@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "work_id": "work:synthetic:shared-offline-control",
+  "origin": "synthetic",
+  "status": "active",
+  "notices": [
+    {
+      "notice_type": "correction",
+      "reference": "invented-notice"
+    }
+  ]
+}

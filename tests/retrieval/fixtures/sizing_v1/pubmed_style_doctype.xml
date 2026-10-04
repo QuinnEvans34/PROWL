@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st January 2025//EN" "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_250101.dtd">
+<PubmedArticleSet>
+<PubmedArticle>
+  <MedlineCitation Status="MEDLINE" Owner="NLM">
+    <PMID Version="1">900000001</PMID>
+    <DateRevised><Year>2026</Year><Month>01</Month><Day>15</Day></DateRevised>
+    <Article PubModel="Print">
+      <Journal>
+        <JournalIssue CitedMedium="Internet"><PubDate><Year>2019</Year><Month>Mar</Month></PubDate></JournalIssue>
+        <Title>Invented Journal of Synthetic Imaging</Title>
+        <ISOAbbreviation>Invented J Synth Imaging</ISOAbbreviation>
+      </Journal>
+      <ArticleTitle>An invented study of <i>synthetic</i> lesion outlines &amp; reader timing.</ArticleTitle>
+      <Abstract>
+        <AbstractText Label="PURPOSE">Invented purpose text for a fixture.</AbstractText>
+        <AbstractText Label="RESULTS">Invented results text with x&#178; and &lt;5% values.</AbstractText>
+      </Abstract>
+      <Language>eng</Language>
+      <PublicationTypeList><PublicationType UI="D000001">Invented Article Type</PublicationType></PublicationTypeList>
+    </Article>
+    <MeshHeadingList>
+      <MeshHeading><DescriptorName UI="D900001" MajorTopicYN="Y">Invented Organ</DescriptorName><QualifierName UI="Q900001" MajorTopicYN="N">invented imaging</QualifierName></MeshHeading>
+      <MeshHeading><DescriptorName UI="D900002" MajorTopicYN="N">Invented Method</DescriptorName></MeshHeading>
+    </MeshHeadingList>
+    <KeywordList Owner="NOTNLM"><Keyword>invented keyword</Keyword></KeywordList>
+    <CommentsCorrectionsList><CommentsCorrections RefType="Cites"><RefSource>Invented ref</RefSource><PMID Version="1">900000099</PMID></CommentsCorrections></CommentsCorrectionsList>
+  </MedlineCitation>
+  <PubmedData>
+    <ArticleIdList><ArticleId IdType="pubmed">900000001</ArticleId><ArticleId IdType="doi">10.0000/invented.0001</ArticleId><ArticleId IdType="pmc">PMC9000001</ArticleId></ArticleIdList>
+    <ReferenceList><Reference><Citation>Invented citation</Citation><ArticleIdList><ArticleId IdType="doi">10.0000/should.not.be.taken</ArticleId></ArticleIdList></Reference></ReferenceList>
+  </PubmedData>
+</PubmedArticle>
+<PubmedArticle>
+  <MedlineCitation Status="PubMed-not-MEDLINE" Owner="NLM">
+    <PMID Version="2">900000002</PMID>
+    <Article PubModel="Electronic">
+      <Journal>
+        <JournalIssue CitedMedium="Internet"><PubDate><MedlineDate>2008 Winter-Spring</MedlineDate></PubDate></JournalIssue>
+        <Title>Invented Quarterly</Title>
+      </Journal>
+      <ArticleTitle>Second invented record without abstract.</ArticleTitle>
+      <Language>eng</Language>
+      <Language>fre</Language>
+    </Article>
+  </MedlineCitation>
+  <PubmedData><ArticleIdList><ArticleId IdType="pubmed">900000002</ArticleId></ArticleIdList></PubmedData>
+</PubmedArticle>
+<PubmedArticle>
+  <MedlineCitation Status="In-Process" Owner="NLM">
+    <PMID Version="1">900000003</PMID>
+    <Article PubModel="Print">
+      <Journal><JournalIssue><PubDate><Year>2025</Year></PubDate></JournalIssue><Title>Invented Journal of Synthetic Imaging</Title></Journal>
+      <ArticleTitle>Third invented record.</ArticleTitle>
+      <Abstract><AbstractText>Unlabelled invented abstract.</AbstractText></Abstract>
+      <Language>eng</Language>
+    </Article>
+  </MedlineCitation>
+</PubmedArticle>
+<PubmedBookArticle>
+  <BookDocument>
+    <PMID Version="1">900000004</PMID>
+    <ArticleTitle>Invented book chapter.</ArticleTitle>
+  </BookDocument>
+</PubmedBookArticle>
+</PubmedArticleSet>

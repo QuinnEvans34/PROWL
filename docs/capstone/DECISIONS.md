@@ -1813,3 +1813,131 @@ in force. This does not grant GroupC/S2/P4/P5 execution, activate a source or en
 Reconciliation evidence: RUNNING-LOG exact byte SHA-256
 `f7657b99d87fd418857b1067adeca65460819b8dc43321b4c70fe09ff543bc9e` at this read;
 [Codex L1–L6 handback](retrieval/CODEX-PLAN07-L1-L6-HANDBACK-2026-10-03.md).
+
+## D-341 — bounded S1 setup and Claude S2 dispatch (approved 2026-10-03; recorded 2026-10-04)
+
+Authority: Quinton's present M1–M6 dispatch and [RUNNING-LOG](retrieval/planning/RUNNING-LOG.md),
+entry “Codex L1-L6 handback reviewed; Quinton's S1/S2, cleanup and integration decisions”.
+“Approve both” authorizes Codex's [S1 allowlist/order](operations/PLAN07-LITERATURE-S1-PROPOSAL-2026-10-03.md)
+and Claude's separately owned S2 code/invented offline tests. S1 may create only
+`scratch/literature`, `artifacts/literature`, `artifacts/literature/receipts` under the verified
+registered external roots and internal fallback `/Users/quintonevans/PROWL-Literature-Receipts/`.
+Tests precede setup/writer activation. One capability-scoped writer; at most 1 MiB invented setup
+payload, 64 MiB primary receipt reserve and 64 MiB fallback reserve. Future 40 GiB sizing allowance
+is not setup allocation. Registry/source/backup permissions and the fixed imaging backup ceiling
+remain unchanged. Native probes only while imaging is idle. The S1-to-S2 binding is a named
+follow-up, not live Run S execution.
+
+“Watchdog is fine” approves the parser-child RSS monitor every approximately 0.5 seconds, stopping
+above 4 GiB; growth within a poll interval can overshoot. This is not an OS memory limit. The signed
+Run S copy must name this method. S2 dispatch is code/testing only. No S3/S4, signature, download,
+installation, database operation, P4/P5 execution, commit or push follows from this record.
+
+## D-342 — two exact housekeeping deletions (approved 2026-10-03; recorded 2026-10-04)
+
+Same authority/entry as D-341: “Delete both”. Recheck regular-file type, exact size and full hash
+from the [L1–L6 handback](retrieval/CODEX-PLAN07-L1-L6-HANDBACK-2026-10-03.md) before deleting only
+`_to_delete/claude-RUNNING-LOG.md.tmp` (114 bytes,
+`0c1f14cffafe4293718b85a8ef52dfa9bd004be9ebeddea03150082e1b004fe9`) and
+`.git/index.lock.stale-claude-20260928` (0 bytes,
+`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
+No other cleanup or active-lock removal is authorized.
+
+## D-343 — separate retrieval offline contract section (approved 2026-10-03; recorded 2026-10-04)
+
+Same authority/entry as D-341: “Accept all three”. Accept inclusion of all 12 accepted retrieval
+1.0.0 schemas as a separate shared offline contract-check section. Keep existing Plan01/02 checks
+and retrieval runtime relationship tests. A concrete implementation packet and reconciliation of
+the contract README's stale “pending re-review” status are owed; this M5 task drafts the packet,
+not its code. Schema checking does not accept a corpus or database.
+
+## D-344 — D-085 additional span and delivered metrics (approved 2026-10-03; recorded 2026-10-04)
+
+Same authority/entry as D-341: “Accept all three”. This accepts the previously proposed D-085
+amendment as additional, separately reported measures: ranked span-hit recall@1/3/5/10,
+delivered-span recall, required-concept coverage and delivered token count. Official source/passage
+recall@1/3/5/10 and MRR remain unchanged; no release bar is retroactively changed.
+
+Per answerable question, ranked span-hit and delivered-span denominators are the distinct direct
+evidence spans keyed by immutable representation identity and half-open Unicode code-point
+`[start,end)` offsets. Credit requires complete containment in a top-k passage or, respectively,
+an actually packed/displayable passage; repeated containment counts once. Required-concept coverage
+uses distinct required concepts as denominator and counts a concept once when a delivered direct
+span supports it. Delivered token count is the sum for actually packed passages, with no recall
+denominator. Empty eligible denominators are undefined and reported with counts/reasons, never
+perfect scores. Macro averages over answerable questions disclose excluded refusal questions and
+undefined questions; passage measures disclose configurations without gold passages.
+
+Measured use requires verified question/query/ranking/corpus binding, immutable representation
+hashes and exact slices, identity-verified rights permitting snippet display (index permission alone
+is insufficient), a named/versioned/hash-pinned reference or generator tokenizer, pinned packing
+rule and context budget. The starting budget is the D-265 provisional 2,000 tokens. Fixture/word
+counters demonstrate mechanics only and cannot evidence actual model token delivery. The current
+P3 producers retain their provisional labels until a separately scoped implementation reconciles
+them; do not relabel old results. Additional metrics may inform development configuration selection
+after these preconditions and the comparison rule are frozen. Held-out labels remain sealed from
+implementers/selection, used only for verification. No unseen labels were opened by this amendment.
+
+## D-345 — P4a packet after imaging; separate trial approval (approved 2026-10-03; recorded 2026-10-04)
+
+Same authority/entry as D-341: “Accept all three”. Prepare a named runtime, pinned PostgreSQL/
+pgvector, storage/resource/stop-limit install-authorization packet after the immediate imaging and
+checkpoint queue. Any approved trial runs in an idle window. Current M5 authorizes a draft only:
+no install, image pull, runtime start, global Docker change, database or accelerator trial. P4b and
+its psycopg3 dependency remain separate. D-341–345 grant no Run S signature or follow-on dispatch.
+
+## D-346 — Claude's filesystem hook first, then Codex binding (2026-10-04)
+
+Authority: Quinton's present agreement to continue and the October4 entry in
+[RUNNING-LOG](retrieval/planning/RUNNING-LOG.md), “Codex M1-M6 handback reviewed; Quinton approves
+the S2 filesystem hook, a local commit and the shared-contract packet”. Quinton chose “Claude adds
+the hook first”: Claude owns `sizing_v1.1` and its `SizingFs`/`PlainFs` implementation; Codex then
+implements S1-S2-BINDING-V1 and repeats native qualification against the new exact handback.
+Reviewed proposal SHA `270436ae6e19fd73730bfbbd05d5c5e94725dc52aeb64d9f5b6b353deedea87b`.
+Current source remains the qualified `sizing_v1` identity814b89c5; the hook has not arrived in this
+checkout. Do not implement against an assumed changed interface or patch Claude's files.
+
+Codex prepares the concrete binding/qualification packet and hook review while that handback is
+pending. Single literature lease, descriptor-based I/O including parser handoff, explicit cumulative
+receipt/fallback ceilings and failure preservation precede live use. The old bounded-setup capability
+does not become a sizing-job permission. No S3, S4/signature, download or Run S execution follows.
+Log hash at reconciliation `faa7b33b03ff6593ba91e3d5c3488bbf9348b25d186e850dc82a0983c8e5cbbd`.
+
+## D-347 — local preservation only; current exact scope recheck (2026-10-04)
+
+Same authority/entry as D-346, recording Quinton's “Commit locally, no push”. Codex rechecks and
+preserves the pending Plan07 checkpoint locally, including completed approved offline contract
+checks and the reviewed follow-up records, after freezing a refreshed exact file list. Retain the
+older40-file proposal as historical evidence; its RUNNING-LOG hash is now stale because Claude
+recorded newer approvals. Never silently stage a partial hook implementation or change expected
+S2 pins. No public push, merge, cleanup, source/job permission or experiment extension is granted.
+
+## D-348 — dispatch the separate shared offline retrieval contract section (2026-10-04)
+
+Same authority/entry as D-346, recording Quinton's “Yes, build it” for
+[the exact shared-contract packet](operations/PLAN07-SHARED-CONTRACT-PACKET-2026-10-04.md).
+Allow the new shared test module and invented fixture/pin directory, and scoped reconciliation of
+the shared contract README's stale review status. No schema or Claude producer/test change.
+Existing Plan01/02 names/checks and retrieval runtime relationship checks remain intact. D-344
+metric policy does not dispatch producer/tokenizer migration. No install, DB, P4a or scientific run.
+
+## D-349 — delivered S2 v1.1 verified; bounded binding prerequisite remains (2026-10-04)
+
+Reconciles D-346's earlier “not arrived” state with
+[Claude's v1.1 handback](retrieval/CLAUDE-S2-V1.1-HANDBACK-2026-10-04.md), SHA
+`3d00e92aac6f12ae4a052c70988a630522bd5af3ad210e40cc846d8a1f13b2c6`, and the
+[other Codex chat's native N2 review](operations/CODEX-S2-V1.1-NATIVE-REVIEW-2026-10-04.md), SHA
+`c151b1a306fa4f1251c7827cf127edd7c9abbf78edb760d235f902ce16470b4c`.
+That chat records Quinton's ownership instruction: “Keep N4/N5 in the other chat; this chat verifies
+N2 and hands back”. N2 passed144sizing/326retrieval tests, no skips. This chat independently
+reverified all22pins and identitydf585e2b, preserving Claude's bytes, and reran the shared contract
+gate:198passed/3054deselected, two existing warnings. The49-check S1 source/fixture inventory and
+registry hash remain fixed. No new full-project acceptance is claimed.
+
+N4 is incomplete: the delivered watchdog's unbounded internal stderr temporary file and undrained
+stdout pipe are outside SizingFs. The [concrete interface request](operations/PLAN07-S2-IO-HOOK-REVIEW-2026-10-04.md)
+requires bounded concurrent diagnostics with failure/closure tests and a fresh Claude-owned handback;
+Codex does not patch that lane. Native compatibility qualification does not close binding acceptance.
+No binding backend, native external rehearsal, sizing signature or run is enabled. D-347 permits
+the local checkpoint to preserve verified work while listing N4 as incomplete; no push. The current
+Claude log hash is `fc5df4c5fc0b747387c7773b9f40422492f29778fe99f6178215d3eb886d91c5`.

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE PubmedArticleSet [
+  <!ENTITY inv "invented">
+]>
+<PubmedArticleSet><PubmedArticle><MedlineCitation><PMID Version="1">900000022</PMID>
+<Article><ArticleTitle>&inv; title</ArticleTitle></Article></MedlineCitation></PubmedArticle></PubmedArticleSet>

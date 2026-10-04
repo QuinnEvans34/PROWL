@@ -1,0 +1,403 @@
+{
+  "authorization": {
+    "code_setup_cleanup": "D-341/D-342; current M1-M6 dispatch",
+    "commit": false,
+    "contract_code": false,
+    "integration_choice_records": "D-343/D-344/D-345",
+    "p4a_install_run": false,
+    "push": false,
+    "sizing_signature_run": false
+  },
+  "base_commit": "5856fdc9d4f6b2318c918505576244f324247f12",
+  "deletions": {
+    "approved": "D-342",
+    "paths": [
+      "_to_delete/claude-RUNNING-LOG.md.tmp",
+      ".git/index.lock.stale-claude-20260928"
+    ],
+    "previously_tracked": false,
+    "receipt": "outputs/prowl/PLAN07-S1-SETUP-20261004/cleanup-result.json"
+  },
+  "exclusions": [
+    "outputs/prowl/PLAN07-S1-SETUP-20261004/**",
+    "configs/local/roots.yaml and secrets",
+    "external scratch/receipt and internal fallback data",
+    "original source datasets/models/real literature",
+    "all unrelated prior untracked/binary drafts"
+  ],
+  "files": [
+    {
+      "bytes": 103441,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "AGENTS.md",
+      "sha256": "a40ab1c9620333e8c67d3c0d73c1faf117efeecff9a9c466947af06d7385761c"
+    },
+    {
+      "bytes": 202092,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/DECISIONS.md",
+      "sha256": "03ce8af4e66019522078cc50ec9ffd58e290efbebb28742a744fc2a82d396cc2"
+    },
+    {
+      "bytes": 102876,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/CURRENT-CHECKPOINT.md",
+      "sha256": "bdd7442202a0c81f591008f0a879430e396d7da15db4111820c82426837be82f"
+    },
+    {
+      "bytes": 3047,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-D085-AMENDMENT-2026-10-04.md",
+      "sha256": "d73e15ac93600d06c1b5664dce5838f2abfec12002cf4baa4e16c0c875f85e77"
+    },
+    {
+      "bytes": 6013,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-M1-M6-HANDBACK-2026-10-04.md",
+      "sha256": "7ec0bc7d9b5d81f476e652a3634e44b6691357a49608f7f148d741800ae7dc60"
+    },
+    {
+      "bytes": 8195,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-P4A-INSTALL-PACKET-2026-10-04.md",
+      "sha256": "f4e44ce3455e0bdd9f786e4d8579326ac91ec3086d6c14b553526e3624d80a30"
+    },
+    {
+      "bytes": 1942,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-PENDING-CHECKPOINT-2026-10-04.md",
+      "sha256": "aa210c2a2e28722baf17604fc4e73977c1051ae6a62ba426974db7be937f8c2b"
+    },
+    {
+      "bytes": 5112,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S1-RESULTS-2026-10-04.md",
+      "sha256": "f4d9b0b0d4ae5183f547d32bf24022ecc9467df93e8968be87cd535a75a02712"
+    },
+    {
+      "bytes": 3064,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S1-S2-BINDING-FOLLOWUP-2026-10-04.md",
+      "sha256": "a0591b74de0b2e1928e92d87b610256028de2a307d7c131d2214af0d29e66adc"
+    },
+    {
+      "bytes": 3641,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-SHARED-CONTRACT-PACKET-2026-10-04.md",
+      "sha256": "5e4b80055717a7a5bc21816e834a1d9f2ae5352ccb107b7dca5c88161fe5122e"
+    },
+    {
+      "bytes": 5510,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-03-R2.md",
+      "sha256": "7cb99b807633f107525d8cc698c44accdc225ce4cd743f6d95bffc0a4ff79de7"
+    },
+    {
+      "bytes": 16858,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-S2-HANDBACK-2026-10-03.md",
+      "sha256": "07040e5712adf9b364017ac17f34ab39e1d9a98d0e84dd72b5e2c552e2704ab3"
+    },
+    {
+      "bytes": 73597,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "2643ddbfb598e3f9ab441a55005e642ee7ff08ea2ae1f1a19206805fa0c0e97d"
+    },
+    {
+      "bytes": 5185,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "scripts/diagnostics/literature_storage_setup_v1.py",
+      "sha256": "2996f4189049f25c283715987c3cbf712929608ed4f61c0d4b2a8248b4e62d0b"
+    },
+    {
+      "bytes": 3228,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "scripts/retrieval/run_s_sizing_v1.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15",
+      "sha256": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15"
+    },
+    {
+      "bytes": 17629,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "src/operations/literature_storage_v1.py",
+      "sha256": "e7c7190d0f7c24c2f72c24550456f0f2fd0c3e6d06040e7ef5391ce93079b206"
+    },
+    {
+      "bytes": 2105,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/__init__.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "29b70aecaf2a35e3833404fc8ab2396f759ae752bfb29ed8062adab326290928",
+      "sha256": "29b70aecaf2a35e3833404fc8ab2396f759ae752bfb29ed8062adab326290928"
+    },
+    {
+      "bytes": 13196,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/journal.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "07025b2efcb36188b741f70f94453bf9416f8b322b5d9ff3dd50594dfbeae983",
+      "sha256": "07025b2efcb36188b741f70f94453bf9416f8b322b5d9ff3dd50594dfbeae983"
+    },
+    {
+      "bytes": 7334,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/listings.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17",
+      "sha256": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17"
+    },
+    {
+      "bytes": 23696,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/parser.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "81c0da39dad9189c93d2e153e0f96ea8eeaba33ef84934de22ba52a157c03a6a",
+      "sha256": "81c0da39dad9189c93d2e153e0f96ea8eeaba33ef84934de22ba52a157c03a6a"
+    },
+    {
+      "bytes": 17630,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/runner.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "8453ee5b9b6b909c5c6217460300d5296df7f96fd1870cba904342b4580e5025",
+      "sha256": "8453ee5b9b6b909c5c6217460300d5296df7f96fd1870cba904342b4580e5025"
+    },
+    {
+      "bytes": 23207,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/transfer.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "a5c35774fb20c988ac42db2ce36e7f6e6392b6576b73bb4138088a471f1e9c90",
+      "sha256": "a5c35774fb20c988ac42db2ce36e7f6e6392b6576b73bb4138088a471f1e9c90"
+    },
+    {
+      "bytes": 370,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/literature_storage_v1/README.md",
+      "sha256": "e4bdc59c912ce46f549c7403637d530380fced9deccd0a57c4d21bd23a066791"
+    },
+    {
+      "bytes": 367,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/literature_storage_v1/observations.json",
+      "sha256": "ac43d7dc4a08a40d391d6a46b653e9f36932236c1812e56bbf05f00c32f96cc5"
+    },
+    {
+      "bytes": 1278,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/README.md",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e",
+      "sha256": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e"
+    },
+    {
+      "bytes": 996,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/billion_laughs.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b",
+      "sha256": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b"
+    },
+    {
+      "bytes": 340,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/external_entity.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23",
+      "sha256": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23"
+    },
+    {
+      "bytes": 296,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/internal_entity.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86",
+      "sha256": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86"
+    },
+    {
+      "bytes": 234,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/malformed.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3",
+      "sha256": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3"
+    },
+    {
+      "bytes": 3608,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/pubmed_style_doctype.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e",
+      "sha256": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e"
+    },
+    {
+      "bytes": 392,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/undeclared_entity.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a",
+      "sha256": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a"
+    },
+    {
+      "bytes": 701,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/update_with_deletes.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1",
+      "sha256": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1"
+    },
+    {
+      "bytes": 90,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/wrong_root.xml",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e",
+      "sha256": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e"
+    },
+    {
+      "bytes": 10685,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_journal.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "9d07c8d285aabcc5220470a93b5b795d5d997284c71fcab0bafd276219e8968f",
+      "sha256": "9d07c8d285aabcc5220470a93b5b795d5d997284c71fcab0bafd276219e8968f"
+    },
+    {
+      "bytes": 5882,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_listings.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2",
+      "sha256": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2"
+    },
+    {
+      "bytes": 12523,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_parser.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "d62759a67868c12893c8b0ab0a41c05fdeeb5cc1e117581375b0111d1bfd65a0",
+      "sha256": "d62759a67868c12893c8b0ab0a41c05fdeeb5cc1e117581375b0111d1bfd65a0"
+    },
+    {
+      "bytes": 19157,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_runner.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "ec48d14f13f1d04c4f076cdd7696f7f71a9b2c4ff38fd4dfe5cd94fac9b27584",
+      "sha256": "ec48d14f13f1d04c4f076cdd7696f7f71a9b2c4ff38fd4dfe5cd94fac9b27584"
+    },
+    {
+      "bytes": 21631,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_transfer.py",
+      "s2_handback_matches": true,
+      "s2_handback_sha256": "ef29c6668c906351b0eaa1834a591dcc346d6a09dc9754c2f24b0c7ea954e8b7",
+      "sha256": "ef29c6668c906351b0eaa1834a591dcc346d6a09dc9754c2f24b0c7ea954e8b7"
+    },
+    {
+      "bytes": 14384,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/test_literature_storage_v1.py",
+      "sha256": "90c6bfcfef1071ee029725253e05fbd7a1db660f3da7c9130590bc8c4399bdf7"
+    }
+  ],
+  "kind": "pending_plan07_m1_m6_checkpoint",
+  "listed_files": 39,
+  "qualification": {
+    "full_expanded_project_suite_run": false,
+    "p3_tracked_files_unchanged": 30,
+    "retrieval_native_passed": 313,
+    "s1_unit_passed": 49,
+    "s2_code_identity": "814b89c5dac055b59df4c28ff14cca008d7831d63ba31b418e380831fad837aa",
+    "s2_native_passed": 131,
+    "s2_native_skips": 0,
+    "s2_pins_verified": 21
+  },
+  "recorded_utc": "2026-10-04T15:57:36.897658+00:00",
+  "schema_version": "1.0.0",
+  "self_manifest": {
+    "path": "docs/capstone/operations/PLAN07-PENDING-CHECKPOINT-FILES-2026-10-04.json",
+    "sha256": "not embedded; self-referential hash excluded"
+  },
+  "total_proposed_files_including_this_manifest": 40
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "event_id": "evt:synthetic-control-001.jsonl:0",
+  "source_file": "synthetic-control-001.jsonl",
+  "ordinal": 0,
+  "event_type": "add_or_replace",
+  "work_id": "work:synthetic:shared-offline-control",
+  "revision_id": "rev:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+}

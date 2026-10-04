@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "query_id": "qry:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "finding": {
+    "modality": "CT",
+    "anatomy": "pancreas",
+    "task": "review",
+    "finding_state": "candidate"
+  },
+  "question_original": "Invented margin question?",
+  "question_normalized": "Invented margin question?",
+  "normalization_version": "invented-question-v1",
+  "scope_policy_version": "invented-scope-v1",
+  "state": "accepted",
+  "refusal_codes": []
+}

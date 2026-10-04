@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "status": "proposed_provisional_not_official",
+  "question_id": "q:invented",
+  "query_id": "qry:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "ranking_id": "rank:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "corpus_id": "corpus:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "counter": {
+    "name": "invented-fixture-counts",
+    "version": "invented-counts-v1",
+    "kind": "fixture_counts"
+  },
+  "budget": 2000,
+  "selected": [
+    "psg:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  ],
+  "skipped": [
+    {
+      "passage_id": "psg:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "tokens": null,
+      "reason": "display_not_permitted"
+    }
+  ],
+  "delivered_tokens": 3,
+  "n_direct_spans": 1,
+  "n_delivered_spans": 1,
+  "delivered_span_recall": 1.0,
+  "n_required_concepts": 1,
+  "n_delivered_concepts": 1,
+  "concept_coverage": 1.0
+}

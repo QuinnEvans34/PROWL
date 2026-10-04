@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE PubmedArticleSet PUBLIC "-//NLM//DTD PubMedArticle, 1st January 2025//EN" "https://dtd.nlm.nih.gov/ncbi/pubmed/out/pubmed_250101.dtd">
+<PubmedArticleSet>
+<PubmedArticle>
+  <MedlineCitation Status="MEDLINE" Owner="NLM">
+    <PMID Version="1">900000010</PMID>
+    <Article><Journal><JournalIssue><PubDate><Year>2026</Year></PubDate></JournalIssue><Title>Invented Updates</Title></Journal>
+      <ArticleTitle>Invented replacement record.</ArticleTitle><Language>eng</Language></Article>
+  </MedlineCitation>
+</PubmedArticle>
+<DeleteCitation>
+  <PMID Version="1">900000011</PMID>
+  <PMID Version="1">900000012</PMID>
+</DeleteCitation>
+</PubmedArticleSet>

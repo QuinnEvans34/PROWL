@@ -1,5 +1,30 @@
 # AGENTS.md — Agent Context
 
+> **October 4 Plan07 follow-up / local preservation:** read
+> `docs/capstone/operations/PLAN07-FOLLOWUP-HANDBACK-2026-10-04.md` and
+> `docs/capstone/operations/PLAN07-LOCAL-PRESERVATION-2026-10-04.md`.
+> D-346–349 record Claude-first hook, local commit/no push, shared checks and latest reconciliation.
+> Shared retrieval contracts implemented:118new/173shared/198contract pass;12schemas unchanged.
+> Delivered S2v1.1 df585e2b/all22pins reverified;other Codex chat's native N2:144sizing/326retrieval,
+> no skips. S1 source/49-check evidence and registry unchanged. N4 incomplete: watchdog diagnostics
+> remain outside SizingFs and uncapped;see concrete Claude request and approved binding packet.
+> No binding backend/qualifier/external rehearsal or run enabled. This exact scope accompanies the
+> authorized local preservation;old40-file proposal is historical. No push or follow-on dispatch.
+> D-335 remains imaging checkpoint;all consumed requests/holds/cohorts/fixedbackupceiling retained.
+
+> **October 4 Plan07 M1–M6 handback:** read
+> `docs/capstone/operations/PLAN07-M1-M6-HANDBACK-2026-10-04.md` and
+> `docs/capstone/operations/PLAN07-S1-RESULTS-2026-10-04.md`.
+> D-341–345 record S1/S2/watchdog/cleanup/integration approvals. S1 bounded setup/native invented
+> probe complete;49 new unit tests pass. Claude S2 native131/fullretrieval313 pass, exact814b89c5
+> code identity/21file pins. Four approved areas created;61,440 invented payload bytes retained,
+> terminal-only fallback/primary+internal APFS locks verified. Registry unchanged;RunS still refuses.
+> Two exact leftovers deleted underD-342. Shared-contract/P4a packets are drafts;D-344 accepts
+> additional metrics policy, producers unchanged. S1-S2-BINDING-V1 is proposed, not dispatched.
+> Fresh checkpoint list is uncommitted;main5856fdc is the prior local625file preservation;no push.
+> Stop after handback. No signature/sizing/download/install/DB/P4/P5/experiment/follow-on authority.
+> D-335 remains latest imaging;all requests consumed,holds/cohorts/fixedbackupceiling preserved.
+
 > **October 3 local preservation settlement:** Quinton authorized the local commit and Monday
 > wording. Read `docs/capstone/operations/PRESERVATION-COMMIT-2026-10-03.md` and its final scope.
 > V2 is historical; include completed Plan07 L1–L6 support/D-336–340 reconciliation.

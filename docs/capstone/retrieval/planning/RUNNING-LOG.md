@@ -1327,3 +1327,127 @@ qualification is a separate review.
 - `operations/CLAUDE-PLAN07-S2-PACKET-DRAFT-2026-10-03.md`: `0ac7eb939e9cfaf17d4c0365f0e29aaa439b5aabe4d2b1c10d8a9622635b80ef`
 - `operations/PLAN07-LITERATURE-S1-PROPOSAL-2026-10-03.md`: `3356a34ac3f7eee3f6a6774d4eb1958c348e69b9eacbb8307fe0b3b41a2b2695`
 - `DECISIONS.md`: `98c188822ecd82f977f8e84750a812c0b4ab0aaf5e2f9d844dad02b31395d0c9`
+
+## 2026-10-03: S2 sizing tool implemented and tested offline; handback written (Claude)
+
+**What was done:** `sizing_v1` was implemented within the S2 packet allowlist:
+- the downloader subset and the sizing-only parser mode;
+- the journal and runner;
+- a readiness CLI that refuses live execution.
+
+Testing used invented fixtures only, with the network denied. Code was written and tested in
+Claude's cloud workspace, then copied into PROWL. Hashes were verified identical on the device.
+
+**Results:**
+- 131 sizing tests: 130 passed, 1 skipped (a directory-permission case that skips as root).
+- Full retrieval suite: 312 passed, 1 skipped. P3 unchanged: 182 passed.
+- Python 3.11.15, expat 2.6.1.
+- `py_compile` passes under 3.10.12 on the device.
+- **A native run on Quinton's Mac is still required.**
+
+**Tool code identity:** `814b89c5dac055b59df4c28ff14cca008d7831d63ba31b418e380831fad837aa`.
+
+**Independent review:** a Claude subagent reviewed the work in three adversarial rounds. All
+confirmed defects were fixed, including the three HIGH findings from round 1:
+- unexpected exceptions skipped the final status;
+- blocking reads were not bounded by the deadline;
+- journal sequence breaks blocked a valid re-run.
+
+The last three round-3 items were fixed afterwards and verified by tests.
+
+**Decisions recorded in the handback for the signed copy:**
+- the network counter is HTTP-layer, with a 1% reserve;
+- the watchdog memory method;
+- the zero-user-entity XML bound;
+- decompressed bytes are charged to scratch;
+- samples are never reused;
+- partition format `prowl-parsed-partition-v0-proposed`.
+
+**Still unmet before run S can be signed:**
+- the S1 live binding (Codex);
+- native qualification;
+- the live listing format, which fails closed if it differs;
+- no proxy support;
+- S3 and S4.
+
+**Side effect:** `py_compile` created `__pycache__/` under `src/retrieval/sizing_v1/` and
+`scripts/retrieval/`. Both are gitignored.
+
+**No exposure:** no literature was read or fetched. Nothing was downloaded, installed in the repo,
+signed, committed or dispatched.
+
+**Hashes:**
+- `CLAUDE-S2-HANDBACK-2026-10-03.md`: `07040e5712adf9b364017ac17f34ab39e1d9a98d0e84dd72b5e2c552e2704ab3`
+- Code and test file hashes: listed in the handback, 21 files, all verified on the device
+
+**Addendum (same day):** Claude wrote `CLAUDE-HANDOFF-TO-CODEX-2026-10-03-R2.md` (round-2 Codex prompt: M1 decisions, M2 S1 setup and interface, M3 native S2 qualification, M4 cleanup, M5 integration scoping, M6 checkpoint scope). SHA-256 `7cb99b807633f107525d8cc698c44accdc225ce4cd743f6d95bffc0a4ff79de7`. It dispatches nothing.
+
+## 2026-10-04: Codex M1-M6 handback reviewed; Quinton approves the S2 filesystem hook, a local commit and the shared-contract packet (Claude records)
+
+**Claude's review of `operations/PLAN07-M1-M6-HANDBACK-2026-10-04.md` (read only):**
+- S2 native qualification: 131 sizing tests passed (no skip natively) and the full retrieval suite
+  passed 313 on Python 3.12.13 / expat 2.7.4. The code identity `814b89c5…` and all 21 pins match.
+  The S2 files on the device are byte-identical to Claude's handback.
+- S1: four areas created and 49 tests pass. The interface is
+  `NativeVolume(...).observe()`, giving uuid, mount, writable, free_bytes and role. Literal paths
+  are in `operations/PLAN07-S1-RESULTS-2026-10-04.md`.
+- D-341 to D-345 were added. The two leftover files were deleted (D-342). This RUNNING-LOG was not
+  edited by Codex: its hash was unchanged at `2643ddbf…` before this entry.
+- **Open gap, correctly identified by Codex** (S1-S2-BINDING-V1, item 4): S2 opens literal paths,
+  so S1's no-follow descriptor guards cannot cover S2's writes from outside. Claude wrote
+  `CLAUDE-S2-IO-HOOK-PROPOSAL-2026-10-04.md`, which lists every S2 filesystem touchpoint and
+  proposes an injected `SizingFs`. The parser child would receive descriptors only.
+
+**Quinton's decisions (2026-10-04, answers to Claude's questions):**
+1. **"Claude adds the hook first."**
+   - Claude implements `sizing_v1.1` with `PlainFs` as the default.
+   - Codex then builds S1-S2-BINDING-V1 and re-runs native qualification.
+   - No download or signature.
+2. **"Commit locally, no push."** Codex re-verifies the pending checkpoint list and makes a local
+   commit only. Pushing remains a separate decision.
+3. **"Yes, build it"** for the shared-contract packet
+   (`operations/PLAN07-SHARED-CONTRACT-PACKET-2026-10-04.md`): offline tests only, with no schema
+   or Claude-code change.
+
+**Not authorized:** run S signature or execution, S3, downloads, installs, P4a, or the D-085
+producer migration (which still needs its own scoped packet).
+
+**Hashes:**
+- `retrieval/CLAUDE-S2-IO-HOOK-PROPOSAL-2026-10-04.md`: `270436ae6e19fd73730bfbbd05d5c5e94725dc52aeb64d9f5b6b353deedea87b`
+- `operations/PLAN07-M1-M6-HANDBACK-2026-10-04.md`: `7ec0bc7d9b5d81f476e652a3634e44b6691357a49608f7f148d741800ae7dc60`
+- `operations/PLAN07-S1-S2-BINDING-FOLLOWUP-2026-10-04.md`: `a0591b74de0b2e1928e92d87b610256028de2a307d7c131d2214af0d29e66adc`
+- `DECISIONS.md`: `03ce8af4e66019522078cc50ec9ffd58e290efbebb28742a744fc2a82d396cc2`
+
+## 2026-10-04: `sizing_v1.1` filesystem hook implemented and tested offline; round-3 Codex prompt written (Claude)
+
+**Implemented** (Quinton's "Claude adds the hook first"):
+- An injected `SizingFs` (new `fsio.py`), with `PlainFs` as the default.
+- All scratch, receipts and fallback I/O in `run_sizing`, `journal` and `transfer` goes through the
+  hook.
+- The parser child receives only descriptors. It checks that they are regular files, that the
+  output is empty and that the two are distinct, and rewinds both.
+- The parent writes the manifest. The partial charge comes from `fstat` on the handle.
+- Any `Exception` from a journal write moves to the fallback.
+
+No change to caps, checks, journal semantics, run S rules, `listings.py`, the CLI or the fixtures.
+
+**Tests** (Linux, Python 3.11.15):
+- 144 sizing tests: 143 passed, 1 skipped as root;
+- the full retrieval suite: 325 passed, 1 skipped, in 10 of 10 runs;
+- the `GuardFs` bypass detector is mutation-checked.
+
+`py_compile` passes under Python 3.10.12 on the device. **A native re-run on the Mac is required.**
+
+**New code identity:** `df585e2b10a69f55e24db8cc0f96822151a43d52be15ad5bb4917bd9a0a24d4e`.
+
+**Review:** rounds 4 and 5 by the same reviewer subagent.
+- Round 4: three MEDIUM findings and two LOW, all fixed.
+- Round 5: confirmed the fixes and found nothing at MEDIUM or above.
+- One timing-sensitive test margin was widened.
+
+**Not done:** nothing was committed, dispatched or signed, and nothing was downloaded.
+
+**Hashes:**
+- `CLAUDE-S2-V1.1-HANDBACK-2026-10-04.md`: `3d00e92aac6f12ae4a052c70988a630522bd5af3ad210e40cc846d8a1f13b2c6`
+- `CLAUDE-HANDOFF-TO-CODEX-2026-10-04-R3.md`: `726d556b09c8b6f520561549a35d202afec2961b82680f07ec544cab34ec16c4`
+- Code and test pins: in the v1.1 handback (22 files, verified on the device)

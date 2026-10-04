@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "representation_id": "repr:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "revision_id": "rev:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "work_id": "work:synthetic:shared-offline-control",
+  "kind": "abstract",
+  "normalization_version": "invented-normalization-v1",
+  "text": "Invented margin.",
+  "text_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sections": [
+    {
+      "section_id": "s0",
+      "title": "Invented",
+      "start": 0,
+      "end": 16
+    }
+  ],
+  "paragraphs": [
+    {
+      "section_id": "s0",
+      "index": 0,
+      "start": 0,
+      "end": 16,
+      "original_length": 16,
+      "original_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "offset_map": [
+        [
+          0,
+          16,
+          0,
+          16
+        ]
+      ]
+    }
+  ]
+}

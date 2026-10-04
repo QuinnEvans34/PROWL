@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "question_id": "q:invented",
+  "label_version": "invented-label-v1",
+  "answerable": true,
+  "required_concepts": [
+    "c:invented"
+  ],
+  "spans": [
+    {
+      "representation_id": "repr:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "representation_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "start": 0,
+      "end": 16,
+      "grade": "direct",
+      "concept_ids": [
+        "c:invented"
+      ]
+    }
+  ]
+}

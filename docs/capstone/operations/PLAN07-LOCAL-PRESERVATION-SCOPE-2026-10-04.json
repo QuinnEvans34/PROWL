@@ -1,0 +1,613 @@
+{
+  "authorization": {
+    "binding_complete": false,
+    "decisions": "D-341\u2013349; Quinton local commit/no push and exact shared packet approvals",
+    "download": false,
+    "local_commit": true,
+    "p4a_install_run": false,
+    "push": false,
+    "sizing_signature_run": false
+  },
+  "base_commit": "5856fdc9d4f6b2318c918505576244f324247f12",
+  "exclusions": [
+    "outputs/prowl/PLAN07-S1-SETUP-20261004/**",
+    "configs/local/roots.yaml and secrets",
+    "external scratch/receipt and internal fallback data",
+    "original source datasets/models/real literature",
+    "all unrelated prior untracked/binary drafts",
+    "outputs/prowl/PLAN07-FOLLOWUP-20261004/**",
+    "all literature source/network payloads and external qualifier areas"
+  ],
+  "files": [
+    {
+      "bytes": 104438,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "AGENTS.md",
+      "sha256": "729025e2057c3fac250774c7dafd88edaeb0f57b071504aa4b2d9590caac5e65"
+    },
+    {
+      "bytes": 206370,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/DECISIONS.md",
+      "sha256": "98ecaa21c200cda02d24875e64df12a6cc1b2313863bbe46a72e82f222863947"
+    },
+    {
+      "bytes": 2925,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/contracts/retrieval/README.md",
+      "sha256": "7fffb42d3c4b66420d8a1f583b1bdf8501c663d4416aed02b54c85e43192bbcd"
+    },
+    {
+      "bytes": 6225,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Other Codex chat N2 handback; preserved without edits",
+      "path": "docs/capstone/operations/CODEX-S2-V1.1-NATIVE-REVIEW-2026-10-04.md",
+      "sha256": "c151b1a306fa4f1251c7827cf127edd7c9abbf78edb760d235f902ce16470b4c"
+    },
+    {
+      "bytes": 104148,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/CURRENT-CHECKPOINT.md",
+      "sha256": "a85b4655837f94bb42022006b7f7bad0e365d5cd5017e7b9b1be2a15127bfd91"
+    },
+    {
+      "bytes": 3047,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-D085-AMENDMENT-2026-10-04.md",
+      "sha256": "d73e15ac93600d06c1b5664dce5838f2abfec12002cf4baa4e16c0c875f85e77"
+    },
+    {
+      "bytes": 3826,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-FOLLOWUP-HANDBACK-2026-10-04.md",
+      "sha256": "6ff15becf07a9713c8a032b066619fb7c1131c2ce2d880e6629a613aea3f644d"
+    },
+    {
+      "bytes": 2665,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-LOCAL-PRESERVATION-2026-10-04.md",
+      "sha256": "fb47998a12d5666e63696ebb8d3111924d15b98ba868bd018ae6f713e690b257"
+    },
+    {
+      "bytes": 6013,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-M1-M6-HANDBACK-2026-10-04.md",
+      "sha256": "7ec0bc7d9b5d81f476e652a3634e44b6691357a49608f7f148d741800ae7dc60"
+    },
+    {
+      "bytes": 8195,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-P4A-INSTALL-PACKET-2026-10-04.md",
+      "sha256": "f4e44ce3455e0bdd9f786e4d8579326ac91ec3086d6c14b553526e3624d80a30"
+    },
+    {
+      "bytes": 1942,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-PENDING-CHECKPOINT-2026-10-04.md",
+      "sha256": "aa210c2a2e28722baf17604fc4e73977c1051ae6a62ba426974db7be937f8c2b"
+    },
+    {
+      "bytes": 15979,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-PENDING-CHECKPOINT-FILES-2026-10-04.json",
+      "sha256": "11ff88106dd47090ca91677e051b6f24d6f1834a9ade8cca307863fa3b6b2322"
+    },
+    {
+      "bytes": 5112,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S1-RESULTS-2026-10-04.md",
+      "sha256": "f4d9b0b0d4ae5183f547d32bf24022ecc9467df93e8968be87cd535a75a02712"
+    },
+    {
+      "bytes": 3064,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S1-S2-BINDING-FOLLOWUP-2026-10-04.md",
+      "sha256": "a0591b74de0b2e1928e92d87b610256028de2a307d7c131d2214af0d29e66adc"
+    },
+    {
+      "bytes": 8250,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S1-S2-BINDING-PACKET-2026-10-04.md",
+      "sha256": "41d9e0f404661b4880d5fcde6d72914550b92f6036bfcdbd46cc3fa98cbb7411"
+    },
+    {
+      "bytes": 8405,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-S2-IO-HOOK-REVIEW-2026-10-04.md",
+      "sha256": "e6e4b72502c6d0008de7cb05cce8c32f2fb86c42ee50e23eb0c191b3520c265f"
+    },
+    {
+      "bytes": 3641,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-SHARED-CONTRACT-PACKET-2026-10-04.md",
+      "sha256": "5e4b80055717a7a5bc21816e834a1d9f2ae5352ccb107b7dca5c88161fe5122e"
+    },
+    {
+      "bytes": 2959,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "docs/capstone/operations/PLAN07-SHARED-CONTRACT-RESULTS-2026-10-04.md",
+      "sha256": "af1fb6eb64a4c22c558854f8d57d19911c33d36796a2cfbfed65dc7299456f32"
+    },
+    {
+      "bytes": 5510,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-03-R2.md",
+      "sha256": "7cb99b807633f107525d8cc698c44accdc225ce4cd743f6d95bffc0a4ff79de7"
+    },
+    {
+      "bytes": 4178,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-04-R3.md",
+      "sha256": "726d556b09c8b6f520561549a35d202afec2961b82680f07ec544cab34ec16c4"
+    },
+    {
+      "bytes": 16858,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-S2-HANDBACK-2026-10-03.md",
+      "sha256": "07040e5712adf9b364017ac17f34ab39e1d9a98d0e84dd72b5e2c552e2704ab3"
+    },
+    {
+      "bytes": 4900,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-S2-IO-HOOK-PROPOSAL-2026-10-04.md",
+      "sha256": "270436ae6e19fd73730bfbbd05d5c5e94725dc52aeb64d9f5b6b353deedea87b"
+    },
+    {
+      "bytes": 8466,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/CLAUDE-S2-V1.1-HANDBACK-2026-10-04.md",
+      "sha256": "3d00e92aac6f12ae4a052c70988a630522bd5af3ad210e40cc846d8a1f13b2c6"
+    },
+    {
+      "bytes": 77895,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "fc5df4c5fc0b747387c7773b9f40422492f29778fe99f6178215d3eb886d91c5"
+    },
+    {
+      "bytes": 5185,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "scripts/diagnostics/literature_storage_setup_v1.py",
+      "sha256": "2996f4189049f25c283715987c3cbf712929608ed4f61c0d4b2a8248b4e62d0b"
+    },
+    {
+      "bytes": 3228,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "scripts/retrieval/run_s_sizing_v1.py",
+      "s2_v1_1_handback_sha256": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15",
+      "sha256": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15"
+    },
+    {
+      "bytes": 17629,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "src/operations/literature_storage_v1.py",
+      "sha256": "e7c7190d0f7c24c2f72c24550456f0f2fd0c3e6d06040e7ef5391ce93079b206"
+    },
+    {
+      "bytes": 2302,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/__init__.py",
+      "s2_v1_1_handback_sha256": "3eec5d35e8cf5470af53bbea177f11024dd5db801a25a0291cefbbe73311789d",
+      "sha256": "3eec5d35e8cf5470af53bbea177f11024dd5db801a25a0291cefbbe73311789d"
+    },
+    {
+      "bytes": 6174,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/fsio.py",
+      "s2_v1_1_handback_sha256": "d2c6db413c72b4b54169a316410036aab8fa58218081f16814a89d8557714705",
+      "sha256": "d2c6db413c72b4b54169a316410036aab8fa58218081f16814a89d8557714705"
+    },
+    {
+      "bytes": 14023,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/journal.py",
+      "s2_v1_1_handback_sha256": "90b52ab491a8cea11eb87d99129eabbd561847a8c8475f0d7dc8db8abe270cd5",
+      "sha256": "90b52ab491a8cea11eb87d99129eabbd561847a8c8475f0d7dc8db8abe270cd5"
+    },
+    {
+      "bytes": 7334,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/listings.py",
+      "s2_v1_1_handback_sha256": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17",
+      "sha256": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17"
+    },
+    {
+      "bytes": 27159,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/parser.py",
+      "s2_v1_1_handback_sha256": "a2081337d8a9516090acdfb722c1e9ee47e7509d9d5243ea568ed4adeeb317f8",
+      "sha256": "a2081337d8a9516090acdfb722c1e9ee47e7509d9d5243ea568ed4adeeb317f8"
+    },
+    {
+      "bytes": 20533,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/runner.py",
+      "s2_v1_1_handback_sha256": "8f42f526164a2a412859a104ca9a19d8bf0af12286914d2791a57cde6df782bf",
+      "sha256": "8f42f526164a2a412859a104ca9a19d8bf0af12286914d2791a57cde6df782bf"
+    },
+    {
+      "bytes": 24051,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "src/retrieval/sizing_v1/transfer.py",
+      "s2_v1_1_handback_sha256": "fb8c159abd6fada2f1c9160c85e72c61a602c329090900f1a33656d13ff2cb1a",
+      "sha256": "fb8c159abd6fada2f1c9160c85e72c61a602c329090900f1a33656d13ff2cb1a"
+    },
+    {
+      "bytes": 370,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/literature_storage_v1/README.md",
+      "sha256": "e4bdc59c912ce46f549c7403637d530380fced9deccd0a57c4d21bd23a066791"
+    },
+    {
+      "bytes": 367,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/literature_storage_v1/observations.json",
+      "sha256": "ac43d7dc4a08a40d391d6a46b653e9f36932236c1812e56bbf05f00c32f96cc5"
+    },
+    {
+      "bytes": 1486,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/README.md",
+      "sha256": "79a0aa6b499115a77ca2c978e41a0ac38c3788dda39c0e9b25831f94ff102141"
+    },
+    {
+      "bytes": 992,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/context-result.synthetic.json",
+      "sha256": "08d9170f93138651ef83d865899834b42af02c5d4a2c46dc0d1493017852963c"
+    },
+    {
+      "bytes": 874,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/corpus-manifest.synthetic.json",
+      "sha256": "fffe966e5fc2cb8667e09c557dbf2c437e52bab3189c067b6e6adf034b4b2a17"
+    },
+    {
+      "bytes": 893,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/metric-result.synthetic.json",
+      "sha256": "bbebe3168a08876d32e12c0d70c451b180e2dddc2e813642fd5f668a709617c7"
+    },
+    {
+      "bytes": 642,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/passage.synthetic.json",
+      "sha256": "3096e091e79926938e329815b61bf40251233b2cf8bf667476371b22c0d29eef"
+    },
+    {
+      "bytes": 2688,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/pins.json",
+      "sha256": "87e7b4dcdeb17004c3555d9e9a10ca2a44d1bbf420a8e980098995d487df746a"
+    },
+    {
+      "bytes": 492,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/query.synthetic.json",
+      "sha256": "f5103e712ac6b7f94ab0374790458190832c16495574078e698371b460ebd6ae"
+    },
+    {
+      "bytes": 923,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/representation.synthetic.json",
+      "sha256": "ebc46e5e53ae662bf5d5aff80aabb151811052c91561d9717021f575dee43723"
+    },
+    {
+      "bytes": 516,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/rights-decision.synthetic.json",
+      "sha256": "47f2fc939c9c80080e255a4971315530add027e68d1932f0468614c74a963e96"
+    },
+    {
+      "bytes": 324,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/source-event.synthetic.json",
+      "sha256": "7810f81c1bd3d144b569c611c0a414abf2d77688008c6453f027fd1d60b09351"
+    },
+    {
+      "bytes": 263,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/source-revision.synthetic.json",
+      "sha256": "bf6eec0cb766808f5174f9feb5bd5d1a34ee58ff54c5894bf5d02ddd917d022c"
+    },
+    {
+      "bytes": 237,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/source-work.synthetic.json",
+      "sha256": "9481b79055b90fef1800ff9a56c258d6197a3ad53a210595ba2a939e47ac2239"
+    },
+    {
+      "bytes": 513,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/span-label.synthetic.json",
+      "sha256": "f250ddf6d49bbcf7cfa463d6e1ff54de7fba38a010a851bd7cce5eb06b5b6df2"
+    },
+    {
+      "bytes": 750,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/fixtures/shared_retrieval_contracts_v1/supplied-ranking.synthetic.json",
+      "sha256": "8b6a7025733a4a5af2e9407883acbc29bf13e3560ac93f345fa21476eff97f1a"
+    },
+    {
+      "bytes": 1278,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/README.md",
+      "s2_v1_1_handback_sha256": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e",
+      "sha256": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e"
+    },
+    {
+      "bytes": 996,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/billion_laughs.xml",
+      "s2_v1_1_handback_sha256": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b",
+      "sha256": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b"
+    },
+    {
+      "bytes": 340,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/external_entity.xml",
+      "s2_v1_1_handback_sha256": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23",
+      "sha256": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23"
+    },
+    {
+      "bytes": 296,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/internal_entity.xml",
+      "s2_v1_1_handback_sha256": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86",
+      "sha256": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86"
+    },
+    {
+      "bytes": 234,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/malformed.xml",
+      "s2_v1_1_handback_sha256": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3",
+      "sha256": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3"
+    },
+    {
+      "bytes": 3608,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/pubmed_style_doctype.xml",
+      "s2_v1_1_handback_sha256": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e",
+      "sha256": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e"
+    },
+    {
+      "bytes": 392,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/undeclared_entity.xml",
+      "s2_v1_1_handback_sha256": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a",
+      "sha256": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a"
+    },
+    {
+      "bytes": 701,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/update_with_deletes.xml",
+      "s2_v1_1_handback_sha256": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1",
+      "sha256": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1"
+    },
+    {
+      "bytes": 90,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/fixtures/sizing_v1/wrong_root.xml",
+      "s2_v1_1_handback_sha256": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e",
+      "sha256": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e"
+    },
+    {
+      "bytes": 11099,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_journal.py",
+      "s2_v1_1_handback_sha256": "3c4c2218b528016f5253594e7ed494333af87e6544bb7207dfb97fa0be384e29",
+      "sha256": "3c4c2218b528016f5253594e7ed494333af87e6544bb7207dfb97fa0be384e29"
+    },
+    {
+      "bytes": 5882,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_listings.py",
+      "s2_v1_1_handback_sha256": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2",
+      "sha256": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2"
+    },
+    {
+      "bytes": 15416,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_parser.py",
+      "s2_v1_1_handback_sha256": "b181314332e0f3479ccb64018dbcea8d9c0d6b4c5a84363e4d09c83edf6a9c33",
+      "sha256": "b181314332e0f3479ccb64018dbcea8d9c0d6b4c5a84363e4d09c83edf6a9c33"
+    },
+    {
+      "bytes": 28523,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_runner.py",
+      "s2_v1_1_handback_sha256": "cad03a1036390d7a22679d4f4684cff3eead9ec0c4b49ca7683837d251503424",
+      "sha256": "cad03a1036390d7a22679d4f4684cff3eead9ec0c4b49ca7683837d251503424"
+    },
+    {
+      "bytes": 22094,
+      "filesystem_mode": "0o600",
+      "git_mode": "100644",
+      "ownership": "Claude input; preserved without edits",
+      "path": "tests/retrieval/test_sizing_v1_transfer.py",
+      "s2_v1_1_handback_sha256": "b1de4cf728cf6ca978d372c42b6bcfb1a5c622d4e98b70cba0118cd258037dca",
+      "sha256": "b1de4cf728cf6ca978d372c42b6bcfb1a5c622d4e98b70cba0118cd258037dca"
+    },
+    {
+      "bytes": 14384,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/test_literature_storage_v1.py",
+      "sha256": "90c6bfcfef1071ee029725253e05fbd7a1db660f3da7c9130590bc8c4399bdf7"
+    },
+    {
+      "bytes": 7504,
+      "filesystem_mode": "0o644",
+      "git_mode": "100644",
+      "ownership": "Codex scoped change",
+      "path": "tests/test_retrieval_contracts.py",
+      "sha256": "9b959a9e3f8a75e2d3c1c7233089a0c308d20793da39e6aa9f0fb11abd82fc6d"
+    }
+  ],
+  "historical_scope": {
+    "path": "docs/capstone/operations/PLAN07-PENDING-CHECKPOINT-FILES-2026-10-04.json",
+    "remains_unchanged": true,
+    "sha256": "11ff88106dd47090ca91677e051b6f24d6f1834a9ade8cca307863fa3b6b2322"
+  },
+  "incomplete": [
+    "N4 descriptor binding and its actual bounded-diagnostics launcher qualification",
+    "S3/S4 and exact Run S signature/execution",
+    "P4a installation/database trial and D-085 producer migration"
+  ],
+  "kind": "authorized_plan07_local_preservation",
+  "listed_hashed_files": 66,
+  "qualification": {
+    "contract_deselected": 3054,
+    "contract_existing_warnings": 2,
+    "contract_gate_passed": 198,
+    "full_expanded_project_suite_run": false,
+    "native_handback_path": "docs/capstone/operations/CODEX-S2-V1.1-NATIVE-REVIEW-2026-10-04.md",
+    "native_handback_sha256": "c151b1a306fa4f1251c7827cf127edd7c9abbf78edb760d235f902ce16470b4c",
+    "native_performed_by_other_chat": true,
+    "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+    "retrieval_native_passed": 326,
+    "s1_five_member_pins_unchanged": true,
+    "s1_prior_unit_passed": 49,
+    "s2_code_identity": "df585e2b10a69f55e24db8cc0f96822151a43d52be15ad5bb4917bd9a0a24d4e",
+    "s2_native_passed": 144,
+    "s2_v1_1_pins_verified": 22,
+    "schema_pins_count": 12,
+    "shared_both_passed": 173,
+    "shared_new_passed": 118
+  },
+  "recorded_utc": "2026-10-04T17:05:04.292604+00:00",
+  "schema_version": "1.0.0",
+  "self_manifest": {
+    "git_mode": "100644",
+    "path": "docs/capstone/operations/PLAN07-LOCAL-PRESERVATION-SCOPE-2026-10-04.json",
+    "sha256": "not embedded; exact self bytes pinned in ignored freeze record"
+  },
+  "total_staged_files_including_self": 67,
+  "tracked_deletions": []
+}

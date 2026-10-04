@@ -1,10 +1,13 @@
 # Plan 07 retrieval contracts (P3, provisional)
 
 **Status:** PROVISIONAL v1.0.0, produced by the Plan 07 P3 synthetic foundation (Claude,
-2026-09-28). Revised for Codex review findings R1–R5 before any acceptance, so the version is still
-1.0.0 (see the handoff). **Pending Codex contract re-review.** They are not yet integrated with the shared
-Plan 01/02 contract set, the PostgreSQL schema (P4b) or any producer beyond the synthetic
-foundation. Changing any schema after review creates a new version.
+2026-09-28). Revised for Codex findings R1–R5 before acceptance; the first accepted version remains
+1.0.0. **Accepted for the dispatched P3 synthetic scope on September 28** in
+[Codex's re-review](../../retrieval/CODEX-P3-REREVIEW-2026-09-28.md).
+On October 4, all 12 schemas joined a separate section of the shared offline contract checks under
+D-348; [verification and limitations](../../operations/PLAN07-SHARED-CONTRACT-RESULTS-2026-10-04.md).
+PostgreSQL schema (P4b), real-corpus and production-consumer integration remain separate. Changing
+any accepted schema requires version/migration review. Schema checking alone is not runtime conformance.
 
 All schemas are JSON Schema Draft 2020-12, with `additionalProperties: false` and a
 `schema_version` constant. They are validated in `src/retrieval/records.py` with the existing

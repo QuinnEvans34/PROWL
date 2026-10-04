@@ -1,0 +1,4 @@
+{
+  "primary": {"uuid": "invented-primary", "filesystem": "apfs", "writable": true, "role": "literature", "device": 701, "free_bytes": 1099511627776, "capacity_bytes": 2199023255552},
+  "internal": {"uuid": "invented-internal", "filesystem": "apfs", "writable": true, "role": "fallback", "device": 702, "free_bytes": 1099511627776, "capacity_bytes": 2199023255552}
+}

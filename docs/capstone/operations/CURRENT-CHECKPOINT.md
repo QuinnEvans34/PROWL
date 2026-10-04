@@ -1,5 +1,33 @@
 # Current PROWL checkpoint
 
+**October 4 Plan07 follow-up:** [phone-first handback](PLAN07-FOLLOWUP-HANDBACK-2026-10-04.md)
+and [local preservation scope/record](PLAN07-LOCAL-PRESERVATION-2026-10-04.md).
+D-346–349: Claude-first hook, local commit/no push, shared section dispatched and delivered revision
+reconciled. Shared118new/173combined pass; refreshed contract gate198pass/3054deselected, two
+existing warnings.12schemas/legacy shared checks unchanged. Delivered1.1 df585e2b and22pins match;
+[other chat's native N2](CODEX-S2-V1.1-NATIVE-REVIEW-2026-10-04.md):144sizing/326retrieval pass,
+no skips. Existing S1 five source/helper/fixture pins and49-check/setup evidence remain unchanged.
+[Binding packet](PLAN07-S1-S2-BINDING-PACKET-2026-10-04.md) approved in order but N4 incomplete:
+[watchdog diagnostics request](PLAN07-S2-IO-HOOK-REVIEW-2026-10-04.md) needs a Claude-owned response
+and new exact handback before guarded launcher acceptance. No binding/external rehearsal/job enabled.
+The refreshed scope accompanies the authorized local preservation;older40-file proposal is historical.
+No push, full expanded-project acceptance, S3/S4/signature/download/install/DB or follow-on dispatch.
+D-335 stays current imaging;registry/cohorts/holds/consumed requests/fixedbackupceiling unchanged.
+
+**October 4 Plan07 M1–M6 complete:**
+[phone-first handback](PLAN07-M1-M6-HANDBACK-2026-10-04.md),
+[S1 results/interface](PLAN07-S1-RESULTS-2026-10-04.md) and
+[fresh pending checkpoint](PLAN07-PENDING-CHECKPOINT-2026-10-04.md).
+D-341–345 record October3 approvals. S1 implemented/qualified49inventedtests;fourapprovedareas
+created,61,440bytes retained;primary/fallback durability and native APFS lock contention verified.
+Claude S2 native131/fullretrieval313 pass(no skips),21pins/tool814b89c5 match;Claude code unchanged.
+Only two approved leftovers deleted. Shared-contract/P4a integration packets are drafts;D-085
+additional-metric policy accepted, old producers/results unchanged. S1-S2 binding proposed only;
+S3/S4/signature/live sizing still unmet. No new scientific execution/installed image/runtime start.
+Prior preservation commit main5856fdc contains625files;new pending scope is uncommitted, no push.
+D-335 remains latest imaging;2933fast/eightlocal prior baseline remains historical, not a new
+full-suite pass for this expanded tree. Imaging registry/cohorts/holds/fixedbackupceiling unchanged.
+
 **October 3 local preservation settlement:** Quinton authorized a local commit and settled
 [Monday wording](COURSE-START-SUMMARY-2026-10-05.md). The
 [preservation record/final scope](PRESERVATION-COMMIT-2026-10-03.md) supersedes V2 for this commit,

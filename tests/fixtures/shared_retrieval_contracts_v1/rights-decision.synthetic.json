@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "rights_id": "rights:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "representation_id": "repr:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+  "policy_version": "invented-rights-v1",
+  "decision": "allowed",
+  "permissions": {
+    "retain_metadata": true,
+    "local_text_store": true,
+    "local_embedding": true,
+    "display_snippet": true,
+    "redistribute": false
+  },
+  "reason": "Invented shape control; no real rights decision."
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "ranking_id": "rank:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "question_id": "q:invented",
+  "query_id": "qry:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+  "corpus_id": "corpus:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "configuration_id": "cfg:invented",
+  "score_direction": "higher_is_better",
+  "tie_policy": "score_then_passage_id",
+  "target_depth": 50,
+  "eligibility_policy": "all_corpus_members",
+  "eligible_count": 1,
+  "items": [
+    {
+      "passage_id": "psg:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "score": 1.0
+    }
+  ],
+  "result_count": 1,
+  "shortfall_reason": "eligible_pool_exhausted"
+}

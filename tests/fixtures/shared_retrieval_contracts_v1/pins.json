@@ -1,0 +1,54 @@
+{
+  "contracts": {
+    "context-result": {
+      "fixture_sha256": "08d9170f93138651ef83d865899834b42af02c5d4a2c46dc0d1493017852963c",
+      "schema_sha256": "c8cfbe08a62a268763a5fefd5223fbefa6a55707eb4a5e6451d22e74e0d3b397"
+    },
+    "corpus-manifest": {
+      "fixture_sha256": "fffe966e5fc2cb8667e09c557dbf2c437e52bab3189c067b6e6adf034b4b2a17",
+      "schema_sha256": "ec348c4ce6fe1768367a0a72712373e5b0457847520165ff58b48f309b208842"
+    },
+    "metric-result": {
+      "fixture_sha256": "bbebe3168a08876d32e12c0d70c451b180e2dddc2e813642fd5f668a709617c7",
+      "schema_sha256": "b205f6a522819578342a3c816aa862c4adca11f634a2d783cc29895942e49b97"
+    },
+    "passage": {
+      "fixture_sha256": "3096e091e79926938e329815b61bf40251233b2cf8bf667476371b22c0d29eef",
+      "schema_sha256": "86a9a48694f6d6e21e6c7863695d25adf88d9142c8da4b5035175adf3bd809ea"
+    },
+    "query": {
+      "fixture_sha256": "f5103e712ac6b7f94ab0374790458190832c16495574078e698371b460ebd6ae",
+      "schema_sha256": "a515105d3db97bb0d5e32fa2408236d50ef5a866019cbde8b1a558fd3622b21a"
+    },
+    "representation": {
+      "fixture_sha256": "ebc46e5e53ae662bf5d5aff80aabb151811052c91561d9717021f575dee43723",
+      "schema_sha256": "0e67ffeef6476dcd03dfd60cadfd7554f1f2363b5a807700b476236f4f3f2c6c"
+    },
+    "rights-decision": {
+      "fixture_sha256": "47f2fc939c9c80080e255a4971315530add027e68d1932f0468614c74a963e96",
+      "schema_sha256": "79247c250437b489e405b7bf5ac9684b6689da226c3f080c11d1e1c3c74f8a05"
+    },
+    "source-event": {
+      "fixture_sha256": "7810f81c1bd3d144b569c611c0a414abf2d77688008c6453f027fd1d60b09351",
+      "schema_sha256": "baeae66f7ad1697fa8e2dfd203b0422d3ff77efe6ac790d4edc75eab79e23b24"
+    },
+    "source-revision": {
+      "fixture_sha256": "bf6eec0cb766808f5174f9feb5bd5d1a34ee58ff54c5894bf5d02ddd917d022c",
+      "schema_sha256": "3baf7278e602252d0b3ef1b32bc36ec9b878a26a7a70d074231c456187c8926e"
+    },
+    "source-work": {
+      "fixture_sha256": "9481b79055b90fef1800ff9a56c258d6197a3ad53a210595ba2a939e47ac2239",
+      "schema_sha256": "b7957d27e63512da1019a9481c29de39a090d441722db78f240155ff286d9102"
+    },
+    "span-label": {
+      "fixture_sha256": "f250ddf6d49bbcf7cfa463d6e1ff54de7fba38a010a851bd7cce5eb06b5b6df2",
+      "schema_sha256": "ac8cff5b6dc92ee087ada92c68a9e6b0f428b838bbb164fab360254b8c122aba"
+    },
+    "supplied-ranking": {
+      "fixture_sha256": "8b6a7025733a4a5af2e9407883acbc29bf13e3560ac93f345fa21476eff97f1a",
+      "schema_sha256": "daf48122fd2ad0f1a79f393f1bdd9b8402db630949e7ab4e669be2023c0bb5de"
+    }
+  },
+  "provenance": "hand-authored invented shape controls; placeholder identities; no producer calls",
+  "schema_version": "1.0.0"
+}
