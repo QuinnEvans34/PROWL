@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/context-result/1.0.0",
+  "title": "Plan 07 delivered-evidence prototype result (proposal)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "question_id",
+    "query_id",
+    "ranking_id",
+    "corpus_id",
+    "counter",
+    "budget",
+    "selected",
+    "skipped",
+    "delivered_tokens",
+    "n_direct_spans",
+    "n_delivered_spans",
+    "delivered_span_recall",
+    "n_required_concepts",
+    "n_delivered_concepts",
+    "concept_coverage"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "const": "proposed_provisional_not_official"
+    },
+    "question_id": {
+      "type": "string",
+      "pattern": "^q:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^qry:[0-9a-f]{64}$"
+    },
+    "ranking_id": {
+      "type": "string",
+      "pattern": "^rank:[0-9a-f]{64}$"
+    },
+    "corpus_id": {
+      "type": "string",
+      "pattern": "^corpus:[0-9a-f]{64}$"
+    },
+    "counter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "kind"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+        },
+        "kind": {
+          "enum": [
+            "synthetic_counter",
+            "fixture_counts"
+          ]
+        }
+      }
+    },
+    "budget": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "selected": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^psg:[0-9a-f]{64}$"
+      }
+    },
+    "skipped": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passage_id",
+          "tokens",
+          "reason"
+        ],
+        "properties": {
+          "passage_id": {
+            "type": "string",
+            "pattern": "^psg:[0-9a-f]{64}$"
+          },
+          "tokens": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer",
+                "minimum": 1
+              }
+            ]
+          },
+          "reason": {
+            "enum": [
+              "exceeds_remaining_budget",
+              "display_not_permitted"
+            ]
+          }
+        }
+      }
+    },
+    "delivered_tokens": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_direct_spans": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_delivered_spans": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "delivered_span_recall": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      ]
+    },
+    "n_required_concepts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "n_delivered_concepts": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "concept_coverage": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      ]
+    }
+  }
+}

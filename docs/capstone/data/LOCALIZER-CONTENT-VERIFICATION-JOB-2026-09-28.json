@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0.0",
+  "status": "specified_not_executed",
+  "purpose": "candidate_content_identity_reverification",
+  "selection": {
+    "rule": "retain_entire_prior_five_case_audit_pool",
+    "study_ids": [
+      "PanTS_00000003",
+      "PanTS_00000026",
+      "PanTS_00000031",
+      "PanTS_00000078",
+      "PanTS_00000266"
+    ],
+    "requested_future_smoke_count": 2,
+    "future_smoke_order": "ascending_study_id_after_positive_qualification",
+    "shortage": "stop_no_automatic_refill",
+    "representative": false
+  },
+  "inputs": [
+    {
+      "path": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91/verification.json",
+      "sha256": "201342b56dd420783136a25c6faf278a224b68f904b1b56dd39278e458c1131b"
+    },
+    {
+      "path": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91/files.json",
+      "sha256": "ab7fbde71d6ceabed2f3c4b259126df757ab69a6dbafd6b80190af84b7fe5d50"
+    },
+    {
+      "path": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91/summary.json",
+      "sha256": "6cfbfc72cb96073da58f37606f2a07b61a31286202c85af3dc334a92a5aafe35"
+    },
+    {
+      "path": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91/request.json",
+      "sha256": "01908502b2a1cd4bd8b7a124cbb001c21116c22ec60b01b600cd4d8a08cedff6"
+    },
+    {
+      "path": "outputs/prowl/voxel-followup-140effff-129c-4ff8-b455-70a2119707a1/receipt.json",
+      "sha256": "575acdd7e71861a6400bcafb89547b53c1859ed810619ec571b4b9f9f1f82d98"
+    },
+    {
+      "path": "outputs/prowl/voxel-followup-140effff-129c-4ff8-b455-70a2119707a1/selection.json",
+      "sha256": "8ed816dbb9fb630348f9b161ca5a7516821c48623a13d8476149cefe17eb2343"
+    },
+    {
+      "path": "outputs/splits/train.txt",
+      "sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8"
+    },
+    {
+      "path": "outputs/splits/val.txt",
+      "sha256": "57549ba515b4d4f3297556a12e8e7c7df43a1f06de0c2f8296b4e5f16c87d2b1"
+    },
+    {
+      "path": "outputs/splits/test.txt",
+      "sha256": "7a323774be8c4459024f6e26113b84a4f892f52c954f42c3d033234e1e7b338e"
+    }
+  ],
+  "files": [
+    {
+      "bytes": 6829413,
+      "content_sha256": null,
+      "kind": "ct",
+      "observation": {
+        "ctime_ns": 1790121048557766966,
+        "device": 16777239,
+        "inode": 313485,
+        "mtime_ns": 1790121048557766966
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000003",
+      "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000003/ct.nii.gz",
+      "expected_content_sha256": "61090a2110a939c82be1edd9cd93a90745434a075ee2789c4949beb57907c3f7"
+    },
+    {
+      "bytes": 33214,
+      "content_sha256": null,
+      "kind": "pancreas",
+      "observation": {
+        "ctime_ns": 1790119741578417596,
+        "device": 16777239,
+        "inode": 195429,
+        "mtime_ns": 1790119741578417596
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000003",
+      "uri": "PanTSMini_Label/PanTS_00000003/segmentations/pancreas.nii.gz",
+      "expected_content_sha256": "f030cff84c6c8efdfa6eab7ab1f9bb18dcb9294a7eccabdbc60854b1c759f5b7"
+    },
+    {
+      "bytes": 16396154,
+      "content_sha256": null,
+      "kind": "ct",
+      "observation": {
+        "ctime_ns": 1790121216029034579,
+        "device": 16777239,
+        "inode": 313750,
+        "mtime_ns": 1790121216029034579
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000026",
+      "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000026/ct.nii.gz",
+      "expected_content_sha256": "255b506353005c1d54851b0e988c15a623533858149286f2b825166ae3dcbb20"
+    },
+    {
+      "bytes": 72389,
+      "content_sha256": null,
+      "kind": "pancreas",
+      "observation": {
+        "ctime_ns": 1790120163099011771,
+        "device": 16777239,
+        "inode": 311461,
+        "mtime_ns": 1790120163099011771
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000026",
+      "uri": "PanTSMini_Label/PanTS_00000026/segmentations/pancreas.nii.gz",
+      "expected_content_sha256": "5d543b71c14458098b43ad2d4779e9e7024efac3902ea365452be24e71045021"
+    },
+    {
+      "bytes": 9679636,
+      "content_sha256": null,
+      "kind": "ct",
+      "observation": {
+        "ctime_ns": 1790121019705202799,
+        "device": 16777239,
+        "inode": 313433,
+        "mtime_ns": 1790121019705202799
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000031",
+      "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000031/ct.nii.gz",
+      "expected_content_sha256": "14029ae7da5922760760f313cadbc84790d53a78be98a47d6a30c36f712dbdd8"
+    },
+    {
+      "bytes": 45682,
+      "content_sha256": null,
+      "kind": "pancreas",
+      "observation": {
+        "ctime_ns": 1790119707319838209,
+        "device": 16777239,
+        "inode": 186153,
+        "mtime_ns": 1790119707319838209
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000031",
+      "uri": "PanTSMini_Label/PanTS_00000031/segmentations/pancreas.nii.gz",
+      "expected_content_sha256": "f3f77cd5433a0d6bbc2efeeff8378b3a991e48bcd0fee2f5498690ba087f008e"
+    },
+    {
+      "bytes": 5842835,
+      "content_sha256": null,
+      "kind": "ct",
+      "observation": {
+        "ctime_ns": 1790120337296752214,
+        "device": 16777239,
+        "inode": 312401,
+        "mtime_ns": 1790120337296752214
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000078",
+      "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000078/ct.nii.gz",
+      "expected_content_sha256": "d5f9849da0ac39919ce6ec0c199ea218deeb0b28b0dd981b01682322de90f57b"
+    },
+    {
+      "bytes": 22384,
+      "content_sha256": null,
+      "kind": "pancreas",
+      "observation": {
+        "ctime_ns": 1790119185642945231,
+        "device": 16777239,
+        "inode": 27812,
+        "mtime_ns": 1790119185642945231
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000078",
+      "uri": "PanTSMini_Label/PanTS_00000078/segmentations/pancreas.nii.gz",
+      "expected_content_sha256": "c9e78f390f4b4e480ba4a2d9c8409939c82331e8ffa427d7701abc6fecf7355c"
+    },
+    {
+      "bytes": 5251708,
+      "content_sha256": null,
+      "kind": "ct",
+      "observation": {
+        "ctime_ns": 1790120751117906622,
+        "device": 16777239,
+        "inode": 313009,
+        "mtime_ns": 1790120751117906622
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000266",
+      "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000266/ct.nii.gz",
+      "expected_content_sha256": "ae4b95e088ac5a443baa1ae51da0f3eba252d68e7448b3fcdb3d78a2c8c4dfd3"
+    },
+    {
+      "bytes": 22295,
+      "content_sha256": null,
+      "kind": "pancreas",
+      "observation": {
+        "ctime_ns": 1790119361662530549,
+        "device": 16777239,
+        "inode": 82813,
+        "mtime_ns": 1790119361662530549
+      },
+      "protected_role": "train",
+      "state": "present",
+      "study_id": "pants:study:PanTS_00000266",
+      "uri": "PanTSMini_Label/PanTS_00000266/segmentations/pancreas.nii.gz",
+      "expected_content_sha256": "9ef2016b1aa887234fdfc09bad70bde939391d6daddbbe3ad2f4fecdddbff201"
+    }
+  ],
+  "unique_input_bytes": 44195710,
+  "limits": {
+    "wall_seconds": 300,
+    "per_file_seconds": 60,
+    "source_read_bytes": 67108864,
+    "chunk_bytes": 1048576,
+    "process_rss_bytes": 536870912,
+    "output_bytes": 8388608,
+    "internal_free_floor_bytes": 107374182400,
+    "concurrency": 1,
+    "attempts_per_file": 1
+  },
+  "prohibited": [
+    "voxel_decode",
+    "source_writes",
+    "eligibility_promotion",
+    "test_or_validation_payloads",
+    "archive_rescan",
+    "training",
+    "automatic_case_substitution"
+  ]
+}

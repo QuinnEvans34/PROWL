@@ -1,0 +1,21 @@
+{
+  "state": "proposed_unapproved",
+  "capability": {
+    "approval": "D-333",
+    "backup_area": "segmenter-v5-rehearsal-keepers",
+    "backup_volume_uuid": "542E8B1F-8D50-4783-9250-752DFDC899CD",
+    "launch_approval_required": false,
+    "max_new_bytes_per_domain": 2147483648,
+    "operation": "segmenter_v5_executor_preparation",
+    "phase": "rehearsal",
+    "primary_area": "segmenter-v5-rehearsal",
+    "primary_volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59",
+    "real_optimizer_updates_allowed": false,
+    "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+    "restore_area": "segmenter-v5-rehearsal-restores",
+    "schema_version": "1.0.0",
+    "backup_baseline_bytes": 14706439882,
+    "absolute_backup_ceiling": 16853923530,
+    "primary_ceiling": 2147483648
+  }
+}

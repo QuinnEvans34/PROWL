@@ -1,12 +1,13 @@
 from copy import deepcopy
-from pathlib import Path
 import pytest
 
 from src.data.audit_assessment_link import link_audits, link_coverage_reference, parse
 from src.data.manifest_records import canonical, digest
+from retained_segmenter_metadata import fixture_path
 
 pytestmark = pytest.mark.unit
-TRAIN = (Path(__file__).resolve().parents[1] / 'outputs/splits/train.txt').read_bytes()
+# Exact compatibility-control bytes; this does not qualify any member for training.
+TRAIN = fixture_path('train.txt').read_bytes()
 
 
 def fixture():

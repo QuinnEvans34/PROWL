@@ -1,0 +1,231 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "proposed_plan07_checkpoint_addendum",
+  "date": "2026-10-03",
+  "authorization": {
+    "record_existing_decisions": true,
+    "documentation_only": true,
+    "commit": false,
+    "push": false,
+    "writer_setup": false,
+    "s2_dispatch": false,
+    "delete": false
+  },
+  "pending_checkpoint": {
+    "path": "docs/capstone/operations/GIT-CHECKPOINT-FILES-V2-2026-10-03.json",
+    "sha256_at_read": "5d427597d241419bfe039d4c2aece279ce9246cc6b11606cb10f6031872cf425",
+    "proposed_file_count_at_read": 617,
+    "sole_manifest_writer": "imaging/checkpoint chat",
+    "must_regenerate_after_support_changes": true,
+    "decisions_entry_is_stale": true
+  },
+  "files": [
+    {
+      "path": "docs/capstone/retrieval/planning/ACQUISITION-PLAN.md",
+      "bytes": 31166,
+      "sha256": "a2be620c6b03373bc6a84b6cd88bf4f2177313bddc1992da7f3991ca713fc826",
+      "filesystem_mode": "0o600",
+      "run_log_expected_sha256": "a2be620c6b03373bc6a84b6cd88bf4f2177313bddc1992da7f3991ca713fc826",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "a2be620c6b03373bc6a84b6cd88bf4f2177313bddc1992da7f3991ca713fc826",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/INFORMATION-NEEDS.md",
+      "bytes": 9759,
+      "sha256": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": null,
+      "pending_v2_match": null
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/P2-DECISION-SHEET.md",
+      "bytes": 6137,
+      "sha256": "8f3abc520162a8edca3fc70bbe18c5ba48fc68b8e693724ad6c1f7b266074311",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "8f3abc520162a8edca3fc70bbe18c5ba48fc68b8e693724ad6c1f7b266074311",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "8f3abc520162a8edca3fc70bbe18c5ba48fc68b8e693724ad6c1f7b266074311",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/PHASES.md",
+      "bytes": 20393,
+      "sha256": "b4abe42d9d1b43504087175ab8f168356fd16356e6868402713ada862d1da4ca",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "b4abe42d9d1b43504087175ab8f168356fd16356e6868402713ada862d1da4ca",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": null,
+      "pending_v2_match": null
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "bytes": 67229,
+      "sha256": "f7657b99d87fd418857b1067adeca65460819b8dc43321b4c70fe09ff543bc9e",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": null,
+      "run_log_pin_matches": null,
+      "pin_basis": "live nonrecursive log snapshot",
+      "pending_v2_sha256": "f7657b99d87fd418857b1067adeca65460819b8dc43321b4c70fe09ff543bc9e",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/SCOPE.md",
+      "bytes": 34419,
+      "sha256": "8ebd22f023b744dfbd36e97a04053ecc628604085440156ea99fa6d960dd0273",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "8ebd22f023b744dfbd36e97a04053ecc628604085440156ea99fa6d960dd0273",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "8ebd22f023b744dfbd36e97a04053ecc628604085440156ea99fa6d960dd0273",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/SEARCH-AND-SELECTION.md",
+      "bytes": 34566,
+      "sha256": "1cb96a960f04b58cb07a796a5ef0b2ea53e0337503279c8d373aa849f4b5c46a",
+      "filesystem_mode": "0o600",
+      "run_log_expected_sha256": "1cb96a960f04b58cb07a796a5ef0b2ea53e0337503279c8d373aa849f4b5c46a",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "1cb96a960f04b58cb07a796a5ef0b2ea53e0337503279c8d373aa849f4b5c46a",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/SEED-CANDIDATES.md",
+      "bytes": 40008,
+      "sha256": "eceaa8bf57c7863f9cb2c1842f893b5e1d386002f05786364ca12099eda195f2",
+      "filesystem_mode": "0o600",
+      "run_log_expected_sha256": "eceaa8bf57c7863f9cb2c1842f893b5e1d386002f05786364ca12099eda195f2",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "eceaa8bf57c7863f9cb2c1842f893b5e1d386002f05786364ca12099eda195f2",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/SEED-SET.md",
+      "bytes": 14689,
+      "sha256": "d68b0b18e1085f87cc413f91ca1ad8b720a86d9d7517cf4eea5dc6006fff604c",
+      "filesystem_mode": "0o600",
+      "run_log_expected_sha256": "d68b0b18e1085f87cc413f91ca1ad8b720a86d9d7517cf4eea5dc6006fff604c",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "d68b0b18e1085f87cc413f91ca1ad8b720a86d9d7517cf4eea5dc6006fff604c",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-P2-DECISION-SHEET-REVIEW-2026-09-28.md",
+      "bytes": 4978,
+      "sha256": "4830b3e48ceb60adacc9c5c5bfbc2603546da1ed973c00de94a15c21d152061e",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "4830b3e48ceb60adacc9c5c5bfbc2603546da1ed973c00de94a15c21d152061e",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "4830b3e48ceb60adacc9c5c5bfbc2603546da1ed973c00de94a15c21d152061e",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-P2-OUTLINE-APPLICATION-REVIEW-2026-09-28.md",
+      "bytes": 7382,
+      "sha256": "45e7d373423acde0d30530835474af1f7eb2a2220991af1b4a94321146bde660",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": null,
+      "run_log_pin_matches": null,
+      "pin_basis": "referenced in log; no full log hash",
+      "pending_v2_sha256": "45e7d373423acde0d30530835474af1f7eb2a2220991af1b4a94321146bde660",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-P2-REREVIEW-2026-09-28.md",
+      "bytes": 5003,
+      "sha256": "8ac4fad463b44c7df80445fa238c859bc3cd2d636aaa0dbadd2beb56fc3434a2",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": null,
+      "run_log_pin_matches": null,
+      "pin_basis": "referenced in log; no full log hash",
+      "pending_v2_sha256": "8ac4fad463b44c7df80445fa238c859bc3cd2d636aaa0dbadd2beb56fc3434a2",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-P2-REVIEW-2026-09-28.md",
+      "bytes": 13428,
+      "sha256": "b932c200fc6d20380f5617cce313ba56451b420e86fe11f9186e5119c4ad37d5",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": null,
+      "run_log_pin_matches": null,
+      "pin_basis": "referenced in log; no full log hash",
+      "pending_v2_sha256": "b932c200fc6d20380f5617cce313ba56451b420e86fe11f9186e5119c4ad37d5",
+      "pending_v2_match": true
+    },
+    {
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-03.md",
+      "bytes": 5659,
+      "sha256": "9978b8088d25fa9dc24bcc1999470a2feec51e4d822ab7352f1afb5d4e1142df",
+      "filesystem_mode": "0o644",
+      "run_log_expected_sha256": "9978b8088d25fa9dc24bcc1999470a2feec51e4d822ab7352f1afb5d4e1142df",
+      "run_log_pin_matches": true,
+      "pin_basis": "latest explicit historical/approval entry",
+      "pending_v2_sha256": "9978b8088d25fa9dc24bcc1999470a2feec51e4d822ab7352f1afb5d4e1142df",
+      "pending_v2_match": true
+    }
+  ],
+  "owned_support_paths": [
+    {
+      "path": "docs/capstone/DECISIONS.md",
+      "bytes": 196616,
+      "sha256": "98c188822ecd82f977f8e84750a812c0b4ab0aaf5e2f9d844dad02b31395d0c9"
+    },
+    {
+      "path": "docs/capstone/operations/PLAN07-LITERATURE-S1-PROPOSAL-2026-10-03.md",
+      "bytes": 8990,
+      "sha256": "3356a34ac3f7eee3f6a6774d4eb1958c348e69b9eacbb8307fe0b3b41a2b2695"
+    },
+    {
+      "path": "docs/capstone/operations/CLAUDE-PLAN07-S2-PACKET-DRAFT-2026-10-03.md",
+      "bytes": 23860,
+      "sha256": "0ac7eb939e9cfaf17d4c0365f0e29aaa439b5aabe4d2b1c10d8a9622635b80ef"
+    },
+    {
+      "path": "docs/capstone/operations/GIT-CHECKPOINT-PLAN07-ADDENDUM-2026-10-03.md",
+      "bytes": 6267,
+      "sha256": "cfcfd1463c0928c49d44b0156d44632d821a968c17825915ae99c100943efd0f"
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-PLAN07-INTEGRATION-OPTIONS-2026-10-03.md",
+      "bytes": 3455,
+      "sha256": "3b22ccc79e3603db49d05afd6bdd287b666b2675a225b4e19050c13795fc9eda"
+    },
+    {
+      "path": "docs/capstone/retrieval/CODEX-PLAN07-L1-L6-HANDBACK-2026-10-03.md",
+      "bytes": 7570,
+      "sha256": "39c6d96df7b17954a5ee25e59583c8ef7a9c263ee56e0e1f8eae1c16cdd29c8f"
+    }
+  ],
+  "self": {
+    "path": "docs/capstone/operations/GIT-CHECKPOINT-PLAN07-FILES-2026-10-03.json",
+    "include_after_refresh": true,
+    "sha256_excluded_to_avoid_recursion": true
+  },
+  "verification": {
+    "explicit_log_file_pins_matched": 10,
+    "input_files_unchanged": true,
+    "running_log_sha256": "f7657b99d87fd418857b1067adeca65460819b8dc43321b4c70fe09ff543bc9e",
+    "decisions_preexisting_prefix_sha256": "5699797aaae96c9281a5a0f9a6297b42e6415d6828ef2825f746eb95ae2b6f3f",
+    "decisions_prefix_unchanged": true,
+    "verbatim_sizing_mode_sha256": "62b90aa6fcff1fdc26169088c053011dd51f0cba3ac1abec1e794e033c8bcf0d",
+    "verbatim_run_s_sha256": "ecd36357ac0a8a8f188fe171e54c87d55833810829db220c38c013fec3477195",
+    "s2_exact_annex_match": true,
+    "registry_sha256_unchanged": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+    "full_merged_checkpoint_not_reverified": true
+  },
+  "excluded_cleanup_paths": [
+    "_to_delete/claude-RUNNING-LOG.md.tmp",
+    ".git/index.lock.stale-claude-20260928"
+  ]
+}

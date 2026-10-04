@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/source-event/1.0.0",
+  "title": "Plan 07 ordered source event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "source_file",
+    "ordinal",
+    "event_type",
+    "work_id",
+    "revision_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt:[A-Za-z0-9][A-Za-z0-9._-]{0,119}:[0-9]{1,9}$"
+    },
+    "source_file": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,119}$"
+    },
+    "ordinal": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "event_type": {
+      "enum": [
+        "add_or_replace",
+        "delete"
+      ]
+    },
+    "work_id": {
+      "type": "string",
+      "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+    },
+    "revision_id": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^rev:[0-9a-f]{64}$"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "delete"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "revision_id": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "add_or_replace"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "revision_id": {
+            "type": "string",
+            "pattern": "^rev:[0-9a-f]{64}$"
+          }
+        }
+      }
+    }
+  ]
+}

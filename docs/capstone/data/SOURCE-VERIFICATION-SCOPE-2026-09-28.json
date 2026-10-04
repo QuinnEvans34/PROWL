@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "source_verification_scope_preparation_not_execution",
+  "date": "2026-09-28",
+  "status": "retained_controls_verified_live_preflight_pending",
+  "source": "pants",
+  "original_membership_counts": {
+    "train": 7200,
+    "validation": 1800,
+    "test": 901
+  },
+  "input_pins": [
+    {
+      "path": "outputs/splits/train.txt",
+      "bytes": 108000,
+      "sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8",
+      "role": "train",
+      "count": 7200
+    },
+    {
+      "path": "outputs/splits/val.txt",
+      "bytes": 27000,
+      "sha256": "57549ba515b4d4f3297556a12e8e7c7df43a1f06de0c2f8296b4e5f16c87d2b1",
+      "role": "validation",
+      "count": 1800
+    },
+    {
+      "path": "outputs/splits/test.txt",
+      "bytes": 13515,
+      "sha256": "7a323774be8c4459024f6e26113b84a4f892f52c954f42c3d033234e1e7b338e",
+      "role": "test",
+      "count": 901
+    },
+    {
+      "path": "outputs/prowl/storage-prep-2026-09-21/mount-and-receipts.json",
+      "bytes": 1728,
+      "sha256": "06788e7a470b5f5f3f69e3dcb5427500311320ea85e8c318caf9c84ca896ae15"
+    },
+    {
+      "path": "outputs/prowl/extraction-2026-09-22/pants.jsonl",
+      "bytes": 97303,
+      "sha256": "b082ee73506a35ac922f5f390ac5fd0ffda3ac630f4f0ada55b7781dead1ca6f"
+    },
+    {
+      "path": "outputs/prowl/inventory-2026-09-27/full-v4.json",
+      "bytes": 624890,
+      "sha256": "b8f561d2fdf7506673f6e29da75c6c879b96dae0ba7cb88add9f1649caca25e5"
+    },
+    {
+      "path": "outputs/prowl/purpose-disposition-b515fd42-29b1-4203-9c62-424856fd523c/verification.json",
+      "bytes": 6103,
+      "sha256": "6ca6afc88ae7bdcf02458350908bf5a074c46d7c1f384f7f19d07666c759fd1e"
+    },
+    {
+      "path": "docs/capstone/data/acquisition-2026-09-19.json",
+      "bytes": 7392,
+      "sha256": "4bf8c3b26d4a50b71a4194c3a904d4ae9da9ddac1792feb0b2408c29b793a870"
+    }
+  ],
+  "training_archive_controls": [
+    {
+      "name": "PanTSMini_ImageTr_00000001_00001000.tar.gz",
+      "bytes": 34190903436,
+      "sha256": "c6a1e4e67617940a3e86da4362fc8c753d7bbc2e592181e347060dc3689af078"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00001001_00002000.tar.gz",
+      "bytes": 35596328294,
+      "sha256": "2bfecfb93a73d4814826727d22ba587c902dfd08f282d2e7559063bd12746c3f"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00002001_00003000.tar.gz",
+      "bytes": 35984898422,
+      "sha256": "ac8b0f8aafab554ee9aeb4133835b7f8e1a85902899afda8cab47be0cc64d640"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00003001_00004000.tar.gz",
+      "bytes": 35096498961,
+      "sha256": "5099f3b4435492d01b876d4027f8b7b937fef57c2b52a7daf6dc581233716de4"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00004001_00005000.tar.gz",
+      "bytes": 36652762963,
+      "sha256": "406f864d59393000e38f1225d48f2b0dcae980e1138f02f6ed4a4b554f030328"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00005001_00006000.tar.gz",
+      "bytes": 34946274132,
+      "sha256": "1ea4d4ee015257367d57dae1fdfab111581cff7062e76cb59735e89d332b4aa3"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00006001_00007000.tar.gz",
+      "bytes": 34799850880,
+      "sha256": "75c83106a511795cd29151a718cc1cd6ee4ca940f015e5273653ea6e2b4462be"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00007001_00008000.tar.gz",
+      "bytes": 34771850148,
+      "sha256": "8bc56bb40ab0ddbd34b20a40b368e418be8fa7fc0283b20c0f593056bf853045"
+    },
+    {
+      "name": "PanTSMini_ImageTr_00008001_00009000.tar.gz",
+      "bytes": 35668462502,
+      "sha256": "c450c191c3469727c5e2b02179b1b66392dcd67791d6b3c93bb7cc23effcfb5b"
+    }
+  ],
+  "retained_extraction_receipts": [
+    {
+      "archive": "PanTSMini_Label.tar.gz",
+      "destination": "PanTSMini_Label",
+      "files": 287128,
+      "expanded_bytes": 52020675883,
+      "sha256": "2de0c363c73c8106b0456d49f3e5057641fefb5383a03f6cf13b4f300a672c83"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00000001_00001000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00000001_00001000",
+      "files": 1000,
+      "expanded_bytes": 34180879311,
+      "sha256": "c6a1e4e67617940a3e86da4362fc8c753d7bbc2e592181e347060dc3689af078"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00001001_00002000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00001001_00002000",
+      "files": 1000,
+      "expanded_bytes": 35585818718,
+      "sha256": "2bfecfb93a73d4814826727d22ba587c902dfd08f282d2e7559063bd12746c3f"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00002001_00003000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00002001_00003000",
+      "files": 1000,
+      "expanded_bytes": 35974324682,
+      "sha256": "ac8b0f8aafab554ee9aeb4133835b7f8e1a85902899afda8cab47be0cc64d640"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00003001_00004000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00003001_00004000",
+      "files": 1000,
+      "expanded_bytes": 35086236331,
+      "sha256": "5099f3b4435492d01b876d4027f8b7b937fef57c2b52a7daf6dc581233716de4"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00004001_00005000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00004001_00005000",
+      "files": 1000,
+      "expanded_bytes": 36641968672,
+      "sha256": "406f864d59393000e38f1225d48f2b0dcae980e1138f02f6ed4a4b554f030328"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00005001_00006000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00005001_00006000",
+      "files": 1000,
+      "expanded_bytes": 34936028258,
+      "sha256": "1ea4d4ee015257367d57dae1fdfab111581cff7062e76cb59735e89d332b4aa3"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00006001_00007000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00006001_00007000",
+      "files": 1000,
+      "expanded_bytes": 34789626908,
+      "sha256": "75c83106a511795cd29151a718cc1cd6ee4ca940f015e5273653ea6e2b4462be"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00007001_00008000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00007001_00008000",
+      "files": 1000,
+      "expanded_bytes": 34761605367,
+      "sha256": "8bc56bb40ab0ddbd34b20a40b368e418be8fa7fc0283b20c0f593056bf853045"
+    },
+    {
+      "archive": "PanTSMini_ImageTr_00008001_00009000.tar.gz",
+      "destination": "PanTSMini_ImageTr_00008001_00009000",
+      "files": 1000,
+      "expanded_bytes": 35657925609,
+      "sha256": "c450c191c3469727c5e2b02179b1b66392dcd67791d6b3c93bb7cc23effcfb5b"
+    }
+  ],
+  "diagnostic_preservation": {
+    "covered_file_hashes_verified": 55,
+    "manifest_outputs_replayed": 5,
+    "receipt_sha256": "6ca6afc88ae7bdcf02458350908bf5a074c46d7c1f384f7f19d07666c759fd1e"
+  },
+  "source_universe": {
+    "protected_studies": 9901,
+    "publisher_train_studies": 9000,
+    "publisher_test_studies": 901,
+    "proposed_inventory_kinds": [
+      "ct",
+      "pancreas"
+    ],
+    "expected_train_ct_files": 9000,
+    "expected_train_pancreas_files": 9000
+  },
+  "proposed_metadata_preflight": {
+    "root_binding": "registered external source root; identity must be reverified",
+    "relative_layout_evidence": "pinned extraction destinations and selected-files.json; reconcile before use",
+    "operations": [
+      "directory enumeration without following symlinks",
+      "lstat expected paths",
+      "join existing receipt/control hashes"
+    ],
+    "raw_payload_reads": false,
+    "publisher_test_payload_reads": false,
+    "maximum_seconds": 600,
+    "maximum_resident_bytes": 536870912,
+    "maximum_output_bytes": 67108864,
+    "maximum_directory_entries": 350000,
+    "stop_on": [
+      "mount identity mismatch",
+      "symlink or special source file",
+      "permission error",
+      "unexpected layout",
+      "budget exceeded"
+    ],
+    "budget_status": "proposed for bounded enumeration, not approved as full content audit"
+  },
+  "content_verification": {
+    "status": "not_budgeted_not_dispatched",
+    "historical_extracted_training_ct_bytes": 317614413856,
+    "source_wide_payload_coverage": "not established by retained receipts",
+    "required_before_job": [
+      "verified current root binding",
+      "exact expected per-file inventory",
+      "reviewed integrity assurance scope",
+      "bounded measured read-throughput sample",
+      "numeric byte/time caps with contingency",
+      "qualification/source-use evidence rules"
+    ]
+  },
+  "real_candidates_selected": false,
+  "eligibility_granted": 0,
+  "training_authorized": false
+}

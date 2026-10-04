@@ -1,0 +1,11 @@
+# D-318 — remaining eight-case content diagnostic
+
+Quinton's “Great, continue on” accepts the next continuation after D-317. Implement a separate exact consumer; preserve the original pilot and every consumed request. The [continuation packet](SEGMENTER-CONTENT-CONTINUATION-PACKET-2026-10-01.md) fixes train6110/2232/6238/5821/4965 and validation2514/2727/7265, three native CT/pancreas/lesion inputs each.
+
+1. Separate request and code/runtime/profile pins. Reconstruct all24 inputs from pinned proposal7fb32a63, full scope33853ca3 and measured M2 identitiesbec0f3b3; verify predecessor pilot2f972c5c. Reject changed role, membership, input, budget, code or runtime before consumption/source reads.
+2. New display version removes duplicate uncropped empty-mask panels and records context/detail truthfully. Immutable native decoding, strict scaled binary mapping, all components, geometry and source masks remain unchanged. Synthetic dense/empty/fragmented/boundary cases at512×434×208 qualify this version; native tests precede freezing the source request.
+3. One exact supervised native request:183,291,323compressed bytes per full hash and decode pass,635,508,776expanded bytes;900seconds/8GiB/64MiB output. Read-only registered source, UUID and source-observation guards, serial cases, process memory monitoring and preserved failure accounting. No retry of a consumed request.
+4. Inspect all eight sheets and combine all12 original candidates in an append-only review. Replay retained pancreas-box containment from prior hash-bound evidence without rereading source. Empty lesion is unknown, not a verified negative. Outside-pancreas labels remain observations, with no clipping, target-dependent box repair or candidate substitution.
+5. Prepare explicit purpose-disposition, paired-inventory and annotation-transition proposals. No real permissions/cohort publication/model/training, component-reference job, source rewriting, cleanup adoption, Git publication or Claude-lane work in this slice.
+
+Completion evidence will include synthetic/test attempts, code snapshots, exact consumed source request and receipt, independent receipt/code/runtime replay, all12 case accounting and a bounded next packet. Preserve153 localizer members/23holds,176 candidates and7200/1800/901 original membership.

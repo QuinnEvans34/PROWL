@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/representation/1.0.0",
+  "title": "Plan 07 normalized document representation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "representation_id",
+    "revision_id",
+    "work_id",
+    "kind",
+    "normalization_version",
+    "text",
+    "text_sha256",
+    "sections",
+    "paragraphs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "representation_id": {
+      "type": "string",
+      "pattern": "^repr:[0-9a-f]{64}$"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^rev:[0-9a-f]{64}$"
+    },
+    "work_id": {
+      "type": "string",
+      "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+    },
+    "kind": {
+      "enum": [
+        "abstract",
+        "full_text"
+      ]
+    },
+    "normalization_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "section_id",
+          "title",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "section_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{0,62}$"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "paragraphs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "section_id",
+          "index",
+          "start",
+          "end",
+          "original_length",
+          "original_sha256",
+          "offset_map"
+        ],
+        "properties": {
+          "section_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]{0,62}$"
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "original_length": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "original_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "offset_map": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              ],
+              "items": false,
+              "minItems": 4
+            }
+          }
+        }
+      }
+    }
+  }
+}

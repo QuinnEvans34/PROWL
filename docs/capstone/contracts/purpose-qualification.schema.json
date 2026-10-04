@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/purpose-qualification/1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "qualification_id",
+    "study_id",
+    "annotation_id",
+    "purpose",
+    "policy_sha256",
+    "bindings",
+    "checks",
+    "outcome"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "qualification_id": {
+      "type": "string",
+      "pattern": "^qualification:[0-9a-f]{64}$"
+    },
+    "study_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "annotation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "const": "pancreas_present_localizer"
+    },
+    "policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "subject",
+        "study",
+        "annotation",
+        "issues"
+      ],
+      "properties": {
+        "snapshot": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "subject": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "study": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "annotation": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "issues": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "evidence_sha256",
+          "result"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "source_readiness",
+              "geometry",
+              "target",
+              "permitted_use",
+              "mapping_lineage"
+            ]
+          },
+          "evidence_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "hold",
+              "exclude"
+            ]
+          }
+        }
+      }
+    },
+    "outcome": {
+      "enum": [
+        "qualified",
+        "held",
+        "excluded"
+      ]
+    }
+  }
+}

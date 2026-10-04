@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/source-work/1.0.0",
+  "title": "Plan 07 source work (bibliographic identity)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "work_id",
+    "origin",
+    "status",
+    "notices"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "work_id": {
+      "type": "string",
+      "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+    },
+    "origin": {
+      "enum": [
+        "synthetic",
+        "pubmed_baseline",
+        "pmc_cloud"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "quarantined",
+        "excluded"
+      ]
+    },
+    "notices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "notice_type",
+          "reference"
+        ],
+        "properties": {
+          "notice_type": {
+            "enum": [
+              "retraction",
+              "correction",
+              "expression_of_concern"
+            ]
+          },
+          "reference": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      }
+    }
+  }
+}

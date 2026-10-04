@@ -2050,3 +2050,1675 @@ on the order of 100,000 clinical reports.
 
 Our data position is far stronger than "706 cases" makes it sound. What we lack is not annotation
 quality — it is quantity of *scans*, which is a different problem with different solutions.
+
+
+## 2026-09-28 — Capstone engineering diagnostic: localizer CPU learning/recovery
+
+Pre-execution plan: [synthetic learning plan](capstone/operations/LOCALIZER-LEARNING-PLAN-2026-09-28.md).
+This is a synthetic engineering check, not a CAP-EXP real-data experiment or model-selection result.
+First attempt `localizer-learning-a04795a9-193f-43c1-8ec8-fa01451ceb0a` stopped at checkpoint publication
+because the supplied store root was relative; four synthetic updates preceded the rejection. Evidence
+is preserved. Corrected attempt `localizer-learning-d1716414-bc04-4ffd-9dbd-ab5e22f21dc5` passed:
+20-step trajectory, 40 total updates including restart/comparison, loss 1.485633 → 0.703371 and exact
+CPU resumed weights/reloaded predictions. SIGTERM after step 4 tested fresh-process recovery.
+[Full results, hashes, test counts and limitations](capstone/operations/LOCALIZER-LEARNING-HANDBACK-2026-09-28.md).
+Retain scratch model, binary target and verified geometry; next measure MPS and bind the production
+run/checkpoint roots before freezing the real smoke recipe. No real CT or protected evaluation used.
+
+
+## 2026-09-28 — Capstone engineering diagnostic: MPS resource profile
+
+Pre-execution [plan](capstone/operations/LOCALIZER-RESOURCE-PROFILE-PLAN-2026-09-28.md), D-272.
+Synthetic only, no CAP-EXP real-data launch. Package
+`localizer-resource-3eeec52b-d8e6-4451-9db1-f2453558adff` passed on its first attempt: two warm-ups,
+six measured 96³ updates (median 0.73616 s), four CPU-stitched full-volume inference passes
+(0.37–0.48 s each), diagnostic checkpoint save/reload and one resumed update. Automatic CPU fallback
+was disabled; reload probability difference was zero. No raw source reads or external writes.
+[Full evidence and provisional budget](capstone/operations/LOCALIZER-RESOURCE-PROFILE-HANDBACK-2026-09-28.md).
+Retain 96³/batch-1/fp32 for the candidate local smoke; do not enlarge the scope from this result.
+Next bind the real cohort/MPS/run/checkpoint path and verify keeper restore before freezing CAP-EXP.
+
+
+## 2026-09-28 — Qualified-input bridge and backup/recovery diagnostic
+
+Pre-execution [plan](capstone/operations/LOCALIZER-RUN-BRIDGE-PLAN-2026-09-28.md), D-273. First attempt
+`localizer-bridge-82b808b7-f79e-4850-9e98-53ad3829de08` failed before case reads/checkpoint writes on
+the macOS internal Data mount heuristic. Native mount-table verification corrected the check; failure
+is preserved. Successful attempt `localizer-bridge-447b7a35-9f76-415c-8c7c-dc8259834e05` verified
+both cases' MPS forward path with no changed weights, two synthetic updates, external checkpoint,
+independent internal backup, fresh-process restore with primary reads refused and a third synthetic
+update. Restored fixed-probe probability difference0; overall50.58s;1,062 native tests pass.
+[Full receipts, limits and findings](capstone/operations/LOCALIZER-RUN-BRIDGE-HANDBACK-2026-09-28.md).
+No real-data training happened; rehearsal weights are excluded from future initialization.
+
+## CAP-EXP-001 — Two-case scratch pancreas-localizer smoke
+
+**Status: completed under D-275; mechanics passed, learning criterion failed.** See the result entry below.
+Pre-launch design record: [Finalized launch design](capstone/operations/CAP-EXP-001-LAUNCH-PLAN-2026-09-28.md)
+records exact cohort/recipe pins, scratch SegResNet, seed42,96³/batch1/fp32, AdamW0.003/cosine100,
+100-update ceiling, before/after full-volume loss/Dice/native-grid review, checkpoints every25 and
+terminal independent backup/restore. Limits:600s updates,1,200s total,16GiB memory,1GiB output reserve.
+The bounded update/evaluation/export executor is complete and synthetically verified under D-274.
+The specific pinned request awaits actual launch approval. No real experiment result/start is claimed.
+
+
+### D-274 executor rehearsals — synthetic engineering evidence, not CAP-EXP-001
+
+[Plan](capstone/operations/LOCALIZER-EXECUTOR-PLAN-2026-09-28.md) was recorded before execution.
+Three successful, preserved native two-update rehearsals verified the initial path, added timing/
+memory reporting, then independent update-phase supervision. They used invented volumes and fresh
+scratch weights; no real source payload was trained. All run IDs, receipts, test corrections and
+exact controls are in the [handback](capstone/operations/LOCALIZER-EXECUTOR-HANDBACK-2026-09-28.md).
+Final run `f3f2512d-8a34-4b72-bf3e-a1bd449e9a3c`: mean full-volume loss1.603314→1.245815,
+Dice0.016713→0.855610; native masks/contact sheets checked, independently restored probe difference0.
+17.54s overall, sampled RSS1.30GiB and overlapping MPS driver2.31GiB.1,074 native tests pass.
+
+Retain exact100-update recipe for the real smoke; change only the explicitly approved data mode,
+real qualified input binding and horizon/cadence from the two-step fixture. Do not reuse rehearsal
+weights. Request `f0943201-0e6d-4c7d-b140-61c7bb4f1efa` is prepared and pending; earlier
+`b8756c5a-fa82-4506-8e6a-7924c71a995d` is superseded by the final source revision. The next question
+is whether qualified CT targets also support finite tiny-set learning and recoverable outputs.
+Actual launch is the remaining decision; neither learning nor generalization on CT is claimed.
+
+### CAP-EXP-001 launch authorization — D-275
+
+Quinton approved the exact prepared request `9b54a25d3ad014ca325464d35046496357f2e7969c9f4b2ddbd04e1ba2196452`.
+Source/environment/plan bindings rechecked unchanged. Execute one fresh scratch attempt under the
+frozen100-update/600s-update/1,200s-total limits; retain and report failure/null learning as well as
+success. Authorization SHA `d7d5adfb333a1bb79364676b1a460f465eb1871d58c2d5a0d768ef9ee5520207`.
+This entry records authorization before execution, not a successful outcome.
+
+
+### CAP-EXP-001 outcome — completed, null foreground learning
+
+[Full result and evidence](capstone/operations/CAP-EXP-001-RESULTS-2026-09-28.md).
+One exact authorized run `localizer-smoke-c5f0d7d6-47f6-455b-adb7-e70c63d71bd3` completed100 updates
+(50/case), full-volume before/after evaluation and all scheduled checkpoints. Receipt
+`a470008bf2bf45cda5f3aaf1de451c64efe3b17687227486d750f232ca26f34a`.
+
+Mean full-volume loss1.545844→1.026209, but mean foreground Dice0.000976→0; both cases have empty
+final masks. **Mechanical checks passed; preset learning indicator failed.** Backup and fresh-process
+MPS recovery passed, fixed-probe difference0. Total234.25s, update phase173.98s, sampled RSS3.35GiB;
+overlapping MPS driver2.31GiB. Four overlays inspected and export geometry/binary checks passed.
+
+Sampling selected44 foreground centers/56 background centers, so no all-background-center failure.
+Even a patch containing the entire target has at most0.315%/0.375% foreground in these cases. Class
+imbalance/optimization/horizon are hypotheses, not proven causes. No probability-distribution or
+per-class gradient diagnosis is claimed from hard masks. Keep cases and protected roles unchanged.
+
+Next recommendation: same-case controlled optimization diagnostic with probability/per-class-loss/
+patch-composition telemetry, then a single-factor comparison such as lower LR. Freeze a separate
+CAP-EXP-002 plan before compute; no automatic extension, restart or new run is authorized/launched.
+Retain this null result, frozen recipe and evidence as the baseline for that discussion.
+
+### D-276 pre-run optimization investigation plan
+
+Read-only follow-up to CAP-EXP-001, not a new training experiment. Replay its100 crops and inspect
+steps0/25/50/75/100 on cases3/26, separating foreground probability, CE/Dice terms and local logit
+gradients.10 full-volume plus10 fixed-patch passes; zero optimizer updates. Bounds600s/16GiB/256MiB.
+[Exact questions and limits](capstone/operations/LOCALIZER-OPTIMIZATION-INVESTIGATION-PLAN-2026-09-28.md)
+were recorded before execution. Threshold points are diagnostic only; original Dice outcome stays0.
+
+
+### D-276 optimization investigation outcome
+
+[Findings](capstone/operations/CAP-EXP-001-OPTIMIZATION-FINDINGS-2026-09-28.md). Diagnostic
+`localizer-optimization-2da20e71-6a17-4f1a-824d-8fb1a3337521`, receipt
+`bc5ad7a35e8f39d726f7be1857b11056fc09934d3ac3ca3f833d854e3392b386`, completed51.45s with zero
+optimizer updates. Replayed100 exact crops (all positive), inspected five checkpoints, reproduced
+original endpoint metrics and verified unchanged weights.1,079 native tests pass.
+
+Final mean foreground probability inside/outside target: case3 0.05694/0.02742, case26
+0.07359/0.03053; global maxima0.08935/0.09675. This is weak separation beneath the original argmax
+boundary, not literally zero foreground probability. Diagnostic threshold0.05 gives poor Dice
+0.06125/0.02941 with extensive predicted foreground; no threshold was selected/promoted.
+About99.6% of net loss decrease is accounted for by background CE contribution. On fixed positive
+patches, CE's net common foreground-logit-shift derivative is positive and exceeds Dice's opposing
+net derivative by35.4×/26.4×. This is not a per-parameter gradient dominance or AdamW-step claim.
+
+Update next-experiment reasoning: prioritize a **single change to CE class balance**, retaining cases,
+seed, LR/schedule, crops and100-update horizon, over the earlier tentative lower-LR-first idea.
+[CAP-EXP-002 proposal](capstone/operations/CAP-EXP-002-PROPOSAL-2026-09-28.md) specifies equal per-class
+CE means plus the unchanged foreground Dice term, objective-aware telemetry and bounded implementation.
+Still a proposal, not a launched experiment or approved new recipe. Preserve CAP-EXP-001's null outcome.
+
+### D-277 CAP-EXP-002 implementation and pre-launch verification
+
+Version4 run/config/checkpoint identity now binds `balanced_ce_dice_v1`; legacy loss dispatch remains
+exact and older checkpoint identities reject introducing a new objective. Every25 steps, telemetry
+reports original and balanced objectives, probability/class contributions and both logit derivative
+terms. The initial real scratch digest must match CAP-EXP-001 without loading its weights. A prepared
+request is consumed through an exclusive launch-claim file to prevent duplicate execution.
+
+Native suite:1,086 passed,2 existing warnings. The first finite-difference check used nondeterministic
+float32 subtraction too close to its tolerance; replaced with fixed float64 inputs, not a looser test.
+A pending-authorization test exposed changed error ordering; pending authorization again rejects
+before experiment routing. Full-suite hash tests also inherited PyTorch high-water memory above512MiB;
+in-process unit RSS is now deterministic, with explicit boundary and unchanged native subprocess tests.
+Production memory limits were not relaxed.
+
+Balanced two-update native rehearsal `localizer-smoke-b68b3f67-f4cc-4c46-80fd-d78466744ede` completed,
+including intermediate telemetry, terminal persistence and fresh-process independent restore;
+fixed-probe difference0. Receipt `f126ffe93d9237b0e1e6fa329a4864d576fce4c281cf3234361a155c39ebfb38`.
+Whole rehearsal19.12s; no real CT training in this check. Its weights will not initialize the comparison.
+Concrete [CAP-EXP-002 launch plan](capstone/operations/CAP-EXP-002-LAUNCH-PLAN-2026-09-28.md) is written
+before request preparation/real execution. D-277 authorizes the bounded overnight comparison.
+
+### CAP-EXP-002 prepared launch — D-277
+
+Request SHA `51e7bf8afc41375284634532ae4c5e9ce26ee0c8aa83698ab3a8cf5cc5cb7287`, directory
+`localizer-launch-request-1068e2ee-acdc-4f7a-8964-e76a51236227`. Source/environment match the verified
+balanced native rehearsal. Authorization SHA
+`5607d7766a385e3d7a57aca0a4b758dd2cd032e8fb99df4790b2f3b7ed557dbf` cites Quinton's D-277 overnight
+scope. Launch one100-update comparison with no extensions; retain/report all outcomes.
+
+### CAP-EXP-002 outcome and CAP-EXP-003 pre-run question
+
+[CAP-EXP-002 result](capstone/operations/CAP-EXP-002-RESULTS-2026-09-28.md):100 updates completed;
+mean balanced loss1.807322→1.166945, Dice0.000976→0.054974. Both predictions are roughly35× target
+volume. Indicator failed; mechanics and independent recovery passed (probe difference0). Exact same
+scratch digest and100 crop traces as CAP-EXP-001. Receipt
+`c4991d60f045ba24ca29b02ccf0e6915134ad323de49425cf49216ffb1a4e65a`.256.10s overall.
+
+D-278 uses overnight authority to test only LR0.0003 versus0.003 in a new100-step balanced run. Keep
+all other settings and same preset endpoint/indicator; do not infer causality from weak intermediate
+Dice fluctuations. [CAP-EXP-003 plan](capstone/operations/CAP-EXP-003-LAUNCH-PLAN-2026-09-28.md) recorded
+before execution. No reuse of CAP-EXP-002 weights and no extension of its consumed request.
+
+### CAP-EXP-003 verification before preparation
+
+Registered experiment/config matching rejects substituting the lower LR into CAP-EXP-002's identity.
+Native suite1,087 passed,2 existing warnings. Lower-LR synthetic rehearsal
+`localizer-smoke-8cb87506-d018-4d7b-b48a-c567cacf98d9` completed19.46s, independent restore probe
+difference0. Receipt `821afd8c473ebaff646224c890c8aab82ce472bb55d7309a3a2e60f6556fdf23`.
+This is a synthetic routing/preservation check, not the real comparison and not reused initialization.
+
+CAP-EXP-003 request `2e04914fa5daf14d153a2a674ac58ad0d770a937191c888cfb91bda06fa6958a` is prepared;
+source/environment match its native rehearsal. D-278 authorization SHA
+`34ada1dcc0b1b607e400127e8d0c90eab13a969916303b011b13153cb08ce245`. Launch exactly once under the
+frozen600s update/1,200s overall budget and preserve the terminal result regardless of learning.
+
+### CAP-EXP-003 outcome and final overnight question
+
+[CAP-EXP-003](capstone/operations/CAP-EXP-003-RESULTS-2026-09-28.md) completed100 updates; mean Dice
+0.109935, balanced loss1.807322→1.167455. Preset indicator passes, but masks remain16–18× reference
+volume. Same scratch digest/all100 crops; recovery probe difference0. Receipt
+`bc9131fd77383ed3e2ef5cdd095cfaf61637556ce0ce2451132b1657a83ab7f9`;257.74s overall.
+
+D-279 selects one final overnight comparison:300 fresh lower-LR balanced updates with matched cosine
+T_max300, same data/seed/loss/LR. This jointly changes duration and schedule horizon, not an identical
+LR-prefix continuation. Stages0/75/150/225/300, same600s update/1,200s total ceiling. [CAP-EXP-004 plan](capstone/operations/CAP-EXP-004-LAUNCH-PLAN-2026-09-28.md) is recorded before compute. Stop after
+reviewing this attempt; do not extend its budget or automatically continue the search.
+
+### CAP-EXP-004 implementation verification
+
+Balanced configurations may now explicitly contain at most300 steps; legacy configurations remain
+capped at100. Real300-step use is limited to registered CAP-EXP-004 with cadence75. Tests verify
+scheduler/checkpoint binding at the longer horizon, reject301 and preserve the legacy ceiling.
+Full native suite1,089 passed,2 existing warnings. Final-route two-update synthetic rehearsal
+`localizer-smoke-6884eb5c-1e5f-4581-9c3e-1010e1ab330c` completed22.96s and independently restored
+with probe difference0. Receipt `d4666db453c74f4e64d93cb4102749bbf5270f26e6e9bc65f1574b612e14e9d8`.
+Rehearsal verifies routing/operators/persistence; it is not a measured300-step real run. Same
+600s update/1,200s total ceilings remain; no automatic extension if the real run hits its cap.
+
+
+CAP-EXP-004 exact pre-launch request: `a4d5a6ab403f0da59645132f9c244afbd4d1abfa803c30cda9e1d0446a4c3bf3`; authorization D-279 `0c7c0471e3f07db0a364898d0cf0059d9951832e32645d9c01acb42b63af1c2c`. Native rehearsal source/environment match; one launch only, unchanged ceilings.
+
+
+### CAP-EXP-004 final overnight outcome
+
+[Full result](capstone/operations/CAP-EXP-004-RESULTS-2026-09-28.md): all 300 updates completed,
+150 per case. Mean full-volume processed-grid Dice 0.000976 → 0.445999; balanced loss
+1.807322 → 1.048862. Final reference recall 1.0 on both training cases, precision 0.281/0.293,
+predicted volume 3.55×/3.42× reference. Preset minimal indicator passes; excess foreground remains.
+Update phase 518.49 s, total attempt 577.91 s; no stop, extension or retry. Independent backup
+restore at step 300 has fixed-probe difference 0. Source/environment and first 100 crop traces
+verified unchanged/matching; 15 local and 21 terminal receipt members rehashed. Receipt
+`1de1d74746ed79c365beadeee528a60fd6f3b61fc2b3d0e429a96ee8c9d39f2c`.
+
+Training stopped after this planned final comparison. No checkpoint selected from intermediate
+results and no generalization claim. [Morning handoff](capstone/operations/MORNING-HANDOFF-2026-09-29.md)
+summarizes the implementation, evidence and proposed next discussion.
+
+
+### September 29 — D-280 localization usefulness and candidate progression
+
+[Plan](capstone/operations/LOCALIZATION-TARGET-2026-09-29.md) defined stronger per-case mask and
+pre-mapping ROI screens before the new measurement. Read-only CAP-EXP-004 diagnostic reproduced
+terminal counts/Dice with unchanged weights; two forwards, zero optimizer updates. Both masks have
+one component, so largest-component cleanup is ineffective. With 10 mm requested physical margin
+(12 mm realized on the grid), boxes retain 100% reference pancreas in 6.79%/5.38% of scan volume.
+Masks fail the stricter fit screen; boxes pass the provisional ROI screen. This supports progressing
+to varied cohorts rather than making two-case contour perfection a prerequisite. No final ROI policy
+or full Stage 2 containment claim. Receipt
+`c8ca6ce913f25a50a1104fcc1e6f1eaca8a6e695636492f3ddd9d335a49670f4`, 45.19 s.
+
+Deterministic metadata-only candidate selection started at 16 train / 8 validation; eight validation
+slots omitted three thin-slice strata. Preserved that package and revised to 16/12 before source reads
+or model observations. Current receipt
+`3e961f4c3285107d765d2176050c2d57aeb29d0ab8d5893ba1fa3b6db97a26e1` covers all available strata.
+No eligibility granted. Header-only preflight read 56 files, 229,376 compressed bytes, no arrays;
+8.22 s, receipt `950a113e6d18d795b90fe1bce7f68555a5e302b48e88de8b97b8651b9e4e73ad`.
+Pair geometry agrees throughout; candidate 6350 has unknown units in both headers. Preserve it
+pending evidence; old two-case unit assessments are not revoked by generic header flags.
+
+Verification: 1,107 native tests passed; two existing warnings. The restricted initial suite failed
+two existing process-monitor tests because /bin/ps was blocked; native rerun passed. The new header
+test caught gzip buffering beyond the intended cap; max-output streaming zlib fixed it before reads.
+No training or held-out model evaluation in this step. See
+[results](capstone/operations/LOCALIZATION-PROGRESSION-RESULTS-2026-09-29.md) and
+[next implementation packet](capstone/data/LOCALIZER-COHORT-EXPANSION-PACKET-2026-09-29.md).
+
+### September 29 — D-281 role contracts and candidate content job
+
+Qualification v2/cohort v3 add purpose-specific annotation use, protected role and explicit
+optimizer/evaluator consumer checks. The old two-case runtime remains unchanged. Synthetic tests
+caught and fixed a missing operation guard in the new entry point before real consumption.
+Corrected the D-280 prose: 27 CT headers declare mm; all pancreas headers have unknown units.
+The original pinned header facts were correct. Case 6350 still lacks either unit anchor.
+
+The exact 56-file content request is prepared at
+`outputs/prowl/localizer-content-request-6063bb74-a6d7-4234-a2e0-968877203044`, SHA
+`29a365b6380d7d793cbb43390a827a75f874c197b2ec6151b3c3bd2384963f75`.
+It captures plan/source/environment/selection and uses D-281's bounded evidence-only scope.
+No optimizer, qualification promotion or candidate replacement. Preserve outcome and inspect all
+alignment evidence before any real qualification decision.
+
+Completed once: 56 files/28 cases, 44.65 s, peak RSS 4,626,972,672 bytes; all full gzip/finite CT/
+strict-binary nonempty target/geometry checks passed. No exact CT-byte duplicates among candidates.
+Case 6350 alone has an automated physical-unit hold. All 28 limited alignment sheets reviewed;
+partial coverage in 4965/3717 and visible noise remain descriptive evidence, not easy-case filters.
+Content receipt `224795f966a25733c7c1198e22dfa34fc525ef56be4e023ebdaa48ef8af0e3a9`;
+review receipt `cb556a1086d665cb8584f9a8f404c89953445401bb9afc7c958f4e498560b8a4`.
+1,122 native tests pass, two existing warnings. No new qualification/cohort or training yet.
+[Results and next bounded implementation](capstone/data/LOCALIZER-CANDIDATE-CONTENT-RESULTS-2026-09-29.md).
+
+### September 29 — D-282 expanded qualification and cohort freeze
+
+[Scope and assessment](capstone/data/LOCALIZER-EXPANSION-QUALIFICATION-2026-09-29.md) pins the
+28 reviewed candidates and permits purpose-specific private development use after qualification.
+No model experiment or raw-source reread is part of this step. Implement the separate deterministic
+expansion builder, preserve unrelated old holds and all split identities, then publish/replay one
+bundle containing separate train/validation cohorts under the existing cohorts-area capability.
+
+The first preparation produced 27 qualified/1 held and preserved all 13 old issues. It is retained at
+`outputs/prowl/expansion-candidate-0050e048-34b8-4fe8-bd73-483edae47d52` but will not be published:
+prepublication review added a frozen actual preparation timestamp for new issue records (replacing
+a fixed date boundary) and extended producing-code pins for imported storage/policy controls.
+A new preparation captures those corrections; old artifacts remain untouched. Native full suite
+passed 1,131 tests before this small hardening; focused expansion tests passed again afterward.
+The final publication/readback result will be recorded separately.
+
+D-282 completed: final candidate
+`outputs/prowl/expansion-candidate-1e1e331d-c385-410b-97ee-a6e1478a1e70` published as
+`cohort-bundle:pants-localizer-expansion-0001:v1`, 20,827,107 payload bytes; completion
+`7f5517feb00bef599261e432af9d7a293cf3f44086d1acbcba8de0e36bab0dcc`.
+Fresh-process readback replayed the persisted package and returned 16 optimizer/11 evaluator
+members, zero source arrays. 27 qualified, case 6350 held; all 13 prior issues and complete original
+membership preserved. Validation lacks arterial/thin-slice coverage; no refill. Final full native
+suite: 1,131 passed, two existing warnings, 16.19 s. Old runtime unchanged; no new training.
+[Results](capstone/data/LOCALIZER-EXPANSION-FREEZE-RESULTS-2026-09-29.md) record exact pins.
+Next: [expanded loader/preprocessing](capstone/data/EXPANDED-LOCALIZER-LOADER-PACKET-2026-09-29.md),
+because 14 qualified scans exceed the old source-voxel limit and eight its compressed-file cap.
+Those are runtime-boundary requirements, not evidence for dropping difficult or large cases.
+
+### September 29 — D-283 expanded loader/preprocessing verification
+
+[Exact job](capstone/data/EXPANDED-LOCALIZER-PREPROCESSING-JOB-2026-09-29.md) implements the next
+D-282 input-readiness step. Separate v2 loader/preprocessing preserves v1, enforces role/permission,
+checks full source bytes and projected allocations, and reports every frozen case. No model run.
+
+Prepared request `outputs/prowl/expanded-preprocessing-request-2ad3c49a-58cf-45be-8ae2-7674667557c2`,
+SHA `c9b07b7666f61777013193a0d8fbc7e25efa6a6da1456a0ad875f3f6f48f90f8`, pins source/environment,
+recipe, capability and header-only projections. Exact 54 files total 684,668,314 compressed bytes;
+maximum conservative projected output is 3,105,675 voxels, below the 8-million cap. Native tests
+must pass before execution. Limits remain 20 minutes/16 GiB, 1 GiB compressed/4 GiB expanded,
+256 MiB output and 100 GiB internal free floor. No held-case read, refill or automatic retry.
+
+First attempt stopped on a review-sheet affine-list TypeError after first-case processing;
+`expanded-preprocessing-41bcb797-9a69-44e8-ba04-21da7f6c8c20` is preserved incomplete. Supervised
+180.92 s, exit 1, sampled peak RSS 1,848,770,560 bytes. Corrected the display conversion and added
+a full synthetic three-row rendering regression. Also automated the manually verified live decoder
+hash check against qualified lineage. No source or cohort change. Final native suite **1,146 passed**,
+two existing warnings, 16.22 s. The recorded revised attempt uses new request
+`expanded-preprocessing-request-39db165d-0d0e-432d-8806-1cbdc16fc5e9`, SHA
+`810ff1bcfb7a39bab0717fc1fc89a37771343a8a3790145c345c9b6bd8b21e65`, same cases/recipe/budgets.
+
+D-283 corrected diagnostic completed: 27/27, exact 54 files, zero failures/updates; 237.48 s,
+peak sampled RSS 12,417,138,688 bytes. Round-trip reference Dice 0.8171–0.9553 (median 0.9285),
+not model accuracy. All 27 sheets reviewed; partial/noisy cases retained. Receipt `8a9274a5815d6acfd466487e5d17c7c1d5f6fd5463dd1d9373daf155d3ab0bff`;
+separate visual review receipt `f6314db209999bb282b37a236ea4312edd4df0c3aac7dc0b2cb3f1669fce82f7`. All 64 payload hashes and 54 source receipts verified.
+[Results and next implementation](capstone/data/EXPANDED-LOCALIZER-PREPROCESSING-RESULTS-2026-09-29.md).
+Next: expanded runner/resource/checkpoint readiness, then a frozen fresh scratch run.
+
+### September 29 — D-284 expanded runner readiness
+
+[Plan](capstone/operations/EXPANDED-RUNNER-PLAN-2026-09-29.md): bounded processed RAM cache,
+role-specific full-volume evaluation and checkpoint identity/continuation. Native suite 1,154 passed
+(two existing warnings,17.63 s). CPU synthetic resumed update matched exactly. First MPS synthetic
+attempt stopped at a bitwise next-update parameter assertion; its sampling/loss equality had passed.
+No real inputs were read. Investigate/report maximum float32 parameter difference; use an explicit
+1e-6 absolute continuation tolerance with exact saved-state probe recovery required separately.
+This is numerical continuation equivalence, not a claim of bitwise reproducibility on MPS.
+
+Synthetic MPS follow-up passed: next-update parameter max difference 3.725290298461914e-9;
+exact sampling/loss trace, four actual synthetic updates (one replayed continuation), three completed
+steps in saved state. Checkpoint receipt `324f523042fc70a3f84db0f313374402ea5fa43d7691f470454cd35086317b8b`,
+`outputs/prowl/expanded-synthetic-ee42cf80-2321-4b7f-a645-f12115ee55a4`.
+Real forward-only request prepared at `outputs/prowl/expanded-profile-request-b9644313-c69e-4339-93c0-ae7c45207bac`,
+SHA `e88dddb361b73092e693700ea1dc70d4287f399bce0f68034621b4fb5b067c8d`.
+Frozen D-284 plan:54 files, complete16/11 cache and full-volume forwards; zero real updates.
+
+D-284 profile complete:54 files/27 cases,200,844,985-byte cache,209.28 s load/verification,
+15.45 s full-volume forwards,227.31 s supervised total,5.53 GiB peakRSS,zero real updates.
+Profile receipt `0a5f3335a46beabed727b4f2d4f662d80043873c94636b399e1ae64d2e8d99da`.
+Synthetic step3 and real-input step0 fresh-process MPS recovery probes both exact (difference0).
+Both checkpoints independently published/backed up/restored byte-identically using registered
+storage verification roots; detailed receipts in [D-284 results](capstone/operations/EXPANDED-RUNNER-RESULTS-2026-09-29.md).
+Final native suite1,155 passed,two existing warnings,17.77 s. All15 profile payload hashes verified.
+CAP-EXP-005 proposed288 updates/18 equal cycles; launch transaction/metrics/exports still to finish.
+No new real training or case filtering; old two-case runtime unchanged.
+
+### September 29 — D-285 expanded transaction preparation
+
+[Exact design](capstone/operations/CAP-EXP-005-LAUNCH-PLAN-2026-09-29.md) fixes 288 updates,
+evaluations0/144/288, checkpoints0/96/192/288, all27 final exports and independent backup recovery.
+Implementation adds a separate executor and schema2 expanded run identity; old schema1 readiness
+and two-case run behavior remain. CPU fixture transaction and injected step3 interruption pass;
+last complete step2 checkpoint survives and no terminal is published after interruption. Empty and
+fragmented masks retain explicit metrics. Next native synthetic rehearsal uses16/11 invented cases,
+four updates, full evaluation/export/backup/primary-forbidden recovery. No real images or updates.
+
+First complete native rehearsal passed: `expanded-execution-a9930a35-73ad-4c7b-b91b-8b5a5ee56711`,
+receipt `bc7cb4cdfc874e1165da6a6d32bbafb469c38bae52898b41dc8d8837e0099c84`.
+31 artifacts (three checkpoints,27 case exports,terminal) backed up and restored in a fresh process
+with primary reads forbidden; fixed probe difference0. Total89.88s,peakRSS1,884,143,616 bytes.
+Review then tightened cross-phase storage accounting: the recovery process now reuses the initial
+worker's absolute quota ceilings, rather than recomputing an increment after backup. The first
+rehearsal remains valid evidence for its source snapshot; rerun the final source after this change.
+
+D-285 final source:1,170 native tests passed,two existing warnings,27.14 s. Final synthetic MPS
+rehearsal `expanded-execution-8801ec48-45ca-4b47-a5e2-2ba46c0a09fd` completed in87.36 s,
+peakRSS1,998,815,232 bytes; all31 artifacts independently restored with primary reads blocked,
+probe difference0. Receipt `748ad87d5100b2d42277408ec77d1e39d6ae60bc0320ccfd1c3e5db4737ecda6`;
+all14 evidence-file hashes checked. Zero real updates/source arrays.
+
+Exact CAP-EXP-005 request frozen at
+`outputs/prowl/expanded-launch-request-7d7dea23-ed27-4d00-9f11-8798f79e70cc`, SHA
+`2fa5f7f20916fb047ddcc54c3aede63e5f1c57566227cec1ef07a1d9756ae456`.
+Source/environment match the successful rehearsal; unapproved authorization rejected, no claim.
+[Final handback](capstone/operations/EXPANDED-EXECUTOR-HANDBACK-2026-09-29.md) records exact
+settings and limits. Next: Quinton's approval for this specific288-update launch, then one bounded
+run and all-case training/validation review. No further input qualification is needed for this run.
+
+### September 29 — CAP-EXP-005 authorized launch (D-286)
+
+Quinton approved the exact request: “Yeah, go for it.” Code/environment preflight still matches.
+Request `2fa5f7f20916fb047ddcc54c3aede63e5f1c57566227cec1ef07a1d9756ae456`;
+approval `outputs/prowl/CAP-EXP-005-APPROVAL-2026-09-29.json`, SHA
+`578b42bb36e6adfcc87e74716177c82938dcb3f7f6543054c2cbd3082066f258`.
+Run the frozen 288-update plan once, preserve all outcomes, then review all-case metrics/exports
+and independent recovery. No recipe or source-code changes before/during execution.
+
+CAP-EXP-005 completed exactly288 updates/18 per training case, no retry/extension. Mean full-volume
+training Dice0.0006→0.0647→0.1262 and validation0.0009→0.0845→0.1512 at0/144/288.
+All27 predictions nonempty;0 mask-fit passes; ROI screen13/16 train,9/11 validation. Large excess
+foreground remains (median volume ratio13.08/12.56); all five ROI failures exceed the scan-volume
+cap. Difficult/partial/noisy cases retained; no model-performance eligibility filtering.
+605.85s total,247.46s update phase,peakRSS9,245,540,352 bytes. All32 artifacts backed up/restored;
+primary reads forbidden in fresh recovery, fixed probe difference0. Job receipt
+`13ebf8e9423d60d62ef105f65eef088331268cff9df9c656d8650216849ef2ed`.
+All-case derived metrics and27 overlays reviewed; [full results](capstone/operations/CAP-EXP-005-RESULTS-2026-09-29.md).
+Next hypothesis: longer fresh duration/schedule horizon, same cohort/objective/initialization.
+576 updates needs a separate bounded configuration and approval; none launched. Code unchanged.
+
+### September 29 — CAP-EXP-006 sustained learning plan (D-287)
+
+Quinton approved proceeding after the training regroup. Before compute: [frozen design](capstone/operations/CAP-EXP-006-LAUNCH-PLAN-2026-09-29.md).
+CAP-EXP-005 both-role improvement motivates2400 fresh updates on the same16/11 (150/train case),
+keeping objective/model/preprocessing/sampling fixed. Duration AND cosine horizon change.
+Final validation mean Dice is primary (+0.05 practical bar), with mean recall drop<=0.02 and no
+additional boxes below99.5% reference coverage; report per-case/volume/ROI tradeoffs. No best-step
+selection, data filtering or claim of significance.50min update/60min total; retain every scheduled
+checkpoint/backup and evaluation. Implementation/rehearsal and exact request freeze precede launch.
+
+CAP-EXP-006 verification before launch: native suite1180 passed/two upstream warnings; initial
+sandbox run1177 passed/two process-monitor permission failures, corrected by native execution.
+New tests cover301-update checkpoint continuation, sustained-budget/legacy caps, exact controls,
+evaluation journal and backup-failure stop. Synthetic MPS rehearsal completed4 fixture updates,
+31 independently backed/restored artifacts, fixed-probe difference0,100.58s,peakRSS1.76GiB.
+Receipt `e42692ed6ac67728fa09c3f317e1ef7a95834ad35da2836e65241e4a69dbf999`.
+Frozen request `expanded-launch-request-bb413397-e1a1-463d-8aba-1edf0887129c`, SHA
+`024fb5b495d78a4ad4686846ec113c3ecc9d8c023cd298a189cafc3c304cf01e`.
+Exact approval record binds D-287 authorization to this request; no second confirmation required.
+
+
+### CAP-EXP-006 outcome — completed, tighter masks but validation coverage failure
+
+[Full result](capstone/operations/CAP-EXP-006-RESULTS-2026-09-29.md).2400 updates/150 per each16
+training members, zero validation optimizer members. Final train/validation Dice0.7481/0.4529;
+median volume ratios1.50/1.09. Validation recall falls0.9490→0.4606 versusCAP-EXP-005;7 validation
+boxes newly miss99.5% reference coverage. ROI screen16/16 train,2/11 validation;strict fit1/27.
+Primary Dice bar+0.30168 passes; both coverage safeguards fail. **Tradeoff, not accepted localizer
+improvement.** Between1600 and2400 train Dice rises0.674→0.748 while validation falls0.470→0.453;
+validation loss rises1.778→2.252. Consistent with limited-cohort overfitting/generalization gap,
+not a unique causal diagnosis or proof of convergence. No retrospective best-step selection.
+
+2444.27s total/2062.75s update phase,peakRSS8.26GiB. All35 artifacts independently backed/restored,
+terminal step2400,fixedprobe difference0. All27 overlays reviewed; difficult cases retained.
+Receipt `900c05364910507ba4f927733f1bf3225a900c85fabc4a99a6bcba306c0c9567`.
+Reporting-only matplotlib absence retained in review log; no dependency changes or reruns.
+
+Next recommendation: bounded read-only coverage-failure audit, then broader representative
+qualified cohort and a newly frozen controlled experiment. More duration alone on these16 is
+not the priority. No additional launch, automatic continuation, eligibility change or final-test use.
+
+
+### September29 — D-288 CAP-EXP-006 coverage inspection
+
+[Plan frozen before reads](capstone/operations/CAP-EXP-006-COVERAGE-INSPECTION-PLAN-2026-09-29.md).
+[Results](capstone/operations/CAP-EXP-006-COVERAGE-INSPECTION-RESULTS-2026-09-29.md).
+No training or inference.54 qualified source files/27 pairs and54 saved005/006 exports independently
+checked on native grids. Mean validation recall0.9492→0.4594;006 native Dice0.4525, close to processed.
+No shape/affine/units/content/role mismatch found. All27 source overlays reviewed. Single-component
+misses and distant-FP box inflation are distinct; deleting components cannot fix7 deficient boxes.
+278.46s,peak3.94GiB,receipt `e9c74c6972d98570c8b047f60a40e8a5a319be6d994f69207d30b93eb1aa8da1`.
+
+Important separate correction: prior scan_fraction included zero-padded tensor volume. Same-box
+mapping to acquired source bounds changes5 CAP-EXP-005 size checks. Additive source_crop_geometry
+and positive acquired-volume size gate now emitted by evaluator; original fields explicitly labeled
+and historical artifacts unchanged. This does not explain/reverse006 validation recall failure.
+Source audit and later metadata correction have separate pinned evidence; no audit rerun.
+
+Next proposal:128 train/48 development-validation candidates, retaining prior cases/holds and adding
+coverage floors plus proportional common-stratum exposure. Not selected/qualified/frozen. Consider
+an explicit probability-only audit to distinguish low-confidence coverage from near-zero scores
+before choosing an operating policy; hard masks cannot answer that. No new launch/automatic resume.
+
+
+### September29 — D-289 preparation after CAP-EXP-006
+
+Prepared a128 train/48 development-validation metadata candidate expansion, retaining all28 prior
+candidates and unresolved6350. Hybrid coverage-floor/proportional selection adds148 cases without
+using model scores or presumed label quality. Selection is not qualification or executable membership.
+Exact metadata replay passes;1,211 native tests pass. No new source payloads or training.
+See [candidate results](capstone/operations/LOCALIZER-CANDIDATE-EXPANSION-RESULTS-2026-09-29.md).
+The [fixed probability-audit plan](capstone/operations/CAP-EXP-006-PROBABILITY-AUDIT-PLAN-2026-09-29.md)
+is the next diagnostic on006; no inference has run and no threshold has been selected. Data breadth
+remains the leading training intervention, with exposure/compute budget deferred until qualification
+and resource profiling. Existing006 evidence and consumed request are preserved.
+
+
+### September29 — D-290 fixed probability audit, no training
+
+CAP-EXP-006 terminal masks exactly reproduced on all27 qualified cases; model unchanged and no
+optimizer steps. Five predetermined thresholds show only partial validation recovery: mean processed
+recall0.4606 at0.50 to0.6047 at0.01, with mean Dice0.4529→0.4275 and larger false foreground/crops.
+All11 baseline-missed-reference probability medians are<0.006. No threshold was chosen or added.
+Broader training exposure remains the leading next intervention; this does not establish its causal
+sufficiency.1,220 native tests pass. [Full results and all-case evidence](capstone/operations/CAP-EXP-006-PROBABILITY-AUDIT-RESULTS-2026-09-29.md).
+Next prepare qualified expanded inputs via the exact148-case/296-file header job (currently prepared,
+not executed), bounded qualification, cohort freeze and new consumer/resource checks. No training
+request is pending; CAP-EXP-006 and the probability audit requests are consumed.
+
+
+### September29 — D-291 candidate header preflight, no training
+
+148 new candidates/296 bounded headers inspected; all CT/target header grids match.14 CT unit
+questions remain unresolved and5 grids exceed64M voxels. All candidates preserved. No voxel arrays,
+qualification or training;1,230 native tests pass. [Results and15-batch content proposal](capstone/data/LOCALIZER-EXPANSION-V2-HEADER-RESULTS-2026-09-29.md).
+Next implement/test a versioned content-evidence consumer and run the first standard pilot; larger
+cases need separately tested diagnostic resource limits. Do not substitute candidates based on
+units/resource difficulty or change the existing16/11 training consumer.
+
+
+### September29 — D-292 content pilot, no training
+
+Batch01's16 new training candidates/32 source files pass integrity, finite CT, matching geometry and
+nonempty strict-binary checks. All16 limited alignment sheets reviewed. Inferior scan-boundary
+contacts56/150/1250/1396/1462 remain explicit visible-target observations, not exclusions.41.53seconds,
+peak3.42GiB;1,242 native tests. No qualification or model execution.
+[Evidence and next recommendation](capstone/data/LOCALIZER-EXPANSION-V2-CONTENT-PILOT-RESULTS-2026-09-29.md):
+continue remaining nine standard batches/127 cases within unchanged caps, then separately verify
+five larger cases. Keep all176 candidate identities and unresolved units; complete qualification,
+cohort freeze and consumer/resource checks before training.
+
+
+### September29 — D-293 complete expanded content evidence, no training
+
+Nine remaining standard batches/127 candidates and five separately gated large cases completed.
+Synthetic96M allocation/decode rehearsal passed at3.48GiB; largest real peak5.20GiB.132 cases/264
+files,246.59seconds summed real job runtime. All124 available alignment sheets reviewed; eight empty
+references have no target-centered sheet and remain unresolved. No gross displacement flagged in
+limited overview; noise, sparse references and source-face contacts preserved as observations.
+
+All176 candidate identities and roles reconciled against frozen selection;8 empty-reference and15
+CT-unit holds (including old6350),153 without automated content holds (113train/40validation).
+These counts do not grant qualification. No exact compressed-CT duplicates across176; biological
+identity remains unresolved.1,264 native tests; no model/optimizer/eligibility changes.
+[Results and evidence](capstone/data/LOCALIZER-EXPANSION-V2-CONTENT-RESULTS-2026-09-29.md).
+Next record supported purpose-specific qualifications, preserve every hold/issue, freeze/replay new
+role cohorts and profile a separately versioned consumer before training. All14 requests consumed.
+
+
+### September29 — D-294 broader purpose qualifications and role freeze, no training
+
+153 positive qualifications (113 train/40 development-validation),23 held and176 original candidates
+accounted for. The new immutable bundle published and independently resolved exactly. All23 prior
+issues and28 prior annotation identities retained. Difficult and all five large scans remain eligible
+for visible-reference localization; whole-organ completeness is not established. Six arterial/thin-slice
+validation cases fill the previous gap, but this stratified development cohort is not population data.
+
+1,284 native tests pass. Two slow unpublished preparations were stopped for bounded validation
+optimizations; a completed intermediate preparation was superseded for an additional JSON-shape guard.
+All such history is documented; no failed or superseded attempt published. No raw arrays or model work.
+[Results](capstone/data/LOCALIZER-EXPANSION-V2-FREEZE-RESULTS-2026-09-29.md) retain hashes and replay.
+Next implement the [consumer packet](capstone/data/LOCALIZER-EXPANSION-V2-CONSUMER-PACKET-2026-09-29.md):
+306 permitted source files, preserved3mm starting recipe, verified preprocessing and measured cache/
+streaming/CPU/MPS costs before a fresh scratch-run request. Existing16/11 consumer unchanged.
+
+
+## 2026-09-29 — D-295 broader input verification (no training)
+
+The113/40 frozen cohort now passes a separately versioned role-safe loader and3mm preprocessing.
+All306 exact source files checked;153 limited transformation sheets reviewed; all targets nonempty.
+Native suite1,307 passes. Successful job durations sum448.307s; maximum CPU RSS6.57GiB; tensor
+payload1.07GiB, not a retained cache or MPS budget. Five large scans retained and handled separately.
+Initial pilot failed before raw reads because the store validation callback returned the wrong report;
+fixed,tested,rehearsed and explicitly retried with a new capability attempt, preserving old evidence.
+No model inference/updates or new CAP-EXP launch. All15 successful requests consumed.
+
+Important null/limitation: nonempty does not mean faithful supervision. Tiny boundary reference6110
+has only0.45956 native round-trip recall;2727 has0.76471. These are preprocessing reference metrics,
+not model results. Keep the cases and investigate target representation before training; do not filter
+them to improve scores. Next: role-safe cache and no-update MPS runner/resource/recovery integration,
+with focused tiny-target checks alongside it. The3mm recipe and old16/11 runtime remain unchanged.
+
+Evidence: [D-295 results](capstone/data/BROAD-LOCALIZER-PREPROCESSING-RESULTS-2026-09-29.md).
+
+
+## 2026-09-29 — D-296 target-fidelity diagnostic (no training)
+
+New two-label job6110/2727 exactly reproduces D-295. Nearest2mm improves native-reference recall
+from0.45956/0.76471 to0.90441/0.88235;1.5mm recovers both1.5mm-source references exactly.3mm
+foreground-center splat increases recall but expands volume2.721×/2.588×,so it is not adopted.
+This supports coarse-grid representation loss,not a reason to remove tiny/partial cases. No CT/model
+reads or optimizer updates.11.806s/1.26GiB;1,312 native tests pass. Development-validation exposure
+for preprocessing debugging is recorded;these are not model/generalization metrics.
+
+Header-only projections across all153 cases: uniform2mm would exceed current8M output ceiling for15
+members,maximum15.046M,and~3GiB tensor payload upper bound. Next propose/test a separate16M candidate
+output envelope and qualify2mm across the cohort before choosing the final cache recipe. Preserve3mm
+baseline and all cases;no automatic production recipe or launch change.
+
+[Full findings and next qualification scope](capstone/data/TARGET-FIDELITY-RESULTS-2026-09-29.md).
+
+### September 30 — D-297 uniform 2 mm input qualification (no model run)
+
+Following the tiny-reference investigation, tested a separate 16M-output recipe and qualified all
+113 train/40 development-validation cases through 15 bounded requests. All 306 files passed,
+153 sheets reviewed; 1,337 native tests. Mean reference Dice train 0.916724→0.943803, validation
+0.909228→0.947150; mean recall 0.916135→0.944986 and 0.915132→0.947109. Dice improved in148/153,
+recall147/153; all regressions and difficult cases retained. 6110 still has imperfect reference
+recovery. These are reference-resampling measures, not model performance.
+
+511.861 seconds summed job time; 6.664 GiB peak CPU RSS. Tensor payload2.902GiB,2.711×3mm.
+No tensor cache/model updates. Optional matplotlib plot failed because dependency is absent;
+no dependency changes. Next: physical-context/MPS profiling, role-safe cache and independent
+checkpoint recovery before a fresh bounded training request. A96³ patch now spans192mm rather
+than288mm, so old patch settings cannot be treated as the same physical context.
+
+[Full results](capstone/data/TWOMM-LOCALIZER-PREPROCESSING-RESULTS-2026-09-30.md).
+
+### September 30 — D-298 synthetic context profile
+
+Compared96³/144³ at nominal2mm using the same model/balanced loss. Both passed finite updates,
+CPU-stitched forward and same-process reload (probe delta0). Median update0.8253/2.6839s;
+same invented volume inference2.1263/3.1594s; sampled MPS driver2.306/4.822GiB. Recommend144³
+candidate for preserved288mm input span. This is not a learning comparison or real run, and fixed
+convolution receptive-field scale still changes. Production96³ guard remains. Native1345tests pass;
+initial sandbox supervisor failures retained. Next versioned cache/adapter, fresh bounded real
+zero-update profiling and independent recovery. No training launch or model promotion.
+
+[Evidence and limitations](capstone/operations/LOCALIZER-CONTEXT-PROFILE-RESULTS-2026-09-30.md).
+
+### September 30 — D-299 persisted cache and patch mechanics (synthetic only)
+
+Implemented separate4GiB payload persisted cache and144³ adapter.1,379 native tests pass;
+synthetic two-role cache reopens and exactly replays four completed-step crop boundaries.
+Validation cannot reach the optimizer sampler; extra patch padding is excluded from center
+selection, while existing preprocessing padding remains eligible. This changed sampling policy
+must be recorded with the future experiment. No optimizer/state recovery claim yet.
+
+Retained D-297 reports yield proposed113/40 binding and153 temporary-padding projections,
+all<=16M; no raw reads or filtering. Next fresh supervised real cache build, zero-update MPS,
+source-grid/padding checks and independent checkpoint recovery before an exact training request.
+
+[Results](capstone/operations/TWOMM-CACHE-ADAPTER-RESULTS-2026-09-30.md).
+
+### September 30 — D-300 real persisted input cache (no model run)
+
+Built8-case pilot then145remaining under fresh single-use authority; all306 source files verified.
+Assembled full113train/40development-validation cache from retained parts with zero new raw reads.
+Every final serialized image/label hash matches its part; every target count and transform agrees
+with D-297. No cases dropped, no23hold changes, no model forward/updates. Final cache2.903GiB;
+peak10.967GiB;1,388 native tests. Full reopen1.784s on warm OS cache, not cold-disk throughput.
+Next versioned144³ session/checkpoint qualification, fresh zero-update MPS run and independent
+backup recovery before a finite training request. All three D-300 requests consumed.
+
+[Cache identity and evidence](capstone/operations/TWOMM-CACHE-BUILD-RESULTS-2026-09-30.md).
+
+
+### September30 — D-301 runner/checkpoint readiness (synthetic only)
+
+Game plan: separate144³ cache-bound session; test strict checkpoint refusal and synthetic next-update
+replay, then exercise actual SegResNet/MPS and independent backup recovery. No CAP-EXP launch.
+
+Outcome:1,406 native tests. Step2 independently restored in a fresh process with primary reads blocked;
+probability delta0,next-crop trace exact,next-loss delta0,next-weight maxdelta7.45e-9. Four synthetic
+optimizer calls total; no real cases. Producer/recovery13.094/6.425s,peakRSS1.028GiB, sampled driver4.822GiB.
+All attempts passed; retained receipts and limitations in
+[session results](capstone/operations/TWOMM-SESSION-RESULTS-2026-09-30.md).
+
+Next: implement/test and freeze8-case real-cache inference/export pilot, then145remaining. This
+qualifies actual input resource/geometry behavior before training; it does not establish learning.
+Native-reference evaluation access still needs an explicit bounded pathway; processed targets are
+not substitutes for original references. No model promotion or automatic training continuation.
+
+### September30 — D-302 cached inference pilot game plan
+
+Exercise the eight retained edge cases through the new144³ session, export predictions to their native
+grids, verify unchanged initial weights, and independently restore an actual-cache-bound step0
+checkpoint. No optimizer updates or native-reference scoring. This checks resource and geometry
+readiness; random initialized predictions cannot support a model-quality conclusion.
+
+Exact cases, controls and safety limits: [pilot plan](capstone/operations/TWOMM-INFERENCE-PILOT-PLAN-2026-09-30.md).
+Tests precede a fresh single-use source/environment-pinned request; failures remain evidence.
+
+D-302 outcome: single native attempt passed all eight inference/native-export checks and independent
+actual-cache-bound step0 recovery (probe delta0). Weights unchanged throughout; no real updates or
+raw reads. Profile/recovery workers53.480/3.942s,peakRSS4.498GiB;31 output members rehashed.
+1,437 native tests pass. [Full evidence](capstone/operations/TWOMM-INFERENCE-PILOT-RESULTS-2026-09-30.md).
+Remaining145 projection ~8.2minutes including reserve supports retaining proposed20minute/16GiB/4GiB
+limits, subject to a separate tested/frozen continuation request. This is engineering readiness,
+not a localization or native-reference accuracy result. No automatic training/model promotion.
+
+### September30 — D-303 full-cache inference continuation game plan
+
+Run the exact145-member complement of the passing eight-case pilot through the same initialized144³
+model and native export/recovery path. Bind pilot evidence and fresh source/environment; consume a
+new request, never the pilot. Reconcile153 unique members and identical initial weights. Preserve all
+holds and observations. [Plan](capstone/operations/TWOMM-INFERENCE-CONTINUATION-PLAN-2026-09-30.md).
+This is zero-update readiness, with no native-reference quality claim or real training launch.
+
+D-303 outcome: single continuation attempt passed145 cases; all153 original113/40 members reconcile.
+Independent review rehashed337 package files and reopened153 native exports. Weights unchanged and
+independently restored probability probe exact. Profile/recovery409.212/4.418s,peakRSS3.031GiB;
+1,460 native tests. No raw source reads or real updates; both inference requests consumed.
+[Full results](capstone/operations/TWOMM-INFERENCE-FULL-RESULTS-2026-09-30.md).
+
+Next: target-only native-reference reader and96M-safe metrics that retain oversized prediction failures,
+then the bounded training executor. Existing cached CTs suffice; no new cohort selection is needed.
+The [completion packet](capstone/operations/TWOMM-TRAINING-COMPLETION-PACKET-2026-09-30.md) proposes
+300updates and45minutes for a first broader diagnostic, subject to implementation/rehearsal and exact
+launch freeze. No learned-model improvement or promotion is inferred from initialized predictions.
+
+### September30 — D-304 native-reference baseline game plan
+
+Score existing initialized native exports against exact qualified original pancreas references, using
+one target-only pass in8+145 cases and a new96M metric path that retains dense/empty failures. Preserve
+all153 members, original23 holds and partial-reference caveats. Tests precede frozen real read jobs;
+no CT/model/optimizer work. [Plan](capstone/operations/NATIVE-REFERENCE-SCORING-PLAN-2026-09-30.md).
+
+D-304 outcome: both native jobs passed;153 labels,21,942,279compressed/4,398,868,031expanded bytes,
+zero CT reads or model/optimizer work.12.078s pilot +67.179s continuation,peakRSS5.817GiB;1,491 tests.
+All113/40 retained. Initialized native Dice0.001700/0.002053,recall0.018415/0.024605;ROI0/113 and0/40.
+Boxes cover nearly the entire scan, explaining100% box-reference coverage without useful localization.
+Three dense predictions and five >64M grids remain in the results. No case/threshold selection or
+trained-model claim. [Evidence](capstone/operations/NATIVE-REFERENCE-SCORING-RESULTS-2026-09-30.md).
+
+Next: implement the actual bounded training loop and new checkpoint/authorization/progress contract,
+rehearse synthetic recovery, then freeze the exact request. Native-reference scores are available for
+a matched initialized baseline; reusing them requires explicit equality checks. Repeated evaluation
+reads require a new stage-specific budget because both D-304 source-read requests are consumed.
+
+### September30 — D-305 training transaction rehearsal
+
+[Game plan](capstone/operations/TWOMM-TRAINING-TRANSACTION-PLAN-2026-09-30.md): separate144³ training
+identity and deterministic per-pass sampling, native before/mid/after scoring, completion-last journal,
+strict nonzero checkpoint and independent recovery. Native invented fixture includes a15,007,744-voxel
+volume. Preserve113/40 memberships and23holds; no real-data updates or fresh source reads. Three
+producer updates plus one restored replay and one deliberately interrupted update. The exact real
+launch remains to be frozen after the complete transaction/resource checks.
+
+D-305 outcome: separate transaction/recovery/keeper path passes1,539 native tests. Three evolving
+native synthetic rehearsals passed and are retained (15 total synthetic update calls including replay
+and interruption injection). Final source-matched worker total46.010s,peakRSS2.570GiB/driver4.853GiB;
+intermediate/terminal probes exact,next-update weights3.73e-9. Six keepers independently restored;
+48 final package files rehashed. [Results](capstone/operations/TWOMM-TRAINING-TRANSACTION-RESULTS-2026-09-30.md).
+
+CAP-EXP-007 is prepared,not launched:300updates,113/40,144³/2mm,fresh baseline and terminal plus
+validation at113/226,45min total. New exact386-label read scope,no CT reads. Request SHA
+`b13ebbce1731090a65dd5fe6c8327963f8e50203e39c25aa8ee6c88f903d85b3`;
+[launch design](capstone/operations/CAP-EXP-007-LAUNCH-PLAN-2026-09-30.md).
+Metadata preflight and cache verification passed; no real update or original source-array read.
+Keepers cover checkpoints/evaluation records; native masks remain explicitly unbacked derived local
+scratch. Next authorize this exact request,run once,and inspect native coverage/size alongside Dice.
+
+### September30 — CAP-EXP-007 authorized launch (D-306)
+
+Quinton approved the exact prepared request: “Great, I approve this exact run.” Launch once from
+fresh seed42 under [the frozen game plan](capstone/operations/CAP-EXP-007-LAUNCH-PLAN-2026-09-30.md):
+300updates,113train/40development-validation,144³/2mm,balancedCE+Dice,AdamW0.0003,cosine schedule;
+full baseline/final and validation at113/226.45min total including recovery,16GiB memory,4GiB outputs,
+AC/100GiB free floor,386 label-only reads. No extension or model promotion. Record learning and
+native coverage/size failures as well as Dice. Exact request SHA
+`b13ebbce1731090a65dd5fe6c8327963f8e50203e39c25aa8ee6c88f903d85b3`.
+
+CAP-EXP-007 outcome:all300updates and386 native evaluations completed,33.082min,peakRSS5.638GiB,
+driver4.799GiB. Full baseline reproduced all153 D-304 metric records. Validation mean Dice
+0.002053→0.061027→0.082020→0.098701 at0/113/226/300; recall0.024605→0.959212→0.984972→0.982700.
+Final training Dice0.097323,recall0.978471. Validation mean crop fraction0.42185 and median volume
+ratio18.50×;ROI only1/40 (train2/113). Coverage remains high, but excess foreground prevents useful
+localization for most cases. Training7604 still has box coverage0.92208; tiny6110/2727 stay included.
+All300 exposures replayed:39members twice,74 three times;146foreground/154background centers.
+
+Nine keepers independently restored with primary reads blocked,terminal probe0.805 package files and
+386exports verified; eight selected sheets inspected. No original reference reread in posthoc review,
+new CT read,filtering,qualification change or model promotion. Source unchanged;1,539-test baseline.
+[Full results and immutable receipts](capstone/operations/CAP-EXP-007-RESULTS-2026-09-30.md).
+The request is consumed and no run remains active. Recommend a longer fresh duration/schedule
+comparison on this same cohort with explicit coverage safeguards; no next experiment is authorized.
+
+
+## 2026-10-01 — CAP-EXP-008 game plan (D-307)
+
+Quinton authorized running the proposed fresh1,200-update experiment after the strategy discussion.
+[Design](capstone/operations/CAP-EXP-008-LAUNCH-PLAN-2026-10-01.md): same113/40 qualified cohort,
+2mm cache,144³,seed42 scratch initialization,balanced CE+Dice/AdamW. Cosine horizon1200 changes
+LR history; this is a duration/schedule diagnostic, not a duration-only control or formalG5 claim.
+Question: can additional optimization reduce excessive foreground while retaining native reference
+coverage? CAP-EXP-007's median validation volume ratio18.497x/Dice.098701/recall.982700/ROI1of40
+motivates it. CAP-EXP-006's coverage collapse motivates numeric checkpoint stops.
+
+Checkpoint/evaluation cadence0/300/600/900/1200; full113/40 first/last,validation40 intermediate.
+Stop from300 for mean recall<.95,minimum<.65,box>=.995 count<38of40 or mean recall drop>.03 from
+best active prior checkpoint. No filtering, threshold tuning, warm start or automatic continuation.
+Fresh426-label maximum:58,621,113compressed/11,763,565,147expanded bytes;zero originalCT reads.
+90min total including recovery,16GiB RSS/driver,4GiB local output,AC/100GiB free floor; existing
+keeper/backup ceilings unchanged. Exact request/source/test/rehearsal evidence will be linked after
+preparation. Stop/failure outcomes will be recorded with their actual step rather than called1200.
+
+
+CAP-EXP-008 attempt01: request294c26b8 consumed; stopped before label bytes/updates because the
+external drive's ephemeral device number changed after remount. One cached inference export,
+step0 keeper and failed journal preserved. All153 label paths retain the same UUID/inode/size/times.
+The experiment's bounded replacement adds a frozen mount receipt and UUID-verified device-only
+observation rebinding; original inventory/cohort/cache hashes and all other source checks unchanged.
+Affected tests/native rehearsal are rerun before a new request. No reused consumed request.
+
+### CAP-EXP-008 actual outcome — stopped300, not1200
+
+The replacement request843fd09a ran once and stopped at the first active coverage review:mean native
+validation recall0.911146<0.95,minimum0.055399<0.65. The frozen guard prevented updates301–1200
+and the planned terminal training evaluation. The stopped transaction/recovery verified successfully.
+
+Same40 validation cases at300:Dice0.077905 vs CAP-EXP-007's0.098701;recall0.911146 vs0.982700;
+median volume23.738x vs18.497x;ROI2/40 vs1/40. All40 boxes cover the reference in both runs, but
+the scattered oversized masks still miss reference pixels.38 Dice scores decreased,2 increased.
+All153 initial metrics reproduce D-304 and all300 sampling traces match CAP-EXP-007. Recorded LR
+after300 is0.000256066 instead of0;this is schedule sensitivity evidence,not a duration-only control.
+Lower final patch loss does not establish improved localization. Benefit beyond300 remains untested.
+
+300updates/113train/40validation,39 cases two exposures and74 three;146 foreground/154 background
+centers.193 label reads,zero originalCT reads;22.729min,5.200GiB RSS/4.799GiB driver. Five keepers
+independently restored with primary reads blocked,terminal probe0;415 package files/193 exports
+rechecked,seven selected sheets viewed. No post-update training metrics or new7604/6110 claim.
+All153 members/23 holds retained;source/environment unchanged;1,574 native tests before freeze.
+[Results and immutable receipts](capstone/operations/CAP-EXP-008-RESULTS-2026-10-01.md).
+
+No run is active/pending and neither consumed request may be replayed. Keep CAP-EXP-007 as the
+stronger retained coverage reference without promoting it. Next discuss a fresh schedule comparison
+that retains earlier decay behavior and the patch-level loss/sampling evidence. Do not relax guards
+after this result or filter difficult cases. Formal G5,lesion cascade and sealed evaluation remain open.
+
+## 2026-10-01 — D-308 schedule/patch/loss audit complete
+
+[Findings and immutable evidence](capstone/operations/CAP-EXP-008-OPTIMIZATION-FINDINGS-2026-10-01.md).
+No scheduler ordering defect:007/008 both match installed PyTorch,while008's first300 applied-rate
+sum is1.8945x007. Saved LR is the next rate after the completed update. Blindly continuing the old
+cosine beyond300 would raise its rate again;current version1's bound prevents that future hazard.
+
+All300 patches exactly replayed from the113-member cache.295 contain foreground despite146/154
+foreground/background centers;only5 are fully negative. Median target0.303%,extra padding32.64%,
+247 patches contain the entire cached reference. Eight background centers lie outside native
+geometric support. Balanced CE functions as implemented;median per-voxel coefficient ratio329,
+up to248831 on tiny6110's12-voxel patch. These common concerns cannot alone explain the difference
+between007/008 and do not justify filtering tiny/partial cases or promoting held negatives.
+
+16 no-update MPS forwards from two independent-backup step300 models reproduced six native masks
+exactly. Selected foreground CE/recall worsens while average background CE improves;matched6449
+patch loss and soft Dice improve while hard Dice worsens. Lower aggregate loss is an insufficient
+progress signal. Gaussian6186 blending does not rescue the failure. No running BN/dropout mismatch
+found;25 group norms in each model. Context,loss,negative exposure,padding and duration remain open.
+
+CPU10.332s/2.235GiB RSS;MPS47.901s/2.945GiB RSS/1.461GiB driver. Zero original source/primary reads,
+real optimizer updates or model changes. Source/runtime unchanged;1,574-test production baseline.
+One CPU helper exact-float assertion was corrected to tolerance,with the failed log preserved;
+no production correction. Audit23-member receipt8ae38155aa54a126ba55539a99c5fc4ca0dae175f0fe4f818ca1a9974a53fc86.
+
+[Proposed600 matched-prefix/low-rate-tail experiment](capstone/operations/LOCALIZER-SCHEDULE-NEXT-PROPOSAL-2026-10-01.md)
+preserves007's first300 applied rates,then uses0.00001 for300 additional updates. Same153/23holds,
+loss,sampler,geometry,prediction and guards. Separate versioned schedule,tests,native recovery and
+budget/request freeze are required. This is a proposal,not approval or an active/pending launch.
+
+
+## 2026-10-01 — CAP-EXP-009 preparation held on native fresh-prefix qualification
+
+D-309 authorized the fresh600-update matched-prefix/0.00001-tail design. Version3 implementation and
+47 new tests are complete;1,621 native tests pass. **No real training request was prepared or run.**
+
+Native original/original synthetic controls differ in model weights by0.000178389 after2updates,
+with identical histories/losses and one exact validation mask. Original/new separate-process and
+final source-matched differences0.000144208/0.000080405 also exceed the1e-6 criterion. CPU toy300
+updates match exactly. This shows an unmet fresh native qualification; it does not identify the
+exact gradient/kernel cause or predict40 real masks/300 real steps. The launcher refuses request
+preparation rather than treating a stopped synthetic transaction as a completed matched rehearsal.
+
+Final refusal/recovery and separate invented tail transition passed:64.346s workers,2.180GiB RSS,
+4.845GiB driver;next-update weights1.862645e-9,probes0. Six unique keepers/seven restore operations,
+80 final members rehashed;439 retained files indexed. No original CT/label reads, real updates,
+cohort changes or model promotion. [Evidence](capstone/operations/CAP-EXP-009-PREFLIGHT-RESULTS-2026-10-01.md),
+audit receipt f30b0e65c05cd1368afd5db02dbc14c1c7013b014df695badbf9779c069c26e9.
+
+[Proposed parented tail](capstone/operations/LOCALIZER-PARENTED-TAIL-PROPOSAL-2026-10-01.md) would
+start from the exact007step300 model/AdamW state and absolute sampler position300, then test300 new
+updates. This is a design proposal requiring review, not an authorized continuation or new run.
+The fresh design remains held;153members/23holds and previous consumed requests remain unchanged.
+
+## 2026-10-01 — CAP-EXP-010 approved parented low-rate tail, qualification in progress
+
+D-310 authorizes a new child of independently backed-up007step300, preserving model/AdamW history,
+with300 new updates at fixed0.00001 and sampler indices300–599. Same113/40,144³/2mm,loss/model,
+prediction policy and153members/23holds. Coverage guards apply from the imported baseline.
+[Frozen design](capstone/operations/CAP-EXP-010-LAUNCH-PLAN-2026-10-01.md).009 fresh replay stays held.
+
+Version4 import/records/loop/budgets/recovery implemented;1,652 native tests pass with two existing
+torch.jit warnings. Source-matched invented MPS rehearsal preserves imported weights/moments and
+independently restores seven keepers, probes0,next weights1.862645e-9;27.742s producer/13.964s recovery.
+
+Zero-update parent qualification request422156cf, SHA
+7ed04c3e1c32a9c085921dcb04b5338c488f7d3bb6059986467b63569b6b288c, is launched under D-310.
+Scope40 validation references/noCT,900s/16GiB/1GiB; session refuses updates. All40 native masks,
+imported weights and old terminal probe must match; three keepers must recover independently.
+Successful source/runtime-matched qualification precedes a separate233-label/300-new-update request,
+45min/16GiB/4GiB including independent recovery. No repeated launch approval is needed.
+No real child updates yet, automatic extension, promotion, Git publication or Claude dispatch.
+
+The first preparation invocation used relative rehearsal paths and was refused before request
+creation or source-label reads; corrected absolute paths produced the frozen qualification request.
+
+Real qualification completed: all40 native masks exact, three independent restores, probe0.
+126.535s worker/141.998s including recovery,4.931GiB RSS/1.410GiB driver;40 label reads/noCT.
+Qualification receipt3f2c561741c58784de081f9ea4166b855ab16d0015ce515e9e15ab9868a0e45b.
+Exact300-new-update requesta2593f26, SHA f37f07ad891ea29406e099f1b46d15188e4eb748dcbd295f31fc6b263a796562,
+authorized under D-310 and launched once;233 label reads/31,766,649 compressed/6,376,087,421 expanded
+bytes,noCT.45min includes recovery. No automatic extension.
+
+## 2026-10-01 — CAP-EXP-010 / D-310 complete
+
+[Results and immutable receipts](capstone/operations/CAP-EXP-010-RESULTS-2026-10-01.md).
+Exact007step300 model/AdamW parent imported;300 new constant0.00001 updates,absolute sampler300–599,
+113/40,144³/2mm. Real zero-update and child0 qualification reproduce all40 native parent masks.
+Final validation Dice0.110417/recall0.975863/median volume16.541x/ROI2/40 versus0.098701/0.982700/
+18.497x/1/40. All40 Dice improve/masks shrink;coverage guards pass,useful-shrinkage target fails.
+Final training Dice0.108541/recall0.979678/ROI2/113.3115 recall0.706283 and7604 box0.860597 retained;
+7684 sole training Dice regression.153members/23holds unchanged,no exclusions/promotion.
+
+25.600min,5.888GiB RSS/4.853GiB driver,233 label reads/noCT;seven keepers independently restored
+with primary blocked,probe0.501execution files/233exports verified,ten paired sheets reviewed.
+300 exact cached crops:155/145foreground/background centers,290 positive/10 empty,median target
+0.303%,padding31.25%,class-coefficient ratio324.643. CPU118.085s/2.212GiB,no original source reads/model forwards/updates.
+Combined600patch exposures give78members five/35six. Source/runtime unchanged;1,652 native tests.
+Execution receipt84a16cc4e39409140404e8639daead08abce7fce9fee9f400effdccef548eee8.
+
+Both new requests consumed;no active/pending run,extension or promotion.009 fresh replay held.
+[Next proposed foreground/objective audit](capstone/operations/LOCALIZER-FOREGROUND-NEXT-PROPOSAL-2026-10-01.md)
+uses fixed training patches/independent models before selecting a controlled loss comparison.
+No new loss, sampler, request, threshold or training is adopted by that proposal.
+
+## 2026-10-01 — D-311 frozen-model foreground/objective audit complete
+
+Quinton authorized the investigation following010: “Great, check that now. Continue on.”
+[Frozen pre-execution design](capstone/operations/LOCALIZER-FOREGROUND-AUDIT-PLAN-2026-10-01.md);
+[results](capstone/operations/LOCALIZER-FOREGROUND-AUDIT-RESULTS-2026-10-01.md).
+This notebook entry is appended after execution;the plan/request and fixed patch selection were
+frozen before logits. That notebook timing deviation is retained,not retroactively relabeled.
+
+Eight identical training-only144³ cached patches through independently backed-up007step300 and
+010childstep300/logical600 models:16forwards,zero optimizer updates/original-source/primary reads.
+Current CE+Dice favors uniform foreground shrinkage7/8 in each;the6-voxel5286patch favors expansion
+at497663x per-voxel coefficient.010improves that patch's reference probability0.427→0.516/recall0→5/6
+while shrinking201243→187479predicted voxels. This is not a universal expansion bias or a parameter
+gradient. The illustrative cap50 favors shrinkage8/8 but cuts the6-voxel foreground contribution
+about4514x,raising sparse-target concerns. No cap/voxel-mean loss adopted. Native-support arithmetic
+strengthens background shrinkage on five padded patches without sign changes. The empty probe
+still predicts179928voxels despite proper background-only pressure;010exposure290positive/10empty
+remains a separate sampling concern. Held empty references remain held.
+
+After the fixed audit, Codex proposes0.25foreground/0.75background class-mean CE+sameDice,sole-class
+means unchanged. Post-hoc saved-component arithmetic favors shrinkage8/8 while retaining50–53%
+foreground contribution;five invented autograd/finite-difference checks pass. This is a proposal,
+not a prospective native treatment,optimal weight or training result.27prelaunch math tests pass;
+native decomposition maximum discrepancy7.19836e-8. Total17.396s,RSS1.823GiB/driver1.371GiB,
+weights/source/runtime unchanged;1,652-test production baseline,153members/23holds unchanged.
+
+Frozen request dff832472a74618b6e3ca5a689811863b04f397ab91715796f3bf4757981b02a consumed;
+execution receipt e90e8b1b72a7d83ff93f5068237b5083e37afbadd2491c2a0bd2d70ed8e02f7f;
+42-member review receipt d4b1f0bc0c0be5a0acde60e1b878bf5df538c3e070d71097680f4af4cf59e74c.
+No native audit/training pending,loss adoption,promotion,Git publication or Claude dispatch.
+[Proposed matched comparison](capstone/operations/LOCALIZER-CLASS-MEAN-REBALANCE-PROPOSAL-2026-10-01.md)
+retains007parent/AdamW,300new updates/0.00001/sampler300–599/cohort/geometry/coverage guards,
+changing onlyCEclass-mean balance. Discuss the formula before versioned implementation,
+native qualification and a new exact launch;sampling/support masking remain separate factors.
+
+## 2026-10-01 — CAP-EXP-011 / D-312 approved, implementation and qualification
+
+Quinton approved the25/75class-mean comparison: “Great, continue with that. Great work.”
+[Prospective launch design](capstone/operations/CAP-EXP-011-LAUNCH-PLAN-2026-10-01.md), motivated by
+[D-311](capstone/operations/LOCALIZER-FOREGROUND-AUDIT-RESULTS-2026-10-01.md).
+Exploratory matched intervention against010's retained control. Exact independent-backup007step300
+model/AdamW parent;300new updates at0.00001,absolute sampler300–599,same113/40/144³/2mm. Only mixed
+patch CE class means change0.5/0.5→0.25/0.75foreground/background;sole-class CE/Dice behavior unchanged.
+No cap50,support mask,sampler/geometry/cohort/threshold change,promotion,extension,Git or Claude action.
+
+Question: can stronger background pressure yield useful shrinkage while preserving reference
+coverage? Predeclared endpoint median validation volume<=13.872506x,ROI>=10/40,mean recall>=0.962700,
+all40boxes>=0.995. Existing coverage stops and0/150/300cadence retained,initial masks exact007.
+Tiny/partial/regressing cases stay in accounting. One control/treatment is not formalG5 or a
+replicated causal estimate;known native variation and inherited optimizer moments remain limits.
+
+New version/loss identity and changed-factor record,synthetic arithmetic/learning/interruption/
+independent recovery precede40-reference zero-update real qualification. Successful source-matched
+qualification precedes fresh233-reference training request,45min including recovery/16GiB/4GiB,
+nooriginalCT. Exact requests and approval bindings will be appended after qualification;no real
+011updates yet. Preserve each attempt,actual stopped prefix,and independently recovered keepers.
+The first targeted test pass found one stale expected CE value after its test changed the target;
+the expectation was recomputed against the new target. Failed log retained;no real request existed.
+
+Implementation verified by1,706native tests. Native invented transaction/recovery passes,seven
+independent keepers,probes0,nextweights1.862645e-9,uncertain interruption refused. Producer31.510s/
+recovery13.934s,peakRSS2.424GiB. Receipts b13dbafd /bcce7d59. Exact zero-update qualification
+request3ec13a6e, SHA7575c72690540ff8992ccc45d6986a9296294b694d703b695e46102cc2ec2923,
+is authorized and launched once underD-312.40references/noCT,900s;updates explicitly refused.
+Source99a64ed0/runtime dd1b62c4 frozen. No real011training updates yet. Future training request
+requires successful40-mask parent qualification plus independent recovery under the same source.
+
+Real qualification completed:all40native007masks exact,three independent restores/probe0,
+97files/40exports verified.126.544s worker/140.925s total,4.530GiB RSS/1.410GiB driver;40label
+reads/noCT. Receipt337187433952cf7aff0031cbf8db1cd37f4485930b7cf4c5c5fbf1864ab88d8c.
+Exact training request6b94ab00, SHA562733c43722a5d3588f9f282ea0d26eb7431a8803a06c803f14ae3c31c2ef20,
+is frozen/authorized underD-312 and launched once.233label reads/noCT,45min including recovery;
+initial40native masks checked again before first update. No extension or gate relaxation follows.
+
+### CAP-EXP-011 actual outcome — stopped150,not300
+
+[Results and receipts](capstone/operations/CAP-EXP-011-RESULTS-2026-10-01.md). The25/75class-mean
+intervention shrank all40validation masks and improved all40Dice scores versus010at the matched
+150boundary,but mean recall0.948096<0.95and drop0.034604>0.03from parent triggered required stop.
+Minimum0.672303/all40boxes pass. Updates151–300and final113train evaluation prevented.
+Native Dice0.140680versus matched0100.098067,median volume12.853xversus18.906x,ROI17/40versus0/40;
+mean recall0.948096versus0.984547.38recalls decline/2tie/none improve. Parent-relative median
+shrinkage30.509%;interim volume/ROI/box utility criteria pass but recall fails,and300endpoint is
+not completed. This is shrinkage/recall mechanism evidence,not model acceptance or formalG5.
+
+6186recall0.672303,31150.685326,272745/51native voxels retained;6534passes ROI screen despite
+recall0.871806. Six same-cache parent/control/treatment sheets viewed. No new6110/7604/7684
+training outcome.150actual traces match010;child78foreground/72background centers/112members,
+combined450exposures cover all113(111fourtimes/2threetimes).153members/23holds preserved.
+80actual label reads/noCT/9,824,370compressed/1,977,219,390expanded bytes,no final153reads.
+10.801min,5.231GiB RSS/4.853GiB driver;five independent restores/probe0,192files/80exports verified.
+Source/runtime unchanged,1,706-test baseline. Execution receipt77fbe303affeda26694d94e74f4c3deec7eb0cf3811e20021191b83c972cd780;
+33-member review receipt b5f08446451a64381d0131775d1c2d4e279a13aa327850cf5f96437028ccd9f9.
+
+Both qualification/training requests consumed;no active/pending run,resume,extension,promotion,
+Git publication or Claude dispatch. [Proposed midpoint37.5/62.5comparison](capstone/operations/LOCALIZER-GENTLER-BALANCE-PROPOSAL-2026-10-01.md)
+would retain75%of original foreground CE pressure/increase background25%,same007parent/AdamW,
+0.00001/300new/sampler300–599/cohort/geometry/guards. New design decision,version/native qualification
+and fresh exact request required. Do not relax guards or claim011's unexecuted300outcome.
+
+## CAP-EXP-012 prospective plan — October 1, D-313
+
+Quinton approved the37.5/62.5class-mean midpoint and its complete qualification/run sequence.
+[Launch plan](capstone/operations/CAP-EXP-012-LAUNCH-PLAN-2026-10-01.md). Hypothesis: retain more
+reference than011while reducing007's excessive foreground. Same007step300/AdamW parent, constant
+0.00001,300newupdates/sampler300–599,113/40,144³/2mm,seed42, unchanged sampling/geometry/argmax.
+Mixed-class CE .375foregroundmean+.625backgroundmean, sole-class full-strength mean, sameDice.
+Only loss changes scientifically; version6 explicitly isolated. Compare010at150/300and011at150.
+Coverage remains active0/150/300:mean>=.95,min>=.65,>=38/40boxes>=.995,mean drop<=.03frombest
+previous boundary including0. Utility at300:median volume<=13.8725059808,ROI>=10/40,mean recall
+>=.9627000322,all40boxes>=.995. If stopped,report actual prefix and prevent future reads/updates.
+Synthetic math/learning/refusal tests and native invented recovery precede fresh40-label/noCT
+zero-update qualification(900s/16GiB/1GiB). Successful source-matched qualification precedes exact
+233-label/noCT request(2700s including recovery/16GiB/4GiB/AC/exclusiveMPS/100GiB free).
+Mandatory views6186/3115/6534/2727and,if terminaltrain evaluation occurs,6110/7604/7684.
+No pending exact request yet; no model promotion, automatic extension, eligibility change orG5claim.
+
+D-313 implementation verified:1,763native tests pass(57new,twoexisting torch.jit warnings).
+Independent loss formula/gradient, sparse/empty learning, parent preservation/absolute sampler,
+interruption/refusal and version isolation tested. Exact factor check:only adapter/session common
+mechanics gain gated version6 support,eight new production modules;old data/model/loss code unchanged.
+Only loss_id changes scientifically against010;plan fields match aside from required versions.
+SourceSHA94b77f49fb18ce3547a91a32d08bd52a787c6f8f86441cfbbd0d0d7a31b9293d;
+runtimeSHA dd1b62c4469320084e2798c6b5dd1129422ede31fad1a02a7bcaef5597589c31.
+Native invented recovery is now running;no real012qualification request or updates yet.
+
+D-313 qualification exact request bound to existing design approval: `outputs/prowl/twomm-training-febb98c7-41e0-45b7-9025-25d878b8a96c`,
+SHA `49afaf63e44fb057ad55c5dd999f27e6e5211d6d4ca12623e3b026aa53934406`; approval SHA `736d364ec9a49c0ce0b932232cbaf63eb508d2e8e47717dd01c0ee10e4cddfe8`.
+40fresh pancreas labels/4912185compressed/988609695expanded bytes,noCT;
+900s including recovery,16GiB RSS/driver,1GiB output,AC/exclusiveMPS/100GiB free.
+Source `94b77f49fb18ce3547a91a32d08bd52a787c6f8f86441cfbbd0d0d7a31b9293d`,runtime `dd1b62c4469320084e2798c6b5dd1129422ede31fad1a02a7bcaef5597589c31`.
+Binding applies approved D-313 design after verified gates;not a claim of prior user review of generated bytes.
+One launch only; no extension, promotion or guard relaxation.
+
+D-313 real zero-update qualification passed:all40native007masks exact,three independent keepers restored,primary blocked/probe0;97files/40exports rechecked. Worker129.394s,total144.740s,RSS4.673GiB,driver1.410GiB.40label reads/noCT. Qualification receipt`bcb8064fe24f86ff55885ca18442d18a2bf4cdda0d1864632efd1ac354057f12`. Source/runtime unchanged;fresh training preparation follows.
+
+D-313 training exact request bound to existing design approval: `outputs/prowl/twomm-training-a0636d70-2ea5-4e5f-9167-db28bff562ba`,
+SHA `06cecda421626271eeb6fae5f02679d7fc9650b5afd0861ce39fce5ed0612218`; approval SHA `4ea46c04f41c22c8fafa89f86a3ddaf75a31c7d9e9effc611406d08cfe772920`.
+233fresh pancreas labels/31766649compressed/6376087421expanded bytes,noCT;
+2700s including recovery,16GiB RSS/driver,4GiB output,AC/exclusiveMPS/100GiB free.
+Source `94b77f49fb18ce3547a91a32d08bd52a787c6f8f86441cfbbd0d0d7a31b9293d`,runtime `dd1b62c4469320084e2798c6b5dd1129422ede31fad1a02a7bcaef5597589c31`.
+Binding applies approved D-313 design after verified gates;not a claim of prior user review of generated bytes.
+One launch only; no extension, promotion or guard relaxation.
+
+### CAP-EXP-012 actual outcome — completed300,utilityfailed
+
+D-313 CAP-EXP-012 complete:300newupdates/logical600,37.5/62.5CE+sameDice,exact007model/AdamW parent,
+0.00001/113/40/144³/2mm. Native validationDice0.129078,meanrecall0.962519,
+minimum0.674440,medianvolume14.2596x/22.907%belowparent,ROI15/40,
+boxes39/40. Every0/150/300stop passes,but utility fails volume/meanrecall/all40boxes;no promotion.
+Against010at300all40Dice improve/masks shrink,38recalls decline.3115newvalidationboxfailure,
+756/6822newtrainingboxfailures,7604persistent;150trainingrecall.4630isworst andonlytrainingDice regression.
+TrainingDice.126738/recall.968681,ROI36/113,boxes110/113. All113members retained,combined600
+exposures78five/35six times;155foreground/145backgroundcenters.300crops exactly match010.
+Actual233labelreads/noCT;25.312min,RSS6.252GiB/driver4.853GiB,seven independent
+keepers restored/primaryblocked/probe0.502executionfiles/233exports,13selectedpairedsheets and
+trajectorychart reviewed,52reviewmembers rehashed.1,763-testsource/runtime unchanged.
+Executionreceipt`2ca47e685f28d8007c34db51410482dc77b5b34da56598f4a645314ef1991926`;reviewreceipt`9f69df5f1d80acf845f89fde52fa6cc4b06a5ca9ac9a78f055b3e8be097e78a6`.
+[Results](capstone/operations/CAP-EXP-012-RESULTS-2026-10-01.md). Both requests consumed;no pendingrun/extension/
+promotion/eligibilitychange/Gitpublication/Claudedispatch.153members/23holds unchanged.
+Next recommendation is a timeboxed retained-prediction structure/box-extent audit and smallStage2
+qualification planning,not another weight guess or approved job. Fresh reference scoring requires
+new scope;oldreadrequests may not be recycled.
+
+
+### October 1 — retained structure audit and Stage 2 planning
+
+|ID|Decision|Authority|Boundary|
+|---|---|---|---|
+|D-314|Timebox the retained native-prediction component/box audit and prepare the small Stage 2 qualification packet.|Quinton: “Great, continue with that.” after the D-313 recommendation.|Compare completed 010 and 012 at child step 300 on all 40 development-validation members plus retained training failures 150/756/6110/6822/7604/7684. CPU only; frozen retained exports/records, no CT or original target arrays, inference, updates, component-policy adoption or model promotion. Native references would require a new read scope. Stage 2 work here is planning; lesion qualification and real reads are not inherited from localizer permission. Preserve 153 members/23 holds and all sealed evidence.|
+
+Owned new files: bounded structure helper, diagnostic script/tests, one local audit output directory,
+operations audit plan/results and Stage 2 qualification/implementation packet. Update only shared
+checkpoint/decision/notebook navigation. Acceptance: independently checked component arithmetic,
+26-connectivity/ties/empty/dense/physical bounds, frozen exact input pins, one-shot request consumption,
+all requested cases visible and old masks unchanged. Audit has no target truth per component;
+hypothetical largest-component box cost is not a validated ROI or pancreas-containment result.
+Prospective plan: [structure audit](capstone/operations/LOCALIZER-STRUCTURE-AUDIT-PLAN-2026-10-01.md).
+
+
+D-314 diagnostic readiness: 26 new synthetic/helper/runner checks pass. Dense 96-million-voxel
+CPU profile passes in 1.362 seconds, peak RSS 604,438,528 bytes. Exact retained-only request
+`outputs/prowl/LOCALIZER-STRUCTURE-AUDIT-20261001/request.json`, SHA
+`f5d455d9eb514f213c11cb8be1be84a90c22e6d4a03870a6954bbcda58de2054`, pins 92 masks,
+21,606,141 compressed bytes and 2,436,199,082 uint8 voxel payload bytes, 1,200 seconds/8 GiB/50 MiB.
+Original-reference/CT reads, model inference/updates and adopted cleanup remain prohibited.
+Exact scope binds Quinton's approved D-314 diagnostic after preparation; it does not claim he
+reviewed these generated bytes. Full native suite is running before the one-shot audit.
+Stage 2 packet prepared: [qualification/cascade slice](capstone/operations/STAGE2-QUALIFICATION-AND-CASCADE-PACKET-2026-10-01.md).
+No Stage 2 eligibility, read request or training authorization follows from that planning document.
+
+
+D-314 complete: 92 retained native masks/46 paired cases (all40 validation + train150/756/6110/6822/7604/7684),
+010/012 child300,26-connectivity/10mm. CPU33.239s,RSS1.464GiB; no original arrays, forwards or updates.
+012 largest foreground share median99.394%, mean crop31.684%→hypothetical21.961%;30/40boxes change,
+size-only15→31/40,not new ROI passes. Main region remains median13.328×reference; count-only guaranteed
+excess median92.69%.3115/756/7604boxes unchanged;6822's smaller box cannot repair existing containment.
+Five012/eight010 validation count-only component recall lower bounds are0;actual overlap unmeasured.
+1,789native tests pass(26new,twoexisting warnings); initial sandbox ps restriction preserved in test log,
+complete native rerun passed.96M dense synthetic profile1.362s/0.563GiB.184selected inputs and audit
+source modules rehashed unchanged. Requestf5d455d9 consumed;executionb58ff84c;review63fb49bb,
+105files/3,046,235bytes. [Audit results](capstone/operations/LOCALIZER-STRUCTURE-AUDIT-RESULTS-2026-10-01.md).
+[Stage2 packet](capstone/operations/STAGE2-QUALIFICATION-AND-CASCADE-PACKET-2026-10-01.md) prepared including
+bounded synthetic purpose records/metadata proposal, then lesion qualification/shared geometry/synthetic
+learning/real zero-update/exact smoke/matched provided-predicted modes. No realStage2 permission/cohort/
+reads/model/job. [Component coverage proposal](capstone/operations/LOCALIZER-COMPONENT-COVERAGE-PROPOSAL-2026-10-01.md)
+needs new scoped reference-read decision;largest-only remains diagnostic. No pending training, promotion,
+consumer/cohort change,Git publication orClaude dispatch.153members/23holds unchanged.
+
+
+### October 1 — Stage 2 synthetic purpose records and metadata proposal
+
+|ID|Decision|Authority|Boundary|
+|---|---|---|---|
+|D-315|Implement Phase A's separate segmenter-purpose qualification/cohort contracts on invented evidence and produce the retained-metadata candidate proposal.|Quinton: “Amazing work, continue.” after D-314's recommended next step.|New versioned dual-target records, synthetic resolver tests and metadata-only candidate/hold accounting; proposed 8 train/4 validation list, not a real cohort. No source arrays/stat jobs, real Stage 2 permissions, cohort publication, model execution, downloads or training. Old localizer rules/consumers and original membership/153 members/23 holds remain unchanged. Component-reference proposal still needs a separate fresh-read scope.|
+
+Owned files: new `segmenter_qualification_v1.py`, `segmenter_cohort_v1.py`, retained inventory CLI,
+new tests and dedicated schemas if needed. Generic manifest/annotation formats already support two
+structures; preserve them and the existing localizer schemas. New purposes are explicitly
+`pancreas_lesion_segmenter_training` and `pancreas_lesion_segmenter_validation` under a distinct policy.
+Records must bind both annotations/all three inputs, exact evidence hashes, issues and original roles;
+empty lesion masks do not infer negative status. Tests must reject stale/changed/omitted evidence,
+wrong roles/purposes, unsupported units/mapping, duplicate/overlapping membership and silent refill.
+Metadata reads are bounded to pinned retained JSON/CSV/split bytes; no legacy file path is resolved.
+Packet: [Stage 2 qualification/cascade](capstone/operations/STAGE2-QUALIFICATION-AND-CASCADE-PACKET-2026-10-01.md).
+
+
+D-315 complete: separate dual-target segmenter qualification/cohort/paired-lesion-inventory contracts,
+47 new synthetic tests; full native 1,836 passes/two existing warnings. Old source snapshot remains
+CT/pancreas-only; no shared schema widening. Four shared data modules/two old schemas match D-294 pins.
+Retained metadata proposal exactly replays in a fresh process:176 candidates/153 localizer-qualified/
+23 held, plus historical31/78/266 contexts retained. New Stage2 qualifications0; original7200/1800/901 unchanged.
+Proposed train3/26/6110/2973/2232/6238/5821/4965; validation2514/5641/2727/7265. Six train/two validation
+positive legacy hints; zero hints are not verified negatives. Current40validation has only two positive
+hints, so a later broader lesion-positive validation proposal is needed for stable performance estimates.
+31,571,267 metadata bytes,1.307s/0.326GiB RSS,zero source stat/array calls or models. CandidateJSON
+2f38464f;metadatareceipte83c27e1;sealedreviewb25f3e20,15files/483,620bytes. All input/code pins verified.
+[Results](capstone/operations/STAGE2-METADATA-RESULTS-2026-10-01.md) and
+[contracts](capstone/data/STAGE2-PURPOSE-CONTRACTS-2026-10-01.md). Proposed next:
+[M1 source stat/availability](capstone/operations/SEGMENTER-SOURCE-VERIFICATION-PROPOSAL-2026-10-01.md), then
+fresh headers/content, purpose dispositions/cohort freeze/shared geometry. No M1 capability/request/run
+or real Stage2 permissions issued here. Component-reference job still needs separate fresh scope.
+No training/promotion,old consumer or eligibility change,source rewriting,Git publication orClaude dispatch.
+
+## October 1 — D-316 segmenter source availability, identity and native header checks
+
+Question: are the proposed8 train/4 validation files present, stable and geometrically pairable before
+new lesion-content checks? **All36 exact paths present;24 companion hashes and two historical lesion
+hashes match.** Twelve lesion headers match qualified mm CT. Five scaled int8 labels require semantic
+binary decoding; six unknown target units have matched byte-bound qualified CT context. Neither headers
+nor legacy zero/positive hints establish current foreground, negative status, completeness or permission.
+
+M1:1.867s/0.100GiB RSS,zero payload reads. M2:7.618s/0.100GiB,276,002,660compressed hash bytes plus
+49,152compressed header bytes; only348decompressed bytes per lesion, no arrays/model updates. All source
+observations and mount checks stable. First sandbox M1 failed at DiskManagement before candidate stats,
+request consumed/preserved; native fresh attempt and separate M2 completed. Successful receipts9a1e5c9c/
+bec0f3b3 consumed. Final1,869native tests/33new fault checks; two existing warnings. Four initial fixture
+failures from historical pytest RSS were corrected in fixtures, with real budgets unchanged. Review
+b90cbf06 (22members/91,259bytes) preserves every attempt and independently checked pins.
+
+[Results](capstone/operations/SEGMENTER-SOURCE-VERIFICATION-RESULTS-2026-10-01.md).
+[Next content/alignment plan](capstone/operations/SEGMENTER-CONTENT-ALIGNMENT-PACKET-2026-10-01.md):
+synthetic largest-case qualification, fresh four-case native-array pilot3/26/2973/5641, review, then
+remaining eight under their own request. Companion expanded sizes/dtypes were recovered from exact-byte-
+matched retained content evidence, avoiding new sizing reads. Proposal total953,056,392expanded bytes;
+separate full hash+decode compressed budgets. No arrays, real Stage2 permission/cohort, training,
+cleanup adoption or component-reference scope in D-316. Current153/23 and protected membership unchanged.
+
+## October1 — D-317 first segmenter native-content/alignment pilot
+
+Train3/26/2973 and validation5641:all12 exact files pass fresh hash+fullgzipCRC/length/header/grid checks.
+Strict semantic binary decoding yields lesion counts1055/7244/124/47190,one26-connected component each.
+Lesion-outside-pancreas-mask counts0/431/3/47190 retained.2973 has124voxels on one7.5mm source slice;
+carry it into target-fidelity checks.5641's masks are disjoint but selected outlines look adjacent/
+complementary. Exact-byte-bound retained pancreas box contains its whole lesion extent; same for all4.
+No gross transform mismatch observed in all4 native sheets. Source annotation relationship is still
+open; no expert target certification or permission inferred. Do not clip/union masks or exclude5641.
+
+New source-content helper/supervised pilot;41new synthetic checks/full native1,910passes,twoexisting
+warnings,65.16s. Initial test-factory sform/pixdim inconsistency corrected before profiling; allattempts
+retained. Largest46,219,264voxel rehearsal passes dense/empty/392fragmented/boundary cases in15.406s,
+0.830GiB RSS. Real pilot6.777s/0.963GiB;185,422,674compressed hash+decode/317,547,616expanded bytes.
+Requestb27b26ab consumed;source2f972c5c,profile14eaa7e0,independent sealedreviewb4cc90d5.38sourcemembers/
+2,851,981B;19reviewmembers/91,382B. No arrays reopened for box checks/final review. Native-display
+orientation/tiny-detail oracles pass; no source rewrite or model execution. Old implementation unchanged.
+
+[Results](capstone/operations/SEGMENTER-CONTENT-PILOT-RESULTS-2026-10-01.md).
+[Next eight-case continuation](capstone/operations/SEGMENTER-CONTENT-CONTINUATION-PACKET-2026-10-01.md)
+needs a separate tested24-file consumer and fresh exactrequest; proposed366,582,646compressed/
+635,508,776expanded bytes. No continuation arrays/freeze ortraining here. After all12 reconciled,
+purpose dispositions/paired inventory/annotation transitions and cohort remain separate,then shared
+pancreas-only ROI geometry,fresh three-class learning/recovery/MPS/exact smoke.153members/23holds unchanged.
+
+### October 1 — D-318 segmenter content continuation (no training)
+
+Separate native 24-file consumer completed the eight remaining cases; all eight source sheets
+reviewed. 1,931 native tests / 21 new checks pass. Largest synthetic reader/analyzer/new renderer
+14.450 s / 0.830 GiB; exact source job 12.343 s / 0.912 GiB, 366,582,646 compressed hash/decode and
+635,508,776 expanded bytes. Source request f378e8d3 consumed; source receipt eeb5d3b0,
+profile56ceb670, reviewfb483be6 (24members/143,111B); no source arrays reopened for review.
+
+Full12 ledger: six train/two validation nonempty references and four empty unknowns. No verified
+negative or permission granted. Case6238 lesion reaches source boundary; all eight nonempty lesion
+extents fit retained pancreas-only boxes.5641's disjoint annotation relationship remains open;
+2973 single7.5mm-slice challenge retained. No clipping/union/refill or lesion-dependent ROI repair.
+Empty sheets now contain three truthful context views; original pilot/version remains unchanged.
+
+[Results](capstone/operations/SEGMENTER-CONTENT-CONTINUATION-RESULTS-2026-10-01.md).
+[Next purpose dispositions](capstone/operations/SEGMENTER-PURPOSE-DISPOSITION-PACKET-2026-10-01.md)
+require paired inventory, explicit reviewed use/target receipts and preserved annotation/issue
+transitions before any real cohort. Shared ROI/three-class geometry, synthetic learning/checkpoint
+recovery and fresh zero-update MPS/resource qualification still precede an exact training launch.
+153 localizer members/23holds,176 candidates and original membership unchanged.
+
+### October 1 — D-319 dual-target purpose ledger (no training)
+
+Twelve exact lesion sidecars and independently replayed purpose qualifications: six train positives
+(3/26/2973/2232/6238/5821), one validation positive(2514), five holds.5641's annotation relationship
+remains unresolved;6110/4965/2727/7265 empty masks remain unknown. No refill or verified negatives.
+All old184annotations/247issues, pancreas identities, protection/source/subject records preserved;
+new manifest196annotations/260issues.3/26 quarantined lesions remain alongside reviewed successors.
+Difficult nonempty targets/source boundary contacts/outside-pancreas voxels retained.
+
+25new checks/1,956native passes in67.43s. Local package7334b71e, input9f45cdf7, manifest31c7239d,
+transition62447d63; fresh full rederivation57.591s/0.958GiB,exit0. Supplementary time-wrapper sysctl
+failed after successful publication; complete receipt verified without repeating publication.
+Independent oracle checks all twelve outcomes/current source counts/sidecars and preserved history.
+Review81ee950a,19members/245,703B,all attempts/snapshots retained. No raw source reads, cohort or
+model operations. One validation positive is an engineering reference, not a generalization estimate.
+
+[Results](capstone/operations/SEGMENTER-PURPOSE-DISPOSITION-RESULTS-2026-10-01.md).
+[Next6/1 cohort freeze](capstone/operations/SEGMENTER-COHORT-FREEZE-PACKET-2026-10-01.md) must require
+independent transition/package pins and registered artifact publication/recovery. Then shared ROI/
+three-class target geometry/fidelity, synthetic learning/checkpoints, zero-update MPS/resource and
+fresh exact smoke launch.153localizer members/23holds,176candidates and original roles unchanged.
+
+### October1 — D-320 registered segmenter cohort freeze (no training)
+
+Exact6train(3/26/2973/2232/6238/5821)/1validation(2514) frozen with original7200/1800protection
+parents;test901 and full9901unchanged. All12/fiveholds,184oldannotations/247issues retained.
+Full D-319 purpose/transition rederivation required; no bare-manifest promotion/refill/negative inference.
+New exact capability0b89b9a9, unchanged roots/provider/source settings. Seven covered members/
+28,722,760B,completion73e7e034,plan49b11f37,code03f0d1e4,descriptorscd52c555. Publication
+263.044s/1.004GiB; fresh registered replay155.396s/0.962GiB; independent direct byte/descriptor/CT
+oracle passes.31new checks/1,987native passes, two existing warnings,70.56s. Reviewf6897492,
+27members/207,038B,all attempts retained. No independent keeper/source arrays/real updates/launch.
+
+[Results](capstone/operations/SEGMENTER-COHORT-FREEZE-RESULTS-2026-10-01.md).
+[Next shared geometry/loader](capstone/operations/SEGMENTER-GEOMETRY-LOADER-PACKET-2026-10-01.md)
+requires independent synthetic physical oracles and a fresh bounded21-file zero-update fidelity
+request;2973single-slice and6238boundary retained. Then fresh three-class learning/recovery,MPS
+resource and exact smoke launch. One positive validation/no negatives supports engineering only;
+153localizer members/23holds and176candidates unchanged. No pending training request.
+
+### October1 — D-321 segmenter geometry and source restoration (no model)
+
+D-321 complete: shared portable physical mapper and registered role-safe triple loader;75new/
+2,062native tests, two existing warnings,72.04s. Real exact6/1all7screens pass; all14native/nearest
+sheets reviewed. Provided-pancreas10mm/1mm intermediate/144³/zero-jitter recipe accepted only for
+engineering subset; nearest lesion recall0.9678–0.9920,union0.9711–0.9962,continuous-reference
+argmax0.9516–0.9839. Tiny2973retains123/124nearest,118/124continuous;6238boundary and every
+outside-mask reference retained. No model performance/negative/autonomous claim or case filtering.
+Fresh scope01619662/profile5cdef929;11synthetic fixtures13.973s/4.567GiB, losses truthfully retained.
+Exact request07d3bb4f consumed once:21files,145,701,969hash/145,701,969decode/544,986,944expanded
+bytes;183.580s/4.173GiB,receipt5c958ac1(33members). Original wrong/canonical transport pins rejected
+before consumption; producer/reader corrected to persisted-byte hashes, regression and fresh
+scope/profile/request retained.53producer members independently verified with no new source reads.
+Acceptanceb3ff4db9/recipe2382855d; reviewd0d94625(35members/451,678B),all attempts and snapshots.
+Old code/schemas/roots and6/1/all12/fiveholds/history unchanged;153localizer/23holds unchanged.
+No retained tensor cache/independent keeper claim, training/model updates or pending launch.
+[Results](capstone/operations/SEGMENTER-GEOMETRY-RESULTS-2026-10-01.md),
+[next learning/recovery packet](capstone/operations/SEGMENTER-LEARNING-RECOVERY-PACKET-2026-10-01.md): fresh
+three-class synthetic learning/CPU+MPS transaction and independent recovery, then new exact real
+zero-update cache/model/export qualification and measured short launch. Original requests are not
+reusable; formal baseline jitter and autonomous cascade remain separate.
+
+
+### October 1 — D-322 synthetic segmenter learning/recovery
+
+Five controlled fresh scratch comparisons on invented24³full-ROI train fixtures;seed42,constant
+LR0.003,SegResNet1→3,complete-ROI sampler. Unweighted CE/120updates and16×lesionCE/120both
+collapse positives.256×/120produces excess foreground and misses multiple lesions. Same256×/
+360hits every component but disconnected Dice0.64fails unchanged0.65bar;fresh480passes all positive
+lesion Dice/recall1,all five components,negativeFP0,pancreasDice0.9954–1.0,lossratio0.010739.
+All original criteria/configurations/source snapshots/failures retained;no threshold or case changes.
+Fixture images directly encode class cues:mechanics evidence only,not real CT performance.
+
+CPU interrupted/uninterrupted trajectories exact;successful worker55.086s/0.880GiB. Native144³
+MPS three committed synthetic updates,dirty fourth transaction refused,25.458s/2.950GiB RSS/
+4.879GiB driver. Cold MPS recovery9.812s/2.772GiB/4.949GiB driver;prediction delta0,nextweights
+1.49e-8,nextloss0,exact invented40.5M-voxel inverse. All six current CPU0/30/480,MPS0/2/3
+keepers restored with primary access blocked;216physical files/30diagnostic members checked.
+Failed trial weights remain local scratch.85new/2,147native tests,two existing warnings,75.61s.
+Reviewb85ceed5,63members/494,485B;acceptance8a061fdb.2,407synthetic optimizer calls excluding
+tests;zero real arrays/updates.6/1/all12/fiveholds,original protection and153localizer/23holds fixed.
+
+[Results](capstone/operations/SEGMENTER-LEARNING-RECOVERY-RESULTS-2026-10-01.md).
+[Next packet](capstone/operations/SEGMENTER-ZERO-UPDATE-QUALIFICATION-PACKET-2026-10-01.md):
+role-safe persisted cache/new21-file scope,all7zero-update MPS/native exports,separate14-target
+original scoring and real-input recovery before exact short training. v3loss is synthetic engineering
+candidate;historical checkpoint inventory/real optimizer consumer still open. No synthetic weights
+as real initialization,no source activation/new eligibility/pending training or automatic extension.
+
+
+### October 2 — D-323 segmenter cache (no model updates)
+
+Exact6train/1validation cache published/cold replayed;all7transforms/fidelity/counts match D-321;
+all7cached target/image views inspected,tiny2973and boundary6238retained.16members/104,576,736B,
+rawpayload104,509,440B;completion90b8cc94,bindingcdd7c707.68new/2,215native tests,73.73s.
+Optimizer closed;image-only consumer returns no target. Original12/fiveholds and153localizer/23holds
+unchanged,no source activation or eligibility promotion.
+
+First consumed request88568c20stopped at initial stat guard before source open/hash/decode.21-path
+metadata receiptb0574622records only volatiledevice16777243→16777239,same APFS UUID and sizes/
+inodes/times/modes. Old evidence retained;newwrapper permits only this pinned metadata refresh,
+all original hashes unchanged. Fresh requestd84cdcdc consumed once,21hashes match;145,701,969B hash/
+same decode,544,986,944B expanded;193.053s/3.413GiB. Cold replay156.701s/0.986GiB,zero rawreads.
+Largest syntheticprofile1.209s/1.875GiB;boundarycomponent recall0.25,total0.625loss preserved,
+not real qualification. All failed attempts and snapshots retained.
+
+28diagnostic/18physical files independently audited,cacheacceptance8b21315b;reviewf7440f39,
+42members/797,102B. Cache/review are derivedlocal,no independent keeper claim. No real model/
+optimizer update or training request. [Results](capstone/operations/SEGMENTER-CACHE-QUALIFICATION-RESULTS-2026-10-02.md).
+[Next](capstone/operations/SEGMENTER-REAL-INFERENCE-PACKET-2026-10-02.md): fresh scratchstep0,
+all7zero-update MPS/native exports/task keeper recovery,then separately scoped original-reference
+scoring. Historical checkpoint inventory/import denial and realoptimizer transaction precede a
+short exact launch;one validation positive/no verifiednegatives is engineering only.
+
+### October 2 — D-324 prospective step0 segmenter inference qualification
+
+User continues after D-323. New inference-only scratch task; no imported or learned synthetic weights,
+optimizer or original source reads. Exact6/1cache images only after synthetic native qualification.
+Prospective plan: operations/SEGMENTER-INFERENCE-QUALIFICATION-PLAN-2026-10-02.md. All native masks,
+checkpoint/controls and image/probability probe protected on separate physical medium; recovery blocks
+primary reads and requires probability delta≤1e-6 and exact native mask. Serial AC/MPS,1200s,
+12GiB RSS/driver,1GiB evidence/additional bytes per domain,100GiB free. Freeze absolute quota ceilings
+before first publication. Synthetic largest40,547,328grid plus empty/dense/sparse/fragmented outputs;
+no foreground/component failure filtering. Original14-target scoring remains a fresh later scope.
+58new rejection/oracle tests pass; full native2,273pass,two preexisting warnings,77.67s. No real
+forward/update yet. Hold metadata/cohorts and D-319–323 producers remain unchanged.
+
+D-324 synthetic request98c47c55 consumed once:10.937s,3.169GiB RSS,1.400GiB sampled driver,
+6protected members/107,172,246B. Empty/dense/sparse/fragmented native cases retained (no foreground
+cap). Independent fresh-process recovery4.156s/2.980GiB,all6members,primary blocked,probe0/nativeexact.
+Profile packagefe013fff verified including successful semantic recovery before real requestfreeze.
+Real requestcfac9e1afd8e4324713557f5e816a62e8d09c477fed756dc4760d42a22850f50 is exact7cache
+images,6train/1validation,zero updates,1200s/12GiB RSS/driver,1GiB outputs. Same frozen absolute
+quota ceilings as synthetic attempt; required all7native masks+controls+state+probe keeper. Authorized
+by D-324 continuation scope; no original CT/target arrays or training approval inferred.
+
+D-324 complete: realrequestcfac9e1a consumed once,all7image-only MPS forwards and nativeexports;
+177.563s/5.312GiB RSS/1.400GiB sampled driver. Scratchweights3ee49a53unchanged,zero updates/
+originalarrays/imports. All12members/202,895,580B protected,rawnative136,244,888B;7sheets reviewed.
+Initial probeexact but absolute-path guard insufficient for dir_fd walks. Supplementalguard first
+fails on valid anonymous subprocess pipe (b82ef16e preserved);new regression detects/fixes it.
+Attempt02 synthetic guardedrestore passes,realduplicatecopy refused by two-payload retry reserve;
+e1a6ff1a partialretained. No quotareset/increase/deletion. Attempt03 cold reads existing independent
+restore+backup under strengthenedguard,all12exact,probe0/nativeexact,3.463s/1.877GiB;no registered
+storagewrites. Final2,287native/72new tests,2existing warnings,73.53s. 89physical/47jobfiles and18cache
+files independently checked;acceptance7cb2ba5d,review11a11afe(28members/1,407,176B). Source/cohorts/
+holds/roots unchanged. No nativeDice,traininglaunch or automaticextension. Next fresh14-target
+originalscoring packetecae4dea,then historicalimport inventory/realoptimizer transaction.
+See operations/SEGMENTER-INFERENCE-QUALIFICATION-RESULTS-2026-10-02.md. Futurekeeper budgets
+must include repeatedcopy/retry reserve,not just raw payload. All failed/partial attempts preserved.
+
+### October 2 — D-325 prospective original-native segmenter scoring
+
+Quinton explicitly requests scoring now. Separate target-only reader/metric/source receipt contract,
+no CT/model forward/update/import. Exact6train/1validation accepted D-324 masks;all12/fiveholds,
+protectedroles/153localizer/23holds unchanged. Truth original lesion-over-pancreas; all components
+and empty/dense/wrong/fragmented predictions remain scores. Plan:
+operations/SEGMENTER-NATIVE-SCORING-PLAN-2026-10-02.md. 65new analytic/decoder/role/grid/forgery
+checks pass. Initial fixture expected one26component for points two voxels apart; that test expectation
+was corrected to two and an actual corner-neighbour test added. Scoring code/formulas unchanged.
+Fresh14path stat-only metadata4a0320f7:all observations identical,zero sourcearrays/hash/decode,
+4.705s. Original hashes remain fixed. Next maximum40547328grid CPU gzip-decode/metric profile,
+then exact1,265,220Bhash/decode and272,494,704Bexpanded source request after qualification.
+Prospective1200s/8GiB RSS/32MiBevidence/100GiBfree;new64MiBdomain scoring capability,absolute
+ceilings frozen before publication including required keeper/restores and retry reserve. No launch
+of source scoring yet;D-319–324 producer/registry pins verified unchanged.
+
+D-325 native suite2,352passes,65new,twoexisting warnings,79.67s. Syntheticmaximum40547328grid
+profilea90ca032:9.793s/0.7345GiB RSS,all392reference components retained across four failurepatterns.
+Exact fresh source request9525baef9004ed568f365a5701cba931bfdb14c3aa433e8d8a45322457e15111
+prepared after stat/profile qualification. Exactly14targets,1,265,220Bhash/same decode,
+272,494,704Bexpanded;zeroCT/model. Newstoragecap4528cf8b,ceilingsprimary67,108,864B/
+independent whole-root10,312,653,981B;64MiB additional includes retry reserve and metrickeepers.
+User's explicit scoring instruction/D-325 authorizes this exact job once; no training inferred.
+
+D-325 request9525baef was consumed but stopped before original payload open/hash/decode.
+The transport encoder omitted the canonical newline: saved hash9525baef versus canonicaldc2d55b7.
+All first-reservation counters remain zero; no native scoring publication. Failure package
+d0ed2d57 and all seven producing source/test/capability snapshots are preserved separately.
+Attempt02 saves canonical transport bytes without changing old producers; seven new regression
+checks prove saved/protected/request-guard identity and pre-open refusal. Absolute original
+64MiB additional-domain ceilings are retained rather than reset on preparation. Fresh stat-only
+metadatae47864af and maximum-grid profile8c865fdc (10.497s,0.734GiB supervisor peak) pass;
+no real reads, CT/model forwards or updates in either qualification job.
+
+D-325 repaired native suite:2,359passes,72new,two existing warnings,90.63s. Fresh attempt02
+requeste24cef49a5d0eb57932217fd045a868bbce7c924f8c65b66244418040cf240b4
+uses identical canonical transport/guard/protected bytes; exact same14targets/read budgets,
+1200s/8GiB/32MiB/100GiB free and frozen original storage ceilings. User scoring scope authorizes
+this replacement request after the consumed zero-read failure; no request reuse or model work.
+
+D-325 complete: original-native step0 baseline accepted; all seven cases and fourteen original
+pancreas/lesion references, no CT/model forward/update/import. 72 new / 2,359 native tests pass,
+two existing warnings,90.63s. Training macro lesion Dice0.001779/recall0.012986; one validation
+Dice0.000061/recall0.000532. Three train lesions have zero overlap; validation one TP voxel.
+Tiny2973, boundary6238 and all original components/outside-pancreas voxels remain in denominators.
+First9525baef request failed its transport/canonical hash guard before original payload reads;
+consumed failured0ed2d57/source5274f03b retained. Canonical-byte repair tested before fresh
+requeste24cef49 completed once:183.935s/1.951GiB RSS; fourteen hashes and exact1,265,220B each
+hash/decode,272,494,704B expanded. Five protected members/101,447B cold independently restored
+with primary denied,1.140s/75.45MiB; original64MiB domain ceilings retained. 27physical/27jobfiles
+independently audited. NumPy/Python macro floating difference≤1.39e-17 recorded and review corrected,
+integer counts/per-case formulas exact; scores unchanged. Acceptancef4bfcaf0/review945d1e50,
+14members/98,480B. D-319–324 code/registry/6/1/all12/fiveholds/153localizer/23holds unchanged.
+Both source requests consumed,no training request/promotion. Results and next transaction packet:
+[Native scoring results](capstone/operations/SEGMENTER-NATIVE-SCORING-RESULTS-2026-10-02.md);
+[next training transaction proposal](capstone/operations/SEGMENTER-REAL-TRAINING-TRANSACTION-PACKET-2026-10-02.md).
+One validation positive/no negatives and random weights support an engineering before baseline only.
+
+### October 2 — D-326 prospective training transaction qualification
+
+Continue from accepted D-325 native scratch baseline. New optimizer consumer/session and checkpoint protocol, bounded historical byte-hash inventory and invented CPU/MPS transaction/recovery checks. No real updates or original arrays. See capstone/operations/SEGMENTER-TRAINING-TRANSACTION-PLAN-2026-10-02.md. All predecessors/cohorts/holds/registry fixed; exact real rate/duration/launch remain later measured choices.
+
+### October 2 — D-326 transaction qualification complete
+
+D-326 complete:96 new/2,455 native tests, two existing warnings,84.52s. Historical203 files/
+8,240,982,194B pure-byte inventory;17,021 tensor-cache payloads excluded,no weight imports.
+Separate qualified6/1 input boundary/session/sampler/checkpoints pass. CPU6 committed/exposure1
+all6:18.019s/1.586GiB; cold0/2/3/6 exact probabilities/nextweights:8.484s/1.194GiB.
+MPS3 committed/dirty4th refused:47.014s/5.271GiB/4.887GiB driver; cold0/2/3 probability0,
+nextweights1.68e-8/nativeexact:22.324s/4.463GiB. Producer MPS4 invented calls plus separate
+recovery1; CPUproducer13 plus recovery1. Seven checkpoints/two probes independently restored.
+Real7-cache bridge169.576s/1.248GiB, zero forwards/updates/original arrays; roles/targetcounts exact.
+Supplemental invented144³ step0 old/new probabilities/native masks exact,3.407s/2.954GiB;
+initialweights3ee49a53 supports D-325 before baseline under unchanged policy/cache/geometry.
+FirstCPUrequest retired unconsumed/source preserved before completion-bound resume strengthening.
+Restricted review DiskManagement unavailable; source/reason retained, native audit then passed:
+339physical/60jobfiles,96producing pins/registry exact; primary518,961,193B/independent
+11,283,770,932B within new qualification-only frozen ceilings,no older quota reset/deletion.
+Acceptancef7a2f6d9,review2a1c24de(18members/251,150B). D-319–325/6/1/all12/fiveholds/153/23
+unchanged. Real updates remain denied; all qualification requests consumed,nonepending.
+[Results](capstone/operations/SEGMENTER-TRAINING-TRANSACTION-RESULTS-2026-10-02.md);
+[next completion packet](capstone/operations/SEGMENTER-SHORT-RUN-COMPLETION-PACKET-2026-10-02.md):
+real executor/approval dispatcher,cadence/interruption,trained export/fresh14-target final scoring,
+keeper/resource rehearsal before freezing a separate48-update candidate request. Rate0.0003/
+48updates remain prospective; no exact real launch,extension,eligibility,cascade/jitter/promotion.
+
+### October 3 — D-327 prospective short segmenter launch preparation
+
+Prepare new executor/native-trained evidence/recovery contracts from D-326; synthetically rehearse exact48updates/0,6,24,48 boundaries before freezing a real request. No real updates or original payloads. Plan: capstone/operations/SEGMENTER-SHORT-LAUNCH-PLAN-2026-10-03.md.
+
+D-327 complete:119 new/2,574 native tests, two existing warnings,92.03s. Full invented144³48-update
+producer257.567s/5.495GiB RSS/4.879GiB sampled driver; exposure8 all6,0/6/24/48checkpoints and
+all7native exports/scores/views. Cold14-artifact restore50.571s/4.360GiB with primary Python reads
+blocked; four probes and7 native predictions exact,nextweights1.49e-8.48invented producer calls
+plus1invented cold6→7call; zero real optimizer calls/original payloads throughout. Real cold adds0calls.
+387protected physical/29jobfiles audited;111source pins/registry exact. Two read-only review-helper
+faults preserved/corrected; no producing code/request changes.14target stats unchanged; real cache
+ancestry replayed,no forwards/updates.6/1/all12/fiveholds/localizer153/23 unchanged, no quotareset.
+Review09d78ecc (41members/662,196B),acceptance158a5d17,readinesse423cc91. Exact CAP-EXP-013
+request `outputs/prowl/CAP-EXP-013-PREPARED-20261003/request.json`, SHA
+`eec73450333f345f22d327be8aec93ad71d2b8afbffb91335fd1bf228b1b45e9`, remains UNCONSUMED/NOT LAUNCHED.
+Freshseed42/144³/zerojitter/v3CE256+Dice/AdamW0.0003/48updates; terminal primary;30min total,
+20min producer/5min cold/12GiB RSS+driver; final14target hash/decode1,265,220B each/272,494,704B
+expanded,zeroCT.14required protected artifacts including selected7image bundle. New real areas
+empty;2GiB primary and14,892,449,687B independent whole-root frozen ceilings, separate exact user
+approval still required. Learning screens frozen before launch: all6original-native cases/components,
+D-325 before baseline,2514separate; no extension/selection/eligibility/formal model promotion inferred.
+[Results](capstone/operations/SEGMENTER-SHORT-EXECUTOR-RESULTS-2026-10-03.md); [exact launch review](capstone/operations/CAP-EXP-013-LAUNCH-REVIEW-2026-10-03.md). Next is the separate exact launch decision.
+
+### October 3 — CAP-EXP-013 exact launch approved (D-328)
+
+Quinton approved the prepared48-update,6train/1evaluation-only,144³ three-class segmenter diagnostic: “Yes, full approve. Continue on.” Exact requesteec73450; freshseed42,provided-pancreas ROI,zerojitter,v3CE256+Dice,AdamW0.0003,terminal primary. Final fresh14target scope and independent recovery approved within original30min/12GiB budget. Frozen learning screens unchanged. Preflight then one launch; no extension, imports or promotion.
+
+D-328 complete: exact CAP-EXP-01348realupdates on6train/1evaluation-only,exposure8each,
+0/6/24/48checkpoints/evaluations. Native lesion train/validation Dice0.030886/0.025448 and
+recall0.994807/0.974468 pass frozen initial signal, BUT all7native pancreas-class counts/overlap0,
+lesion volumes35–835×reference; no promotion. Saved tensor pancreas overlap0 bystep6; case3
+pancreas probabilities finite but no argmax winners at24/48. Denominator shares suggest possible
+loss imbalance,not measured gradients/proved cause. All cases/components/original references retained.
+Producer367.416s/4.755GiB RSS/4.879GiB sampled driver; cold32.464s/4.119GiB with primary Python
+reads blocked,four probes/7native exact,14artifacts independently restored;0coldoptimizer/originalreads.
+403.118s(6.72min) total supervised.14original targets exactly1,265,220B hash/same decode/
+272,494,704B expanded;zeroCT.387physical/29jobfiles,111source pins/registry exact; producingcode
+unchanged,2,574-test qualification baseline unchanged.7technical views checked;no runtime/review faults.
+Requiredpayload583,004,143B,primary583,047,635B/independent13,911,176,703B within unchangedfrozen
+ceilings,no quotareset/deletion. Approval9f48d34c,producer23cf88bd,recovery744cf4cc;review633c7e09
+(43members/658,643B),acceptance846c4aca.6/1/all12/fiveholds/localizer153/23 fixed. Requesteec73450
+and both real jobs consumed;no pending run/continuation/autoextension/imports/source activation/formal registration.
+[Results](capstone/operations/CAP-EXP-013-RESULTS-2026-10-03.md); [next proposal](capstone/operations/CAP-EXP-013-CLASS-COLLAPSE-FOLLOWUP-2026-10-03.md): bounded training-only zero-update objective/gradient audit, then select/qualify one loss-balance factor for a fresh same-cohort48-update comparison. No new analysis or training request is frozen/authorized.
+
+## D-329 — CAP-EXP-013 training-only loss/gradient audit (October 3)
+
+Quinton continued the proposed class-collapse investigation. New isolated loss decomposition/CLI/
+26tests;2,600native tests pass. Exact attempt02 request97e75261 consumed:6training cases×saved
+0/6/24/48,24forwards/48CE-Dice head VJPs,zerooptimizer calls/original payload opens/validation model
+evaluations. Fresh qualified cache ancestry; same-run checkpoints only; all transaction state unchanged.
+
+CE's pancreas bias gradient is positive in all24 (plain descent lowers the channel bias), while Dice's
+opposing negative term is much smaller. CE/Dice whole output-head gradient norm ratios11.53–84.09.
+Mean CE bias0.378104/0.262958/0.241593/0.190048 at0/6/24/48; Dice−0.000939/−0.001234/−0.001758/
+−0.002756. Tensor predicted pancreas13,275,068→381→1→0,TP220,723→0→0→0. This supports measured
+class competition; does not prove causality or prescribe the complete AdamW/backbone update.
+
+Predeclared arithmetic weights[1,16,256]/[1,32,256]/[1,64,256], current fixed logits: early0/6 bias
+upward0/12,6/12,12/12. Provisional64pancreas weight only; unchanged256lesion relative share drops,
+so original tiny-lesion and negative learning bars remain necessary. Reconstruction6.11e-8;
+no extra forwards/reads/validation. No real recipe changed or new training request prepared.
+
+Native worker200.359s(202.195supervised),1.666GiB RSS/1.571GiB sampled driver. Four CPpayloads
+188,625,652B,cache closure104,576,736B; six unique pairs89,579,520B, repeated4×358,318,080B.
+Independent56files/810,813B numeric copy/readback verified,whole-root13,911,987,516B, oldceiling
+retained;111producer pins/registry/cohorts/holds fixed. Prelaunch hash-print error refused before
+consumption and fixed with new qualified attempt02; read-only interpretation NumPy-int error fixed
+on a new output. Preserve all prior/failure records; no consumed run retried. CAP-EXP-013 primary48
+remains unchanged. [Results](capstone/operations/SEGMENTER-LOSS-AUDIT-RESULTS-2026-10-03.md);
+[next qualification](capstone/operations/SEGMENTER-LOSS-REBALANCE-QUALIFICATION-PACKET-2026-10-03.md).
+
+## D-330 — provisional v4 synthetic learning failure (October 3)
+
+Quinton dispatched D-329's qualification packet. Separate `[1,64,256]` objective/synthetic task/codec/
+closed CPUrequest path;38new/2,638native tests pass. Frozen CPUrequest7ee8240c consumed once:
+freshseed42/24³/AdamW0.003/480updates onfive existing invented class cues; baseline480 and actual
+SIGTERM30/fresh450restart,960qualificationcalls,all synthetic. Exactfullmodel/optimizer/RNG/progress/
+prediction equivalence. Total55.846s,maxworker0.728GiB; no real/sourcearray/imports.
+
+Original learning bars fail: sparse/multiple/boundary lesions empty; outside-pancreas Dice0.470588/
+recall0.333333;four offive lesioncomponentsmissed. Pancreas Dice0.955–0.968,negativeFP0,lossratio
+0.258607 pass their bars. This is a learning failure with passing transaction mechanics. Do not advance
+v4toMPS or realtraining. Preserve allcases/counts/criteria; no automaticdurationextension/filtering.
+
+Numeric/fullstate review independent. Samefixedweights allocate sparseinventedpancreas93.03%/
+lesion1.09% ofCEdenominator,versusv3's17.25%/12.91%; dependenceontargetcounts motivates proposing
+per-case present-class meanCE next. Sharesare notgradients/causality and inventedsuccess/failure does
+notprove realCTbehavior. v3's retained480syntheticpass wasnotrerun/imported. Nextproposal hasexact
+formula/absence/negative semantics/original bars butno newrequestor acceptedloss.
+
+CPUpackaged298c9d3(59files/188,880,118B),tests5f304229,reviewd94295ab;newindependentfailedsnapshot
+67files/188,947,673B,manifest a69e1f78,all four8-member CPsdecoded withprimaryPythonreadsblocked,
+zeroadditionalmodel/optimizer/originalreads. Whole-root14,100,935,189B, earlierceilingretained;
+118pins/registry/cohorts/holds fixed,no unexpectedfaults/noMPS/newrealrequest/promotion.
+[Results](capstone/operations/SEGMENTER-BALANCED-QUALIFICATION-RESULTS-2026-10-03.md);
+[next proposal](capstone/operations/SEGMENTER-CLASS-NORMALIZED-CE-PROPOSAL-2026-10-03.md).
+
+## D-331 — class-normalized CE synthetic learning failure (October 3)
+
+Separate v5 per-case present-class mean CE + preserved foreground Dice;40new/2,678native tests
+pass(100.76s), all118prior producers unchanged. CPUrequestbfd4b3a2 consumed, twofresh480-update
+invented paths atseed42/24³/AdamW0.003;960synthetic calls, actualSIGTERM30/fresh450restart exact
+fullmodel/optimizer/RNG/progress/predictions. Total58.084s,maxworker0.750GiB,no real/sourcearrays/imports.
+
+Original learning gate fails. PancreasDice0.831–0.848 andlossratio0.353020 pass, but lesionDice
+0.021–0.047 failsallfour positives. Sparse/boundary/outside recall1.0 with373/384/496predictedvs
+8/8/12reference;multiple4/16TP,onecomponentmissed. Negative368false lesionvoxels/13,824=0.026620
+fails0.02. Learningfailure cannot be waived by numerical/restart success. StopbeforeMPS/realrequest.
+
+Independent read-only review reproduces metrics/bars/fullstate equality. Separate10-forward invented
+terminalv4/v5 inspection(1.155s/0.582GiB,zerooptimizer/original/real/validationreads) reproduces saved
+losses/metrics/nonmutation. v5falsepositives onboth backgroundandpancreas;negative151/217. Saved
+last20epochmeans0.757289–1.340302,terminal0.850028,earlierminimum0.516616. No causal LRclaim or
+selectedcheckpoint. Nextpacket proposes freshconstantCPU LR0.001, onechangedfactor/same480/
+originalbars, notimplemented/frozen/launched. No automatic sweep/extension/filtering/softenedgate.
+
+CPUpackage52211138:59files/188,884,855B;inspection2057c97d:4files/43,371B. Newindependentfull
+failedsnapshot73files/189,009,159B,manifest681726f9;allhashes/four8-memberCPdecodes passwithprimary
+Pythonreadsdenied,zeropreservationforwards/updates/originalreads. Whole-root14,289,944,348B,
+fresh/earlierabsoluteceilingsretained,registry122sourcepins/cohorts/allholdsfixed,no unexpectedfaults.
+CAP-EXP-013 remains consumed/terminal48primary; noMPS/realtraining/eligibility/imports/promotion.
+[Results](capstone/operations/SEGMENTER-NORMALIZED-QUALIFICATION-RESULTS-2026-10-03.md);
+[next packet](capstone/operations/SEGMENTER-NORMALIZED-OPTIMIZATION-PACKET-2026-10-03.md).
+
+## D-332 — controlled low-rate v5 learning and native recovery pass (October 3)
+
+One CPU scientific factor LR0.003→0.001, same v5/seed42/24³/five invented class cues/480/decay/
+epoch permutation. All original gates pass: pancreas and positive lesion Dice/recall1.0, all five
+lesion components hit, negativeFP0, lossratio0.006461. Two480 paths/960 invented updates, actual
+SIGTERM30/fresh450restart exact model/optimizer/RNG/history/predictions;62.786s/maxworker0.748GiB.
+Independent numerical/full-state review reproduces results. Last20epochmeans0.014543–0.033322,
+terminal0.014543 versus retained failed LR0.003's0.850028. No real CT learning or optimal LR claim.
+
+First sandbox `/bin/ps` fault consumed requestab730d92 before worker/model/updates; sealed fault
+package98ff446e retained. Distinct native-preflight attempt02 binds that0-update fault and125source
+pins, request7b5e649d/package64b7ae4d; no consumed rerun or old producing edit. Earlier self-import
+wiring correction was pre-freeze; added regressions cover actual ancestry and native preflight.
+
+Fresh144³/v5/MPS0.0003 qualification/recovery request089f975e/package3e13f53a: checkpoints0/2/4,
+four clean/one dirty/one recovered optimizer call, eight forwards,47.285s/maxRSS2.818GiB/driver4.839GiB.
+All three eight-member payloads restore with primary reads denied. Probe/native mask/derived-invented
+target scores exact, nextloss0 and weightdelta1.033e-8. Native step2 lesion prediction remains empty
+against4,140 invented native voxels; no native learning gate or real-reference claim. Preserve failure
+patterns; no promotion.65new/2,743native tests pass,129pins/registry/cohorts/holds fixed.
+
+CPU/fault snapshot87files189,101,113B, native32files227,218,858B, numeric30files175,563B protected
+and verified, manifests03973c58/3fd1ed40/4158dbeb. Whole backup root14,706,439,882B below fresh/
+retained limits, no cleanup/reset. Only186,009,805B remain under retained D-328 ceiling; nextreal
+comparison cannot fit without a reviewed new stage allowance. Real v3/CAP-EXP-013 terminal48 remain
+fixed/consumed; no real inputs/updates/eligibility/source activation/import/promotion/registration.
+Next proposed real-v5 consumer/recovery/read-scope/screens and explicit capacity/request review;
+same6/1/48 and realLR0.0003, separate exact launch approval. No new real implementation/request/run.
+[Results](capstone/operations/SEGMENTER-LOWRATE-QUALIFICATION-RESULTS-2026-10-03.md);
+[next implementation packet](capstone/operations/SEGMENTER-V5-REAL-COMPARISON-PACKET-2026-10-03.md).
+
+### 2026-10-03 — D-333 isolated v5 executor preparation; native rehearsal not launched
+
+2,933 native tests(190 new),118.03s/two existing warnings. Separate v5 real-capable identities,
+exact dispatcher/target scope/backup catalog and fixed-capacity approval gate implemented;129 old
+pins preserved,142 total. CPU unit completion/dirty failure/resume/roles/counts/terminal policy pass.
+Fresh seed42/144³/48/6+1/0.0003 comparison retains every real case; v5 loss is the only proposed
+scientific change. Training-only pancreas/lesion/component screens and FP-volume reporting fixed;
+2514 remains report-only. No real/source/processed-real arrays consumed or model promotion.
+
+Exact invented rehearsal request8e2dcc5d/capabilitya318b3b6 prepared,unconsumed; full48native+14
+independent restores pending exact capacity review. Backup remains14,706,439,882B/oldceiling14,892,449,687B;
+2GiB new allowance/whole ceiling16,853,923,530B proposed only. Bound1,974,853,376B/headroom172,630,272B;
+registered20GiB unchanged. No external writes or cleanup. Final suite corrected a pre-freeze control
+size-guard error; earlier failed logs retained. No CAP-EXP-014 request/real approval yet.
+[Results](capstone/operations/SEGMENTER-V5-EXECUTOR-RESULTS-2026-10-03.md).
+
+### 2026-10-03 — D-334 full invented v5 transaction and recovery pass
+
+48+1 invented calls,6train/1eval,14 artifacts/387 three-copy files,7 native predictions exact; probe0/nextweights7.45e-9. Combined363.490s, producerRSS5.532GiB/driver4.776GiB. All7 sheets reviewed; toy/native mechanics scores are not real performance. Frozen142 pins/2,933 tests unchanged; zero real/source/processed-real reads/updates. Both jobs consumed; no autoextension. Readiness accepted; fresh14-target stat-only scope prepared. Exact real CAP-EXP-014 and actual capacity remain separate approval. [Results](capstone/operations/SEGMENTER-V5-REHEARSAL-RESULTS-2026-10-03.md).
+
+D-334 follow-through: real CAP-EXP-014 requeste63f5613/cap85b9a90c prepared only; accepted processed-cache resolution, no original arrays/forwards/real updates. Base16171162225B/fixed proposed ceiling18318645873B. Await exact separate storage/read/launch approval. [Review](capstone/operations/CAP-EXP-014-LAUNCH-REVIEW-2026-10-03.md).
+
+D-334 bookkeeping correction: actual real capability transport5dfc16d1 differs from canonical85b9a90c. Preparation-review-V2/current launch review identify both; unchanged exact requeste63f5613. Final preservation caught mismatch before writes. No producer change or real launch.
+
+### 2026-10-03 — D-335 / CAP-EXP-014 v5 comparison complete
+
+Freshsame6/1/48/144³/0.0003; numerical factorCEallocation/reduction only. All training screens pass: pancreasDice0.159877 vs v3zero, lesionDice0.055142 vs0.030886, recall0.833063 vs0.994807; all6components hit. Lesion volumes12.78–383.26×, poor precision;2514 lesionrecall0.123936 vs0.974468/Dice0.006397. No generalization/promotion claim.14originaltarget reads/0CT; independent14restores,7native predictions/4probes exact,0cold updates/source reads. Combined525.229s, producerRSS4.790GiB/driver4.776GiB. All7sheets and native arithmetic reviewed;142pins/2,933native-test baseline unchanged. Both requests consumed; no automatic extension. Source/cohort/hold/qualification state fixed. Next discussion: saved training evidence, exact fresh duration/coverage proposal and multiclass expansion readiness. [Results](capstone/operations/CAP-EXP-014-RESULTS-2026-10-03.md).
+
+Saved training-only history audit, no new model/source/cache calls: mean loss2.037188→1.692695; pancreas/lesion tensor Dice at24→48 improves0.106990→0.159272 /0.038591→0.054626. Duration remains a hypothesis requiring a fresh bounded recipe/request; no extra run launched.

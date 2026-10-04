@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "approval": "D-273",
+  "operation": "localizer_bridge_checkpoint_backup_verification",
+  "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+  "primary_volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59",
+  "backup_volume_uuid": "542E8B1F-8D50-4783-9250-752DFDC899CD",
+  "primary_area": "localizer-runs",
+  "backup_area": "localizer-keepers",
+  "restore_area": "localizer-restores",
+  "max_new_bytes_per_domain": 1073741824,
+  "real_optimizer_updates_allowed": false,
+  "read_capability_sha256": "0e0a05279dead8c365a3359f35da260aacdcca20c98400ddb820242a1ed80473"
+}

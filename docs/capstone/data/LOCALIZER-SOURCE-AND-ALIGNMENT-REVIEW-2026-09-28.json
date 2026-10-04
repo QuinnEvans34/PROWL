@@ -1,0 +1,61 @@
+{
+  "status": "reviewed_evidence_not_qualification",
+  "review_sha256": "f093ed893d9bc2a6f93dc03fa1a2593abe291ef7e6f6a7b5046e62a71aa927c8",
+  "evidence_receipt": {
+    "path": "outputs/prowl/localizer-alignment-8ae22f7e-f845-4865-aa8f-8219662f46c4/verification.json",
+    "sha256": "bc66dafbfc7e72ec4a259bc42416c6bcb16bfc83008153687e7cc3f07efca04f"
+  },
+  "cases": [
+    {
+      "study_id": "pants:study:PanTS_00000003",
+      "source_files": {
+        "ct": "61090a2110a939c82be1edd9cd93a90745434a075ee2789c4949beb57907c3f7",
+        "pancreas": "f030cff84c6c8efdfa6eab7ab1f9bb18dcb9294a7eccabdbc60854b1c759f5b7"
+      },
+      "alignment": "supports_engineering_smoke_not_expert_contour_acceptance",
+      "source_assurance": "staged_partial_integrity",
+      "proposed_allowed_uses": [
+        "training_target"
+      ],
+      "use_scope": "private_noncommercial_pancreas_present_smoke",
+      "method": "human_validated",
+      "validation_status": "source_asserted",
+      "provenance_scope": "publisher_protocol",
+      "positive_qualification_published": false
+    },
+    {
+      "study_id": "pants:study:PanTS_00000026",
+      "source_files": {
+        "ct": "255b506353005c1d54851b0e988c15a623533858149286f2b825166ae3dcbb20",
+        "pancreas": "5d543b71c14458098b43ad2d4779e9e7024efac3902ea365452be24e71045021"
+      },
+      "alignment": "supports_engineering_smoke_not_expert_contour_acceptance",
+      "source_assurance": "staged_partial_integrity",
+      "proposed_allowed_uses": [
+        "training_target"
+      ],
+      "use_scope": "private_noncommercial_pancreas_present_smoke",
+      "method": "human_validated",
+      "validation_status": "source_asserted",
+      "provenance_scope": "publisher_protocol",
+      "positive_qualification_published": false
+    },
+    {
+      "study_id": "pants:study:PanTS_00000031",
+      "source_files": {
+        "ct": "14029ae7da5922760760f313cadbc84790d53a78be98a47d6a30c36f712dbdd8",
+        "pancreas": "f3f77cd5433a0d6bbc2efeeff8378b3a991e48bcd0fee2f5498690ba087f008e"
+      },
+      "alignment": "supports_engineering_smoke_not_expert_contour_acceptance",
+      "source_assurance": "staged_partial_integrity",
+      "proposed_allowed_uses": [
+        "training_target"
+      ],
+      "use_scope": "private_noncommercial_pancreas_present_smoke",
+      "method": "human_validated",
+      "validation_status": "source_asserted",
+      "provenance_scope": "publisher_protocol",
+      "positive_qualification_published": false
+    }
+  ]
+}

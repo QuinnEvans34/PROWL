@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/source-revision/1.0.0",
+  "title": "Plan 07 source revision (content identity)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "revision_id",
+    "work_id",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^rev:[0-9a-f]{64}$"
+    },
+    "work_id": {
+      "type": "string",
+      "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

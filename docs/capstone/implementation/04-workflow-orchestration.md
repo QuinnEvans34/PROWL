@@ -7,6 +7,11 @@
 **Source requirements:** Approved proposal workflow-DAG commitment; artifact and run-manifest contracts  
 **Last reviewed:** 2026-09-20 (walkthrough accepted; local-tool selection approach reaffirmed)
 
+September 28 follow-up: **D-269 authorizes only the shared cohort-publication controls and S4
+registry/resolver** after Quinton's continuation of that explicitly named next step. This satisfies
+the coding gate for that bounded slice. The older general “not authorized” statements below remain
+historical for this slice; other orchestration implementation and the Prefect trial remain gated.
+
 ## Required explanation gate
 
 > **Explain to Quinn the function of this plan before writing any code.**

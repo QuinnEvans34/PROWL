@@ -1,0 +1,286 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/source-snapshot-v2/2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_snapshot_id",
+    "source_key",
+    "source_version",
+    "license",
+    "root_alias",
+    "scope",
+    "observed_files",
+    "accounting_status",
+    "integrity_coverage"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "source_snapshot_id": {
+      "type": "string",
+      "pattern": "^snapshot:pants:[0-9a-f]{64}$"
+    },
+    "source_key": {
+      "const": "pants"
+    },
+    "source_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version_status",
+        "release",
+        "archive_version",
+        "commit"
+      ],
+      "properties": {
+        "version_status": {
+          "enum": [
+            "known",
+            "partially_known",
+            "unknown"
+          ]
+        },
+        "release": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "archive_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "commit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{7,64}$"
+        }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "evidence_uri",
+        "restrictions",
+        "citation_required"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "evidence_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "restrictions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "noncommercial",
+              "attribution",
+              "redistribution_limited",
+              "source_terms_apply",
+              "none_recorded"
+            ]
+          }
+        },
+        "citation_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "root_alias": {
+      "$ref": "#/$defs/rootAlias"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "study_ids",
+        "expected_files",
+        "control_sha256"
+      ],
+      "properties": {
+        "study_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "expected_files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "study_id",
+              "kind",
+              "uri"
+            ],
+            "properties": {
+              "study_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "ct",
+                  "pancreas"
+                ]
+              },
+              "uri": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "control_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "observed_files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "study_id",
+          "kind",
+          "uri",
+          "state",
+          "bytes",
+          "sha256"
+        ],
+        "properties": {
+          "study_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "ct",
+              "pancreas"
+            ]
+          },
+          "uri": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "enum": [
+              "present",
+              "missing",
+              "unextracted"
+            ]
+          },
+          "bytes": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "minimum": 0
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sha256": {
+            "oneOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "accounting_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "quarantined"
+      ]
+    },
+    "integrity_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_files",
+        "present_files",
+        "hashed_files",
+        "present_bytes",
+        "hashed_bytes",
+        "unverified_uris"
+      ],
+      "properties": {
+        "expected_files": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "present_files": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hashed_files": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "present_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hashed_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unverified_uris": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "sourceKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{1,31}$"
+    },
+    "rootAlias": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+    },
+    "relativeUri": {
+      "type": "string",
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!file:)(?!\\.\\.(?:/|$))(?!.*\\/\\.\\.(?:\\/|$)).+"
+    }
+  }
+}

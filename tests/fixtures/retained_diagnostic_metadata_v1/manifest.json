@@ -1,0 +1,50 @@
+{
+  "kind": "retained_project_generated_metadata_only",
+  "origin": "retained_real_diagnostic_metadata_not_synthetic",
+  "execution_authority": false,
+  "original_arrays_included": false,
+  "model_or_cache_payloads_included": false,
+  "schema_version": "1.0.0",
+  "sources": {
+    "header_selection": {
+      "path": "outputs/prowl/localizer-candidates-v2-0d91addc-1ef8-402b-b12a-611aa78f12f9/selection.json",
+      "sha256": "4ad3f30df763b7b2f5c0a8140edeef23046ba7d56bf694274864db84572ff287"
+    },
+    "header_result": {
+      "path": "outputs/prowl/candidate-headers-v2-551775cb-f388-44e0-9453-b49b181c9621/result.json",
+      "sha256": "80b474a7b049ef520a7e3ae43187133132eb6c8cf6ae4b75908a7b38ba9a8ed1"
+    },
+    "binding": {
+      "path": "outputs/prowl/twomm-cache-readiness-20260930/proposed-binding.json",
+      "sha256": "ceb18e13622a73596bfa68305859ff71db8ddf9d01054300ef516ed751da759d"
+    },
+    "prefix_reference": {
+      "path": "outputs/prowl/CAP-EXP-009-preparation-20261001/prefix-reference.json",
+      "sha256": "9bd634420038d6cba9ab1533ca54224b6dffc3f9edd6d41fe659f30d9124dbbf"
+    },
+    "parent_reference": {
+      "path": "outputs/prowl/CAP-EXP-010-preparation-20261001/parent-reference.json",
+      "sha256": "969d86b898e90ff8c5afc340c336588f5f757615409feb12bf8f975948f4d5cc"
+    },
+    "parent_receipt": {
+      "path": "outputs/prowl/twomm-training-cd6be21f-7dcf-4bd5-b9da-a704f5f1167f-execution/receipt.json",
+      "sha256": "a7dd38662304d20bf8fc9bd9801a6ba692d1f74b9ff176b5434dd377a933b975"
+    },
+    "continuation": {
+      "path": "outputs/prowl/SEGMENTER-CONTENT-PILOT-REVIEW-20261001/continuation-proposal.json",
+      "sha256": "7fb32a630e4152ebd9b2cee944f85ba212d95df32ffdd6b11c771b32236fb1e0"
+    }
+  },
+  "files": {
+    "contracts.json": {
+      "bytes": 3201278,
+      "sha256": "756ac56d6a747887b3b618e02e85acdcadd1614c2f134b7787f3f839737c9fe7"
+    }
+  },
+  "verified_metadata_readers": [
+    "localizer_candidate_headers_v2.controls",
+    "localizer_candidate_content_v2.checked_selection",
+    "localizer_candidate_content_v3.checked_selection",
+    "segmenter_native_scoring.inputs"
+  ]
+}

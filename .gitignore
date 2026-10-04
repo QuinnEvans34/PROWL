@@ -87,6 +87,10 @@ week3/*.jpg
 # Machine-specific storage paths/volume IDs; example and schema stay reviewable.
 /configs/local/roots.yaml
 
+# Consumed machine-specific launch/storage approvals remain local evidence.
+/configs/local/*-launch-approval.json
+/configs/local/*-storage-approval.json
+
 # ---- Vite build artifacts (auto-generated; preserved locally in ui/.vite-cache/) ----
 ui/.vite-cache/
 vite.config.js.timestamp-*.mjs

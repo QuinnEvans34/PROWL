@@ -1,0 +1,64 @@
+{
+  "execution_authority": false,
+  "files": {
+    "CAP-EXP-013-PREPARED-20261003/request.json": {
+      "bytes": 123555,
+      "sha256": "eec73450333f345f22d327be8aec93ad71d2b8afbffb91335fd1bf228b1b45e9"
+    },
+    "accepted-native-baseline.json": {
+      "bytes": 21747,
+      "sha256": "f4bfcaf0dd63ff066ce8456d66b978e738e8cca8322a6c74fcce23c89b090db2"
+    },
+    "contracts.json": {
+      "bytes": 470352,
+      "sha256": "ec341f84d69c537827f9e1677143dbc1824cba8d1fe39941b309b1d8c214948b"
+    },
+    "train.txt": {
+      "bytes": 108000,
+      "sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8"
+    }
+  },
+  "kind": "retained_project_generated_metadata_only",
+  "model_or_cache_payloads_included": false,
+  "origin": "retained_real_diagnostic_metadata_not_synthetic",
+  "original_arrays_included": false,
+  "schema_version": "1.0.0",
+  "sources": {
+    "baseline": {
+      "path": "outputs/prowl/SEGMENTER-NATIVE-SCORE-REVIEW-20261002/accepted-native-baseline.json",
+      "sha256": "f4bfcaf0dd63ff066ce8456d66b978e738e8cca8322a6c74fcce23c89b090db2"
+    },
+    "before_after": {
+      "path": "outputs/prowl/CAP-EXP-013-BEFORE-AFTER-20261003.json",
+      "sha256": "9073e9d1a4aaf002888a670f5c7d7068ec8bd897f12014cf1405841b9f1e09c2"
+    },
+    "bridge": {
+      "path": "outputs/prowl/SEGMENTER-TRAINING-BRIDGE-20261002/result.json",
+      "sha256": "7d96b2f2479e1a2bb56a184d1dc8afa66e1c2fd8ebc18696d75ace7e31d6261f"
+    },
+    "cache_request": {
+      "path": "outputs/prowl/SEGMENTER-CACHE-BUILD-attempt02-20261002/request.json",
+      "sha256": "d84cdcdc828410ed4603dccf1bab29ecf6d0e9154f9a4f6f3f9f9cd0bc613364"
+    },
+    "geometry_scope": {
+      "path": "outputs/prowl/SEGMENTER-GEOMETRY-SCOPE-attempt02-20261001/result.json",
+      "sha256": "8c94a47ca635e159be7a27ecf0d73e81994d8a66e818fd34a33c3b59a43f7b4b"
+    },
+    "native_request": {
+      "path": "outputs/prowl/SEGMENTER-NATIVE-SCORE-REAL-attempt02-20261002/request.json",
+      "sha256": "e24cef49a5d0eb57932217fd045a868bbce7c924f8c65b66244418040cf240b4"
+    },
+    "refresh": {
+      "path": "outputs/prowl/SEGMENTER-CACHE-METADATA-REFRESH-20261002/result.json",
+      "sha256": "37d30cac65f8c98e7137b67d2c13eef8c2f79354f50c0db8949b8c241b52ed0f"
+    },
+    "request": {
+      "path": "outputs/prowl/CAP-EXP-013-PREPARED-20261003/request.json",
+      "sha256": "eec73450333f345f22d327be8aec93ad71d2b8afbffb91335fd1bf228b1b45e9"
+    },
+    "train_membership": {
+      "path": "outputs/splits/train.txt",
+      "sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8"
+    }
+  }
+}

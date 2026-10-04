@@ -44,3 +44,22 @@ Thirty schema/format checks now run in `.venv-prowl` via `tests/test_contracts.p
 This adds repeatable checks for ten existing contracts and hand-authored cohort/review fixtures;
 it does not establish runtime producer/consumer, cross-record, or transport conformance. No schema
 was changed. Plan 04 run-manifest code/tests remain outside this slice pending its coding authorization.
+
+
+September 28 staged-qualification slice: 67 focused synthetic tests; 880 full native Python tests,
+two existing upstream warnings. New source v2/manifest v3/cohort v2 and qualification contracts use
+explicit validator dispatch, retain old validators and do not publish a real cohort. Details in
+[the handback](../data/SYNTHETIC-QUALIFICATION-IMPLEMENTATION-2026-09-28.md).
+
+September 29 D-281: explicit purpose-qualification v2/cohort v3 synthetic conformance and
+operation/role refusal checks added, with bounded-reader integrity regressions. Full native suite:
+1,122 passed, two existing upstream warnings. Old schemas/validators remain separate. This verifies
+the pure contract and reader boundary, not publication of real candidate cohorts or a new loader.
+See [implementation](../data/ROLE-SAFE-QUALIFICATION-IMPLEMENTATION-2026-09-29.md).
+
+September 29 D-282: the separate evidence-bound expansion builder and immutable bundle publisher
+passed nine new synthetic checks; final native suite 1,131 passed (two existing warnings).
+Real retained evidence produced 27 qualified/1 held; published 16 train/11 validation cohorts
+replayed in a fresh native process with explicit optimizer/evaluator consumers. All 13 prior issues
+and full original membership survived. [Result and pins](../data/LOCALIZER-EXPANSION-FREEZE-RESULTS-2026-09-29.md).
+Expanded source loading/preprocessing remains the next boundary; no new training occurred.

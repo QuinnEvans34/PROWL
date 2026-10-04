@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "component",
+    "state",
+    "study_id",
+    "source_snapshot_id",
+    "source_version_sha256",
+    "file"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "component": {
+      "const": "segmenter-lesion-inventory-v1"
+    },
+    "state": {
+      "const": "present"
+    },
+    "study_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_version_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root_alias",
+        "uri",
+        "media_type",
+        "bytes",
+        "content_sha256"
+      ],
+      "properties": {
+        "root_alias": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "content_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/segmenter-lesion-inventory-v1/1.0.0"
+}

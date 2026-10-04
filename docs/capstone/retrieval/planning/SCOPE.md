@@ -406,6 +406,14 @@ evaluation. Its rules:
 
 ## 10. Reconciliation list (for Codex; not edited by Claude)
 
+**Status note (2026-09-28, recorded by Claude from the Codex P2 review; row text unchanged):**
+- **Done (wording only):**
+  - the P07-05 and `CORPUS-AND-RIGHTS.md` channel-text rows are reconciled: baseline plus ordered
+    updates, with E-utilities for bounded checks;
+  - L-03, L-08 and L-09 are recorded as D-261 to D-263.
+- **Not done:** runs S, A and B are unsigned. The storage-alias rows are not complete (see
+  `ACQUISITION-PLAN.md`, S1). Codex owns the other rows.
+
 | Record | Issue | Proposed change |
 |---|---|---|
 | `DECISIONS.md` D-077 | Text already permits "approved services"; no conflict | Optional clarifying note that the NLM annual baseline/update distribution is an approved service route under L-03, once Quinton confirms L-03 |

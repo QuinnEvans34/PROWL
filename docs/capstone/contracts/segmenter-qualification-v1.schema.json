@@ -1,0 +1,157 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "component",
+    "evidence_domain",
+    "study_id",
+    "pancreas_annotation_id",
+    "lesion_annotation_id",
+    "purpose",
+    "protected_role",
+    "policy_sha256",
+    "bindings",
+    "checks",
+    "outcome",
+    "lesion_target_state",
+    "qualification_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "component": {
+      "const": "segmenter-qualification-v1"
+    },
+    "evidence_domain": {
+      "enum": [
+        "synthetic_fixture",
+        "retained_source"
+      ]
+    },
+    "study_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pancreas_annotation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lesion_annotation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "enum": [
+        "pancreas_lesion_segmenter_training",
+        "pancreas_lesion_segmenter_validation"
+      ]
+    },
+    "protected_role": {
+      "enum": [
+        "train",
+        "validation"
+      ]
+    },
+    "policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot",
+        "subject",
+        "study",
+        "protection",
+        "annotations",
+        "issues"
+      ],
+      "properties": {
+        "snapshot": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "subject": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "study": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "protection": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "annotations": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "issues": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "result",
+          "evidence_sha256"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "geometry",
+              "mapping_lineage",
+              "permitted_use",
+              "source_readiness",
+              "pancreas_target",
+              "lesion_target"
+            ]
+          },
+          "result": {
+            "enum": [
+              "pass",
+              "hold",
+              "exclude"
+            ]
+          },
+          "evidence_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "outcome": {
+      "enum": [
+        "qualified",
+        "held",
+        "excluded"
+      ]
+    },
+    "lesion_target_state": {
+      "enum": [
+        "positive",
+        "verified_negative",
+        "unknown"
+      ]
+    },
+    "qualification_id": {
+      "type": "string",
+      "pattern": "^segmenter-qualification:[0-9a-f]{64}$"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/segmenter-qualification-v1/1.0.0"
+}

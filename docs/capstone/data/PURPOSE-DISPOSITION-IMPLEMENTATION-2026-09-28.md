@@ -1,8 +1,9 @@
 # Next data slice: purpose-specific rejection and retained decisions
 
-September 28, 2026. Bounded implementation proposal prepared at Quinton's request.
-This document defines the next slice; no implementation, new diagnostic package,
-cohort, source read or training run was produced by this planning pass.
+September 28, 2026. Quinton authorized this slice after checkpoint publication.
+The synthetic rejection-only helper is now implemented: **44 focused tests and 631
+non-retrieval tests pass**. See completion evidence below. No real diagnostic package,
+cohort, source read or training run was produced. Original design text follows.
 
 ## Problem and outcome
 
@@ -98,3 +99,56 @@ inputs and small-fixture resource evidence. Every attempt belongs in docs/experi
 No prior project-trained checkpoint reuse, protected-test tuning, source rewriting or
 assumption that retrieval must finish before imaging. The publisher reply can resolve a
 specific hold later; waiting for it need not stop synthetic engineering or other qualification.
+
+## Implementation and verification
+
+Implemented in `src/data/purpose_disposition.py`, tested in
+`tests/test_purpose_disposition.py`. No existing runtime module or schema was modified.
+
+- `make_purpose_issue` creates a proposed existing-schema data-issue v1 record. Explicit
+  IDs/timestamps make identical inputs replayable. Construction itself is not attestation.
+- `check_purpose` requires independently reviewed canonical study, annotation and issue
+  hashes plus retained decision/evidence bytes and their independent pins. Every purpose
+  issue binds policy version, requested purpose, study, snapshot, CT and annotation hashes.
+  It validates prior issue references, rejects conflicts/duplicates/dangling references,
+  and checks already attached purpose issues as well as new proposals.
+- Rules are chosen by reviewed evidence, never inferred from case number, plausible
+  spacing or an empty mask. Synthetic fixtures use case-78 and case-2/266-shaped contexts;
+  no actual case decision has been materialized or published by this task.
+- This first version is deliberately rejection-only: missing purpose decisions reject;
+  there is no clearance rule. It returns no allowed uses and never promotes eligibility.
+  The units hold applies conservatively to all three supported purposes, including
+  anatomy-absent robustness. A future non-geometric robustness workflow needs its own
+  reviewed purpose definition, not reuse of a permissive default.
+- Supersession/resolution is unsupported and rejected. A later resolution needs reviewed
+  evidence and a separately implemented path. Original records are never mutated.
+- Caller-supplied train role is checked, but full frozen ancestry, subject/snapshot
+  qualification, actual geometry, approved binary lineage and source-byte integrity
+  remain separate consumer responsibilities. Hashes establish identity, not truth.
+  The synthetic consumer/manifest tests are not a production loader or frozen cohort.
+
+Focused run: **44 passed**, 0.17 seconds. Full existing suite excluding Claude's active
+retrieval lane: **631 passed**, two existing torch.jit deprecation warnings, 5.23 seconds.
+
+```sh
+env PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv-prowl/bin/python -m pytest tests/test_purpose_disposition.py -q -p no:cacheprovider
+env PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 .venv-prowl/bin/python -m pytest tests --ignore=tests/retrieval -q -p no:cacheprovider
+```
+
+Tests cover every acceptance category above: deterministic/no-mutation issue creation,
+wrong source/study/snapshot/purpose bindings, evidence/pin tampering, unsupported rules,
+duplicate/conflicting issues, missing qualification, broad permission bypass attempts,
+history retention, resolution refusal and synthetic consumer rejection before selection.
+A real v2 manifest assembled from invented inputs stays quarantined after attaching the
+new blocking issue and replays exactly. Initial focused failures exposed invalid test
+fixtures (eligible without geometry, then quarantined without an issue); fixtures were
+corrected to a valid discovered state without relaxing existing schema checks.
+
+No source data, existing evidence packages, Claude files, memberships or training inputs
+were changed. No new Git commit/push occurred in this implementation task.
+
+Next: review exact retained evidence and publication inputs for an append-only diagnostic
+disposition package, including how case 2's earlier evidence relates to the five-study
+v2 package (which contains case 266 and case 78, not case 2). Do not silently extend that
+package or mark qualification complete. The remaining source/cohort/smoke gates above
+still apply.

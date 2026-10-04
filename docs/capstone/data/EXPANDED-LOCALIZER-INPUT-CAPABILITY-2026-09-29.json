@@ -1,0 +1,53 @@
+{
+  "approval": "D-283",
+  "completion_sha256": "7f5517feb00bef599261e432af9d7a293cf3f44086d1acbcba8de0e36bab0dcc",
+  "inputs_sha256": "65236e19a7a26bd43d7206010d5d1b029e45b556b6aa8408f63209dedbf6d4fb",
+  "limits": {
+    "compressed": 1073741824,
+    "expanded": 4294967296,
+    "per_file_compressed": 134217728,
+    "per_file_expanded": 536870912,
+    "voxels": 64000000
+  },
+  "manifest_sha256": "d050e2ca30714e7f02e9fa4a5bf2982d2e9e9d08551b180258aac12dfe81adc2",
+  "members": {
+    "evaluator": [
+      "pants:study:PanTS_00001004",
+      "pants:study:PanTS_00002942",
+      "pants:study:PanTS_00003104",
+      "pants:study:PanTS_00004995",
+      "pants:study:PanTS_00005747",
+      "pants:study:PanTS_00007265",
+      "pants:study:PanTS_00007482",
+      "pants:study:PanTS_00007484",
+      "pants:study:PanTS_00007687",
+      "pants:study:PanTS_00007839",
+      "pants:study:PanTS_00008855"
+    ],
+    "optimizer": [
+      "pants:study:PanTS_00000003",
+      "pants:study:PanTS_00000026",
+      "pants:study:PanTS_00002973",
+      "pants:study:PanTS_00003188",
+      "pants:study:PanTS_00003191",
+      "pants:study:PanTS_00003239",
+      "pants:study:PanTS_00003668",
+      "pants:study:PanTS_00003717",
+      "pants:study:PanTS_00004226",
+      "pants:study:PanTS_00004965",
+      "pants:study:PanTS_00005286",
+      "pants:study:PanTS_00005593",
+      "pants:study:PanTS_00006886",
+      "pants:study:PanTS_00007295",
+      "pants:study:PanTS_00008037",
+      "pants:study:PanTS_00008443"
+    ]
+  },
+  "operation": "read_only_preprocessing",
+  "recipe_sha256": "6ed81b30ae9f5b23103e108a6480387f269755c9bb717adcc04013bcbfd9de04",
+  "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+  "schema_version": "1.0.0",
+  "source_file_count": 54,
+  "source_root": "/Volumes/PROWL-Data/PROWL/sources/pants/extraction-3b1cd6110811-20260922",
+  "volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59"
+}

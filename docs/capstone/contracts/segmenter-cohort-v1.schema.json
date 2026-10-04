@@ -1,0 +1,186 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "component",
+    "name",
+    "evidence_domain",
+    "state",
+    "purpose",
+    "protected_role",
+    "manifest",
+    "protection_parent",
+    "members",
+    "definition",
+    "cohort_id"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "component": {
+      "const": "segmenter-cohort-v1"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_domain": {
+      "enum": [
+        "synthetic_fixture",
+        "retained_source"
+      ]
+    },
+    "state": {
+      "const": "validated_in_memory"
+    },
+    "purpose": {
+      "enum": [
+        "pancreas_lesion_segmenter_training",
+        "pancreas_lesion_segmenter_validation"
+      ]
+    },
+    "protected_role": {
+      "enum": [
+        "train",
+        "validation"
+      ]
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "protection_parent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "members": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "study_id",
+          "subject_id",
+          "protection_group_id",
+          "protected_role",
+          "qualification",
+          "pancreas_annotation_id",
+          "lesion_annotation_id",
+          "lesion_target_state"
+        ],
+        "properties": {
+          "study_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "protection_group_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "protected_role": {
+            "enum": [
+              "train",
+              "validation"
+            ]
+          },
+          "qualification": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "sha256"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          },
+          "pancreas_annotation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lesion_annotation_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "lesion_target_state": {
+            "enum": [
+              "positive",
+              "verified_negative"
+            ]
+          }
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_method",
+        "requested_count",
+        "shortage_policy"
+      ],
+      "properties": {
+        "selection_method": {
+          "const": "fixed_membership"
+        },
+        "requested_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "shortage_policy": {
+          "const": "fail"
+        }
+      }
+    },
+    "cohort_id": {
+      "type": "string",
+      "pattern": "^segmenter-cohort:[0-9a-f]{64}$"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/segmenter-cohort-v1/1.0.0"
+}

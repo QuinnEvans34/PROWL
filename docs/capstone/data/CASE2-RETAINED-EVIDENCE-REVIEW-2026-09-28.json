@@ -1,0 +1,67 @@
+{
+  "scope": "retained-case2-evidence-review-only",
+  "prior_manifest_control_sha256": "39d91b6a4277bd3168d9887ee94ed9378e58e09fc16e8c7ef3b776624e58085b",
+  "pilot_receipt_sha256": "4d4a22dc10a25dd9abd6f50fbacfeb1989b491e0d333173aead00b99fcb36970",
+  "pilot_receipt_pin_status": "recorded_now; report and source identities checked against retained controls",
+  "verified_manifest_files": 13,
+  "verified_pilot_reports": 4,
+  "replay_outputs": 5,
+  "study_id": "pants:study:PanTS_00000002",
+  "study_sha256": "a97a0ec2d3e470fdc928e20bca34760a66460b3ea8494857311960bf06a9bd46",
+  "ct": {
+    "bytes": 11169107,
+    "content_sha256": "d9c23ce3de221bca3fde6b3dfa1b749964a3e95c7d914fbd6b29974eed1454a4",
+    "media_type": "application/gzip",
+    "root_alias": "pants_slice",
+    "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000002/ct.nii.gz"
+  },
+  "train_sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8",
+  "prior_annotation_count": 0,
+  "rows": [
+    {
+      "structure": "pancreas",
+      "pair_sha256": "dbea4b38171763f8ce1aaaed7ae1bf202a0e20e47fdb27b7e09cabbb4a1fcdfc",
+      "source": {
+        "bytes": 50591,
+        "content_sha256": "2e7db34ba66374d67a1249f6403c9c89a9e58736b724f5de76412be830d41028",
+        "media_type": "application/gzip",
+        "root_alias": "pants_slice",
+        "uri": "PanTSMini_Label/PanTS_00000002/segmentations/pancreas.nii.gz"
+      },
+      "values": [
+        [
+          0,
+          9775614
+        ],
+        [
+          1,
+          25386
+        ]
+      ],
+      "foreground": 25386,
+      "physical_volume_available": false
+    },
+    {
+      "structure": "lesion",
+      "pair_sha256": "94f00fcd09df218debc8c04a1a5ff1b4038d6e9eb186e0c2405a87f2ba3ba83a",
+      "source": {
+        "bytes": 42899,
+        "content_sha256": "982ce7f48b032a35eef00b6f8fcd68b39111d3eb77182b1c06dc26c52635abc7",
+        "media_type": "application/gzip",
+        "root_alias": "pants_slice",
+        "uri": "PanTSMini_Label/PanTS_00000002/segmentations/pancreatic_lesion.nii.gz"
+      },
+      "values": [
+        [
+          0,
+          9801000
+        ]
+      ],
+      "foreground": 0,
+      "physical_volume_available": false
+    }
+  ],
+  "geometry": "unresolved; both CT and masks unknown units",
+  "adapter_gap": "link_audits expects followup selection.json/pair-NN.json/source_hashes and followup_source; pilot has named reports and pants_slice. Do not rewrite retained receipt or aliases.",
+  "next": "Keep held. A separately tested pilot-evidence adapter can create quarantined v2 records from retained measurements; it would not qualify case 2 for training."
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "approval": "D-269",
+  "root_alias": "prowl_artifacts",
+  "area": "cohorts",
+  "operation": "publish_and_resolve_cohort",
+  "scientific_runs_enabled": false,
+  "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+  "volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59"
+}

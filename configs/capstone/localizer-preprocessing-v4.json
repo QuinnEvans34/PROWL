@@ -1,0 +1,28 @@
+{
+  "schema_version": "4.0.0",
+  "component": "pancreas-localizer-preprocessing-v4",
+  "orientation": "RAS",
+  "spacing_mm": [
+    2.0,
+    2.0,
+    2.0
+  ],
+  "hu_window": [
+    -100.0,
+    300.0
+  ],
+  "minimum_shape": [
+    96,
+    96,
+    96
+  ],
+  "image_interpolation": "bilinear",
+  "target_interpolation": "nearest",
+  "padding_mode": "constant_zero",
+  "crop": "none",
+  "augmentation": "none",
+  "cache": "none",
+  "workers": 0,
+  "max_output_voxels": 16000000,
+  "max_source_voxels": 96000000
+}

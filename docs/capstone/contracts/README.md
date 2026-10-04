@@ -40,3 +40,26 @@ shape only and are not project artifact identities.
 
 The current synthetic examples validate against their Draft 2020-12 schemas. This confirms the
 architecture contract itself; it does not replace the application-level tests required by Plan 09.
+
+
+## September 28 staged qualification implementation
+
+Explicit source v2, manifest v3, purpose-qualification v1 and cohort/member v2 schemas now support
+pure in-memory synthetic validation under D-266–D-268. Old schema meanings remain unchanged.
+The new cohort state is `validated_in_memory`, never a production frozen artifact. See
+[the implementation handback](../data/SYNTHETIC-QUALIFICATION-IMPLEMENTATION-2026-09-28.md)
+for trust inputs, current scope, native verification and publication prerequisites.
+
+## September 29 role-specific extension
+
+[`purpose-qualification-v2.schema.json`](purpose-qualification-v2.schema.json) and
+[`cohort-v3.schema.json`](cohort-v3.schema.json) explicitly distinguish pancreas-localizer
+training targets from validation references. Member v2 and manifest v3 remain the underlying
+contracts. Consumer operations must match the protected role. These are pure validated records,
+not a new disk registry or model loader. See the
+[implementation record](../data/ROLE-SAFE-QUALIFICATION-IMPLEMENTATION-2026-09-29.md).
+
+The subsequent D-282 [expansion publication](../data/LOCALIZER-EXPANSION-FREEZE-RESULTS-2026-09-29.md)
+freezes 16 train/11 validation records through an immutable completed artifact bundle and verifies
+fresh-process resolution. This adds a real published use of the role contracts; expanded array
+loading and preprocessing still require their own verified consumer.

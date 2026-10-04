@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/passage/1.0.0",
+  "title": "Plan 07 passage (exact span of a representation)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "passage_id",
+    "representation_id",
+    "representation_sha256",
+    "work_id",
+    "section_id",
+    "start",
+    "end",
+    "text_sha256",
+    "chunking",
+    "ordinal",
+    "oversized"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "passage_id": {
+      "type": "string",
+      "pattern": "^psg:[0-9a-f]{64}$"
+    },
+    "representation_id": {
+      "type": "string",
+      "pattern": "^repr:[0-9a-f]{64}$"
+    },
+    "representation_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "work_id": {
+      "type": "string",
+      "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+    },
+    "section_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]{0,62}$"
+    },
+    "start": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "end": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "text_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "chunking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "max_chars",
+        "overlap_sentences"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+        },
+        "max_chars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "overlap_sentences": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "ordinal": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "oversized": {
+      "type": "boolean"
+    }
+  }
+}

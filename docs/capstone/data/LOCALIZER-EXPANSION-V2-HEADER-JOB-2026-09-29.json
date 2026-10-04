@@ -1,0 +1,5944 @@
+{
+  "candidate_receipt_sha256": "aa9a77cbcb3848b194a2e1bcb5515174dbf4aa4efa22c18e0d0d7746ec7ab3a7",
+  "case_count": 148,
+  "cases": [
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 43898869,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121393833358283,
+            "device": 16777239,
+            "inode": 314030,
+            "mtime_ns": 1790121393833358283
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000056",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000056/ct.nii.gz"
+        },
+        {
+          "bytes": 214596,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119897638995186,
+            "device": 16777239,
+            "inode": 239789,
+            "mtime_ns": 1790119897638995186
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000056",
+          "uri": "PanTSMini_Label/PanTS_00000056/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000056"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 36868513,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120892700520786,
+            "device": 16777239,
+            "inode": 313227,
+            "mtime_ns": 1790120892700520786
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000122",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000122/ct.nii.gz"
+        },
+        {
+          "bytes": 181309,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119859858189282,
+            "device": 16777239,
+            "inode": 229675,
+            "mtime_ns": 1790119859858189282
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000122",
+          "uri": "PanTSMini_Label/PanTS_00000122/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000122"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 58729486,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120504373736224,
+            "device": 16777239,
+            "inode": 312655,
+            "mtime_ns": 1790120504373736224
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000150",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000150/ct.nii.gz"
+        },
+        {
+          "bytes": 275110,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119563548119036,
+            "device": 16777239,
+            "inode": 143588,
+            "mtime_ns": 1790119563548119036
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000150",
+          "uri": "PanTSMini_Label/PanTS_00000150/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000150"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 12026590,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121246893449788,
+            "device": 16777239,
+            "inode": 313798,
+            "mtime_ns": 1790121246893449788
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000199",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000199/ct.nii.gz"
+        },
+        {
+          "bytes": 51783,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120049046615852,
+            "device": 16777239,
+            "inode": 281176,
+            "mtime_ns": 1790120049046615852
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000199",
+          "uri": "PanTSMini_Label/PanTS_00000199/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000199"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 34977078,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120678522999373,
+            "device": 16777239,
+            "inode": 312903,
+            "mtime_ns": 1790120678522999373
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000202",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000202/ct.nii.gz"
+        },
+        {
+          "bytes": 150764,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119436176708339,
+            "device": 16777239,
+            "inode": 105242,
+            "mtime_ns": 1790119436176708339
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000202",
+          "uri": "PanTSMini_Label/PanTS_00000202/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000202"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 55524579,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120559689768344,
+            "device": 16777239,
+            "inode": 312731,
+            "mtime_ns": 1790120559689768344
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000261",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000261/ct.nii.gz"
+        },
+        {
+          "bytes": 223511,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119600258289824,
+            "device": 16777239,
+            "inode": 154353,
+            "mtime_ns": 1790119600258289824
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000261",
+          "uri": "PanTSMini_Label/PanTS_00000261/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000261"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 58008567,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121336494674572,
+            "device": 16777239,
+            "inode": 313948,
+            "mtime_ns": 1790121336494674572
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000430",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000430/ct.nii.gz"
+        },
+        {
+          "bytes": 257866,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119985435355918,
+            "device": 16777239,
+            "inode": 264452,
+            "mtime_ns": 1790119985435355918
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000430",
+          "uri": "PanTSMini_Label/PanTS_00000430/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000430"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 59617361,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120567901203563,
+            "device": 16777239,
+            "inode": 312743,
+            "mtime_ns": 1790120567901203563
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000756",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000756/ct.nii.gz"
+        },
+        {
+          "bytes": 248948,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119609829641498,
+            "device": 16777239,
+            "inode": 157302,
+            "mtime_ns": 1790119609829641498
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000756",
+          "uri": "PanTSMini_Label/PanTS_00000756/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000756"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 39866570,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790120169954987696,
+            "device": 16777239,
+            "inode": 312131,
+            "mtime_ns": 1790120169954987696
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000767",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000767/ct.nii.gz"
+        },
+        {
+          "bytes": 179921,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119299906997115,
+            "device": 16777239,
+            "inode": 63644,
+            "mtime_ns": 1790119299906997115
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000767",
+          "uri": "PanTSMini_Label/PanTS_00000767/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000767"
+    },
+    {
+      "descriptive_stratum": "arterial|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5888041,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121255170539348,
+            "device": 16777239,
+            "inode": 313820,
+            "mtime_ns": 1790121255170539348
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000795",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000795/ct.nii.gz"
+        },
+        {
+          "bytes": 27206,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120056712509657,
+            "device": 16777239,
+            "inode": 283193,
+            "mtime_ns": 1790120056712509657
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000795",
+          "uri": "PanTSMini_Label/PanTS_00000795/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000795"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 24777675,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121413204208844,
+            "device": 16777239,
+            "inode": 314066,
+            "mtime_ns": 1790121413204208844
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000804",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000804/ct.nii.gz"
+        },
+        {
+          "bytes": 100475,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119916152779631,
+            "device": 16777239,
+            "inode": 245250,
+            "mtime_ns": 1790119916152779631
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000804",
+          "uri": "PanTSMini_Label/PanTS_00000804/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000804"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7313833,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466289733217197,
+            "device": 16777239,
+            "inode": 314989,
+            "mtime_ns": 1790466289733217197
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001250",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001250/ct.nii.gz"
+        },
+        {
+          "bytes": 34637,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119293580773322,
+            "device": 16777239,
+            "inode": 61812,
+            "mtime_ns": 1790119293580773322
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001250",
+          "uri": "PanTSMini_Label/PanTS_00001250/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001250"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5282442,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466599913115029,
+            "device": 16777239,
+            "inode": 315617,
+            "mtime_ns": 1790466599913115029
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001282",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001282/ct.nii.gz"
+        },
+        {
+          "bytes": 23471,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119478241662255,
+            "device": 16777239,
+            "inode": 118147,
+            "mtime_ns": 1790119478241662255
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001282",
+          "uri": "PanTSMini_Label/PanTS_00001282/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001282"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 30907071,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466780654594639,
+            "device": 16777239,
+            "inode": 315959,
+            "mtime_ns": 1790466780654594639
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001369",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001369/ct.nii.gz"
+        },
+        {
+          "bytes": 144086,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119787597126665,
+            "device": 16777239,
+            "inode": 208922,
+            "mtime_ns": 1790119787597126665
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001369",
+          "uri": "PanTSMini_Label/PanTS_00001369/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001369"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 44701090,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466660580102657,
+            "device": 16777239,
+            "inode": 315739,
+            "mtime_ns": 1790466660580102657
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001396",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001396/ct.nii.gz"
+        },
+        {
+          "bytes": 200526,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119415077966608,
+            "device": 16777239,
+            "inode": 98944,
+            "mtime_ns": 1790119415077966608
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001396",
+          "uri": "PanTSMini_Label/PanTS_00001396/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001396"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 49410920,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466765500457375,
+            "device": 16777239,
+            "inode": 315935,
+            "mtime_ns": 1790466765500457375
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001462",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001462/ct.nii.gz"
+        },
+        {
+          "bytes": 249651,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119767791274065,
+            "device": 16777239,
+            "inode": 202873,
+            "mtime_ns": 1790119767791274065
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001462",
+          "uri": "PanTSMini_Label/PanTS_00001462/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001462"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 54291058,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466609096306598,
+            "device": 16777239,
+            "inode": 315639,
+            "mtime_ns": 1790466609096306598
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001590",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001590/ct.nii.gz"
+        },
+        {
+          "bytes": 234144,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119371036478347,
+            "device": 16777239,
+            "inode": 85451,
+            "mtime_ns": 1790119371036478347
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001590",
+          "uri": "PanTSMini_Label/PanTS_00001590/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001590"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 9827957,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466290372017098,
+            "device": 16777239,
+            "inode": 314993,
+            "mtime_ns": 1790466290372017098
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001783",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001783/ct.nii.gz"
+        },
+        {
+          "bytes": 32056,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119289446629970,
+            "device": 16777239,
+            "inode": 60478,
+            "mtime_ns": 1790119289446629970
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001783",
+          "uri": "PanTSMini_Label/PanTS_00001783/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001783"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 21698258,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467041610168507,
+            "device": 16777239,
+            "inode": 316428,
+            "mtime_ns": 1790467041610168507
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001786",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001786/ct.nii.gz"
+        },
+        {
+          "bytes": 95550,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120050819071699,
+            "device": 16777239,
+            "inode": 281703,
+            "mtime_ns": 1790120050819071699
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001786",
+          "uri": "PanTSMini_Label/PanTS_00001786/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001786"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 23258780,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466923088233264,
+            "device": 16777239,
+            "inode": 316222,
+            "mtime_ns": 1790466923088233264
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001851",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001851/ct.nii.gz"
+        },
+        {
+          "bytes": 98042,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119648817395135,
+            "device": 16777239,
+            "inode": 169368,
+            "mtime_ns": 1790119648817395135
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001851",
+          "uri": "PanTSMini_Label/PanTS_00001851/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001851"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 52875395,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466818547529057,
+            "device": 16777239,
+            "inode": 316027,
+            "mtime_ns": 1790466818547529057
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001900",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001900/ct.nii.gz"
+        },
+        {
+          "bytes": 229576,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119685621154680,
+            "device": 16777239,
+            "inode": 179513,
+            "mtime_ns": 1790119685621154680
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001900",
+          "uri": "PanTSMini_Label/PanTS_00001900/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001900"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 32543508,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467108924110160,
+            "device": 16777239,
+            "inode": 316558,
+            "mtime_ns": 1790467108924110160
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001909",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001909/ct.nii.gz"
+        },
+        {
+          "bytes": 136817,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119975705551524,
+            "device": 16777239,
+            "inode": 261816,
+            "mtime_ns": 1790119975705551524
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001909",
+          "uri": "PanTSMini_Label/PanTS_00001909/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001909"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 89833195,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466771364862901,
+            "device": 16777239,
+            "inode": 315943,
+            "mtime_ns": 1790466771364862901
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001935",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001935/ct.nii.gz"
+        },
+        {
+          "bytes": 366156,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119766470150368,
+            "device": 16777239,
+            "inode": 202532,
+            "mtime_ns": 1790119766470150368
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001935",
+          "uri": "PanTSMini_Label/PanTS_00001935/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001935"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 37806972,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466387088001071,
+            "device": 16777239,
+            "inode": 315185,
+            "mtime_ns": 1790466387088001071
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001950",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001950/ct.nii.gz"
+        },
+        {
+          "bytes": 184475,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119127550949170,
+            "device": 16777239,
+            "inode": 10840,
+            "mtime_ns": 1790119127550949170
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001950",
+          "uri": "PanTSMini_Label/PanTS_00001950/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001950"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 11239148,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467846024010351,
+            "device": 16777239,
+            "inode": 317934,
+            "mtime_ns": 1790467846024010351
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002048",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002048/ct.nii.gz"
+        },
+        {
+          "bytes": 45307,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119966913823203,
+            "device": 16777239,
+            "inode": 259520,
+            "mtime_ns": 1790119966913823203
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002048",
+          "uri": "PanTSMini_Label/PanTS_00002048/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002048"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 21239169,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467575013579090,
+            "device": 16777239,
+            "inode": 317448,
+            "mtime_ns": 1790467575013579090
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002105",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002105/ct.nii.gz"
+        },
+        {
+          "bytes": 90052,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119194601144692,
+            "device": 16777239,
+            "inode": 30542,
+            "mtime_ns": 1790119194601144692
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002105",
+          "uri": "PanTSMini_Label/PanTS_00002105/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002105"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 59781912,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468256466377651,
+            "device": 16777239,
+            "inode": 318746,
+            "mtime_ns": 1790468256466377651
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002152",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002152/ct.nii.gz"
+        },
+        {
+          "bytes": 234415,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119866628311440,
+            "device": 16777239,
+            "inode": 231412,
+            "mtime_ns": 1790119866628311440
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002152",
+          "uri": "PanTSMini_Label/PanTS_00002152/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002152"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 44280186,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468139826404361,
+            "device": 16777239,
+            "inode": 318504,
+            "mtime_ns": 1790468139826404361
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002200",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002200/ct.nii.gz"
+        },
+        {
+          "bytes": 196258,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119731407790254,
+            "device": 16777239,
+            "inode": 192886,
+            "mtime_ns": 1790119731407790254
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002200",
+          "uri": "PanTSMini_Label/PanTS_00002200/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002200"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 17382487,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468104753630795,
+            "device": 16777239,
+            "inode": 318442,
+            "mtime_ns": 1790468104753630795
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002232",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002232/ct.nii.gz"
+        },
+        {
+          "bytes": 73720,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119700759981460,
+            "device": 16777239,
+            "inode": 184136,
+            "mtime_ns": 1790119700759981460
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002232",
+          "uri": "PanTSMini_Label/PanTS_00002232/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002232"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 42644956,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467441429885327,
+            "device": 16777239,
+            "inode": 317202,
+            "mtime_ns": 1790467441429885327
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002266",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002266/ct.nii.gz"
+        },
+        {
+          "bytes": 196639,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119595526103106,
+            "device": 16777239,
+            "inode": 152925,
+            "mtime_ns": 1790119595526103106
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002266",
+          "uri": "PanTSMini_Label/PanTS_00002266/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002266"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 55871522,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467481451409591,
+            "device": 16777239,
+            "inode": 317270,
+            "mtime_ns": 1790467481451409591
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002312",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002312/ct.nii.gz"
+        },
+        {
+          "bytes": 214584,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119123013784576,
+            "device": 16777239,
+            "inode": 9320,
+            "mtime_ns": 1790119123013784576
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002312",
+          "uri": "PanTSMini_Label/PanTS_00002312/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002312"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 20581741,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467963578896559,
+            "device": 16777239,
+            "inode": 318168,
+            "mtime_ns": 1790467963578896559
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002454",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002454/ct.nii.gz"
+        },
+        {
+          "bytes": 80121,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120097475384376,
+            "device": 16777239,
+            "inode": 293865,
+            "mtime_ns": 1790120097475384376
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002454",
+          "uri": "PanTSMini_Label/PanTS_00002454/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002454"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 25411910,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467990777158177,
+            "device": 16777239,
+            "inode": 318222,
+            "mtime_ns": 1790467990777158177
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002488",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002488/ct.nii.gz"
+        },
+        {
+          "bytes": 91590,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120136380050145,
+            "device": 16777239,
+            "inode": 304323,
+            "mtime_ns": 1790120136380050145
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002488",
+          "uri": "PanTSMini_Label/PanTS_00002488/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002488"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 54924753,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467880251393849,
+            "device": 16777239,
+            "inode": 317996,
+            "mtime_ns": 1790467880251393849
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002547",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002547/ct.nii.gz"
+        },
+        {
+          "bytes": 246531,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120006087132162,
+            "device": 16777239,
+            "inode": 270161,
+            "mtime_ns": 1790120006087132162
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002547",
+          "uri": "PanTSMini_Label/PanTS_00002547/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002547"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5501213,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468100381212209,
+            "device": 16777239,
+            "inode": 318430,
+            "mtime_ns": 1790468100381212209
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002691",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002691/ct.nii.gz"
+        },
+        {
+          "bytes": 17980,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119707095827286,
+            "device": 16777239,
+            "inode": 186060,
+            "mtime_ns": 1790119707095827286
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002691",
+          "uri": "PanTSMini_Label/PanTS_00002691/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002691"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 6770290,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467334826154030,
+            "device": 16777239,
+            "inode": 316996,
+            "mtime_ns": 1790467334826154030
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002694",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002694/ct.nii.gz"
+        },
+        {
+          "bytes": 26145,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119484337090222,
+            "device": 16777239,
+            "inode": 120101,
+            "mtime_ns": 1790119484337090222
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002694",
+          "uri": "PanTSMini_Label/PanTS_00002694/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002694"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 17478292,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468129748826806,
+            "device": 16777239,
+            "inode": 318492,
+            "mtime_ns": 1790468129748826806
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002737",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002737/ct.nii.gz"
+        },
+        {
+          "bytes": 78966,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119741571510484,
+            "device": 16777239,
+            "inode": 195398,
+            "mtime_ns": 1790119741571510484
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002737",
+          "uri": "PanTSMini_Label/PanTS_00002737/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002737"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 93003642,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468299486909375,
+            "device": 16777239,
+            "inode": 318825,
+            "mtime_ns": 1790468299486909375
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003206",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003206/ct.nii.gz"
+        },
+        {
+          "bytes": 368935,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119166915746596,
+            "device": 16777239,
+            "inode": 22290,
+            "mtime_ns": 1790119166915746596
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003206",
+          "uri": "PanTSMini_Label/PanTS_00003206/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003206"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 4200988,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469321749683609,
+            "device": 16777239,
+            "inode": 320736,
+            "mtime_ns": 1790469321749683609
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003241",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003241/ct.nii.gz"
+        },
+        {
+          "bytes": 20150,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120111088925736,
+            "device": 16777239,
+            "inode": 297093,
+            "mtime_ns": 1790120111088925736
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003241",
+          "uri": "PanTSMini_Label/PanTS_00003241/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003241"
+    },
+    {
+      "descriptive_stratum": "venous|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 4760336,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468909906564748,
+            "device": 16777239,
+            "inode": 319958,
+            "mtime_ns": 1790468909906564748
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003280",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003280/ct.nii.gz"
+        },
+        {
+          "bytes": 24025,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119683769091879,
+            "device": 16777239,
+            "inode": 179048,
+            "mtime_ns": 1790119683769091879
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003280",
+          "uri": "PanTSMini_Label/PanTS_00003280/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003280"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 49682388,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468683469692673,
+            "device": 16777239,
+            "inode": 319490,
+            "mtime_ns": 1790468683469692673
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003560",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003560/ct.nii.gz"
+        },
+        {
+          "bytes": 201561,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119440841163624,
+            "device": 16777239,
+            "inode": 106576,
+            "mtime_ns": 1790119440841163624
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003560",
+          "uri": "PanTSMini_Label/PanTS_00003560/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003560"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 44438717,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469276842823410,
+            "device": 16777239,
+            "inode": 320656,
+            "mtime_ns": 1790469276842823410
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003744",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003744/ct.nii.gz"
+        },
+        {
+          "bytes": 195311,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120133548972809,
+            "device": 16777239,
+            "inode": 303485,
+            "mtime_ns": 1790120133548972809
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003744",
+          "uri": "PanTSMini_Label/PanTS_00003744/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003744"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 64359341,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469035845550451,
+            "device": 16777239,
+            "inode": 320206,
+            "mtime_ns": 1790469035845550451
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003747",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003747/ct.nii.gz"
+        },
+        {
+          "bytes": 269879,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119876941926371,
+            "device": 16777239,
+            "inode": 234143,
+            "mtime_ns": 1790119876941926371
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003747",
+          "uri": "PanTSMini_Label/PanTS_00003747/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003747"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 33918333,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468841352499624,
+            "device": 16777239,
+            "inode": 319818,
+            "mtime_ns": 1790468841352499624
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003821",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003821/ct.nii.gz"
+        },
+        {
+          "bytes": 142645,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119676388918123,
+            "device": 16777239,
+            "inode": 177093,
+            "mtime_ns": 1790119676388918123
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003821",
+          "uri": "PanTSMini_Label/PanTS_00003821/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003821"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 60451077,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468602472054752,
+            "device": 16777239,
+            "inode": 319354,
+            "mtime_ns": 1790468602472054752
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003859",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003859/ct.nii.gz"
+        },
+        {
+          "bytes": 272681,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119377407152905,
+            "device": 16777239,
+            "inode": 87468,
+            "mtime_ns": 1790119377407152905
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003859",
+          "uri": "PanTSMini_Label/PanTS_00003859/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003859"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 66710859,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468543084373192,
+            "device": 16777239,
+            "inode": 319241,
+            "mtime_ns": 1790468543084373192
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003865",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003865/ct.nii.gz"
+        },
+        {
+          "bytes": 291898,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119319346350223,
+            "device": 16777239,
+            "inode": 69691,
+            "mtime_ns": 1790119319346350223
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003865",
+          "uri": "PanTSMini_Label/PanTS_00003865/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003865"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 31430121,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468934758636365,
+            "device": 16777239,
+            "inode": 320008,
+            "mtime_ns": 1790468934758636365
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003970",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003970/ct.nii.gz"
+        },
+        {
+          "bytes": 161468,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119706910664564,
+            "device": 16777239,
+            "inode": 185998,
+            "mtime_ns": 1790119706910664564
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003970",
+          "uri": "PanTSMini_Label/PanTS_00003970/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003970"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 33243172,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469632204510165,
+            "device": 16777239,
+            "inode": 321282,
+            "mtime_ns": 1790469632204510165
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004021",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004021/ct.nii.gz"
+        },
+        {
+          "bytes": 142223,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119830043269799,
+            "device": 16777239,
+            "inode": 221113,
+            "mtime_ns": 1790119830043269799
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004021",
+          "uri": "PanTSMini_Label/PanTS_00004021/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004021"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7329788,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469614840600858,
+            "device": 16777239,
+            "inode": 321256,
+            "mtime_ns": 1790469614840600858
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004025",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004025/ct.nii.gz"
+        },
+        {
+          "bytes": 27227,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119946504876000,
+            "device": 16777239,
+            "inode": 254060,
+            "mtime_ns": 1790119946504876000
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004025",
+          "uri": "PanTSMini_Label/PanTS_00004025/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004025"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 17543806,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470147584884241,
+            "device": 16777239,
+            "inode": 322211,
+            "mtime_ns": 1790470147584884241
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004029",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004029/ct.nii.gz"
+        },
+        {
+          "bytes": 69088,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119374775306655,
+            "device": 16777239,
+            "inode": 86505,
+            "mtime_ns": 1790119374775306655
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004029",
+          "uri": "PanTSMini_Label/PanTS_00004029/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004029"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 43180475,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469500270451042,
+            "device": 16777239,
+            "inode": 321050,
+            "mtime_ns": 1790469500270451042
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004109",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004109/ct.nii.gz"
+        },
+        {
+          "bytes": 184382,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119972684020362,
+            "device": 16777239,
+            "inode": 260916,
+            "mtime_ns": 1790119972684020362
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004109",
+          "uri": "PanTSMini_Label/PanTS_00004109/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004109"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 40405591,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470061684774276,
+            "device": 16777239,
+            "inode": 322059,
+            "mtime_ns": 1790470061684774276
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004137",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004137/ct.nii.gz"
+        },
+        {
+          "bytes": 165239,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119425201632033,
+            "device": 16777239,
+            "inode": 102047,
+            "mtime_ns": 1790119425201632033
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004137",
+          "uri": "PanTSMini_Label/PanTS_00004137/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004137"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 13647944,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470165206575563,
+            "device": 16777239,
+            "inode": 322243,
+            "mtime_ns": 1790470165206575563
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004268",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004268/ct.nii.gz"
+        },
+        {
+          "bytes": 59693,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119419792600975,
+            "device": 16777239,
+            "inode": 100403,
+            "mtime_ns": 1790119419792600975
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004268",
+          "uri": "PanTSMini_Label/PanTS_00004268/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004268"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 3381269,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470227716344971,
+            "device": 16777239,
+            "inode": 322365,
+            "mtime_ns": 1790470227716344971
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004359",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004359/ct.nii.gz"
+        },
+        {
+          "bytes": 15023,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119353142415892,
+            "device": 16777239,
+            "inode": 80177,
+            "mtime_ns": 1790119353142415892
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004359",
+          "uri": "PanTSMini_Label/PanTS_00004359/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004359"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 51302816,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469840184993574,
+            "device": 16777239,
+            "inode": 321636,
+            "mtime_ns": 1790469840184993574
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004591",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004591/ct.nii.gz"
+        },
+        {
+          "bytes": 214786,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119722131887392,
+            "device": 16777239,
+            "inode": 190187,
+            "mtime_ns": 1790119722131887392
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004591",
+          "uri": "PanTSMini_Label/PanTS_00004591/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004591"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 8482058,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469454461007827,
+            "device": 16777239,
+            "inode": 320970,
+            "mtime_ns": 1790469454461007827
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004640",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004640/ct.nii.gz"
+        },
+        {
+          "bytes": 38109,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120082508449729,
+            "device": 16777239,
+            "inode": 290359,
+            "mtime_ns": 1790120082508449729
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004640",
+          "uri": "PanTSMini_Label/PanTS_00004640/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004640"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 14365761,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470158351449862,
+            "device": 16777239,
+            "inode": 322229,
+            "mtime_ns": 1790470158351449862
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004652",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004652/ct.nii.gz"
+        },
+        {
+          "bytes": 61370,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119413276168690,
+            "device": 16777239,
+            "inode": 98076,
+            "mtime_ns": 1790119413276168690
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004652",
+          "uri": "PanTSMini_Label/PanTS_00004652/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004652"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7412581,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471077577357883,
+            "device": 16777239,
+            "inode": 323998,
+            "mtime_ns": 1790471077577357883
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005117",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005117/ct.nii.gz"
+        },
+        {
+          "bytes": 32845,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120041052457319,
+            "device": 16777239,
+            "inode": 279159,
+            "mtime_ns": 1790120041052457319
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005117",
+          "uri": "PanTSMini_Label/PanTS_00005117/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005117"
+    },
+    {
+      "descriptive_stratum": "delay|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 27244214,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471310024206577,
+            "device": 16777239,
+            "inode": 324466,
+            "mtime_ns": 1790471310024206577
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005187",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005187/ct.nii.gz"
+        },
+        {
+          "bytes": 106653,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119747275354078,
+            "device": 16777239,
+            "inode": 196981,
+            "mtime_ns": 1790119747275354078
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005187",
+          "uri": "PanTSMini_Label/PanTS_00005187/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005187"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 71461180,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471161421268185,
+            "device": 16777239,
+            "inode": 324162,
+            "mtime_ns": 1790471161421268185
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005190",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005190/ct.nii.gz"
+        },
+        {
+          "bytes": 277178,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119917052926717,
+            "device": 16777239,
+            "inode": 245561,
+            "mtime_ns": 1790119917052926717
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005190",
+          "uri": "PanTSMini_Label/PanTS_00005190/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005190"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 34569603,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471073693443190,
+            "device": 16777239,
+            "inode": 323990,
+            "mtime_ns": 1790471073693443190
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005214",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005214/ct.nii.gz"
+        },
+        {
+          "bytes": 143392,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120032148840872,
+            "device": 16777239,
+            "inode": 276678,
+            "mtime_ns": 1790120032148840872
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005214",
+          "uri": "PanTSMini_Label/PanTS_00005214/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005214"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 38837903,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470511858752553,
+            "device": 16777239,
+            "inode": 322902,
+            "mtime_ns": 1790470511858752553
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005233",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005233/ct.nii.gz"
+        },
+        {
+          "bytes": 183970,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119580368647091,
+            "device": 16777239,
+            "inode": 148612,
+            "mtime_ns": 1790119580368647091
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005233",
+          "uri": "PanTSMini_Label/PanTS_00005233/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005233"
+    },
+    {
+      "descriptive_stratum": "venous|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5485470,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471386933851041,
+            "device": 16777239,
+            "inode": 324624,
+            "mtime_ns": 1790471386933851041
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005325",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005325/ct.nii.gz"
+        },
+        {
+          "bytes": 25088,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119693423119633,
+            "device": 16777239,
+            "inode": 181624,
+            "mtime_ns": 1790119693423119633
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005325",
+          "uri": "PanTSMini_Label/PanTS_00005325/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005325"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 18534670,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471435926486815,
+            "device": 16777239,
+            "inode": 324724,
+            "mtime_ns": 1790471435926486815
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005336",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005336/ct.nii.gz"
+        },
+        {
+          "bytes": 83509,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119614430006507,
+            "device": 16777239,
+            "inode": 158759,
+            "mtime_ns": 1790119614430006507
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005336",
+          "uri": "PanTSMini_Label/PanTS_00005336/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005336"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 25154780,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470651115530916,
+            "device": 16777239,
+            "inode": 323187,
+            "mtime_ns": 1790470651115530916
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005507",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005507/ct.nii.gz"
+        },
+        {
+          "bytes": 116824,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119407278572334,
+            "device": 16777239,
+            "inode": 96247,
+            "mtime_ns": 1790119407278572334
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005507",
+          "uri": "PanTSMini_Label/PanTS_00005507/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005507"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 33076585,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470678933744787,
+            "device": 16777239,
+            "inode": 323247,
+            "mtime_ns": 1790470678933744787
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005542",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005542/ct.nii.gz"
+        },
+        {
+          "bytes": 147459,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119380849631702,
+            "device": 16777239,
+            "inode": 88461,
+            "mtime_ns": 1790119380849631702
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005542",
+          "uri": "PanTSMini_Label/PanTS_00005542/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005542"
+    },
+    {
+      "descriptive_stratum": "delay|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 45567648,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470594174205153,
+            "device": 16777239,
+            "inode": 323065,
+            "mtime_ns": 1790470594174205153
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005569",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005569/ct.nii.gz"
+        },
+        {
+          "bytes": 166435,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119469127409777,
+            "device": 16777239,
+            "inode": 115633,
+            "mtime_ns": 1790119469127409777
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005569",
+          "uri": "PanTSMini_Label/PanTS_00005569/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005569"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 13553656,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471331172393816,
+            "device": 16777239,
+            "inode": 324510,
+            "mtime_ns": 1790471331172393816
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005627",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005627/ct.nii.gz"
+        },
+        {
+          "bytes": 67247,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119766686621511,
+            "device": 16777239,
+            "inode": 202594,
+            "mtime_ns": 1790119766686621511
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005627",
+          "uri": "PanTSMini_Label/PanTS_00005627/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005627"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5727098,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470473267686738,
+            "device": 16777239,
+            "inode": 322828,
+            "mtime_ns": 1790470473267686738
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005741",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005741/ct.nii.gz"
+        },
+        {
+          "bytes": 28081,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119598876404711,
+            "device": 16777239,
+            "inode": 154012,
+            "mtime_ns": 1790119598876404711
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005741",
+          "uri": "PanTSMini_Label/PanTS_00005741/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005741"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 34913368,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470663971583523,
+            "device": 16777239,
+            "inode": 323217,
+            "mtime_ns": 1790470663971583523
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005746",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005746/ct.nii.gz"
+        },
+        {
+          "bytes": 142204,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119358613819415,
+            "device": 16777239,
+            "inode": 81945,
+            "mtime_ns": 1790119358613819415
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005746",
+          "uri": "PanTSMini_Label/PanTS_00005746/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005746"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 52689742,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470499630267777,
+            "device": 16777239,
+            "inode": 322884,
+            "mtime_ns": 1790470499630267777
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005773",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005773/ct.nii.gz"
+        },
+        {
+          "bytes": 226731,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119571985749291,
+            "device": 16777239,
+            "inode": 145976,
+            "mtime_ns": 1790119571985749291
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005773",
+          "uri": "PanTSMini_Label/PanTS_00005773/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005773"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 38304211,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471207322466335,
+            "device": 16777239,
+            "inode": 324248,
+            "mtime_ns": 1790471207322466335
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005821",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005821/ct.nii.gz"
+        },
+        {
+          "bytes": 178331,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119894621883708,
+            "device": 16777239,
+            "inode": 239075,
+            "mtime_ns": 1790119894621883708
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005821",
+          "uri": "PanTSMini_Label/PanTS_00005821/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005821"
+    },
+    {
+      "descriptive_stratum": "delay|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 33136358,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471285177034473,
+            "device": 16777239,
+            "inode": 324418,
+            "mtime_ns": 1790471285177034473
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005946",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005946/ct.nii.gz"
+        },
+        {
+          "bytes": 133041,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119784932703306,
+            "device": 16777239,
+            "inode": 207836,
+            "mtime_ns": 1790119784932703306
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005946",
+          "uri": "PanTSMini_Label/PanTS_00005946/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005946"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 6781633,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471619261120120,
+            "device": 16777239,
+            "inode": 325083,
+            "mtime_ns": 1790471619261120120
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006110",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006110/ct.nii.gz"
+        },
+        {
+          "bytes": 23871,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120158199350701,
+            "device": 16777239,
+            "inode": 310313,
+            "mtime_ns": 1790120158199350701
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006110",
+          "uri": "PanTSMini_Label/PanTS_00006110/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006110"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 9782888,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472070176341193,
+            "device": 16777239,
+            "inode": 325997,
+            "mtime_ns": 1790472070176341193
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006154",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006154/ct.nii.gz"
+        },
+        {
+          "bytes": 38108,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119375846575648,
+            "device": 16777239,
+            "inode": 86940,
+            "mtime_ns": 1790119375846575648
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006154",
+          "uri": "PanTSMini_Label/PanTS_00006154/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006154"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 42965833,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471702246372700,
+            "device": 16777239,
+            "inode": 325239,
+            "mtime_ns": 1790471702246372700
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006238",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006238/ct.nii.gz"
+        },
+        {
+          "bytes": 201596,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120028551139544,
+            "device": 16777239,
+            "inode": 275964,
+            "mtime_ns": 1790120028551139544
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006238",
+          "uri": "PanTSMini_Label/PanTS_00006238/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006238"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 26053137,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472310486046661,
+            "device": 16777239,
+            "inode": 326463,
+            "mtime_ns": 1790472310486046661
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006288",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006288/ct.nii.gz"
+        },
+        {
+          "bytes": 126410,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119161050775744,
+            "device": 16777239,
+            "inode": 20523,
+            "mtime_ns": 1790119161050775744
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006288",
+          "uri": "PanTSMini_Label/PanTS_00006288/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006288"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 22338128,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471980408441663,
+            "device": 16777239,
+            "inode": 325803,
+            "mtime_ns": 1790471980408441663
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006292",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006292/ct.nii.gz"
+        },
+        {
+          "bytes": 103519,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119465313523951,
+            "device": 16777239,
+            "inode": 114269,
+            "mtime_ns": 1790119465313523951
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006292",
+          "uri": "PanTSMini_Label/PanTS_00006292/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006292"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 19898471,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471477954277289,
+            "device": 16777239,
+            "inode": 324807,
+            "mtime_ns": 1790471477954277289
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006401",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006401/ct.nii.gz"
+        },
+        {
+          "bytes": 84669,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119994670649316,
+            "device": 16777239,
+            "inode": 267151,
+            "mtime_ns": 1790119994670649316
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006401",
+          "uri": "PanTSMini_Label/PanTS_00006401/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006401"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 60082616,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471668432568385,
+            "device": 16777239,
+            "inode": 325185,
+            "mtime_ns": 1790471668432568385
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006449",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006449/ct.nii.gz"
+        },
+        {
+          "bytes": 257921,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120077072514615,
+            "device": 16777239,
+            "inode": 288775,
+            "mtime_ns": 1790120077072514615
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006449",
+          "uri": "PanTSMini_Label/PanTS_00006449/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006449"
+    },
+    {
+      "descriptive_stratum": "delay|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 17988605,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471822178952341,
+            "device": 16777239,
+            "inode": 325481,
+            "mtime_ns": 1790471822178952341
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006627",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006627/ct.nii.gz"
+        },
+        {
+          "bytes": 68441,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119624699460634,
+            "device": 16777239,
+            "inode": 162046,
+            "mtime_ns": 1790119624699460634
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006627",
+          "uri": "PanTSMini_Label/PanTS_00006627/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006627"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 49241909,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471783570693552,
+            "device": 16777239,
+            "inode": 325411,
+            "mtime_ns": 1790471783570693552
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006712",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006712/ct.nii.gz"
+        },
+        {
+          "bytes": 249833,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119646748704276,
+            "device": 16777239,
+            "inode": 168747,
+            "mtime_ns": 1790119646748704276
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006712",
+          "uri": "PanTSMini_Label/PanTS_00006712/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006712"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 19823817,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471907385810317,
+            "device": 16777239,
+            "inode": 325654,
+            "mtime_ns": 1790471907385810317
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006786",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006786/ct.nii.gz"
+        },
+        {
+          "bytes": 89346,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119842111717130,
+            "device": 16777239,
+            "inode": 224649,
+            "mtime_ns": 1790119842111717130
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006786",
+          "uri": "PanTSMini_Label/PanTS_00006786/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006786"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 120868413,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471951689326655,
+            "device": 16777239,
+            "inode": 325745,
+            "mtime_ns": 1790471951689326655
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006822",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006822/ct.nii.gz"
+        },
+        {
+          "bytes": 444432,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119757734260608,
+            "device": 16777239,
+            "inode": 200174,
+            "mtime_ns": 1790119757734260608
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006822",
+          "uri": "PanTSMini_Label/PanTS_00006822/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006822"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 50052706,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472163436328574,
+            "device": 16777239,
+            "inode": 326187,
+            "mtime_ns": 1790472163436328574
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006827",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006827/ct.nii.gz"
+        },
+        {
+          "bytes": 200303,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119526206168400,
+            "device": 16777239,
+            "inode": 132730,
+            "mtime_ns": 1790119526206168400
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006827",
+          "uri": "PanTSMini_Label/PanTS_00006827/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006827"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 42803457,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471886990289268,
+            "device": 16777239,
+            "inode": 325620,
+            "mtime_ns": 1790471886990289268
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006936",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006936/ct.nii.gz"
+        },
+        {
+          "bytes": 179517,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119822467140612,
+            "device": 16777239,
+            "inode": 219096,
+            "mtime_ns": 1790119822467140612
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006936",
+          "uri": "PanTSMini_Label/PanTS_00006936/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006936"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 19004259,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472400726362638,
+            "device": 16777239,
+            "inode": 326629,
+            "mtime_ns": 1790472400726362638
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006975",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006975/ct.nii.gz"
+        },
+        {
+          "bytes": 82528,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119314081585384,
+            "device": 16777239,
+            "inode": 67800,
+            "mtime_ns": 1790119314081585384
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006975",
+          "uri": "PanTSMini_Label/PanTS_00006975/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006975"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 9932803,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472838555180338,
+            "device": 16777239,
+            "inode": 327517,
+            "mtime_ns": 1790472838555180338
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007082",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007082/ct.nii.gz"
+        },
+        {
+          "bytes": 33460,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119532830604896,
+            "device": 16777239,
+            "inode": 134900,
+            "mtime_ns": 1790119532830604896
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007082",
+          "uri": "PanTSMini_Label/PanTS_00007082/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007082"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 36612057,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473415097727759,
+            "device": 16777239,
+            "inode": 328595,
+            "mtime_ns": 1790473415097727759
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007152",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007152/ct.nii.gz"
+        },
+        {
+          "bytes": 181085,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119978725117178,
+            "device": 16777239,
+            "inode": 262591,
+            "mtime_ns": 1790119978725117178
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007152",
+          "uri": "PanTSMini_Label/PanTS_00007152/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007152"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 28521593,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473053352625159,
+            "device": 16777239,
+            "inode": 327941,
+            "mtime_ns": 1790473053352625159
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007210",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007210/ct.nii.gz"
+        },
+        {
+          "bytes": 112195,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119756830261965,
+            "device": 16777239,
+            "inode": 199926,
+            "mtime_ns": 1790119756830261965
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007210",
+          "uri": "PanTSMini_Label/PanTS_00007210/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007210"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 23709694,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473233527458381,
+            "device": 16777239,
+            "inode": 328291,
+            "mtime_ns": 1790473233527458381
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007303",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007303/ct.nii.gz"
+        },
+        {
+          "bytes": 110333,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119672367828590,
+            "device": 16777239,
+            "inode": 175758,
+            "mtime_ns": 1790119672367828590
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007303",
+          "uri": "PanTSMini_Label/PanTS_00007303/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007303"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 62570269,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473170863204472,
+            "device": 16777239,
+            "inode": 328161,
+            "mtime_ns": 1790473170863204472
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007310",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007310/ct.nii.gz"
+        },
+        {
+          "bytes": 270596,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119735713225668,
+            "device": 16777239,
+            "inode": 193786,
+            "mtime_ns": 1790119735713225668
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007310",
+          "uri": "PanTSMini_Label/PanTS_00007310/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007310"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 66627231,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473397200203813,
+            "device": 16777239,
+            "inode": 328570,
+            "mtime_ns": 1790473397200203813
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007321",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007321/ct.nii.gz"
+        },
+        {
+          "bytes": 271067,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119963809330449,
+            "device": 16777239,
+            "inode": 258683,
+            "mtime_ns": 1790119963809330449
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007321",
+          "uri": "PanTSMini_Label/PanTS_00007321/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007321"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 42460577,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472743654342571,
+            "device": 16777239,
+            "inode": 327319,
+            "mtime_ns": 1790472743654342571
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007344",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007344/ct.nii.gz"
+        },
+        {
+          "bytes": 200727,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119562416340026,
+            "device": 16777239,
+            "inode": 143277,
+            "mtime_ns": 1790119562416340026
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007344",
+          "uri": "PanTSMini_Label/PanTS_00007344/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007344"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 61158286,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473037859637934,
+            "device": 16777239,
+            "inode": 327913,
+            "mtime_ns": 1790473037859637934
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007478",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007478/ct.nii.gz"
+        },
+        {
+          "bytes": 248810,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119878335258531,
+            "device": 16777239,
+            "inode": 234577,
+            "mtime_ns": 1790119878335258531
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007478",
+          "uri": "PanTSMini_Label/PanTS_00007478/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007478"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 18997765,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472726541564252,
+            "device": 16777239,
+            "inode": 327287,
+            "mtime_ns": 1790472726541564252
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007509",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007509/ct.nii.gz"
+        },
+        {
+          "bytes": 82753,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119169146356362,
+            "device": 16777239,
+            "inode": 22972,
+            "mtime_ns": 1790119169146356362
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007509",
+          "uri": "PanTSMini_Label/PanTS_00007509/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007509"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 53284367,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472845719714661,
+            "device": 16777239,
+            "inode": 327529,
+            "mtime_ns": 1790472845719714661
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007526",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007526/ct.nii.gz"
+        },
+        {
+          "bytes": 230014,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119537468951603,
+            "device": 16777239,
+            "inode": 136110,
+            "mtime_ns": 1790119537468951603
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007526",
+          "uri": "PanTSMini_Label/PanTS_00007526/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007526"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 20519793,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472731778764175,
+            "device": 16777239,
+            "inode": 327299,
+            "mtime_ns": 1790472731778764175
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007604",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007604/ct.nii.gz"
+        },
+        {
+          "bytes": 91141,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119554521331967,
+            "device": 16777239,
+            "inode": 140981,
+            "mtime_ns": 1790119554521331967
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007604",
+          "uri": "PanTSMini_Label/PanTS_00007604/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007604"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 15468217,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472797745000145,
+            "device": 16777239,
+            "inode": 327423,
+            "mtime_ns": 1790472797745000145
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007684",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007684/ct.nii.gz"
+        },
+        {
+          "bytes": 68689,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119489944977415,
+            "device": 16777239,
+            "inode": 121682,
+            "mtime_ns": 1790119489944977415
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007684",
+          "uri": "PanTSMini_Label/PanTS_00007684/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007684"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 33399913,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473434173710400,
+            "device": 16777239,
+            "inode": 328635,
+            "mtime_ns": 1790473434173710400
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007723",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007723/ct.nii.gz"
+        },
+        {
+          "bytes": 142887,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120001100297983,
+            "device": 16777239,
+            "inode": 268733,
+            "mtime_ns": 1790120001100297983
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007723",
+          "uri": "PanTSMini_Label/PanTS_00007723/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007723"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 10187851,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473419189709814,
+            "device": 16777239,
+            "inode": 328607,
+            "mtime_ns": 1790473419189709814
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007938",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007938/ct.nii.gz"
+        },
+        {
+          "bytes": 44805,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119983561561570,
+            "device": 16777239,
+            "inode": 263894,
+            "mtime_ns": 1790119983561561570
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007938",
+          "uri": "PanTSMini_Label/PanTS_00007938/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007938"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 65522523,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472746777204519,
+            "device": 16777239,
+            "inode": 327325,
+            "mtime_ns": 1790472746777204519
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007957",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007957/ct.nii.gz"
+        },
+        {
+          "bytes": 282501,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119569581773702,
+            "device": 16777239,
+            "inode": 145294,
+            "mtime_ns": 1790119569581773702
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007957",
+          "uri": "PanTSMini_Label/PanTS_00007957/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007957"
+    },
+    {
+      "descriptive_stratum": "delay|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 17495839,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473789976962837,
+            "device": 16777239,
+            "inode": 329341,
+            "mtime_ns": 1790473789976962837
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008062",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008062/ct.nii.gz"
+        },
+        {
+          "bytes": 74652,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119788740011877,
+            "device": 16777239,
+            "inode": 209388,
+            "mtime_ns": 1790119788740011877
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008062",
+          "uri": "PanTSMini_Label/PanTS_00008062/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008062"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 25077088,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474160823500052,
+            "device": 16777239,
+            "inode": 330026,
+            "mtime_ns": 1790474160823500052
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008090",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008090/ct.nii.gz"
+        },
+        {
+          "bytes": 118381,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119560553818871,
+            "device": 16777239,
+            "inode": 142719,
+            "mtime_ns": 1790119560553818871
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008090",
+          "uri": "PanTSMini_Label/PanTS_00008090/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008090"
+    },
+    {
+      "descriptive_stratum": "arterial|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 13827283,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474476634516167,
+            "device": 16777239,
+            "inode": 330632,
+            "mtime_ns": 1790474476634516167
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008341",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008341/ct.nii.gz"
+        },
+        {
+          "bytes": 64795,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119128852672654,
+            "device": 16777239,
+            "inode": 11243,
+            "mtime_ns": 1790119128852672654
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008341",
+          "uri": "PanTSMini_Label/PanTS_00008341/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008341"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 51945619,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474142489190037,
+            "device": 16777239,
+            "inode": 329980,
+            "mtime_ns": 1790474142489190037
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008401",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008401/ct.nii.gz"
+        },
+        {
+          "bytes": 234980,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119587261978857,
+            "device": 16777239,
+            "inode": 150504,
+            "mtime_ns": 1790119587261978857
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008401",
+          "uri": "PanTSMini_Label/PanTS_00008401/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008401"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5735316,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474513264452853,
+            "device": 16777239,
+            "inode": 330710,
+            "mtime_ns": 1790474513264452853
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008459",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008459/ct.nii.gz"
+        },
+        {
+          "bytes": 27021,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119218689065270,
+            "device": 16777239,
+            "inode": 37955,
+            "mtime_ns": 1790119218689065270
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008459",
+          "uri": "PanTSMini_Label/PanTS_00008459/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008459"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 14138447,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473593108688918,
+            "device": 16777239,
+            "inode": 328959,
+            "mtime_ns": 1790473593108688918
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008812",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008812/ct.nii.gz"
+        },
+        {
+          "bytes": 60312,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120149483489069,
+            "device": 16777239,
+            "inode": 308017,
+            "mtime_ns": 1790120149483489069
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008812",
+          "uri": "PanTSMini_Label/PanTS_00008812/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008812"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 9908458,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474555195833410,
+            "device": 16777239,
+            "inode": 330788,
+            "mtime_ns": 1790474555195833410
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008831",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008831/ct.nii.gz"
+        },
+        {
+          "bytes": 42617,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119185660680304,
+            "device": 16777239,
+            "inode": 27843,
+            "mtime_ns": 1790119185660680304
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008831",
+          "uri": "PanTSMini_Label/PanTS_00008831/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008831"
+    },
+    {
+      "descriptive_stratum": "delay|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 96993392,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473821564865089,
+            "device": 16777239,
+            "inode": 329403,
+            "mtime_ns": 1790473821564865089
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008937",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008937/ct.nii.gz"
+        },
+        {
+          "bytes": 433049,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119757884234392,
+            "device": 16777239,
+            "inode": 200205,
+            "mtime_ns": 1790119757884234392
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008937",
+          "uri": "PanTSMini_Label/PanTS_00008937/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008937"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 51370554,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790474140552620524,
+            "device": 16777239,
+            "inode": 329976,
+            "mtime_ns": 1790474140552620524
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008956",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008956/ct.nii.gz"
+        },
+        {
+          "bytes": 216934,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119585649805125,
+            "device": 16777239,
+            "inode": 150163,
+            "mtime_ns": 1790119585649805125
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008956",
+          "uri": "PanTSMini_Label/PanTS_00008956/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008956"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 12266667,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473944973710851,
+            "device": 16777239,
+            "inode": 329649,
+            "mtime_ns": 1790473944973710851
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008988",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008988/ct.nii.gz"
+        },
+        {
+          "bytes": 43300,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119631368428751,
+            "device": 16777239,
+            "inode": 164063,
+            "mtime_ns": 1790119631368428751
+          },
+          "protected_role": "train",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008988",
+          "uri": "PanTSMini_Label/PanTS_00008988/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "train",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008988"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 10583150,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790121104106789993,
+            "device": 16777239,
+            "inode": 313581,
+            "mtime_ns": 1790121104106789993
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000754",
+          "uri": "PanTSMini_ImageTr_00000001_00001000/PanTS_00000754/ct.nii.gz"
+        },
+        {
+          "bytes": 45838,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119656368076303,
+            "device": 16777239,
+            "inode": 171167,
+            "mtime_ns": 1790119656368076303
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00000754",
+          "uri": "PanTSMini_Label/PanTS_00000754/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00000754"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 6031302,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790466987885618972,
+            "device": 16777239,
+            "inode": 316338,
+            "mtime_ns": 1790466987885618972
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001984",
+          "uri": "PanTSMini_ImageTr_00001001_00002000/PanTS_00001984/ct.nii.gz"
+        },
+        {
+          "bytes": 24710,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120139871527118,
+            "device": 16777239,
+            "inode": 305564,
+            "mtime_ns": 1790120139871527118
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00001984",
+          "uri": "PanTSMini_Label/PanTS_00001984/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00001984"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 11021295,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467522248935178,
+            "device": 16777239,
+            "inode": 317352,
+            "mtime_ns": 1790467522248935178
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002514",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002514/ct.nii.gz"
+        },
+        {
+          "bytes": 49934,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119167717278354,
+            "device": 16777239,
+            "inode": 22538,
+            "mtime_ns": 1790119167717278354
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002514",
+          "uri": "PanTSMini_Label/PanTS_00002514/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002514"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 21130810,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467320460752546,
+            "device": 16777239,
+            "inode": 316962,
+            "mtime_ns": 1790467320460752546
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002573",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002573/ct.nii.gz"
+        },
+        {
+          "bytes": 92800,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119460571016470,
+            "device": 16777239,
+            "inode": 112873,
+            "mtime_ns": 1790119460571016470
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002573",
+          "uri": "PanTSMini_Label/PanTS_00002573/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002573"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7182762,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467823735488574,
+            "device": 16777239,
+            "inode": 317900,
+            "mtime_ns": 1790467823735488574
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002692",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002692/ct.nii.gz"
+        },
+        {
+          "bytes": 32522,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119950837392983,
+            "device": 16777239,
+            "inode": 255424,
+            "mtime_ns": 1790119950837392983
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002692",
+          "uri": "PanTSMini_Label/PanTS_00002692/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002692"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5900833,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790467789013354756,
+            "device": 16777239,
+            "inode": 317824,
+            "mtime_ns": 1790467789013354756
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002727",
+          "uri": "PanTSMini_ImageTr_00002001_00003000/PanTS_00002727/ct.nii.gz"
+        },
+        {
+          "bytes": 22449,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119923985875629,
+            "device": 16777239,
+            "inode": 247483,
+            "mtime_ns": 1790119923985875629
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00002727",
+          "uri": "PanTSMini_Label/PanTS_00002727/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00002727"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5756482,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468640777756894,
+            "device": 16777239,
+            "inode": 319416,
+            "mtime_ns": 1790468640777756894
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003115",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003115/ct.nii.gz"
+        },
+        {
+          "bytes": 30367,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119468708096176,
+            "device": 16777239,
+            "inode": 115385,
+            "mtime_ns": 1790119468708096176
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003115",
+          "uri": "PanTSMini_Label/PanTS_00003115/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003115"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5817262,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469010758975900,
+            "device": 16777239,
+            "inode": 320150,
+            "mtime_ns": 1790469010758975900
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003179",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003179/ct.nii.gz"
+        },
+        {
+          "bytes": 26134,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119849971966905,
+            "device": 16777239,
+            "inode": 226760,
+            "mtime_ns": 1790119849971966905
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003179",
+          "uri": "PanTSMini_Label/PanTS_00003179/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003179"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 61922196,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469123144582231,
+            "device": 16777239,
+            "inode": 320385,
+            "mtime_ns": 1790469123144582231
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003274",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003274/ct.nii.gz"
+        },
+        {
+          "bytes": 261674,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119910065827538,
+            "device": 16777239,
+            "inode": 243389,
+            "mtime_ns": 1790119910065827538
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003274",
+          "uri": "PanTSMini_Label/PanTS_00003274/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003274"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 30661418,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468910643975334,
+            "device": 16777239,
+            "inode": 319960,
+            "mtime_ns": 1790468910643975334
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003314",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003314/ct.nii.gz"
+        },
+        {
+          "bytes": 136397,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119684066982232,
+            "device": 16777239,
+            "inode": 179141,
+            "mtime_ns": 1790119684066982232
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003314",
+          "uri": "PanTSMini_Label/PanTS_00003314/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003314"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5256705,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469252721117846,
+            "device": 16777239,
+            "inode": 320622,
+            "mtime_ns": 1790469252721117846
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003322",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003322/ct.nii.gz"
+        },
+        {
+          "bytes": 24881,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120035877722491,
+            "device": 16777239,
+            "inode": 277763,
+            "mtime_ns": 1790120035877722491
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003322",
+          "uri": "PanTSMini_Label/PanTS_00003322/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003322"
+    },
+    {
+      "descriptive_stratum": "arterial|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7589981,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469079353624698,
+            "device": 16777239,
+            "inode": 320301,
+            "mtime_ns": 1790469079353624698
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003828",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003828/ct.nii.gz"
+        },
+        {
+          "bytes": 35431,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119930099458581,
+            "device": 16777239,
+            "inode": 249282,
+            "mtime_ns": 1790119930099458581
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003828",
+          "uri": "PanTSMini_Label/PanTS_00003828/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003828"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 15988042,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790468546144943675,
+            "device": 16777239,
+            "inode": 319249,
+            "mtime_ns": 1790468546144943675
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003881",
+          "uri": "PanTSMini_ImageTr_00003001_00004000/PanTS_00003881/ct.nii.gz"
+        },
+        {
+          "bytes": 67510,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119321572991306,
+            "device": 16777239,
+            "inode": 70590,
+            "mtime_ns": 1790119321572991306
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00003881",
+          "uri": "PanTSMini_Label/PanTS_00003881/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00003881"
+    },
+    {
+      "descriptive_stratum": "arterial|thick_gt5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 5274760,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470229821457210,
+            "device": 16777239,
+            "inode": 322375,
+            "mtime_ns": 1790470229821457210
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004120",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004120/ct.nii.gz"
+        },
+        {
+          "bytes": 24537,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119328585936051,
+            "device": 16777239,
+            "inode": 72731,
+            "mtime_ns": 1790119328585936051
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004120",
+          "uri": "PanTSMini_Label/PanTS_00004120/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004120"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 37612547,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469996298035732,
+            "device": 16777239,
+            "inode": 321927,
+            "mtime_ns": 1790469996298035732
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004175",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004175/ct.nii.gz"
+        },
+        {
+          "bytes": 170533,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119504124714643,
+            "device": 16777239,
+            "inode": 126461,
+            "mtime_ns": 1790119504124714643
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004175",
+          "uri": "PanTSMini_Label/PanTS_00004175/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004175"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 47184993,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790469696982078249,
+            "device": 16777239,
+            "inode": 321402,
+            "mtime_ns": 1790469696982078249
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004310",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004310/ct.nii.gz"
+        },
+        {
+          "bytes": 210675,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119859651125179,
+            "device": 16777239,
+            "inode": 229582,
+            "mtime_ns": 1790119859651125179
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004310",
+          "uri": "PanTSMini_Label/PanTS_00004310/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004310"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 31498777,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470162086265779,
+            "device": 16777239,
+            "inode": 322237,
+            "mtime_ns": 1790470162086265779
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004365",
+          "uri": "PanTSMini_ImageTr_00004001_00005000/PanTS_00004365/ct.nii.gz"
+        },
+        {
+          "bytes": 115081,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119421619696788,
+            "device": 16777239,
+            "inode": 100868,
+            "mtime_ns": 1790119421619696788
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00004365",
+          "uri": "PanTSMini_Label/PanTS_00004365/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00004365"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 66970601,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471266154211191,
+            "device": 16777239,
+            "inode": 324376,
+            "mtime_ns": 1790471266154211191
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005194",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005194/ct.nii.gz"
+        },
+        {
+          "bytes": 254124,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119825601706200,
+            "device": 16777239,
+            "inode": 219934,
+            "mtime_ns": 1790119825601706200
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005194",
+          "uri": "PanTSMini_Label/PanTS_00005194/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005194"
+    },
+    {
+      "descriptive_stratum": "non-contrast|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 26084320,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470703055957251,
+            "device": 16777239,
+            "inode": 323293,
+            "mtime_ns": 1790470703055957251
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005396",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005396/ct.nii.gz"
+        },
+        {
+          "bytes": 108205,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119333662926285,
+            "device": 16777239,
+            "inode": 74437,
+            "mtime_ns": 1790119333662926285
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005396",
+          "uri": "PanTSMini_Label/PanTS_00005396/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005396"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 36029527,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471447668537567,
+            "device": 16777239,
+            "inode": 324746,
+            "mtime_ns": 1790471447668537567
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005478",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005478/ct.nii.gz"
+        },
+        {
+          "bytes": 142517,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119631646487856,
+            "device": 16777239,
+            "inode": 164156,
+            "mtime_ns": 1790119631646487856
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005478",
+          "uri": "PanTSMini_Label/PanTS_00005478/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005478"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 57181837,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470673787030637,
+            "device": 16777239,
+            "inode": 323237,
+            "mtime_ns": 1790470673787030637
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005641",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005641/ct.nii.gz"
+        },
+        {
+          "bytes": 246611,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119372252882020,
+            "device": 16777239,
+            "inode": 85792,
+            "mtime_ns": 1790119372252882020
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005641",
+          "uri": "PanTSMini_Label/PanTS_00005641/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005641"
+    },
+    {
+      "descriptive_stratum": "delay|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 32709745,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790470866213846821,
+            "device": 16777239,
+            "inode": 323583,
+            "mtime_ns": 1790470866213846821
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005663",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005663/ct.nii.gz"
+        },
+        {
+          "bytes": 126675,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119229947821160,
+            "device": 16777239,
+            "inode": 41585,
+            "mtime_ns": 1790119229947821160
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005663",
+          "uri": "PanTSMini_Label/PanTS_00005663/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005663"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7710785,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471448804164350,
+            "device": 16777239,
+            "inode": 324752,
+            "mtime_ns": 1790471448804164350
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005958",
+          "uri": "PanTSMini_ImageTr_00005001_00006000/PanTS_00005958/ct.nii.gz"
+        },
+        {
+          "bytes": 31612,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119632735635013,
+            "device": 16777239,
+            "inode": 164497,
+            "mtime_ns": 1790119632735635013
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00005958",
+          "uri": "PanTSMini_Label/PanTS_00005958/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00005958"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 23533991,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472410348562905,
+            "device": 16777239,
+            "inode": 326643,
+            "mtime_ns": 1790472410348562905
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006081",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006081/ct.nii.gz"
+        },
+        {
+          "bytes": 105653,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119320414070660,
+            "device": 16777239,
+            "inode": 70218,
+            "mtime_ns": 1790119320414070660
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006081",
+          "uri": "PanTSMini_Label/PanTS_00006081/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006081"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 74133317,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472404548256938,
+            "device": 16777239,
+            "inode": 326633,
+            "mtime_ns": 1790472404548256938
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006186",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006186/ct.nii.gz"
+        },
+        {
+          "bytes": 319543,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119316502127015,
+            "device": 16777239,
+            "inode": 68823,
+            "mtime_ns": 1790119316502127015
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006186",
+          "uri": "PanTSMini_Label/PanTS_00006186/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006186"
+    },
+    {
+      "descriptive_stratum": "delay|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 26014884,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471702813588674,
+            "device": 16777239,
+            "inode": 325241,
+            "mtime_ns": 1790471702813588674
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006348",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006348/ct.nii.gz"
+        },
+        {
+          "bytes": 104179,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120032548153476,
+            "device": 16777239,
+            "inode": 276802,
+            "mtime_ns": 1790120032548153476
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006348",
+          "uri": "PanTSMini_Label/PanTS_00006348/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006348"
+    },
+    {
+      "descriptive_stratum": "arterial|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 19142230,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790472253624855907,
+            "device": 16777239,
+            "inode": 326361,
+            "mtime_ns": 1790472253624855907
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006479",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006479/ct.nii.gz"
+        },
+        {
+          "bytes": 91091,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119179080549883,
+            "device": 16777239,
+            "inode": 25981,
+            "mtime_ns": 1790119179080549883
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006479",
+          "uri": "PanTSMini_Label/PanTS_00006479/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006479"
+    },
+    {
+      "descriptive_stratum": "venous|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 35060238,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471501773972923,
+            "device": 16777239,
+            "inode": 324843,
+            "mtime_ns": 1790471501773972923
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006534",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006534/ct.nii.gz"
+        },
+        {
+          "bytes": 158146,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119950828568780,
+            "device": 16777239,
+            "inode": 255393,
+            "mtime_ns": 1790119950828568780
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006534",
+          "uri": "PanTSMini_Label/PanTS_00006534/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006534"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 53314850,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471869329617429,
+            "device": 16777239,
+            "inode": 325585,
+            "mtime_ns": 1790471869329617429
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006727",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006727/ct.nii.gz"
+        },
+        {
+          "bytes": 228559,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119872535387124,
+            "device": 16777239,
+            "inode": 232901,
+            "mtime_ns": 1790119872535387124
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006727",
+          "uri": "PanTSMini_Label/PanTS_00006727/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006727"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 53200858,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790471506261169208,
+            "device": 16777239,
+            "inode": 324851,
+            "mtime_ns": 1790471506261169208
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006863",
+          "uri": "PanTSMini_ImageTr_00006001_00007000/PanTS_00006863/ct.nii.gz"
+        },
+        {
+          "bytes": 204316,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119951950238320,
+            "device": 16777239,
+            "inode": 255703,
+            "mtime_ns": 1790119951950238320
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00006863",
+          "uri": "PanTSMini_Label/PanTS_00006863/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00006863"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 4568778,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473091560618522,
+            "device": 16777239,
+            "inode": 328009,
+            "mtime_ns": 1790473091560618522
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007612",
+          "uri": "PanTSMini_ImageTr_00007001_00008000/PanTS_00007612/ct.nii.gz"
+        },
+        {
+          "bytes": 17802,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119790929758154,
+            "device": 16777239,
+            "inode": 209977,
+            "mtime_ns": 1790119790929758154
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00007612",
+          "uri": "PanTSMini_Label/PanTS_00007612/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00007612"
+    },
+    {
+      "descriptive_stratum": "arterial|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 47227605,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473566260495560,
+            "device": 16777239,
+            "inode": 328893,
+            "mtime_ns": 1790473566260495560
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008463",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008463/ct.nii.gz"
+        },
+        {
+          "bytes": 194627,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120044389296323,
+            "device": 16777239,
+            "inode": 279904,
+            "mtime_ns": 1790120044389296323
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008463",
+          "uri": "PanTSMini_Label/PanTS_00008463/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008463"
+    },
+    {
+      "descriptive_stratum": "venous|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 7814631,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473661327960713,
+            "device": 16777239,
+            "inode": 329095,
+            "mtime_ns": 1790473661327960713
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008477",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008477/ct.nii.gz"
+        },
+        {
+          "bytes": 34232,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119924751631661,
+            "device": 16777239,
+            "inode": 247700,
+            "mtime_ns": 1790119924751631661
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008477",
+          "uri": "PanTSMini_Label/PanTS_00008477/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008477"
+    },
+    {
+      "descriptive_stratum": "delay|medium_le5mm",
+      "inventory_inputs": [
+        {
+          "bytes": 11468288,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473603128707067,
+            "device": 16777239,
+            "inode": 328987,
+            "mtime_ns": 1790473603128707067
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008736",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008736/ct.nii.gz"
+        },
+        {
+          "bytes": 43179,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790120135533738323,
+            "device": 16777239,
+            "inode": 304106,
+            "mtime_ns": 1790120135533738323
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008736",
+          "uri": "PanTSMini_Label/PanTS_00008736/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008736"
+    },
+    {
+      "descriptive_stratum": "non-contrast|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 49572830,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473828001040292,
+            "device": 16777239,
+            "inode": 329419,
+            "mtime_ns": 1790473828001040292
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008847",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008847/ct.nii.gz"
+        },
+        {
+          "bytes": 209424,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119754290949790,
+            "device": 16777239,
+            "inode": 199306,
+            "mtime_ns": 1790119754290949790
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008847",
+          "uri": "PanTSMini_Label/PanTS_00008847/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "proportional",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008847"
+    },
+    {
+      "descriptive_stratum": "delay|thin_le2mm",
+      "inventory_inputs": [
+        {
+          "bytes": 49034695,
+          "content_sha256": null,
+          "kind": "ct",
+          "observation": {
+            "ctime_ns": 1790473818685901960,
+            "device": 16777239,
+            "inode": 329401,
+            "mtime_ns": 1790473818685901960
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008940",
+          "uri": "PanTSMini_ImageTr_00008001_00009000/PanTS_00008940/ct.nii.gz"
+        },
+        {
+          "bytes": 158628,
+          "content_sha256": null,
+          "kind": "pancreas",
+          "observation": {
+            "ctime_ns": 1790119757180384575,
+            "device": 16777239,
+            "inode": 200050,
+            "mtime_ns": 1790119757180384575
+          },
+          "protected_role": "validation",
+          "state": "present",
+          "study_id": "pants:study:PanTS_00008940",
+          "uri": "PanTSMini_Label/PanTS_00008940/segmentations/pancreas.nii.gz"
+        }
+      ],
+      "protected_role": "validation",
+      "retained_hold": null,
+      "selection_reason": "coverage_floor",
+      "status": "candidate_not_qualified",
+      "study_id": "pants:study:PanTS_00008940"
+    }
+  ],
+  "decision": "D-290",
+  "failure_policy": "Retain every outcome; no replacements. Stop on resource/source-identity violation.",
+  "file_count": 296,
+  "header_format": "NIfTI-1 gzip; reject unsupported format without reading arrays",
+  "limits": {
+    "compressed_bytes_per_file": 65536,
+    "compressed_bytes_total": 20971520,
+    "decompressed_header_bytes_per_file": 348,
+    "internal_free_floor": 107374182400,
+    "output_bytes": 8388608,
+    "rss_bytes": 536870912,
+    "seconds": 900
+  },
+  "qualification_granted": false,
+  "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+  "selection_sha256": "4ad3f30df763b7b2f5c0a8140edeef23046ba7d56bf694274864db84572ff287",
+  "source_content_arrays_allowed": false,
+  "state": "prepared_not_executed"
+}

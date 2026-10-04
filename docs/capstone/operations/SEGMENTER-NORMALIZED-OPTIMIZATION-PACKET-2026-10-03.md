@@ -1,0 +1,24 @@
+# Next proposal — controlled v5 learning-rate comparison
+
+D-331's class-normalized candidate passes numerical and restart checks but fails the original synthetic learning gate. Keep the failed v4/v5 records, original cases, targets and criteria. No MPS or real request follows this failure. This packet proposes the next bounded investigation; it is not an accepted loss or launched job.
+
+## Why this comparison
+
+At480updates, v5 recovers sparse/boundary/outside lesion recall1.0 but predicts373/384/496 lesion voxels against8/8/12 references. Multiple-lesion recall is0.25 with one of two components missed. The verified negative has368 false lesion voxels, fraction0.026620 above0.02. Pancreas Dice0.831–0.848 passes0.8. A separately frozen ten-forward read-only inspection reproduces saved metrics and finds false positives on both background and pancreas, including151/217 voxels in the negative fixture. This is a broad false-positive issue, not only an organ restriction issue; a pancreas-only clip would also discard the outside-pancreas target.
+
+The saved v5 history has last20 five-update epoch means ranging0.757289–1.340302; terminal0.850028 versus an earlier minimum0.516616. Different epoch orders and the per-case losses limit interpretation. Fluctuation motivates testing optimization sensitivity, but does not prove that LR is the cause. The v3 synthetic result passed at the same0.003 LR; changing CE reduction changes the gradient scale and spatial allocation, so one LR need not suit every objective. Nominal equal class weights are not equal measured gradients or proof of a correct loss.
+
+## Single changed factor
+
+Test a **fresh constant LR0.001**, versus the retained failed v5 LR0.003 outcome. This threefold reduction is a diagnostic choice, not a claimed optimum. Keep v5's exact per-case present-class mean CE plus foreground Dice, fresh seed42, architecture, five invented intensity-cue fixtures,24³ geometry,480updates, AdamW decay1e-5, batch size and epoch permutation unchanged. No warm start, LR tail, larger duration, threshold tuning, new sampling, target edits or checkpoint selection. Compare terminal480 only; preserve every failed screen. Do not rerun the consumed0.003 request or import its weights.
+
+## Implementation and qualification phases
+
+1. Verify the sealed D-331 package, source122 pins and unchanged ancestry. Add a separate closed comparison wrapper and task/config identity that permits only this fresh0.001 invented CPU experiment. The v5 numerical implementation should remain pinned. Test exact LR/request identity, wrong-task/loss/optimizer resume refusal, source/criteria tampering, single-use consumption and actual dirty-update refusal. If a new session module is needed, preserve the producing v5 source and codec.
+2. Freeze two480-update trajectories: uninterrupted480 and actualSIGTERM30/fresh450restart.960 synthetic optimizer calls, no real or original inputs. Retain≤180s/2GiB percomplete trajectory,≤400s total,256MiB output and100GiB free. Before the first update, bind exact runtime, source, fixtures, sampler, identities and persisted request bytes. Report any fault; do not silently rerun or extend.
+3. Keep original D-322 gates: mean fixed-fixture final/initial loss ratio<0.8; every pancreas Dice≥0.8; every positive lesion Dice≥0.65 and recall≥0.8; each reference lesion component hit; verified-negative lesion FP fraction≤0.02. Independently recompute integer metrics, compare full model/optimizer/RNG/progress and predictions across both paths, and preserve the complete package and checkpoints under a fresh bounded independent capability. Classwise confusion and final20-epoch summaries can be derived from saved evidence under a separately budgeted zero-update inspection; neither can replace the terminal gates.
+4. If failed, stop before MPS and reassess the loss/optimization hypothesis using both retained results. No automatic LR sweep, longer run or relaxed gate. If passed, qualify fresh144³ native MPS mechanics/resources/independent recovery under a separate request; CPU learned weights do not initialize MPS. Only then consider a fresh same6/1/48-update real comparison, with an explicit decision about its optimizer LR and screens and separate exact launch approval.
+
+## Interpretation and boundaries
+
+A pass shows that this invented task can be learned with the candidate at one bounded optimizer setting. It does not establish real CT performance, superiority over v3, specificity, generalization or a clinical operating policy. A failure does not by itself prove that class normalization is unusable. Keep tiny, boundary, multiple, outside-pancreas and negative cases; never optimize the reported score through case removal or a softened gate. Validation2514 remains excluded from tuning. CAP-EXP-013 terminal48 remains primary and consumed; cohort memberships/holds, accepted real recipe, source activation, imports and formal registration remain unchanged.

@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "metadata_inventory_review_not_qualification",
+  "package": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91",
+  "receipt_sha256": "201342b56dd420783136a25c6faf278a224b68f904b1b56dd39278e458c1131b",
+  "files_sha256": "ab7fbde71d6ceabed2f3c4b259126df757ab69a6dbafd6b80190af84b7fe5d50",
+  "package_bytes": 5779584,
+  "covered_hashes_verified": 4,
+  "roles": {
+    "train": {
+      "ct": 7200,
+      "pancreas": 7200
+    },
+    "validation": {
+      "ct": 1800,
+      "pancreas": 1800
+    }
+  },
+  "zero_byte_files": 0,
+  "ct_shards_matching_retained_byte_totals": 9,
+  "observed_summary": {
+    "assurance": "directory_entries_and_stat_only",
+    "bytes_by_kind": {
+      "ct": 317614413856,
+      "pancreas": 1365403323
+    },
+    "content_hashes_computed": 0,
+    "elapsed_seconds": 541.4240445829928,
+    "eligibility_granted": 0,
+    "entries_observed": 297900,
+    "file_count": 18000,
+    "missing": 0,
+    "outside_purpose_structure_counts": {
+      "adrenal_gland_left.nii.gz": 9000,
+      "adrenal_gland_right.nii.gz": 9000,
+      "aorta.nii.gz": 9000,
+      "bladder.nii.gz": 9000,
+      "celiac_artery.nii.gz": 8999,
+      "colon.nii.gz": 9000,
+      "combined_labels.nii.gz": 9000,
+      "common_bile_duct.nii.gz": 9000,
+      "duodenum.nii.gz": 9000,
+      "femur_left.nii.gz": 9000,
+      "femur_right.nii.gz": 9000,
+      "gall_bladder.nii.gz": 9000,
+      "kidney_left.nii.gz": 9000,
+      "kidney_right.nii.gz": 9000,
+      "liver.nii.gz": 9000,
+      "lung_left.nii.gz": 9000,
+      "lung_right.nii.gz": 9000,
+      "pancreas_body.nii.gz": 9000,
+      "pancreas_head.nii.gz": 9000,
+      "pancreas_tail.nii.gz": 9000,
+      "pancreatic_duct.nii.gz": 9000,
+      "pancreatic_lesion.nii.gz": 9000,
+      "postcava.nii.gz": 9000,
+      "prostate.nii.gz": 9000,
+      "spleen.nii.gz": 9000,
+      "stomach.nii.gz": 9000,
+      "superior_mesenteric_artery.nii.gz": 9000,
+      "veins.nii.gz": 9000
+    },
+    "present": 18000,
+    "publisher_test_directories_seen": 901,
+    "publisher_test_payloads_inspected": 0,
+    "schema_version": "1.0.0"
+  },
+  "limitations": [
+    "metadata only; no payload identity or geometry verified",
+    "point-in-time observations under trusted single-writer boundary, not an atomic source snapshot",
+    "publisher-test payloads not inspected",
+    "no source eligibility or training authorization"
+  ]
+}

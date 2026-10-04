@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/manifest-v3/3.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "name",
+    "evidence_domain",
+    "migration_pins",
+    "snapshots",
+    "protection",
+    "subjects",
+    "studies",
+    "annotations",
+    "issues",
+    "accounting_status",
+    "qualification_policy_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "3.0.0"
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^manifest:[a-z][a-z0-9_-]*:[0-9a-f]{64}$"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "evidence_domain": {
+      "enum": [
+        "synthetic_fixture",
+        "retained_source"
+      ]
+    },
+    "migration_pins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "train",
+        "validation",
+        "test"
+      ],
+      "properties": {
+        "train": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "validation": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "test": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "protection": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "study_id",
+          "subject_id",
+          "source_study_id",
+          "protected_role",
+          "protection_group_id"
+        ],
+        "properties": {
+          "study_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_study_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "protected_role": {
+            "enum": [
+              "train",
+              "validation",
+              "test"
+            ]
+          },
+          "protection_group_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "studies": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "accounting_status": {
+      "enum": [
+        "complete",
+        "partial",
+        "quarantined"
+      ]
+    },
+    "qualification_policy_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

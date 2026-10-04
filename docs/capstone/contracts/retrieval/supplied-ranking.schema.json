@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/supplied-ranking/1.0.0",
+  "title": "Plan 07 supplied ranking (fixture input, not a retriever output)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ranking_id",
+    "question_id",
+    "query_id",
+    "corpus_id",
+    "configuration_id",
+    "score_direction",
+    "tie_policy",
+    "target_depth",
+    "eligibility_policy",
+    "eligible_count",
+    "items",
+    "result_count",
+    "shortfall_reason"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "ranking_id": {
+      "type": "string",
+      "pattern": "^rank:[0-9a-f]{64}$"
+    },
+    "question_id": {
+      "type": "string",
+      "pattern": "^q:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^qry:[0-9a-f]{64}$"
+    },
+    "corpus_id": {
+      "type": "string",
+      "pattern": "^corpus:[0-9a-f]{64}$"
+    },
+    "configuration_id": {
+      "type": "string",
+      "pattern": "^cfg:[a-z0-9][a-z0-9._-]{0,62}$"
+    },
+    "score_direction": {
+      "enum": [
+        "higher_is_better",
+        "lower_is_better"
+      ]
+    },
+    "tie_policy": {
+      "const": "score_then_passage_id"
+    },
+    "target_depth": {
+      "const": 50
+    },
+    "eligibility_policy": {
+      "const": "all_corpus_members"
+    },
+    "eligible_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passage_id",
+          "score"
+        ],
+        "properties": {
+          "passage_id": {
+            "type": "string",
+            "pattern": "^psg:[0-9a-f]{64}$"
+          },
+          "score": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "result_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "shortfall_reason": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "const": "eligible_pool_exhausted"
+        }
+      ]
+    }
+  }
+}

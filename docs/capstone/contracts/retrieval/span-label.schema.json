@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/span-label/1.0.0",
+  "title": "Plan 07 question label set with evidence spans",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "question_id",
+    "label_version",
+    "answerable",
+    "required_concepts",
+    "spans"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "question_id": {
+      "type": "string",
+      "pattern": "^q:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "label_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+    },
+    "answerable": {
+      "type": "boolean"
+    },
+    "required_concepts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^c:[a-z0-9][a-z0-9-]{0,62}$"
+      }
+    },
+    "spans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "representation_id",
+          "representation_sha256",
+          "start",
+          "end",
+          "grade",
+          "concept_ids"
+        ],
+        "properties": {
+          "representation_id": {
+            "type": "string",
+            "pattern": "^repr:[0-9a-f]{64}$"
+          },
+          "representation_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "grade": {
+            "enum": [
+              "direct",
+              "partial_context",
+              "contradicting_or_limiting",
+              "uncertain"
+            ]
+          },
+          "concept_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^c:[a-z0-9][a-z0-9-]{0,62}$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

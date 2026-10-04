@@ -10,6 +10,14 @@ hash-verified copies on both devices. See [the setup evidence](STORAGE-SETUP-202
 No routine backup service, trained-model restore, off-site backup, or full raw-data mirror exists.
 Recheck the cap/free-space floor on every future copy; never automatically delete to make it fit.
 
+## September 28 checkpoint recovery evidence
+
+D-273 verified a synthetic trained localizer checkpoint on the registered external artifact root,
+its independent internal backup, and fresh-destination MPS consumer recovery with primary reads
+refused. See [the bridge handback](LOCALIZER-RUN-BRIDGE-HANDBACK-2026-09-28.md). This is an executed
+checkpoint drill, not a real-data-trained keeper, off-site backup or raw-data mirror. Existing cap,
+free-space, no-deletion and later release-drill requirements remain.
+
 ## Purpose
 
 September 28 literature amendment (D-262/D-263/D-264): canonical literature and live

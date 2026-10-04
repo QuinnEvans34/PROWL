@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/corpus-manifest/1.0.0",
+  "title": "Plan 07 corpus manifest and membership",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "corpus_id",
+    "allowed_origins",
+    "members",
+    "excluded",
+    "counts"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "corpus_id": {
+      "type": "string",
+      "pattern": "^corpus:[0-9a-f]{64}$"
+    },
+    "allowed_origins": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "synthetic",
+          "pubmed_baseline",
+          "pmc_cloud"
+        ]
+      }
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passage_id",
+          "text_sha256",
+          "representation_id",
+          "work_id",
+          "rights_id"
+        ],
+        "properties": {
+          "passage_id": {
+            "type": "string",
+            "pattern": "^psg:[0-9a-f]{64}$"
+          },
+          "text_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "representation_id": {
+            "type": "string",
+            "pattern": "^repr:[0-9a-f]{64}$"
+          },
+          "work_id": {
+            "type": "string",
+            "pattern": "^work:(pmid:[1-9][0-9]{0,9}|synthetic:[a-z0-9][a-z0-9-]{0,62})$"
+          },
+          "rights_id": {
+            "type": "string",
+            "pattern": "^rights:[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "passage_id",
+          "reason"
+        ],
+        "properties": {
+          "passage_id": {
+            "type": "string",
+            "pattern": "^psg:[0-9a-f]{64}$"
+          },
+          "reason": {
+            "enum": [
+              "rights_not_indexable",
+              "work_quarantined",
+              "work_excluded",
+              "work_retracted",
+              "not_final_revision",
+              "work_deleted",
+              "origin_not_allowed"
+            ]
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input_passages",
+        "members",
+        "excluded"
+      ],
+      "properties": {
+        "input_passages": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "members": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "excluded": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

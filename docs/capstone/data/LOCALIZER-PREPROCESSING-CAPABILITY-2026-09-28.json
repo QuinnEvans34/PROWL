@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "approval": "D-270",
+  "operation": "read_only_preprocessing",
+  "cohort_id": "cohort:pants-localizer-smoke-0001:v1",
+  "study_ids": [
+    "pants:study:PanTS_00000003",
+    "pants:study:PanTS_00000026"
+  ],
+  "source_alias": "followup_source",
+  "raw_file_count": 4,
+  "recipe_file_sha256": "3bdc8ae7f60039b6a3e4e8a3ae2629255af4f3519ff83814145f7988d2242f94",
+  "publication_capability_sha256": "b8be9d3e20d108eade87282e067f9f6f2fa4eeb87c39a681999f4534a64c0136",
+  "completion_sha256": "37a4f6a8e248200de579a31631d740b5009b0836147b382aff50212084cb632c",
+  "s3_receipt_sha256": "7018583fa42310a4a179efc0d5570eebb605a4b2d49c2f9883c33315b43872b2",
+  "manifest_sha256": "12ba8fe0a7013db13d06b0e0ea87ea949f167896bee9d2712b2d1d0f18d83220",
+  "source_request_path": "outputs/prowl/localizer-metadata-4c93efaa-f102-4bef-bae6-8966b3446d91/request.json",
+  "source_request_sha256": "01908502b2a1cd4bd8b7a124cbb001c21116c22ec60b01b600cd4d8a08cedff6"
+}

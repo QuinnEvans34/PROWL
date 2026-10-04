@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/cohort-v2/2.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cohort_id",
+    "derivation_sha256",
+    "cohort_family_id",
+    "capability",
+    "protected_role",
+    "purpose",
+    "manifest",
+    "parents",
+    "ancestors",
+    "members",
+    "definition",
+    "profile",
+    "state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "cohort_id": {
+      "type": "string",
+      "pattern": "^cohort:[a-z][a-z0-9_-]*:v[1-9][0-9]*$"
+    },
+    "derivation_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "cohort_family_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "capability": {
+      "enum": [
+        "protection_only",
+        "executable"
+      ]
+    },
+    "protected_role": {
+      "enum": [
+        "train",
+        "validation",
+        "test"
+      ]
+    },
+    "purpose": {
+      "enum": [
+        null,
+        "pancreas_present_localizer"
+      ]
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "parents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "ancestors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_method",
+        "requested_count",
+        "shortage_policy"
+      ],
+      "properties": {
+        "selection_method": {
+          "enum": [
+            "fixed_membership"
+          ]
+        },
+        "requested_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "shortage_policy": {
+          "const": "fail"
+        }
+      }
+    },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "study_count",
+        "subject_count"
+      ],
+      "properties": {
+        "study_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subject_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "state": {
+      "const": "validated_in_memory"
+    }
+  }
+}

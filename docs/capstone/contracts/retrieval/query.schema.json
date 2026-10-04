@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/query/1.0.0",
+  "title": "Plan 07 validated query record (fixture-level scope gate)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "query_id",
+    "finding",
+    "question_original",
+    "question_normalized",
+    "normalization_version",
+    "scope_policy_version",
+    "state",
+    "refusal_codes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^qry:[0-9a-f]{64}$"
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "modality",
+        "anatomy",
+        "task",
+        "finding_state"
+      ],
+      "properties": {
+        "modality": {
+          "const": "CT"
+        },
+        "anatomy": {
+          "const": "pancreas"
+        },
+        "task": {
+          "enum": [
+            "localization",
+            "pancreas_contour",
+            "suspected_lesion_contour",
+            "measurement",
+            "review"
+          ]
+        },
+        "finding_state": {
+          "enum": [
+            "no_candidate",
+            "candidate",
+            "multiple_candidates",
+            "processing_failed"
+          ]
+        },
+        "lesion_count_bin": {
+          "enum": [
+            "0",
+            "1",
+            "2_or_more"
+          ]
+        },
+        "size_bin": {
+          "enum": [
+            "lt_10mm",
+            "10_to_20mm",
+            "gt_20mm"
+          ]
+        },
+        "warning_category": {
+          "enum": [
+            "localization_uncertain",
+            "empty_prediction",
+            "multiple_components",
+            "geometry_mismatch",
+            "processing_error"
+          ]
+        }
+      }
+    },
+    "question_original": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "question_normalized": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "normalization_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+    },
+    "scope_policy_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+    },
+    "state": {
+      "enum": [
+        "accepted",
+        "refused"
+      ]
+    },
+    "refusal_codes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "RF1_diagnosis",
+          "RF2_case_malignancy_stage_subtype",
+          "RF3_treatment",
+          "RF4_prognosis",
+          "RF6_hidden_patient_material",
+          "RF7_injection",
+          "RF8_protected_system_information",
+          "RF9_contour_certification",
+          "identifier_or_path"
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "accepted"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "refusal_codes": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "refused"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "refusal_codes": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

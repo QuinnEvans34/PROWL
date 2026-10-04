@@ -10,6 +10,12 @@ downloader uses an isolated `sources/pants/acquisition-<revision>/` directory, n
 snapshot. It retains `.part` files there for resume; none are discoverable through a source alias.
 Production resolution, source-write protection, and generic publication remain unimplemented.
 
+September 28 D-269 implementation: the shared bounded writer and reader now support cohort artifacts
+through a separate pinned capability over the unchanged setup registry. See the
+[publication handback](../data/LOCALIZER-COHORT-PUBLICATION-2026-09-28.md). The first cohort is published
+and independently resolved. Earlier “unimplemented” wording below is historical for this narrow
+slice; global scientific-run enablement, source activation and full workflow recovery remain pending.
+
 ## Purpose
 
 Define how portable scientific identity is translated into local files without letting an absolute

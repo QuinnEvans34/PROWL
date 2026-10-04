@@ -3,6 +3,12 @@
 **Status:** Approved Plan 02 baseline  
 **Version:** 1.0
 
+September 28 implementation: [first frozen localizer cohort](LOCALIZER-COHORT-PUBLICATION-2026-09-28.md)
+is published and resolved under D-269. Cohort-v2 protection parents preserve all original members;
+only the 3/26 executable child grants the reviewed target purpose. Complete publication is asserted
+by the independently pinned artifact envelope, not the embedded in-memory state field. Future source
+or membership changes require new frozen identities/versions; never rewrite this bundle.
+
 ## Purpose
 
 This protocol prevents evaluation leakage, wrong-parent sampling, irreproducible membership, and
@@ -149,3 +155,13 @@ Do not freeze or consume a cohort when:
 - blocking duplicate candidates cross roles;
 - membership changes between identical repeat builds;
 - a consumer can bypass the cohort registry with an arbitrary list.
+
+
+## September 28 staged membership implementation (D-266–D-268)
+
+Original membership is permanent; permissions are purpose-specific. Explicit cohort/member v2
+contracts distinguish protection-only membership from qualified executable descendants. The current
+implementation validates in-memory records only and does not satisfy the freeze/publication steps
+above. Difficulty/model performance cannot determine qualification. Read
+[S1 verification and compatibility](SYNTHETIC-QUALIFICATION-IMPLEMENTATION-2026-09-28.md)
+before using the new entry points; no G1 or source-readiness waiver is implied.

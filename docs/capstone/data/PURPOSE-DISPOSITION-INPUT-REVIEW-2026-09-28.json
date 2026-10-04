@@ -1,0 +1,96 @@
+{
+  "scope": "retained-input-review-only",
+  "packages": [
+    {
+      "path": "outputs/prowl/manifest-slice-35acf328-ae35-4c32-954c-df2c34034d87",
+      "verification_sha256": "39d91b6a4277bd3168d9887ee94ed9378e58e09fc16e8c7ef3b776624e58085b",
+      "verified_files": 13,
+      "replay_files": 5,
+      "studies": [
+        "pants:study:PanTS_00000001",
+        "pants:study:PanTS_00000002"
+      ],
+      "annotation_count": 0
+    },
+    {
+      "path": "outputs/prowl/manifest-v2-slice-685cfdbd-ae54-4508-be6f-5b9267197bd9",
+      "verification_sha256": "850d6ecd3d4a3c3d62c72c6025a756f0d0c319632650a2993404f96617f3fda6",
+      "verified_files": 25,
+      "replay_files": 5,
+      "studies": [
+        "pants:study:PanTS_00000003",
+        "pants:study:PanTS_00000026",
+        "pants:study:PanTS_00000031",
+        "pants:study:PanTS_00000078",
+        "pants:study:PanTS_00000266"
+      ],
+      "annotation_count": 10
+    }
+  ],
+  "candidate_records": [
+    {
+      "study_id": "pants:study:PanTS_00000078",
+      "annotation_id": "pants:annotation:PanTS_00000078-pancreas-v2-acf7cdcf67458174",
+      "snapshot_id": "snapshot:pants:e76c492d125fce6cf8f385e2daf9e62d4a774157e0dc2b456da9da27531b1471",
+      "study_record_sha256": "a60e3bd4b600987bff5c0796679bce99621ea6aaf9c5c9f188abba8c35b2e954",
+      "annotation_record_sha256": "8fa30d44c3ddc3e23d8c92b6e50f60383ca35cc4adbc17456092de3d0df0cdcc",
+      "ct_sha256": "d5f9849da0ac39919ce6ec0c199ea218deeb0b28b0dd981b01682322de90f57b",
+      "mask_sha256": "c9e78f390f4b4e480ba4a2d9c8409939c82331e8ffa427d7701abc6fecf7355c",
+      "audit_file": {
+        "bytes": 3601,
+        "content_sha256": "d923aeed240486fa491db17071fa5f3a1f8e7214a0e025372b3b8918cbe838d8",
+        "media_type": "application/json",
+        "root_alias": "manifest_evidence",
+        "uri": "pair-06.json"
+      },
+      "existing_issue_hashes": {
+        "issue:0221dfda-b443-4b09-84e9-c34277b358a6": "9ca6ba7e34c6cc344893c9dabcaa7567b7a7308215c5ac0af3ff6454a611268e",
+        "issue:57f81740-a708-4d6e-8f10-123e217e0441": "5cfda1a6d0aefef412a76a79c87ebe7e7426046e5fdc1e0a6484c2cd86cddc42"
+      },
+      "purpose": "pancreas_present_localizer",
+      "rule_code": "PANCREAS_PRESENT_TARGET_EXCLUDED"
+    },
+    {
+      "study_id": "pants:study:PanTS_00000266",
+      "annotation_id": "pants:annotation:PanTS_00000266-pancreas-v2-6ff57b6ff69dd900",
+      "snapshot_id": "snapshot:pants:e76c492d125fce6cf8f385e2daf9e62d4a774157e0dc2b456da9da27531b1471",
+      "study_record_sha256": "9eec3e890a744468d459a6ff19b70e7011d7779fc2a4af9498304ed9baa1255d",
+      "annotation_record_sha256": "ec5754faf0dcc3e9230b0853311e2c6fcad46c1ae63d918111acb6662a5d9023",
+      "ct_sha256": "ae4b95e088ac5a443baa1ae51da0f3eba252d68e7448b3fcdb3d78a2c8c4dfd3",
+      "mask_sha256": "9ef2016b1aa887234fdfc09bad70bde939391d6daddbbe3ad2f4fecdddbff201",
+      "audit_file": {
+        "bytes": 3201,
+        "content_sha256": "a8738ca2296674ec21594555ae5b17a8e06ce08e7bff68cce7cdfff3770cf313",
+        "media_type": "application/json",
+        "root_alias": "manifest_evidence",
+        "uri": "pair-09.json"
+      },
+      "existing_issue_hashes": {
+        "issue:e5ecaaed-c10d-4a48-8af3-6b3cf2a61c92": "eb070907f44017fececd1388312c9c665621f77eb7f197701e84a1be8647c5d9",
+        "issue:92c30a6d-60ba-46ce-a7ba-d2c526c16c4b": "7ee3c5e9b2038c425fca5528ce440f4564cceca4609dfb953a01effbcc16dd2f"
+      },
+      "purpose": "pancreas_present_localizer",
+      "rule_code": "PHYSICAL_UNITS_UNRESOLVED"
+    }
+  ],
+  "followup_receipt_verified_files": 13,
+  "coverage_reference": {
+    "bone_sha256": "de15e4927d8916154e0d7cb761c37a7146445a9f25548a578789a1e534f7b4a2",
+    "coverage_assessment": "unchanged_uncertain",
+    "evidence_sha256": "b0afbccb8fde6fd5561525d5fffcc7d1f1907b20b2388123684dbcd2e32fcb1c",
+    "review_sha256": "d5ac2b95a4b60f523ea4b75a25863d2b2473f314fe2c3df910f79ec30d43dbdc",
+    "status": "provisional_review_not_adjudication"
+  },
+  "input_files": {
+    "docs/capstone/data/PURPOSE-ELIGIBILITY-DECISIONS-2026-09-28.md": "fc6d258b7767e9d03f28d1a6e990fe325db08f84043ce06314702d1e24ed66f2",
+    "docs/capstone/data/CASE78-COVERAGE-REVIEW-2026-09-28.md": "d5ac2b95a4b60f523ea4b75a25863d2b2473f314fe2c3df910f79ec30d43dbdc",
+    "docs/capstone/data/UNIT-EVIDENCE-INVESTIGATION-2026-09-28.md": "44685e6a4760174bba166369100ab3c1c5d818b6b39747ed4783916ce46d7ac8",
+    "src/data/purpose_disposition.py": "e7e6e5fea9824c8fcca3ba85673acdd12a2b5581b7d72d3e3be3b0c8713b249d",
+    "src/data/annotation_contract_v2.py": "47939ed9e02638bd91672bbb331640220354331d92442f0c50a52946729724e7",
+    "docs/capstone/contracts/data-issue.schema.json": "671140691c8b800a5aa9a2c250e74f1c2ec485b535ec5ef8e9fe613963421e91",
+    "docs/capstone/contracts/annotation-record-v2.schema.json": "215e18b3537a17bc63ecb4006a75da9f4e7c286c2553b2722876ccaa4afd79f4",
+    "outputs/prowl/case78-coverage-c48e03d8-9d04-477e-8792-3a9c413128ed/evidence.json": "b0afbccb8fde6fd5561525d5fffcc7d1f1907b20b2388123684dbcd2e32fcb1c"
+  },
+  "train_membership_sha256": "bfc827ac52346e4636ed3a58581d5f55a9f1e80983bbfd6228c928babd519fc8",
+  "case2": "Prior two-study package contains zero annotations; no v2 pancreas record to pass to helper. Keep hold; separate evidence/representation slice needed."
+}

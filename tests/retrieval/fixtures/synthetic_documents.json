@@ -1,0 +1,32 @@
+{
+  "_provenance": "Invented by Claude for PROWL P3 on 2026-09-28. Fictional terms (zorbel, quintar, Vell phase). Not real literature, not medical claims.",
+  "works": [
+    {
+      "work_id": "work:synthetic:zorbel-margins",
+      "kind": "abstract",
+      "sections": [
+        {"section_id": "background", "title": "Background",
+         "paragraphs": ["The zorbel margin is not visible in the Vell phase.  Readers  disagree on its edge.",
+                        "Café notation and café notation are equivalent here — a synthetic check."]},
+        {"section_id": "results", "title": "Results",
+         "paragraphs": ["Quintar outlines were revised in 12 of 40 synthetic cases. The revision rate was not reduced by training. Outlines were then re-read."]}
+      ]
+    },
+    {
+      "work_id": "work:synthetic:quintar-review",
+      "kind": "abstract",
+      "sections": [
+        {"section_id": "summary", "title": "Summary",
+         "paragraphs": ["Automated quintar tracing produced false regions near the flux duct. Human review removed most of them. Some remained after review."]}
+      ]
+    },
+    {
+      "work_id": "work:synthetic:retracted-item",
+      "kind": "abstract",
+      "sections": [
+        {"section_id": "summary", "title": "Summary",
+         "paragraphs": ["This invented record reports a zorbel result that was later withdrawn."]}
+      ]
+    }
+  ]
+}

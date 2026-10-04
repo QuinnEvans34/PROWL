@@ -539,3 +539,791 @@ left to Codex.
 - pure Python, synthetic fixtures only;
 - no SQL, services, tokenizers, downloads, real text or held-out data;
 - the span-hit and delivered-evidence metrics are labelled as a proposal.
+
+---
+
+## 2026-09-28: P3 handback to Codex (Claude)
+
+**Delivered (allowlist only; 31 files):**
+- `src/retrieval/`: 7 modules;
+- `tests/retrieval/`: 7 test files plus 2 fixture files;
+- `docs/capstone/contracts/retrieval/`: 12 schemas plus README;
+- `docs/capstone/retrieval/FOUNDATION-DESIGN-2026-09-28.md`;
+- `docs/capstone/retrieval/CLAUDE-FOUNDATION-HANDOFF-2026-09-28.md`, SHA-256
+  `522e341bbe2754c5b3b021113d36127dfc0682d44ee69eb2f807e3a2a0b72b53`.
+
+Every file's hash on the Mac was verified against the container copy (all 31 match; per-file hashes
+are in the handoff).
+
+**Tests (Linux container; NOT native):**
+- `tests/retrieval`: 120 passed, stable over 3 runs;
+- pyflakes clean;
+- 10 reverted fault injections, all caught. One (duplicate span credit) was missed at first, and a
+  new test was added to catch it.
+
+The full native suite was not run; Codex runs both packet commands on the Mac. Two hand oracles
+were corrected during development, as disclosed in the handoff; the implementation was never
+changed to fit a test.
+
+**Scope held:**
+- no SQL/FTS5, services, tokenizer, downloads, real text, held-out data or shared-file edits;
+- span-hit and delivered-evidence metrics labelled `proposed_provisional_not_official`;
+- the D-085 metrics remain the official ones.
+
+**Concurrent change observed (not Claude's):** HEAD moved from `f4d7109` to `21f838c` during P3
+(Codex checkpoint commits "Checkpoint September data qualification and approved retrieval planning"
+and "Record verified checkpoint publication and current handoff"). `git status` now lists the P3
+paths as untracked; they were not part of those commits.
+
+**Ownership:** handed back. Claude does not edit these files during Codex review. P4b waits for the
+contract review and a separate psycopg 3 approval.
+
+---
+
+## 2026-09-28: P3 corrections R1–R5 started (Claude)
+
+**Trigger:** `docs/capstone/retrieval/CODEX-P3-REVIEW-2026-09-28.md` (changes requested; P3 contract
+review not accepted). Quinton asked Claude to address R1–R5, add regression tests and return an
+updated handback.
+
+**Scope:** the existing P3 write allowlist only. Same synthetic-only rules. The frozen needs and
+existing decisions are unchanged; the proposed metrics stay proposals. No P4b work.
+
+**Plan:**
+- R1: recompute revision, rights and event identities at replay/assembly/permission boundaries;
+  reject duplicate logical records.
+- R2: bind evaluation to question, accepted query, configuration and corpus; verify passages and
+  representations against the manifest; reject duplicate questions.
+- R3: delivered evidence takes the verified ranking/corpus records, derives counted text from
+  verified slices and enforces display permission separately from indexing.
+- R4: bind per-paragraph original length/hash and the offset map into representation identity;
+  validate coverage, order and bounds.
+- R5: persist and verify an eligible count bound to the corpus (P3: all corpus members) and require
+  min(50, eligible) results.
+
+The P3 files on the Mac were confirmed unchanged since the first handback before work began.
+
+---
+
+## 2026-09-28: P3 corrections handback to Codex (Claude)
+
+**Addressed:** R1–R5 from `CODEX-P3-REVIEW-2026-09-28.md`, each with regressions at the public entry
+points. Codex's probes are now assertions, and every one is rejected.
+- **R1:** revision, rights and event identities are recomputed at replay, assembly and permission
+  checks. Byte-identical duplicate records are refused.
+- **R2:** `evaluate` requires `queries` and binds each ranking to its question, accepted query,
+  configuration and corpus. It refuses duplicate question IDs and re-verifies passages and
+  representations against the manifest.
+- **R3:** `delivered_evidence` takes the verified ranking, corpus and rights. It counts only verified
+  slices and enforces display permission separately from indexing (`display_not_permitted`).
+- **R4:** the offset map, original length and original SHA-256 are in the representation identity.
+  `verify_offset_map` checks coverage, order and bounds. `verify_representation_source` proves
+  provenance where the originals are available.
+- **R5:** the ranking persists `eligibility_policy=all_corpus_members` and `eligible_count` (equal to
+  the corpus members) and requires exactly min(50, eligible) results.
+
+**Files:** 15 of the 31 P3 files changed, all inside the P3 allowlist. The three changed schemas are
+`representation`, `supplied-ranking` and `context-result`; they stay at 1.0.0 because they were never
+accepted, and Codex is asked to confirm or request 1.1.0. The functions whose signatures changed are
+listed in the handoff. Every one of the 31 files on the Mac was verified by SHA-256 against the
+container copy.
+
+The handoff is `docs/capstone/retrieval/CLAUDE-FOUNDATION-HANDOFF-2026-09-28.md` (revision 2), SHA-256
+`c6a072db9194c1d94b9f26fafec17eaf26db5c1a6d662cd2043923acefdb3c48`.
+
+**Tests (Linux container; NOT native):**
+- `tests/retrieval`: 182 passed (was 120), stable over 3 runs;
+- pyflakes clean;
+- 33 reverted fault injections on the new guards, all caught. Two were missed at first
+  (representation re-verification, counter-kind guard); tests were added for them, and the
+  implementation was not changed.
+- One R4 oracle was corrected by adding a documented single-space-or-cluster rule. This is disclosed
+  in the handoff.
+
+**Scope held:**
+- no SQL, services, tokenizer, downloads, real text, held-out data, dependency changes or shared-file
+  edits;
+- the frozen needs and decisions are unchanged;
+- span-hit and delivered-evidence metrics remain `proposed_provisional_not_official`.
+
+HEAD is still `21f838c`, and the P3 paths are still untracked.
+
+**Ownership:** handed back. Claude does not edit these files during re-review. P4b waits for an
+accepted contract review and a separate psycopg 3 approval.
+
+---
+
+## 2026-09-28: P3 accepted by Codex (recorded by Claude)
+
+**Source:** `docs/capstone/retrieval/CODEX-P3-REREVIEW-2026-09-28.md`, relayed by Quinton. Codex
+accepted handback revision 2 (SHA-256 `c6a072db…`) for the dispatched P3 synthetic scope. R1–R5 are
+closed.
+
+**Native evidence (Codex, Mac):**
+- `tests/retrieval`: 182 passed;
+- full suite: 813 passed, with the 2 existing torch.jit warnings;
+- all 31 files hash-verified.
+
+Codex reviewed Claude's mutation campaign as evidence and did not rerun it.
+
+**Schema decision:** 1.0.0 is confirmed as the first accepted baseline and is identified by the
+exact hashes in the accepted handback. The superseded pre-acceptance draft is not compatible merely
+because it shares the version string. Future incompatible changes need version and migration review.
+
+**Downstream obligations recorded by Codex (Claude carries these forward):**
+- **P5 parser acceptance:** at real ingestion, call `verify_revision` with the pinned source bytes and
+  `verify_representation_source` with the original paragraphs before publishing a representation.
+- Identities detect change but do not authorize it. Production consumers resolve approved, pinned
+  builds through the later artifact boundary.
+- Fixture query rules and synthetic counters are not a security sandbox, anonymizer, tokenizer or
+  permission to send text externally.
+- `all_corpus_members` is the only accepted ranking-pool rule. New filters need a verifiable
+  inventory and policy.
+- Span-hit and delivered-evidence metrics remain proposed and provisional, not D-085.
+
+**Gates now:**
+- P3's contract-review dependency is satisfied.
+- P4b still needs P4a plus a separate psycopg 3 approval; P4a needs its own authorization.
+- No new phase is dispatched.
+
+The proposed next literature task (Codex's week plan, `PRECOURSE-TRAINING-WEEK-2026-09-28.md`) is
+bounded P2 seed-candidate work and acquisition-plan preparation for Quinton's review. It must not
+compete with imaging for accelerator, memory or storage during a run.
+
+---
+
+## 2026-09-28: P2 started, protocols on paper (Claude)
+
+**Dispatch:** Quinton, in the Claude discussion ("move onto P2 now"), after Codex accepted P3.
+Codex's week plan names this bounded P2 work as the proposed next literature task.
+
+**Scope (PHASES P2):**
+- make `SEARCH-AND-SELECTION.md` policy v0 executable;
+- propose seed candidates by citation chaining (`SEED-SET.md` rules 1-2) for Quinton's review;
+- make run record S in `ACQUISITION-PLAN.md` ready for signature.
+
+**Write set (Claude's planning lane; no shared files):**
+- `planning/SEARCH-AND-SELECTION.md`, `planning/SEED-SET.md`, `planning/ACQUISITION-PLAN.md`;
+- a new `planning/SEED-CANDIDATES.md`;
+- append-only entries here.
+
+Nothing else is touched: no code, downloads, installs, data, `DECISIONS.md` or Codex-owned
+documents. `INFORMATION-NEEDS.md` stays frozen at v1.
+
+**Literature inspection disclosed (SEED-SET rules 2 and 9).** This is citation chaining only,
+before any selection run exists. Only reference-list metadata was read (titles, authors, venues,
+years, DOIs); no abstracts and no full text. Every fetch went through Claude's web-fetch tool on
+2026-09-28:
+- **PanTS** (arXiv 2507.01291v1, HTML): full reference list read (69 entries).
+- **Medical Segmentation Decathlon** (Nat Commun 2022, nature.com): full reference list read
+  (45 entries).
+- **S-02** (UEG J 2025, doi:10.1002/ueg2.12723): the Crossref record was read (130 deposited
+  references, DOIs only). OpenAlex gave its PMID as 39865461, which matches the appendix. Titles were
+  looked up in Crossref for 13 of the DOIs. One lookup (10.1148/radiol.220329) was rate-limited and
+  skipped.
+- **Cao 2023** (Nat Med, doi:10.1038/s41591-023-02640-w; second-level chaining from PanTS): Crossref
+  reference list read (53 entries).
+- **Spot checks:** three DOIs taken from the extracted lists were re-read in Crossref; title and
+  year matched each time.
+- **Web search** was used only to locate the S-02 and Cao 2023 article pages, never to find
+  candidates.
+
+**Gaps (could not read):**
+- S-01 (Suman 2021): the Europe PMC references endpoint was rate-limited, and a Crossref
+  bibliographic search found no match for the appendix citation.
+- S-02: the full reference list with titles was not available. PMC required a CAPTCHA (not
+  bypassed), Wiley returned 403, the Europe PMC endpoint was rate-limited, and OpenAlex returned 429.
+- PANORAMA protocol: the Zenodo PDF (6.3 MB) could not be parsed by the fetch tool. Downloading it
+  needs Quinton's permission.
+
+Nothing was fetched from the device shell (it has no network) and no rate limit was bypassed.
+Identifiers are "per source" and unverified until P5 verifies them against the local snapshot.
+
+---
+
+## 2026-09-28: P2 handback, for Quinton's review and Codex review (Claude)
+
+**Delivered (Claude's planning lane only):**
+- `SEARCH-AND-SELECTION.md` **revision 6**, policy v0:
+  - the OPEN markers now read APPROVED-provisional, per D-265 / SCOPE 12B;
+  - new section 11, execution definitions: exact XML paths, MeSH resolution and explosion,
+    tokenizer, wildcard and hyphen rules, evaluation order, the reconciliation universe, dates and
+    cutoff, deterministic sampling keys and order, the Wilson interval, a pinned Unicode runtime, and
+    outputs;
+  - a precise qualifier-trigger rule;
+  - new section 12: 28 synthetic conformance examples (E1-E27 plus E5b), as oracles for the P6
+    matching tests.
+
+  No concept block, term list, branch, bar or exclusion rule was changed. Seven interpretations are
+  listed in its status block for Quinton to confirm.
+- `SEED-SET.md` **revision 5**:
+  - second-level chaining;
+  - named metadata lookups;
+  - the P5 resolution order and citation check;
+  - outcomes that are never auto-repaired;
+  - scope probes (rule 10) and no tuning to seeds (rule 11);
+  - the `title_only_branches` field;
+  - a proposed rule 6 addition.
+- `SEED-CANDIDATES.md` (new):
+  - 22 PubMed candidates, 17 recommended and 5 optional;
+  - 8 scope probes, 10 non-PubMed references and 3 optional negative seeds;
+  - title-only branch predictions, coverage and gaps, and 7 decisions for Quinton.
+- `ACQUISITION-PLAN.md` **revision 6**: run record S's envelope is complete for signature:
+  - a deterministic file choice (`n0001`, `n0667`, `n1334`, the two newest updates, MeSH);
+  - the executor is Quinton's Mac, not the Cowork VM;
+  - a prerequisite status table, a pre-run checklist, and the post-run state;
+  - a receipt location;
+  - signing of a frozen copy (`RUN-S-SIGNED-<date>.md`, hashed in this log).
+
+  The run A table is unchanged. Run B gains a licence-allowlist row, and the prerequisite lists
+  read "before running", with signing last.
+
+**File SHA-256 at handback:**
+- `SEARCH-AND-SELECTION.md`: `be5edc3781f0216581c5ea5c07aab2a5c6a136e7bf523be74b9b63005f1382f1`
+- `SEED-SET.md`: `91fabc6cddd4393bf8a96037644c0369c14feb186ade1b82fd05e9c6fef51276`
+- `SEED-CANDIDATES.md`: `e60b7fc0754839b1b51e053884497373b019c3ff111b0d2248579bc5a4ca5850`
+- `ACQUISITION-PLAN.md`: `1e0612f7a177201234a44a9fb8e4037e4a45cf9335fe07667d495d493a390b1c`
+
+**Verification:** an independent Claude subagent reviewed the drafts adversarially, over two rounds
+(33 findings, then 13). Everything it raised was fixed, or turned into an explicit question for
+Quinton. It confirmed:
+- every conformance example follows from the rules;
+- every title-only branch prediction and every seed-versus-probe placement is correct;
+- the counts and the 90% arithmetic.
+
+This is desk review only. No code or data exists yet to test against.
+
+**Findings that matter for Quinton:**
+- **Family 5 is below the 2-seed minimum.** Eleven needs have no section A candidate, and the
+  WORKFLOW branch has no seed. The chaining sources cannot fill these gaps, so papers Quinton has
+  read or another named chaining source are needed.
+- **With 17 seeds, the 90% bar allows one miss.**
+- **Pre-run policy questions** (not seed-driven): whether to add a bare `AI` token to block A,
+  `intra-observer`, or "reader studies".
+
+**Incident (caused by Claude, fixed):** a `git status` from the Cowork VM created
+`.git/index.lock`, and the VM could not delete it. That lock would have blocked Git on the Mac. It
+was renamed to `.git/index.lock.stale-claude-20260928` (0 bytes). The lock is gone, and Quinton can
+delete the renamed file. From now on Claude uses only `git --no-optional-locks`, read-only.
+
+**P2 exit status (PHASES):**
+- selection v0 and the seed list are **awaiting Quinton's review**;
+- run S's envelope is **complete**; signing waits for S1 (aliases, Codex) and S2 (sizing-tool
+  packet, group C, not granted);
+- Codex's storage-alias and L-03 channel items are unchanged by Claude.
+
+**Ownership:** handed back for review. Claude makes no further P2 edits until Quinton or Codex
+responds.
+
+---
+
+## 2026-09-28: Codex P2 review received; exposure disclosures (Claude records)
+
+**Review:** `docs/capstone/retrieval/CODEX-P2-REVIEW-2026-09-28.md`. **Revisions requested before P2
+acceptance or seed freeze.** Codex verified the four handback hashes.
+
+**Required revisions:**
+- **R1:** seed eligibility must not depend on matching policy terms.
+- **R2:** correct S-01 and recompute coverage.
+- **R3:** tighten run S into a bounded execution contract.
+
+Codex also recommended:
+- **yes** to the three pre-run term changes: uppercase `AI`, `intra-observer`, `reader studies`;
+- **keep** all seven written interpretations;
+- a candidate-by-candidate list.
+
+These are recommendations, not Quinton's decisions.
+
+**S-01 citation conflict (confirmed):**
+- Codex read the NLM record for PMID 33840636. It is Suman et al., "Quality gaps in public
+  pancreas imaging datasets: Implications & challenges for AI applications", *Pancreatology*
+  2021;21(5):1001-1008, doi:10.1016/j.pan.2021.03.016.
+- Claude re-checked that DOI in Crossref, reading metadata only (title, authors, venue, pages). It
+  matches.
+- The appendix v3.1 citation ("Assessment of pancreatic ductal adenocarcinoma using CT imaging")
+  does not match. The appendix is not edited.
+
+**Pre-sampling exposure list** (to transfer into the inspected-PMID ledger when it is created in P6;
+these records are kept out of independent confirmation):
+- **Codex, 2026-09-28** (review):
+  - web search `site.pubmed.ncbi.nlm.nih.gov "automation bias" radiology systematic review`;
+  - the snippets included abstract-derived text;
+  - PMIDs 21685142, 21335679, 27516495, 38635456, 42436051, 42446358, 42565207;
+  - DOI 10.1148/radiol.222176;
+  - the NLM page for PMID 33840636 (abstract and MeSH shown).
+- **Claude, 2026-09-28** (P2 locating searches, disclosed for completeness): result **titles**
+  were shown while locating the S-02 and Cao 2023 pages. Of those shown, these were not used:
+  - PMC12286379, PMC13227626, PMC13236442, PMC13292061, PMC13103180, PMC12346778;
+  - PMIDs 39830259, 42169791, 39665541;
+  - nature.com articles s41746-025-01970-y, s41598-025-00512-6, s41746-025-02260-3,
+    s41598-026-51814-2, s41591-025-03785-6, s41572-026-00699-6, s41591-026-04589-y.
+
+  The Crossref records fetched in P2 may contain deposited abstracts. The fetch tool was told to
+  return metadata only, and Claude did not see abstract text.
+
+None of these is a seed candidate by virtue of the exposure. No relevance labels were assigned.
+
+**Next:** Claude revises R1-R3 and prepares the S-01 correction and the policy amendment for
+Quinton's approval. No freeze, download, tool build or phase start.
+
+---
+
+## 2026-09-28: P2 revision 2 handback, response to the Codex P2 review (Claude)
+
+**Response to each finding:**
+- **R1 (seed eligibility): addressed.**
+  - SEED-SET rule 10 is now a topic-and-use test: Quinton judges need plus Tier 1 scope, and no
+    policy term has to match.
+  - Title-only branches are a diagnostic column only.
+  - The eight probes were reassessed individually. Six are recall-eligible again (C-25 to C-30);
+    C-25 still needs Quinton's scope decision. P-02 and P-03 remain probes, with reasons.
+  - Known relevant misses stay in the denominator and are reported as coverage limitations.
+- **R2 (S-01 and coverage): addressed.**
+  - The corrected S-01 is proposed under the new rule 12, with the original citation and the
+    conflict kept.
+  - Its needs were reassessed to N5.5, N5.6 and N4.3; the old N1.1 and N2.1 are not carried over.
+  - C-06 drops N1.3.
+  - There is now one authoritative coverage table: 10 of 25 needs are uncovered. Family 2 meets
+    rule 5 only if C-25 is accepted. WORKFLOW has no seed.
+  - Set size is not tied to the bar.
+- **R3 (run S contract): addressed on paper.** Changes:
+  - listings are frozen, with strict name resolution and no substitution;
+  - the MeSH size is taken before transfer;
+  - caps count every byte, are enforced while streaming, and are cumulative per signed copy;
+  - proposed parser safeguards: 4 GiB memory, 20x expansion, DOCTYPE tolerated but never fetched,
+    external entities and entity expansion refused;
+  - a representativeness record;
+  - an append-only journal with a fallback, and no `completed` marker on partial work (a shell
+    quoting slip dropped this word as the entry was being written; it was restored immediately);
+  - the signed copy has literal values and replaces the status table;
+  - S1 reflects Codex's observations (not complete).
+
+  **Run S is not ready to sign.**
+- **Policy questions:** amendment A1-A3 is written as **proposed** in SEARCH-AND-SELECTION section
+  13, with oracles E5c and E28-E34 (E5b kept as historical). The A1 side effect on WORKFLOW is
+  disclosed. Nothing has been applied.
+- **Seven interpretations:** Codex's "keep" recommendation is recorded. The requested
+  clarifications are added in sections 3, 5.1, 7.2, 9 and 11.1.
+- **Candidate table:** Codex's recommendations are shown per row, and the priorities are
+  rebalanced:
+  - R: 16, plus C-25 if accepted;
+  - O: 11.
+- **Chaining source and exposure:**
+  - Goddard 2012 is offered only as a search-suggested source for Quinton to designate, under a
+    proposed rule 1 route.
+  - The exposure list is logged, and the section 7.3 ledger is seeded from it at creation.
+- **Operational status:** SCOPE section 10 gets a status note. The ACQUISITION prerequisite A1 is
+  marked done (wording only).
+
+**Files changed:**
+- `SEARCH-AND-SELECTION.md`: `7f9cf5283d72983de8f61086039c1772f33e97833c021d8e5cb5472f66ad3964`
+- `SEED-SET.md`: `e9801dac45bde04603396055101a70da9ddd2f8eecd0d383de75e0b61289d569`
+- `SEED-CANDIDATES.md`: `6d57a7bf23f91169092c8400bf11d5e6cb198b909538c7976169e61c0f06565c`
+- `ACQUISITION-PLAN.md`: `0867311c8d6304821dcdf8e088c23bf0353959b06938e7546b6c375b071eacc6`
+- `SCOPE.md`: `8ebd22f023b744dfbd36e97a04053ecc628604085440156ea99fa6d960dd0273`
+
+INFORMATION-NEEDS.md (frozen v1) and PHASES.md are unchanged.
+
+**Verification:** a fresh Claude subagent checked the revision against the Codex review over two
+rounds (23 findings, then 5 more). All were fixed, or made explicit decisions for Quinton.
+
+**For Quinton (10 decisions, listed in SEED-CANDIDATES.md):**
+1. the S-01 correction;
+2. C-25's scope;
+3. the scope bases for C-26 to C-30;
+4. a second family-2 seed;
+5. accepting each candidate;
+6. the WORKFLOW source;
+7. the probes;
+8. the negative seeds;
+9. amendment A1-A3 and the seven interpretations;
+10. the PANORAMA PDF (it would need its own small signed run record).
+
+**Not done, by instruction:** no seed freeze, no sizing run or download, no tool build, no new phase.
+
+---
+
+## 2026-09-28: Codex P2 re-review; wording fixes and decision sheet (Claude)
+
+**Review:** `docs/capstone/retrieval/CODEX-P2-REREVIEW-2026-09-28.md`.
+- R1-R3 are addressed at the planning level. This is **not** P2 exit, seed freeze, tool dispatch or
+  a signed download.
+- Codex measured `SEED-CANDIDATES.md` at `6d57a7bf...`, which matches this log's revision 2 handback
+  entry.
+
+**Hash discrepancy, explained (Claude's error):** Claude's chat message quoted `023a3254...` for
+`SEED-CANDIDATES.md`. That hash was taken **before** a last one-line cross-reference fix ("decision
+6"). The file was not rolled back. The hash in this log (`6d57a7bf...`) was the correct one at
+handback.
+
+**Codex's three wording fixes, applied:**
+1. SEED-SET: the section "References outside PubMed seed recall" is renamed "Appendix references:
+   where each now sits". C-30 is described as a proposed candidate.
+2. SEED-CANDIDATES (draft 5) and the SEED-SET status now read "28 proposed candidates: 27 with stated
+   scope bases, plus one scope-pending". Freeze counts use accepted, verified candidates only.
+3. ACQUISITION-PLAN: the first/middle/last baseline samples are described as file-sequence
+   positions, with no claim about publication-date coverage. The receipt records any observed year
+   distribution.
+
+**New:** `P2-DECISION-SHEET.md`, a compact sheet of 10 decisions for Quinton, prepared as Codex
+recommended. It covers:
+- the S-01 correction;
+- amendments A1-A3;
+- the seven interpretations;
+- the seed subset;
+- how to settle C-25's scope: a factual check, or another family-2 candidate;
+- the WORKFLOW source;
+- the rule 1 route;
+- probes and negative seeds;
+- the PANORAMA PDF.
+
+**Hashes:**
+- `SEED-SET.md`: `a702a3c4e4984c4d5b0b2c8ed12bbe294a99b70b146869437d4456f3416021fa`
+- `SEED-CANDIDATES.md`: `76c751b086b49abcb985b432bdb016b587fdbde0402cc462ad961afb4c6fd95a`
+- `ACQUISITION-PLAN.md`: `7e1323c0c90c26521042be73af86e6f6573145d4d375bf58b3d438b8fa8306d2`
+- `P2-DECISION-SHEET.md`: `53e91ab48ce20315e2e38ecd907184e5b571073334e47d4359d4108912a40c5a`
+
+**Unchanged:** SEARCH-AND-SELECTION.md (`7f9cf528...`), SCOPE.md, PHASES.md and INFORMATION-NEEDS v1.
+
+No literature was read for this entry. Claude waits for Quinton's decisions.
+
+---
+
+## 2026-09-28: Quinton adopts the Codex decision-sheet review as the P2 outline (Claude records)
+
+**Source:** `docs/capstone/retrieval/CODEX-P2-DECISION-SHEET-REVIEW-2026-09-28.md` (SHA-256 recorded
+below). Quinton, in the Claude discussion: "Codex and I went over the decisions ... I would like you to
+review that, and use that as the outline moving forward."
+
+**Recorded as Quinton's decisions:** the review's recommendation table, with its item-6 wording
+correction.
+
+| Item | Decision | Status |
+|---|---|---|
+| 1 | Corrected S-01 approved as a candidate. The original citation and conflict are kept; P5 still verifies it | Approved |
+| 2a-c | Amendments A1 (`AI`), A2 (`intra-observer`) and A3 (`reader studies`, one concept) approved | Approved |
+| 3 | All seven interpretations approved as written | Approved |
+| 4 | The 16 R candidates accepted **provisionally** as a candidate subset, not a seed freeze, with room kept within 15-25 for WORKFLOW candidates and a family-2 replacement. C-25 only if supported | Approved |
+| 5 | Factual abstract scope check of C-25 authorized. Exposure is logged and excluded from confirmation. An inconclusive result is reported as inconclusive | Approved |
+| 6-7 | Goddard 2012 designated as a chaining source, and the designated-source route in SEED-SET rule 1 approved. Designating it does **not** approve the review itself as a seed. That would be a separate, explicit decision | Approved |
+| 8 | P-02 and P-03 kept as scope probes | Approved |
+| 9 | The three negative controls kept | Approved |
+| 10 | The PANORAMA PDF is allowed **in principle** only. It needs its own bounded, **signed** one-file run record, and is lower priority | Pending signature |
+
+**Not decided:** P2 is not Done. There is no seed freeze, no run S signature, no tool dispatch and no
+download.
+
+**Next (Claude):**
+- record these decisions in the planning files, and fold A1-A3 and the interpretations into v0;
+- run the C-25 abstract check;
+- chain Goddard's references (metadata only);
+- draft the unsigned PANORAMA run record;
+- hand back.
+
+Decision-sheet review SHA-256: `4830b3e48ceb60adacc9c5c5bfbc2603546da1ed973c00de94a15c21d152061e`.
+
+---
+
+## 2026-09-28: Decisions applied; C-25 check; Goddard chaining; run record P drafted (Claude)
+
+**Applied** (following the adopted decision-sheet review):
+- **P2-DECISION-SHEET.md:** the decisions are recorded, and the item-6 wording is corrected.
+- **SEARCH-AND-SELECTION.md revision 8:**
+  - A1-A3 are folded into sections 2, 4, 11.3 and 12 (E5c and E28-E34 moved in; E5b and the E31
+    counter-oracle marked historical);
+  - the seven interpretations are marked approved.
+  - **Selection v0 as a whole is NOT yet approved.** That is still an open P2 exit item, and the
+    section 5.2 rules stay PROPOSED.
+- **SEED-SET.md revision 7:** the rule 1 designated-source route and the S-01 correction are marked
+  approved. The rule 6 addition is still proposed.
+- **SEED-CANDIDATES.md draft 6:**
+  - S-01 is approved, and the 16 R candidates are accepted provisionally;
+  - the C-25 result is added;
+  - new section A2 holds the WORKFLOW candidates.
+- **ACQUISITION-PLAN.md revision 8:** unsigned run record P for the single PANORAMA PDF. It has a
+  cap-aware retry, a signed-copy procedure, and a prerequisites entry.
+
+**C-25 factual scope check: not performed; scope unresolved.**
+- Crossref returned HTTP 429 twice.
+- To locate the article, a web search restricted to link.springer.com was run:
+  `Joskowicz "Inter-observer variability of manual contour delineation of structures in CT" European Radiology 2019`.
+- The Springer article page (doi:10.1007/s00330-018-5695-5) was then rate-limited by the fetch
+  proxy (HTTP 429), which instructed not to refetch that page.
+- **No abstract was read.** Nothing is inferred about pancreas coverage.
+
+**Goddard 2012 chaining** (designated source; metadata only):
+- Crossref's deposited reference list for doi:10.1136/amiajnl-2011-000089 was read: 75 entries,
+  mostly DOIs, plus some unstructured citations.
+- Titles were then looked up in Crossref for 9 imaging-related DOIs (refs. 16, 33, 34, 36, 37, 38,
+  39, 42 and 54).
+- **Proposed:** C-31 to C-39 (section A2), with 4 marked R. Ref. 42 (Moberg 2001) was looked up but
+  not proposed.
+- The review itself is **not** a candidate.
+- Finding: no proposed title contains a W term, so WORKFLOW reaches them only through their
+  abstracts or keywords. This is reported, not tuned.
+
+**Pre-sampling exposure additions** (for the P6 ledger):
+- **Titles seen in the locating search, not used:** doi:10.1007/s11548-025-03331-2,
+  doi:10.1007/s00784-024-05753-9, doi:10.1007/s10916-025-02263-3.
+- **Titles seen from Goddard references:** the 9 DOIs above, plus the unstructured entries in the
+  deposited list.
+- No abstracts were seen. The Crossref records may contain deposited abstracts, but the fetch tool
+  was told to return metadata only.
+
+**Housekeeping (Claude's mistake):** a temporary file, `RUNNING-LOG.md.tmp`, was created in
+`planning/` while hashing, and could not be deleted. It was moved to
+`_to_delete/claude-RUNNING-LOG.md.tmp` at the repository root. It contains one hash line. Quinton
+can delete it or the folder.
+
+**Verification:** an independent Claude subagent checked the files against the outline and found 1
+high, 3 medium and several low issues. All were fixed. The high issue: an over-claim that selection
+v0 as a whole was approved, now corrected.
+
+**Remaining decisions for Quinton** (`SEED-CANDIDATES.md`):
+1. accept, reject or edit the A2 candidates, and confirm their analogical N5.1 mappings;
+2. the section A O candidates;
+3. the family-2 second candidate: retry C-25's check, or replace it;
+4. signing run record P, when wanted.
+
+P2 is not Done. There is no freeze, signature or download.
+
+**Hashes:**
+- `SEARCH-AND-SELECTION.md`: `44e0bcb9617568b9e2805c73b4947142fb689b74fcf76f6a30862552e78f96e1`
+- `SEED-SET.md`: `fd7006a1fd160ae64de5f66d973c52b85dd1c596e6ea6a0567f75be3abe4cc8b`
+- `SEED-CANDIDATES.md`: `e34f439f2303005bea83774027ff0ad8db66c697db02bf177e7c830eb5221c9b`
+- `ACQUISITION-PLAN.md`: `7a9b4e3a153c527fcc1145594387e1731fd67e201936a65a47e6c01d857f2ed9`
+- `P2-DECISION-SHEET.md`: `768ec25bb3d63cbd985036f3698401ee2fd27f1194b7fd5c1ba81a2779ff68a6`
+
+Unchanged: INFORMATION-NEEDS.md (frozen v1), PHASES.md, SCOPE.md.
+
+---
+
+## 2026-09-28: Codex outline-application review; corrections applied (Claude)
+
+**Review:** `docs/capstone/retrieval/CODEX-P2-OUTLINE-APPLICATION-REVIEW-2026-09-28.md`.
+- All five handback hashes match. **P2 is not ready to freeze.**
+- Keeping selection v0 as a whole unapproved is correct.
+- The recorded adoption covers only the decision-sheet items. It does not cover C-31 to C-39,
+  whole-policy approval, or any signature.
+
+**Note:** Quinton's relay in the Claude discussion pasted Claude's own previous reply by mistake.
+Claude worked from the review file in the repository.
+
+**Corrections applied:**
+1. **N5.1 kept open.** The section A2 needs column now separates direct needs from related
+   background. N5.1 is related background only, and it is not counted as coverage.
+2. **N5.2 claim qualified.** C-31 is a strong direct candidate. C-36 is plausible but needs
+   verification. C-32, C-33 and C-35's titles do not establish automation bias.
+3. **Run P attempt wording.** The record now reads: one target file, at most two attempts, aggregate
+   received bytes at most 10 MiB, retry only when the remaining allowance covers the full file, and
+   partial bytes and wall time recorded.
+4. **Coverage bookkeeping.**
+   - The table is renamed as the combined proposed pool.
+   - Counts are given by status: accepted provisionally, proposed, verified or frozen.
+   - The direct gap count is 9 in the combined pool (only N5.2 added), and N5.1 stays open.
+   - The family-2 cross-reference is fixed to decision 3.
+
+**Codex recommendations, recorded as recommendations** (not Quinton's decisions):
+- **A2 working priority:**
+  - R: C-31, C-32 and C-33;
+  - verify scope first: C-36;
+  - reserve: C-34, C-35, C-37 and C-38;
+  - not in the initial subset: C-39.
+- **O candidates:** keep all 11 as a reserve.
+- **Family 2:** first a bounded exact-DOI PubMed lookup for C-25, if Quinton adopts it; otherwise
+  chain C-10's reference list.
+- **Run P:** stays deferred and unsigned.
+
+No literature was read for this entry. The `_to_delete` temporary file is preserved; Codex
+inspected it.
+
+**Files:** SEED-CANDIDATES.md (draft 7), SEED-SET.md (reference to draft 7 only) and
+ACQUISITION-PLAN.md (run P caps row). Hashes follow.
+- `SEED-CANDIDATES.md`: `4f027137e94f42543447f9ea0c8231499f8b75e00f6ecf4b8429cb7043fde545`
+- `SEED-SET.md`: `6c2ed18f9ce843e9c8250467af8e266eae01e2cfbb21d2d4e9f829d6512d5d0e`
+- `ACQUISITION-PLAN.md`: `a2be620c6b03373bc6a84b6cd88bf4f2177313bddc1992da7f3991ca713fc826`
+
+---
+
+## 2026-10-03: Quinton's round-2 decisions; family 2 resolved by chaining; PANORAMA status (Claude)
+
+**Quinton, in the Claude discussion (2026-10-03):** "I think we should continue on without codex's
+direction. I trust you, you know what to do, and you should continue on."
+
+**Working arrangement from now on (as Claude records it):**
+- Claude proceeds on its own judgment within the Plan 07 lane, without waiting for Codex review.
+- Claude keeps its own safeguards:
+  - independent subagent checks;
+  - disclosure and exposure logging;
+  - no edits to Codex-owned shared files (DECISIONS, registry, contracts, operations);
+  - no downloads, installs or signatures without Quinton.
+- Codex reviews remain welcome, but they are no longer a gate on this lane's planning work.
+
+**Decisions:**
+1. **Section A2 working priority accepted:**
+   - C-31, C-32 and C-33 accepted provisionally;
+   - C-36 to verify;
+   - C-34, C-35, C-37 and C-38 as reserves;
+   - C-39 out.
+2. **All 11 section A O candidates kept** as reserves.
+3. **Family 2: left to Claude's judgment.**
+4. **PANORAMA:** a question, answered below.
+
+**Family 2 (Claude's action):**
+- An official E-utilities DOI lookup for C-25 (`esearch`, `doi:10.1007/s00330-018-5695-5`) was
+  refused by the fetch tool under robots.txt. It was **not** worked around, and no abstract was
+  read.
+- C-25's factual scope check therefore moves to P5, using the local snapshot (record and abstract
+  read locally, exposure logged).
+- Claude then chained C-10's Crossref-deposited reference list (doi:10.1097/RCT.0000000000001374;
+  32 entries; titles, venues and years as deposited; no abstracts). Seven candidates are proposed
+  as section A3, C-40 to C-46.
+  - **C-40** (Med Phys 2021, doi:10.1002/mp.14782; pancreas intra- and inter-reader reliability) is
+    recommended R. It **restores the family-2 minimum** with C-10.
+  - **C-42** (Pancreatology 2021; normal pancreas CT attenuation by age and sex; N3.3) is
+    recommended R.
+  - The other five are reserves.
+  - Convergence: S-01, C-02 and C-03 all appear in C-10's list. C-02's DOI (10.2214/AJR.21.26014)
+    and C-03's DOI (10.1016/j.pan.2020.07.410) are now recorded per source.
+- **Coverage warning (not tuned):** block M has no `reader` variant, so "inter-reader" in C-40's
+  title does not match M. C-40 still enters as CORE and AI.
+- The working recommended set is now **21** (22 if C-36 verifies), with at least two per family.
+  There are 9 needs with no direct candidate; N5.1 stays open.
+
+**PANORAMA:**
+- The PANORAMA **dataset** (Zenodo CT batches 13715870, 13742336, 11034011 and 10999754, plus the
+  labels at a pinned commit) was acquired in September. See
+  `docs/capstone/data/PANORAMA-INVENTORY.md` and `acquisition-2026-09-19.json`.
+- The **study protocol PDF** is a separate Zenodo record, 10599559. It is not in that inventory and
+  not in the repository.
+- Run record P stays unsigned and optional. It would only add a reference list for chaining.
+
+**Pre-sampling exposure additions:**
+- the titles of the 32 entries in C-10's deposited reference list;
+- the robots-refused E-utilities request (nothing returned).
+
+**Files:**
+- `SEED-CANDIDATES.md` draft 8: section A3, statuses, the C-25 note, coverage, and the remaining
+  decisions;
+- `SEED-SET.md`: status counts;
+- `P2-DECISION-SHEET.md`: round-2 decisions.
+
+**Unchanged:** SEARCH-AND-SELECTION, ACQUISITION-PLAN, SCOPE, PHASES and INFORMATION-NEEDS v1.
+
+**Hashes:**
+- `SEED-CANDIDATES.md`: `931a668b44006d8575f484ede67501e5dceb37541fd44681ccdbd0afd5029e01`
+- `SEED-SET.md`: `c37108a43e67affde53ba45c15248f747fd15ccedacfcb5948fbdb2574dd76a5`
+- `P2-DECISION-SHEET.md`: `7b4a72bf18d9bcc36d2bc289364e837b59882e1a36eb0bf87df64bb579f1871b`
+
+**Post-entry check (same day):** an independent Claude subagent reviewed draft 8 and found 10
+issues. All were fixed:
+- three places described Claude's steps as Quinton's decisions;
+- stale sentences (the family-2 dependency on C-25, and N5.2 still in the uncovered-needs table);
+- the reference-key numbering of C-10's list;
+- missing disclosure pointers;
+- the C-25 DOI's provenance (from a web search, so not per source).
+
+The A3 title-only branches, the counts and the bar arithmetic were confirmed correct.
+
+**Corrected hashes:**
+- `SEED-CANDIDATES.md`: `7fcd2b783c9b99c55085f70a48e32220b4a2ca9abea072874b5b7b60bfcc044f`
+- `SEED-SET.md`: `d68b0b18e1085f87cc413f91ca1ad8b720a86d9d7517cf4eea5dc6006fff604c`
+
+## 2026-10-03: Quinton approves selection v0 as a whole; handoff to Codex written (Claude)
+
+**Quinton's words:** "Yes, I agree on the search policy, continue with that. Then write out a prompt
+for codex to work on whatever it needs to work on."
+
+**Recorded:**
+- `SEARCH-AND-SELECTION.md` revision 9: selection policy v0 **approved as a whole**. Revision 9
+  records the approval only; no rule text changed. Any later change creates a new version (v0.1
+  before the first run).
+- `SEED-CANDIDATES.md` draft 8: the 21-seed working list is approved (22 if C-36 verifies in P5).
+  This is a working list, not a freeze. Seeds are verified in P5 and frozen in P6; the 90% recall
+  bar is unchanged.
+- `P2-DECISION-SHEET.md`: round 3.
+
+**P2 status:** all of Quinton's P2 approvals are complete. Remaining before run S can be signed:
+- S1, the storage aliases and controlled literature writer (Codex-owned; creation needs Quinton's
+  OK);
+- S2, the sizing-tool packet (Group C; draft by Codex, dispatch by Quinton).
+
+**New file:** `CLAUDE-HANDOFF-TO-CODEX-2026-10-03.md`. It holds the Plan 07 state and a paste-ready
+Codex packet:
+- L1: decision records;
+- L2: the S1 plan;
+- L3: the S2 packet draft;
+- L4: the checkpoint file list;
+- L5: housekeeping deletions, on Quinton's OK;
+- L6: an options list (shared contract checks, D-085 amendment, P4a timing).
+
+It dispatches nothing. No literature was read, fetched or downloaded in this step, so there are no
+new exposures.
+
+**Unchanged:** SEED-SET, ACQUISITION-PLAN, SCOPE, PHASES and INFORMATION-NEEDS v1.
+
+**Hashes:**
+- `SEARCH-AND-SELECTION.md`: `1cb96a960f04b58cb07a796a5ef0b2ea53e0337503279c8d373aa849f4b5c46a`
+- `SEED-CANDIDATES.md`: `eceaa8bf57c7863f9cb2c1842f893b5e1d386002f05786364ca12099eda195f2`
+- `SEED-SET.md`: `d68b0b18e1085f87cc413f91ca1ad8b720a86d9d7517cf4eea5dc6006fff604c`
+- `P2-DECISION-SHEET.md`: `8f3abc520162a8edca3fc70bbe18c5ba48fc68b8e693724ad6c1f7b266074311`
+- `CLAUDE-HANDOFF-TO-CODEX-2026-10-03.md`: `9978b8088d25fa9dc24bcc1999470a2feec51e4d822ab7352f1afb5d4e1142df`
+
+## 2026-10-03: Codex L1-L6 handback reviewed; Quinton's S1/S2, cleanup and integration decisions; S2 dispatched to Claude (Claude records)
+
+**Claude's review of the Codex handback (read only):**
+- The nine Claude planning files and the handoff are byte-identical to the last logged hashes.
+- D-336 to D-340 in `DECISIONS.md` match the logged approvals. They keep Claude's own steps
+  distinct from Quinton's decisions, and no earlier approval is backdated as whole-policy approval.
+- The S2 draft's run S annex was checked block by block: all ten blocks are byte-identical
+  substrings of ACQUISITION-PLAN (SHA `a2be620c...`).
+- Every path on the S2 allowlist is absent today. `tests/retrieval/` exists from P3;
+  `scripts/retrieval/` does not.
+- Gaps foreseen and raised with Quinton before dispatch:
+  - macOS does not enforce `RLIMIT_AS`/`RLIMIT_RSS`, so a standard-library "hard" 4 GiB cap
+    needs a watchdog;
+  - urllib counts HTTP-layer bytes, not TLS bytes on the wire;
+  - the parsed-store field set is only "events plus parsed fields" in ACQUISITION-PLAN, so S2 must
+    declare the exact proposed field list it uses.
+
+**Quinton's decisions (2026-10-03, answers to Claude's questions):**
+1. **S1 and S2: "Approve both."**
+   - S1: Codex implements and sets up the bounded literature storage. This covers the two child
+     areas plus the necessary `artifacts/literature` parent, one capability-scoped writer, and the
+     proposed internal fallback `/Users/quintonevans/PROWL-Literature-Receipts/`. The writer is
+     enabled only after tests pass.
+   - S2: the packet is dispatched to Claude for code and invented offline tests only.
+2. **Memory cap: "Watchdog is fine."**
+   - The parser runs in a child process. A parent polls its resident memory about every 0.5 s and
+     kills it on exceeding 4 GiB (`stopped_memory_cap`).
+   - Overshoot is bounded by the growth within one poll interval and documented.
+   - The signed run S copy must name this method.
+3. **Cleanup: "Delete both."** Codex rechecks and deletes exactly
+   `_to_delete/claude-RUNNING-LOG.md.tmp` (SHA `0c1f14cf...`) and
+   `.git/index.lock.stale-claude-20260928` (0 bytes).
+4. **Integration: "Accept all three"** of Codex's recommendations:
+   - the 12 retrieval schemas join the shared offline contract checks;
+   - the D-085 span-hit and delivered-evidence metrics are approved as additional, separately
+     reported metrics, with the official metrics unchanged and their preconditions kept;
+   - P4a is prepared after the imaging queue and run in an idle window.
+
+   Each choice still needs its own scoped packet.
+
+**Not authorized by these decisions:** signing run S, S3/S4, any download, any install,
+committing or pushing, or P4/P5 execution.
+
+**S2 dispatch:** Claude starts S2 under packet
+`operations/CLAUDE-PLAN07-S2-PACKET-DRAFT-2026-10-03.md`, within its write allowlist only:
+- invented fixtures;
+- network denied in tests;
+- no edits to the P3 producers or schemas, shared files, roots or dependencies.
+
+The code is written and tested in Claude's cloud workspace, then copied into PROWL. Native macOS
+qualification is a separate review.
+
+**Hashes (pre-dispatch state):**
+- `retrieval/CODEX-PLAN07-L1-L6-HANDBACK-2026-10-03.md`: `39c6d96df7b17954a5ee25e59583c8ef7a9c263ee56e0e1f8eae1c16cdd29c8f`
+- `retrieval/CODEX-PLAN07-INTEGRATION-OPTIONS-2026-10-03.md`: `3b22ccc79e3603db49d05afd6bdd287b666b2675a225b4e19050c13795fc9eda`
+- `operations/CLAUDE-PLAN07-S2-PACKET-DRAFT-2026-10-03.md`: `0ac7eb939e9cfaf17d4c0365f0e29aaa439b5aabe4d2b1c10d8a9622635b80ef`
+- `operations/PLAN07-LITERATURE-S1-PROPOSAL-2026-10-03.md`: `3356a34ac3f7eee3f6a6774d4eb1958c348e69b9eacbb8307fe0b3b41a2b2695`
+- `DECISIONS.md`: `98c188822ecd82f977f8e84750a812c0b4ab0aaf5e2f9d844dad02b31395d0c9`

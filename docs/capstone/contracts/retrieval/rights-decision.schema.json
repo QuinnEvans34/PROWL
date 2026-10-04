@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/rights-decision/1.0.0",
+  "title": "Plan 07 per-representation rights decision (fail closed)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "rights_id",
+    "representation_id",
+    "policy_version",
+    "decision",
+    "permissions",
+    "reason"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "rights_id": {
+      "type": "string",
+      "pattern": "^rights:[0-9a-f]{64}$"
+    },
+    "representation_id": {
+      "type": "string",
+      "pattern": "^repr:[0-9a-f]{64}$"
+    },
+    "policy_version": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+    },
+    "decision": {
+      "enum": [
+        "allowed",
+        "restricted_local",
+        "metadata_only",
+        "quarantined",
+        "excluded"
+      ]
+    },
+    "permissions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "retain_metadata",
+        "local_text_store",
+        "local_embedding",
+        "display_snippet",
+        "redistribute"
+      ],
+      "properties": {
+        "retain_metadata": {
+          "type": "boolean"
+        },
+        "local_text_store": {
+          "type": "boolean"
+        },
+        "local_embedding": {
+          "type": "boolean"
+        },
+        "display_snippet": {
+          "type": "boolean"
+        },
+        "redistribute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    }
+  }
+}
