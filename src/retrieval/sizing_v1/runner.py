@@ -349,11 +349,16 @@ def _locked_run(config, transport, clock, wall, volume, launcher, run_id, code_h
 
 
 def install_signal_handlers():
-    """CLI only: SIGTERM/SIGINT/SIGHUP raise Interrupted so the journal records ``interrupted``."""
+    """CLI only: termination, quit, hang-up and terminal-stop signals raise Interrupted.
+
+    The journal then records ``interrupted`` and the parser's process group is killed. Ctrl-Z
+    (SIGTSTP) is treated as an interruption rather than a suspension, because a suspended parent
+    would leave the parser child running without its memory watchdog.
+    """
     def handler(signum, frame):
         raise Interrupted(f'signal {signum}')
     previous = {}
-    for name in ('SIGTERM', 'SIGINT', 'SIGHUP'):
+    for name in ('SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT', 'SIGTSTP'):
         sig = getattr(signal, name, None)
         if sig is not None:
             previous[sig] = signal.signal(sig, handler)

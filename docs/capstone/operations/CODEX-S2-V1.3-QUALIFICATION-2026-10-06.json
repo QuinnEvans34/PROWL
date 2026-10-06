@@ -1,0 +1,50 @@
+{
+  "evidence_pins": {
+    "configs/local/roots.yaml": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+    "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-06-R5.md": "570ab7cfb616f02540d198f1805b8ab0bb6eac516403e1758392b4b92ed13b9e",
+    "docs/capstone/retrieval/CLAUDE-S2-V1.3-HANDBACK-2026-10-06.md": "8940b0e854799719265ac760c63e652aec1004a60f45fe8184d81b8f3bbdd6f1",
+    "docs/capstone/retrieval/planning/RUNNING-LOG.md": "c6fcacfdc4d2b13552f9036d5c29ae0a7de1af19ad4ae89e3d3d1cef4e9238f3"
+  },
+  "identity": "791be77ffc96c17aaaf23a8b588c52bf8db1a82ddaa959d41ad217da318f4d53",
+  "lifecycle": {
+    "exit_code": 0,
+    "extra_descriptors": [],
+    "live_drain_threads": [],
+    "live_tracked_children": [],
+    "output": ".....                                                                    [100%]\n5 passed, 41 deselected in 0.59s\n",
+    "tracked_children": 17
+  },
+  "no_lane_edits": true,
+  "no_network": true,
+  "pins": {
+    "scripts/retrieval/run_s_sizing_v1.py": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15",
+    "src/retrieval/sizing_v1/__init__.py": "edc6a0f62cd69bd5d51f92ce1e04916e9c27c9d0916937d79fd74fafeb022fdf",
+    "src/retrieval/sizing_v1/fsio.py": "d2c6db413c72b4b54169a316410036aab8fa58218081f16814a89d8557714705",
+    "src/retrieval/sizing_v1/journal.py": "4c94749c1b1cc74dd22c3bc6da6eb0d51cf56679913c630a792b62f4372c026a",
+    "src/retrieval/sizing_v1/listings.py": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17",
+    "src/retrieval/sizing_v1/parser.py": "b8f6dc8db2fc3e353fb050af0f59ca9e6e0390ee1b5edea1489132c6255953f6",
+    "src/retrieval/sizing_v1/runner.py": "4d1b9e79648a9b525ce49afb353502bb13f9e8a82abd5427d142bc4dc8508c1e",
+    "src/retrieval/sizing_v1/transfer.py": "fb8c159abd6fada2f1c9160c85e72c61a602c329090900f1a33656d13ff2cb1a",
+    "tests/retrieval/fixtures/sizing_v1/README.md": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e",
+    "tests/retrieval/fixtures/sizing_v1/billion_laughs.xml": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b",
+    "tests/retrieval/fixtures/sizing_v1/external_entity.xml": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23",
+    "tests/retrieval/fixtures/sizing_v1/internal_entity.xml": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86",
+    "tests/retrieval/fixtures/sizing_v1/malformed.xml": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3",
+    "tests/retrieval/fixtures/sizing_v1/pubmed_style_doctype.xml": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e",
+    "tests/retrieval/fixtures/sizing_v1/undeclared_entity.xml": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a",
+    "tests/retrieval/fixtures/sizing_v1/update_with_deletes.xml": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1",
+    "tests/retrieval/fixtures/sizing_v1/wrong_root.xml": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e",
+    "tests/retrieval/test_sizing_v1_journal.py": "ddee36ca812ab4050161af1b229b6b69b5c9ad34e32da27c7e29964d2473274c",
+    "tests/retrieval/test_sizing_v1_listings.py": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2",
+    "tests/retrieval/test_sizing_v1_parser.py": "bd58f66550e1245139ca5f53ac3198308ff4f41638409a9c5b8389c78f0a7853",
+    "tests/retrieval/test_sizing_v1_runner.py": "cad03a1036390d7a22679d4f4684cff3eead9ec0c4b49ca7683837d251503424",
+    "tests/retrieval/test_sizing_v1_transfer.py": "b1de4cf728cf6ca978d372c42b6bcfb1a5c622d4e98b70cba0118cd258037dca"
+  },
+  "platform": "macOS native Python 3.12.13",
+  "post_test_pins_match": true,
+  "retrieval_command": ".venv-prowl/bin/python -m pytest -q tests/retrieval",
+  "retrieval_output": "........................................................................ [ 21%]\n........................................................................ [ 42%]\n........................................................................ [ 63%]\n........................................................................ [ 84%]\n......................................................                   [100%]\n342 passed in 5.79s\n",
+  "sizing_command": ".venv-prowl/bin/python -m pytest -q tests/retrieval -k sizing_v1",
+  "sizing_output": "........................................................................ [ 45%]\n........................................................................ [ 90%]\n................                                                         [100%]\n160 passed, 182 deselected in 5.25s\n",
+  "status": "native_v1.3_qualified"
+}

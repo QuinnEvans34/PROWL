@@ -4,6 +4,7 @@ import json
 import os
 import socket
 import sys
+import time
 import zlib
 from pathlib import Path
 
@@ -256,7 +257,7 @@ def test_watchdog_runs_periodic_volume_check_and_stops_on_failure():
 def test_noisy_child_stderr_cannot_block_the_watchdog():
     noisy = [sys.executable, '-c', 'import sys; sys.stderr.write("x" * 300000); print("{}")']
     rc, out, err, _ = P.run_with_watchdog(noisy, probe=P.PsMemoryProbe(), poll=0.01, seconds_left=20)
-    assert rc == 0 and len(err) == 2000
+    assert rc == 0 and len(err) == P.DIAG_STDERR_TAIL and out.strip() == b'{}'
 
 
 def test_child_crash_reports_parser_failed_with_file(tmp_path):
@@ -331,3 +332,231 @@ def test_handover_rejects_non_regular_nonempty_or_identical_descriptors(tmp_path
     finally:
         os.close(r)
         os.close(w)
+
+
+def _open_fds():
+    return set(os.listdir('/dev/fd'))
+
+
+@pytest.mark.parametrize('stream', ['stdout', 'stderr'])
+def test_diagnostics_overflow_stops_and_reaps_the_child(stream):
+    code = f'import sys, time; sys.{stream}.buffer.write(b"x" * (2 * 1024 * 1024)); sys.{stream}.flush(); time.sleep(30)'
+    before = _open_fds()
+    t0 = time.monotonic()
+    with pytest.raises(ParserGuard) as exc:
+        P.run_with_watchdog([sys.executable, '-c', code], probe=FixedProbe(1), poll=0.01, seconds_left=20)
+    assert exc.value.reason == 'diagnostics_overflow' and time.monotonic() - t0 < 10
+    assert _open_fds() <= before | {'3'}                     # no leaked pipe descriptors
+
+
+def test_overflow_after_exit_is_still_a_failed_parse():
+    code = 'import sys; sys.stderr.buffer.write(b"y" * (2 * 1024 * 1024))'
+    with pytest.raises(ParserGuard) as exc:
+        P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01, seconds_left=20)
+    assert exc.value.reason == 'diagnostics_overflow'
+
+
+def test_checks_stay_active_under_pipe_pressure():
+    code = ('import sys, time\n'
+            'for _ in range(200):\n'
+            '    sys.stdout.buffer.write(b"o" * 4096); sys.stderr.buffer.write(b"e" * 4096)\n'
+            '    sys.stdout.flush(); sys.stderr.flush(); time.sleep(0.01)\n'
+            'time.sleep(30)\n')
+    calls = []
+
+    def periodic():
+        calls.append(1)
+        raise VolumeCheckFailed('invented mount loss under pipe pressure')
+    from src.retrieval.sizing_v1 import VolumeCheckFailed
+    t0 = time.monotonic()
+    with pytest.raises(VolumeCheckFailed):
+        P.run_with_watchdog([sys.executable, '-c', code], probe=FixedProbe(1), poll=0.01, seconds_left=20,
+                            periodic=periodic, check_interval=0.3)
+    assert calls == [1] and time.monotonic() - t0 < 10
+    with pytest.raises(ParserGuard) as exc:
+        P.run_with_watchdog([sys.executable, '-c', code], probe=FixedProbe(5 * GIB), poll=0.01, seconds_left=20)
+    assert exc.value.reason == 'memory_cap'
+
+
+def test_no_diagnostic_file_is_created(monkeypatch):
+    import tempfile
+
+    def refuse(*a, **k):
+        raise AssertionError('no temporary diagnostic file may be created')
+    monkeypatch.setattr(tempfile, 'TemporaryFile', refuse)
+    monkeypatch.setattr(tempfile, 'NamedTemporaryFile', refuse)
+    monkeypatch.setattr(tempfile, 'mkstemp', refuse)
+    code = 'import sys; sys.stderr.write("diag" * 10); print("{}")'
+    rc, out, err, _ = P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01,
+                                          seconds_left=20)
+    assert rc == 0 and err == b'diag' * 10
+
+
+def test_descriptors_closed_after_each_exit_path():
+    before = _open_fds()
+    P.run_with_watchdog([sys.executable, '-c', 'print("{}")'], probe=P.PsMemoryProbe(), poll=0.01, seconds_left=20)
+    with pytest.raises(ParserGuard):
+        P.run_with_watchdog(SLEEPER, probe=FixedProbe(5 * GIB), poll=0.01, seconds_left=20)
+    with pytest.raises(CapExceeded):
+        P.run_with_watchdog(SLEEPER, probe=FixedProbe(1), poll=0.01, seconds_left=0.05)
+    assert _open_fds() <= before | {'3'}
+
+
+def test_failed_child_writes_no_manifest_through_the_launcher(tmp_path):
+    src = gz_fixture(tmp_path, 'malformed.xml')
+    with open(src, 'rb') as s_fh, open(tmp_path / 'nm.jsonl.gz', 'xb') as o_fh:
+        with pytest.raises(ParserGuard):
+            P.WatchdogLauncher(poll=0.02).parse(src=s_fh, out=o_fh, source_file='x.xml.gz',
+                                                compressed_size=os.path.getsize(src), scratch_allowance=GIB,
+                                                seconds_left=30, expansion_limit=20)
+    assert not (tmp_path / 'nm.jsonl.gz.manifest.json').exists()
+
+
+def test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives(tmp_path):
+    import threading
+    code = ('import subprocess, sys\n'
+            'g = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(60)"])\n'
+            'print(g.pid, flush=True)\n')
+    t0 = time.monotonic()
+    rc, out, err, _ = P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01,
+                                          seconds_left=20)
+    assert rc == 0 and time.monotonic() - t0 < 8
+    gpid = int(out.split()[0])
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
+        try:
+            os.kill(gpid, 0)
+        except ProcessLookupError:
+            break
+        time.sleep(0.05)
+    else:
+        pytest.fail('grandchild survived the parse')
+    assert not [t for t in threading.enumerate() if t.name == 'run-s-diag-drain' and t.is_alive()]
+    probe_file = tmp_path / 'unrelated.bin'
+    probe_file.write_bytes(b'z' * 200000)
+    with open(probe_file, 'rb') as fh:                 # a reused descriptor number is not read by anyone
+        time.sleep(0.3)
+        assert len(fh.read()) == 200000
+
+
+def test_stderr_tail_keeps_updating_after_overflow():
+    import threading
+    r, w = os.pipe()
+    reader = os.fdopen(r, 'rb')
+
+    def write():
+        with os.fdopen(w, 'wb') as fh:
+            fh.write(b'a' * (2 * 1024 * 1024))
+            fh.write(b'END-OF-STREAM')
+    th = threading.Thread(target=write)
+    th.start()
+    drain = P._BoundedDrain(reader, P.DIAG_STREAM_LIMIT, P.DIAG_STDERR_TAIL)
+    th.join(10)
+    drain.thread.join(10)
+    assert reader.closed and not drain.thread.is_alive()
+    assert drain.overflow and drain.total == 2 * 1024 * 1024 + 13
+    assert len(drain.data()) == P.DIAG_STDERR_TAIL and drain.data().endswith(b'END-OF-STREAM')
+
+
+def test_child_stops_when_the_watchdog_parent_is_gone(tmp_path, monkeypatch):
+    monkeypatch.setattr(P, '_PARENT_PID', os.getppid() + 999999)      # simulate a re-parented child
+    with pytest.raises(ParserGuard) as exc:
+        run(tmp_path, gz_fixture(tmp_path, 'pubmed_style_doctype.xml'))
+    assert exc.value.reason == 'parent_lost'
+
+
+def test_group_kill_happens_once_and_only_before_reaping(monkeypatch):
+    calls, anchors = [], []
+    real_killpg, real_anchor = os.killpg, P._GroupAnchor
+
+    def spy(pgid, sig):
+        calls.append(pgid)
+        assert anchors and anchors[-1].proc.returncode is None   # anchor unreaped: the group ID is pinned
+        return real_killpg(pgid, sig)
+
+    class Spy(real_anchor):
+        def __init__(self, *a, **k):
+            super().__init__(*a, **k)
+            anchors.append(self)
+    monkeypatch.setattr(os, 'killpg', spy)
+    monkeypatch.setattr(P, '_GroupAnchor', Spy)
+    P.run_with_watchdog([sys.executable, '-c', 'print("{}")'], probe=P.PsMemoryProbe(), poll=0.01, seconds_left=20)
+    assert calls == [anchors[-1].pgid] and anchors[-1].proc.returncode is not None
+    calls.clear()
+    with pytest.raises(ParserGuard):
+        P.run_with_watchdog(SLEEPER, probe=FixedProbe(5 * GIB), poll=0.01, seconds_left=20)
+    assert calls == [anchors[-1].pgid] and anchors[-1].proc.returncode is not None
+
+def test_cleanup_works_without_os_waitid_as_on_macos(tmp_path, monkeypatch):
+    monkeypatch.delattr(os, 'waitid', raising=False)            # native macOS Python has no os.waitid
+    test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives(tmp_path)
+
+
+def test_parser_child_and_grandchild_share_the_anchor_group(monkeypatch):
+    anchors = []
+    real_anchor = P._GroupAnchor
+
+    class Spy(real_anchor):
+        def __init__(self, *a, **k):
+            super().__init__(*a, **k)
+            anchors.append(self)
+    monkeypatch.setattr(P, '_GroupAnchor', Spy)
+    code = ('import os, subprocess, sys\n'
+            'g = subprocess.Popen([sys.executable, "-c", "import os; print(os.getpgid(0), flush=True)"],'
+            ' stdout=subprocess.PIPE)\n'
+            'print(os.getpgid(0), g.communicate()[0].decode().strip(), flush=True)\n')
+    rc, out, err, _ = P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01,
+                                          seconds_left=20)
+    child_pgid, grandchild_pgid = (int(x) for x in out.split())
+    assert rc == 0 and child_pgid == grandchild_pgid == anchors[-1].pgid != os.getpgid(0)
+
+
+def test_launch_failure_cleans_up_the_anchor(monkeypatch):
+    anchors = []
+    real_anchor = P._GroupAnchor
+
+    class Spy(real_anchor):
+        def __init__(self, *a, **k):
+            super().__init__(*a, **k)
+            anchors.append(self)
+    monkeypatch.setattr(P, '_GroupAnchor', Spy)
+    with pytest.raises(OSError):
+        P.run_with_watchdog(['/nonexistent/invented-binary'], probe=FixedProbe(1), poll=0.01, seconds_left=5)
+    assert anchors[-1].proc.returncode is not None
+
+
+def test_hard_killed_parent_leaves_no_unwatched_parser(tmp_path):
+    import signal as sig
+    import subprocess
+    helper = tmp_path / 'helper.py'
+    pidfile = tmp_path / 'child.pid'
+    helper.write_text(
+        'import sys, time\n'
+        f'sys.path.insert(0, {str(P.REPO_ROOT)!r})\n'
+        'from src.retrieval.sizing_v1 import parser as P\n'
+        'class Probe:\n'
+        '    def rss_bytes(self, pid):\n'
+        f'        open({str(pidfile)!r}, "w").write(str(pid)); return 1\n'
+        'P.run_with_watchdog([sys.executable, "-c", "import time; time.sleep(60)"], probe=Probe(), poll=0.05,'
+        ' seconds_left=60)\n')
+    h = subprocess.Popen([sys.executable, str(helper)])
+    try:
+        deadline = time.monotonic() + 10
+        while not (pidfile.exists() and pidfile.read_text()) and time.monotonic() < deadline:
+            time.sleep(0.05)
+        child = int(pidfile.read_text())
+        os.kill(h.pid, sig.SIGKILL)                       # hard kill: no finally block runs in the parent
+        h.wait(10)
+        deadline = time.monotonic() + 10
+        while time.monotonic() < deadline:
+            try:
+                os.kill(child, 0)
+            except ProcessLookupError:
+                break
+            time.sleep(0.05)
+        else:
+            pytest.fail('parser child outlived its hard-killed parent')
+    finally:
+        if h.poll() is None:
+            h.kill()
+            h.wait(10)

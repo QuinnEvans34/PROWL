@@ -21,7 +21,7 @@ MIB = 1024 ** 2
 KIB = 1024
 
 TOOL_NAME = 'prowl-run-s-sizing'
-TOOL_VERSION = 'sizing_v1.1'
+TOOL_VERSION = 'sizing_v1.3'
 SIZING_ONLY_MARKER = 'sizing_only'
 
 

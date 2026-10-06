@@ -1,0 +1,81 @@
+{
+  "all_22_pins_match_before_and_after": true,
+  "authority": "D-350 / Quinton round-4 dispatch",
+  "base_commit": "edf5e478d528fc18e34e59f546026ba92a2010eb",
+  "binding_complete": false,
+  "claude_log_sha256": "1eeac0961dfb18d4a9d98766fa8f262fea0b9145edb4baa16eadb7a2d0f375e4",
+  "code_identity": "3198b2685709bff92367f0cba6254b09a9269c48837fde7d3dfc4ac61f464203",
+  "commit_performed": false,
+  "date": "2026-10-06",
+  "delivery": "Direct Claude conversation not identifiable in native app; exact copyable request saved in review; no message sent",
+  "environment": {
+    "WNOWAIT_available": true,
+    "native_runs": "outside sandbox using approved ps RSS monitor",
+    "platform": "darwin",
+    "python": "3.12.13",
+    "sandbox_initial_attempt": "13 failed, 142 passed, 182 deselected in 3.88s; ps denied",
+    "waitid_available": false
+  },
+  "exclusions": [
+    "No Claude source/test/planning edits",
+    "No binding backend or external qualification child areas",
+    "No live sizing/network/download/signature/S3/DB/install",
+    "No commit/push or follow-on dispatch"
+  ],
+  "kind": "native_sizing_v12_qualification_failure",
+  "native_commands": [
+    {
+      "command": ".venv-prowl/bin/python -m pytest -q tests/retrieval -k sizing_v1 --tb=short",
+      "output": "........................................................................ [ 46%]\n...F..F................................................................. [ 92%]\n...........                                                              [100%]\n=================================== FAILURES ===================================\n_____ test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives _____\ntests/retrieval/test_sizing_v1_parser.py:421: in test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives\n    rc, out, err, _ = P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01,\nsrc/retrieval/sizing_v1/parser.py:598: in run_with_watchdog\n    raise ParserGuard('parser child pipes are still held open after exit', reason='diagnostics_pipe_held')\nE   src.retrieval.sizing_v1.ParserGuard: parser child pipes are still held open after exit\n_____________ test_group_kill_happens_once_and_only_before_reaping _____________\ntests/retrieval/test_sizing_v1_parser.py:477: in test_group_kill_happens_once_and_only_before_reaping\n    assert len(calls) == 1\nE   assert 0 == 1\nE    +  where 0 = len([])\n=========================== short test summary info ============================\nFAILED tests/retrieval/test_sizing_v1_parser.py::test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives\nFAILED tests/retrieval/test_sizing_v1_parser.py::test_group_kill_happens_once_and_only_before_reaping\n2 failed, 153 passed, 182 deselected in 14.42s\n",
+      "result": "2 failed, 153 passed, 182 deselected in 14.42s"
+    },
+    {
+      "command": ".venv-prowl/bin/python -m pytest -q tests/retrieval --tb=short",
+      "output": "........................................................................ [ 21%]\n........................................................................ [ 42%]\n........................................................................ [ 64%]\n.........................................F..F........................... [ 85%]\n.................................................                        [100%]\n=================================== FAILURES ===================================\n_____ test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives _____\ntests/retrieval/test_sizing_v1_parser.py:421: in test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives\n    rc, out, err, _ = P.run_with_watchdog([sys.executable, '-c', code], probe=P.PsMemoryProbe(), poll=0.01,\nsrc/retrieval/sizing_v1/parser.py:598: in run_with_watchdog\n    raise ParserGuard('parser child pipes are still held open after exit', reason='diagnostics_pipe_held')\nE   src.retrieval.sizing_v1.ParserGuard: parser child pipes are still held open after exit\n_____________ test_group_kill_happens_once_and_only_before_reaping _____________\ntests/retrieval/test_sizing_v1_parser.py:477: in test_group_kill_happens_once_and_only_before_reaping\n    assert len(calls) == 1\nE   assert 0 == 1\nE    +  where 0 = len([])\n=========================== short test summary info ============================\nFAILED tests/retrieval/test_sizing_v1_parser.py::test_grandchild_holding_pipes_is_killed_and_no_drain_thread_survives\nFAILED tests/retrieval/test_sizing_v1_parser.py::test_group_kill_happens_once_and_only_before_reaping\n2 failed, 335 passed in 14.86s\n",
+      "result": "2 failed, 335 passed in 14.86s"
+    }
+  ],
+  "next_start": "Claude-owned portable macOS process-group lifecycle fix, fresh pins/handback; native P2 before N4 and conditional local commit",
+  "pins": {
+    "scripts/retrieval/run_s_sizing_v1.py": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15",
+    "src/retrieval/sizing_v1/__init__.py": "d7ad3280d35d1cf7f0f9cc048b02b3826d7930b6744431867691845ad044e541",
+    "src/retrieval/sizing_v1/fsio.py": "d2c6db413c72b4b54169a316410036aab8fa58218081f16814a89d8557714705",
+    "src/retrieval/sizing_v1/journal.py": "90b52ab491a8cea11eb87d99129eabbd561847a8c8475f0d7dc8db8abe270cd5",
+    "src/retrieval/sizing_v1/listings.py": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17",
+    "src/retrieval/sizing_v1/parser.py": "2e4546f1d75f3d9cfdc7b782ebcabad7ebd3c9969c422af64c9176aabf6c7f76",
+    "src/retrieval/sizing_v1/runner.py": "8f42f526164a2a412859a104ca9a19d8bf0af12286914d2791a57cde6df782bf",
+    "src/retrieval/sizing_v1/transfer.py": "fb8c159abd6fada2f1c9160c85e72c61a602c329090900f1a33656d13ff2cb1a",
+    "tests/retrieval/fixtures/sizing_v1/README.md": "d5b270d84d3389f8b2b66a6bd2a640448dc845c9aecf10c0b5210d1c019f2a0e",
+    "tests/retrieval/fixtures/sizing_v1/billion_laughs.xml": "eac14200ca0e171d347e828377ebde8b449a4e5de32b9ff67c1e4dfaba46794b",
+    "tests/retrieval/fixtures/sizing_v1/external_entity.xml": "d74786196fb74147374eb66dc6b4e582e5f8df7486a9d06d50455d2893083a23",
+    "tests/retrieval/fixtures/sizing_v1/internal_entity.xml": "ad8c9527a59d981a1ac089cfe901968ddf2c113c80535d02feb42ee9d5619e86",
+    "tests/retrieval/fixtures/sizing_v1/malformed.xml": "43fdc5a22376dc55d6dcd9e2fd66018475919ceabbc4220f3de4e31b897642c3",
+    "tests/retrieval/fixtures/sizing_v1/pubmed_style_doctype.xml": "58970b32ea772e70271fe6fcf6a8342eca9b55289481f349ead568a63651a65e",
+    "tests/retrieval/fixtures/sizing_v1/undeclared_entity.xml": "b9cb2eefc291022ab626a41094bf4f16480c9bf0fe78c70f1cf348042247263a",
+    "tests/retrieval/fixtures/sizing_v1/update_with_deletes.xml": "3ff5a04c07c3df8d8ffa6c1e3ff1327d76a5a6a5ea37393996691871e58afad1",
+    "tests/retrieval/fixtures/sizing_v1/wrong_root.xml": "c11a224a5d6926ff7ed442b8765274cd832ea98223cf4b8ad82ff7710709482e",
+    "tests/retrieval/test_sizing_v1_journal.py": "3c4c2218b528016f5253594e7ed494333af87e6544bb7207dfb97fa0be384e29",
+    "tests/retrieval/test_sizing_v1_listings.py": "6d06cd475085a34298b0ee56a760555ab5de63ae2a72a3ab75297c5cafda53f2",
+    "tests/retrieval/test_sizing_v1_parser.py": "112e915c47a86a65219375e86b15a8e67621f82684075fc403bcbc0dfbc23c25",
+    "tests/retrieval/test_sizing_v1_runner.py": "cad03a1036390d7a22679d4f4684cff3eead9ec0c4b49ca7683837d251503424",
+    "tests/retrieval/test_sizing_v1_transfer.py": "b1de4cf728cf6ca978d372c42b6bcfb1a5c622d4e98b70cba0118cd258037dca"
+  },
+  "process_probe": {
+    "WNOWAIT_available": true,
+    "elapsed_seconds": 10.09,
+    "exception_type": "ParserGuard",
+    "extra_descriptors": [],
+    "live_drain_threads": [],
+    "message": "parser child pipes are still held open after exit",
+    "own_probe_grandchild_cleanup": "SIGKILL sent to still-live recorded probe child",
+    "platform": "darwin",
+    "probe_grandchild_survived": true,
+    "python": "3.12.13",
+    "reason": "diagnostics_pipe_held",
+    "status": "refused",
+    "waitid_available": false
+  },
+  "push_performed": false,
+  "qualified": false,
+  "schema_version": "1.0.0"
+}

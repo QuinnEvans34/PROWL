@@ -299,3 +299,15 @@ def test_receipts_dir_fsync_failure_leaves_no_blocking_file(dirs, monkeypatch):
     with pytest.raises(RunRefused):
         Journal(dirs.fs, 'r1', SHA, wall)
     assert not os.path.exists(os.path.join(dirs.receipts, primary_name('r1')))
+
+
+def test_cli_signal_handlers_cover_quit_and_terminal_stop():
+    import signal as sig
+    from src.retrieval.sizing_v1.runner import install_signal_handlers
+    previous = install_signal_handlers()
+    try:
+        names = {s.name for s in previous}
+        assert {'SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT', 'SIGTSTP'} <= names
+    finally:
+        for s, h in previous.items():
+            sig.signal(s, h)

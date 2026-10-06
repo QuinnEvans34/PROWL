@@ -1,0 +1,142 @@
+{
+  "authority": "Quinton R5 dispatch; unchanged R4 P4 local commit, no push, verified partial P3 allowed",
+  "base_commit": "edf5e478d528fc18e34e59f546026ba92a2010eb",
+  "commit_ready": true,
+  "excluded": [
+    "Other chat AGENTS/course/imaging files",
+    "Unrelated untracked files",
+    "Registry/roots/data/external areas/ignored controls",
+    "Push/live sizing/signature/S3/install/database/producer migration"
+  ],
+  "files": [
+    {
+      "bytes": 208667,
+      "path": "docs/capstone/DECISIONS.md",
+      "sha256": "ea3db20d939bdb07a20e6ba509a5847a876781de5e7e399a6abff90302c158fa"
+    },
+    {
+      "bytes": 9123,
+      "path": "docs/capstone/operations/CODEX-S2-V1.2-NATIVE-REVIEW-2026-10-06.md",
+      "sha256": "8bbf89d9befa40dfac5e4d5ce31f53c2e288a82a4b0b02cbd7ae29b15563d4d6"
+    },
+    {
+      "bytes": 8071,
+      "path": "docs/capstone/operations/CODEX-S2-V1.2-QUALIFICATION-2026-10-06.json",
+      "sha256": "8a2644b570df57101e3bb40dd893261605ac9d009bff511a6f7203809235cb2a"
+    },
+    {
+      "bytes": 1978,
+      "path": "docs/capstone/operations/CODEX-S2-V1.3-NATIVE-REVIEW-2026-10-06.md",
+      "sha256": "9a6260f0ca8bb7e8bc257b0d8c7e5486f1f74fb166132ffb3f8e1fec759726c3"
+    },
+    {
+      "bytes": 4626,
+      "path": "docs/capstone/operations/CODEX-S2-V1.3-QUALIFICATION-2026-10-06.json",
+      "sha256": "b1499608430548aeb1d861816fbba9af88e9adf16b46619a30a4fdec9ac29881"
+    },
+    {
+      "bytes": 5688,
+      "path": "docs/capstone/operations/PLAN07-BINDING-QUALIFICATION-2026-10-06.json",
+      "sha256": "e01dc5f4e690c8d6c3480fdba10b69e11367660888279d1aee97b50416b92c0b"
+    },
+    {
+      "bytes": 6166,
+      "path": "docs/capstone/operations/PLAN07-BINDING-RESULTS-2026-10-06.md",
+      "sha256": "c23b016988199aa8f2a9d3fe472977b30ef8795eb9c1eb71fd89896e611d19ec"
+    },
+    {
+      "bytes": 2787,
+      "path": "docs/capstone/operations/PLAN07-V12-PENDING-CHECKPOINT-2026-10-06.json",
+      "sha256": "a0983c8406132fc8ac1770f5713bb535db6e0ab96bc74581d157e4ece0161c2a"
+    },
+    {
+      "bytes": 3186,
+      "path": "docs/capstone/operations/PLAN07-V13-HANDBACK-2026-10-06.md",
+      "sha256": "1e7453faaa27f87eedafec607a2efbdf01cf7135012f5af1890f8ddaf063489e"
+    },
+    {
+      "bytes": 3683,
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-05-R4.md",
+      "sha256": "d323018864bcddb1d3909d9042bf15fa6955f5b920783ba6c895af47adb06134"
+    },
+    {
+      "bytes": 2361,
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-06-R5.md",
+      "sha256": "570ab7cfb616f02540d198f1805b8ab0bb6eac516403e1758392b4b92ed13b9e"
+    },
+    {
+      "bytes": 6650,
+      "path": "docs/capstone/retrieval/CLAUDE-S2-V1.2-HANDBACK-2026-10-04.md",
+      "sha256": "9e5845e2b91f84ef4dfc2c677ee94c47dfdaf23655a348c07c37a42c6d90e2b3"
+    },
+    {
+      "bytes": 5972,
+      "path": "docs/capstone/retrieval/CLAUDE-S2-V1.3-HANDBACK-2026-10-06.md",
+      "sha256": "8940b0e854799719265ac760c63e652aec1004a60f45fe8184d81b8f3bbdd6f1"
+    },
+    {
+      "bytes": 82915,
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "c6fcacfdc4d2b13552f9036d5c29ae0a7de1af19ad4ae89e3d3d1cef4e9238f3"
+    },
+    {
+      "bytes": 14560,
+      "path": "scripts/diagnostics/literature_sizing_binding_qualification_v1.py",
+      "sha256": "2ccdf9b34d8dd318cbb441b5ef4b39bf78e44df3606338ce3f181cfe0476c270"
+    },
+    {
+      "bytes": 21330,
+      "path": "src/operations/literature_sizing_binding_v1.py",
+      "sha256": "c5e537ffafe252972af1e4771cd6705c045ba15a3029166f668a90e930357ab3"
+    },
+    {
+      "bytes": 2302,
+      "path": "src/retrieval/sizing_v1/__init__.py",
+      "sha256": "edc6a0f62cd69bd5d51f92ce1e04916e9c27c9d0916937d79fd74fafeb022fdf"
+    },
+    {
+      "bytes": 13991,
+      "path": "src/retrieval/sizing_v1/journal.py",
+      "sha256": "4c94749c1b1cc74dd22c3bc6da6eb0d51cf56679913c630a792b62f4372c026a"
+    },
+    {
+      "bytes": 34679,
+      "path": "src/retrieval/sizing_v1/parser.py",
+      "sha256": "b8f6dc8db2fc3e353fb050af0f59ca9e6e0390ee1b5edea1489132c6255953f6"
+    },
+    {
+      "bytes": 20814,
+      "path": "src/retrieval/sizing_v1/runner.py",
+      "sha256": "4d1b9e79648a9b525ce49afb353502bb13f9e8a82abd5427d142bc4dc8508c1e"
+    },
+    {
+      "bytes": 507,
+      "path": "tests/fixtures/literature_sizing_binding_v1/README.md",
+      "sha256": "6a5509b9136631a28777f142617ad0944e2ab6e01f4f2ae83b43ab8ebf76a4a2"
+    },
+    {
+      "bytes": 536,
+      "path": "tests/fixtures/literature_sizing_binding_v1/invented.xml",
+      "sha256": "1ec855d2a0db0785445772f3ce96dd5ed7200b6d112ede0450257bd127b2778f"
+    },
+    {
+      "bytes": 11509,
+      "path": "tests/retrieval/test_sizing_v1_journal.py",
+      "sha256": "ddee36ca812ab4050161af1b229b6b69b5c9ad34e32da27c7e29964d2473274c"
+    },
+    {
+      "bytes": 25503,
+      "path": "tests/retrieval/test_sizing_v1_parser.py",
+      "sha256": "bd58f66550e1245139ca5f53ac3198308ff4f41638409a9c5b8389c78f0a7853"
+    },
+    {
+      "bytes": 16814,
+      "path": "tests/test_literature_sizing_binding_v1.py",
+      "sha256": "249cdb04fdbe08dcfa482fc9cd6258b4bf8787c19f848f55c94bd33ab713a235"
+    }
+  ],
+  "manifest_self": "This inventory is also committed; its Git blob authenticates it without a recursive self-pin.",
+  "n4_external_rehearsal_complete": false,
+  "push": false,
+  "q1_passed": true
+}

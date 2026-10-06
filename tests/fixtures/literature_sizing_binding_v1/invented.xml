@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE PubmedArticleSet SYSTEM "https://binding.invalid/never-fetch.dtd">
+<PubmedArticleSet><PubmedArticle><MedlineCitation><PMID>900099001</PMID>
+<Article><Journal><Title>Invented Test Journal</Title><JournalIssue><PubDate><Year>2026</Year></PubDate></JournalIssue></Journal>
+<ArticleTitle>Invented filesystem binding record</ArticleTitle>
+<Abstract><AbstractText>Made up content for offline storage qualification only.</AbstractText></Abstract>
+</Article></MedlineCitation></PubmedArticle></PubmedArticleSet>

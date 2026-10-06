@@ -1,0 +1,76 @@
+{
+  "base_commit": "edf5e478d528fc18e34e59f546026ba92a2010eb",
+  "commit_ready": false,
+  "date": "2026-10-06",
+  "excluded": [
+    "Other chat course-assignment changes and course-start summary",
+    "Unrelated untracked files",
+    "Claude lane edits by Codex",
+    "Registry/roots/external areas/data/outputs",
+    "Push/signature/live sizing/download/install/DB"
+  ],
+  "files": [
+    {
+      "bytes": 2302,
+      "native_acceptance": "failed",
+      "path": "src/retrieval/sizing_v1/__init__.py",
+      "sha256": "d7ad3280d35d1cf7f0f9cc048b02b3826d7930b6744431867691845ad044e541"
+    },
+    {
+      "bytes": 33020,
+      "native_acceptance": "failed",
+      "path": "src/retrieval/sizing_v1/parser.py",
+      "sha256": "2e4546f1d75f3d9cfdc7b782ebcabad7ebd3c9969c422af64c9176aabf6c7f76"
+    },
+    {
+      "bytes": 21949,
+      "native_acceptance": "failed",
+      "path": "tests/retrieval/test_sizing_v1_parser.py",
+      "sha256": "112e915c47a86a65219375e86b15a8e67621f82684075fc403bcbc0dfbc23c25"
+    },
+    {
+      "bytes": 6650,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/retrieval/CLAUDE-S2-V1.2-HANDBACK-2026-10-04.md",
+      "sha256": "9e5845e2b91f84ef4dfc2c677ee94c47dfdaf23655a348c07c37a42c6d90e2b3"
+    },
+    {
+      "bytes": 3683,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-05-R4.md",
+      "sha256": "d323018864bcddb1d3909d9042bf15fa6955f5b920783ba6c895af47adb06134"
+    },
+    {
+      "bytes": 80954,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "1eeac0961dfb18d4a9d98766fa8f262fea0b9145edb4baa16eadb7a2d0f375e4"
+    },
+    {
+      "bytes": 208667,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/DECISIONS.md",
+      "sha256": "ea3db20d939bdb07a20e6ba509a5847a876781de5e7e399a6abff90302c158fa"
+    },
+    {
+      "bytes": 9123,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/operations/CODEX-S2-V1.2-NATIVE-REVIEW-2026-10-06.md",
+      "sha256": "8bbf89d9befa40dfac5e4d5ce31f53c2e288a82a4b0b02cbd7ae29b15563d4d6"
+    },
+    {
+      "bytes": 8071,
+      "native_acceptance": "record_only",
+      "path": "docs/capstone/operations/CODEX-S2-V1.2-QUALIFICATION-2026-10-06.json",
+      "sha256": "8a2644b570df57101e3bb40dd893261605ac9d009bff511a6f7203809235cb2a"
+    }
+  ],
+  "kind": "blocked_pending_checkpoint_inventory",
+  "reason": "P2 native qualification failed; conditional P4 commit not permitted yet",
+  "schema_version": "1.0.0",
+  "self_hash_omitted": true,
+  "self_manifest": "docs/capstone/operations/PLAN07-V12-PENDING-CHECKPOINT-2026-10-06.json",
+  "unimplemented": [
+    "N4 backend/unit integration/native external rehearsal"
+  ]
+}

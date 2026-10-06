@@ -27,7 +27,9 @@ every ``poll`` seconds and kills it above the cap (Quinton's decision, 2026-10-0
 bounded by the growth within one poll interval, or three if readings are briefly missing. A
 monitor failure, or more than two consecutive missing readings while the child is alive, kills it. This is a watchdog cap, not an OS-enforced limit; the tests inject RSS
 readings and do not prove an OS-level bound. The same loop runs the 60-second volume and
-free-space check during parsing.
+free-space check during parsing. The child's stdout and stderr are drained concurrently into
+bounded memory: 1 MiB accepted per stream, with a 64 KiB stderr tail. Overflow stops the child,
+and no diagnostic file is created (``sizing_v1.2``).
 
 **Expansion:** gzip is decompressed as a stream, with at most ``CHUNK`` bytes out per call.
 Decompressed bytes above ``expansion_limit`` x compressed size stop the parse
@@ -45,10 +47,12 @@ import json
 import os
 import pyexpat
 import re
+import select
+import signal
 import subprocess
 import stat
 import sys
-import tempfile
+import threading
 import time
 import zlib
 from xml.parsers import expat
@@ -63,6 +67,11 @@ MIN_EXPAT = (2, 4, 1)
 MEMORY_CAP = 4 * GIB
 EXPANSION_LIMIT = 20
 POLL_SECONDS = 0.5
+DIAG_STREAM_LIMIT = 1024 * 1024
+DIAG_STDERR_TAIL = 64 * 1024
+DRAIN_JOIN_SECONDS = 5.0
+DRAIN_SELECT_SECONDS = 0.1
+_PARENT_PID = None          # set only in the parser child: stop if the watchdog parent disappears
 MAX_MISSING_READINGS = 2
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 ARTICLE_FIELDS = ('title', 'abstract', 'journal_title', 'journal_iso', 'pub_year', 'pub_date_raw',
@@ -175,6 +184,8 @@ class _Meter:
     def check_time(self):
         if time.monotonic() >= self.deadline:
             raise CapExceeded('per-run time cap reached during parse', reason='time_cap')
+        if _PARENT_PID is not None and os.getppid() != _PARENT_PID:
+            raise ParserGuard('watchdog parent is gone; the child stops', reason='parent_lost')
 
 
 class _Handler:
@@ -435,30 +446,161 @@ class PsMemoryProbe:
         return int(text) * 1024
 
 
+class _BoundedDrain:
+    """Drains one child pipe on a thread into bounded memory (no files).
+
+    The drain owns its descriptor: it duplicates the pipe's descriptor, the caller's file object is
+    closed at once, and only the drain thread closes the duplicate, when it reaches end of file or
+    is told to stop. No other code can close the descriptor while the thread may read it, so a
+    reused descriptor number can never be read by a stale thread.
+
+    At most ``limit`` bytes are accepted. Beyond that the stream is marked ``overflow``, and further
+    bytes are still read (so the child never blocks on a full pipe) but not retained. With
+    ``tail``, the last ``tail`` bytes of the stream are kept, including after overflow.
+    """
+
+    def __init__(self, stream, limit, tail=None):
+        self.limit, self.tail = limit, tail
+        self.total, self.overflow, self.buf = 0, False, bytearray()
+        self.fd = os.dup(stream.fileno())
+        stream.close()
+        self.stop = threading.Event()
+        self.thread = threading.Thread(target=self._run, name='run-s-diag-drain', daemon=True)
+        self.thread.start()
+
+    def _run(self):
+        try:
+            while not self.stop.is_set():
+                ready, _, _ = select.select([self.fd], [], [], DRAIN_SELECT_SECONDS)
+                if not ready:
+                    continue
+                try:
+                    chunk = os.read(self.fd, 65536)
+                except OSError:
+                    return
+                if not chunk:
+                    return
+                self.total += len(chunk)
+                if self.total > self.limit:
+                    self.overflow = True
+                if self.tail is not None:
+                    self.buf += chunk
+                    if len(self.buf) > self.tail:
+                        del self.buf[:len(self.buf) - self.tail]
+                elif not self.overflow:
+                    self.buf += chunk
+        finally:
+            os.close(self.fd)
+
+    def data(self):
+        return bytes(self.buf)
+
+
+class _GroupAnchor:
+    """A tiny, never-reaped-early process that leads the parse's process group.
+
+    The anchor starts in a new process group and simply waits on a pipe from the parent. The parser
+    child then joins the anchor's group. While the anchor is unreaped, alive or a zombie, its PID
+    pins the group ID. So ``kill()`` (``killpg`` with SIGKILL) can never reach an unrelated
+    process, whenever the parser child itself exited or was reaped. This needs no ``os.waitid``,
+    which macOS Python lacks.
+
+    ``kill()`` runs at most once. It takes down the parser child, any grandchildren and the anchor.
+    Then ``reap()`` collects the anchor. If the parent dies, even by SIGKILL, the anchor's stdin
+    reaches end of file and the anchor kills its own group. So no parser or grandchild is left
+    running without the memory watchdog.
+    """
+
+    CODE = ('import os, signal, sys\n'
+            'sys.stdin.buffer.read()\n'                 # returns when the parent closes or dies
+            'os.killpg(0, signal.SIGKILL)\n')           # parent gone: take the parser and grandchildren down
+
+    def __init__(self, python):
+        kwargs = _group_kwargs(0)
+        self.proc = subprocess.Popen([python, '-c', self.CODE], stdin=subprocess.PIPE,
+                                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **kwargs)
+        self.pgid = self.proc.pid
+        self.killed = False
+
+    def kill(self):
+        if self.killed:
+            return
+        self.killed = True
+        try:
+            os.killpg(self.pgid, signal.SIGKILL)   # pgid pinned: the anchor is not yet reaped
+        except (ProcessLookupError, PermissionError):
+            pass
+
+    def reap(self):
+        try:
+            self.proc.stdin.close()
+        except Exception:   # noqa: BLE001
+            pass
+        try:
+            self.proc.wait(timeout=30)
+        except subprocess.TimeoutExpired:
+            pass
+
+
+def _group_kwargs(pgid):
+    """Popen arguments that put the new process into group ``pgid`` (0 = a new group of its own)."""
+    if sys.version_info >= (3, 11):
+        return dict(process_group=pgid)
+    return dict(preexec_fn=lambda: os.setpgid(0, pgid))
+
+
 def run_with_watchdog(argv, *, probe, memory_cap=MEMORY_CAP, poll=POLL_SECONDS, seconds_left,
                       sleep=time.sleep, monotonic=time.monotonic, cwd=None, periodic=None,
-                      check_interval=60, pass_fds=()):
+                      check_interval=60, pass_fds=(), stream_limit=DIAG_STREAM_LIMIT,
+                      stderr_tail=DIAG_STDERR_TAIL):
     """Runs ``argv`` as a child and kills it above ``memory_cap`` RSS or past ``seconds_left``.
 
     Fail closed: a monitor exception, or more than ``MAX_MISSING_READINGS`` consecutive polls with no
     reading while the child is still running, kills it. A child that is exiting briefly has no RSS
     before it can be reaped, so up to that many gaps are tolerated; this extends the overshoot bound
     to at most three poll intervals in that case.
+
     ``periodic`` (the volume/free-space check) runs every ``check_interval`` seconds; if it raises,
-    the child is killed and the exception propagates. The child's stdout carries one JSON line;
-    stderr goes to an anonymous temporary file, so a noisy child cannot block on a full pipe.
-    Returns ``(returncode, stdout, stderr_tail, peak_rss_polled)``.
+    the child is killed and the exception propagates.
+
+    **Bounded diagnostics (``sizing_v1.2``).** stdout and stderr are pipes drained concurrently by
+    two threads into memory, never into a file:
+    - at most ``stream_limit`` bytes (1 MiB) are accepted per stream, and only the last
+      ``stderr_tail`` bytes (64 KiB) of stderr are kept;
+    - more than the limit on either stream stops and reaps the child, with
+      ``ParserGuard(reason='diagnostics_overflow')``. The run writes no manifest after a failed parse.
+    - The child runs in a process group led by a ``_GroupAnchor``. The anchor is reaped only after
+      the group has been killed, so the kill is safe without ``os.waitid`` (absent on macOS). The
+      group is killed exactly once on every exit, so a grandchild still holding a pipe cannot
+      outlive the parse. If pipes stay open anyway (a grandchild that left the group), the parse
+      fails with ``diagnostics_pipe_held``.
+
+    Draining never blocks the child, so the RSS, time and periodic checks keep running under pipe
+    pressure. Every exit path kills the child if it is still alive, joins both drains and closes
+    both pipes. Returns ``(returncode, stdout, stderr_tail, peak_rss_polled)``.
     """
-    err_file = tempfile.TemporaryFile()
+    anchor = _GroupAnchor(sys.executable)
     try:
-        proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=err_file, cwd=cwd, pass_fds=tuple(pass_fds))
+        proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd,
+                                pass_fds=tuple(pass_fds), **_group_kwargs(anchor.pgid))
     except BaseException:
-        err_file.close()
+        anchor.kill()
+        anchor.reap()
         raise
-    start, peak, missing = monotonic(), 0, 0
-    next_check = start + check_interval
+    drains = []
     try:
+        drains.append(_BoundedDrain(proc.stdout, stream_limit))
+        drains.append(_BoundedDrain(proc.stderr, stream_limit, stderr_tail))
+        start, peak, missing = monotonic(), 0, 0
+        next_check = start + check_interval
+
+        def overflowed():
+            return any(d.overflow for d in drains)
+
         while proc.poll() is None:
+            if overflowed():
+                raise ParserGuard('parser child exceeded the diagnostics limit', reason='diagnostics_overflow',
+                                  limit=stream_limit)
             try:
                 rss = probe.rss_bytes(proc.pid)
             except Exception as exc:   # noqa: BLE001 - any monitor failure denies
@@ -485,22 +627,35 @@ def run_with_watchdog(argv, *, probe, memory_cap=MEMORY_CAP, poll=POLL_SECONDS, 
                 periodic()
                 next_check = now + check_interval
             sleep(poll)
-        out, _ = proc.communicate(timeout=30)
-        err_file.seek(0, os.SEEK_END)
-        size = err_file.tell()
-        err_file.seek(max(0, size - 2000))
-        return proc.returncode, out, err_file.read(), peak
-    except BaseException:
-        if proc.poll() is None:
-            proc.kill()
-            proc.wait(timeout=30)
-        raise
+        proc.wait(timeout=30)
+        anchor.kill()                          # the group stays pinned by the anchor: kill leftovers safely
+        for d in drains:
+            d.thread.join(DRAIN_JOIN_SECONDS)
+        if any(d.thread.is_alive() for d in drains):
+            raise ParserGuard('parser child pipes are still held open after exit', reason='diagnostics_pipe_held')
+        if overflowed():
+            raise ParserGuard('parser child exceeded the diagnostics limit', reason='diagnostics_overflow',
+                              limit=stream_limit)
+        return proc.returncode, drains[0].data(), drains[1].data(), peak
     finally:
-        err_file.close()
+        anchor.kill()                          # at most once per run; no-op if already done
+        try:
+            proc.wait(timeout=30)
+        except subprocess.TimeoutExpired:
+            pass
+        anchor.reap()
+        for d in drains:
+            d.stop.set()
+        for d in drains:
+            d.thread.join(DRAIN_JOIN_SECONDS)    # each drain closes only its own descriptor
+        for stream in (proc.stdout, proc.stderr):
+            if stream is not None and not stream.closed:
+                stream.close()               # only a stream no drain took over (drain creation failed)
 
 
-_REASON_TYPES = {'memory_cap': ParserGuard, 'expansion_guard': ParserGuard, 'xml_guard': ParserGuard,
+_REASON_TYPES = {'diagnostics_overflow': ParserGuard, 'diagnostics_pipe_held': ParserGuard, 'memory_cap': ParserGuard, 'expansion_guard': ParserGuard, 'xml_guard': ParserGuard,
                  'malformed_xml': ParserGuard, 'memory_monitor': ParserGuard, 'parser_failed': ParserGuard,
+                 'parent_lost': ParserGuard,
                  'unexpected_file': UnexpectedFile, 'scratch_cap': CapExceeded, 'time_cap': CapExceeded,
                  'scratch_collision': CapExceeded}
 
@@ -520,7 +675,7 @@ class WatchdogLauncher:
 
     def parse(self, *, src, out, periodic=None, **kwargs):
         fds = (src.fileno(), out.fileno())
-        args = dict(kwargs, src_fd=fds[0], out_fd=fds[1])
+        args = dict(kwargs, src_fd=fds[0], out_fd=fds[1], parent_pid=os.getpid())
         argv = [self.python, '-m', 'src.retrieval.sizing_v1.parser', '--worker', json.dumps(args)]
         rc, out, err, peak = run_with_watchdog(argv, probe=self.probe, memory_cap=self.memory_cap,
                                                poll=self.poll, seconds_left=kwargs['seconds_left'] + 5,
@@ -553,8 +708,10 @@ def check_handover_fds(src_fd, out_fd):
 
 
 def _worker(args_json):
+    global _PARENT_PID
     kwargs = json.loads(args_json)
     src_fd, out_fd = kwargs.pop('src_fd'), kwargs.pop('out_fd')
+    _PARENT_PID = kwargs.pop('parent_pid', None)
     try:
         check_handover_fds(src_fd, out_fd)
         with os.fdopen(src_fd, 'rb') as src, os.fdopen(out_fd, 'wb') as out:

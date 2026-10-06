@@ -1451,3 +1451,91 @@ No change to caps, checks, journal semantics, run S rules, `listings.py`, the CL
 - `CLAUDE-S2-V1.1-HANDBACK-2026-10-04.md`: `3d00e92aac6f12ae4a052c70988a630522bd5af3ad210e40cc846d8a1f13b2c6`
 - `CLAUDE-HANDOFF-TO-CODEX-2026-10-04-R3.md`: `726d556b09c8b6f520561549a35d202afec2961b82680f07ec544cab34ec16c4`
 - Code and test pins: in the v1.1 handback (22 files, verified on the device)
+
+## 2026-10-05: Codex N1-N5 follow-up reviewed; `sizing_v1.2` bounded diagnostics; Quinton approves one more local commit (Claude records)
+
+**Claude's review of Codex's follow-up (read only):**
+- **Native N2 of v1.1:** 144 sizing tests and 326 retrieval tests passed, with no skips. Code
+  identity `df585e2b…` and all 22 pins matched. See `operations/CODEX-S2-V1.1-NATIVE-REVIEW-2026-10-04.md`.
+- **N3:** the shared retrieval contract section was added (118 new tests; 173 combined pass).
+- **Decisions:** D-346 to D-349 were recorded.
+- **Local commit:** `edf5e47`, "Preserve literature setup and shared retrieval contracts". It holds
+  v1.1 and this log at `fc5df4c5…`.
+- **N4 is incomplete.** Codex asked for bounded parser diagnostics: stderr went to an uncapped
+  anonymous `TemporaryFile`, outside the fs hook, and stdout was drained only after the child exited
+  (`operations/PLAN07-S2-IO-HOOK-REVIEW-2026-10-04.md`).
+- This RUNNING-LOG was not edited by Codex.
+
+**Claude implemented `sizing_v1.2`, the follow-on Quinton had approved ("continue on").** Three files
+changed: `__init__.py`, `parser.py` and the parser tests.
+- stdout and stderr are drained concurrently into memory:
+  - at most 1 MiB is accepted per stream;
+  - stderr keeps a 64 KiB tail, which stays current after overflow;
+  - no file is created.
+- Overflow stops the child with `diagnostics_overflow`, and no manifest is written.
+- The child runs in its own process group, which is killed exactly once, before the child is
+  reaped (`waitid` with `WNOWAIT`).
+- Each drain owns its own descriptor.
+- If pipes are still held after the group kill, the parse fails with `diagnostics_pipe_held`.
+- The child stops if the watchdog parent dies (`parent_lost`).
+
+**Tests** (Linux, Python 3.11.15):
+- 155 sizing tests: 154 passed, 1 skipped as root;
+- the full retrieval suite: 336 passed, 1 skipped, in 9 of 9 runs;
+- the key tests were mutation-checked.
+
+**Review:** rounds 6 and 7 by the same reviewer subagent.
+- Round 6: one MEDIUM finding (a grandchild could make a stale drain read a reused descriptor),
+  fixed, and two LOW, fixed.
+- Round 7: confirmed the fixes and found nothing at MEDIUM or above. Two of its LOW items were
+  fixed afterwards with tests; two were accepted.
+
+**New code identity:** `3198b2685709bff92367f0cba6254b09a9269c48837fde7d3dfc4ac61f464203`. The
+files were verified on the device.
+
+**Quinton's decision (2026-10-05):** "Yes, commit locally". After native qualification of v1.2,
+Codex makes one more local commit containing v1.2, the binding work and anything else verified.
+No push.
+
+**Not authorized:** run S signature or execution, S3, downloads, installs, P4a, or the D-085
+producer migration.
+
+**Hashes:**
+- `CLAUDE-S2-V1.2-HANDBACK-2026-10-04.md`: `9e5845e2b91f84ef4dfc2c677ee94c47dfdaf23655a348c07c37a42c6d90e2b3`
+- `CLAUDE-HANDOFF-TO-CODEX-2026-10-05-R4.md`: `d323018864bcddb1d3909d9042bf15fa6955f5b920783ba6c895af47adb06134`
+- v1.2 changed files: `__init__.py` `d7ad3280…`, `parser.py` `2e4546f1…`, `test_sizing_v1_parser.py` `112e915c…`
+
+## 2026-10-06: Native v1.2 failed on macOS (no `os.waitid`); `sizing_v1.3` group-anchor repair (Claude)
+
+**Codex's native review** (`operations/CODEX-S2-V1.2-NATIVE-REVIEW-2026-10-06.md`; D-350 recorded):
+- Sizing tests: 153 passed, 2 failed. Full retrieval suite: 335 passed, 2 failed. All 22 pins and
+  identity `3198b268…` matched.
+- **Root cause:** macOS Python 3.12.13 has no `os.waitid`. The fallback reaped the group leader
+  before the group kill, so a grandchild survived.
+- **Not done:** no binding, commit or rehearsal. This RUNNING-LOG was unchanged (`1eeac096…`).
+
+**Claude's repair, `sizing_v1.3`.** It follows the prescribed route; no new decision was needed.
+- A `_GroupAnchor` process leads the parse's process group, and the parser child joins it. The
+  anchor is reaped only after one `killpg`, so the group ID stays pinned without `waitid`.
+- If the parent dies, the anchor kills its own group, so there are no unwatched orphans.
+- The CLI's signal handlers and the journal's deferred signals now include SIGQUIT and SIGTSTP.
+- 6 files changed.
+
+**Tests:**
+- Linux, Python 3.11.15: 160 sizing tests (159 passed, 1 skipped as root); full retrieval suite
+  341 passed, 1 skipped, 7 times out of 7.
+- macOS simulated by deleting `waitid`: passes.
+- Mutation checks: pass.
+- Device Python 3.10.12 functional probe: the grandchild was killed and no drains were left.
+
+**Review:** round 8 by the reviewer subagent found nothing at MEDIUM or above. Its LOW items were
+fixed with tests.
+
+**New code identity:** `791be77ffc96c17aaaf23a8b588c52bf8db1a82ddaa959d41ad217da318f4d53`.
+
+**Not done:** nothing was committed, signed or downloaded.
+
+**Hashes:**
+- `CLAUDE-S2-V1.3-HANDBACK-2026-10-06.md`: `8940b0e854799719265ac760c63e652aec1004a60f45fe8184d81b8f3bbdd6f1`
+- `CLAUDE-HANDOFF-TO-CODEX-2026-10-06-R5.md`: `570ab7cfb616f02540d198f1805b8ab0bb6eac516403e1758392b4b92ed13b9e`
+- v1.3 file pins: in the handback (22 files, verified on the device)

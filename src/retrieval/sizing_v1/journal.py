@@ -6,7 +6,7 @@
   is ``fsync``-ed. If it cannot be created, the run never starts (``RunRefused``).
 - Each event is one JSON line, written, flushed and ``fsync``-ed before the call returns.
   - The sequence number is reserved before the write.
-  - SIGINT, SIGTERM and SIGHUP are deferred during the write, so a handled signal cannot tear a
+  - SIGINT, SIGTERM, SIGHUP, SIGQUIT and SIGTSTP are deferred during the write, so a handled signal cannot tear a
     line or reuse a number.
 - If a primary write fails, the remaining events go to
   ``<fallback_dir>/run-S-<run_id>.fallback.jsonl``, also created exclusively.
@@ -31,8 +31,7 @@ from src.retrieval.sizing_v1.fsio import LockHeld, LockUnsupported
 
 FINAL = 'final'
 MAX_RUNS = 2
-_DEFERRED = {s for s in (getattr(signal, 'SIGINT', None), getattr(signal, 'SIGTERM', None),
-                         getattr(signal, 'SIGHUP', None)) if s is not None}
+_DEFERRED = {getattr(signal, n) for n in ('SIGINT', 'SIGTERM', 'SIGHUP', 'SIGQUIT', 'SIGTSTP') if hasattr(signal, n)}
 
 
 class JournalUnwritable(Exception):

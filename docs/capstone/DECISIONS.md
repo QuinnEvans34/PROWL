@@ -1941,3 +1941,34 @@ Codex does not patch that lane. Native compatibility qualification does not clos
 No binding backend, native external rehearsal, sizing signature or run is enabled. D-347 permits
 the local checkpoint to preserve verified work while listing N4 as incomplete; no push. The current
 Claude log hash is `fc5df4c5fc0b747387c7773b9f40422492f29778fe99f6178215d3eb886d91c5`.
+
+## D-350 — one further local checkpoint after native v1.2 qualification (approved 2026-10-05; recorded 2026-10-06)
+
+Authority: Quinton's “Yes, commit locally”, recorded in the October 5 entry of
+[RUNNING-LOG](retrieval/planning/RUNNING-LOG.md), “Codex N1-N5 follow-up reviewed;
+`sizing_v1.2` bounded diagnostics; Quinton approves one more local commit”. Quinton's October 6
+dispatch of [the round-4 packet](retrieval/CLAUDE-HANDOFF-TO-CODEX-2026-10-05-R4.md) assigns this
+chat native qualification, the approved N4 binding against the exact qualified hook, and one local
+commit. This supersedes this chat's earlier N2-only assignment for this new packet. Single-writer
+ownership and imaging priority remain required.
+
+The commit is conditional on P2 passing. Include the three changed v1.2 files, its handback and
+round-4 handoff, the latest Claude log preserved without edits, and verified Codex binding/decision
+and evidence files, with a refreshed exact hashed scope. If P3 remains incomplete after P2 passes,
+preserve only verified work and identify the remainder. No push, Run S signature/execution, S3,
+download, install, database, P4/P5 execution or D-085 producer migration is authorized. Claude owns
+its code, tests and planning files; Codex reports native failures rather than editing that lane.
+
+Handback SHA `9e5845e2b91f84ef4dfc2c677ee94c47dfdaf23655a348c07c37a42c6d90e2b3`;
+round-4 handoff SHA `d323018864bcddb1d3909d9042bf15fa6955f5b920783ba6c895af47adb06134`.
+The declared v1.2 identity is `3198b2685709bff92367f0cba6254b09a9269c48837fde7d3dfc4ac61f464203`;
+matching hashes alone do not satisfy native qualification or binding acceptance.
+RUNNING-LOG SHA at reconciliation:
+`1eeac0961dfb18d4a9d98766fa8f262fea0b9145edb4baa16eadb7a2d0f375e4`.
+
+October 6 outcome: native P2 failed on macOS process-group cleanup; see
+[the exact review](operations/CODEX-S2-V1.2-NATIVE-REVIEW-2026-10-06.md).
+The declared code identity and all 22 pins match, but sizing reports 153 passed/2 failed and the
+full retrieval suite 335 passed/2 failed. P3 and the conditional commit remain incomplete; no
+binding backend, external rehearsal or new commit was enabled. Request a fresh Claude-owned
+macOS lifecycle fix and handback before repeating qualification. No producer or test was patched.
