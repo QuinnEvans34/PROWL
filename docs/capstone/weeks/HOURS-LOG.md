@@ -71,7 +71,21 @@ background interval as active work or confirm the earlier provisional 3–4-hour
 
 | Date | Goals | Clock-in | Clock-out | Breaks / excluded time | Net active hours | Status |
 |---|---|---|---|---|---|---|
-| Wednesday, Oct 7, 2026 | G1, G2 | 9:00 a.m. MDT (UTC−06:00) | Pending — supply actual finish tonight | Pending — schoolwork, breaks, assignment work, unattended intervals and overlap | Pending | Open |
+| Wednesday, Oct 7, 2026 | G1, G2 | 9:00 a.m. MDT (UTC−06:00) | Pending — supply actual finish tonight | Confirmed pause 3:15–approximately 4:27 p.m.; other schoolwork, breaks, assignments, unattended intervals and overlap pending | Pending | Resumed approximately 4:27 p.m. MDT; open |
+
+Session events supplied on October 7:
+
+| Event | America/Denver time | Basis |
+|---|---|---|
+| Initial clock-in | 9:00 a.m. MDT | Quinton's retrospective requested start |
+| Pause | 3:15 p.m. MDT | Quinton: “we stopped working at 3:15” |
+| Resume | Approximately 4:27 p.m. MDT | Quinton: “are back now”; time read 22:27:06 UTC and recorded to the minute |
+| Final clock-out | Pending | Use Quinton's actual finish tonight |
+
+Exclude the approximately **1 hour 12 minute** pause. The earlier 9:00 a.m.–3:15 p.m. window
+is 6 hours 15 minutes of elapsed time, with its schoolwork/background/other exclusions still
+unreconciled; it is not 6.25 credited project hours. Today's active total remains pending.
+The resumed session begins with training-readiness discussion; no new model job has started.
 
 At clock-out, record the day's project activities and reconcile pauses. Net hours equal the
 clock interval minus excluded time, counted once across all chats; if that reconstruction is
@@ -119,6 +133,11 @@ Quinton was asked for his active school/home windows and breaks; revise this est
 | Oct 7–11 | Remaining week | Not yet recorded | Future work | Add actual session entries rather than counting planned budgets. |
 
 ### Correction history
+
+October 7, afternoon pause/resume: recorded Quinton's supplied 3:15 p.m. pause and “back now”
+resumption at approximately 4:27 p.m. America/Denver. Added the known pause as excluded time;
+kept final finish, other exclusions and net active hours pending. Monday/Tuesday estimates and
+their 9–10-hour subtotal remain unchanged. No portal submission or continuous school-day credit.
 
 October 7, session-clock update: at Quinton's request, opened today's session at 9:00 a.m. Denver
 time. Finish and exclusions remain pending; no Wednesday hours or new weekly total were inferred.

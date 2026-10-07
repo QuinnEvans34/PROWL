@@ -1,5 +1,12 @@
 # AGENTS.md — Agent Context
 
+> **October 7 human pause/resume:** Quinton reports stopping at15:15MDT and returning “now”;
+> current time22:27:06UTC records approximate16:27MDT resumption. HOURS-LOG.md now records
+> the1h12pause as excluded; original09:00start preserved. Finish/other exclusions/net human
+> hours pending; no6.25h credit for the pre-pause school/background interval. Mon4/Tue5–6/
+> subtotal9–10unchanged, no portal submission. User requests discussion of proximity to training
+> before continuation; corrected I02 still needs its concrete decision. No job launched.
+
 > **October 7 DUR-06 delivered; I01 helper preflight failed:** Quinton explicitly approved DUR-06.
 > Four producing paths delivered;62new model-free checks pass1.804800625s/373932032B owned RSS,
 > workers reaped.402pins match;398prior paths and numerical/cold replay code stay fixed. One
