@@ -1,5 +1,25 @@
 # AGENTS.md — Agent Context
 
+> **October 7 bounded diagnosis delivered:** Quinton selected the diagnosis/launch-decision sequence.
+> DUR-05 reporting and fresh D01/D02 retained-invented-state diagnostics finished; native review
+> accepted both. Read `docs/capstone/operations/SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md`.
+> D02 model max3.725290298461914e-9/3873elements/30fields, optimizer max4.3655745685100555e-9/
+> 925459elements/103fields; progress/CPU-RNG/MPS-RNG exact. No nonfinite/reported structural-scalar
+> differences. Bit-exact continuation still fails; original N02 failing in-memory state remains
+> unavailable. No training-loop defect or harmless long-run drift proven. Reporter OrderedDict/
+> component-max defect repaired;40new model-free checks pass1.588161s/352616448B, workers reaped.
+> D01/D02 each8forwards/1inventedupdate; combined18.831315s/max1162100736B owned sampled RSS,
+> workers reaped/lock released; each113213038B retained payload members,0original/cache/CT/third-party
+> payloads. N02/D01/D02 consumed/retired, no replay.400current producing pins:396prior unchanged,
+> launcher cold-only amendment and3new paths; no session/executor/numerical/policy/cap changes.
+> Exact criteria/history stay fixed. Read `SEGMENTER-DURATION-REAL-DATA-PREPARATION-2026-10-07.md`:
+> retained-metadata50target ledger drafted,0arrays opened; no actual source controls or job.
+> DUR-06 four-file inference-only readiness amendment + conditional fresh30forward/0update cold
+> qualification is PROPOSED/UNAPPROVED. No scientific launch/resume/tolerance amendment/full new
+> producer follows. W01-28 remains incomplete/To-Do awaiting that decision. Keep SuPreM parked.
+> Meaningful reviewed local preservation allowed; no public push. Hours/9am open clock unchanged.
+> Earlier DUR-05-unapproved and component-unknown passages below are historical checkpoints.
+
 > **October7 human clock-in:** Quinton requests today's session start09:00America/Denver/MDT,
 > clock-out when he finishes tonight. HOURS-LOG.md records an open window, not credited continuous
 > school-day/background time. Finish/pauses/exclusions/net hours pending; Mon4/Tue5–6 subtotal9–10

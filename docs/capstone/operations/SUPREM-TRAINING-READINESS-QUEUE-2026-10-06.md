@@ -3,7 +3,24 @@
 Prepared October 6, 2026 for Quinton Evans. Owner: this Codex imaging chat.
 Tracking: [W01-12](https://trello.com/c/fiOfVdBz).
 
-## October 7 current work and training sequence
+## October 7 latest priority: scratch duration diagnosis finished
+
+[DUR-05/D01/D02 result](SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md) measures tiny finite
+model/optimizer next-update differences, exact progress/CPU-RNG/MPS-RNG,40new model-free checks
+and two completed focused invented diagnostics. No scientific job or tolerance change. Quinton's
+current priority remains the scratch duration comparison; do not continue SuPreM engineering to
+fill the schedule. Its publisher/source evidence remains absent.
+
+[The prepared run packet](SEGMENTER-DURATION-REAL-DATA-PREPARATION-2026-10-07.md) proposes DUR-06
+inference-only readiness for one uninterrupted pilot, a distinct guard/certificate and fresh cold
+check over retained invented evidence. Human decision pending; all currently approved diagnosis
+work is finished. Do not implement that proposal, resume/replay N02/D01/D02 or freeze/launch actual
+training from scheduling. Exact real-target draft remains50reads/zero CT; roles/DUR-01/26GiB/floor
+unchanged. Reviewed local preservation is allowed; public push and scientific launch remain separate.
+Human9am clock is open; hours await supplied finish/pauses/net participation. Earlier restart/HEAD
+paragraphs below are historical; inspect the actual checkout and latest diagnosis receipt.
+
+## Historical October 7 pretrained session preparation sequence
 
 Quinton asked to plan the remaining steps and get them done. S01 is now the bounded coding
 scope: [closed session contract](../imaging/SEGMENTER-PRETRAINED-SESSION-CONTRACT-V1.md),

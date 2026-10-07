@@ -1,5 +1,13 @@
 # Duration readiness handback — October 7
 
+**Later diagnosis handback:** [DUR-05/D01/D02](SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md)
+finished after Quinton selected the bounded diagnosis sequence. Fresh D02 measured weight max
+3.7253e-9 and optimizer max4.3656e-9, exact progress/CPU/MPS RNG; bit-exact continuation still
+fails. Reporting is repaired/40new checks pass. No scientific readiness or launch claimed.
+[DUR-06 inference-only readiness and real-data preparation](SEGMENTER-DURATION-REAL-DATA-PREPARATION-2026-10-07.md)
+is the concrete unapproved next decision. The original N02 failure and proposal wording below
+remain retained historical evidence, not new dispatch or replay authority.
+
 ## N02 finished: producer complete, independent next-update recovery failed
 
 **The full 192-update invented producer completed. Native qualification remains incomplete because

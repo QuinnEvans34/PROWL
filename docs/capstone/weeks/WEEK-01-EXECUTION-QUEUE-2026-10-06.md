@@ -1,6 +1,26 @@
 # Week 1 execution queue — October 6–11, 2026
 
-## October 7 N02 finished; native recovery mismatch remains
+## October 7 bounded recovery diagnosis complete; limited-readiness decision next
+
+Quinton selected diagnosis before a launch decision. [DUR-05/D01/D02 handback](../operations/SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md):
+40new model-free checks pass; two fresh invented continuations complete16forwards/two updates,
+18.831315supervised seconds/max1,162,100,736B sampled owned RSS, workers reaped. D02 weight max
+3.7253e-9/optimizer max4.3656e-9; progress and CPU/MPS RNG match exactly. Bit-exact recovery still
+fails; no numerical criterion changed or training-loop defect established. Original N02 failure
+and every consumed attempt remain fixed.400current producing pins;396prior bytes and historical
+experiment tail unchanged. No original/cache/CT/third-party payloads or scientific job.
+
+[Prepared run/decision packet](../operations/SEGMENTER-DURATION-REAL-DATA-PREPARATION-2026-10-07.md)
+has the inactive50target-read ledger and unchanged recipe/membership/DUR-01/resource boundaries.
+Recommend DUR-06's distinct inference-only readiness scope and one focused30forward/zero-update
+cold qualification over retained invented checkpoints/exports. This is **unapproved**; current
+full-native guard remains enforced. [W01-28](https://trello.com/c/3oahjFM6) returns To-Do/incomplete
+awaiting the protocol decision, with diagnosis finished and resume qualification deferred only if
+Quinton agrees. No full producer repeat, old check replay, actual controls, scientific job or
+public push follows from scheduling. Hours/9am open human session unchanged; unattended runtime
+excluded. Earlier component-unknown/DUR-05-pending text below remains historical.
+
+## Historical October 7 N02 handback; native recovery mismatch remained
 
 Producer completed192invented144³/MPS updates, five checkpoints, four native screens and25exports/
 views;253forwards/192optimizer calls. Independent cold recovery failed the full step-49 state

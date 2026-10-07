@@ -187,6 +187,8 @@ def cold(r,args,grant):
     require(Path(args.dest)==ss[1].root.parent/areas(r['storage_capability'])['controls'],"Cold output outside approved control area")
     producer=json.loads(read_control(Path(args.dest)/"transaction.json",args.producer_pin,8*1024**2))
     identity=r["identity"];restored=[];counter=engine.CallCounter(r["model_calls"]["cold"]);start=time.monotonic()
+    from src.training import segmenter_duration_recovery_audit_v1 as recovery_audit
+    deltas=[];native=[];component_audit=None;phase="restore_summary"
     def tick():
         _,rss=owned_tree(os.getpid())
         require(rss<=r["limits"]["rss_bytes"] and time.monotonic()-start<r["limits"]["recovery_seconds"] and torch.mps.driver_allocated_memory()<=r["limits"]["driver_bytes"],"Cold resource stop")
@@ -195,51 +197,73 @@ def cold(r,args,grant):
     def restore(pair,validator):
         tick();files,reference=restore_backup(ss[1],ss[2],pair["backup"],pair["primary"],identity,validator)
         restored.append(reference);tick();return files
-    summary=restore(producer["summary_reference"],lambda f,i:evidence.validate_summary(f,r))
-    completion=json.loads(summary["completion.json"])
-    require(completion=={k:v for k,v in producer.items() if k!="summary_reference"},"Producer result differs from independent summary")
-    all_exports=completion["recovery"]["exports"]
-    for pair in completion["screens"]:
-        step=pair["step"];exports=[v for v in all_exports if v["report"]["completed_updates"]==step]
-        restore(pair,lambda f,i,step=step,exports=exports:validate_stage(f,r,step,exports))
-    if completion["state"]=="stopped":
-        for pair in all_exports:
-            report=pair['report'];case=next(c for c in r['targets']['cases'] if c['study_id']==report['study_id']);context=dict(identity=identity,case=case,step=report['completed_updates'],weights_sha256=report['weights_sha256'])
-            restore(pair,lambda f,i,context=context:evidence.validate_export(f,context))
-            restore(pair['view_reference'],lambda f,i,context=context,report=report:evidence.validate_views(f,context|dict(prediction_sha256=report['native_sha256'])))
-        for pair in completion["checkpoints"]:
-            files=restore(pair,core.validate_payload);session=core.restore_payload(files,identity)
-            require(session.step==pair["step"],"Stopped checkpoint boundary drift");del session,files;gc.collect();torch.mps.empty_cache()
-        result=dict(state="stopped_checkpoints_restored",full_duration_qualified=False,restores=restored,model_calls=counter.counts,original_targets=0,original_ct=0)
-    else:
-        images=restore(completion["recovery"]["images_reference"],lambda f,i:evidence.validate_images(f,r))
-        probes=restore(completion["recovery"]["probe_reference"],lambda f,i:evidence.validate_probes(f,i,r))
-        next_state=restore(completion["recovery"]["next_state_reference"],core.validate_payload)
-        expected_next=core.restore_payload(next_state,identity);require(expected_next.step==49,"Next-state boundary")
-        image=core.cache.decode(probes["image.npy"],"image");deltas=[];native=[];next_exact=False
-        for pair in completion["checkpoints"]:
-            step=pair["step"];files=restore(pair,core.validate_payload);session=counter.attach(core.restore_payload(files,identity));del files
-            require(session.step==step,"Cold checkpoint boundary drift");tick()
-            expected=np.load(__import__('io').BytesIO(probes[f"prob-{step}.npy"]),allow_pickle=False)
-            difference=float(np.max(np.abs(session.predict(image)-expected)));require(difference<=1e-6,"Cold probability drift");deltas.append(difference)
-            for exported in [v for v in all_exports if v["report"]["completed_updates"]==step]:
-                report=exported["report"];case=next(c for c in r["targets"]["cases"] if c["study_id"]==report["study_id"])
-                context=dict(identity=identity,case=case,step=step,weights_sha256=report["weights_sha256"])
-                files=restore(exported,lambda f,i,context=context:evidence.validate_export(f,context))
-                restore(exported['view_reference'],lambda f,i,context=context,report=report:evidence.validate_views(f,context|dict(prediction_sha256=report['native_sha256'])))
-                n=r["targets"]["cases"].index(case);x=core.cache.decode(images[f"image-{n:02d}.npy"],"image")
-                probability=session.predict(x);mask,_=evidence.codec.export(probability,case,tick=tick)
-                require(evidence.codec.array_bytes(mask)==files["mask.npy"],"Cold native export drift");native.append(dict(study_id=case["study_id"],step=step,prediction_exact=True))
-                del probability,mask,files,x;tick()
-            if step==48 and r["kind"]=="native_rehearsal":
-                p=inputs.InventedInputs(144);require(canonical(p.control)==r["controls"]["inputs.json"].encode(),"Invented replay identity")
-                session.update(p);tick()
-                require(core.tree_exact(session.model.state_dict(),expected_next.model.state_dict()) and core.tree_exact(session.optimizer.state_dict(),expected_next.optimizer.state_dict()) and core.progress(session)==core.progress(expected_next) and core.tree_exact(session.cpu_rng,expected_next.cpu_rng) and core.tree_exact(session.mps_rng,expected_next.mps_rng),"Independent full next-update recovery differs")
-                require(core.numerical.state_hash(session.model.state_dict())==json.loads(probes["manifest.json"])["next_weights_sha256"],"Independent next weights differ");next_exact=True;del p
-            del session;gc.collect();torch.mps.empty_cache();tick()
-        require(counter.counts==r["model_calls"]["cold"],"Incomplete cold model-call inventory")
-        result=dict(state="passed",full_duration_qualified=True,engineering_only=r["kind"]=="native_rehearsal",restores=restored,probability_max_difference=max(deltas),native_checks=native,next_update_exact=next_exact if r["kind"]=="native_rehearsal" else None,model_calls=counter.counts,original_targets=0,original_ct=0)
-    verify_code(r);engine.put(Path(args.dest)/"cold-result.json",canonical(result));return result
+    try:
+        summary=restore(producer["summary_reference"],lambda f,i:evidence.validate_summary(f,r))
+        completion=json.loads(summary["completion.json"])
+        require(completion=={k:v for k,v in producer.items() if k!="summary_reference"},"Producer result differs from independent summary")
+        all_exports=completion["recovery"]["exports"]
+        for pair in completion["screens"]:
+            phase="restore_screen"
+            step=pair["step"];exports=[v for v in all_exports if v["report"]["completed_updates"]==step]
+            restore(pair,lambda f,i,step=step,exports=exports:validate_stage(f,r,step,exports))
+        if completion["state"]=="stopped":
+            for pair in all_exports:
+                phase="restore_stopped_export"
+                report=pair['report'];case=next(c for c in r['targets']['cases'] if c['study_id']==report['study_id']);context=dict(identity=identity,case=case,step=report['completed_updates'],weights_sha256=report['weights_sha256'])
+                restore(pair,lambda f,i,context=context:evidence.validate_export(f,context))
+                restore(pair['view_reference'],lambda f,i,context=context,report=report:evidence.validate_views(f,context|dict(prediction_sha256=report['native_sha256'])))
+            for pair in completion["checkpoints"]:
+                phase="restore_stopped_checkpoint"
+                files=restore(pair,core.validate_payload);session=core.restore_payload(files,identity)
+                require(session.step==pair["step"],"Stopped checkpoint boundary drift");del session,files;gc.collect();torch.mps.empty_cache()
+            result=dict(state="stopped_checkpoints_restored",full_duration_qualified=False,restores=restored,model_calls=counter.counts,original_targets=0,original_ct=0)
+        else:
+            phase="restore_images"
+            images=restore(completion["recovery"]["images_reference"],lambda f,i:evidence.validate_images(f,r))
+            phase="restore_probes"
+            probes=restore(completion["recovery"]["probe_reference"],lambda f,i:evidence.validate_probes(f,i,r))
+            phase="restore_expected_next_state"
+            next_state=restore(completion["recovery"]["next_state_reference"],core.validate_payload)
+            expected_next=core.restore_payload(next_state,identity);require(expected_next.step==49,"Next-state boundary")
+            image=core.cache.decode(probes["image.npy"],"image");next_exact=False
+            for pair in completion["checkpoints"]:
+                step=pair["step"];phase="restore_checkpoint_"+str(step);files=restore(pair,core.validate_payload);session=counter.attach(core.restore_payload(files,identity));del files
+                require(session.step==step,"Cold checkpoint boundary drift");tick()
+                expected=np.load(__import__('io').BytesIO(probes[f"prob-{step}.npy"]),allow_pickle=False)
+                phase="checkpoint_probability"
+                difference=float(np.max(np.abs(session.predict(image)-expected)));deltas.append(difference);require(difference<=1e-6,"Cold probability drift")
+                for exported in [v for v in all_exports if v["report"]["completed_updates"]==step]:
+                    phase="native_export"
+                    report=exported["report"];case=next(c for c in r["targets"]["cases"] if c["study_id"]==report["study_id"])
+                    context=dict(identity=identity,case=case,step=step,weights_sha256=report["weights_sha256"])
+                    files=restore(exported,lambda f,i,context=context:evidence.validate_export(f,context))
+                    restore(exported['view_reference'],lambda f,i,context=context,report=report:evidence.validate_views(f,context|dict(prediction_sha256=report['native_sha256'])))
+                    n=r["targets"]["cases"].index(case);x=core.cache.decode(images[f"image-{n:02d}.npy"],"image")
+                    probability=session.predict(x);mask,_=evidence.codec.export(probability,case,tick=tick)
+                    require(evidence.codec.array_bytes(mask)==files["mask.npy"],"Cold native export drift");native.append(dict(study_id=case["study_id"],step=step,prediction_exact=True))
+                    del probability,mask,files,x;tick()
+                if step==48 and r["kind"]=="native_rehearsal":
+                    p=inputs.InventedInputs(144);require(canonical(p.control)==r["controls"]["inputs.json"].encode(),"Invented replay identity")
+                    phase="replay_next_update";session.update(p);tick()
+                    phase="compare_next_update"
+                    def state_parts(s):
+                        return dict(model=s.model.state_dict(),optimizer=s.optimizer.state_dict(),progress=core.progress(s),cpu_rng=s.cpu_rng,mps_rng=s.mps_rng)
+                    component_audit=recovery_audit.compare(state_parts(session),state_parts(expected_next),tree_equal=core.tree_exact)
+                    recovery_audit.publish(Path(args.dest)/"next-update-audit.json",component_audit)
+                    require(component_audit["all_exact"],"Independent full next-update recovery differs")
+                    require(core.numerical.state_hash(session.model.state_dict())==json.loads(probes["manifest.json"])["next_weights_sha256"],"Independent next weights differ");next_exact=True;del p
+                del session;gc.collect();torch.mps.empty_cache();tick()
+            require(counter.counts==r["model_calls"]["cold"],"Incomplete cold model-call inventory")
+            result=dict(state="passed",full_duration_qualified=True,engineering_only=r["kind"]=="native_rehearsal",restores=restored,probability_max_difference=max(deltas),native_checks=native,next_update_exact=next_exact if r["kind"]=="native_rehearsal" else None,model_calls=counter.counts,original_targets=0,original_ct=0)
+        phase="persist_success"
+        verify_code(r);engine.put(Path(args.dest)/"cold-result.json",canonical(result));return result
+    except BaseException as exc:
+        try:
+            report=recovery_audit.failure(phase=phase,error=exc,counts=counter.counts,restored=len(restored),deltas=deltas,native=native,component_audit=component_audit)
+            recovery_audit.publish(Path(args.dest)/"cold-failure-audit.json",report)
+        except BaseException as audit_error:
+            if hasattr(exc,"add_note"):exc.add_note("Cold failure metadata could not be persisted: "+type(audit_error).__name__)
+        raise
 
 
 def main(argv=None):
