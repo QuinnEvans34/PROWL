@@ -1,6 +1,26 @@
 # Week 1 execution queue — October 6–11, 2026
 
-## October 7 training priority review
+## October 7 daytime preparation — DUR-02 delivered
+
+[W01-27](https://trello.com/c/rhNujXdz) completed the approved sixteen-file consumer/unit packet.
+[Handback](../operations/SEGMENTER-DURATION-EXECUTION-RESULTS-2026-10-07.md):161distinct new checks,
+four tiny CPU optimizer calls/eight attempted forwards; mock192sequencing;299priorpins fixed,
+315total. No actual144³/native/source/cache/scientific job. A001failures repaired and retained;
+Final six-case native-stage mismatch also repaired and directly qualified. Do not rerun completed checks.
+[W01-28](https://trello.com/c/3oahjFM6) stays To-Do/incomplete for drive and native packet review.
+
+Quinton explicitly approved26GiB/≤8GiB added backup/preserve all evidence/100GiBfree. After the
+new storage/metadata unit checks, local registry cap is26GiB and its schema preserves20GiB
+historical support plus26GiB. Old hash-bound S1/N4/legacy controls require owner reconciliation;
+no other-lane rebinding occurred. No writer/external areas/actual authority created.
+
+Exact next: connect registered drive/AC, scoped current storage/idle-owner proof and review the
+native-onlyDUR_NATIVE_20261007_N01 packet in the closed contract. It is unprepared/unapproved;
+scientific launch remains separately frozen after native/cold success. Keep SuPreM parked and
+all original memberships/holds/evidence. Repeat this frozen recipe through fresh configuration
+and approvals; changed recipes need relevant scoped checks, not another training subsystem.
+
+## Historical October 7 training priority review
 
 Quinton wants the shortest path to training today and a strong model. See
 [the scratch-duration launch plan](../operations/SCRATCH-DURATION-TRAINING-PLAN-2026-10-07.md)

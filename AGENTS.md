@@ -1,5 +1,45 @@
 # AGENTS.md — Agent Context
 
+> **October7 DUR-02 delivered /26GiB budget applied:**161distinct new unit checks qualified across
+> retained attempts; four tiny24³CPU optimizer calls/eight attempted forwards (one refused before
+> computation). Full192loop mocked; actual144³/native/scientific jobs and actual cache/targets absent.
+> Read docs/capstone/operations/SEGMENTER-DURATION-EXECUTION-RESULTS-2026-10-07.md and closed contract.
+> All299prior producing pins/tail unchanged;315total with16new producing pins. A001journal/failure
+> defects and final six-case stage mismatch repaired/retained; no old-suite/request replay. Versioned192consumer, stages, keeper/cold
+> APIs and fixed dispatcher complete. Native engineering mode preserves quality failures and can
+> exercise full mechanics; scientific mode always enforces DUR-01. No full native/recovery/learning
+> or independent backup claim from unit tests. Fresh driver has no automatic scientific resume.
+> Quinton explicitly approved26GiB budget; local roots cap now27917287424B, portable schema retains
+> historical20and admits26. Registry be068cb7; old registry/schema snapshots kept in ignored task
+> receipt. Maxnew8GiB/two phases/100GiBfree/preserve all evidence; no actual writer/areas/job prepared.
+> Old hash-bound controls—including other-lane S1/N4—need owner reconciliation, not silent rebinding.
+> Meaningful local preservation recorded in task receipt; no public push. Exact restart: when home,
+> registered drive+AC/fresh storage/idle-owner proof and review native-onlyDUR_NATIVE_20261007_N01;
+>192+one invented recovery update/253+31forwards/60min/12GiB,0original/cache/CT/third-party weights.
+> Native preparation/request still unapproved/unprepared. Only after native/cold qualification freeze
+> separate scientific request (D335baseline/tiny2973/boundary6238/unmodifiedDUR01/50targets/terminal192).
+> No repeated successful checks, cap proposal re-approval, old consumed replay or automatic follow-on.
+> Earlier20GiB/pendingimplementation/budget language below is historical. Human hours unconfirmed.
+
+> **Historical October7 storage budget approval/start (application settled above):** Quinton answered “Approve the26GiB proposal” to the exact
+> fixed/registered26GiB,≤8GiB added backup across one native rehearsal+one training attempt,
+> preserve-all-evidence/100GiB free-floor question. Budget is now approved; no job/writer follows.
+> Current registry still20GiB until the new storage/read adapter is qualified; old readers pin
+> the original registry hash, so changing it alone would break those readers. Preserve the original
+> registry/control evidence; later exact registry/capability preparation must bind the new hash.
+> Closed DUR-02 unit implementation continues; native/scientific requests remain separate.
+
+> **Historical October7 DUR-02 implementation start (completion settled above):** Quinton asks daytime preparation for training tonight,
+> says “lets keep going,” and asks to avoid day-long coding per run. This accepts the reviewed
+> sixteen-file scratch-duration implementation plus bounded invented unit mechanics, not a native
+> or scientific job. Follow SEGMENTER-DURATION-EXECUTION-CONTRACT-V1.md; preserve299priorpins.
+> Unit attempts collectively≤24tiny24³CPU updates/48forwards;300s per invocation/3GiB owned tree.
+> New callback-based runner must retain native coverage/FP stops, protected roles, complete keeper
+> and recovery evidence, and fresh one-use requests. W01-27 In-Progress. No actual arrays/weights,
+>144³/MPS job, external writer, cap/registry change or push.26GiB budget answer remains pending;
+> drive will be reconciled when Quinton is home. Earlier unselected-implementation wording is history
+> only for this bounded packet. Source acceptance, native qualification and launch remain separate.
+
 > **October7 training-priority review:** Quinton wants training today and the strongest model.
 > Read `docs/capstone/operations/SCRATCH-DURATION-TRAINING-PLAN-2026-10-07.md` and its inactive
 > storage proposal. Recommend fresh scratch192 before further SuPreM engineering; no publisher
