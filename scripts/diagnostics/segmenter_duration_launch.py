@@ -108,6 +108,76 @@ def validate_readiness(r):
     reconcile(REPO,r['source_pins'],cpu,native)
     if r['kind']=='native_rehearsal':
         require(r['readiness']['acceptance_sha256']==old.CPU_PIN,"Frozen numerical readiness identity")
+    elif r['readiness']['kind']=='qualified_duration_inference_v1':
+        import math
+        base=REPO/'outputs/prowl/SEGMENTER-DURATION-DUR06-20261007'
+        job=REPO/'outputs/prowl/SEGMENTER-DURATION-INFERENCE-I01-20261007'
+        a=json.loads(read_control(REPO/'outputs/prowl/SEGMENTER-DURATION-INFERENCE-READINESS.json',r['readiness']['acceptance_sha256']))
+        fields={'state','source_pins','runtime','completed_steps','primary_reads_blocked','training_resume_qualified',
+                'next_update_exact','continuation_status','all_native_exports_exact','cold_original_reads','model_calls',
+                'producer_sha256','recovery_sha256','tests_sha256','lineage_sha256','checkpoints','probe_checks',
+                'native_checks','view_checks','origin_request_sha256'}
+        require(type(a) is dict and set(a)==fields and a['state']=='qualified_duration_inference_v1'
+                and r['kind']=='scientific' and a['source_pins']==r['source_pins'] and a['runtime']==r['runtime']
+                and type(a['completed_steps']) is int and a['completed_steps']==192
+                and a['primary_reads_blocked'] is True and a['training_resume_qualified'] is False
+                and r['readiness']['training_resume_qualified'] is False and a['next_update_exact'] is False
+                and a['continuation_status']=='failed_bit_exact_deferred' and a['all_native_exports_exact'] is True
+                and type(a['cold_original_reads']) is int and a['cold_original_reads']==0
+                and a['model_calls']==dict(producer=engine.call_limits('scientific')['producer'],cold=engine.call_limits('scientific')['cold'])
+                and all(type(v) is int for row in a['model_calls'].values() for v in row.values())
+                and all(a[k]==r['readiness'][k] for k in ('producer_sha256','recovery_sha256','tests_sha256','lineage_sha256')),
+                'Missing inference-only qualification')
+        require(r['extension_allowed'] is False and r['recovery_policy']==dict(primary_denied=True,
+                original_target_reads=0,original_ct_reads=0,real_optimizer_calls=0,automatic_restart=False),
+                'Inference qualification cannot permit restart')
+        origin=json.loads(read_control(REPO/'outputs/prowl/SEGMENTER-DURATION-NATIVE-N02-20261007/frozen-manifest.json',
+                '40cbd6ca620d3dcd7bbf1d6118acbe00456530c50d964c82d1fcbc774f426c36'))
+        prior=json.loads(read_control(REPO/'outputs/prowl/SEGMENTER-DURATION-DUR05-20261007/protected-pins-post-repair.json',
+                '05d4532ee7856fda80939fa89bd55ef33b96edcbfbb192fff55a46cebd47d965'))
+        lineage=json.loads(read_control(base/'source-lineage.json',a['lineage_sha256']))
+        amended=['scripts/diagnostics/segmenter_duration_launch.py','src/training/segmenter_duration_executor_v1.py']
+        require(lineage==dict(state='reviewed_DUR06_function_scope',source_pins=r['source_pins'],prior_source_pins=prior,
+                origin_source_pins=origin['source_pins'],amended=amended,outside_approved_regions_identical=True,
+                numerical_recipe_unchanged=True,original_replay_assertion_unchanged=True)
+                and len(prior)==400 and all(r['source_pins'].get(n)==h for n,h in prior.items() if n not in amended)
+                and all(prior.get(n)==h for n,h in origin['source_pins'].items() if n!=amended[0]),
+                'Inference producing lineage differs')
+        require(a['origin_request_sha256']==origin['pins']['request_sha256']
+                and a['origin_request_sha256']=='575603717131190f97ea7496e4ef0d4c0311ae5f9be0599658dad1c0671fd70b'
+                and a['producer_sha256']=='a1930dd30180be300a07dd9a6aaa1e57650d4e0b1c8d93dc1c73864999151e3b',
+                'Inference producer origin differs')
+        tests=json.loads(read_control(base/'unit-qualification.json',a['tests_sha256']))
+        require(tests['state']=='qualified_model_free_DUR06' and tests['source_pins']==r['source_pins']
+                and type(tests['passed']) is int and tests['passed']>0
+                and all(type(tests[k]) is int and tests[k]==0 for k in ('model_forwards','optimizer_calls','actual_arrays')),
+                'Inference readiness unit qualification absent')
+        recovery=json.loads(read_control(job/'result.json',a['recovery_sha256']))
+        require(recovery['state']=='passed_duration_inference_v1' and recovery['attempt']=='DUR_INFERENCE_20261007_I01'
+                and recovery['source_pins']==r['source_pins'] and recovery['runtime']==r['runtime']
+                and recovery['producer_sha256']==a['producer_sha256'] and recovery['origin_request_sha256']==a['origin_request_sha256']
+                and recovery['lineage_sha256']==a['lineage_sha256'] and recovery['tests_sha256']==a['tests_sha256']
+                and recovery['model_calls']==dict(forwards=30,optimizer_calls=0) and all(type(v) is int for v in recovery['model_calls'].values())
+                and recovery['primary_reads_blocked'] is True
+                and all(type(recovery[k]) is int and recovery[k]==0 for k in ('original_arrays','third_party_weights'))
+                and recovery['training_resume_qualified'] is False
+                and recovery['scientific_launch'] is False and type(recovery['payload_member_bytes']) is int
+                and 0<recovery['payload_member_bytes']<=2*1024**3
+                and type(recovery['seconds']) in (float,int) and math.isfinite(recovery['seconds']) and 0<=recovery['seconds']<600
+                and all(recovery[k]==a[k] for k in ('checkpoints','probe_checks','native_checks','view_checks')),
+                'Inference cold qualification absent')
+        steps=[0,48,96,144,192];cases=origin['targets']['cases']
+        expected=[(step,c['study_id']) for step in steps[1:] for c in (cases if step==192 else cases[:6])]
+        require(a['checkpoints']==steps and all(type(n) is int for n in a['checkpoints'])
+                and type(a['probe_checks']) is list and len(a['probe_checks'])==5
+                and all(set(v)=={'step','max_absolute_difference'} and type(v['step']) is int and v['step']==n
+                    and type(v['max_absolute_difference']) in (float,int) and math.isfinite(v['max_absolute_difference'])
+                    and 0<=v['max_absolute_difference']<=1e-6 for n,v in zip(steps,a['probe_checks']))
+                and type(a['native_checks']) is list and len(a['native_checks'])==25
+                and all(set(v)=={'step','study_id','prediction_exact','view_validated'} and type(v['step']) is int
+                    and (v['step'],v['study_id'])==pair and v['prediction_exact'] is True and v['view_validated'] is True
+                    for pair,v in zip(expected,a['native_checks'])) and type(a['view_checks']) is int and a['view_checks']==25,
+                'Incomplete inference checkpoint/export/view qualification')
     else:
         acceptance=json.loads(read_control(REPO/'outputs/prowl/SEGMENTER-DURATION-NATIVE-READINESS.json',r['readiness']['acceptance_sha256']))
         require(acceptance['state']=='qualified_duration_native_v1' and acceptance['source_pins']==r['source_pins'] and acceptance['runtime']==r['runtime'] and acceptance['completed_steps']==192 and acceptance['primary_reads_blocked'] is True and acceptance['next_update_exact'] is True and acceptance['all_native_exports_exact'] is True and acceptance['cold_original_reads']==0 and acceptance['model_calls']==dict(producer=engine.call_limits('native_rehearsal')['producer'],cold=engine.call_limits('native_rehearsal')['cold']) and all(acceptance[k]==r['readiness'][k] for k in ('producer_sha256','recovery_sha256','tests_sha256')),"Missing exact duration native qualification")

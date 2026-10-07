@@ -1,5 +1,20 @@
 # AGENTS.md — Agent Context
 
+> **October 7 DUR-06 delivered; I01 helper preflight failed:** Quinton explicitly approved DUR-06.
+> Four producing paths delivered;62new model-free checks pass1.804800625s/373932032B owned RSS,
+> workers reaped.402pins match;398prior paths and numerical/cold replay code stay fixed. One
+> reviewed I01 invocation failed1.370969042s/374718464B before payload/model/storage admission:
+> pinned() got an unexpected keyword argument 'sha256'. Persisted0forwards/0updates/0payloadbytes;
+> no consumption marker, operationally retired/no reset or replay. No inference certificate or
+> scientific job. Read SEGMENTER-DURATION-INFERENCE-READINESS-RESULTS-2026-10-07.md. Corrected
+> private hash-reader passes10failure-specific invented metadata checks; no model/array job.
+> Fresh I02 three-path evidence-binding amendment +64changed/new model-free checks +one30forward/
+> zero-update job is an inactive concrete proposal; no I02 production patch/control/dispatch.
+> Same600s/12GiB/2GiB reads/8MiB outputs/100GiB floor;26GiB budget fixed. Obtain the exact I02
+> decision before advancing; no full producer repeat, resume, tolerance revision or actual launch.
+> W01-28ToDo/incomplete; hours/9am human clock unchanged. Meaningful reviewed local preservation
+> allowed; no public push. Earlier DUR-06-unapproved/component-unknown passages are historical.
+
 > **October 7 bounded diagnosis delivered:** Quinton selected the diagnosis/launch-decision sequence.
 > DUR-05 reporting and fresh D01/D02 retained-invented-state diagnostics finished; native review
 > accepted both. Read `docs/capstone/operations/SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md`.

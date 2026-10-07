@@ -3,7 +3,21 @@
 Prepared October 6, 2026 for Quinton Evans. Owner: this Codex imaging chat.
 Tracking: [W01-12](https://trello.com/c/fiOfVdBz).
 
-## October 7 latest priority: scratch duration diagnosis finished
+## October 7 current priority: inference-only recovery qualification
+
+Quinton explicitly approved DUR-06. [Current handback](SEGMENTER-DURATION-INFERENCE-READINESS-RESULTS-2026-10-07.md):
+four producing paths delivered, 62 new model-free checks pass, 402 producing pins match.
+I01 failed a helper metadata-hash keyword binding before checkpoint payloads, models or storage
+admission; zero persisted payload/model calls, worker reaped. Operationally retired, not falsely
+disk-consumed; no inference certificate or scientific job. Ten focused metadata checks qualify
+the corrected private hash reader. Fresh I02's exact three-path binding amendment, changed/new
+unit checks and single retained-invented cold job are **proposed, unapproved and unprepared**.
+Wait for that human decision; do not replay I01/N02/D01/D02, broaden criteria or launch training
+from scheduling. Real source/storage/request review remains separate after full inference success.
+Keep SuPreM parked: publisher evidence is absent.26GiB budget/roles/DUR-01 remain unchanged.
+Meaningful reviewed local preservation allowed; no public push. Human9am clock/net hours unchanged.
+
+## Historical October 7 priority: scratch duration diagnosis finished
 
 [DUR-05/D01/D02 result](SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md) measures tiny finite
 model/optimizer next-update differences, exact progress/CPU-RNG/MPS-RNG,40new model-free checks

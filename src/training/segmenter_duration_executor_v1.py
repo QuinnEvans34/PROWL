@@ -131,9 +131,14 @@ def validate_request(r):
         geometry = json.loads(r["controls"]["geometry.json"])
         require(geometry["target_scope_sha256"] == digest(canonical(r["targets"]))
                 and geometry["stage"] == targets.STAGE, "Stage not bound to geometry")
-        require(type(r["readiness"]) is dict and r["readiness"].get("kind") ==
-                ("qualified_duration_native_v1" if real else "frozen_v5_numerics_v1")
+        require(type(r["readiness"]) is dict and r["readiness"].get("kind") in
+                (("qualified_duration_native_v1", "qualified_duration_inference_v1") if real else ("frozen_v5_numerics_v1",))
                 and pin(r["readiness"].get("acceptance_sha256")), "Missing independent readiness")
+        if r["readiness"].get("kind") == "qualified_duration_inference_v1":
+            require(real and set(r["readiness"]) == {"kind", "acceptance_sha256", "producer_sha256",
+                    "recovery_sha256", "tests_sha256", "lineage_sha256", "training_resume_qualified"}
+                    and r["readiness"]["training_resume_qualified"] is False
+                    and pin(r["readiness"]["lineage_sha256"]), "Inference readiness cannot qualify resume")
         if real:
             require(set(r["input_cache"]) == {"area", "acceptance_sha256", "request_sha256", "payload_bytes"}
                     and r["input_cache"] == dict(area="segmenter-input-cache",

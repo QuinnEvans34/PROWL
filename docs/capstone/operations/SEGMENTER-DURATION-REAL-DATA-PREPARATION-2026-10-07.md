@@ -1,5 +1,13 @@
 # Duration comparison preparation and tonight's decision — October 7
 
+**Current October 7 status:** Quinton approved DUR-06; four-file implementation and62new model-free
+checks are complete. I01 failed a helper hash-reader keyword binding before payload/model work,
+and is operationally retired. No inference certificate or scientific preparation follows.
+The corrected helper and exact fresh I02 amendment/job proposal are recorded in the
+[current handback](SEGMENTER-DURATION-INFERENCE-READINESS-RESULTS-2026-10-07.md); I02 approval is
+pending. The original proposal below is preserved as reviewed history, not current pending
+DUR-06 authorization. Real recipe, target ledger and separate scientific launch decision stay fixed.
+
 **Inactive draft; no scientific controls, grant, writer or request prepared.** The bounded diagnosis
 is [complete](SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md). The current native-readiness
 guard still requires exact next-update state, so it correctly refuses scientific launch. This

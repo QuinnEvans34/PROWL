@@ -1,6 +1,22 @@
 # Week 1 execution queue — October 6–11, 2026
 
-## October 7 bounded recovery diagnosis complete; limited-readiness decision next
+## October 7 current: DUR-06 delivered; fresh I02 decision pending
+
+Quinton explicitly approved DUR-06. [Current handback](../operations/SEGMENTER-DURATION-INFERENCE-READINESS-RESULTS-2026-10-07.md):
+62 new model-free checks pass, 402 producing pins match, and original numerical/replay criteria
+remain unchanged. One I01 invocation failed in helper metadata-hash argument binding before any
+checkpoint payload or model call. Worker reaped; no consumption marker or inference certificate.
+I01 is operationally retired; preserve its failed namespace and controls, no retry/reset.
+
+The corrected private helper passes 10 focused metadata checks. Three exact inactive amendment
+drafts and a fresh I02 proposal are reviewable in the handback: new receipt/job/attempt bindings,
+64 changed/new model-free checks, then one retained-invented 30-forward/zero-update cold check
+under the same bounds. **Human I02 decision pending; no production patch or job prepared.**
+[W01-28](https://trello.com/c/3oahjFM6) is incomplete/To-Do with the concrete approval blocker.
+No full 192-update producer repeat, scientific preparation/launch, automatic replay or public
+push. Parent W01-12 and optimizer resume remain incomplete; hours/9am clock unchanged.
+
+## Historical October 7 bounded recovery diagnosis; limited-readiness decision pending
 
 Quinton selected diagnosis before a launch decision. [DUR-05/D01/D02 handback](../operations/SEGMENTER-DURATION-RECOVERY-AUDIT-RESULTS-2026-10-07.md):
 40new model-free checks pass; two fresh invented continuations complete16forwards/two updates,
