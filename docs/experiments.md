@@ -95,8 +95,89 @@ linked Plan 06 protocol supplies the full fields for controlled/confirmatory wor
 
 ## Active capstone entries
 
-No new entries yet. Complete the remaining planning/strategy review and relevant run prerequisites
-before registering and starting the first capstone experiment.
+CAP-EXP-001 through014 have dated records appended later in this notebook. The latest imaging
+checkpoint remains [D-335/CAP-EXP-014](capstone/operations/CAP-EXP-014-RESULTS-2026-10-03.md),
+complete/consumed. The September18 opening queue wording above is historical; it does not describe
+a pending launch. No new experiment ID is reserved by the October6 planning review below.
+
+### October6 — reuse prior methods; preserve historical score boundaries
+
+Quinton requested consulting this notebook before choosing the next training work: prior models
+reached about.5Dice, and existing outlined experiments should inform the capstone. He accepted the
+192-update planning choices and DUR-01 invented-count policy slice. That module is an engineering
+building block; the longer-run executor, qualification and scientific launch remain separate scopes.
+
+The preserved record supports useful prior performance, with essential distinctions:
+
+| Historical result | Recorded evidence | Use in current planning |
+|---|---|---|
+| EXP-17c lesion.524raw/.528cleaned, provided union ROI | July17 full-eval account; July19 split audit found30/40 positive evaluation cases in training | Withdrawn headline; retain failed split/ROI/confounded scale+duration lessons. |
+| EXP-20 autonomous lesion.483raw | Same historically contaminated segmenter/localizer comparison, also withdrawn by the audit | Prior cascade design/error-analysis lesson; no accepted capstone autonomous score. |
+| EXP-24 clean lesion.415raw/.412cleaned | July19 development40-positive evaluation after leakage repair; SuPreM-initialized whole-box/24k training, provided union ROI | Stronger prior-method reference; development selection and oracle ROI remain explicit. |
+| EXP-24 official-test lesion.474, sensitivity96%, specificity17% | Recorded in EXP-25's July23–25 baseline comparison,151positive/750negative | Historical final-cohort account, not new capstone evidence or a tuning cohort. |
+| EXP-25 healthier1:9 cohort lesion.374, sensitivity88%, specificity46% | Rejected on the predeclared90% detection floor; small-case damage | Preserve coverage/subgroup safeguards; more negatives is a controlled tradeoff, not an automatic improvement. |
+| EXP-26 auxiliary anatomy | Rejected at24k despite a promising12k comparison | Compare declared endpoints; avoid adopting an early trajectory winner. |
+
+This is a text/control review of existing records, not independent re-scoring or weight validation.
+All original claims, later withdrawals, difficult cases and future ideas remain intact below.
+The current6-positive/1report-only scratch48-update result is not a reproduction of the old
+larger-cohort/pretrained24k result. Its lesionDice.055142 establishes limited engineering behavior;
+neither a20%relative gain nor192updates would establish recovered prior-quality/generalization.
+
+Carry forward whole-box physical geometry, qualified caching, adequate exposure, role-separated
+evaluation, positive/negative accounting, per-size/phase failures, durable checkpoints and explicit
+coverage-versus-foreground tradeoffs. Existing capstone geometry/cache/recovery already implement
+several of these lessons. Repeating sampling/background/resolution guesses is not the leading move.
+
+**Recommended next scientific preparation after DUR-01:** prioritize varied multiclass/development/
+verified-negative readiness plus a bounded SuPreM provenance/load-audit proposal before committing
+to a full longer-run executor. [Plan05 permits audited third-party general pretraining](capstone/imaging/MODEL-LINEAGE-AND-TRAINING.md),
+while D-003 prohibits prior-project fine-tuned weights. The current scratch consumer denies every
+weight import; a new audited initialization needs a separate versioned scope and qualified source/
+license/hash/architecture/load/overlap evidence. No checkpoint bytes are read or imported here.
+192 remains an accepted planning choice for the same-cohort duration question, not an order to run
+it ahead of that strategic review. Pretraining/cohort/loss/ROI changes must not be silently combined
+with a comparison described as duration-only.
+
+Keep the outlined experiments visible, but replan their selected methods under current roles/gates:
+EXP-34 training-versus-development gap before assuming capacity, EXP-33 adequate horizon and
+EXP-32 EMA after a stable baseline; EXP-29 anisotropic context and EXP-28 retrieval-derived features
+are later bounded comparisons. EXP-27 PANORAMA needs source/overlap/purpose qualification;
+EXP-30 extra anatomy and EXP-31 external-model error comparison have further supervision/provenance
+dependencies. Old official-test curves/selection commands, arbitrary exclusions, old split lists,
+cleanup instructions and prior trained checkpoint warm starts do not carry forward. Use development
+data for selection, freeze the final test protocol before its separately permitted execution.
+
+No training/source acquisition/array job, checkpoint import, formal run registration, deletion,
+Git publication or follow-on dispatch occurs through this notebook update. Exact restart is the
+[duration policy handback](capstone/operations/SEGMENTER-DURATION-POLICY-RESULTS-2026-10-06.md),
+then review the next data/pretraining preparation scope with Quinton.
+
+**October6 follow-up preparation:** Quinton approved the repository-text/control review and
+[SuPreM qualification-packet draft](capstone/operations/SUPREM-INITIALIZATION-QUALIFICATION-PACKET-2026-10-06.md).
+The current scratch backbone matches the historical SuPreM-compatible definition; actual source
+rights/overlap/tensors remain unqualified. The retained byte inventory supplies a candidate identity,
+not import permission. [Review handback](capstone/operations/SUPREM-INITIALIZATION-REVIEW-2026-10-06.md)
+proposes an isolated in-memory invented-weight auditor before actual-checkpoint and pretrained
+consumer qualification. No new coding/experiment/request is dispatched; historical bytes below
+remain unchanged. The accepted192duration question keeps its original scratch initialization.
+
+**SUP-01 implementation handback:** Quinton then approved the four-file invented initializer audit.
+[85targeted CPU checks](capstone/operations/SEGMENTER-INITIALIZATION-AUDIT-RESULTS-2026-10-06.md)
+verify complete backbone transfer, exact fresh three-class head retention, strict load and failure/
+input/RNG isolation within1.45s/0.40GiB. This is an invented component result, with no actual
+third-party checkpoint/source acceptance, model forward/update or new experiment. Source-metadata/
+actual-file/pretrained-session qualification and varied-data readiness remain separate next scopes.
+
+**October 6 public SuPreM review:** Quinton approved the
+[public-source review](capstone/operations/SUPREM-PUBLIC-PROVENANCE-REVIEW-2026-10-06.md) and
+[bounded inspection draft](capstone/operations/SUPREM-CHECKPOINT-INSPECTION-PACKET-2026-10-06.md).
+The published released-file SHA agrees exactly with the retained candidate record. Weight/code/
+dataset terms are recorded separately; candidate-specific pretraining AND upstream model-selection
+separation remain unresolved. Actual local identity/serialization/value audit and a versioned
+pretrained session are still owed. No checkpoint payload/model/source array/scientific job used.
+The proposed invented-file metadata reader can be developed without the drive after its concrete
+scope is approved. The 192-update scratch comparison retains its separate initialization/factors.
 
 ## Preserved earlier experiment record
 
