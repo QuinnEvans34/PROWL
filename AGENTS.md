@@ -1,5 +1,13 @@
 # AGENTS.md — Agent Context
 
+> **October7 project-hours record:** Quinton supplied/accepted personal estimates: MondayOct5
+> 4hours, TuesdayOct6 5–6hours; combined9–10hours, not timer measurements. HOURS-LOG.md under
+> docs/capstone/weeks now records G1training workflow/G2experiment-and-data planning plus daily
+> reviewed descriptions. Exact Tuesday portal value remains unselected; Wednesday not logged.
+> Setup/Resources/short pitch, unattended runtime and overlapping time are excluded; class/meetings
+> remain separate. Older Tuesday4h/range3–5 assistant reconstruction is preserved/superseded,
+> not added. No Project Peek entries submitted by this chat. DUR-05 still unapproved; no job/push.
+
 > **October7 N02 finished / recovery failed:** producer completed192invented144³/MPS updates,
 > checkpoints0/48/96/144/192/four screens/25exports+views;253forwards/192updates,
 > 1202.456363s/4495294464B owned peak, worker reaped. Cold consumed/failed72.057609s/4823351296B,

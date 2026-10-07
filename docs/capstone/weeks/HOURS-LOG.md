@@ -6,8 +6,10 @@ Pre-course work before October 5 belongs in a separate retrospective, not the We
 
 ## Recording rules
 
-- Count Quinton's focused planning, reading, coding, assignment preparation, result review,
+- Count Quinton's focused project planning, reading, coding, result review,
   testing supervision and active remote check-ins. Combine short phone sessions when useful.
+- Exclude the Capstone Setup submission, Resources assignment and short What/Why/How pitch
+  preparation from project hours, following the agreed October 7 reporting scope.
 - Record class/meeting time separately so the instructor's counting rule can be applied explicitly.
 - Exclude unattended agent execution, training, downloads and waiting. Record machine duration
   separately when it matters for resource planning; it is not human study time.
@@ -17,7 +19,57 @@ Pre-course work before October 5 belongs in a separate retrospective, not the We
 - At each session handback, record the task, evidence and human time supplied by Quinton. When time
   is unknown, say so. At the weekly review, confirm the total and retain the estimation basis.
 
+## Project goals
+
+### G1 — Develop and test the pancreas and lesion segmentation training workflow
+
+Implement and test input preparation, model initialization, training, prediction export and
+checkpoint recovery. Document failures and resolve issues needed for reproducible training.
+
+Completion means the coordinated workflow passes its bounded checks and demonstrates independent
+checkpoint recovery. This goal remains partly done: the invented-data producer completed, but
+its independent next-update recovery failed. Work on that unresolved issue still contributes
+to the goal; the rehearsal does not establish actual-data model quality.
+
+### G2 — Review experiment results and plan the next model improvements
+
+Analyze previous training results, identify data and annotation gaps, and define controlled
+experiments with clear evaluation criteria and resource limits.
+
+Completion means the experiment review and next training/data-validation plan are documented
+with explicit overlap, coverage, excess-foreground and resource criteria. Planning hours count
+without implying that the proposed experiments or dataset expansion have been executed.
+
 ## Week 1 — October 5–11, 2026
+
+### Current project-hour entries
+
+Quinton supplied these estimates on October 7 and approved the daily work descriptions below.
+They are personal estimates of active project time, not timer measurements or agent runtime.
+The same hours support both goals; they are counted once rather than allocated twice.
+
+| Date | Goals | Work completed / reviewed | Human hours | Basis |
+|---|---|---|---:|---|
+| Monday, Oct 5 | G1, G2 | Reviewed project progress and technical requirements, organized development priorities, and planned the segmentation training workflow. | 4 | Quinton estimate |
+| Tuesday, Oct 6 | G1, G2 | Reviewed segmentation experiments, worked through training-readiness issues, evaluated input-adapter and checkpoint tests, and investigated dataset qualification gaps. | 5–6 | Quinton estimate; precise portal value not selected |
+
+**Monday–Tuesday estimated subtotal: 9–10 hours.** No Wednesday hours are added yet; record them
+after the day's active project work is reviewed. Class/instructor meetings remain separate and
+unmeasured. These entries have not been submitted to Project Peek by this chat.
+
+| Day | Estimate feedback |
+|---|---|
+| Monday | Use the 4-hour estimate for active project participation under the exclusions above. |
+| Tuesday | Quinton's recollection supersedes the earlier assistant reconstruction. 5.5 hours is a suggested midpoint if he chooses it; it is not currently recorded as the submitted value. |
+
+Relevant technical records: [input-adapter review](../operations/PREDICTED-ROI-ADAPTER-RESULTS-2026-10-06.md),
+[training-readiness sequence](../operations/SUPREM-TRAINING-READINESS-QUEUE-2026-10-06.md),
+[dataset gap inventory](../operations/VARIED-MULTICLASS-GAP-INVENTORY-2026-10-06.md) and
+[controlled duration plan](../operations/SEGMENTER-DURATION-COMPARISON-PROPOSAL-2026-10-06.md).
+These records substantiate project activities, not their human duration. Daily notes describe
+Quinton's planning/review participation and do not credit unattended implementation as his time.
+
+### Historical October 6 reconstruction — superseded, excluded from current subtotal
 
 **Confirmed weekly total:** not recorded yet. Unknown time is not zero.
 **Provisional Tuesday total through the evening review:** approximately **4 active human hours**,
@@ -46,6 +98,12 @@ Quinton was asked for his active school/home windows and breaks; revise this est
 | Oct 7–11 | Remaining week | Not yet recorded | Future work | Add actual session entries rather than counting planned budgets. |
 
 ### Correction history
+
+October 7: Quinton estimated Monday at 4 hours and Tuesday at 5–6 hours and accepted the daily
+work descriptions. Added G1/G2 and the current 9–10-hour project subtotal. The older Tuesday
+4-hour/range3–5 reconstruction included assignments and is preserved in the historical section,
+not added to these entries. Excluded setup, Resources and short-pitch assignment preparation.
+No exact Tuesday portal value, Wednesday total or unattended runtime was inferred.
 
 October 6: initialized the log. The provisional Tuesday range is deliberately separate from a
 confirmed weekly total. No agent runtime or pre-course hours have been credited to Quinton.
