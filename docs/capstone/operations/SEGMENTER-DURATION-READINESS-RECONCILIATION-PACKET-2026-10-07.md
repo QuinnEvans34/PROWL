@@ -1,6 +1,10 @@
 # DUR-03 — exact readiness reconciliation and fresh N02 proposal
 
-**Draft; no guard/code change or new job is approved.** N01's unexecuted preflight is retired
+**Approved October7; DUR-03 implementation/60 model-free checks delivered.** Quinton answered
+“I approve” to the exact amendment/conditional N02 question. See
+[the result and separate DUR-04 proposal](SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md).
+N02 has not started because the unchanged dispatcher refuses required script paths.
+The proposal text below preserves the originally reviewed scope. N01's unexecuted preflight is retired
 with its [refusal evidence](SEGMENTER-DURATION-NATIVE-N01-RESULTS-2026-10-07.md). The blocker is
 the launcher's all-historical-hash readiness assertion after previously approved schema/test changes.
 Do not bypass that assertion, restore old files into the live checkout or repin historical results.

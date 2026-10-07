@@ -1,5 +1,9 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October7 DUR-03 delivered; dispatcher path amendment pending
+
+Quinton approved the exact repair/conditional N02. [DUR-03 handback](../operations/SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md):60new model-free checks passed;396current producing pins,313prior bytes unchanged/two amended,68historical additions. No arrays/models/native job or old-suite replay. N01 remains retired; N02 unprepared/unconsumed. The actual dispatcher guard rejects required scripts, including its own fixed launcher. DUR-04's exact two-amended/one-new contract scope is proposed in the handback; do not change that guard or bypass it from scheduling. [W01-28](https://trello.com/c/3oahjFM6) returns To-Do awaiting this concrete amendment. Budget is already approved; conditional N02 permission persists under its original limits after every launch guard qualifies. Scientific launch remains separate.
+
 ## October 7 native launch approval and N01 blocker
 
 Quinton confirms the drive is connected, approves and asks launch. The native-only N01 preflight

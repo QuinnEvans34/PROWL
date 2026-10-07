@@ -1,5 +1,23 @@
 # AGENTS.md — Agent Context
 
+> **October7 DUR-03 delivered / DUR-04 proposed:** exact human approval accepted; four new/two
+> amended files complete,60new model-free checks pass2.491359s/367951872B sampledowned tree; workers
+> reaped, zero model/array/native/scientific calls. Read SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md.
+> New396producing pins:313prior unchanged/two amended/68historical additions/13other new entries;
+> allbytes/tail match; historical315ledger fixed. Launcher readiness now accepts only six exact
+> proven transitions with pinned provenance. Unchanged dispatcher rejects28required scripts,
+> including its own fixed launcher; negative test confirms. N02 unprepared/unconsumed, N01retired.
+> DUR-04 two amended source/test files plus new contract is proposed, not approved; no verifier
+> bypass, script-pin removal or native preparation from scheduling. Already approved conditional
+> N02 persists after every guard qualifies; budget unchanged. W01-28ToDo. Meaningful local
+> preservation allowed, no push. Human hours unconfirmed; no old successful check replay.
+
+> **October7 DUR-03 approval/start:** Quinton answered “I approve” to the exact four-new/two-amended
+> repair and conditional fresh N02 question. Apply the closed reconciliation packet; metadata-only
+> checks≤90s/2GiB, no model/array work. N01 remains retired. Snapshot two amended files and preserve
+> 313other producing pins/history. N02 remains conditional on every actual launch guard passing;
+> no broader dispatcher changes, scientific launch, capacity increase or push follows. W01-28active.
+
 > **October7 N01 launch approval / unexecuted preflight refusal:** Quinton confirms drive connected,
 > approves and asks launch. Native-only preparation/one N01 accepted; no frozen scientific request.
 > N01 preflight refused Numerical pins drift after0.517369s, before144³ generation/request/areas/

@@ -104,8 +104,8 @@ def validate_readiness(r):
     cpu=metadata_result(old.cpu.DEST,old.CPU_PIN)
     native=metadata_result(old.DEST,'3e13f53adec249ed55a1fe5de7be126ad78e6002536f9ac7f6d9f7d74f26b391')
     require(cpu['state']=='qualified' and cpu['gate']['passed'] and native['state']=='qualified_native_mechanics_not_real_training' and native['producer']['state']=='passed' and native['recovery']['state']=='passed',"Frozen numerical qualification missing")
-    fixed=cpu['source_pins']|native['source_pins']
-    require(all(r['source_pins'].get(n)==h for n,h in fixed.items()),"Frozen numerical source closure differs")
+    from src.operations.segmenter_duration_readiness_v1 import reconcile
+    reconcile(REPO,r['source_pins'],cpu,native)
     if r['kind']=='native_rehearsal':
         require(r['readiness']['acceptance_sha256']==old.CPU_PIN,"Frozen numerical readiness identity")
     else:

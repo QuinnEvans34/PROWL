@@ -27,6 +27,8 @@ REQUIRED_CODE = (
     'src/training/segmenter_duration_evidence_v1.py','src/data/segmenter_duration_targets_v1.py',
     'src/operations/segmenter_duration_backup_v1.py','src/operations/segmenter_duration_storage_v1.py',
     'src/operations/segmenter_duration_dispatch_v1.py','scripts/diagnostics/segmenter_duration_launch.py',
+    'src/operations/segmenter_duration_readiness_v1.py','tests/test_segmenter_duration_readiness.py',
+    'docs/capstone/imaging/SEGMENTER-DURATION-READINESS-CONTRACT-V1.md',
     'src/training/segmenter_duration_policy_v1.py','tests/segmenter_duration_fixtures.py',
     'tests/test_segmenter_duration_transaction.py','tests/test_segmenter_duration_executor.py',
     'tests/test_segmenter_duration_targets.py','tests/test_segmenter_duration_evidence_recovery.py',
