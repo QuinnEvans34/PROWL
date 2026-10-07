@@ -2,6 +2,12 @@
 
 ## October 7 current: DUR-06 delivered; fresh I02 decision pending
 
+Quinton requested a plan before execution. [Tonight's two-step plan](../operations/TONIGHT-TRAINING-EXECUTION-PLAN-2026-10-07.md)
+scopes corrected I02 (20–35 minutes), conditional real-run preparation (30–45 minutes) and a
+separate launch decision, approximately 60–90 minutes after approval if checks pass. Both new
+execution scopes remain pending a human decision; no new patch, request, source access or job
+is authorized by the plan. Existing 26 GiB budget, fixed cohort/policy and failed evidence remain.
+
 Quinton explicitly approved DUR-06. [Current handback](../operations/SEGMENTER-DURATION-INFERENCE-READINESS-RESULTS-2026-10-07.md):
 62 new model-free checks pass, 402 producing pins match, and original numerical/replay criteria
 remain unchanged. One I01 invocation failed in helper metadata-hash argument binding before any
