@@ -1,5 +1,16 @@
 # AGENTS.md — Agent Context
 
+> **October7 training-priority review:** Quinton wants training today and the strongest model.
+> Read `docs/capstone/operations/SCRATCH-DURATION-TRAINING-PLAN-2026-10-07.md` and its inactive
+> storage proposal. Recommend fresh scratch192 before further SuPreM engineering; no publisher
+> evidence has arrived. Native read-only storage observation: external registered mount not
+> observable; internal backup17,341,924,636B/fixed18,318,645,873B leaves976,721,237B. Full192
+> one-copy projection1,056,042,480B exceeds it. Proposed26GiB fixed/registered cap and DUR-02
+> vertical allowlist require their concrete human decision; no cap/writer/native/real launch
+> was changed or dispatched. W01-26 scopes the review, not completed training. Preserve299pins,
+> old evidence/roles/consumed attempts. Do not repeat successful checks or unchanged probes.
+> Exact restart: resolve external connection; settle bounded storage and implementation scope.
+
 > **October7 S01 delivered:**46native new checks pass11.312240s/2,155,593,728B sampled owned tree;
 > six tiny invented CPU optimizer calls/17forwards incl one fresh-process prediction,workers reaped.
 > Typed backbone/fresh-head/fresh optimizer,train-only sampler,dirty refusal,complete byte codec

@@ -1,5 +1,18 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 training priority review
+
+Quinton wants the shortest path to training today and a strong model. See
+[the scratch-duration launch plan](../operations/SCRATCH-DURATION-TRAINING-PLAN-2026-10-07.md)
+and [inactive capacity proposal](../operations/SCRATCH-DURATION-STORAGE-PROPOSAL-2026-10-07.json).
+W01-26 scopes that route; it does not close implementation/native/scientific gates. The registered
+external mount was not observable in a native metadata check. Current backup17,341,924,636B leaves
+976,721,237B under the unchanged fixed ceiling; the full-duration keeper projection exceeds it.
+Recommend the proposed26GiB bounded allowance and DUR-02 vertical implementation before another
+SuPreM slice. Both are concrete proposals, not grants from an hourly wake-up. No source/array/model
+calls, capacity change, external writes or new native/scientific request occurred in this review.
+Preserve all299 protected pins, consumed attempts and source roles. Unchanged dependencies stay quiet.
+
 ## October 7 training preparation
 
 S01 is the new bounded engineering task selected after B03 metadata passed. See
