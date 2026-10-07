@@ -1,5 +1,27 @@
 # Current PROWL checkpoint
 
+**October6 imaging/development checkpoint:** [B03 metadata handback](SUPREM-CHECKPOINT-METADATA-DISPATCH-V3-RESULTS-2026-10-06.md)
+records one explicitly approved consumed/pass actual inspection: identity/full83float32 signature
+compatible, originalcuda:0/CPUfake/metastorage;2.599347s/348,815,360B sampled aggregate,worker
+reaped;five diagnostics130,397B retained. No values/model/training;no B02/B03 replay. Invented
+adapter/duration/initializer/metadata/value-head/device packets and43-ID map delivered;exact
+qualification and open gates in [the Week1 queue](../weeks/WEEK-01-EXECUTION-QUEUE-2026-10-06.md).
+R04closed;candidate-bound rights/pretraining AND selection separation,actual values/init,
+pretrained session/native/recovery,current keeper fit/frozen launch remain open. D-335 stays
+latest imaging experiment;cohorts/holds/consumed requests/fixed backup ceiling preserved.
+
+Retrieval owner's October6 [v1.3/binding handback](PLAN07-V13-HANDBACK-2026-10-06.md) supersedes
+older1.1/binding wording below:160sizing/342retrieval and626binding checks;actual N4 APFS rehearsal
+incomplete. This chat does not dispatch/edit that lane. Course setup submitted; Resources and
+Thursday slide/presentation prepared but remaining completion unconfirmed. Human active time
+provisional4h/range3–5h,not a confirmed weekly total. [Hours](../weeks/HOURS-LOG.md).
+
+Quinton requests meaningful completed-work commits and GitHub visibility. Review/exact commits
+and publication outcome: [October6 preservation handback](WEEK-01-COMMIT-HANDBACK-2026-10-06.md).
+Earlier local-only/pending accounts remain their historical snapshots;no blanket staging or
+scientific follow-on. All296protected source/test/contract/lock pins and notebook tail unchanged.
+
+
 **October 4 Plan07 follow-up:** [phone-first handback](PLAN07-FOLLOWUP-HANDBACK-2026-10-04.md)
 and [local preservation scope/record](PLAN07-LOCAL-PRESERVATION-2026-10-04.md).
 D-346–349: Claude-first hook, local commit/no push, shared section dispatched and delivered revision

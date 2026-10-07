@@ -7,6 +7,20 @@
 **Approved outcome:** Confirm data design, retrieval requirements, workflow DAG, UI-extension
 requirements, and test strategy.
 
+**October 6 execution reconciliation:** use the
+[current development focus](WEEK-01-DEVELOPMENT-FOCUS-2026-10-06.md) and
+[human-hours log](HOURS-LOG.md) for this week's live priorities and actual/provisional time.
+The approved [execution queue](WEEK-01-EXECUTION-QUEUE-2026-10-06.md) now contains the delivered
+invented adapter (133targeted passes), duration/data drafts and43-requirement map; hourly follow-ups
+through Sunday resume only new explicitly approved scope or report changed dependencies.
+The designs and early evidence below remain the planning baseline. Imaging training/export/recovery
+is demonstrated, while useful contours and the autonomous cascade remain open. October 6 native
+retrieval v1.2 had two failures; v1.3 passed160sizing/342retrieval native checks and the guarded
+binding passed626combined checks; actual N4 APFS rehearsal remains with the existing owner.
+The later SuPreM B03 metadata pass/R04 completion, source/session/keeper gates and ongoing
+commit practice are recorded in the live queue; current human time is provisional4h/range3–5h.
+This reconciliation closes no full-system or scientific gate.
+
 ## Week outcome
 
 At the end of this week, the capstone should be implementation-ready without prematurely locking
