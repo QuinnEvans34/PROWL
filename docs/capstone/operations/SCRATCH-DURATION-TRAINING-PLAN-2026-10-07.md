@@ -1,5 +1,24 @@
 # Scratch duration training — next launch plan, October 7
 
+**Current handback:**[DUR-02 finished](SEGMENTER-DURATION-EXECUTION-RESULTS-2026-10-07.md):161distinct
+new unit checks/four optimizer calls/eight attempted tiny forwards;299priorpins fixed/315total.
+The explicitly approved26GiB budget is applied to the local registry and portable schema; snapshots
+are retained. Old hash-bound capabilities require fresh owner reconciliation, not automatic use.
+No writer, external area, actual array/cache/weights, native144³ or scientific job was dispatched.
+Next is the drive/AC/current resource proof and separately approved native-only packet in the
+closed contract, then the exact scientific request. The earlier scoping observation/proposal below
+is historical; the old capacity and implementation decisions need no repeated approval.
+
+**Later October7 decisions:** Quinton asks daytime preparation for training tonight and says
+“lets keep going,” accepting the sixteen-file DUR-02 implementation and its bounded invented unit
+checks. He then answers “Approve the26GiB proposal” to the exact storage question: fixed/registered
+26GiB, at most8GiB added backup across one native rehearsal and one training attempt, preserve
+all evidence and100GiB free floor. The JSON below remains the historical inactive proposal;
+the budget is now approved. Registry/capability/writer preparation and actual/native/scientific
+jobs have not occurred. Old readers bind the original registry hash; the new checked reader/storage
+path must be qualified before changing the registry. Earlier decision-pending wording is history
+for implementation/budget only. See [the closed contract](../imaging/SEGMENTER-DURATION-EXECUTION-CONTRACT-V1.md).
+
 ## Phone handback
 
 Quinton wants training to take priority and wants to start today. Recommend completing the fresh

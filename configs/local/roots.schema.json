@@ -70,7 +70,7 @@
       "properties": {
         "path": {"type": "string", "pattern": "^/"}, "role": {"const": "backup"},
         "access": {"const": "selected_controls_and_keepers"}, "failure_domain": {"const": "internal_backup"},
-        "cap_bytes": {"const": 21474836480}, "minimum_free_bytes": {"const": 107374182400},
+        "cap_bytes": {"enum": [21474836480, 27917287424]}, "minimum_free_bytes": {"const": 107374182400},
         "automatic_deletion": {"const": false}
       }
     }
