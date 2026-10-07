@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#60717F"/>
+    </marker>
+    <style>
+      .title { font: 700 24px Arial, sans-serif; fill: #153A5B; }
+      .head { font: 700 18px Arial, sans-serif; fill: #153A5B; }
+      .text { font: 15px Arial, sans-serif; fill: #40515E; }
+      .arrow { stroke: #60717F; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="600" fill="#FFFFFF"/>
+  <text x="600" y="38" text-anchor="middle" class="title">Design-level file schema</text>
+
+  <rect x="35" y="95" rx="12" ry="12" width="210" height="115" fill="#E8F3F1" stroke="#147D73" stroke-width="2"/>
+  <text x="140" y="128" text-anchor="middle" class="head">Source files</text>
+  <text x="55" y="158" class="text">• image and label paths</text>
+  <text x="55" y="184" class="text">• source documentation</text>
+
+  <rect x="285" y="75" rx="12" ry="12" width="245" height="155" fill="#F5F7F8" stroke="#80909C" stroke-width="2"/>
+  <text x="408" y="108" text-anchor="middle" class="head">Unified manifest</text>
+  <text x="305" y="138" class="text">• source and case identifier</text>
+  <text x="305" y="164" class="text">• patient grouping key</text>
+  <text x="305" y="190" class="text">• label provenance and paths</text>
+  <text x="305" y="216" class="text">• validation status</text>
+
+  <rect x="570" y="95" rx="12" ry="12" width="220" height="115" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="680" y="128" text-anchor="middle" class="head">Frozen cohorts</text>
+  <text x="590" y="158" class="text">• train, validation, test</text>
+  <text x="590" y="184" class="text">• checksum and timestamp</text>
+
+  <rect x="830" y="75" rx="12" ry="12" width="330" height="155" fill="#E8F3F1" stroke="#147D73" stroke-width="2"/>
+  <text x="995" y="108" text-anchor="middle" class="head">Run record</text>
+  <text x="850" y="138" class="text">• configuration, seed, and code version</text>
+  <text x="850" y="164" class="text">• cohort checksum and model artifact</text>
+  <text x="850" y="190" class="text">• metrics and error-analysis notes</text>
+  <text x="850" y="216" class="text">• decision: adopt, reject, or continue</text>
+
+  <path d="M245 152 H275" class="arrow"/>
+  <path d="M530 152 H560" class="arrow"/>
+  <path d="M790 152 H820" class="arrow"/>
+
+  <rect x="110" y="350" rx="12" ry="12" width="255" height="135" fill="#F5F7F8" stroke="#80909C" stroke-width="2"/>
+  <text x="238" y="383" text-anchor="middle" class="head">Prediction artifact</text>
+  <text x="130" y="413" class="text">• model and scan identifier</text>
+  <text x="130" y="439" class="text">• mask, score, measurements</text>
+  <text x="130" y="465" class="text">• processing provenance</text>
+
+  <rect x="470" y="350" rx="12" ry="12" width="255" height="135" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="598" y="383" text-anchor="middle" class="head">Review record</text>
+  <text x="490" y="413" class="text">• prediction identifier</text>
+  <text x="490" y="439" class="text">• accept, edit, or reject</text>
+  <text x="490" y="465" class="text">• note and timestamp</text>
+
+  <rect x="830" y="330" rx="12" ry="12" width="275" height="175" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="968" y="363" text-anchor="middle" class="head">Evidence record</text>
+  <text x="850" y="393" class="text">• source identifier and citation</text>
+  <text x="850" y="419" class="text">• retrieved passage identifiers</text>
+  <text x="850" y="445" class="text">• generated summary or refusal</text>
+  <text x="850" y="471" class="text">• retrieval and grounding scores</text>
+
+  <path d="M995 230 V280 H238 V340" class="arrow"/>
+  <path d="M365 418 H460" class="arrow"/>
+  <path d="M995 230 V320" class="arrow"/>
+  <path d="M725 418 H820" class="arrow"/>
+
+  <text x="600" y="560" text-anchor="middle" class="text">These records are versioned files first; database services remain optional implementation choices.</text>
+</svg>

@@ -1,0 +1,117 @@
+dataset: abdomenatlas
+reports: None
+model: medformer
+dimension: 3d
+pretrain: False
+amp: False
+batch_size: 2
+resume: True
+load: /projects/bodymaps/Pedro/R-Super_public/rsuper_train/exp/abdomenatlas/pants_pancreas/fold_0_latest.pth
+cp_path: ./exp/
+log_path: ./log/abdomenatlas/
+unique_name: pants_pancreas
+all_train: False
+crop_on_tumor: True
+multi_ch_tumor: False
+multi_ch_tumor_data_root: /projects/bodymaps/Pedro/data/atlas_300_medformer_multi_ch_tumor_npy/
+multi_ch_tumor_classes: 61
+debug_val: False
+workers: 1
+load_augmented: True
+save_destination: /projects/bodymaps/Pedro/data/PANTS_pancreas_Merlin_MedformerNpzAugmented/
+save_augmented: False
+data_root: /projects/bodymaps/Data/release/pants_medformer_npz/
+UFO_root: None
+jhh_root: None
+ucsf_ids: None
+world_size: 2
+rank: 0
+dist_url: tcp://127.0.0.1:9697
+dist_backend: nccl
+report_volume_loss_basic: 0.0
+seg_loss: 1
+pretrained: None
+warmup: 5
+loss: ball_dice_last
+classification_branch: False
+update_output_layer: False
+old_classes: None
+epochs: 100
+classes_number: None
+ball_bce_weight: 1
+ball_dice_weight: 1
+stardard_ce_ball: False
+lr: 0.001
+gpu: 0,1
+balance_pos_neg: False
+class_weights: False
+clip_pretrain: False
+clip_source: /projects/bodymaps/Pedro/data/report_embeddings_clinical_longformer/
+no_mask: False
+model_genesis_pretrain: False
+pancreas_only: False
+kidney_only: False
+UFO_only: False
+Atlas_only: False
+no_pancreas_subseg: False
+ball_volume_margin: 0.2
+volume_loss_tolerance: 0.2
+tumor_classes: ['pancreas']
+clip_loss: False
+load_clip: False
+classes: 42
+modality: CT
+arch: medformer
+in_chan: 1
+base_chan: 32
+conv_block: BasicBlock
+down_scale: [[2, 2, 2], [2, 2, 2], [2, 2, 2], [2, 2, 2]]
+kernel_size: [[3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3], [3, 3, 3]]
+chan_num: [64, 128, 256, 320, 256, 128, 64, 32]
+norm: in
+act: relu
+map_size: [3, 3, 3]
+conv_num: [2, 0, 0, 0, 0, 0, 2, 2]
+trans_num: [0, 2, 4, 6, 4, 2, 0, 0]
+num_heads: [1, 4, 8, 10, 8, 4, 1, 1]
+expansion: 4
+fusion_depth: 2
+fusion_dim: 320
+fusion_heads: 10
+attn_drop: 0
+proj_drop: 0
+proj_type: depthwise
+training_size: [128, 128, 128]
+start_epoch: 0
+num_workers: 2
+aug_device: cpu
+aux_loss: True
+aux_weight: [0.5, 0.5]
+split_seed: 0
+k_fold: 10
+optimizer: adamw
+base_lr: 0.001
+betas: [0.9, 0.999]
+weight_decay: 0.05
+weight: [0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+rlt: 1
+scale: [0, 0, 0]
+rotate: [30, 30, 30]
+translate: [0, 0, 0]
+affine_pad_size: [40, 40, 40]
+gaussian_noise_std: 0.02
+print_freq: 5
+iter_per_epoch: 1000
+ema: True
+ema_alpha: 0.99
+val_freq: 20000
+sliding_window: True
+window_size: [128, 128, 128]
+proc_idx: 0
+port: 10000
+multiprocessing_distributed: True
+reproduce_seed: None
+batch_size_global: 4
+distributed: True
+ngpus_per_node: 2
+cp_dir: ./exp//abdomenatlas/pants_pancreas

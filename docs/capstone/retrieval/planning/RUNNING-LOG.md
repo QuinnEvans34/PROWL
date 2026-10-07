@@ -1539,3 +1539,60 @@ fixed with tests.
 - `CLAUDE-S2-V1.3-HANDBACK-2026-10-06.md`: `8940b0e854799719265ac760c63e652aec1004a60f45fe8184d81b8f3bbdd6f1`
 - `CLAUDE-HANDOFF-TO-CODEX-2026-10-06-R5.md`: `570ab7cfb616f02540d198f1805b8ab0bb6eac516403e1758392b4b92ed13b9e`
 - v1.3 file pins: in the handback (22 files, verified on the device)
+
+## 2026-10-06: v1.3 passes native qualification; guarded binding implemented; local commit `c636e00`; N4 waits for the drive (Claude records)
+
+**Claude's review of `operations/PLAN07-V13-HANDBACK-2026-10-06.md` (read only):**
+
+Native results on Quinton's Mac:
+- Sizing tests: 160 passed. Full retrieval suite: 342 passed. No skips.
+- Combined binding, S1, shared contracts and retrieval: 626 passed.
+- All 22 pins and identity `791be77f…` match.
+- The grandchild, anchor and hard-killed-parent checks pass on a Mac without `os.waitid`.
+- The lifecycle audit found no surviving processes, threads or descriptors.
+
+Binding (Codex-owned):
+- Codex implemented and tested `src/operations/literature_sizing_binding_v1.py` (62 tests). It uses
+  `run_sizing(..., fs=self, volume=self)` with `O_NOFOLLOW` descriptor opens, a no-delete
+  `remove_own_empty`, and quota and lease checks around Claude's launcher.
+- It is qualification-only: it accepts only the frozen invented transport.
+- **Note for the future live binding:** it currently accepts `InProcessLauncher` as well as
+  `WatchdogLauncher`. A live run S must require `WatchdogLauncher`, because the 4 GiB watchdog is
+  Quinton's approved memory method.
+
+Commit and files:
+- Local commit `c636e00`, "Qualify sizing v1.3 and preserve guarded binding with APFS rehearsal
+  pending": 26 files, no push. It includes this log at `c6fcacfd…` and the six v1.3 files. The
+  device copies match the v1.3 pins.
+- Claude's files were not edited by Codex.
+
+Still open:
+- **N4 remains open.** `/Volumes/PROWL-Data` was not mounted, so the actual APFS rehearsal could not
+  run. No external qualification areas were created.
+- **Next:** Quinton connects the approved drive. Codex then confirms that imaging is idle, freezes a
+  fresh invented request, and runs the bounded rehearsal once.
+- No new policy decision is needed.
+
+**Still not authorized:** run S signature or execution, S3, downloads, installs, P4/P5 execution,
+or the D-085 producer migration.
+
+## 2026-10-06: N4 actual-volume rehearsal blocked: PROWL-Data not detected (Claude records)
+
+Codex's handback, `operations/PLAN07-N4-ACTUAL-VOLUME-REHEARSAL-2026-10-06.md`, reports two native
+checks. Neither found the approved UUID `22750B93-…` or `/Volumes/PROWL-Data`; the Mac detects only
+internal disks.
+
+Codex verified the runtime and registry pins, the S2 identity `791be77f…`, the internal fallback and
+that imaging was idle.
+
+Nothing else happened:
+- no external writes;
+- no frozen or consumed request;
+- no commit or push.
+
+Codex also recorded the future live-binding requirements, including mandatory `WatchdogLauncher`
+for any non-invented run.
+
+**N4 remains open.** The only prerequisite is physically connecting the approved drive. When it
+is detected, the next steps are a fresh preflight, the request freeze and the single bounded
+rehearsal. No new decision is needed.

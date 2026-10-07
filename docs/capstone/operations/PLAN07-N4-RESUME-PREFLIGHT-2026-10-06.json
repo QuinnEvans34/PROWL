@@ -1,0 +1,66 @@
+{
+  "commit": false,
+  "external_writes": 0,
+  "finder_observation": "Available Finder Desktop sidebar Locations showed iCloud Drive, quintonevans, Macintosh HD, AirDrop, Network and Trash; no PROWL-Data.",
+  "imaging_idle": {
+    "active_worker_pids": [],
+    "method": "native ps; Python imaging/sizing command arguments"
+  },
+  "internal_cumulative_bytes": 139,
+  "internal_observation": {
+    "capacity_bytes": 994610155520,
+    "device": 16777234,
+    "filesystem": "apfs",
+    "free_bytes": 117559947264,
+    "mount": "/System/Volumes/Data",
+    "role": "fallback",
+    "uuid": "542E8B1F-8D50-4783-9250-752DFDC899CD",
+    "writable": true
+  },
+  "n4_closed": false,
+  "primary_mount_exists": false,
+  "primary_queries": {
+    "/Volumes/PROWL-Data": {
+      "exit_code": 1,
+      "info": {
+        "Error": true,
+        "ErrorMessage": "Could not find disk: /Volumes/PROWL-Data",
+        "ExitCode": 1
+      }
+    },
+    "22750B93-2F3F-499D-87F5-902981BFAB59": {
+      "exit_code": 1,
+      "info": {
+        "Error": true,
+        "ErrorMessage": "Could not find disk: 22750B93-2F3F-499D-87F5-902981BFAB59",
+        "ExitCode": 1
+      }
+    }
+  },
+  "push": false,
+  "recorded_at_utc": "2026-10-06T21:18:15.965957+00:00",
+  "registry_sha256": "46e3bcd5cbcdf3f9cbcb49fbb42383af680419ecc6e7ff74a4a04defa30e7788",
+  "request_consumed": false,
+  "request_frozen": false,
+  "runtime_pins_verified": {
+    "scripts/diagnostics/literature_sizing_binding_qualification_v1.py": "2ccdf9b34d8dd318cbb441b5ef4b39bf78e44df3606338ce3f181cfe0476c270",
+    "scripts/diagnostics/literature_storage_setup_v1.py": "2996f4189049f25c283715987c3cbf712929608ed4f61c0d4b2a8248b4e62d0b",
+    "scripts/retrieval/run_s_sizing_v1.py": "e433bf9df28619c46fc82512e2a6ceb46374ea853d8eef7f21df67e2a7b97c15",
+    "src/operations/literature_sizing_binding_v1.py": "c5e537ffafe252972af1e4771cd6705c045ba15a3029166f668a90e930357ab3",
+    "src/operations/literature_storage_v1.py": "e7c7190d0f7c24c2f72c24550456f0f2fd0c3e6d06040e7ef5391ce93079b206",
+    "src/retrieval/sizing_v1/__init__.py": "edc6a0f62cd69bd5d51f92ce1e04916e9c27c9d0916937d79fd74fafeb022fdf",
+    "src/retrieval/sizing_v1/fsio.py": "d2c6db413c72b4b54169a316410036aab8fa58218081f16814a89d8557714705",
+    "src/retrieval/sizing_v1/journal.py": "4c94749c1b1cc74dd22c3bc6da6eb0d51cf56679913c630a792b62f4372c026a",
+    "src/retrieval/sizing_v1/listings.py": "ad25719ee617bdbd19d54748fa7ddae0e5330fa15f6a340e104c105b581e3d17",
+    "src/retrieval/sizing_v1/parser.py": "b8f6dc8db2fc3e353fb050af0f59ca9e6e0390ee1b5edea1489132c6255953f6",
+    "src/retrieval/sizing_v1/runner.py": "4d1b9e79648a9b525ce49afb353502bb13f9e8a82abd5427d142bc4dc8508c1e",
+    "src/retrieval/sizing_v1/transfer.py": "fb8c159abd6fada2f1c9160c85e72c61a602c329090900f1a33656d13ff2cb1a",
+    "tests/fixtures/literature_sizing_binding_v1/README.md": "6a5509b9136631a28777f142617ad0944e2ab6e01f4f2ae83b43ab8ebf76a4a2",
+    "tests/fixtures/literature_sizing_binding_v1/invented.xml": "1ec855d2a0db0785445772f3ce96dd5ed7200b6d112ede0450257bd127b2778f",
+    "tests/test_literature_sizing_binding_v1.py": "249cdb04fdbe08dcfa482fc9cd6258b4bf8787c19f848f55c94bd33ab713a235"
+  },
+  "s1_capability_sha256": "e6b9de3b381bfa891bae35725978e1e967f17c83bf2dfcede6f9b45ea51afe3a",
+  "s2_identity": "791be77ffc96c17aaaf23a8b588c52bf8db1a82ddaa959d41ad217da318f4d53",
+  "s2_pins_verified": 22,
+  "status": "resume_preflight_primary_not_detected"
+}

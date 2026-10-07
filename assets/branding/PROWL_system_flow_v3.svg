@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#60717F"/>
+    </marker>
+    <style>
+      .title { font: 700 24px Arial, sans-serif; fill: #153A5B; }
+      .label { font: 700 20px Arial, sans-serif; fill: #153A5B; }
+      .small { font: 16px Arial, sans-serif; fill: #40515E; }
+      .tiny { font: 14px Arial, sans-serif; fill: #5D6A74; }
+      .arrow { stroke: #60717F; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="#FFFFFF"/>
+  <text x="600" y="40" text-anchor="middle" class="title">PROWL system architecture</text>
+
+  <rect x="45" y="80" rx="14" ry="14" width="250" height="90" fill="#E8F3F1" stroke="#147D73" stroke-width="2"/>
+  <text x="170" y="116" text-anchor="middle" class="label">PanTS imaging</text>
+  <text x="170" y="143" text-anchor="middle" class="small">CT volumes and labels</text>
+
+  <rect x="45" y="205" rx="14" ry="14" width="250" height="90" fill="#E8F3F1" stroke="#147D73" stroke-width="2"/>
+  <text x="170" y="241" text-anchor="middle" class="label">PANORAMA imaging</text>
+  <text x="170" y="268" text-anchor="middle" class="small">CT volumes and labels</text>
+
+  <rect x="45" y="350" rx="14" ry="14" width="250" height="90" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="170" y="386" text-anchor="middle" class="label">Literature corpus</text>
+  <text x="170" y="413" text-anchor="middle" class="small">PubMed and PMC records</text>
+
+  <rect x="400" y="105" rx="16" ry="16" width="310" height="190" fill="#F5F7F8" stroke="#80909C" stroke-width="2"/>
+  <text x="555" y="142" text-anchor="middle" class="label">File-based artifact layer</text>
+  <rect x="430" y="165" rx="9" ry="9" width="250" height="42" fill="#FFFFFF" stroke="#B3C0C9"/>
+  <text x="555" y="192" text-anchor="middle" class="small">manifests and frozen cohorts</text>
+  <rect x="430" y="220" rx="9" ry="9" width="250" height="42" fill="#FFFFFF" stroke="#B3C0C9"/>
+  <text x="555" y="247" text-anchor="middle" class="small">cached volumes and run artifacts</text>
+
+  <rect x="400" y="350" rx="16" ry="16" width="310" height="90" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="555" y="386" text-anchor="middle" class="label">Local retrieval index</text>
+  <text x="555" y="413" text-anchor="middle" class="small">versioned evidence artifact</text>
+
+  <rect x="815" y="95" rx="16" ry="16" width="320" height="95" fill="#E8F3F1" stroke="#147D73" stroke-width="2"/>
+  <text x="975" y="132" text-anchor="middle" class="label">Model experimentation</text>
+  <text x="975" y="159" text-anchor="middle" class="small">autonomous localization and segmentation</text>
+
+  <rect x="815" y="235" rx="16" ry="16" width="320" height="95" fill="#F5F7F8" stroke="#80909C" stroke-width="2"/>
+  <text x="975" y="272" text-anchor="middle" class="label">Predictions and measurements</text>
+  <text x="975" y="299" text-anchor="middle" class="small">masks, scores, provenance, limitations</text>
+
+  <rect x="815" y="375" rx="16" ry="16" width="320" height="95" fill="#EDF3F8" stroke="#3F6F9F" stroke-width="2"/>
+  <text x="975" y="412" text-anchor="middle" class="label">Radiologist review</text>
+  <text x="975" y="439" text-anchor="middle" class="small">accept, edit, reject; cite or refuse</text>
+
+  <path d="M295 125 H390" class="arrow"/>
+  <path d="M295 250 H390" class="arrow"/>
+  <path d="M295 395 H390" class="arrow"/>
+  <path d="M710 170 H805" class="arrow"/>
+  <path d="M975 190 V225" class="arrow"/>
+  <path d="M975 330 V365" class="arrow"/>
+  <path d="M710 395 H805" class="arrow"/>
+  <path d="M815 445 C760 500, 650 495, 610 450" class="arrow"/>
+  <text x="686" y="504" text-anchor="middle" class="tiny">review decisions return as versioned evidence</text>
+</svg>
