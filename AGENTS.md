@@ -1,5 +1,20 @@
 # AGENTS.md — Agent Context
 
+> **October7 N01 launch approval / unexecuted preflight refusal:** Quinton confirms drive connected,
+> approves and asks launch. Native-only preparation/one N01 accepted; no frozen scientific request.
+> N01 preflight refused Numerical pins drift after0.517369s, before144³ generation/request/areas/
+> dispatch/model calls. Registered-volume/AC/MPS/idle/lock checks reached before refusal; final
+> resource values not retained, so no native fit claim. All315currentpins/tail fixed. Historical
+> numeric receipts add68missing unchanged entries and conflict only with the approved schema and
+> five Oct3portable tests (exact successful-export/5856fdc hashes). No numerical production drift.
+> Read SEGMENTER-DURATION-NATIVE-N01-RESULTS-2026-10-07.md and DUR-03 reconciliation packet under
+> docs/capstone/operations. N01 operationally retired/not disk-consumed; no retry/reset. DUR-03
+> exact4new/2amended files, model-free checks and fresh conditionalN02 are proposals awaiting the
+> human decision; do not weaken guards or change any315sourcepin from a heartbeat.26GiB remains
+> approved/applied; no new capacity, actual arrays, scientific launch, N4 work or push. W01-28ToDo.
+> Meaningful local review preservation permitted; no old check replay. Prior DUR-02 remains unit
+> qualified; its historical all-unfinished-complete wording is superseded for this new native blocker.
+
 > **October7 DUR-02 delivered /26GiB budget applied:**161distinct new unit checks qualified across
 > retained attempts; four tiny24³CPU optimizer calls/eight attempted forwards (one refused before
 > computation). Full192loop mocked; actual144³/native/scientific jobs and actual cache/targets absent.

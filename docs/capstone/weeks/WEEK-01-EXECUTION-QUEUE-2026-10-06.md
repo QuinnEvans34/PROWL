@@ -1,5 +1,16 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 native launch approval and N01 blocker
+
+Quinton confirms the drive is connected, approves and asks launch. The native-only N01 preflight
+refused historical numerical-source equality before any model/data/job work. All315current pins
+match. The conflicting six paths are the approved storage schema plus documented portable tests;
+68other historical closure entries match current bytes. [N01 result](../operations/SEGMENTER-DURATION-NATIVE-N01-RESULTS-2026-10-07.md)
+retains the refusal and retires the unexecuted attempt. [W01-28](https://trello.com/c/3oahjFM6) returns
+To-Do while the [DUR-03 amendment](../operations/SEGMENTER-DURATION-READINESS-RECONCILIATION-PACKET-2026-10-07.md)
+awaits approval. No native rehearsal or training has started. No guard change/test replay/old
+request reset is authorized by scheduling; budget approval remains settled.
+
 ## October 7 daytime preparation — DUR-02 delivered
 
 [W01-27](https://trello.com/c/rhNujXdz) completed the approved sixteen-file consumer/unit packet.
