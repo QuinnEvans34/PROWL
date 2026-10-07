@@ -94,3 +94,24 @@ limits. Internal metadata/AC/MPS/idle/lock preflight must pass anew. No fresh so
 backup copies are granted. A failed I02 stops without retry; full success may publish only the
 distinct inference-only certificate after supervisor exit/reaping and current-source review.
 Scientific preparation/launch remain separate; no old producer repeat or training resume.
+
+
+## Approved fresh replacement I03
+
+I02's reviewed invocation failed before output/consumption/payload/model admission because its
+request writer omitted the canonical trailing newline. Retain the exact controls, helper and
+supervisor evidence; I02 remains operationally retired and cannot be rewritten/replayed.
+Quinton answered “Yes, I approve. I would also like a status update after each response so I know how close we are to training.” to the I03 replacement and PREP-01 dependency question on October 7. This approves the closed replacement and conditional preparation; scientific launch remains separate.
+The same three-path amendment changes only readiness base/job/attempt literals to fresh
+DUR06-I03/INFERENCE-I03/DUR_INFERENCE_20261007_I03, updates the fixture and exact I03-path/retired
+I02 denial checks, and records this contract. Preserve402before/399other producing pins.
+64affected model-free checks≤90seconds/2GiB precede one independently reviewed I03. Use the
+project canonical() writer and assert canonical-byte round trip before native invocation.
+All six metadata keyword bindings, helper/authority/source/runtime/receipt hashes and limits
+must be checked before submitting dispatch. Unchanged30forwards/0updates/600seconds/12GiB/2GiB
+reads/8MiBoutputs/100GiBfloor, retained-invented62-artifact inventory, five probes/25exact masks
+and views. No producer repeat/tolerance revision/new backup phase/capacity/writer or replay.
+Only complete success and resource/source review may publish inference-only qualification;
+optimizer resume stays unqualified. The selected PREP-01 may then proceed under the amended
+I03-success dependency; scientific launch remains separately reviewed. Failure preserves and
+stops, without another actual job. Original I02 and all earlier failures remain immutable.
