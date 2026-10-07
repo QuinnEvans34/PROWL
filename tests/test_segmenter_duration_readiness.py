@@ -120,13 +120,50 @@ def test_native_evidence_cannot_satisfy_scientific_readiness(accepted,monkeypatc
     with pytest.raises(ValueError,match='No scientific'):launch.validate_readiness(r)
 
 
-def test_readiness_does_not_relax_dispatch_source_path_guard(accepted):
-    # Newly discovered blocker: REQUIRED_CODE includes scripts/, the unchanged guard excludes it.
-    # Retain that refusal; this six-file approval cannot silently modify dispatcher policy.
+def test_changed_complete_source_path_verification(accepted):
     pins,cpu,native=accepted
-    with pytest.raises(ValueError,match='Code pin cannot point to data/weights'):
-        verify_code(dict(source_pins=pins))
-    assert 'scripts/diagnostics/segmenter_duration_launch.py' in engine.REQUIRED_CODE
+    pins['docs/capstone/imaging/SEGMENTER-DURATION-SOURCE-PATH-CONTRACT-V1.md']=digest((ROOT/'docs/capstone/imaging/SEGMENTER-DURATION-SOURCE-PATH-CONTRACT-V1.md').read_bytes())
+    verify_code(dict(source_pins=pins))
+    assert len(pins)==397
+
+
+def test_full_launch_source_chain_without_models(accepted):
+    r=launcher_request(accepted)
+    verify_code(r)
+    launch.validate_readiness(r)
+
+
+SCRIPT_PATHS=tuple(json.loads((ROOT/'outputs/prowl/SEGMENTER-DURATION-DUR03-20261007/dispatcher-blocker.json').read_bytes())['required_script_paths'])
+
+
+@pytest.mark.parametrize('name',SCRIPT_PATHS)
+def test_script_path_exact_known_script_verifies(name):
+    verify_code(dict(source_pins={name:digest((ROOT/name).read_bytes())}))
+
+
+@pytest.mark.parametrize('name',SCRIPT_PATHS)
+def test_script_path_hash_substitution_refuses(name):
+    with pytest.raises(ValueError,match='identity changed'):verify_code(dict(source_pins={name:'a'*64}))
+
+
+@pytest.mark.parametrize('name',['scripts/diagnostics/unapproved.py','scripts/unapproved.py','scripts/diagnostics/segmenter_duration_launch.py.npy','scripts/diagnostics/segmenter_duration_launch.py/../segmenter_duration_launch.py','/scripts/diagnostics/segmenter_duration_launch.py','outputs/patient.json','src/patient.nii.gz','tests/state.pt','configs/cache.npy'])
+def test_script_path_unapproved_or_payload_refuses_before_open(name,monkeypatch):
+    from src.operations import segmenter_duration_dispatch_v1 as dispatcher
+    def denied(*a,**k):raise AssertionError('Disallowed source was opened')
+    monkeypatch.setattr(dispatcher,'read_control',denied)
+    with pytest.raises(ValueError,match='Code pin cannot'):verify_code(dict(source_pins={name:'a'*64}))
+
+
+@pytest.mark.parametrize('unsafe',['symlink','hardlink','oversize'])
+def test_script_path_safe_file_guards_retained(tmp_path,monkeypatch,unsafe):
+    from src.operations import segmenter_duration_dispatch_v1 as dispatcher
+    monkeypatch.setattr(dispatcher,'REPO',tmp_path);name='scripts/diagnostics/segmenter_duration_launch.py';path=tmp_path/name;path.parent.mkdir(parents=True);raw=b'no executable fixture calls'
+    if unsafe=='symlink':
+        other=tmp_path/'fixture.py';other.write_bytes(raw);path.symlink_to(other)
+    elif unsafe=='hardlink':
+        path.write_bytes(raw);os.link(path,tmp_path/'linked.py')
+    else:raw=b'0'*(4*1024**2+1);path.write_bytes(raw)
+    with pytest.raises(ValueError):verify_code(dict(source_pins={name:digest(raw)}))
 
 
 def test_read_pinned_symlink_refused(tmp_path):

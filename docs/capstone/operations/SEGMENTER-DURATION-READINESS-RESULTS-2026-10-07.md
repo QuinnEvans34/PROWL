@@ -1,5 +1,40 @@
 # DUR-03 handback — October7
 
+## October7 DUR-04 delivered; N02 running
+
+Quinton answered “Yes, approve” to the exact dispatcher amendment and continuation into the
+already-approved conditional N02. Only dispatcher `verify_code` and changed/new readiness tests
+were amended; the source-path contract was added. Two source snapshots and396ledger preserved.
+New397ledger verifies394prior unchanged paths/two approved amended hashes/one new contract.
+70changed/new model-free checks passed;59unchanged tests deselected. Pytest1.31s, supervised
+1.715557s,365,084,672B sampled owned peak/24samples, workers reaped; zero forwards/optimizer/
+actual arrays. Exact28script success/hash substitution, full397closure and launcher readiness
+plus unsafe-path/file refusals qualify. All other dispatcher functions and producing files fixed.
+
+N02 fresh preflight passed independent registered APFS UUID/writability/device/free guards,
+AC/MPS/idle-owner check and held shared MPS lock. External device16777242/free2,866,266,128,384B;
+internal device16777231/free118,011,367,424B. Backup baseline17,341,924,636B. Source closure397
+verified. Native invented inputs/target geometry/controls prepared in4.62s under the5minute limit.
+The frozen controls were separately reviewed before dispatch: request
+`575603717131190f97ea7496e4ef0d4c0311ae5f9be0599658dad1c0671fd70b`.
+Producer dispatched once; native cold recovery follows only a complete192producer. Shared lock
+stays held through both. No original/cache/CT/third-party weight payloads; no scientific job.
+
+Policy template is explicitly invented positive-only control, separate from D-335 or actual native
+counts; invented-train-4 is negative and any inapplicable/poor-quality DUR-01 result stays recorded.
+Engineering completion cannot establish model quality. Original192+1updates/253+31forwards/60min/
+12GiB and26GiB whole/8GiBgrowth/100GiB floor/2GiBchild/4GiBphase/64MiBcontrols stay fixed.
+Local N02 receipt `outputs/prowl/SEGMENTER-DURATION-NATIVE-N02-20261007/` contains preflight, frozen
+manifest, independent control review and dispatch start. Active controls are in the exact registered
+internal backup scope `segmenter-duration-20261007-n02-rehearsal-controls`; primary/keeper/restore
+areas use that same approved namespace. No other lane was rebound. Preserve any consumed failure;
+no retry/reset. N01 remains retired. Human hours unconfirmed; all unattended runtime excluded.
+
+**Current restart:** monitor this one N02 session and retain its producer/cold outcome. Do not
+dispatch another job or repeat completed checks. The earlier DUR-04 proposal/approval-pending
+paragraphs below are historical; scientific launch remains a separate exact request after native
+qualification.
+
 **Readiness repair finished; native rehearsal has not started.** Quinton answered “I approve” to
 the exact DUR-03 repair/conditional N02 question. The four-new/two-amended-file implementation
 is complete. All60new model-free checks passed; no old suite or consumed attempt was replayed.

@@ -40,10 +40,13 @@ def read_metadata(path,max_bytes=1024**2):
 
 
 def verify_code(request):
+    # DUR-04 admits only the exact previously frozen script names, never a scripts/ prefix.
+    approved_scripts = frozenset(('scripts/diagnostics/freeze_segmenter_cohort.py', 'scripts/diagnostics/probe_suprem_fake_device_v1.py', 'scripts/diagnostics/probe_suprem_metadata_volume_v1.py', 'scripts/diagnostics/publish_segmenter_dispositions.py', 'scripts/diagnostics/run_suprem_checkpoint_metadata_v1.py', 'scripts/diagnostics/run_suprem_checkpoint_metadata_v2.py', 'scripts/diagnostics/run_suprem_checkpoint_metadata_v3.py', 'scripts/diagnostics/segmenter_balanced_qualification.py', 'scripts/diagnostics/segmenter_cache_qualification.py', 'scripts/diagnostics/segmenter_checkpoint_inventory.py', 'scripts/diagnostics/segmenter_content_pilot.py', 'scripts/diagnostics/segmenter_duration_launch.py', 'scripts/diagnostics/segmenter_geometry_qualification.py', 'scripts/diagnostics/segmenter_inference_guarded_recovery.py', 'scripts/diagnostics/segmenter_inference_qualification.py', 'scripts/diagnostics/segmenter_learning_rehearsal.py', 'scripts/diagnostics/segmenter_loss_audit.py', 'scripts/diagnostics/segmenter_lowrate_native_qualification.py', 'scripts/diagnostics/segmenter_lowrate_qualification.py', 'scripts/diagnostics/segmenter_lowrate_qualification_attempt02.py', 'scripts/diagnostics/segmenter_native_scoring.py', 'scripts/diagnostics/segmenter_normalized_qualification.py', 'scripts/diagnostics/segmenter_short_launch.py', 'scripts/diagnostics/segmenter_source_verification.py', 'scripts/diagnostics/segmenter_training_policy_parity.py', 'scripts/diagnostics/segmenter_training_qualification.py', 'scripts/diagnostics/segmenter_training_review.py', 'scripts/diagnostics/storage_setup.py'))
     for name,pin in request["source_pins"].items():
         path=Path(name)
-        require(not path.is_absolute() and ".." not in path.parts and path.parts[0] in
-                ("src","tests","docs","requirements","configs")
+        script = name in approved_scripts and path.suffix == ".py"
+        require(not path.is_absolute() and ".." not in path.parts and path.parts and
+                (path.parts[0] in ("src","tests","docs","requirements","configs") or script)
                 and path.suffix in (".py",".json",".md",".txt"),"Code pin cannot point to data/weights")
         read_control(REPO/path,pin)
 

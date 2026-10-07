@@ -1,5 +1,23 @@
 # AGENTS.md — Agent Context
 
+> **October7 DUR-04 delivered / N02 running:**70changed/new model-free checks pass1.715557s/
+> 365084672B owned peak/24samples;59unchanged deselected, workers reaped. Exact28script guard
+> fixed only at verify_code;397pins verify394prior unchanged/two amended/one new contract. N02
+> fresh preflight passed registered independent devices/UUID/APFS/free/AC/MPS/idle/sharedlock;
+> baseline17341924636B/internalfree118011367424B/externalfree2866266128384B. Invented144³scope
+> prepared4.62s; controls independently reviewed; request575603717131190f97ea7496e4ef0d4c0311ae5f9be0599658dad1c0671fd70b.
+> One producer dispatched; monitor this session, cold only after full192producer, lock through both.
+> Limits192+1invented updates/253+31forwards/60min/12GiB and approved26GiB budget fixed.0original/
+> cache/CT/third-party weights/scientific job. No replay/retry/push or other-lane changes. N01retired.
+> Read latest readiness handback; older DUR-04-pending text below historical. Human hours unconfirmed.
+
+> **October7 DUR-04 approval/start:** Quinton answered “Yes, approve” to exact source-path repair
+> and continuation into already-approved conditional N02. Amend dispatcher verify_code and changed/
+> new readiness tests only; add source-path contract. Snapshot two files; preserve396ledger. Exact
+> 28already-pinned script names, safe-file/hash guards and all other dispatcher functions fixed.
+> New/changed model-free checks≤90s/2GiB precede N02 fresh preflight/preparation/one native job.
+> No old-suite replay, N01reset, new capacity, actual arrays/scientific job or push. W01-28active.
+
 > **October7 DUR-03 delivered / DUR-04 proposed:** exact human approval accepted; four new/two
 > amended files complete,60new model-free checks pass2.491359s/367951872B sampledowned tree; workers
 > reaped, zero model/array/native/scientific calls. Read SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md.

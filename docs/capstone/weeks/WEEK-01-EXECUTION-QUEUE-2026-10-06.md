@@ -1,5 +1,15 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October7 DUR-04 delivered; N02 native producer active
+
+Quinton approved the narrow dispatcher repair and continuation.70changed/new zero-model checks
+passed;397source pins match. Fresh N02 hardware/storage/AC/idle preflight passed; invented144³
+controls prepared and independently reviewed. One native producer dispatched; cold recovery only
+after full192producer. [W01-28](https://trello.com/c/3oahjFM6) In-Progress. Keep shared MPS lock and
+original192+1/253+31/60min/12GiB limits; no real/scientific launch or automatic retry. Read
+[latest handback](../operations/SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md). N01 retired,
+older pending-amendment wording historical; approved26GiB budget unchanged.
+
 ## October7 DUR-03 delivered; dispatcher path amendment pending
 
 Quinton approved the exact repair/conditional N02. [DUR-03 handback](../operations/SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md):60new model-free checks passed;396current producing pins,313prior bytes unchanged/two amended,68historical additions. No arrays/models/native job or old-suite replay. N01 remains retired; N02 unprepared/unconsumed. The actual dispatcher guard rejects required scripts, including its own fixed launcher. DUR-04's exact two-amended/one-new contract scope is proposed in the handback; do not change that guard or bypass it from scheduling. [W01-28](https://trello.com/c/3oahjFM6) returns To-Do awaiting this concrete amendment. Budget is already approved; conditional N02 permission persists under its original limits after every launch guard qualifies. Scientific launch remains separate.
