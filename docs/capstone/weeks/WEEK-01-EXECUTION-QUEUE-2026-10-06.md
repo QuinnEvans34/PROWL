@@ -1,6 +1,20 @@
 # Week 1 execution queue — October 6–11, 2026
 
-## October7 DUR-04 delivered; N02 native producer active
+## October 7 N02 finished; native recovery mismatch remains
+
+Producer completed192invented144³/MPS updates, five checkpoints, four native screens and25exports/
+views;253forwards/192optimizer calls. Independent cold recovery failed the full step-49 state
+comparison after probabilities0/48 and six step48exports passed. The failing state component is
+unknown. Both workers reaped; helper exited/shared lock released. No native readiness acceptance
+or scientific job. All397producing pins/tail fixed;26GiB budget preserved, growth2,282,284,481B.
+[W01-28](https://trello.com/c/3oahjFM6) To-Do/incomplete with explicit blocked title; readback verified.
+N02 is consumed/retired, no replay/reset. [Latest handback](../operations/SEGMENTER-DURATION-READINESS-RESULTS-2026-10-07.md)
+contains the concrete **unapproved DUR-05** four-file model-free component/failure diagnostics
+packet. Exact next is that human scope decision, then a separately reviewed recovery request.
+No payload reopening/model job/source change follows from scheduling. Human hours unconfirmed;
+runtime excluded. Earlier running/pending paragraphs are historical checkpoints.
+
+## Historical DUR-04 handback: N02 native producer active
 
 Quinton approved the narrow dispatcher repair and continuation.70changed/new zero-model checks
 passed;397source pins match. Fresh N02 hardware/storage/AC/idle preflight passed; invented144³

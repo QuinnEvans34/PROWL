@@ -1,6 +1,106 @@
-# DUR-03 handback — October7
+# Duration readiness handback — October 7
 
-## October7 DUR-04 delivered; N02 running
+## N02 finished: producer complete, independent next-update recovery failed
+
+**The full 192-update invented producer completed. Native qualification remains incomplete because
+cold recovery failed at the step-48-to-49 state comparison. Nothing from this attempt is running.**
+Quinton's DUR-04 approval was applied, its 70 changed/new model-free checks passed, and the repair
+was locally preserved at `8ae2748e3c1c9e0467b76c1b079f6a3e023b9342`. Its conditional N02 request
+was prepared, separately reviewed, then dispatched once per stage. Both stages are disk-consumed;
+N02 is operationally retired. No retry, reset, automatic extension or scientific job follows.
+
+### What finished and what failed
+
+- Producer: 192 invented 144³/MPS updates; each of the six training members received 32 updates.
+  Checkpoints at 0/48/96/144/192, four native screens, and all 25 exports plus 25 views completed.
+  The persisted counter is 253 forwards/192 optimizer calls. Producer watchdog elapsed
+  1,202.456363 seconds, sampled owned RSS peak 4,495,294,464 bytes, 15,492 samples; worker reaped.
+- Cold: consumed failure after 72.057609 supervised seconds, sampled owned RSS peak
+  4,823,351,296 bytes, 928 samples; worker reaped. Exact worker error:
+  `Independent full next-update recovery differs`, at launcher line 237. Its combined assertion
+  covers model, optimizer, progress, CPU RNG and MPS RNG; it short-circuits and does not persist
+  which component failed or its numerical difference. Do not infer corruption, a serialization
+  defect or MPS nondeterminism from this message alone.
+- The pinned control path reaching that assertion establishes that probability checks at steps
+  0 and 48 met the unchanged 1e-6 requirement and all six step-48 native exports matched exactly.
+  All four screens, images, probes, expected full step-49 state, two checkpoints and six
+  export/view pairs were restored: 22 completed restore receipts. The remaining checkpoints
+  and 19 exports were not cold-qualified. Probability differences were not retained numerically.
+- Cold ran one invented replay update before the assertion. Nine forwards/one optimizer call
+  follow from the pinned source path, **not a persisted cold counter**; aggregate calls inferred
+  across the attempt are 262 forwards/193 updates. The outer helper's failure JSON retains its
+  initial zero call placeholders and must not be cited as zero model work. That raw record is
+  preserved unchanged; `failure-audit.json` records the distinction.
+- Primary Python payload reads were blocked by the installed recovery guard; cold restored from
+  the independent internal keeper. Full next-update matching and all-25 export recovery remain
+  unqualified. No `SEGMENTER-DURATION-NATIVE-READINESS.json` or successful cold result was written.
+
+All work used invented inputs and invented native targets: zero original/cache/CT/third-party
+weight payloads. The positive-only policy template remains separate from D-335 and actual native
+reference counts. Positive `reference_drift` and negative `components` policy failures were
+retained at the engineering screens. The producer's terminal decision is `terminal_insufficient`;
+this rehearsal supplies no scientific model-quality acceptance.
+
+### Resources, preservation and tracking
+
+The helper completed in 1,334.311343 seconds with sampled aggregate owned RSS peak 5,456,035,840
+bytes and 10,406 samples. No watchdog stop occurred. It exited; both worker records report reaping,
+and the helper's final record reports the shared MPS lock released. A read-only native PID check
+confirmed helper PID 78471 absent. The original 60-minute/12-GiB ceilings were preserved.
+
+Backup baseline was 17,341,924,636 bytes; final metadata inventory is 19,624,209,117 bytes, growth
+2,282,284,481 bytes. N02 keepers are 1,611,507,905 bytes, partial restores 670,373,414 bytes and
+controls 403,162 bytes. These sum to the measured growth and fit the approved child/phase/control
+and whole-backup ceilings. Internal free space was 115,507,200,000 bytes and external free space
+2,863,104,000,000 bytes at the final observation, above the 100-GiB floor. Existing evidence was
+preserved; no pruning, capacity increase or other-lane capability rebinding occurred. The 26-GiB
+budget remains approved/applied, but another rehearsal is outside the spent one-rehearsal scope.
+
+All 397 producing source pins and the historical experiment tail remain unchanged after the job.
+No completed test, producer or recovery stage was rerun. The post-run metadata helper initially
+looked for uppercase `EXPERIMENTS.md`, found none and stopped; its corrected review used the
+existing `docs/experiments.md`. No model or payload operation occurred in either review.
+
+Local receipt `outputs/prowl/SEGMENTER-DURATION-NATIVE-N02-20261007/` preserves the frozen manifest,
+independent control review, producer result, raw helper failure/resources, copied cold worker log,
+consumption/failure records, supplemental failure audit and post-run pin review. Actual keeper
+and partial restore artifacts remain in their approved N02 namespace. These local metadata
+receipts alone are not independent recovery acceptance. W01-28 is **To-Do/incomplete**, titled
+`Blocked: native recovery step-49 state mismatch`; its updated description and list were read back.
+Human active hours remain unconfirmed; unattended runtime is excluded. No public push occurred.
+
+### DUR-05 proposal: diagnose the exact recovery mismatch before another model job
+
+This is a concrete **unapproved** follow-up. Its closed producing allowlist is:
+
+1. New `src/training/segmenter_duration_recovery_audit_v1.py`: bounded component comparisons for
+   model, optimizer, progress, CPU RNG and MPS RNG. Report all component predicates, at most 16
+   differing field paths, shapes/dtypes/devices, mismatch counts and finite maximum absolute
+   differences where applicable. Persist metadata only; no weights, arrays or full optimizer
+   values in the report. The conjunction remains exactly as strict as the existing requirement;
+   a numerical tolerance cannot turn failure into acceptance.
+2. Amend only the cold comparison/failure-reporting region of
+   `scripts/diagnostics/segmenter_duration_launch.py`: write a bounded atomic audit before the
+   existing refusal and retain partial counters, checkpoint probability differences, native
+   export counts and reached phase on failure. Keep primary denial, one-use request consumption,
+   numerical recipe, sampler, source/hash guards and every time/resource/quality limit unchanged.
+3. New `tests/test_segmenter_duration_recovery_audit.py`: invented small tensor and fake-session
+   checks for each component failure, simultaneous failures, nonfinite/structural substitutions,
+   bounded output and recorded failure counters. Zero model forwards/optimizer calls; run only
+   the new tests under a 90-second/2-GiB ceiling. No old test replay or 144³ generation.
+4. New `docs/capstone/imaging/SEGMENTER-DURATION-RECOVERY-AUDIT-CONTRACT-V1.md`: record the exact
+   scope and limits before code; snapshot the launcher, preserve the 397-entry ledger and record
+   the one approved hash transition plus new producing pins. Routine handback/tracking updates
+   and a meaningful reviewed local commit are included. No session/executor/numerical change.
+
+This packet authorizes no N02 payload inspection, replay, native run, writer or scientific launch.
+After diagnostics are qualified, any use of retained invented states or new recovery job requires
+its own reviewed request, source binding and remaining storage allocation. It must not reuse the
+spent N02 authority. **Exact next starting point:** Quinton's decision on this four-file, model-free
+DUR-05 packet. Full native recovery and a separately frozen scientific request still precede
+actual-data training. SuPreM's missing publisher evidence remains a separate unresolved route.
+
+## Historical DUR-04 handback: N02 running at that checkpoint
 
 Quinton answered “Yes, approve” to the exact dispatcher amendment and continuation into the
 already-approved conditional N02. Only dispatcher `verify_code` and changed/new readiness tests

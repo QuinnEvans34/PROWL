@@ -1,5 +1,19 @@
 # AGENTS.md — Agent Context
 
+> **October7 N02 finished / recovery failed:** producer completed192invented144³/MPS updates,
+> checkpoints0/48/96/144/192/four screens/25exports+views;253forwards/192updates,
+> 1202.456363s/4495294464B owned peak, worker reaped. Cold consumed/failed72.057609s/4823351296B,
+> worker reaped: Independent full next-update recovery differs at launcher237. Exact model/
+> optimizer/progress/CPU-RNG/MPS-RNG failing predicate unknown. Source path proves probabilities0/48
+> and six native exports passed;22restore receipts; cold9forwards/1update inferred, not persisted.
+> Wrapper zero counters are initial placeholders, not zero-work evidence. Helper exited1334.311343s/
+> 5456035840B peak/lock released. Backup19624209117B/growth2282284481B/internalfree115507200000B;
+> approved26GiB budget/floor preserved. All397producing pins/tail fixed; no native acceptance or
+> scientific job. N02 operationally retired/both stages consumed/no retry/reset;0original/cache/CT/
+> third-party weights. W01-28ToDo/incomplete. Read latest duration readiness handback. DUR-05 exact
+> four-file model-free component/failure audit is proposed, unapproved; no N02 payload reopen/model
+> job/source mutation from scheduling. No old check replay/push; human hours unconfirmed.
+
 > **October7 DUR-04 delivered / N02 running:**70changed/new model-free checks pass1.715557s/
 > 365084672B owned peak/24samples;59unchanged deselected, workers reaped. Exact28script guard
 > fixed only at verify_code;397pins verify394prior unchanged/two amended/one new contract. N02
