@@ -18,6 +18,12 @@ Pre-course work before October 5 belongs in a separate retrospective, not the We
   quarter-hours, preserve corrections and avoid claiming minute-level precision.
 - At each session handback, record the task, evidence and human time supplied by Quinton. When time
   is unknown, say so. At the weekly review, confirm the total and retain the estimation basis.
+- Starting October 7, record a user-supplied clock-in at the start of a work session and a
+  clock-out when Quinton finishes. Record pauses/resumptions for breaks, schoolwork and other
+  activities. At close, subtract excluded time before recording active project hours. An open
+  clock interval is not proof of continuous participation; missing exclusions keep the total pending.
+- Agent execution and scheduled wake-ups never clock Quinton in or out. A session does not
+  automatically end at the automation cutoff; use Quinton's actual finish time.
 
 ## Project goals
 
@@ -53,9 +59,24 @@ The same hours support both goals; they are counted once rather than allocated t
 | Monday, Oct 5 | G1, G2 | Reviewed project progress and technical requirements, organized development priorities, and planned the segmentation training workflow. | 4 | Quinton estimate |
 | Tuesday, Oct 6 | G1, G2 | Reviewed segmentation experiments, worked through training-readiness issues, evaluated input-adapter and checkpoint tests, and investigated dataset qualification gaps. | 5–6 | Quinton estimate; precise portal value not selected |
 
-**Monday–Tuesday estimated subtotal: 9–10 hours.** No Wednesday hours are added yet; record them
-after the day's active project work is reviewed. Class/instructor meetings remain separate and
+**Monday–Tuesday estimated subtotal: 9–10 hours.** Wednesday has an open session below; no net
+Wednesday hours are added until clock-out and excluded time are supplied. Class/instructor meetings remain separate and
 unmeasured. These entries have not been submitted to Project Peek by this chat.
+
+### Open session — Wednesday, October 7
+
+Quinton requested a retrospective clock-in of **9:00 a.m. America/Denver** for today, with clock-out
+when he finishes tonight. This records his supplied start; it does not credit the entire school-day
+background interval as active work or confirm the earlier provisional 3–4-hour estimate.
+
+| Date | Goals | Clock-in | Clock-out | Breaks / excluded time | Net active hours | Status |
+|---|---|---|---|---|---|---|
+| Wednesday, Oct 7, 2026 | G1, G2 | 9:00 a.m. MDT (UTC−06:00) | Pending — supply actual finish tonight | Pending — schoolwork, breaks, assignment work, unattended intervals and overlap | Pending | Open |
+
+At clock-out, record the day's project activities and reconcile pauses. Net hours equal the
+clock interval minus excluded time, counted once across all chats; if that reconstruction is
+uncertain, label the result as Quinton-estimated rather than timed. The Monday–Tuesday subtotal
+stays unchanged until today's net time is confirmed.
 
 | Day | Estimate feedback |
 |---|---|
@@ -98,6 +119,10 @@ Quinton was asked for his active school/home windows and breaks; revise this est
 | Oct 7–11 | Remaining week | Not yet recorded | Future work | Add actual session entries rather than counting planned budgets. |
 
 ### Correction history
+
+October 7, session-clock update: at Quinton's request, opened today's session at 9:00 a.m. Denver
+time. Finish and exclusions remain pending; no Wednesday hours or new weekly total were inferred.
+Adopted clock-in/pause/resume/clock-out recording for future human work sessions.
 
 October 7: Quinton estimated Monday at 4 hours and Tuesday at 5–6 hours and accepted the daily
 work descriptions. Added G1/G2 and the current 9–10-hour project subtotal. The older Tuesday

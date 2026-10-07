@@ -1,9 +1,16 @@
 # AGENTS.md — Agent Context
 
+> **October7 human clock-in:** Quinton requests today's session start09:00America/Denver/MDT,
+> clock-out when he finishes tonight. HOURS-LOG.md records an open window, not credited continuous
+> school-day/background time. Finish/pauses/exclusions/net hours pending; Mon4/Tue5–6 subtotal9–10
+> unchanged. Future human sessions use supplied clock-in/pause/resume/out; never agent/heartbeat
+> time or automatic21:00clock-out. User requests renewed discussion of purpose/pace before further
+> development. No DUR-05 implementation/native/scientific job is approved by this discussion.
+
 > **October7 project-hours record:** Quinton supplied/accepted personal estimates: MondayOct5
 > 4hours, TuesdayOct6 5–6hours; combined9–10hours, not timer measurements. HOURS-LOG.md under
 > docs/capstone/weeks now records G1training workflow/G2experiment-and-data planning plus daily
-> reviewed descriptions. Exact Tuesday portal value remains unselected; Wednesday not logged.
+> reviewed descriptions. Exact Tuesday portal value remains unselected; Wednesday net hours not logged.
 > Setup/Resources/short pitch, unattended runtime and overlapping time are excluded; class/meetings
 > remain separate. Older Tuesday4h/range3–5 assistant reconstruction is preserved/superseded,
 > not added. No Project Peek entries submitted by this chat. DUR-05 still unapproved; no job/push.
