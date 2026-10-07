@@ -3,6 +3,29 @@
 Prepared October 6, 2026 for Quinton Evans. Owner: this Codex imaging chat.
 Tracking: [W01-12](https://trello.com/c/fiOfVdBz).
 
+## October 7 current work and training sequence
+
+Quinton asked to plan the remaining steps and get them done. S01 is now the bounded coding
+scope: [closed session contract](../imaging/SEGMENTER-PRETRAINED-SESSION-CONTRACT-V1.md),
+[live result and granular sequence](SEGMENTER-PRETRAINED-SESSION-RESULTS-2026-10-07.md),
+[W01-25](https://trello.com/c/jEz77o2O). It explicitly includes tiny invented24³ CPU unit
+forwards/optimizer mechanics (12updates/24forwards per attempt maximum); no actual source,
+real arrays, native144³ request or scientific training. Four new files and routine pointers only.
+After delivery, S02 keeper, S03 executor and S04 dispatcher each need their concrete coding scope.
+Separate learning/native/recovery requests, actual values/cache integration, current approved
+volume/keeper budget and exact final launch follow; unit checks do not close those gates.
+
+Quinton confirms **no new publisher evidence**. Candidate-specific rights, pretraining AND
+model-selection separation remain unresolved. This is independent of the session engineering.
+R04 remains complete: B03 consumed/pass; never replay it. R05 actual and R06 scientific
+qualification remain incomplete. The source-evidence questions are already prepared for Quinton;
+no outreach is delegated. Keep the192 scratch duration question separate from the48 initialization
+comparison. There is no reliable SuPreM start date while source evidence and capacity are missing.
+
+Current checkout HEAD/cached origin/main are87fbaee, a newer “Massive update” commit. This chat
+did not create/push it. Preserve it and all296 protected pins; older publication-refusal records
+below describe the prior state, not permission for another push. Human hours stay unconfirmed.
+
 ## Latest October6 iteration handback
 
 **Current B03 handback:** explicit approval accepted; fresh request consumed/pass
@@ -17,7 +40,7 @@ boundary remain next dependencies. V01-I/V02-I always deny actual use; no follow
 Quinton approved reviewed meaningful commits and a provisional human-hours reconstruction this
 turn; the old no-Git paragraphs below are superseded only for that reviewed preservation scope.
 
-**Current B03 blocker:** automatic approval review rejected native preflight process creation
+**Historical B03 blocker, superseded by the pass above:** automatic approval review rejected native preflight process creation
 because Quinton's “Great, continue to the next” did not supply the requested named approval.
 Exact reason in [dispatch3 result](SUPREM-CHECKPOINT-METADATA-DISPATCH-V3-RESULTS-2026-10-06.md).
 B03 remains unprepared/unconsumed;zero actual source/output observation,controls,receipt or

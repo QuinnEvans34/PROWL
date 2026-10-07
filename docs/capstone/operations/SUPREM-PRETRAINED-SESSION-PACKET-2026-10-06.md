@@ -1,5 +1,11 @@
 # R03 draft — versioned pretrained session and independent recovery
 
+October7 update: Quinton requested planning and implementation toward training. S01 now has a
+[closed four-file invented session contract](../imaging/SEGMENTER-PRETRAINED-SESSION-CONTRACT-V1.md)
+and [current result/sequence](SEGMENTER-PRETRAINED-SESSION-RESULTS-2026-10-07.md). Tiny invented
+CPU mechanics are included only in that scope. S02–S04 and qualification requests below remain
+proposals; actual source acceptance remains unresolved. The October6 draft is preserved below.
+
 October6,2026. **Draft complete; implementation and qualification requests are not dispatched.**
 [Value/initialization packet](SUPREM-VALUE-AND-INITIALIZATION-PACKET-2026-10-06.md);
 [launch-readiness draft](SUPREM-TRAINING-LAUNCH-READINESS-2026-10-06.md).

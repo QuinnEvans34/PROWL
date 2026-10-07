@@ -1,5 +1,18 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 training preparation
+
+S01 is the new bounded engineering task selected after B03 metadata passed. See
+[the current readiness sequence](../operations/SUPREM-TRAINING-READINESS-QUEUE-2026-10-06.md),
+[S01 contract](../imaging/SEGMENTER-PRETRAINED-SESSION-CONTRACT-V1.md) and
+[S01 result](../operations/SEGMENTER-PRETRAINED-SESSION-RESULTS-2026-10-07.md).
+[W01-25](https://trello.com/c/jEz77o2O) tracks the four-file invented session/codec and tiny CPU
+unit mechanics. This supersedes earlier no-forward/update wording only for its explicitly bounded
+invented unit checks; actual source, real arrays, native/scientific requests and training remain
+separate. S02 keeper is the next concrete scope, followed by executor/dispatcher. Source evidence
+is still missing, confirmed by Quinton; actual R05 and R06 qualification are incomplete.
+Preserve completed T/R packets, consumed B03/D-335, ownership and all296 prior pins.
+
 ## Authority and objective
 
 On October 6 Quinton approved the bounded batch: implement the existing invented-only predicted-ROI

@@ -1,5 +1,20 @@
 # AGENTS.md — Agent Context
 
+> **October7 S01 delivered:**46native new checks pass11.312240s/2,155,593,728B sampled owned tree;
+> six tiny invented CPU optimizer calls/17forwards incl one fresh-process prediction,workers reaped.
+> Typed backbone/fresh-head/fresh optimizer,train-only sampler,dirty refusal,complete byte codec
+> and uninterrupted-live next-update/full-state recovery pass. All296priorpins/tail fixed; no
+> independent keeper/native144³/learning/actual-source claim. Quinton requested planning/bounded
+> implementation. Read `docs/capstone/operations/SEGMENTER-PRETRAINED-SESSION-RESULTS-2026-10-07.md`
+> and its closed four-file session contract. S01 includes tiny invented24³/CPU unit mechanics only;
+> original296pins/scratch consumers/experiment tail fixed. Source rights/pretraining AND selection
+> separation remain unresolved; Quinton confirms no new evidence. B03 consumed/pass, no replay.
+> Actual values/cache bridge, native/scientific learning/recovery, current keeper/resource fit and
+> exact launch remain separate. No keeper/executor/dispatcher follow-on from the S01 handback.
+> Preserve newer base87fbaee “Massive update”; this chat did not create/push it. Cached origin/main
+> matches that base; historical publication refusal is not new push authority. Meaningful local
+> completed-work commits remain authorized. Human hours unconfirmed; runtime excluded.
+
 > **October6 meaningful commit practice:** Quinton requested multiple logical completed-work
 > commits and ongoing commits for instructor-visible GitHub activity. Nine reviewed packet/course
 > commits delivered; final tracking checkpoint/normal publication now being verified. Follow
