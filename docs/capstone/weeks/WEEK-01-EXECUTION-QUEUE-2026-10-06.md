@@ -1,5 +1,40 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 current: I03 and real preparation complete; final R01 decision
+
+[PREP-01 finished](../operations/SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md).
+P01's private experiment-ID refusal is retained; P02 corrected only that metadata field and
+passes the unchanged guards. Aggregate five CPU constructions/zero forwards,updates or payloads;
+both workers reaped. Cohort/cache ancestry and14original target metadata checks passed. All402
+producing pins match/399prior unchanged. Full4GiB internal-phase reservation fits the approved
+26GiB/original-baseline+8GiB budgets and100GiB free floor.
+
+[W01-28](https://trello.com/c/3oahjFM6) moves to To-Do/incomplete awaiting Quinton's final
+scientific launch decision for the [exact R01 packet](../operations/SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md).
+Request SHA256 `60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8`;
+six train/2514terminal-only,192updates/253forwards+30cold/0cold updates,50original targets/0CT,
+unchanged DUR-01,60min/12GiB/fixed budget. No scientific approval, native areas/writer/grant/job.
+Inactive launch helper reviewed as source only. No model resume or checkpoint acceptance revision.
+Exact next: actual R01 answer, request-bound authority, fresh admission and independent frozen
+command review before one producer/conditional cold. No additional engineering required; no
+successful check/job replay or automatic launch from scheduling. Status in each human response;
+quiet unchanged dependencies. Hours/ownership/roles/holds stay fixed; no public push.
+
+## October 7 latest: I03 passed; approved PREP-01 underway
+
+Quinton approved fresh I03 plus the PREP-01 dependency amendment and requests readiness status
+in each human-facing response. [I03 handback](../operations/SEGMENTER-DURATION-INFERENCE-I03-RESULTS-2026-10-07.md):
+64affected model-free checks pass;402pins match/399other producing paths unchanged. One native
+I03passes81.346871seconds/5,572,575,232B owned RSS/reaped; five checkpoint predictions exact,
+25masks/views validated,30forwards/0updates/1,554,717,069B62retained invented artifacts.
+Separate inference-only certificate recorded; optimizer resume remains unqualified.
+
+[W01-28](https://trello.com/c/3oahjFM6) is In-Progress for the approved metadata/control preparation;
+fresh initial drive/AC/idle checks passed. One bounded PREP-01 supervisor is running; no second
+invocation, patient/cache payload opens, job grant, writer/areas or scientific launch.
+Read its result before advancing. Original budget/source roles/holds/failures/human hours fixed;
+final real request and scientific launch decision remain pending. No public push.
+
 ## October 7 latest: I02 pre-admission failure; fresh I03 decision pending
 
 Quinton approved corrected I02 plus conditional PREP-01. [I02 handback](../operations/SEGMENTER-DURATION-INFERENCE-I02-RESULTS-2026-10-07.md):

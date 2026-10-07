@@ -1,5 +1,21 @@
 # Tonight's path to a controlled training run — October 7, 2026
 
+**Current finish:** I03 and PREP-01 completed. Read the [preparation handback](SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md)
+and [exact R01 launch packet](SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md).
+The canonical real request `60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8`
+passes existing guards; the full resource reservation fits. Five preparation CPU constructions,
+zero forwards/updates/payloads; all workers reaped. No scientific approval, areas, writer or job.
+**Only remaining decision:** final approval of one R01 real producer and conditional cold.
+Fresh admission/control review takes about5–10 minutes after that answer; producer about25–45
+minutes,60-minute total hard cap. Original estimates and earlier failures below remain historical.
+
+**Latest approved continuation:** Quinton approved the fresh I03 replacement and PREP-01
+dependency amendment. [I03 passed](SEGMENTER-DURATION-INFERENCE-I03-RESULTS-2026-10-07.md):
+five exact probe predictions,25exact masks/views,30forwards/0updates; inference-only certificate
+reviewed. PREP-01's bounded metadata/control check is underway; scientific launch still separate.
+Include readiness status in each human-facing response. Earlier failure/proposal paragraphs
+below remain historical; preserve their evidence and scope rather than replaying them.
+
 **Latest result:** the I02 amendment and64affected checks completed; the reviewed I02 helper
 stopped before payload/model admission because the request writer omitted the canonical trailing
 newline. I02 is retired, with no certificate. See [the result and fresh I03 replacement proposal](SEGMENTER-DURATION-INFERENCE-I02-RESULTS-2026-10-07.md).

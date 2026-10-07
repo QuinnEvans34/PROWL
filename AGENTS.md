@@ -1,5 +1,49 @@
 # AGENTS.md — Agent Context
 
+> **October 7 I03 and PREP-01 complete; R01 launch decision pending:** Quinton approved I03
+> and conditional real preparation. I03 passed 30 forwards/0 updates; separate inference-only
+> certificate 582c9b62 remains pinned, optimizer resume unqualified. PREP P01 retained the private
+> experiment-ID refusal, 175.292223s/1,348,026,368B/reaped/2 CPU constructions; P02 corrected only
+> the ID and passed 2.053071s/396,509,184B/reaped/3 constructions. Five total of eight permitted;
+> zero forwards/updates/source or cache payload bytes. Cohort/cache ancestry and14 target metadata
+> checks passed; unchanged metadata checks not replayed. Current402 pins match/399 prior fixed.
+> Read SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md and R01-LAUNCH-PACKET under operations.
+> Exact frozen scientific request60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8:
+> DURATION-CAP-EXP-015-192/DUR_REAL_20261007_R01, six train/2514 terminal-only,192 updates/253
+> forwards +30 cold forwards/0 updates,50 original targets/0CT, unchanged DUR-01,60min/12GiB.
+> Backup19,624,209,117B plus full4GiB reservation23,919,176,413B fits fixed26GiB and original
+> baseline+8GiB ceilings; reserved internal free110,861,144,064B exceeds100GiB floor.
+> No scientific approval/grant/native areas/writer/job. Inactive helper source reviewed only,
+> hash0e6a17e848eaa43f62d91b6863cbd4680579b7c80ec98f9d457716fdf4c45cda; no invocation.
+> Exact next: obtain final R01 scientific answer, then request-bound authority/fresh admission/
+> independent frozen-command review/one producer and conditional cold. Do not repeat I03/PREP/
+> successful checks or infer launch approval from a heartbeat. All owned workers finished/reaped.
+> Status in each human response; quiet unchanged scheduling. Budget/roles/holds/ownership/hours
+> fixed; reviewed local preservation allowed, no public push. Older running/pending text historical.
+
+> **October 7 I03 passed; PREP-01 running:**64affected model-free checks pass2.394679166s/
+> 378109952B/reaped;402pins/399other fixed. One reviewed I03 passes81.346870958s/5572575232B/
+> 1103samples/reaped;30forwards/0updates/1554717069B62retained invented artifacts. Five checkpoint
+> probe differences0.0;25masks exact/25views validated. Certificate582c9b62f0096eacf241eb8cb76266b11da996f008136c0e7ccebd50b58aaf63
+> is inference-only; original exact-replay failure and resume denial preserved. Read I03 result.
+> Approved PREP-01 native metadata/control check now running;≤8freshCPUconstructs/0forwards/
+> 0updates/300s/2GiB; payload opens denied/no grant/areas/writer/scientific job. Monitor only its
+> owned supervisor/session; do not start a second invocation. Fresh initial drive/AC/idle passed;
+> backup19624209117B/internalfree115221495808B. Binding/finalrequest result pending. Status in each
+> human response; quiet unchanged heartbeat.26GiB budget/hours/roles/holds/ownership fixed/no push.
+
+> **October 7 I03 + PREP-01 dependency approved/start:** Quinton answered “Yes, I approve. I
+> would also like a status update after each response so I know how close we are to training.”
+> to the exact I03 replacement/conditional PREP-01 question. Same three binding/test/contract
+> paths only;402before/399other fixed;64affected model-free checks≤90s/2GiB. Official canonical
+> writer plus complete metadata/helper/authority preflight precede one independently reviewed
+> I03,30forwards/0updates/600s/12GiB/2GiBreads/8MiBoutputs/100GiBfloor. Only on full I03 success
+> proceed selected PREP-01≤8freshCPUvalidator constructions/0forwards/0updates/300s/2GiB with
+> source/storage metadata and inactive controls; no actual patient/cache arrays or scientific
+> launch. Return exact real request for that decision. Include readiness status in each human
+> response; routine unchanged scheduled checks remain quiet. Preserve budgets/hours/old failures,
+> roles/ownership; routine tracking/local commits allowed, no public push or producer repeat.
+
 > **October 7 I02 finished/pre-admission failure:** approved three-path amendment delivered;
 > 64affected model-free checks pass2.457015708s/373194752B, workers reaped;402pins/399other fixed.
 > One reviewed I02 invocation refused raw canonical bytes after1.820391792s/371949568B/reaped:
