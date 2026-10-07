@@ -110,8 +110,8 @@ def validate_readiness(r):
         require(r['readiness']['acceptance_sha256']==old.CPU_PIN,"Frozen numerical readiness identity")
     elif r['readiness']['kind']=='qualified_duration_inference_v1':
         import math
-        base=REPO/'outputs/prowl/SEGMENTER-DURATION-DUR06-20261007'
-        job=REPO/'outputs/prowl/SEGMENTER-DURATION-INFERENCE-I01-20261007'
+        base=REPO/'outputs/prowl/SEGMENTER-DURATION-DUR06-I02-20261007'
+        job=REPO/'outputs/prowl/SEGMENTER-DURATION-INFERENCE-I02-20261007'
         a=json.loads(read_control(REPO/'outputs/prowl/SEGMENTER-DURATION-INFERENCE-READINESS.json',r['readiness']['acceptance_sha256']))
         fields={'state','source_pins','runtime','completed_steps','primary_reads_blocked','training_resume_qualified',
                 'next_update_exact','continuation_status','all_native_exports_exact','cold_original_reads','model_calls',
@@ -153,7 +153,7 @@ def validate_readiness(r):
                 and all(type(tests[k]) is int and tests[k]==0 for k in ('model_forwards','optimizer_calls','actual_arrays')),
                 'Inference readiness unit qualification absent')
         recovery=json.loads(read_control(job/'result.json',a['recovery_sha256']))
-        require(recovery['state']=='passed_duration_inference_v1' and recovery['attempt']=='DUR_INFERENCE_20261007_I01'
+        require(recovery['state']=='passed_duration_inference_v1' and recovery['attempt']=='DUR_INFERENCE_20261007_I02'
                 and recovery['source_pins']==r['source_pins'] and recovery['runtime']==r['runtime']
                 and recovery['producer_sha256']==a['producer_sha256'] and recovery['origin_request_sha256']==a['origin_request_sha256']
                 and recovery['lineage_sha256']==a['lineage_sha256'] and recovery['tests_sha256']==a['tests_sha256']

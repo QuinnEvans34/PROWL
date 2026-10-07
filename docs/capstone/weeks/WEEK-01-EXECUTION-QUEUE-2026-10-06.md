@@ -1,5 +1,20 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 latest: I02 pre-admission failure; fresh I03 decision pending
+
+Quinton approved corrected I02 plus conditional PREP-01. [I02 handback](../operations/SEGMENTER-DURATION-INFERENCE-I02-RESULTS-2026-10-07.md):
+three producing-path amendments delivered;64affected model-free checks pass;402pins match,
+399other paths unchanged. One reviewed native invocation stopped before output/consumption/
+payload/model/storage admission because the agent's request writer omitted the canonical JSON
+trailing newline. Correct attempt/state;1.820392seconds/371,949,568B owned RSS, worker reaped.
+I02 retired/not disk-consumed, no replay or certificate. Four new metadata checks demonstrate
+the one-byte cause and qualify the official canonical writer. No real preparation occurred.
+
+Fresh I03 same-bound replacement and PREP-01 dependency amendment are concrete inactive
+proposals. [W01-28](https://trello.com/c/3oahjFM6) returns To-Do/incomplete for Quinton's decision;
+no actual I03 source changes, controls or job. No scientific launch or full producer repeat.
+Approved26GiB budget/roles/holds/replay failure/human hours remain fixed; no public push.
+
 ## October 7 current: DUR-06 delivered; fresh I02 decision pending
 
 Quinton requested a plan before execution. [Tonight's two-step plan](../operations/TONIGHT-TRAINING-EXECUTION-PLAN-2026-10-07.md)

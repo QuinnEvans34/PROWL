@@ -40,7 +40,7 @@ def evidence(monkeypatch):
     lineage=dict(state='reviewed_DUR06_function_scope',source_pins=pins,prior_source_pins=prior,origin_source_pins=origin['source_pins'],amended=amended,outside_approved_regions_identical=True,numerical_recipe_unchanged=True,original_replay_assertion_unchanged=True)
     tests=dict(state='qualified_model_free_DUR06',source_pins=pins,passed=1,model_forwards=0,optimizer_calls=0,actual_arrays=0)
     recovery={k:deepcopy(a[k]) for k in ('source_pins','runtime','producer_sha256','origin_request_sha256','lineage_sha256','tests_sha256','primary_reads_blocked','training_resume_qualified','checkpoints','probe_checks','native_checks','view_checks')}
-    recovery.update(state='passed_duration_inference_v1',attempt='DUR_INFERENCE_20261007_I01',model_calls=dict(forwards=30,optimizer_calls=0),original_arrays=0,third_party_weights=0,scientific_launch=False,payload_member_bytes=100,seconds=1.)
+    recovery.update(state='passed_duration_inference_v1',attempt='DUR_INFERENCE_20261007_I02',model_calls=dict(forwards=30,optimizer_calls=0),original_arrays=0,third_party_weights=0,scientific_launch=False,payload_member_bytes=100,seconds=1.)
     rows={'SEGMENTER-DURATION-INFERENCE-READINESS.json':a,'frozen-manifest.json':origin,'protected-pins-post-repair.json':prior,'source-lineage.json':lineage,'unit-qualification.json':tests,'result.json':recovery}
     def read(path,pin,*args):
         name=Path(path).name
@@ -145,3 +145,20 @@ def test_request_inference_scope_denial(scientific_request,fault):
     elif fault=='role':request['policy']['report_case_id']='invented-0'
     else:request['model_calls']['cold']['optimizer_calls']=1
     with pytest.raises((ValueError,KeyError)):engine.validate_request(request)
+
+
+def test_i02_result_path(evidence,monkeypatch):
+    r,rows=evidence;old=launch.read_control;seen=[]
+    def read(path,pin,*args):
+        if Path(path).name=='result.json':
+            seen.append(str(path))
+            assert Path(path).parent.name=='SEGMENTER-DURATION-INFERENCE-I02-20261007'
+        return old(path,pin,*args)
+    monkeypatch.setattr(launch,'read_control',read)
+    launch.validate_readiness(r)
+    assert len(seen)==1
+
+
+def test_retired_i01_not_accepted(evidence):
+    r,rows=evidence;rows['result.json']['attempt']='DUR_INFERENCE_20261007_I01'
+    with pytest.raises(ValueError,match='Inference cold qualification absent'):launch.validate_readiness(r)

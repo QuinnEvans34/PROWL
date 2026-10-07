@@ -1,5 +1,28 @@
 # AGENTS.md — Agent Context
 
+> **October 7 I02 finished/pre-admission failure:** approved three-path amendment delivered;
+> 64affected model-free checks pass2.457015708s/373194752B, workers reaped;402pins/399other fixed.
+> One reviewed I02 invocation refused raw canonical bytes after1.820391792s/371949568B/reaped:
+> preparation omitted canonical trailing newline (47195vs47196B). Correct attempt/state;
+> no output namespace, consumption, storage/AC/idle/lock admission, payload or model work.
+> I02 retired/not disk-consumed/no replay. Read SEGMENTER-DURATION-INFERENCE-I02-RESULTS-2026-10-07.md.
+> Four new failure-specific metadata checks qualify official canonical writer; no actual new job.
+> Fresh I03 same three-path/64affected-check/30forward0update replacement plus conditional
+> PREP-01 dependency amendment is a concrete unapproved proposal. No I03 patches/controls/job
+> or real preparation; obtain decision first. No certificate/scientific launch. Budget/hours/roles/
+> old failures fixed; W01-28ToDo/incomplete. Meaningful local preservation allowed, no public push.
+
+> **October 7 corrected I02 + conditional PREP-01 approved/start:** Quinton answered “Yes, I
+> approve. Lets start getting this done so we can launch in an hour or two.” to the two-step
+> TONIGHT-TRAINING-EXECUTION-PLAN-2026-10-07.md and named approval question. Apply only the three
+> I02 binding/test/contract amendments; preserve402before/399other pins and old I01 evidence.
+> Qualify64affected model-free checks≤90s/2GiB, then independently review one fresh I02 under
+> unchanged30forwards/0updates/600s/12GiB/2GiBreads/8MiBoutputs/100GiBfloor. Only on full success
+> issue inference-only certificate and proceed into metadata/control PREP-01;≤8freshCPUvalidator
+> constructions/0forwards/0updates/300s/2GiB, no patient/cache arrays. No scientific launch grant;
+> return the frozen real packet for that decision. Existing26GiB budget/failed replay/roles/holds
+> and human-hours pause/resume stay fixed. Routine tracking/local preservation included; no push.
+
 > **October 7 human pause/resume:** Quinton reports stopping at15:15MDT and returning “now”;
 > current time22:27:06UTC records approximate16:27MDT resumption. HOURS-LOG.md now records
 > the1h12pause as excluded; original09:00start preserved. Finish/other exclusions/net human

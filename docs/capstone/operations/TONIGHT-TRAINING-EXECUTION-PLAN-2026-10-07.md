@@ -1,9 +1,19 @@
 # Tonight's path to a controlled training run — October 7, 2026
 
-**Plan prepared for Quinton's review; execution approval pending.** Quinton asked for the steps,
+**Latest result:** the I02 amendment and64affected checks completed; the reviewed I02 helper
+stopped before payload/model admission because the request writer omitted the canonical trailing
+newline. I02 is retired, with no certificate. See [the result and fresh I03 replacement proposal](SEGMENTER-DURATION-INFERENCE-I02-RESULTS-2026-10-07.md).
+Conditional PREP-01 has not started. The original timeline below remains a conditional estimate;
+the failure adds replacement review/approval time. No scientific launch has been approved.
+
+**Approved execution start:** Quinton answered “Yes, I approve. Lets start getting this done so
+we can launch in an hour or two.” to corrected I02 and conditional PREP-01. Scientific launch
+remains a separate final decision. The original plan below is preserved as the approved scope.
+
+**Original plan prepared for Quinton's review.** Quinton asked for the steps,
 their purpose, estimated duration and a realistic launch window before proceeding. This plan
 selects corrected I02 followed, only on success, by real-run preparation. It does not record a
-new approval, prepare actual controls or authorize scientific execution.
+scientific launch approval. No actual scientific controls existed at plan creation.
 
 ## Current position and why these two steps matter
 

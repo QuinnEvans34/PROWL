@@ -70,3 +70,27 @@ N02/D01/D02 failure/consumption and all snapshots. If I01 fails, no retry or sci
 If it passes, review fresh real-data source/storage/resource controls and then ask for the exact
 scientific launch decision. An interrupted pilot is retained for evaluation and marked incomplete;
 training resume remains unqualified. No automatic launch, indefinite queue or tolerance revision.
+
+
+## Approved fresh replacement I02
+
+Quinton answered “Yes, I approve. Lets start getting this done so we can launch in an hour or two.”
+to corrected I02 plus conditional PREP-01 on October 7. This authorizes this replacement after the retained
+I01 hash-reader keyword defect is fixed and qualified. I01 remains failed, operationally retired
+and not disk-consumed; preserve its controls, helper, failure and resources. The metadata hash
+reader uses the literal sha256 keyword; ten failure-specific invented metadata checks remain
+qualified. Snapshot the current402pins and the launcher/test/contract before this amendment.
+Only the inference readiness base/job/attempt literals change in validate_readiness: fresh
+DUR06-I02 receipt, INFERENCE-I02 result and DUR_INFERENCE_20261007_I02 attempt. No numerical,
+optimizer, source eligibility, tolerance, quality, capacity, request permissions or cold replay
+assertion changes. Update the invented evidence fixture to I02 and add exact-path/I01-denial
+checks:64 changed/new model-free cases,90seconds/2GiB,zero model/array/optimizer work. Retain
+the old62-case qualification and every prior snapshot; do not rerun it as unchanged evidence.
+The new402closure changes these three paths only;399prior paths remain exact. New lineage and
+unit receipts live exclusively under SEGMENTER-DURATION-DUR06-I02-20261007; never overwrite
+DUR06's original receipts. Independently freeze/review one fresh I02 request/helper/inventory
+under the original30forward/zero-update,600second/12GiB,2GiB reads/8MiB outputs/100GiB floor
+limits. Internal metadata/AC/MPS/idle/lock preflight must pass anew. No fresh source arrays or
+backup copies are granted. A failed I02 stops without retry; full success may publish only the
+distinct inference-only certificate after supervisor exit/reaping and current-source review.
+Scientific preparation/launch remain separate; no old producer repeat or training resume.
