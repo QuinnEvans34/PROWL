@@ -1,0 +1,63 @@
+# Dedicated capstone session/executor. Development-only SuPreM use; cohort acceptance pending.
+version: 1
+name: full_segmenter_suprem_mac_01
+base_config: configs/level45.yaml
+recipe:
+  device: mps
+  full_segmenter:
+    output_dir: /Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01
+    session:
+      tensor_shape:
+      - 144
+      - 144
+      - 144
+      seed: 42
+      learning_rate: 0.0001
+      weight_decay: 1.0e-05
+      warmup_steps: 500
+      lr_schedule: warmup_cosine
+    geometry:
+      component: segmenter-geometry-v2
+      tensor_shape:
+      - 144
+      - 144
+      - 144
+      sampling_mm: 1.0
+      margin_mm: 10.0
+      max_source_voxels: 256000000
+      max_sampling_voxels: 16000000
+      hu_window:
+      - -100.0
+      - 250.0
+      roi_selection: pancreas_only
+      image_interpolation: linear
+      target_interpolation: nearest
+      orientation: physical_RAS
+      affine_support: finite_invertible_affine
+      padding: symmetric_zero
+    cache_dir: /Volumes/PROWL-Data/PROWL/scratch/full-segmenter-cache-mac-01
+    cache_max_bytes: 34359738368
+    backup_dir: /Users/quintonevans/PROWL-Backups
+    backup_cap_bytes: 25931859228
+    rss_bytes: 12884901888
+cohort:
+  manifest: outputs/prowl/full-segmenter-inputs-mac-20261007/manifest.csv
+  train_ids: outputs/prowl/full-segmenter-inputs-mac-20261007/train.txt
+  development_ids: outputs/prowl/full-segmenter-inputs-mac-20261007/development.txt
+  original_train_ids: outputs/splits/train.txt
+  original_development_ids: outputs/splits/val.txt
+  test_ids: outputs/splits/test.txt
+  review: null
+initialization:
+  kind: suprem
+  checkpoint: pretrained_weights/supervised_suprem_segresnet_2100.pth
+  sha256: 2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3
+  source_review: outputs/prowl/full-segmenter-inputs-mac-20261007/suprem-development-source-review.json
+run:
+  max_updates: 24000
+  validate_every: 2000
+  checkpoint_every: 500
+  log_every: 25
+  cache: disk
+  max_seconds: 86400
+  min_free_bytes: 107374182400

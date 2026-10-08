@@ -69,6 +69,22 @@ def test_review_does_not_make_missing_sources_ready(experiment):
     assert not E.preflight(load(experiment), inspect_payload_paths=True)['ready']
 
 
+def test_development_source_use_does_not_certify_separation(experiment):
+    spec, _, root = experiment
+    review = root/'development-source.json'
+    spec['initialization'] = dict(kind='suprem', checkpoint=str(root/'unused.pth'),
+        sha256='a'*64, source_review=str(review))
+    review.write_text(json.dumps(dict(decision='accepted_for_development', evaluation_scope='development_only',
+        checkpoint_sha256='a'*64, protected_roles_sha256={k:E.sha256(spec['cohort'][k])
+        for k in ('original_train_ids','original_development_ids','test_ids')},
+        evidence=['invented source review'], user_instruction='invented explicit source choice',
+        limitations=['Pretraining membership unverified'])))
+    cfg=load(experiment)
+    assert not E.preflight(cfg)['ready']
+    report=E.preflight(cfg,source_review_mode='development_use')
+    assert report['ready'] and report['source_limitations']==['Pretraining membership unverified']
+
+
 def test_isolated_outputs_and_no_reuse(experiment):
     cfg = load(experiment)
     with pytest.raises(ValueError, match='source path'):

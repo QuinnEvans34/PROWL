@@ -3842,3 +3842,35 @@ firstloss exact,small differences beginupdate2 and later diverge. Root cause and
 significance unproven;no extra model/optimizer/sourcearray/weight calls for that review. No
 longer-training failure claim,model promotion,generalization or negative specificity. Next discuss
 prospective stop design and coverage/FP/history tradeoff before a new scope. [Reviewed handback](capstone/operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md).
+
+### 2026-10-07 — FULL-SEG-MAC-001 / full_segmenter_suprem_mac_01 — preparation in progress
+
+Quinton requested a long experiment through the new capstone session/executor, selected SuPreM,
+and required broader native-size/tilted-geometry support before launch. This is a fresh development
+experiment, not R01 continuation, EXP-24 reproduction, or a published PanTS benchmark claim.
+
+Planned recipe: capstone SegResNet (16 initial filters, three-class fresh head), strict transfer from
+the publisher's `supervised_suprem_segresnet_2100.pth` (SHA-256 `2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3`),
+normalized v5 loss, seed42, 144³ pancreas-only physical ROI/10mm margin/1mm intermediate sampling,
+geometry v2 including tilted affines, AdamW LR0.0001/weight decay0.00001,500-update warmup/cosine,
+24,000 updates, development every2,000, initial/latest/best checkpoints and saves every500.
+No update48 recall stop is inherited. Stop on invalid inputs/numerics, resource/IO/backup failure,
+or completion of the configured horizon. Native optimizer continuation is not qualified/enabled.
+
+Candidates are1,412 original-role training members (706 historical positive/706 historical empty)
+and80 original-role development members (40/40, deterministic seed42). Final membership will be
+frozen after the complete real content/geometry audit; every failed case is an explicit exclusion.
+Empty references remain annotation-background targets, not verified healthy patients. No original
+test arrays are requested. The primary selection metric is positive-case macro lesion Dice on the
+tensor grid; native full-scan evaluation remains separate. Pretraining/selection scan membership is
+unverified and recorded as a limitation of this development-only source use.
+
+Engine: `scripts/train_full_segmenter.py` → `segmenter_full_session_v1` /
+`segmenter_full_executor_v1`; not `scripts/train.py`. Current allocation:24h upper limit/12GiB
+owned worker RSS/32GiB external derived cache/100GiB free floors, external primary checkpoints
+with verified internal backups under the existing total ceiling. This is not an ETA.
+
+Real preprocessing is running at `outputs/prowl/full-segmenter-content-mac-20261007/`; it performs
+no model forwards or optimizer updates. Model training has **not started** in this registration.
+The separate invented native profile and actual CPU SuPreM import are engineering evidence only.
+[Implementation and evidence](training-full-segmenter.md).

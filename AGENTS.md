@@ -1,5 +1,33 @@
 # AGENTS.md — Agent Context
 
+> **October 7 full capstone engine / real cache preparation LIVE:** Quinton requires the NEW
+> session/executor architecture and explicitly chose broader geometry support before the first long
+> run. `scripts/train_full_segmenter.py` now runs `segmenter_full_session_v1` / `segmenter_full_executor_v1`,
+> not the legacy trainer. Geometry v2 supports tilted affines and up to256M native voxels. Candidate
+> inputs:1412train/80development,allpaths present,currentoriginalroles separated,no test arrays and
+> knownholds absent. V1 rejected222sizes/26tilts/4label-grid conflicts;v2admits all1492sizes/affines,
+> fourlabel-grid conflicts remain held. Actual content/cache job LIVE in owned execsession29751,
+> `outputs/prowl/full-segmenter-content-mac-20261007/`; monitor only,do not start a second copy.
+> Explicit setup/broader-support request plus native approval authorizes this selected1492case
+> preparation:2h/12GiBworker/32GiBexternalderivedcache/100GiBfloor,no models/weights/updates/testreads.
+> Producer hashes and exact source snapshots retained there; subsequent launcher changes do not
+> rewrite its producing evidence. Candidate audit cannot supply optimizer batches. Complete ledger
+> and reaped worker precede cohort compilation; failures become explicit exclusions,empty references
+> are annotation-background targets only,never automatically verified healthy. New prepared provider
+> verifies accepted cache members and prevents expensive duplicate preprocessing.
+> Native invented a02 profile passed2MPSupdates/4forwards,largest201785580voxel tiltedshape,
+> exact checkpoint evaluation restore,13.0186s/5101207552B owned peak/reaped;no native optimizer-resume
+> claim. First sandbox invocation failed /bin/ps; no approval-review rejection. Actual SuPreM CPU
+> strict83tensorimport/finiteness/freshheadcheck passed0forwards/updates. Publisher SHA matches2db81dc0.
+> User's SuPreM choice after uncertainty disclosure is recorded as accepted_for_development,with
+> pretraining/selection membership explicitly unverified; this does not satisfy the older separation
+> gate or certify a clean PanTS comparison. See docs/training-full-segmenter.md. Template24k,
+> validate2000/checkpoint500/24h ceiling/12GiB uses independent externalcheckpoint/internalbackup
+> paths under existing backup ceiling;no scientific run launched yet. Native full-data integration
+> and launch still follow preparation/admission;no micro-run or benchmark claim by default.
+> Keep R01 and earlier frozen consumers retired/unchanged. Preserve unrelated MACHINES.md and
+> machine_inventory.ps1. No public push or agent/runtime human-hour credit.
+
 > **October 7 full-run architecture correction:** Quinton explicitly requested fixing the
 > architecture for long experiments, then selected "Use SuPreM; resolve its source question first."
 > `scripts/train.py --experiment` now uses `src/training/experiment_config.py` and YAML-controlled

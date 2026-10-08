@@ -91,9 +91,11 @@ def load_experiment(path):
     return cfg
 
 
-def preflight(cfg, *, inspect_payload_paths=False):
+def preflight(cfg, *, inspect_payload_paths=False, source_review_mode='separation'):
     """Aggregate missing prerequisites. Path inspection is explicit; no payload decode/hash."""
-    spec = cfg['_experiment']; cohort = spec['cohort']; errors = []; groups = {}; pins = {}
+    if source_review_mode not in ('separation', 'development_use'):
+        raise ValueError('Unknown source review scope')
+    spec = cfg['_experiment']; cohort = spec['cohort']; errors = []; groups = {}; pins = {}; source_limitations = []
     for key in ('train_ids', 'development_ids', 'original_train_ids', 'original_development_ids', 'test_ids'):
         try:
             path = resolve(cohort[key]); groups[key] = set(ids(path)); pins[key] = sha256(path)
@@ -135,7 +137,12 @@ def preflight(cfg, *, inspect_payload_paths=False):
             if not init['source_review']: raise ValueError('SuPreM source/selection separation review is pending')
             review = json.loads(resolve(init['source_review']).read_text())
             expected = {k: pins.get(k) for k in ('original_train_ids', 'original_development_ids', 'test_ids')}
-            if (review.get('decision') != 'accepted' or review.get('checkpoint_sha256') != init['sha256']
+            accepted = review.get('decision') == 'accepted'
+            if source_review_mode == 'development_use' and review.get('decision') == 'accepted_for_development':
+                accepted = (review.get('evaluation_scope') == 'development_only' and
+                            bool(review.get('user_instruction')) and bool(review.get('limitations')))
+                source_limitations = review.get('limitations', [])
+            if (not accepted or review.get('checkpoint_sha256') != init['sha256']
                     or review.get('protected_roles_sha256') != expected or not review.get('evidence')):
                 raise ValueError('SuPreM review must bind checkpoint and protected roles and cite source evidence')
             if inspect_payload_paths and not resolve(init['checkpoint']).is_file(): errors.append('SuPreM checkpoint unavailable')
@@ -145,7 +152,8 @@ def preflight(cfg, *, inspect_payload_paths=False):
     if Path(cfg['paths']['output_dir']).exists(): errors.append('Output already exists; choose a new run name')
     return {'ready': not errors, 'errors': errors, 'input_sha256': pins,
             'train_cases': len(groups.get('train_ids', [])), 'development_cases': len(groups.get('development_ids', [])),
-            'max_updates': spec['run']['max_updates'], 'payload_paths_checked': inspect_payload_paths}
+            'max_updates': spec['run']['max_updates'], 'payload_paths_checked': inspect_payload_paths,
+            'source_review_mode': source_review_mode, 'source_limitations': source_limitations}
 
 
 def apply_arguments(args, cfg):

@@ -1,5 +1,9 @@
 # Configurable full training
 
+**Superseded for the requested new-architecture run:** this document describes the earlier adapter
+around the legacy trainer. Use [Full capstone session training](training-full-segmenter.md) and
+`scripts/train_full_segmenter.py` for Quinton's subsequently requested session/executor path.
+
 The full-run entry point reuses the working `scripts/train.py` numerical loop through a versioned
 experiment YAML. The six-case/192-step duration pilot remains historical and separate. A new full
 run does not inherit its inference certificate, native scoring, backup qualification or stop policy.
