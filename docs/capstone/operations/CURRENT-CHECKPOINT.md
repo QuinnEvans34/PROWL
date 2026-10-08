@@ -1,5 +1,36 @@
 # Current PROWL checkpoint
 
+**October 7 latest scientific result: R01 stopped at48 and recovered.**
+[Reviewed handback](SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md). The approved actual run made
+48updates/68forwards, eight exposures per train member. Lesion recall0.691498 fell below the
+0.803063 floor; case3/26/5821 component/lesion-recall checks failed. LesionDice0.058952 versus
+D-3350.055142 and mean lesion FP111.866668mL versus162.628931 did not satisfy coverage. Six
+components hit/tiny2973recall1.0; all interim FP and pancreas coverage checks passed. The requested
+192duration comparison is incomplete;2514not evaluated. Keep D-335 as the comparison baseline.
+
+Cold independently restored16stopped artifacts with0forwards/updates/original reads; full192
+qualification/resume remain false. Producer/cold/helper finished,workers reaped/sharedlock
+released; no active/pending job or automatic retry.12originaltarget reads/0CT;backup20,031,773,929B
+and fixed26GiB/originalbaseline+8GiB/freefloor preserved;402producing pins fixed. Six sheets and
+native arithmetic reviewed. Kept histories have identical48member/batch hashes;firstloss matches,
+small differences startupdate2 and later diverge; cause not established. Next discuss scientific
+stop design/coverage tradeoff and divergence before a fresh concrete run. No demonstrated defect
+requires new coding now. Hours/roles/holds/retrieval ownership remain fixed;local preservation only.
+Older active-run/pending-approval/20GiB paragraphs below are historical snapshots.
+
+**October 7 actual R01 training is running:** Quinton explicitly approved the
+[exact scientific packet](SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md); fresh native
+admission and independent frozen-control review passed. At17:52:51MDT the journal confirms
+four completed real optimizer updates. [Active handback](SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md).
+One owned helper/session12310 handles producer and conditional cold; first native screen48
+pending. Fresh scratch192 uses the same six training members/2514terminal report-only, v5recipe,
+unchanged DUR-01,50original targets/0CT,60min/12GiB and fixed approved26GiB/two-phase8GiB budget.
+I03 inference-only recovery passed; optimizer resume remains unqualified. No completion/model
+promotion or broader performance claim. Preserve D-335 as the comparison baseline, earlier
+failures/consumed requests and every original role/hold. No automatic retry/resume/extension/sweep.
+Older D-335-as-latest-current and fixed20GiB wording below describes historical checkpoints.
+Human hours are separately recorded in [HOURS-LOG](../weeks/HOURS-LOG.md); no runtime credit.
+
 **October6 imaging/development checkpoint:** [B03 metadata handback](SUPREM-CHECKPOINT-METADATA-DISPATCH-V3-RESULTS-2026-10-06.md)
 records one explicitly approved consumed/pass actual inspection: identity/full83float32 signature
 compatible, originalcuda:0/CPUfake/metastorage;2.599347s/348,815,360B sampled aggregate,worker

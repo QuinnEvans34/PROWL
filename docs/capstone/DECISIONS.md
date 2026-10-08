@@ -1972,3 +1972,28 @@ The declared code identity and all 22 pins match, but sizing reports 153 passed/
 full retrieval suite 335 passed/2 failed. P3 and the conditional commit remain incomplete; no
 binding backend, external rehearsal or new commit was enabled. Request a fresh Claude-owned
 macOS lifecycle fix and handback before repeating qualification. No producer or test was patched.
+
+## D-351 — R01 actual duration launch approved; quality stop retained (2026-10-07)
+
+Authority: Quinton explicitly answered “Yes, I approve this: Do you approve R01 real-data training
+under that packet?” to the [exact R01 scientific packet](operations/SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md).
+Request60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8;
+actual job authorityd93ec0e2b06f760651d557e224dffecb98f2e858373b10cc639a491282349c45.
+This authorizes one fresh scratch192 producer and conditional cold under the unchanged v5recipe,
+six original training roles/2514terminal report-only, DUR-01 coverage/FP stops,50original target
+maximum/0CT,60min/12GiB and already approved26GiB/originalbaseline+8GiB/storage-free limits.
+It grants no reuse, automatic resume/retry/extension/sweep, source acquisition or SuPreM use.
+
+[Result](operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md):48real updates/68forwards,
+eight per train member, checkpoints0/48. Lesionrecall0.691498 vs baseline0.833063/floor0.803063
+fails, alongside case3/26/5821 lesion/component-recall. LesionDice0.058952 vs0.055142 and mean
+lesionFP111.866668mL vs162.628931 improve but do not waive coverage; six components still hit,
+tiny2973recall1.0, all interim FP/pancreas checks pass. Stop retained;192question incomplete,
+2514not evaluated. Twelve original target reads/0CT. Cold16restores/0forwards/updates/originals,
+full_duration_qualified=false;workers reaped/sharedlock released. All402producing pins preserved.
+
+Both stages consumed/retired. Same48member/batch hashes asD335, firstloss matches, small differences
+startupdate2; cause unproven from saved JSON alone. No additional model/weight/source-payload calls
+for that review or demonstrated coding defect. Next prospective experiment/stop-policy choice
+requires its own concrete scope; this failed outcome and original criteria remain fixed. No public
+push or human runtime credit. Other-lane ownership and all historical decisions remain unchanged.

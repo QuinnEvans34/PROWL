@@ -3803,3 +3803,31 @@ D-334 bookkeeping correction: actual real capability transport5dfc16d1 differs f
 Freshsame6/1/48/144³/0.0003; numerical factorCEallocation/reduction only. All training screens pass: pancreasDice0.159877 vs v3zero, lesionDice0.055142 vs0.030886, recall0.833063 vs0.994807; all6components hit. Lesion volumes12.78–383.26×, poor precision;2514 lesionrecall0.123936 vs0.974468/Dice0.006397. No generalization/promotion claim.14originaltarget reads/0CT; independent14restores,7native predictions/4probes exact,0cold updates/source reads. Combined525.229s, producerRSS4.790GiB/driver4.776GiB. All7sheets and native arithmetic reviewed;142pins/2,933native-test baseline unchanged. Both requests consumed; no automatic extension. Source/cohort/hold/qualification state fixed. Next discussion: saved training evidence, exact fresh duration/coverage proposal and multiclass expansion readiness. [Results](capstone/operations/CAP-EXP-014-RESULTS-2026-10-03.md).
 
 Saved training-only history audit, no new model/source/cache calls: mean loss2.037188→1.692695; pancreas/lesion tensor Dice at24→48 improves0.106990→0.159272 /0.038591→0.054626. Duration remains a hypothesis requiring a fresh bounded recipe/request; no extra run launched.
+
+### 2026-10-07 — D-351 / R01 duration attempt stopped at48
+
+Quinton explicitly approved the exact fresh scientific request60f3cc51 (DURATION-CAP-EXP-015-192/
+DUR_REAL_20261007_R01), after I03 inference-only qualification and metadata preparation. Same
+six training members/protected roles/v5recipe/seed42/144³/MPS/0.0003/zerojitter; requested192
+updates/screens48/96/144/192,2514terminal report-only. Original DUR-01 coverage/FP stops unchanged.
+
+Actual48updates/68forwards,eight per train member; checkpoints0/48. Native screen48 stops:
+lesion macrorecall0.691498 vsD3350.833063/floor0.803063;case3/26/5821 lesion/component recalls fail.
+PancreasDice0.181887 vs0.159877,lesionDice0.058952 vs0.055142;meanlesionFP111.866668mL vs162.628931.
+All six components hit,tiny2973recall1.0,all interim per-case FP and pancreas checks pass. This
+tradeoff does not meet coverage;192duration comparison unanswered,2514not evaluated. Six masks/
+views/screen/summary/two checkpoints kept;all six sheets and native arithmetic reviewed.
+
+Twelve original targets/0CT;hash/decode1,173,533B each,expanded253,698,624B. Conditional cold
+restores16artifacts with0forwards/updates/original reads;no fresh prediction equivalence test,
+full_duration_qualified=false,optimizer resume unqualified. Producer545.335812s/4,870,045,696B
+sampled owned RSS; cold35.344273s/2,573,090,816B;helper654.297251s/5,611,421,696B aggregate,
+workers reaped/lockreleased/no watchdog fault. Both stages consumed/retired,no retry or extension.
+Whole backup20,031,773,929B/R01growth407,564,812B,totaltwo-phase2,689,849,293B;fixed26GiB/original
+baseline+8GiB/freefloor preserved;402producing pins unchanged,no production/policy changes.
+
+Retained JSON histories show exactsame48member andimage/targetbatch-hash sequences asD335;
+firstloss exact,small differences beginupdate2 and later diverge. Root cause and long-run
+significance unproven;no extra model/optimizer/sourcearray/weight calls for that review. No
+longer-training failure claim,model promotion,generalization or negative specificity. Next discuss
+prospective stop design and coverage/FP/history tradeoff before a new scope. [Reviewed handback](capstone/operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md).

@@ -1,5 +1,48 @@
 # AGENTS.md — Agent Context
 
+> **October 7 R01 FINISHED / quality stop at48:** read SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md.
+> Actual48updates/68forwards, six members8each; checkpoints0/48 and six native masks/views kept.
+> Lesion macrorecall0.691498 vs D3350.833063/floor0.803063; case3/26/5821 lesion/component-recall
+> checks fail. All6components hit,tiny2973recall1.0;interim FP/pancreas checks pass. LesionDice
+>0.058952 vs0.055142, pancreasDice0.181887 vs0.159877,meanlesionFP111.866668mL vs162.628931.
+>192duration question unanswered;2514not evaluated. Cold16restores/0forwards/0updates/0originals,
+> stopped_checkpoints_restored/full_duration_qualified=false. Both workers reaped/sharedlock
+> released; helper654.297251s/5,611,421,696B sampled aggregate,no watchdog fault. Owned session
+>12310 FINISHED; never poll/take over as live or repeat R01. Both stages consumed/retired.
+>12originaltarget reads/0CT; hash+decode1,173,533B each/253,698,624B expanded. Backup20,031,773,929B,
+> R01growth407,564,812B,totaltwo-phase2,689,849,293B; fixed26GiB/originalbaseline+8GiB/100GiBfloor
+> preserved.402producing pins unchanged. Six sheets/arithmetic reviewed. Kept JSON histories:
+> exact48member/batch-hash sequences matchD335;firstloss exact,update2diff4.76837158203125e-7;
+> cause unproven,no extra models/payloads/weights opened. No full192/recovery/model promotion/
+> resume claim or demonstrated coding defect. Exact next is review scientific stop design and
+> coverage/FP/history divergence with Quinton before any new scope. All approved work complete;
+> quiet unchanged scheduling,no replay/tests/new diagnostics or run. W01-28Done for this failed
+> quality attempt,parenttraininggoal incomplete. Status each human response;hours/ownership
+> fixed,reviewed local handback preservation allowed,no public push. Older running text historical.
+
+> **October 7 R01 ACTUAL TRAINING CONFIRMED:** at23:52:51UTC/17:52:51MDT, the scientific
+> journal confirms four completed real optimizer updates; first member5821/loss2.3436131477.
+> R01 remains live in owned execsession12310; first native screen48 is pending. Monitor only
+> that one helper; producer/cold consumption and quality/resource stops remain enforced. Read
+> SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md for active state; no completion/model-quality/
+> resume claim yet. Exact192/253+30/0/50targets/0CT/60min/fixed storage scope below stays fixed.
+
+> **October 7 actual R01 launch approved and producer dispatched:** Quinton explicitly answered
+> “Yes, I approve this: Do you approve R01 real-data training under that packet?” This authorizes
+> the exact scientific R01, not another rehearsal. Request60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8;
+> actual job approvald93ec0e2b06f760651d557e224dffecb98f2e858373b10cc639a491282349c45.
+> Unchanged helper0e6a17e8 invoked once after native review. Fresh admission passed402pins,
+> certificate/runtime/AC/MPS/idle/independent volumes/fixed budget,backup19,624,209,117B and
+> internalfree115,145,076,736B. Exact controls/command independently reviewed; shared lock held.
+> R01 producer dispatched in owned execsession12310; monitor it, never start a second invocation.
+> First actual update not yet confirmed. Six original train/2514terminal-only,192updates/253
+> forwards,50original targets/0CT/unchanged DUR-01; conditional cold30forwards/0real updates;
+>60min/12GiB/26GiBcap/originalbaseline+8GiBgrowth/100GiBfloor fixed. No automatic retry/resume/
+> extension/sweep; preserve all evidence. Actual namespace/controls and local receipt are
+> outputs/prowl/SEGMENTER-DURATION-REAL-R01-20261007/ and registered R01 real areas. Read
+> SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md; pending-launch text below is historical.
+> Keep status in human responses; scheduled unchanged checks quiet. No unrelated changes/push.
+
 > **October 7 I03 and PREP-01 complete; R01 launch decision pending:** Quinton approved I03
 > and conditional real preparation. I03 passed 30 forwards/0 updates; separate inference-only
 > certificate 582c9b62 remains pinned, optimizer resume unqualified. PREP P01 retained the private

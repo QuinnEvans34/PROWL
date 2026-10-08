@@ -1,5 +1,42 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October 7 R01 complete: stopped at48; next scope unselected
+
+[R01 handback](../operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md):48actual updates/
+68forwards, six train members8each; native coverage stop,not a runtime fault. Lesionrecall
+0.691498 vs baseline0.833063 fails; lesionDice0.058952 and FP111.866668mL improve but do not
+override coverage. Checkpoints0/48,six masks/views,screen/summary recovered16artifacts;
+cold0forwards/updates/originals,full192qualification false. All owned workers finished/reaped,
+lockreleased;session12310 is no longer live. Both stage requests consumed/retired; no replay.
+402producing pins/fixedbudget/roles/holds preserved. Twelve original targets,0CT;2514not evaluated.
+
+W01-28 is Done for the finished attempt, with quality failure explicit;192comparison and broader
+training goal remain incomplete. ParentW01-12 incomplete. No selected next implementation/run.
+Discuss prospective stop design,coverage/FP tradeoff and retained history divergence with Quinton.
+JSONreview confirms same48member/batch-hash sequence asD335;firstloss matches;small differences
+startupdate2,cause unproven. No additional model/payload/weight reads for review. No new coding
+defect demonstrated. Quiet unchanged scheduling;status in human responses;humanhours separate,
+local completed-work preservation allowed,no public push. Older active-run notes below historical.
+
+**Actual model work confirmed:**17:52:51MDT journal shows four real optimizer updates.
+[R01 active handback](../operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md).
+Producer remains live; first native screen48 pending. No additional launch approval needed.
+
+## October 7 R01 real training approved and dispatched
+
+Quinton explicitly approved the [exact R01 scientific launch packet](../operations/SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md).
+Native admission and independent frozen-control review passed; the producer was dispatched once.
+Monitor owned exec session12310; no second invocation. First update confirmation is pending.
+[W01-28](https://trello.com/c/3oahjFM6) is In-Progress/incomplete during producer/conditional cold.
+Request60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8;
+approvald93ec0e2b06f760651d557e224dffecb98f2e858373b10cc639a491282349c45;
+native controls and once-only commands reviewed,402producing pins fixed. Six original training
+members,2514terminal report-only,192updates/253producer forwards and30cold/0cold updates,
+50original targets/0CT, unchanged DUR-01 and fixed60min/12GiB/storage limits remain enforced.
+No automatic resume/retry/sweep/follow-on. Retain interruption/failures and report actual progress;
+optimizer continuation remains unqualified. Hours separate; no public push. Older pending
+launch paragraphs below are historical; the latest actual approval supersedes them only for R01.
+
 ## October 7 current: I03 and real preparation complete; final R01 decision
 
 [PREP-01 finished](../operations/SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md).

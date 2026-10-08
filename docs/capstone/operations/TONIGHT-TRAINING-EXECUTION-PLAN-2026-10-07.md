@@ -1,5 +1,14 @@
 # Tonight's path to a controlled training run — October 7, 2026
 
+**Execution finished:** Quinton approved the final R01 scientific packet. Training made48actual
+updates then stopped on the unchanged lesion coverage gate. Six native cases and checkpoints0/48
+were kept; conditional cold restored16artifacts,0forwards/updates;workers reaped/lockreleased.
+Read the [reviewed result](SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md). The192duration question
+remains unanswered; no active job or next run is selected. Discuss stop design and the retained
+coverage/FP/history evidence before a new concrete scope; no additional coding defect is proven.
+This attempt and its original approval are spent, with no retry/resume/extension/overnight sweep.
+Earlier preparation/decision/timing notes below remain their historical snapshots.
+
 **Current finish:** I03 and PREP-01 completed. Read the [preparation handback](SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md)
 and [exact R01 launch packet](SEGMENTER-DURATION-R01-LAUNCH-PACKET-2026-10-07.md).
 The canonical real request `60f3cc516f4d5a6be3337080df5ab5643592f23bb91b2e550f6ac6402ad067a8`

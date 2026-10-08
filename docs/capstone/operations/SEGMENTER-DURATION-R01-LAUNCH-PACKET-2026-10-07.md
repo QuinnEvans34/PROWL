@@ -1,5 +1,11 @@
 # R01 — controlled real-data duration comparison
 
+**Historical launch packet, now spent:** Quinton explicitly approved this exact R01 scientific
+run on October7. It completed48updates then stopped at the unchanged coverage gate; conditional
+cold restored16artifacts. Both stages consumed/retired,workers reaped. Read the
+[result](SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md). Do not reuse this packet/request/approval
+or invoke its helper again. The original proposal below preserves the scope Quinton approved.
+
 **Ready for the separate scientific launch decision. Not launched.** Quinton approved I03 and
 conditional PREP-01; both finished. That preparation approval does not authorize this real run.
 The [preparation handback](SEGMENTER-DURATION-REAL-PREP-RESULTS-2026-10-07.md) records passed checks,
