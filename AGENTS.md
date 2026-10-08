@@ -1,5 +1,36 @@
 # AGENTS.md — Agent Context
 
+> **October 8 full SuPreM RESUMED / LIVE at08:12MDT:** user requested continuation at school.
+> New resume implementation867b034 restores pinned13500state into separate segment
+> full_segmenter_suprem_mac_01_resume01. Owned execsession96730 LIVE; monitor only, no duplicate.
+> Original48374 remains stopped; parent outputs/history13760tail preserved. Actual restored model/
+> optimizer/progress/exposures/CPU+MPS RNG all exactly match parent13500; independent initial backup
+> SHA42c9b3dc. First resumed13501/PanTS_00006257/loss0.7228825688362122 matches original batch/loss;
+> 13530 confirmed at14:12:36UTC. Target24000 total (not another24000), best0.3403853604947385 inherited.
+> Config/reports/launch receipt: outputs/prowl/full-segmenter-resume-mac-20261008/.
+> Primary /Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01_resume01/;
+> internal backup /Users/quintonevans/PROWL-Backups/full_segmenter_suprem_mac_01_resume01/.
+> Remaining active budget47716s after38683.3854s parent; travel excluded. Same12GiB/32GiBcache/
+> existingbackupcap/100GiBfloors,1333train/75dev,validate2000/save500. No data preprocessing replay.
+>16distinct CPU checks passed; fresh-process144³MPS restore exact/nextupdate withinfloat32
+> rtol1.3e-6/atol1e-5,max2.682209e-7,12.4509s/1563361280B/reaped. Prior tighter1e-7 absolute
+> comparison failure retained; two native attempts3inventedupdates each. No bit-exact futureGPU
+> or drift/quality guarantee. Development-only metric/source limitations remain; no testdata/push/
+> humanhours credit. Earlier no-resume/liveparent passages are historical. ResumeCLI now supported.
+
+> **October 8 TRANSPORT STOP at07:16MDT:** User must disconnect drive for school and requested
+> pause/resume. Training session48374 now FINISHED by intentional SIGTERM; owned PIDs12946/12960/
+>12962 verified absent. Supervisor exit1 is expected user stop, not spontaneous failure.
+> Last completed13760; exact verified external/internal last.pt is13500, SHA256
+>2a5f439426eeef01af8d673eb4d1af4f8556e5b21af7d4a0209d43f43059d89c;260updates need repetition.
+> Model/optimizer/progress/exposures/CPU+MPS RNG present in saved state. Final full journal copied
+> to internal backup history-before-transport-20261008.jsonl and hash verified. Transport receipt
+> retained in admitted folder, primary run and internal backup. No live job; never poll48374 as live.
+> Resume CLI still NOT implemented/native optimizer continuation NOT qualified. User requests
+> continuation at school: implement/test continuation against saved identity before restart, preserve
+> original journal and interrupted-tail evidence, no scratch restart or overwrite. Older LIVE text
+> below is historical. macOS confirmed PROWL-Data on disk5s1 unmounted; safe to unplug.
+
 > **October 7 full SuPreM training LIVE (20:31 MDT / October 8 02:31 UTC):** NEW capstone
 > `segmenter_full_session_v1` / `segmenter_full_executor_v1`, engine commit3614f6c; no legacy
 > trainer. Owned execsession48374 is running; monitor that job, never launch a duplicate.

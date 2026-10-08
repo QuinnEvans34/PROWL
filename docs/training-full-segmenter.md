@@ -116,3 +116,35 @@ under `/Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01/`; backu
 Target24,000 updates, with a24h watchdog ceiling; a slower run may stop before the update target.
 This is a running development experiment, not a completed result or qualified PanTS benchmark.
 Keep the Mac connected to AC and the external drive mounted while the supervised job runs.
+
+
+## Checkpoint continuation after transport
+
+The launcher now accepts `--resume-checkpoint ABSOLUTE_PATH --resume-sha256 SHA256` with an
+experiment YAML selecting a fresh name/output directory. Keep the model, initialization identity,
+cohort, geometry, optimizer recipe, and total update horizon identical. The new segment retains the
+checkpoint step, optimizer moments, learning-rate position, exposure counts, sampler position,
+CPU/MPS RNG and best development score. Original logs/checkpoints are never truncated or replaced.
+The checkpoint hash and its exact parent journal prefix are recorded in `continuation.json`.
+Best checkpoints from earlier segments remain in their original folders; a new segment writes a new
+`best.pt` only when its inherited score is exceeded.
+
+October8 continuation was requested after transport. Resume configuration and retained checks:
+`outputs/prowl/full-segmenter-resume-mac-20261008/`. It resumes13500 toward24000, with47716seconds
+left of the original24h active-runtime allocation; time spent travelling is excluded. All storage
+ceilings and1333train/75development members remain unchanged.
+
+Validation:16distinct CPU checks (nine existing mechanics and seven resume checks) passed, covering
+checkpoint/cohort/horizon/journal/best-score refusal, exact CPU continuation and parent preservation.
+A fresh-process144³ MPS test restored full state exactly and completed the next update within
+float32 tolerances (rtol1.3e-6,atol1e-5); maximum observed tensor difference2.682209e-7. Native
+supervisor12.4509s/1563361280B peak/reaped. An earlier rtol1e-5/atol1e-7 comparison failed and is
+retained alongside the successful result; no bit-exact GPU continuation or long-run drift claim.
+Both native attempts used invented arrays only, three optimizer calls each. Engine commit867b034.
+
+
+Actual continuation is running as `full_segmenter_suprem_mac_01_resume01` in owned session96730.
+At08:12MDT onOctober8,13530 updates were confirmed. The actual restored full state matched the
+parent checkpoint exactly; first replayed batch/loss matched, and the resumed initial checkpoint
+matched its independent internal backup. Read this segment's `execution/history.jsonl` for current
+progress. The original run's journal remains historical after its user-requested stop.

@@ -3895,3 +3895,36 @@ remain unchanged. Live journal:
 `/Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01/execution/history.jsonl`.
 Launch receipt, admitted cohort review and complete exclusions are in the admitted folder above.
 No native optimizer resume or automatic retry; development-only metric/source limitations remain.
+
+
+#### FULL-SEG-MAC-001 — user-requested transport stop, October 8 07:16 MDT
+
+Quinton requested stopping drive access to travel to school. The owned worker was intentionally
+terminated after verifying the complete 13,500-update checkpoint against its internal backup
+(SHA-256 `2a5f439426eeef01af8d673eb4d1af4f8556e5b21af7d4a0209d43f43059d89c`).
+All three owned processes exited; supervisor exit1 is the expected response to intentional termination.
+The journal ends at13,760 completed updates;260 updates beyond the saved state must be repeated.
+Final journal was separately copied and verified internally, preserving the interrupted tail.
+Model, optimizer, progress, exposure counts and CPU/MPS RNG are stored. Resume CLI remains to be
+implemented and native continuation checked before restart at school. No fresh run was launched.
+Receipt: `outputs/prowl/full-segmenter-admitted-mac-20261007/transport-pause-20261008.json`.
+
+
+#### FULL-SEG-MAC-001 — resumed, October 8 08:12 MDT
+
+At Quinton's request, continuation segment `full_segmenter_suprem_mac_01_resume01` resumed the
+verified13,500-update checkpoint through the new capstone session/executor (commit867b034).
+Owned execsession96730 is live; parent48374 remains stopped. Actual restored model/optimizer/
+progress/exposure/CPU+MPS RNG state matched the source exactly. Initial checkpoint/internal backup
+SHA-256 match `42c9b3dc5ea619b40da9e938b9402fc8adb87a97b93232a100f9fd4dd1d81939`.
+First resumed update13501 uses PanTS_00006257 with identical batch hashes and loss0.7228825688362122
+as the preserved parent journal.13530 updates confirmed at14:12:36UTC. This is not a claim of
+bit-exact future GPU arithmetic or training completion.
+
+Target remains24,000 total; best development Dice0.3403853604947385 is inherited. The260 updates
+past the last parent checkpoint are replayed, not counted twice. Parent history remains intact.
+Remaining active runtime47,716seconds preserves the original24h allocation (travel excluded).
+Cohort, cadence, numeric recipe and storage/memory limits remain unchanged. Separate primary and
+backup directories use the segment name; configuration, engineering checks and launch receipt are
+under `outputs/prowl/full-segmenter-resume-mac-20261008/`. See the full training guide for resume
+validation, retained native comparison failure and scope limitations.
