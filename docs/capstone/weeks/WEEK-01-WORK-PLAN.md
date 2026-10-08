@@ -12,6 +12,36 @@ component contracts retain their scope authority. Historical packets remain evid
 instructions to repeat their work. This plan does not require the entire product or a particular
 Dice score to be finished in Week 1.
 
+## Proposal alignment — reviewed October 8
+
+Source: [approved proposal v3.8](../../../Evans_Quinton_PROWL_Capstone_Proposal_v3.8.docx),
+sections 2–4 and 6, and [technical appendix v3.1](../../../Evans_Quinton_PROWL_Capstone_Technical_Appendix_v3.1.docx),
+sections A2–A5 and A8. Source hashes match [approved sources](../../../references/governance/APPROVED-SOURCES.md).
+The original documents remain unchanged.
+
+| Week | Approved scheduled outcome | Consequence for our planning |
+|---|---|---|
+| 1 | Architecture, acceptance criteria, workflow design and test plan | Reconcile evidence and specify missing boundaries; a complete product is not required this week |
+| 2 | Frozen protected cohorts; patient separation, manifests and repeatability tests | Primary next-week deliverable; reuse existing manifests and audit their evidence before extending them |
+| 3 | PANORAMA integration, label mapping, provenance, exclusions and duplicate checks | Preserve this commitment alongside PanTS; do not silently replace it with training infrastructure |
+| 4 | Unified reproducible, restartable preprocessing and orchestration | Early training preparation should contribute reusable pieces to this deliverable |
+| 5 | Autonomous imaging baseline and versioned, queryable retrieval foundation | Raw CT must reach predictions without reference-mask localization; report errors and limitations |
+| 6 | Controlled model comparison and retrieval evaluation | Record a model decision, including false-alarm tradeoffs; improvement is not guaranteed |
+| 7 | UI refinement and stakeholder review | Integrate review actions and record feedback |
+| 8 | End-to-end integration, tests and locked evaluation | Finish the committed system and documentation drafts |
+| 9–10 | Protected stabilization buffer, then final delivery | No new features consume the buffer or delivery week |
+
+The product path is raw CT → automatic pancreas localization/region selection → pancreas and lesion
+segmentation → original-coordinate masks, measurements and review-order score → reviewer accept/edit/reject
+with persisted history. Literature retrieval remains a parallel committed capability with citations and
+unsupported-answer handling. This is a research annotation-assist system, not a clinical diagnostic claim.
+
+Reference masks remain valid training labels and evaluation targets. They must not supply or repair the
+region during autonomous prediction. The reference-region arm remains useful for measuring the autonomy
+gap. The appendix allows single-stage, cascaded or other anatomy-aware models; test the cascade first
+using existing work, then decide from measured performance. Matching published PanTS performance is
+Quinton's research aspiration, not a promised score or a Week1 acceptance condition.
+
 ## Outcomes we need by Sunday
 
 - [ ] A clear, current account of the product architecture and implemented versus missing components.
@@ -117,7 +147,13 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
 
 ### W01-C05 — Week2 plan and experiment selection
 
-- Select work that advances raw-CT inference and the usable review application.
+- Anchor the main Week2 outcome to proposal section6: frozen, reproducible protected cohorts.
+- Inventory existing manifests, patient/group identity evidence, split assignments, annotation provenance,
+  duplicate/exclusion records and cohort hashes. Distinguish reference-empty cases from verified negatives.
+  Name unresolved evidence rather than claiming existing train/development counts prove separation.
+- Specify the smallest missing separation/repeatability checks and a portable input manifest. Keep stable
+  case identities and cohort membership separate from machine-specific paths.
+- Advance raw-CT inference and the usable review application in parallel when the primary outcome is covered.
 - First imaging comparison proposal: same segmenter/cases/native scoring, reference-region versus
   predicted-region inference. Count localization failures and missed lesions in the denominator.
 - Inspect existing localizer eligibility/results before choosing reuse, fine-tuning or new training.
@@ -148,7 +184,7 @@ start downloads, another training job or another chat.
 | ID | Work | Next concrete output | Dependency / status |
 |---|---|---|---|
 | W01-P01 | Finish and review current full training run | Terminal outcome, best/latest backups, development curve and limitations | Running when this plan was created; no automatic retry or model promotion |
-| W01-P02 | Lenovo as stationary training machine | CUDA/session/launcher/storage port spec; fit and save/resume checks; one chosen run | Inventory available; actual Lenovo environment and drive need inspection |
+| W01-P02 | Lenovo as stationary training machine | Portable cohort/data provisioning plan; bounded CUDA/session/launcher port; fit and save/resume checks; one chosen run | Quinton confirms dedicated uninterrupted home use for the remaining ten-week plan; 1TB external drive has no dataset loaded; actual environment/drive need inspection |
 | W01-P03 | Reference-free inference diagnostic | Matched localizer → crop → current segmenter → native output test | Existing localizers/adapter need real integration and geometry compatibility review |
 | W01-P04 | Retrieval integration | Current owner handback and next small interface task | Owner status not yet refreshed; no duplicate dispatch |
 
@@ -169,8 +205,9 @@ is short, prioritize reproducible development and a clear Week2 start over new i
 |---|---|
 | Main architecture | Test two-stage first; single-stage remains a challenger, not rejected |
 | Main outcome | Autonomous raw-CT performance; reference-crop Dice is a diagnostic |
-| Hardware split | Desired: stationary Lenovo training, portable Mac development; CUDA port/fit unproven |
-| Storage | Independent Lenovo inputs needed; Mac keeps development fixtures/selected artifacts; no drive formatting assumed |
+| Hardware split | Confirmed by Quinton Oct8: Lenovo stays at home dedicated to training throughout the plan; Mac is the development machine. CUDA port/fit remain unproven |
+| Storage | Lenovo external 1TB drive has no dataset loaded. First inventory usable space/filesystem, then size and provision the selected cohort plus derived data/checkpoints with content verification. Mac keeps development fixtures/selected artifacts; no drive formatting assumed |
+| Next-week priority | Proposal Week2 protected cohorts first; Lenovo setup and early autonomous experiments can overlap without replacing that deliverable |
 | First product slice | Propose case-package-to-viewer adapter; confirm after C01 inventory |
 | Other workstream status | Refresh retrieval evidence with its existing owner; do not infer progress from old notes |
 
@@ -179,6 +216,7 @@ is short, prioritize reproducible development and a clear Week2 start over new i
 | Date | Change / decision | Evidence / effect |
 |---|---|---|
 | Oct8 | Created at Quinton's request; weekly Sunday planning adopted | Reconciles current training/resume progress with original Week1 architecture/test scope |
+| Oct8 | Read approved proposal/appendix; confirmed dedicated Lenovo and autonomous prediction priority | Week2 primary outcome corrected to protected cohorts; early compute/inference work supports the scheduled Week4–5 outcomes |
 
 ## Sunday closeout — fill during review
 

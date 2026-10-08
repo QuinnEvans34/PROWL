@@ -6,6 +6,13 @@
 **Status:** Planning / In progress / Closed / Partially complete  
 **Weekly commitment:** Link the approved schedule and state the outcome in one sentence.
 
+## Approved proposal commitment
+
+- **Source section / scheduled deliverable:** Link the approved proposal and relevant appendix section.
+- **Evidence already available:** Reuse existing code, manifests and results.
+- **Required outcome versus parallel early work:** State which work closes this week and which advances a later week.
+- **Changes from the approved schedule:** Explain any deliberate change; do not silently replace a deliverable.
+
 ## Outcomes for this week
 
 Choose a small achievable set; distinguish course requirements from optional development.
@@ -31,7 +38,7 @@ action. Done requires the finish criterion and evidence; Deferred names the dest
 
 ### WNN-01 — Task name
 
-- **Problem / purpose:** Why this task is needed.
+- **Problem / purpose:** Why this task is needed and which proposal deliverable it advances.
 - **Inputs / dependencies:** Existing code, data, artifacts and required decisions.
 - **Implementation scope:** Exact component or file area; preserve unrelated work.
 - **Outputs:** What will exist when finished.
