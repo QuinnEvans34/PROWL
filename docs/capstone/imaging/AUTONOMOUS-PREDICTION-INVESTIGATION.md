@@ -178,6 +178,47 @@ PANORAMA integration proceeds with the scheduled Week3 data work and can supply 
 comparison. If compute is limited, finish the reference-versus-predicted-region comparison first;
 defer extra expert networks before extending infrastructure work indefinitely.
 
+## October 8 continuation: historical recipes and compute capacity
+
+Quinton confirms the historical manifest contamination is known and wants to reuse promising ideas
+in fresh, properly separated experiments. Recover the architecture, preprocessing, initialization,
+loss and training horizon from the historical localizer recipe; do not carry forward its contaminated
+performance claims. Prefer fresh training from the intended initialization on the corrected cohort,
+with explicit split checks and a new experiment ID. Preserve each experiment's documented validity
+status rather than infer that every historical experiment had identical contamination.
+
+Both laptops may be available for concurrent weekend experiments. Plan independent jobs with fixed
+code/config versions and separate outputs; each needs locally available inputs, capacity and backups.
+A possible pairing is localizer training on one machine and segmenter work on the other, selected after
+fit measurements. Different-device results must disclose backend/precision differences; a comparison
+that changes both architecture and device is not a pure architecture ablation.
+
+Cloud compute is an option to investigate if local runtime or memory limits progress. Before selecting
+it, compare expected run cost, data transfer/setup time, storage and checkpoint retrieval, availability,
+and compatibility with the portable CUDA route. No provider, spending limit, upload or paid job has
+been selected or authorized by this planning discussion. Do not make cloud setup a prerequisite for
+local progress.
+
+### Minimum software work for the first Lenovo job
+
+The current new trainer is not yet ready to launch unchanged on Lenovo:
+
+- `segmenter_full_session_v1.py` accepts CPU/MPS only. Add CUDA execution and CUDA random-state
+  checkpoint/restore handling, plus the corresponding state validation.
+- `train_full_segmenter.py` uses macOS power/sleep commands and a platform-specific lock. Choose the
+  actual Lenovo environment and provide compatible launch, locking and resource monitoring behavior.
+- The current input manifest stores absolute Mac paths. Provide a portable root/path mapping and
+  regenerate appropriate location evidence while preserving case membership and file identity.
+- On Lenovo, verify the environment and a representative real batch, measure VRAM fit, then exercise
+  save/restart on that backend before the selected long experiment. Do not assume an 8GB fit or promise
+  launch immediately on arriving home. Transfer/preparation time is also still unmeasured.
+
+These are bounded operational tasks, not a redesign of the model architecture. The autonomous adapter,
+classifier, specialist networks, ensemble fusion and PANORAMA treatment arm are investigation work;
+none must be complete before the first selected PanTS-only Lenovo training experiment. Quinton can
+work on other homework today and resume setup at home; no unattended development is implied by this
+plan. The present training run is not changed by these edits.
+
 ## Experiment record — fill before each launch and append results
 
 - ID, question and proposal deliverable:
@@ -205,6 +246,7 @@ defer extra expert networks before extending infrastructure work indefinitely.
 
 | Date | Finding / decision | Evidence | Next action |
 |---|---|---|---|
+| Oct8 | User confirms clean historical-recipe reruns, potential dual-laptop weekend experiments and cloud exploration | Current discussion; no paid job selected | Prepare bounded Lenovo port and choose independent experiments from evidence |
 | Oct8 | User requests a two-week living investigation including specialist alternatives | Current discussion | Review over both weekends and append measured results here |
 | Oct8 | Current training is entirely PanTS; PANORAMA source directories exist | Resume config + manifest + 1,408 admitted ID/path joins; source-root directory listing | Reconcile eligible PANORAMA pool under Plan03 |
 | Oct8 | Older high containment and autonomous near-oracle claims have a documented leakage withdrawal | Experiment notebook July19 audit | Identify reusable checkpoint and eligible independent evaluation before claiming accuracy |
