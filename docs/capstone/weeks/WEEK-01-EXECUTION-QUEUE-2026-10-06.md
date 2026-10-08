@@ -1,5 +1,16 @@
 # Week 1 execution queue — October 6–11, 2026
 
+## October7 full training scope review finished; next scope needs selection
+
+Quinton requests full experiments comparable in scale to prior14hour models. Read the
+[training scale review](../operations/FULL-TRAINING-SCALE-REVIEW-2026-10-07.md): historical6k–24k/
+larger cohorts versus current6positive/192maximum/R01stopped48. Recommended next packet combines
+varied multiclass/development/negative readiness with minimal reuse of the long-run trainer.
+Full-horizon/casecounts/cadences/stop recommendations are proposals,not approved implementation
+or run. No new source payload/model/code/control/budget/job used. W01-28 remains Done for the
+failed finished attempt;parentW01-12/fullbaseline incomplete. All402pins/history/roles/holds fixed.
+Do not dispatch new work from this review or scheduling;discuss concrete scope withQuinton first.
+
 ## October 7 R01 complete: stopped at48; next scope unselected
 
 [R01 handback](../operations/SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md):48actual updates/

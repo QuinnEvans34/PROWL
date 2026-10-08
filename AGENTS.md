@@ -1,5 +1,18 @@
 # AGENTS.md — Agent Context
 
+> **October7 full training intent clarified/review delivered:** Quinton points out prior14hour
+> models and asks for full experiments. Read FULL-TRAINING-SCALE-REVIEW-2026-10-07.md under
+> operations: old6k–24k/hundreds-to1,412cases versus current6positive/48actual/192maximum. Clean
+> historicalEXP24 recorded.415developmentDice/best18k; earlier.528withdrawn for leakage. Sept28
+> smoke goal and Oct6six-case192plan are separate from full development baseline. Recommend
+> full-horizon/cohort expansion+minimal long-trainer reuse packet,not another micro-run by default.
+> Proposed24k/hundreds/dozensdevelopment/cadences/stop design are UNSELECTED,not new authority.
+> Only6train/1report-only/noverifiednegatives currently qualified;SuPreMsourceevidence absent;
+> legacytrainertext reviewed,not invoked. No new code/model/sourcepayload/control/budget/job,
+> no numerical rootcause claim or ETA promise. R01consumed/retired/finished;all402pins/oldhistory
+> preserved. Discuss concrete next scope withQuinton;quiet unchanged schedule/statushumanresponses.
+> Routine review documentation/local preservation allowed;no public push/humanruntime credit.
+
 > **October 7 R01 FINISHED / quality stop at48:** read SEGMENTER-DURATION-R01-RESULTS-2026-10-07.md.
 > Actual48updates/68forwards, six members8each; checkpoints0/48 and six native masks/views kept.
 > Lesion macrorecall0.691498 vs D3350.833063/floor0.803063; case3/26/5821 lesion/component-recall

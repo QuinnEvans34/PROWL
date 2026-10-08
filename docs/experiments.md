@@ -95,6 +95,17 @@ linked Plan 06 protocol supplies the full fields for controlled/confirmatory wor
 
 ## Active capstone entries
 
+**October7 full-training scope clarification:** Quinton asks why the run was fast compared with
+his prior14hour experiments and requests full training sessions. [Scale review](capstone/operations/FULL-TRAINING-SCALE-REVIEW-2026-10-07.md)
+compares historical6k–24k/larger-cohort methods with the six-case scratch pilot. R01 is now the
+latest actual attempt:48updates,quality stop,retired; its appended record below preserves outcome.
+The October6six-case192proposal was an engineering duration comparison, not full model training.
+Recommend a full-development baseline readiness packet covering varied qualified data, adequate
+thousands-of-updates horizon and reuse of a general trainer. Proposed24k/casecounts/cadences/
+selection/stops remain unselected;no new experiment ID/control/job or source use granted here.
+Historical results/withdrawals/commands and D-335/R01 evidence remain unchanged. The older
+D-335-as-latest and pending-training paragraphs below are dated snapshots.
+
 CAP-EXP-001 through014 have dated records appended later in this notebook. The latest imaging
 checkpoint remains [D-335/CAP-EXP-014](capstone/operations/CAP-EXP-014-RESULTS-2026-10-03.md),
 complete/consumed. The September18 opening queue wording above is historical; it does not describe
