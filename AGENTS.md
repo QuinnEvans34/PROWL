@@ -1,5 +1,25 @@
 # AGENTS.md — Agent Context
 
+> **October 7 full SuPreM training LIVE (20:31 MDT / October 8 02:31 UTC):** NEW capstone
+> `segmenter_full_session_v1` / `segmenter_full_executor_v1`, engine commit3614f6c; no legacy
+> trainer. Owned execsession48374 is running; monitor that job, never launch a duplicate.
+> First real update confirmed PanTS_00004537/loss2.2838823795318604; eight updates confirmed
+> by02:31:22UTC. Initial external checkpoint and internal backup SHA matchfc109d6d.
+> Cohort frozen1333train(671positive/662reference_empty),75development(38positive/37reference_empty).
+> Completed1492candidate audit:1408pass/84excluded (50empty pancreas,26lost lesion/support,8grid
+> mismatches),3019.6935s supervisor/7734181888B peak/reaped. Includes218formerly oversized and13
+> formerly tilted-header failures now passing. No test arrays; original split files unchanged.
+> Frozen config/review/launch receipt: outputs/prowl/full-segmenter-admitted-mac-20261007/.
+> Actual run: /Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01/;
+> journal execution/history.jsonl, verified backups /Users/quintonevans/PROWL-Backups/full_segmenter_suprem_mac_01/.
+> Scope24000updates/validate2000/checkpoint500/24h maximum/12GiB worker/32GiB cache/100GiB floors;
+> existing backup ceiling retained. The24h watchdog can end a slow run before24000; no ETA or
+> completion claim. Native optimizer resume remains unqualified/disabled; no automatic retry.
+> Development-only SuPreM source use, membership unverified, tensor-grid provided-pancreas ROI
+> evaluation; no clean PanTS benchmark/generalization claim. Empty references are not verified healthy.
+> Preparation session29751 is FINISHED/reaped, not live. Prior preparation text below is historical.
+> Keep frozen R01/history intact; no public push, unrelated machine files or human-hour changes.
+
 > **October 7 full capstone engine / real cache preparation LIVE:** Quinton requires the NEW
 > session/executor architecture and explicitly chose broader geometry support before the first long
 > run. `scripts/train_full_segmenter.py` now runs `segmenter_full_session_v1` / `segmenter_full_executor_v1`,

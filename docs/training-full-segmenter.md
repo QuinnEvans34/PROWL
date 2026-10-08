@@ -97,3 +97,22 @@ The actual content/cache pass is recorded under
 `outputs/prowl/full-segmenter-content-mac-20261007/`. Its request, original producing-code hashes and
 source snapshots are retained even as subsequent launcher work continues. Read `summary.json`,
 `resources.json` and `cases.jsonl` for its current state; absence of a summary is not completion.
+
+
+## First full run launched
+
+On October7 at20:31MDT, `full_segmenter_suprem_mac_01` began real SuPreM training through the new
+session/executor (engine commit `3614f6c`, owned execsession48374). The completed preparation pass
+admitted1,333training/75development cases and recorded84 exclusions. Its workers are reaped.
+The admitted cohort includes218oversized and13tilted scans rejected by the previous loader.
+
+Frozen configuration: `outputs/prowl/full-segmenter-admitted-mac-20261007/experiment.yaml`.
+The adjacent `cohort-review.json`, `summary.json` and `launch-receipt.json` record exact membership,
+exclusions and observed launch evidence. Eight actual updates were confirmed at02:31:22UTC;
+initial checkpoint and its internal backup matched by SHA-256. Primary artifacts and journal are
+under `/Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01/`; backups are under
+`/Users/quintonevans/PROWL-Backups/full_segmenter_suprem_mac_01/`.
+
+Target24,000 updates, with a24h watchdog ceiling; a slower run may stop before the update target.
+This is a running development experiment, not a completed result or qualified PanTS benchmark.
+Keep the Mac connected to AC and the external drive mounted while the supervised job runs.

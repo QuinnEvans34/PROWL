@@ -3874,3 +3874,24 @@ Real preprocessing is running at `outputs/prowl/full-segmenter-content-mac-20261
 no model forwards or optimizer updates. Model training has **not started** in this registration.
 The separate invented native profile and actual CPU SuPreM import are engineering evidence only.
 [Implementation and evidence](training-full-segmenter.md).
+
+#### FULL-SEG-MAC-001 — actual launch confirmed, October 7 20:31 MDT
+
+The complete preparation pass finished: 1,408/1,492 candidates passed; 84 were excluded with
+individual reasons (50 empty pancreas masks, 26 lost lesion/component support, eight CT/label grid
+mismatches). Final training cohort: 1,333 (671 positive/662 reference-empty); development: 75
+(38 positive/37 reference-empty). This includes 218 oversized and 13 tilted scans rejected by v1.
+Preparation supervisor: 3,019.6935s, peak owned RSS 7,734,181,888 bytes, workers reaped.
+
+New-engine commit `3614f6c` launched the frozen
+`outputs/prowl/full-segmenter-admitted-mac-20261007/experiment.yaml` in owned exec session48374.
+First actual update: PanTS_00004537, loss2.2838823795318604; eight completed updates observed at
+October8 02:31:22UTC. Initial checkpoint and independent internal backup hashes match
+`fc109d6d39fcb78ac907384c27c1a33e6312cfa575fd80ca95621f5a778a0241`.
+
+Status **running**, not completed or quality-qualified. Target24,000 updates;24h watchdog can
+stop a slower run before that horizon. Validation2000/checkpoint500 and all recorded recipe/limits
+remain unchanged. Live journal:
+`/Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01/execution/history.jsonl`.
+Launch receipt, admitted cohort review and complete exclusions are in the admitted folder above.
+No native optimizer resume or automatic retry; development-only metric/source limitations remain.
