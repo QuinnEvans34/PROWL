@@ -147,6 +147,10 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
 
 ### W01-C05 — Week2 plan and experiment selection
 
+The [two-week autonomous prediction investigation](../imaging/AUTONOMOUS-PREDICTION-INVESTIGATION.md)
+tracks the matched cascade comparison, alternative architectures, specialist routing and PANORAMA
+experiment questions for October8–22. Keep findings there and weekly task ownership here.
+
 - Anchor the main Week2 outcome to proposal section6: frozen, reproducible protected cohorts.
 - Inventory existing manifests, patient/group identity evidence, split assignments, annotation provenance,
   duplicate/exclusion records and cohort hashes. Distinguish reference-empty cases from verified negatives.
