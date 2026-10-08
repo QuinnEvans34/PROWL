@@ -1,0 +1,118 @@
+﻿{
+    "collected_at":  "2026-10-07T19:21:38.2367075-06:00",
+    "hostname":  "QUINNS-LAPTOP",
+    "system":  {
+                   "manufacturer":  "LENOVO",
+                   "model":  "21FWS0DU00",
+                   "system_type":  "x64-based PC",
+                   "bios":  "N3ZET56W (1.43 )",
+                   "serial_hidden":  true
+               },
+    "os":  {
+               "caption":  "Microsoft Windows 11 Pro",
+               "version":  "10.0.26300",
+               "build":  "26300",
+               "display_version":  "26H2",
+               "ubr":  9457,
+               "arch":  "64-bit"
+           },
+    "cpu":  [
+                {
+                    "name":  "13th Gen Intel(R) Core(TM) i7-13800H",
+                    "cores":  14,
+                    "logical_processors":  20,
+                    "max_clock_mhz":  2500,
+                    "l2_kb":  11776,
+                    "l3_kb":  24576,
+                    "virtualization_fw":  false
+                }
+            ],
+    "memory":  {
+                   "total_bytes":  33999495168,
+                   "slots":  2,
+                   "max_capacity_kb":  100663296,
+                   "modules":  [
+                                   {
+                                       "slot":  "Controller0-ChannelA/B-DIMM0",
+                                       "capacity_bytes":  34359738368,
+                                       "speed_mts":  5600,
+                                       "configured_speed_mts":  5600,
+                                       "manufacturer":  "SK Hynix",
+                                       "part":  "HMCG88AGBSA092N",
+                                       "smbios_type":  34,
+                                       "form_factor":  12
+                                   }
+                               ]
+               },
+    "gpu_wmi":  [
+                    {
+                        "name":  "Intel(R) UHD Graphics",
+                        "driver":  "32.0.101.7085",
+                        "adapter_ram_bytes_capped":  2147479552,
+                        "resolution":  "2560x1600",
+                        "refresh":  165
+                    },
+                    {
+                        "name":  "NVIDIA GeForce RTX 4060 Laptop GPU",
+                        "driver":  "32.0.15.9658",
+                        "adapter_ram_bytes_capped":  4293918720,
+                        "resolution":  "x",
+                        "refresh":  null
+                    }
+                ],
+    "gpu_registry":  [
+                         {
+                             "name":  "Intel(R) UHD Graphics",
+                             "vram_bytes":  null,
+                             "driver":  "32.0.101.7085"
+                         },
+                         {
+                             "name":  "NVIDIA GeForce RTX 4060 Laptop GPU",
+                             "vram_bytes":  8585740288,
+                             "driver":  "32.0.15.9658"
+                         }
+                     ],
+    "nvidia_smi_csv":  "name, memory.total [MiB], driver_version, compute_cap, pcie.link.gen.max, pcie.link.width.max, power.limit [W], power.max_limit [W], clocks.max.sm [MHz]\r\nNVIDIA GeForce RTX 4060 Laptop GPU, 8188 MiB, 596.58, 8.9, 4, 8, [N/A], 105.00 W, 3105 MHz",
+    "nvidia_smi_full":  "Wed Oct  7 19:21:28 2026       \r\n+-----------------------------------------------------------------------------------------+\r\n| NVIDIA-SMI 596.58                 Driver Version: 596.58         CUDA Version: 13.2     |\r\n+-----------------------------------------+------------------------+----------------------+\r\n| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |\r\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\r\n|                                         |                        |               MIG M. |\r\n|=========================================+========================+======================|\r\n|   0  NVIDIA GeForce RTX 4060 ...  WDDM  |   00000000:01:00.0 Off |                  N/A |\r\n| N/A   67C    P0             16W /   80W |      10MiB /   8188MiB |      0%      Default |\r\n|                                         |                        |                  N/A |\r\n+-----------------------------------------+------------------------+----------------------+\r\n\r\n+-----------------------------------------------------------------------------------------+\r\n| Processes:                                                                              |\r\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\r\n|        ID   ID                                                               Usage      |\r\n|=========================================================================================|\r\n|    0   N/A  N/A           15876    C+G   ...2p2nqsd0c76g0\\app\\ChatGPT.exe      N/A      |\r\n+-----------------------------------------------------------------------------------------+",
+    "physical_disks":  [
+                           {
+                               "name":  "KXG8AZNV1T02 LA KIOXIA",
+                               "media":  "SSD",
+                               "bus":  "NVMe",
+                               "size_bytes":  1024209543168,
+                               "health":  "Healthy"
+                           }
+                       ],
+    "volumes":  [
+                    {
+                        "letter":  "C",
+                        "label":  "Windows",
+                        "fs":  "NTFS",
+                        "type":  "Fixed",
+                        "size_bytes":  1021821579264,
+                        "free_bytes":  236643753984
+                    }
+                ],
+    "battery":  [
+                    {
+                        "name":  "5B11K07736",
+                        "status":  2,
+                        "charge_pct":  99
+                    }
+                ],
+    "power_plan":  "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+    "python_cmds":  {
+                        "py":  {
+                                   "path":  "C:\\Windows\\py.exe",
+                                   "version":  "Python 3.14.2"
+                               }
+                    },
+    "py_launcher":  "-V:3.14 *        C:\\Users\\quinn\\AppData\\Local\\Programs\\Python\\Python314\\python.exe\r\n -V:3.13          C:\\Users\\quinn\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\r\n -V:3.11          C:\\Users\\quinn\\AppData\\Local\\Microsoft\\WindowsApps\\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\\python.exe",
+    "python_ml_probe":  "{\"python\": \"3.14.2 (tags/v3.14.2:df79316, Dec  5 2025, 17:18:21) [MSC v.1944 64 bit (AMD64)]\", \"executable\": \"C:\\\\Users\\\\quinn\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python314\\\\python.exe\", \"torch_error\": \"ModuleNotFoundError(\\\"No module named \u0027torch\u0027\\\")\", \"monai\": null, \"numpy\": \"2.4.0\", \"nibabel\": null, \"SimpleITK\": null, \"mlflow\": null}",
+    "nvcc":  null,
+    "cuda_path_env":  null,
+    "conda":  null,
+    "git":  "git version 2.53.0.windows.1",
+    "docker":  "Docker version 29.6.2, build dfc4efb",
+    "wsl":  " NAME              STATE           VERSION\r\n\r\n* Ubuntu            Stopped         2\r\n\r\n  docker-desktop    Stopped         2\r\n\r\n"
+}
