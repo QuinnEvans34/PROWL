@@ -1,5 +1,10 @@
 # PROWL capstone documentation hub
 
+**Weekly execution:** [Week1 living work plan](weeks/WEEK-01-WORK-PLAN.md) is the October8
+task/specification and closeout overlay. Follow the [Sunday planning routine](weeks/README.md)
+and [weekly template](weeks/WEEKLY-WORK-PLAN-TEMPLATE.md) for subsequent weeks. Older status
+snapshots below need reconciliation as specified in that plan.
+
 Current execution/ownership summary: [CURRENT-CHECKPOINT](operations/CURRENT-CHECKPOINT.md).
 Read it before older status prose below. The latest approved database amendment is
 [D-260](operations/POSTGRES-PGVECTOR-DECISION-2026-09-28.md), supplemented by D-261–D-265.

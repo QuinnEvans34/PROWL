@@ -1,5 +1,9 @@
 # Week 1 — architecture and test planning
 
+**October8 working-plan update:** Use [Week1 living work plan](WEEK-01-WORK-PLAN.md) for
+current tasks, specifications, development order and Sunday closeout. This file retains the
+approved weekly baseline; older execution snapshots below are historical.
+
 **Status:** Active  
 **Official week:** 2026-10-05 through 2026-10-11  
 **Preparation began:** 2026-09-07; early work carries forward as completion evidence  
