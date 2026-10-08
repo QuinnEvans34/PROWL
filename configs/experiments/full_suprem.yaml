@@ -1,0 +1,40 @@
+# Preparation template. Missing reviews/cohort/allocation are deliberate, reported by --preflight.
+# This is a new provided-pancreas development baseline, not an EXP-24 or autonomous reproduction.
+version: 1
+name: full_suprem_baseline_01
+base_config: configs/level45.yaml
+recipe:
+  device: mps
+  preprocessing:
+    whole_box: true
+    crop_native_margin_vox: 16
+    roi_source: pancreas
+    target_spacing: [1.5, 1.5, 1.5]
+  sampling:
+    patch_size: [128, 128, 128]
+    num_samples: 1
+  inference:
+    sw_roi_size: [128, 128, 128]
+  training:
+    num_workers: 0
+cohort:
+  manifest: outputs/prowl/full-baseline-inputs/manifest.csv
+  train_ids: outputs/splits/scaledmax_clean.txt
+  development_ids: outputs/prowl/full-baseline-inputs/development.txt
+  original_train_ids: outputs/splits/train.txt
+  original_development_ids: outputs/splits/val.txt
+  test_ids: outputs/splits/test.txt
+  review: null
+initialization:
+  kind: suprem
+  checkpoint: pretrained_weights/supervised_suprem_segresnet_2100.pth
+  sha256: 2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3
+  source_review: null
+run:
+  max_updates: 24000
+  validate_every: 2000
+  checkpoint_every: 500
+  log_every: 25
+  cache: disk
+  max_seconds: null
+  min_free_bytes: 107374182400

@@ -33,6 +33,9 @@ from monai.data import DataLoader, list_data_collate
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="configs/level45.yaml")
+    ap.add_argument("--experiment", help="Versioned full-run YAML (duration/cohorts/cadences); no pilot limits")
+    ap.add_argument("--preflight", action="store_true", help="Check experiment metadata only; do not train")
+    ap.add_argument("--inspect-input-paths", action="store_true", help="Also stat selected image/mask/weight paths during preflight")
     ap.add_argument("--split", default="dev_subset")
     ap.add_argument("--overfit", type=int, default=None, help="limit to N cases (Stage 0)")
     ap.add_argument("--max-iters", type=int, default=None)
@@ -98,7 +101,27 @@ def main():
     ap.add_argument("--neg-ids", default=None, help="frozen tumor-free report cohort id file (hashed into metadata)")
     args = ap.parse_args()
 
-    cfg = load_config(args.config)
+    if args.preflight and not args.experiment:
+        ap.error('--preflight requires --experiment')
+    if args.experiment:
+        from src.training import experiment_config as experiments
+        experiment_started = time.monotonic()
+        # One source of truth: do not allow CLI defaults/overrides to change a frozen recipe.
+        allowed = {'--experiment', '--preflight', '--inspect-input-paths'}
+        unexpected = [a.split('=')[0] for a in sys.argv[1:] if a.startswith('--') and a.split('=')[0] not in allowed]
+        if unexpected: ap.error(f'Put experiment settings in YAML, not extra flags: {unexpected}')
+        cfg = experiments.load_experiment(args.experiment)
+        report = experiments.preflight(cfg, inspect_payload_paths=args.inspect_input_paths or not args.preflight)
+        if args.preflight:
+            import json
+            print(json.dumps(report, indent=2))
+            return 0 if report['ready'] else 2
+        if not report['ready']:
+            raise SystemExit('Experiment not ready:\n' + '\n'.join(report['errors']))
+        experiments.prepare_run(cfg, report)
+        experiments.apply_arguments(args, cfg)
+    else:
+        cfg = load_config(args.config)
     # experiment overrides: change field of view without editing the config file.
     # patch drives both the training crop and the inference window so they always match.
     if args.patch:
@@ -286,8 +309,13 @@ def main():
     model = model.to(device)
     if not args.init_weights:
         if use_pretrained and dp["pretrained_weights"].exists():
-            load_suprem(model, dp["pretrained_weights"])
+            if args.experiment:
+                experiments.load_suprem_checked(model, cfg['_experiment']['initialization'])
+            else:
+                load_suprem(model, dp["pretrained_weights"])
         elif use_pretrained:
+            if args.experiment:
+                raise RuntimeError('Selected SuPreM checkpoint is unavailable; scratch fallback forbidden')
             print(f"[warn] pretrained weights missing at {dp['pretrained_weights']} — training from scratch")
             use_pretrained = False
 
@@ -492,6 +520,8 @@ def main():
     t0 = time.time()
     running = 0.0
     for step in range(start, stop_at):
+        if args.experiment:
+            experiments.check_resources(cfg, elapsed=time.monotonic() - experiment_started)
         if freeze_iters and step == freeze_iters:
             set_encoder_requires_grad(model, True)
             print(f"[transfer] encoder unfrozen at step {step}")
@@ -502,10 +532,15 @@ def main():
         optimizer.zero_grad(set_to_none=True)
         logits = model(img)
         loss = loss_fn(logits, lab)
+        if args.experiment and not torch.isfinite(loss).all():
+            raise RuntimeError(f'Nonfinite training loss at update {step + 1}; previous checkpoints retained')
         loss.backward()
         optimizer.step()
         scheduler.step()
         running += float(loss.detach())
+        if args.experiment:
+            experiments.record_event(cfg, event='update', step=step + 1, loss=float(loss.detach()),
+                                     learning_rate=optimizer.param_groups[0]['lr'])
 
         if (step + 1) % args.log_every == 0:
             evaluator.reset()
@@ -540,7 +575,7 @@ def main():
                 T.save_checkpoint(ckpt_dir / "best.pt", model, optimizer, scheduler, step + 1, best, extra=run_meta)
                 T.save_checkpoint(run_dir / "best.pt", model, optimizer, scheduler, step + 1, best, extra=run_meta)  # immutable archive copy
 
-        if val_loader is not None and (step + 1) % args.val_every == 0:
+        if val_loader is not None and ((step + 1) % args.val_every == 0 or (args.experiment and step + 1 == stop_at)):
             from src.inference.sliding_window import validate
             vd = validate(model, val_loader, evaluator, cfg, device)
             vp, vl = vd.get("pancreas", 0.0), vd.get("lesion")
@@ -552,6 +587,9 @@ def main():
                     vm["val/dice_lesion"] = vl
                 ml.log_metrics(vm, step=step + 1)
             score = vl if vl is not None else vd.get("mean", 0.0)
+            if args.experiment:
+                experiments.record_event(cfg, event='validation', step=step + 1,
+                                         pancreas_dice=vp, lesion_dice=vl, selection_score=score)
             if score > best_val:
                 best_val = score
                 T.save_checkpoint(ckpt_dir / "best.pt", model, optimizer, scheduler, step + 1, best_val, extra=run_meta)
@@ -612,7 +650,9 @@ def main():
               f"Stage 0 gate: not yet (best pancreas {best_panc:.3f}) — train longer")
     if ml:
         ml.end_run()
+    if args.experiment:
+        experiments.record_event(cfg, event='finished', state=status, completed_updates=end_step)
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

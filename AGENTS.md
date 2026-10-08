@@ -1,5 +1,20 @@
 # AGENTS.md — Agent Context
 
+> **October 7 full-run architecture correction:** Quinton explicitly requested fixing the
+> architecture for long experiments, then selected "Use SuPreM; resolve its source question first."
+> `scripts/train.py --experiment` now uses `src/training/experiment_config.py` and YAML-controlled
+> duration/cohorts/cadences with the existing general trainer; historical duration consumers remain
+> unchanged. See `docs/training-experiments.md` and the Week 1 training-refocus retrospective.
+> Fifteen focused tests include three real tiny CPU updates on artificial nine-train/two-dev data,
+> validation and checkpoints; long horizons tested as configuration only. No actual weights/patient
+> payloads or real job used. Preparation template `configs/experiments/full_suprem.yaml` selects
+> SuPreM/24k/legacy1412 candidate IDs but lacks reconciled manifest/dev IDs, cohort/source reviews
+> and concrete runtime/resource allocation. No fallback to scratch, source acceptance, full-scale
+> qualification, resume/backup claim or tonight ETA. User's benchmark ambition is competitive PanTS
+> performance with comparable evaluation, alongside the approved capstone outcomes. New engineering
+> authority supersedes older no-code-next-scope statements only for this architecture correction.
+> Existing roles/holds, R01 retirement and source/backup constraints remain; no public push.
+
 > **October7 full training intent clarified/review delivered:** Quinton points out prior14hour
 > models and asks for full experiments. Read FULL-TRAINING-SCALE-REVIEW-2026-10-07.md under
 > operations: old6k–24k/hundreds-to1,412cases versus current6positive/48actual/192maximum. Clean
