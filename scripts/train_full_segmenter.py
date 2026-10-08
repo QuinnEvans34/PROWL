@@ -65,7 +65,7 @@ def tree_bytes(root):
     return sum(p.stat().st_size for p in Path(root).rglob('*') if p.is_file()) if Path(root).exists() else 0
 
 
-def worker(cfg, report):
+def worker(cfg, report, resume=None):
     from src.data.segmenter_prepared_inputs_v1 import PreparedInputs
     from src.training.segmenter_full_session_v1 import Session
     from src.training.segmenter_full_executor_v1 import execute
@@ -105,12 +105,20 @@ def worker(cfg, report):
     provider = PreparedInputs(cfg, full['geometry'])
     (output / 'input-control.json').write_bytes(canonical(provider.control))
     copy_backup(output / 'input-control.json')
-    session = Session(session_config(cfg), provider.control, device=cfg['device'],
-                      initialization=cfg['_experiment']['initialization'])
+    initial_best = None
+    continuation = None
+    if resume:
+        from src.training.segmenter_full_resume_v1 import restore_checkpoint
+        session, initial_best, continuation = restore_checkpoint(cfg, provider.control, **resume)
+        (output / 'continuation.json').write_bytes(canonical(continuation))
+        copy_backup(output / 'continuation.json')
+    else:
+        session = Session(session_config(cfg), provider.control, device=cfg['device'],
+                          initialization=cfg['_experiment']['initialization'])
     result = execute(session, provider, output / 'execution',
         validate_every=cfg['_experiment']['run']['validate_every'],
         checkpoint_every=cfg['_experiment']['run']['checkpoint_every'], tick=tick,
-        checkpoint_hook=backup_checkpoint)
+        checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation)
     copy_backup(output / 'execution' / 'history.jsonl')
     (output / 'result.json').write_bytes(canonical(result))
     copy_backup(output / 'result.json')
@@ -123,15 +131,30 @@ def main():
     parser.add_argument('--preflight', action='store_true')
     parser.add_argument('--inspect-input-paths', action='store_true')
     parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--resume-checkpoint')
+    parser.add_argument('--resume-sha256')
     args = parser.parse_args(); cfg = E.load_experiment(args.experiment)
+    require(bool(args.resume_checkpoint) == bool(args.resume_sha256), 'Resume checkpoint and SHA-256 required together')
+    resume = dict(checkpoint=str(Path(args.resume_checkpoint).resolve()), checkpoint_sha256=args.resume_sha256) if args.resume_checkpoint else None
     if 'full_segmenter' in cfg:
         cfg['paths']['output_dir'] = cfg['full_segmenter']['output_dir']
     report = preflight(cfg, inspect=args.inspect_input_paths or not args.preflight)
+    if resume and report['ready']:
+        from src.data.segmenter_prepared_inputs_v1 import PreparedInputs
+        from src.training.segmenter_full_resume_v1 import read_checkpoint
+        try:
+            provider = PreparedInputs(cfg, cfg['full_segmenter']['geometry'])
+            payload, _, provenance = read_checkpoint(cfg, provider.control, **resume)
+            report['resume'] = provenance
+            report['inherited_best'] = payload['best_score']
+            del payload, provider
+        except (OSError, ValueError, KeyError) as exc:
+            report['errors'].append(str(exc)); report['ready'] = False
     if args.preflight or not report['ready']:
         print(json.dumps(report, indent=2)); return 0 if report['ready'] else 2
     if args.worker:
         require(os.environ.get('PROWL_FULL_SUPERVISED') == '1', 'Use the supervised entry point')
-        print(json.dumps(worker(cfg, report))); return 0
+        print(json.dumps(worker(cfg, report, resume))); return 0
     from src.operations.segmenter_duration_dispatch_v1 import watch
     lock_path = ROOT / 'outputs/prowl/.mps-profile.lock'
     lock_path.parent.mkdir(parents=True, exist_ok=True)
@@ -141,6 +164,8 @@ def main():
         env = dict(os.environ, PYTORCH_ENABLE_MPS_FALLBACK='0', PROWL_FULL_SUPERVISED='1')
         command = ['/usr/bin/caffeinate', '-dimsu', sys.executable, str(Path(__file__).resolve()),
                    '--experiment', str(Path(args.experiment).resolve()), '--worker']
+        if resume:
+            command += ['--resume-checkpoint', resume['checkpoint'], '--resume-sha256', resume['checkpoint_sha256']]
         full = cfg['full_segmenter']; last_scan = [0.]
         def tick():
             E.check_resources(cfg, elapsed=0)

@@ -26,10 +26,12 @@ def atomic_checkpoint(path, session, *, best_score, history_bytes):
 
 
 def execute(session, provider, output, *, validate_every, checkpoint_every, tick=lambda:None,
-            checkpoint_hook=lambda path:None):
+            checkpoint_hook=lambda path:None, initial_best=None, continuation=None):
     require(all(type(v) is int and v > 0 for v in (validate_every, checkpoint_every)), 'Positive cadences required')
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
-    best = None; started = time.monotonic()
+    require(initial_best is None or (type(initial_best) in (int, float) and 0 <= initial_best <= 1),
+            'Invalid inherited development score')
+    best = initial_best; started = time.monotonic()
     with (output / 'history.jsonl').open('xb') as journal:
         def event(row):
             journal.write((json.dumps(row, allow_nan=False) + '\n').encode())
@@ -40,6 +42,8 @@ def execute(session, provider, output, *, validate_every, checkpoint_every, tick
             atomic_checkpoint(path, session, best_score=best, history_bytes=journal.tell())
             checkpoint_hook(path)
         event(dict(event='started', identity=session.identity, step=session.step))
+        if continuation is not None:
+            event(dict(event='resumed', step=session.step, parent=continuation, inherited_best=best))
         save('initial.pt')
         try:
             while session.step < session.config['max_steps']:

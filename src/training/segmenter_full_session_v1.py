@@ -24,6 +24,12 @@ from src.training.experiment_config import load_suprem_checked
 POLICY = 'full_cohort_seeded_permutation_v1'
 
 
+def identity_for(config, control, device, initialization):
+    return deepcopy(dict(version='segmenter-full-session-1', config=config,
+        control=control, device=device, initialization=initialization,
+        architecture=numerical.ARCH, loss=loss.LOSS, sampling=POLICY))
+
+
 def validate_config(c):
     require(set(c) == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
                        'warmup_steps', 'lr_schedule'}, 'Full session configuration fields')
@@ -48,10 +54,8 @@ class Session:
         if device == 'mps':
             require(torch.backends.mps.is_available() and os.environ.get('PYTORCH_ENABLE_MPS_FALLBACK') == '0',
                     'Native MPS with fallback disabled required')
-        self.config, self.control = deepcopy(config), deepcopy(control)
-        self.identity = dict(version='segmenter-full-session-1', config=self.config,
-            control=self.control, device=device, initialization=deepcopy(initialization),
-            architecture=deepcopy(numerical.ARCH), loss=loss.LOSS, sampling=POLICY)
+        self.identity = identity_for(config, control, device, initialization)
+        self.config, self.control = self.identity['config'], self.identity['control']
         self.identity_pin = digest(canonical(self.identity))
         self.control_pin = digest(canonical(control))
         with torch.random.fork_rng(devices=[]):
