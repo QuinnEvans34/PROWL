@@ -51,7 +51,7 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
 | W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; geometry correction verified: 68 outputs/7 unresolved-unit cases; quality work open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
-| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | 68 matched pairs complete; crop-policy experiment next | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
+| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | 68 matched pairs and largest-component experiment complete; reusable evaluation command next | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
 
@@ -164,3 +164,9 @@ October9 CT-only crop challenger completed: largest26-connected region plus10mm 
 lesion box coverage33/33 and modestly improves Dice0.225818→0.246612, with8 improved/8 worsened/17 tied
 positive cases. All68 cases ran; raw localizer masks match baseline. Opt-in experimental policy only;
 default unchanged. Confidence-based crop sizing and crop-variation training remain open questions.
+
+October 9 next-step handoff: [Lenovo crop-variation experiment](../operations/LENOVO-CROP-VARIATION-EXPERIMENT-HANDOFF.md)
+specifies one controlled successor run while preserving the active training job. Further crop-policy
+sweeps are deferred. Mac priorities are a reusable fixed-cohort evaluation command, completion of
+portable cohort checks, and a saved-prediction connection to the existing viewer. This is a development
+plan, not a claim that the augmentation or successor launch has already been implemented.
