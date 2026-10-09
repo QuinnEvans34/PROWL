@@ -3,7 +3,7 @@
 **Dates:** October 12–18, 2026 (America/Denver)
 **Prepared:** October 9; early start this weekend, refine at Sunday review
 **Owner:** Quinton Evans + Mac development chat
-**Status:** Proposed execution order; no new implementation or training dispatched
+**Status:** Development in progress; CT-only connection and separate scoring implemented; first fixed-cohort baseline completed; reliability corrections open
 **Weekly commitment:** Reproducible protected cohorts, with an early autonomous prediction integration slice.
 
 ## Direction confirmed October 9
@@ -50,8 +50,8 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 | ID | Priority | Task | Owner | Status | Finish criterion |
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
-| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; two real CT diagnostics complete; anatomy/failure review pending | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
-| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | Depends on W02-02 | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
+| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; fixed75-case baseline complete (56 outputs/19 failures); corrections open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
+| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | Separate scorer and one paired case complete; cohort comparison pending | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
 
@@ -141,3 +141,9 @@ CT-only evaluation remain open; no leakage-free benchmark claim. See investigati
 October9 trained-checkpoint integration: [two CT-only diagnostics](../imaging/AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md)
 complete with native exports. A01 appears non-abdominal yet received organ predictions; investigate
 source/annotation provenance and unsupported-input handling. Separate scoring and quality acceptance remain open.
+
+October9 fixed-cohort baseline: all75 admitted development IDs accounted for;56 scored outputs,19
+explicit inference failures. Mean positive lesion Dice0.244807 over28 scored positive cases;10positive
+and9reference-empty cases remain unscored. Missing CT units and geometry allocation limits are concrete
+engineering gaps. Source/anatomy review and matched cohort-wide crop comparison remain open. See the
+[checkpoint connection report](../imaging/AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md).

@@ -377,3 +377,12 @@ The suspicious scan has a74-voxel pancreas annotation and severe autonomous fals
 hashes match prior preparation, but anatomical validity is unresolved. Frozen cohorts and Lenovo training
 were not changed. Added independently tested, model-free native scoring; robust unsupported-input
 handling and fixed-cohort evaluation remain unfinished.
+
+### October9 fixed75-case autonomous baseline
+
+All admitted development IDs were frozen before evaluation, with two existing outputs reused.56
+predictions scored;19 failed explicitly (11 oversized predicted-region grids,7 unknown CT units,
+1 projected whole-scan grid). Mean lesion Dice0.244807 over28 scored positive cases;10other positive
+cases failed. This supersedes interpreting the single-case0.726 as typical quality. See the detailed
+[connection report](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) for denominators, resource evidence,
+source-review limits and specific next corrections. No training was changed.

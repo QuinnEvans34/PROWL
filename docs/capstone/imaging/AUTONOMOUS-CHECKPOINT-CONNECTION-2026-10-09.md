@@ -159,3 +159,74 @@ on unsuitable inputs. Further work is fixed-cohort evaluation and anatomical/sou
 by an evidence-based input-quality/localizer failure policy. A hardcoded case exclusion or an arbitrary
 organ-volume cutoff would conceal the problem rather than solve it. Lenovo training remains untouched;
 its historical cohort should be reviewed against this finding before interpreting final metrics.
+
+## Fixed75-case development baseline — October 9 continuation
+
+Evaluated every ID in the existing admitted development list in its original order. The case list,
+checkpoint pair, crop policy and preprocessing were frozen before execution. The two earlier predictions
+were reused after checking CT/model identity, result hashes and prediction hashes;73 new inference
+attempts ran. No model or crop policy was tuned during this evaluation. Workers received CT-only
+requests, with reference scoring in a separate process after all inference ended. No original test
+cases, optimizer updates, Lenovo changes or external publication were involved.
+
+Private evidence lives under `outputs/prowl/autonomous-real-ct-20261009/fixed-development-75/`:
+`plan.json`, `software.json`, `ct-header-audit.json`, ordered `inference-journal.jsonl`, per-case requests,
+logs/results/predictions, `execution-summary.json`, `scores.json`, `summary.json`, scoring source/logs.
+Plan SHA256: `eab509bc8bb85d35d22aa43a5a8da3f748ada762525628ffef596e9b658c227a`.
+The recorded inference/scoring source hashes remained unchanged through execution/scoring.
+
+### Results, including failures
+
+- Fixed cohort:75 cases (38 positive lesion references,37 reference-empty).
+- 56 predictions scored:54 new successful outputs plus two reused outputs.
+- 19 explicit inference failures:11 predicted-region sampling allocations exceed16M voxels;
+  seven CT headers declare unknown spatial units; one whole-scan projected-resampling budget exceeded.
+- 28 positive cases scored: mean per-case lesion Dice0.244807, mean recall0.349978.
+- 28 reference-empty cases scored: mean predicted lesion volume7.914077mL.
+- 56 scored cases: mean pancreas+lesion union Dice0.634342.
+- The19 unscored cases comprise10 positive and9 reference-empty cases. They remain in the75-case
+  denominator; the quality means above cover only completed predictions. No failed case receives an
+  invented Dice value, and reference-empty does not mean verified healthy.
+
+These results replace the single-case0.726 example as the evidence for this **fixed development
+baseline**. They are not an untouched benchmark. Do not directly compare0.244807 against the training
+journal's0.395317: those use different input regions, scoring grids and case populations. The baseline
+shows that working connections alone do not establish reliable autonomous performance.
+
+The73 supervised attempts consumed472.799745 summed worker seconds, with maximum sampled owned
+RSS3,606,478,848 bytes. All workers were reaped; none hit the600s/12GiB watchdog. Batch limits also
+included30minutes total, a100GiB free-space floor and a shared accelerator lock. Missing-unit and
+geometry-allocation rejections are application checks, not evidence that physical RAM was exhausted.
+No successful unchanged inference was replayed to obtain a better score.
+
+Added `src/inference/evaluation_summary.py` and three focused tests. It requires exact ordered case
+accounting and reports failures and positive/empty reference populations separately. Tests cover
+known means with failures/empty annotations, omitted/duplicate/reordered cases and an all-failure
+cohort; all three passed.
+
+### Source-review limitation and next corrections
+
+A bounded120-second streaming audit of the33GiB downloaded CT archive did not reach the suspicious
+case's member before timeout. `a01-archive-audit.json` records this incomplete result. No member was
+extracted and no original-archive integrity or anatomical-pairing claim follows. The earlier verified
+extracted-file/preparation hashes and74-voxel pancreas annotation remain the available evidence.
+
+The concrete next work is:
+
+1. Establish a CT-only spatial-unit normalization/provenance rule for the seven unknown-unit inputs.
+   Shape/affine plausibility alone is insufficient evidence to silently invent physical units.
+2. Support large predicted crops and projected whole-scan grids with bounded memory, or define and
+   evaluate an explicit localization policy. Preserve this baseline; do not silently drop predicted
+   components or borrow a reference region to make failing cases pass.
+3. Compare reference-region and autonomous predictions on matched cases to separate localization,
+   resampling and segmenter quality. One paired case does not settle the cohort-wide question.
+4. Review the suspicious source and unsupported-anatomy response. Keep it visible in accounting;
+   neither a hardcoded case exclusion nor an arbitrary organ-volume rule is validated by this result.
+
+Separate post-inference coverage scoring (`crop-coverage.json`, `score_coverage.py`) checked pinned
+reference masks against the recorded native crop boxes: all28 scored positive cases have100% native
+lesion bounding-box coverage. None has a completely missed lesion at that stage. This narrows the
+quality investigation: poor scores are not explained by simply excluding the lesion from these native
+boxes. It does **not** establish lesion survival after resampling to144³, adequate crop scale/context,
+or good segmenter predictions, and says nothing about the10 positive inference failures. Reference
+labels were used only in this post-hoc coverage assessment, never to choose or repair prediction boxes.
