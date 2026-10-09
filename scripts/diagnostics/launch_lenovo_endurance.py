@@ -38,7 +38,7 @@ def audit_gate(handoff,audit,expected_count=1408):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--handoff',type=Path,required=True);p.add_argument('--verification',type=Path,required=True)
-    p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    p.add_argument('--output',type=Path,required=True);p.add_argument('--continue-from',type=Path);a=p.parse_args()
     a.output.mkdir(parents=True,exist_ok=False)
     paths=subprocess.check_output(['git','ls-files','src','scripts','configs'],cwd=ROOT,text=True).splitlines()
     # Include this launcher even before its first commit.
@@ -70,10 +70,21 @@ def main():
     candidate=a.output/'candidate';audit=a.output/'content-audit';admitted=a.output/'admitted'
     try:
         with training_guard(ROOT/'outputs/prowl/.lenovo-endurance-pipeline.lock'):
-            run('bind-inputs','scripts/diagnostics/prepare_lenovo_handoff_config.py',
-                ['--handoff',a.handoff,'--verification',a.verification,'--output',candidate],120)
+            if a.continue_from:
+                parent=a.continue_from.resolve()
+                events=[json.loads(line) for line in (parent/'pipeline.jsonl').read_text().splitlines()]
+                if events[-1].get('status')!='failed' or any(r['stage']=='training' for r in events):
+                    raise ValueError('Only stopped pretraining preparation can continue')
+                candidate=parent/'candidate'
+                (a.output/'continuation-parent.json').write_text(json.dumps(dict(parent=str(parent),
+                    pipeline_sha256=hashlib.sha256((parent/'pipeline.jsonl').read_bytes()).hexdigest(),
+                    preparation_seconds=14400,automatic_retry=False),indent=2)+'\n')
+            else:
+                run('bind-inputs','scripts/diagnostics/prepare_lenovo_handoff_config.py',
+                    ['--handoff',a.handoff,'--verification',a.verification,'--output',candidate],120)
+            extra=(['--resume-audit',a.continue_from/'content-audit','--max-seconds',14400] if a.continue_from else [])
             run('prepare-cache','scripts/prepare_full_segmenter_cache.py',
-                ['--experiment',candidate/'candidate.yaml','--output',audit],7500)
+                ['--experiment',candidate/'candidate.yaml','--output',audit]+extra,14700 if a.continue_from else 7500)
             audit_gate(a.handoff,audit)
             run('compile-cohort','scripts/compile_full_segmenter_cohort.py',
                 ['--config',candidate/'candidate.yaml','--audit',audit,'--output',admitted],180)

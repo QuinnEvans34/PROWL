@@ -1,5 +1,24 @@
 # AGENTS.md — Agent Context
 
+> **October 9 Lenovo continuation approved / prepared:** Quinton says "Ok, lets start that now."
+> Added explicit cache-preserving continuation: exact stopped ordered-prefix/control/source-stat
+> binding; hash/read completed derived batches against old ledger, no completed CT replay; missing,
+> corrupt or orphan evidence refuses. New attempt keeps original logs intact, appends only remaining
+> 307 cache entries, preparation allowance14400s; all memory/storage/cohort/scientific limits fixed.
+> 17 continuation/cohort/admission tests pass. Only3 prior producing paths changed (Inputs cache-open,
+> preparation CLI and pipeline orchestration); numerical training and preprocessing unchanged.
+> New attempt planned E:/PROWL/readiness/lenovo-8h-20261009-a02. Do not repeat a01 or CT verification.
+
+> **October 8 Lenovo pipeline STOPPED / preparation timeout:** At23:07:30MDT(Oct9 05:07:30UTC)
+> cache watchdog reached7200.016s;1101/1408case records pass,0casefailures,307not completed.
+> Peak workerRSS3899154432B below12GiB; worker and pipeline trees reaped. Ownedexec61716
+> FINISHED exit1; do not poll as live/retry. pipeline.jsonl terminalfailed; logs/cache retained.
+> No realCUDAprofile/scientifictraining/optimizerupdates/trainingcheckpoints;8hclockneverstarted.
+> Heartbeat lenovo-eight-hour-training-watch deleted as instructed. No pinnedcode/configchanges,
+> CT rehash, retry, allowanceextension or Macjobaction. Need human direction for cache-preserving
+> continuation and revised preparation allowance; existing cache continuation is not yet qualified.
+> Prior LIVE/admission text below is historical. All1408sourceCT hashes remain verified evidence.
+
 > **October 8 Lenovo admission pipeline LIVE / CT verification complete:** All1408CTs matched
 > transferredSHA256s,46341767190B/779.328s;exec20288 FINISHED,do not repeat. User-approved
 > single pipeline4b55583 launched ownedexec61716 at2026-10-09T03:07:29UTC(Oct8 21:07MDT).

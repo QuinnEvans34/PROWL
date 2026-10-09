@@ -1,5 +1,46 @@
 # Lenovo training readiness — October 8, 2026
 
+## October 9 authorized cache-preserving continuation
+
+Quinton requested starting the continuation after the preparation timeout. A new attempt at
+`E:/PROWL/readiness/lenovo-8h-20261009-a02` will preserve the original failed audit and candidate
+configuration. The parent must be stopped/reaped and have an exact successful ordered prefix,
+unchanged source observations and input control, and no missing or orphan cache members.
+The 1,101 retained batches are read and hash-checked against the parent ledger; their original
+CTs are not reprocessed. Only the remaining 307 cases require preprocessing. The new preparation
+watchdog is four hours; 12 GiB worker, 32 GiB cache, storage floors and all scientific limits remain
+unchanged. No automatic retry. Failure evidence remains preserved.
+
+Seventeen focused continuation, cohort-compilation and admission tests passed, including injected
+corruption, missing members, altered configuration/control/source observations and orphan entries.
+The three modified prior producing paths are the input cache-opening branch, preparation driver,
+and pipeline orchestrator; numerical preprocessing, model, optimizer and timed executor are unchanged.
+The pipeline still requires all 1,408 cases, exact original 1,333/75 membership, source hashes and
+target states, followed by real CUDA/independent backup/cold recovery checks before eight-hour
+scientific training. Preparation time does not count toward the eight-hour target.
+
+## Terminal stop — October 8, 23:07 MDT
+
+The pipeline stopped during cache preparation at its two-hour watchdog limit, before real
+CUDA qualification or scientific training. The content ledger retains **1,101 technical passes,
+zero recorded case failures, and 307 of the 1,408 cases not completed**. The last completed
+record is at 7,194.766 seconds; the preparation watchdog ended at 7,200.016 seconds.
+Peak sampled worker RSS was 3,899,154,432 bytes, below the 12-GiB ceiling, identifying the
+elapsed-time limit rather than the memory bound as the resource stop.
+
+`content-audit/resources.json` and `prepare-cache-resources.json` both report workers reaped;
+owned exec 61716 returned exit 1 and is finished. The pipeline journal records terminal failure
+at 2026-10-09T05:07:30.758Z. There is no long-run training history: zero scientific updates,
+no training checkpoint/backup, and the eight-hour clock never started. The earlier verified
+1,408 CT hashes remain evidence; no original CTs were rehashed by monitoring.
+
+All logs and partial cache contents are preserved in their original directories. The scheduled
+monitor `lenovo-eight-hour-training-watch` was deleted after this terminal failure as requested,
+using the scheduled-task control; no retry, source/config change or Mac action occurred.
+Next requires user direction: qualify a continuation that preserves completed cache work and
+select a longer preparation allowance. Do not assume the existing scripts already support
+resuming this partial cache, or rerun preparation from scratch automatically.
+
 ## Admission pipeline active — October 8, 21:07 MDT
 
 All **1,408 CTs passed**, 46,341,767,190 bytes read in 779.328 seconds. Owned verifier
