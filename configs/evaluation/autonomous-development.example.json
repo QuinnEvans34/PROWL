@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "cohort_id": "REPLACE_WITH_FROZEN_DEVELOPMENT_COHORT",
+  "inference": {
+    "models": {
+      "localizer": {
+        "path": "/absolute/private/models/localizer.pt",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "segmenter": {
+        "path": "/absolute/private/models/segmenter.pt",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "localizer_recipe": {
+      "augmentation": "none",
+      "cache": "none",
+      "component": "pancreas-localizer-preprocessing-v4",
+      "crop": "none",
+      "hu_window": [
+        -100.0,
+        300.0
+      ],
+      "image_interpolation": "bilinear",
+      "max_output_voxels": 64000000,
+      "max_source_voxels": 96000000,
+      "minimum_shape": [
+        96,
+        96,
+        96
+      ],
+      "orientation": "RAS",
+      "padding_mode": "constant_zero",
+      "schema_version": "4.0.0",
+      "spacing_mm": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "target_interpolation": "nearest",
+      "workers": 0
+    },
+    "patch_size": [
+      144,
+      144,
+      144
+    ],
+    "tensor_shape": [
+      144,
+      144,
+      144
+    ],
+    "device": "mps",
+    "max_sampling_voxels": 64000000
+  },
+  "limits": {
+    "seconds_per_case": 600,
+    "total_seconds": 1800,
+    "rss_bytes": 12884901888,
+    "free_floor_bytes": 107374182400
+  },
+  "cases": [
+    {
+      "case_id": "REPLACE_WITH_CASE_ID",
+      "ct": {
+        "path": "/absolute/private/case/ct.nii.gz",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "references": {
+        "pancreas": {
+          "path": "/absolute/private/case/pancreas.nii.gz",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "lesion": {
+          "path": "/absolute/private/case/lesion.nii.gz",
+          "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "allow_unknown_units": false
+      },
+      "reference_state": "unknown",
+      "flags": []
+    }
+  ],
+  "limitations": [
+    "Development evaluation; not an untouched-test PanTS benchmark",
+    "Biological patient separation and SuPreM pretraining/selection membership remain unverified",
+    "Reference-empty annotations do not establish clinical health"
+  ]
+}

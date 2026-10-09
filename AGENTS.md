@@ -1,5 +1,29 @@
 # AGENTS.md — Agent Context
 
+> **October8 second transport/resume:** User stopped training at14:20MDT to disconnect drive.
+> Session96730 FINISHED intentional interrupt/exit130; supervisor cleanup returned, lock released.
+> Final journal21207; last checkpoint21000 external/internal SHA94dd0a065d48054980f618b92ac4ab4f00a94248dc3eefd0f92a62291773dfdd;
+> best checkpoint SHA89847675d2e4637571970ca662b74247e49e652d7b502ea1a800ac9b8d44e5c8.
+> Drive safely unmounted then user remounted and explicitly requested restart. Correct UUID/AC/no
+> existing trainer verified; new resume02 preflight passed1333train/75dev/21000state/best0.3953174294791896.
+> New supervised command LIVE in owned execsession28633; actual update21016 confirmed; initial backup hash matches.
+> Config/evidence outputs/prowl/full-segmenter-resume02-mac-20261008/. New output
+> /Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01_resume02/; independent internal
+> backup under same run name. Same new engine/cohort/geometry/horizon24000; conservative25000s
+> remaining active budget, unchanged storage limits. Preserve parent journal21207tail; replay207updates.
+> No duplicate launch; older LIVE96730 statements are historical. No human-hours change.
+
+> **October8 clock pause/resume:** Quinton stopped10:00MDT and restarted10:57MDT. HOURS-LOG.md
+> closes08:02–10:00 (1h58elapsed), excludes57minutes training-only, opens10:57session for Week1
+> closeout planning. Existing short-pitch assignment exclusion applies within morning interval;
+> its duration is unseparated, so net project hours pending. No machine runtime credited.
+
+> **October 8 human clock update:** Quinton reports finishing October7 around20:15MDT and
+> starting October8 at08:02MDT. HOURS-LOG.md closes Wednesday and opens Thursday. Preserve
+> Wednesday09:00start and15:15–approximately16:27pause;11h15span minus1h12knownpause leaves
+>10h03before other exclusions, NOT credited active hours. Wednesday net remains pending; Thursday
+> finish/breaks/net pending. Monday–Tuesday9–10h unchanged. No overnight/agent runtime credit.
+
 > **October 8 full SuPreM RESUMED / LIVE at08:12MDT:** user requested continuation at school.
 > New resume implementation867b034 restores pinned13500state into separate segment
 > full_segmenter_suprem_mac_01_resume01. Owned execsession96730 LIVE; monitor only, no duplicate.

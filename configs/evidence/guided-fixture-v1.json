@@ -1,0 +1,21 @@
+{
+  "version": "guided-fixture-v1",
+  "notice": "Synthetic demonstration only. These passages are authored test fixtures, not published literature or medical advice.",
+  "passages": [
+    {
+      "id": "fixture-workflow-1",
+      "title": "Synthetic reviewer workflow",
+      "locator": "Fixture paragraph 1",
+      "text": "In this demonstration workflow, the reviewer compares a proposed contour with the displayed source image and records whether correction is needed.",
+      "rights": "PROWL-authored synthetic fixture; display permitted"
+    }
+  ],
+  "questions": [
+    {"id": "workflow", "label": "What does this demonstration's review workflow involve?", "state": "answered", "passage_ids": ["fixture-workflow-1"], "message": "The selected fixture supports the statement below. It does not establish that any patient's contour is correct."},
+    {"id": "contour", "label": "What CT contour considerations does the evidence support?", "state": "insufficient_evidence", "passage_ids": [], "message": "I do not have enough supporting evidence in this fixture set to answer that question. This does not mean that relevant evidence does not exist."},
+    {"id": "measurement", "label": "How reproducible are these measurements?", "state": "insufficient_evidence", "passage_ids": [], "message": "These fixtures provide no evidence about measurement reproducibility. I cannot infer reliability from a displayed measurement or model score."},
+    {"id": "anatomy", "label": "What evidence explains pancreas subregion terminology?", "state": "insufficient_evidence", "passage_ids": [], "message": "There is no supporting anatomy passage in this fixture set. I cannot supply an evidence-backed explanation from these inputs."},
+    {"id": "limitations", "label": "What are the limitations of this segmentation model?", "state": "insufficient_evidence", "passage_ids": [], "message": "This fixture set contains no validated performance evidence for the selected model. I cannot assess its reliability for this patient."},
+    {"id": "diagnosis-boundary", "label": "Boundary demonstration: can PROWL diagnose this patient?", "state": "out_of_scope", "passage_ids": [], "message": "PROWL cannot diagnose this patient or determine malignancy, stage, prognosis, or treatment. It can only answer supported questions within its research review scope. Patient-specific clinical decisions require a qualified clinician."}
+  ]
+}

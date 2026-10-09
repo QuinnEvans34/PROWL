@@ -11,5 +11,7 @@ export default defineConfig({
       if (source.endsWith('/NiivueViewer.jsx')) return fileURLToPath(new URL('./fixtures/MockViewer.jsx', import.meta.url))
     },
   }, react()],
-  server: { host: '127.0.0.1', port: 5179, strictPort: true, open: false },
+  server: { host: '127.0.0.1', port: 5179, strictPort: true, open: false,
+    proxy: { '/evidence-fixture': 'http://127.0.0.1:8012' },
+  },
 })

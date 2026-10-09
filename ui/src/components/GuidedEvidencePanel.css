@@ -1,0 +1,15 @@
+.guided-evidence { margin: 12px 0; padding: 14px 18px; border: 1px solid #3c4d65; border-radius: 8px; background: #121d2d; color: #e6edf5; }
+.guided-evidence summary { cursor: pointer; font-weight: 600; }
+.guided-evidence summary span { display: inline-block; margin-left: 12px; color: #f5ce88; font-size: 12px; }
+.guided-evidence__body { display: grid; gap: 12px; margin-top: 14px; max-width: 900px; }
+.guided-evidence p, .guided-evidence small { line-height: 1.6; margin: 0; }
+.guided-evidence select { width: 100%; min-width: 0; padding: 10px; color: #e6edf5; background: #1d2b40; border: 1px solid #6e819b; border-radius: 4px; }
+.guided-evidence button { justify-self: start; padding: 10px 14px; color: #fff; background: #285e90; border: 1px solid #81b9e9; border-radius: 4px; cursor: pointer; }
+.guided-evidence button:disabled { opacity: .65; cursor: wait; }
+.guided-evidence article { display: grid; gap: 12px; padding-top: 12px; overflow-wrap: anywhere; }
+.guided-evidence h3 { margin: 0; font-size: 16px; }
+.guided-evidence blockquote { margin: 12px 0; padding-left: 14px; border-left: 3px solid #81b9e9; line-height: 1.6; }
+.guided-evidence a { color: #a7d6ff; text-decoration: underline; }
+.guided-evidence [role=alert] { color: #f5ce88; }
+.guided-evidence :focus-visible { outline: 2px solid #f5ce88; outline-offset: 3px; }
+.review-stage:has(.guided-evidence[open]) { overflow-y: auto; }

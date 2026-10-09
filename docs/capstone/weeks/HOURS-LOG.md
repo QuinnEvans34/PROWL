@@ -46,6 +46,18 @@ Completion means the experiment review and next training/data-validation plan ar
 with explicit overlap, coverage, excess-foreground and resource criteria. Planning hours count
 without implying that the proposed experiments or dataset expansion have been executed.
 
+### G3 — Complete the Week 1 training architecture and launch long experiments
+
+Finish the new training pipeline so it can support long runs and checkpoint recovery.
+
+**October 8 work summary:** Worked on the new training pipeline, resumed the long SuPreM run,
+and prepared the Lenovo training handoff, including dataset and checkpoint transfer requirements.
+Reviewed remaining Week 1 work and planned the next development steps.
+
+This goal records the implementation and launch focus, not a claim that every Week 1 item is
+complete. Its hours overlap G1/G2 and must be counted once. October 8 active time remains pending
+an end time and exclusions; no training runtime is credited.
+
 ## Week 1 — October 5–11, 2026
 
 ### Current project-hour entries
@@ -59,38 +71,55 @@ The same hours support both goals; they are counted once rather than allocated t
 | Monday, Oct 5 | G1, G2 | Reviewed project progress and technical requirements, organized development priorities, and planned the segmentation training workflow. | 4 | Quinton estimate |
 | Tuesday, Oct 6 | G1, G2 | Reviewed segmentation experiments, worked through training-readiness issues, evaluated input-adapter and checkpoint tests, and investigated dataset qualification gaps. | 5–6 | Quinton estimate; precise portal value not selected |
 
-**Monday–Tuesday estimated subtotal: 9–10 hours.** Wednesday has an open session below; no net
-Wednesday hours are added until clock-out and excluded time are supplied. Class/instructor meetings remain separate and
-unmeasured. These entries have not been submitted to Project Peek by this chat.
+**Monday–Tuesday estimated subtotal: 9–10 hours.** Wednesday is clocked out; its net active
+hours remain pending reconciliation of other excluded time. Thursday has an open session below.
+Class/instructor meetings remain separate and unmeasured. These entries have not been submitted
+to Project Peek by this chat.
 
-### Open session — Wednesday, October 7
+### Closed clock interval — Wednesday, October 7
 
-Quinton requested a retrospective clock-in of **9:00 a.m. America/Denver** for today, with clock-out
-when he finishes tonight. This records his supplied start; it does not credit the entire school-day
-background interval as active work or confirm the earlier provisional 3–4-hour estimate.
+Quinton supplied a retrospective clock-in of **9:00 a.m. America/Denver** and, on October 8,
+reported finishing at approximately **8:15 p.m. on October 7**. These are user-reported times;
+they do not credit the entire school-day background interval as active work or confirm the earlier
+provisional 3–4-hour estimate.
 
 | Date | Goals | Clock-in | Clock-out | Breaks / excluded time | Net active hours | Status |
 |---|---|---|---|---|---|---|
-| Wednesday, Oct 7, 2026 | G1, G2 | 9:00 a.m. MDT (UTC−06:00) | Pending — supply actual finish tonight | Confirmed pause 3:15–approximately 4:27 p.m.; other schoolwork, breaks, assignments, unattended intervals and overlap pending | Pending | Resumed approximately 4:27 p.m. MDT; open |
+| Wednesday, Oct 7, 2026 | G1, G2 | 9:00 a.m. MDT (UTC−06:00) | Approximately 8:15 p.m. MDT | Confirmed pause 3:15–approximately 4:27 p.m.; other schoolwork, breaks, assignments, unattended intervals and overlap pending | Pending other exclusions | Clocked out; finish reported October 8 |
 
-Session events supplied on October 7:
+Session events (finish supplied retrospectively on October 8):
 
 | Event | America/Denver time | Basis |
 |---|---|---|
 | Initial clock-in | 9:00 a.m. MDT | Quinton's retrospective requested start |
 | Pause | 3:15 p.m. MDT | Quinton: “we stopped working at 3:15” |
 | Resume | Approximately 4:27 p.m. MDT | Quinton: “are back now”; time read 22:27:06 UTC and recorded to the minute |
-| Final clock-out | Pending | Use Quinton's actual finish tonight |
+| Final clock-out | Approximately 8:15 p.m. MDT | Quinton, October 8: “we finished working around 8:15 last night” |
 
 Exclude the approximately **1 hour 12 minute** pause. The earlier 9:00 a.m.–3:15 p.m. window
 is 6 hours 15 minutes of elapsed time, with its schoolwork/background/other exclusions still
-unreconciled; it is not 6.25 credited project hours. Today's active total remains pending.
-The resumed session begins with training-readiness discussion; no new model job has started.
+unreconciled; it is not 6.25 credited project hours. The full clock span is approximately
+11 hours 15 minutes; subtracting the known pause leaves approximately 10 hours 3 minutes
+**before other exclusions**, not a credited active total. Wednesday's net hours remain pending.
 
-At clock-out, record the day's project activities and reconcile pauses. Net hours equal the
-clock interval minus excluded time, counted once across all chats; if that reconstruction is
-uncertain, label the result as Quinton-estimated rather than timed. The Monday–Tuesday subtotal
-stays unchanged until today's net time is confirmed.
+Project discussion covered training readiness, review of earlier experiments, and refocusing on
+long runs through the new architecture. Later agent preparation and training do not extend
+Quinton's supplied 8:15 p.m. finish. The Monday–Tuesday subtotal stays unchanged until Wednesday's
+net active time is confirmed.
+
+### Open session — Thursday, October 8
+
+| Date | Goals | Clock-in | Clock-out | Breaks / excluded time | Net active hours | Status |
+|---|---|---|---|---|---|---|
+| Thursday, Oct 8, 2026 — morning | G1, G2 | 8:02 a.m. MDT (UTC−06:00) | 10:00 a.m. MDT | Short-pitch assignment preparation within this interval remains excluded under the existing rule; duration not yet separated | 1h58 elapsed; net project hours pending assignment exclusion | Clocked out |
+| Thursday, Oct 8, 2026 — resumed | G1, G2 | 10:57 a.m. MDT | Pending | 10:00–10:57 training-only interval excluded; record further breaks | Pending | Open |
+
+Quinton supplied today's 8:02 a.m. start on October 8. No earlier morning check-in, transport,
+overnight training or agent execution is added to this session automatically. He subsequently
+reported stopping at10:00a.m. and resuming at10:57a.m. MDT. The57-minute training-only interval
+is excluded. The first interval spans1h58; it includes What/Why/How assignment work, which the
+existing reporting rule excludes from project hours until its duration is separated. The resumed
+session begins with Week1 software-closeout planning; its finish remains open.
 
 | Day | Estimate feedback |
 |---|---|
@@ -133,6 +162,15 @@ Quinton was asked for his active school/home windows and breaks; revise this est
 | Oct 7–11 | Remaining week | Not yet recorded | Future work | Add actual session entries rather than counting planned budgets. |
 
 ### Correction history
+
+October8,10:57MDT: user reported10:00stop and10:57restart. Closed the8:02–10:00interval
+(1h58elapsed) and excluded57minutes of unattended training. Opened the10:57session; retained
+the existing short-pitch assignment exclusion instead of crediting the entire morning as project
+hours. No new weekly total inferred.
+
+October 8: recorded Quinton's approximate October 7 finish at8:15p.m. MDT and October 8 start
+at8:02a.m. MDT. Closed Wednesday's clock interval, retained the known1h12pause and pending
+other exclusions, and opened Thursday. No unattended runtime or new weekly total credited.
 
 October 7, afternoon pause/resume: recorded Quinton's supplied 3:15 p.m. pause and “back now”
 resumption at approximately 4:27 p.m. America/Denver. Added the known pause as excluded time;

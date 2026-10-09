@@ -51,7 +51,7 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
 | W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; geometry correction verified: 68 outputs/7 unresolved-unit cases; quality work open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
-| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | 68 matched pairs and largest-component experiment complete; reusable evaluation command next | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
+| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | 68 matched pairs and largest-component experiment complete; reusable prediction/scoring/comparison CLI implemented and synthetic-tested | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
 
@@ -170,3 +170,24 @@ specifies one controlled successor run while preserving the active training job.
 sweeps are deferred. Mac priorities are a reusable fixed-cohort evaluation command, completion of
 portable cohort checks, and a saved-prediction connection to the existing viewer. This is a development
 plan, not a claim that the augmentation or successor launch has already been implemented.
+
+October 9 conversation continuation: [fixed-cohort evaluator](../../evaluation-autonomous-cohort.md)
+now wraps the existing CT-only predictor, separate saved-output scorer and summary. It provides pinned
+plans, compatible saved-output reuse, full case/failure accounting and paired report comparisons.
+24 focused tests pass, covering actual synthetic cascade/native scoring and reuse/tamper/resource/identity boundaries;
+no new real-cohort experiment was run. Component/crop-coverage diagnostics remain separate.
+W02-03 tooling is implemented; this does not finish portable cohort admission, unresolved-unit reviews,
+source/anatomy concerns, viewer integration or scientific quality work. Lenovo remains user-reported
+and untouched. Human-hours records remain unchanged.
+
+October 9 planning recenter: Quinton requested proposal review and discussion before selecting today's
+implementation. [Feature and weekly delivery outline](PROJECT-DELIVERY-OUTLINE-2026-10-09.md) records
+the approved scope, current evidence, Week 1 closeout, ten-week deliverables and an early AI-expert DAG
+option. It is a discussion guide, not a second task queue or a blanket completion declaration.
+Today's task remains unselected; protected cohorts remain Week 2's primary commitment.
+
+October 9 ownership clarification: Quinton confirmed that this chat has no training responsibility.
+The other laptop/chat owns training code, setup, launches and monitoring. This chat develops the
+application/data/evidence workflows and tests supplied candidate models when ready. Cross-machine
+cohort identity remains relevant to model consumption, but remote training readiness is not a task
+for this chat. Trello is the required work/grading log; see the weekly working agreement.

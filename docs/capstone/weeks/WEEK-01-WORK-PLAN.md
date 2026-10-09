@@ -242,3 +242,9 @@ is short, prioritize reproducible development and a clear Week2 start over new i
 - **Human hours:** See HOURS-LOG; reconcile exclusions with Quinton.
 - **Week2 top outcomes and first task:** Pending Sunday selection.
 - **Quinton review:** Pending.
+
+October 9 planning recenter: Quinton requested proposal review and discussion before selecting today's
+implementation. [Feature and weekly delivery outline](PROJECT-DELIVERY-OUTLINE-2026-10-09.md) records
+the approved scope, current evidence, Week 1 closeout, ten-week deliverables and an early AI-expert DAG
+option. It is a discussion guide, not a second task queue or a blanket completion declaration.
+Today's task remains unselected; protected cohorts remain Week 2's primary commitment.
