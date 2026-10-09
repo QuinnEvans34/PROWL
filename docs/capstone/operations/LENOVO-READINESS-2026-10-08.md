@@ -1,5 +1,37 @@
 # Lenovo training readiness — October 8, 2026
 
+## Admission pipeline active — October 8, 21:07 MDT
+
+All **1,408 CTs passed**, 46,341,767,190 bytes read in 779.328 seconds. Owned verifier
+20288 finished; no need to repeat it. Frozen launch code commit `4b55583` adds the single
+pipeline after `6c91b14` timed-run support. Five additional admission-gate tests pass:
+47 distinct affected checks now pass, with one explicit native MPS skip.
+
+Owned exec **61716** runs `scripts/diagnostics/launch_lenovo_endurance.py`, with:
+
+- Handoff: `E:/PROWL/transfer/PanTS-8h-20261008/`
+- CT verification: `E:/PROWL/readiness/ct-verify-20261008-a01/`
+- Pipeline logs/pins/authority/config: `E:/PROWL/readiness/lenovo-8h-20261008-a01/`
+- Training output, after all gates: `E:/PROWL/artifacts/full_segmenter_suprem_lenovo_8h_01/`
+- Independent backup root: `C:/Users/quinn/PROWL-Backups/`
+
+Current checkpoint: input binding passed, cache preparation active, first 13 content cases pass
+with zero failures. **No scientific optimizer updates yet.** The pipeline will automatically
+compile the unchanged cohort, compare all newly prepared source hashes and target states to
+the handoff, run a bounded real CUDA/75-case validation/independent-backup/cold-continuation
+qualification, then start exactly one fresh eight-hour training job. Any failure stops it with
+evidence; no retry or cohort shrinkage. Preparation has a two-hour inner resource limit;
+training targets eight elapsed hours after the initial checkpoint/backup with a nine-hour
+watchdog. Do not modify its pinned source/config files or launch a second invocation.
+
+A quiet five-minute in-chat heartbeat, `lenovo-eight-hour-training-watch`, observes this pipeline
+and reports confirmed actual training start, failure/required action, or completion. It removes
+itself on a terminal outcome. This uses the documented scheduled-chat follow-up mechanism, not
+a second training process. Keep the desktop app running, AC connected, both drives attached,
+lid open and vents clear. Ask this chat to stop the owned pipeline before unplugging storage;
+stopping is not a graceful final-save guarantee, and unsaved updates after the last checkpoint
+may need replay. Verify every owned worker has exited before drive removal.
+
 ## Launch requested; eight-hour duration selected
 
 Quinton requested training launch and explicitly selected eight elapsed training hours rather

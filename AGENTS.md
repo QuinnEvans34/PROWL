@@ -1,5 +1,17 @@
 # AGENTS.md — Agent Context
 
+> **October 8 Lenovo admission pipeline LIVE / CT verification complete:** All1408CTs matched
+> transferredSHA256s,46341767190B/779.328s;exec20288 FINISHED,do not repeat. User-approved
+> single pipeline4b55583 launched ownedexec61716 at2026-10-09T03:07:29UTC(Oct8 21:07MDT).
+> E:/PROWL/readiness/lenovo-8h-20261008-a01/pipeline.jsonl is authoritative; bind-inputsPASSED,
+> prepare-cacheACTIVE(first13pass/0fail),no scientificoptimizerupdate yet. One pipeline autonomously
+> gates complete1408cache/sourcehash/targetstate equality,ordered1333/75cohort,realCUDA3updates/
+>75validation+1cold update andindependentC:backup,thenone8htargettraining. Anyfailure stops/no retry.
+> Numerical/source/configproducingpaths hashpinned: DO NOT EDIT while active. Monitorlogs/session
+> only,neverinvokeanotherpipeline.5newgatecheckspass;47focusedtotal/1MPSskip. Heartbeat
+> lenovo-eight-hour-training-watch ACTIVE every5min,quietnormalprogress,notifyactualtrainingstart/
+> failure/completion,removeonterminal. Keep app/AC/D:/E:connected. No publicpush/humanruntimecredit.
+
 > **October 8 Lenovo launch requested / data admission active:** Quinton says starttraining and
 > explicitly selects eightelapsedhours beyond24kifnecessary,retain24kLRschedule/finalratethereafter.
 > Added optional target_seconds with finalcheckpoint,9hwatchdog/8htarget;1M safetyupdateceiling,
