@@ -1,5 +1,16 @@
 # AGENTS.md — Agent Context
 
+> **October 8 JHU drive mounted on Lenovo / PANORAMA storage blocker:** user attached D:/ and
+> requested missing PANORAMA download. D: now readable as JHU-PanTS/APFS,500090011648B total,
+>34608918528B free; standard Get-Volume does not expose it, DriveInfo/filesystem/Python do.
+> PanTS/data has ImageTr,ImageTe,LabelAll,metadata.xlsx; directory metadata only inspected.
+> PANORAMA contains only unverified panorama_labels-main.zip(91264820B), no CT archives there.
+> Pinned four CT archives require194181682590B; smallest46271075077B already exceeds D:free.
+> C:also cannot hold full archive set while retaining100GiBfloor. Need user's empty1TBdrive
+> connected as destination before transfer; no download/repair/deletion/payloadread performed.
+> Read updated LENOVO-READINESS-2026-10-08.md. Prior unmounted text is historical; drive health
+> remains unproven. Environment/CUDA synthetic qualification stands; no scientific run yet.
+
 > **October 8 Lenovo environment/CUDA ready (Windows checkout):** User assigns Lenovo as primary
 > stationary trainer and prioritizes environment readiness. Based on origin/main8d64dda, installed
 > isolated `.venv-prowl-windows` using existing app Python3.12.14; standalone installer was blocked

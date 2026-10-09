@@ -1,5 +1,32 @@
 # Lenovo training readiness — October 8, 2026
 
+## Follow-up: JHU drive is now readable, PANORAMA capacity blocked
+
+After Quinton attached `D:/`, filesystem inspection identifies `JHU-PanTS`, APFS,
+500,090,011,648-byte volume, 34,608,918,528 bytes free. Standard Windows volume/partition
+cmdlets do not expose D:, but .NET DriveInfo, PowerShell filesystem access and Python disk
+usage agree it is available. This is a mount/access observation, not a drive-health qualification.
+
+`D:/PanTS/data/` contains `ImageTr`, `ImageTe`, `LabelAll` and `metadata.xlsx`.
+Only directory metadata was inspected; publisher-test arrays and patient payloads were not read.
+`D:/PANORAMA/` contains only `panorama_labels-main.zip` (91,264,820 bytes), with identity and
+integrity not yet checked. No PANORAMA CT archive was present in that directory.
+
+The retained publisher inventory requires 194,181,682,590 bytes for all four CT archives;
+the smallest alone is 46,271,075,077 bytes. Neither fits D:'s free space. Publisher Zenodo
+records 13715870 and 10999754 still show matching batch 1/4 checksums and rounded sizes.
+The challenge's landing page returned HTTP 403 in the browsing tool. C: had approximately
+219.6 GB free at inspection, only 112.3 GB usable above the existing 100-GiB free-space floor.
+It cannot hold the full CT archive set within that floor, either. Earlier retained extraction
+inventory indicates roughly 195.7 GB of additional expanded output; new download/extraction
+planning must include both archives and expanded data.
+
+PANORAMA download is requested, but no transfer was started because a suitable destination
+is missing. Next: connect the previously mentioned empty 1-TB drive and inspect its identity,
+filesystem and free space for the PANORAMA destination. Preserve the existing PanTS data.
+The prior environment and CUDA qualification remain valid. The earlier unmounted-drive
+observation below is historical.
+
 ## Current outcome — environment and synthetic CUDA qualification passed
 
 The isolated `.venv-prowl-windows` is installed using the app's existing Python 3.12.14
