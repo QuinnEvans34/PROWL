@@ -299,3 +299,62 @@ Next concrete task: resolve one candidate's checkpoint/identity/preprocessing fr
 then implement a CT-only inference runner with native exports and explicit per-case failures. Reuse
 existing checkpoint validation; do not silently load a historical three-class localizer into a binary
 architecture. The completed adapter removes the geometry mismatch without deciding which localizer wins.
+
+## October 9 CT-only execution and leakage safeguards
+
+Quinton intends to share results with Johns Hopkins and explicitly requires avoiding oracle inputs
+and leakage. The executable boundary is now `src/inference/autonomous_cascade_v1.py`:
+
+- `run_case` receives one explicit CT path/hash, case ID, output directory and model options. There is
+  no manifest, label path, reference box, outcome label or scoring input. Extra reference arguments fail.
+- Whole-volume localizer preprocessing is called without a target, then sliding-window model logits
+  produce a native binary mask. That prediction alone determines the stage2 region.
+- Stage2 image preparation, inference and native hard-mask export use the geometryv2 predicted route.
+  No component receives case diagnosis as a model feature. Case ID records lineage only.
+- The runner reads the named NIfTI directly without discovering sibling files. Its current supported
+  input is a finite3D CT with millimetre units; DICOM support is not implied. The localizer's inherited
+  96M-source-voxel cap is still narrower than the segmenter's256M cap; refusals remain visible.
+- A fresh output directory retains success or failure. No empty-localizer rescue with a reference crop.
+  Evaluation/threshold selection are absent from this module and belong in a separate scorer.
+
+Verification:19 focused tests pass in2.94s (two upstream TorchScript deprecation warnings). Three
+new integration tests exercise real preprocessing, sliding-window execution, native restoration and
+NIfTI export using **synthetic deterministic torch models**, not trained clinical models. Predictions
+are identical with masks absent, deliberately incorrect masks present, then masks removed. A Python
+file-open guard rejects reference-directory reads during the test and records that the adjacent mask
+was not opened. Hash-mismatched CTs and reference arguments are rejected; empty localization retains a
+failure report. This is code-level isolation evidence, not an OS sandbox or a trained-model benchmark.
+
+The runner currently takes trusted model objects plus their declared checksums; it does not itself
+load or authenticate checkpoint files. The next integration must bind those objects to verified,
+reviewed checkpoint bytes and recipes before any trained-model result is reported. Neither a supplied
+hash nor `reference_inputs_used=false` is, by itself, evidence of model provenance or zero leakage.
+
+### Separate evidence needed for a scientific claim
+
+1. **Inference inputs:** run the fixed executable with a CT-only directory, model artifacts and writable
+   outputs; reference storage unavailable to that process. Preserve input/output identities. The present
+   synthetic read-guard test is an initial check; real isolated inference remains pending.
+2. **Training membership:** compare evaluation cases/patient groups/known duplicates against every model's
+   training membership, including localizer, segmenter, classifier, ancestors and initialization where known.
+3. **Selection:** development data may select checkpoints, crop margins, thresholds and architecture.
+   Lock those choices before final held-out evaluation; repeated development scores are not test results.
+4. **Scoring:** save predictions first; use a separate scorer that can read references and cannot alter
+   predictions. Count every requested case and include failures. Report oracle/reference-crop comparisons
+   as diagnostics only, never as autonomous performance.
+5. **Limits:** distinguish case-ID disjointness from verified biological patient separation and disclose
+   unresolved pretraining membership. Unlabeled scans demonstrate operational independence, but cannot
+   establish Dice or lesion sensitivity without a suitable independent reference.
+
+Read-only membership observation: CAP-EXP-012 attempt inputs at
+`outputs/prowl/twomm-training-a0636d70-2ea5-4e5f-9167-db28bff562ba-execution/attempt/inputs.json`
+contain113 optimizer and40 evaluator IDs. Optimizer IDs overlap current75 segmenter development IDs
+in0 cases; evaluator IDs overlap in3. This is metadata evidence for that attempt only. Its parent
+reference names the cd6be21f localizer checkpoint at step300; full ancestor/cohort reconciliation and
+checkpoint payload verification remain pending. Do not infer parent separation from child separation.
+The earlier historical scaledmax contamination remains withdrawn. The current SuPreM source-use
+review explicitly leaves pretraining/selection membership unverified; this work does not resolve it.
+
+No new real-data predictions, scientific metrics, training runs, data uploads or Johns Hopkins messages
+were produced. Lenovo training was not changed. Next is the verified trained-model loader/lineage
+binding and a small CT-only diagnostic, followed by independent native scoring on eligible cases.
