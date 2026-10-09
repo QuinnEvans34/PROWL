@@ -1,5 +1,17 @@
 # AGENTS.md — Agent Context
 
+> **October 8 Lenovo launch requested / data admission active:** Quinton says starttraining and
+> explicitly selects eightelapsedhours beyond24kifnecessary,retain24kLRschedule/finalratethereafter.
+> Added optional target_seconds with finalcheckpoint,9hwatchdog/8htarget;1M safetyupdateceiling,
+> lr_horizon_steps24000 with clampatlastoriginalupdate rate. Oldnontimedstateidentity/results
+> preserved;timedresume refusedpendingremainingdurationreconciliation.42focusedchecks pass,
+>1MPSskip;prior resultshape regression fixed/preservedinturn. No scientific launch yet.
+> CTverify ownedexec20288 underway, first575match; E:/PROWL/readiness/ct-verify-20261008-a01/.
+> Do not duplicate that verification. Nextall1408hashpass,localcandidate/cacheaudit(all1408must
+> pass,no silentnewexclusions),cohortcompile,realCUDAprofile/independentbackup/coldrestore,launch.
+> Newhelper scripts diagnostics/{verify_lenovo_ct_handoff,prepare_lenovo_handoff_config,
+> profile_lenovo_real_segmenter}. Keep transferred1333/75/84exclusions/rolebytes fixed.
+
 > **October 8 private handoff RECEIVED/verified:** User requested MagicWormhole reception.
 > Installed0.24.0 in isolated C:/Users/quinn/.cache/prowl-transfer-venv (pipcheckpass), training
 > venv unchanged. Owned receiver87831 completed/reaped. ZIP E:/PROWL/transfer/

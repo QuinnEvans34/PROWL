@@ -49,7 +49,7 @@ def load_experiment(path):
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}', spec['name']):
         raise ValueError('Experiment name must be a simple unique directory name')
     run = spec['run']
-    if set(run) != {'max_updates', 'validate_every', 'checkpoint_every', 'log_every', 'cache', 'max_seconds', 'min_free_bytes'}:
+    if set(run) - {'target_seconds'} != {'max_updates', 'validate_every', 'checkpoint_every', 'log_every', 'cache', 'max_seconds', 'min_free_bytes'}:
         raise ValueError('Unknown or missing run setting')
     for key in ('max_updates', 'validate_every', 'checkpoint_every', 'log_every'):
         if type(run[key]) is not int or run[key] < 1:
@@ -61,6 +61,9 @@ def load_experiment(path):
     for key in ('max_seconds', 'min_free_bytes'):
         if run[key] is not None and (type(run[key]) is not int or run[key] <= 0):
             raise ValueError(f'{key} must be a positive integer or null while planning')
+    if 'target_seconds' in run and (type(run['target_seconds']) is not int or run['target_seconds'] <= 0
+            or run['max_seconds'] is None or run['target_seconds'] >= run['max_seconds']):
+        raise ValueError('Training duration target must be positive and below watchdog limit')
     init = spec['initialization']
     if set(init) != {'kind', 'checkpoint', 'sha256', 'source_review'} or init['kind'] not in ('scratch', 'suprem'):
         raise ValueError('Explicit scratch or SuPreM initialization required')

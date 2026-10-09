@@ -1,5 +1,28 @@
 # Lenovo training readiness — October 8, 2026
 
+## Launch requested; eight-hour duration selected
+
+Quinton requested training launch and explicitly selected eight elapsed training hours rather
+than a potentially shorter 24,000-update ceiling. New optional duration support targets 28,800
+seconds after the initial checkpoint, including the training loop's validation/checkpoint time.
+A separate 32,400-second watchdog and one-million-update safety ceiling bound the job. The
+learning-rate horizon remains 24,000; beyond it the last original update's very small rate is
+held fixed (endurance work, not a claim of meaningful continued learning). Failure/resource/AC
+stops remain enforced. Timed resume refuses automatic timer resets pending an explicit remaining
+duration calculation. Historical non-timed identity/result formats remain unchanged.
+
+Affected checks: 42 distinct passes and one explicit native MPS skip. The first attempt found
+one result-shape regression (35 pass/1 fail/1 skip); restoring the old non-timed return shape
+fixed it (11 affected checks pass/1 skip). Six new duration configuration boundary checks pass.
+Three new local handoff/real-profile helper entry points compile. No full historical-suite replay.
+
+CT verification is running under owned exec session 20288, preserving an append-only per-file
+hash ledger in `E:/PROWL/readiness/ct-verify-20261008-a01/`; first 575 files matched at this
+checkpoint. This is not completion. Next: all 1,408 CT matches, local manifest/cache preparation,
+complete no-new-failures cohort compilation, actual CUDA updates/75-case validation and cold
+continuation from an independently hashed internal backup, then the authorized single long run.
+No cohort shrinkage, scratch fallback, AMP or tensor-size change is implicit. PANORAMA is separate.
+
 ## Private handoff received and verified
 
 Magic Wormhole 0.24.0 is installed in a separate environment,

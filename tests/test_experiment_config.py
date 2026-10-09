@@ -36,6 +36,19 @@ def load(experiment):
     spec, path, _ = experiment; path.write_text(yaml.safe_dump(spec)); return E.load_experiment(path)
 
 
+@pytest.mark.parametrize('target', [0, -1, True, 60, 61])
+def test_endurance_target_must_fit_watchdog(experiment, target):
+    experiment[0]['run']['target_seconds'] = target
+    with pytest.raises(ValueError, match='duration target'): load(experiment)
+
+
+def test_endurance_target_keeps_step_and_runtime_bounds(experiment):
+    experiment[0]['run']['target_seconds'] = 50
+    cfg = load(experiment)
+    assert cfg['_experiment']['run']['target_seconds'] == 50
+    assert cfg['_experiment']['run']['max_seconds'] == 60
+
+
 @pytest.mark.parametrize('steps', [24000, 72000, 100000])
 def test_arbitrary_full_horizon_and_cohort(experiment, steps):
     experiment[0]['run']['max_updates'] = steps

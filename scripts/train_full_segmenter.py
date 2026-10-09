@@ -115,7 +115,8 @@ def worker(cfg, report, resume=None):
     result = execute(session, provider, output / 'execution',
         validate_every=cfg['_experiment']['run']['validate_every'],
         checkpoint_every=cfg['_experiment']['run']['checkpoint_every'], tick=tick,
-        checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation)
+        checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation,
+        target_seconds=cfg['_experiment']['run'].get('target_seconds'))
     copy_backup(output / 'execution' / 'history.jsonl')
     (output / 'result.json').write_bytes(canonical(result))
     copy_backup(output / 'result.json')
@@ -133,6 +134,8 @@ def main():
     args = parser.parse_args(); cfg = E.load_experiment(args.experiment)
     require(bool(args.resume_checkpoint) == bool(args.resume_sha256), 'Resume checkpoint and SHA-256 required together')
     resume = dict(checkpoint=str(Path(args.resume_checkpoint).resolve()), checkpoint_sha256=args.resume_sha256) if args.resume_checkpoint else None
+    require(not (resume and cfg['_experiment']['run'].get('target_seconds')),
+            'Timed-run resume needs an explicitly reconciled remaining duration; automatic timer reset refused')
     if 'full_segmenter' in cfg:
         cfg['paths']['output_dir'] = cfg['full_segmenter']['output_dir']
     report = preflight(cfg, inspect=args.inspect_input_paths or not args.preflight)

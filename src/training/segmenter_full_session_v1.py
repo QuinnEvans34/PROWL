@@ -34,7 +34,7 @@ def identity_for(config, control, device, initialization):
 
 
 def validate_config(c):
-    require(set(c) == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
+    require(set(c) - {'lr_horizon_steps'} == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
                        'warmup_steps', 'lr_schedule'}, 'Full session configuration fields')
     require(type(c['max_steps']) is int and c['max_steps'] > 0, 'Positive training horizon required')
     require(type(c['seed']) is int and 0 <= c['seed'] < 2**32, 'Invalid seed')
@@ -44,6 +44,18 @@ def validate_config(c):
             for k in ('learning_rate', 'weight_decay')) and c['learning_rate'] > 0, 'Invalid optimizer')
     require(type(c['warmup_steps']) is int and 0 <= c['warmup_steps'] < c['max_steps']
             and c['lr_schedule'] in ('constant', 'warmup_cosine'), 'Invalid schedule')
+    if 'lr_horizon_steps' in c:
+        require(type(c['lr_horizon_steps']) is int and c['warmup_steps'] < c['lr_horizon_steps'] <= c['max_steps'],
+                'Invalid independent learning-rate horizon')
+
+
+def learning_rate_factor(c, step):
+    if c['lr_schedule'] == 'constant': return 1.
+    if step < c['warmup_steps']: return (step + 1) / max(1, c['warmup_steps'])
+    horizon = c.get('lr_horizon_steps', c['max_steps'])
+    # Retain the last original update's rate after the selected schedule is exhausted.
+    schedule_step = min(step, horizon - 1)
+    return .5 * (1 + math.cos(math.pi * (schedule_step-c['warmup_steps']) / (horizon-c['warmup_steps'])))
 
 
 class Session:
@@ -153,9 +165,7 @@ class Session:
         self._clean(); name = self.next_member()
         b, x, y = self._batch(provider, name, 'train', 'optimizer')
         c = self.config
-        if c['lr_schedule'] == 'constant': factor = 1.
-        elif self.step < c['warmup_steps']: factor = (self.step + 1) / max(1, c['warmup_steps'])
-        else: factor = .5 * (1 + math.cos(math.pi * (self.step-c['warmup_steps']) / (c['max_steps']-c['warmup_steps'])))
+        factor = learning_rate_factor(c, self.step)
         for group in self.optimizer.param_groups: group['lr'] = c['learning_rate'] * factor
         self.dirty = True
         with self.rng_scope():
