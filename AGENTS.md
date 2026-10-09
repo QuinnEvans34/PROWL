@@ -1,5 +1,14 @@
 # AGENTS.md — Agent Context
 
+> **October 9 Lenovo continuation LIVE:** Producing commit8e69054, ownedexec71115 launched
+> 2026-10-09T13:10:58UTC; monitor only. New journal E:/PROWL/readiness/lenovo-8h-20261009-a02/pipeline.jsonl.
+> Parent/control/prefix admission passed; continuation.json binds1101reused/307remaining, first
+> retained batches hash-match and technical_pass confirmed. Preparation ACTIVE; no long-run updates
+> yet and8hclock NOT started. 18focused tests pass (17continuation/cohort/gate+1provider regression).
+> Heartbeat lenovo-eight-hour-training-watch ACTIVE5min/quiet normal progress; notify trainingstart,
+> failure/completion and remove atterminal. Do not change pinned src/scripts/configs or duplicate jobs.
+> Preserve a01;61716finished. Keep app/AC/D:/E:connected. No Mac action/publicpush/humanruntimecredit.
+
 > **October 9 Lenovo continuation approved / prepared:** Quinton says "Ok, lets start that now."
 > Added explicit cache-preserving continuation: exact stopped ordered-prefix/control/source-stat
 > binding; hash/read completed derived batches against old ledger, no completed CT replay; missing,

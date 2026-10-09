@@ -2,6 +2,12 @@
 
 ## October 9 authorized cache-preserving continuation
 
+**Live:** commit `8e69054`, owned exec **71115**, started October 9 at 13:10:58 UTC.
+Parent/control/prefix validation passed; initial retained batches match their parent hashes.
+Preparation is active, not scientific training; the eight-hour clock has not started.
+An additional existing input-provider regression passed (18 focused checks total).
+The five-minute quiet monitor `lenovo-eight-hour-training-watch` is active for this new attempt.
+
 Quinton requested starting the continuation after the preparation timeout. A new attempt at
 `E:/PROWL/readiness/lenovo-8h-20261009-a02` will preserve the original failed audit and candidate
 configuration. The parent must be stopped/reaped and have an exact successful ordered prefix,
