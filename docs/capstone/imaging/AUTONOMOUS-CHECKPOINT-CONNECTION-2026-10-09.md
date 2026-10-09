@@ -102,3 +102,60 @@ shared accelerator lock. Do not replay completed requests or overwrite their res
    limitations before any Johns Hopkins performance claim.
 
 Lenovo training was untouched. No weights/data were published and no external messages were sent.
+
+## October 9 debugging: independent native scoring and matched crop diagnostic
+
+Added `src/inference/saved_prediction_scoring.py`. It reads saved predictions and pinned references
+without importing models or changing predictions. It rejects changed bytes, incompatible grids,
+invalid codes and unsupported units. Empty lesion references produce undefined Dice/recall plus false
+positive volume; they are not treated as verified healthy cases. Four focused tests passed, including
+known overlap arithmetic, lesion precedence, grid/hash rejection and explicit unknown-unit handling.
+
+Both original pancreas masks declare unknown spatial units; both CTs and lesion masks declare mm.
+The scorer initially refused this. The diagnostic now explicitly records the assumption that these
+pancreas masks share the mm units of their exactly matching shape/affine. No header or label was edited.
+The saved prediction hashes remained unchanged before/after scoring. Private evidence:
+`verified-scores.json`, `score_saved.py`, and `score-log.txt` in the diagnostic folder above.
+
+| Case | Pancreas+lesion union Dice | Lesion Dice | Lesion recall | Lesion false-positive mL |
+|---|---:|---:|---:|---:|
+| A01 / 1389 | 0.000 | undefined (empty reference) | undefined | 68.556 |
+| A02 / 1070 | 0.760 | 0.726 | 0.635 | 0.541 |
+
+A01 has only74 pancreas-reference voxels (approximately0.250mL), with zero overlap with the
+predicted union. Source CT and both label SHA256s exactly match the retained training-preparation
+metadata. The historical manifest also records the same110×125×116 CT dimensions. This rules out
+an accidental new input-copy change and a simple native-grid mismatch; it does **not** prove correct
+anatomical pairing or identify the upstream cause. Visual non-abdominal appearance plus tiny organ
+annotation requires source review. No case was silently excluded, no frozen manifest/split/cache was
+changed, and the source archives were not re-extracted or independently rehashed in this diagnostic.
+Previous mechanical admission checked nonempty pancreas and lesion survival, not anatomical validity.
+
+For A02 only, a separate, explicitly reference-assisted diagnostic used the same segmenter weights,
+preprocessing and native export, substituting the reference pancreas box. This is an oracle comparator,
+never an autonomous prediction or deployable result. Both region boxes cover100% of annotated pancreas
+and lesion voxels. Results:
+
+| Crop | Union Dice | Lesion Dice | Lesion recall | Lesion false-positive mL |
+|---|---:|---:|---:|---:|
+| Predicted region (original A02) | 0.760 | 0.726 | 0.635 | 0.541 |
+| Reference region (diagnostic) | 0.826 | 0.703 | 0.909 | 3.195 |
+
+The predicted region did not cut off the reference target on this example. Differences in crop
+context/resampling affect predictions; higher Dice here accompanies lower lesion recall, and is not
+evidence that localization always improves performance. One adaptively selected development case
+cannot establish general quality, equivalence to published results or absence of source leakage.
+
+The first comparator helper failed before a model forward because it treated the loader's
+`(model, receipt)` return as a model. That helper error was corrected in a fresh retained attempt.
+The successful comparator performed one inference, zero updates, took2.669301s and peaked at
+1,511,948,288 sampled owned bytes; workers were reaped under600s/12GiB supervision. Evidence includes
+`reference-diagnostic.log`, `resources-reference-diagnostic.json` (failed attempt), and
+`reference-diagnostic-a02-retry01/result.json`, helper source and retry resource/log files (success).
+
+**Current conclusion:** The CT-only connection works on the tested abdominal CT, and there is no
+observed crop truncation or native-grid mismatch explaining its result. The system is not yet robust
+on unsuitable inputs. Further work is fixed-cohort evaluation and anatomical/source review, followed
+by an evidence-based input-quality/localizer failure policy. A hardcoded case exclusion or an arbitrary
+organ-volume cutoff would conceal the problem rather than solve it. Lenovo training remains untouched;
+its historical cohort should be reviewed against this finding before interpreting final metrics.

@@ -366,3 +366,14 @@ and full-segmenter checkpoints now run through CT-only inference/native export o
 cases. One visibly non-abdominal input produced unsupported organ predictions and remains a retained
 failure finding; the second showed abdominal anatomy. Accuracy is unscored. The next step is separate
 reference scoring and input-anatomy/provenance investigation, not another synthetic connection claim.
+
+### October 9: first separate native scores and crop comparison
+
+See [checkpoint connection diagnostic](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) for retained
+results and limitations. The abdominal diagnostic achieved lesion Dice0.726 from CT-only prediction;
+both predicted and reference regions contained all annotated targets. The reference-assisted comparator
+had Dice0.703 with higher recall and more false positives. These are selected development diagnostics.
+The suspicious scan has a74-voxel pancreas annotation and severe autonomous false positives. Its CT/label
+hashes match prior preparation, but anatomical validity is unresolved. Frozen cohorts and Lenovo training
+were not changed. Added independently tested, model-free native scoring; robust unsupported-input
+handling and fixed-cohort evaluation remain unfinished.
