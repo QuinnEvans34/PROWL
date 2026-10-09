@@ -1,5 +1,28 @@
 # Lenovo training readiness — October 8, 2026
 
+## Private handoff received and verified
+
+Magic Wormhole 0.24.0 is installed in a separate environment,
+`C:/Users/quinn/.cache/prowl-transfer-venv`; pip check passes. The CUDA environment was
+not modified. User-authorized receive completed in owned session 87831 through the
+encrypted relay, with receiver exit zero. No Mac job was controlled from this machine.
+
+Received `E:/PROWL/transfer/PROWL-Lenovo-PanTS-8h-private-20261008.zip` matches the
+user-supplied SHA256 `047032713173bce4264eacbb47404fcf0b48fffd806f6700c1eb4c7cc4dab56a`.
+Archive validation checked 4,252 entries, 440,931,704 expanded bytes, destination containment,
+case-insensitive duplicate paths and symbolic-link rejection before extraction into fresh
+`E:/PROWL/transfer/PanTS-8h-20261008/`. The verifier source was inspected; inventory paths
+were checked before execution without an execution-policy override. It reports **4,251
+payload files verified**, including labels and the pinned pretrained checkpoint.
+
+This resolves the metadata/label/weights transfer blocker, not full data admission. Next:
+independently match the 1,408 admitted CT hashes against the supplied source-file inventory,
+then prepare Windows observations/cache/review against the protected 1,333/75 split. No CT
+arrays, pretrained model state or training job were opened/launched during transfer verification.
+Keep the handoff private and external to Git. Its README's proposed eight-hour cap plus
+24,000-update ceiling is not equivalent to the user's at-least-eight-hour endurance request;
+reconcile the duration design before launch while preserving safety stops and LR-horizon semantics.
+
 ## E: connected; PANORAMA acquisition and real-data endurance request
 
 Quinton connected `E:/`, requested PANORAMA there and selected real-data PanTS training

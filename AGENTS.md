@@ -1,5 +1,17 @@
 # AGENTS.md — Agent Context
 
+> **October 8 private handoff RECEIVED/verified:** User requested MagicWormhole reception.
+> Installed0.24.0 in isolated C:/Users/quinn/.cache/prowl-transfer-venv (pipcheckpass), training
+> venv unchanged. Owned receiver87831 completed/reaped. ZIP E:/PROWL/transfer/
+> PROWL-Lenovo-PanTS-8h-private-20261008.zip SHA256
+>047032713173bce4264eacbb47404fcf0b48fffd806f6700c1eb4c7cc4dab56a matches human supplied.
+> Safe archive paths checked4252entries/440931704expandedB; extracted fresh PanTS-8h-20261008/.
+> Inspected verifier and bounded inventory paths; verifier passed4251files including2816labels/
+> pinnedSuPreM. NoCTreads/modelcalls/training. Next1408CThashchecks/newWindowscacheandreview.
+> Handoff README proposes8hCAP/24kceiling whereas user askedATLEAST8h: reconcile duration before
+> launch, do not silently treat stepceiling as endurance completion.1333train/75dev/84exclusions
+> and development-onlysource limitations fixed. Private files stayexternal/notGit; no publicpush.
+
 > **October 8 E: acquisition / real endurance request:** User connected E: and selected real PanTS
 > training for at least8hours, not synthetic. E:QUINN/NTFS/TOSHIBAUSB,1000202039296B total,
 >1000064032768B initialfree; volumeGUID3daa84f0-0000-0000-0000-100000000000. NewWindowsCT-only
