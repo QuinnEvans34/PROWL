@@ -1,5 +1,23 @@
 # AGENTS.md — Agent Context
 
+> **October 8 Lenovo environment/CUDA ready (Windows checkout):** User assigns Lenovo as primary
+> stationary trainer and prioritizes environment readiness. Based on origin/main8d64dda, installed
+> isolated `.venv-prowl-windows` using existing app Python3.12.14; standalone installer was blocked
+> and never executed. Torch2.11.0+cu128/MONAI1.6.1/MLflow3.17.0 plus imaging/test deps installed;
+> pip check and CUDA kernel/import checks pass. Full route ported to CUDA float32/TF32disabled,
+> CUDA RNG recovery, Windows lock/AC/awake/job supervision and write-through checkpoint replace.
+> Portable full batch avoids frozen macOS resolver imports; legacy pilot producing files preserved.
+>49distinct focused tests pass/1explicit MPS-native skip; prior missing-dependency/import/CSVfixture
+> failures retained. 144cube invented profile:3producerupdates+1evaluation,1coldcontinuationupdate;
+> exact restored full state/next-updatefloat32 tolerance pass(max2.086162567138672e-7),peakCUDA
+> allocated3454467072B/reserved3879731200B;bothworkersreaped. No realdata/SuPreMpayloads/scientificrun.
+> Read docs/capstone/operations/LENOVO-READINESS-2026-10-08.md and docs/training-windows.md;
+> evidence outputs/prowl/windows-readiness-20261008/. Mac running-session notes below belong to
+> the other machine; do not take them over here. Old500GB USBdrive is APFS/unmounted onWindows;
+> health unproven/no recovery or payload reads. Need usable target storage, verifieddata/cohorts,
+> portablepath observations,source-use/weights,realbatch and independentbackup admission next.
+> No public push or human-runtime credit. Existing app runtime must remain available for this venv.
+
 > **October 8 full SuPreM RESUMED / LIVE at08:12MDT:** user requested continuation at school.
 > New resume implementation867b034 restores pinned13500state into separate segment
 > full_segmenter_suprem_mac_01_resume01. Owned execsession96730 LIVE; monitor only, no duplicate.

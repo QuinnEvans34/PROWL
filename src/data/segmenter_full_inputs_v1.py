@@ -10,7 +10,7 @@ import numpy as np
 
 from src.data import segmenter_geometry_v2 as geometry
 from src.data import segmenter_content_v1 as content
-from src.data import segmenter_training_inputs_v1 as boundary
+from src.data import segmenter_full_batch_v1 as boundary
 from src.data.manifest_records import canonical, digest
 from src.data.source_inventory_records import require
 from src.training.experiment_config import ids, resolve, sha256

@@ -1,5 +1,10 @@
 # Windows Laptop — Machine Specs (secondary training machine)
 
+> October 8 update: Quinton selected this as the primary stationary training machine. The
+> Windows/CUDA environment and a 144-cube synthetic fit/restart check now pass; see
+> [readiness evidence](docs/capstone/operations/LENOVO-READINESS-2026-10-08.md).
+> The software table below preserves the original October 7 inventory.
+
 > **For the main machine / any AI session:** this is the second machine in the PROWL project, a Windows laptop with an
 > **NVIDIA RTX 4060 (8 GB VRAM, CUDA)**. It is *not* the MacBook Pro (Apple M5 Pro, MPS, 64 GB unified) described in
 > `CLAUDE.md`. Use this file when planning jobs that will run here.

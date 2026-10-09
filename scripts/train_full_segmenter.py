@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Supervised full-cohort capstone session/executor entry point; no legacy training loop."""
 import argparse
-import fcntl
 import json
 import os
 from pathlib import Path
@@ -16,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 from src.training import experiment_config as E
 from src.data.manifest_records import canonical
 from src.data.source_inventory_records import require
+from src.operations.full_training_platform import durable_replace, training_guard, require_ac
 
 
 def session_config(cfg):
@@ -90,10 +90,7 @@ def worker(cfg, report, resume=None):
         with path.open('rb') as src, temp.open('xb') as dest:
             shutil.copyfileobj(src, dest); dest.flush(); os.fsync(dest.fileno())
         require(E.sha256(temp) == E.sha256(path), 'Backup verification failed')
-        os.replace(temp, backup / path.name)
-        fd = os.open(backup, os.O_RDONLY)
-        try: os.fsync(fd)
-        finally: os.close(fd)
+        durable_replace(temp, backup / path.name)
     def backup_checkpoint(path):
         copy_backup(path)
         copy_backup(path.parent / 'history.jsonl')
@@ -155,15 +152,18 @@ def main():
     if args.worker:
         require(os.environ.get('PROWL_FULL_SUPERVISED') == '1', 'Use the supervised entry point')
         print(json.dumps(worker(cfg, report, resume))); return 0
-    from src.operations.segmenter_duration_dispatch_v1 import watch
-    lock_path = ROOT / 'outputs/prowl/.mps-profile.lock'
+    if os.name == 'nt':
+        from src.operations.full_training_platform import watch_windows as watch
+    else:
+        from src.operations.segmenter_duration_dispatch_v1 import watch
+    lock_path = ROOT / ('outputs/prowl/.cuda-training.lock' if os.name == 'nt' else 'outputs/prowl/.mps-profile.lock')
     lock_path.parent.mkdir(parents=True, exist_ok=True)
-    with lock_path.open('a') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        require('AC Power' in subprocess.check_output(['pmset', '-g', 'batt'], text=True), 'AC power required')
+    with training_guard(lock_path):
         env = dict(os.environ, PYTORCH_ENABLE_MPS_FALLBACK='0', PROWL_FULL_SUPERVISED='1')
-        command = ['/usr/bin/caffeinate', '-dimsu', sys.executable, str(Path(__file__).resolve()),
+        command = [sys.executable, str(Path(__file__).resolve()),
                    '--experiment', str(Path(args.experiment).resolve()), '--worker']
+        if os.name != 'nt':
+            command = ['/usr/bin/caffeinate', '-dimsu'] + command
         if resume:
             command += ['--resume-checkpoint', resume['checkpoint'], '--resume-sha256', resume['checkpoint_sha256']]
         full = cfg['full_segmenter']; last_scan = [0.]
@@ -171,6 +171,7 @@ def main():
             E.check_resources(cfg, elapsed=0)
             # The inherited watchdog also bounds stalled kernels and owned process memory.
             if time.monotonic() - last_scan[0] >= 30:
+                require_ac()
                 require(tree_bytes(full['cache_dir']) <= full['cache_max_bytes'], 'Derived cache budget exceeded')
                 require(tree_bytes(full['backup_dir']) <= full['backup_cap_bytes'], 'Backup budget exceeded')
                 last_scan[0] = time.monotonic()

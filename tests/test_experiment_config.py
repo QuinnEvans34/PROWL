@@ -22,7 +22,7 @@ def experiment(tmp_path, monkeypatch):
         path = tmp_path / f'{key}.txt'; path.write_text('\n'.join(values)); cohort[key] = str(path)
     path = tmp_path / 'manifest.csv'; cohort['manifest'] = str(path)
     payload = tmp_path / 'invented-placeholder'; payload.write_text('metadata fixture, never decoded')
-    with path.open('w') as stream:
+    with path.open('w', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=['case_id', 'ct_path', 'pancreas_path', 'lesion_path']); writer.writeheader()
         for name in names['train_ids'] + names['development_ids']:
             writer.writerow(dict(case_id=name, ct_path=str(payload), pancreas_path=str(payload), lesion_path=str(payload)))

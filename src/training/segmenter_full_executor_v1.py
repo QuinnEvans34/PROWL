@@ -12,6 +12,7 @@ import torch
 
 from src.data.source_inventory_records import require
 from src.training.segmenter_full_session_v1 import Session
+from src.operations.full_training_platform import durable_replace
 
 
 def atomic_checkpoint(path, session, *, best_score, history_bytes):
@@ -19,10 +20,7 @@ def atomic_checkpoint(path, session, *, best_score, history_bytes):
     state = dict(session=session.state(), best_score=best_score, history_bytes=history_bytes)
     with temporary.open('xb') as stream:
         torch.save(state, stream); stream.flush(); os.fsync(stream.fileno())
-    os.replace(temporary, path)
-    fd = os.open(path.parent, os.O_RDONLY)
-    try: os.fsync(fd)
-    finally: os.close(fd)
+    durable_replace(temporary, path)
 
 
 def execute(session, provider, output, *, validate_every, checkpoint_every, tick=lambda:None,

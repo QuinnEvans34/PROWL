@@ -73,7 +73,7 @@ def test_incompatible_resume_refused(interrupted, change):
 @pytest.mark.skipif(os.environ.get('PROWL_NATIVE_RESUME_TEST')!='1',reason='Explicit native qualification only')
 def test_fresh_process_mps_optimizer_continuation(tmp_path):
     import numpy as np
-    from src.data.segmenter_training_inputs_v1 import Batch, _TOKEN
+    from src.data.segmenter_full_batch_v1 import Batch, _TOKEN
     from src.data.manifest_records import canonical,digest
     class Native(Invented):
         def __init__(self):
@@ -90,7 +90,7 @@ def test_fresh_process_mps_optimizer_continuation(tmp_path):
 import sys,json,numpy as np,torch
 from pathlib import Path
 from src.training.segmenter_full_session_v1 import Session
-from src.data.segmenter_training_inputs_v1 import Batch,_TOKEN
+from src.data.segmenter_full_batch_v1 import Batch,_TOKEN
 from src.data.manifest_records import canonical,digest
 p=Path(sys.argv[1]);state=torch.load(p/'before.pt',map_location='cpu',weights_only=True)
 class Provider:

@@ -7,7 +7,7 @@ import numpy as np
 
 from src.data.manifest_records import canonical,digest
 from src.data.source_inventory_records import require
-from src.data import segmenter_training_inputs_v1 as boundary
+from src.data import segmenter_full_batch_v1 as boundary
 from src.data.segmenter_full_inputs_v1 import Inputs
 from src.training.experiment_config import resolve,ids,sha256
 
