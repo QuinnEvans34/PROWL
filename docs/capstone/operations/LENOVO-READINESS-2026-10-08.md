@@ -1,5 +1,51 @@
 # Lenovo training readiness — October 8, 2026
 
+## E: connected; PANORAMA acquisition and real-data endurance request
+
+Quinton connected `E:/`, requested PANORAMA there and selected real-data PanTS training
+for at least eight hours. E: is QUINN, NTFS, TOSHIBA External USB 3.0, volume GUID
+`3daa84f0-0000-0000-0000-100000000000`, total 1,000,202,039,296 bytes and initially
+1,000,064,032,768 bytes free. This resolves the archive-destination capacity blocker.
+
+The new Windows CT-only downloader preserves the historical Mac acquisition implementation.
+Nine new unit checks pass (HTTP range/size/encoding rejection, hash verification, complete
+partial promotion and oversize preservation). It reserves 512 GiB, binds the volume GUID,
+holds a Windows acquisition lock/awake request, requires AC, retains failures/partials,
+validates pinned sizes and publisher MD5 and records local SHA256. No extraction, source
+activation or label qualification occurs. Initial launch at 2026-10-09T02:33:24Z, owned
+exec session 48517, destination `E:/PROWL/sources/panorama/acquisition-20261008/`;
+follow its existing attempt JSONL before any action. No automatic duplicate/retry.
+
+The eight-hour real-data training job has **not** launched. The original protected splits,
+current Mac cohort manifest/review and pretrained checkpoint are absent from this checkout.
+`D:/PanTS/data/ImageTr/PanTS_00000001/ct.nii.gz` exists (40,442,531-byte metadata observation);
+the `D:/PanTS/data/LabelAll` directory lists no entries. This is not a label/content qualification.
+No patient arrays were opened. Do not create a fresh random split to substitute for the Mac split.
+Plan primary/cache on E:, independent checkpoint backups on C:, existing 100-GiB training
+free floors. Actual prepared-batch and backup qualification precedes launch. The requested
+eight hours is an endurance target, not authority to ignore errors, AC or resource stops;
+step/time configuration must avoid a shorter fixed-step run masquerading as an eight-hour test.
+
+Quinton authorized a request to the Mac Codex instance. The app's available chat inventory
+does not expose that Mac training chat; no message has been sent. Ready-to-relay request:
+
+> Prepare a minimal read-only handoff for the Lenovo's requested eight-hour real-data PanTS
+> training test. Do not interrupt or take over the Mac training job. Include the exact original
+> `outputs/splits/train.txt`, `val.txt`, `test.txt`; the current selected train/development IDs,
+> manifest, cohort review, exclusions and source-use review from the admitted full-segmenter run
+> (including dependencies of `outputs/prowl/full-segmenter-inputs-mac-20261007/`, not just that
+> initial candidate directory). Provide a relative-path inventory with byte sizes and SHA256s,
+> producing Git revision and run configuration. Explain which case labels are needed and
+> where to obtain their original pancreas and pancreatic_lesion files: the Lenovo's D: has
+> ImageTr CTs but LabelAll lists empty. Include or identify the pinned SuPreM checkpoint
+> `supervised_suprem_segresnet_2100.pth` (expected SHA256
+> `2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3`) and development-use
+> limitations if using the same initialization. Do not publish patient data, weights, secrets
+> or runtime artifacts to GitHub. Return the small metadata handoff and a private transfer
+> plan; Lenovo destination is `E:/PROWL/transfer/`. Mac absolute paths/inodes will be rebound
+> and checked locally, not accepted as Windows observations. The Lenovo CUDA environment and
+> 144-cube synthetic save/restore smoke test have already passed; no real training has launched.
+
 ## Follow-up: JHU drive is now readable, PANORAMA capacity blocked
 
 After Quinton attached `D:/`, filesystem inspection identifies `JHU-PanTS`, APFS,

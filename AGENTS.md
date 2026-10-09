@@ -1,5 +1,17 @@
 # AGENTS.md — Agent Context
 
+> **October 8 E: acquisition / real endurance request:** User connected E: and selected real PanTS
+> training for at least8hours, not synthetic. E:QUINN/NTFS/TOSHIBAUSB,1000202039296B total,
+>1000064032768B initialfree; volumeGUID3daa84f0-0000-0000-0000-100000000000. NewWindowsCT-only
+> PANORAMA downloader launched in ownedexec48517, E:/PROWL/sources/panorama/acquisition-20261008/.
+> Four pinned archives194181682590B, publisherMD5/localSHA256,512GiBreserve,no extraction;
+>9newunitchecks pass. Check its existing log/session; do not launch duplicate. Labelsnotqualified.
+> RealtrainingNOTlaunched: originalsplitfiles/currentMacmanifest/pretrainedweights absent; D:LabelAll
+> metadata listing empty, CTcase1file exists(metadataonly). User authorizes request to MacCodex;
+> list_threads exposes noMactrainingchat, so no message sent. Need userrelay/accessible destination.
+> Read current LENOVO-READINESS for exact handoff. Preserve roles, no newrandomsplit/Macjobtakeover,
+> no publicpush.8h intent does not bypass error/resource/AC stops; exactdurationconfig pending inputs.
+
 > **October 8 JHU drive mounted on Lenovo / PANORAMA storage blocker:** user attached D:/ and
 > requested missing PANORAMA download. D: now readable as JHU-PanTS/APFS,500090011648B total,
 >34608918528B free; standard Get-Volume does not expose it, DriveInfo/filesystem/Python do.
