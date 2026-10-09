@@ -5,6 +5,15 @@
 **Target window:** October 8–22, 2026; review October 11 and 18; decision checkpoint October 22  
 **Status:** Living investigation; experiments proposed, no new jobs launched by this document
 
+## October 9 ownership update
+
+Quinton reports training running on Lenovo and the entire dataset downloaded there. All long training
+work now belongs to Lenovo; Mac develops/integrates/evaluates using its4TB drive. This supersedes the
+optional dual-laptop weekend training plan below. The Mac's resume02 result reports24,000 completed
+updates with best reference-crop development Dice0.3953174294791896. Lenovo's implementation/results
+are pending a handback here; no remote action or restart follows from this planning update.
+See the [Week2 development plan](../weeks/WEEK-02-WORK-PLAN.md).
+
 ## Purpose and proposal alignment
 
 Choose an evidence-backed baseline that turns a raw CT into pancreas and lesion predictions without

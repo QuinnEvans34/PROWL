@@ -42,6 +42,16 @@ gap. The appendix allows single-stage, cascaded or other anatomy-aware models; t
 using existing work, then decide from measured performance. Matching published PanTS performance is
 Quinton's research aspiration, not a promised score or a Week1 acceptance condition.
 
+## October 9 regroup
+
+Quinton reports Lenovo training is running and its full dataset is downloaded. Lenovo now owns all
+long training jobs; Mac focuses on development/evaluation with the4TB drive. This supersedes the
+October8 optional two-machine training plan and empty-Lenovo-drive status below, which are historical.
+Mac resume02 result reports24,000 updates complete; best reference-crop development Dice0.3953174294791896.
+The Week1 outline is prepared; unchecked closeout criteria remain evidence to reconcile, not a reason
+to restart architecture planning. [Week2 development plan](WEEK-02-WORK-PLAN.md) is drafted early for
+Sunday review, anchored to protected cohorts plus an autonomous prediction integration slice.
+
 ## Outcomes we need by Sunday
 
 - [ ] A clear, current account of the product architecture and implemented versus missing components.
