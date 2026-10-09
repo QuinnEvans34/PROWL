@@ -201,6 +201,9 @@ local progress.
 
 ### Minimum software work for the first Lenovo job
 
+Implementation handoff: [Lenovo training setup specification](../operations/LENOVO-TRAINING-SETUP-SPEC.md).
+Quinton will relay the Lenovo chat's readiness report for review before selecting the long experiment.
+
 The current new trainer is not yet ready to launch unchanged on Lenovo:
 
 - `segmenter_full_session_v1.py` accepts CPU/MPS only. Add CUDA execution and CUDA random-state
