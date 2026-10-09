@@ -358,3 +358,11 @@ review explicitly leaves pretraining/selection membership unverified; this work 
 No new real-data predictions, scientific metrics, training runs, data uploads or Johns Hopkins messages
 were produced. Lenovo training was not changed. Next is the verified trained-model loader/lineage
 binding and a small CT-only diagnostic, followed by independent native scoring on eligible cases.
+
+## October 9 trained-model connection completed
+
+See [checkpoint connection results](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md). Actual CAP-EXP-012
+and full-segmenter checkpoints now run through CT-only inference/native export on two development
+cases. One visibly non-abdominal input produced unsupported organ predictions and remains a retained
+failure finding; the second showed abdominal anatomy. Accuracy is unscored. The next step is separate
+reference scoring and input-anatomy/provenance investigation, not another synthetic connection claim.
