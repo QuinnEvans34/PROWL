@@ -265,3 +265,37 @@ plan. The present training run is not changed by these edits.
 
 No new downloads, model jobs, source mutations or changes to the current training run were performed
 to create this plan. Update this document rather than create competing architecture investigation queues.
+
+## October 9 first implementation result
+
+Implemented `src/data/segmenter_predicted_roi_v2.py`: a native binary localizer prediction defines
+an all-support10mm region using geometryv2. Image-only preparation shares the current trainer's
+physical mapping and HU normalization; hard three-class predictions can return to the native grid.
+The adapter accepts no reference mask. It checks prediction/source/grid identity and refuses empty
+localization, altered transforms, invalid image values and unknown output classes.
+
+`segmenter_geometry_v2.plan_geometry` now explicitly distinguishes predicted versus reference origin;
+its default retains existing training-record behavior. Added image-only `prepare_image`; the training
+preprocess numerical path was not changed. The v1 adapter remains unchanged. V2 restores hard codes,
+not interpolated probability maps; choose and document that distinction in the eventual scorer.
+
+Verification:74 focused CPU tests passed in1.11s across predicted-ROI v1/v2 and geometryv2, including
+seven new v2 cases. Tilted/sheared synthetic images match the existing training image preparation,
+known tensor targets return to the expected native region, and failure cases are retained as errors.
+No patient/model inference, trained-checkpoint loading, GPU work or new training was used. Lenovo's
+running code was not changed. This is an implemented connection component, not an end-to-end result.
+
+Inventory findings: the historical localizer run-info is retained under
+`outputs/checkpoints/pants-level45/runs/localizer_fullscan_scaledmax__20260717_235833/run_info.txt`:
+16k updates,96-cubed full-scan patches,1.5mm spacing,transfer initialization,DiceFocal,seed42,scaledmax.
+Its leakage history remains disqualifying for the withdrawn validation claim. A filename search of
+repo checkpoints and mounted artifact filenames found that record but did not locate a matching
+historically named weight file; this does not establish that no weight exists in hashed stores.
+The newer localizer code uses a binary SegResNet and sliding-window prediction. CAP-EXP-010/012
+have retained audit evidence, but selecting/restoring an eligible checkpoint and its preprocessing
+still remains to be connected to the new adapter and current segmenter.
+
+Next concrete task: resolve one candidate's checkpoint/identity/preprocessing from its artifact receipt,
+then implement a CT-only inference runner with native exports and explicit per-case failures. Reuse
+existing checkpoint validation; do not silently load a historical three-class localizer into a binary
+architecture. The completed adapter removes the geometry mismatch without deciding which localizer wins.

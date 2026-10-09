@@ -56,7 +56,8 @@ def select_pancreas_box(pancreas, affine, r):
     return [low,high]
 
 
-def plan_geometry(shape, affine, box, r, *, source_identity):
+def plan_geometry(shape, affine, box, r, *, source_identity, roi_origin="provided_pancreas_reference"):
+    require(roi_origin in ("provided_pancreas_reference", "predicted_region"), "Unsupported ROI origin")
     a=canonical_geometry(shape,affine,r)
     require(set(source_identity)=={'study_id','ct_sha256'} and isinstance(source_identity['study_id'],str)
         and len(source_identity['ct_sha256'])==64, 'Source identity required')
@@ -80,13 +81,13 @@ def plan_geometry(shape, affine, box, r, *, source_identity):
         normalized_shape=normalized.tolist(),normalized_affine=grid(step,edge+step/2),
         tensor_shape=deepcopy(r['tensor_shape']),tensor_affine=grid(step,edge+step/2-pad*step),
         pad_low=pad.tolist(),pad_high=(np.asarray(r['tensor_shape'])-normalized-pad).tolist(),
-        effective_spacing_mm=[step]*3,roi_origin='provided_pancreas_reference')
+        effective_spacing_mm=[step]*3,roi_origin=roi_origin)
 
 
 def validate_record(record, trusted_record_sha256):
     require(content_hash(record)==trusted_record_sha256, 'Changed geometry record')
     require(record==plan_geometry(record['source_shape'],record['source_affine'],record['native_box'],
-        record['recipe'],source_identity=record['source_identity']), 'Geometry derivation mismatch')
+        record['recipe'],source_identity=record['source_identity'],roi_origin=record['roi_origin']), 'Geometry derivation mismatch')
 
 
 def forward_field(array, record, *, order, tick=lambda:None):
@@ -95,6 +96,17 @@ def forward_field(array, record, *, order, tick=lambda:None):
     sampled=_sample(crop,record['crop_affine'],record['sampling_affine'],record['sampling_shape'],order,tick=tick)
     mapped=_sample(sampled,record['sampling_affine'],record['normalized_affine'],record['normalized_shape'],order,tick=tick)
     return np.pad(mapped,list(zip(record['pad_low'],record['pad_high'])),constant_values=0)
+
+
+def prepare_image(image, record, *, trusted_record_sha256, tick=lambda:None):
+    """Image-only preparation on an explicitly identified physical transform."""
+    validate_record(record, trusted_record_sha256)
+    image = np.asarray(image)
+    require(image.shape == tuple(record['source_shape']) and image.dtype.kind in 'buif'
+            and np.isfinite(image).all(), 'Finite matching source image required')
+    low, high = record['recipe']['hu_window']
+    scaled = np.clip((image.astype(np.float32)-low)/(high-low), 0, 1)
+    return forward_field(scaled, record, order=1, tick=tick)
 
 
 def restore_codes(codes, record, *, trusted_record_sha256, tick=lambda:None):

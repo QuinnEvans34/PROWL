@@ -50,7 +50,7 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 | ID | Priority | Task | Owner | Status | Finish criterion |
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
-| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | Ready to specify exact patch after source trace | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
+| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: geometryv2 image-only adapter implemented; real model runner pending | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
 | W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | Depends on W02-02 | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
@@ -130,3 +130,6 @@ experiments. Cloud provisioning and new training infrastructure are deferred unl
 - Review Lenovo run result/config/checkpoint identity when delivered; no presumed quality improvement.
 - Select the next experiment from a written question; Lenovo owns launch and monitoring.
 - Update task status from evidence and identify the first Monday implementation task.
+
+October9 implementation: predicted-region geometryv2 adapter and seven new tests delivered;74 focused
+checks pass. See the investigation result. Full CT/model inference and native real-case evaluation remain pending.
