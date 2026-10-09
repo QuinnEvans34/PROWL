@@ -18,10 +18,10 @@ FIELDS = {'component', 'policy_id', 'prediction_record', 'prediction_record_sha2
 
 
 def plan_predicted_roi(prediction, affine, *, source_identity, prediction_record,
-                       trusted_prediction_record_sha256, tensor_shape=(144,144,144)):
+                       trusted_prediction_record_sha256, tensor_shape=(144,144,144), max_sampling_voxels=16_000_000):
     p = np.asarray(prediction)
     _prediction(prediction_record, trusted_prediction_record_sha256, source_identity, p.shape, affine)
-    recipe = geometry.recipe(tensor_shape=tensor_shape)
+    recipe = geometry.recipe(tensor_shape=tensor_shape, max_sampling_voxels=max_sampling_voxels)
     try:
         geometry.canonical_geometry(list(p.shape), affine, recipe)
     except (TypeError, ValueError) as exc:
@@ -53,7 +53,7 @@ def validate_plan(plan, trusted_plan_sha256):
         _prediction(plan['prediction_record'],plan['prediction_record_sha256'],
                     t['source_identity'],t['source_shape'],t['source_affine'])
         _check(t['roi_origin']=='predicted_region' and
-               t['recipe']==geometry.recipe(tensor_shape=tuple(t['tensor_shape'])),
+               t['recipe']==geometry.recipe(tensor_shape=tuple(t['tensor_shape']), max_sampling_voxels=t['recipe']['max_sampling_voxels']),
                'plan_policy','Reference origin or altered recipe refused')
         geometry.validate_record(t,plan['transform_sha256'])
     except PredictedRoiError:

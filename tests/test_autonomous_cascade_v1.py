@@ -83,3 +83,32 @@ def test_wrong_ct_and_reference_argument_rejected(tmp_path):
     with pytest.raises(TypeError):
         run_case(ct,tmp_path/'oracle',case_id='wrong',expected_ct_sha256=sha256(ct.read_bytes()).hexdigest(),
                  reference_mask=np.ones((32,32,32)),**options())
+
+
+def test_unknown_units_review_persists_without_editing_ct(tmp_path):
+    ct=ct_file(tmp_path/'inputs');im=nib.load(ct)
+    im.header.set_xyzt_units('unknown');nib.save(im,ct)
+    pin=sha256(ct.read_bytes()).hexdigest()
+    with pytest.raises(ValueError,match='source review'):
+        run_case(ct,tmp_path/'no_review',case_id='synthetic',expected_ct_sha256=pin,**options())
+    review=dict(ct_sha256=pin,interpreted_units='mm',basis='ct_acquisition_metadata',
+                evidence='Invented test fixture generated with millimeter coordinates',reviewer='test fixture')
+    r=run_case(ct,tmp_path/'reviewed',case_id='synthetic',expected_ct_sha256=pin,
+               spatial_units_review=review,**options())
+    assert r['spatial_units']['header_units']=='unknown' and r['spatial_units']['review']==review
+    assert sha256(ct.read_bytes()).hexdigest()==pin
+    assert nib.load(tmp_path/'reviewed/prediction.nii.gz').header.get_xyzt_units()[0]=='mm'
+
+
+def test_larger_localizer_cap_keeps_numerics_and_enforces_ceiling():
+    from src.data import localizer_preprocessing_v4 as geometry
+    recipe=options()['localizer_recipe'];image=np.zeros((20,20,20),np.float32)
+    before=geometry.preprocess(image,np.eye(4),recipe)['image'].as_tensor()
+    larger=dict(recipe,max_output_voxels=64_000_000)
+    after=geometry.preprocess(image,np.eye(4),larger)['image'].as_tensor()
+    assert torch.equal(before,after)
+    with pytest.raises(ValueError,match='budget'):
+        geometry.plan_geometry([300]*3,np.diag([2.,2.,2.,1.]),recipe)
+    assert geometry.plan_geometry([300]*3,np.diag([2.,2.,2.,1.]),larger)['conservative_output_voxels']>16_000_000
+    with pytest.raises(ValueError,match='cap'):
+        geometry.validate_recipe(dict(recipe,max_output_voxels=64_000_001))

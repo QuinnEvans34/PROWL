@@ -15,17 +15,18 @@ from src.data.source_inventory_records import content_hash, require
 from src.data.segmenter_geometry_v1 import _sample
 
 
-def recipe(*, tensor_shape=(144,144,144), sampling_mm=1., margin_mm=10., max_source_voxels=256_000_000):
+def recipe(*, tensor_shape=(144,144,144), sampling_mm=1., margin_mm=10., max_source_voxels=256_000_000, max_sampling_voxels=16_000_000):
     return dict(component='segmenter-geometry-v2', tensor_shape=list(tensor_shape),
         sampling_mm=float(sampling_mm), margin_mm=float(margin_mm), max_source_voxels=max_source_voxels,
-        max_sampling_voxels=16_000_000, hu_window=[-100.,250.], roi_selection='pancreas_only',
+        max_sampling_voxels=max_sampling_voxels, hu_window=[-100.,250.], roi_selection='pancreas_only',
         image_interpolation='linear', target_interpolation='nearest', orientation='physical_RAS',
         affine_support='finite_invertible_affine', padding='symmetric_zero')
 
 
 def validate_recipe(r):
-    fixed=recipe();variable={'tensor_shape','sampling_mm','margin_mm','max_source_voxels'}
+    fixed=recipe();variable={'tensor_shape','sampling_mm','margin_mm','max_source_voxels','max_sampling_voxels'}
     require(set(r)==set(fixed) and all(r[k]==v for k,v in fixed.items() if k not in variable), 'Geometry v2 recipe')
+    require(type(r['max_sampling_voxels']) is int and 0<r['max_sampling_voxels']<=64_000_000, 'Sampling volume allocation')
     require(len(r['tensor_shape'])==3 and all(type(v) is int and 0<v<=192 for v in r['tensor_shape']), 'Tensor shape')
     require(type(r['max_source_voxels']) is int and 0<r['max_source_voxels']<=256_000_000, 'Native volume allocation')
     require(all(type(r[k]) in (int,float) and math.isfinite(r[k]) for k in ('sampling_mm','margin_mm'))

@@ -386,3 +386,9 @@ predictions scored;19 failed explicitly (11 oversized predicted-region grids,7 u
 cases failed. This supersedes interpreting the single-case0.726 as typical quality. See the detailed
 [connection report](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) for denominators, resource evidence,
 source-review limits and specific next corrections. No training was changed.
+
+October9 geometry correction recovers all12 prior geometry failures with explicit64M voxel ceilings
+and unchanged numerical settings; measured peak4.16GiB under12GiB. Combined accounting now68/75
+outputs, with seven unknown-unit inputs still unresolved. CT-only hash-bound unit-review support is
+implemented, but no source evidence has been fabricated.31 focused tests pass. Recovered-case quality
+is poor; matched crop/resampling-versus-segmenter analysis remains necessary. See the connection report.

@@ -25,7 +25,7 @@ def validate_recipe(recipe):
             recipe['hu_window'][0]<recipe['hu_window'][1], 'Invalid HU window')
     require(len(recipe['minimum_shape'])==3 and all(type(v)==int and v>0 for v in recipe['minimum_shape']), 'Invalid padding shape')
     require(type(recipe['max_source_voxels'])==int and 0<recipe['max_source_voxels']<=96_000_000,'Source voxel cap policy')
-    require(type(recipe['max_output_voxels'])==int and 0<recipe['max_output_voxels']<=16_000_000,'Output voxel cap')
+    require(type(recipe['max_output_voxels'])==int and 0<recipe['max_output_voxels']<=64_000_000,'Output voxel cap')
 
 
 def geometry(affine,shape):

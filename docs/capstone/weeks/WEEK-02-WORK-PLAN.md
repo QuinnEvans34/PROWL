@@ -50,7 +50,7 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 | ID | Priority | Task | Owner | Status | Finish criterion |
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
-| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; fixed75-case baseline complete (56 outputs/19 failures); corrections open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
+| W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; geometry correction verified: 68 outputs/7 unresolved-unit cases; quality work open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
 | W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | Separate scorer and one paired case complete; cohort comparison pending | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
@@ -147,3 +147,9 @@ explicit inference failures. Mean positive lesion Dice0.244807 over28 scored pos
 and9reference-empty cases remain unscored. Missing CT units and geometry allocation limits are concrete
 engineering gaps. Source/anatomy review and matched cohort-wide crop comparison remain open. See the
 [checkpoint connection report](../imaging/AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md).
+
+October9 capacity correction: configurable bounded64M geometry limits recover all12 geometry failures
+without changing spacing/crops/models.68/75 outputs now available, seven CT-unit cases require source
+evidence. Explicit hash-bound unit-review support is implemented/tested; no real reviews invented.
+31 focused tests pass. Quality remains weak: combined mean lesion Dice0.225818 over33 positive cases,
+with changed population; this is not an accuracy-improvement claim. Lenovo remains untouched.

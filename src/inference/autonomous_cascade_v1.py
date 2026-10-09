@@ -18,7 +18,7 @@ from src.data.source_inventory_records import content_hash, require
 
 def predict(image, affine, *, source_identity, localizer, segmenter, localizer_sha256,
             segmenter_sha256, localizer_recipe, patch_size=(144,144,144),
-            tensor_shape=(144,144,144), device='cpu'):
+            tensor_shape=(144,144,144), device='cpu', max_sampling_voxels=16_000_000):
     """Models receive image tensors only; the localizer sees the entire CT grid."""
     require(device in ('cpu','mps','cuda'), 'Explicit backend required')
     require(len(patch_size)==3 and all(type(v) is int and 16<=v<=192 and v%8==0 for v in patch_size),
@@ -43,7 +43,7 @@ def predict(image, affine, *, source_identity, localizer, segmenter, localizer_s
             full_volume=True,binary_mask_sha256=sha256(mask.tobytes()).hexdigest())
         plan=region.plan_predicted_roi(mask,affine,source_identity=source_identity,
             prediction_record=prediction,trusted_prediction_record_sha256=content_hash(prediction),
-            tensor_shape=tensor_shape)
+            tensor_shape=tensor_shape,max_sampling_voxels=max_sampling_voxels)
         pin=content_hash(plan)
         crop=region.prepare_predicted_image(image,affine,source_identity=source_identity,
             plan=plan,trusted_plan_sha256=pin)
@@ -60,7 +60,7 @@ def predict(image, affine, *, source_identity, localizer, segmenter, localizer_s
         inference_claim='CT-only code path; training/selection provenance requires separate review')
 
 
-def run_case(ct_path, output_dir, *, case_id, expected_ct_sha256, **model_options):
+def run_case(ct_path, output_dir, *, case_id, expected_ct_sha256, spatial_units_review=None, **model_options):
     """Read one named NIfTI CT, write a fresh result/failure; never discover sibling files.
 
     Only mm NIfTI scans are supported here. DICOM conversion and unknown-unit
@@ -78,7 +78,8 @@ def run_case(ct_path, output_dir, *, case_id, expected_ct_sha256, **model_option
         img=nib.load(path)
         require(len(img.shape)==3 and math.prod(img.shape)<=model_options['localizer_recipe']['max_source_voxels'],
                 'CT allocation envelope')
-        require(img.header.get_xyzt_units()[0]=='mm','CT physical units must be mm')
+        from src.inference.spatial_units import resolve_mm
+        report['spatial_units']=resolve_mm(img.header.get_xyzt_units()[0],h.hexdigest(),spatial_units_review)
         image=np.asarray(img.dataobj,dtype=np.float32)
         result,evidence=predict(image,img.affine,source_identity=dict(study_id=case_id,ct_sha256=h.hexdigest()),
                                 **model_options)

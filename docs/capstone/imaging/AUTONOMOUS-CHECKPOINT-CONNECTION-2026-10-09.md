@@ -230,3 +230,63 @@ quality investigation: poor scores are not explained by simply excluding the les
 boxes. It does **not** establish lesion survival after resampling to144³, adequate crop scale/context,
 or good segmenter predictions, and says nothing about the10 positive inference failures. Reference
 labels were used only in this post-hoc coverage assessment, never to choose or repair prediction boxes.
+
+## Geometry capacity and explicit CT-unit correction
+
+The earlier geometry failures came from fixed allocation checks. The localizer's recipe can now set
+`max_output_voxels` up to64,000,000, and the segmenter geometry can set `max_sampling_voxels` up to
+64,000,000. The CT-only CLI accepts the latter as an optional top-level request field; omitted values
+retain16,000,000. Existing recipes keep their original limits, and requests above the new ceiling fail.
+
+These are allocation limits, not new spatial resolutions. The2mm localizer,1mm intermediate ROI,
+all-predicted-support10mm margin,144³ segmenter tensor, interpolation, HU windows and weights are
+unchanged. No component is discarded to fit a crop. Resource supervision is still required: the CLI's
+voxel ceilings do not themselves enforce a process-RSS limit. Previously pinned consumers retain their
+old recipes/evidence; this code change does not silently rebind historical source hashes.
+
+`src/inference/spatial_units.py` supports an explicit CT-side review for missing units. The optional
+`spatial_units_review` request object must have exactly `ct_sha256`, `interpreted_units` (`mm`),
+`basis` (`ct_acquisition_metadata` or `source_dataset_documentation`), `evidence`, and `reviewer`.
+It must match the actual CT hash. The decision is retained in `result.json`, and source CT bytes are
+never modified. Declared non-mm units are not relabeled; unknown units without a review still fail.
+This is a mechanism for recording a reviewed fact, not an automated verification of evidence text.
+A reference-mask header is deliberately not an accepted evidence basis.
+
+No real unit reviews have been invented for the seven unknown-unit cases. The [PanTS paper](https://papers.nips.cc/paper_files/paper/2025/file/2dc24f4adc257251b2f3929c67ec1e3a-Paper-Datasets_and_Benchmarks_Track.pdf)
+reports image spacing in millimeters, but that population-level convention alone does not establish
+the interpretation of each malformed NIfTI header. Attempts to retrieve the pinned dataset card and
+repository README through the browser were unsuccessful. These seven cases still need CT-side
+acquisition or release evidence; the synthetic review test demonstrates software support only.
+
+Tests:22 capacity/cascade/ROI/geometry checks,2 additional unit-review/localizer-cap checks, and7
+localizer restoration/parity/default-envelope checks passed (31 distinct tests). Existing supported
+synthetic images produce identical tensors under16M and64M limits. The tests also cover wrong CT
+identity, mask-derived review rejection, unchanged source CT bytes, explicit output mm units, old
+recipe rejection of oversized grids, and refusal above64M. Two upstream TorchScript deprecation
+warnings remain.
+
+A separate correction attempt targets exactly the12 prior geometry failures, with larger caps and
+all other numerical choices fixed. Its private directory is `geometry-repair-12/` beside the baseline;
+plan SHA256 `942879fbd6b678cba9c2c9a2922ac3c109e78ecd6debd78b29c853af570393a3`.
+It retains fresh requests, source hashes, supervised resource records and outputs. The original75-case
+baseline is unchanged. No Lenovo runtime or training configuration was touched.
+
+**Correction result:** All12 geometry retries completed and scored. Summed worker time122.285110s;
+peak sampled owned RSS4,464,967,680 bytes (4.16GiB), below the12GiB ceiling; all workers reaped. Fresh
+outputs match their source grids. Five lesion-positive cases have mean Dice0.119480/recall0.218704;
+seven reference-empty cases have mean predicted lesion volume74.802730mL. Execution success is not
+quality acceptance. Larger allocations expose poor predictions instead of hiding them behind failures.
+
+Combined accounting in `geometry-repair-12/combined-summary.json` reuses the56 original predictions
+and adds12 corrected outputs:68/75 scored, seven unknown-unit failures retained (five positive and two
+reference-empty). Mean lesion Dice0.225818/recall0.330088 over33 positive cases; union Dice0.578969 over
+68 cases; mean predicted lesion volume21.291808mL over35 reference-empty cases. This is a mixed retained/
+corrected development report, not a fresh75-case run or a matched accuracy-improvement comparison.
+The different denominator explains why it must not be described as a Dice regression caused by the fix.
+
+The remaining unknown-unit IDs are:
+`PanTS_00006011`, `PanTS_00005780`, `PanTS_00001823`, `PanTS_00002935`, `PanTS_00005370`,
+`PanTS_00006901`, `PanTS_00006115`. No review was supplied and none of these was rerun. Their next step
+is source/acquisition-unit evidence, not a reference-mask fallback. All twelve geometry failures from
+this baseline are resolved within measured resources; this does not qualify arbitrary future volumes
+or resolve the suspicious anatomy/weak model behavior.
