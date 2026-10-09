@@ -392,3 +392,19 @@ and unchanged numerical settings; measured peak4.16GiB under12GiB. Combined acco
 outputs, with seven unknown-unit inputs still unresolved. CT-only hash-bound unit-review support is
 implemented, but no source evidence has been fabricated.31 focused tests pass. Recovered-case quality
 is poor; matched crop/resampling-versus-segmenter analysis remains necessary. See the connection report.
+
+### October9 paired diagnosis: crop scale/context is a major contributor
+
+All68 available cases now have matched autonomous/reference-crop results, with the same segmenter.
+On33 positive cases, lesion Dice is0.225818 versus0.422671; on35 reference-empty cases, predicted lesion
+volume is21.291808 versus1.527572mL. Reference-assisted values are diagnostics, never autonomous scores.
+All41 lesion components survive both resampling paths. Nearest-label roundtrip Dice is0.896041 versus
+0.946782, so complete lesion disappearance does not explain the gap. Median paired crop-volume ratio
+is5.533175 and median lesion-tensor-voxel ratio0.225107: predicted crops present much broader context.
+
+The next controlled experiment should refine the CT-only crop policy and measure both coverage and
+quality with fixed weights. A separate Lenovo experiment should investigate training with realistic
+crop variation. Neither is a reason to modify the currently running job. Four diagnostic tests pass;
+initial near-binary decoding failures and one interrupted attempt are preserved. See the
+[matched results and limits](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) before interpreting these
+selected development findings as general performance.

@@ -51,7 +51,7 @@ See [Week1](WEEK-01-WORK-PLAN.md), [Plan02](../implementation/02-data-and-cohort
 |---|---|---|---|---|---|
 | W02-01 | Required | Finish protected portable cohort consumption | Mac; coordinate Lenovo path changes via handback | Ready to inspect current implementation | Repeat build gives identical memberships/content identities; overlap and role misuse rejected; machine roots do not redefine membership |
 | W02-02 | Primary development | Connect native CT → predicted region → segmenter → native masks | Mac | In progress: trained checkpoints connected; geometry correction verified: 68 outputs/7 unresolved-unit cases; quality work open | Small eligible set runs without reference-label access; tilted/large geometry behavior covered; every request has output or named failure |
-| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | Separate scorer and one paired case complete; cohort comparison pending | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
+| W02-03 | Primary evaluation | Matched reference/autonomous report | Mac | 68 matched pairs complete; crop-policy experiment next | Same cases/checkpoint/native scoring; coverage, lesion/pancreas Dice, false alarms, failure denominator and paired case changes recorded |
 | W02-04 | Secondary product | Show one prediction package in current viewer | Mac | Depends on stable output from W02-02 | CT and masks align; case/model identity shown; loading/missing/failure states explicit |
 | W02-05 | Small closeout | Reconcile Week1 evidence and obtain Lenovo handback | Quinton + Mac | Pending available evidence | Specific carryovers and actual run/code identities recorded; no blanket completion claims |
 
@@ -153,3 +153,9 @@ without changing spacing/crops/models.68/75 outputs now available, seven CT-unit
 evidence. Explicit hash-bound unit-review support is implemented/tested; no real reviews invented.
 31 focused tests pass. Quality remains weak: combined mean lesion Dice0.225818 over33 positive cases,
 with changed population; this is not an accuracy-improvement claim. Lenovo remains untouched.
+
+October9 matched analysis: all68 available cases paired. Same segmenter improves mean lesion Dice
+from0.225818 to0.422671 on33 positive cases when given reference crops; no entire lesion component
+is lost under either transform. Predicted crops are materially larger/coarser. Crop scale/context
+robustness is the next experimental focus; the reference-assisted number is not an autonomous result.
+Seven unknown-unit cases and source/anatomy issues remain open. Current Lenovo training stays unchanged.

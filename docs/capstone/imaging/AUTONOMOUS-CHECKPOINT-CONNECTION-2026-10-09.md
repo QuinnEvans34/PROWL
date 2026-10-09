@@ -290,3 +290,98 @@ The remaining unknown-unit IDs are:
 is source/acquisition-unit evidence, not a reference-mask fallback. All twelve geometry failures from
 this baseline are resolved within measured resources; this does not qualify arbitrary future volumes
 or resolve the suspicious anatomy/weak model behavior.
+
+## Paired crop versus segmenter investigation — October 9
+
+Frozen scope: all68 cases with saved autonomous outputs, including33 lesion-positive and35
+reference-empty cases. The seven unknown-unit cases remain unpaired and counted against the original
+75. Same segmenter weights and native-grid scorer; no threshold tuning or new training. For each case:
+
+1. Reuse the saved autonomous prediction and its exact predicted crop transform.
+2. Construct a pancreas-reference crop with the training recipe (1mm intermediate sampling,10mm
+   margin,144³ tensor), run the same segmenter once, and label the output reference-assisted.
+3. Independently map the reference target through each crop's forward transform and native restoration
+   without a model. Record native box coverage, tensor lesion voxels, nearest-label roundtrip Dice/recall,
+   effective tensor spacing and original26-connected lesion components lost during forward resampling.
+
+These target roundtrips measure representation fidelity; they are **not mathematical ceilings** on
+model Dice and do not allocate an additive causal percentage to localization versus model error.
+Changing a crop changes context and effective resolution together. The reference branch is an oracle
+comparator, never the production path or a deployable result. No reference is fed into the saved CT-only
+prediction process, and saved autonomous predictions are hash-checked and left unchanged.
+
+New `src/inference/crop_diagnostics.py` is a reference-only diagnostic module. Four focused tests
+passed: identity/connected-component preservation, a tiny lesion lost despite100% box coverage,
+empty-reference/record-pin behavior, and near-binary label decoding. The new helper initially demanded
+exact0/1 decoded labels; scaled NIfTI labels close to those values triggered assertions before inference.
+It was corrected to use the existing scorer's1e-6 near-integer tolerance, rejecting fractional,
+nonfinite and out-of-range values. This corrects a diagnostic helper, not the autonomous pipeline.
+
+The first attempt was intentionally interrupted after27 journaled cases (16 completed/11 failed).
+The watchdog's cleanup completed; the interrupted PanTS_00008339 case has no final receipt/resource
+row, so its work count must not be inferred as zero. All16 completed comparisons are reused. A fresh
+52-case continuation preserves the original failures and unstarted/interrupted cases. The already
+completed1070 reference comparison is reused too; it does not receive another model forward.
+
+Private evidence: `paired-crop-diagnostics/` and `paired-crop-diagnostics-retry01/` beside the baseline.
+The first plan SHA is `411f4a926c1602977d625791087b0ed92ac57f67ea43777829c2d6cd2f9e6855`;
+continuation SHA is `905791553c5f5a9dc4fa984948c8ef0e61b48cca345170aec052cbc4ef2a2619`.
+Each has frozen cases, helpers/source hashes, journal and per-case reports. Actual reference masks and
+weights remain private. Lenovo training is unchanged.
+
+### Completed matched results
+
+All68 planned pairs completed after the helper correction, with33 positive and35 reference-empty
+cases. Seven unresolved-unit cases remain unpaired. Results in
+`paired-crop-diagnostics-retry01/summary.json`, `paired-results.json`, and `scale-analysis.json`:
+
+| Measure / population | Autonomous predicted crop | Reference-assisted crop |
+|---|---:|---:|
+| Mean lesion Dice,33 positive cases | 0.225818 | 0.422671 |
+| Mean lesion recall,33 positive cases | 0.330088 | 0.590874 |
+| Mean pancreas+lesion union Dice,68 cases | 0.578969 | 0.817779 |
+| Mean predicted lesion volume,35 reference-empty cases | 21.291808mL | 1.527572mL |
+| Mean nearest-label lesion roundtrip Dice,33 positive cases | 0.896041 | 0.946782 |
+| Mean nearest-label lesion roundtrip recall,33 positive cases | 0.894685 | 0.939318 |
+| Mean native lesion box coverage,33 positive cases | 1.000000 | 0.986175 |
+| Lesion components lost during forward mapping,41 components | 0 | 0 |
+| Median effective tensor spacing,33 positive cases | 1.652778mm | 1.048611mm |
+
+The reference branch improves lesion Dice on24/33 cases, worsens8 and ties1 (absolute delta≤1e-6).
+Mean paired Dice difference is+0.196853. This is an actual matched crop intervention with fixed weights,
+not the denominator change in the previous capacity-repair summary. The0.422671 value is explicitly
+reference-assisted; it must never be advertised as autonomous performance.
+
+Across positive cases, the median **per-case** predicted/reference crop-volume ratio is5.533175;
+median paired effective-spacing ratio1.645161; median ratio of lesion voxels represented in the tensor
+is0.225107. In practical terms, the same144³ model input usually contains a much larger physical region
+under the predicted policy, and the lesion occupies far fewer input voxels. Ratios of medians and
+medians of paired ratios are different summaries and should not be interchanged.
+
+### Interpretation and next experiment
+
+- Crop choice is a major demonstrated contributor to the gap: the same segmenter performs materially
+  better with the training-style reference crop, including much lower false-positive volume on
+  reference-empty cases. This is consistent with sensitivity to crop scale/context at inference.
+- Complete lesion disappearance is not the explanation on these33 positive cases: all41 components
+  survive both forward mappings. Boundary/detail loss exists, and nearest-label roundtrip quality is
+  worse under predicted crops, but subtracting that fidelity gap from the model Dice gap would not
+  yield a valid causal attribution. CT interpolation/context and model response still interact.
+- Reference-region performance is still imperfect (Dice0.422671, recall0.590874), so crop refinement
+  alone cannot be assumed to solve model quality. The reference crop itself clips a small amount of
+  lesion on some cases; it is not an infallible target-region definition.
+- Next controlled software experiment: evaluate a declared CT-only crop refinement using the localizer
+  output, with the same weights and cases. Measure coverage, scale, Dice/recall and false-positive volume
+  together; never select a component or margin from a case's reference mask during prediction. Keep
+  the existing all-support crop as the baseline and preserve failures in the denominator.
+- Next training question for Lenovo: whether training with realistic predicted/jittered crop variation
+  improves robustness to the broader context. Prepare that as a new experiment; do not alter the current
+  run or infer a production-policy choice from this diagnostic alone. Source/unit/anatomy review remains
+  open, as do untouched evaluation and pretraining-membership limitations.
+
+Recorded resource rows sum439.586025worker-seconds across initial/retry attempts; largest recorded
+owned peak is4,405,231,616bytes (4.10GiB), with all recorded workers reaped. These totals exclude the
+unjournaled interrupted attempt and are not complete run resource totals. Completed receipts account
+for67 new model forwards, plus the reused1070 reference result; interrupted work remains unknown.
+All final continuation source hashes match its recorded producer inventory. No optimizer updates,
+Lenovo changes, public data/weight publication, or human-hours credit occurred.
