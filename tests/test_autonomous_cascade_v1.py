@@ -39,7 +39,8 @@ def ct_file(root,empty=False):
     p=root/'ct.nii.gz';nib.save(img,p);return p
 
 
-def test_masks_absent_changed_removed_never_read(tmp_path,monkeypatch):
+@pytest.mark.parametrize("policy",["all_support","largest_component_26"])
+def test_masks_absent_changed_removed_never_read(tmp_path,monkeypatch,policy):
     ct=ct_file(tmp_path/'inputs');pin=sha256(ct.read_bytes()).hexdigest()
     # A hard read guard fails if inference tries to open any file in the reference directory.
     refs=tmp_path/'references';refs.mkdir();mask=refs/'pancreas.nii.gz'
@@ -53,14 +54,14 @@ def test_masks_absent_changed_removed_never_read(tmp_path,monkeypatch):
         return opened
     with monkeypatch.context() as m:
         m.setattr(builtins,'open',guard(real_builtin));m.setattr(io,'open',guard(real_io))
-        first=run_case(ct,tmp_path/'absent',case_id='synthetic',expected_ct_sha256=pin,**options())
+        first=run_case(ct,tmp_path/'absent',case_id='synthetic',expected_ct_sha256=pin,**dict(options(),region_policy=policy))
     mask.write_bytes(b'wrong reference');(ct.parent/'pancreas.nii.gz').write_bytes(b'also wrong')
     with monkeypatch.context() as m:
         m.setattr(builtins,'open',guard(real_builtin));m.setattr(io,'open',guard(real_io))
-        second=run_case(ct,tmp_path/'changed',case_id='synthetic',expected_ct_sha256=pin,**options())
+        second=run_case(ct,tmp_path/'changed',case_id='synthetic',expected_ct_sha256=pin,**dict(options(),region_policy=policy))
     assert ct.parent/'pancreas.nii.gz' not in observed
     mask.unlink();refs.rmdir();(ct.parent/'pancreas.nii.gz').unlink()
-    third=run_case(ct,tmp_path/'removed',case_id='synthetic',expected_ct_sha256=pin,**options())
+    third=run_case(ct,tmp_path/'removed',case_id='synthetic',expected_ct_sha256=pin,**dict(options(),region_policy=policy))
     assert first['prediction_array_sha256']==second['prediction_array_sha256']==third['prediction_array_sha256']
     output=nib.load(tmp_path/'absent/prediction.nii.gz');source=nib.load(ct)
     assert output.shape==source.shape and np.array_equal(output.affine,source.affine)

@@ -385,3 +385,75 @@ unjournaled interrupted attempt and are not complete run resource totals. Comple
 for67 new model forwards, plus the reused1070 reference result; interrupted work remains unknown.
 All final continuation source hashes match its recorded producer inventory. No optimizer updates,
 Lenovo changes, public data/weight publication, or human-hours credit occurred.
+
+## CT-only largest-component crop experiment
+
+A single challenger is fixed before evaluation: take the largest26-connected component of the
+native binary localizer prediction, then apply the existing10mm margin and geometryv2 processing.
+Component size is measured in native voxels; ties select the first component in native C-order
+labeling. Empty input remains empty and triggers the existing failure path. No reference mask,
+lesion location, diagnosis or case-specific margin enters this selection. No anatomical correctness
+is implied by choosing the largest component.
+
+`src/inference/localizer_region_selection.py` implements the selector and records raw/selected mask
+SHA256s, voxel counts, component count and tie rule. `autonomous_cascade_v1` and its CLI accept
+`region_policy="largest_component_26"`; default remains `all_support`. The downstream ROI adapter
+uses all support of the **selected** mask, while `region_selection` identifies the upstream selection.
+Both model checkpoints, HU windows, spatial sampling,144³ tensor and10mm margin remain fixed.64M
+allocation ceilings are used consistently; this is not a resolution change.
+
+Nine distinct focused tests passed: three selection tests plus five existing cascade checks and
+an added largest-component version of the mask-absence/change/removal test. They cover distant-island
+removal,26-connectivity, deterministic ties, empty/invalid input, unchanged default mask support,
+reference independence and existing geometry/unit behavior. Two upstream TorchScript warnings remain.
+
+Private experiment: `outputs/prowl/autonomous-real-ct-20261009/largest-component-68/`.
+Plan SHA256 `747903975b02c592be57f0c84bf0d0c9d60d00dce5a53de6b6a9723186b0f50a` freezes all68 previously
+runnable cases; the seven unresolved-unit cases remain outside the paired comparison and visible in
+the original75-case accounting. Each CT-only worker has the existing file-access guard,600s/12GiB
+supervision, batch30minute limit and100GiB storage floor. All original outputs remain untouched.
+Reference scoring and coverage checks happen after inference in separate processes. Retained raw-mask
+hashes allow checking that differences come from selection rather than changed localizer predictions.
+The policy is experimental and is not promoted to default based on a single favorable metric.
+
+### Largest-component result and disposition
+
+All68 CT-only candidates completed and scored; no new execution failures. Raw localizer mask hashes
+match the prior all-support baseline in68/68 cases, so the comparison isolates downstream component
+selection with fixed localizer output and segmenter weights.66/68 raw masks have multiple components.
+
+| Paired measure | All-support baseline | Largest26-connected component |
+|---|---:|---:|
+| Mean lesion Dice,33 positive cases | 0.225818 | 0.246612 |
+| Mean lesion recall,33 positive cases | 0.330088 | 0.354583 |
+| Mean union Dice,68 cases | 0.578969 | 0.626706 |
+| Mean predicted lesion volume,35 reference-empty cases | 21.291808mL | 13.989806mL |
+| Positive cases with100% native lesion box coverage | 33/33 | 33/33 |
+| Median effective tensor spacing,33 positive cases | 1.652778mm | 1.451389mm |
+
+Eight positive cases improve, eight worsen, and17 tie (absolute Dice delta≤1e-6). None of the33
+annotated lesions is partially or entirely outside the new native crop. This is observed box coverage,
+not proof of component survival after resampling or future-case coverage. The seven unresolved-unit
+cases remain untested, and the suspicious anatomy case remains in scoring.
+
+Median paired candidate/baseline crop-volume ratio is0.882089. Compared directly with the retained
+reference-crop diagnostic, candidate crops still have median paired volume ratio3.990349. Thus removing
+disconnected islands helps modestly, but the retained main region still presents much broader context
+than the reference crop. These results do not justify claiming the scale/context mismatch is solved.
+
+**Disposition:** retain the policy as an explicit experimental option; keep `all_support` as the
+unchanged default. Preserve the candidate as a measured comparator rather than silently promoting it.
+It has a small mean benefit and retains observed lesion box coverage, but substantial residual error
+and eight worsened positive cases remain. This is development selection, not a new untouched test.
+
+**Next focused question:** can a confidence-based localization region produce a more pancreas-sized
+crop while preserving coverage? A subsequent experiment should freeze its confidence/margin policy
+before scoring and retain CT-only probability/transform artifacts to avoid rerunning the localizer for
+every crop-policy variant. Do not select thresholds or regions per case from reference masks. Training
+with realistic crop variation remains a separate Lenovo experiment; the current job is not modified.
+
+Private `comparison.json`, `paired-case-results.json`, `crop-coverage.json`, and
+`reference-scale-comparison.json` retain the results under `largest-component-68/`. Summed supervised
+inference time539.110140s; maximum sampled owned RSS4,465,328,128bytes (4.16GiB); all workers reaped.
+Scoring/coverage CPU work is separate from those resource totals. Producer source hashes match the
+frozen inventory. No weights/data were published, no optimizer updates occurred, and Lenovo was untouched.

@@ -18,8 +18,9 @@ from src.data.source_inventory_records import content_hash, require
 
 def predict(image, affine, *, source_identity, localizer, segmenter, localizer_sha256,
             segmenter_sha256, localizer_recipe, patch_size=(144,144,144),
-            tensor_shape=(144,144,144), device='cpu', max_sampling_voxels=16_000_000):
+            tensor_shape=(144,144,144), device='cpu', max_sampling_voxels=16_000_000, region_policy='all_support'):
     """Models receive image tensors only; the localizer sees the entire CT grid."""
+    require(region_policy in ('all_support','largest_component_26'), 'Unknown localizer region policy')
     require(device in ('cpu','mps','cuda'), 'Explicit backend required')
     require(len(patch_size)==3 and all(type(v) is int and 16<=v<=192 and v%8==0 for v in patch_size),
             'Supported sliding-window patch required')
@@ -37,6 +38,8 @@ def predict(image, affine, *, source_identity, localizer, segmenter, localizer_s
         processed=logits[0].argmax(0,keepdim=True);del logits
         native=local_geometry.restore_to_source(processed,transform,discrete=True)
         mask=native.as_tensor()[0].numpy().astype(np.uint8);del native,prepared,processed,x
+        from src.inference.localizer_region_selection import select_region
+        mask,selection=select_region(mask,region_policy)
         prediction=dict(schema_version='1.0.0',task='binary_pancreas',prediction_id='localizer-output',
             run_id='autonomous-cascade-v1',model_sha256=localizer_sha256,source_identity=source_identity,
             native_shape=list(mask.shape),native_affine=np.asarray(affine).tolist(),units='mm',
@@ -55,7 +58,7 @@ def predict(image, affine, *, source_identity, localizer, segmenter, localizer_s
     return result,dict(component='autonomous-cascade-v1',source_identity=source_identity,
         model_sha256=dict(localizer=localizer_sha256,segmenter=segmenter_sha256),
         localizer_recipe=localizer_recipe,localizer_transform=transform,patch_size=list(patch_size),
-        overlap=.25,localizer_decision='argmax_all_support',region_plan=plan,device=device,
+        overlap=.25,localizer_decision='argmax_then_'+region_policy,region_selection=selection,region_plan=plan,device=device,
         output_decision='tensor_argmax_then_nearest_native',reference_inputs_used=False,
         inference_claim='CT-only code path; training/selection provenance requires separate review')
 

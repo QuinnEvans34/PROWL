@@ -159,3 +159,8 @@ from0.225818 to0.422671 on33 positive cases when given reference crops; no entir
 is lost under either transform. Predicted crops are materially larger/coarser. Crop scale/context
 robustness is the next experimental focus; the reference-assisted number is not an autonomous result.
 Seven unknown-unit cases and source/anatomy issues remain open. Current Lenovo training stays unchanged.
+
+October9 CT-only crop challenger completed: largest26-connected region plus10mm preserves full native
+lesion box coverage33/33 and modestly improves Dice0.225818→0.246612, with8 improved/8 worsened/17 tied
+positive cases. All68 cases ran; raw localizer masks match baseline. Opt-in experimental policy only;
+default unchanged. Confidence-based crop sizing and crop-variation training remain open questions.

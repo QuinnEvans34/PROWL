@@ -408,3 +408,16 @@ crop variation. Neither is a reason to modify the currently running job. Four di
 initial near-binary decoding failures and one interrupted attempt are preserved. See the
 [matched results and limits](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) before interpreting these
 selected development findings as general performance.
+
+### October9 CT-only crop challenger: largest connected region
+
+Fixed largest26-connected predicted component plus the existing10mm margin ran on all68 available
+cases with zero execution failures. Raw localizer masks match the all-support baseline for every case.
+Mean lesion Dice improves0.225818→0.246612 on33 positive cases; predicted lesion volume on35 empty
+references falls21.291808→13.989806mL. All33 lesions remain fully inside the native crop, but positive
+case Dice improves8/worsens8/ties17. The retained crop still has median volume3.99× the reference crop.
+
+Keep this as an opt-in experimental comparator; do not promote it to default or claim the context
+mismatch solved. Nine focused tests passed. Next investigate a frozen CT-only confidence-based crop
+policy and retain localizer probability artifacts for efficient comparisons. Crop-variation training
+remains a separately specified Lenovo experiment. See the detailed connection report for evidence.
