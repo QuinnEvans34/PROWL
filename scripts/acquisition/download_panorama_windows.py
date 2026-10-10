@@ -7,6 +7,7 @@ import argparse
 import ctypes
 from datetime import datetime, timezone
 import hashlib
+import http.client
 import json
 import os
 from pathlib import Path
@@ -14,6 +15,7 @@ import shutil
 import sys
 import time
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -21,6 +23,37 @@ from src.operations.full_training_platform import training_guard, require_ac
 
 CHUNK = 1024 * 1024
 FLOOR = 512 * 1024**3
+
+
+def retry_delay(exc, retry):
+    if isinstance(exc, HTTPError):
+        if exc.code not in (408, 429, 500, 502, 503, 504):
+            return None
+    elif not isinstance(exc, (TimeoutError, ConnectionError, URLError, http.client.IncompleteRead)):
+        return None
+    delay = min(300, 5 * 2 ** min(retry, 6))
+    if isinstance(exc, HTTPError):
+        value = exc.headers.get('Retry-After', '') if exc.headers else ''
+        if value.isdigit():
+            delay = max(delay, int(value))
+    return delay
+
+
+def transfer_with_retries(item, directory, check, record, max_retries=100, sleep=time.sleep):
+    for attempt in range(max_retries + 1):
+        try:
+            return transfer(item, directory, check, record)
+        except Exception as exc:
+            delay = retry_delay(exc, attempt)
+            if delay is None or attempt == max_retries:
+                raise
+            check()  # Never retry across a power, storage or volume failure.
+            record('retry_wait', name=item['name'], retry=attempt + 1,
+                   wait_seconds=delay, error=repr(exc), partials_retained=True)
+            # Keep safety checks responsive during backoff.
+            while delay > 0:
+                interval = min(5, delay)
+                sleep(interval); check(); delay -= interval
 
 
 def volume_id(root):
@@ -83,16 +116,18 @@ def transfer(item, directory, check, record):
             check()
             with partial.open('ab' if partial.exists() else 'xb') as output:
                 count = offset; last = time.monotonic()
-                for chunk in iter(lambda: response.read1(CHUNK), b''):
-                    if count + len(chunk) > item['bytes']:
-                        raise ValueError('Transfer exceeds pinned size')
-                    check(len(chunk))
-                    output.write(chunk); count += len(chunk)
-                    if time.monotonic() - last >= 30:
-                        output.flush()
-                        record('progress', name=name, bytes=count, expected_bytes=item['bytes'])
-                        last = time.monotonic()
-                output.flush(); os.fsync(output.fileno())
+                try:
+                    for chunk in iter(lambda: response.read1(CHUNK), b''):
+                        if count + len(chunk) > item['bytes']:
+                            raise ValueError('Transfer exceeds pinned size')
+                        check(len(chunk))
+                        output.write(chunk); count += len(chunk)
+                        if time.monotonic() - last >= 30:
+                            output.flush()
+                            record('progress', name=name, bytes=count, expected_bytes=item['bytes'])
+                            last = time.monotonic()
+                finally:
+                    output.flush(); os.fsync(output.fileno())
         if count != item['bytes']:
             raise ConnectionError('Short transfer retained for explicit resume')
     check()
@@ -106,7 +141,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--drive', required=True, type=Path)
     parser.add_argument('--volume-id', required=True)
+    parser.add_argument('--max-retries', type=int, default=100)
     args = parser.parse_args()
+    if not 0 <= args.max_retries <= 1000:
+        raise ValueError('Retry limit must be between 0 and 1000')
     mount = args.drive.resolve()
     if os.name != 'nt' or str(mount) != mount.anchor:
         raise ValueError('An explicit Windows volume root is required')
@@ -135,9 +173,11 @@ def main():
         record('attempt_started', volume_id=args.volume_id, destination=str(directory),
                inventory_sha256=hashlib.sha256(raw).hexdigest(),
                script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-               ct_archives_only=True, extraction=False, reserve_bytes=FLOOR)
+               ct_archives_only=True, extraction=False, reserve_bytes=FLOOR,
+               max_retries_per_archive=args.max_retries)
         try:
-            for item in queue: transfer(item, directory, check, record)
+            for item in queue:
+                transfer_with_retries(item, directory, check, record, args.max_retries)
             record('ct_queue_complete', labels_qualified=False, training_source_qualified=False)
         except BaseException as exc:
             record('failed', error=repr(exc), partials_retained=True)

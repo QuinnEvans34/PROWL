@@ -1,5 +1,41 @@
 # AGENTS.md — Agent Context
 
+> **October 9 evening PANORAMA robust resume LIVE:** User requests addressing failures and full
+> overnight download. Prior43377 FINISHED timeout21:14:32UTC;7276375000B retained. Added bounded
+> network-only automatic retries/backoff (100perarchive,5-300s, numericRetryAfter honored), durable
+> flush on interrupted reads; no retries for checksum/range/storage/AC/volume faults.15tests pass.
+> Ownedexec75108 launched2026-10-10T02:21:16UTC (Oct9 20:21MDT), sameE:acquisition-20261008;
+> monitor this job only, no duplicates.4CTarchives/publisherMD5+SHA256 verification/noextraction,
+>512GiBreserve andAC/drive checks retained. No training, no scheduled AI prompts. Completion
+> requires ct_queue_complete and all4verified; do not claim overnight finish from launch alone.
+
+> **October 9 Lenovo USER STOPPED / PANORAMA downloading:** User explicitly requested stopping
+> training and resuming PANORAMA until departure. Training worker34788 stopped after8000validation/
+> checkpoint; ownedexec71115 FINISHED exit1, allworkersreaped. Intentional stop, not spontaneousfault.
+> Last8009updates/21423.938journal seconds (~5h57m); primary/internalcheckpoint8000 SHA256
+> a38b36af4657bcf2be54956b09b0a901a47bba0d48b5326551ecdbd5c7e92e3c matches;9unsavedupdates.
+> Finaljournal separately backedup as history-user-stop-20261009.jsonl SHA c9c05c405cd8b8102bb032a853b30472a8b155acbf918d9c324e718e9997e252.
+> Developmentpositive lesionDice2000/4000/6000/8000=.193172/.271467/.279065/.299239. Not8hpass.
+> Timedresume still refused pending reconciliation; no automatic training restart. No pinnedcode edits.
+> PANORAMA explicitresume ownedexec43377 LIVE, started19:54:06UTC from6509456172B; newbytesconfirmed.
+> Existing download_panorama_windows.py unchanged, same E:acquisition-20261008,512GiBreserve,
+> publisherchecks/fullqueue/noextraction. Old48517failedshorttransfer/reaped, do notpollaslive.
+> User will announce departure: stop43377 then preservepartial and confirm no writer beforeunplug.
+> Scheduled monitor DELETED byuser duecredits; neverrecreatewithoutrequest. No Mac/publicpush.
+
+> **October 9 scheduled monitoring STOP requested:** Quinton explicitly requests stopping scheduled
+> tasks due to credit usage. Do NOT recreate automated checks or follow-ups without a new request.
+> Training itself must continue unchanged; latest manual check7730updates/20599.719s (~5h43m).
+> Prior heartbeat-active instructions below are superseded by this user request.
+
+> **October 9 Lenovo ACTUAL TRAINING CONFIRMED:** At14:01UTC check, scientific history confirms
+> 154completed optimizer updates/285.969elapsed training seconds; first loss2.2838797569274902.
+> User notified actual training has started; do not repeat start notification. Ownedexec71115 LIVE,
+> monitor only same a02 pipeline. Preparation1408pass/0fail/reaped; exactcohort/source gates and
+> realCUDA3updates/75validation pluscold1update passed (exactrestore,nextmaxdiff3.5390258e-8).
+> Eight-hour clock now running; not completed. Prior preparation-active text below historical.
+> Notify failure/action or completion, keep unchanged checks quiet. No duplicate/retry/pin edits.
+
 > **October 9 Lenovo continuation LIVE:** Producing commit8e69054, ownedexec71115 launched
 > 2026-10-09T13:10:58UTC; monitor only. New journal E:/PROWL/readiness/lenovo-8h-20261009-a02/pipeline.jsonl.
 > Parent/control/prefix admission passed; continuation.json binds1101reused/307remaining, first
