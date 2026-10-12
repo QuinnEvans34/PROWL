@@ -15,7 +15,8 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 from xml.parsers import expat
 
-VERSION = 'prowl-pubmed-catalog-preview-v1'
+VERSION = 'prowl-pubmed-catalog-preview-v2'
+LEGACY_VERSION = 'prowl-pubmed-catalog-preview-v1'
 NAME = re.compile(r'pubmed26n(\d{4})\.xml\.gz')
 
 
@@ -111,12 +112,20 @@ def events(path, *, max_expanded=8 * 1024**3, max_record=16 * 1024**2,
 
 def connect(path):
     db = sqlite3.connect(path)
+    if db.execute("SELECT 1 FROM sqlite_master WHERE name='metadata'").fetchone():
+        version = dict(db.execute('SELECT key,value FROM metadata')).get('version')
+        if version and version != VERSION:
+            db.close()
+            raise ValueError('Catalog v2 requires a new output path; rebuild to retain deleted PMIDs')
     db.execute('PRAGMA journal_mode=DELETE')
     db.execute('CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)')
     db.execute('CREATE TABLE IF NOT EXISTS applied (position INTEGER PRIMARY KEY, name TEXT UNIQUE, sha256 TEXT, events INTEGER)')
     db.execute('''CREATE TABLE IF NOT EXISTS documents
         (pmid TEXT PRIMARY KEY, title TEXT, abstract TEXT, source_file TEXT,
          source_sha256 TEXT, source_seq INTEGER, xml TEXT)''')
+    db.execute('''CREATE TABLE IF NOT EXISTS deleted
+        (pmid TEXT PRIMARY KEY, source_file TEXT, source_sha256 TEXT, source_seq INTEGER,
+         xml TEXT)''')
     db.commit()
     return db
 
@@ -131,7 +140,7 @@ def bind(db, manifest_bytes):
             db.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)',(key,value))
 
 
-def apply_file(db, path, expected_sha, position):
+def apply_file(db, path, expected_sha, position, *, check_resources=None, file_seconds=600):
     """Commit all events from one verified source, or roll back the entire file."""
     path = Path(path)
     if path.is_symlink() or not NAME.fullmatch(path.name):
@@ -148,18 +157,27 @@ def apply_file(db, path, expected_sha, position):
         raise ValueError('Source SHA256 mismatch')
     count = 0
     with db:
-        for seq,pmid,node in events(path):
+        for seq,pmid,node in events(path, seconds=file_seconds):
             count += 1
+            if check_resources is not None and count % 256 == 1:
+                check_resources()
             if node.tag == 'DeleteCitation':
+                prior_xml = db.execute('SELECT xml FROM documents WHERE pmid=? UNION ALL SELECT xml FROM deleted WHERE pmid=?', (pmid,pmid)).fetchone()
+                db.execute('INSERT OR REPLACE INTO deleted VALUES (?,?,?,?,?)',
+                           (pmid,path.name,expected_sha,seq,prior_xml[0] if prior_xml else None))
                 db.execute('DELETE FROM documents WHERE pmid=?',(pmid,))
                 continue
+            db.execute('DELETE FROM deleted WHERE pmid=?',(pmid,))
             article = node.find('MedlineCitation/Article') if node.tag == 'PubmedArticle' else node.find('BookDocument')
             def content(n):
                 return '' if n is None else ''.join(n.itertext())
             title = content(article.find('ArticleTitle')) if article is not None else ''
             sections = article.findall('Abstract/AbstractText') if article is not None else []
             abstract = '\n'.join(content(n) for n in sections)
-            db.execute('INSERT OR REPLACE INTO documents VALUES (?,?,?,?,?,?,?)',
+            db.execute('''INSERT INTO documents VALUES (?,?,?,?,?,?,?)
+                ON CONFLICT(pmid) DO UPDATE SET title=excluded.title, abstract=excluded.abstract,
+                source_file=excluded.source_file, source_sha256=excluded.source_sha256,
+                source_seq=excluded.source_seq, xml=excluded.xml''',
                 (pmid,title,abstract,path.name,expected_sha,seq,ET.tostring(node,encoding='unicode')))
         after = path.stat()
         if (before.st_size,before.st_mtime_ns,before.st_ino) != (after.st_size,after.st_mtime_ns,after.st_ino):
@@ -205,6 +223,7 @@ def _build(source, output, max_files=3):
         applied = db.execute('SELECT count(*) FROM applied').fetchone()[0]
         return dict(version=VERSION,applied_files=applied,total_files=len(members),
                     documents=db.execute('SELECT count(*) FROM documents').fetchone()[0],
+                    deleted_pmids=db.execute('SELECT count(*) FROM deleted').fetchone()[0],
                     snapshot_replayed=applied==len(members),
                     selected_corpus=False,rights_qualified=False)
     finally:
@@ -232,7 +251,7 @@ def search(path, query, limit=10):
         raise ValueError('Supply a nonempty query and limit 1..100')
     db = sqlite3.connect(Path(path).resolve().as_uri()+'?mode=ro',uri=True)
     try:
-        if dict(db.execute('SELECT key,value FROM metadata')).get('version') != VERSION:
+        if dict(db.execute('SELECT key,value FROM metadata')).get('version') not in (VERSION, LEGACY_VERSION):
             raise ValueError('Unsupported catalog')
         pattern = '%'+query.replace('!', '!!').replace('%','!%').replace('_','!_')+'%'
         rows = db.execute("SELECT pmid,title,abstract,source_file,source_sha256,source_seq FROM documents WHERE title LIKE ? ESCAPE '!' OR abstract LIKE ? ESCAPE '!' ORDER BY length(pmid),pmid LIMIT ?",(pattern,pattern,limit)).fetchall()

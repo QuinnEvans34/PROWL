@@ -97,3 +97,45 @@ def test_single_writer_lock(tmp_path):
     with out.with_suffix('.sqlite.lock').open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX | fcntl.LOCK_NB)
         with pytest.raises(BlockingIOError): build(tmp_path,out,1)
+
+
+def test_deleted_universe_unknown_delete_readd_and_rollback(tmp_path):
+    db=connect(tmp_path/'v2.sqlite');bind(db,b'x')
+    p,h=source(tmp_path,1,article(1)+article(2));apply_file(db,p,h,0)
+    p,h=source(tmp_path,2,'<DeleteCitation><PMID>1</PMID><PMID>99</PMID></DeleteCitation>')
+    apply_file(db,p,h,1)
+    deleted=list(db.execute('SELECT pmid,xml,source_seq FROM deleted ORDER BY pmid'))
+    assert [r[0] for r in deleted]==['1','99']
+    assert 'Pancreas CT' in deleted[0][1] and deleted[1][1] is None
+    assert [r[2] for r in deleted]==[0,1]
+    p,h=source(tmp_path,3,'<PubmedArticleSet>'+article(99)+'<broken>',False)
+    with pytest.raises(Exception): apply_file(db,p,h,2)
+    assert db.execute('SELECT count(*) FROM deleted').fetchone()[0]==2
+    p,h=source(tmp_path,3,article(1,'Re-added')+'<DeleteCitation><PMID>99</PMID></DeleteCitation>')
+    apply_file(db,p,h,2)
+    assert db.execute('SELECT pmid FROM deleted').fetchall()==[('99',)]
+    assert db.execute('SELECT count(*) FROM documents').fetchone()[0]==2
+    db.close()
+
+
+def test_legacy_catalog_rebuild_required_without_mutation(tmp_path):
+    import sqlite3
+    from src.retrieval.pubmed_catalog import LEGACY_VERSION
+    path=tmp_path/'legacy.sqlite'
+    db=sqlite3.connect(path)
+    db.execute('CREATE TABLE metadata (key TEXT PRIMARY KEY,value TEXT)')
+    db.execute('INSERT INTO metadata VALUES (?,?)',('version',LEGACY_VERSION))
+    db.commit();db.close()
+    before=path.read_bytes()
+    with pytest.raises(ValueError,match='new output path'): connect(path)
+    assert path.read_bytes()==before
+
+
+def test_update_preserves_existing_row_and_exact_fields(tmp_path):
+    db=connect(tmp_path/'c');bind(db,b'x')
+    a,h=source(tmp_path,1,article(1)+article(2));apply_file(db,a,h,0)
+    rowid=db.execute('SELECT rowid FROM documents WHERE pmid="1"').fetchone()[0]
+    b,h=source(tmp_path,2,article(1,'Updated')+article(3));apply_file(db,b,h,1)
+    assert db.execute('SELECT rowid,title,source_file,source_sha256,source_seq FROM documents WHERE pmid="1"').fetchone()==(rowid,'Updated',b.name,h,0)
+    assert db.execute('SELECT count(*) FROM documents').fetchone()[0]==3
+    db.close()

@@ -26,11 +26,11 @@ Run from the repository root. Use an output directory separate from the raw down
 ```sh
 .venv-prowl/bin/python scripts/retrieval/prepare_pubmed_catalog.py build \
   --source /Volumes/PROWL-Data/PROWL/scratch/literature/pubmed-2026-20261009 \
-  --output /Volumes/PROWL-Data/PROWL/scratch/literature/catalog-preview-20261010/catalog.sqlite \
+  --output /Volumes/PROWL-Data/PROWL/scratch/literature/catalog-preview-v2-20261010/catalog.sqlite \
   --max-files 1
 
 .venv-prowl/bin/python scripts/retrieval/prepare_pubmed_catalog.py search \
-  --catalog /Volumes/PROWL-Data/PROWL/scratch/literature/catalog-preview-20261010/catalog.sqlite \
+  --catalog /Volumes/PROWL-Data/PROWL/scratch/literature/catalog-preview-v2-20261010/catalog.sqlite \
   --query pancreas --limit 5
 ```
 
@@ -63,6 +63,21 @@ existing passage contracts and compare lexical retrieval against vector retrieva
 existing guided UI and its synthetic labeling until real evidence passes through that integration.
 
 The bulk downloader, prior sizing parser, UI changes and PostgreSQL plans are unchanged.
+
+## October 10 continuation: deleted-PMID accounting
+
+The builder now writes `prowl-pubmed-catalog-preview-v2`. A separate `deleted` table retains final
+deletions, including PMIDs first encountered in a delete event. It retains the most recent available
+article XML for rule/reason reporting and the final deletion's source identity. Re-addition removes
+the tombstone; repeated deletion preserves the retained metadata. Both tables change within the
+same file transaction. Their disjoint union is every PMID observed in the applied prefix.
+
+Building against a v1 catalog refuses before schema mutation. Rebuild at a new path (as above).
+The historical real-file v1 preview remains intact and searchable, but cannot supply official
+deleted-PMID accounting. No real v2 rebuild was run in this continuation.
+
+The [topic-selection implementation](TOPIC-SELECTION-V0.md) now consumes v2 metadata. Full-scale
+replay, MeSH source acquisition/verification and real selection remain separate work.
 
 ## October 10 result
 
