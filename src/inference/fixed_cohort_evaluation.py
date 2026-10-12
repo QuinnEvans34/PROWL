@@ -48,10 +48,16 @@ def require(value, message):
 
 
 def validate_plan(plan):
-    require(set(plan) == {'version', 'cohort_id', 'inference', 'limits', 'cases', 'limitations'},
+    fields = {'version', 'cohort_id', 'inference', 'limits', 'cases', 'limitations'}
+    if plan.get('version') == 2:
+        fields.add('cohort_binding')
+    require(set(plan) == fields,
             'Exact evaluation plan fields required')
-    require(plan['version'] == 1 and isinstance(plan['cohort_id'], str) and plan['cohort_id'],
+    require(plan['version'] in (1, 2) and isinstance(plan['cohort_id'], str) and plan['cohort_id'],
             'Version and fixed cohort identity required')
+    if plan['version'] == 2:
+        from src.data.portable_cohort import validate_binding
+        validate_binding(plan)
     require(isinstance(plan['limitations'], list) and all(isinstance(x, str) for x in plan['limitations']),
             'Explicit limitations required')
     settings = plan['inference']
@@ -226,6 +232,7 @@ def run_worker(request_path, log_path, seconds, rss_bytes, *, free_floor_bytes):
 
 
 def score_predictions(plan, plan_pin, journal_path):
+    validate_plan(plan)
     from src.inference.saved_prediction_scoring import score_saved
     from src.inference.evaluation_summary import summarize
     journal = [json.loads(line) for line in Path(journal_path).read_text().splitlines()]

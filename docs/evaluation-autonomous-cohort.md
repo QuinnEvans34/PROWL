@@ -1,5 +1,14 @@
 # Fixed-cohort autonomous evaluation
 
+## Protected cohort consumption — October 12
+
+For the admitted 75-case development population, use the generated **version 2** plan from
+[`prepare_portable_cohort.py`](../scripts/prepare_portable_cohort.py). It binds exact membership,
+original protected roles, source hashes and a local root mapping before prediction/scoring.
+See [portable cohort delivery and usage](capstone/data/PORTABLE-COHORT-2026-10-12.md).
+Version 1 plans described below remain historical/synthetic compatibility; their free-form cohort
+name alone is not protected-cohort admission. No training consumer is changed by this adapter.
+
 Use `scripts/evaluate_autonomous_cohort.py` to predict, separately score saved native masks,
 and compare two reports. It reuses the existing autonomous predictor, native scorer, summary
 and owned-process watchdog. No optimizer or new crop policy is introduced.
