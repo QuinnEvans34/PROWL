@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { evidenceFixture, evidenceStates, requestEvidence } from '../lib/guidedEvidence.js'
+import { evidenceFixture, evidenceStates, evidenceWording, requestEvidence } from '../lib/guidedEvidence.js'
 import './GuidedEvidencePanel.css'
 
 export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) {
@@ -37,8 +37,7 @@ export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) 
       <summary>Guided evidence questions <span>Fixture demonstration</span></summary>
       <div className="guided-evidence__body">
         <p>{evidenceFixture.notice}</p>
-        <p>PROWL supports research review. It cannot diagnose a patient or recommend treatment.
-          Evidence support does not guarantee clinical truth.</p>
+        <p>{evidenceWording.panel}</p>
         <label htmlFor="guided-evidence-question">Reviewer question</label>
         <select id="guided-evidence-question" value={questionId} disabled={phase === 'loading'}
           onChange={event => { setQuestionId(event.target.value); setResponse(null); setPhase('idle'); pending.current = null }}>
@@ -49,9 +48,10 @@ export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) 
         </button>
         <div aria-live="polite">
           {phase === 'loading' && <p>Checking the fixed passage and saving one response…</p>}
-          {phase === 'unavailable' && <p role="alert">Evidence service unavailable or response invalid.
-            A saved response could not be confirmed. No evidence conclusion can be drawn from this failure.
-            Retry reuses the same request. The image viewer and review controls remain available.</p>}
+          {phase === 'unavailable' && <div role="alert">
+            <p>{evidenceWording.unavailable}</p>
+            <p>{evidenceWording.save_unconfirmed}</p>
+          </div>}
           {response && <article aria-label="Saved fixture response">
             <h3>{evidenceStates[response.state]}</h3>
             <p>{response.message}</p>

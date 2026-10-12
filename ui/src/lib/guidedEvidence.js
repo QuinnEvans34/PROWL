@@ -1,6 +1,9 @@
-import fixture from '../../../configs/evidence/guided-fixture-v1.json'
+import fixture from '../../../configs/evidence/guided-fixture-v2.json'
+import legacyFixture from '../../../configs/evidence/guided-fixture-v1.json'
+import wording from '../../../configs/evidence/evidence-wording-v1.json'
 
 export const evidenceFixture = fixture
+export const evidenceWording = wording
 export const evidenceStates = {
   answered: 'Supported by the selected fixture',
   insufficient_evidence: 'Not enough evidence',
@@ -18,15 +21,16 @@ export async function requestEvidence(request, signal) {
 }
 
 export function validateEvidence(response, request) {
-  const question = fixture.questions.find(q => q.id === request.question_id)
-  const passages = question?.passage_ids.map(id => fixture.passages.find(p => p.id === id))
+  const source = [fixture, legacyFixture].find(f => f.version === response?.provenance?.corpus)
+  const question = source?.questions.find(q => q.id === request.question_id)
+  const passages = question?.passage_ids.map(id => source.passages.find(p => p.id === id))
   const valid = question && response?.schema_version === 'prowl-guided-fixture-response-v1'
     && response.response_id === request.request_id
     && response.request?.request_id === request.request_id
     && response.request?.question_id === request.question_id
     && response.question === question.label && response.state === question.state
     && response.message === question.message
-    && response.provenance?.corpus === fixture.version
+    && response.provenance?.corpus === source.version
     && response.provenance?.adapter === 'fixed-extractive-v1'
     && response.provenance?.model === null && response.provenance?.index === null
     && /^[a-f0-9]{64}$/.test(response.content_sha256)

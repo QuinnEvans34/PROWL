@@ -4,6 +4,36 @@ Quinton selected this first AI expert implementation on October 9, 2026: guided 
 questions, one saved response per request, and transparent evidence/scope/failure messages.
 Tracking: [W01-30](https://trello.com/c/3qTiK9p4).
 
+## Approved wording baseline — October 9, 2026
+
+Quinton approved the following copy as professional, clear and concise. The reusable strings live in
+`configs/evidence/evidence-wording-v1.json`; new fixture responses use `guided-fixture-v2.json`.
+Keep this baseline for subsequent retrieval/generation integration. Change it deliberately when the
+behavior requires clarification, rather than adding repeated disclaimers or vague confidence language.
+
+| Situation | Approved wording |
+|---|---|
+| Supported answer | The selected sources support the following… |
+| Insufficient evidence | The available sources do not provide enough evidence to answer this question. |
+| Partially supported | The sources address **X**, but do not establish **Y**. |
+| Conflicting evidence | The selected sources disagree on this point. |
+| Diagnosis or treatment request | PROWL supports research review and cannot diagnose patients or recommend treatment. Please select a question about the evidence or review workflow. |
+| Technical failure | The evidence service is unavailable. Please try again. You can continue reviewing the scan. |
+| Save not confirmed | We could not confirm that this response was saved. Retry to confirm the save. |
+
+Persistent panel text: **Research review support. Responses are limited to the cited evidence and do
+not provide patient-specific clinical advice.**
+
+Development label: **Synthetic demonstration — not published literature**.
+
+Supported answers include the answer and citations. Partial answers replace X/Y with the actual
+supported/unsupported topics; conflicting answers briefly explain the disagreement. Those two response
+paths remain future implementation, with wording approved now. Avoid “we know,” “definitely,” and vague
+“I'm not sure” messages; name the actual limitation instead.
+
+The original v1 fixture and saved artifacts remain unchanged. Historical reads/retries validate against
+their original fixture version, preserving the exact saved wording and digest. New requests use v2.
+
 This is a working synthetic adapter, not a qualified literature expert. The approved grounded-response
 and interface plans remain the production target. No live search, generation, medical source claims,
 patient interpretation, or training is performed. The fixture is deliberately sparse: unanswered
@@ -74,6 +104,10 @@ attachment and browsing saved response history remain future integration work.
 
 Use Node 24 for the installed UI test dependencies; the machine's Node 20 runtime fails before test
 collection in the installed jsdom/undici combination. No dependency installation was needed.
+October 9 results: 15 Python tests, 25 UI unit tests and 2 browser tests passed; the production build
+passed with the existing large-chunk warning. Screenshots at 1280 and 1024 pixels were visually
+reviewed. The initial browser attempts exposed a local reverse-DNS startup stall; the loopback
+server now skips that unnecessary lookup. These checks use no patient arrays or models.
 
 ## Next implementation choice
 

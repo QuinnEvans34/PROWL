@@ -69,3 +69,13 @@ def test_failed_write_never_returns_saved_response(tmp_path, monkeypatch):
     with pytest.raises(OSError):
         ResponseStore(tmp_path).save(request())
     assert list(tmp_path.iterdir()) == []
+
+
+def test_wording_update_preserves_historical_artifact_and_retry(tmp_path):
+    req = request()
+    original = build_response(req, version="guided-fixture-v1")
+    (tmp_path / f'{req["request_id"]}.json').write_bytes(canonical(original))
+    store = ResponseStore(tmp_path)
+    assert store.read(req["request_id"]) == original
+    assert store.save(req) == original
+    assert store.save(request())["provenance"]["corpus"] == "guided-fixture-v2"

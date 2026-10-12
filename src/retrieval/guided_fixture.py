@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from uuid import UUID
 
-FIXTURE = Path(__file__).resolve().parents[2] / "configs/evidence/guided-fixture-v1.json"
+FIXTURE = Path(__file__).resolve().parents[2] / "configs/evidence/guided-fixture-v2.json"
+FIXTURES = {version: FIXTURE.with_name(f"{version}.json") for version in ("guided-fixture-v1", "guided-fixture-v2")}
 
 
 def canonical(value):
@@ -18,21 +19,23 @@ def digest(value):
     return hashlib.sha256(canonical(value)).hexdigest()
 
 
-def request_fields(request):
+def request_fields(request, *, version="guided-fixture-v2"):
     if not isinstance(request, dict) or set(request) != {"request_id", "question_id"}:
         raise ValueError("Only request_id and a guided question_id are accepted.")
     request_id = request["request_id"]
     if not isinstance(request_id, str) or str(UUID(request_id)) != request_id:
         raise ValueError("Invalid request ID.")
-    fixture = json.loads(FIXTURE.read_text())
+    if version not in FIXTURES:
+        raise ValueError("Unknown fixture version.")
+    fixture = json.loads(FIXTURES[version].read_text())
     question = next((q for q in fixture["questions"] if q["id"] == request["question_id"]), None)
     if question is None:
         raise ValueError("Unknown guided question.")
     return request_id, fixture, question
 
 
-def build_response(request):
-    request_id, fixture, question = request_fields(request)
+def build_response(request, *, version="guided-fixture-v2"):
+    request_id, fixture, question = request_fields(request, version=version)
     passages = {p["id"]: p for p in fixture["passages"]}
     citations = [dict(passages[pid], sha256=digest(passages[pid])) for pid in question["passage_ids"]]
     response = {
@@ -57,7 +60,7 @@ def verify_response(response):
     payload = dict(response)
     if payload.pop("content_sha256", None) != digest(payload):
         raise ValueError("Response integrity check failed.")
-    expected = build_response(response["request"])
+    expected = build_response(response["request"], version=response["provenance"]["corpus"])
     for key in expected:
         if key not in {"content_sha256", "completed_at"} and response.get(key) != expected[key]:
             raise ValueError("Response does not match the fixed evidence policy.")

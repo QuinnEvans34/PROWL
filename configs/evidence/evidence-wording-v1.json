@@ -1,0 +1,12 @@
+{
+  "version": "evidence-wording-v1",
+  "panel": "Research review support. Responses are limited to the cited evidence and do not provide patient-specific clinical advice.",
+  "synthetic": "Synthetic demonstration — not published literature",
+  "answered": "The selected sources support the following…",
+  "insufficient_evidence": "The available sources do not provide enough evidence to answer this question.",
+  "partially_answered": "The sources address {supported_topic}, but do not establish {unsupported_topic}.",
+  "conflicting_evidence": "The selected sources disagree on this point.",
+  "out_of_scope": "PROWL supports research review and cannot diagnose patients or recommend treatment. Please select a question about the evidence or review workflow.",
+  "unavailable": "The evidence service is unavailable. Please try again. You can continue reviewing the scan.",
+  "save_unconfirmed": "We could not confirm that this response was saved. Retry to confirm the save."
+}
