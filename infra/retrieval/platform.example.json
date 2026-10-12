@@ -1,0 +1,7 @@
+{
+  "mount": "/Volumes/PROWL-Data",
+  "volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59",
+  "data": "/Volumes/PROWL-Data/PROWL/scratch/literature/pgvector-smoke-01",
+  "password_file": "/REPLACE/WITH/PRIVATE/LOCAL/db-password",
+  "port": 55432
+}
