@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { savedPredictionPlugin } from './savedPredictionPlugin.js'
 
 // Static-first viewer, with an optional local fixture writer during development.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [savedPredictionPlugin(), react()],
   server: {
     port: 5173, open: true,
     proxy: { '/evidence-fixture': 'http://127.0.0.1:8011' },
