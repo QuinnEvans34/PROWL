@@ -2,10 +2,15 @@
 
 **Status:** Active planning baseline  
 **Sources:** Approved Proposal v3.8 and Technical Appendix v3.1  
-**Last reviewed:** 2026-09-18
+**Last reviewed:** 2026-10-12 (evidence overlay; baseline requirements preserved)
 
 This table makes completion auditable. A requirement is not complete until its implementation
 artifact and verification evidence exist.
+
+Current evidence and remaining acceptance for every requirement are in the
+[October 12 closeout map](weeks/WEEK-01-CLOSEOUT-2026-10-12.md). The original statuses below
+are the planning baseline, not current completion claims. G0-design is delivered; full current-tree
+G0-verification remains partial.
 
 ## Product and scope
 

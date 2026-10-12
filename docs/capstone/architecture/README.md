@@ -6,6 +6,9 @@
 This directory contains the human-readable architecture views. Machine-readable boundary contracts
 live under [`../contracts/`](../contracts/).
 
+The inherited current-state view is dated September 8. For implemented capstone slices and
+remaining gaps, use the [October 12 evidence overlay](../weeks/WEEK-01-CLOSEOUT-2026-10-12.md).
+
 ## Views
 
 | View | Question answered |

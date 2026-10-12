@@ -203,3 +203,21 @@ as the initial subtotal; Quinton may correct both allocation and total.
 
 Weekly handback: confirmed human total, remaining estimates, separate class/meeting time,
 completed tasks, principal blocker and the next bounded packet.
+
+
+## October 12 review — outstanding confirmation
+
+The older October 8 open interval is an unresolved historical record, not a clock running through
+October 12. Monday 4 and Tuesday 5–6 remain the only credited estimates; the 9–10 subtotal is not
+Week 1's total. Requested exact Tuesday value and net active hours for October 7–11. No new time
+is credited until supplied.
+
+| Date | Activity summary for confirmation | Human hours |
+|---|---|---|
+| Friday Oct 9 | Planned the AI expert's guided questions and transparent responses; reviewed autonomous imaging results, evaluation/cohort follow-ons and literature acquisition. | Pending Quinton |
+| Saturday Oct 10 | Reviewed journal-first corpus scope, MeSH/source eligibility and download/import preparation and progress. | Pending Quinton |
+| Sunday Oct 11 | Reviewed import performance/recovery and overnight completion safeguards. Unattended processing is excluded. | Pending Quinton |
+| Monday Oct 12 | Planned Week 2; reviewed portable cohorts, source issues, saved prediction viewer, architecture traceability and weekly acceptance. | Pending Quinton |
+
+These are activity descriptions supported by task records, not inferred durations or new submitted
+portal entries. Week 2 hours and final Sunday review remain open.

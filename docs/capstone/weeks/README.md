@@ -4,12 +4,18 @@ Quinton adopted a Sunday planning routine on October8,2026. Each week has one li
 `WEEK-NN-WORK-PLAN.md`. It is the daily task/specification list, not a replacement for the approved
 proposal, master schedule, experiment records or component contracts.
 
-**Current:** [Week1 work plan](WEEK-01-WORK-PLAN.md), October5–11.
-**Next:** [Week2 development plan](WEEK-02-WORK-PLAN.md), October12–18; early draft for Sunday review.
+**Current:** [Week 2 work plan and delivery benchmark](WEEK-02-WORK-PLAN.md), October 12–18.
+**Previous:** [Week 1 closeout](WEEK-01-WORK-PLAN.md), October 5–11; evidence/hour carryovers remain visible.
 **Template:** [Weekly work plan](WEEKLY-WORK-PLAN-TEMPLATE.md).
 **Human time:** [Hours log](HOURS-LOG.md).
 
-## Sunday routine
+## Beginning-of-week planning and Sunday closeout
+
+October 12 update: Quinton requests a concrete specification at the beginning of every week.
+Use Sunday to review results and prepare the next plan; confirm its delivery benchmark at the start
+of the new week. Include required proposal outcomes, selected early work, conditional stretch work,
+acceptance evidence, capacity, and a checkpoint for every project area. Weekly progress is measured
+against delivered artifacts and checks, not card counts or unattended runtime.
 
 1. Review the outgoing week's completed work, experiment outcomes and remaining gates with Quinton.
 2. Reconcile hours and course/Trello status; never count unattended training as human work.

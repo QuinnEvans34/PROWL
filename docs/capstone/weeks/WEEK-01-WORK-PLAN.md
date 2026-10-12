@@ -1,9 +1,9 @@
 # Week 1 living work plan
 
-**Dates:** October 5–11, 2026 (America/Denver)  
-**Updated:** October 8, 2026  
-**Owner:** Quinton Evans  
-**Status:** In progress — closeout evidence not yet reconciled  
+**Dates:** October 5–11, 2026 (America/Denver)\
+**Updated:** October 8, 2026\
+**Owner:** Quinton Evans\
+**Status:** Week ended; delivered work recorded, evidence closeout and human hours carried forward\
 **Weekly commitment:** Architecture and test readiness; a concrete starting point for Week 2.
 
 This is the working task list for the week. Update it as work progresses instead of creating another
@@ -105,8 +105,8 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
   Week1 checklist; preserve dated history and retirement of old runs.
 - Map requirements to existing component plans rather than write a new architecture from scratch.
 
-**Deliverable:** Updated navigation/status and one linked architecture map.  
-**Verification:** Compare claims to code and retained results; all local links resolve.  
+**Deliverable:** Updated navigation/status and one linked architecture map.\
+**Verification:** Compare claims to code and retained results; all local links resolve.\
 **Not included:** Replacing models, changing the active run, or claiming architecture choice is experimentally settled.
 
 ### W01-C02 — Python and UI development readiness
@@ -122,8 +122,8 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
 - Identify a minimal synthetic/sample-data fixture set for UI and pipeline development.
 - Fix concrete setup/test failures; preserve diagnostic output. Document one clear entry sequence.
 
-**Deliverable:** Updated setup/testing instructions and a check/result table with environment/commit/scope.  
-**Verification:** Selected checks actually pass; unsupported or untested areas remain explicit.  
+**Deliverable:** Updated setup/testing instructions and a check/result table with environment/commit/scope.\
+**Verification:** Selected checks actually pass; unsupported or untested areas remain explicit.\
 **Not included:** Running every historical test, a UI redesign, deployment or full clinical-image validation.
 
 ### W01-C03 — Product integration specifications
@@ -138,8 +138,8 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
   the region during autonomous inference.
 - Keep durable reviewer decisions and retrieval integration as separately sized tasks.
 
-**Deliverable:** An implementation-ready task specification linked here and in Week2.  
-**Verification:** Inputs/outputs/owner/failures/test/finish criteria are all named.  
+**Deliverable:** An implementation-ready task specification linked here and in Week2.\
+**Verification:** Inputs/outputs/owner/failures/test/finish criteria are all named.\
 **Not included:** Requiring a production localizer or complete end-to-end application this week.
 
 ### W01-C04 — Requirement and risk reconciliation
@@ -152,7 +152,7 @@ An unresolved mandatory gate remains open; documenting it does not turn it into 
 - For each high-impact risk, name a practical check and fallback; avoid turning every research unknown
   into a prerequisite for all development.
 
-**Deliverable:** Updated evidence map and explicit G0-design/G0-verification decision.  
+**Deliverable:** Updated evidence map and explicit G0-design/G0-verification decision.\
 **Verification:** Quinton can see what is complete and what prevents any unclosed gate.
 
 ### W01-C05 — Week2 plan and experiment selection
@@ -176,7 +176,7 @@ experiment questions for October8–22. Keep findings there and weekly task owne
 - Include the Lenovo port as a proposed task with a concrete first experiment, not an indefinite
   infrastructure project. One fixed, resumable training job is its first operational finish line.
 
-**Deliverable:** `WEEK-02-WORK-PLAN.md` created during Sunday planning, with selected tasks specified.  
+**Deliverable:** `WEEK-02-WORK-PLAN.md` created during Sunday planning, with selected tasks specified.\
 **Verification:** The first task can start without reconstructing this conversation; experiment arms,
 metrics, cohort, runtime, storage, failure handling and expected outputs are stated before launch.
 
@@ -242,6 +242,35 @@ is short, prioritize reproducible development and a clear Week2 start over new i
 - **Human hours:** See HOURS-LOG; reconcile exclusions with Quinton.
 - **Week2 top outcomes and first task:** Pending Sunday selection.
 - **Quinton review:** Pending.
+
+### October 12 board reconciliation — current closeout disposition
+
+The [Trello board](https://trello.com/b/vac4k8Po) now separates Week 1 Complete from Week 2
+To Do / In Progress / Complete. Thirty-five delivered cards are in Week 1 Complete, including
+the user-confirmed course tasks and the completed PubMed acquisition/replay. Pre-course work
+remains separate. This count records completed task scopes, not 35 fully qualified product features.
+
+- Architecture, component designs, the feature/week outline and integration specifications exist.
+  Requirement-to-check reconciliation and explicit G0 disposition were delivered October 12 on
+  [W01-01](https://trello.com/c/hpTmjopp): see the [closeout map](WEEK-01-CLOSEOUT-2026-10-12.md).
+  G0-design is delivered; current full G0-verification remains partial. Focused passing checks do not establish a full-tree pass.
+- Guided evidence fixtures, the reusable autonomous evaluator and selection-rule implementation
+  are delivered. Full PubMed replay completed October 11; its new completion card is
+  [W01-32](https://trello.com/c/NOfEBwXj). Full topic selection remains W02-06.
+- The retained internal resume02 result records 24,000 completed training updates and best
+  provided-region development Dice 0.3953174294791896. W01-12 is closed for readiness/run delivery;
+  future training belongs to the other laptop/chat, not this development lane.
+- Quinton confirmed October 12 that Resources and What/Why/How were both fully completed,
+  including submission and presentation/upload. COURSE-01 and COURSE-02 are closed on that basis.
+- Human hours remain incomplete on [W01-05](https://trello.com/c/yU3zZfAz): confirm exact active
+  daily estimates and the weekly total; exclude unattended work and overlapping chats.
+- Legacy [N4 storage recovery](https://trello.com/c/XcloMmhR) remains unverified in Backlog.
+  The old missing-drive blocker is stale; successful import does not prove the separate recovery
+  rehearsal passed. Decide whether the path remains necessary or has an evidenced replacement.
+
+**Gate result:** Design substantially delivered; final executable-evidence closeout remains open.
+Week 2's primary delivery is portable protected cohorts. Its imaging and literature follow-ons
+are scoped in the living Week 2 plan. No new implementation or experiment was launched by cleanup.
 
 October 9 planning recenter: Quinton requested proposal review and discussion before selecting today's
 implementation. [Feature and weekly delivery outline](PROJECT-DELIVERY-OUTLINE-2026-10-09.md) records
