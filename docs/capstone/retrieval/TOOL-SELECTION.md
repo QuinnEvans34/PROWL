@@ -1,5 +1,18 @@
 # PostgreSQL + pgvector configuration trial
 
+## October 12 configuration decision
+
+Quinton accepted exact vector search plus PostgreSQL full-text search for the initial bounded
+corpus and deferred optimization after reviewing the filtered HNSW recall failure. The synthetic
+trial is authorized by the Phase 2 continuation requests. The older no-execution status below
+records the original design stage, not the current trial authorization.
+
+Exact-first configuration must still meet the latency/resource/coexistence and recovery criteria.
+The >=0.95 approximate-recall bar remains mandatory before any future approximate-index promotion;
+the failed HNSW trial is retained, not relabeled as passing. See
+[Phase 2 evidence](PGVECTOR-PHASE2-RESULTS-2026-10-12.md). Real embeddings, relevance and contract-bound
+ingestion remain later work.
+
 Status: approved engine and trial design; no installation/execution permission.
 D-260 selects the literature-only engine. D-263/D-264 and approved PHASES P4a/P4b
 supersede the historical engine bake-off retained below. D-202 remains open for measured

@@ -27,7 +27,11 @@ These are commitments to deliver and verify the stated artifacts, not claims tha
 A blocked or partial outcome is recorded as such; a blocker note does not satisfy the missing deliverable.
 No accuracy target, model improvement or finish time for a long-running job is promised.
 
-**AI expert resumes after the Week 2 engineering outputs:** full journal selection → permitted
+**October 12 AI planning update:** [database implementation plan](../retrieval/PGVECTOR-IMPLEMENTATION-PLAN-2026-10-12.md)
+proposes the synthetic W02-08 platform trial first; it can run independently of real corpus preparation.
+This refines the sequence below without declaring W02-08 complete or starting a database job.
+
+**Real-data AI expert sequence after the Week 2 engineering outputs:** full journal selection → permitted
 text/passages → bounded pgvector retrieval slice → real evidence-panel connection planning. These
 remain specified follow-ons, not prerequisites for Week 2 completion. Administrative hours confirmation
 or an unavailable new model must not become an indefinite blocker to returning to the AI expert. Optional research stretch goals follow the committed system, not just this week's AI progress.
