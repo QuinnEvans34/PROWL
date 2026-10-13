@@ -260,6 +260,11 @@ Record Quinton's human hours in [HOURS-LOG.md](HOURS-LOG.md); Trello provides ta
 
 ### Deferred checks — revisit later this week
 
+**October 13 tooling follow-up complete:** [UI dependency update](../testing/UI-TOOLING-UPDATE-2026-10-13.md)
+pins compatible Vite/Vitest/React-plugin versions. Full npm audit returns zero findings; clean
+install, 37 UI tests, build, two synthetic and three saved-prediction browser tests pass.
+The earlier ten-entry npm audit is historical; source/cross-machine/hours/Sunday items stay open.
+
 **October 13 repair complete:** [readiness portability repair](../testing/READINESS-PORTABILITY-2026-10-13.md)
 removes the collection-time local receipt dependency and isolates the cohort lock fixture. A new
 export without outputs/root registry passes **5,021 fast tests**, with one intentional native skip

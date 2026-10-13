@@ -1,5 +1,8 @@
 # UI dependency audit review — October 13
 
+**Follow-up completed:** [verified tooling update](UI-TOOLING-UPDATE-2026-10-13.md) resolves
+the reported findings; full audit now returns zero. This document preserves the pre-update review.
+
 ## Finding and scope
 
 The retained full npm audit reports ten affected package entries: four moderate, four high,

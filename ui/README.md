@@ -3,6 +3,8 @@
 ## Capstone test foundation
 
 Use Node 24.21.0 (`nvm use` in this directory), then `npm ci` and `npm run test:run`.
+Verified tooling: Vite 8.3.4, Vitest 5.0.4, React plugin 6.1.2, npm 11.19.0.
+See [the tooling update and browser verification](../docs/capstone/testing/UI-TOOLING-UPDATE-2026-10-13.md).
 For the synthetic Chromium smoke test, run `npx --no-install playwright install chromium` then
 `npm run test:e2e`. `npm run build` builds locally; it does not publish a site.
 The browser fixture stubs NiiVue, blocks case/network access except its local server and a stubbed

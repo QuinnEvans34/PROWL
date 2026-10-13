@@ -12,6 +12,8 @@ This is the foundation/test environment, not the full historical training enviro
 Use Node **24.21.0**, pinned in `ui/.nvmrc`; the October 13 clean run used npm **11.19.0**.
 Select the version explicitly with `cd ui && nvm use`, then verify `node --version` and
 `npm --version` before `npm ci`. The ambient Node 20 shell is not the supported UI baseline.
+The [verified UI tooling update](UI-TOOLING-UPDATE-2026-10-13.md) pins Vite 8.3.4,
+Vitest 5.0.4 and React plugin 6.1.2; UI/build/synthetic and saved-prediction browser checks pass.
 
 [October 13 reproduction evidence](REPRODUCTION-2026-10-13.md) records clean installation,
 UI checks and Python collection/skip reconciliation. The subsequent
