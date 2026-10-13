@@ -1,7 +1,7 @@
 # Phase 3 — journal selection readiness and execution
 
-Status: seed citation lookup paused at Quinton's request on October 13, with 37,630,000 of
-41,226,017 records checkpointed (91.3%). Resume only when requested; full topic selector not launched.
+Status: seed citation lookup resumed at Quinton's request on October 13 from 37,630,000 of
+41,226,017 records (91.3%). Verify native activity for current state; full topic selector not launched.
 Owner: Quinton + Mac development. Trello: https://trello.com/c/LxvwMa3s.
 
 ## Required sequence
@@ -116,3 +116,14 @@ last_rowid38168341 and20 title matches (91.28% of41,226,017). Script/candidate h
 catalog size/mtime match checkpoint identity. Status reports stopped; completion remains pending.
 Resume SAME attempt02 with --resume only when requested; no restart from zero. Drive remains
 mounted; normal eject is required before disconnection. No selection, embeddings or training started.
+
+## Resume after class — October 13
+
+Quinton connected the drive and explicitly requested continuation. Worktree was already clean;
+UI update d67e93c and storage review77232e6 are committed. Verified external UUID
+22750B93-2F3F-499D-87F5-902981BFAB59, approximately2.26TB free, no competing corpus process,
+unchanged script/candidate/catalog stat/metadata identity and available locks. Preserved the stopped
+status under a fresh timestamped pause-before-resume receipt. Same attempt02 resumes at37,630,000
+records/last_rowid38168341/20matches, --resume --seconds43200. Owned session10195, native
+Python36048/caffeinate36049 confirmed live; 12h is an invocation ceiling, not an ETA. Prior97663
+remains finished. No restart from zero, selector, embeddings or training.
