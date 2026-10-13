@@ -1596,3 +1596,20 @@ for any non-invented run.
 **N4 remains open.** The only prerequisite is physically connecting the approved drive. When it
 is detected, the next steps are a fresh preflight, the request freeze and the single bounded
 rehearsal. No new decision is needed.
+
+## 2026-10-13: provisional local seed review and exposure ledger initialized
+
+The full title lookup remains incomplete. Direct indexed reads reviewed the 21 located records;
+all match citation checks and all supplied DOIs agree. C-29/C-42 remain unlocated pending the scan.
+All 21 located records have MeSH; the three-no-MeSH target is not met. See
+SEED-READINESS-2026-10-13.md for findings and scope recommendations. No seed freeze or policy change.
+C-25 and C-36 abstracts were read locally for the previously planned factual scope checks.
+C-25's record does not establish pancreas coverage; C-36 supports imaging CAD cueing effects.
+Scope recommendations are recorded for Quinton's review, not silently promoted into frozen seeds.
+
+INSPECTED-PMIDS.jsonl initializes 11 earlier PMID exposures and 21 new local-review events
+(32 events,31 distinct PMIDs), all ineligible for independent confirmation. Duplicate PMID33840636
+is retained as event history. EXPOSURE-MAPPING-PENDING.json retains unresolved identifiers and
+chaining groups; mappings must be appended, never used to clear an exposed record. No sampling,
+keys, frozen seeds, executable admission or real selection was produced. Evidence remains in
+outputs/prowl/seed-readiness-20261013/. No human hours inferred.

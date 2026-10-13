@@ -127,3 +127,53 @@ status under a fresh timestamped pause-before-resume receipt. Same attempt02 res
 records/last_rowid38168341/20matches, --resume --seconds43200. Owned session10195, native
 Python36048/caffeinate36049 confirmed live; 12h is an invocation ceiling, not an ETA. Prior97663
 remains finished. No restart from zero, selector, embeddings or training.
+
+## Resumable selector design — October 13
+
+Engineering Phase 1 is documented in [the resumable selection design](RESUMABLE-SELECTION-DESIGN-2026-10-13.md).
+Quinton selected keeping Expat. The design specifies transactional evaluation checkpoints, exact
+resume identities, global ranking, recoverable exports, resource bounds and acceptance tests.
+Design review precedes Phase 2 implementation; seed review/freeze still precedes real selection.
+This documentation does not change the active lookup or completed replay implementation.
+
+## Resumable selector Phase 2 — October 13
+
+[Phase 2 results](RESUMABLE-SELECTION-PHASE2-2026-10-13.md) document the new isolated evaluation
+module/CLI, atomic checkpoints, explicit resume, identities and locks. Synthetic regression suite:
+69 passed. Evaluation stops at ranking pending; no final selection receipt or actual corpus run.
+Next review is engineering Phase 3 ranking/export recovery. Existing replay and lookup code unchanged.
+
+## Resumable selector engineering Phase 3 — October 13
+
+[Ranking/export results](RESUMABLE-SELECTION-PHASE3-2026-10-13.md): global winners committed,
+numbered recoverable export attempts, byte verification and completion summary published last.
+84 synthetic/regression checks pass, including publication crash boundaries and prior-selector
+byte equivalence. No real selection run. Next is engineering Phase 4 recovery/performance review;
+SQLite temporary spill accounting remains a specific resource qualification item before launch.
+
+## Resumable selector engineering Phase 4 — October 13
+
+[Recovery/resource/performance results](RESUMABLE-SELECTION-PHASE4-2026-10-13.md): 102 tests pass,
+including nine actual SIGINT/SIGTERM/SIGKILL recovery cases. Open-unlinked descriptor accounting
+now detects real SQLite spill; cooperative limits still require launch headroom. Eighteen bounded
+synthetic benchmark runs match reference output hashes; keep Expat and batch 1,000. Internal
+invocation logs added to the CLI. No real selection launched. Next: Phase 5 concrete launch packet
+after seed review/freeze and other admission prerequisites, with real sizing as needed.
+
+## Engineering Phase 5 packet prepared — October 13
+
+[Draft launch packet](RESUMABLE-SELECTION-PHASE5-LAUNCH-2026-10-13.md) records exact proposed paths,
+command, identity pins, resource limits and pause/resume/completion procedure. Native PID36048
+confirmed running the existing lookup; status advanced39.77M to39.78M/41.226M during checks.
+Correct external UUID and~2.26TB free verified. No matches.json yet; seed review/freeze and reserve/
+exposure artifacts remain prerequisites. Real output capacity still needs review. Packet is
+explicitly non-executable; no actual selector, new corpus scan, seed freeze or key generation.
+
+## Seed prerequisites in progress — October 13
+
+[Provisional seed review](planning/SEED-READINESS-2026-10-13.md) examines the21 already-located
+records by direct PMID lookup: citation/supplied-DOI checks pass, but all21 have MeSH. C-29/C-42
+remain pending the full scan. C-25/C-36 local abstract scope checks completed; recommendations
+submitted to Quinton. Initialized32 exposure events/31 distinct PMIDs and retained17 explicit
+identifier mappings plus chaining groups as unresolved. No seed freeze or reserve keys yet.
+Missing-MeSH coverage requires additional reviewed candidates or an explicit protocol decision.
