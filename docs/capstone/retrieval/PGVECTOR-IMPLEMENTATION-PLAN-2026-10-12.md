@@ -19,7 +19,7 @@ recall failed the 95% bar. [Results and exact-first recommendation](PGVECTOR-PHA
 **Current closeout:** Quinton selected exact-first retrieval. Client latency (205 ms broad p95;
 211 ms concurrent) and synthetic GPU coexistence (1.73% throughput reduction) passed; all owned
 containers stopped. Phase 2 engineering complete, ready for review; HNSW remains deferred.
-**Next:** Phase 3 / W02-06 full journal selection. Real-corpus ingestion remains Phase 5.
+**Current phase:** Quinton advanced to Phase 3 / W02-06. [Seed lookup and selection readiness](PHASE3-SELECTION-2026-10-12.md) is active; seed freeze precedes the full selector. Real-corpus ingestion remains Phase 5.
 All later implementation phases remain pending; platform acceptance is not complete.
 
 | Phase | What Quinton can review | Completion checks | Next / existing tracking |
