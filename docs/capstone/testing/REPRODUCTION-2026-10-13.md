@@ -1,5 +1,8 @@
 # Week 2 clean-environment reproduction — October 13
 
+Follow-up: the [readiness portability repair](READINESS-PORTABILITY-2026-10-13.md) addresses
+the collection error found in this audit. The original failed results below remain preserved.
+
 ## Scope and identity
 
 Verified a clean source export of commit `69a77c36a0b83da9f301b0489ce3c881b4f1055c` on

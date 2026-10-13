@@ -260,6 +260,13 @@ Record Quinton's human hours in [HOURS-LOG.md](HOURS-LOG.md); Trello provides ta
 
 ### Deferred checks — revisit later this week
 
+**October 13 repair complete:** [readiness portability repair](../testing/READINESS-PORTABILITY-2026-10-13.md)
+removes the collection-time local receipt dependency and isolates the cohort lock fixture. A new
+export without outputs/root registry passes **5,021 fast tests**, with one intentional native skip
+and 51 explicit local-evidence deselections (237.03 seconds, exit 0). The macOS foundation
+install/collection/fast-suite follow-up is complete. Cross-machine execution, local historical
+integration, npm audit remediation and full release/G0/G8 acceptance remain separate.
+
 **October 13 environment check:** [clean reproduction report](../testing/REPRODUCTION-2026-10-13.md)
 verifies Python 3.12.13 / pip 26.1, all 58 locked packages, and Node 24.21.0 / npm 11.19.0
 in an isolated source export. UI: 37 unit tests, two synthetic browser tests and build pass.

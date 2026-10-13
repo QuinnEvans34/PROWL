@@ -14,8 +14,9 @@ Select the version explicitly with `cd ui && nvm use`, then verify `node --versi
 `npm --version` before `npm ci`. The ambient Node 20 shell is not the supported UI baseline.
 
 [October 13 reproduction evidence](REPRODUCTION-2026-10-13.md) records clean installation,
-UI checks and Python collection/skip reconciliation. Fresh Python installation succeeds, but
-full current-source portability remains open because tests depend on ignored local evidence.
+UI checks and Python collection/skip reconciliation. The subsequent
+[readiness portability repair](READINESS-PORTABILITY-2026-10-13.md) separates portable checks
+from explicitly selected historical receipt integration and records fresh-export verification.
 The commands below are design intents where wrappers have not yet been implemented; do not assume
 a `verify` executable exists. Actual default Python selection is defined by `pytest.ini`, including
 the exclusion of `local_evidence`. No Linux lock or cross-machine execution is qualified here.

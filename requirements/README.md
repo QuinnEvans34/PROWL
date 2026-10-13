@@ -41,8 +41,9 @@ The October 13 clean install reproduced all 58 locked packages on Python 3.12.13
 and passed `pip check`. Installation success does not mean every current test is portable:
 the fresh source export exposed a collection-time dependency on ignored diagnostic outputs.
 See [the current reproduction report](../docs/capstone/testing/REPRODUCTION-2026-10-13.md)
-for test results and remaining work. Keep historical September/October 3 results tied to their
-original source versions.
+for the original findings and the [readiness test repair](../docs/capstone/testing/READINESS-PORTABILITY-2026-10-13.md)
+for subsequent fresh-export verification. Keep historical September/October 3 results tied to
+their original source versions.
 
 ## Moving the checkout
 

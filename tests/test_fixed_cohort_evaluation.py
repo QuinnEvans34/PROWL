@@ -205,10 +205,14 @@ def test_real_synthetic_cascade_through_evaluator(tmp_path):
     assert nib.load(tmp_path / 'actual/a/prediction/prediction.nii.gz').shape == image.shape
 
 
-def test_mps_lock_refuses_duplicate_before_creating_output(tmp_path):
+def test_mps_lock_refuses_duplicate_before_creating_output(tmp_path, monkeypatch):
+    from src.inference import fixed_cohort_evaluation as evaluation
     fcntl = pytest.importorskip('fcntl')
     plan, _ = fixture(tmp_path); plan['inference']['device'] = 'mps'
-    with (ROOT / 'outputs/prowl/.mps-profile.lock').open('a') as lock:
+    lock_root = tmp_path / 'isolated-repo'
+    (lock_root / 'outputs/prowl').mkdir(parents=True)
+    monkeypatch.setattr(evaluation, 'ROOT', lock_root)
+    with (lock_root / 'outputs/prowl/.mps-profile.lock').open('a') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         with pytest.raises(BlockingIOError):
             run_predictions(plan, PIN, tmp_path / 'duplicate', lambda *a: pytest.fail('No competing GPU job'))
