@@ -260,6 +260,14 @@ Record Quinton's human hours in [HOURS-LOG.md](HOURS-LOG.md); Trello provides ta
 
 ### Deferred checks — revisit later this week
 
+**October 13 environment check:** [clean reproduction report](../testing/REPRODUCTION-2026-10-13.md)
+verifies Python 3.12.13 / pip 26.1, all 58 locked packages, and Node 24.21.0 / npm 11.19.0
+in an isolated source export. UI: 37 unit tests, two synthetic browser tests and build pass.
+Python collection fails on an ignored historical-output dependency; the diagnostic run reports
+4,934 passed, one explicit native skip, eight local-evidence deselections and one collection error.
+Full fast portability remains open. Ten npm audit package findings are retained for a separate dependency review. This advances
+the environment follow-up without claiming full G0/G8 or cross-machine verification.
+
 Quinton explicitly requested on October 12 that the following remain documented for later-week
 review while we discuss the AI expert prerequisites. These are open items, not completed gates.
 The dates below are planning checkpoints, not scheduled automations or promises of resolution.
