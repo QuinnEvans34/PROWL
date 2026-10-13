@@ -260,6 +260,12 @@ Record Quinton's human hours in [HOURS-LOG.md](HOURS-LOG.md); Trello provides ta
 
 ### Deferred checks — revisit later this week
 
+**October 13 storage applicability reviewed:** [N4 disposition](../operations/N4-APPLICABILITY-2026-10-13.md)
+confirms that the selected catalog/seed/pgvector paths do not use the legacy N4 writer binding.
+Its rehearsal stays deferred/unverified, not a blocker to these paths. Existing pgvector recovery
+uses the same external volume and does not prove independent backup or primary-volume-loss recovery;
+define and qualify durable real-corpus recovery in Phase 5 before relying on that service.
+
 **October 13 tooling follow-up complete:** [UI dependency update](../testing/UI-TOOLING-UPDATE-2026-10-13.md)
 pins compatible Vite/Vitest/React-plugin versions. Full npm audit returns zero findings; clean
 install, 37 UI tests, build, two synthetic and three saved-prediction browser tests pass.
