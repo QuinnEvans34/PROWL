@@ -83,3 +83,13 @@ Readiness receipt and old source copies retained in the evidence folder. No eval
 export or deep audit was run. Future command uses ordinary --resume with current v3 bytes and
 same admission/output; omit --prepare-resume and --transition-from only when continuation is
 requested. Leave paused until that request.
+
+## Authorized continuation
+
+User requested resume and commits. Code a2d75f8 and readiness documentation9ac6af3 committed.
+Verified drive UUID/free space/no duplicate, then launched ordinary --resume (no migration flag)
+in owned session46696, Python2142/caffeinate2143. Invocation03 uses12workers/4096MiB cache,
+120second startup phases/12h invocation/768GiB cap/400GiB floor. AC charging confirmed after
+initial battery warning. Actual new checkpoint39,215,890 confirms433new records beyond prior
+39,215,457, sequence39567. No stderr error. Continue monitoring this job; no duplicate launch.
+Logs and resume-03-receipt.json: outputs/prowl/selection-launch-r02/. Earlier42532 is finished.
