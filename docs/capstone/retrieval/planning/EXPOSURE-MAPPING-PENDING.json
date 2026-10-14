@@ -1,124 +1,141 @@
 {
-  "status": "incomplete_no_confirmation_sampling",
+  "status": "explicit_identifiers_mapped_broader_groups_pending_no_sampling",
   "identifiers": [
     {
       "kind": "doi",
       "identifier": "10.1148/radiol.222176",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "37129490"
     },
     {
       "kind": "doi",
       "identifier": "10.1007/s11548-025-03331-2",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "39961898"
     },
     {
       "kind": "doi",
       "identifier": "10.1007/s00784-024-05753-9",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "38842694"
     },
     {
       "kind": "doi",
       "identifier": "10.1007/s10916-025-02263-3",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "41023263"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC12286379",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "40700385"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC13227626",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "41992154"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC13236442",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "42225574"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC13292061",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "42358845"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC13103180",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "40679761"
     },
     {
       "kind": "pmcid",
       "identifier": "PMC12346778",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "40805252"
     },
     {
       "kind": "nature_article",
       "identifier": "s41746-025-01970-y",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "41083668"
     },
     {
       "kind": "nature_article",
       "identifier": "s41598-025-00512-6",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "40473659"
     },
     {
       "kind": "nature_article",
       "identifier": "s41746-025-02260-3",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "41476122"
     },
     {
       "kind": "nature_article",
       "identifier": "s41598-026-51814-2",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "42086843"
     },
     {
       "kind": "nature_article",
       "identifier": "s41591-025-03785-6",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "40555751"
     },
     {
       "kind": "nature_article",
       "identifier": "s41572-026-00699-6",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "42098138"
     },
     {
       "kind": "nature_article",
       "identifier": "s41591-026-04589-y",
-      "status": "pmid_mapping_pending",
+      "status": "local_identifier_confirmed",
       "purpose": "pre_run_exposure",
-      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md"
+      "source": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "pmid": "42618635"
     }
   ],
   "additional_source_groups": [

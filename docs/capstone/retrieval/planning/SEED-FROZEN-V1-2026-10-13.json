@@ -1,0 +1,1185 @@
+{
+  "version": "prowl-seed-freeze-v1",
+  "frozen_at": "2026-10-14T00:16:17.133093+00:00",
+  "approval": "Quinton: Yes, I approve. Continue on; approval of proposed23 seeds incl3 withoutMeSH and C32/C33 background disposition.",
+  "information_needs_sha256": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+  "decision_document_sha256": "85c2fc3391e537cfae210458108eb3768e144339f5d3189e8804f0fe17b95370",
+  "catalog_manifest_sha256": "aaa2a78495cdb92fb4d6d5f4e439532b5826899e0c8498a64f880b34f42a9be3",
+  "seed_count": 23,
+  "missing_mesh_count": 3,
+  "family_counts": {
+    "1": 5,
+    "2": 3,
+    "3": 3,
+    "4": 13,
+    "5": 8
+  },
+  "excluded_from_recall": {
+    "C-25": "scope probe",
+    "C-32": "related background",
+    "C-33": "related background"
+  },
+  "seeds": [
+    {
+      "seed_id": "S-01",
+      "pmid": "33840636",
+      "needs": [
+        "N5.5",
+        "N5.6",
+        "N4.3",
+        "N1.1",
+        "N2.1"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row S-01",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Suman G",
+          "Patra A",
+          "Korfiatis P",
+          "Majumder S",
+          "Chari ST",
+          "Truty MJ",
+          "Fletcher JG",
+          "Goenka AH"
+        ],
+        "title": "Quality gaps in public pancreas imaging datasets: Implications & challenges for AI applications.",
+        "year": 2021,
+        "venue": "Pancreatology : official journal of the International Association of Pancreatology (IAP) ... [et al.]"
+      },
+      "identifier": {
+        "pmid": "33840636",
+        "dois": [
+          "10.1016/j.pan.2021.03.016"
+        ]
+      },
+      "families": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1079.xml.gz",
+      "source_sha256": "0d82d7cfc60f4194b23eeec52995ad0f2c54743e7e87c53fd0dddaad5fa43967",
+      "xml_sha256": "5945241d1538e9468eff93534373529db2af29c34b018bf1f057767520bbee2e"
+    },
+    {
+      "seed_id": "S-02",
+      "pmid": "39865461",
+      "needs": [
+        "N4.1",
+        "N4.3",
+        "N4.6"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row S-02",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Podin\u0103 N",
+          "Gheorghe EC",
+          "Constantin A",
+          "Cazacu I",
+          "Croitoru V",
+          "Gheorghe C",
+          "Balaban DV",
+          "Jinga M",
+          "\u021aieranu CG",
+          "S\u0103ftoiu A"
+        ],
+        "title": "Artificial Intelligence in Pancreatic Imaging: A Systematic Review.",
+        "year": 2025,
+        "venue": "United European gastroenterology journal"
+      },
+      "identifier": {
+        "pmid": "39865461",
+        "dois": [
+          "10.1002/ueg2.12723"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1276.xml.gz",
+      "source_sha256": "70eda504dd14c95f94464b10268352ac0b043d655d373cf01798783a18b46c4b",
+      "xml_sha256": "edebb9e550435976b53f41994b80916a4351261d4b73f29dfc53260d060ddd70"
+    },
+    {
+      "seed_id": "C-01",
+      "pmid": "29785074",
+      "needs": [
+        "N1.1"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-01",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Zhang L",
+          "Sanagapalli S",
+          "Stoita A"
+        ],
+        "title": "Challenges in diagnosis of pancreatic cancer.",
+        "year": 2018,
+        "venue": "World journal of gastroenterology"
+      },
+      "identifier": {
+        "pmid": "29785074",
+        "dois": [
+          "10.3748/wjg.v24.i19.2047"
+        ]
+      },
+      "families": [
+        1
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0947.xml.gz",
+      "source_sha256": "d868bd596ecf87678c302d389ec21c3cf4be68ba6b518837d616abdbcff27087",
+      "xml_sha256": "67925bae7e0ae7192745438a3203f29c3bf728b79a1c43d8a7a54bc380c1cfeb"
+    },
+    {
+      "seed_id": "C-05",
+      "pmid": "37266655",
+      "needs": [
+        "N1.1",
+        "N1.2"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-05",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "LeBlanc M",
+          "Kang J",
+          "Costa AF"
+        ],
+        "title": "Can we rely on contrast-enhanced CT to identify pancreatic ductal adenocarcinoma? A population-based study in sensitivity and factors associated with false negatives.",
+        "year": 2023,
+        "venue": "European radiology"
+      },
+      "identifier": {
+        "pmid": "37266655",
+        "dois": [
+          "10.1007/s00330-023-09758-y"
+        ]
+      },
+      "families": [
+        1
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1191.xml.gz",
+      "source_sha256": "d44a62f3c53505670d510668216c7adb3242710bc8ace1627fd6057857ab0609",
+      "xml_sha256": "53b2fbc66d43e7db9a3fb420b27b89c80f6aa3b0c11ed6fabe5e7427daaf8b57"
+    },
+    {
+      "seed_id": "C-06",
+      "pmid": "16009817",
+      "needs": [
+        "N3.1"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-06",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "To'o KJ",
+          "Raman SS",
+          "Yu NC",
+          "Kim YJ",
+          "Crawford T",
+          "Kadell BM",
+          "Lu DS"
+        ],
+        "title": "Pancreatic and peripancreatic diseases mimicking primary pancreatic neoplasia.",
+        "year": 2005,
+        "venue": "Radiographics : a review publication of the Radiological Society of North America, Inc"
+      },
+      "identifier": {
+        "pmid": "16009817",
+        "dois": [
+          "10.1148/rg.254045167"
+        ]
+      },
+      "families": [
+        3
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0522.xml.gz",
+      "source_sha256": "41a6aa0075a26dc688ee9564cc821dd297848571cd1ca42fae27a72bfa2e6313",
+      "xml_sha256": "5f851afe6e9dbc83b81a54edc0891f834a3dbedfb98cb1030eb8a3d93e5bec09"
+    },
+    {
+      "seed_id": "C-07",
+      "pmid": "33485792",
+      "needs": [
+        "N3.3",
+        "N1.4"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-07",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Hoogenboom SA",
+          "Bolan CW",
+          "Chuprin A",
+          "Raimondo MT",
+          "van Hooft JE",
+          "Wallace MB",
+          "Raimondo M"
+        ],
+        "title": "Pancreatic steatosis on computed tomography is an early imaging feature of pre-diagnostic pancreatic cancer: A preliminary study in overweight patients.",
+        "year": 2021,
+        "venue": "Pancreatology : official journal of the International Association of Pancreatology (IAP) ... [et al.]"
+      },
+      "identifier": {
+        "pmid": "33485792",
+        "dois": [
+          "10.1016/j.pan.2021.01.003"
+        ]
+      },
+      "families": [
+        1,
+        3
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1067.xml.gz",
+      "source_sha256": "060a930f31533b27eb50b60e115f1daaa52447946fe41be9cb39a2d002dbcd00",
+      "xml_sha256": "16212e1fdad7782501aefddd4be3093b0991d341b4d01758d619b272ab5400bd"
+    },
+    {
+      "seed_id": "C-10",
+      "pmid": "36055122",
+      "needs": [
+        "N2.2",
+        "N5.3",
+        "N4.6"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-10",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Khasawneh H",
+          "Patra A",
+          "Rajamohan N",
+          "Suman G",
+          "Klug J",
+          "Majumder S",
+          "Chari ST",
+          "Korfiatis P",
+          "Goenka AH"
+        ],
+        "title": "Volumetric Pancreas Segmentation on Computed Tomography: Accuracy and Efficiency of a Convolutional Neural Network Versus Manual Segmentation in 3D Slicer in the Context of Interreader Variability of Expert Radiologists.",
+        "year": 2022,
+        "venue": "Journal of computer assisted tomography"
+      },
+      "identifier": {
+        "pmid": "36055122",
+        "dois": [
+          "10.1097/rct.0000000000001374"
+        ]
+      },
+      "families": [
+        2,
+        4,
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI",
+        "MEASURE"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1151.xml.gz",
+      "source_sha256": "2ab9bd7f3d1da7a96de3af0906cf76b51eced84e5f91b812b4bb10900c04dfce",
+      "xml_sha256": "a9a40e4677330fda171bdbd705af95e295cfdae555173a9d1f4b8594a8c5d707"
+    },
+    {
+      "seed_id": "C-11",
+      "pmid": "38102442",
+      "needs": [
+        "N4.1",
+        "N4.2",
+        "N4.6"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-11",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Kawamoto S",
+          "Zhu Z",
+          "Chu LC",
+          "Javed AA",
+          "Kinny-K\u00f6ster B",
+          "Wolfgang CL",
+          "Hruban RH",
+          "Kinzler KW",
+          "Fouladi DF",
+          "Blanco A",
+          "Shayesteh S",
+          "Fishman EK"
+        ],
+        "title": "Deep neural network-based segmentation of normal and abnormal pancreas on abdominal CT: evaluation of global and local accuracies.",
+        "year": 2024,
+        "venue": "Abdominal radiology (New York)"
+      },
+      "identifier": {
+        "pmid": "38102442",
+        "dois": [
+          "10.1007/s00261-023-04122-6"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1218.xml.gz",
+      "source_sha256": "1fc38b123109d4bb284e26ab78e13a62c5e8741bfd6723981c69a51c249e8285",
+      "xml_sha256": "ca5dca990cc5c3551316cb343eb439177f6586c827104a81dfa243933fbb9ed1"
+    },
+    {
+      "seed_id": "C-12",
+      "pmid": "29427897",
+      "needs": [
+        "N4.5",
+        "N4.6"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-12",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Roth HR",
+          "Lu L",
+          "Lay N",
+          "Harrison AP",
+          "Farag A",
+          "Sohn A",
+          "Summers RM"
+        ],
+        "title": "Spatial aggregation of holistically-nested convolutional neural networks for automated pancreas localization and segmentation.",
+        "year": 2018,
+        "venue": "Medical image analysis"
+      },
+      "identifier": {
+        "pmid": "29427897",
+        "dois": [
+          "10.1016/j.media.2018.01.006"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0936.xml.gz",
+      "source_sha256": "3573f7ae9626b739651eac7bc850f55c312584d9561b895ae579cc7e694d59a7",
+      "xml_sha256": "d9cbc2599b34d1f87115399f395291ee15f0ad1381b018febcf05ed6da78ddbe"
+    },
+    {
+      "seed_id": "C-13",
+      "pmid": "37985692",
+      "needs": [
+        "N4.3",
+        "N4.6",
+        "N4.1"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-13",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Cao K",
+          "Xia Y",
+          "Yao J",
+          "Han X",
+          "Lambert L",
+          "Zhang T",
+          "Tang W",
+          "Jin G",
+          "Jiang H",
+          "Fang X",
+          "Nogues I",
+          "Li X",
+          "Guo W",
+          "Wang Y",
+          "Fang W",
+          "Qiu M",
+          "Hou Y",
+          "Kovarnik T",
+          "Vocka M",
+          "Lu Y",
+          "Chen Y",
+          "Chen X",
+          "Liu Z",
+          "Zhou J",
+          "Xie C",
+          "Zhang R",
+          "Lu H",
+          "Hager GD",
+          "Yuille AL",
+          "Lu L",
+          "Shao C",
+          "Shi Y",
+          "Zhang Q",
+          "Liang T",
+          "Zhang L",
+          "Lu J"
+        ],
+        "title": "Large-scale pancreatic cancer detection via non-contrast CT and deep learning.",
+        "year": 2023,
+        "venue": "Nature medicine"
+      },
+      "identifier": {
+        "pmid": "37985692",
+        "dois": [
+          "10.1038/s41591-023-02640-w"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1215.xml.gz",
+      "source_sha256": "16627fddd4f62bf384407e76c760e34b06d7137a2a34f0d9632eaa6cfe52040c",
+      "xml_sha256": "ebb80e3670698f3d0e8e72969285b95094758b964fe281d81a42718ecb74c934"
+    },
+    {
+      "seed_id": "C-14",
+      "pmid": "33328124",
+      "needs": [
+        "N4.3"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-14",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Liu KL",
+          "Wu T",
+          "Chen PT",
+          "Tsai YM",
+          "Roth H",
+          "Wu MS",
+          "Liao WC",
+          "Wang W"
+        ],
+        "title": "Deep learning to distinguish pancreatic cancer tissue from non-cancerous pancreatic tissue: a retrospective study with cross-racial external validation.",
+        "year": 2020,
+        "venue": "The Lancet. Digital health"
+      },
+      "identifier": {
+        "pmid": "33328124",
+        "dois": [
+          "10.1016/s2589-7500(20)30078-9"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1062.xml.gz",
+      "source_sha256": "2c4990be699fed7dd56ea972eb8bad7acec8d813360f77211aefbc5e106a1be3",
+      "xml_sha256": "3e13c16dda74aeb5c843a7009da05c61d7e7d1d62d92bc3656f59f353a2fdedc"
+    },
+    {
+      "seed_id": "C-17",
+      "pmid": "35788343",
+      "needs": [
+        "N4.2",
+        "N1.4"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-17",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Mukherjee S",
+          "Patra A",
+          "Khasawneh H",
+          "Korfiatis P",
+          "Rajamohan N",
+          "Suman G",
+          "Majumder S",
+          "Panda A",
+          "Johnson MP",
+          "Larson NB",
+          "Wright DE",
+          "Kline TL",
+          "Fletcher JG",
+          "Chari ST",
+          "Goenka AH"
+        ],
+        "title": "Radiomics-based Machine-learning Models Can Detect Pancreatic Cancer on Prediagnostic Computed Tomography Scans at a Substantial Lead Time Before Clinical Diagnosis.",
+        "year": 2022,
+        "venue": "Gastroenterology"
+      },
+      "identifier": {
+        "pmid": "35788343",
+        "dois": [
+          "10.1053/j.gastro.2022.06.066"
+        ]
+      },
+      "families": [
+        1,
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1143.xml.gz",
+      "source_sha256": "ad93cd9c2df7318a6c03f9abeaade8e29544b777324e30eea02a8e679b62a1ba",
+      "xml_sha256": "5be30caca064214c7c15e8bc4cd3e037e6d6b0ae5b7c1c6aed43cb918a363fdd"
+    },
+    {
+      "seed_id": "C-27",
+      "pmid": "34314356",
+      "needs": [
+        "N5.5",
+        "N4.3"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-27",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Ma J",
+          "Zhang Y",
+          "Gu S",
+          "Zhu C",
+          "Ge C",
+          "Zhang Y",
+          "An X",
+          "Wang C",
+          "Wang Q",
+          "Liu X",
+          "Cao S",
+          "Zhang Q",
+          "Liu S",
+          "Wang Y",
+          "Li Y",
+          "He J",
+          "Yang X"
+        ],
+        "title": "AbdomenCT-1K: Is Abdominal Organ Segmentation a Solved Problem?",
+        "year": 2022,
+        "venue": "IEEE transactions on pattern analysis and machine intelligence"
+      },
+      "identifier": {
+        "pmid": "34314356",
+        "dois": [
+          "10.1109/tpami.2021.3100536"
+        ]
+      },
+      "families": [
+        4,
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1094.xml.gz",
+      "source_sha256": "4a56e489bcb1f371ff0c53403c52d4099bab3dfd0b81825d58d9c79b39522cb4",
+      "xml_sha256": "dd9c4c8bcbd3b51bcbdc44bc9197e7779129fa7c468a52a15f4209016a579d4b"
+    },
+    {
+      "seed_id": "C-28",
+      "pmid": "36223682",
+      "needs": [
+        "N5.4",
+        "N5.5"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-28",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Luo X",
+          "Liao W",
+          "Xiao J",
+          "Chen J",
+          "Song T",
+          "Zhang X",
+          "Li K",
+          "Metaxas DN",
+          "Wang G",
+          "Zhang S"
+        ],
+        "title": "WORD: A large scale dataset, benchmark and clinical applicable study for abdominal organ segmentation from CT image.",
+        "year": 2022,
+        "venue": "Medical image analysis"
+      },
+      "identifier": {
+        "pmid": "36223682",
+        "dois": [
+          "10.1016/j.media.2022.102642"
+        ]
+      },
+      "families": [
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1157.xml.gz",
+      "source_sha256": "fcd2f49eab7db0117270bf216dbe0a6945016f4555b9b9b606f2cb76f8a33a6a",
+      "xml_sha256": "3c51ed8bb2e20c68e69efe9ba69adcef1d340083fbc35290735822d87be95e6c"
+    },
+    {
+      "seed_id": "C-29",
+      "pmid": "39116766",
+      "needs": [
+        "N5.3",
+        "N5.5"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-29",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Li W",
+          "Qu C",
+          "Chen X",
+          "Bassi PRAS",
+          "Shi Y",
+          "Lai Y",
+          "Yu Q",
+          "Xue H",
+          "Chen Y",
+          "Lin X",
+          "Tang Y",
+          "Cao Y",
+          "Han H",
+          "Zhang Z",
+          "Liu J",
+          "Zhang T",
+          "Ma Y",
+          "Wang J",
+          "Zhang G",
+          "Yuille A",
+          "Zhou Z"
+        ],
+        "title": "AbdomenAtlas: A large-scale, detailed-annotated, & multi-center dataset for efficient transfer learning and open algorithmic benchmarking.",
+        "year": 2024,
+        "venue": "Medical image analysis"
+      },
+      "identifier": {
+        "pmid": "39116766",
+        "dois": [
+          "10.1016/j.media.2024.103285"
+        ]
+      },
+      "families": [
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1517.xml.gz",
+      "source_sha256": "6b9c383e2cfc636f42c3464cd413abad54a2c669d074e66d2a51320a2e40c606",
+      "xml_sha256": "60b79420fa4ac4f42990c38b464673b2f2609d25fbaba41d311d474ea24ad694"
+    },
+    {
+      "seed_id": "C-30",
+      "pmid": "35840566",
+      "needs": [
+        "N5.5",
+        "N4.6"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-30",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Antonelli M",
+          "Reinke A",
+          "Bakas S",
+          "Farahani K",
+          "Kopp-Schneider A",
+          "Landman BA",
+          "Litjens G",
+          "Menze B",
+          "Ronneberger O",
+          "Summers RM",
+          "van Ginneken B",
+          "Bilello M",
+          "Bilic P",
+          "Christ PF",
+          "Do RKG",
+          "Gollub MJ",
+          "Heckers SH",
+          "Huisman H",
+          "Jarnagin WR",
+          "McHugo MK",
+          "Napel S",
+          "Pernicka JSG",
+          "Rhode K",
+          "Tobon-Gomez C",
+          "Vorontsov E",
+          "Meakin JA",
+          "Ourselin S",
+          "Wiesenfarth M",
+          "Arbel\u00e1ez P",
+          "Bae B",
+          "Chen S",
+          "Daza L",
+          "Feng J",
+          "He B",
+          "Isensee F",
+          "Ji Y",
+          "Jia F",
+          "Kim I",
+          "Maier-Hein K",
+          "Merhof D",
+          "Pai A",
+          "Park B",
+          "Perslev M",
+          "Rezaiifar R",
+          "Rippel O",
+          "Sarasua I",
+          "Shen W",
+          "Son J",
+          "Wachinger C",
+          "Wang L",
+          "Wang Y",
+          "Xia Y",
+          "Xu D",
+          "Xu Z",
+          "Zheng Y",
+          "Simpson AL",
+          "Maier-Hein L",
+          "Cardoso MJ"
+        ],
+        "title": "The Medical Segmentation Decathlon.",
+        "year": 2022,
+        "venue": "Nature communications"
+      },
+      "identifier": {
+        "pmid": "35840566",
+        "dois": [
+          "10.1038/s41467-022-30695-9"
+        ]
+      },
+      "families": [
+        4,
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1144.xml.gz",
+      "source_sha256": "e7d0512d0183dcdbfaf03fb0c31ee0d161426db5b893fd0b89521992de30c2fb",
+      "xml_sha256": "2423ba6afd98db0670beaf74bc02f4aa838de9c3295c51c66157b65c1847b952"
+    },
+    {
+      "seed_id": "C-31",
+      "pmid": "15354301",
+      "needs": [
+        "N5.2"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-31",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Alberdi E",
+          "Povykalo A",
+          "Strigini L",
+          "Ayton P"
+        ],
+        "title": "Effects of incorrect computer-aided detection (CAD) output on human decision-making in mammography.",
+        "year": 2004,
+        "venue": "Academic radiology"
+      },
+      "identifier": {
+        "pmid": "15354301",
+        "dois": [
+          "10.1016/j.acra.2004.05.012"
+        ]
+      },
+      "families": [
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0501.xml.gz",
+      "source_sha256": "c0201cb56dbb344e498d4f70fe6a9285abcb2bc8f6474676e7d958a68f411be1",
+      "xml_sha256": "518c672ad835edb3875b701e18367151ff5b4db6a75417fc311dc829d387c9f9"
+    },
+    {
+      "seed_id": "C-36",
+      "pmid": "11719657",
+      "needs": [
+        "N5.2"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-36",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Zheng B",
+          "Ganott MA",
+          "Britton CA",
+          "Hakim CM",
+          "Hardesty LA",
+          "Chang TS",
+          "Rockette HE",
+          "Gur D"
+        ],
+        "title": "Soft-copy mammographic readings with different computer-assisted detection cuing environments: preliminary findings.",
+        "year": 2001,
+        "venue": "Radiology"
+      },
+      "identifier": {
+        "pmid": "11719657",
+        "dois": [
+          "10.1148/radiol.2213010308"
+        ]
+      },
+      "families": [
+        5
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0387.xml.gz",
+      "source_sha256": "f25be2eea4eb66feaa75733751782067f832e1b47152ba2720a6b3eaed90064f",
+      "xml_sha256": "9c94e6f3867f7984a2e89c4e09314c7ba65a50e7e99575508d68b1535f158ef7"
+    },
+    {
+      "seed_id": "C-40",
+      "pmid": "33595105",
+      "needs": [
+        "N2.2"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-40",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Panda A",
+          "Korfiatis P",
+          "Suman G",
+          "Garg SK",
+          "Polley EC",
+          "Singh DP",
+          "Chari ST",
+          "Goenka AH"
+        ],
+        "title": "Two-stage deep learning model for fully automated pancreas segmentation on computed tomography: Comparison with intra-reader and inter-reader reliability at full and reduced radiation dose on an external dataset.",
+        "year": 2021,
+        "venue": "Medical physics"
+      },
+      "identifier": {
+        "pmid": "33595105",
+        "dois": [
+          "10.1002/mp.14782"
+        ]
+      },
+      "families": [
+        2
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1071.xml.gz",
+      "source_sha256": "e31459e4d47db9aa88576ed412cbf37bc9735ab31e93b6b516198e90dd5a9211",
+      "xml_sha256": "5610708eeceed1c1a9f06d15d66056c5bdd9c062ac5fdf4feea3e2fa6017439c"
+    },
+    {
+      "seed_id": "C-42",
+      "pmid": "34507900",
+      "needs": [
+        "N3.3"
+      ],
+      "source_of_knowledge": "SEED-CANDIDATES.md row C-42",
+      "proposed_by": "Existing reviewed working list",
+      "citation": {
+        "authors": [
+          "Janssens LP",
+          "Weston AD",
+          "Singh D",
+          "Spears G",
+          "Harmsen WS",
+          "Takahashi N",
+          "Philbrick KA",
+          "Erickson BJ",
+          "Abu Dayyeh BK",
+          "Chari ST",
+          "Chandrasekhara V",
+          "Gleeson FC",
+          "Levy MJ",
+          "Pearson RK",
+          "Petersen BT",
+          "Vege SS",
+          "Majumder S"
+        ],
+        "title": "Determining age and sex-specific distribution of pancreatic whole-gland CT attenuation using artificial intelligence aided image segmentation: Associations with body composition and pancreatic cancer risk.",
+        "year": 2021,
+        "venue": "Pancreatology : official journal of the International Association of Pancreatology (IAP) ... [et al.]"
+      },
+      "identifier": {
+        "pmid": "34507900",
+        "dois": [
+          "10.1016/j.pan.2021.08.004"
+        ]
+      },
+      "families": [
+        3
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "MEDLINE",
+      "mesh_present": true,
+      "title_only_branches": [
+        "CORE",
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1571.xml.gz",
+      "source_sha256": "425f27254b706743b80bfbcb2bc0854a8324c6c62e5ab1e202aed7f1913590ad",
+      "xml_sha256": "2ad119707aa9fb36b883d9ea02cdf0b3538da0a17e9febd939542a12892c613a"
+    },
+    {
+      "seed_id": "C-47",
+      "pmid": "27831881",
+      "needs": [
+        "N4.6"
+      ],
+      "source_of_knowledge": "C-10 PMID36055122, local reference11",
+      "proposed_by": "Codex; accepted by Quinton",
+      "citation": {
+        "authors": [
+          "Farag A",
+          "Le Lu",
+          "Roth HR",
+          "Liu J",
+          "Turkbey E",
+          "Summers RM"
+        ],
+        "title": "A Bottom-Up Approach for Pancreas Segmentation Using Cascaded Superpixels and (Deep) Image Patch Labeling.",
+        "year": 2017,
+        "venue": "IEEE transactions on image processing : a publication of the IEEE Signal Processing Society"
+      },
+      "identifier": {
+        "pmid": "27831881",
+        "dois": [
+          "10.1109/tip.2016.2624198"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "PubMed-not-MEDLINE",
+      "mesh_present": false,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n0886.xml.gz",
+      "source_sha256": "dd172ffbd9679dfab795e940baad1e45711fceae0cb6e1df49cca4db0ac3e279",
+      "xml_sha256": "dbfce35bce6dab64c0ba1c4297ca88e78f8a1b9e74d1e67ab2128296590be079"
+    },
+    {
+      "seed_id": "C-48",
+      "pmid": "35406426",
+      "needs": [
+        "N4.6"
+      ],
+      "source_of_knowledge": "S-02 PMID39865461, local reference97",
+      "proposed_by": "Codex; accepted by Quinton",
+      "citation": {
+        "authors": [
+          "Preuss K",
+          "Thach N",
+          "Liang X",
+          "Baine M",
+          "Chen J",
+          "Zhang C",
+          "Du H",
+          "Yu H",
+          "Lin C",
+          "Hollingsworth MA",
+          "Zheng D"
+        ],
+        "title": "Using Quantitative Imaging for Personalized Medicine in Pancreatic Cancer: A Review of Radiomics and Deep Learning Applications.",
+        "year": 2022,
+        "venue": "Cancers"
+      },
+      "identifier": {
+        "pmid": "35406426",
+        "dois": [
+          "10.3390/cancers14071654"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "PubMed-not-MEDLINE",
+      "mesh_present": false,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1130.xml.gz",
+      "source_sha256": "fb3929fe16a00d5ae6784ad14695c3a49a09044e12033bd7c9914481512dfd95",
+      "xml_sha256": "5e90a81d74a979da0897069348eb9cb445e35560f4c6b615b75c4c060d586b8f"
+    },
+    {
+      "seed_id": "C-49",
+      "pmid": "37173876",
+      "needs": [
+        "N4.3",
+        "N4.6"
+      ],
+      "source_of_knowledge": "S-02 PMID39865461, local reference115",
+      "proposed_by": "Codex; accepted by Quinton",
+      "citation": {
+        "authors": [
+          "Jiang J",
+          "Chao WL",
+          "Culp S",
+          "Krishna SG"
+        ],
+        "title": "Artificial Intelligence in the Diagnosis and Treatment of Pancreatic Cystic Lesions and Adenocarcinoma.",
+        "year": 2023,
+        "venue": "Cancers"
+      },
+      "identifier": {
+        "pmid": "37173876",
+        "dois": [
+          "10.3390/cancers15092410"
+        ]
+      },
+      "families": [
+        4
+      ],
+      "reviewed_by": "Quinton Evans",
+      "review_date": "2026-10-13",
+      "verification": "resolves_in_final_snapshot",
+      "indexing_status": "PubMed-not-MEDLINE",
+      "mesh_present": false,
+      "title_only_branches": [
+        "AI"
+      ],
+      "title_only_note": "Diagnostic only. Abstracts and MeSH can add blocks; no full-record selection evaluated.",
+      "source_file": "pubmed26n1188.xml.gz",
+      "source_sha256": "a12f152125cd7af12b4d90c14d0ad7924d92953f090432642678d5ee7509b236",
+      "xml_sha256": "d4fc4b308815620b557fe075f44e46312c98326f647b2d4e3c6a055c3d8d7868"
+    }
+  ]
+}
