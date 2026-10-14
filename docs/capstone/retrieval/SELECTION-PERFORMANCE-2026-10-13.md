@@ -108,3 +108,22 @@ stdout-02.txt,stderr-02.txt in outputs/prowl/selection-launch-r02. Initial obser
 validating_source, with no error. New committed progress is not yet confirmed; checkpoint
 validation counts existing ledger rows before evaluation resumes. Do not launch a duplicate.
 Battery82% at launch; user advised to connect power. Prior session48921 remains finished.
+
+## October 14 second transport stop — resume validation bottleneck
+
+User requested pause and investigation before another run. Verified PID66663 command, sent
+SIGINT once; session74856 exited1 with intentional SQLite interrupted. Python66663 and
+caffeinate66664 are absent. Trace confirms validate_checkpoint at PRAGMA quick_check,
+not evaluation. Invocation lasted8837.886 seconds (~2h27m); zero new evaluated records.
+Saved checkpoint remains39,215,457, sequence39564/cursor40839149. Two native stack samples
+show SQLite checkTreePage/pread; samples, traceback, logs and transport-stop-02-20261014.json
+are preserved in outputs/prowl/selection-launch-r02. No claim that integrity validation passed.
+Verified external UUID and normal macOS physical disk4 ejection succeeded. Safe to disconnect.
+Do not resume automatically. Next work: diagnose full-ledger validation I/O and design/test
+bounded resume verification without silently bypassing integrity/identity/count safeguards.
+No producing code changed and no human hours credited.
+
+October14 resume fix: see RESUME-VALIDATION-FIX-2026-10-14.md.135tests pass; explicit v2-to-v3
+prepare-only transition on the actual R02 ledger passed in8.884seconds/exit0. All39,215,457
+records and checkpoint position retained. Ready to resume; no evaluation launched. Session42532
+finished. Ordinary next --resume uses new identity and unchanged admission; do not repeat transition.
