@@ -1,5 +1,53 @@
 # PROWL living experiment notebook
 
+## October 13 — PanTS only: longer 72k schedule with ordinary and EMA weights
+
+**Launched and actual training confirmed, October13 ~10:10MDT.** Ownedexec87724;
+34 completed optimizer updates at55.359journal seconds. MLflow
+`38cdd18be83449da87275f5ef8b12898` is RUNNING with step25 metrics verified.
+Initial primary/independent backup SHA256
+`35f143d655f42bc6a766b41784ec4ac8242e3dd2cccfb51d0b3c99f5c2e9c759` matches.
+No scientific validation Dice yet. Dashboard now tracks72k and separates ordinary/EMA results.
+
+User explicitly approved launching this single run. Prospective protocol:
+[long-schedule and EMA specification](capstone/operations/PANTS-EMA-72K-20261013.md)
+(CAP-EXP-018, human title above). Fresh original SuPreM initialization, same 1,333 PanTS
+training studies, matched 70 development studies (36 positive/34 reference-empty), unchanged
+144-cube geometry, supervision and DiceFocal loss. No PANORAMA training in this run.
+No cache rebuild or repeated overlap audit. The five uncertain development cases remain excluded.
+
+The learning-rate horizon is stretched to 72,000 updates, not a 24k schedule followed by a
+near-zero-rate tail. EMA alpha .99 starts by copying weights after update500 and averages
+subsequent updates. Both weight variants are stored together with optimizer/RNG state.
+Primary fixed comparison: native positive-case macro Dice, ordinary72k versusordinary24k.
+Success requires +.02 Dice, paired95% lower bound abovezero, and detection/false-alarm/pancreas
+guardrails. Separate exploratory EMA comparison: EMA72k versusordinary72k, +.01 Dice plus
+the same uncertainty and guardrail requirements. Full rejection/inconclusive rules are in the
+frozen specification; intermediate or best scores cannot replace fixed endpoints.
+
+Engineering admission:52 focused checks pass/1 explicit Mac-only skip; CUDA4 producer updates
+with ordinary/EMA native evaluation on one positive and one reference-empty development case,
+then a cold1-update continuation from the independent C: backup. Full restored state exact;
+next-state maximum absolute difference7.450580596923828e-9, within declared float32 tolerance.
+Both workers reaped. These tiny diagnostic models are nonpromotable, not scientific results.
+First receipt collection stopped on an allocation-parent control path; separate finalizer uses
+the reviewed prepared-cache root, preserving qualified producing files and diagnostic evidence.
+
+Frozen receipt `E:/PROWL/readiness/pants-ema-72k-20261013-a01/ready.json`, SHA256
+`8e20da25466bf1fe27205fdbb89633dbe02680a552c61d828cebdf390fb3fee6`.
+Scientific output `E:/PROWL/artifacts/pants_only_ema_72k_20261013`;
+independent checkpoints `C:/Users/quinn/PROWL-Backups/pants_only_ema_72k_20261013`.
+Validation every2k, checkpoints every500, paired native milestones24/36/48/60/72k.
+72-hour watchdog, existing12GiB worker/32GiB cache/100GiB free-space/backup and AC guards.
+Live local MLflow every25 updates plus validation; durable local journal remains authoritative.
+No automatic retry/resume, scheduled AI checks, test-set evaluation, or automatic PANORAMA launch.
+
+Training-fit diagnostic is complete: parent14k native training Dice .445655, mixed8k .360899
+on the same50 positive/50 reference-empty PanTS training cases; empty alarms48/50 and49/50.
+MLflow runs `450eff5d1050468395a58f2541841ef5` and `57752768ba61495088120ef7824ae78e`
+are FINISHED. Modest training fit motivates, but does not establish the cause of, a longer-schedule
+test. Duration, optimization, resolution, supervision and capacity remain competing explanations.
+
 **Active use confirmed by Quinton:** 2026-09-18
 
 **Purpose:** Plan every experiment before execution, retain every outcome, and use evidence to choose
@@ -49,6 +97,115 @@ model/evaluation experiments all receive notebook entries at a proportionate lev
 
 ## Active capstone queue
 
+### October13 priority amendment — training fit, then EMA / longer horizon
+
+**Launch amendment:** User explicitly requested execution. Owned session2971 launched the frozen
+training-fit request with SHA256 `39fe048b3407c95f992550c4f13ed8b4f9e83ac79728c1c294def407e701ac0a`.
+Two sequential native training-sample evaluations, live MLflow progress, no optimizer updates.
+Evidence: readiness/training-fit-20261013-a01/execution/. Launch is not completion; frozen setup
+document remains historical setup evidence. No new long training or recurring AI monitor.
+
+Quinton approved restoring the historical EXP-34 → EXP-32/33 priority ahead of the sampling
+proposal below, and requested setup with MLflow. The immediate diagnostic asks **Do our completed
+models fit their own training scans?** It uses the same frozen random50positive/50reference-empty
+PanTS training sample with both selected models, the existing native scoring method, and saved
+70-case development results. No optimizer updates, new data audit or protected-test evaluation.
+
+[Current diagnostic setup and successor draft](capstone/operations/TRAINING-FIT-EMA-HORIZON-20261013.md)
+specifies roles, selection seed, resource limits, MLflow records and interpretation. Setup is not
+execution. The later EMA/72k design still needs the diagnostic review and a frozen comparison;
+no72k run or new watchdog allowance is approved by this entry. The sampling proposal is deferred,
+not rejected. Old official-test curves and categorical capacity conclusions are not carried forward.
+
+### Completed training — Add expert PANORAMA lesions (October13, CAP-EXP-017)
+
+All24,000updates completed, all12validation opportunities retained, workersreaped. Frozenfile
+pins and independent checkpoint/journal backups match. Post-run native review compares the same
+70development scans in botharms; no new data audit, duplicate scan or protected-test inference.
+Full interpretation, uncertainty and next-experiment proposal:
+[PANORAMA-positive results](capstone/operations/PANORAMA-POSITIVE-RESULTS-20261013.md).
+
+Primary selected-nativeDice **0.405092 PanTS-only →0.371897 mixed**, delta-0.033195,
+paired95%CI[-0.102249,+0.028561]. Detection34→33/36; emptyalarms32→34/34 (+5.88percentagepoints,
+above+3allowed); pancreasDice0.810533→0.799845. **Reject the practical intervention; fail to
+reject H0.** Do not claim proof of no benefit or a significantly negative Dice effect. Selected
+steps14k/8k; final24k comparison remains mandatorysecondary, not an alternate acceptance route.
+Completed final24k nativeDice0.319538→0.331492,delta+0.011954,CI[-0.049570,+0.071232];
+detection26→28/36,alarms18→20/34. The secondary also fails the alarmguardrail. Both70-case
+native reports complete/reaped; neither comparison establishes a significant Dice improvement.
+
+Actual source exposures:19,055PanTS+4,945PANORAMA, rather than24,000PanTS in the baseline.
+Positive/empty updates14,543/9,457. More data changed the source mix, positive fraction, crop
+policy and PanTS exposures together. This run does not isolate data quantity or prove an ensemble.
+
+**Next proposed, not approved/launched:** keep the same mixed data but restore50:50positive/empty
+sampling to test false-alarm reduction with Dice/detection guardrails. See the proposal in the
+review; agree/freeze it beforeimplementation and launch. Reuse the prepared data and decisions.
+
+### Approved tracking follow-up — backfill complete, live integration still pending
+
+October13: both completed scientific histories are now in private local MLflow, with24k loss,
+learning-rate and elapsed-time points each and separate75/70-case tensor metrics. Exact readback
+passed; a repeat importedzero newpoints into the same two runs. Native reports are now included,
+with selected/final summaries and checkpoint identities. Import timestamps are explicitly labeled, never passed off as original
+training wall-clock timestamps. Local journals and checkpoints remain authoritative.
+The historical approval below is preserved; its not-yet-importing language is superseded here.
+
+Quinton approved deferring MLflow changes until the current PANORAMA-added training run
+finishes. The full-session trainer currently writes durable local journals and checkpoints,
+not MLflow; the historical MLflow entries below describe the older trainer.
+
+- After this run, backfill **PanTS-only long run: recover the course recipe before adding
+  PANORAMA** and **Add expert-annotated PANORAMA lesions: does more positive training data
+  improve outlining?** from their saved evidence. No training or inference replay is needed
+  just to import recorded results.
+- Preserve recorded steps, available timestamps, settings, cohort/configuration hashes,
+  checkpoint identities and terminal outcomes. Explicitly tag the records as backfilled;
+  do not invent missing metrics or timestamps. Make imports repeat-safe to avoid duplicate runs.
+- Keep tensor-grid and native-space metrics distinct. Preserve the original75-case baseline
+  results separately from the amended70-case matched comparison; label their cohort versions.
+- Before the next experiment, implement and test ongoing MLflow logging in the full-session
+  training path. Keep durable local evidence authoritative and recoverable if tracking fails.
+- Do not edit the active run's frozen code, restart training, upload CTs/labels, or create
+  recurring AI checks for this follow-up. This records the plan; no import is running yet.
+
+### Current amendment — Add expert PANORAMA lesions (October 12, CAP-EXP-017 v2)
+
+Quinton approved excluding the five provenance-uncertain current-development CTs, documenting
+the decision, loading the expert-positive data and launching after production checks. The
+[admission amendment](capstone/operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md) and
+[v2 specification](capstone/operations/PANORAMA-POSITIVE-EXPERIMENT-20261012.json) supersede
+older duplicate-scan launch gates for this exploratory run. Keep274knownimports/alltechnicalholds
+excluded. No further broad overlap scan; no claim of zero undeclared overlap.
+
+Development is now70 (36positive/34reference-empty), excluding PanTS_00000922,00005105,
+00005370,00007299,00007523. These are not confirmed duplicates and never move to training.
+Original split files/parent results remain untouched. Recomputed all12parent selection scores
+from saved per-case history:14k remains selected. Its retained-cohort nativeDice is0.4050923173,
+detection34/36,emptyalarms32/34,pancreasDice0.8105329504. Final24k nativeDice0.3195378297,
+detection26/36,emptyalarms18/34. Both-arm comparisons use this same70-case subset, never old75
+aggregates. No parent inference or training replay was needed.
+
+Retain all345eligible expert studies from344source subjects, perD030; the earlier one-study-per-
+subject draft was an unapproved rule and never used. Planned1678train=1016positive/662empty.
+Same24kbudget/originalSuPreM/freshhead/DiceFocal/seed42. H0delta<=0; practical acceptance still
+observedDicegain>=.02 withpaired95%lower>0 and unchanged detection/alarm/pancreas guardrails.
+The addedsource/PDAC/prevalence/unionROI and lowerPanTSexposures remain coupled changes.
+
+Missing PANORAMA production tensors are being constructed; PanTS cache, prior source audits,
+focused physicalQC and machine qualification are reused. Production adapter/smoke/freeze remain
+before scientific updates. Preparation has a4hwatchdog,12GiBmemory,32GiBaggregatecache and100GiB
+free-space floors. This is a safety ceiling, not an ETA. Anyfailure stops without automaticretry.
+Run remains exploratory with residualoverlap and unknownSuPreMmembership limitations.
+
+**Authorized pipeline dispatched October12 15:28:02UTC:** ownedexec89693 waits on the existing
+cache job95165, then performs productionbinding,5producerupdates+1coldnextupdate with independent
+backup, freezes a receipt, and dispatches exactly one24k scientificrun.103focusedtests pass/1Macskip.
+No automatic retries or additional AI schedules. At dispatch, scientificupdates=0; cacheconstruction
+continues. Monitor pipeline.jsonl under readiness/panorama-positive-run-20261012-a01; the phone
+dashboard now shows preparation and switches to the new trainingjournal when it exists. A
+pipeline dispatch is not an assertion that cache, GPU qualification or scientifictraining completed.
+
 Use `CAP-EXP-001`, `CAP-EXP-002`, and so on for new capstone entries; retain historical `EXP-*` IDs.
 Reserve an ID only when adding an actual planned experiment. No capstone experiment is newly queued
 or launched by this documentation update. Review the historical future ideas during the required
@@ -94,6 +251,227 @@ linked Plan 06 protocol supplies the full fields for controlled/confirmatory wor
 ```
 
 ## Active capstone entries
+
+### CAP-EXP-017 — Add expert-annotated PANORAMA lesions: does more positive training data improve outlining?
+
+**October12,2026 — design prepared / readiness pending / not launched.** Quinton selected additional
+PANORAMA lesion-positive training data as the next intervention and requested setup followed by
+execution when ready. Full [scientific outline](capstone/operations/PANORAMA-POSITIVE-EXPERIMENT-20261012.json)
+is version1, not yet a frozen executable configuration. Parent: the completed PanTS course-recipe run.
+
+**Question and null:** At the same24k optimizer budget, does adding qualified expert-PDAC PANORAMA
+subjects improve native PanTS development positive-case macro lesion Dice? H0: Dice delta<=0;
+H1: delta>0. A useful improvement also requires observed delta>=.02, paired95%CI lower>0, case
+detection delta>=-.03, reference-empty alarm delta<=+.03 and pancreasDice delta>=-.02. These
+guardrails use point estimates, not demonstrated statistical noninferiority. Reject any guardrail
+breach or DiceCI upper<.02; otherwise inconclusive. Runtime failure/invalid evaluation are separate.
+
+**Matched comparison:** treatment's highest scheduled tensor-Dice checkpoint versus parent's
+identically selected14k checkpoint, scored natively on unchanged38positive/37empty development
+cases. Control nativeDice=.4066068260; practical target>=.4266068260 plus interval/guardrails.
+Both arms get12scheduled selection opportunities. Final24k versus final24k is a required secondary
+robustness comparison, never a substitute acceptance endpoint. Paired10k bootstrap seed20261012;
+one training seed and repeated-use development selection limit inference. No test evaluation.
+
+**Intervention and fixed factors:** preserve original SuPreM initialization/fresh seeded head,
+three-class architecture,DiceFocal,optimizer,schedule,batch1,seed42,24k steps,validation2k/checkpoint500,
+no augmentation/freeze, unchanged PanTS cache/development/inference and native metric contract.
+No fine-tuning of the parent's trained weights. Use existing seeded full-cohort permutation, with
+source/class/subject exposure logging. New expert lesions accompany machine-generated pancreas
+masks and a disclosed PANORAMA union-ROI adapter; PanTS geometry stays unchanged. Extra source,
+PDAC subtype distribution, positive fraction, ROI supervision and fewer PanTS exposures at fixed
+updates are a coherent intervention block, not proof of a pure data-count effect.
+
+**Metadata setup completed:**345candidate studies/344subjects, one repeated-subject group. Planner
+preserves candidates only, admits0, uses no CT/label payloads;8focused tests passed. Candidate
+artifact alias `readiness/panorama-positive-experiment-20261012/candidate-plan.json` binds source
+catalog and audit hashes. After QC/overlap/role checks choose first eligible publisher study ID per
+subject in lexical order; unresolved subject overlap holds entire subject. Upper bound344additions
+would give1677training cases (1015positive/662empty), about60.5%positive and14.31passes at24k.
+Exact cohort/counts remain unset until admission. All274declared imports and existing holds remain;
+automatic-lesion and unknown-generic-lesion cases are excluded from this experiment.
+
+**Launch gates still open:** candidate fingerprint calibration recovered20/20planted variants but
+is explicitly NOT qualified for full scanning: negative controls/candidate burden need review.
+Protected original development/test overlap must be addressed, prioritizing92+80ambiguous records
+without declaring other origins disjoint; protected CT-only duplicate inspection is not test
+evaluation. Final physical expert-lesion/machine-pancreas QC and production source-aware provider/
+cache binding remain. The prior five-case review and mixed smoke are engineering evidence, not
+cohort admission. Freeze payload-stage scope/resources before new preparation, then changed-factor
+audit, bounded mixedCUDA/coldrestore/backup smoke, complete resolved config and readiness receipt.
+Existing PanTS audit/cache are reused, not rebuilt. No numerical producing-code changes this turn.
+
+**Resources:**24htraining watchdog,12GiBworkerRSS,32GiBaggregate cache,100GiBfree per C/E and existing
+backup cap;AC required. Preparation stages separately bounded at4h/12GiB/4GiBQC evidence plus
+approved cache allowance. No automatic retries/extensions, schedules, publicpush, Mac action or
+successor launch with unresolved gates. Scientific launch command remains unavailable.
+
+**Ensemble interpretation:** a Dice improvement would support this data-addition block, not prove
+an ensemble. Subsequent ensemble testing requires complementary-error evidence and separately
+planned fitting/calibration with detection/false-alarm guardrails; avoid scoring a gate on its own
+fitting data as if independent. The current experiment does not add a detector or combination rule.
+
+### CAP-EXP-016 — PanTS-only long run: recover the course recipe before adding PANORAMA
+
+#### October12 final native evaluation — accepted by the frozen within-run rule
+
+Supersedes the pending status below, retaining the earlier tensor-space analysis as a timestamped
+interim observation. Three75-case native evaluations completed successfully, all workers reaped;
+8k503.25s,24k425.125s,best419.484s, peakRSS each below2.52GB. One-shot evaluation queue42159
+finished0; no training launched. Evidence alias `readiness/pants-course-retrospective-20261012/`:
+`native-008000/report.json`, `native-024000/report.json`, `native-best/report.json`,
+`fixed-native-decision.json`, `aggregate-review.json`.
+
+| Native checkpoint | Positive Dice | Cases detected | Empty alarms | Pancreas Dice |
+| --- | --- | --- | --- | --- |
+| Fixed8k | .249939 | 26/38 | 19/37 | .795069 |
+| Fixed24k | .324534 | 27/38 | 19/37 | .829934 |
+| Selected14k | .406607 | 35/38 | 34/37 | .812787 |
+
+**Decision: accepted for the predeclared8k→24k within-run comparison.** Dice delta+.074595683,
+paired95%CI[+.000131978,+.155512773]; observed gain exceeds.02 and lower bound is strictly>0.
+Case-detection delta+1/38=+.0263158,95%CI[-.105263,+.157895]; alarm delta0,95%CI[-.189189,+.189189].
+Both point-estimate guardrails pass; wide intervals do not establish statistical noninferiority.
+Reject the no-improvement null using the specified interval rule, narrowly. The interval does NOT
+establish a true effect of at least.02; .02 is the observed-effect practical threshold. Retain full
+precision rather than rounding the tiny positive lower bound to zero. One seed, one repeatedly used
+development cohort and provided ROI limit the claim. No causal cohort-scale effect or generalization
+is proven, and this does not imply24k beats the selected14k checkpoint.
+
+Native reference lesions comprise47connected components:8k detects28,24k29,selected14k41.
+Case-total lesion volume bands small/medium/large have5/25/8positive cases. Native8k→24k Dice:
+small.0860→.2111,medium.2715→.3318,large.2851→.3728; corresponding cases detected1→2,17→19,8→6.
+Thus the aggregate gain masks lost large-lesion case detection; subgroup results are descriptive.
+The selected14k model detects all5small cases but their meanDice is only.1641. Empty-reference
+predicted lesion volume is33674/16085/140802mm3 at8k/24k/14k respectively;50mm3alerts18/14/32of37.
+These signals support investigating lesion delineation and precision rather than declaring a
+clinically acceptable model. Selected14k remains the preregistered reference artifact, not a release
+promotion. Original SuPreM/provided-ROI/source-membership and unmatched-course comparison caveats
+remain. User selected the PANORAMA-positive intervention above as the next setup task.
+
+#### October 12 retrospective — training complete; native decision pending
+
+All **24,000 consecutive optimizer updates completed**. Owned session65303 exited0; supervisor
+reported65,434.14seconds (18h10m34s), peak ownedRSS1,648,304,128bytes and workers reaped. Journal
+terminal is `completed`; final write approximately07:21MDT. The8k,24k and selected-best checkpoints
+each match their independent C: backup hashes. Frozen producing-file pins were checked without a
+mismatch. No next model, new data admission, test evaluation or recurring AI checks were launched.
+
+**Routine tensor-grid development results** (38 positive /37 reference-empty cases; zero-overlap
+counts are case-level diagnostics, not clinical sensitivity or lesion-wise detection):
+
+| Step | Positive lesion Dice | Pancreas Dice | Zero-overlap positive cases | Empty-reference cases with predictions |
+| --- | --- | --- | --- | --- |
+| 2,000 | 0.267271 | 0.765918 | 4/38 | 34/37 |
+| 4,000 | 0.237492 | 0.765734 | 6/38 | 36/37 |
+| 6,000 | 0.324646 | 0.799710 | 8/38 | 28/37 |
+| 8,000 | 0.253632 | 0.791689 | 12/38 | 19/37 |
+| 10,000 | 0.390261 | 0.803168 | 7/38 | 34/37 |
+| 12,000 | 0.297163 | 0.806602 | 8/38 | 28/37 |
+| **14,000 (selected best)** | **0.407714** | 0.808921 | **3/38** | **35/37** |
+| 16,000 | 0.386880 | 0.817973 | 6/38 | 26/37 |
+| 18,000 | 0.361417 | 0.824886 | 8/38 | 22/37 |
+| 20,000 | 0.342669 | 0.825990 | 10/38 | 20/37 |
+| 22,000 | 0.335861 | 0.825773 | 10/38 | 19/37 |
+| **24,000 (fixed endpoint)** | **0.321561** | **0.826071** | **11/38** | **19/37** |
+
+**Interpretation, not a new acceptance rule:** best-lesion selection selected14k, exactly as
+preregistered. Its35/37 empty-reference alarms preclude calling it a balanced detection success.
+From14k to24k, eight previously overlapping positives lose all overlap and16 empty-reference
+alarms disappear (no reverse transitions). Thus a more conservative output pattern accompanies
+the Dice decline; overfitting is plausible but not established as the cause. Mean training loss
+over the500updates ending8k/14k/24k falls0.511581/0.464138/0.422842. Validation loss was not logged;
+these training averages do not establish a causal mechanism or cross-recipe superiority.
+
+**Hypothesis language:** the baseline's primary purpose is reference establishment, not a
+superiority test against the unmatched course experiment. The predeclared secondary question is
+whether24k improves native positive-case Dice over8k by at least0.02, with a paired95% interval
+strictly above0, detection delta>=-0.03 and empty-reference alarm delta<=0.03. Statistical wording
+should distinguish rejecting a no-improvement null from satisfying practical/guardrail criteria;
+failure to reject a null is not accepting/proving it. The guardrails are point-estimate rules,
+not confidence-bound noninferiority tests.
+
+**Provisional tensor-space evidence, not the formal endpoint:** 8k→24k Dice delta+0.067929,
+paired10,000-resample seed20261011 percentile95%CI[-0.008731,+0.149544]. Detection gains4/losses3;
+alarm additions7/removals7. This proxy comparison is inconclusive, not accepted and not proof of
+no benefit. Its interval includes zero. Do not substitute it for the specified native evaluation.
+
+**Required native evaluation underway:** supervised development-only evaluation of the retained8k
+checkpoint is owned session11805, output alias `readiness/pants-course-retrospective-20261012/native-008000/`.
+This applies the frozen argmax/restoration/component rules; no optimizer updates or test reads.
+One-shot queue owned42159 waits for this exact evaluator to finish and its complete75-case report,
+then runs24k and selected14k sequentially under the same evaluator safeguards and applies the
+frozen comparator. No automatic retries or successor training. Queue implementation is external
+to frozen producing paths. Outputs include `fixed-native-decision.json` and `aggregate-review.json`
+only after successful completion; do not assume these exist from queue launch alone.
+The24k and selected14k native reports and fixed comparator are still required. Full-cohort native
+scoring includes lesions outside the provided ROI. Formal verdict remains **pending evaluation**.
+
+**Proposed next decision, awaiting discussion:** retain this completed run as the PanTS reference,
+not as evidence that longer is always better. First finish native paired metrics and size-stratified
+failure analysis. Prefer a controlled data intervention toward the planned PANORAMA-positive
+question once overlap/protected roles, expert-cohort QC and production-provider qualification are
+closed; explicitly account for changed source, prevalence and ROI policy rather than attributing
+everything to positive-case count. Do not repeat the historically rejected1:9 negative ratio.
+An auxiliary detector/gating ensemble needs its own development split/calibration and missed-lesion
+guardrails; it is not automatically justified by the high Dice peak. No successor is approved here.
+
+**Launch — October 11, 2026, 13:11 MDT:** Quinton explicitly authorized launch. Frozen readiness
+receipt validated and one supervised job started in owned session65303. Actual25optimizer updates
+confirmed at43.265 journal seconds; initial external/internal checkpoints match SHA256
+`d1ac610227d5b024131e4b845820a6201669cefc98916d82be67df6ab23a7eaf`.
+Run alias `artifacts/pants_course_reference_dicefocal_24k_20261011/`; authoritative journal
+`execution/history.jsonl`. Scientific training is active; no development Dice or result decision
+yet. Approved24k horizon and all frozen settings retained. No scheduled AI checks created.
+The setup-only statements below are historical snapshots.
+
+**October 11, 2026 — setup authorized; scientific training not launched.**
+Quinton approved the [complete proposed design](capstone/operations/PANTS-COURSE-REFERENCE-LONG-RUN-20261011.json)
+and requested training setup. The scientific run remains pending launch. Human-readable titles
+come first; this identifier is only the evidence cross-reference.
+
+The reference is the project-course clean whole-box SuPreM baseline (EXP-24), with EXP-25's
+small-lesion detection regression and EXP-26's overturned interim win informing the guardrails.
+This is a historical-recipe-inspired baseline, not a matched reproduction: current 144-cubed
+pancreas-only geometry, cohort, sampler, augmentation and schedule differ from the course run.
+Historical 0.415 development / 0.474 test Dice are context, not matched acceptance thresholds.
+
+Correction to the October 11 chat/Notion summaries: the qualified cohort is **1,333 train and
+75 development**, not 118/5. The latter are pooled-provenance subsets relevant to future PANORAMA
+overlap review. Counts confirmed from the current review: 671 positive/662 reference-empty train,
+38 positive/37 reference-empty development. Existing 84 exclusions and original roles remain.
+
+Plan: original SuPreM backbone plus fresh three-class SegResNet head; optional versioned MONAI
+DiceFocal bg0/gamma2/weights1+1; AdamW 1e-4/weight decay1e-5, batch1, seed42, seeded permutations,
+500 warmup then cosine to24k; no augmentation or encoder freeze in this current route.
+Reuse the existing qualified cache. Validate every2k, checkpoint every500; retain8k/24k plus
+initial/latest/best, independent backup. Fixed8k versus24k native development comparison:
+macro positive lesionDice gain>=.02 with paired95% bootstrap interval above0; detection change
+>=-.03 and reference-empty false-alarm increase<=.03, point-estimate guardrails with uncertainty
+reported. Reject guardrail breaches or Dice interval upper bound<.02; otherwise inconclusive.
+Native three-class argmax; any-overlap detection on26-connected reference components; no lesion
+largest-component pruning. Selected tensor-Dice best (earliest tie) and terminal24k reported
+separately. Native comparison includes all reference lesion voxels, including outside-crop misses.
+
+Resource proposal:24h watchdog/12GiB worker/32GiB existing cache/100GiB free on both storage volumes;
+existing independent-backup ceiling. Runtime fault/user stop preserves evidence; no automatic
+retry or next run. No test evaluation, PANORAMA optimizer use, prior trained model reuse or schedule.
+
+Setup artifacts: external alias `readiness/pants-course-reference-20261011-a01/` contains
+`experiment.yaml`, `setup.json`, changed-recipe CUDA qualification and native-evaluator evidence.
+The bounded qualification is an engineering attempt under this plan and its models are disposable.
+It does not contribute scientific Dice evidence. Final setup receipt records actual checks and
+remaining limitations; no hypothesis decision exists before the24k scientific endpoint.
+
+**Setup result:** 94 distinct focused tests passed, one explicit MPS-native skip. Changed-recipe
+CUDA qualification completed three producer updates, two development forwards and one cold repeat;
+full-state restore exact, next-state maximum difference 2.0023435e-8, workers reaped. Native endpoint
+qualification restored/scored two positive development cases. The first native attempt failed an
+overly literal binary-label assumption; repaired by reusing the existing approved semantic decoder,
+with failed evidence retained and a separate successful attempt. Empty-case and multiple-lesion
+metric behavior covered by fixtures; these diagnostic model scores are not scientific outcomes.
+Frozen `ready.json` SHA256 `f10a9a5ec8313ec8d2bf86a462813e0f91dd701443109b8e95f17445e9882603`.
+Configuration and producing code are pinned there. No scientific run launched or schedule created.
 
 **October7 full-training scope clarification:** Quinton asks why the run was fast compared with
 his prior14hour experiments and requests full training sessions. [Scale review](capstone/operations/FULL-TRAINING-SCALE-REVIEW-2026-10-07.md)

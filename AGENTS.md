@@ -1,5 +1,292 @@
 # AGENTS.md — Agent Context
 
+> **October14 Git synchronization authorized / merge deferred:** User explicitly requests committing
+>and pushing this laptop's accumulated repo work and inspecting incoming Mac work; this supersedes
+>older no-public-push instructions for this source/documentation snapshot only, never raw data,
+>checkpoints, credentials or private tracking databases. Fetched origin/main at a833ccb (37 incoming
+>commits,141 changed paths). Incoming src/data/{localizer_preprocessing_v4,segmenter_geometry_v2}.py
+>overlap the live72k receipt pins. DO NOT merge/pull/rebase/switch the active training checkout.
+>Publish current codex/windows-training-readiness branch without force; integrate after this run
+>finishes and a deliberate compatibility review. All receipt pins matched before staging; training
+>confirmed advancing beyond37565updates. Generated browser state/screenshots stay ignored/local.
+
+> **October13 PanTS-only 72k ordinary/EMA TRAINING LIVE:** User explicitly approved this one
+>PanTS-only run; PANORAMA conditional future work, NOT automatic launch authority. Ownedexec87724
+>runs scripts/train_ema_segmenter.py; monitor only, no duplicate/retry. Scientific journal
+>E:/PROWL/artifacts/pants_only_ema_72k_20261013/execution/history.jsonl confirms34updates at55.359s.
+>Receipt E:/PROWL/readiness/pants-ema-72k-20261013-a01/ready.json SHA256
+>8e20da25466bf1fe27205fdbb89633dbe02680a552c61d828cebdf390fb3fee6 pins src/scripts/spec/config.
+>DO NOT EDIT pinned producing files while active. New additive EMA wrapper/executor, freshSuPreM,
+>1333PanTS train/70matched dev(36positive34empty), samefiveexcludeddev; noPANORAMA/noCTprep replay.
+>72kcosine/500warmup,EMAalpha.99copy500 thenaverage; tensorvalidate2k/pairedcheckpoint500,
+>nativeboth24/36/48/60/72k. Read docs/capstone/operations/PANTS-EMA-72K-20261013.md for endpoints.
+>72hwatchdog/12GiBRSS/32GiBcache/100GiBC/Efloors/existingbackupcap/AC; no automaticresume/retry.
+>52focusedtests pass/1Macskip; realCUDA4producer+1cold exactrestore/nextmaxdiff7.45058e-9,
+>bothworkersreaped. Initial E:/C:backupSHA35f143d655f42bc6a766b41784ec4ac8242e3dd2cccfb51d0b3c99f5c2e9c759.
+>LiveMLflow38cdd18be83449da87275f5ef8b12898 RUNNING,step25metricsverified; sqlite C:/Users/quinn/PROWL-Tracking/mlflow.db.
+>Phone dashboard C:/Users/quinn/PROWL-Monitor active-run.json nowtargets72k; serverowned88396,
+>old81861stoppedONLYmonitor. Raw/EMAmetrics separated,8monitorchecks pass; no newnetworkexposure.
+>Training-fit2971 FINISHED/reaped:parent14kDice.445655/alarms48of50,mixed8k.360899/49of50,
+>same100traincases; bothMLflowFINISHED. Earlier diagnosticLIVE text historical. No schedules/testevaluation/publicpush.
+
+> **October13 professor-demo dashboard shipped:** C:/Users/quinn/PROWL-Monitor/{server.py,demo.py,index.html}
+>serve read-only aggregate showcase at existing private http://quinns-laptop.tailcbc356.ts.net/.
+>Ownedserver81861 replacesoldmonitorONLY; diagnostic2971 untouched. Two completedrun cards,
+>nativebest/final comparison, matched70tensorcurves, runtime andlive100case diagnosticprogress.
+>7monitorchecks pass; browser390px mobile/nohorizontaloverflow and privateURL verified.
+>Progress freshness uses observedcase-count changes, notexFATfilemtime (which lagged despiteupdates).
+>NoMLflowserver/networkexposureadded; aggregatesonly,noCT/caseIDs/checkpoints/control endpoints.
+>Lastdiagnosticcount96/100parent, mixedwaiting;notcompletedclaim. Preserveallactiveproducingpins.
+
+> **October13 training-fit diagnostic LAUNCHED:** User says "do that now"; ownedexec2971 runs
+>run_training_fit.py --launch with requestSHA39fe048b3407c95f992550c4f13ed8b4f9e83ac79728c1c294def407e701ac0a.
+>Two sequential100-case training-only native evaluations, parent14k thenmixed8k; liveMLflow.
+>Read E:/PROWL/readiness/training-fit-20261013-a01/execution/{0,1}/cases.jsonl andtracking.json.
+>No optimizerupdates/testreads/longtraining; no schedule. DO NOT EDIT pinned src Python,
+>setup/run_training_fit.py,backfill_full_runs_mlflow.py,train_full_segmenter.py or frozenplan whileactive.
+>Monitor samejob,neverduplicate/retry. User wants other work alongside; ask what task they intend.
+>Earlier setup-not-executed wording below is historical. Completion requires reports+reapedworkers.
+
+> **October13 priority amendment / training-fit SETUP:** User approves training-fit → EMA/longer
+>horizon ahead of sampling and requests setup+MLflow. New setup_training_fit.py/run_training_fit.py
+>prepare100sharedPanTStrain cases(50pos50empty,seed20261013), selectedparent14k/mixed8k, native
+>evaluator semantics and saveddev70. Nooptimizerupdates/testreads/duplicateaudit;NO launch yet.
+>Plan docs/capstone/operations/TRAINING-FIT-EMA-HORIZON-20261013.md;20focusedtestspass.
+>Read readiness/training-fit-20261013-a01/setup-receipt.json for setupMLflowID/requesthash.
+>Preflight without --launch is read-only; --launch separately runs evaluation only. Keep frozen
+>request/pins; oldscientificruns unchanged. Training-timeMLflow/EMA/72kimplementation remains later.
+>No schedules/longrun;sampling deferred,notrejected. Earlier next-sampling priority superseded.
+
+> **October13 mixed training and retrospective COMPLETE:** Owned89693 FINISHEDexit0,
+>24kupdates/12validations/67764.062s/reaped. Frozenpins and allE/Ccheckpoints+journal match.
+>Selected8k native70Dice.371897 vsparent14k.405092,delta-.033195,CI[-.102249,+.028561];
+>detection33vs34/36,alarms34vs32/34. PracticalinterventionREJECTED(alarmguardrail);H0notrejected.
+>Postrunqueue6106 FINISHEDexit0,both70-case native reportscomplete/reaped,no training/testreads.
+>FinalnativeDice.331492vsparent.319538,delta+.011954,CI[-.049570,+.071232],alarms20vs18/34;
+>secondaryalsofailsalarmguardrail. Outputpanorama-positive-review-20261013-a01/results.json.
+>Bothhistories+nativebackfilledlocalMLflow at C:/Users/quinn/PROWL-Tracking/mlflow.db;
+>runIDsparent67d11609cc78406b86145f13e24ec61b,mixedc038332411df4f38bf52d650810c77c0.
+>Original75/reduced70andtensornativekeptseparate;14backfill/comparisontestspass.
+>Next50:50samplingproposalNOTapproved/launched;liveMLflowintegrationbeforefuturetrainingpending.
+>Read docs/capstone/operations/PANORAMA-POSITIVE-RESULTS-20261013.md. No newduplicateaudit/schedule.
+>SamplerproposalstillusesoriginalSuPreMfreshhead,nottrainedparent. Noactiveevaluation/training.
+>OlderLIVEandnot-yet-trainingsections below are historical;preserveoriginalruns/specs/holds/testroles.
+
+> **MLflow plan approved after current run:** User requests future MLflow use and backfill
+>AFTER the active mixed run. Do not alter pinned training code or attach logging mid-run.
+>At the post-run review, backfill the completed PanTS course-reference and PANORAMA-added
+>runs from durable journals/configs/evaluation reports, preserving original steps, cohort
+>versions and provenance; mark imported history as backfilled. Before the next experiment,
+>implement/test MLflow integration while keeping local journals/checkpoints authoritative.
+>This is a recorded backlog item, NOT an AI schedule or an already-running import.
+>Last manual check confirmed mixed scientific training at5962/24000; cache-only wording below
+>is historical. Continue preserving all frozen producing files while training is active.
+
+> **October12 authorized mixed pipeline LIVE / cache preparation, NOT scientific updates yet:**
+>Ownedcacheexec95165 constructs ONLY345missingexpertPANORAMA tensors;51+pass/readbackconfirmed,
+>no duplicate scan. Ownedpipeline89693 started15:28:02UTC; waits thatsamecache, then productionbind,
+>bounded5producer+1cold CUDAcheck, frozenreceipt, singleapproved24krun. No retries. Monitor these,
+>do not duplicate. ALL src/scripts Python and experimentv2 spec pinned by pipeline-request.json:
+>DO NOT EDIT whileactive. Read E:/PROWL/readiness/panorama-positive-run-20261012-a01/pipeline.jsonl.
+>103focusedtests pass/1Macskip; unitchecks are not yet realproductionGPUqualification.
+>Run name pants_plus_expert_panorama_dicefocal_24k_20261012; planned1678train(1016pos662empty),
+>70dev(36pos34empty). Parentrescoring all12steps keeps14k; nativeDice.4050923173 best/.3195378297final.
+>Sourceaudits/PanTScache reused, repeatedPANORAMAstudies retained perD030. KeepAC/app/D:/E:connected.
+>No schedules/testpayloads/publicpush. Notion amended; historical fullscan wording supersededforthisrun.
+
+> **October12 MIXED RUN AUTHORIZED / admission policy amended:** User explicitly requests
+>excluding five uncertain current-dev CTs, documenting/clarifying old policy, loading and launching
+>the next experiment. Governing amendment: docs/capstone/operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md.
+>No broad duplicate scan; retain274knownimports/alltechnicalholds. Exclude PanTS_00000922,
+>00005105,00005370,00007299,00007523 from run-specific dev, never move totrain. Dev70=36pos/34empty.
+>Originalsplits/testroles/parentartifacts immutable. Recompute parent savedmetrics/selection on70.
+>345expertstudies/344subjects candidate; retainrepeatedstudies perD030 (prior draftonepersubject wrong).
+>Exploratory residualoverlap/SuPreM uncertainty disclosed, not cleanbenchmark. Setup inprogress,
+>not yettraining. Old fullscan gates superseded FORTHISRUN; do not reopen settled work absent newevidence.
+
+> **October12 parent native review COMPLETE / PANORAMA-positive design prepared:** Evaluationqueue
+>42159FINISHED0; all3native75case reports complete/reaped. Fixed8k→24k ACCEPTED by frozen rule:
+>Dice.249939→.324534,delta.074595683,95%CI[.000131978,.155512773],detection26→27/38,alarms19→19/37.
+>NarrowCI and pointguardrails only, not statisticalnoninferiority/generalization. Selected14k native
+>Dice.406607,detect35/38,alarms34/37. Older pending/liveevaluation text below historical.
+> User selects PANORAMA-positive setup then run when ready. New CAP-EXP-017 human title
+>Add expert-annotated PANORAMA lesions: does more positive training data improve outlining?
+>Spec docs/capstone/operations/PANORAMA-POSITIVE-EXPERIMENT-20261012.json; NOT LAUNCHABLE.
+>Metadata planner8tests pass,345candidate studies/344subjects,0admitted; candidate-plan.json under
+>E:/PROWL/readiness/panorama-positive-experiment-20261012/. No CTpayloads or numericalchanges.
+>Primary matched selectedbest vs selectedbest(.406606826);same24kbudget,delta>=.02/CI>0,
+>detection>=-.03/alarms<=+.03/pancreas>=-.02. Finalvsfinal secondary. No trainedparent reuse.
+>Still need detector negative-control/burdenreview, protected-role overlap/QC/productionmixedprovider,
+>bounded smoke/frozenreceipt. Calibration20/20 does NOT qualify scan. No launch/schedule/testeval.
+
+> **October 12 PanTS course-reference TRAINING COMPLETE / REVIEW:** Owned65303 exited0,
+> all24000updates contiguous, supervised65434.14s/peakRSS1648304128B/workersreaped.
+> Best tensor positiveDice.4077144203 at14000 (3/38zerooverlap,35/37emptyalarms);
+> terminal.3215606311 (11/38zerooverlap,19/37emptyalarms). E/C8k,24k,best hashes match;
+> frozen producing pins unchanged. Native8k evaluation owned11805 LIVE at
+> E:/PROWL/readiness/pants-course-retrospective-20261012/native-008000/; monitor only.
+> One-shotqueue42159 waits exact8k parent32780 then requires complete75report; runs native24k,
+> selectedbest sequentially and fixedcompare/aggregate. No retries/training/schedules. Inspect
+> evaluation-queue.jsonl/fixed-native-decision.json/aggregate-review.json when completed.
+> Native24k/selectedbest and fixed decision still required; no formal verdict from tensor proxy.
+> Notebook retrospective appended; Notion Review. User requires agreement before successor
+> training; none launched. No schedules/testevaluation/PANORAMAadmission. Previous LIVE training
+> text below historical. Dashboard read-only service93200 remains separate from trainer.
+
+> **October 11 PanTS course-reference TRAINING LIVE:** User explicitly said "Ok, let's launch it."
+> Frozen receipt f10a9a5ec8313ec8d2bf86a462813e0f91dd701443109b8e95f17445e9882603 passed;
+> owned exec65303 runs the single approved24k job. Actual updates25 confirmed at43.265journal seconds.
+> Initial checkpoint created19:11:06UTC (13:11MDT); E:/PROWL/artifacts/
+> pants_course_reference_dicefocal_24k_20261011/execution/history.jsonl is authoritative.
+> Initial E:/C:independentcheckpoint SHA d1ac610227d5b024131e4b845820a6201669cefc98916d82be67df6ab23a7eaf matches.
+> Monitor existing job only; DO NOT EDIT pinned src/scripts/configs or duplicate/retry job.
+> 1333train/75dev,SuPreM+DiceFocal,24k horizon/2kvalidation/500checkpoint/8k+24k retained,
+>24h watchdog and existing resource/AC safeguards. No scientific Dice yet; no schedules created.
+> Keep app/AC/D:/E:connected. Setup-not-launched wording below is historical.
+
+> **October 11 PanTS course-reference SETUP COMPLETE / NOT LAUNCHED:** User approved long-run
+> specification and requested setup only. CAP-EXP-016 human title: PanTS-only long run: recover
+> the course recipe before adding PANORAMA. Qualified full cohort is1333train(671positive/662empty)
+> and75dev(38positive/37empty);118/5 below are provenance subsets, NOT cohort totals.
+> Config E:/PROWL/readiness/pants-course-reference-20261011-a01/experiment.yaml; ready.json SHA256
+> f10a9a5ec8313ec8d2bf86a462813e0f91dd701443109b8e95f17445e9882603 binds code/config/evidence.
+> Use scripts/diagnostics/launch_pants_course_reference.py --receipt [ready.json] --sha256 [above]
+> for read-only preflight; --launch is a separate scientific launch action, not yet performed.
+> Added optional versioned DiceFocal bg0, retained8k/24k checkpoints, native development evaluator
+> and fixed8k/24k comparison. Existing normalized-loss behavior/identities preserved.94distinct
+> focused tests pass/1MPSskip; changedrecipe CUDA3updates/2dev pluscold1 passes, exactrestore,
+> nextmaxdiff2.0023435e-8; bothworkersreaped. Native2positive-dev qualification passed/reaped;
+> first attempt failed literalbinary check, repaired using approved existing semantic decoder;
+> failure retained. No full75native repeat, cache rebuild or CTpayload replay. Diagnostic models
+> nonpromotable.24k scientific run pending, SuPreM development-only/providedpancreas/historical
+> unmatched comparison caveats remain. No schedules, Mac actions, PANORAMA admission or publicpush.
+
+> **October 11 NARROW PASS COMPLETED:** User requested metadata-first four-step spec and one pass,
+> no long training. Spec docs/capstone/operations/PANORAMA-NARROW-READINESS-20261011.json; results
+> E:/PROWL/readiness/panorama-narrow-readiness-20261011-a01/findings.json. All274imports retained
+> (194MSD/80NIH), no rediscovery scan. Read-only metadata9901: pooledRadboud533 =361train/92dev/
+>80test; actualadmitted118train/5dev. NOT confirmedduplicates. Fullscan deferred, not overlapwaived.
+> FiveexpertPDAC size-quantile crops prepared/reviewed in physicalRAS tensor views, componentsall
+> survive; engineering-only, not radiologist/fullcohortQC.30focusedmapping/rolechecks pass.
+> Isolated diagnostic mixedprovider:5CUDAproducer updates across2PanTS(pos/empty)+2expertPANORAMA,
+>1existingdevforward;1coldrepeatstep5. Exactrestore/nextmaxdiff1.0430813e-7 pass. E/Ccheckpoint4
+> SHAaac2559d matches. Preparation21424,producer81989,cold34006 FINISHED/reaped. No livejob.
+> Prior PanTS qualification reused, no cache rebuild/75devrepeat. PriorPANORAMA10pinsstillmatch.
+> No scientific mixedadmission or production longrun provider conversion; diagnostic models are
+> nonpromotable. Next targetedprotection decision:5currentdev,80test (92dev+80test originalroles),
+> expertcohort/QC and productionbinding; no scans or schedules launched. Preserve allholds/Mac.
+> Previous3716/readinesspacket LIVE wording below is historical: FINISHED536s/reaped/reviewrequired.
+
+> **October 11 staged combined-readiness pass LIVE:** User requested one planned pass through
+> quality, duplicates, cohort and mixed smoke; no long training. Plan is
+> docs/capstone/operations/PANORAMA-READINESS-PASS-20261011.json. First dispatch ownedexec3716
+> build_panorama_readiness_packet.py runs at E:/PROWL/readiness/panorama-readiness-pass-20261011-a01.
+> It inventories protected CT paths, renders49stratified QC selections, then20planted duplicate
+> variants against20both-source distractors.14focused tests pass. Inventory7200train/1800dev/
+>901test allpresent; no protected-test payload reads yet. Actual first2overlays rendered.
+> Four-hour/12GiB/4GiBoutput/100GiBfree/AC bounds. Pins in request.json; do notedit producing
+> files or duplicate job. Stops REVIEW_REQUIRED, not cohortaccepted/fullscan/automatictraining.
+> Fullduplicate scan/cohort/sourceawareprovider/mixedsmoke remain downstream, not running.
+> Review overlays as native-index previews (not radiological orientation/physical-aspect views);
+> need suitable physical/crop views before final quality adjudication, no admission from rendering.
+> Detector is candidate spike; >=19/20recall plus reviewed nonmatch controls/burden needed before
+> eligibility scanning. No similarity autoexclusion. No AI schedules or publicpush.
+> PriorPANORAMA37866 FINISHED1904pass/333priorheldexcluded/1unionhold,11711s/reaped/pinsunchanged.
+
+> **October 10 PANORAMA full content/union preparation LIVE:** User approved continuing setup,
+> and answered "Do what you think is best. You have full authority" to CT-only protected-test
+> duplicate checking versus Mac fingerprints. Chosen CT-only duplicate detection is authorized:
+> no test labels/model inference/evaluation. No such protected CTs opened yet. Ownedexec37866
+> now runs prepare_panorama_content.py on PANORAMA ONLY, output data-setup-20261010-a01/
+> panorama-ct-union-a01. First2 CTcontentpass confirmed; no completion/admission claim.
+> Prior59holds/274imports retained without payload replay;1905prior-pass CTs hash+finite checks,
+> PDAC uniongeometry diagnostics, no cache/model/training.4h/12GiB/100GiBfloor/AC supervised.
+> Pins in request.json: DO NOT EDIT producing code/catalog during job.9content/union tests pass.
+> Completion still needs QC overlays, calibrated full-role duplicates/adjudication and cohort.
+> PanTS qualification below complete. No scheduledAIchecks/longrun/publicpush.
+
+> **October 10 PanTS setup QUALIFIED / PANORAMA not admitted:** Cache75391 FINISHED1408pass/0fail,
+> reaped7638s. Source hash sets/targetstates all match handoff; original ordered1333/75 preserved,
+> new pants-admitted cohort review under E:/PROWL/readiness/data-setup-20261010-a01/.
+> Candidate inherited invalid500warmup/24000horizon with3update ceiling; original preserved,
+> separate pants-admitted/smoke.yaml uses1warmup/3horizon. Binder corrected for future setup.
+> Profile53145 FINISHED:3CUDAupdates/75dev evaluations plus1cold update; exactrestore,
+> nextmaxdiff2.9802322e-8, bothworkersreaped. E:saved.pt/C:independentbackup SHA1f17be99a04b
+> matches. OriginalSuPreM only; no retiredmodel or longrun. paths.json points to smoke config.
+> PANORAMA holds report:346expertpass/36held,192optional-machinepass/4held, other19held;
+> no admission. New separate union-ROI diagnostic geometry has synthetictests only, not wired
+> into optimizerprovider or realCTqualified. Fullcontent/overlays/duplicatecalibration remain.
+> Asked user for CT-only protected-test duplicate-scan authorization OR verifiedMacfingerprints;
+> current no-test-CT-read prohibition remains until answered. No schedules/publicpush.
+
+> **October 10 cache-monitor repair / setup continuation:** User explicitly requested fixing
+> stopped preparation and restarting. Parent58876 FINISHED after300 technical passes/0fail;
+> storage tree_bytes raced atomic tmp rename, workers reaped. Fixed bounded full-tree rescan
+> on FileNotFoundError; other faults propagate, limits unchanged.16 race/continuation tests pass.
+> One unjournaled PanTS_00007989.npz preserved/hashverified under parent orphan-evidence,
+> not admitted. Original config/control/journal retained. New ownedexec75391 prepares ONLY
+> pants-content-audit-a02 with --resume-audit pants-content-audit and14400s allowance;
+> validates/reuses300 completed batches then prepares1108remaining. No automatic training.
+> PANORAMA audit-a02 finished2238:1905technicalpass/274imports/59holds(22grid/37size),
+> not training admission. No schedules, no long training. Read repair-receipt.json in parent.
+
+> **October 10 setup-only preparation LIVE:** User explicitly asks to connect paths and finish
+> PanTS/PANORAMA preparation, but NO long training. Ignored configs/local/windows-data.yaml
+> points to E:/PROWL/readiness/data-setup-20261010-a01/paths.json. New PanTS candidate binds
+> original1333train/75development and source-use review to D:CTs/restoredE:masks/weights;
+> original splits unchanged, candidate review null, smoke-only3update/600s limit, no timedrun.
+> Ownedexec58876 runs ONLY prepare_full_segmenter_cache.py, four-hour allowance/12GiB/32GiBcache/
+>100GiBfloor/AC/Windows supervision. First44cases technical_pass/0fail confirmed; not complete.
+> Do not duplicate, restart or change its producing code/config. No automatic trainer afterward.
+> PANORAMA metadata reconciled2238studies/2224subjects;274imports excluded,382expertPDAC
+> candidates,196separateoptional-machinePDAC,3manualnonPDAC quarantines,1383otherunknown-lesion.
+> Catalog is NOT cohort admission; no new random split, no negative inference or overlap clearance.
+> Label/CT-header audit ownedexec84248 LIVE at panorama-content-audit-a02/,1h/4GiB/noCTvoxelreads/
+> no models. Exact source label hashes checked; streaming exact0..6 float/integer codes, production
+> affineatol1e-5/256Mvoxel limit. Early real float64 masks pass. Monitor ONLY existing jobs if asked.
+> Prior audit61149 INTENTIONALLY STOPPED/reaped to correct overly strict integer-storage-only
+> validator; oldledger/resources/stop-reason retained, not data-admission evidence. Bothmanualand
+> automatic source masks may usefloat64; nofractional/nonfinite/unknown labels permitted.
+>35focused new setup tests pass plus17existing trainer/windows/cohort tests (52distinctthisturn).
+> PANORAMA union-crop versus PanTS pancreas-only integration, fullCTcontent,duplicatecalibration/
+> adjudication and machine-pancreas visual QC remain required before mixed training. No longrun,
+> scheduledAIchecks,trained-modelreuse,testCTreads,sourcewrites or publicpush. Keepapp/AC/D:/E:.
+
+> **October 10 private handoff restored after reformat:** New user-requested Wormhole receiver
+>45922FINISHED; archive restored E:/PROWL/transfer/PROWL-Lenovo-PanTS-8h-private-20261008.zip,
+>441698548B, SHA256047032713173bce4264eacbb47404fcf0b48fffd806f6700c1eb4c7cc4dab56a
+> matches user supplied. Fresh extraction PanTS-8h-20261008/4252safe entries; verifier passed
+> all4251payload files including2816masks/originalSuPreMweights. Extraction/verifier30192finished.
+> Earlier missing-label/weight findings now superseded for extracted handoff assets; configured
+> paths/cache/PANORAMA admission still pending. No CT rehash, old model reuse, long run or schedule.
+> Evidence outputs/prowl/readiness-reset-20261010/handoff-received.json. Package8h instructions
+> historical, not current launch authority; user requests setup before future real experiments.
+
+> **October 10 readiness reset / old Lenovo experiment retired by user:** QUINN E: was
+> deliberately reformatted exFAT for Mac/Windows interchange; old E: cache, handoff and run
+> directories are gone. Do not resume/reconstruct the old scientific run or restart download.
+> User requests setup/readiness only before selecting real experiments or long runs. Internal
+> C: backups still exist; preserve original split provenance, not as permission to reuse models.
+> PANORAMA transfer has 2238 CTs and 2238 annotation files (482 manual/1756 automatic),
+> Mac per-file transfer-SHA receipt; local all-file size/pairing and header audit evidence in
+> outputs/prowl/readiness-reset-20261010/. No complete local payload rehash or content admission.
+> Fresh environment/CUDA kernel/pip check pass; 33 focused tests pass/1 native MPS skip;
+> invented144cube CUDA3producer+1cold updates pass, exact restore/next-update tolerance,
+> both workers reaped. Small E:exFAT/C:independent write-replace-readback probes pass; not
+> power-loss or real-data qualification. D: retains all1408 prior selected CT paths, but
+> 2816 PanTS masks and configured original SuPreM weights are missing. Original split lists
+> survive in C: backup. Asked for original442MBMac private handoff again, not old trained model.
+> PANORAMA needs label mapping/provenance, protected roles/overlap review, geometry/content
+> admission and new Windows config/cache before real-data training. No long run or schedule.
+> Header audit FINISHED:4480manifest files present/sizes match,2238CT-label pairs/no unmatched,
+>2199header-pass/39holds at audit affineatol1e-4 (productionstricter1e-5); no voxel decoding.
+> User agrees to retransferring original private handoff via Wormhole; await new sender code.
+
+> **October 9 evening PANORAMA USER STOP:** User chooses faster Mac download and explicitly
+> requests stopping Lenovo before firmware update. Owned downloader75108 stopped (worker2944),
+> no automatic restart or scheduled checks. Retained batch_1.zip.part on E: for later reconciliation;
+> do not treat partial as verified. Training remains stopped. Prior download-LIVE text historical.
+
 > **October 9 evening PANORAMA robust resume LIVE:** User requests addressing failures and full
 > overnight download. Prior43377 FINISHED timeout21:14:32UTC;7276375000B retained. Added bounded
 > network-only automatic retries/backoff (100perarchive,5-300s, numericRetryAfter honored), durable

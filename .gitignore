@@ -31,6 +31,10 @@ pretrained_weights/
 # ---- Outputs: predictions, figures, checkpoints, logs, peek images ----
 outputs/
 
+# Local browser inspection and generated dashboard screenshots
+/.playwright-cli/
+/output/playwright/
+
 # ---- Experiment tracking ----
 mlruns/
 mlflow.db
@@ -86,6 +90,7 @@ week3/*.jpg
 
 # Machine-specific storage paths/volume IDs; example and schema stay reviewable.
 /configs/local/roots.yaml
+/configs/local/windows-data.yaml
 
 # Consumed machine-specific launch/storage approvals remain local evidence.
 /configs/local/*-launch-approval.json

@@ -1,5 +1,11 @@
 # PANORAMA integration
 
+> **October 12 execution clarification:** The [CAP-EXP-017 exploratory amendment](../operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md)
+> is the current run-specific admission authority: retain declared274imports/technicalholds,
+> exclude five uncertain current-development cases, reuse completed audits and focused QC,
+> and prepare the production mixed loader without another broad duplicate scan. The stronger
+> design below is not evidence that those checks ran or an instruction to repeat settled work.
+
 **Status:** Ready — design approved; execution gated on pinned CT and label snapshots  
 **Owner:** Quinton Evans  
 **Target week:** 3  

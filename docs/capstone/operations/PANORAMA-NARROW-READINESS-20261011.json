@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "scope": "User-requested four-step narrow readiness pass; setup and disposable mixed-source engineering smoke only, no scientific or long training",
+  "supersedes": "The immediate full-overlap-scan requirement in PANORAMA-READINESS-PASS-20261011.json is deferred pending metadata findings. Scientific cohort admission is not waived.",
+  "output": "E:/PROWL/readiness/panorama-narrow-readiness-20261011-a01",
+  "steps": [
+    {"id": 1, "action": "Reconcile retained catalog and audit records: exactly 194 MSD plus 80 NIH records remain excluded, with no payload scan or reinstatement.", "pass": "All 274 exclusions and their IDs retained."},
+    {"id": 2, "action": "Read PanTS provenance metadata and original/admitted split lists only. Join by exact study ID, reject missing/duplicate/overlapping keys, enumerate Radboud/Nijmegen/Groningen/Dutch and missing-provenance groups by original and actually used roles.", "pass": "Report exact membership and counts; distinguish pooled origin uncertainty from confirmed duplication. Propose targeted scope only; do not launch CT duplicate scanning."},
+    {"id": 3, "action": "Reuse completed PANORAMA label and full-content/union audit. Keep all holds. Run focused mapping/crop regressions, physically scaled CT-target/crop review of a small expert-PDAC sample, and an isolated mixed-source CUDA smoke using unchanged admitted PanTS cache plus reviewed PANORAMA diagnostic arrays.", "limits": "At most 12 producer updates plus one cold update, at most 30 minutes per supervised worker, 12GiB RSS, 4GiB new evidence, 100GiB free on E and C, AC required. No automatic retry of runtime faults.", "pass": "Source-aware mapping and role guards pass; every selected lesion component survives; reviewed sample has no obvious mapping/crop failure; both sources reach actual optimizer updates with finite losses, checkpoint/independent backup/cold continuation verified. Smoke outputs remain non-promotable engineering evidence, not accepted scientific cohort or accuracy results."},
+    {"id": 4, "action": "Reference existing PanTS qualification and unchanged configuration/control evidence. Do not rerun machine qualification, complete cache preparation, full source hashing or the 75-case evaluation.", "pass": "Prior 1408-cache/3-update/75-development/1-cold qualification explicitly reused."}
+  ],
+  "review_scope": "Focused engineering visual review is not radiologist annotation certification or whole-PANORAMA admission. Automatic lesion cases and unknown generic-lesion cases remain outside the primary smoke.",
+  "failure_policy": "Preserve evidence and stop a failing runtime stage. Continue independent read-only steps where possible. Report incomplete/blocked checks accurately; never turn an attempted check into a pass.",
+  "forbidden": ["long training", "test CT/label payload reads in this pass", "test inference/evaluation", "broad duplicate scan", "changing original splits", "clearing holds silently", "retired model reuse", "Mac changes", "public push", "AI schedules"],
+  "deliverable": "One findings report with per-step results, actual updates and source exposures, QC limits, targeted overlap recommendation, and explicit combined scientific-readiness decision."
+}

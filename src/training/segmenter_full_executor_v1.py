@@ -24,9 +24,12 @@ def atomic_checkpoint(path, session, *, best_score, history_bytes):
 
 
 def execute(session, provider, output, *, validate_every, checkpoint_every, tick=lambda:None,
-            checkpoint_hook=lambda path:None, initial_best=None, continuation=None, target_seconds=None):
+            checkpoint_hook=lambda path:None, initial_best=None, continuation=None, target_seconds=None,
+            retain_steps=()):
     require(all(type(v) is int and v > 0 for v in (validate_every, checkpoint_every)), 'Positive cadences required')
     require(target_seconds is None or (type(target_seconds) is int and target_seconds > 0), 'Positive duration target required')
+    require(all(type(s) is int and 0 < s <= session.config['max_steps'] for s in retain_steps)
+            and list(retain_steps) == sorted(set(retain_steps)), 'Invalid retained checkpoint steps')
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
     require(initial_best is None or (type(initial_best) in (int, float) and 0 <= initial_best <= 1),
             'Invalid inherited development score')
@@ -70,6 +73,7 @@ def execute(session, provider, output, *, validate_every, checkpoint_every, tick
                     if best is None or score > best:
                         best = score; save('best.pt')
                 if session.step % checkpoint_every == 0 or terminal: save('last.pt')
+                if session.step in retain_steps: save(f'step-{session.step:06d}.pt')
             if target_seconds is not None and stop_reason != 'duration_target':
                 require(time.monotonic() - training_started >= target_seconds,
                         'Update ceiling reached before endurance duration target')

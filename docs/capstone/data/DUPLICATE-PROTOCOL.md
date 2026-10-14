@@ -1,5 +1,12 @@
 # PANORAMA–PanTS duplicate-control protocol
 
+> **Current experiment exception, October 12, 2026:** CAP-EXP-017 uses the user-approved
+> [exploratory admission amendment](../operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md):
+> retain the 274 declared exclusions and existing holds; exclude the five provenance-uncertain
+> current development cases; no new broad duplicate scan. The protocol below remains the
+> stronger benchmark-control design, not a pending requirement to repeat preparation for
+> this exploratory run. Neither metadata reconciliation nor this exception certifies zero overlap.
+
 **Status:** Approved Plan 03 design baseline  
 **Version:** 0.1 planning draft  
 **Owner:** Quinton Evans  

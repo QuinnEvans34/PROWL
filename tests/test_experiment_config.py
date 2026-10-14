@@ -68,6 +68,24 @@ def test_duplicate_and_cross_role_members_refused(experiment):
     assert any('original training' in s for s in errors)
 
 
+def test_explicit_panorama_addition_preserves_original_roles(experiment):
+    from src.data.segmenter_mixed_inputs_v1 import DOMAIN, EXCLUDED
+    spec,_,root=experiment;cohort=spec['cohort'];name='panorama:study:unit'
+    original=E.resolve(cohort['original_train_ids']).read_bytes()
+    train=E.resolve(cohort['train_ids']);train.write_text(train.read_text()+'\n'+name)
+    manifest=E.resolve(cohort['manifest']);payload=root/'invented-placeholder'
+    with manifest.open('a') as f:f.write(f'{name},{payload},{payload},{payload}\n')
+    review_path=E.resolve(cohort['review']);review=json.loads(review_path.read_text())
+    review.update(domain=DOMAIN,policy='declared_imports_excluded_five_dev_holds_exploratory',
+        excluded_development=sorted(EXCLUDED),panorama_cache={'members':{name:{}}})
+    review['input_sha256']={k:E.sha256(v) for k,v in cohort.items() if k!='review'}
+    review_path.write_text(json.dumps(review))
+    assert E.preflight(load(experiment))['ready']
+    assert E.resolve(cohort['original_train_ids']).read_bytes()==original
+    review['policy']='unapproved';review_path.write_text(json.dumps(review))
+    assert not E.preflight(load(experiment))['ready']
+
+
 def test_manifest_missing_member_and_stale_review(experiment):
     path = E.resolve(experiment[0]['cohort']['manifest'])
     path.write_text('\n'.join(path.read_text().splitlines()[:-1]) + '\n')

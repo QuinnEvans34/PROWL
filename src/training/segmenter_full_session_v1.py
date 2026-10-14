@@ -22,20 +22,31 @@ from src.training import segmenter_normalized_loss_v1 as loss
 from src.training.experiment_config import load_suprem_checked
 
 POLICY = 'full_cohort_seeded_permutation_v1'
+DICE_FOCAL = 'monai_dice_focal_bg0_gamma2_v1'
+
+
+def objective(logits, target, config):
+    if config.get('loss_id', loss.LOSS) == loss.LOSS:
+        return loss.objective(logits, target)
+    require(config['loss_id'] == DICE_FOCAL, 'Unsupported full-session loss')
+    from monai.losses import DiceFocalLoss
+    return DiceFocalLoss(include_background=False, to_onehot_y=True, softmax=True,
+        gamma=2., lambda_dice=1., lambda_focal=1.)(logits, target[:, None])
 
 
 def identity_for(config, control, device, initialization):
     identity = dict(version='segmenter-full-session-1', config=config,
         control=control, device=device, initialization=initialization,
-        architecture=numerical.ARCH, loss=loss.LOSS, sampling=POLICY)
+        architecture=numerical.ARCH, loss=config.get('loss_id', loss.LOSS), sampling=POLICY)
     if device == 'cuda':
         identity['precision'] = 'float32_tf32_disabled'
     return deepcopy(identity)
 
 
 def validate_config(c):
-    require(set(c) - {'lr_horizon_steps'} == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
+    require(set(c) - {'lr_horizon_steps', 'loss_id'} == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
                        'warmup_steps', 'lr_schedule'}, 'Full session configuration fields')
+    require(c.get('loss_id', loss.LOSS) in (loss.LOSS, DICE_FOCAL), 'Unsupported full-session loss')
     require(type(c['max_steps']) is int and c['max_steps'] > 0, 'Positive training horizon required')
     require(type(c['seed']) is int and 0 <= c['seed'] < 2**32, 'Invalid seed')
     require(len(c['tensor_shape']) == 3 and all(type(v) is int and 16 <= v <= 192 and v % 8 == 0
@@ -170,7 +181,7 @@ class Session:
         self.dirty = True
         with self.rng_scope():
             self.model.train(); self.optimizer.zero_grad(set_to_none=True)
-            value = loss.objective(self.model(x[None].to(self.device)), y[None].to(self.device))
+            value = objective(self.model(x[None].to(self.device)), y[None].to(self.device), c)
             require(torch.isfinite(value).item(), 'Nonfinite loss')
             value.backward()
             require(all(p.grad is not None and torch.isfinite(p.grad).all().item() for p in self.model.parameters()),

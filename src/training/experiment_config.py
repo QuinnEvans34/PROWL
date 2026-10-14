@@ -49,13 +49,17 @@ def load_experiment(path):
     if not re.fullmatch(r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,79}', spec['name']):
         raise ValueError('Experiment name must be a simple unique directory name')
     run = spec['run']
-    if set(run) - {'target_seconds'} != {'max_updates', 'validate_every', 'checkpoint_every', 'log_every', 'cache', 'max_seconds', 'min_free_bytes'}:
+    if set(run) - {'target_seconds', 'retain_steps'} != {'max_updates', 'validate_every', 'checkpoint_every', 'log_every', 'cache', 'max_seconds', 'min_free_bytes'}:
         raise ValueError('Unknown or missing run setting')
     for key in ('max_updates', 'validate_every', 'checkpoint_every', 'log_every'):
         if type(run[key]) is not int or run[key] < 1:
             raise ValueError(f'{key} must be a positive integer')
     if run['validate_every'] > run['max_updates']:
         raise ValueError('Validation interval must not exceed training horizon')
+    retained = run.get('retain_steps', [])
+    if (not isinstance(retained, list) or any(type(s) is not int or not 0 < s <= run['max_updates'] for s in retained)
+            or retained != sorted(set(retained))):
+        raise ValueError('Retained steps must be unique sorted updates within horizon')
     if run['cache'] not in ('none', 'ram', 'disk'):
         raise ValueError('Unsupported cache mode')
     for key in ('max_seconds', 'min_free_bytes'):
@@ -106,7 +110,16 @@ def preflight(cfg, *, inspect_payload_paths=False, source_review_mode='separatio
             errors.append(f'{key}: {exc}')
     if len(groups) == 5:
         train, dev = groups['train_ids'], groups['development_ids']
-        if not train <= groups['original_train_ids']: errors.append('Training members outside original training role')
+        extra = set()
+        try:
+            review = json.loads(resolve(cohort['review']).read_text()) if cohort['review'] else {}
+            if review.get('domain') == 'exploratory_pants_panorama_20261012':
+                from src.data.segmenter_mixed_inputs_v1 import extra_training
+                extra = extra_training(review)
+                if not extra <= train: errors.append('Admitted PANORAMA members missing from training')
+        except (OSError, ValueError, KeyError, TypeError) as exc:
+            errors.append(f'Mixed admission: {exc}')
+        if not train <= groups['original_train_ids'] | extra: errors.append('Training members outside original training role')
         if not dev <= groups['original_development_ids']: errors.append('Development members outside original development role')
         if train & dev or (train | dev) & groups['test_ids']: errors.append('Training/development/test overlap')
     try:

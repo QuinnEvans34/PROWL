@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -62,7 +63,24 @@ def preflight(cfg, inspect=False):
 
 
 def tree_bytes(root):
-    return sum(p.stat().st_size for p in Path(root).rglob('*') if p.is_file()) if Path(root).exists() else 0
+    root = Path(root)
+    if not root.exists():
+        return 0
+    # Cache writers atomically rename .tmp files. Restart the entire scan when
+    # an enumerated name disappears, so the replacement is counted, not skipped.
+    for attempt in range(3):
+        try:
+            root.stat()
+            total = 0
+            for path in root.rglob('*'):
+                info = path.stat()
+                if stat.S_ISREG(info.st_mode):
+                    total += info.st_size
+            root.stat()
+            return total
+        except FileNotFoundError:
+            if attempt == 2:
+                raise
 
 
 def worker(cfg, report, resume=None):
@@ -116,7 +134,8 @@ def worker(cfg, report, resume=None):
         validate_every=cfg['_experiment']['run']['validate_every'],
         checkpoint_every=cfg['_experiment']['run']['checkpoint_every'], tick=tick,
         checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation,
-        target_seconds=cfg['_experiment']['run'].get('target_seconds'))
+        target_seconds=cfg['_experiment']['run'].get('target_seconds'),
+        retain_steps=cfg['_experiment']['run'].get('retain_steps', []))
     copy_backup(output / 'execution' / 'history.jsonl')
     (output / 'result.json').write_bytes(canonical(result))
     copy_backup(output / 'result.json')

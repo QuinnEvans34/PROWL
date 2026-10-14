@@ -29,7 +29,7 @@ def compare(left,right,*,exact=False,maxima=None):
     else:assert left==right
 
 
-def worker(experiment,output,backup,cold):
+def worker(experiment,output,backup,cold,validation_limit=None):
     import torch
     from src.training import experiment_config as E
     from src.training.segmenter_full_session_v1 import Session
@@ -61,7 +61,8 @@ def worker(experiment,output,backup,cold):
         rows.append(session.update(provider))
         atomic_checkpoint(output/'expected.pt',session,best_score=None,history_bytes=0)
         at=time.monotonic()
-        evaluations=[session.evaluate_case(provider,name) for name in session.control['validation']]
+        names=session.control['validation'][:validation_limit] if validation_limit else session.control['validation']
+        evaluations=[session.evaluate_case(provider,name) for name in names]
         report=dict(stage='producer',optimizer_updates=3,forwards=3+len(evaluations),updates=rows,
             validation_seconds=time.monotonic()-at,evaluations=evaluations,backup_sha256=E.sha256(backup/'saved.pt'))
     torch.cuda.synchronize()
@@ -75,8 +76,10 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--experiment',required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--backup',type=Path,required=True);p.add_argument('--worker',action='store_true');p.add_argument('--cold',action='store_true')
+    p.add_argument('--validation-limit',type=int, help='Bounded changed-recipe qualification; does not alter cohort identity')
     a=p.parse_args()
-    if a.worker:return worker(a.experiment,a.output,a.backup,a.cold)
+    if a.validation_limit is not None and a.validation_limit < 1:raise ValueError('Positive validation limit required')
+    if a.worker:return worker(a.experiment,a.output,a.backup,a.cold,a.validation_limit)
     from src.operations.full_training_platform import training_guard,watch_windows,require_ac
     from scripts.train_full_segmenter import preflight
     from src.training import experiment_config as E
@@ -93,6 +96,7 @@ def main():
         for stage in ('producer','cold'):
             command=[sys.executable,str(Path(__file__).resolve()),'--experiment',a.experiment,
                 '--output',str(a.output),'--backup',str(a.backup),'--worker']+(['--cold'] if stage=='cold' else [])
+            if a.validation_limit:command+=['--validation-limit',str(a.validation_limit)]
             with (a.output/f'{stage}.log').open('x') as log:
                 process=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT,cwd=ROOT)
                 try:watch_windows(process,seconds=900,rss_bytes=12*1024**3,tick=tick)

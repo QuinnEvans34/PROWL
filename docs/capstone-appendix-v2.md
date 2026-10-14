@@ -1,5 +1,12 @@
 # Technical Appendix
 
+> **October 12, 2026 run-specific clarification:** CAP-EXP-017 follows the explicit
+> [exploratory admission amendment](capstone/operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md).
+> Source-declared overlap exclusions are complete; five uncertain current-development cases
+> are excluded. No additional broad duplicate scan is required for that exploratory run.
+> The stronger benchmark design below remains a separate standard. Neither “overlap passed”
+> nor a metadata-clean remainder certifies zero undeclared overlap.
+
 **Autonomous Pancreatic Lesion Detection and Radiologist Review System**
 
 **Quinn Evans** · Supplement to the BSAAI Capstone Proposal
