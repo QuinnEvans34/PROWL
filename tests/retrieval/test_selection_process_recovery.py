@@ -13,10 +13,11 @@ from test_topic_selection import mesh_path
 from src.retrieval import resumable_selection as rs
 
 
+@pytest.mark.parametrize('workers',[1,2])
 @pytest.mark.parametrize('boundary',['evaluation','export','publication'])
 @pytest.mark.parametrize('sig',[signal.SIGINT,signal.SIGTERM,signal.SIGKILL])
-def test_process_signal_resume(case,tmp_path,boundary,sig):
-    args=full(case)
+def test_process_signal_resume(case,tmp_path,boundary,sig,workers):
+    args=dict(full(case),workers=workers)
     config=tmp_path/'worker.json';config.write_text(json.dumps(args,default=str))
     marker=tmp_path/'ready'
     with (tmp_path/'child.log').open('w') as log:
@@ -27,10 +28,18 @@ def test_process_signal_resume(case,tmp_path,boundary,sig):
             while not marker.exists() and proc.poll() is None and time.monotonic()<deadline:
                 time.sleep(0.02)
             assert marker.exists(),(tmp_path/'child.log').read_text()
+            children=json.loads(marker.read_text())['children']
             os.kill(proc.pid,sig)
             code=proc.wait(timeout=10)
             assert code!=0
             if sig==signal.SIGKILL: assert code==-signal.SIGKILL
+            def alive(pid):
+                try: os.kill(pid,0); return True
+                except ProcessLookupError: return False
+            deadline=time.monotonic()+5
+            while any(alive(pid) for pid in children) and time.monotonic()<deadline:
+                time.sleep(0.05)
+            assert not any(alive(pid) for pid in children), 'Orphan evaluation workers'
         finally:
             if proc.poll() is None:
                 proc.kill();proc.wait(timeout=10)

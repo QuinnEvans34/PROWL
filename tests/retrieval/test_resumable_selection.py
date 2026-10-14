@@ -120,6 +120,9 @@ def test_space_and_foreign_output_refuse(case):
 def test_empty_tables(case):
     with sqlite3.connect(case['catalog']) as db:
         db.execute('DELETE FROM documents'); db.execute('DELETE FROM deleted')
+    report_path=case['catalog'].parent/'replay-status.json'
+    report=json.loads(report_path.read_text()); report.update(documents=0,deleted_pmids=0)
+    report_path.write_text(json.dumps(report))
     cp=rs.run(**case)
     assert cp['stage']=='ranking' and cp['counts']==dict(documents=0,deleted=0)
     assert rs.run(**case,resume=True)==cp
@@ -127,7 +130,11 @@ def test_empty_tables(case):
 
 def test_commit_then_status_failure_recovers(case,monkeypatch):
     original=rs.write_json
-    monkeypatch.setattr(rs,'write_json',lambda *a,**k: (_ for _ in ()).throw(OSError('disk status failure')))
+    def fail(path, value):
+        if value.get('state') == 'evaluating_documents':
+            raise OSError('disk status failure')
+        return original(path, value)
+    monkeypatch.setattr(rs,'write_json',fail)
     with pytest.raises(OSError): rs.run(**case)
     assert len(rows(case['output']))==1
     monkeypatch.setattr(rs,'write_json',original)
@@ -210,7 +217,8 @@ def full(case):
     return dict(case,evaluation_only=False)
 
 
-def test_full_ranking_byte_equivalence(case):
+@pytest.mark.parametrize('workers',[1,4])
+def test_full_ranking_byte_equivalence(case,workers):
     # Enlarge the invented catalog before binding: cap, ties, huge PMIDs and a book.
     with sqlite3.connect(case['catalog']) as db:
         template=db.execute('SELECT source_file,source_sha256,source_seq FROM documents LIMIT 1').fetchone()
@@ -220,9 +228,12 @@ def test_full_ranking_byte_equivalence(case):
         for pmid,xml in [('999999999999999999999999999',article(pmid='999999999999999999999999999')),
                          ('600','<PubmedBookArticle><BookDocument><PMID>600</PMID></BookDocument></PubmedBookArticle>')]:
             db.execute('INSERT INTO documents(pmid,xml,source_file,source_sha256,source_seq) VALUES (?,?,?,?,?)',(pmid,xml,*template))
+    report_path=case['catalog'].parent/'replay-status.json'
+    report=json.loads(report_path.read_text());report['documents']=514
+    report_path.write_text(json.dumps(report))
     expected=case['output'].with_name('reference')
     reference=sc.select(case['catalog'],case['mesh_path'],expected,mesh_sha256=case['mesh_sha256'],cutoff_year=2026,free_gib=0)
-    result=rs.run(**full(case))
+    result=rs.run(**dict(full(case),workers=workers))
     assert result['counts']==reference['counts']
     assert result['counts']['workflow_capped']==500
     for name in ('records.jsonl','candidate-pmids.txt'):
@@ -333,6 +344,9 @@ def test_final_source_recheck_refuses_changed_receipt(case,monkeypatch):
 def test_full_empty_exports(case):
     with sqlite3.connect(case['catalog']) as db:
         db.execute('DELETE FROM documents'); db.execute('DELETE FROM deleted')
+    report_path=case['catalog'].parent/'replay-status.json'
+    report=json.loads(report_path.read_text());report.update(documents=0,deleted_pmids=0)
+    report_path.write_text(json.dumps(report))
     result=rs.run(**full(case))
     assert result['counts']['universe']==0
     assert (case['output']/'records.jsonl').read_bytes()==b''
@@ -401,3 +415,42 @@ def test_enospc_before_batch_commit_rolls_back(case,monkeypatch):
     assert len(rows(case['output']))==1
     monkeypatch.setattr(rs,'save',original)
     assert rs.run(**case,resume=True)['stage']=='ranking'
+
+
+@pytest.mark.parametrize('workers', [2, 4])
+def test_parallel_output_exact_and_resume(case,tmp_path,workers):
+    args=full(case)
+    baseline=rs.run(**args)
+    parallel=rs.run(**dict(args,output=tmp_path/'parallel',workers=workers))
+    assert parallel['counts']==baseline['counts']
+    for name in ('records.jsonl','candidate-pmids.txt'):
+        assert (args['output']/name).read_bytes()==(tmp_path/'parallel'/name).read_bytes()
+    assert rs.run(**dict(args,output=tmp_path/'parallel',workers=workers),resume=True)==parallel
+
+
+@pytest.mark.parametrize('delta', [-1, 1])
+def test_bad_replay_count_cannot_publish(case,delta):
+    path=case['catalog'].parent/'replay-status.json'
+    report=json.loads(path.read_text());report['documents']+=delta;path.write_text(json.dumps(report))
+    with pytest.raises(ValueError,match='Source count mismatch'):
+        rs.run(**full(case))
+    assert not (case['output']/'summary.json').exists()
+    assert not (case['output']/'records.jsonl').exists()
+
+
+def test_source_identity_does_not_recount_index(case):
+    original=sqlite3.connect
+    statements=[]
+    # Source identity should use only max(rowid); output checkpoint validation still counts its own ledger.
+    with original(case['catalog']) as src:
+        src.set_trace_callback(statements.append)
+        mesh=rs.MeshIndex.load(case['mesh_path'],year=2026)
+        bound=rs.source_identity(src,case['catalog'],case['receipts'],mesh,2026,{},'synthetic-volume')
+    assert bound['tables']['documents']['count']==2
+    assert not any('count(' in q.lower() for q in statements)
+
+
+@pytest.mark.parametrize('workers',[0,13,True,1.5])
+def test_invalid_workers_refused(case,workers):
+    with pytest.raises(ValueError,match='Workers'):
+        rs.run(**case,workers=workers)

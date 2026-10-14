@@ -1,5 +1,9 @@
 """Resumable stage-1 evaluation, global ranking and verified publication."""
 from contextlib import contextmanager
+from collections import deque
+from concurrent.futures import ProcessPoolExecutor, TimeoutError as FutureTimeout
+import multiprocessing
+import threading
 import fcntl
 import errno
 import stat
@@ -19,7 +23,7 @@ from .pubmed_catalog import VERSION, sha256
 from .streaming_corpus import Budget, count_rows, write_json
 from .topic_selection import MeshIndex, evaluate, identity, metadata
 
-ENGINE = 'prowl-resumable-selection-v1'
+ENGINE = 'prowl-resumable-selection-v2'
 def unlinked_file_bytes(device):
     """Count this process's open, unlinked regular files once per inode.
 
@@ -151,7 +155,15 @@ def source_identity(src, catalog, receipts, mesh, cutoff_year, packet, volume_id
         raise ValueError('Replay identity manifest mismatch')
     tables = {}
     for table in ('documents', 'deleted'):
-        count, maximum = src.execute(f'SELECT count(*),max(rowid) FROM {table}').fetchone()
+        # COUNT over the fragmented PMID index can take longer than useful work.
+        # Bind the completed replay's count, then independently count every row
+        # during evaluation and refuse ranking/publication on any disagreement.
+        count = report.get('documents' if table == 'documents' else 'deleted_pmids')
+        if type(count) is not int or count < 0:
+            raise ValueError('Invalid replay table count')
+        maximum = src.execute(f'SELECT max(rowid) FROM {table}').fetchone()[0]
+        if (count == 0) != (maximum is None):
+            raise ValueError('Replay count/source emptiness mismatch')
         tables[table] = {'count': count, 'max_rowid': maximum}
     # Runtime and all local imported behavior bytes are bound; no source rehash.
     paths = ['src/retrieval/resumable_selection.py', 'src/retrieval/topic_selection.py',
@@ -167,6 +179,78 @@ def source_identity(src, catalog, receipts, mesh, cutoff_year, packet, volume_id
                 implementation={p:sha256(ROOT/p) for p in paths},
                 runtime=[platform.python_version(), sqlite3.sqlite_version, expat.EXPAT_VERSION],
                 admission=packet)
+
+
+def evaluate_source_row(item, mesh, cutoff_year, table):
+    rowid, pmid, xml, file, source_hash, seq = item
+    record = metadata(xml) if xml is not None else None
+    if record and record['pmid'] != pmid:
+        raise ValueError(f'XML/PMID mismatch at {table}:{rowid}')
+    row = evaluate(record, mesh, cutoff_year=cutoff_year, deleted=table == 'deleted', pmid=pmid)
+    row['provenance'] = dict(source_file=file, source_sha256=source_hash, source_seq=seq)
+    return rowid, pmid, encoded(row)
+
+
+def init_evaluator(mesh, cutoff_year, owner_pid):
+    global _worker_mesh, _worker_cutoff
+    _worker_mesh, _worker_cutoff = mesh, cutoff_year
+    def watch_owner():
+        while os.getppid() == owner_pid:
+            time.sleep(0.5)
+        os._exit(1)  # No writer handles in workers; don't orphan CPU jobs after SIGKILL.
+    threading.Thread(target=watch_owner, daemon=True).start()
+
+
+def evaluate_chunk(chunk, table):
+    return [evaluate_source_row(item, _worker_mesh, _worker_cutoff, table) for item in chunk]
+
+
+def evaluated_rows(cursor, mesh, cutoff_year, table, workers, budget):
+    """One ordered reader/writer; bounded CPU workers with no database handles."""
+    if workers == 1:
+        for item in cursor:
+            yield evaluate_source_row(item, mesh, cutoff_year, table)
+        return
+    def chunks():
+        chunk, size = [], 0
+        for item in cursor:
+            budget.check()
+            chunk.append(item)
+            size += len(item[2] or '')
+            if len(chunk) >= 64 or size >= 2 * 1024**2:
+                yield chunk
+                chunk, size = [], 0
+        if chunk:
+            yield chunk
+    # Spawn avoids inheriting the source/output locks and SQLite descriptors.
+    pool = ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context('spawn'),
+                               initializer=init_evaluator, initargs=(mesh, cutoff_year, os.getpid()))
+    pending = deque()
+    batches = iter(chunks())
+    try:
+        for _ in range(workers * 2):
+            chunk = next(batches, None)
+            if chunk is None:
+                break
+            pending.append(pool.submit(evaluate_chunk, chunk, table))
+        while pending:
+            future = pending[0]
+            while True:
+                budget.check()
+                try:
+                    result = future.result(timeout=0.25)
+                    break
+                except FutureTimeout:
+                    continue
+            pending.popleft()
+            yield from result
+            chunk = next(batches, None)
+            if chunk is not None:
+                pending.append(pool.submit(evaluate_chunk, chunk, table))
+    finally:
+        for future in pending:
+            future.cancel()
+        pool.shutdown(wait=True, cancel_futures=True)
 
 
 def admission(packet_path):
@@ -221,7 +305,7 @@ def validate_checkpoint(db, bound):
 def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
         mesh_sha256, cutoff_year, resume=False, hours=12, max_gib=256,
         free_gib=400, cache_mib=32, batch_size=1000, commit_seconds=10,
-        evaluation_only=False):
+        evaluation_only=False, workers=1):
     """Run all stages; evaluation_only is an explicit development boundary."""
     if type(cutoff_year) is not int or not 1000 <= cutoff_year <= 9999:
         raise ValueError('Invalid cutoff year')
@@ -229,6 +313,8 @@ def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
         raise ValueError('Invalid batch bounds')
     if type(cache_mib) is not int or not 32 <= cache_mib <= 8192:
         raise ValueError('Invalid cache')
+    if type(workers) is not int or not 1 <= workers <= 12:
+        raise ValueError('Workers must be an integer in 1..12')
     if not all(math.isfinite(v) for v in (hours, max_gib, free_gib)):
         raise ValueError('Nonfinite resource limit')
     catalog, output = safe(catalog), safe(output)
@@ -246,6 +332,7 @@ def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
         db = None
         prior_temp = None
         try:
+            write_json(output/'selection-status.json', dict(state='validating_source', workers=workers))
             src.execute('PRAGMA mmap_size=0')
             src.execute(f'PRAGMA cache_size={-cache_mib*1024}')
             src.set_progress_handler(budget.sqlite_progress, 10000)
@@ -293,22 +380,23 @@ def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
                 query = f'SELECT rowid,pmid,xml,source_file,source_sha256,source_seq FROM {table}'
                 cursor = src.execute(query + (' WHERE rowid>?' if last is not None else '')+' ORDER BY rowid', () if last is None else (last,))
                 pending, since = 0, time.monotonic()
-                for rowid, pmid, xml, file, source_hash, seq in cursor:
-                    budget.check()
-                    record = metadata(xml) if xml is not None else None
-                    if record and record['pmid'] != pmid:
-                        raise ValueError(f'XML/PMID mismatch at {table}:{rowid}')
-                    row = evaluate(record, mesh, cutoff_year=cutoff_year, deleted=table=='deleted', pmid=pmid)
-                    row['provenance'] = dict(source_file=file, source_sha256=source_hash, source_seq=seq)
-                    db.execute('INSERT INTO rows VALUES (?,?,?,?)', (pmid, table, rowid, encoded(row)))
-                    cp['counts'][table] += 1
-                    cp['cursors'][table] = rowid
-                    pending += 1
-                    if pending >= batch_size or time.monotonic()-since >= commit_seconds:
-                        cp['committed_processing_seconds'] += time.monotonic()-since
-                        save(db, cp)
-                        write_json(output/'selection-status.json', dict(state=cp['stage'], checkpoint=cp))
-                        pending, since = 0, time.monotonic()
+                evaluated = evaluated_rows(cursor, mesh, cutoff_year, table, workers, budget)
+                try:
+                    for rowid, pmid, body in evaluated:
+                        budget.check()
+                        db.execute('INSERT INTO rows VALUES (?,?,?,?)', (pmid, table, rowid, body))
+                        cp['counts'][table] += 1
+                        cp['cursors'][table] = rowid
+                        pending += 1
+                        if cp['counts'][table] > bound['tables'][table]['count']:
+                            raise ValueError('Source count mismatch')
+                        if pending >= batch_size or time.monotonic()-since >= commit_seconds:
+                            cp['committed_processing_seconds'] += time.monotonic()-since
+                            save(db, cp)
+                            write_json(output/'selection-status.json', dict(state=cp['stage'], workers=workers, checkpoint=cp))
+                            pending, since = 0, time.monotonic()
+                finally:
+                    evaluated.close()
                 if cp['counts'][table] != bound['tables'][table]['count']:
                     raise ValueError('Source count mismatch')
                 cp['committed_processing_seconds'] += time.monotonic()-since

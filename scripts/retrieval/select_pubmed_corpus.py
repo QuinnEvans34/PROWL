@@ -34,6 +34,7 @@ def main():
     parser.add_argument('--max-gib', type=float, default=256)
     parser.add_argument('--free-gib', type=float, default=400)
     parser.add_argument('--cache-mib', type=int, default=32)
+    parser.add_argument('--workers', type=int, default=1, help='Ordered CPU evaluation workers (1..12); one SQLite writer')
     args = vars(parser.parse_args())
     log_path = args.pop('log_path').absolute()
     if log_path.exists() or any(p.is_symlink() for p in (log_path, *log_path.parents)):
