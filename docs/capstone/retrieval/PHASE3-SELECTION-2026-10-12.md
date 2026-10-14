@@ -177,3 +177,41 @@ remain pending the full scan. C-25/C-36 local abstract scope checks completed; r
 submitted to Quinton. Initialized32 exposure events/31 distinct PMIDs and retained17 explicit
 identifier mappings plus chaining groups as unresolved. No seed freeze or reserve keys yet.
 Missing-MeSH coverage requires additional reviewed candidates or an explicit protocol decision.
+
+## Transport pause — October 13 afternoon
+
+Quinton requested pause before going home. Command-verified Python36048 received SIGINT;
+owned session10195 finished exit1 with intentional SQLite interruption. Python36048 and
+caffeinate36049 confirmed absent; lookup lock released. Saved checkpoint40,510,000 titles
+(98.26%), last_rowid44538617,23 title matches;716,017 titles remain. Candidate/script hashes
+and catalog size/mtime still match. Timestamped transport-stop receipt retained in attempt02.
+Resume SAME output with --resume only when Quinton requests continuation; no restart from zero.
+Drive was not unmounted by this pause; normal eject remains required before disconnecting it.
+
+## Home resume — October 13
+
+Quinton requested continuation after the meeting. Verified the correct external UUID,
+about 2.26 TB free, unchanged catalog stat/metadata and script/candidate hashes, available
+locks and no competing processing job. Preserved pause-before-home-resume-20261013T220621Z.json.
+Resumed SAME attempt02 with --resume --seconds43200 from40,510,000/41,226,017 titles
+(98.26%), last_rowid44538617 and23 matches. Owned session51288; native Python51397 and
+caffeinate51398 confirmed live, status scanning_titles. Prior10195 remains finished.
+716,017 titles remain at restart;12h is an invocation ceiling, not an ETA. Seed review/freeze
+still follows lookup completion; no real selection or embeddings launched. Trello W02-06 updated.
+
+## Citation lookup completed — October 13
+
+Owned session51288 exited0; native lookup/caffeinate processes confirmed absent. Status is
+lookup_complete_review_pending: all41,226,017 titles scanned,23 title matches and23 matched
+candidates. Final matches.json exists and parses; its SHA256 and exit evidence are retained in
+attempt02/completion-observed-20261013.json. Final invocation took3934.49seconds (~65.6minutes).
+This completes citation lookup only; seed review/freeze, outstanding coverage/scope decisions
+and real-selection admission remain open. No selector or embeddings launched.
+
+## Selection R01 launched — October13
+
+Approved23seeds frozen,3withoutMeSH; see SELECTION-R01-LAUNCH-2026-10-13.md. Native session90578/Python6127/caffeinate6128 launched initial source validation. Exact evidence in outputs/prowl/selection-launch-r01. Cap768GiB/floor400GiB/12h/32MiBcache after bounded actual sizing. Sampling separately blocked on remaining exposure groups; no embeddings. Verify live process and checkpoint before reporting evaluation progress.
+
+## Optimization pause and R02 — October13 evening
+
+R01 stopped before evaluation; original code/output preserved. Enginev2 fuses count reconciliation with evaluation and adds ordered CPU workers.121tests pass;12worker CPU benchmark8.9x, full-path rates depend on disk cache. R02 session48921 launched with12workers/4096MiBcache/768GiBcap/400GiBfloor/11.58h ceiling. See SELECTION-PERFORMANCE-2026-10-13.md; confirm checkpoint before reporting progress.

@@ -1,6 +1,6 @@
 # Resumable selector Phase 5 — draft real-run packet
 
-October 13, 2026. **Prepared but not launch-ready. No real selection authorized by this packet.**
+October 13, 2026. **Historical draft; superseded by [the actual R01 launch record](SELECTION-R01-LAUNCH-2026-10-13.md).** The draft JSON remains unchanged for provenance.
 Tracking: [W02-06](https://trello.com/c/LxvwMa3s).
 Engineering evidence: [Phase 4](RESUMABLE-SELECTION-PHASE4-2026-10-13.md).
 Machine-readable draft: [captured identities and proposed settings](launch/selection-r01-draft-2026-10-13.json).
