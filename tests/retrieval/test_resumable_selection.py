@@ -131,7 +131,7 @@ def test_empty_tables(case):
 def test_commit_then_status_failure_recovers(case,monkeypatch):
     original=rs.write_json
     def fail(path, value):
-        if value.get('state') == 'evaluating_documents':
+        if value.get('state') == 'evaluating_documents' and value.get('checkpoint', {}).get('committed_total', 0) > 0:
             raise OSError('disk status failure')
         return original(path, value)
     monkeypatch.setattr(rs,'write_json',fail)
@@ -454,3 +454,143 @@ def test_source_identity_does_not_recount_index(case):
 def test_invalid_workers_refused(case,workers):
     with pytest.raises(ValueError,match='Workers'):
         rs.run(**case,workers=workers)
+
+
+def test_resume_uses_index_probes_without_full_scan(case):
+    rs.run(**case)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        bound=json.loads(db.execute('SELECT body FROM binding').fetchone()[0])
+        statements=[];db.set_trace_callback(statements.append)
+        rs.validate_checkpoint(db,bound)
+        assert not any('quick_check' in q.lower() or 'count(' in q.lower() for q in statements)
+        plan=db.execute('EXPLAIN QUERY PLAN SELECT source_rowid FROM rows WHERE source_table=? ORDER BY source_rowid DESC LIMIT 1',('documents',)).fetchall()
+        assert any('SEARCH' in row[3] and 'COVERING INDEX' in row[3] for row in plan)
+        assert not any('TEMP B-TREE' in row[3] for row in plan)
+
+
+def test_missing_interior_row_detected_before_publication(case):
+    rs.run(**case)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        db.execute("DELETE FROM rows WHERE pmid='1'")
+    # Fast boundaries deliberately do not certify all historical data.
+    assert rs.run(**case,resume=True,prepare_resume=True)['stage']=='ready_to_resume'
+    with pytest.raises(ValueError,match='count mismatch'):
+        rs.run(**full(case),resume=True)
+    assert not (case['output']/'summary.json').exists()
+
+
+def test_deep_audit_detects_missing_interior_row(case):
+    rs.run(**case)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        db.execute("DELETE FROM rows WHERE pmid='1'")
+    with pytest.raises(ValueError,match='count mismatch'):
+        rs.run(**case,resume=True,audit_only=True)
+
+
+def test_deep_audit_and_prepare_do_not_evaluate(case,monkeypatch):
+    rs.run(**case)
+    monkeypatch.setattr(rs,'evaluate',lambda *a,**k:pytest.fail('maintenance evaluated a record'))
+    assert rs.run(**case,resume=True,audit_only=True)['stage']=='audit_complete'
+    assert rs.run(**case,resume=True,prepare_resume=True)['stage']=='ready_to_resume'
+    assert not (case['output']/'summary.json').exists()
+
+
+def test_corrupted_ledger_header_refused(case):
+    rs.run(**case)
+    with (case['output']/'selection.sqlite').open('r+b') as f:f.write(b'not a database!!\x00')
+    with pytest.raises(sqlite3.DatabaseError):rs.run(**case,resume=True,prepare_resume=True)
+
+
+def test_validation_deadline_bounded(case):
+    rs.run(**case)
+    with pytest.raises(TimeoutError,match='phase deadline'):
+        rs.run(**case,resume=True,validation_seconds=1e-12)
+    status=json.loads((case['output']/'selection-status.json').read_text())
+    assert status['error_type']=='TimeoutError'
+
+
+def legacy_binding(case,monkeypatch):
+    original=rs.evaluate
+    calls=0
+    def stop(*a,**kw):
+        nonlocal calls
+        calls+=1
+        if calls==2:raise KeyboardInterrupt()
+        return original(*a,**kw)
+    monkeypatch.setattr(rs,'evaluate',stop)
+    with pytest.raises(KeyboardInterrupt):rs.run(**case)
+    monkeypatch.setattr(rs,'evaluate',original)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        old=json.loads(db.execute('SELECT body FROM binding').fetchone()[0])
+        old['engine']='prowl-resumable-selection-v2'
+        old['implementation']['src/retrieval/resumable_selection.py']='old-test-hash'
+        cp=rs.checkpoint(db);cp['identity_sha256']=rs.digest(old)
+        db.execute('UPDATE binding SET body=?',(rs.encoded(old),))
+        db.execute('UPDATE checkpoint SET body=?',(rs.encoded(cp),))
+    return old,cp
+
+
+def test_explicit_transition_preserves_prefix_and_outputs(case,monkeypatch,tmp_path):
+    old,cp=legacy_binding(case,monkeypatch)
+    prefix=rows(case['output'])
+    with pytest.raises(ValueError,match='identity mismatch'):rs.run(**case,resume=True)
+    result=rs.run(**case,resume=True,prepare_resume=True,transition_from=rs.digest(old))
+    assert result['stage']=='ready_to_resume' and rows(case['output'])==prefix
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        a,b,c=db.execute('SELECT * FROM implementation_transition').fetchone()
+        assert json.loads(a)==old and json.loads(b)==cp
+        assert c==rs.checkpoint(db)['identity_sha256']
+    rs.run(**full(case),resume=True)
+    rs.run(**dict(full(case),output=tmp_path/'reference'))
+    for name in ('records.jsonl','candidate-pmids.txt'):
+        assert (case['output']/name).read_bytes()==(tmp_path/'reference'/name).read_bytes()
+
+
+@pytest.mark.parametrize('change',['identity','policy','code','runtime'])
+def test_transition_refuses_unrelated_changes(case,monkeypatch,change):
+    old,cp=legacy_binding(case,monkeypatch)
+    expected=rs.digest(old)
+    if change=='identity':expected='0'*64
+    else:
+        with sqlite3.connect(case['output']/'selection.sqlite') as db:
+            if change=='policy':old['cutoff_year']=2025
+            elif change=='code':old['implementation']['src/retrieval/topic_selection.py']='bad'
+            else:old['runtime']=['wrong']
+            cp['identity_sha256']=rs.digest(old);expected=rs.digest(old)
+            db.execute('UPDATE binding SET body=?',(rs.encoded(old),))
+            db.execute('UPDATE checkpoint SET body=?',(rs.encoded(cp),))
+    with pytest.raises(ValueError,match='Transition'):
+        rs.run(**case,resume=True,prepare_resume=True,transition_from=expected)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        assert json.loads(db.execute('SELECT body FROM binding').fetchone()[0])==old
+
+
+def test_export_rejects_body_pmid_mismatch(case):
+    rs.run(**case)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        body=json.loads(db.execute("SELECT body FROM rows WHERE pmid='1'").fetchone()[0]);body['pmid']='wrong'
+        db.execute("UPDATE rows SET body=? WHERE pmid='1'",(json.dumps(body),))
+    with pytest.raises(ValueError,match='PMID/body'):rs.run(**full(case),resume=True)
+    assert not (case['output']/'summary.json').exists()
+
+
+def test_transition_transaction_rolls_back_on_failure(case,monkeypatch):
+    old,cp=legacy_binding(case,monkeypatch)
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        db.execute("CREATE TRIGGER fail_transition BEFORE UPDATE ON checkpoint BEGIN SELECT RAISE(ABORT,'injected transition failure'); END")
+    with pytest.raises(sqlite3.DatabaseError,match='injected transition'):
+        rs.run(**case,resume=True,prepare_resume=True,transition_from=rs.digest(old))
+    with sqlite3.connect(case['output']/'selection.sqlite') as db:
+        assert json.loads(db.execute('SELECT body FROM binding').fetchone()[0])==old
+        assert rs.checkpoint(db)==cp
+        assert not db.execute("SELECT name FROM sqlite_master WHERE name='implementation_transition'").fetchall()
+
+
+def test_phase_progress_and_sqlite_timeout(tmp_path,monkeypatch):
+    b=rs.SelectionBudget(tmp_path,free_gib=0)
+    b.phase('deep_integrity_audit',10)
+    state=json.loads((tmp_path/'selection-status.json').read_text())
+    assert state['state']=='deep_integrity_audit' and state['phase_limit_seconds']==10
+    monkeypatch.setattr(rs.time,'monotonic',lambda:b.phase_started+11)
+    assert b.sqlite_progress()==1
+    assert isinstance(b.failure,TimeoutError) and 'deep_integrity_audit' in str(b.failure)

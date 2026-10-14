@@ -35,6 +35,10 @@ def main():
     parser.add_argument('--free-gib', type=float, default=400)
     parser.add_argument('--cache-mib', type=int, default=32)
     parser.add_argument('--workers', type=int, default=1, help='Ordered CPU evaluation workers (1..12); one SQLite writer')
+    parser.add_argument('--validation-seconds', type=float, default=120, help='Per startup phase or explicit audit deadline (max 3600 seconds)')
+    parser.add_argument('--audit-only', action='store_true', help='Explicit deep integrity/count audit; no evaluation or export')
+    parser.add_argument('--prepare-resume', action='store_true', help='Validate checkpoint then stop without evaluating records')
+    parser.add_argument('--transition-from', help='Exact old binding SHA256 for explicit v2-to-v3 prepare-resume migration')
     args = vars(parser.parse_args())
     log_path = args.pop('log_path').absolute()
     if log_path.exists() or any(p.is_symlink() for p in (log_path, *log_path.parents)):

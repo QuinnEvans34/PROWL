@@ -23,7 +23,7 @@ from .pubmed_catalog import VERSION, sha256
 from .streaming_corpus import Budget, count_rows, write_json
 from .topic_selection import MeshIndex, evaluate, identity, metadata
 
-ENGINE = 'prowl-resumable-selection-v2'
+ENGINE = 'prowl-resumable-selection-v3'
 def unlinked_file_bytes(device):
     """Count this process's open, unlinked regular files once per inode.
 
@@ -49,8 +49,22 @@ class SelectionBudget(Budget):
     """Preserve the underlying resource cause when SQLite reports interrupted."""
     failure = None
 
+    def phase(self, name, seconds=None):
+        self.phase_name = name
+        self.phase_started = time.monotonic()
+        self.phase_deadline = self.phase_started + seconds if seconds is not None else self.deadline
+        self.phase_reported = 0
+        self.check(force=True)
+
     def check(self, force=False):
         now = time.monotonic()
+        if now > getattr(self, 'phase_deadline', self.deadline):
+            raise TimeoutError(f"Selection phase deadline reached: {self.phase_name}")
+        if getattr(self, 'phase_name', None) and (force or now-self.phase_reported >= 5):
+            self.phase_reported = now
+            write_json(self.folder/'selection-status.json', dict(
+                state=self.phase_name, elapsed_seconds=round(now-self.phase_started, 3),
+                phase_limit_seconds=round(self.phase_deadline-self.phase_started, 3)))
         if now > self.deadline:
             raise TimeoutError('Selection invocation deadline reached')
         if force or now-self.last >= 1:
@@ -280,18 +294,23 @@ def save(db, cp):
 
 
 def validate_checkpoint(db, bound):
-    if db.execute('PRAGMA quick_check').fetchall() != [('ok',)]:
-        raise ValueError('Ledger integrity failure')
     if db.execute('SELECT body FROM binding').fetchall() != [(encoded(bound),)]:
         raise ValueError('Resume identity mismatch')
+    if [r[2] for r in db.execute('PRAGMA index_info(sqlite_autoindex_rows_2)')] != ['source_table', 'source_rowid']:
+        raise ValueError('Ledger boundary index mismatch')
     cp = checkpoint(db)
     if cp['schema_version'] != 1 or cp['stage'] not in STAGES or cp['identity_sha256'] != digest(bound):
         raise ValueError('Invalid checkpoint schema or identity')
     if cp.get('committed_total') != sum(cp['counts'].values()):
         raise ValueError('Checkpoint total mismatch')
     for table in ('documents', 'deleted'):
-        n, last = db.execute('SELECT count(*),max(source_rowid) FROM rows WHERE source_table=?', (table,)).fetchone()
-        if n != cp['counts'][table] or last != cp['cursors'][table] or n > bound['tables'][table]['count']:
+        # Indexed boundary probes, not a recount of the committed prefix.
+        n = cp['counts'][table]
+        tail = db.execute('SELECT source_rowid FROM rows WHERE source_table=? ORDER BY source_rowid DESC LIMIT 1', (table,)).fetchone()
+        last = tail[0] if tail else None
+        if (type(n) is not int or n < 0 or (n == 0) != (last is None)
+                or last != cp['cursors'][table] or n > bound['tables'][table]['count']
+                or (last is not None and (type(last) is not int or last < 1 or last > bound['tables'][table]['max_rowid']))):
             raise ValueError('Checkpoint/ledger mismatch')
     if cp['stage'] != STAGES[0] and cp['counts']['documents'] != bound['tables']['documents']['count']:
         raise ValueError('Premature stage transition')
@@ -302,11 +321,64 @@ def validate_checkpoint(db, bound):
     return cp
 
 
+def deep_audit(db, bound):
+    """Explicit exhaustive structural audit; never implicit on routine resume."""
+    if db.execute('PRAGMA quick_check').fetchall() != [('ok',)]:
+        raise ValueError('Ledger integrity failure')
+    cp = validate_checkpoint(db, bound)
+    for table in ('documents', 'deleted'):
+        n = db.execute('SELECT count(*) FROM rows WHERE source_table=?', (table,)).fetchone()[0]
+        if n != cp['counts'][table]:
+            raise ValueError('Checkpoint/ledger count mismatch')
+    return cp
+
+
+def transition_binding(db, bound, expected):
+    """Explicit v2->v3 migration; retain original binding/checkpoint atomically."""
+    old = json.loads(db.execute('SELECT body FROM binding').fetchone()[0])
+    if digest(old) != expected or old.get('engine') != 'prowl-resumable-selection-v2':
+        raise ValueError('Transition old identity mismatch')
+    changed = {'src/retrieval/resumable_selection.py', 'scripts/retrieval/select_pubmed_corpus.py'}
+    for key in set(old) | set(bound):
+        if key == 'engine':
+            continue
+        if key == 'implementation':
+            if set(old[key]) != set(bound[key]):
+                raise ValueError('Transition implementation paths mismatch')
+            if any(old[key][p] != bound[key][p] for p in old[key] if p not in changed):
+                raise ValueError('Transition changes evaluation semantics')
+        elif encoded(old.get(key)) != encoded(bound.get(key)):
+            raise ValueError(f'Transition source identity mismatch: {key}')
+    cp = validate_checkpoint(db, old)
+    if cp['stage'] not in ('evaluating_documents', 'evaluating_deleted'):
+        raise ValueError('Transition only allowed before ranking')
+    if db.execute('SELECT 1 FROM attempts LIMIT 1').fetchone() or db.execute('SELECT 1 FROM winners LIMIT 1').fetchone():
+        raise ValueError('Transition requires unpublished evaluation')
+    original = encoded(cp)
+    db.execute('BEGIN IMMEDIATE')
+    db.execute('CREATE TABLE implementation_transition(old_binding TEXT NOT NULL, old_checkpoint TEXT NOT NULL, new_identity TEXT NOT NULL)')
+    db.execute('INSERT INTO implementation_transition VALUES (?,?,?)', (encoded(old), original, digest(bound)))
+    db.execute('UPDATE binding SET body=?', (encoded(bound),))
+    cp['identity_sha256'] = digest(bound)
+    db.execute('UPDATE checkpoint SET body=? WHERE id=1', (encoded(cp),))
+    db.commit()
+    return cp
+
+
 def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
         mesh_sha256, cutoff_year, resume=False, hours=12, max_gib=256,
         free_gib=400, cache_mib=32, batch_size=1000, commit_seconds=10,
-        evaluation_only=False, workers=1):
+        evaluation_only=False, workers=1, validation_seconds=120, audit_only=False,
+        prepare_resume=False, transition_from=None):
     """Run all stages; evaluation_only is an explicit development boundary."""
+    if not math.isfinite(validation_seconds) or not 0 < validation_seconds <= 3600:
+        raise ValueError('Invalid validation deadline')
+    if (audit_only or prepare_resume or transition_from) and not resume:
+        raise ValueError('Maintenance requires resume')
+    if transition_from and (not prepare_resume or audit_only):
+        raise ValueError('Transition requires prepare-resume only')
+    if audit_only and prepare_resume:
+        raise ValueError('Conflicting maintenance modes')
     if type(cutoff_year) is not int or not 1000 <= cutoff_year <= 9999:
         raise ValueError('Invalid cutoff year')
     if type(batch_size) is not int or not 1 <= batch_size <= 10000 or not 0 < commit_seconds <= 60:
@@ -332,7 +404,7 @@ def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
         db = None
         prior_temp = None
         try:
-            write_json(output/'selection-status.json', dict(state='validating_source', workers=workers))
+            budget.phase('validating_source_identity', validation_seconds)
             src.execute('PRAGMA mmap_size=0')
             src.execute(f'PRAGMA cache_size={-cache_mib*1024}')
             src.set_progress_handler(budget.sqlite_progress, 10000)
@@ -372,10 +444,24 @@ def run(catalog, mesh_path, output, *, receipts, packet_path, volume_id,
                           counts=dict(documents=0, deleted=0))
                 db.execute('INSERT INTO checkpoint VALUES (1,?)', (encoded(cp),))
                 db.commit()
+            budget.phase('validating_checkpoint', validation_seconds)
+            if transition_from:
+                transition_binding(db, bound, transition_from)
             cp = validate_checkpoint(db, bound)
+            if audit_only:
+                budget.phase('deep_integrity_audit', validation_seconds)
+                deep_audit(db, bound)
+                write_json(output/'selection-status.json', dict(state='audit_complete', checkpoint=cp))
+                return dict(stage='audit_complete', checkpoint=cp)
+            if prepare_resume:
+                write_json(output/'selection-status.json', dict(state='ready_to_resume', checkpoint=cp,
+                    integrity_scope='identity_and_boundaries_only; full_counts_checked_during_export'))
+                return dict(stage='ready_to_resume', checkpoint=cp)
+            budget.phase(cp['stage'])
             for table in ('documents', 'deleted'):
                 if cp['stage'] != 'evaluating_'+table:
                     continue
+                budget.phase('evaluating_'+table)
                 last = cp['cursors'][table]
                 query = f'SELECT rowid,pmid,xml,source_file,source_sha256,source_seq FROM {table}'
                 cursor = src.execute(query + (' WHERE rowid>?' if last is not None else '')+' ORDER BY rowid', () if last is None else (last,))
@@ -461,14 +547,23 @@ def durable_json(path, value):
 
 def ranked_rows(db, budget):
     winners = {r[0] for r in db.execute('SELECT pmid FROM winners')}
-    for pmid, body in db.execute('SELECT pmid,body FROM rows ORDER BY length(pmid),pmid'):
+    observed = dict(documents=0, deleted=0)
+    expected = checkpoint(db)['counts']
+    for pmid, body, table in db.execute('SELECT pmid,body,source_table FROM rows ORDER BY length(pmid),pmid'):
+        if table not in observed:
+            raise ValueError('Unknown ledger source table')
+        observed[table] += 1
         budget.check()
         row = json.loads(body)
+        if row.get('pmid') != pmid:
+            raise ValueError('Ledger PMID/body mismatch')
         if row['disposition']=='candidate' and row['branches']==['WORKFLOW'] and pmid not in winners:
             row['reasons'].append('workflow_capped_out')
             row['disposition']='excluded'
             row['primary_stratum']=None
         yield row
+    if observed != expected:
+        raise ValueError('Checkpoint/ledger count mismatch during export')
 
 
 def record_bytes(row):
@@ -548,8 +643,11 @@ def finish(db, cp, bound, folder, budget, recheck):
     write_json(folder/'selection-status.json',dict(state=cp['stage'],checkpoint=cp))
     if cp['stage']=='ranking':
         db.execute('BEGIN')
+        budget.phase('building_export_order_index')
         db.execute('CREATE INDEX IF NOT EXISTS numeric_order ON rows(length(pmid),pmid)')
+        budget.phase('building_workflow_rank_index')
         db.execute(f'CREATE INDEX IF NOT EXISTS workflow_rank ON rows({RANK_ORDER}) WHERE {WORKFLOW}')
+        budget.phase('selecting_workflow_winners')
         db.execute('DELETE FROM winners')
         db.execute(f'INSERT INTO winners SELECT pmid FROM rows WHERE {WORKFLOW} ORDER BY {RANK_ORDER} LIMIT 500')
         cp['winner_count']=db.execute('SELECT count(*) FROM winners').fetchone()[0]
@@ -557,6 +655,7 @@ def finish(db, cp, bound, folder, budget, recheck):
         cp['stage']='exporting'
         save(db,cp)
     # Validate saved winners rather than trusting a stage label after resume.
+    budget.phase('validating_workflow_winners')
     expected=[r[0] for r in db.execute(f'SELECT pmid FROM rows WHERE {WORKFLOW} ORDER BY {RANK_ORDER} LIMIT 500')]
     actual={r[0] for r in db.execute('SELECT pmid FROM winners')}
     if actual != set(expected) or cp.get('winner_count') != len(actual):
@@ -565,11 +664,13 @@ def finish(db, cp, bound, folder, budget, recheck):
         write_json(folder/'selection-status.json',dict(state='exporting',checkpoint=cp))
         if any((folder/n).exists() for n in ('summary.json','records.jsonl','candidate-pmids.txt')):
             raise ValueError('Premature final output')
+        budget.phase('exporting')
         export_attempt(db,cp,folder,budget)
     write_json(folder/'selection-status.json',dict(state=cp['stage'],checkpoint=cp))
     attempt = cp['export_attempt']
     receipt_text, summary_text = db.execute('SELECT receipt,summary FROM attempts WHERE id=?',(attempt,)).fetchone()
     receipt=json.loads(receipt_text)
+    budget.phase('verifying_export_bytes')
     paths=verify_exports(db,receipt,folder,budget)
     recheck()
     budget.check(force=True)
@@ -590,6 +691,9 @@ def finish(db, cp, bound, folder, budget, recheck):
                                     cooperative_checks=True, hard_rss_limit=False),
                      records_sha256=receipt['files']['records.jsonl']['sha256'],
                      candidate_pmids_sha256=receipt['files']['candidate-pmids.txt']['sha256'],
+                     validation_scope=dict(resume='identity_and_indexed_boundaries',
+                         full_counts='reconciled_during_export_and_verification',
+                         deep_integrity_audit='separate_explicit_operation'),
                      snapshot_replayed=True, official_selection_frozen=False,
                      rights_qualified=False, sampling_performed=False, stage=1)
         db.execute('UPDATE attempts SET summary=? WHERE id=?',(encoded(summary),attempt))
