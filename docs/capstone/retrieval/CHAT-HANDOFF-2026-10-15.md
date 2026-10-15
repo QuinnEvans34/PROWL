@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+**Scope-verification follow-up:** [Implementation/results](SCOPE-VERIFICATION-2026-10-15.md)
+adds experimental per-excerpt checks and same-source context expansion. Reasoning-off8b review
+loses useful evidence:5/7 supported answers,4/7 clean,9/14 aspects,2 invalid assessments; it also
+accepts an unrelated CT study. Reasoning-on4096-token profile stopped early after a budget failure:
+four cases completed, six unscored. Neither profile is promoted. Original quotation API remains
+unchanged. Fixed repeated-text occurrence/context binding;53 focused checks pass and14 retained
+raw-response replays preserve evaluated behavior. Next is a bounded evaluator-capability comparison,
+not another review-stage stack or corpus expansion. Owned evaluation clients are stopped.
+
 **Structured-selector follow-up:** [Implementation/comparison](STRUCTURED-SELECTION-2026-10-15.md)
 adds experimental `span_answer.py` + `evidence_spans.py`, explicitly selected by the evaluation CLI.
 Ten-case comparison:7/7 supported answers,12/12 exact citations,0 generation rejections,3/3 correct

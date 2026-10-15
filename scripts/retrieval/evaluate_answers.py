@@ -44,12 +44,19 @@ def main():
     parser.add_argument('--suite', type=Path, default=ROOT/'configs/evidence/evaluation/development-v1.json')
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--selector', choices=('quotations', 'spans'), default='quotations',
+    parser.add_argument('--selector', choices=('quotations', 'spans', 'scoped-spans'), default='quotations',
                         help='spans selects the experimental policy; live APIs keep quotations')
+    parser.add_argument('--reuse-selection', type=Path,
+                        help='Review frozen structured-span selections; requires scoped-spans and matching retrieval')
+    parser.add_argument('--scope-reasoning', action='store_true', help='Enable reasoning only for experimental scope review')
     parser.add_argument('--reuse-retrieval', type=Path,
                         help='Reuse a prior run with identical suite/corpus to isolate generation changes')
     args = parser.parse_args()
-    if args.selector == 'spans':
+    if args.scope_reasoning and args.selector != 'scoped-spans':
+        raise ValueError('Scope reasoning requires scoped-spans')
+    if args.selector == 'scoped-spans':
+        from src.retrieval import scope_answer as selected
+    elif args.selector == 'spans':
         from src.retrieval import span_answer as selected
     else:
         selected = answers
@@ -64,6 +71,11 @@ def main():
     previous = checked_read(args.reuse_retrieval/'manifest.json') if args.reuse_retrieval else None
     if previous and previous['suite_sha256'] != digest(suite):
         raise ValueError('Cannot reuse retrieval across changed suites')
+    selection_manifest = checked_read(args.reuse_selection/'manifest.json') if args.reuse_selection else None
+    if selection_manifest and (args.selector != 'scoped-spans' or not previous
+            or selection_manifest['suite_sha256'] != digest(suite)
+            or selection_manifest['policy'] != 'verified-spans-v1'):
+        raise ValueError('Selection reuse requires matching structured-span suite and retrieval')
     # Refuse reuse of any run directory, including failed attempts.
     args.output.mkdir(parents=True, exist_ok=False)
     from direct_corpus import read_config, connect, encoder
@@ -80,12 +92,16 @@ def main():
                     corpus_record_sha256=digest(records),
                     encoder_id=previous['encoder_id'] if previous else model.id,
                     selector=args.selector, model=selected.MODEL, model_sha256=selected.MODEL_SHA,
-                    policy=selected.POLICY, prompt_sha256=digest(selected.SYSTEM),
+                    policy=selected.POLICY, scope_reasoning=args.scope_reasoning,
+                    prompt_sha256=digest(selected.scope_prompt(args.scope_reasoning)
+                                         if args.selector == 'scoped-spans' else selected.SYSTEM),
                     reused_manifest_sha256=digest(previous) if previous else None,
+                    reused_selection_manifest_sha256=digest(selection_manifest) if selection_manifest else None,
                     source_sha256={p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in (
                         'scripts/retrieval/evaluate_answers.py', 'src/retrieval/grounded_answer.py',
                         'src/retrieval/evidence_spans.py',
                         'src/retrieval/span_answer.py',
+                        'src/retrieval/scope_answer.py',
                         'src/retrieval/guided_retrieval.py', 'src/retrieval/direct_ingestion.py',
                         'configs/evidence/research-questions-v1.json')})
     save(args.output/'manifest.json', manifest)
@@ -106,9 +122,18 @@ def main():
             read_config(args.config)
             with connect(config) as db:
                 return guided_search(db, suite['collection'], model, question, 5)
+        def generate(question, passages):
+            if not selection_manifest:
+                if args.selector == 'scoped-spans':
+                    return selected.generate_answer(question, passages, reasoning=args.scope_reasoning)
+                return selected.generate_answer(question, passages)
+            old = checked_read(args.reuse_selection/(case['id']+'.json'))
+            if old['question'] != question or old['suite_sha256'] != digest(suite) or old['passages'] != passages:
+                raise ValueError('Selection reuse input mismatch')
+            return selected.verify_answer(question, passages, old['generation'], reasoning=args.scope_reasoning)
         try:
             with patch.object(selected, 'api', recorded_api):
-                result = run_case(case, retrieve, selected.generate_answer)
+                result = run_case(case, retrieve, generate)
             result['retrieval_reused'] = bool(previous)
         except Exception as exc:
             result = dict(case_id=case['id'], question=case['question'], error=type(exc).__name__)

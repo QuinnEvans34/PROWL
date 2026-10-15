@@ -23,7 +23,8 @@ Prediction accuracy does not establish a survival benefit or perfect performance
 Do not give patient advice or use prior knowledge. Partial evidence is not a complete answer. /no_think'''
 
 
-def generate_answer(question, passages):
+def generate_answer(question, passages, *, call_api=None):
+    call_api = call_api or api
     provenance = dict(model=MODEL, model_sha256=MODEL_SHA, policy=POLICY, prompt_sha256=digest(SYSTEM))
     if not passages:
         return dict(answer={'status': 'insufficient_evidence', 'extracts': []}, provenance=provenance,
@@ -36,10 +37,10 @@ def generate_answer(question, passages):
     schema = evidence_spans.selection_schema(spans)
     provenance['selection_schema_sha256'] = digest(schema)
     try:
-        models = api('tags')['models']
+        models = call_api('tags')['models']
         if not any(m['name'] == MODEL and m['digest'] == MODEL_SHA for m in models):
             raise OSError('Pinned model is unavailable')
-        result = api('chat', dict(model=MODEL, stream=False, think=False, keep_alive='5m', format=schema,
+        result = call_api('chat', dict(model=MODEL, stream=False, think=False, keep_alive='5m', format=schema,
             options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=900), messages=[
                 dict(role='system', content=SYSTEM), dict(role='user', content=json.dumps(dict(
                     question=question, sources=sources)))]))

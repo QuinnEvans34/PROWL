@@ -1,0 +1,40 @@
+{
+  "run": "scope-reasoning-v1",
+  "status": "stopped_early_not_a_full_score",
+  "manifest_sha256": "c0b64bbd146851061e9130feff0540cfa518257798f00b12df2d3a9219bfcab5",
+  "reason": "Reasoning radiomics exhausted4096 tokens without final assessment. Four cases completed before owned-client interruption during CT external review; no final CT external response retained.",
+  "completed_cases": {
+    "radiomics": {
+      "receipt_sha256": "7d8d5e06edf114e28a47154e7d7be94c8409e7526955930179c36052ebcf727b",
+      "validation": "generation_rejected",
+      "note": "One review exhausted4096 output tokens and returned no JSON; generation rejected after88.16s.",
+      "seconds": 88.15673400001833
+    },
+    "eus": {
+      "receipt_sha256": "f02302e3e6bb5a797ed624f536aaff91c3b9908106979f40dcc259d5fc31f131",
+      "validation": "exact_quotes_verified",
+      "note": "Both relevant EUS excerpts retained; complete answer.",
+      "seconds": 21.974232458043844
+    },
+    "ct-detection": {
+      "receipt_sha256": "65d4e614cfa385c3aae2c994d5a5c14caa5756c8779b97e6bb82a47f0f67a55b",
+      "validation": "exact_quotes_verified",
+      "note": "Relevant CT study retained with method/cohort/results; complete answer.",
+      "seconds": 7.456649457977619
+    },
+    "ncle-study": {
+      "receipt_sha256": "b46d556765658491dd224d5a9d020b2848eb2f9b7a3f8b84ca2a9e9024601056",
+      "validation": "generation_rejected",
+      "note": "Invalid first assessment rejected whole answer; useful nCLE evidence lost.",
+      "seconds": 12.50098866695771
+    }
+  },
+  "unscored_cases": [
+    "ct-external",
+    "mri-differential",
+    "pet-neuroendocrine",
+    "randomized-survival",
+    "prowl-validation",
+    "guaranteed-detection"
+  ]
+}

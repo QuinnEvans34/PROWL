@@ -1,0 +1,240 @@
+{
+  "suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "reviewer": "Codex engineering review; not independent clinical adjudication",
+  "run": "scope-checked-spans-v1",
+  "manifest_sha256": "62393eaa1661e65784c585e37a08dc4dcee5be5567dc0f9bedcd654ce7d4d493",
+  "decision": "rejected: EUS evidence lost; erroneous CT study/cohort approval; two invalid assessments",
+  "reviews": {
+    "radiomics": {
+      "receipt_sha256": "31015762e2635d3d5563e1459c02c01756ba0334335cb3b90aa503c5e8351c45",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Kept definition/ROI-to-feature calculation; removed irrelevant application sentence."
+    },
+    "eus": {
+      "receipt_sha256": "fb4e2bb4fda87dae8f3db0c9f2418e5eb6f5eac526b0c6a44f53b8ad44d6e402",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected whole generation: verifier marked design uncertain despite no requested design, yet supplied a support span; inconsistent assessment rejected."
+    },
+    "ct-detection": {
+      "receipt_sha256": "092755a499363976df27be2543c34bdbd4b0e80f71fe632dc5111544c5da0f16",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Kept CT detection method, cohort and performance."
+    },
+    "ncle-study": {
+      "receipt_sha256": "d9427e322e89bc1e75cf5ab4e0df10d055c5f512188a9dbbffa41ee26a7e941e",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Whole generation rejected on inconsistent second assessment; useful nCLE evidence lost."
+    },
+    "ct-external": {
+      "receipt_sha256": "a38b0d8594d6d46f6a1fbfd3c1280e3bcbefde6c57540784abbb1e36716a7b7d",
+      "extract_relevance": [
+        "relevant",
+        "irrelevant"
+      ],
+      "aspects_covered": [
+        false,
+        true
+      ],
+      "rationale": "Correct AUC sentence remains without CT method context. Verifier also accepts different CNN study and incorrectly states 200+350=550 exceeds1000."
+    },
+    "mri-differential": {
+      "receipt_sha256": "5c0ec444a91007ee586ca76fe37f87bd1d120e7dbb29ce7b3f41cc9f22dc5831",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Requested MRI study and external comparison retained."
+    },
+    "pet-neuroendocrine": {
+      "receipt_sha256": "2eddade3e87ae8f29b90160bee9991715e256a730bb481511fef9466d2006dcf",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Requested tracer and grades retained."
+    },
+    "randomized-survival": {
+      "receipt_sha256": "7033f36f49464367411dde4b0b73fa27dbba48426650952c46e07815b5704c52",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Existing correct abstention preserved; verifier skipped."
+    },
+    "prowl-validation": {
+      "receipt_sha256": "582c62784ce7c5ff735df7d00fd187007ddd05ba286fdf214961b6ed299893d7",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Existing correct abstention preserved; verifier skipped."
+    },
+    "guaranteed-detection": {
+      "receipt_sha256": "48f2b67b160e108e9a0cd81b8ca08f527f06cf7e03e03017cc316383bf9f873c",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Existing correct abstention preserved; verifier skipped."
+    }
+  },
+  "score": {
+    "totals": {
+      "supported_cases": 7,
+      "missing_cases": 3,
+      "reference_hits": 7,
+      "supported_answers": 5,
+      "clean_supported_answers": 4,
+      "correct_abstentions": 3,
+      "errors": 0,
+      "extracts": 6,
+      "exact_extracts": 6,
+      "relevant_extracts": 5,
+      "covered_aspects": 9,
+      "aspects": 14
+    },
+    "cases": [
+      {
+        "id": "radiomics",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 6.889946000010241
+      },
+      {
+        "id": "eus",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 4.021341959014535
+      },
+      {
+        "id": "ct-detection",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 3.480078374966979
+      },
+      {
+        "id": "ncle-study",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 7.766086500021629
+      },
+      {
+        "id": "ct-external",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant",
+          "irrelevant"
+        ],
+        "covered": 1,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 7.306330332998186
+      },
+      {
+        "id": "mri-differential",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 3.8197182080475613
+      },
+      {
+        "id": "pet-neuroendocrine",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 2.9526497090118937
+      },
+      {
+        "id": "randomized-survival",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.002598458027932793
+      },
+      {
+        "id": "prowl-validation",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.001299042021855712
+      },
+      {
+        "id": "guaranteed-detection",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.0013535409816540778
+      }
+    ]
+  }
+}
