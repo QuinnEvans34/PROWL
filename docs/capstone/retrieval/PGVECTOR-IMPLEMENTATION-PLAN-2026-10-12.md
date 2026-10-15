@@ -1,5 +1,13 @@
 # AI expert: database and retrieval implementation plan
 
+## October 14 delivery change — current direction
+
+Quinton chose direct vector ingestion without waiting for global topic selection.
+[Direct ingestion plan](DIRECT-INGESTION-PLAN-2026-10-14.md) supersedes the Phase 3 full-selector
+completion gate below. The selector is parked with its checkpoint retained. Reuse the qualified
+platform and passage contracts; deliver batched embedding/search, then grounded responses.
+The historical phase table remains for provenance, not as a requirement to restart selection.
+
 Date: October 12, 2026. Status: implementation proposal; inventory complete, no database launched.
 Owner: Quinton + Mac development chat. Tracking: [W02-08](https://trello.com/c/nqTumUtb).
 

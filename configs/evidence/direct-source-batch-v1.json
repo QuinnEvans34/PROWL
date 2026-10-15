@@ -1,0 +1,17 @@
+{
+  "version": "direct-source-batch-v1",
+  "sources": [
+    {
+      "path": "outputs/prowl/seed-readiness-20261013/PMC8997008.xml",
+      "sha256": "0d540917f2ed9caf78f5d473d106846c6b852a67143dca77e8a20f6f8e1cfc1d",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8997008/fullTextXML",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    {
+      "path": "outputs/prowl/seed-readiness-20261013/PMC10177524.xml",
+      "sha256": "28e60b0203f3fa47dda280881e701c789069e40fccd0a701fb035fdcd7acd652",
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10177524/fullTextXML",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ]
+}
