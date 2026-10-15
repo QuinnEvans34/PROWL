@@ -11,6 +11,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from src.retrieval.guided_fixture import ResponseStore, canonical
 
 PREFIX = "/evidence-fixture/responses"
+LOCAL_UI_ORIGINS = frozenset({
+    "http://localhost:5173", "http://127.0.0.1:5173",  # Existing development clients.
+    "http://127.0.0.1:5179",  # Synthetic browser-test harness.
+    "http://127.0.0.1:5180",  # PROWL local demo.
+})
 
 
 class LocalFixtureServer(ThreadingHTTPServer):
@@ -42,7 +47,7 @@ def handler_for(store, prefix=PREFIX, mode="synthetic-fixture"):
                 return self.reply(404, {"error": "Unknown route."})
             # No cross-origin writes; Vite forwards requests without changing Origin.
             origin = self.headers.get("Origin")
-            if origin and origin not in {"http://localhost:5173", "http://127.0.0.1:5173", "http://127.0.0.1:5179"}:
+            if origin and origin not in LOCAL_UI_ORIGINS:
                 return self.reply(403, {"error": "Origin not allowed."})
             try:
                 length = int(self.headers.get("Content-Length", "0"))

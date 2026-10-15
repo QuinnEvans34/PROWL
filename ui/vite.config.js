@@ -6,7 +6,7 @@ import { savedPredictionPlugin } from './savedPredictionPlugin.js'
 export default defineConfig({
   plugins: [savedPredictionPlugin(), react()],
   server: {
-    port: 5173, open: true,
+    host: '127.0.0.1', port: 5180, strictPort: true, open: true,
     proxy: { '/research-answers': 'http://127.0.0.1:8014', '/research-evidence': 'http://127.0.0.1:8013', '/evidence-fixture': 'http://127.0.0.1:8011' },
   },
   build: {
