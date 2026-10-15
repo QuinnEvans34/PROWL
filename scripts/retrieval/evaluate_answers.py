@@ -44,9 +44,15 @@ def main():
     parser.add_argument('--suite', type=Path, default=ROOT/'configs/evidence/evaluation/development-v1.json')
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--selector', choices=('quotations', 'spans'), default='quotations',
+                        help='spans selects the experimental policy; live APIs keep quotations')
     parser.add_argument('--reuse-retrieval', type=Path,
                         help='Reuse a prior run with identical suite/corpus to isolate generation changes')
     args = parser.parse_args()
+    if args.selector == 'spans':
+        from src.retrieval import span_answer as selected
+    else:
+        selected = answers
     suite = json.loads(args.suite.read_text())
     if suite['split'] != 'development' or not 1 <= len(suite['cases']) <= 20:
         raise ValueError('Only bounded development suites supported')
@@ -73,17 +79,19 @@ def main():
                     started_at=datetime.now(timezone.utc).isoformat(),
                     corpus_record_sha256=digest(records),
                     encoder_id=previous['encoder_id'] if previous else model.id,
-                    model=answers.MODEL, model_sha256=answers.MODEL_SHA,
-                    policy=answers.POLICY, prompt_sha256=digest(answers.SYSTEM),
+                    selector=args.selector, model=selected.MODEL, model_sha256=selected.MODEL_SHA,
+                    policy=selected.POLICY, prompt_sha256=digest(selected.SYSTEM),
                     reused_manifest_sha256=digest(previous) if previous else None,
                     source_sha256={p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in (
                         'scripts/retrieval/evaluate_answers.py', 'src/retrieval/grounded_answer.py',
+                        'src/retrieval/evidence_spans.py',
+                        'src/retrieval/span_answer.py',
                         'src/retrieval/guided_retrieval.py', 'src/retrieval/direct_ingestion.py',
                         'configs/evidence/research-questions-v1.json')})
     save(args.output/'manifest.json', manifest)
     for case in suite['cases']:
         raw = []
-        original_api = answers.api
+        original_api = selected.api
         def recorded_api(path, payload=None):
             response = original_api(path, payload)
             if path == 'chat':
@@ -99,8 +107,8 @@ def main():
             with connect(config) as db:
                 return guided_search(db, suite['collection'], model, question, 5)
         try:
-            with patch.object(answers, 'api', recorded_api):
-                result = run_case(case, retrieve, answers.generate_answer)
+            with patch.object(selected, 'api', recorded_api):
+                result = run_case(case, retrieve, selected.generate_answer)
             result['retrieval_reused'] = bool(previous)
         except Exception as exc:
             result = dict(case_id=case['id'], question=case['question'], error=type(exc).__name__)

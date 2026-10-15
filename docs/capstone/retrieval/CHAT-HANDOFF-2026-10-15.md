@@ -1,5 +1,13 @@
 # PROWL development handoff — October 15, 2026
 
+**Structured-selector follow-up:** [Implementation/comparison](STRUCTURED-SELECTION-2026-10-15.md)
+adds experimental `span_answer.py` + `evidence_spans.py`, explicitly selected by the evaluation CLI.
+Ten-case comparison:7/7 supported answers,12/12 exact citations,0 generation rejections,3/3 correct
+abstentions; clean complete answers remain4/7 and strict relevance falls to8/12. Not promoted:
+study mixing remains and radiomics relevance regresses. Live default stays byte-identical v2.
+39 focused checks pass;10 offline raw-response replays match after module separation. Next is
+separate study-scope verification using these spans, not another prompt sweep or larger corpus.
+
 **Latest development evaluation:** Ten frozen cases were run after Docker/demo recovery.
 See [evaluation and decision](DEVELOPMENT-EVALUATION-2026-10-15.md). Baseline has7/7 supported
 reference hits,4/7 complete relevant answers,3/3 correct missing-evidence abstentions. One prompt
