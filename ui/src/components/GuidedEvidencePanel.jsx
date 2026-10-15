@@ -1,3 +1,4 @@
+import ResearchEvidencePanel from './ResearchEvidencePanel.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { evidenceFixture, evidenceStates, evidenceWording, requestEvidence } from '../lib/guidedEvidence.js'
 import './GuidedEvidencePanel.css'
@@ -33,6 +34,9 @@ export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) 
   }
 
   return (
+    <>
+    <ResearchEvidencePanel answers />
+    <ResearchEvidencePanel />
     <details className="guided-evidence">
       <summary>Guided evidence questions <span>Fixture demonstration</span></summary>
       <div className="guided-evidence__body">
@@ -76,5 +80,6 @@ export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) 
           switching cases clears this panel. This demo does not attach evidence to a patient record.</small>
       </div>
     </details>
+    </>
   )
 }

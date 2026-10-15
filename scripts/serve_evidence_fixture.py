@@ -21,7 +21,8 @@ class LocalFixtureServer(ThreadingHTTPServer):
         self.server_port = self.server_address[1]
 
 
-def handler_for(store):
+def handler_for(store, prefix=PREFIX, mode="synthetic-fixture"):
+    health = prefix.rsplit("/", 1)[0] + "/health"
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass  # Do not log request contents or paths.
@@ -37,7 +38,7 @@ def handler_for(store):
             self.wfile.write(body)
 
         def do_POST(self):
-            if self.path != PREFIX:
+            if self.path != prefix:
                 return self.reply(404, {"error": "Unknown route."})
             # No cross-origin writes; Vite forwards requests without changing Origin.
             origin = self.headers.get("Origin")
@@ -58,12 +59,12 @@ def handler_for(store):
             self.reply(200, result)
 
         def do_GET(self):
-            if self.path == "/evidence-fixture/health":
-                return self.reply(200, {"mode": "synthetic-fixture"})
-            if not self.path.startswith(PREFIX + "/"):
+            if self.path == health:
+                return self.reply(200, {"mode": mode})
+            if not self.path.startswith(prefix + "/"):
                 return self.reply(404, {"error": "Unknown route."})
             try:
-                result = store.read(self.path[len(PREFIX) + 1:])
+                result = store.read(self.path[len(prefix) + 1:])
             except FileNotFoundError:
                 return self.reply(404, {"error": "Response not found."})
             except (ValueError, TypeError, KeyError, OSError):

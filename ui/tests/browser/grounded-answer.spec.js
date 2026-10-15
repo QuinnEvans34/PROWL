@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test'
+
+test('local model answer is quoted, cited and saved once', async ({ page, request }, testInfo) => {
+  test.skip(!process.env.PROWL_LIVE_ANSWERS, 'Requires local model, research service and drive')
+  test.setTimeout(120000)
+  await page.route('https://fonts.googleapis.com/**', r => r.fulfill({ contentType: 'text/css', body: '' }))
+  await page.goto('/')
+  await page.getByText('Grounded research answers', { exact: false }).click()
+  await page.getByLabel('Evidence question', { exact: true }).selectOption('ct-detection')
+  await page.getByRole('button', { name: 'Answer with cited excerpts' }).click()
+  const article = page.getByRole('article', { name: 'Saved evidence answer' })
+  await expect(article).toBeVisible({ timeout: 110000 })
+  const link = page.getByRole('link', { name: 'Download saved evidence answer' })
+  const url = await link.getAttribute('href')
+  const saved = await (await request.get(url)).json()
+  expect(saved.generation.answer.status).toBe('excerpts')
+  expect(saved.generation.validation).toBe('exact_quotes_verified')
+  expect(saved.generation.answer.extracts.map(e => e.quote).join(' ')).not.toMatch(/MRI|treatment response/i)
+  for (const e of saved.generation.answer.extracts) {
+    expect(saved.passages.find(p => p.record.passage.passage_id === e.passage_id).record.text).toContain(e.quote)
+  }
+  expect(await (await request.post('/research-answers/responses', { data: saved.request })).json()).toEqual(saved)
+  await article.getByRole('link', { name: 'Source [1]', exact: true }).click()
+  await expect(article.locator('details[open]').first()).toBeVisible()
+  await page.screenshot({ path: testInfo.outputPath('answer-live.png'), fullPage: true })
+  await page.route('**/research-answers/responses', route => route.fulfill({ status: 503, body: '{}' }))
+  await page.getByRole('button', { name: 'Answer with cited excerpts' }).click()
+  await expect(page.getByRole('alert')).toBeVisible()
+  await expect(article).toHaveCount(0)
+})

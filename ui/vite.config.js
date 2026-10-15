@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [savedPredictionPlugin(), react()],
   server: {
     port: 5173, open: true,
-    proxy: { '/evidence-fixture': 'http://127.0.0.1:8011' },
+    proxy: { '/research-answers': 'http://127.0.0.1:8014', '/research-evidence': 'http://127.0.0.1:8013', '/evidence-fixture': 'http://127.0.0.1:8011' },
   },
   build: {
     // Sites registers static files from the conventional client directory.

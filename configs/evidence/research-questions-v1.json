@@ -1,0 +1,23 @@
+[
+  {
+    "id": "radiomics",
+    "label": "What is radiomics and how are quantitative features extracted from pancreatic CT images?",
+    "retrieval_queries": [
+      "radiomics definition handcrafted quantitative image features",
+      "radiomics workflow ROI segmentation feature extraction"
+    ]
+  },
+  {
+    "id": "eus",
+    "label": "How has artificial intelligence been studied with endoscopic ultrasound for pancreatic cystic lesions?",
+    "retrieval_queries": [
+      "EUS CNN pancreatic cyst morphology mucinous dysplasia studies",
+      "EUS nCLE IPMN CNN artificial intelligence studies"
+    ]
+  },
+  {
+    "id": "ct-detection",
+    "label": "How have CT radiomic models been studied for pancreatic cancer detection?",
+    "retrieval_queries": []
+  }
+]

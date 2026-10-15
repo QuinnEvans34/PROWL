@@ -12,6 +12,6 @@ export default defineConfig({
     },
   }, react()],
   server: { host: '127.0.0.1', port: 5179, strictPort: true, open: false,
-    proxy: { '/evidence-fixture': 'http://127.0.0.1:8012' },
+    proxy: { '/research-answers': 'http://127.0.0.1:8014', '/research-evidence': 'http://127.0.0.1:8013', '/evidence-fixture': 'http://127.0.0.1:8012' },
   },
 })
