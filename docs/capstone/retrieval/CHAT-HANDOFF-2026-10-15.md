@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+**Latest development evaluation:** Ten frozen cases were run after Docker/demo recovery.
+See [evaluation and decision](DEVELOPMENT-EVALUATION-2026-10-15.md). Baseline has7/7 supported
+reference hits,4/7 complete relevant answers,3/3 correct missing-evidence abstentions. One prompt
+candidate regressed to3/7 clean answers and was rejected; production source remains v2 and the
+demo is unchanged. Frozen suite/harness checkpoint442daee precedes both runs. Both runs and raw
+failures are retained locally; hash-bound judgments are in configs/evidence/evaluation/. Next is
+structured source-span selection with study context, then explicit expert DAG reuse/recovery.
+Do not treat the older pending evaluation or original uncommitted-state notes below as current.
+
 **Checkpoint follow-up:** Quinton subsequently assigned this chat DAG/RAG ownership and requested
 the reviewed Git checkpoint. See [review and verification](REVIEW-CHECKPOINT-2026-10-15.md) for
 the two failure-handling repairs, current checks, remaining startup issues and checkpoint scope.

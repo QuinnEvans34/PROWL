@@ -54,8 +54,93 @@ baseline outputs, then compare the same cases and retrieval once. Accept only if
 error improves without reducing supported coverage or missing-evidence abstention. Report mixed
 or negative results, and do not repeatedly tune until this set passes. No clinical-quality claim.
 
-## Results
+## Results and engineering decision
 
-Baseline and comparison pending. Services verified alive with the expected pinned Qwen3:8b and
-healthy dedicated database before this work. The initial generic `/health` check returned404;
-the actual `/research-evidence/health` and `/research-answers/health` routes succeeded.
+**Baseline completed; prompt-only candidate rejected. Production remains verified-extracts-v2.**
+The freeze/harness was committed and published as `442daee` before either model run. Both runs
+completed ten cases without service exceptions, with one rejected generation each. All ten
+candidate retrieval snapshots exactly match baseline, so retrieval was not a changed variable.
+Same model/digest/options, corpus, encoder, question wording and validator. The candidate changed
+only the selection prompt and its policy identity to experimental verified-extracts-v3.
+
+| Measure | Baseline v2 | Rejected prompt v3 |
+| --- | ---: | ---: |
+| Supported reference hit@5 | 7/7 | 7/7 (reused) |
+| Published exact citations | 13/13 | 11/11 |
+| Strictly relevant extracts | 10/13 (76.9%) | 7/11 (63.6%) |
+| Supported questions answered | 6/7 | 6/7 |
+| Expected aspects covered | 11/14 | 12/14 |
+| Complete answers with only relevant extracts | 4/7 | 3/7 |
+| Correct missing-evidence abstentions | 3/3 | 3/3 |
+| Rejected generations | 1 | 1 |
+
+These are engineering judgments by Codex against the prewritten rubric, not independent clinical
+adjudication. Exact citations measure published outputs only; the rejected raw generations remain
+available and are not counted as correct missing-evidence abstentions. No model served as judge.
+The public JSON reviews retain per-case judgments, reasons, receipt hashes and recomputable totals.
+
+Baseline failures:
+- CT detection adds PET/CT neuroendocrine evidence despite retrieving the relevant CT studies.
+- Specific EUS-nCLE question includes a different EUS morphology study's 43-patient cohort and
+  99.6% result. The requested 35-patient cohort is present, but its 82% result is omitted.
+- Specific CT external-performance question is rejected: a candidate quotation from an unrelated
+  CNN study drops its inline reference marker, failing exact matching. The valid relevant quote
+  cannot rescue an invalid whole answer under the existing fail-closed validator.
+
+Candidate prompt explicitly required matching modality/technique, disease, task, study and cohort;
+it also emphasized retaining reference markers. It removed the CT/PET mistake and recovered the
+requested nCLE accuracy and CT performance, but still mixed studies. It regressed the general EUS
+answer by including adjacent MRI results, and mistyped a radiomics passage ID (`ps3:` instead of
+`psg:`), causing rejection. The lower strict relevance and fewer clean answers justify rejection
+despite higher aggregate aspect coverage. No additional prompt variants or model sweep followed.
+The candidate prompt is retained in `scoped-selection-v3-review.json`; its exact producing source
+is retained locally. Restored production source is byte-identical to the frozen baseline.
+
+Timing: baseline retrieval median0.114s (range0.093–0.129), answer selection median6.590s
+(range1.064–14.082), total median6.688s (range1.179–14.211). Candidate answer selection median7.330s
+(range1.143–13.956); retrieval was a cached file read, not a new search. Summed case time66.813s
+baseline and65.725s candidate excludes encoder initialization and setup. No latency improvement,
+load capacity or reproducibility-across-hardware claim follows from these two sequential runs.
+
+## Reproduce and inspect
+
+Existing local evidence, excluded from Git:
+
+- `outputs/prowl/development-evaluation-20261015/baseline/`
+- `outputs/prowl/development-evaluation-20261015/scoped-selection-v3/`
+
+Each contains a manifest, ten immutable case receipts, raw model responses and a scored review.
+The candidate directory also contains `candidate-grounded-answer.py`. The default public model
+interface remains the original three fixed questions; the additional seven are evaluation only.
+
+From the repository root, recompute either saved score without model/DB calls:
+
+```sh
+.venv-retrieval/bin/python -m src.retrieval.evaluation --run outputs/prowl/development-evaluation-20261015/baseline --review configs/evidence/evaluation/baseline-review-v1.json
+.venv-retrieval/bin/python -m src.retrieval.evaluation --run outputs/prowl/development-evaluation-20261015/scoped-selection-v3 --review configs/evidence/evaluation/scoped-selection-v3-review.json
+```
+
+Both score recomputations passed; all receipts and review bindings verify. A new live baseline
+can use the following command with a **new** run name; it will call the local model ten times:
+
+```sh
+.venv-retrieval/bin/python scripts/retrieval/evaluate_answers.py --output outputs/prowl/development-evaluation-20261015/NEW-RUN-NAME
+```
+
+Verification:8 new offline evaluation checks pass;27 combined evaluation/generation/retrieval/store
+checks pass. The first immutable-writer test expected the wrong exception class; corrected to the
+existing ValueError contract before the freeze commit. Existing source and UI were not changed by
+the final checkpoint, so no browser/build rerun or API restart was needed. Services were verified
+alive with the pinned Qwen3:8b and healthy database. An initial generic `/health` request returned
+404; actual `/research-evidence/health` and `/research-answers/health` routes succeeded.
+
+## Next development step
+
+Evidence selection is the demonstrated bottleneck for these cases; adding corpus volume is not
+the first repair. Implement selection from server-owned source spans with stable bounded IDs,
+preserving neighboring study context and distinguishing the requested technique/task. That should
+remove free-form ID/text copying as a failure source; relevance still requires separate measurement.
+Keep this development set available for regression and reserve unseen cases for later evaluation.
+This is proposed follow-on work, not an implemented semantic verifier or accepted quality fix.
+The explicit expert DAG/reuse/retry milestone follows this selection repair. Full selector and
+training remain parked in this chat. No human project hours inferred.

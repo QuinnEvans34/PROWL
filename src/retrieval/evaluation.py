@@ -55,3 +55,24 @@ def score(suite, receipts, reviews):
                          covered=sum(covered), aspects=len(covered), clean=bool(clean),
                          total_seconds=receipt['total_seconds']))
     return dict(totals=totals, cases=rows)
+
+
+if __name__ == '__main__':
+    import argparse
+    import json
+    from pathlib import Path
+    from scripts.retrieval.evaluate_answers import checked_read
+    parser = argparse.ArgumentParser(description='Recompute a development score from immutable receipts and recorded judgments')
+    parser.add_argument('--run', type=Path, required=True)
+    parser.add_argument('--review', type=Path, required=True)
+    args = parser.parse_args()
+    manifest = checked_read(args.run/'manifest.json')
+    review = json.loads(args.review.read_text())
+    suite = manifest['suite']
+    if review['manifest_sha256'] != digest(manifest) or review['suite_sha256'] != digest(suite):
+        raise ValueError('Review belongs to another run/suite')
+    receipts = {c['id']: checked_read(args.run/(c['id']+'.json')) for c in suite['cases']}
+    result = score(suite, receipts, review['reviews'])
+    if result != review['score']:
+        raise ValueError('Recorded score differs from recomputed result')
+    print(json.dumps(result, indent=2))
