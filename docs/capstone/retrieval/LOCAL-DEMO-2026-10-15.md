@@ -1,5 +1,10 @@
 # Local research demo — October 15, 2026
 
+**Current status: restored and live-tested.** Quinton approved Docker recovery; Docker Desktop
+restart repaired external-drive sharing. The existing PostgreSQL database recovered, XML-Adventure
+was restored, and browser search plus all three guided answer questions succeeded. Relevance
+evaluation remains open; see the CT scope issue below.
+
 Entry point: http://127.0.0.1:5180/research (also the **Research evidence** navigation button).
 This page reuses the real research/answer panels without selecting or loading an imaging case.
 It offers three fixed questions over the existing two-paper collection, not free-form chat.
@@ -18,7 +23,7 @@ The initial empty case table was transient during loading: three historical prep
 appeared. Their imaging scores are not new capstone results. The dedicated research entry point
 keeps this test independent of those cases and their scan files.
 
-## Database recovery blocker
+## Initial database recovery blocker (resolved)
 
 The expected external UUID `22750B93-2F3F-499D-87F5-902981BFAB59` is mounted; the existing
 database directory and its `pgdata` child are directories on macOS. The checked start passed
@@ -34,9 +39,13 @@ Earlier PostgreSQL logs record lost directory access and immediate shutdown afte
 directory lock file. Exit 0 alone must not be interpreted as a clean shutdown.
 
 Requested permission to restart Docker Desktop because it also interrupts the unrelated running
-XML-Adventure container. Its identity and restart policy (`no`) were inspected; if the restart is
-approved, restore that same container afterward. No Docker-wide restart, data deletion, database
-reinitialization, full selector or training was performed while that decision was pending.
+XML-Adventure container. Quinton explicitly approved: "Yes, do whatever you need for docker."
+Docker Desktop restart succeeded, and the exact previously running XML-Adventure container
+`ac77e4b628e81e1f694a862028616f0d353dfe692b9e266584ca48a34cdbbf9d` was started and verified running.
+The normal checked PROWL start then succeeded on the existing data directory, with the dedicated
+container healthy. PostgreSQL reported automatic WAL recovery after an interrupted shutdown and
+readiness for connections; initialization was skipped because the existing database was present.
+No database deletion/rebuild, corpus replay, model download, full selector or training occurred.
 Canonical frozen batches and original database files remain preserved.
 
 ## Checks completed before database recovery
@@ -50,9 +59,49 @@ Canonical frozen batches and original database files remain preserved.
 - Browser navigation from the main page reaches `/research`; search while DB is stopped shows
   an explicit unavailable/save-unconfirmed alert and a same-request retry button.
 
-End-to-end retrieval, generated quotation checks, saved-response retry and live database tests
-remain pending successful database startup. Do not describe the demo as fully restored yet.
-Local operation logs: `outputs/prowl/demo-restore-20261015/` (ignored).
+## Recovery and live verification
+
+- Read-only comparison verifies all **274 research-v1 passages across nine batches** against the
+  canonical frozen batch files: encoder identity, batch inventory, records, text and float32 vector
+  hashes match exactly. No re-embedding or reload was needed. This verifies this retained collection,
+  not every PostgreSQL object or a general power-loss guarantee.
+- The **four previously skipped live PostgreSQL checks pass** (13 offline cases deselected):
+  atomic retry, whole-batch rollback, query encoder isolation and tampered-vector rejection.
+  They use unique test collections; research-v1 is unchanged.
+- In the actual browser on port 5180, the search that failed while DB was stopped succeeded on
+  its same-request retry and returned five real passages. Saved hash and exact retry pass; conflicting
+  question reuse returns 409, unexpected fields 400 and foreign Origin 403 through the actual proxy.
+- All three guided answers were generated through the actual `/research` page. The server-validated
+  quotations, response content hashes and exact saved retries pass. A source link was expanded to
+  inspect the cited text, authors, PMID, DOI and source location. Changing questions clears old results.
+
+| Guided question | Saved response ID | Excerpts | Ollama reported duration |
+|---|---|---:|---:|
+| Radiomics | `1892ad24-9b37-47a2-becc-dfbb37b61fb1` | 3 | 10.77 s |
+| EUS cystic lesions | `38b7cf40-406e-475b-b610-668079b5ed65` | 2 | 14.22 s |
+| CT detection | `3eaeae11-fbdd-4397-8c97-4f6279996a67` | 3 | 11.17 s |
+
+These are observed model durations, not full end-to-end latency benchmarks. Search response ID:
+`25107689-241d-46cd-a5fa-ec34f12b78d0`. Exact answer retries took approximately 1.5–2.5 ms through
+the local proxy and returned the original payload without generation. One earlier retry probe
+overlapped EUS generation and received the existing busy 503; retry after the worker was idle passed.
+The current store serializes even saved POST retries; GET remains readable. Short browser-tool waits
+also expired before generation finished; later inspection confirmed completed saved answers, rather
+than treating the wait timeout as an application failure or resubmitting the request.
+
+**Quality limit retained:** the CT answer's third excerpt concerns PET/CT neuroendocrine tumors.
+Exact quotation matching passes, but modality/subtype relevance still needs evaluation. No prompt,
+ranking, model or question policy was changed to make this smoke check pass. These three familiar
+questions are development checks, not a held-out quality score or a complete refusal evaluation.
+
+Local evidence under `outputs/prowl/demo-restore-20261015/` (ignored): `database-verification.json`,
+`live-search-check.json`, `live-answer-checks.json`, service logs, the initial database-start error,
+`research-db-unavailable.jpg` and `research-restored.jpg`. Original response artifacts remain in their
+existing immutable response stores. The research page is left open with a completed answer.
+
+Services at handback: healthy PROWL DB on 55433, retrieval API 8013, answer API 8014, installed Ollama
+on 11434 and Vite on 5180, all bound to loopback on the host. XML-Adventure is running again with
+its prior configuration. No human-hours credit is inferred from service/test runtime.
 
 ## Normal operation
 
