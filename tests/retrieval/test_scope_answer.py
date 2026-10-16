@@ -135,3 +135,32 @@ def test_repeated_quote_cannot_move_to_another_studys_context(monkeypatch):
     result = g.verify_answer('question', passages, old)
     assert result['validation'] == 'generation_rejected'
     assert result['answer']['extracts'] == []
+
+
+def test_separate_evaluator_pin_and_selection_provenance(monkeypatch):
+    old = base()
+    old['provenance']['model'] = g.MODEL
+    calls = []
+    def api(path, payload=None):
+        if path == 'tags':
+            return {'models': [{'name': 'qwen3:30b', 'digest': g.EVALUATORS['qwen3:30b']}]}
+        calls.append(payload)
+        return dict(done=True, message=dict(content=json.dumps(assessment())))
+    monkeypatch.setattr(g, 'api', api)
+    result = g.verify_answer('CT study?', PASSAGES, old, evaluator='qwen3:30b')
+    assert calls[0]['model'] == 'qwen3:30b' and calls[0]['think'] is False
+    assert result['provenance']['model'] == g.MODEL
+    assert result['provenance']['scope_model'] == 'qwen3:30b'
+    assert result['provenance']['scope_model_sha256'] == g.EVALUATORS['qwen3:30b']
+    assert result['selection_generation'] == old
+    with pytest.raises(ValueError, match='Unknown'):
+        g.verify_answer('CT study?', PASSAGES, old, evaluator='unreviewed')
+
+
+def test_wrong_evaluator_digest_refuses_before_chat(monkeypatch):
+    def api(path, payload=None):
+        assert path == 'tags'
+        return {'models': [{'name': 'qwen3:30b', 'digest': g.MODEL_SHA}]}
+    monkeypatch.setattr(g, 'api', api)
+    with pytest.raises(OSError, match='unavailable'):
+        g.verify_answer('CT study?', PASSAGES, base(), evaluator='qwen3:30b')

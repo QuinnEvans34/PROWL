@@ -5,6 +5,8 @@ from .direct_ingestion import digest
 from .grounded_answer import MODEL, MODEL_SHA, api, validate_answer, distinct_extracts
 
 POLICY = 'scope-checked-spans-v1'
+EVALUATORS = {MODEL: MODEL_SHA,
+              'qwen3:30b': 'ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226'}
 AXES = ('technique', 'disease', 'task', 'study', 'cohort', 'design', 'directness')
 VERDICTS = ('match', 'mismatch', 'uncertain', 'not_requested')
 SYSTEM = '''Assess ONE proposed research excerpt against the question using its full source passage.
@@ -70,8 +72,11 @@ def scope_prompt(reasoning=False):
     return SYSTEM.replace('/no_think', '/think') if reasoning else SYSTEM
 
 
-def verify_answer(question, passages, base, *, selection_reused=True, reasoning=False):
+def verify_answer(question, passages, base, *, selection_reused=True, reasoning=False, evaluator=MODEL):
     """Caller binds a reused selection to its original question/receipt; never load gold labels."""
+    if evaluator not in EVALUATORS:
+        raise ValueError('Unknown scope evaluator')
+    evaluator_sha = EVALUATORS[evaluator]
     sources, spans = evidence_spans.catalog(passages)
     validate_answer(base['answer'], passages)
     if base['provenance']['policy'] != span_answer.POLICY:
@@ -86,13 +91,14 @@ def verify_answer(question, passages, base, *, selection_reused=True, reasoning=
     limit = 4096 if reasoning else 900
     provenance = dict(base['provenance'], policy=POLICY, prompt_sha256=digest(prompt),
                       scope_reasoning=reasoning, scope_output_limit=limit,
+                      scope_model=evaluator, scope_model_sha256=evaluator_sha,
                       selection_sha256=digest(base), question_sha256=digest(question))
     assessments, kept, duration = [], [], 0
     validation = base['validation']
     if base['answer']['extracts']:
         try:
             models = api('tags')['models']
-            if not any(m['name'] == MODEL and m['digest'] == MODEL_SHA for m in models):
+            if not any(m['name'] == evaluator and m['digest'] == evaluator_sha for m in models):
                 raise OSError('Pinned model unavailable')
         except Exception as exc:
             raise OSError('Scope model unavailable') from exc
@@ -103,7 +109,7 @@ def verify_answer(question, passages, base, *, selection_reused=True, reasoning=
         source = dict(sources[source_index], selectable_spans=list(candidates))
         schema = assessment_schema(candidates)
         try:
-            result = api('chat', dict(model=MODEL, stream=False, think=reasoning, keep_alive='5m', format=schema,
+            result = api('chat', dict(model=evaluator, stream=False, think=reasoning, keep_alive='5m', format=schema,
                 options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=limit), messages=[
                     dict(role='system', content=prompt), dict(role='user', content=json.dumps(dict(
                         question=question, proposed_excerpt=extract['quote'], source=source)))]))

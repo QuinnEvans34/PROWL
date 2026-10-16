@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**Evaluator-capability comparison complete:** [30B comparison](EVALUATOR-COMPARISON-2026-10-15.md)
+uses installed pinned Qwen3:30B with the same frozen selections/nonreasoning scope prompt. Ten cases,
+twelve calls,28.427seconds:7/7 supported,5/7 clean,14/14 aspects,8/10 relevant exact quotations,
+zero invalid assessments. All eight useful selections retained; only two of four irrelevant selections
+removed. Three abstentions preserved without reviewer calls. Not promoted: wrong nCLE study and
+irrelevant definition/application evidence still pass.56 focused checks,20 offline replays, ten shared
+request comparisons and score recomputation pass. Live v2 demo unchanged; client finished/Ollama idle.
+Next proposed repair: source-linked study/method/cohort/result evidence with adjacent paragraph
+context and explicit question intent, before expert DAG integration. No more model/prompt sweep
+or full selector/training follows automatically. Older next-step paragraphs below are historical.
+
 **Scope-verification follow-up:** [Implementation/results](SCOPE-VERIFICATION-2026-10-15.md)
 adds experimental per-excerpt checks and same-source context expansion. Reasoning-off8b review
 loses useful evidence:5/7 supported answers,4/7 clean,9/14 aspects,2 invalid assessments; it also
