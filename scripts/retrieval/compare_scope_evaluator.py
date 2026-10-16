@@ -61,7 +61,23 @@ def main():
     parser.add_argument('--selection', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evaluator', choices=scope_answer.EVALUATORS, required=True)
+    parser.add_argument('--policy', choices=['scope', 'records'], default='scope')
+    parser.add_argument('--bundles', type=Path, help='Retained source bundle directory for records')
     args = parser.parse_args()
+    selected = scope_answer
+    bundles = {}
+    if args.policy == 'records':
+        from src.retrieval import study_evidence as selected
+        if args.evaluator != selected.MODEL or not args.bundles:
+            raise ValueError('Records require the pinned30B evaluator and retained bundles')
+        for path in sorted(args.bundles.glob('rev-*.json')):
+            bundle = json.loads(path.read_text())
+            key = bundle['representation']['representation_id']
+            if key in bundles:
+                raise ValueError('Duplicate representation')
+            bundles[key] = bundle
+        if not bundles:
+            raise ValueError('No retained source bundles')
     suite = json.loads((ROOT/'configs/evidence/evaluation/development-v1.json').read_text())
     previous, inputs = frozen_inputs(args.selection, suite)
     args.output.mkdir(parents=True, exist_ok=False)
@@ -70,15 +86,22 @@ def main():
                     'src/retrieval/span_answer.py', 'src/retrieval/grounded_answer.py',
                     'src/retrieval/direct_ingestion.py',
                     'docs/capstone/retrieval/EVALUATOR-COMPARISON-2026-10-15.md']
+    if args.policy == 'records':
+        source_paths += ['src/retrieval/study_evidence.py', 'src/retrieval/passages.py',
+                         'src/retrieval/records.py',
+                         'docs/capstone/retrieval/STUDY-EVIDENCE-2026-10-15.md']
     sources = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in source_paths}
     for p in source_paths:
         destination = args.output/'producing-sources'/p
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes((ROOT/p).read_bytes())
-    manifest = dict(suite=suite, suite_sha256=digest(suite), policy=scope_answer.POLICY,
+    manifest = dict(suite=suite, suite_sha256=digest(suite), policy=selected.POLICY,
         started_at=datetime.now(timezone.utc).isoformat(), evaluator=args.evaluator,
         evaluator_sha256=scope_answer.EVALUATORS[args.evaluator], scope_reasoning=False,
-        prompt_sha256=digest(scope_answer.SYSTEM), source_sha256=sources,
+        prompt_sha256=digest(scope_answer.SYSTEM) if args.policy == 'scope' else None, source_sha256=sources,
+        record_prompt_sha256=digest(selected.RECORD_SYSTEM) if args.policy == 'records' else None,
+        match_prompt_sha256=digest(selected.MATCH_SYSTEM) if args.policy == 'records' else None,
+        source_bundle_sha256={k: digest(v) for k, v in bundles.items()},
         reused_selection_manifest_sha256=digest(previous),
         corpus_record_sha256=suite['corpus_record_sha256'],
         input_receipt_sha256={k: digest(v) for k, v in inputs.items()},
@@ -86,7 +109,12 @@ def main():
     save(args.output/'manifest.json', manifest)
     started = time.monotonic()
     completed, current, raw = [], None, []
-    original_api = scope_answer.api
+    original_api = selected.api
+    cache = {}
+    def save_record(key, record):
+        folder = args.output/'records'
+        folder.mkdir(exist_ok=True)
+        save(folder/(key+'.json'), record)
     def recorded_api(path, payload=None):
         remaining = 600 - (time.monotonic() - started)
         if remaining <= 0:
@@ -96,21 +124,25 @@ def main():
         if path == 'chat':
             raw.append(response)
             save(args.output/f'{current}-call-{len(raw)}.json',
-                 dict(request_sha256=digest(payload), response=response))
+                 dict(request_sha256=digest(payload), request=payload, response=response))
         return response
     stop_reason = 'completed'
     try:
-        with time_limit(600), patch.object(scope_answer, 'api', recorded_api):
+        with time_limit(600), patch.object(selected, 'api', recorded_api):
             for case in suite['cases']:
                 current, raw = case['id'], []
                 old = inputs[current]
-                result = run_case(case, lambda _: old['passages'],
-                    lambda q, p: scope_answer.verify_answer(q, p, old['generation'], evaluator=args.evaluator))
+                def generate(q, p):
+                    if args.policy == 'records':
+                        return selected.verify_answer(q, p, old['generation'], bundles, cache, save_record=save_record)
+                    return selected.verify_answer(q, p, old['generation'], evaluator=args.evaluator)
+                result = run_case(case, lambda _: old['passages'], generate)
                 result.update(retrieval_reused=True, raw_model_responses=raw, suite_sha256=digest(suite))
                 save(args.output/(current+'.json'), result)
                 completed.append(current)
                 print(json.dumps(dict(case_id=current, seconds=result['total_seconds'],
-                      decisions=[a['decision'] for a in result['generation']['scope_assessments']])), flush=True)
+                      status=result['generation']['answer']['status'],
+                      validation=result['generation']['validation'])), flush=True)
     except (BudgetExpired, KeyboardInterrupt, Exception) as exc:
         stop_reason = type(exc).__name__
         save(args.output/'interruption.json', dict(reason=stop_reason, case_id=current,

@@ -1,0 +1,230 @@
+{
+  "suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "reviewer": "Codex engineering review; not independent clinical adjudication",
+  "run": "study-linked-v1",
+  "manifest_sha256": "435eb76072e15531a5bba4562b9ec236c494af5c02b75f1f4692286b05473131",
+  "decision": "rejected: 3/7 clean answers; five useful selections lost; two record-unit violations and false abstentions",
+  "reviews": {
+    "radiomics": {
+      "receipt_sha256": "25aec75b4f50be7fa941392ab39cdd88dbb65e2cd6b2ba4e4b6d201fd69fcb65",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Keeps the exact definition/workflow excerpt; excludes the detection-application study. Both frozen aspects covered."
+    },
+    "eus": {
+      "receipt_sha256": "c18df2deacc6943945cb34bb94c58345ed48ec98c9517807b76ff86a01bfc619",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Matcher abstains despite two valid records with useful EUS/IPMN source evidence. Both relevant selections lost."
+    },
+    "ct-detection": {
+      "receipt_sha256": "477bfba82270bfb2d18d54f3ca204da5761fddbd587f62f09ba898e2e3c3fcb2",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Retains the correct CT radiomics detection study, cohort and AUC results."
+    },
+    "ncle-study": {
+      "receipt_sha256": "5428c285d7898dff517464da4cb6a5e7afe8536fe3a29926e24af7c2df3d57a8",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Entire answer rejected: nCLE record unit contains only its cohort/method sentence but study and result fields cite outside that unit. Correct evidence lost; final wrong-study candidate not processed."
+    },
+    "ct-external": {
+      "receipt_sha256": "4314801bc456010525b9735ffee9caded52408fde1e567b31dd7a795e092f56d",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Entire answer rejected: unit contains only the result, while method/study fields cite outside it and cohort incorrectly points to a different neighboring study. Correct evidence lost; CNN candidate not processed."
+    },
+    "mri-differential": {
+      "receipt_sha256": "04b786fc2d75b7403b3d07352bc1f773b97828617937a6b4ff08dcb04eeab6b7",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Keeps the requested MRI differential diagnosis and different-institution AUC comparison."
+    },
+    "pet-neuroendocrine": {
+      "receipt_sha256": "b1c90d5250148ae76b5ec3ac68840e9d2dcee558f5180b4cd397a1feb907a976",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Matcher abstains despite a valid record with the requested tracer, tumor grades and named study. Useful selection lost."
+    },
+    "randomized-survival": {
+      "receipt_sha256": "851ad1f7d82562b4dee651127a9b29cbef10e5a790c5f74f73701f551e751951",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Saved abstention preserved; no extraction or matching call."
+    },
+    "prowl-validation": {
+      "receipt_sha256": "9e06430df9374b0fa88746b65d64d46d29a92a4ffdd0bd57d60d613df2f1aeb8",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Saved abstention preserved; no extraction or matching call."
+    },
+    "guaranteed-detection": {
+      "receipt_sha256": "de0f0ff63333ed7d65c87c58845350de538fb69bd2241325547436f4ba77013d",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Saved abstention preserved; no extraction or matching call."
+    }
+  },
+  "score": {
+    "totals": {
+      "supported_cases": 7,
+      "missing_cases": 3,
+      "reference_hits": 7,
+      "supported_answers": 3,
+      "clean_supported_answers": 3,
+      "correct_abstentions": 3,
+      "errors": 0,
+      "extracts": 3,
+      "exact_extracts": 3,
+      "relevant_extracts": 3,
+      "covered_aspects": 6,
+      "aspects": 14
+    },
+    "cases": [
+      {
+        "id": "radiomics",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 8.941373125009704
+      },
+      {
+        "id": "eus",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 5.299018792051356
+      },
+      {
+        "id": "ct-detection",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 2.060448082978837
+      },
+      {
+        "id": "ncle-study",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 2.1397053329856135
+      },
+      {
+        "id": "ct-external",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 0.8675236249691807
+      },
+      {
+        "id": "mri-differential",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 3.185406624979805
+      },
+      {
+        "id": "pet-neuroendocrine",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 1.8063109170179814
+      },
+      {
+        "id": "randomized-survival",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.00023099995451048017
+      },
+      {
+        "id": "prowl-validation",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.00016599998343735933
+      },
+      {
+        "id": "guaranteed-detection",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.0002460419782437384
+      }
+    ]
+  }
+}

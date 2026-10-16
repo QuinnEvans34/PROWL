@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**Source-linked evidence experiment complete / rejected:** [Design/results](STUDY-EVIDENCE-2026-10-15.md)
+adds question-independent study records with exact parent-sentence anchors, adjacent context,
+explicit explanation/study kinds and separate matching. Ten cases/15calls/24.311seconds;8valid records.
+Quality regresses from30Bscope5/7clean to3/7clean,6/14aspects;5of8useful selections lost. EUS/PET false
+abstentions; nCLE/CT field-unit violations rejected, including a neighboring-study cohort attribution.
+Only radiomics cleanup improves.70focused tests and10offline generation replays/15request hashes pass;
+no semantic qualification. No demo change; client finished, Ollama idle, answer API healthy.
+Next recommended: direct30Bevidence-span selection on frozen passages with the existing selection
+prompt/schema, to measure the missing simpler baseline before more stages. Not yet run. Full corpus
+selector/training stay parked. Earlier proposed-next paragraphs below are historical.
+
 **Evaluator-capability comparison complete:** [30B comparison](EVALUATOR-COMPARISON-2026-10-15.md)
 uses installed pinned Qwen3:30B with the same frozen selections/nonreasoning scope prompt. Ten cases,
 twelve calls,28.427seconds:7/7 supported,5/7 clean,14/14 aspects,8/10 relevant exact quotations,
