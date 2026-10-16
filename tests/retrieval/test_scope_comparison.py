@@ -80,3 +80,35 @@ def test_interrupted_run_preserves_completed_call_and_never_retries(tmp_path, mo
     assert completion['completed'] == [] and len(completion['unscored']) == 10
     assert not (output/'radiomics.json').exists()
     assert signal.getitimer(signal.ITIMER_REAL) == (0, 0)
+
+
+def test_direct_span_mode_uses_passages_without_saved_selection_or_review(tmp_path, monkeypatch):
+    from scripts.retrieval import compare_scope_evaluator as runner
+    from scripts.retrieval.evaluate_answers import checked_read
+    from src.retrieval import span_answer, scope_answer
+    suite = json.loads((runner.ROOT/'configs/evidence/evaluation/development-v1.json').read_text())
+    passage = dict(record=dict(passage=dict(passage_id='invented'),
+                   text='An invented study describes an imaging method in this sentence.'))
+    # No generation field: a review stage or reused selection would fail this test.
+    old = dict(passages=[passage])
+    monkeypatch.setattr(runner, 'frozen_inputs', lambda *_: ({}, {c['id']: old for c in suite['cases']}))
+    monkeypatch.setattr(scope_answer, 'verify_answer', lambda *_a, **_k: pytest.fail('No review stage'))
+    calls = []
+    def api(path, payload=None):
+        if path == 'tags':
+            return dict(models=[dict(name='qwen3:30b',digest=span_answer.MODELS['qwen3:30b'])])
+        calls.append(payload)
+        return dict(done=True,message=dict(content='{"status":"excerpts","span_ids":["P1:1-1"]}'))
+    monkeypatch.setattr(span_answer, 'api', api)
+    output = tmp_path/'run'
+    monkeypatch.setattr(runner.sys,'argv',['compare','--selection',str(tmp_path),'--output',str(output),
+                                         '--evaluator','qwen3:30b','--policy','spans'])
+    assert runner.main() == 0 and len(calls) == 10
+    manifest = checked_read(output/'manifest.json')
+    assert manifest['policy'] == span_answer.POLICY and manifest['reused_selection_manifest_sha256'] is None
+    assert manifest['prompt_sha256'] == digest(span_answer.SYSTEM)
+    for request, case in zip(calls, suite['cases']):
+        content = json.loads(request['messages'][1]['content'])
+        assert set(content) == {'question','sources'} and content['question'] == case['question']
+        assert request['model'] == 'qwen3:30b'
+    assert checked_read(output/'completion.json')['unscored'] == []

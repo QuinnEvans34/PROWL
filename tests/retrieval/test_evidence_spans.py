@@ -79,3 +79,29 @@ def test_no_valid_span_skips_model_and_duplicate_sources_refused(monkeypatch):
     assert result['validation'] == 'no_selectable_spans'
     with pytest.raises(ValueError, match='Duplicate'):
         s.catalog(PASSAGES * 2)
+
+
+def test_model_selection_changes_only_model_and_provenance():
+    requests = []
+    def api(path, payload=None):
+        if path == 'tags':
+            return dict(models=[dict(name=k, digest=v) for k, v in g.MODELS.items()])
+        requests.append(payload)
+        return dict(done=True, message=dict(content=json.dumps(dict(status='excerpts',span_ids=['P1:1-1']))))
+    default = g.generate_answer('CT model?', PASSAGES, call_api=api)
+    larger = g.generate_answer('CT model?', PASSAGES, call_api=api, model='qwen3:30b')
+    assert requests[0]['model'] == g.MODEL
+    assert requests[1]['model'] == 'qwen3:30b'
+    assert dict(requests[0],model='same') == dict(requests[1],model='same')
+    assert default['answer'] == larger['answer']
+    assert larger['provenance']['model_sha256'] == g.MODELS['qwen3:30b']
+    with pytest.raises(ValueError, match='Unknown'):
+        g.generate_answer('CT model?', PASSAGES, call_api=api, model='unknown')
+
+
+def test_larger_model_wrong_pin_refused_before_chat():
+    def api(path, payload=None):
+        assert path == 'tags'
+        return dict(models=[dict(name='qwen3:30b',digest=g.MODEL_SHA)])
+    with pytest.raises(OSError):
+        g.generate_answer('CT model?', PASSAGES, call_api=api, model='qwen3:30b')

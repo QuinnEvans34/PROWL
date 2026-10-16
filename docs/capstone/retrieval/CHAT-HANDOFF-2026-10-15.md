@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+**Direct30B selection baseline complete / not promoted:** [Comparison](DIRECT-SPAN-COMPARISON-2026-10-15.md)
+changes only the span-selection model on the same frozen passages/prompt/schema. Ten fresh calls,
+12.699seconds:5/7supported,4/7clean,9/14aspects,6/6relevant exact excerpts,3/3fresh correct abstentions,
+zero invalid generations. nCLE study mixing resolves, but radiomics/PET falsely abstain and CT method
+context remains omitted. No quality acceptance or live change.56focused checks and20exact offline
+replays pass; all10request pairs differ only in model. Client finished/Ollama idle/API healthy.
+Next proposed: bounded30Breasoning diagnosis of the two false abstentions and missing context, with
+positive/unsupported controls, before additional stages. Not run; no prompt/model sweep or full corpus
+selector/training. Older proposed-next entries below preserve history.
+
 **Source-linked evidence experiment complete / rejected:** [Design/results](STUDY-EVIDENCE-2026-10-15.md)
 adds question-independent study records with exact parent-sentence anchors, adjacent context,
 explicit explanation/study kinds and separate matching. Ten cases/15calls/24.311seconds;8valid records.

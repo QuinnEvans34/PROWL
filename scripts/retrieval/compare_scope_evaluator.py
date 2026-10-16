@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One bounded evaluator run over immutable development selections; no database or gold inputs."""
+"""One bounded generation/review run over frozen development inputs; no database or gold inputs."""
 import argparse
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -58,14 +58,17 @@ def frozen_inputs(directory, suite):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--selection', type=Path, required=True)
+    parser.add_argument('--selection', type=Path, required=True,
+                        help='Frozen structured-span baseline; spans policy reuses only its retrieval')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evaluator', choices=scope_answer.EVALUATORS, required=True)
-    parser.add_argument('--policy', choices=['scope', 'records'], default='scope')
+    parser.add_argument('--policy', choices=['scope', 'records', 'spans'], default='scope')
     parser.add_argument('--bundles', type=Path, help='Retained source bundle directory for records')
     args = parser.parse_args()
     selected = scope_answer
     bundles = {}
+    if args.policy == 'spans':
+        from src.retrieval import span_answer as selected
     if args.policy == 'records':
         from src.retrieval import study_evidence as selected
         if args.evaluator != selected.MODEL or not args.bundles:
@@ -90,6 +93,8 @@ def main():
         source_paths += ['src/retrieval/study_evidence.py', 'src/retrieval/passages.py',
                          'src/retrieval/records.py',
                          'docs/capstone/retrieval/STUDY-EVIDENCE-2026-10-15.md']
+    if args.policy == 'spans':
+        source_paths += ['docs/capstone/retrieval/DIRECT-SPAN-COMPARISON-2026-10-15.md']
     sources = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in source_paths}
     for p in source_paths:
         destination = args.output/'producing-sources'/p
@@ -98,11 +103,13 @@ def main():
     manifest = dict(suite=suite, suite_sha256=digest(suite), policy=selected.POLICY,
         started_at=datetime.now(timezone.utc).isoformat(), evaluator=args.evaluator,
         evaluator_sha256=scope_answer.EVALUATORS[args.evaluator], scope_reasoning=False,
-        prompt_sha256=digest(scope_answer.SYSTEM) if args.policy == 'scope' else None, source_sha256=sources,
+        prompt_sha256=digest(selected.SYSTEM) if args.policy in ('scope', 'spans') else None, source_sha256=sources,
         record_prompt_sha256=digest(selected.RECORD_SYSTEM) if args.policy == 'records' else None,
         match_prompt_sha256=digest(selected.MATCH_SYSTEM) if args.policy == 'records' else None,
         source_bundle_sha256={k: digest(v) for k, v in bundles.items()},
-        reused_selection_manifest_sha256=digest(previous),
+        reused_selection_manifest_sha256=digest(previous) if args.policy != 'spans' else None,
+        reused_retrieval_manifest_sha256=digest(previous),
+        generation_mode=args.policy,
         corpus_record_sha256=suite['corpus_record_sha256'],
         input_receipt_sha256={k: digest(v) for k, v in inputs.items()},
         total_limit_seconds=600, call_limit_seconds=60, retries=0)
@@ -133,6 +140,8 @@ def main():
                 current, raw = case['id'], []
                 old = inputs[current]
                 def generate(q, p):
+                    if args.policy == 'spans':
+                        return selected.generate_answer(q, p, model=args.evaluator)
                     if args.policy == 'records':
                         return selected.verify_answer(q, p, old['generation'], bundles, cache, save_record=save_record)
                     return selected.verify_answer(q, p, old['generation'], evaluator=args.evaluator)
