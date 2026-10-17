@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 approved cache cleanup and live workflow passed:**
+[Live verification](WORKFLOW-LIVE-CHECK-2026-10-17.md). Deleted exactly37 reviewed private build-cache
+records; Docker reports9.162GB freed,34 shared records retained, container/image/volume inventories
+unchanged. Host recovered to~105.46GiB; unchanged admission passed. Docker restart fixed stale drive
+sharing; XML-Adventure restored and PROWL DB healthy. Added existing workflow panel to `/research`.
+One browser radiomics run completed all4stages in10.890196s;3exact quotes, one loosely related.
+Same-ID POST/GET reuse identical with no new inference or artifact writes;274passages/9batches and
+DB fingerprints unchanged. Build passes. DB55433/workflow8015/Ollama11434/UI5180 running; old8013/8014
+offline. Quality unresolved. Next proposed: controlled real-service interruption/recovery check using
+retained/synthetic generation before broader workflow scope. No full selector/training/hours credit.
+Earlier blocked/pending statements below are historical.
+
 **October17 live integration blocked by storage / cache review complete:**
 [Storage review](LOCAL-STORAGE-REVIEW-2026-10-17.md). Quinton approved one live question/reuse check;
 normal database startup refused95.547GiB internal free versus104GiB requirement before Compose.

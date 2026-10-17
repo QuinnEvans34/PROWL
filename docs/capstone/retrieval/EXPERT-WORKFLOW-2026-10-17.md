@@ -1,5 +1,10 @@
 # First explicit research workflow — October 17, 2026
 
+**Follow-up:** The real single-question integration and same-ID saved-result reuse now pass.
+See [live verification](WORKFLOW-LIVE-CHECK-2026-10-17.md) for cleanup, recovery, route integration,
+current service state and the remaining relevance limitation. Earlier not-started statements below
+describe the initial implementation checkpoint.
+
 Quinton approved the retrieve → select → validate → save slice after the bounded reasoning diagnostic.
 This delivers the local research adapter and visible recovery behavior. It does not close Plan 04/G3,
 select Prefect versus another framework, implement the full imaging DAG, or qualify answer relevance.

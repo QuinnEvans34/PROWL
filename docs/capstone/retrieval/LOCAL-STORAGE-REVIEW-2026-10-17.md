@@ -1,5 +1,12 @@
 # Live workflow storage and Docker cache review — October 17, 2026
 
+**Subsequent decision and outcome:** Quinton explicitly approved deletion. Exactly the37 reviewed
+private cache records were removed;9.162GB reported freed,34 shared records retained. Container,
+image and volume inventories were unchanged; npm cache untouched. Host free space recovered to
+~105.46GiB and normal storage admission passed. Docker sharing recovery and the one-question live
+check completed; see [verification](WORKFLOW-LIVE-CHECK-2026-10-17.md). The original review and
+unapproved preview below are preserved as historical evidence.
+
 The authorized one-question live workflow check has not run. Checked database startup refused
 before Compose because internal free space was95.547GiB against the104GiB admission requirement.
 External free1967.710GiB exceeds408GiB; the configured drive UUID matches. Ollama is available;
