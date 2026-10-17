@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.5 — October 17, 2026 (evaluation draft preparation)\
+**Version:** 1.6 — October 17, 2026 (development label review)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -260,7 +260,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
-| Step 5 / AI-03 | In progress — human gates pending | [30 development drafts and protected-authoring worksheet](DEVELOPMENT-SET-REVIEW-2026-10-17.md); 58 spans, 31 checks, explicit tuning refusal. No protected content created/read and no final split freeze. |
+| Step 5 / AI-03 | In progress — human gates pending | [All-30 follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md); revised v3 draft, four corrected labels, 60 spans; actual offline validation passes. Prior 31 checks retained. First-five relevance feedback recorded separately. No protected content created/read and no final split freeze. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 
 Excluded from this completion plan: training/fine-tuning, autonomous clinical decisions, broad report

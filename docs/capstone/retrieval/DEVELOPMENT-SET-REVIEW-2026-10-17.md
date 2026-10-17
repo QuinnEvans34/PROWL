@@ -1,5 +1,8 @@
 # Development evaluation draft and review checkpoint — October 17, 2026
 
+> Follow-up: [all-30 agent review and four label corrections](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md).
+> Use the revised v3 draft/packet linked there; this preparation checkpoint and its v2 evidence remain historical.
+
 **Disposition:** Step 5 / [AI-03](https://trello.com/c/NctoNxr8) preparation is delivered; the complete
 60-question freeze is **not complete**. Thirty exposed development drafts and a protected-authoring
 worksheet are ready. Quinton's semantic adjudication, second consistency pass and private held-out

@@ -1,0 +1,49 @@
+{
+  "state": "agent_review_complete_human_gates_pending",
+  "parent_content_sha256": "e01f456c7f96e8fce39963277b54709653ad705f9c012f9ce824681404cdaf47",
+  "content_sha256": "ca4dacfe39a429493d56fdf8f7ed0f928d2ec76657ee199eea0ad5ca7387a83e",
+  "reviewer": "same authoring agent; not independent expert review",
+  "cases_reviewed": 30,
+  "changed_cases": [
+    "q:dev2-05",
+    "q:dev2-08",
+    "q:dev2-16",
+    "q:dev2-17"
+  ],
+  "unchanged_cases": 26,
+  "question_wording_and_order_unchanged": true,
+  "span_counts": {
+    "direct": 45,
+    "partial_context": 10,
+    "contradicting_or_limiting": 5
+  },
+  "human_feedback": {
+    "case_ids": [
+      "q:dev2-01",
+      "q:dev2-02",
+      "q:dev2-03",
+      "q:dev2-04",
+      "q:dev2-05"
+    ],
+    "scope": "looked great and relevant",
+    "full_semantic_adjudication_inferred": false,
+    "unseen_case_acceptance_inferred": false
+  },
+  "all_prior_preparation_pins_verified": true,
+  "actual_draft_validation": "passed",
+  "require_ready_exit_code": 1,
+  "ready_for_tuning": false,
+  "protected_content_read": false,
+  "pins": {
+    "configs/evidence/evaluation/development-v2-draft.json": "5faa8cb3a7bbba840ab353f97c906aceeda71bdeb743aa03d498a8fb489e5977",
+    "configs/evidence/evaluation/development-v2-preparation.json": "bc78eb06666210d1b5f6a5350d086baae977219bee88b2a85114a20ccd1f9f65",
+    "configs/evidence/evaluation/development-v3-draft.json": "5a44ee05accdaa8dcd676d6105394ffd33284781f310e486dc2df5bb1fbc87a2",
+    "docs/capstone/contracts/retrieval/development-draft-v1.schema.json": "fa1401800a4550c45157e155551389828f5f331971fe7d7f4297921db4847a51",
+    "src/retrieval/development_set.py": "9c154655eee88cca720947243fda8c1a91dd32689e34d9db7bb8ea9e547aac20",
+    "outputs/prowl/evaluation-review-20261017/validation-v3-final.json": "141c6f8ab82afe1e516d7615ac7fe834899a168c118188c64828ba59c73da6e4",
+    "outputs/prowl/evaluation-review-20261017/tuning-refusal-v3.json": "a3ba72c6107a31ec7f335dd008c30ee0040e9f3111887e70817c6537e768d7bf",
+    "outputs/prowl/evaluation-review-20261017/development-review-v3.html": "17039db903e1e200c3aa547c7c6e51312ba0be42c72a459ab67c90fcae365c3b",
+    "outputs/prowl/evaluation-review-20261017/initial-version-refusal.json": "14cc327afabc67002d4506111694dffa3b7f35f76f18b1d347e19108da8dde08",
+    "outputs/prowl/evaluation-review-20261017/rejected-label-revision-draft.json": "b9c35183c78dfc83b57b2bf8bbe3594138fd8995c52454be800f45dcc6469b87"
+  }
+}

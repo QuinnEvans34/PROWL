@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 follow-up development review:** Quinton found the first five relevant and requested
+> agent review of all 30. Read `DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md`.
+> Revised suite `configs/evidence/evaluation/development-v3-draft.json`: same questions/order,
+> four revised labels (05/08/16/17), 60 spans (45 direct / 10 partial / 5 limiting).
+> Canonical SHA `ca4dacfe39a429493d56fdf8f7ed0f928d2ec76657ee199eea0ad5ca7387a83e`.
+> Current local packet: `outputs/prowl/evaluation-review-20261017/development-review-v3.html`.
+> Actual offline validation passes; v2 draft/receipt/packet preserved. Human relevance feedback
+> for 01–05 is recorded separately, not inferred acceptance of all cases or source-label adjudication.
+> Next human batch 06–10; revisit 05 background and later corrected 16/17. Human consistency review,
+> protected authoring/backup and complete split freeze remain pending; AI-03 In Progress, no tuning.
+
 > **October 17 Step 5 / AI-03 preparation delivered; HUMAN GATES PENDING:** Read
 > `DEVELOPMENT-SET-REVIEW-2026-10-17.md` and `PROTECTED-EVALUATION-AUTHORING.md`.
 > `configs/evidence/evaluation/development-v2-draft.json` contains 30 exposed drafts: 20 answerable,
