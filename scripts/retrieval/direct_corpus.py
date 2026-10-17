@@ -65,7 +65,7 @@ def ingest(c,args):
         initialize(db)
         for path in args.sources:
             if time.monotonic()-start>args.seconds:raise TimeoutError('Ingestion time limit')
-            bundle=source_bundle(path)
+            bundle=source_bundle(path, profile=getattr(args, 'source_profile', 'legacy-v1'))
             write_once(root/(bundle['revision']['revision_id'].replace(':','-')+'.json'),bundle)
             rows=list(encoder_passages(bundle,enc))
             for offset in range(0,len(rows),args.batch_size):
@@ -98,6 +98,7 @@ def main():
     sub=p.add_subparsers(dest='action',required=True)
     sub.add_parser('start');sub.add_parser('stop')
     i=sub.add_parser('ingest');i.add_argument('--sources',nargs='+',required=True);i.add_argument('--artifacts',required=True)
+    i.add_argument('--source-profile',choices=('legacy-v1','coverage-v1'),default='legacy-v1')
     i.add_argument('--collection',default='research-v1');i.add_argument('--batch-size',type=int,default=32)
     i.add_argument('--seconds',type=float,default=300);i.add_argument('--max-batches',type=int,default=0)
     l=sub.add_parser('load');l.add_argument('--batches',nargs='+',required=True);l.add_argument('--collection',required=True)

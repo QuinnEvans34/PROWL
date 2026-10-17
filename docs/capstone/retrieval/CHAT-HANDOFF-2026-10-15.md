@@ -1,5 +1,22 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 Step 4 / bounded corpus freeze COMPLETE:** Read
+> `CORPUS-FREEZE-2026-10-17.md` and completion-spec v1.4. Separate `research-coverage-v1`
+> has 7 CC BY 4.0 sources / 693 passages / 23 batches, SHA
+> `17f65adda92c288e9bfc587cd7edbb195cf75e232a44929296393954edb5b681`.
+> Exact second-collection rebuild / three guided queries pass; 35 offline checks pass, four opt-in
+> DB checks skipped. All seven raw-source extractions exactly reproduce bundles; 25 frozen needs /
+> 60 anchors verified. Coverage: 6 direct / 15 partial / 4 gaps, agent-authored, not gold labels.
+> New opt-in extraction profile permits exact JATS header without DTD resolution and excludes named
+> admin/non-prose content; provisional refusals/artifacts retained. Original 274-passage demo unchanged;
+> UI/workflow health/Ollama model-list respond, no service restart or generation. Public manifests in
+> `configs/evidence/{corpus-coverage-v1,coverage-matrix-v1}.json`; private receipts/raw text under
+> `outputs/prowl/corpus-freeze-20261017/`. W02-07 closes bounded scope; W05-02 roll-up remains open.
+> **Next Step 5 / AI-03:** development cases, protected-authoring template, label/adjudication freeze.
+> Quinton owns held-out authoring/storage; do not read or manufacture protected content. Full selector,
+> training and human hours untouched. Earlier next-step statements below are historical.
+
+
 **October17 Step3 literature workflow qualified:**
 [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md): corpus inventory/catalog now pinned;
 repeatable-read verification before retrieval; unchanged storage floors enforced before attempts/stages.

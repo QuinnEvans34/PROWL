@@ -14,7 +14,9 @@ remaining literature feature work. AI-01 contracts/acceptance are complete for t
 scope (83 checks); AI-02 comparison is complete but rejected for quality (4/7 clean, 2/3 required
 abstentions). [Step 3 literature DAG/rebuild qualification](../retrieval/LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md)
 is complete for the bounded adapter: 63 Python/three imaging checks, exact 274-passage rebuild and
-three-query parity. Step 4 coverage review/corpus freeze is next; broader G3 stays open. A bounded two-review
+three-query parity. [Step 4 bounded corpus freeze](../retrieval/CORPUS-FREEZE-2026-10-17.md) is complete:
+seven sources / 693 passages, exact rebuild; 6 directly supported needs / 15 partial / 4 gaps.
+Step 5 / AI-03 evaluation authoring and protected-template preparation is next; broader G3 stays open. A bounded two-review
 pgvector demo and recoverable research workflow have been delivered; quality and final integration
 remain open. W02-06 full selection is parked, so the historical full-selection-first sequence below
 is not the current execution instruction. W02-07/W05-02 can cover an explicitly bounded permitted

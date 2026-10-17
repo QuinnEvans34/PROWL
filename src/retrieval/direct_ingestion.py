@@ -17,6 +17,25 @@ from .records import canonical_bytes, make_revision, make_work, make_rights, may
 LICENSE = 'https://creativecommons.org/licenses/by/4.0/'
 XLINK = '{http://www.w3.org/1999/xlink}href'
 DIMENSIONS = 384
+SOURCE_PROFILES = ('legacy-v1', 'coverage-v1')
+JATS_HEADER = b'<!DOCTYPE article\n  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">'
+ADMIN_SECTIONS = {'acknowledgments', 'acknowledgements', 'author contributions', 'funding',
+    'institutional review board statement', 'informed consent statement', 'conflicts of interest',
+    'conflict of interest statement', 'ethics statement', 'contributor information',
+    'data availability statement', 'footnotes'}
+NON_PROSE = {'table-wrap', 'fig', 'supplementary-material', 'ref-list'}
+
+
+def prose_text(node):
+    """Exclude embedded non-prose while retaining the surrounding paragraph text."""
+    parts = [node.text or '']
+    for child in node:
+        if child.tag not in NON_PROSE:
+            parts.append(prose_text(child))
+        else:
+            parts.append(' ')
+        parts.append(child.tail or '')
+    return ''.join(parts)
 
 
 def digest(value):
@@ -27,11 +46,17 @@ def text(element):
     return ''.join(element.itertext()).strip() if element is not None else ''
 
 
-def source_bundle(path):
+def source_bundle(path, *, profile='legacy-v1'):
     raw = Path(path).read_bytes()
-    if len(raw) > 32 * 1024**2 or b'<!DOCTYPE' in raw.upper() or b'<!ENTITY' in raw.upper():
+    if profile not in SOURCE_PROFILES:
+        raise ValueError('Unknown source extraction profile')
+    parsed = raw
+    if profile == 'coverage-v1' and parsed.lstrip().startswith(JATS_HEADER):
+        # Exact declaration only; never fetch a DTD or resolve an entity. Identity uses raw bytes.
+        parsed = parsed.lstrip()[len(JATS_HEADER):]
+    if len(raw) > 32 * 1024**2 or b'<!DOCTYPE' in parsed.upper() or b'<!ENTITY' in parsed.upper():
         raise ValueError('Oversized or entity-bearing XML refused')
-    root = ET.fromstring(raw)
+    root = ET.fromstring(parsed)
     meta = root.find('./front/article-meta')
     if meta is None or root.get('article-type') in ('retraction', 'correction', 'expression-of-concern'):
         raise ValueError('Unsupported or notice article')
@@ -54,12 +79,16 @@ def source_bundle(path):
         if parent is None:
             continue
         def walk(node, heading):
-            if node.tag in ('table-wrap', 'fig', 'supplementary-material', 'ref-list'):
+            if node.tag in NON_PROSE:
+                return
+            if profile == 'coverage-v1' and node.tag in ('ack', 'fn-group', 'fn', 'bio', 'contrib-group', 'notes'):
                 return
             if node.tag == 'sec':
                 heading = text(node.find('title')) or heading
+                if profile == 'coverage-v1' and heading.strip().lower() in ADMIN_SECTIONS:
+                    return
             if node.tag == 'p':
-                value = text(node)
+                value = prose_text(node).strip() if profile == 'coverage-v1' else text(node)
                 if value:
                     sections.append(dict(section_id=f'{region}-{len(sections)}', title=heading, paragraphs=[value]))
                 return
@@ -76,8 +105,11 @@ def source_bundle(path):
         year=text(meta.find('./pub-date/year')), url=f'https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/',
         license_url=LICENSE, attribution=text(meta.find('./permissions/copyright-statement')),
         notice_scope='retained_source_snapshot_only')
-    return dict(work=work, revision=revision, representation=rep, rights=rights, citation=citation,
+    result = dict(work=work, revision=revision, representation=rep, rights=rights, citation=citation,
                 source_sha256=hashlib.sha256(raw).hexdigest(), original_sections=sections)
+    if profile != 'legacy-v1':
+        result['extraction_profile'] = profile
+    return result
 
 
 def source_passages(bundle):

@@ -1,0 +1,957 @@
+{
+  "version": "prowl-coverage-matrix-v1",
+  "date": "2026-10-17",
+  "needs": {
+    "path": "docs/capstone/retrieval/planning/INFORMATION-NEEDS.md",
+    "sha256": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+    "bytes": 9759
+  },
+  "corpus_manifest": {
+    "path": "configs/evidence/corpus-coverage-v1.json",
+    "sha256": "33043b9fb8253aa64c70db84460b32d76921a79517f98de4dfb621d894ef50c6",
+    "bytes": 37901
+  },
+  "method": "Exposed agent-authored paragraph-level coverage review; not human-adjudicated gold labels. Gaps mean adequate support was not identified in this bounded retained corpus, not that evidence does not exist.",
+  "status_definitions": {
+    "direct": "Direct study-specific support identified for the need; not exhaustive or universally generalizable.",
+    "partial": "Support exists only for a subset or adjacent/general workflow context; preserve the stated missing part.",
+    "gap": "Adequate support for the stated need was not identified; do not infer an answer from adjacent material."
+  },
+  "counts": {
+    "direct": 6,
+    "partial": 15,
+    "gap": 4
+  },
+  "rows": [
+    {
+      "need_id": "N1.1",
+      "status": "direct",
+      "scope_and_limit": "General boundary difficulty; no judgment about a displayed lesion.",
+      "anchors": [
+        {
+          "pmcid": "PMC8997008",
+          "representation_id": "repr:996abb62a0ac3895445274649db2875efb402ed90db948c46bc1535d7c3d85db",
+          "section_id": "body-38",
+          "start": 51755,
+          "end": 53922,
+          "text_sha256": "d40164c5a77cbe9c921dc2f4311151d7c5c4c0dcb5b38630cedff6ad09bad05b",
+          "passage_ids": [
+            "psg:de4b1c4b1207c65b6cfa9c56a49dc600a83eb5ffa0d82cc5408695361599f56b",
+            "psg:b4093d6b86fb067c527f21f22a92c93bc72aee3d45ba6035e89dc28c6d4e88b1",
+            "psg:8071946aed7c98a576c4760ab9c9a0ad4f03afe4cde33bd4e6fa41aa477167dc",
+            "psg:9c172b834be73c53c8959e173cb546315e8d5fd63bc68613b500201d7f273b73",
+            "psg:a45ca9b3419d5c34a5dacb6c5981a6c90983db1667d6c58b29afdeee004fcc8f",
+            "psg:96662cc39948fbb0fc88d3208fa1a2b43b2688d59999385bd302ccef8919a8e9"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-40",
+          "start": 30819,
+          "end": 32814,
+          "text_sha256": "83b117f79e83d37e0cfa1d53e7845e235510eebb1ac067b11b4f7fe6a58728dd",
+          "passage_ids": [
+            "psg:fd7cd551b6fccd2349511f1e2e29811d9fe67732351ac992e217c7d030a4aa95",
+            "psg:af132575294ea5dcff3edd942a83206a0ce85f8edd83115c0d1944d1da19e19d",
+            "psg:52cc89b1ad95fd682a27d0fb19ae6bca267eae79465476ea7b179fc79754206b",
+            "psg:022cb4b34f73d5c4b83a4146a2bbde4fb5ad7df5410a4ee2b8367846bf8ddbeb",
+            "psg:bb234eb00f6445faebd76f98d5a01abc00b200b42abd1b1dc4dab9122c0bda8a"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N1.2",
+      "status": "partial",
+      "scope_and_limit": "Specific phase/protocol description; no controlled optimum or current-patient scan recommendation.",
+      "anchors": [
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-13",
+          "start": 6710,
+          "end": 7399,
+          "text_sha256": "59091f5051aa30aa9118fa7c62a33ee70347fbca5b4b6b0d120c8adbabafc138",
+          "passage_ids": [
+            "psg:e65f2dabba2fced1c77973f0a8a219bdae4b0880c7f8a789e31262c36aa06f1f",
+            "psg:741e67d0701c65f46166ab22d64e9e8bf21ce42bc55336dfb3a0c0f2147aafe8"
+          ]
+        },
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-15",
+          "start": 8207,
+          "end": 9088,
+          "text_sha256": "c7806ddc6de4fca219e43a68263cd4d536f6c6c27846149ca87072cfd72aae18",
+          "passage_ids": [
+            "psg:d61b064245da457316f056a471acf186721d898cfb003f40a2e1c6c124aa2d06",
+            "psg:0cf22765880ef62c683b056e04c620bc152fb2840310a180797d90b1c00f3f76"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N1.3",
+      "status": "direct",
+      "scope_and_limit": "Study-defined isoattenuation and detection limitations; no patient classification.",
+      "anchors": [
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-4",
+          "start": 2441,
+          "end": 3095,
+          "text_sha256": "38549ecdc4689edd7c99b1242c6e28a8a0ad5b8cc2a969d81df81a34a9819121",
+          "passage_ids": [
+            "psg:02ec62abb0b23f7a02c5ba4c59a16d41159ab58a3408731259e26ba3131564d0",
+            "psg:866841c35b200aaaa415d9f2ba9f9ed5a65f1d3cf150166c1a10101fda101f12"
+          ]
+        },
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-15",
+          "start": 8207,
+          "end": 9088,
+          "text_sha256": "c7806ddc6de4fca219e43a68263cd4d536f6c6c27846149ca87072cfd72aae18",
+          "passage_ids": [
+            "psg:d61b064245da457316f056a471acf186721d898cfb003f40a2e1c6c124aa2d06",
+            "psg:0cf22765880ef62c683b056e04c620bc152fb2840310a180797d90b1c00f3f76"
+          ]
+        },
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-36",
+          "start": 20344,
+          "end": 21916,
+          "text_sha256": "fece11de25d3a7a8cb547a6d32aada9c9845f101dc7a9e14ba82d3ad322c7fd8",
+          "passage_ids": [
+            "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937",
+            "psg:efc79fa74ffcf82cabd648074f8f9195119a303baf6c56116ea0d28282fa572c",
+            "psg:5e3511f9763354b3cbba920d63b60f36f56fba1f15f8d7aba1908645a56c730f",
+            "psg:a84cfbdc456fa38302ac7295a01760213a41fb11a5d7b308d5eec367b9d4c99d"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N1.4",
+      "status": "partial",
+      "scope_and_limit": "Indirect localization and selected-cohort limitations; indirect signs do not establish an exact boundary.",
+      "anchors": [
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-15",
+          "start": 8207,
+          "end": 9088,
+          "text_sha256": "c7806ddc6de4fca219e43a68263cd4d536f6c6c27846149ca87072cfd72aae18",
+          "passage_ids": [
+            "psg:d61b064245da457316f056a471acf186721d898cfb003f40a2e1c6c124aa2d06",
+            "psg:0cf22765880ef62c683b056e04c620bc152fb2840310a180797d90b1c00f3f76"
+          ]
+        },
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-21",
+          "start": 11888,
+          "end": 12616,
+          "text_sha256": "54c90e2128d24428f434eff9bbb58c777aae1a817d5ff5965020349f0d42799a",
+          "passage_ids": [
+            "psg:4d794b5f6e57eb818954b835bd2f6d2551714e2a08561f7fe3727a95fe711bf1",
+            "psg:47f90de58549c433289c9382e96d370672bc1367aa781479bbbfe3e1f23e8332"
+          ]
+        },
+        {
+          "pmcid": "PMC8145900",
+          "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+          "section_id": "body-36",
+          "start": 20344,
+          "end": 21916,
+          "text_sha256": "fece11de25d3a7a8cb547a6d32aada9c9845f101dc7a9e14ba82d3ad322c7fd8",
+          "passage_ids": [
+            "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937",
+            "psg:efc79fa74ffcf82cabd648074f8f9195119a303baf6c56116ea0d28282fa572c",
+            "psg:5e3511f9763354b3cbba920d63b60f36f56fba1f15f8d7aba1908645a56c730f",
+            "psg:a84cfbdc456fa38302ac7295a01760213a41fb11a5d7b308d5eec367b9d4c99d"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N1.5",
+      "status": "partial",
+      "scope_and_limit": "Fixed acquisition, partial-volume and motion/processing limitations; no complete artifact/noise delineation study.",
+      "anchors": [
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-16",
+          "start": 18268,
+          "end": 20197,
+          "text_sha256": "33b8de2eb2226313d9c33f43ed5ebee88c47fe3629b8da8249d8f39afbabaac1",
+          "passage_ids": [
+            "psg:7edc9c9125e26204e8cba2f67a625d3de5512a3ad8b28a8be8ff44aec9b217fb",
+            "psg:162ae057d2bf20c997a08a4ea1ad530bf8334f47b2e3287f353e0a3b0ee224c5",
+            "psg:7d24427a9a2f624001d838bef662a380c42df612ae342aabac3c9ddf310604bd",
+            "psg:d041abba78b3190799efd8a6ccdfc5c16154d32742d0f1240c277f5351eef499",
+            "psg:ee1f79e762a4480a369a5a2f4fbfb65058ae61f7ddc95486aa9cbebe4cec367f"
+          ]
+        },
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-19",
+          "start": 21969,
+          "end": 22456,
+          "text_sha256": "711b0867112f11cb3eaebb2411846fa201d57fff95f2196501ae1d3084fca285",
+          "passage_ids": [
+            "psg:a3c4630ab185572de3a51a466ae6e937ebf10e6db8bb996d2d8f4184ed41f9e4"
+          ]
+        },
+        {
+          "pmcid": "PMC8997008",
+          "representation_id": "repr:996abb62a0ac3895445274649db2875efb402ed90db948c46bc1535d7c3d85db",
+          "section_id": "body-36",
+          "start": 49107,
+          "end": 50851,
+          "text_sha256": "8ddaa9f14b935eebb1c29026c4166fa1ae28f3fce4aeb2652aa6d29c7923377b",
+          "passage_ids": [
+            "psg:147ccc1611e7a185b49f69f42a084a4ec66fcb15d482768fd3775436360087ae",
+            "psg:413c31fede557c6c7e3dba46f1fc5e1f720865b5e52c8669a0bf8fe97f5d21dc",
+            "psg:b61a8978b1ae5caf6a4e6ab8ef2737a2f134e6752e2de781844fc61a209f5ff4",
+            "psg:a0ec1a6891cfb187073975b86eeb80f6f31b7a5efeae106c07fa182336bebed1",
+            "psg:efb8378c55a396bda2c7b3b426e97345b929d3f3eca98573e75a2b88b499dc24"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N2.1",
+      "status": "partial",
+      "scope_and_limit": "Volume outlining and general shape features; a reproducible CT lesion diameter convention is missing.",
+      "anchors": [
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-5",
+          "start": 6754,
+          "end": 7456,
+          "text_sha256": "455da788f60a75cd78451cc1c24dce3170633d04c6ed8e5ac2773b1a4053431a",
+          "passage_ids": [
+            "psg:f85c2aaea602f91120552c4c6fe957f8d5b85eddb1304e9c5143f8a5d31a8623",
+            "psg:5669fa705129190625c15c851e6f1c2ebbd5deff2abe1a74f7943cb89b6a17ae"
+          ]
+        },
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-20",
+          "start": 22458,
+          "end": 23517,
+          "text_sha256": "794752033b5b35a3f4f53efa57dc503ecb2601bd3df9f548c0e41a37136954b4",
+          "passage_ids": [
+            "psg:50531ff972f03e300286f6e3153db4b0f946dd7f4288cd06b76f6e56592fe3fb",
+            "psg:48eb12848fc019af9246851bf407e60f52957dd6a47daf2ce0516130af409e88"
+          ]
+        },
+        {
+          "pmcid": "PMC8997008",
+          "representation_id": "repr:996abb62a0ac3895445274649db2875efb402ed90db948c46bc1535d7c3d85db",
+          "section_id": "body-14",
+          "start": 16213,
+          "end": 18527,
+          "text_sha256": "ad2ce06f53aad1288fdb27e2525790a0cb686d1e567be4fa5d834b610a1b7078",
+          "passage_ids": [
+            "psg:9e14e283159b98c668385c1ad4b71c73bf16671d8b26509366e822a3eb110da9",
+            "psg:bf4d64093fcdd83ba8434ba3e60310ac9eca319ad51fb79d6f6241fc23d43050",
+            "psg:c1dd42037e9595c38a33c1a71a09626b6f0f63117b51451acf80f59850be89a7",
+            "psg:54ad8108594045e3023e760aad6a0271fb0706bdc30c599200a2e6cd2bd948fe",
+            "psg:f1ef096f12d5accef627fb1e6763f025289dc7bcbcd606e9c8847df8de0d1c82",
+            "psg:f69cf510465a35b33ed6305c5926a2c377d8ec71f1c958fc676d920d2c5d5046"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N2.2",
+      "status": "direct",
+      "scope_and_limit": "Study-specific inter- and intra-reader agreement with reader/sample/metric conditions.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-8",
+          "start": 7377,
+          "end": 8364,
+          "text_sha256": "5712d5e54e3369733cc6ce8afffea981d49eb2192bed57be38c7f02929f0667c",
+          "passage_ids": [
+            "psg:b93e0689b2458b99d3e8ab56ab56b706dda295bde368cc5982f628d0d29ad2f1",
+            "psg:74c76779f102588aa73970c61e7f94e709db61f54321e2e1ea7ca9407a6e27da",
+            "psg:61855a094e3c4d4fbd20a5daf8017a8918e42f880c30e1806ceeac85f7a74f25"
+          ]
+        },
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-6",
+          "start": 7458,
+          "end": 8631,
+          "text_sha256": "b475aa9e060ceb49dd590f4ad1efed992addee8b442125642e53e8f51441f5d1",
+          "passage_ids": [
+            "psg:d29a9bba63549e0b8d06bd24286fe9e25d26d0fe390bcba45e4fb3e8653b4e21",
+            "psg:4889cd43b05171ad67e7d307813e18f349b99f0fb0b191799ae5fe252018ca8e",
+            "psg:fed09a425a6a6c7523a2835b853106c5055f3a04476a059521557ac0d00a8b58"
+          ]
+        },
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-16",
+          "start": 18268,
+          "end": 20197,
+          "text_sha256": "33b8de2eb2226313d9c33f43ed5ebee88c47fe3629b8da8249d8f39afbabaac1",
+          "passage_ids": [
+            "psg:7edc9c9125e26204e8cba2f67a625d3de5512a3ad8b28a8be8ff44aec9b217fb",
+            "psg:162ae057d2bf20c997a08a4ea1ad530bf8334f47b2e3287f353e0a3b0ee224c5",
+            "psg:7d24427a9a2f624001d838bef662a380c42df612ae342aabac3c9ddf310604bd",
+            "psg:d041abba78b3190799efd8a6ccdfc5c16154d32742d0f1240c277f5351eef499",
+            "psg:ee1f79e762a4480a369a5a2f4fbfb65058ae61f7ddc95486aa9cbebe4cec367f"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N2.3",
+      "status": "gap",
+      "scope_and_limit": "No adequate diameter-versus-volume comparison identified. General shape-feature mention is insufficient.",
+      "anchors": []
+    },
+    {
+      "need_id": "N2.4",
+      "status": "partial",
+      "scope_and_limit": "Research contour extent, independent outlining and adjudication; not a complete internal-appearance protocol.",
+      "anchors": [
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-20",
+          "start": 22458,
+          "end": 23517,
+          "text_sha256": "794752033b5b35a3f4f53efa57dc503ecb2601bd3df9f548c0e41a37136954b4",
+          "passage_ids": [
+            "psg:50531ff972f03e300286f6e3153db4b0f946dd7f4288cd06b76f6e56592fe3fb",
+            "psg:48eb12848fc019af9246851bf407e60f52957dd6a47daf2ce0516130af409e88"
+          ]
+        },
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-21",
+          "start": 23519,
+          "end": 23826,
+          "text_sha256": "411692819068bea8d24efdc0f9b229b16e97f3e0cc3f6d65680c8cac1f92a725",
+          "passage_ids": [
+            "psg:3aaf945759c3bdb7c5358050069084f0ada3aa92d40f9e2274f95e1b345bcc3b"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-7",
+          "start": 6278,
+          "end": 7375,
+          "text_sha256": "4ccec3538fa4e29f237d8b102311cdbcbc0e7ba9ecd9d30045526fb489a5842b",
+          "passage_ids": [
+            "psg:b783fe8d845e847fa34a3924c15071db76e8787b3474a7ac86e04474f6f0b39a",
+            "psg:7efdacb2237292cfe126a4f68121a12fcf73aa924dd9af46279c712856c30216",
+            "psg:c2d9dee902b32fc651342d175074757245be33f201de581e8155808c656c9cb2"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N3.1",
+      "status": "partial",
+      "scope_and_limit": "Adjacency context only; not evidence of which neighbouring structures are commonly confused.",
+      "anchors": [
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-11",
+          "start": 9672,
+          "end": 10516,
+          "text_sha256": "d82b0087e7dd2f12527f8b7add49b3f68d20d74593c0a1b94376782e2fbe34f1",
+          "passage_ids": [
+            "psg:baa64c457cae269ce83843795c2afd18149fc4455e0e99b6d91b1cee21f53d50",
+            "psg:50ccd3ef93f6dd6a0cd58678e731a3d546e7a64c2d353be24fb4295ad5f615c3"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N3.2",
+      "status": "partial",
+      "scope_and_limit": "Study-specific subregion heuristics and annotation; no universal boundary convention or full landmark consensus.",
+      "anchors": [
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-9",
+          "start": 8640,
+          "end": 9408,
+          "text_sha256": "30176b164762a5aca09b6dde497c4afd74bb7e9330ef3593843728588bba25bb",
+          "passage_ids": [
+            "psg:ce9cecad171dc5632f56356621b9a7a2e075b2dbaa6679a14dd34ee160567619",
+            "psg:513263fa4c51df62a711138c548025b57b4627fb440b7a68844dade882e77ad9"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-10",
+          "start": 9410,
+          "end": 9670,
+          "text_sha256": "2a761dec94790e7f3126aca8e0743189b5697e024f1d1cab5d1158c98000a18a",
+          "passage_ids": [
+            "psg:63c56a99191ecfd727d8e75596d97f7e70078cdcedb422c963af21e52b3624ab"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-11",
+          "start": 9672,
+          "end": 10516,
+          "text_sha256": "d82b0087e7dd2f12527f8b7add49b3f68d20d74593c0a1b94376782e2fbe34f1",
+          "passage_ids": [
+            "psg:baa64c457cae269ce83843795c2afd18149fc4455e0e99b6d91b1cee21f53d50",
+            "psg:50ccd3ef93f6dd6a0cd58678e731a3d546e7a64c2d353be24fb4295ad5f615c3"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-12",
+          "start": 10518,
+          "end": 11372,
+          "text_sha256": "0786ab5209b5280452fc1c8d52529b5e78c6e43c91e612d077235456551b8597",
+          "passage_ids": [
+            "psg:ce12eb10f1f8dddb0f750d432c8122b91cab2e2dd12655d2fad010fb40442001",
+            "psg:27658d769da1df9783826930a40262fd62925756e76e1af171de0166b84d9aaa"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N3.3",
+      "status": "gap",
+      "scope_and_limit": "Normal aging/fat-related contour variation lacks adequate retained support; candidate outside current rights profile.",
+      "anchors": []
+    },
+    {
+      "need_id": "N3.4",
+      "status": "gap",
+      "scope_and_limit": "No verified duct inclusion/exclusion contour rule. Attenuation ROI exclusions and duct signs are different tasks.",
+      "anchors": []
+    },
+    {
+      "need_id": "N4.1",
+      "status": "partial",
+      "scope_and_limit": "Low-overlap failure frequency; lacks a spatial false-positive/error-region taxonomy.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-38",
+          "start": 29203,
+          "end": 30219,
+          "text_sha256": "e1f7b661006047dea377accdbca8a12e9cf0114e2d6ad93abcc65ff2662c30d0",
+          "passage_ids": [
+            "psg:975a5ae8dc17b8db97906f4a58b060c5860be6d84fb99600f039155385f95e77",
+            "psg:9f7f66192e1c37588f5a5bf70c402e94b79e9ffeefa82ff464016c096b024607",
+            "psg:8ba02340400ae21e86976704e99a7ade8c8a3dd80fbc1e2cea0230d7e02fe6a2"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N4.2",
+      "status": "partial",
+      "scope_and_limit": "Reported difficult appearances and cohort limitations; no causal size/appearance failure analysis.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-40",
+          "start": 30819,
+          "end": 32814,
+          "text_sha256": "83b117f79e83d37e0cfa1d53e7845e235510eebb1ac067b11b4f7fe6a58728dd",
+          "passage_ids": [
+            "psg:fd7cd551b6fccd2349511f1e2e29811d9fe67732351ac992e217c7d030a4aa95",
+            "psg:af132575294ea5dcff3edd942a83206a0ce85f8edd83115c0d1944d1da19e19d",
+            "psg:52cc89b1ad95fd682a27d0fb19ae6bca267eae79465476ea7b179fc79754206b",
+            "psg:022cb4b34f73d5c4b83a4146a2bbde4fb5ad7df5410a4ee2b8367846bf8ddbeb",
+            "psg:bb234eb00f6445faebd76f98d5a01abc00b200b42abd1b1dc4dab9122c0bda8a"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-23",
+          "start": 19387,
+          "end": 20222,
+          "text_sha256": "c0e9f3a794cda8864c619a3cb25952133294b7332641d1d6d60bf34ff59ec18a",
+          "passage_ids": [
+            "psg:48773c7244419314c6061711ffc18b1147525b7ac5011852bfa48a192ffd0767",
+            "psg:224ad8f951295d8cafbbafaf646ec79c34462df0ee0f0220af2f1e843d00880b"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-27",
+          "start": 22549,
+          "end": 23125,
+          "text_sha256": "0fd5dc9f3829151782d65c698463b1d2282b91b0bd46649ddfe0b5fb658fa63d",
+          "passage_ids": [
+            "psg:90a15bd151811a3da4272a3c3bdbb1af30573620bd7f938926b6cf5b61eb32d3"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N4.3",
+      "status": "direct",
+      "scope_and_limit": "Patient-split and held-center evidence under specified prompting; broader populations remain unproven.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-19",
+          "start": 12978,
+          "end": 13902,
+          "text_sha256": "3f17a75b8b66dc9e510d28f07c79248a8b3f5ec870d89489b77b12ed2b790986",
+          "passage_ids": [
+            "psg:50b39e8335d9b738a038e8bd258cef69880996cbab552c79cb409e2eb5f4bea5",
+            "psg:ae1153f05b9362ec8fa978b5bca954b87eb51cd1924afd420a2da6618bae3dd6"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-21",
+          "start": 14443,
+          "end": 15271,
+          "text_sha256": "598834483ce01676f6c98855a33d6da3e198e06468c3bb5852ef81820086ce8b",
+          "passage_ids": [
+            "psg:9f58ae3b663a9aec82887da861c101ae1c72cc8d997f7fdc4e33c05a5cc37b58",
+            "psg:d8daf0b76c73c757077271bb54c0e1361bf9fbef9885941f38cdab082daaf50c"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-29",
+          "start": 20679,
+          "end": 21666,
+          "text_sha256": "837b9204a642cd51cc6905411663b2993fe2017d4e7335e16ba926613506f6a9",
+          "passage_ids": [
+            "psg:7f14a76af00dae96170c632f326dc3732196abd7feab5e9555e89bb04e4bdaeb",
+            "psg:7b6298f59153507efd2b7dfdd9ef7c64ab895451532efd3584ffd3d769e58611"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-35",
+          "start": 26806,
+          "end": 27387,
+          "text_sha256": "770ecea85407cb2d3bc5f8d0c1b7da700ac5a9803fd849bc22f537af2564bca1",
+          "passage_ids": [
+            "psg:273f0764345fd38afeadbce2e968bfd4766df3f58fc17f7aa9607c613b598956"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-40",
+          "start": 30819,
+          "end": 32814,
+          "text_sha256": "83b117f79e83d37e0cfa1d53e7845e235510eebb1ac067b11b4f7fe6a58728dd",
+          "passage_ids": [
+            "psg:fd7cd551b6fccd2349511f1e2e29811d9fe67732351ac992e217c7d030a4aa95",
+            "psg:af132575294ea5dcff3edd942a83206a0ce85f8edd83115c0d1944d1da19e19d",
+            "psg:52cc89b1ad95fd682a27d0fb19ae6bca267eae79465476ea7b179fc79754206b",
+            "psg:022cb4b34f73d5c4b83a4146a2bbde4fb5ad7df5410a4ee2b8367846bf8ddbeb",
+            "psg:bb234eb00f6445faebd76f98d5a01abc00b200b42abd1b1dc4dab9122c0bda8a"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N4.4",
+      "status": "gap",
+      "scope_and_limit": "No validated segmentation confidence/calibration method identified. A statement that uncertainty was not evaluated is insufficient.",
+      "anchors": []
+    },
+    {
+      "need_id": "N4.5",
+      "status": "partial",
+      "scope_and_limit": "Reference-crop and prompt dependencies; no matched causal ablation of localization error propagation.",
+      "anchors": [
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-17",
+          "start": 14683,
+          "end": 15218,
+          "text_sha256": "e21dbd95e7737182d86d9d37ef03a707979a262dd2356ec8e727b58833ae4a67",
+          "passage_ids": [
+            "psg:1bd6b8450d59661933e9910c05d53f9e0b3b7e38e8e906ce0a9162d28af4a48c"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-27",
+          "start": 22549,
+          "end": 23125,
+          "text_sha256": "0fd5dc9f3829151782d65c698463b1d2282b91b0bd46649ddfe0b5fb658fa63d",
+          "passage_ids": [
+            "psg:90a15bd151811a3da4272a3c3bdbb1af30573620bd7f938926b6cf5b61eb32d3"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-21",
+          "start": 14443,
+          "end": 15271,
+          "text_sha256": "598834483ce01676f6c98855a33d6da3e198e06468c3bb5852ef81820086ce8b",
+          "passage_ids": [
+            "psg:9f58ae3b663a9aec82887da861c101ae1c72cc8d997f7fdc4e33c05a5cc37b58",
+            "psg:d8daf0b76c73c757077271bb54c0e1361bf9fbef9885941f38cdab082daaf50c"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N4.6",
+      "status": "direct",
+      "scope_and_limit": "Explicit target, metrics, splits and prompting conditions; reference-derived prompts are not autonomous detection.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-19",
+          "start": 12978,
+          "end": 13902,
+          "text_sha256": "3f17a75b8b66dc9e510d28f07c79248a8b3f5ec870d89489b77b12ed2b790986",
+          "passage_ids": [
+            "psg:50b39e8335d9b738a038e8bd258cef69880996cbab552c79cb409e2eb5f4bea5",
+            "psg:ae1153f05b9362ec8fa978b5bca954b87eb51cd1924afd420a2da6618bae3dd6"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-21",
+          "start": 14443,
+          "end": 15271,
+          "text_sha256": "598834483ce01676f6c98855a33d6da3e198e06468c3bb5852ef81820086ce8b",
+          "passage_ids": [
+            "psg:9f58ae3b663a9aec82887da861c101ae1c72cc8d997f7fdc4e33c05a5cc37b58",
+            "psg:d8daf0b76c73c757077271bb54c0e1361bf9fbef9885941f38cdab082daaf50c"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-22",
+          "start": 15273,
+          "end": 15517,
+          "text_sha256": "4cf721aadcfef10517196708d336d7987a3f2d702256bfbc13c2bf35d5feb8a4",
+          "passage_ids": [
+            "psg:d11821357617378d326dab5b4aa931fc53fa37796b75f0ea445424e7e89662ff"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-29",
+          "start": 20679,
+          "end": 21666,
+          "text_sha256": "837b9204a642cd51cc6905411663b2993fe2017d4e7335e16ba926613506f6a9",
+          "passage_ids": [
+            "psg:7f14a76af00dae96170c632f326dc3732196abd7feab5e9555e89bb04e4bdaeb",
+            "psg:7b6298f59153507efd2b7dfdd9ef7c64ab895451532efd3584ffd3d769e58611"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-40",
+          "start": 30819,
+          "end": 32814,
+          "text_sha256": "83b117f79e83d37e0cfa1d53e7845e235510eebb1ac067b11b4f7fe6a58728dd",
+          "passage_ids": [
+            "psg:fd7cd551b6fccd2349511f1e2e29811d9fe67732351ac992e217c7d030a4aa95",
+            "psg:af132575294ea5dcff3edd942a83206a0ce85f8edd83115c0d1944d1da19e19d",
+            "psg:52cc89b1ad95fd682a27d0fb19ae6bca267eae79465476ea7b179fc79754206b",
+            "psg:022cb4b34f73d5c4b83a4146a2bbde4fb5ad7df5410a4ee2b8367846bf8ddbeb",
+            "psg:bb234eb00f6445faebd76f98d5a01abc00b200b42abd1b1dc4dab9122c0bda8a"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-17",
+          "start": 14683,
+          "end": 15218,
+          "text_sha256": "e21dbd95e7737182d86d9d37ef03a707979a262dd2356ec8e727b58833ae4a67",
+          "passage_ids": [
+            "psg:1bd6b8450d59661933e9910c05d53f9e0b3b7e38e8e906ce0a9162d28af4a48c"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.1",
+      "status": "partial",
+      "scope_and_limit": "General prostate radiotherapy review evidence; cannot infer pancreatic clinical safety or full error detection.",
+      "anchors": [
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-47",
+          "start": 23538,
+          "end": 24664,
+          "text_sha256": "368429d9ea42e12c6977624a45bdf721b912f2c8ef6df2bf27fc8c61e338ba10",
+          "passage_ids": [
+            "psg:ec95f7fec0ffabd628d087a5bfcc9484dddae47d1ed10960f8e3d6595f18c7c1",
+            "psg:c451829f660f1006a3137a8c59210223ea76aa2ea8c018d3afb696469c39b64e",
+            "psg:135bfef04e8836b2bc4a8cfe9a8ab630931f48ab3d3dcf06a463b0d2eab72482"
+          ]
+        },
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-59",
+          "start": 34968,
+          "end": 36250,
+          "text_sha256": "120716dd50d3771deeef61c1f9971c504157b4d703e55108a6c940e3187c9552",
+          "passage_ids": [
+            "psg:ee9920fd1dc901612eb08f7633b1abfe2f8669114df762e62a5e2a844761084c",
+            "psg:8450c91ef61843a7ea61fd38d95a13f62adddaea8f5d6f2f9eee3f91814a3364",
+            "psg:c652934ae95484b77f6aeca4f5018d92c522a0c8e8ba490d11121c3de0acfdab",
+            "psg:2ad65a267be008fa55bb810d5ac2841d3b62e9c2897c5578baa61ccfca7322b0"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.2",
+      "status": "partial",
+      "scope_and_limit": "Possible automation bias with an alternative conscious-adequacy explanation; no causal pancreas-specific demonstration.",
+      "anchors": [
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-47",
+          "start": 23538,
+          "end": 24664,
+          "text_sha256": "368429d9ea42e12c6977624a45bdf721b912f2c8ef6df2bf27fc8c61e338ba10",
+          "passage_ids": [
+            "psg:ec95f7fec0ffabd628d087a5bfcc9484dddae47d1ed10960f8e3d6595f18c7c1",
+            "psg:c451829f660f1006a3137a8c59210223ea76aa2ea8c018d3afb696469c39b64e",
+            "psg:135bfef04e8836b2bc4a8cfe9a8ab630931f48ab3d3dcf06a463b0d2eab72482"
+          ]
+        },
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-48",
+          "start": 24666,
+          "end": 25968,
+          "text_sha256": "ed730770f5efcfd34f15e8217d3ff517659ec207946cdc46101f0afb8249f3ab",
+          "passage_ids": [
+            "psg:d2d50ff2879e0d3766c76439fc5b651e6ef7c80ece35622c5901b2f38273f77e",
+            "psg:50f9301b6e6b045d1369350ba986bb24bb92a191076fba3fd79e0b9fcb04471f",
+            "psg:6539da07294bbad983f9d0d47647f4823bb1704b843f89e2418635d1aafd47c1",
+            "psg:3c219581ca83d2c49a1d4ac95619052ada8c42e635f689eacf390712386730e7"
+          ]
+        },
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-59",
+          "start": 34968,
+          "end": 36250,
+          "text_sha256": "120716dd50d3771deeef61c1f9971c504157b4d703e55108a6c940e3187c9552",
+          "passage_ids": [
+            "psg:ee9920fd1dc901612eb08f7633b1abfe2f8669114df762e62a5e2a844761084c",
+            "psg:8450c91ef61843a7ea61fd38d95a13f62adddaea8f5d6f2f9eee3f91814a3364",
+            "psg:c652934ae95484b77f6aeca4f5018d92c522a0c8e8ba490d11121c3de0acfdab",
+            "psg:2ad65a267be008fa55bb810d5ac2841d3b62e9c2897c5578baa61ccfca7322b0"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.3",
+      "status": "partial",
+      "scope_and_limit": "General workflow agreement/quality comparison; correction time and pancreatic clinical benefit not measured.",
+      "anchors": [
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-38",
+          "start": 15949,
+          "end": 16852,
+          "text_sha256": "62dee739181bec8c22096fd63980863d18d998d8c7fc959d40e46256cf59a91c",
+          "passage_ids": [
+            "psg:9a7c95e624f8bb26ecd5cff1a80a54aeea0707bfb7fdf40b53ed8d968f09843e",
+            "psg:5fa92e83c9e2847985f65337a3ddd541c8d97c03fa7b686a078c6e293618faf2"
+          ]
+        },
+        {
+          "pmcid": "PMC12715409",
+          "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+          "section_id": "body-47",
+          "start": 23538,
+          "end": 24664,
+          "text_sha256": "368429d9ea42e12c6977624a45bdf721b912f2c8ef6df2bf27fc8c61e338ba10",
+          "passage_ids": [
+            "psg:ec95f7fec0ffabd628d087a5bfcc9484dddae47d1ed10960f8e3d6595f18c7c1",
+            "psg:c451829f660f1006a3137a8c59210223ea76aa2ea8c018d3afb696469c39b64e",
+            "psg:135bfef04e8836b2bc4a8cfe9a8ab630931f48ab3d3dcf06a463b0d2eab72482"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-38",
+          "start": 29203,
+          "end": 30219,
+          "text_sha256": "e1f7b661006047dea377accdbca8a12e9cf0114e2d6ad93abcc65ff2662c30d0",
+          "passage_ids": [
+            "psg:975a5ae8dc17b8db97906f4a58b060c5860be6d84fb99600f039155385f95e77",
+            "psg:9f7f66192e1c37588f5a5bf70c402e94b79e9ffeefa82ff464016c096b024607",
+            "psg:8ba02340400ae21e86976704e99a7ade8c8a3dd80fbc1e2cea0230d7e02fe6a2"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.4",
+      "status": "direct",
+      "scope_and_limit": "Study-specific annotator roles, independent/mutual review and senior correction.",
+      "anchors": [
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-9",
+          "start": 8640,
+          "end": 9408,
+          "text_sha256": "30176b164762a5aca09b6dde497c4afd74bb7e9330ef3593843728588bba25bb",
+          "passage_ids": [
+            "psg:ce9cecad171dc5632f56356621b9a7a2e075b2dbaa6679a14dd34ee160567619",
+            "psg:513263fa4c51df62a711138c548025b57b4627fb440b7a68844dade882e77ad9"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-7",
+          "start": 6278,
+          "end": 7375,
+          "text_sha256": "4ccec3538fa4e29f237d8b102311cdbcbc0e7ba9ecd9d30045526fb489a5842b",
+          "passage_ids": [
+            "psg:b783fe8d845e847fa34a3924c15071db76e8787b3474a7ac86e04474f6f0b39a",
+            "psg:7efdacb2237292cfe126a4f68121a12fcf73aa924dd9af46279c712856c30216",
+            "psg:c2d9dee902b32fc651342d175074757245be33f201de581e8155808c656c9cb2"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-8",
+          "start": 7377,
+          "end": 8364,
+          "text_sha256": "5712d5e54e3369733cc6ce8afffea981d49eb2192bed57be38c7f02929f0667c",
+          "passage_ids": [
+            "psg:b93e0689b2458b99d3e8ab56ab56b706dda295bde368cc5982f628d0d29ad2f1",
+            "psg:74c76779f102588aa73970c61e7f94e709db61f54321e2e1ea7ca9407a6e27da",
+            "psg:61855a094e3c4d4fbd20a5daf8017a8918e42f880c30e1806ceeac85f7a74f25"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.5",
+      "status": "partial",
+      "scope_and_limit": "Publisher-reported public annotation provenance; missing/empty-label semantics absent and no local dataset audit.",
+      "anchors": [
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-7",
+          "start": 6278,
+          "end": 7375,
+          "text_sha256": "4ccec3538fa4e29f237d8b102311cdbcbc0e7ba9ecd9d30045526fb489a5842b",
+          "passage_ids": [
+            "psg:b783fe8d845e847fa34a3924c15071db76e8787b3474a7ac86e04474f6f0b39a",
+            "psg:7efdacb2237292cfe126a4f68121a12fcf73aa924dd9af46279c712856c30216",
+            "psg:c2d9dee902b32fc651342d175074757245be33f201de581e8155808c656c9cb2"
+          ]
+        },
+        {
+          "pmcid": "PMC13564768",
+          "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+          "section_id": "body-39",
+          "start": 30221,
+          "end": 30817,
+          "text_sha256": "3f673ef6c344ae515e71241a15c7d8a031529b480667f54599a63c016f40d310",
+          "passage_ids": [
+            "psg:9a963d0a308d782d70ef472b9122be08503b43249c99f28aef9e6f6642e4a4ac"
+          ]
+        }
+      ]
+    },
+    {
+      "need_id": "N5.6",
+      "status": "partial",
+      "scope_and_limit": "Uncertain boundary exclusion and altered-anatomy limits; no complete truncation/absent-label policy.",
+      "anchors": [
+        {
+          "pmcid": "PMC8357939",
+          "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+          "section_id": "body-20",
+          "start": 22458,
+          "end": 23517,
+          "text_sha256": "794752033b5b35a3f4f53efa57dc503ecb2601bd3df9f548c0e41a37136954b4",
+          "passage_ids": [
+            "psg:50531ff972f03e300286f6e3153db4b0f946dd7f4288cd06b76f6e56592fe3fb",
+            "psg:48eb12848fc019af9246851bf407e60f52957dd6a47daf2ce0516130af409e88"
+          ]
+        },
+        {
+          "pmcid": "PMC9317715",
+          "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+          "section_id": "body-27",
+          "start": 22549,
+          "end": 23125,
+          "text_sha256": "0fd5dc9f3829151782d65c698463b1d2282b91b0bd46649ddfe0b5fb658fa63d",
+          "passage_ids": [
+            "psg:90a15bd151811a3da4272a3c3bdbb1af30573620bd7f938926b6cf5b61eb32d3"
+          ]
+        }
+      ]
+    }
+  ]
+}

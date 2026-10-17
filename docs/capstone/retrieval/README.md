@@ -5,7 +5,8 @@ Nine ordered steps define the remaining feature, acceptance evidence and linked 
 Step 1: [frozen acceptance/query/response mapping](AI-EXPERT-CONTRACT-V1.md), 83 offline checks pass.
 Step 2: [choice comparison rejected](CHOICE-SELECTION-2026-10-17.md); response quality remains open.
 Step 3: [bounded literature workflow qualified](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); broader G3 remains open.
-Next: [W02-07 — coverage review and bounded corpus freeze](https://trello.com/c/fGxysGgy), Step 4.
+Step 4: [seven-source corpus frozen](CORPUS-FREEZE-2026-10-17.md), 693 passages; 6 direct / 15 partial / 4 coverage gaps.
+Next: [AI-03 — evaluation authoring and label freeze](https://trello.com/c/NctoNxr8), Step 5.
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
 for implementation evidence and dated service observations.
