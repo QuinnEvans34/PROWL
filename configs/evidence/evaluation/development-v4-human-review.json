@@ -82,7 +82,67 @@
           "content_sha256": "6fc6e98896ccd5103833911f58f1f7cb4cf06c8ef36af4e0340d74021583e48e"
         }
       ]
+    },
+    {
+      "sequence": 5,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:20:15Z",
+      "stage": "wording_and_answer",
+      "decision": "accept",
+      "human_statement": "Asked: After reviewing Questions 6\u201310, including expected answers and displayed source evidence, do you accept their wording, answers, and evidence labels? Quinton replied: Looks good as well.",
+      "targets": [
+        {
+          "id": "q:dev2-06",
+          "content_sha256": "bca65cdc156c2f91d32a22156965f11feec16e2bbf5e62fbfb6110a04c5b94ca"
+        },
+        {
+          "id": "q:dev2-07",
+          "content_sha256": "49aa70dc8243c3cff42a1c5481ab306afada5a3029bcd2ca82512cf3c094c7d8"
+        },
+        {
+          "id": "q:dev2-08",
+          "content_sha256": "2d384915d0c2f4a72a4828321d68480e6d8c5494aeab82185cc449fbb3edefa0"
+        },
+        {
+          "id": "q:dev2-09",
+          "content_sha256": "3c57e387d59d902ff5aa5e6c1a27c6ed768b8717152d679fbf89fea344ae6a08"
+        },
+        {
+          "id": "q:dev2-10",
+          "content_sha256": "9d7528f92014bf3e836e5078e7ebcb8a553886fe6adf42312431d7bb104c6902"
+        }
+      ]
+    },
+    {
+      "sequence": 6,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:20:15Z",
+      "stage": "evidence_labels",
+      "decision": "accept",
+      "human_statement": "Asked: After reviewing Questions 6\u201310, including expected answers and displayed source evidence, do you accept their wording, answers, and evidence labels? Quinton replied: Looks good as well.",
+      "targets": [
+        {
+          "id": "q:dev2-06",
+          "content_sha256": "bca65cdc156c2f91d32a22156965f11feec16e2bbf5e62fbfb6110a04c5b94ca"
+        },
+        {
+          "id": "q:dev2-07",
+          "content_sha256": "49aa70dc8243c3cff42a1c5481ab306afada5a3029bcd2ca82512cf3c094c7d8"
+        },
+        {
+          "id": "q:dev2-08",
+          "content_sha256": "2d384915d0c2f4a72a4828321d68480e6d8c5494aeab82185cc449fbb3edefa0"
+        },
+        {
+          "id": "q:dev2-09",
+          "content_sha256": "3c57e387d59d902ff5aa5e6c1a27c6ed768b8717152d679fbf89fea344ae6a08"
+        },
+        {
+          "id": "q:dev2-10",
+          "content_sha256": "9d7528f92014bf3e836e5078e7ebcb8a553886fe6adf42312431d7bb104c6902"
+        }
+      ]
     }
   ],
-  "content_sha256": "75a833e16dd2e76fdaca14397c0016e264ec92703f3e8964f4143f519365b1cb"
+  "content_sha256": "6688265206bf0390e674b726b9a3566a29a388e02448761e0b419134a72f6055"
 }
