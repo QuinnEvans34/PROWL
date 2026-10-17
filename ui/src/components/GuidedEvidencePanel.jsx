@@ -1,3 +1,4 @@
+import ResearchWorkflowPanel from './ResearchWorkflowPanel.jsx'
 import ResearchEvidencePanel from './ResearchEvidencePanel.jsx'
 import { useEffect, useRef, useState } from 'react'
 import { evidenceFixture, evidenceStates, evidenceWording, requestEvidence } from '../lib/guidedEvidence.js'
@@ -35,6 +36,7 @@ export default function GuidedEvidencePanel({ loadResponse = requestEvidence }) 
 
   return (
     <>
+    <ResearchWorkflowPanel />
     <ResearchEvidencePanel answers />
     <ResearchEvidencePanel />
     <details className="guided-evidence">

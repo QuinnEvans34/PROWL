@@ -4,6 +4,12 @@
 **Owner:** Quinton Evans  
 **Governing plan:** [`../implementation/04-workflow-orchestration.md`](../implementation/04-workflow-orchestration.md)
 
+**October17 bounded research slice:** Quinton authorized and received the explicit local
+retrieve/select/validate/save adapter with UI stage status and linked recovery. See
+[implementation/results](../retrieval/EXPERT-WORKFLOW-2026-10-17.md). This is scoped authorization
+and evidence for that research slice; the broader framework selection and G3 remain open.
+The older coding-authorization status above/below applies to that broader Plan04 scope.
+
 This directory defines orchestration behavior independently from Prefect or any fallback runner.
 The DAG coordinates scientific components, but artifact validity remains controlled by PROWL's own
 schemas, hashes, lineage, and completion records.

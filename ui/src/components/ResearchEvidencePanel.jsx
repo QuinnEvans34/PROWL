@@ -7,7 +7,10 @@ export async function requestResearch(request, signal, answers = false) {
   const reply = await fetch(`${answers ? '/research-answers' : '/research-evidence'}/responses`, { method: 'POST',
     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request), signal })
   if (!reply.ok) throw new Error('Search unavailable')
-  const result = await reply.json()
+  return validateResearch(await reply.json(), request, answers)
+}
+
+export function validateResearch(result, request, answers = false) {
   if (result.schema_version !== (answers ? 'prowl-research-answer-v1' : 'prowl-research-search-v1') || result.response_id !== request.request_id
     || result.request?.question_id !== request.question_id || result.request?.request_id !== request.request_id
     || result.question !== questions.find(q => q.id === request.question_id)?.label

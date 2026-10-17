@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 first expert workflow delivered:** [Implementation and verification](EXPERT-WORKFLOW-2026-10-17.md).
+Separate local adapter/panel exposes retrieve→select→validate→save, immutable artifacts/events,
+verified reuse, and explicit linked retry. Invalid generation fails without publishing an answer;
+valid insufficient evidence completes.45distinct Python and47distinct UI checks pass; real-browser
+synthetic HTTP failure/recovery/reload passes, as does the build. Abrupt process death and interruption
+after response publication recover without repeating verified generation. Existing v2 policy unchanged.
+Production8015 service/database not started this turn; next is one bounded live integration check.
+This is a research workflow slice, not full Plan04/G3 or semantic-quality acceptance. No framework
+selection, new inference-quality run, selector continuation, training or human-hours credit.
+
+
 **October17 reasoning diagnostic complete / rejected:** [Results](REASONING-DIAGNOSTIC-2026-10-17.md).
 Five selected cases, five calls,113.255seconds. PET recovers; radiomics/CT/nCLE each exhaust2048tokens
 with empty final JSON. Supported1/4,clean1/4,aspects2/8,unsupported abstention1/1,three invalid
