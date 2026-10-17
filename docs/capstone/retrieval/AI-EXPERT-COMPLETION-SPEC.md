@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.10 — October 17, 2026 (explicit human-review tracking)\
+**Version:** 1.11 — October 17, 2026 (answer-key separation verified)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -199,6 +199,10 @@ Use the [development review workflow](DEVELOPMENT-REVIEW-WORKFLOW.md) to record 
 answer, evidence-label and second-pass decisions against the exact draft/case/answer hashes.
 The delivered tracker has 19 focused checks; its actual record has zero events. It does not grant
 tuning release or replace independent protected authoring and the final split-freeze artifact.
+
+Expected answers are evaluation references only: never index them as literature or attach them to
+the generation prompt. [Six boundary checks](ANSWER-KEY-BOUNDARY-2026-10-17.md) pass for the current
+guided quotation path; future free-text/summary adapters must qualify this separation themselves.
 
 The existing exposed ten-case suite stays a separate development regression; do not relabel it
 held-out. Quinton owns protected held-out authoring/storage under the existing encrypted-image,

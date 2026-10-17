@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 answer-key boundary verified:** Quinton supports the updated questions and asks
+> for honest evaluation, then authorizes continuation. Expected answers remain grading references,
+> never extra corpus evidence or prompt attachments. Six new offline canary tests exercise current
+> guided retrieval/store/generation: metadata excluded, request injection refused, unsupported quote
+> rejected and empty retrieval abstains. No production code/labels/corpus changed; prior evidence
+> pins unchanged. Read `ANSWER-KEY-BOUNDARY-2026-10-17.md` for limits. Current live code selects exact
+> quotations; plain-language summaries/free text remain future qualification. No actual model/DB/
+> service/private-store operations or inferred human approval. Spec v1.11; AI-03 still open.
+
 > **October 17 human-review tracking delivered:** `DEVELOPMENT-REVIEW-WORKFLOW.md` gives the next
 > human steps. `development_review.py` and its closed schema track explicit decisions against
 > draft/case/answer hashes; 19 invented-input checks pass. Actual v4 human-review record has zero

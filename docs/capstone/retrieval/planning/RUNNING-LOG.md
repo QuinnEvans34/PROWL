@@ -1671,3 +1671,14 @@ first-pass decisions reopen consistency. Nineteen invented-input checks pass; ac
 validates with zero events/30 pending cases at each stage and ready_for_tuning=false. Prior v4
 preparation/evidence pins unchanged. See ../DEVELOPMENT-REVIEW-WORKFLOW.md for human steps and limits.
 No protected content/storage, model/DB/service/selector/training work or inferred human hours.
+
+## 2026-10-17: Answer-key separation regression (Codex)
+
+Quinton questioned whether prepared expected answers would cheat evaluation, endorsed the revised
+questions, and authorized continuation. Clarified that answer keys are grading material, not added
+corpus evidence or prompt input. Six new invented-input checks pass against current guided search,
+response store and quotation generation, using fake search/model transports. Request injection and
+unsupported canary quotes are refused; prompt metadata is projected out and empty retrieval abstains.
+No production code, model/DB/index/services, labels, human-review event, protected content or training
+changed. This is an engineering boundary check, not model quality or future free-text qualification.
+See ../ANSWER-KEY-BOUNDARY-2026-10-17.md. Human review and protected split freeze remain next.
