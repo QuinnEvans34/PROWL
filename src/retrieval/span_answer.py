@@ -25,12 +25,20 @@ Prediction accuracy does not establish a survival benefit or perfect performance
 Do not give patient advice or use prior knowledge. Partial evidence is not a complete answer. /no_think'''
 
 
-def generate_answer(question, passages, *, call_api=None, model=MODEL):
+def selection_prompt(reasoning=False):
+    return SYSTEM.replace('/no_think', '/think') if reasoning else SYSTEM
+
+
+def generate_answer(question, passages, *, call_api=None, model=MODEL, reasoning=False):
     if model not in MODELS:
         raise ValueError('Unknown span model')
     model_sha = MODELS[model]
     call_api = call_api or api
-    provenance = dict(model=model, model_sha256=model_sha, policy=POLICY, prompt_sha256=digest(SYSTEM))
+    prompt = selection_prompt(reasoning)
+    limit = 2048 if reasoning else 900
+    provenance = dict(model=model, model_sha256=model_sha, policy=POLICY, prompt_sha256=digest(prompt))
+    if reasoning:
+        provenance.update(reasoning=True, output_limit=limit)
     if not passages:
         return dict(answer={'status': 'insufficient_evidence', 'extracts': []}, provenance=provenance,
                     validation='no_passages', model_called=False)
@@ -45,9 +53,9 @@ def generate_answer(question, passages, *, call_api=None, model=MODEL):
         models = call_api('tags')['models']
         if not any(m['name'] == model and m['digest'] == model_sha for m in models):
             raise OSError('Pinned model is unavailable')
-        result = call_api('chat', dict(model=model, stream=False, think=False, keep_alive='5m', format=schema,
-            options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=900), messages=[
-                dict(role='system', content=SYSTEM), dict(role='user', content=json.dumps(dict(
+        result = call_api('chat', dict(model=model, stream=False, think=reasoning, keep_alive='5m', format=schema,
+            options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=limit), messages=[
+                dict(role='system', content=prompt), dict(role='user', content=json.dumps(dict(
                     question=question, sources=sources)))]))
     except Exception as exc:
         raise OSError('Local answer model unavailable') from exc

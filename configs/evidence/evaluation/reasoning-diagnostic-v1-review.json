@@ -1,0 +1,220 @@
+{
+  "suite_sha256": "d66235193309795206881c26fe6d400acd2ed8642178c65d84700cb027165669",
+  "parent_suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "reviewer": "Codex engineering review; not independent clinical adjudication",
+  "run": "direct-spans-30b-reasoning-v1",
+  "manifest_sha256": "406f39c79414837550b99ab45bd63ce166b0bf1f29ff13f11eeb7ec3fdf129d5",
+  "decision": "not promoted: PET recovered, but three token-exhausted invalid generations including the positive control; bounded profile failed",
+  "reviews": {
+    "radiomics": {
+      "receipt_sha256": "303b45b09dff36938321293bc071ec2d3292fbfb7f811001973f822be0e21545",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Generation exhausted the 2048-token cap with empty final content. Rejected, not counted as a valid evidence abstention; no answer aspects covered."
+    },
+    "pet-neuroendocrine": {
+      "receipt_sha256": "a0f7f27287c6919c2c2374efb31e8c9c03017a1e9af5c414965052121590855c",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Exact named study excerpt includes the requested Ga-DOTANOC PET/CT method and grade 1 and 2 pancreatic neuroendocrine tumors."
+    },
+    "ct-external": {
+      "receipt_sha256": "06fa87453c8c82472ea09b1b4d9a60b60af50ab5d80c25b423176556ecd3eea6",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Generation exhausted the 2048-token cap with empty final content. Rejected, not counted as a valid evidence abstention; no answer aspects covered."
+    },
+    "ncle-study": {
+      "receipt_sha256": "2b3853bf8eb50757e69b332b3b5c4304a6b7ea64c3cf2f4c3f0083100907f902",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Generation exhausted the 2048-token cap with empty final content. Rejected, not counted as a valid evidence abstention; no answer aspects covered."
+    },
+    "randomized-survival": {
+      "receipt_sha256": "c05ddf475b4f0029767e79d515783c170cc9eb626edecef428d93aac66f3743b",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid insufficient-evidence selection correctly abstains; no randomized survival evidence."
+    }
+  },
+  "score": {
+    "totals": {
+      "supported_cases": 4,
+      "missing_cases": 1,
+      "reference_hits": 4,
+      "supported_answers": 1,
+      "clean_supported_answers": 1,
+      "correct_abstentions": 1,
+      "errors": 0,
+      "extracts": 1,
+      "exact_extracts": 1,
+      "relevant_extracts": 1,
+      "covered_aspects": 2,
+      "aspects": 8
+    },
+    "cases": [
+      {
+        "id": "radiomics",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 33.38151241699234
+      },
+      {
+        "id": "pet-neuroendocrine",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 12.795387334073894
+      },
+      {
+        "id": "ct-external",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 26.534619124955498
+      },
+      {
+        "id": "ncle-study",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 28.022304500103928
+      },
+      {
+        "id": "randomized-survival",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 12.51549741695635
+      }
+    ]
+  },
+  "baseline_subset": {
+    "model_calls": 0,
+    "original_receipt_sha256": {
+      "ct-external": "19804706712b5bb734d1d8aa0c9e5d9df685af962734becd8f4cbbc7b906c8ac",
+      "ncle-study": "0e2a4b8385e6cc1526556d837b70e7ed248b2eacf824baaa878518dbabda90db",
+      "pet-neuroendocrine": "dfa8d6455a39ccffab40b259eeb61bc138ff09fddf9017d90fc26d72ab49ca45",
+      "radiomics": "9a3d79f3c69e2c5f40572a450b9a3181d202543006e87d6b9f8159d7c010f415",
+      "randomized-survival": "e631cf02c3596e9597e63dba75461278e225fe6f48ee853ae9bc31030931f151"
+    },
+    "projection_only": true,
+    "score": {
+      "cases": [
+        {
+          "aspects": 2,
+          "clean": false,
+          "covered": 0,
+          "id": "radiomics",
+          "reference_hit": true,
+          "relevance": [],
+          "status": "insufficient_evidence",
+          "total_seconds": 3.9922186660114676,
+          "validation": "exact_quotes_verified"
+        },
+        {
+          "aspects": 2,
+          "clean": false,
+          "covered": 0,
+          "id": "pet-neuroendocrine",
+          "reference_hit": true,
+          "relevance": [],
+          "status": "insufficient_evidence",
+          "total_seconds": 0.8285029159742408,
+          "validation": "exact_quotes_verified"
+        },
+        {
+          "aspects": 2,
+          "clean": false,
+          "covered": 1,
+          "id": "ct-external",
+          "reference_hit": true,
+          "relevance": [
+            "relevant"
+          ],
+          "status": "excerpts",
+          "total_seconds": 1.0047936250339262,
+          "validation": "exact_quotes_verified"
+        },
+        {
+          "aspects": 2,
+          "clean": true,
+          "covered": 2,
+          "id": "ncle-study",
+          "reference_hit": true,
+          "relevance": [
+            "relevant",
+            "relevant"
+          ],
+          "status": "excerpts",
+          "total_seconds": 1.2533625420182943,
+          "validation": "exact_quotes_verified"
+        },
+        {
+          "aspects": 0,
+          "clean": false,
+          "covered": 0,
+          "id": "randomized-survival",
+          "reference_hit": false,
+          "relevance": [],
+          "status": "insufficient_evidence",
+          "total_seconds": 0.838422917004209,
+          "validation": "exact_quotes_verified"
+        }
+      ],
+      "totals": {
+        "aspects": 8,
+        "clean_supported_answers": 1,
+        "correct_abstentions": 1,
+        "covered_aspects": 3,
+        "errors": 0,
+        "exact_extracts": 3,
+        "extracts": 3,
+        "missing_cases": 1,
+        "reference_hits": 4,
+        "relevant_extracts": 3,
+        "supported_answers": 2,
+        "supported_cases": 4
+      }
+    },
+    "source_manifest_sha256": "d0489574cc8f3d5f8cf5efe4a307a768a5c7d1485192e5d7bccf25d6a41cc204",
+    "source_review_sha256": "f4d4d6637224e00a29f5896dce959276703c15cf334361f93aefd8923c540106"
+  }
+}

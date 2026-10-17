@@ -1,0 +1,11 @@
+{
+  "parent_suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "case_ids": ["radiomics", "pet-neuroendocrine", "ct-external", "ncle-study", "randomized-survival"],
+  "model": "qwen3:30b",
+  "model_sha256": "ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226",
+  "reasoning": true,
+  "output_limit": 2048,
+  "total_limit_seconds": 300,
+  "call_limit_seconds": 60,
+  "notes": "Three known failures, one positive control, one unsupported control. Diagnostic development subset, not held-out or full-suite acceptance. No retries or automatic extension."
+}

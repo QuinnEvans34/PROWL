@@ -56,6 +56,22 @@ def frozen_inputs(directory, suite):
     return manifest, receipts
 
 
+def diagnostic_suite(suite, profile):
+    """Derive a small suite without changing any question or its frozen scoring rubric."""
+    from src.retrieval.span_answer import MODELS
+    ids = profile['case_ids']
+    cases = {c['id']: c for c in suite['cases']}
+    if (profile['parent_suite_sha256'] != digest(suite)
+            or not isinstance(ids, list) or len(ids) != 5 or len(set(ids)) != len(ids)
+            or any(i not in cases for i in ids)
+            or profile['model'] != 'qwen3:30b' or profile['model_sha256'] != MODELS['qwen3:30b']
+            or profile['reasoning'] is not True or profile['output_limit'] != 2048
+            or profile['total_limit_seconds'] != 300 or profile['call_limit_seconds'] != 60):
+        raise ValueError('Invalid bounded diagnostic profile')
+    return dict(suite, cases=[cases[i] for i in ids],
+                notes=suite['notes']+' Five-case reasoning diagnostic; not full-suite acceptance.')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--selection', type=Path, required=True,
@@ -64,7 +80,10 @@ def main():
     parser.add_argument('--evaluator', choices=scope_answer.EVALUATORS, required=True)
     parser.add_argument('--policy', choices=['scope', 'records', 'spans'], default='scope')
     parser.add_argument('--bundles', type=Path, help='Retained source bundle directory for records')
+    parser.add_argument('--diagnostic', action='store_true', help='Frozen five-case30B reasoning profile')
     args = parser.parse_args()
+    if args.diagnostic and (args.policy != 'spans' or args.evaluator != 'qwen3:30b'):
+        raise ValueError('Reasoning diagnostic requires direct30B spans')
     selected = scope_answer
     bundles = {}
     if args.policy == 'spans':
@@ -83,6 +102,13 @@ def main():
             raise ValueError('No retained source bundles')
     suite = json.loads((ROOT/'configs/evidence/evaluation/development-v1.json').read_text())
     previous, inputs = frozen_inputs(args.selection, suite)
+    profile = None
+    parent_suite_sha256 = digest(suite)
+    if args.diagnostic:
+        profile = json.loads((ROOT/'configs/evidence/evaluation/reasoning-diagnostic-v1.json').read_text())
+        suite = diagnostic_suite(suite, profile)
+        inputs = {c['id']: inputs[c['id']] for c in suite['cases']}
+    total_limit = profile['total_limit_seconds'] if profile else 600
     args.output.mkdir(parents=True, exist_ok=False)
     source_paths = ['scripts/retrieval/compare_scope_evaluator.py', 'scripts/retrieval/evaluate_answers.py',
                     'src/retrieval/scope_answer.py', 'src/retrieval/evidence_spans.py',
@@ -95,6 +121,9 @@ def main():
                          'docs/capstone/retrieval/STUDY-EVIDENCE-2026-10-15.md']
     if args.policy == 'spans':
         source_paths += ['docs/capstone/retrieval/DIRECT-SPAN-COMPARISON-2026-10-15.md']
+    if profile:
+        source_paths += ['configs/evidence/evaluation/reasoning-diagnostic-v1.json',
+                         'docs/capstone/retrieval/REASONING-DIAGNOSTIC-2026-10-17.md']
     sources = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in source_paths}
     for p in source_paths:
         destination = args.output/'producing-sources'/p
@@ -103,7 +132,9 @@ def main():
     manifest = dict(suite=suite, suite_sha256=digest(suite), policy=selected.POLICY,
         started_at=datetime.now(timezone.utc).isoformat(), evaluator=args.evaluator,
         evaluator_sha256=scope_answer.EVALUATORS[args.evaluator], scope_reasoning=False,
-        prompt_sha256=digest(selected.SYSTEM) if args.policy in ('scope', 'spans') else None, source_sha256=sources,
+        prompt_sha256=digest(selected.selection_prompt(bool(profile))) if args.policy == 'spans' else (
+            digest(selected.SYSTEM) if args.policy == 'scope' else None), source_sha256=sources,
+        diagnostic_profile=profile, parent_suite_sha256=parent_suite_sha256,
         record_prompt_sha256=digest(selected.RECORD_SYSTEM) if args.policy == 'records' else None,
         match_prompt_sha256=digest(selected.MATCH_SYSTEM) if args.policy == 'records' else None,
         source_bundle_sha256={k: digest(v) for k, v in bundles.items()},
@@ -112,7 +143,7 @@ def main():
         generation_mode=args.policy,
         corpus_record_sha256=suite['corpus_record_sha256'],
         input_receipt_sha256={k: digest(v) for k, v in inputs.items()},
-        total_limit_seconds=600, call_limit_seconds=60, retries=0)
+        total_limit_seconds=total_limit, call_limit_seconds=60, retries=0)
     save(args.output/'manifest.json', manifest)
     started = time.monotonic()
     completed, current, raw = [], None, []
@@ -123,7 +154,7 @@ def main():
         folder.mkdir(exist_ok=True)
         save(folder/(key+'.json'), record)
     def recorded_api(path, payload=None):
-        remaining = 600 - (time.monotonic() - started)
+        remaining = total_limit - (time.monotonic() - started)
         if remaining <= 0:
             raise BudgetExpired('Total budget exhausted')
         with time_limit(min(60, remaining)):
@@ -135,13 +166,13 @@ def main():
         return response
     stop_reason = 'completed'
     try:
-        with time_limit(600), patch.object(selected, 'api', recorded_api):
+        with time_limit(total_limit), patch.object(selected, 'api', recorded_api):
             for case in suite['cases']:
                 current, raw = case['id'], []
                 old = inputs[current]
                 def generate(q, p):
                     if args.policy == 'spans':
-                        return selected.generate_answer(q, p, model=args.evaluator)
+                        return selected.generate_answer(q, p, model=args.evaluator, reasoning=bool(profile))
                     if args.policy == 'records':
                         return selected.verify_answer(q, p, old['generation'], bundles, cache, save_record=save_record)
                     return selected.verify_answer(q, p, old['generation'], evaluator=args.evaluator)

@@ -105,3 +105,20 @@ def test_larger_model_wrong_pin_refused_before_chat():
         return dict(models=[dict(name='qwen3:30b',digest=g.MODEL_SHA)])
     with pytest.raises(OSError):
         g.generate_answer('CT model?', PASSAGES, call_api=api, model='qwen3:30b')
+
+
+def test_reasoning_profile_keeps_sources_and_schema_and_rejects_token_exhaustion():
+    calls = []
+    def api(path, payload=None):
+        if path == 'tags':return dict(models=[dict(name='qwen3:30b',digest=g.MODELS['qwen3:30b'])])
+        calls.append(payload)
+        return dict(done=True,done_reason='length',message=dict(content='',thinking='unfinished'))
+    baseline = g.generate_answer('CT model?',PASSAGES,call_api=api,model='qwen3:30b')
+    reasoned = g.generate_answer('CT model?',PASSAGES,call_api=api,model='qwen3:30b',reasoning=True)
+    assert reasoned['validation'] == 'generation_rejected' and reasoned['answer']['extracts'] == []
+    assert reasoned['provenance']['reasoning'] is True and reasoned['provenance']['output_limit'] == 2048
+    assert 'reasoning' not in baseline['provenance']
+    assert calls[0]['format'] == calls[1]['format']
+    assert calls[0]['messages'][1] == calls[1]['messages'][1]
+    assert calls[1]['think'] is True and calls[1]['options']['num_predict'] == 2048
+    assert calls[1]['messages'][0]['content'] == g.SYSTEM.replace('/no_think','/think')

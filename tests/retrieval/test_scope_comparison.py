@@ -82,7 +82,8 @@ def test_interrupted_run_preserves_completed_call_and_never_retries(tmp_path, mo
     assert signal.getitimer(signal.ITIMER_REAL) == (0, 0)
 
 
-def test_direct_span_mode_uses_passages_without_saved_selection_or_review(tmp_path, monkeypatch):
+@pytest.mark.parametrize('diagnostic', [False, True])
+def test_direct_span_mode_uses_passages_without_saved_selection_or_review(tmp_path, monkeypatch, diagnostic):
     from scripts.retrieval import compare_scope_evaluator as runner
     from scripts.retrieval.evaluate_answers import checked_read
     from src.retrieval import span_answer, scope_answer
@@ -102,13 +103,34 @@ def test_direct_span_mode_uses_passages_without_saved_selection_or_review(tmp_pa
     monkeypatch.setattr(span_answer, 'api', api)
     output = tmp_path/'run'
     monkeypatch.setattr(runner.sys,'argv',['compare','--selection',str(tmp_path),'--output',str(output),
-                                         '--evaluator','qwen3:30b','--policy','spans'])
-    assert runner.main() == 0 and len(calls) == 10
+                                         '--evaluator','qwen3:30b','--policy','spans'] + (['--diagnostic'] if diagnostic else []))
+    if diagnostic:
+        profile = json.loads((runner.ROOT/'configs/evidence/evaluation/reasoning-diagnostic-v1.json').read_text())
+        suite = runner.diagnostic_suite(suite,profile)
+    assert runner.main() == 0 and len(calls) == len(suite['cases'])
     manifest = checked_read(output/'manifest.json')
     assert manifest['policy'] == span_answer.POLICY and manifest['reused_selection_manifest_sha256'] is None
-    assert manifest['prompt_sha256'] == digest(span_answer.SYSTEM)
+    assert manifest['prompt_sha256'] == digest(span_answer.selection_prompt(diagnostic))
+    assert manifest['total_limit_seconds'] == (300 if diagnostic else 600)
     for request, case in zip(calls, suite['cases']):
         content = json.loads(request['messages'][1]['content'])
         assert set(content) == {'question','sources'} and content['question'] == case['question']
-        assert request['model'] == 'qwen3:30b'
+        assert request['model'] == 'qwen3:30b' and request['think'] is diagnostic
+        assert request['options']['num_predict'] == (2048 if diagnostic else 900)
     assert checked_read(output/'completion.json')['unscored'] == []
+
+
+def test_diagnostic_preserves_exact_case_rubrics_and_refuses_drift():
+    import copy
+    from scripts.retrieval import compare_scope_evaluator as runner
+    suite = json.loads((runner.ROOT/'configs/evidence/evaluation/development-v1.json').read_text())
+    profile = json.loads((runner.ROOT/'configs/evidence/evaluation/reasoning-diagnostic-v1.json').read_text())
+    selected = runner.diagnostic_suite(suite,profile)
+    assert len(selected['cases']) == 5 and len(suite['cases']) == 10
+    assert [c['id'] for c in selected['cases']] == profile['case_ids']
+    assert all(c in suite['cases'] for c in selected['cases'])
+    assert sum(c['expected_status']=='excerpts' for c in selected['cases']) == 4
+    for key,value in [('parent_suite_sha256','wrong'),('model_sha256','wrong'),('output_limit',4096),
+                      ('total_limit_seconds',600),('case_ids',['radiomics']*5)]:
+        bad=copy.deepcopy(profile);bad[key]=value
+        with pytest.raises(ValueError,match='diagnostic'):runner.diagnostic_suite(suite,bad)

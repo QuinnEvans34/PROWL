@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 reasoning diagnostic complete / rejected:** [Results](REASONING-DIAGNOSTIC-2026-10-17.md).
+Five selected cases, five calls,113.255seconds. PET recovers; radiomics/CT/nCLE each exhaust2048tokens
+with empty final JSON. Supported1/4,clean1/4,aspects2/8,unsupported abstention1/1,three invalid
+outputs; no promotion.59focused tests,15exact offline replays,five request comparisons and score
+recomputation pass. No retries or budget expansion. Ollama restored/idle; answerAPI8014 offline,
+other demo services not reverified. Earlier healthy-service statements are historical. Next proposed:
+explicit retrieve→select→validate→save stage status/reuse and failure/retry slice, distinguishing
+invalid generation from insufficient evidence. Pause model/prompt experiments; quality remains open.
+Full selector and training remain parked. No human-hours credit or raw-output publication.
+
+
 **Direct30B selection baseline complete / not promoted:** [Comparison](DIRECT-SPAN-COMPARISON-2026-10-15.md)
 changes only the span-selection model on the same frozen passages/prompt/schema. Ten fresh calls,
 12.699seconds:5/7supported,4/7clean,9/14aspects,6/6relevant exact excerpts,3/3fresh correct abstentions,
