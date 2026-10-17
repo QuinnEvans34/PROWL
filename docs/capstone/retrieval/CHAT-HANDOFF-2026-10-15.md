@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 live integration blocked by storage / cache review complete:**
+[Storage review](LOCAL-STORAGE-REVIEW-2026-10-17.md). Quinton approved one live question/reuse check;
+normal database startup refused95.547GiB internal free versus104GiB requirement before Compose.
+No inference or DB start. Docker inventory shows9.162GB private old Astro/Airflow build cache;
+its relocated source project exists, but historical cached snapshots have not been compared to backups.
+Quinton requested verification before deleting anything: no cache/data deleted; cleanup permission
+pending. Do not bypass floors or use broad pruning. Ollama available; workflow/UI/old answer services
+offline at preflight. One-question live verification remains outstanding; selector/training parked.
+
+
 **October17 first expert workflow delivered:** [Implementation and verification](EXPERT-WORKFLOW-2026-10-17.md).
 Separate local adapter/panel exposes retrieve→select→validate→save, immutable artifacts/events,
 verified reuse, and explicit linked retry. Invalid generation fails without publishing an answer;
