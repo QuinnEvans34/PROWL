@@ -12,6 +12,9 @@ or second human consistency pass is inferred; machine-readable human review rema
 
 ## Current artifacts
 
+Start with the [readable questions and expected answers](DEVELOPMENT-QUESTIONS-AND-ANSWERS.md).
+The local HTML remains available for exact source-text inspection.
+
 - Revised draft: `configs/evidence/evaluation/development-v3-draft.json`.
 - Canonical content SHA-256: `ca4dacfe39a429493d56fdf8f7ed0f928d2ec76657ee199eea0ad5ca7387a83e`.
 - Review receipt: `configs/evidence/evaluation/development-v3-review.json`.
@@ -106,7 +109,7 @@ Rejected draft and attempt notes are preserved locally; final validation passed 
 
 ## Next review
 
-Use the revised local packet. The next manageable human batch is **06–10**, with particular attention
+Use the readable Q&A, with the revised local packet for exact excerpts. The next manageable human batch is **06–10**, with particular attention
 to corrected 08; revisit the added background in 05. Later, review corrected 16 and 17 in context.
 The required human semantic/consistency pass and private authoring remain under
 [the evaluation protocol](QUESTION-SET-AND-EVALUATION.md). Agent review assists that work and does

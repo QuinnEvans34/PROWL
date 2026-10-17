@@ -5,6 +5,8 @@
 > Revised suite `configs/evidence/evaluation/development-v3-draft.json`: same questions/order,
 > four revised labels (05/08/16/17), 60 spans (45 direct / 10 partial / 5 limiting).
 > Canonical SHA `ca4dacfe39a429493d56fdf8f7ed0f928d2ec76657ee199eea0ad5ca7387a83e`.
+> Human reading copy: `DEVELOPMENT-QUESTIONS-AND-ANSWERS.md` (all 30, short answers/source links).
+> It preserves v3 question wording/order and pending review; sample prose is not model output.
 > Current local packet: `outputs/prowl/evaluation-review-20261017/development-review-v3.html`.
 > Actual offline validation passes; v2 draft/receipt/packet preserved. Human relevance feedback
 > for 01–05 is recorded separately, not inferred acceptance of all cases or source-label adjudication.

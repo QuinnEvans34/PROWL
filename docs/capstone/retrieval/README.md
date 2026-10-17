@@ -7,6 +7,7 @@ Step 2: [choice comparison rejected](CHOICE-SELECTION-2026-10-17.md); response q
 Step 3: [bounded literature workflow qualified](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); broader G3 remains open.
 Step 4: [seven-source corpus frozen](CORPUS-FREEZE-2026-10-17.md), 693 passages; 6 direct / 15 partial / 4 coverage gaps.
 Step 5: [all-30 follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md) complete with four label corrections; revised draft v3 ready for human review.
+Read the [plain-language questions and expected answers](DEVELOPMENT-QUESTIONS-AND-ANSWERS.md), grouped in batches of five.
 Next: Quinton semantic review/second pass and independent protected authoring; AI-03 remains open.
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
