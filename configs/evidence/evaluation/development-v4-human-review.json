@@ -202,7 +202,147 @@
           "content_sha256": "919ec18d6e797068b2353779fe05fa19f9e68584b3e1402ba1091cc137461824"
         }
       ]
+    },
+    {
+      "sequence": 9,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:25:54Z",
+      "stage": "wording_and_answer",
+      "decision": "accept",
+      "human_statement": "Asked to read Questions 16\u201330 with expected answers and evidence in one document, then send corrections or acceptance. Quinton replied: Great, honestly it looks perfect. I have no changes. Great work on this.",
+      "targets": [
+        {
+          "id": "q:dev2-16",
+          "content_sha256": "d0884746a62fdc44c1289e86b04e3a24e109ae0e91f86bda9aa54dcc97b54323"
+        },
+        {
+          "id": "q:dev2-17",
+          "content_sha256": "effd0cbba49c84ee6377368629d1e150c0d32cdc10dbbb36626e6e7178101601"
+        },
+        {
+          "id": "q:dev2-18",
+          "content_sha256": "a7bb327ad4d69fd193c4d41ad49dca4645f1f391a638526f67c32ed920f617e2"
+        },
+        {
+          "id": "q:dev2-19",
+          "content_sha256": "141926f650937a8110a5a9f30a3a1452318bc58fcae985d4f2cfc506fdf0cd38"
+        },
+        {
+          "id": "q:dev2-20",
+          "content_sha256": "916907076b1c7d9ca7243e0f2c1903cb2c1e9ad2748581843aba815d870eeda6"
+        },
+        {
+          "id": "q:dev2-21",
+          "content_sha256": "79258fb7d187a256a2075b41b1a9b4eb185287a55a12e0ea9ba5829c9650460b"
+        },
+        {
+          "id": "q:dev2-22",
+          "content_sha256": "c2f1fb881cd6264f641792564edfeaed28e07de0eb4cab1f5cb1245f31b0052e"
+        },
+        {
+          "id": "q:dev2-23",
+          "content_sha256": "f90b1bae43fe62065e6373924642c253ff07bb8018ee5dbba9db67b70f58683e"
+        },
+        {
+          "id": "q:dev2-24",
+          "content_sha256": "d787c1fc7c7ae81e7af9d3179ca9c5d094716a2ad57aaa6e6e686800dbf47964"
+        },
+        {
+          "id": "q:dev2-25",
+          "content_sha256": "2ec5a5b4603912bc4659ea4078b051df971c65f01774ff6270c610230162ba94"
+        },
+        {
+          "id": "q:dev2-26",
+          "content_sha256": "55316d31d4ffa5be4c19a7d0af7cc7408e0e8cb6043692824db2a68da1050a33"
+        },
+        {
+          "id": "q:dev2-27",
+          "content_sha256": "87054faa559229d73116c66372571ebe688e9c882737a978cb6fdb1e089c999c"
+        },
+        {
+          "id": "q:dev2-28",
+          "content_sha256": "53514d5c59686a68a1e64bb253ad2bc16b5eb2d2e5ac98e75e0301d6679406aa"
+        },
+        {
+          "id": "q:dev2-29",
+          "content_sha256": "09178ecfea5c2d54dbc12eab2833f5191a6f18783561f71ac22822285f1adb75"
+        },
+        {
+          "id": "q:dev2-30",
+          "content_sha256": "e5ab50d6f9b2112ca711fc2bc1dc1ef45c77b0ef18fce414e1657ac14c017eee"
+        }
+      ]
+    },
+    {
+      "sequence": 10,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:25:54Z",
+      "stage": "evidence_labels",
+      "decision": "accept",
+      "human_statement": "Asked to read Questions 16\u201330 with expected answers and evidence in one document, then send corrections or acceptance. Quinton replied: Great, honestly it looks perfect. I have no changes. Great work on this.",
+      "targets": [
+        {
+          "id": "q:dev2-16",
+          "content_sha256": "d0884746a62fdc44c1289e86b04e3a24e109ae0e91f86bda9aa54dcc97b54323"
+        },
+        {
+          "id": "q:dev2-17",
+          "content_sha256": "effd0cbba49c84ee6377368629d1e150c0d32cdc10dbbb36626e6e7178101601"
+        },
+        {
+          "id": "q:dev2-18",
+          "content_sha256": "a7bb327ad4d69fd193c4d41ad49dca4645f1f391a638526f67c32ed920f617e2"
+        },
+        {
+          "id": "q:dev2-19",
+          "content_sha256": "141926f650937a8110a5a9f30a3a1452318bc58fcae985d4f2cfc506fdf0cd38"
+        },
+        {
+          "id": "q:dev2-20",
+          "content_sha256": "916907076b1c7d9ca7243e0f2c1903cb2c1e9ad2748581843aba815d870eeda6"
+        },
+        {
+          "id": "q:dev2-21",
+          "content_sha256": "79258fb7d187a256a2075b41b1a9b4eb185287a55a12e0ea9ba5829c9650460b"
+        },
+        {
+          "id": "q:dev2-22",
+          "content_sha256": "c2f1fb881cd6264f641792564edfeaed28e07de0eb4cab1f5cb1245f31b0052e"
+        },
+        {
+          "id": "q:dev2-23",
+          "content_sha256": "f90b1bae43fe62065e6373924642c253ff07bb8018ee5dbba9db67b70f58683e"
+        },
+        {
+          "id": "q:dev2-24",
+          "content_sha256": "d787c1fc7c7ae81e7af9d3179ca9c5d094716a2ad57aaa6e6e686800dbf47964"
+        },
+        {
+          "id": "q:dev2-25",
+          "content_sha256": "2ec5a5b4603912bc4659ea4078b051df971c65f01774ff6270c610230162ba94"
+        },
+        {
+          "id": "q:dev2-26",
+          "content_sha256": "55316d31d4ffa5be4c19a7d0af7cc7408e0e8cb6043692824db2a68da1050a33"
+        },
+        {
+          "id": "q:dev2-27",
+          "content_sha256": "87054faa559229d73116c66372571ebe688e9c882737a978cb6fdb1e089c999c"
+        },
+        {
+          "id": "q:dev2-28",
+          "content_sha256": "53514d5c59686a68a1e64bb253ad2bc16b5eb2d2e5ac98e75e0301d6679406aa"
+        },
+        {
+          "id": "q:dev2-29",
+          "content_sha256": "09178ecfea5c2d54dbc12eab2833f5191a6f18783561f71ac22822285f1adb75"
+        },
+        {
+          "id": "q:dev2-30",
+          "content_sha256": "e5ab50d6f9b2112ca711fc2bc1dc1ef45c77b0ef18fce414e1657ac14c017eee"
+        }
+      ]
     }
   ],
-  "content_sha256": "81e4a051051fa66f4683d6f4f500fd9bfff1b7bd908e0ebffd50dad48ecf0680"
+  "content_sha256": "96181ba2c7ee31d72a33be31ecd6b9e968ccf20c5d1766b27a4af515f88f589c"
 }

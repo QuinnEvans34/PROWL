@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.11 — October 17, 2026 (answer-key separation verified)\
+**Version:** 1.12 — October 17, 2026 (development first review accepted)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
+**State:** Steps 1–4 complete for their bounded scopes; all 30 development cases accepted in the first human wording/answer/evidence review. Second consistency review and protected authoring/freeze remain pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 ## 1. Outcome and authority
@@ -290,7 +290,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
-| Step 5 / AI-03 | In progress — human gates pending | [Plain-language revision](PLAIN-LANGUAGE-REVIEW-2026-10-17.md); v4 revises ten questions, 70 spans and needs-v2 binding; 42 focused checks and actual v3/v4 validation pass. Topic feedback is separate from final label adjudication. No protected content created/read and no final split freeze. |
+| Step 5 / AI-03 | In progress — first human review accepted | Quinton accepted all 30 v4 questions, expected answers and evidence labels in ten recorded stage events. The set-wide second consistency pass, independent protected authoring/backup and final split freeze remain pending. Existing 42-check draft verification and 70 evidence spans are unchanged. No protected content created/read or tuning release. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 

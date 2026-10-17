@@ -8,13 +8,13 @@ Step 1: [frozen acceptance/query/response mapping](AI-EXPERT-CONTRACT-V1.md), 83
 Step 2: [choice comparison rejected](CHOICE-SELECTION-2026-10-17.md); response quality remains open.
 Step 3: [bounded literature workflow qualified](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); broader G3 remains open.
 Step 4: [seven-source corpus frozen](CORPUS-FREEZE-2026-10-17.md), 693 passages; 6 direct / 15 partial / 4 coverage gaps.
-Step 5: [plain-language revision](PLAIN-LANGUAGE-REVIEW-2026-10-17.md) delivered: ten revised questions, 70 spans, 42 checks; v4 remains human-review pending.
+Step 5: [plain-language revision](PLAIN-LANGUAGE-REVIEW-2026-10-17.md) delivered: ten revised questions, 70 spans, 42 checks; all 30 v4 cases accepted in the first human review, with consistency review/protected freeze pending.
 Read the [plain-language questions and expected answers](DEVELOPMENT-QUESTIONS-AND-ANSWERS.md), grouped in batches of five.
 These are grading references, not indexed evidence or prepared runtime responses; [six current-path separation checks pass](ANSWER-KEY-BOUNDARY-2026-10-17.md).
-For source review, read all questions and evidence in `outputs/prowl/development-review-q01-q15-20261017/all-questions.md`.
+For source review, read all questions and evidence in `outputs/prowl/development-review-first-pass-accepted-20261017/all-questions.md`.
 Each of the 30 Markdown pages includes the expected answer, exact excerpts, limitations and all source judgments.
-Quinton accepted Q1–15's wording/answers and evidence; Q16–30 remain. He prefers one reading pass and consolidated feedback, not more small-batch prompts. The renderer is `scripts/retrieval/build_development_review_packet.py` and accepts only the fixed public v4 inputs.
-Next: follow the [development review workflow](DEVELOPMENT-REVIEW-WORKFLOW.md). Exact-version human-review tracking is delivered (19 new checks); no decisions inferred. Complete semantic/consistency review and independent protected authoring; AI-03 remains open.
+Quinton accepted all 30 questions' wording/answers and evidence with no changes. He prefers one reading pass and consolidated feedback, not more small-batch prompts. The renderer is `scripts/retrieval/build_development_review_packet.py` and accepts only the fixed public v4 inputs.
+Next: complete the set-wide second consistency pass under the [development review workflow](DEVELOPMENT-REVIEW-WORKFLOW.md), then independent protected authoring/backup and split freeze. Exact-version tracking records the actual human decisions; AI-03 remains open.
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
 for implementation evidence and dated service observations.
