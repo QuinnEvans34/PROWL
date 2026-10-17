@@ -3,7 +3,8 @@
 **Current execution plan (October 17):** [AI expert completion specification](AI-EXPERT-COMPLETION-SPEC.md).
 Nine ordered steps define the remaining feature, acceptance evidence and linked Trello tasks.
 Step 1: [frozen acceptance/query/response mapping](AI-EXPERT-CONTRACT-V1.md), 83 offline checks pass.
-Next: [AI-02 — test the authoritative evidence-choice contract](https://trello.com/c/VnFmSvXO).
+Step 2: [choice comparison rejected](CHOICE-SELECTION-2026-10-17.md); response quality remains open.
+Next: [W04-01 — literature workflow/rebuild qualification](https://trello.com/c/Z9QSh78P), Step 3.
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
 for implementation evidence and dated service observations.

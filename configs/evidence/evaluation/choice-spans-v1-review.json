@@ -1,0 +1,258 @@
+{
+  "suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "reviewer": "Codex engineering source review; not independent clinical adjudication",
+  "run": "choice-spans-v1",
+  "manifest_sha256": "fedbdb2dac01a5e8d4cac02ba04b94bf624037d72ad4100b15d3b113872cea3c",
+  "decision": "rejected: 4/7 clean,10/14 aspects,2/3 correct abstentions and one excessive-choice invalid generation",
+  "reviews": {
+    "radiomics": {
+      "receipt_sha256": "7ddb9f7d709a5562f2893191db0a38af94751ddb86280ba7fce5fbde59987896",
+      "extract_relevance": [
+        "relevant",
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Exact definition and general ROI/feature/model workflow; both requested aspects covered without unrelated excerpts."
+    },
+    "eus": {
+      "receipt_sha256": "f2c063048984b3003bd6a56057bd5d5bb8a83c415d0dba35984c1fe8994c5d8f",
+      "extract_relevance": [
+        "relevant",
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Schultz IPMN CNN description is EUS-related in its source context; Kuwahara EUS/IPMN cohort and measured result directly cover both aspects. Repeated Kuwahara sentence is deterministically deduplicated."
+    },
+    "ct-detection": {
+      "receipt_sha256": "d93b625414113cead6f32ec87b6f6d644ed6ea408810a4b1cc0bda540092e385",
+      "extract_relevance": [
+        "irrelevant",
+        "relevant",
+        "irrelevant"
+      ],
+      "aspects_covered": [
+        false,
+        true
+      ],
+      "rationale": "MRI differential-diagnosis result and CT treatment/prognosis result are outside the requested detection scope. Correct Chen numerical result lacks CT/detection-versus-normal context in the chosen text; only result aspect credited."
+    },
+    "ncle-study": {
+      "receipt_sha256": "467e4e4e73aa2efe346ef57941cb950ac4c739d1b296d07dfcd2692a0f33cb3a",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Four non-null choices exceed the frozen three-span limit and are rejected. The actual nCLE passage is null; choices concern other EUS/MRI studies. No published answer and no aspect credit."
+    },
+    "ct-external": {
+      "receipt_sha256": "06619e65088cca3be4fe37f2b778c7a690d68634db5bc8865678c960da42daf6",
+      "extract_relevance": [
+        "irrelevant",
+        "relevant"
+      ],
+      "aspects_covered": [
+        false,
+        true
+      ],
+      "rationale": "Chang grading study is not the requested Chen detection study. Correct >1000-subject local/external AUC sentence omits its contrast-enhanced CT detection context. Wrong-study CT context cannot repair that gap."
+    },
+    "mri-differential": {
+      "receipt_sha256": "373106e1f21db9c67a49108e02e6cd0d5b26a28d318bd9b47121aec986fcd9b0",
+      "extract_relevance": [
+        "relevant",
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Correct Deng MRI comparison method and same-study validation result are selected across overlapping passages; no adjacent PET/CT or EUS sentences emitted."
+    },
+    "pet-neuroendocrine": {
+      "receipt_sha256": "3abc8afb93fc832702c888d210424bd4cde5132cd4f3422dab2cd66d323a3d91",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Correct named PET/CT study, tracer and both grades with adjacent MRI text excluded."
+    },
+    "randomized-survival": {
+      "receipt_sha256": "cf6eaeb5750ddb69f4de3b3c2cb113df6ab40edfaaa7725c27e75f127ab67506",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid abstention: supplied prediction studies do not establish randomized mortality reduction."
+    },
+    "prowl-validation": {
+      "receipt_sha256": "d6513c52e659673d80c0b3e5ba7e04607e8b0cb217eee001aa88a3381c91e845",
+      "extract_relevance": [
+        "irrelevant"
+      ],
+      "aspects_covered": [],
+      "rationale": "False answer: a general statement that PCL AI studies were retrospective is not evidence about PROWL prospective multicenter validation. Required abstention failed."
+    },
+    "guaranteed-detection": {
+      "receipt_sha256": "ea5f5cd9d07a3a528ab904960649d682b6201b2c02920b24c62fa10c69a4f2f6",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid abstention: finite study estimates do not establish universal future zero-error performance."
+    }
+  },
+  "score": {
+    "totals": {
+      "supported_cases": 7,
+      "missing_cases": 3,
+      "reference_hits": 7,
+      "supported_answers": 6,
+      "clean_supported_answers": 4,
+      "correct_abstentions": 2,
+      "errors": 0,
+      "extracts": 13,
+      "exact_extracts": 13,
+      "relevant_extracts": 9,
+      "covered_aspects": 10,
+      "aspects": 14
+    },
+    "cases": [
+      {
+        "id": "radiomics",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant",
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 5.3632303749909624
+      },
+      {
+        "id": "eus",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant",
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 1.3875316249905154
+      },
+      {
+        "id": "ct-detection",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "irrelevant",
+          "relevant",
+          "irrelevant"
+        ],
+        "covered": 1,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 1.3422473749378696
+      },
+      {
+        "id": "ncle-study",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 1.4948569999542087
+      },
+      {
+        "id": "ct-external",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "irrelevant",
+          "relevant"
+        ],
+        "covered": 1,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 1.26738137495704
+      },
+      {
+        "id": "mri-differential",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant",
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 1.143640249967575
+      },
+      {
+        "id": "pet-neuroendocrine",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 1.1001827920554206
+      },
+      {
+        "id": "randomized-survival",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 1.049533125013113
+      },
+      {
+        "id": "prowl-validation",
+        "reference_hit": false,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "irrelevant"
+        ],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 0.9507089171092957
+      },
+      {
+        "id": "guaranteed-detection",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 1.1407319999998435
+      }
+    ]
+  }
+}

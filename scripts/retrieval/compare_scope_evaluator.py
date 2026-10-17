@@ -78,13 +78,13 @@ def main():
                         help='Frozen structured-span baseline; spans policy reuses only its retrieval')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evaluator', choices=scope_answer.EVALUATORS, required=True)
-    parser.add_argument('--policy', choices=['scope', 'records', 'spans', 'assessed-spans'], default='scope')
+    parser.add_argument('--policy', choices=['scope', 'records', 'spans', 'assessed-spans', 'choice-spans'], default='scope')
     parser.add_argument('--bundles', type=Path, help='Retained source bundle directory for records')
     parser.add_argument('--diagnostic', action='store_true', help='Frozen five-case30B reasoning profile')
     args = parser.parse_args()
     if args.diagnostic and (args.policy != 'spans' or args.evaluator != 'qwen3:30b'):
         raise ValueError('Reasoning diagnostic requires direct30B spans')
-    direct = args.policy in ('spans', 'assessed-spans')
+    direct = args.policy in ('spans', 'assessed-spans', 'choice-spans')
     selected = scope_answer
     bundles = {}
     if args.policy == 'spans':
@@ -93,6 +93,10 @@ def main():
         from src.retrieval import assessed_span_answer as selected
         if args.evaluator != selected.MODEL:
             raise ValueError('Assessed spans require pinned30B')
+    if args.policy == 'choice-spans':
+        from src.retrieval import choice_span_answer as selected
+        if args.evaluator != selected.MODEL:
+            raise ValueError('Choices require pinned30B')
     if args.policy == 'records':
         from src.retrieval import study_evidence as selected
         if args.evaluator != selected.MODEL or not args.bundles:
@@ -106,6 +110,9 @@ def main():
         if not bundles:
             raise ValueError('No retained source bundles')
     suite = json.loads((ROOT/'configs/evidence/evaluation/development-v1.json').read_text())
+    if args.policy == 'choice-spans' and (suite['split'] != 'development'
+            or len(suite['cases']) != 10 or len({c['id'] for c in suite['cases']}) != 10):
+        raise ValueError('Choices require the ten-case development suite')
     previous, inputs = frozen_inputs(args.selection, suite)
     profile = None
     parent_suite_sha256 = digest(suite)
@@ -129,6 +136,11 @@ def main():
     if args.policy == 'assessed-spans':
         source_paths += ['src/retrieval/assessed_span_answer.py',
                          'docs/capstone/retrieval/ASSESSED-SELECTION-2026-10-17.md']
+    if args.policy == 'choice-spans':
+        source_paths += ['src/retrieval/choice_span_answer.py', 'src/retrieval/evaluation.py',
+                         'src/retrieval/records.py', 'configs/evidence/expert-acceptance-v1.json',
+                         'docs/capstone/retrieval/AI-EXPERT-CONTRACT-V1.md',
+                         'docs/capstone/retrieval/CHOICE-SELECTION-2026-10-17.md']
     if profile:
         source_paths += ['configs/evidence/evaluation/reasoning-diagnostic-v1.json',
                          'docs/capstone/retrieval/REASONING-DIAGNOSTIC-2026-10-17.md']

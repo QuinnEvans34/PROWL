@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 AI-02 complete — choice candidate rejected:**
+[Comparison](CHOICE-SELECTION-2026-10-17.md): ten calls/16.250867s,6/7nonempty positive responses,
+4/7clean,10/14aspects,9/13relevant exact excerpts,2/3correct abstentions,one invalid generation.
+nCLE selects four spans and is rejected; CT mixes studies/omits context; PROWL-validation falsely
+answers with unrelated retrospective-study text. No promotion or further model experiment.
+50focused checks and ten exact offline generation/request/input replays pass; public score retained.
+Owned comparison finished/absent; Ollama slots idle; live v2 unchanged. Specv1.2 marks Step2 complete
+as an investigation, not quality acceptance. **Next Step3/W04-01: literature DAG invalidation,
+rebuild and remaining recovery qualification**, using fixtures/evidence-only behavior. Full selector,
+training, held-out and human-hours remain untouched. Earlier proposed-next statements are historical.
+
 **October17 AI-01 complete — contracts and acceptance frozen:**
 [Contract v1](AI-EXPERT-CONTRACT-V1.md) maps existing guided/query/response/workflow versions,
 adds opt-in response schema and cross-record validator, seven invented state examples and three

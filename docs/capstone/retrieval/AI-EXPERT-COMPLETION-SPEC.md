@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.1 — October 17, 2026 (AI-01 contract checkpoint)\
+**Version:** 1.2 — October 17, 2026 (AI-02 comparison checkpoint)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Step 1 complete for contract/fixture scope; Step 2 is next. Feature quality remains open.\
+**State:** Steps 1–2 complete for contract/investigation scope; Step 3 is next. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 ## 1. Outcome and authority
@@ -25,6 +25,9 @@ The [frozen information needs](planning/INFORMATION-NEEDS.md),
 Changes to a frozen contract create a new version and a recorded reason.
 
 ## 2. Starting point
+
+This is the baseline at specification creation. Current checkpoint results are in the execution
+table below, including the [rejected AI-02 comparison](CHOICE-SELECTION-2026-10-17.md).
 
 | Area | Evidence already delivered | Remaining acceptance gap |
 |---|---|---|
@@ -115,8 +118,8 @@ quality gate remains open. Only advance past it when the next step does not depe
 | Step | Work / Trello owner | Exit evidence | Current status |
 |---|---|---|---|
 | 1 | Freeze acceptance and query/response contracts — [AI-01](https://trello.com/c/BkOGKoPY) | [Contract, fixtures and 83-check result](AI-EXPERT-CONTRACT-V1.md) | **Complete — contract scope** |
-| 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | One bounded comparison, unchanged ten-case scoring, accept/reject decision and retained evidence | **Ready; next** |
-| 3 | Close literature DAG and rebuild behavior — [W04-01](https://trello.com/c/Z9QSh78P) | Versioned stages, invalidation/rebuild/recovery evidence and literature-only completion boundary | Queued after 2 disposition |
+| 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | [One comparison and rejection evidence](CHOICE-SELECTION-2026-10-17.md): 4/7 clean, 10/14 aspects, 2/3 correct abstentions, one invalid generation | **Complete — investigation; quality failed** |
+| 3 | Close literature DAG and rebuild behavior — [W04-01](https://trello.com/c/Z9QSh78P) | Versioned stages, invalidation/rebuild/recovery evidence and literature-only completion boundary | **Ready; next, independent of failed quality gate** |
 | 4 | Fill corpus coverage gaps and freeze the index — [W02-07](https://trello.com/c/fGxysGgy), [W05-02](https://trello.com/c/OqxGSjju) | Coverage matrix, rights/exclusions, search cutoff, corpus/index manifests and reproducible build | Queued after 3 |
 | 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | Queued after 4 |
 | 6 | Measure and select retrieval — [W06-02](https://trello.com/c/zDFlThwi) | Development lexical/dense/hybrid comparison and frozen selection with D-202 disposition | Queued after 5 |
@@ -239,7 +242,8 @@ integration/evaluation/documentation. Week 9 is stabilization; Week 10 is delive
 planning targets, not new runtime or completion guarantees. Beginning early is useful; feature
 completion is measured by evidence, not by the calendar or number of passing engineering tests.
 
-Only one implementation task is active in this lane. Step 1 is complete; Step 2 is queued next; other new tasks stay
+Only one implementation task is active in this lane. Steps 1–2 are complete in their stated scopes;
+Step 3 is queued next, using fixtures/evidence-only behavior; other new tasks stay
 in Backlog. The full-selector card is parked in Backlog, and W02-08 retains the existing prototype
 history pending its scoped closeout. Existing milestone cards remain the roll-up records; new AI
 cards are execution subtasks, not replacement project milestones. Broader-card dates stay unchanged.
@@ -253,7 +257,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 |---|---|---|
 | Completion specification v1.0 | Documented October 17 | This spec; Trello links in execution table. No implementation or model run performed by this planning checkpoint. |
 | Step 1 / AI-01 | Complete October 17 — contract scope | [Frozen mapping/schema/fixtures/rubric](AI-EXPERT-CONTRACT-V1.md); 83 offline checks pass; live services unchanged. |
-| Steps 2–9 | Open | Start Step 2. Later rows are updated as each step produces evidence. |
+| Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
+| Steps 3–9 | Open | Start Step 3. Response quality gate remains open for Step 7. |
 
 Excluded from this completion plan: training/fine-tuning, autonomous clinical decisions, broad report
 drafting, raw patient-data retrieval, an unrestricted chatbot, automatic full-selector continuation,
