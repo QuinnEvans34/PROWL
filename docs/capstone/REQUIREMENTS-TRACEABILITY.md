@@ -87,3 +87,17 @@ G0-verification remains partial.
 - `Verified` — evidence exists and is linked from this table.
 - `At risk` — the artifact or test is unlikely to meet its scheduled gate.
 - `Deferred` — only valid for optional scope, with a recorded decision.
+
+
+## October 17 user-authorized measurement-aware extension
+
+Required for final delivery, after core RAG acceptance. Source: Quinton's explicit instruction;
+see [extension plan](retrieval/MEASUREMENT-AWARE-EXPERT-PLAN.md). Original baseline requirements above
+remain intact; these rows are new commitments, not assertions about the original proposal wording.
+
+| ID | Requirement | Plan | Required artifact | Verification | Status |
+|---|---|---|---|---|---|
+| REQ-X01 | Verified pancreas/lesion measurements and validated expert adapter | Step 10 / AI-05 | Versioned measurements, units, validity and lineage | Geometry fixtures, reviewed cases, frozen tolerances, invalid-mask checks | Required; queued after core acceptance |
+| REQ-X02 | Eligible published reference comparisons | Step 11 / AI-06 | Rights-cleared reference records and comparison provenance | Supported comparison plus mismatched/absent reference cases | Required; queued after X01 |
+| REQ-X03 | Plain-language measurement-aware explanations in viewer | Steps 11–12 / AI-06–AI-07 | Cited explanations and versioned UI/API | Claim/number/unit checks, case isolation, refusals and separate final assessment | Required; not started |
+| REQ-X04 | Human-reviewed feedback consumable by training workflow | Step 12 / AI-07 | Review ledger, eligible export and loader integration | Zero-update loader dry-run; unreviewed/protected-role rejection | Required; no training launch |

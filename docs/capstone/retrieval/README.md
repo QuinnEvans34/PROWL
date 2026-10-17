@@ -1,7 +1,9 @@
 # Literature retrieval design package
 
 **Current execution plan (October 17):** [AI expert completion specification](AI-EXPERT-COMPLETION-SPEC.md).
-Nine ordered steps define the remaining feature, acceptance evidence and linked Trello tasks.
+Twelve ordered steps define the remaining feature, acceptance evidence and linked Trello tasks.
+Steps 1–9 qualify core RAG; the [required measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md)
+follows in Steps 10–12 and is part of final delivery, not a stretch goal.
 Step 1: [frozen acceptance/query/response mapping](AI-EXPERT-CONTRACT-V1.md), 83 offline checks pass.
 Step 2: [choice comparison rejected](CHOICE-SELECTION-2026-10-17.md); response quality remains open.
 Step 3: [bounded literature workflow qualified](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); broader G3 remains open.

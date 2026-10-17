@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.7 — October 17, 2026 (plain-language demo requirement)\
+**Version:** 1.8 — October 17, 2026 (required measurement-aware extension)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -18,6 +18,11 @@ remain the source of truth; see [approved-source registry](../../../references/g
 This specification sequences the remaining work in [Plan 07](../implementation/07-literature-retrieval.md)
 and the literature portion of [Plan 04](../implementation/04-workflow-orchestration.md).
 It does not replace their release gates or declare the full cross-project DAG complete.
+
+**October 17 user-authorized scope addition:** the [measurement-aware expert extension](MEASUREMENT-AWARE-EXPERT-PLAN.md)
+is required in the final deliverable, after accepted core RAG Steps 1–9. Steps 10–12 add verified
+measurements, cited reference comparisons, explanations and reviewed training feedback. This dated
+amendment does not rewrite the approved proposal files or imply institutional approval of new scope.
 
 The [frozen information needs](planning/INFORMATION-NEEDS.md),
 [query contract](QUERY-AND-RETRIEVAL.md), and
@@ -49,7 +54,7 @@ Evidence: [selection comparison](ASSESSED-SELECTION-2026-10-17.md),
 [restart check](WORKFLOW-RECOVERY-CHECK-2026-10-17.md).
 These are dated observations, not a fresh service-health assertion.
 
-## 3. Product contract
+## 3. Core product contract
 
 1. The reviewer chooses a finding and a question within the five frozen families: CT appearance,
    measurement/contour review, anatomy, AI limitations, and review workflow/uncertainty.
@@ -125,7 +130,10 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 6 | Measure and select retrieval — [W06-02](https://trello.com/c/zDFlThwi) | Development lexical/dense/hybrid comparison and frozen selection with D-202 disposition | Queued after 5 |
 | 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Queued after 6 |
 | 8 | Connect finding → question → evidence in the viewer — [W07-01](https://trello.com/c/IM0zPvP9) | Browser-tested finding/context/citation flow and all failure states | Queued after 7 disposition |
-| 9 | Run protected acceptance and package the feature — [W08-01](https://trello.com/c/s827dTBE), [W07-02](https://trello.com/c/cfVFZT2a) | Frozen held-out report, final integration/recovery evidence, walkthrough and operator handoff | Queued after 8; all release dependencies required |
+| 9 | Run protected core acceptance and package the baseline — [W08-01](https://trello.com/c/s827dTBE), [W07-02](https://trello.com/c/cfVFZT2a) | Frozen held-out report, final integration/recovery evidence, walkthrough and operator handoff | Queued after 8; all release dependencies required |
+| 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Required; queued after accepted core Step 9 |
+| 11 | Add eligible reference comparisons and explanations — [AI-06](https://trello.com/c/TKCLH5PZ) | REQ-X02–X03 cited comparison and failure/refusal evidence | Required; queued after 10 |
+| 12 | Integrate reviewed training feedback and accept extension — [AI-07](https://trello.com/c/pL25Swot) | REQ-X04, separate extension assessment, viewer and final handoff | Required; queued after 11 |
 
 ### Step 1 — Acceptance and contracts
 
@@ -160,7 +168,7 @@ count/hash/query parity, explicit recovery at remaining publication boundaries, 
 artifacts, concurrent run IDs, unavailable DB/Ollama and storage admission. Verify imaging remains
 usable. Preserve valid existing evidence instead of rerunning unchanged tests without reason.
 Record the Plan 04 runner/tool decision and which literature obligations are met; broader imaging
-orchestration and G3 remain separately assessed. Final Step 9 rechecks affected integration paths.
+orchestration and G3 remain separately assessed. Core Step 9 rechecks affected integration paths; Step 12 qualifies the extension.
 
 ### Step 4 — Coverage and corpus freeze
 
@@ -225,7 +233,7 @@ timeouts, model/DB outages and explicit retry/reload. Static fixtures and live r
 same versioned contract. Keep W07-01's wider durable review-decision obligations separate; this
 literature subtask alone does not close that entire card.
 
-### Step 9 — Final acceptance and handoff
+### Step 9 — Core RAG acceptance and handoff
 
 Freeze the release commit, corpus/index/model/policy identities and rubrics before Quinton's logged
 held-out evaluation. Lock retrieval rankings, then evaluate responses against them without tuning.
@@ -237,6 +245,14 @@ with answered, partial, refused and unavailable examples. Deliver startup/shutdo
 resource prerequisites, restore/rebuild/recovery instructions, troubleshooting, pinned dependencies
 and a demonstration script. Quinton reviews the outcome; each broader capstone card closes only
 when its own complete acceptance criteria are met.
+
+### Steps 10–12 — Required measurement-aware extension
+
+Implement the [extension plan](MEASUREMENT-AWARE-EXPERT-PLAN.md) only after Step 9 satisfies its
+core quality gates. Require actual accepted RAG behavior, not a functioning demo or excerpt fallback.
+Deliver REQ-X01–X04 and separately evaluate the expanded release. Exact measurement summaries need
+a new validated contract; current coarse inputs stay unchanged until then. Reviewed training feedback
+is required, but this plan does not start training or promise a fine-tuning/performance gain.
 
 ## 6. Schedule, scope and progress control
 
@@ -266,18 +282,22 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
 | Step 5 / AI-03 | In progress — human gates pending | [All-30 follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md); revised v3 draft, four corrected labels, 60 spans; actual offline validation passes. Prior 31 checks retained. First-five relevance feedback recorded separately. No protected content created/read and no final split freeze. |
+| Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 
-Excluded from this completion plan: training/fine-tuning, autonomous clinical decisions, broad report
+Excluded from this completion plan: actual training/fine-tuning runs (reviewed feedback integration is required), autonomous clinical decisions, broad report
 drafting, raw patient-data retrieval, an unrestricted chatbot, automatic full-selector continuation,
 new model downloads, and unbounded prompt/model sweeps. Existing storage and source-rights controls
 still apply. A needed scope change is documented before execution rather than hidden inside a card.
 
 ## 7. Definition of done
 
-The feature is complete when Steps 1–9 have accepted evidence, Plan 07 G6 is satisfied, the finding
+The expanded feature is complete when Steps 1–12 have accepted evidence, REQ-X01–X04 are verified,
+Plan 07 G6 is satisfied, the finding
 workflow works in the reviewer UI, the frozen development and protected evaluation meet the declared
-quality contract, and an operator can reproduce/recover the supported release. Trello, this progress
+quality contract, and an operator can reproduce/recover the supported release. Core RAG acceptance
+is a prerequisite, not final completion of the required extension. Training-feedback integration
+is required; actual retraining remains a separately scoped experiment. Trello, this progress
 record and the Git checkpoint must agree. If a required gate fails, report **partial/blocked with a
 specific remaining gap**, even when the demo is usable. No percentage-complete estimate substitutes
 for those results.

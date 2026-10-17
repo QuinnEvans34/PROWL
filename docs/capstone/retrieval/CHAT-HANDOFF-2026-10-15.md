@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 REQUIRED final-deliverable expansion:** Quinton explicitly requires measurement-aware
+> expert capability after proven core RAG. Read `MEASUREMENT-AWARE-EXPERT-PLAN.md`; spec v1.8 now
+> has 12 steps. Core Steps 1–9 must pass first; then AI-05 verified measurements, AI-06 eligible
+> cited comparisons/explanations, AI-07 reviewed training feedback and extension acceptance.
+> REQ-X01–X04 are required, not stretch work. Master plan, decisions and traceability updated.
+> A training-consumable reviewed export/loader dry-run is required; no training launch, automatic
+> self-labeling, diagnosis or protected-test reuse. Core acceptance alone is no longer final done.
+> Current Step 5 plain-language/coverage/evaluation work remains next; no extension implementation now.
+
 > **October 17 plain-language requirement:** Quinton finds all questions on topic and endorses
 > citation/system-information refusals, but needs everyday demo questions (for example average
 > pancreas size). Read `PLAIN-LANGUAGE-DEMO-PLAN.md`; completion spec now v1.7.

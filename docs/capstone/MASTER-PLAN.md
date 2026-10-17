@@ -19,6 +19,17 @@ The capstone succeeds by demonstrating a coherent system with honest evaluation 
 artifacts. It does not succeed merely by training a higher-scoring model or adding unrelated
 technologies.
 
+### October 17 required final-deliverable addition
+
+Quinton explicitly requires [measurement-aware AI expert functionality](retrieval/MEASUREMENT-AWARE-EXPERT-PLAN.md)
+after the core RAG system has passed its frozen acceptance gates. Required scope: verified pancreas/
+lesion measurements, eligible cited reference comparisons, readable non-diagnostic explanations,
+and a working human-reviewed training-feedback pipeline. These are REQ-X01–X04 and completion-spec
+Steps 10–12, tracked in AI-05–AI-07. They are not stretch goals. Core RAG acceptance alone does not
+complete the expanded final deliverable. No training launch or clinical diagnosis is authorized.
+This records the user's added implementation commitment, not a claim that the original proposal
+files were amended or institutionally reapproved. Reconcile schedule impact in the next planning pass.
+
 ## 2. Prior foundation versus new capstone work
 
 ### Reusable foundation

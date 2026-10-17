@@ -2009,3 +2009,17 @@ adds exact corpus/catalog binding, storage admission and canonical rebuild/parit
 This records the literature tool choice only. No Prefect trial ran; Prefect has not failed its
 selection criteria. General D-201, cross-workflow scheduling/accelerator coordination, full registry
 operations and broader imaging G3 remain open. No claim of answer-quality acceptance follows.
+
+
+## October 17 — Required measurement-aware expert after core RAG acceptance
+
+Quinton explicitly directs that the previously discussed measurement-aware expert and reviewed
+training-feedback capability be documented as part of the final deliverable, implemented only after
+a solid RAG system works as expected. Adopt [the extension plan](retrieval/MEASUREMENT-AWARE-EXPERT-PLAN.md)
+as required scope, REQ-X01–X04 / AI-05–AI-07 / completion-spec Steps 10–12. Existing frozen core
+acceptance thresholds define entry; core acceptance alone cannot close the expanded deliverable.
+The addition covers deterministic measurements, eligible reference comparisons, plain-language
+cited context and human-verified feedback exports. It does not authorize clinical diagnosis/staging,
+automatic self-training, protected-evaluation reuse, a training launch or full-selector restart.
+Version richer input contracts and freeze extension criteria before experiments. Preserve original
+proposal files/hashes; this is a dated user scope amendment, not institutional reapproval.
