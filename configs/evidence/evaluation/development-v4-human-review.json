@@ -2,6 +2,35 @@
   "schema_version": "prowl-development-review-v1",
   "development_content_sha256": "7db15aa85606247134675681bb077e056045c9beecce6e2960634bbba0f786aa",
   "answers_sha256": "060250a39693e41c0eaf4d53736ff56430428259277ac207d42c399ffc8d3c55",
-  "events": [],
-  "content_sha256": "3ba630119dbf76fb19a8ddb8befb0d831ff6c4806f40faa4cef4459e15c2239e"
+  "events": [
+    {
+      "sequence": 1,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:08:58Z",
+      "stage": "wording_and_answer",
+      "decision": "accept",
+      "human_statement": "Asked: After reading Question 1 and its evidence, do you accept its wording, expected answer, and evidence labels, or see something to revise? Quinton replied: Accept Question 1 and its evidence.",
+      "targets": [
+        {
+          "id": "q:dev2-01",
+          "content_sha256": "07fcba94c85cebab8c33f0a2968a8bb4709678aff37e11fb52e128efb42e6aa6"
+        }
+      ]
+    },
+    {
+      "sequence": 2,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:08:58Z",
+      "stage": "evidence_labels",
+      "decision": "accept",
+      "human_statement": "Asked: After reading Question 1 and its evidence, do you accept its wording, expected answer, and evidence labels, or see something to revise? Quinton replied: Accept Question 1 and its evidence.",
+      "targets": [
+        {
+          "id": "q:dev2-01",
+          "content_sha256": "07fcba94c85cebab8c33f0a2968a8bb4709678aff37e11fb52e128efb42e6aa6"
+        }
+      ]
+    }
+  ],
+  "content_sha256": "070089206e056cadc1a157496d600fab757672a73707ce34f723de4be211b48c"
 }

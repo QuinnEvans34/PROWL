@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 combined review pages delivered:** Removed the need to cross-reference three files
+> during human source review. Fixed-v4 renderer produces 30 local Markdown pages combining question,
+> expected answer, required concepts, exact evidence and all source judgments. Use
+> `outputs/prowl/development-review-pages-v3-20261017/README.md`; earlier formatting/review snapshots preserved.
+> Verified all 30 questions/70 exact spans/140 source judgments, local links and output hashes;
+> existing-output/out-of-scope writes refused. First formatting attempt is preserved separately.
+> Quinton explicitly replied "Accept Question 1 and its evidence" to wording/answer/evidence review.
+> Two append-only events now record Q1 acceptance; 29 first-pass cases and the full consistency pass
+> remain. Only the review-record pin advances; prior producing receipts are historical and preserved.
+> Draft/answers/source labels unchanged; no protected content read. Next human batch: Q2–5.
+> Same Step 5 human/protected freeze gates; no retrieval/model/DB/service/training operations.
+
 > **October 17 answer-key boundary verified:** Quinton supports the updated questions and asks
 > for honest evaluation, then authorizes continuation. Expected answers remain grading references,
 > never extra corpus evidence or prompt attachments. Six new offline canary tests exercise current

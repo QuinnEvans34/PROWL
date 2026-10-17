@@ -1682,3 +1682,24 @@ unsupported canary quotes are refused; prompt metadata is projected out and empt
 No production code, model/DB/index/services, labels, human-review event, protected content or training
 changed. This is an engineering boundary check, not model quality or future free-text qualification.
 See ../ANSWER-KEY-BOUNDARY-2026-10-17.md. Human review and protected split freeze remain next.
+
+## 2026-10-17: Combined human evidence-review pages (Codex)
+
+Continuation addressed a usability gap: Q&A, exact excerpts and source judgments were in separate
+files. Added a fixed-public-v4 renderer producing 30 local Markdown pages plus an index and receipt.
+Each page combines the unchanged expected answer, concepts, boundary, exact quotations, attribution
+and all source judgments. Final v2 formatting uses readable evidence-grade names and shorter author
+citations; first formatting output is preserved. Actual corpus/draft and review bindings validate.
+All 30 question strings, 70 source spans and 140 source judgments verified; local links/output hashes
+checked. Existing destination and out-of-scope output refusals verified without writes. All prior
+preparation/review pins unchanged. No label, answer, decision, model/DB/service/private-store change.
+Asked Quinton to review Q1's wording/answer and evidence explicitly; no reply or approval inferred.
+Next remains human source review and protected split authoring/freeze, not retrieval tuning.
+
+Human response in the same checkpoint: Quinton explicitly answered "Accept Question 1 and its
+evidence" to the displayed question asking about wording, expected answer and evidence labels.
+Recorded two events for q:dev2-01 against its unchanged case hash, at receipt time 23:08:58 UTC.
+Actual tracker reports one accepted/29 pending in wording/answer and evidence stages, all 30 pending
+in second consistency. Review-record hash intentionally advances; older producing receipts retain
+the blank-record hash as historical evidence. No case/answer/label changed. Regenerated the combined
+packet as development-review-pages-v3-20261017 so Q1 shows acceptance. Next human batch is Q2–5.
