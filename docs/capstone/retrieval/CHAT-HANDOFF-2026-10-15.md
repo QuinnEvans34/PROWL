@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 completion specification and Trello sequence documented:**
+[Completion spec v1.0](AI-EXPERT-COMPLETION-SPEC.md) is the current execution plan: nine ordered
+steps from contracts through quality, literature DAG/rebuild, corpus coverage, protected evaluation,
+finding integration and final acceptance. Four new cards AI-01–AI-04 cover missing execution tasks;
+existing milestone cards retain their wider scope and have linked updates. W02-06 is parked in
+Backlog; W02-08 is queued in To Do for prototype closeout. No feature gate is marked complete.
+**Next is Step1/AI-01: versioned query/response mapping, synthetic examples, metric/rubric and budget
+freeze.** New numerical targets are proposals to dispose before broad tuning, not achieved results.
+The protected held-out authoring boundary stays with Quinton. This checkpoint changes documentation
+and Trello only; no new model run, code, service operation, selector, training or human-hours credit.
+Earlier proposed-next passages below are historical; retain their experiment evidence.
+
 **October17 assessed selection comparison rejected:**
 [Quality comparison](ASSESSED-SELECTION-2026-10-17.md). New experimental single-call passage
 assessment plus span selector:10calls/37.043s,2/7supported,1/7clean,3/14aspects,3/3fresh abstentions,

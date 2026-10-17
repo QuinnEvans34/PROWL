@@ -8,6 +8,14 @@
 
 ## 1. Commitment and alignment
 
+**October 17 AI follow-on sequencing update:** the
+[AI expert completion specification](../retrieval/AI-EXPERT-COMPLETION-SPEC.md) now governs the
+remaining literature feature work, starting with AI-01 contracts/acceptance. A bounded two-review
+pgvector demo and recoverable research workflow have been delivered; quality and final integration
+remain open. W02-06 full selection is parked, so the historical full-selection-first sequence below
+is not the current execution instruction. W02-07/W05-02 can cover an explicitly bounded permitted
+corpus. Original Week 2 commitments, proposal milestones and historical evidence remain unchanged.
+
 The approved proposal section 6 assigns Week 2 **frozen protected cohorts, patient/group separation,
 manifests and repeatability checks**. See [confirmed delivery outline](PROJECT-DELIVERY-OUTLINE-2026-10-09.md)
 and [Plan 02](../implementation/02-data-and-cohorts.md). This remains our first obligation.

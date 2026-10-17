@@ -1,6 +1,13 @@
 # Literature retrieval design package
 
-Current: D-260–D-265 and the approved [scope](planning/SCOPE.md) /
+**Current execution plan (October 17):** [AI expert completion specification](AI-EXPERT-COMPLETION-SPEC.md).
+Nine ordered steps define the remaining feature, acceptance evidence and linked Trello tasks.
+Next: [AI-01 — freeze acceptance and query/response contracts](https://trello.com/c/BkOGKoPY).
+The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
+open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
+for implementation evidence and dated service observations.
+
+Design authority: D-260–D-265 and the approved [scope](planning/SCOPE.md) /
 [phases](planning/PHASES.md). [Revised P3 packet](../operations/CLAUDE-PLAN07-P3-PACKET-2026-09-28.md)
 is issued for Quinton dispatch. Additional span/delivered metrics remain a proposed
 D-085 amendment; models and execution permissions remain separately gated.
