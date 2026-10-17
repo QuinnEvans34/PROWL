@@ -1,5 +1,37 @@
 # AGENTS.md — Agent Context
 
+> **October17 selected-native evaluations COMPLETE:** Owned73080 FINISHEDexit0, both70case reports
+>complete/reaped under E:/PROWL/readiness/pants-selected-native-20261017-a01/{raw,ema}/.
+>Ordinary28k nativeDice.399545,detect33/36,alarms33/34;EMA8k .406650,33/36,34/34.
+>Emptylesionvolume49.911mLvs97.490mL;no causalEMAclaim fromdifferentselectedsteps. MLflow
+>293346f5cd3c4e7fba06208cea291183 andcd079e24e08c431385f0d3eece182b29.18testspass.
+>No updates/testreads/promotion; fixed72k decisionsunchanged. Read
+>docs/capstone/operations/PANTS-SELECTED-NATIVE-20261017.md for nextcropvariationproposal,
+>matched24kcontrol requirements,units/cohortcompatibility. No newtraining/merge/push/schedule.
+>Earlier evaluationLIVE text below is historical; do not retry completed job.
+
+> **October17 selected-checkpoint native evaluation LIVE:** User explicitly requests native ordinary28k
+>andEMA8k evaluation before planning crop variation. Ownedexec73080 runs
+>scripts/diagnostics/evaluate_selected_ema.py --launch, sequentialrawthenEMA,70matcheddev each,
+>zerooptimizerupdates/testreads. Output E:/PROWL/readiness/pants-selected-native-20261017-a01/;
+>request.json pins exactcheckpoints/frozenproducer/cohort/newscript. DO NOT change pins or launch
+>a duplicate whileactive. Existing native_case and EMASession.weights select correctvariant.
+>Onehour/model,12GiBworker,100GiBC/Efloors,256MiBoutput,AC/CUDAlock/reapedworkers; no retry.
+>Each diagnostic has separate localMLflow tracking.json. Completion requires bothreport.json+
+>resources workers_reaped; selectiondiagnostics neverreplace fixed72kverdicts. No successortraining.
+
+> **October16 72k run COMPLETE / native retrospective:** Finished Oct15 18:58:34MDT,72000contiguous
+>updates/204494.015journal seconds, supervisorworkersreaped. All386receiptpins and9E/Ccheckpoints+
+>finaljournalmatch. Review E:/PROWL/readiness/pants-ema-review-20261016-a01/results.json;
+>docs/capstone/operations/PANTS-EMA-72K-RESULTS-20261016.md. Nativeordinary24k→72kDice
+>.312373→.253297,delta-.059076 CI[-.129955,+.005082],detect27→24/36,alarms21→15/34.
+>Duration practicalhypothesisREJECTED(detectionguardrail andCIupperbelow+.02);H0notrejected.
+>EMAterminalgain+.000003362 CI[0,+.000010086],practicalREJECTED;H0notrejected.5reviewtestspass.
+>No new inference/CTaudit/testreads/training. CropvariationfromMac discussedasnextproposalONLY,
+>not launchauthority. Do not automaticallyrunPANORAMA. OldLIVE/active-pin warnings arehistorical;
+>retain all original evidence; integrationstillrequiresdeliberatecompatibilityreview. Monitor57819
+>restored Oct16;Tailscalealreadyonline/privateServeunchanged. No schedules/publicpush thisreview.
+
 > **October14 Git synchronization authorized / merge deferred:** User explicitly requests committing
 >and pushing this laptop's accumulated repo work and inspecting incoming Mac work; this supersedes
 >older no-public-push instructions for this source/documentation snapshot only, never raw data,

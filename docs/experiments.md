@@ -1,5 +1,34 @@
 # PROWL living experiment notebook
 
+## October17 — Best ordinary28k and EMA8k, native development evaluation
+
+Both authorized70-case evaluations completed/reaped; no optimizer updates or test reads.
+[Detailed results and crop-variation planning](capstone/operations/PANTS-SELECTED-NATIVE-20261017.md).
+Ordinary28k: nativeDice.399545,detect33/36,alarms33/34,pancreas.811866.
+EMA8k: nativeDice.406650,detect33/36,alarms34/34,pancreas.808478.
+Empty predicted lesion volume totals49.911mL versus97.490mL; >=50mm3 alerts30/34 versus34/34.
+MLflow diagnostics293346f5cd3c4e7fba06208cea291183 andcd079e24e08c431385f0d3eece182b29.
+These independently selected checkpoints differ in step: not a controlled EMA effect, no promotion,
+and no revision to rejected fixed72k practical hypotheses. Priorselected14k PanTS model remains
+contextuallycompetitive(.405092Dice,34/36detect,32/34alarms). Cropvariation remains a proposed
+controlled24k experiment for predicted-ROI robustness; not a proven false-positive remedy.
+No successortraining or Gitintegration launched. Existing admission evidence reused;18testspass.
+
+## October16 — Completed PanTS72k/EMA retrospective
+
+**Both practical improvement hypotheses rejected; neither no-improvement null rejected.**
+Full [native-resolution results and next-experiment discussion](capstone/operations/PANTS-EMA-72K-RESULTS-20261016.md).
+All72kupdates completed before restart; all386frozenpins and nineindependentcheckpoint copies/finaljournal match.
+Ordinary24k→72k nativeDice.312373→.253297,delta-.059076,paired95%CI[-.129955,+.005082].
+Detection27→24/36 fails -3pp guardrail, despite alarms21→15/34 and improved pancreasDice.
+EMA72k versusordinary72k gain+.000003362,95%CI[0,+.000010086],far below+.01 minimum.
+Do not write "accepted the null" or substitute intermediate/selected-best scores for frozen endpoints.
+Falling training loss with deteriorating development Dice is consistent with overfitting/objective
+mismatch, not proof. The run does not support automatic72kPANORAMA follow-up.
+Proposed next direction: existing Mac crop-variation plan for imperfect localization, with matched
+24kcontrol and fixed autonomous evaluation, subject to compatibility/units/cohort reconciliation.
+No successor or additional inference has been launched. Historical LIVE entries below are retained.
+
 ## October 13 — PanTS only: longer 72k schedule with ordinary and EMA weights
 
 **Launched and actual training confirmed, October13 ~10:10MDT.** Ownedexec87724;
