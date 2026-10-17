@@ -2,8 +2,9 @@
 
 > **October17 current Mac code integrated and augmentation plan specified:** User requests pulling
 >current other-machine code and writing the next experiment, NOT a training launch. Safety snapshot
->3f9b64a preserves completed Windows reviews. Merge origin/main7e6796c (52 incoming commits,
->216paths) into codex/windows-training-readiness; only AGENTS history conflict, both retained.
+>3f9b64a preserves completed Windows reviews. Merged origin/main throughd121330 (53 incoming commits,
+>219paths) into codex/windows-training-readiness; firstmergea5bfe5c includes52, finalfollowup adds1.
+>Only AGENTS history conflict, both retained; latest research recovery test remains Mac-oriented.
 >No active trainer/evaluator at merge; existing dashboard untouched. Full Windows trainer/EMA/MLflow
 >preserved. Shared geometry defaults exactly match premerge outputs on3 synthetic affine cases.
 >156focused merged-checkout tests pass/3capability skips; old Mac duration-readiness tests still

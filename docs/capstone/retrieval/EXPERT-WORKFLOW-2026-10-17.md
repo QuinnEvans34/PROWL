@@ -1,5 +1,9 @@
 # First explicit research workflow — October 17, 2026
 
+**Restart follow-up:** [Controlled HTTP interruption/recovery](WORKFLOW-RECOVERY-CHECK-2026-10-17.md)
+now passes using synthetic outputs and a fresh service process. Retrieval/selection reuse, original
+history preservation and one response at the selected pre-publication boundary were verified.
+
 **Follow-up:** The real single-question integration and same-ID saved-result reuse now pass.
 See [live verification](WORKFLOW-LIVE-CHECK-2026-10-17.md) for cleanup, recovery, route integration,
 current service state and the remaining relevance limitation. Earlier not-started statements below

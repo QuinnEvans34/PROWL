@@ -72,3 +72,33 @@ it('aborts status polling on case switch and ignores a late result', async () =>
   finish()
   expect(screen.queryByRole('article')).toBeNull()
 })
+
+it('confirms interruption after a lost reply before offering explicit linked recovery', async () => {
+  const user = userEvent.setup()
+  const load = vi.fn().mockRejectedValueOnce(new Error('service died')).mockImplementation(async request => {
+    const value = run(request, request.resume_of ? 'completed' : 'interrupted')
+    value.stages = ['retrieve', 'select', 'validate', 'save'].map((stage, i) => ({ stage,
+      state: (request.resume_of ? ['reused', 'reused', 'completed', 'completed']
+        : ['completed', 'completed', 'running', 'pending'])[i] }))
+    return value
+  })
+  render(<ResearchWorkflowPanel loadWorkflow={load} />)
+  await user.click(screen.getByText('Research evidence workflow'))
+  await user.click(screen.getByRole('button'))
+  expect((await screen.findByRole('alert')).textContent).toContain('could not confirm')
+  expect(load).toHaveBeenCalledTimes(1)
+  await user.click(screen.getByRole('button', { name: 'Check same request' }))
+  expect((await screen.findByRole('alert')).textContent).toContain('workflow was interrupted')
+  expect(screen.queryByRole('article')).toBeNull()
+  expect(load).toHaveBeenCalledTimes(2)
+  expect(load.mock.calls[1][0]).toEqual(load.mock.calls[0][0])
+  await user.click(screen.getByRole('button', { name: 'Retry failed stage' }))
+  expect(await screen.findByRole('article')).toBeTruthy()
+  expect(load).toHaveBeenCalledTimes(3)
+  const [original, , recovery] = load.mock.calls.map(c => c[0])
+  expect(recovery.request_id).not.toBe(original.request_id)
+  expect(recovery.resume_of).toBe(original.request_id)
+  expect(screen.getByRole('list').textContent).toContain('Select evidence: Reused from prior attempt')
+  expect(screen.getByRole('link', { name: original.request_id }).getAttribute('href'))
+    .toBe(`/research-workflow/runs/${original.request_id}`)
+})

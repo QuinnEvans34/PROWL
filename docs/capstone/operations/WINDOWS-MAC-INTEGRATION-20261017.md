@@ -3,14 +3,17 @@
 ## Outcome and source identities
 
 Quinton requested the new augmentation experiment specification and the latest code from the other
-machine on October17. This integration brings all52 incoming commits published on `origin/main`
-through `7e6796c66ef3d421680a5a6be69fcbb1e75e750a` into `codex/windows-training-readiness`.
+machine on October17. This integration brings all53 incoming commits published on `origin/main`
+through `d121330a2f358f275c33b344342e2b140d52b1e4` into `codex/windows-training-readiness`.
 It preserves the Windows trainer, completed-run evidence and local configuration. It does not fetch
 uncommitted or unpushed files from the Mac, copy private artifacts, launch training or publish a push.
 
 The pre-integration safety commit is `3f9b64a`: completed72k/EMA and selected-native reviews,
 their scripts/tests, notebook entries and agent handoff. The last previously published Windows
-snapshot was `1e427dd`. The shared merge base was `8d64dda`; incoming changes touch216 paths.
+snapshot was `1e427dd`. The shared merge base was `8d64dda`; incoming changes touch219 paths.
+The first52 commits through `7e6796c` were integrated in local merge `a5bfe5c`. A final remote check
+found one additional commit, `d121330`, adding research-workflow HTTP interruption/recovery tests
+and documentation. It was fetched and merged separately without conflicts; training code did not change.
 No force, reset, rebase, dependency reinstall or alternative checkout was used.
 
 Before merging, the Windows process inventory showed only the read-only dashboard Python service,
@@ -85,6 +88,10 @@ dependency chain imports Python's Unix-only `resource` module. It was not bypass
 represented as passing. This legacy path remains unqualified on Windows and is separate from the
 current full CUDA trainer whose tests passed. The first incoming evaluation test run also retained
 the two failures above before their scoped portability correction (45passed,2failed,1skip).
+
+The imported research workflow also uses Unix `fcntl`, and its new process-recovery test assumes
+Unix signal exit codes. That Mac-oriented service/test path has not been ported to native Windows;
+its latest source is present, not claimed runnable here. It is not the phone training dashboard.
 
 The full Python repository suite, frontend dependency installation/build, live research services,
 Mac runtime and real-CUDA successor qualification were not exercised. Incoming Markdown contains

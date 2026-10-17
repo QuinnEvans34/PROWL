@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 controlled HTTP restart recovery passed:**
+[Recovery verification](WORKFLOW-RECOVERY-CHECK-2026-10-17.md). Killed only an isolated synthetic
+HTTP service after selection publication; a fresh process reported interruption. Explicit linked
+retry reused retrieval/selection, verified and saved exactly one answer at this pre-publication
+boundary. Same-ID delivery stays read-only; original history and artifact hashes unchanged.
+Six HTTP and eight workflow UI checks pass; both owned processes reaped, no real inference/DB
+connection or production changes. Live workflow/UI/Ollama health200 afterward. This does not prove
+power-loss durability or global exactly-once publication. Next priority: relevance/study identity,
+with normal execution and this restart path now qualified. Full selector/training stay parked.
+
 **October17 approved cache cleanup and live workflow passed:**
 [Live verification](WORKFLOW-LIVE-CHECK-2026-10-17.md). Deleted exactly37 reviewed private build-cache
 records; Docker reports9.162GB freed,34 shared records retained, container/image/volume inventories
