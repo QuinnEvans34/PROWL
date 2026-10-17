@@ -1,5 +1,13 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 Q11–15 accepted / review preference changed:** Quinton says this batch looks good
+> and requests reading all questions in one pass. Two appended events record acceptance of Q11–15
+> only; Q1–15 accepted, Q16–30 and full second consistency still pending. Stop small-batch prompts.
+> Renderer now also produces `outputs/prowl/development-review-q01-q15-20261017/all-questions.md`
+> with every unchanged question, answer and evidence excerpt. Await consolidated feedback on the
+> remaining set; do not infer approval of unread cases. Prior packets/events preserved. No model/
+> DB/tuning/private-store/training work. Protected authoring/freeze remains pending.
+
 > **October 17 Q6–10 accepted:** Quinton replied "Looks good as well." to the named batch's
 > wording/answer/evidence review. Two appended events preserve his exact response and case hashes.
 > Ten accepted/20 pending at both first-pass stages; full second consistency pass remains pending.

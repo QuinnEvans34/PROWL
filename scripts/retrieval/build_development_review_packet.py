@@ -53,6 +53,7 @@ def build(output):
     pages = {}
     index = ['# Development evidence review — one question at a time', '',
         'These are evaluation references, not live model outputs or searchable RAG evidence.', '',
+        f'[Read all 30 questions and their evidence in one document]({output / "all-questions.md"})', '',
         'Start with question 1. Each page combines the expected answer, required facts, exact source',
         'excerpts, limitations and source judgments. No decision is recorded by opening a page.', '',
         'Reply by question number with **accept**, **revise**, or **unsure**. Distinguish wording/answer',
@@ -102,6 +103,10 @@ def build(output):
             f'Case `{case["id"]}` · version {case["version"]} · content SHA `{case["content_sha256"]}`.',
             f'Draft SHA `{suite["content_sha256"]}`. Source excerpts are local CC BY 4.0 material; keep off Git.', '']
         pages[filename] = '\n'.join(lines)
+    pages['all-questions.md'] = ('# Complete development evidence review\n\n'
+        'All thirty questions, expected answers and evidence in one reading pass. '
+        'Review examples, not live model outputs. Opening this file does not record decisions.\n\n'
+        + '\n\n---\n\n'.join(pages.values()))
     pages['README.md'] = '\n'.join(index) + '\n'
     output.mkdir(parents=True, exist_ok=False)
     for name, content in pages.items():

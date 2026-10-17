@@ -142,7 +142,67 @@
           "content_sha256": "9d7528f92014bf3e836e5078e7ebcb8a553886fe6adf42312431d7bb104c6902"
         }
       ]
+    },
+    {
+      "sequence": 7,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:21:46Z",
+      "stage": "wording_and_answer",
+      "decision": "accept",
+      "human_statement": "Asked: Do you accept Questions 11\u201315 wording, expected answers, and displayed evidence labels? Quinton replied: Ok, looks good as well. I dont think we need to walk through each of these one at a time. I can read all of them through one pass through.",
+      "targets": [
+        {
+          "id": "q:dev2-11",
+          "content_sha256": "6e53b7e149403b9f1e230878b9b7bc85cd72a7ad5f4e74adb096d6b3e019a737"
+        },
+        {
+          "id": "q:dev2-12",
+          "content_sha256": "6c6d31f5de6c830424835fd040c56ad65eae215326e441ecb5eef8a0c0f1f604"
+        },
+        {
+          "id": "q:dev2-13",
+          "content_sha256": "56761319c4f33bd775c63866647fede73a587f2fd8e161ab5cc649bf0f05d836"
+        },
+        {
+          "id": "q:dev2-14",
+          "content_sha256": "f79472e58c98e7880af89a99faf19cc0bfd9c7f0da271bf64d609174f082208a"
+        },
+        {
+          "id": "q:dev2-15",
+          "content_sha256": "919ec18d6e797068b2353779fe05fa19f9e68584b3e1402ba1091cc137461824"
+        }
+      ]
+    },
+    {
+      "sequence": 8,
+      "reviewer": "Quinton Evans",
+      "reviewed_at": "2026-10-17T23:21:46Z",
+      "stage": "evidence_labels",
+      "decision": "accept",
+      "human_statement": "Asked: Do you accept Questions 11\u201315 wording, expected answers, and displayed evidence labels? Quinton replied: Ok, looks good as well. I dont think we need to walk through each of these one at a time. I can read all of them through one pass through.",
+      "targets": [
+        {
+          "id": "q:dev2-11",
+          "content_sha256": "6e53b7e149403b9f1e230878b9b7bc85cd72a7ad5f4e74adb096d6b3e019a737"
+        },
+        {
+          "id": "q:dev2-12",
+          "content_sha256": "6c6d31f5de6c830424835fd040c56ad65eae215326e441ecb5eef8a0c0f1f604"
+        },
+        {
+          "id": "q:dev2-13",
+          "content_sha256": "56761319c4f33bd775c63866647fede73a587f2fd8e161ab5cc649bf0f05d836"
+        },
+        {
+          "id": "q:dev2-14",
+          "content_sha256": "f79472e58c98e7880af89a99faf19cc0bfd9c7f0da271bf64d609174f082208a"
+        },
+        {
+          "id": "q:dev2-15",
+          "content_sha256": "919ec18d6e797068b2353779fe05fa19f9e68584b3e1402ba1091cc137461824"
+        }
+      ]
     }
   ],
-  "content_sha256": "6688265206bf0390e674b726b9a3566a29a388e02448761e0b419134a72f6055"
+  "content_sha256": "81e4a051051fa66f4683d6f4f500fd9bfff1b7bd908e0ebffd50dad48ecf0680"
 }

@@ -1721,3 +1721,12 @@ tracker: ten accepted/20 pending in both first-pass stages; full second consiste
 Refreshed packet/status under development-review-q01-q10-20261017; previous snapshots and events
 preserved. Original draft/answer/source-label pins match. Next Q11–15. No new test-suite execution,
 model/DB/service/tuning/private-store/training work or inferred hours.
+
+## 2026-10-17: Human acceptance Q11–15 and one-pass review preference
+
+Quinton said Q11–15 look good and requested reading everything in one pass instead of reviewing
+small batches in chat. Two appended events at receipt time 23:21:46 UTC record that batch's wording/
+answer and evidence acceptance. Q1–15 accepted; Q16–30 and second consistency pending. Added a single
+all-questions.md export alongside per-question pages; same source text and labels. Current packet:
+development-review-q01-q15-20261017. Await consolidated remaining-set feedback; no more small-batch
+prompts. No model/DB/service/tuning/training/private-store work or approval inferred for unread cases.
