@@ -27,18 +27,18 @@ among answerable cases. Aim for a reasonable spread rather than forcing four que
 family despite missing evidence. Include easy terminology, paraphrase, multi-passage and limiting
 questions; label the difficulty explicitly. No protected questions are supplied here for copying.
 
-Use the frozen seven-source corpus identified by
-`configs/evidence/corpus-coverage-v1.json`, content SHA
-`17f65adda92c288e9bfc587cd7edbb195cf75e232a44929296393954edb5b681`.
-The four documented gaps are not supported answers waiting to be invented. If independent authoring
+Use the versioned ten-source corpus identified by
+`configs/evidence/corpus-coverage-v2.json`, content SHA
+`6978c2f0aaef592efaec76792c615d2fd96e63fde37688d0b595e2f003baeb8d`.
+The two remaining documented gaps are not supported answers waiting to be invented. If independent authoring
 cannot produce adequate coverage, stop before tuning and version the corpus/labels through an explicit
 revision. Do not weaken required concepts or mislabel an unsupported question to meet the counts.
 
 Before writing final wording, privately compare intended questions against all exposed versions:
 
 - `configs/evidence/evaluation/development-v1.json`: prior ten-case regression and its history.
-- `configs/evidence/evaluation/development-v4-draft.json`: current 30 drafts, including `intent_group`.
-- Earlier `development-v2-draft.json` and `development-v3-draft.json`, including replaced wording/intents;
+- `configs/evidence/evaluation/development-v5-draft.json`: current 30 drafts, including `intent_group`.
+- Earlier `development-v2-draft.json`, `development-v3-draft.json` and `development-v4-draft.json`, including replaced wording/intents;
   the prior anatomy-priors question remains exposed. The twelve demo candidates in PLAIN-LANGUAGE-DEMO-PLAN.md are exposed too.
 
 Keep related intents and paraphrases in one split. A shared broad family or paper alone does not
@@ -98,7 +98,7 @@ history and any revised versions. Image checksum equality is backup evidence; it
 prove semantic labels or restoration behavior.
 
 Only share a completed **content-free receipt** derived from
-`configs/evidence/evaluation/heldout-receipt-template-v1.json`: hashes, aggregate counts, review and
+`configs/evidence/evaluation/heldout-receipt-template-v2.json`: hashes, aggregate counts, review and
 backup attestations. Do not fill the template with invented hashes or mark pending work complete.
 No source IDs, question IDs/text, label offsets or filesystem paths belong in that public receipt.
 The template is not proof that a store or backup exists.
@@ -106,3 +106,13 @@ The template is not proof that a store or backup exists.
 Later, the selected retriever/prompt is evaluated once through the logged read-only mount procedure,
 then the image is unmounted. Freeze the result hash and report errors without tuning against protected
 content. The agent must not read protected content to perform duplicate checks or inspect a failure.
+
+## Public checkpoint checker
+
+The v2 receipt uses a closed schema; no free-form notes, source IDs, questions, offsets or private paths.
+The corpus is now v2; final development identity must be the exact accepted v5 SHA. The blank template
+truthfully remains `not_created`. A completed receipt goes in the separate public `heldout-receipt-v2.json`
+only after actual private work. Run `python -m src.retrieval.evaluation_checkpoint --receipt-name heldout-receipt-v2.json --require-ready`
+with the retrieval environment. It verifies public content bindings, counts, review attestations and
+encrypted image/backup checksum equality; it neither reads nor independently verifies protected content.
+Do not attest mechanical validation until it has actually been performed privately.

@@ -1,5 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 targeted coverage v2 / checkpoint prepared:** Quinton authorized one targeted update
+> followed by evaluation. Separate v2/rebuild: 10 sources/947 passages/32 batches, SHA
+> `6978c2f0aaef592efaec76792c615d2fd96e63fde37688d0b595e2f003baeb8d`; all 23 old batches and
+> live/v1 collections unchanged. Three CC BY4 additions cover small MRI control-group volume, CT
+> diameter/volume and age/fat morphology. Quality-held PMC8904764 excluded. Read TARGETED-COVERAGE-UPDATE-2026-10-17.md.
+> Coverage 7direct/16partial/2gaps. Parser accepts exact CC BY4 HTTP/HTTPS publisher fields; legacy
+> behavior fixed. 37 tests pass/5 optional skips; real exact rebuild and three query parities pass.
+> Development v5 revises Q8/Q10, adds four background-only spans plus new-source judgments. 59
+> draft/review tests and34 checkpoint tests pass. V4 approvals preserved; v5 has0events,28wording/
+> 8refusal evidence approvals inherited,2wording/22evidence/all30consistency pending. Delta packet
+> outputs/prowl/development-v5-coverage-review-20261017/. Human delta decision requested; do not infer it.
+> Content-free heldout v2 template remains not_created. Public checkpoint --require-ready refuses.
+> Next: explicit delta acceptance/second consistency and independent private authoring/validation/
+> backup/freeze. Private authoring runner not yet delivered; no private data accessed. No tuning,
+> generator/training/full-selector/service restart/demo repointing or inferred hours. Spec v1.13.
+
 > **October 17 all 30 development cases accepted in first human review:** Quinton reviewed the
 > remaining set and said "Great, honestly it looks perfect. I have no changes. Great work on this."
 > Two appended events accept Q16–30 wording/answers and evidence, completing those stages for all

@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 
 from src.retrieval.development_set import checked_json, validate_draft
-from src.retrieval.development_review import validate_review
+from src.retrieval.development_review import validate_review, validate_delta_review
 
 ROOT = Path(__file__).resolve().parents[2]
 GRADES = {'direct': 'Direct support', 'partial_context': 'Background context',
@@ -23,14 +23,18 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def build(output):
+def build(output, version='v4'):
+    if version not in ('v4', 'v5'):
+        raise ValueError('Only exposed v4/v5 development packets are supported')
     output = output.resolve()
     if not output.is_relative_to((ROOT / 'outputs/prowl').resolve()) or output.exists():
         raise ValueError('Use a new directory under repository outputs/prowl')
-    suite_path = ROOT / 'configs/evidence/evaluation/development-v4-draft.json'
-    answers_path = ROOT / 'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md'
-    review_path = ROOT / 'configs/evidence/evaluation/development-v4-human-review.json'
-    manifest_path = ROOT / 'configs/evidence/corpus-coverage-v1.json'
+    suite_path = ROOT / f'configs/evidence/evaluation/development-{version}-draft.json'
+    suffix = '-V5' if version == 'v5' else ''
+    answers_path = ROOT / f'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS{suffix}.md'
+    review_path = ROOT / f'configs/evidence/evaluation/development-{version}-human-review.json'
+    corpus = 'v2' if version == 'v5' else 'v1'
+    manifest_path = ROOT / f'configs/evidence/corpus-coverage-{corpus}.json'
     suite = json.loads(suite_path.read_text())
     manifest = json.loads(manifest_path.read_text())
     bundles = [checked_json(s['bundle'], ROOT) for s in manifest['sources']]
@@ -40,8 +44,15 @@ def build(output):
         regression_sha256=sha(ROOT / 'configs/evidence/evaluation/development-v1.json'),
         information_needs_sha256=sha(ROOT / 'docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md'),
         information_needs_base_sha256=sha(ROOT / 'docs/capstone/retrieval/planning/INFORMATION-NEEDS.md'))
-    review_report = validate_review(json.loads(review_path.read_text()), suite,
-                                    answers_sha256=sha(answers_path))
+    if version == 'v5':
+        review_report = validate_delta_review(json.loads(review_path.read_text()), suite,
+            answers_path.read_text(),
+            prior_suite=json.loads((ROOT / 'configs/evidence/evaluation/development-v4-draft.json').read_text()),
+            prior_record=json.loads((ROOT / 'configs/evidence/evaluation/development-v4-human-review.json').read_text()),
+            prior_answers=(ROOT / 'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md').read_text())
+    else:
+        review_report = validate_review(json.loads(review_path.read_text()), suite,
+                                        answers_sha256=sha(answers_path))
     sections = re.findall(r'^### (\d+)\. (.*?)\n(.*?)(?=^### |^## |\Z)',
                           answers_path.read_text(), re.M | re.S)
     if ([int(n) for n, _, _ in sections] != list(range(1, 31))
@@ -51,14 +62,15 @@ def build(output):
     by_work = {b['work']['work_id']: b for b in bundles}
     # Build all pages before creating output; fail rather than leave an incomplete review packet.
     pages = {}
-    index = ['# Development evidence review — one question at a time', '',
+    index = ['# Development evidence review', '',
         'These are evaluation references, not live model outputs or searchable RAG evidence.', '',
         f'[Read all 30 questions and their evidence in one document]({output / "all-questions.md"})', '',
-        'Start with question 1. Each page combines the expected answer, required facts, exact source',
+        'Read in one pass. Each page combines the expected answer, required facts, exact source',
         'excerpts, limitations and source judgments. No decision is recorded by opening a page.', '',
         'Reply by question number with **accept**, **revise**, or **unsure**. Distinguish wording/answer',
         'feedback from evidence-label review. Uncertainty is useful feedback; do not guess.', '',
-        'Changed questions: **1, 3, 5, 7, 9, 10, 12, 16, 17, 19**. All thirty need the final review.', '']
+        ('Changed questions: **8 and 10**. Prior unchanged decisions are carried forward; review the added evidence and complete set-wide consistency.' if version == 'v5' else
+         'Historical v4 packet. See its recorded decisions; all thirty need set-wide consistency.'), '']
     for (number, question, body), case in zip(sections, suite['cases']):
         match = re.search(r'\*\*Expected (?:answer|response)\*\*\s*\n(.*?)(?=\n\*\*(?:Source|Sources|Basis):)', body, re.S)
         if match is None:
@@ -117,6 +129,7 @@ def build(output):
         span_count=sum(len(c['labels']['spans']) for c in suite['cases']),
         validation_state=report['state'], ready_for_tuning=False,
         files={name: sha(output / name) for name in pages})
+    receipt['review_status'] = review_report
     (output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n')
     return output / 'README.md'
 
@@ -124,4 +137,6 @@ def build(output):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    print(build(parser.parse_args().output))
+    parser.add_argument('--version', choices=('v4', 'v5'), default='v4')
+    args = parser.parse_args()
+    print(build(args.output, args.version))

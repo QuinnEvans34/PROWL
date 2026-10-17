@@ -1741,3 +1741,23 @@ Refreshed packet/status in development-review-first-pass-accepted-20261017; earl
 preserved. Next is the set-wide consistency review and independently protected authoring/backup/
 freeze. This is human label acceptance, not measured RAG performance. No model/DB/services, protected
 access, training, selector or tuning execution. Consolidated feedback preference remains active.
+
+
+## 2026-10-17: Targeted coverage v2 and continuation into evaluation checkpoint
+
+Quinton explicitly approved one targeted pre-freeze coverage update then the evaluation checkpoint.
+Built separate research-coverage-v2 and exact rebuild with10sources/947passages/32batches; reused all
+23oldbatches unchanged. Added PMC4423920/PMC7540900/PMC9962587; held PMC8904764 for inconsistent
+reported statistics, excluded NC/ND candidates. Exact CC BY4 publisher license forms supported with
+legacy behavior unchanged. Ten raw re-extractions exact; live/v1 inventory preserved; three existing
+guided-query rebuild comparisons exact (not quality scoring). Coverage7direct/16partial/2gaps.
+
+V5 revises Q8diameter/volume and Q10small MRI control-group mean/SEM; four other questions gain
+background-only labels. Existing v4 file/answers/ten review events unchanged. Delta inheritance carries
+28wording/answer and8refusal evidence approvals without adding events.2wording/22evidence and full
+second consistency pending. Consolidated changes packet presented; explicit user response pending.
+59draft/review checks pass;37ingestion/inventory/rebuild checks pass with5optionalDBchecks skipped;
+34public checkpoint tests pass. Real checkpoint refuses readiness as expected. Closed content-free
+heldoutv2template remains not_created; no private questions/image/backup/read. Private authoring
+runner remains undelivered; never invent validation attestations. See TARGETED-COVERAGE-UPDATE-2026-10-17.md.
+No generator/training/fullselector/service restart/livecollectionchange or inferred human hours.

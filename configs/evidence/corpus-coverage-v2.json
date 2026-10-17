@@ -1,0 +1,1181 @@
+{
+  "version": "prowl-coverage-corpus-v2",
+  "freeze_date": "2026-10-17",
+  "state": "frozen_for_development_evaluation",
+  "collection": "research-coverage-v2",
+  "rebuild_collection": "research-coverage-rebuild-v2",
+  "live_collection": "research-v1",
+  "inventory": {
+    "version": "prowl-corpus-inventory-v1",
+    "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+    "batch_count": 32,
+    "source_count": 10,
+    "passage_count": 947,
+    "content_sha256": "6978c2f0aaef592efaec76792c615d2fd96e63fde37688d0b595e2f003baeb8d"
+  },
+  "search": {
+    "method": "One targeted pre-freeze coverage update, purposive discovery; not systematic or exhaustive.",
+    "cutoff": "2026-10-17",
+    "ranking_reproducible": false,
+    "parent_search_preserved_in": {
+      "path": "configs/evidence/corpus-coverage-v1.json",
+      "sha256": "33043b9fb8253aa64c70db84460b32d76921a79517f98de4dfb621d894ef50c6",
+      "bytes": 37901
+    },
+    "acquisition_plan": {
+      "path": "outputs/prowl/coverage-update-20261017/acquisition-plan.json",
+      "sha256": "71c86152efb45e56f3eb1a4e21d4ad27d9f21c4e1b33bcc189f29a4320805c24",
+      "bytes": 733
+    },
+    "amendment": {
+      "path": "outputs/prowl/coverage-update-20261017/acquisition-amendment-01.json",
+      "sha256": "a665e8b7eb6be1bec6db5785df7be67dabcf36ff75a0a148fcca05c13c4ce1a9",
+      "bytes": 351
+    },
+    "queries": [
+      "pancreatic volume healthy adults MRI Creative Commons Attribution",
+      "normal pancreas volume age CT CC BY",
+      "pancreatic cancer diameter volume multiplanar CT",
+      "pancreas volume healthy Scientific Reports normal CT"
+    ]
+  },
+  "sources": [
+    {
+      "pmcid": "PMC10177524",
+      "citation": {
+        "attribution": "© 2023 by the authors.",
+        "authors": [
+          "Jiang, Joanna",
+          "Chao, Wei-Lun",
+          "Culp, Stacey",
+          "Krishna, Somashekar G",
+          "Millar, Ewan"
+        ],
+        "doi": "10.3390/cancers15092410",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC10177524",
+        "pmid": "37173876",
+        "title": "Artificial Intelligence in the Diagnosis and Treatment of Pancreatic Cystic Lesions and Adenocarcinoma",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10177524/",
+        "year": "2023"
+      },
+      "raw": {
+        "path": "outputs/prowl/seed-readiness-20261013/PMC10177524.xml",
+        "sha256": "28e60b0203f3fa47dda280881e701c789069e40fccd0a701fb035fdcd7acd652",
+        "bytes": 186836
+      },
+      "bundle": {
+        "path": "outputs/prowl/direct-ingestion-20261014/batches/rev-4c084189aeb3d61b711f79ec40a4b077e56109650fbcd5e0fec30ee1f28485b4.json",
+        "sha256": "b1d2b3b67f7247e882192ba673fd85ba59023e794bf74312a134e0adaf67285f",
+        "bytes": 91886
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC10177524.metadata.json",
+        "sha256": "c8f92cb9b3055cbad82a06f58535d000546d4099d6f77153c4d4cb4afd5d4704",
+        "bytes": 5396
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10177524/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC10177524&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2023-04-22",
+      "extraction_profile": "legacy-v1",
+      "work_id": "work:pmid:37173876",
+      "revision_id": "rev:4c084189aeb3d61b711f79ec40a4b077e56109650fbcd5e0fec30ee1f28485b4",
+      "representation_id": "repr:2811462f5852b796e50141e59cafe954770ce938a40415bbb413b556ceeed7d0",
+      "representation_sha256": "dd038232eab73175036f382be4b980c56b66de6ea06f02a7f33ad4afade78063",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:2811462f5852b796e50141e59cafe954770ce938a40415bbb413b556ceeed7d0",
+        "rights_id": "rights:377e683dfcbb069ea253344ee823346c7e3526c1fa4e9c49f6d25b71a1bba493",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 90,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "review-article",
+          "Review",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC12715409",
+      "citation": {
+        "attribution": "© 2025 The Author(s). Journal of Applied Clinical Medical Physics published by Wiley Periodicals, LLC on behalf of The American Association of Physicists in Medicine.",
+        "authors": [
+          "Arjmandi, Najmeh",
+          "Sebzari, Ahmed Reza",
+          "Molaei, Fatemeh",
+          "Rezaei, Saeid",
+          "Rezaie‐Yazdi, Maryam",
+          "Rezaie‐Yazdi, Malihe"
+        ],
+        "doi": "10.1002/acm2.70425",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC12715409",
+        "pmid": "41414851",
+        "title": "Clinical validation of AI‐assisted contouring in prostate radiation therapy treatment planning: Highlighting automation bias and the need for standardized quality assurance",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12715409/",
+        "year": "2025"
+      },
+      "raw": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC12715409.xml",
+        "sha256": "382920db57ad0ba90cf59b0a5ea549456be381e09f5543e2030f9096e9af3e15",
+        "bytes": 152463
+      },
+      "bundle": {
+        "path": "outputs/prowl/corpus-freeze-20261017/new-batches/rev-1a3ee9cb0d36e93eeb816c715484480c29ea4f6e85063a96992a46d226345813.json",
+        "sha256": "04e870cd224764aad2c3581fc4c052aec37968f5fd9fea4010d289da2dacae6a",
+        "bytes": 107083
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC12715409.metadata.json",
+        "sha256": "589a4d32532ea0edb7f87370e56c5501d5aab09b65ff6a9ea4e3e18a73ee4943",
+        "bytes": 8118
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12715409/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC12715409&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2026-01-01",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:41414851",
+      "revision_id": "rev:1a3ee9cb0d36e93eeb816c715484480c29ea4f6e85063a96992a46d226345813",
+      "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+      "representation_sha256": "874a29816bdebdca74ecff3735bd39228f73ff434c5ca06ee9b3493c5966add6",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:f1af4d6e1056c7340e3b7cdb0286d8f3df434ff7a9450d0af42ecc16295c5775",
+        "rights_id": "rights:6a2382a6f0b1e889f202ffdde640a5e16ec7821aaf685d59aab74e1e94ebd024",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 116,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "research-article",
+          "Validation Study",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC13564768",
+      "citation": {
+        "attribution": "© 2026 by the authors.",
+        "authors": [
+          "Aktas, Halil Ertugrul",
+          "Sen Tasci, Eminenur",
+          "Peng, Linkai",
+          "Tasci, Muhammed Enes",
+          "Taktak, Yavuz B.",
+          "Taflan, Sitki Safa",
+          "Tutun, Baver",
+          "Bol, Fergan",
+          "Iren, Murat",
+          "Ekici, Mucahit",
+          "Bejar, Andrea Mia",
+          "Keles, Elif",
+          "Pan, Hongyi",
+          "Dou, Wanying",
+          "Gultekin, Burak",
+          "Akin, Alper",
+          "Ikizgul, Oyku",
+          "Cetin, Okan",
+          "Uysal, Emre",
+          "Mureva, Maide",
+          "Nalbant, Mustafa Orhan",
+          "Kaya, Nurullah",
+          "Medetalibeyoglu, Alpay",
+          "Atakir, Kadir",
+          "Akkus Yildirim, Berna",
+          "Dagoglu Kartal, Gulbiz",
+          "Zhou, Zongwei",
+          "Erturk, Sukru Mehmet",
+          "Miller, Frank H.",
+          "Durak, Gorkem",
+          "Bagci, Ulas",
+          "Yamazaki, Hideya"
+        ],
+        "doi": "10.3390/cancers18172836",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC13564768",
+        "pmid": "42738357",
+        "title": "Multicenter Validation of Foundation Model Adaptation for Automated Pancreatic Tumor Delineation on CT Scans",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13564768/",
+        "year": "2026"
+      },
+      "raw": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC13564768.xml",
+        "sha256": "0af4e61f82251bf2fe50cf077dd154e566c5a4d4b1387d8233fa24586bbf346f",
+        "bytes": 151523
+      },
+      "bundle": {
+        "path": "outputs/prowl/corpus-freeze-20261017/new-batches/rev-df127675273a6e028194886a07f761c00d3730767e09914d4ef4ea8445cbdd63.json",
+        "sha256": "d605d6016fc69a2c5e4b90babc0f4ac6080968abfee7de4041b10cddfe40fa43",
+        "bytes": 84778
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC13564768.metadata.json",
+        "sha256": "70d11c2f531997cc6ddc7d7d8327b22aab07fbf6d67b2cde011ce340839c0e79",
+        "bytes": 15943
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC13564768/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC13564768&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2026-09-01",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:42738357",
+      "revision_id": "rev:df127675273a6e028194886a07f761c00d3730767e09914d4ef4ea8445cbdd63",
+      "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+      "representation_sha256": "5c77339bd986a8485d1720a67b4d15e8492e26e020ae79734d2d2e253b845dca",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:9c66b81d3e40b78e573b6e3ef0759ec4dcc5cc0c103e2f6fc02a4d56c96f7522",
+        "rights_id": "rights:dd42590c1463ae5457271f01d0caad3d552844f413f47b455454a0700faa7c1c",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 88,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "research-article",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC4423920",
+      "citation": {
+        "attribution": "© 2015 Macauley et al",
+        "authors": [
+          "Macauley, Mavin",
+          "Percival, Katie",
+          "Thelwall, Peter E.",
+          "Hollingsworth, Kieren G.",
+          "Taylor, Roy",
+          "Kulkarni, Rohit"
+        ],
+        "doi": "10.1371/journal.pone.0126825",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC4423920",
+        "pmid": "25950180",
+        "title": "Altered Volume, Morphology and Composition of the Pancreas in Type 2 Diabetes",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4423920/",
+        "year": "2015"
+      },
+      "raw": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC4423920.xml",
+        "sha256": "a5b9220dc1dabb217b82cc0e3d4672bb80c4a8d85de691a55e04eabd05acdfe1",
+        "bytes": 85403
+      },
+      "bundle": {
+        "path": "outputs/prowl/coverage-update-20261017/new-batches/rev-acdd06c0e8127c112fd05d2cf6d5ac2155ed5b2eab4edf28b1d9142aa4e52e25.json",
+        "sha256": "91299d4661d9dc5df7ac0d019ad458854f064ef1e326eba6f446e56adbe425a2",
+        "bytes": 59212
+      },
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC4423920.metadata.json",
+        "sha256": "4dcfe6e2eb35ae6bf659656ebaf2b72c2610333ef902e01eaa246b409b65d483",
+        "bytes": 8351
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC4423920/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC4423920&format=json&resultType=core",
+      "first_publication_date": "2015-05-07",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:25950180",
+      "revision_id": "rev:acdd06c0e8127c112fd05d2cf6d5ac2155ed5b2eab4edf28b1d9142aa4e52e25",
+      "representation_id": "repr:c35c7f99802fb65be57ba9129c8c0088dcedde62f1459da52d7184fdf98ad91c",
+      "representation_sha256": "1d22aec02e2ed41cf114d6b6492e84954c8944c069d0a4cba98fa979ea809061",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:c35c7f99802fb65be57ba9129c8c0088dcedde62f1459da52d7184fdf98ad91c",
+        "rights_id": "rights:95afcb61571956fb31711f0becc148ad5228f1a767099de270c43b1a83eb9792",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 60,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "Research Support, Non-U.S. Gov't",
+          "research-article",
+          "Randomized Controlled Trial",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check only, not exhaustive notice monitoring."
+      }
+    },
+    {
+      "pmcid": "PMC7540900",
+      "citation": {
+        "attribution": "© 2020 Choi et al",
+        "authors": [
+          "Choi, Moon Hyung",
+          "Yoon, Seung Bae",
+          "Song, Meiying",
+          "Lee, In Seok",
+          "Hong, Tae Ho",
+          "Lee, Myung Ah",
+          "Jung, Eun Sun",
+          "Koay, Eugene J"
+        ],
+        "doi": "10.1371/journal.pone.0240318",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC7540900",
+        "pmid": "33027288",
+        "title": "Benefits of the multiplanar and volumetric analyses of pancreatic cancer using computed tomography",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7540900/",
+        "year": "2020"
+      },
+      "raw": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC7540900.xml",
+        "sha256": "c8d5d519a7b123b989cbf9120a0ff50ff350b842ea39b5e0022d749f7ebdf41b",
+        "bytes": 70440
+      },
+      "bundle": {
+        "path": "outputs/prowl/coverage-update-20261017/new-batches/rev-550c25c4d9a22e92a3459535e5446acf7cf6da0af2f48c1bd6226042467fb8a7.json",
+        "sha256": "1899d9928d556cd9542d5056d2bccc549ddf58fdc736e80f0f3ef1eb73a97d03",
+        "bytes": 49309
+      },
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC7540900.metadata.json",
+        "sha256": "f42e719a5522cddf3fd98b706c4034a875bd33a9a5e18ef42c04c565db667e45",
+        "bytes": 8165
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC7540900/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC7540900&format=json&resultType=core",
+      "first_publication_date": "2020-10-07",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:33027288",
+      "revision_id": "rev:550c25c4d9a22e92a3459535e5446acf7cf6da0af2f48c1bd6226042467fb8a7",
+      "representation_id": "repr:9b77a91c848f940810e5407930d4b4bc2dec7bbad1c578aa459013a907b0bb5a",
+      "representation_sha256": "1255dc2b893b1efd488d1423cf4d3cf01ddddd65f83d2acc7d903264fa74ab99",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:9b77a91c848f940810e5407930d4b4bc2dec7bbad1c578aa459013a907b0bb5a",
+        "rights_id": "rights:4b2fbce0d55d92e10efd82d56bd547df01e1cf4311e42c9e61b739dc603493b9",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 51,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "Research Support, Non-U.S. Gov't",
+          "research-article",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check only, not exhaustive notice monitoring."
+      }
+    },
+    {
+      "pmcid": "PMC8145900",
+      "citation": {
+        "attribution": "© 2021 by the authors.",
+        "authors": [
+          "Psar, Robert",
+          "Urban, Ondrej",
+          "Cerna, Marie",
+          "Rohan, Tomas",
+          "Hill, Martin",
+          "Hanada, Keiji"
+        ],
+        "doi": "10.3390/diagnostics11050776",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC8145900",
+        "pmid": "33925859",
+        "title": "Improvement of the Diagnosis of Isoattenuating Pancreatic Carcinomas by Defining Their Characteristics on Contrast Enhanced Computed Tomography and Endosonography with Fine-Needle Aspiration (EUS-FNA)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8145900/",
+        "year": "2021"
+      },
+      "raw": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8145900.xml",
+        "sha256": "103419ef4ad95638ec3c78867adce9c67c49d7c960805e24e48b60173f2a0011",
+        "bytes": 78518
+      },
+      "bundle": {
+        "path": "outputs/prowl/corpus-freeze-20261017/new-batches/rev-cc19ef71dc920192f023e52d9139bc9fb5c024d02617673faf64546f3cc3b054.json",
+        "sha256": "a08eb54cbe27ef8701a46c5e4b47d8afdb94b09c4124f3866b5e1deaac1a6ead",
+        "bytes": 64781
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8145900.metadata.json",
+        "sha256": "e441893906907695595310f2cb789a37e26396b718050e135cae60e462064f10",
+        "bytes": 6247
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8145900/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC8145900&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2021-04-26",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:33925859",
+      "revision_id": "rev:cc19ef71dc920192f023e52d9139bc9fb5c024d02617673faf64546f3cc3b054",
+      "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+      "representation_sha256": "2018d8f87167e5ca937cff670964403bb3597255b5ca4fdde0bd68a64357369e",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:92cbf60b30ed8c981b2c87a0e1b32fb56c053143951c4df1940ca34d963b44e5",
+        "rights_id": "rights:ece251a0b3638f6f74480feabdbc2722a177bc3ac9a0a36c18950b0977b20975",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 64,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "research-article",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC8357939",
+      "citation": {
+        "attribution": "© The Author(s) 2021",
+        "authors": [
+          "Wong, Jeffrey",
+          "Baine, Michael",
+          "Wisnoskie, Sarah",
+          "Bennion, Nathan",
+          "Zheng, Dechun",
+          "Yu, Lei",
+          "Dalal, Vipin",
+          "Hollingsworth, Michael A.",
+          "Lin, Chi",
+          "Zheng, Dandan"
+        ],
+        "doi": "10.1038/s41598-021-95152-x",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC8357939",
+        "pmid": "34381070",
+        "title": "Effects of interobserver and interdisciplinary segmentation variabilities on CT-based radiomics for pancreatic cancer",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8357939/",
+        "year": "2021"
+      },
+      "raw": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8357939.xml",
+        "sha256": "cabb8b7e11b549c43e97fa45cd7aad1ac286972fb30754d911cb78946aba94c4",
+        "bytes": 130958
+      },
+      "bundle": {
+        "path": "outputs/prowl/corpus-freeze-20261017/new-batches/rev-712007cd38849362563c2ca2f35ab66f3f99e7d051028462e01bd29172a39c90.json",
+        "sha256": "a19153a950b6f5ffaeb717f65ecb4d9c6c2155a0315ad6e94706cc561773a8e9",
+        "bytes": 71417
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8357939.metadata.json",
+        "sha256": "2b4fe3e031981cd18e9e1ef7e0e3e8f5d0974a2082aedec89192534a89cccd31",
+        "bytes": 8365
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8357939/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC8357939&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2021-08-11",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:34381070",
+      "revision_id": "rev:712007cd38849362563c2ca2f35ab66f3f99e7d051028462e01bd29172a39c90",
+      "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+      "representation_sha256": "f3815e876de10c30cd1356eadfa866abda5eff1a13c92cd930c80ad630cbe55f",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:99299cc3e1836619b56103489237595cc50d586e8444029b8b254858fe40e1ef",
+        "rights_id": "rights:e7f1128461b87c150ecc9521624a234611dfb05c2662acf49e88b2b12faee11b",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 87,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "research-article",
+          "Journal Article",
+          "Research Support, N.I.H., Extramural"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC8997008",
+      "citation": {
+        "attribution": "© 2022 by the authors.",
+        "authors": [
+          "Preuss, Kiersten",
+          "Thach, Nate",
+          "Liang, Xiaoying",
+          "Baine, Michael",
+          "Chen, Justin",
+          "Zhang, Chi",
+          "Du, Huijing",
+          "Yu, Hongfeng",
+          "Lin, Chi",
+          "Hollingsworth, Michael A",
+          "Zheng, Dandan",
+          "Sperti, Cosimo"
+        ],
+        "doi": "10.3390/cancers14071654",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC8997008",
+        "pmid": "35406426",
+        "title": "Using Quantitative Imaging for Personalized Medicine in Pancreatic Cancer: A Review of Radiomics and Deep Learning Applications",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8997008/",
+        "year": "2022"
+      },
+      "raw": {
+        "path": "outputs/prowl/seed-readiness-20261013/PMC8997008.xml",
+        "sha256": "0d540917f2ed9caf78f5d473d106846c6b852a67143dca77e8a20f6f8e1cfc1d",
+        "bytes": 345622
+      },
+      "bundle": {
+        "path": "outputs/prowl/direct-ingestion-20261014/batches/rev-8f4745ebc9a47339c6079ef560946789eece26303af5fc33d7d8e8ddd1ffe3a4.json",
+        "sha256": "01a1cd64593b15a9dda56adb09dd6e27e720b2aaf4cbc762c719905cf95512b0",
+        "bytes": 144281
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8997008.metadata.json",
+        "sha256": "6fd2197d726bfcd8c1a8346c8e9192c99ed5b5ed4de94542a7c83b916a59291a",
+        "bytes": 8197
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8997008/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC8997008&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2022-03-24",
+      "extraction_profile": "legacy-v1",
+      "work_id": "work:pmid:35406426",
+      "revision_id": "rev:8f4745ebc9a47339c6079ef560946789eece26303af5fc33d7d8e8ddd1ffe3a4",
+      "representation_id": "repr:996abb62a0ac3895445274649db2875efb402ed90db948c46bc1535d7c3d85db",
+      "representation_sha256": "9c09d3d0312bd29e4006b5b0e9559ed4d6fe5c14fd82df360620ec0e8d9c7519",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:996abb62a0ac3895445274649db2875efb402ed90db948c46bc1535d7c3d85db",
+        "rights_id": "rights:ff6582aaca788656bc92e368badbe9180403bc0308fac0186b2f240e7e27935e",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 184,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "review-article",
+          "Review",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC9317715",
+      "citation": {
+        "attribution": "© 2022 by the authors.",
+        "authors": [
+          "Javed, Sehrish",
+          "Qureshi, Touseef Ahmad",
+          "Deng, Zengtian",
+          "Wachsman, Ashley",
+          "Raphael, Yaniv",
+          "Gaddam, Srinivas",
+          "Xie, Yibin",
+          "Pandol, Stephen Jacob",
+          "Li, Debiao",
+          "Placidi, Giuseppe",
+          "Mandal, Mrinal",
+          "Bouhrara, Mustapha"
+        ],
+        "doi": "10.3390/jimaging8070195",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC9317715",
+        "pmid": "35877639",
+        "title": "Segmentation of Pancreatic Subregions in Computed Tomography Images",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9317715/",
+        "year": "2022"
+      },
+      "raw": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC9317715.xml",
+        "sha256": "ca8f06153abb6dcb2c0054ba80d839c0c6c4137eb5868099e0fb354267102b58",
+        "bytes": 107498
+      },
+      "bundle": {
+        "path": "outputs/prowl/corpus-freeze-20261017/new-batches/rev-e2ed4dfb7c181fbfb3098be90286d4c2870918419f4d78ce46dc91b8c84a41c9.json",
+        "sha256": "ea405fbd196aff03974188b02ed764decec8fd9d631d6d399ae18affe0654c42",
+        "bytes": 61856
+      },
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC9317715.metadata.json",
+        "sha256": "23a15acd0c2db277554e8e15b150f8397a99b88232f4d53f25191493fc68ecdb",
+        "bytes": 6957
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9317715/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMC9317715&format=json&resultType=core&pageSize=5",
+      "first_publication_date": "2022-07-12",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:35877639",
+      "revision_id": "rev:e2ed4dfb7c181fbfb3098be90286d4c2870918419f4d78ce46dc91b8c84a41c9",
+      "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+      "representation_sha256": "066365c4c2d7cd00f6c77795ae4702c34a6dfaf80a7bfb6e5f417d06e7e8911b",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:be037e3efc61841176cd26d05c021c9c0792b1b7fe6e960eae87699b251ac26f",
+        "rights_id": "rights:b061581c037fcc03f070f3296c807e863cef18d32fada94f295c41c5c83646a3",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 64,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "research-article",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check; not certification that no notice exists elsewhere or will appear later."
+      }
+    },
+    {
+      "pmcid": "PMC9962587",
+      "citation": {
+        "attribution": "© 2023 by the authors.",
+        "authors": [
+          "Li, Kailin",
+          "Bian, Ji",
+          "Xiao, Yao",
+          "Wang, Da",
+          "Han, Lin",
+          "He, Caian",
+          "Gong, Lan",
+          "Wang, Min",
+          "Basso, Daniela"
+        ],
+        "doi": "10.3390/ijms24043513",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "notice_scope": "retained_source_snapshot_only",
+        "pmcid": "PMC9962587",
+        "pmid": "36834922",
+        "title": "Changes in Pancreatic Senescence Mediate Pancreatic Diseases",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9962587/",
+        "year": "2023"
+      },
+      "raw": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC9962587.xml",
+        "sha256": "9d7c7c384db7f0b0308ff2f43799cba86fa578e64d16368516572dbd1f117e73",
+        "bytes": 223446
+      },
+      "bundle": {
+        "path": "outputs/prowl/coverage-update-20261017/new-batches/rev-3ac0fbacb7d7f009337a97404f3c3c802b238e08d0239c684b1c26f041da2109.json",
+        "sha256": "fcdd720c5a21b15fc1b5ef552c5e680923ed17749be68f1d4460275509d9fcc2",
+        "bytes": 120286
+      },
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC9962587.metadata.json",
+        "sha256": "fd8588c27a9987b1a9533e1b8c8c236eb54fbbdf14ad454e3fd4b78f7ef2fac0",
+        "bytes": 7687
+      },
+      "source_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9962587/fullTextXML",
+      "metadata_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=PMCID:PMC9962587&format=json&resultType=core",
+      "first_publication_date": "2023-02-09",
+      "extraction_profile": "coverage-v1",
+      "work_id": "work:pmid:36834922",
+      "revision_id": "rev:3ac0fbacb7d7f009337a97404f3c3c802b238e08d0239c684b1c26f041da2109",
+      "representation_id": "repr:3f4d6b1aa566ec0f1f234b789b3d42a960d39e4f6eb854c6a18542d15b46ec0a",
+      "representation_sha256": "e16a2f9d14ff9e66fd2f9b2cbb52ec76f8096558b79b300891226e6cc3add27f",
+      "rights": {
+        "decision": "allowed",
+        "permissions": {
+          "display_snippet": true,
+          "local_embedding": true,
+          "local_text_store": true,
+          "redistribute": false,
+          "retain_metadata": true
+        },
+        "policy_version": "jats-cc-by-4.0-v1",
+        "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only.",
+        "representation_id": "repr:3f4d6b1aa566ec0f1f234b789b3d42a960d39e4f6eb854c6a18542d15b46ec0a",
+        "rights_id": "rights:8ca224cbf57a3edcb47e5bd5a7dca57d62f6af9801fe4957b046f05f956a6fb2",
+        "schema_version": "1.0.0"
+      },
+      "passage_count": 143,
+      "notice_review": {
+        "as_of": "2026-10-17",
+        "jats_related_article_count": 0,
+        "core_comment_correction_list_present": false,
+        "pub_types": [
+          "review-article",
+          "Review",
+          "Journal Article"
+        ],
+        "decision": "no_notice_found_in_inspected_snapshots",
+        "limitation": "Snapshot check only, not exhaustive notice monitoring."
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "pmcid": "PMC12701807",
+      "pmid": "41394428",
+      "title": "Benchmarking robustness of automated CT pancreas segmentation: achieving human-level reliability through human-in-the-loop optimization.",
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC12701807.metadata.json",
+        "sha256": "413d1dcf8fd58ffaf5aed54ecac99da3a016b4be880764c8bb07b260c88ce1bf",
+        "bytes": 8550
+      },
+      "reported_license": "cc by-nc",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC8316779",
+      "pmid": "33938646",
+      "title": "Quantification of Pancreas Surface Lobularity on CT: A Feasibility Study in the Normal Pancreas.",
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC8316779.metadata.json",
+        "sha256": "236b5d9db71158259d7b320df99576197750d050f0f21648e111bd48b459cccc",
+        "bytes": 7727
+      },
+      "reported_license": "cc by-nc",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC12873139",
+      "pmid": "41513702",
+      "title": "A MultiRater MultiOrgan Abdominal CT Dataset for Calibration Analysis and Uncertainty Modeling in Segmentation.",
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC12873139.metadata.json",
+        "sha256": "736ad61dbe3e3042a04b7ecacfb342e20945237cf60c1ae61367618ef404e5e3",
+        "bytes": 8961
+      },
+      "reported_license": "cc by-nc-nd",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC12084540",
+      "pmid": "40379726",
+      "title": "Pancreas segmentation using AI developed on the largest CT dataset with multi-institutional validation and implications for early cancer detection.",
+      "metadata": {
+        "path": "outputs/prowl/corpus-freeze-20261017/PMC12084540.metadata.json",
+        "sha256": "93985a685cccd7d0f0417ede53ae50f918dcf302baffd644dc5fb92853d2c82b",
+        "bytes": 8463
+      },
+      "reported_license": "cc by-nc-nd",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC7674810",
+      "pmid": "33190466",
+      "title": "Distribution and Characteristics of Pancreatic Volume Using Computed Tomography Volumetry.",
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC7674810.metadata.json",
+        "sha256": "1cac35fddd37e0362fe0e150b1c2f120bc5982a02269ddfdd06d8a8cba4f20ad",
+        "bytes": 6852
+      },
+      "reported_license": "cc by-nc",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC12004316",
+      "pmid": "40256459",
+      "title": "Development and validation of a new formula to predict standard pancreas volume in Chinese adults using body surface area.",
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC12004316.metadata.json",
+        "sha256": "f9040c2213116587b2731594b53098defaecc90b920b8146d83633ada483259b",
+        "bytes": 6799
+      },
+      "reported_license": "cc by-nc-nd",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC8711217",
+      "pmid": "34964011",
+      "title": "Magnetic resonance imaging investigation of age-related morphological changes in the pancreases of 226 Chinese.",
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC8711217.metadata.json",
+        "sha256": "f2934614f565411639f732241c900a903aa56be8ac448b48745c10da07c5da2f",
+        "bytes": 6975
+      },
+      "reported_license": "cc by-nc-nd",
+      "full_text_acquired": false,
+      "reason": "Outside current explicit CC BY 4.0 adapter; not a universal legal prohibition."
+    },
+    {
+      "pmcid": "PMC8904764",
+      "pmid": "35260710",
+      "title": "Automated pancreas segmentation and volumetry using deep neural network on computed tomography.",
+      "metadata": {
+        "path": "outputs/prowl/coverage-update-20261017/PMC8904764.metadata.json",
+        "sha256": "cb4f72774f1b493c7acdbcea944f287c17f579b8057e314a382b444e8b995ff5",
+        "bytes": 7766
+      },
+      "reported_license": "cc by",
+      "full_text_acquired": true,
+      "reason": "Quality hold: reported total mean 66.5 cm3 disagrees with sex-specific means/counts; total n=1006 versus sex counts 528+475=1003. No correction/retraction claimed. Preprint relationship is not a correction."
+    }
+  ],
+  "batches": [
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/02754d7b04f077d0e856cb00c85795aef1348af17ad9f62ac83f3c7636097965.batch.json",
+      "sha256": "3aaac46f822ff332e522173a71378266bb4113a31551a4930122058f3c065863",
+      "bytes": 332364
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/0a3c1d4ca32b196f72feed8d7b4c84cb0f931f10e7d75a8d029488f3ef3fc4b3.batch.json",
+      "sha256": "cbb0fd96cb98ad47a144cf34c35ff0a9c69d346645574c7d3645fcb0174ace03",
+      "bytes": 338448
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/29f7b2dd6541fab99a2c59d1aeed25a3087f5ea93313a6f58252f1881650ca7f.batch.json",
+      "sha256": "ebd90eb213534afe5ad556398245d149fac522c4091c79c40731724bb7b85ed1",
+      "bytes": 332806
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/53b727ef26176ab697cddbb4319439866705146dbc1a67d0d16520e2f693dde1.batch.json",
+      "sha256": "bfb30f806243379b9f0867e9378c349421edef0467fcb281f64cae5db87e9860",
+      "bytes": 337564
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/89979fc413ed763ee7241900785194d377d0d78addef13dc1bfcf1f0c086307c.batch.json",
+      "sha256": "64cd6e1a3eecbcca3b627dcdb8f82f9525ffce490255f762d517a32ae4d65161",
+      "bytes": 250586
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/9b842ea0fa32ffccf28a031f2a35502bbda0e8fc4ba501c468f4786cdec83975.batch.json",
+      "sha256": "40fd5f44ddef130bc9f811dab6940deb5210ec80c801c5d77ba700a0911a993e",
+      "bytes": 337974
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/9cb49d696f01356b841bb0f5b71af1febb8217cf9466d099e41c4e537ff4b1b2.batch.json",
+      "sha256": "99dafdc06b2758bec2cc093c9edb0653e61a5635081ea2cf8fbcfd76de3df652",
+      "bytes": 269896
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/be970654b097b48742ed392500a28e498e2c76b4db5bb67b413a2f94cb04ec6d.batch.json",
+      "sha256": "e6aee133a6e5f88807ce85bd5e9c314932f641ed45b4c83ced7229944ff33a86",
+      "bytes": 337597
+    },
+    {
+      "path": "outputs/prowl/direct-ingestion-20261014/batches/f525cd9f503316965aa67999e2e05ffca9ed29bc698fc77c86a49850187924ce.batch.json",
+      "sha256": "f960e16a6db615da49f1276487c0cd3ddb0d7a7064a4d4b23c6bc681b1da6e1e",
+      "bytes": 338459
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/2ee395319ed981b3ef1184d955c4f33328584c70a5857dd181aa5d8db9e466b8.batch.json",
+      "sha256": "3bcd64f818d89a02e08492a2d7e0e7d0bf3df1f7977a45c614d32c4836dde574",
+      "bytes": 336258
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/4e4a23e289edba471773221503d22cad75464a91d3028bde3fe1cd76947a3a34.batch.json",
+      "sha256": "8097d760c0009a3125c6dc7f439c909e58f256943a2d8c54aaf2ff277b8cc178",
+      "bytes": 348565
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/4e797c8a72c1bfd7a9c3fab26fe3b1272515665a6c1bae4acdf6e2990ea3b372.batch.json",
+      "sha256": "0bb5b4db2d7a14c89b99259b4dfa40f70e401fd9f430705c5c1f76e5c7643900",
+      "bytes": 341253
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/516a6d157083bcf0aa444d70962ec8150f218b55861cf40be5b67b8a5db3ffe3.batch.json",
+      "sha256": "5074534e5920ad193c6c0100b55cf5ec58b17e60c129261822f7709bb57d5f63",
+      "bytes": 213589
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/73601476456d7aa65808444a5378064d4ceeca7d456e7cca277190af26bd648d.batch.json",
+      "sha256": "da744c0f121422f8563c2b52b4b15eced9e6d34793cc782ca32c1b3108a61cb8",
+      "bytes": 335734
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/870354a3594e56716bc8229bfe4553f086d71c46cd4d544b25269861f06d6ec2.batch.json",
+      "sha256": "ca7d2bda2c975e8f052a6c8c67ca87474bae83a2d44395d677e63ef42d0e87bb",
+      "bytes": 336544
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/874ba0a5ba31cd9515f7d4112880396fcfeaabc82dd7765e0944e15a5b3cca01.batch.json",
+      "sha256": "68a69d1dcc1acf822009e737a8a8f09d07afc57ef697f8523a24c9a1b3d95aa8",
+      "bytes": 335985
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/91725c006e11c9166e296826b07824c46a36f623b6d382b012fc272ac4d534c9.batch.json",
+      "sha256": "0b2951053f5eb3f5e4d1a01b620f7b8f91c6b9014dc66dd85b688cf6d33e1a7a",
+      "bytes": 335411
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/b2b1faa18f05f014ac34b6fad805ace6984a6e4129565102a1aac6fb80e14813.batch.json",
+      "sha256": "40857a8d2f66c34b31fc8c8e6e2e66c1070b15c5b16f89e33c158e98dbb6a117",
+      "bytes": 335107
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/b31b848a17dc6f2e28eed23f54bead5181aad404658ce04710c8feaf9edaee8c.batch.json",
+      "sha256": "b844a9ffef9503ad142f0d1a62ac7663b634872790980c21eeaf7ff1d855fa99",
+      "bytes": 338784
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/b3d008f879e6841ee357142c5d9ee590d3c6717a6f72e69929160ae6f6a35966.batch.json",
+      "sha256": "d6db867c4da1a95f1a846fb1ee9100b0049dbfa223cc0a9e61b5e8cb642c2c80",
+      "bytes": 262796
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/ddef84738e846a7377832e08dfd8f8cc340fdc96341b8d2a07af87652ad0ac26.batch.json",
+      "sha256": "597ad9429b67efa5642c11995f92555a67b1839cc426b9698552632d8e21d145",
+      "bytes": 339038
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/e2591a1d3491923c3061a0eb55ac4ae68f1e3f7dd6b5bf08bb9250625e5bf73f.batch.json",
+      "sha256": "eb349a19b314d74295b9c062d14aa86cbf0ad4c8b0369a7eacf99c27c1e8aab4",
+      "bytes": 238094
+    },
+    {
+      "path": "outputs/prowl/corpus-freeze-20261017/new-batches/ea3737247acdf1972777bea7259550b5fabecd529d9d659ba86b321b94114705.batch.json",
+      "sha256": "4025b965ef9d30c4495fdc0bd7aa77ef5ecaaf7317f9c30e0f3ed8f780d39378",
+      "bytes": 349256
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/0d90730c8abd4b0110173dc82370be914f509d9c10a16eb212c70c2bd6c7afae.batch.json",
+      "sha256": "f3ebcdd612dd8a67abf6f65f8df14452157e0f6ced2d8c902cff99bb2756263a",
+      "bytes": 332559
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/60cf166260c00a3f3699024eb8ad8af0c168d4b011ffdee8d11e2bdd7af1e7cf.batch.json",
+      "sha256": "7a13ce9eeb5a13fb12ef8a763fc5ddf69b4637acde3d7297b53a8ce7af04e089",
+      "bytes": 292247
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/7f2195ddc50ffe6a4c7c8e5ec097b81fc4e01575b2a710822275cf8f9280cef6.batch.json",
+      "sha256": "5b5890192b0cd4644ac852be53fd5b40b7c79f3bf7d5212c3caf30a0d02abcfe",
+      "bytes": 332825
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/ae16a8d99ab4701d9a2f07bac18ab9ec883257e68e99f45911e7b4e6eabba08e.batch.json",
+      "sha256": "56587f6e7f7a1e73a6de9cdf2a952fb7270cd056a347fc25aec28cad69a75a41",
+      "bytes": 332783
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/ae35c48ba832c55439bacf7f4b96ab459691519ce0a81b6e871b3565d85233ee.batch.json",
+      "sha256": "2fadb6bb7568e27ae871b19bfa7e9d349d124389b79801c3f764cfc6d718f352",
+      "bytes": 198222
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/bae81a01e754a3d4a68962aa89b0c6664c4402d2b27533f135d9f3a24fcb481a.batch.json",
+      "sha256": "b5d8e9ec8f4c14e40ba48be00b543d97459b5aa3b81af07fedd3f286673ef6ab",
+      "bytes": 332416
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/ca050b9da07b11b4b4482cfaff560dcd5dd47ce9bbbde339cebd6825c3f6c104.batch.json",
+      "sha256": "34e7fef55acfec73d3a7a63d005df0d7a30339a349af2971470a51628426ee33",
+      "bytes": 333522
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/d24064dfad6bdf77eb3a596c4cc4fca334fa3eaa0d86c10aec0d712fb0e7f9b6.batch.json",
+      "sha256": "2065e3b47b1292bf4bdaf03007dc411697d620042d57a7232b13ce6525de70f7",
+      "bytes": 156458
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/new-batches/e6f73cd94358abcf7044dec6717c5532b7ad0164014521e0b67f9b8cff9261a8.batch.json",
+      "sha256": "6b8e5f3f2927f2f61997cc28a9f71ccd554335b97d888c406bf5ba868a9b8cb0",
+      "bytes": 334334
+    }
+  ],
+  "encoder": {
+    "descriptor": {
+      "path": "configs/evidence/encoder-minilm-v1.json",
+      "sha256": "3635898a775524ea61bc3fbd58874b31a0e531180e41d85490e6713a5385e8c2",
+      "bytes": 813
+    },
+    "id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+    "dimensions": 384,
+    "max_tokens": 256,
+    "device": "cpu",
+    "threads": 4
+  },
+  "index": {
+    "engine": "PostgreSQL pgvector",
+    "ranking": "Exact cosine distance ascending, passage_id ascending tie-break",
+    "approximate_index": false,
+    "selection_status": "Unselected; lexical/dense comparison follows Step 5 labels."
+  },
+  "producers": [
+    {
+      "path": "src/retrieval/direct_ingestion.py",
+      "sha256": "b8cfa21996ca30810ebf40a6f5ad017b93573b6a1639c6df39ea3b7f45877402",
+      "bytes": 18168
+    },
+    {
+      "path": "scripts/retrieval/direct_corpus.py",
+      "sha256": "c76b0ca33010435cfc74ac20e1c4cff2356460c333eeb4e23b5cbf430015917e",
+      "bytes": 7374
+    },
+    {
+      "path": "scripts/retrieval/rebuild_corpus.py",
+      "sha256": "1dbd47512e3ba6cf073c4c8d897de1cb66fb6bc33458d03526721dbb1858033a",
+      "bytes": 5262
+    },
+    {
+      "path": "src/retrieval/corpus_inventory.py",
+      "sha256": "57739f5280c784a0c479a01126f44aa4c4062ac7594f941e949ce3ba6c40d0a4",
+      "bytes": 6069
+    },
+    {
+      "path": "src/retrieval/passages.py",
+      "sha256": "1ab8dc86605eccd769959d5155b71849e28ae015e882f68327fabdff980931ec",
+      "bytes": 19412
+    },
+    {
+      "path": "src/retrieval/records.py",
+      "sha256": "0f70d4fadac0f1cf211c76be1a9a35df192de893d2552fa4aa4ff10eb19396b7",
+      "bytes": 18073
+    },
+    {
+      "path": "src/retrieval/guided_retrieval.py",
+      "sha256": "7e7c192f73cbceac07b217231e1f879a13f160e39d1785fcc9a97f945cdb63be",
+      "bytes": 2236
+    }
+  ],
+  "receipts": {
+    "rebuild": {
+      "path": "outputs/prowl/coverage-update-20261017/rebuild/COMPLETE.json",
+      "sha256": "58dc4612b57735b5d9d905125266411a773913f13c39264e68c1b9970cd2e38e",
+      "bytes": 1587
+    },
+    "rebuild_plan": {
+      "path": "outputs/prowl/coverage-update-20261017/rebuild/plan.json",
+      "sha256": "84e6f3fefed2712fb412d3b9d69b0c04164dae2d4c054a73393c8302ae97d6e3",
+      "bytes": 12506
+    },
+    "preflight": {
+      "path": "outputs/prowl/coverage-update-20261017/ingestion-preflight-final.json",
+      "sha256": "afa53c9c590f1c2f14f9f879eca493a38ffc583dec86e01ccc126f1c467c3f83",
+      "bytes": 1100
+    },
+    "build_commands": {
+      "path": "outputs/prowl/coverage-update-20261017/commands.json",
+      "sha256": "c1c6ac05f92cd0c90a0ac2f56bee65ddb44b9dea06d95d01f05179abd7a27441",
+      "bytes": 3570
+    },
+    "tests": {
+      "path": "outputs/prowl/coverage-update-20261017/ingestion-tests.xml",
+      "sha256": "8511831f94529929b825e6ccb37b1400a4bff3696ccaacfb8c1543bf79d53563",
+      "bytes": 12260
+    }
+  },
+  "exposure": "All source selection and coverage review are exposed development work. No protected questions or labels were created, read or evaluated.",
+  "generation_calls": 0,
+  "training_calls": 0,
+  "parent_manifest": {
+    "path": "configs/evidence/corpus-coverage-v1.json",
+    "sha256": "33043b9fb8253aa64c70db84460b32d76921a79517f98de4dfb621d894ef50c6",
+    "bytes": 37901
+  },
+  "source_limits": {
+    "PMC4423920": "MRI study; only 14 age/weight/sex-matched normal-glucose-tolerance controls. 82.6 +/- 4.8 cm3 is mean +/- SEM, not SD or normal reference interval. No universal average or CT patient classification.",
+    "PMC7540900": "Retrospective single-center Korean surgical adenocarcinoma cohort, 183 patients. Admit measurement-method context; staging/prognosis/treatment statements do not authorize patient advice.",
+    "PMC9962587": "Narrative review including human and animal evidence. Age/fat morphology context, not a validated contour rule or patient-specific reference interval."
+  }
+}

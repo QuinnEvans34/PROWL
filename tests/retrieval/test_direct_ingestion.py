@@ -149,3 +149,47 @@ def test_live_retry_detects_database_vector_tamper(live_db,bundle):
     live_db.execute('UPDATE literature.passages SET embedding=%s::vector WHERE collection_id=%s AND passage_id=%s',
                     (d.vector_sql(vector(5)),collection,b['items'][0]['record']['passage']['passage_id']))
     with pytest.raises(ValueError,match='content mismatch'):d.load_batch(live_db,collection,b)
+
+
+def test_coverage_accepts_exact_http_license_without_rewriting_source(tmp_path):
+    raw = XML.replace('https://creativecommons.org/licenses/by/4.0/',
+                      'http://creativecommons.org/licenses/by/4.0/')
+    p = tmp_path / 'http-license.xml'; p.write_text(raw)
+    b = d.source_bundle(p, profile='coverage-v1')
+    assert b['source_sha256'] == d.hashlib.sha256(raw.encode()).hexdigest()
+    assert b['citation']['license_url'] == d.LICENSE
+    with pytest.raises(ValueError, match='licence'):
+        d.source_bundle(p)
+
+
+@pytest.mark.parametrize('url', [
+    'http://creativecommons.org/licenses/by-nc/4.0/',
+    'http://creativecommons.org/licenses/by/3.0/',
+    'http://creativecommons.org.evil.test/licenses/by/4.0/',
+    'http://creativecommons.org/licenses/by/4.0/?redirect=other',
+])
+def test_coverage_license_alias_does_not_broaden_rights(tmp_path, url):
+    p = tmp_path / 'other-license.xml'; p.write_text(XML.replace(d.LICENSE, url))
+    with pytest.raises(ValueError, match='licence'):
+        d.source_bundle(p, profile='coverage-v1')
+
+
+@pytest.mark.parametrize('declaration', [
+    '<license xlink:href="http://creativecommons.org/licenses/by/4.0/">',
+    '<license><ali:license_ref xmlns:ali="http://www.niso.org/schemas/ali/1.0/">https://creativecommons.org/licenses/by/4.0/</ali:license_ref>',
+])
+def test_coverage_publisher_license_locations(tmp_path, declaration):
+    raw = XML.replace('<license>', declaration).replace(
+        '<ext-link xlink:href="https://creativecommons.org/licenses/by/4.0/">CC BY</ext-link>', '')
+    p = tmp_path / 'publisher.xml'; p.write_text(raw)
+    assert d.source_bundle(p, profile='coverage-v1')['citation']['license_url'] == d.LICENSE
+    p.write_text(raw.replace('/by/4.0/', '/by-nc/4.0/'))
+    with pytest.raises(ValueError, match='licence'):
+        d.source_bundle(p, profile='coverage-v1')
+
+
+def test_license_in_body_does_not_grant_article_rights(tmp_path):
+    raw = XML.replace('<permissions>', '<untrusted>').replace('</permissions>', '</untrusted>')
+    p = tmp_path / 'not-permissions.xml'; p.write_text(raw)
+    with pytest.raises(ValueError, match='licence'):
+        d.source_bundle(p, profile='coverage-v1')

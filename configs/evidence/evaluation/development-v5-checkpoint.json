@@ -1,0 +1,135 @@
+{
+  "version": "prowl-development-v5-checkpoint-v1",
+  "state": "pending_human_delta_consistency_and_protected_freeze",
+  "development_content_sha256": "62a4f4f2833ab82ccaddf8684a0a1fc686725e477d68bccdbeedf951d9774d92",
+  "span_counts": {
+    "direct": 56,
+    "partial_context": 18,
+    "contradicting_or_limiting": 6
+  },
+  "question_count": 30,
+  "pins": [
+    {
+      "path": "configs/evidence/corpus-coverage-v1.json",
+      "sha256": "33043b9fb8253aa64c70db84460b32d76921a79517f98de4dfb621d894ef50c6"
+    },
+    {
+      "path": "configs/evidence/corpus-coverage-v2.json",
+      "sha256": "a5c65bd2756400a57a8bc6cd9e7369f8e332488085012e84981b05214e88ac59"
+    },
+    {
+      "path": "configs/evidence/coverage-matrix-v2.json",
+      "sha256": "672c72e98c00848b98eb0ccce6ab1a35b4e347c8cc3a8b7a0f6ca30a35460a63"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v4-draft.json",
+      "sha256": "0ffdc97df533acc2c7e766e182be85e7506e940284c7f350e3ebd07a52503c5f"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v4-human-review.json",
+      "sha256": "1fa05dcd7dc7341b6f9c5803f406bfee0a9441fa8f1b1a4d98b1f15782dccfe1"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v5-draft.json",
+      "sha256": "a8072c19bc27c3e4047f3d2b289e16e4b6bce96ea2fb4136700b9624bb906520"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v5-human-review.json",
+      "sha256": "6b251c66f39f35b7f70c929fe9fa2cfe5323b8733b6bee88202f9defa33bb2f2"
+    },
+    {
+      "path": "configs/evidence/evaluation/heldout-receipt-template-v2.json",
+      "sha256": "d6277fbf7f3ce7a7ea3953aadac95e47c63c3ac1608b2c77b175f15a4da27c1e"
+    },
+    {
+      "path": "docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md",
+      "sha256": "060250a39693e41c0eaf4d53736ff56430428259277ac207d42c399ffc8d3c55"
+    },
+    {
+      "path": "docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS-V5.md",
+      "sha256": "4737f35f5e6d5e7d2255d97fc4ead5890e7da2c22cf80207318a64e555a73bfa"
+    },
+    {
+      "path": "src/retrieval/direct_ingestion.py",
+      "sha256": "b8cfa21996ca30810ebf40a6f5ad017b93573b6a1639c6df39ea3b7f45877402"
+    },
+    {
+      "path": "src/retrieval/development_set.py",
+      "sha256": "0b56d61c57e636909eb5b7dec5e5bb62c7175944bf3f20e9b386d220fa8a8fcc"
+    },
+    {
+      "path": "src/retrieval/development_review.py",
+      "sha256": "e8e18f7c774baadd1c77542933f927326c3acba37c9e5a7ee298e5f00df89b3b"
+    },
+    {
+      "path": "src/retrieval/evaluation_checkpoint.py",
+      "sha256": "69e60efd1c33597b2f60d3c9432b99162c64a321cc5cae6239018b826a531f0f"
+    },
+    {
+      "path": "scripts/retrieval/build_development_review_packet.py",
+      "sha256": "0980cd32a97ef7b81aff381026e1c203915893abe8d4697e27fd7c36977d896e"
+    },
+    {
+      "path": "docs/capstone/contracts/retrieval/heldout-receipt-v2.schema.json",
+      "sha256": "37fa44aef62b99c7a2e08d1ad0296eb2a46c18746c17292e77320df23ab183bd"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "outputs/prowl/coverage-update-20261017/preflight.json",
+      "sha256": "d597ec51da96a40ecfb375942d696cc2562eedf609b3316225a05006577fd572"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/acquisition-plan.json",
+      "sha256": "71c86152efb45e56f3eb1a4e21d4ad27d9f21c4e1b33bcc189f29a4320805c24"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/acquisition-amendment-01.json",
+      "sha256": "a665e8b7eb6be1bec6db5785df7be67dabcf36ff75a0a148fcca05c13c4ce1a9"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/freeze-verification.json",
+      "sha256": "ef74a5c3b96851adbbc209c309c82a351908a41d40a02736dbeca996808b4816"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/development-v5-validation-final.json",
+      "sha256": "5335bc2d1ff4549ebe97bf60d7d7300ff26d303bb0c209072e20c6f524c38c17"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/review-delta-status.json",
+      "sha256": "2c5980e56803f505cbc4c10f730dd111a459841e0ef05e5a88727b5e8d6e4c2c"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/checkpoint-status.json",
+      "sha256": "c8b3fa28bb36d10ccf3d901f44c1f97888bf06a1d465e39b5e97dd4ee6b172fc"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/ingestion-tests.xml",
+      "sha256": "8511831f94529929b825e6ccb37b1400a4bff3696ccaacfb8c1543bf79d53563"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/evaluation-tests.xml",
+      "sha256": "ebb6ac50e051d9b53846a18222a3d9a8809ef2e9ef442bd23bf6a6273a92797e"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/checkpoint-tests.xml",
+      "sha256": "df5a0925ea3133fab828e04db47019ba3753afc1eb5e041a2a77cdac7aedc6ab"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/final-service-inventory.json",
+      "sha256": "a089d0abd3d8af854da0ca5ba279090090663c086d6aca2e9397fd69a8533d93"
+    },
+    {
+      "path": "outputs/prowl/coverage-update-20261017/workflow-health-correct-route.json",
+      "sha256": "1d9f79ea21680a8904b61e750a808e761e8f5ed1214ce641fae198d1f37a129f"
+    }
+  ],
+  "review_packet": {
+    "path": "outputs/prowl/development-v5-coverage-review-20261017/receipt.json",
+    "sha256": "90ac35586ec768819c6c4294d9dd540c32c475ed7ea6c647c0e9a08645f00753"
+  },
+  "generation_calls": 0,
+  "training_calls": 0,
+  "protected_content_accessed": false,
+  "ready_for_development_comparison": false
+}

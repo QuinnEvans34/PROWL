@@ -1,5 +1,11 @@
 # Finish the development review
 
+> **Current October 17 update:** use [targeted v5 delta review](TARGETED-COVERAGE-UPDATE-2026-10-17.md) and
+> `outputs/prowl/development-v5-coverage-review-20261017/changes-to-review.md`. Original v4 instructions
+> below describe the preserved prior review. The v5 delta carries 28 wording/answer approvals and eight
+> refusal evidence approvals; it records no new decisions. Review only changed evidence, then complete
+> the set-wide consistency pass in one reading document.
+
 **October 17, 2026:** Review tracking is ready. No human decisions have been entered, neither split
 is frozen, and retrieval tuning is not released. The existing positive topic feedback remains valid;
 it is not expanded into evidence-label or second-pass approval.

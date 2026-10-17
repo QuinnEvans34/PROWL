@@ -63,7 +63,16 @@ def source_bundle(path, *, profile='legacy-v1'):
     if meta.findall('related-article'):
         raise ValueError('Related-article notices require review')
     links = [e.get(XLINK, '') for e in meta.findall('./permissions/license//ext-link')]
-    if LICENSE not in links:
+    if profile == 'coverage-v1':
+        links.extend(e.get(XLINK, '') for e in meta.findall('./permissions/license'))
+        links.extend(text(e) for e in meta.findall(
+            './permissions/license/{http://www.niso.org/schemas/ali/1.0/}license_ref'))
+    # Older publisher JATS uses HTTP for this same exact licence identifier.
+    # Opt in only for coverage extraction; preserve legacy acceptance behavior.
+    accepted_licenses = {LICENSE}
+    if profile == 'coverage-v1':
+        accepted_licenses.add('http://creativecommons.org/licenses/by/4.0/')
+    if not accepted_licenses.intersection(links):
         raise ValueError('Explicit CC BY 4.0 licence required')
     ids = {e.get('pub-id-type'): text(e) for e in meta.findall('article-id')}
     pmid, pmcid = ids.get('pmid', ''), ids.get('pmcid', '')

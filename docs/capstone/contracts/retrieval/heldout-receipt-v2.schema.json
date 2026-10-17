@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "owner",
+    "corpus_content_sha256",
+    "final_development_content_sha256",
+    "protected_content_manifest_sha256",
+    "encrypted_image_sha256",
+    "independent_encrypted_backup_sha256",
+    "question_count",
+    "answerable_count",
+    "unsupported_or_refused_count",
+    "unresolved_label_count",
+    "maximum_single_gold_source_question_count",
+    "answerable_family_counts",
+    "difficulty_counts",
+    "independent_authorship_attested",
+    "protected_content_mechanically_validated",
+    "quinton_semantic_adjudication_complete",
+    "quinton_second_consistency_pass_complete",
+    "cross_split_near_duplicate_review_complete",
+    "regression_exposure_review_complete",
+    "source_concentration_review_complete",
+    "storage_allocation_confirmed",
+    "independent_backup_hash_verified",
+    "protected_image_unmounted_after_freeze",
+    "freeze_date"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "prowl-heldout-receipt-v2"
+    },
+    "status": {
+      "enum": [
+        "not_created",
+        "frozen"
+      ]
+    },
+    "owner": {
+      "const": "Quinton Evans"
+    },
+    "corpus_content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "final_development_content_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "protected_content_manifest_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "encrypted_image_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "independent_encrypted_backup_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "question_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 30
+    },
+    "answerable_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 30
+    },
+    "unsupported_or_refused_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 30
+    },
+    "unresolved_label_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 30
+    },
+    "maximum_single_gold_source_question_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "maximum": 20
+    },
+    "answerable_family_counts": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "appearance",
+        "measurement",
+        "anatomy",
+        "ai_limits",
+        "review"
+      ],
+      "properties": {
+        "appearance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "measurement": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "anatomy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "ai_limits": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "review": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        }
+      }
+    },
+    "difficulty_counts": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "easy",
+        "paraphrase",
+        "multi_passage",
+        "limiting"
+      ],
+      "properties": {
+        "easy": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "paraphrase": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "multi_passage": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "limiting": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        }
+      }
+    },
+    "independent_authorship_attested": {
+      "type": "boolean"
+    },
+    "protected_content_mechanically_validated": {
+      "type": "boolean"
+    },
+    "quinton_semantic_adjudication_complete": {
+      "type": "boolean"
+    },
+    "quinton_second_consistency_pass_complete": {
+      "type": "boolean"
+    },
+    "cross_split_near_duplicate_review_complete": {
+      "type": "boolean"
+    },
+    "regression_exposure_review_complete": {
+      "type": "boolean"
+    },
+    "source_concentration_review_complete": {
+      "type": "boolean"
+    },
+    "storage_allocation_confirmed": {
+      "type": "boolean"
+    },
+    "independent_backup_hash_verified": {
+      "type": "boolean"
+    },
+    "protected_image_unmounted_after_freeze": {
+      "type": "boolean"
+    },
+    "freeze_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  }
+}

@@ -151,11 +151,12 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--development', type=Path, required=True)
+    parser.add_argument('--corpus-version', choices=('v1', 'v2'), default='v1')
     parser.add_argument('--require-ready', action='store_true')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     development = development_path(args.development, root)
-    path = root / 'configs/evidence/corpus-coverage-v1.json'
+    path = root / f'configs/evidence/corpus-coverage-{args.corpus_version}.json'
     manifest = json.loads(path.read_text())
     if len(manifest['sources']) > 32 or len(manifest['batches']) > 256:
         raise ValueError('Corpus input count exceeds draft bound')

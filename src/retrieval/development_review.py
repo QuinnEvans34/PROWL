@@ -45,6 +45,10 @@ def new_record(suite, answers_sha256):
 
 
 def validate_review(record, suite, *, answers_sha256):
+    return _validate_review(record, suite, answers_sha256=answers_sha256)
+
+
+def _validate_review(record, suite, *, answers_sha256, inherited=None):
     verify_development(suite)
     schema = json.loads((CONTRACTS / 'development-review-v1.schema.json').read_text())
     try:
@@ -57,6 +61,10 @@ def validate_review(record, suite, *, answers_sha256):
         raise ValueError('Review content binding mismatch')
     cases = {c['id']: c['content_sha256'] for c in suite['cases']}
     states = {stage: dict.fromkeys(cases, 'pending') for stage in STAGES}
+    if inherited is not None:
+        for stage in STAGES[:2]:
+            for case_id in inherited[stage]:
+                states[stage][case_id] = 'accept'
     for sequence, event in enumerate(record['events'], 1):
         if event['sequence'] != sequence:
             raise ValueError('Review events must retain contiguous append order')
@@ -85,6 +93,60 @@ def validate_review(record, suite, *, answers_sha256):
                 development_review_attested_complete=not any(pending.values()),
                 ready_for_tuning=False,
                 limitation='Attestations only; corpus validation, protected authoring and split freeze remain separate.')
+
+
+def answer_blocks(text, suite):
+    """Compare actual answer prose, independently of changed introductions/source links."""
+    import re
+    sections = re.findall(r'^### (\d+)\. (.*?)\n(.*?)(?=^### |^## |\Z)', text, re.M | re.S)
+    if ([int(n) for n, _, _ in sections] != list(range(1, len(suite['cases']) + 1))
+            or [q for _, q, _ in sections] != [c['question'] for c in suite['cases']]):
+        raise ValueError('Readable answer question/order mismatch')
+    result = {}
+    for (_, _, body), case in zip(sections, suite['cases']):
+        match = re.search(r'\*\*Expected (?:answer|response)\*\*\s*\n(.*?)(?=\n\*\*(?:Source|Sources|Basis):)', body, re.S)
+        if match is None:
+            raise ValueError('Readable expected answer missing')
+        result[case['id']] = match.group(1).strip()
+    return result
+
+
+def validate_delta_review(record, suite, answers, *, prior_suite, prior_record, prior_answers):
+    """Carry only proven unchanged accepted parts; never invent review events.
+
+    New corpus judgments reopen evidence review. Corpus-gap cases always reopen when
+    the corpus changes, even if their wording and empty labels are identical.
+    Set-wide consistency never carries across versions.
+    """
+    prior = validate_review(prior_record, prior_suite,
+                            answers_sha256=sha256_hex(prior_answers.encode()))
+    verify_development(suite)
+    before = {c['id']: c for c in prior_suite['cases']}
+    old_answers = answer_blocks(prior_answers, prior_suite)
+    new_answers = answer_blocks(answers, suite)
+    inherited = {s: [] for s in STAGES[:2]}
+    core = ('id', 'split', 'primary_need', 'family', 'intent_group', 'question',
+            'finding', 'expected', 'concepts')
+    corpus_changed = suite['corpus_content_sha256'] != prior_suite['corpus_content_sha256']
+    for case in suite['cases']:
+        ident = case['id']; old = before.get(ident)
+        if old is None:
+            continue
+        same = (all(case[k] == old[k] for k in core)
+                and new_answers[ident] == old_answers[ident])
+        if same and ident not in prior['pending']['wording_and_answer']:
+            inherited['wording_and_answer'].append(ident)
+        if (same and case['labels'] == old['labels']
+                and case['source_judgments'] == old['source_judgments']
+                and not (corpus_changed and case['expected']['status'] == 'insufficient_evidence')
+                and ident not in prior['pending']['evidence_labels']):
+            inherited['evidence_labels'].append(ident)
+    result = _validate_review(record, suite, answers_sha256=sha256_hex(answers.encode()),
+                              inherited=inherited)
+    result.update(inherited_acceptances=inherited,
+                  prior_development_content_sha256=prior_suite['content_sha256'],
+                  prior_review_content_sha256=prior_record['content_sha256'])
+    return result
 
 
 def read_public_json(path, root):

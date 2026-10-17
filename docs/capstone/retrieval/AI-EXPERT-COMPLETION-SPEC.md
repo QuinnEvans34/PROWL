@@ -1,9 +1,13 @@
 # AI expert completion specification
 
-**Version:** 1.12 — October 17, 2026 (development first review accepted)\
+**Version:** 1.13 — October 17, 2026 (targeted coverage v2 and evaluation checkpoint)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; all 30 development cases accepted in the first human wording/answer/evidence review. Second consistency review and protected authoring/freeze remain pending. Response quality remains open.\
+**State:** Steps 1–4 complete for their bounded scopes. Targeted v2 corpus built/rebuilt: 10 sources, 947 passages. Evaluation v5 preserves v4 approvals for unchanged content; two revised questions, new evidence judgments and second consistency need human review. Protected authoring/freeze remains pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
+
+October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
+Use corpus v2 and development v5 for the next freeze. The prior v4 first-pass approval remains historical
+and is carried only where exact content permits. No tuning before both splits are frozen.
 
 ## 1. Outcome and authority
 

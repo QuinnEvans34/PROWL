@@ -125,3 +125,81 @@ def test_heldout_and_external_paths_refused_before_read(tmp_path, fixture):
         read_public_json(tmp_path/'configs/evidence/evaluation/heldout.json',tmp_path)
     suite=deepcopy(fixture[0]); suite['cases'][0]['split']='held_out'; seal(suite)
     with pytest.raises(ValueError,match='draft schema violation'): new_record(suite,'a'*64)
+
+
+def prose(suite):
+    return '\n'.join(f'### {i}. {c["question"]}\n\n**Expected answer**\n\nInvented answer {i}.\n\n**Source:** invented\n' for i,c in enumerate(suite['cases'],1))
+
+
+def delta_fixture(fixture):
+    from src.retrieval.records import sha256_hex
+    old=deepcopy(fixture[0]); answers=prose(old)
+    review=new_record(old,sha256_hex(answers.encode()))
+    for stage in ('wording_and_answer','evidence_labels','second_consistency'):
+        event(review,old,stage)
+    new=deepcopy(old);new['corpus_content_sha256']='c'*64;seal(new)
+    return old,review,answers,new,new_record(new,sha256_hex(answers.encode()))
+
+
+def delta_check(data, new_answers=None):
+    from src.retrieval.development_review import validate_delta_review
+    old,review,answers,new,record=data
+    return validate_delta_review(record,new,new_answers or answers,
+        prior_suite=old,prior_record=review,prior_answers=answers)
+
+
+def test_delta_carries_unchanged_but_reopens_corpus_gaps_and_all_consistency(fixture):
+    data=delta_fixture(fixture);r=delta_check(data)
+    assert len(r['inherited_acceptances']['wording_and_answer'])==30
+    assert len(r['inherited_acceptances']['evidence_labels'])==20
+    assert len(r['pending']['evidence_labels'])==10
+    assert len(r['pending']['second_consistency'])==30
+    assert data[-1]['events']==[] and not r['ready_for_tuning']
+
+
+def test_delta_changed_source_judgment_needs_new_review(fixture):
+    from src.retrieval.records import sha256_hex
+    data=delta_fixture(fixture);old,review,answers,new,record=data
+    new['cases'][0]['source_judgments'][0]['rationale']='Revised rationale';seal(new)
+    data=(old,review,answers,new,new_record(new,sha256_hex(answers.encode())))
+    r=delta_check(data)
+    assert 'q:dev2-01' in r['pending']['evidence_labels']
+    assert 'q:dev2-01' not in r['pending']['wording_and_answer']
+
+
+def test_delta_changed_prose_invalidates_inheritance(fixture):
+    from src.retrieval.records import sha256_hex
+    old,review,answers,new,record=delta_fixture(fixture)
+    revised=answers.replace('Invented answer 1.','A revised answer.')
+    record=new_record(new,sha256_hex(revised.encode()))
+    r=delta_check((old,review,answers,new,record),revised)
+    assert 'q:dev2-01' in r['pending']['wording_and_answer']
+    assert 'q:dev2-01' in r['pending']['evidence_labels']
+
+
+def test_delta_cannot_carry_unaccepted_or_forged_parent(fixture):
+    data=delta_fixture(fixture)
+    event(data[1],data[0],'wording_and_answer','revise',count=1)
+    assert 'q:dev2-01' in delta_check(data)['pending']['wording_and_answer']
+    data[1]['events'][0]['human_statement']='Tampered without rehash'
+    with pytest.raises(ValueError,match='hash mismatch'):delta_check(data)
+
+
+def test_delta_requires_all_reopened_reviews_before_consistency(fixture):
+    data=delta_fixture(fixture);event(data[-1],data[3],'second_consistency')
+    with pytest.raises(ValueError,match='Resolve wording and evidence'):delta_check(data)
+
+
+def test_delta_explicit_review_completes_without_repeating_accepted_stages(fixture):
+    data=delta_fixture(fixture)
+    event(data[-1],data[3],'evidence_labels')
+    event(data[-1],data[3],'second_consistency')
+    result=delta_check(data)
+    assert result['development_review_attested_complete']
+    assert result['event_count']==2 and not result['ready_for_tuning']
+
+
+def test_delta_answer_order_must_match(fixture):
+    data=delta_fixture(fixture)
+    with pytest.raises(ValueError,match='question/order'):
+        delta_check(data,data[2].replace('### 1.','### 4.'))
