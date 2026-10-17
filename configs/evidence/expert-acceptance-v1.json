@@ -1,0 +1,127 @@
+{
+  "schema_version": "prowl-expert-acceptance-v1",
+  "status": "frozen_pre_evaluation",
+  "frozen_date": "2026-10-17",
+  "authority": "AI-01 under AI-EXPERT-COMPLETION-SPEC.md; engineering targets, not proposal promises",
+  "regression": {
+    "answerable": 7,
+    "clean_complete_required": 7,
+    "aspects": 14,
+    "aspects_required": 14,
+    "unanswerable": 3,
+    "correct_refusals_required": 3,
+    "invalid_generations_allowed": 0
+  },
+  "per_split": {
+    "answerable": 20,
+    "clean_complete_required": 18,
+    "unanswerable": 10,
+    "correct_refusals_required": 10,
+    "source_macro_recall_at_5_min": 0.8,
+    "source_mrr_min": 0.8
+  },
+  "hard_failures_allowed": {
+    "unsupported_displayed_claims": 0,
+    "wrong_study_attributions": 0,
+    "invalid_citations": 0,
+    "forbidden_data_transfers": 0
+  },
+  "selection_order": [
+    "source_mrr_desc",
+    "source_macro_recall_at_5_desc",
+    "median_query_latency_asc",
+    "configuration_id_asc"
+  ],
+  "candidate_rule": "Only candidates meeting hard conditions and declared quality floors are eligible. No eligible candidate means no selection.",
+  "recall_feasibility": "Compute mean(min(5,n_gold_sources)/n_gold_sources) before ranker comparison. If below 0.8, block this release gate; preserve labels and thresholds. Never cap gold sources to make a target pass.",
+  "model_experiment": {
+    "candidate": "AI-02 only",
+    "model": "qwen3:30b",
+    "model_sha256": "ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226",
+    "think": false,
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 8192,
+    "num_predict": 1200,
+    "max_calls": 10,
+    "call_deadline_seconds": 60,
+    "run_deadline_seconds": 600,
+    "retries": 0,
+    "max_passages": 5,
+    "max_selected_spans": 3,
+    "max_response_bytes": 1048576
+  },
+  "ai01": {
+    "model_calls": 0,
+    "database_calls": 0,
+    "test_deadline_seconds": 60,
+    "max_fixture_bytes": 2097152,
+    "test_network_calls": 0
+  },
+  "scope": {
+    "question_max_chars": 500,
+    "free_text_live_enabled": false,
+    "score_bands_enabled": false,
+    "input_schema": "query/1.0.0"
+  },
+  "intents": [
+    {
+      "family": "appearance",
+      "needs": [
+        "N1.1",
+        "N1.2",
+        "N1.3",
+        "N1.4",
+        "N1.5"
+      ],
+      "intent": "General factors affecting visibility and delineation on CT"
+    },
+    {
+      "family": "measurement",
+      "needs": [
+        "N2.1",
+        "N2.2",
+        "N2.3",
+        "N2.4"
+      ],
+      "intent": "Study-specific measurement conventions, disagreement and contour review"
+    },
+    {
+      "family": "anatomy",
+      "needs": [
+        "N3.1",
+        "N3.2",
+        "N3.3",
+        "N3.4"
+      ],
+      "intent": "Anatomical context and protocol definitions for outlining"
+    },
+    {
+      "family": "ai_limits",
+      "needs": [
+        "N4.1",
+        "N4.2",
+        "N4.3",
+        "N4.4",
+        "N4.5",
+        "N4.6"
+      ],
+      "intent": "Detection/segmentation errors, uncertainty and evaluation limits"
+    },
+    {
+      "family": "review",
+      "needs": [
+        "N5.1",
+        "N5.2",
+        "N5.3",
+        "N5.4",
+        "N5.5",
+        "N5.6"
+      ],
+      "intent": "Human verification, automation bias, annotation provenance and uncertainty"
+    }
+  ],
+  "intent_provenance": "Codex operational grouping of September 28 frozen information needs. Existing needs remain unchanged; these are exposed development planning intents, not held-out questions.",
+  "held_out": "Quinton-owned protected authoring and evaluation; no held-out text/labels in Git or agent context",
+  "metric_scope": "Official source/passage recall and MRR preserved. Aspect coverage remains development diagnostic; no D-085 amendment."
+}

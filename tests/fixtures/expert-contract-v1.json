@@ -1,0 +1,623 @@
+{
+  "schema_version": "prowl-expert-contract-fixtures-v1",
+  "origin": "Entirely invented by Codex for AI-01; PMID123 is an artificial fixture ID, not a source lookup. No patient, real literature or held-out content.",
+  "queries": {
+    "accepted": {
+      "schema_version": "1.0.0",
+      "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+      "finding": {
+        "modality": "CT",
+        "anatomy": "pancreas",
+        "task": "measurement",
+        "finding_state": "candidate",
+        "size_bin": "10_to_20mm"
+      },
+      "question_original": "What measurement and limitations did invented study A report?",
+      "question_normalized": "What measurement and limitations did invented study A report?",
+      "normalization_version": "prowl-qnorm-v1",
+      "scope_policy_version": "prowl-scope-kw-v1",
+      "state": "accepted",
+      "refusal_codes": []
+    },
+    "refused": {
+      "schema_version": "1.0.0",
+      "query_id": "qry:ac807aecbfe80f4e9e8afe54d500ea4b18876f8066d8a72e5cd2b4dcac4fe829",
+      "finding": {
+        "modality": "CT",
+        "anatomy": "pancreas",
+        "task": "measurement",
+        "finding_state": "candidate",
+        "size_bin": "10_to_20mm"
+      },
+      "question_original": "Is this contour correct?",
+      "question_normalized": "Is this contour correct?",
+      "normalization_version": "prowl-qnorm-v1",
+      "scope_policy_version": "prowl-scope-kw-v1",
+      "state": "refused",
+      "refusal_codes": [
+        "RF9_contour_certification"
+      ]
+    },
+    "partial": {
+      "schema_version": "1.0.0",
+      "query_id": "qry:bffba8d863c6ce06b5f6db48f2e2f4d575a7a66a00f78b0e1b42db2ea5aa7561",
+      "finding": {
+        "modality": "CT",
+        "anatomy": "pancreas",
+        "task": "measurement",
+        "finding_state": "candidate",
+        "size_bin": "10_to_20mm"
+      },
+      "question_original": "What measurement and reader agreement did invented study A report?",
+      "question_normalized": "What measurement and reader agreement did invented study A report?",
+      "normalization_version": "prowl-qnorm-v1",
+      "scope_policy_version": "prowl-scope-kw-v1",
+      "state": "accepted",
+      "refusal_codes": []
+    }
+  },
+  "passages": [
+    {
+      "record": {
+        "passage": {
+          "schema_version": "1.0.0",
+          "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+          "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+          "representation_sha256": "26cfbcabb9ffe438cb384d047c95548809b4f5678d31e9e7961f74b06c47067e",
+          "work_id": "work:pmid:123",
+          "section_id": "body-0",
+          "start": 0,
+          "end": 110,
+          "text_sha256": "38356bd2bb70961c339af3a81058de639db9dc7f3fb4cb356df08b081cf6860e",
+          "chunking": {
+            "version": "prowl-chunk-v1",
+            "max_chars": 600,
+            "overlap_sentences": 1
+          },
+          "ordinal": 0,
+          "oversized": false
+        },
+        "text": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom.",
+        "citation": {
+          "pmid": "123",
+          "pmcid": "PMC123",
+          "doi": null,
+          "title": "Invented contract fixture, not clinical evidence",
+          "authors": [
+            "Fixture, Author"
+          ],
+          "year": "",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC123/",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "attribution": "Invented by PROWL",
+          "notice_scope": "retained_source_snapshot_only"
+        },
+        "revision_id": "rev:08d731fa7d89b8ca72c856e4ee781c83452ca63e6ba7faa577832a140f3652f0",
+        "source_sha256": "4d716f43c68aa39db312a31ce10c2f7bb23463d669a6e6d0fd9221615556fee0",
+        "rights": {
+          "schema_version": "1.0.0",
+          "rights_id": "rights:c420eefce13d754f3ff0be35bf1bb297f3608d39dfc924d6146603cd6f60c5a3",
+          "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+          "policy_version": "jats-cc-by-4.0-v1",
+          "decision": "allowed",
+          "permissions": {
+            "retain_metadata": true,
+            "local_text_store": true,
+            "local_embedding": true,
+            "display_snippet": true,
+            "redistribute": false
+          },
+          "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only."
+        }
+      }
+    },
+    {
+      "record": {
+        "passage": {
+          "schema_version": "1.0.0",
+          "passage_id": "psg:129075e757e91b58d3e5cd52af27ad44f9f98e919b11cbf01ffa08b588d3a6cb",
+          "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+          "representation_sha256": "26cfbcabb9ffe438cb384d047c95548809b4f5678d31e9e7961f74b06c47067e",
+          "work_id": "work:pmid:123",
+          "section_id": "body-1",
+          "start": 112,
+          "end": 228,
+          "text_sha256": "9690cee69360d16182fe339f4f0224f4e418a48b75b62a01d66db160731c1858",
+          "chunking": {
+            "version": "prowl-chunk-v1",
+            "max_chars": 600,
+            "overlap_sentences": 1
+          },
+          "ordinal": 1,
+          "oversized": false
+        },
+        "text": "Invented study B used MRI and reported a 23 mm test measurement. Its result was limited to another invented phantom.",
+        "citation": {
+          "pmid": "123",
+          "pmcid": "PMC123",
+          "doi": null,
+          "title": "Invented contract fixture, not clinical evidence",
+          "authors": [
+            "Fixture, Author"
+          ],
+          "year": "",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC123/",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/",
+          "attribution": "Invented by PROWL",
+          "notice_scope": "retained_source_snapshot_only"
+        },
+        "revision_id": "rev:08d731fa7d89b8ca72c856e4ee781c83452ca63e6ba7faa577832a140f3652f0",
+        "source_sha256": "4d716f43c68aa39db312a31ce10c2f7bb23463d669a6e6d0fd9221615556fee0",
+        "rights": {
+          "schema_version": "1.0.0",
+          "rights_id": "rights:c420eefce13d754f3ff0be35bf1bb297f3608d39dfc924d6146603cd6f60c5a3",
+          "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+          "policy_version": "jats-cc-by-4.0-v1",
+          "decision": "allowed",
+          "permissions": {
+            "retain_metadata": true,
+            "local_text_store": true,
+            "local_embedding": true,
+            "display_snippet": true,
+            "redistribute": false
+          },
+          "reason": "Explicit CC BY 4.0 in retained JATS snapshot; attribution retained; local use only."
+        }
+      }
+    }
+  ],
+  "request_id": "00000000-0000-4000-8000-000000000001",
+  "identities": {
+    "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+    "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+    "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+    "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+  },
+  "examples": [
+    {
+      "id": "answered",
+      "query": "accepted",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "answered",
+        "mode": "summary",
+        "reason_codes": [
+          "supported"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Invented study A reported a 17 mm test measurement limited to a phantom.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 0,
+            "end": 110,
+            "quote": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom."
+          }
+        ],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "ffb7de178acb7cfb0a01375a89991f4adc1cea9c9f099378208f7ee0c96003b7"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "invented illustration only; not a measured model outcome"
+    },
+    {
+      "id": "partially_answered",
+      "query": "partial",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:bffba8d863c6ce06b5f6db48f2e2f4d575a7a66a00f78b0e1b42db2ea5aa7561",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "partially_answered",
+        "mode": "summary",
+        "reason_codes": [
+          "missing_concepts"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Invented study A reported a 17 mm test measurement limited to a phantom.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 0,
+            "end": 110,
+            "quote": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom."
+          }
+        ],
+        "gaps": [
+          "Reader disagreement was not supplied."
+        ],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "dcfd3a1e26b0b658589f779bf1354e122d1ee32fbe5649379a78cf5e81ac6df8"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "invented illustration only; not a measured model outcome"
+    },
+    {
+      "id": "evidence_only",
+      "query": "accepted",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "evidence_only",
+        "mode": "excerpts",
+        "reason_codes": [
+          "selected_evidence"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 0,
+            "end": 110,
+            "quote": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom."
+          }
+        ],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "f933f3126f1b65f7ca09e2a508565c94b5479dbca70958af213da71688f99135"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "invented illustration only; not a measured model outcome"
+    },
+    {
+      "id": "insufficient_evidence",
+      "query": "accepted",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "insufficient_evidence",
+        "mode": "none",
+        "reason_codes": [
+          "no_direct_support"
+        ],
+        "claims": [],
+        "citations": [],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "6bc5a7a5e2055de2ea94cfd0adefe6976d39dcd9d28ea165a2d425e6fa201950"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "State-shape illustration only. No semantic acceptance claimed: supporting absence/conflict judgment must come from the rubric; these shared passages do not prove this state."
+    },
+    {
+      "id": "out_of_scope",
+      "query": "refused",
+      "passages": "empty",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:ac807aecbfe80f4e9e8afe54d500ea4b18876f8066d8a72e5cd2b4dcac4fe829",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "status": "out_of_scope",
+        "mode": "none",
+        "reason_codes": [
+          "query_refused"
+        ],
+        "claims": [],
+        "citations": [],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "605cf64ad5d3192cecf1252e6c1919b15c9567b5ba871ca5be2524ea5daf5e0f"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "invented illustration only; not a measured model outcome"
+    },
+    {
+      "id": "conflicting_evidence",
+      "query": "accepted",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "conflicting_evidence",
+        "mode": "none",
+        "reason_codes": [
+          "conflict_unresolved"
+        ],
+        "claims": [],
+        "citations": [],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "72a2f769938de50b1f3f117107d4b621da51d6816c88bb9b6e587b55a4648da6"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "State-shape illustration only. No semantic acceptance claimed: supporting absence/conflict judgment must come from the rubric; these shared passages do not prove this state."
+    },
+    {
+      "id": "unavailable",
+      "query": "accepted",
+      "passages": "supplied",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "unavailable",
+        "mode": "none",
+        "reason_codes": [
+          "service_unavailable"
+        ],
+        "claims": [],
+        "citations": [],
+        "gaps": [],
+        "generation": {
+          "state": "unavailable",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "33cf8ac01b848129665b3e1ec536a3f8477639fbc4eef66d90dede5fa2c0c28b"
+      },
+      "structural_accept": true,
+      "semantic_disposition": "invented illustration only; not a measured model outcome"
+    }
+  ],
+  "semantic_rejections": [
+    {
+      "id": "wrong_study",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "answered",
+        "mode": "summary",
+        "reason_codes": [
+          "supported"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Invented study B reported a 23 mm test measurement limited to another phantom.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:129075e757e91b58d3e5cd52af27ad44f9f98e919b11cbf01ffa08b588d3a6cb",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 112,
+            "end": 228,
+            "quote": "Invented study B used MRI and reported a 23 mm test measurement. Its result was limited to another invented phantom."
+          }
+        ],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "9a30eedb1b3df9d33cba6ef898e6ccc7c0c059d7414bf567b17bc07d1f8a11f7"
+      },
+      "structural_accept": true,
+      "semantic_accept": false,
+      "review_reason": "Question asks study A; study B is a different study even within the same article."
+    },
+    {
+      "id": "wrong_units",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "answered",
+        "mode": "summary",
+        "reason_codes": [
+          "supported"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Invented study A reported a 17 cm test measurement limited to a phantom.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 0,
+            "end": 110,
+            "quote": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom."
+          }
+        ],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "16eff48ebca9fba1ccedfc0c26a11b369161ccfedac3a78901e7b638239e1e22"
+      },
+      "structural_accept": true,
+      "semantic_accept": false,
+      "review_reason": "Citation says mm, not cm."
+    },
+    {
+      "id": "omitted_qualifier",
+      "response": {
+        "schema_version": "prowl-expert-response-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "query_id": "qry:1460eecdf894075b292bd5f66cb7638e23b9aee6769aa8722ac68642e3b967ac",
+        "identities": {
+          "corpus_sha256": "79d545aa124bb74d58dd4f27f8359080f413c48e41a74a48726d9dfb3a348ac6",
+          "index_sha256": "5c87f6253d734dd3ff7d6cd80962dda81c6d80e9e39ab23ef829b623a55b5ece",
+          "retriever_sha256": "67bf6cf3583235c8a1fc8a467e9917b7ec3a430d64609d8e51e7b0eadd8b873a",
+          "response_policy_sha256": "6dddac1fbd3a0d0bf2da81b11fd16f26ac12cc0a59bf732f8a188ca133f16dfd"
+        },
+        "retrieval_sha256": "53b84b274f3de2b3163b70bf10cc17d7dd6512b2a0e10f64719dac9f47de76cd",
+        "status": "answered",
+        "mode": "summary",
+        "reason_codes": [
+          "supported"
+        ],
+        "claims": [
+          {
+            "claim_id": "claim-1",
+            "text": "Study A establishes a 17 mm measurement for every clinical case.",
+            "support_type": "qualified",
+            "citation_ids": [
+              "citation-1"
+            ]
+          }
+        ],
+        "citations": [
+          {
+            "citation_id": "citation-1",
+            "passage_id": "psg:22ff45d03172be7385c9a8abbfc42365b3368ca395d8fc17834ee67aed9401d4",
+            "work_id": "work:pmid:123",
+            "representation_id": "repr:45296e2b02a02ae5094807c9926c742fff27bdc4465310dc799d3232f1f3788b",
+            "start": 0,
+            "end": 110,
+            "quote": "Invented study A used CT and reported a 17 mm test measurement. Its result was limited to an invented phantom."
+          }
+        ],
+        "gaps": [],
+        "generation": {
+          "state": "not_called",
+          "model": null
+        },
+        "policy_notice_id": "research-review-only-v1",
+        "content_sha256": "eb76a476c278e1c5339559603d944a26fdf412395a52f06969f4046d190f77a4"
+      },
+      "structural_accept": true,
+      "semantic_accept": false,
+      "review_reason": "Invented phantom result cannot establish a universal clinical conclusion."
+    }
+  ]
+}

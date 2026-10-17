@@ -1,0 +1,268 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "query_id",
+    "identities",
+    "retrieval_sha256",
+    "status",
+    "mode",
+    "reason_codes",
+    "claims",
+    "citations",
+    "gaps",
+    "generation",
+    "policy_notice_id",
+    "content_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "prowl-expert-response-v1"
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "query_id": {
+      "type": "string",
+      "pattern": "^qry:[0-9a-f]{64}$"
+    },
+    "identities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpus_sha256",
+        "index_sha256",
+        "retriever_sha256",
+        "response_policy_sha256"
+      ],
+      "properties": {
+        "corpus_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "index_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "retriever_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "response_policy_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "retrieval_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {
+      "enum": [
+        "evidence_only",
+        "answered",
+        "partially_answered",
+        "insufficient_evidence",
+        "out_of_scope",
+        "conflicting_evidence",
+        "unavailable"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "excerpts",
+        "summary",
+        "none"
+      ]
+    },
+    "reason_codes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "selected_evidence",
+          "supported",
+          "missing_concepts",
+          "no_direct_support",
+          "query_refused",
+          "conflict_unresolved",
+          "service_unavailable",
+          "invalid_generation",
+          "timeout",
+          "identity_mismatch"
+        ]
+      }
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_id",
+          "text",
+          "support_type",
+          "citation_ids"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1600
+          },
+          "support_type": {
+            "enum": [
+              "direct",
+              "qualified",
+              "conflicting"
+            ]
+          },
+          "citation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "uniqueItems": true
+          }
+        }
+      },
+      "maxItems": 3
+    },
+    "citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "citation_id",
+          "passage_id",
+          "work_id",
+          "representation_id",
+          "start",
+          "end",
+          "quote"
+        ],
+        "properties": {
+          "citation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "passage_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "work_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "representation_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "quote": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1600
+          }
+        }
+      },
+      "maxItems": 9
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "generation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "model"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "valid",
+            "not_called",
+            "rejected",
+            "unavailable"
+          ]
+        },
+        "model": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "model_sha256",
+                "prompt_sha256"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "model_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                },
+                "prompt_sha256": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{64}$"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "policy_notice_id": {
+      "const": "research-review-only-v1"
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/schemas/retrieval/expert-response/1",
+  "title": "AI-01 opt-in evidence response contract; structural validation is not semantic acceptance"
+}

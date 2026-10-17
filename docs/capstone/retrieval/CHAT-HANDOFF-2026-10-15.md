@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 AI-01 complete — contracts and acceptance frozen:**
+[Contract v1](AI-EXPERT-CONTRACT-V1.md) maps existing guided/query/response/workflow versions,
+adds opt-in response schema and cross-record validator, seven invented state examples and three
+semantic counterexamples.83focused offline checks pass (42new/41existing query); exact identity,
+source/rights/offset/model/prompt checks do not certify relevance or entailment. Existing guided
+live input stays closed; fixture regex is not unrestricted free-text safety. Proposed numerical
+targets adopted unchanged with explicit pre-evaluation recall-feasibility check; all25need mappings
+retained. Specv1.1 marks only Step1 complete. **Next AI-02:** one choice/null per supplied passage,
+code-derived status; frozen shape/budget in contract. No selector implementation/model comparison
+or live integration performed here. No service changes/full selector/training/hours credit.
+
 **October17 completion specification and Trello sequence documented:**
 [Completion spec v1.0](AI-EXPERT-COMPLETION-SPEC.md) is the current execution plan: nine ordered
 steps from contracts through quality, literature DAG/rebuild, corpus coverage, protected evaluation,

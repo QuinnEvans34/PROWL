@@ -2,7 +2,8 @@
 
 **Current execution plan (October 17):** [AI expert completion specification](AI-EXPERT-COMPLETION-SPEC.md).
 Nine ordered steps define the remaining feature, acceptance evidence and linked Trello tasks.
-Next: [AI-01 — freeze acceptance and query/response contracts](https://trello.com/c/BkOGKoPY).
+Step 1: [frozen acceptance/query/response mapping](AI-EXPERT-CONTRACT-V1.md), 83 offline checks pass.
+Next: [AI-02 — test the authoritative evidence-choice contract](https://trello.com/c/VnFmSvXO).
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
 for implementation evidence and dated service observations.

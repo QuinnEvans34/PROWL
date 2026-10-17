@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.0 — October 17, 2026\
+**Version:** 1.1 — October 17, 2026 (AI-01 contract checkpoint)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Completion plan documented; steps below remain open. Step 1 is next.\
+**State:** Step 1 complete for contract/fixture scope; Step 2 is next. Feature quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 ## 1. Outcome and authority
@@ -85,13 +85,14 @@ as correct or safe and never produces patient-specific diagnosis, staging, progn
 - Publish the complete per-question results, denominators and limitations in the permitted form.
   Small, single-reviewer evaluation is not clinical validation or evidence of generalization.
 
-### Quality targets to freeze in Step 1
+### Quality targets frozen in Step 1
 
-These are **new engineering targets proposed by this completion spec**, not numerical promises in
-the approved proposal and not achieved results. Step 1 records their metric definitions, feasibility
-against label cardinality, and final pre-evaluation disposition before further broad tuning:
+These are **engineering acceptance targets**, not numerical promises in the approved proposal and
+not achieved results. [AI-01](AI-EXPERT-CONTRACT-V1.md) adopted the original proposed values unchanged
+before broader evaluation and froze definitions, budgets and the feasibility procedure. Label-specific
+recall feasibility remains a Step 5 check; a failure blocks the gate without pruning gold labels.
 
-| Measure | Proposed target | Interpretation |
+| Measure | Frozen target | Interpretation |
 |---|---|---|
 | Current ten-case regression | 7/7 clean complete answers; 14/14 aspects; 3/3 correct abstentions; zero invalid generations | Known, corpus-informed development check only; passing does not authorize live promotion. |
 | Frozen 30-question development and 30-question held-out splits | At least 18/20 clean complete answerable responses in each; 10/10 correct required refusals in each | Partial responses and false abstentions do not count as clean complete answers. Safety conditions above apply even when coverage misses. |
@@ -99,8 +100,9 @@ against label cardinality, and final pre-evaluation disposition before further b
 | Citation support | 100% of displayed claims supported; 100% citation identity/locator validity | Report counts; an empty response cannot earn answerability credit by emitting no claims. |
 
 Report recall@1/3/5/10, MRR, duplicates, source diversity, family breakdown, empty/failure counts,
-latency and rebuild size regardless of pass/fail. Step 1 also freezes timeout/resource budgets using
-the installed local baseline; this specification promises no unmeasured latency. Diagnostic span/
+latency and rebuild size regardless of pass/fail. AI-01 freezes bounded test/next-comparison budgets
+from the retained local configuration; execution still requires fresh admission. This specification
+promises no unmeasured latency. Diagnostic span/
 concept measures do not silently replace official D-085 metrics or approve its proposed amendments.
 Targets cannot be relaxed after observing evaluation results to manufacture a pass.
 
@@ -110,10 +112,10 @@ Work one step at a time. Each step ends with a reviewed artifact, relevant check
 checkpoint and a Trello result. A rejected experiment can complete an investigation task while its
 quality gate remains open. Only advance past it when the next step does not depend on that gate.
 
-| Step | Work / Trello owner | Exit evidence | Initial status |
+| Step | Work / Trello owner | Exit evidence | Current status |
 |---|---|---|---|
-| 1 | Freeze acceptance and query/response contracts — [AI-01](https://trello.com/c/BkOGKoPY) | Versioned schema mapping, synthetic examples, metric/rubric definitions, budgets, failure matrix and test plan | **Ready; next** |
-| 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | One bounded comparison, unchanged ten-case scoring, accept/reject decision and retained evidence | Queued after 1 |
+| 1 | Freeze acceptance and query/response contracts — [AI-01](https://trello.com/c/BkOGKoPY) | [Contract, fixtures and 83-check result](AI-EXPERT-CONTRACT-V1.md) | **Complete — contract scope** |
+| 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | One bounded comparison, unchanged ten-case scoring, accept/reject decision and retained evidence | **Ready; next** |
 | 3 | Close literature DAG and rebuild behavior — [W04-01](https://trello.com/c/Z9QSh78P) | Versioned stages, invalidation/rebuild/recovery evidence and literature-only completion boundary | Queued after 2 disposition |
 | 4 | Fill corpus coverage gaps and freeze the index — [W02-07](https://trello.com/c/fGxysGgy), [W05-02](https://trello.com/c/OqxGSjju) | Coverage matrix, rights/exclusions, search cutoff, corpus/index manifests and reproducible build | Queued after 3 |
 | 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | Queued after 4 |
@@ -237,7 +239,7 @@ integration/evaluation/documentation. Week 9 is stabilization; Week 10 is delive
 planning targets, not new runtime or completion guarantees. Beginning early is useful; feature
 completion is measured by evidence, not by the calendar or number of passing engineering tests.
 
-Only one implementation task is active in this lane. Step 1 is queued first; other new tasks stay
+Only one implementation task is active in this lane. Step 1 is complete; Step 2 is queued next; other new tasks stay
 in Backlog. The full-selector card is parked in Backlog, and W02-08 retains the existing prototype
 history pending its scoped closeout. Existing milestone cards remain the roll-up records; new AI
 cards are execution subtasks, not replacement project milestones. Broader-card dates stay unchanged.
@@ -250,7 +252,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Checkpoint | State | Evidence / next action |
 |---|---|---|
 | Completion specification v1.0 | Documented October 17 | This spec; Trello links in execution table. No implementation or model run performed by this planning checkpoint. |
-| Steps 1–9 | Open | Start Step 1. Later rows are updated as each step produces evidence. |
+| Step 1 / AI-01 | Complete October 17 — contract scope | [Frozen mapping/schema/fixtures/rubric](AI-EXPERT-CONTRACT-V1.md); 83 offline checks pass; live services unchanged. |
+| Steps 2–9 | Open | Start Step 2. Later rows are updated as each step produces evidence. |
 
 Excluded from this completion plan: training/fine-tuning, autonomous clinical decisions, broad report
 drafting, raw patient-data retrieval, an unrestricted chatbot, automatic full-selector continuation,

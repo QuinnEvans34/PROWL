@@ -10,7 +10,8 @@
 
 **October 17 AI follow-on sequencing update:** the
 [AI expert completion specification](../retrieval/AI-EXPERT-COMPLETION-SPEC.md) now governs the
-remaining literature feature work, starting with AI-01 contracts/acceptance. A bounded two-review
+remaining literature feature work. AI-01 contracts/acceptance are complete for the offline contract
+scope (83 checks); AI-02 authoritative evidence selection is next. A bounded two-review
 pgvector demo and recoverable research workflow have been delivered; quality and final integration
 remain open. W02-06 full selection is parked, so the historical full-selection-first sequence below
 is not the current execution instruction. W02-07/W05-02 can cover an explicitly bounded permitted
