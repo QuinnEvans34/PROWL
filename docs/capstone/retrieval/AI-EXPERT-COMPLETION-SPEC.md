@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.4 — October 17, 2026 (bounded corpus freeze)\
+**Version:** 1.5 — October 17, 2026 (evaluation draft preparation)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; Step 5 evaluation authoring is next. Response quality remains open.\
+**State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 ## 1. Outcome and authority
@@ -121,7 +121,7 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | [One comparison and rejection evidence](CHOICE-SELECTION-2026-10-17.md): 4/7 clean, 10/14 aspects, 2/3 correct abstentions, one invalid generation | **Complete — investigation; quality failed** |
 | 3 | Close literature DAG and rebuild behavior — [W04-01](https://trello.com/c/Z9QSh78P) | [Inventory, invalidation, recovery and exact rebuild evidence](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md) | **Complete — bounded literature scope; broader G3 open** |
 | 4 | Fill corpus coverage gaps and freeze the index — [W02-07](https://trello.com/c/fGxysGgy), [W05-02](https://trello.com/c/OqxGSjju) | [Seven-source freeze and coverage limits](CORPUS-FREEZE-2026-10-17.md); 693 passages, exact rebuild | **Complete — bounded candidate; 4 coverage gaps retained** |
-| 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | **Ready; next — human held-out authoring dependency** |
+| 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | **In progress — development draft/template delivered; human gates pending** |
 | 6 | Measure and select retrieval — [W06-02](https://trello.com/c/zDFlThwi) | Development lexical/dense/hybrid comparison and frozen selection with D-202 disposition | Queued after 5 |
 | 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Queued after 6 |
 | 8 | Connect finding → question → evidence in the viewer — [W07-01](https://trello.com/c/IM0zPvP9) | Browser-tested finding/context/citation flow and all failure states | Queued after 7 disposition |
@@ -243,7 +243,7 @@ planning targets, not new runtime or completion guarantees. Beginning early is u
 completion is measured by evidence, not by the calendar or number of passing engineering tests.
 
 Only one implementation task is active in this lane. Steps 1–2 are complete in their stated scopes;
-Steps 3–4 are complete for the bounded literature adapter and seven-source corpus; Step 5 is next. Other new tasks stay
+Steps 3–4 are complete for the bounded literature adapter and seven-source corpus; Step 5 preparation is delivered and awaits human adjudication/protected authoring. Other new tasks stay
 in Backlog. The full-selector card is parked in Backlog, and W02-08 retains the existing prototype
 history pending its scoped closeout. Existing milestone cards remain the roll-up records; new AI
 cards are execution subtasks, not replacement project milestones. Broader-card dates stay unchanged.
@@ -260,7 +260,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
-| Steps 5–9 | Open | Start AI-03 evaluation authoring/template and labels; Quinton owns protected held-out content. Response quality gate remains open for Step 7. |
+| Step 5 / AI-03 | In progress — human gates pending | [30 development drafts and protected-authoring worksheet](DEVELOPMENT-SET-REVIEW-2026-10-17.md); 58 spans, 31 checks, explicit tuning refusal. No protected content created/read and no final split freeze. |
+| Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 
 Excluded from this completion plan: training/fine-tuning, autonomous clinical decisions, broad report
 drafting, raw patient-data retrieval, an unrestricted chatbot, automatic full-selector continuation,

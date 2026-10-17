@@ -1,5 +1,24 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 Step 5 / AI-03 preparation delivered; HUMAN GATES PENDING:** Read
+> `DEVELOPMENT-SET-REVIEW-2026-10-17.md` and `PROTECTED-EVALUATION-AUTHORING.md`.
+> `configs/evidence/evaluation/development-v2-draft.json` contains 30 exposed drafts: 20 answerable,
+> 8 policy refusals / 2 corpus gaps; 58 spans (47 direct / 6 partial / 5 limiting), all direct spans
+> fully contained in frozen passages. Canonical draft hash
+> `e01f456c7f96e8fce39963277b54709653ad705f9c012f9ce824681404cdaf47`.
+> 31 offline checks pass; real draft/corpus hashes validate; `--require-ready` deliberately refuses.
+> Agent first/second passes complete, NOT human adjudication or independent expert agreement.
+> Human review packet: `outputs/prowl/evaluation-authoring-20261017/development-review.html`;
+> raw excerpts/initial draft/failed and passed test receipts remain ignored locally.
+> **Next: Quinton reviews development concepts/labels with a second consistency pass, independently
+> authors protected 30 cases and supplies only hashes/counts/attestations after actual storage/backup
+> checks.** Blank held-out receipt says not_created; no private image/backup/question/label exists
+> from this task. Never request protected questions/labels/paths/credentials in chat. No Step 6 tuning
+> before complete split freeze. Existing ten-case regression and seven-source corpus unchanged;
+> no DB/model/service/training/full-selector calls or inferred hours. AI-03 stays In Progress.
+> Earlier next-step statements below remain historical.
+
+
 > **October 17 Step 4 / bounded corpus freeze COMPLETE:** Read
 > `CORPUS-FREEZE-2026-10-17.md` and completion-spec v1.4. Separate `research-coverage-v1`
 > has 7 CC BY 4.0 sources / 693 passages / 23 batches, SHA
