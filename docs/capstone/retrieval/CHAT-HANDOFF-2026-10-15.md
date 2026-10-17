@@ -1,5 +1,12 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 Q2–5 accepted:** Quinton replied "Great, accept. Lets continue on." to the named
+> Q2–5 wording/answer/evidence review. Two events append those four cases to Q1's earlier acceptance.
+> Five accepted/25 pending at each first-pass stage; all 30 still await the second consistency pass.
+> Exact draft/answers/labels unchanged. Current local packet and status receipt:
+> `outputs/prowl/development-review-q01-q05-20261017/`. Next human batch Q6–10.
+> Prior events and packet snapshots preserved; no tuning/model/DB/private-store/training work.
+
 > **October 17 combined review pages delivered:** Removed the need to cross-reference three files
 > during human source review. Fixed-v4 renderer produces 30 local Markdown pages combining question,
 > expected answer, required concepts, exact evidence and all source judgments. Use
