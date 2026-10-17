@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.8 — October 17, 2026 (required measurement-aware extension)\
+**Version:** 1.9 — October 17, 2026 (plain-language development revision)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -24,7 +24,7 @@ is required in the final deliverable, after accepted core RAG Steps 1–9. Steps
 measurements, cited reference comparisons, explanations and reviewed training feedback. This dated
 amendment does not rewrite the approved proposal files or imply institutional approval of new scope.
 
-The [frozen information needs](planning/INFORMATION-NEEDS.md),
+The [information needs v2 amendment](planning/INFORMATION-NEEDS-V2.md), incorporating unchanged frozen v1,
 [query contract](QUERY-AND-RETRIEVAL.md), and
 [question/evaluation protocol](QUESTION-SET-AND-EVALUATION.md) remain binding.
 Changes to a frozen contract create a new version and a recorded reason.
@@ -281,7 +281,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
-| Step 5 / AI-03 | In progress — human gates pending | [All-30 follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md); revised v3 draft, four corrected labels, 60 spans; actual offline validation passes. Prior 31 checks retained. First-five relevance feedback recorded separately. No protected content created/read and no final split freeze. |
+| Step 5 / AI-03 | In progress — human gates pending | [Plain-language revision](PLAIN-LANGUAGE-REVIEW-2026-10-17.md); v4 revises ten questions, 70 spans and needs-v2 binding; 42 focused checks and actual v3/v4 validation pass. Topic feedback is separate from final label adjudication. No protected content created/read and no final split freeze. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 

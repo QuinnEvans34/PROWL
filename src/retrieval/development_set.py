@@ -28,14 +28,26 @@ def verify_hash(record):
         raise ValueError('Draft content hash mismatch')
 
 
-def validate_draft(suite, manifest, bundles, batches, *, manifest_sha256, regression_sha256):
-    schema = json.loads((CONTRACTS / 'development-draft-v1.schema.json').read_text())
+def validate_draft(suite, manifest, bundles, batches, *, manifest_sha256, regression_sha256,
+                   information_needs_sha256=None, information_needs_base_sha256=None):
+    schemas = {'prowl-development-draft-v1': 'development-draft-v1.schema.json',
+               'prowl-development-draft-v2': 'development-draft-v2.schema.json'}
+    version = suite.get('schema_version') if isinstance(suite, dict) else None
+    if not isinstance(version, str) or version not in schemas:
+        raise ValueError('Unsupported development draft schema')
+    schema = json.loads((CONTRACTS / schemas[version]).read_text())
     try:
         Draft202012Validator(schema).validate(suite)
     except ValidationError:
         # Do not echo rejected fields or question text in routine error output.
         raise ValueError('Draft schema violation') from None
     verify_hash(suite)
+    if version == 'prowl-development-draft-v2' and (
+            information_needs_sha256 is None
+            or suite['information_needs_sha256'] != information_needs_sha256
+            or information_needs_base_sha256 is None
+            or suite['information_needs_base_sha256'] != information_needs_base_sha256):
+        raise ValueError('Draft information-needs binding mismatch')
     if (suite['corpus_manifest_sha256'] != manifest_sha256
             or suite['baseline_regression_sha256'] != regression_sha256
             or suite['corpus_content_sha256'] != manifest['inventory']['content_sha256']):
@@ -154,10 +166,14 @@ def main():
         [checked_json(s['bundle'], root) for s in manifest['sources']],
         [checked_json(b, root) for b in manifest['batches']],
         manifest_sha256=sha256_hex(path.read_bytes()),
-        regression_sha256=sha256_hex((root/'configs/evidence/evaluation/development-v1.json').read_bytes()))
+        regression_sha256=sha256_hex((root/'configs/evidence/evaluation/development-v1.json').read_bytes()),
+        information_needs_sha256=(sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md').read_bytes())
+            if suite.get('schema_version') == 'prowl-development-draft-v2' else None),
+        information_needs_base_sha256=(sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS.md').read_bytes())
+            if suite.get('schema_version') == 'prowl-development-draft-v2' else None))
     print(json.dumps(result, indent=2))
     if args.require_ready:
-        # This v1 reader accepts development DRAFTS only. No self-attested promotion switch.
+        # Both schemas accept development DRAFTS only. No self-attested promotion switch.
         raise SystemExit('Draft is not released for tuning; complete the documented human/protected gates.')
 
 

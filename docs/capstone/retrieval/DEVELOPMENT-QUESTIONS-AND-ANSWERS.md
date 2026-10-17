@@ -2,21 +2,21 @@
 
 October 17, 2026 · Review draft
 
-These are the answers we expect the AI expert to support with evidence. They are **review examples, not outputs from a tested model**, and their wording is not an exact-match grading requirement. The four evidence corrections from our review are included.
+These are the answers we expect the AI expert to support with evidence. They are **review examples, not outputs from a tested model**, and their wording is not an exact-match grading requirement. The previous evidence corrections and ten plain-language question revisions are included.
 
 Read five questions at a time. For each, check that the question is useful, the expected answer is supported by its source, and its limitations are clear. Reply with **accept**, **revise**, or **unsure**, plus the question number and any concern. For example: “6 — accept; 7 — unsure about the exclusion rule.”
 
-You have given favorable relevance feedback on 1–5. **Start with 6–10 next.** Final source-label review remains pending. Questions 21–28 should receive a scope refusal; 29–30 should acknowledge missing evidence.
+You have given favorable topic feedback on the earlier set. **Review revised questions 1, 3, 5, 7, 9, 10, 12, 16, 17 and 19 next.** Question 10 now asks about pancreas length; question 1 has broader source support. Final source-label review remains pending. Questions 21–28 should receive a scope refusal; 29–30 should acknowledge missing evidence.
 
 ## Questions 1–5
 
-### 1. How did the isoattenuating pancreatic carcinoma study define the density difference on its two contrast phases?
+### 1. Why can a pancreatic tumor blend in with the surrounding tissue on a CT scan?
 
 **Expected answer**
 
-The study defined isoattenuation as a density difference of **less than 15 HU** between the suspected tumor region and adjacent pancreatic tissue in **both the pancreatic and portal venous phases**. This describes the study’s definition; it does not classify a current lesion.
+Some pancreatic tumors look similar to nearby tissue on CT, so their edges have **little contrast** and can be difficult to distinguish. The retained studies and reviews describe this imaging difficulty; it does not establish what a particular finding is or where its exact boundary lies.
 
-**Source:** [Isoattenuating pancreatic carcinoma study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8145900/).
+**Sources:** [Isoattenuating pancreatic carcinoma study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8145900/), [pancreatic AI review](https://pmc.ncbi.nlm.nih.gov/articles/PMC10177524/), [interobserver radiomics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8357939/), and [quantitative imaging review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8997008/).
 
 ### 2. Which postcontrast phases were acquired in the isoattenuating carcinoma study, and how were they timed relative to each other?
 
@@ -26,11 +26,11 @@ The study acquired **pancreatic parenchymal** and **portal venous** images. The 
 
 **Source:** [Isoattenuating pancreatic carcinoma study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8145900/).
 
-### 3. What cohort-selection limitations should qualify interpretation of the isoattenuating carcinoma study?
+### 3. What limitations were reported in the study of pancreatic tumors that look similar to surrounding tissue on CT?
 
 **Expected answer**
 
-The study was **retrospective, conducted at one center, and based on a small sample**. It included only tumors confirmed by EUS-FNA. Because false-positive EUS-FNA cases were excluded, the study could not estimate EUS-FNA specificity.
+The study looked back at existing data from **one center and a small sample**. It included only tumors confirmed by **endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA), a tissue-sampling procedure**. Because false-positive EUS-FNA cases were excluded, the study could not estimate how well that procedure correctly ruled out cancer in people without it (specificity).
 
 **Source:** [Isoattenuating pancreatic carcinoma study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8145900/).
 
@@ -42,11 +42,11 @@ The study used specific acquisition, reconstruction, and display settings, so it
 
 **Source:** [Interobserver pancreatic radiomics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8357939/). Background: [quantitative imaging review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8997008/); it does not replace the primary study’s specific evidence.
 
-### 5. In the interdisciplinary CT contouring study, how did mean tumor volumes differ between radiology and radiation oncology observers?
+### 5. Can specialists from different fields draw different-sized outlines around the same pancreatic tumor? Give a reported example.
 
 **Expected answer**
 
-Radiologists outlined smaller tumor volumes on average: **35.6 ± 15.0 cm³**, compared with **54.1 ± 15.9 cm³** for radiation oncology observers. This study-specific difference does not establish which contour is correct.
+Yes. In one study, three radiology observers and three radiation oncology observers independently outlined tumors in the **same group of 21 patients**. Radiologists outlined smaller volumes on average: **35.6 ± 15.0 cm³**, compared with **54.1 ± 15.9 cm³** for radiation oncology observers. The difference does not establish which outline is correct.
 
 **Source:** [Interobserver pancreatic radiomics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8357939/). Background: [quantitative imaging review](https://pmc.ncbi.nlm.nih.gov/articles/PMC8997008/); it does not replace the primary study’s specific evidence.
 
@@ -60,7 +60,7 @@ For **agreement between readers**, two radiologists independently segmented 30 r
 
 **Source:** [Multicenter TAGS study](https://pmc.ncbi.nlm.nih.gov/articles/PMC13564768/).
 
-### 7. What is one reported research protocol for handling uncertain pancreatic tumor extent and nearby non-target structures during CT contouring?
+### 7. How did one research study handle uncertain tumor edges and nearby structures when outlining pancreatic tumors on CT?
 
 **Expected answer**
 
@@ -76,7 +76,7 @@ An investigator who was not one of the contouring observers visually inspected a
 
 **Source:** [Interobserver pancreatic radiomics study](https://pmc.ncbi.nlm.nih.gov/articles/PMC8357939/).
 
-### 9. Which neighbouring structure surrounds the pancreatic head in the anatomy description used by the subregion segmentation study?
+### 9. What part of the intestine curves around the head of the pancreas?
 
 **Expected answer**
 
@@ -84,11 +84,11 @@ The pancreatic head lies within the **curve of the duodenum**. This anatomical r
 
 **Source:** [Pancreatic subregion segmentation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9317715/).
 
-### 10. How can anatomical and geometric priors help divide a pancreas into subregions in a reported CT segmentation method?
+### 10. How long is the pancreas?
 
 **Expected answer**
 
-The method used the subregions’ **adjacency arrangement, length proportions, and volume proportions** to help divide the pancreas into subregions. These were assumptions used by that model, not universal clinical boundary rules.
+One source in our collection describes the pancreas as **12–15 cm long**. That is a reported anatomical range, **not a measured population average or a volume estimate**. It cannot tell us whether the pancreas in a particular scan is normal in size.
 
 **Source:** [Pancreatic subregion segmentation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9317715/).
 
@@ -102,11 +102,11 @@ The model assumes that the **whole pancreas is present**. Surgery such as pancre
 
 **Source:** [Pancreatic subregion segmentation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9317715/).
 
-### 12. What preparation of the input limits interpreting the pancreatic subregion model as an autonomous whole-pancreas segmenter?
+### 12. Can an AI that divides the pancreas into parts necessarily find it on its own? Give a research example.
 
 **Expected answer**
 
-The images were **cropped using reference pancreas outlines**, and non-pancreas pixels inside the crop were set to zero. **Whole-pancreas segmentation was outside the study’s scope.** The results therefore do not show how the method performs without that reference localization.
+Not necessarily. In the study that divided the pancreas into parts, researchers first used **reference pancreas outlines to crop the images** and set non-pancreas pixels to zero. Finding and outlining the whole pancreas was outside the study’s scope, so these results do not establish that the method could locate it on its own.
 
 **Source:** [Pancreatic subregion segmentation study](https://pmc.ncbi.nlm.nih.gov/articles/PMC9317715/).
 
@@ -136,15 +136,15 @@ The study used **DSC for volumetric overlap** and **NSD with a 5 mm tolerance fo
 
 ## Questions 16–20
 
-### 16. What did the multicenter TAGS study report about low-overlap cases after fine-tuning, and what prevented it from claiming a measured workflow benefit?
+### 16. Does getting better at outlining pancreatic tumors prove that an AI saves doctors time? Give a research example.
 
 **Expected answer**
 
-The fraction of cases with **DSC below 0.50** was **47.0% for TAGS (Zero-Shot)** and **15.8% for each fine-tuned variant, MSD-TAGS and SAM-TAGS**. The study did not measure interaction time, re-prompting frequency, radiologist workload, or downstream clinical outcomes, so it could not quantify a workflow or clinical benefit.
+No. In one pancreatic tumor study, the share of cases with a low outline-overlap score (**DSC below 0.50**) was **47.0% for TAGS (Zero-Shot)** and **15.8% for each fine-tuned version, MSD-TAGS and SAM-TAGS**. But the researchers did not measure interaction time, repeated prompting, radiologist workload, or downstream clinical outcomes. Better outline scores therefore did not establish a measured time saving or clinical benefit in that study.
 
 **Source:** [Multicenter TAGS study](https://pmc.ncbi.nlm.nih.gov/articles/PMC13564768/).
 
-### 17. Can reviewers agreeing more closely on AI-assisted contours still produce outlines less accurate than fully manual work? Give a reported example and its anatomical scope.
+### 17. Can reviewers agree more after using AI but still draw less accurate outlines? Give an example and say which organ was studied.
 
 **Expected answer**
 
@@ -160,7 +160,7 @@ The **prostate radiotherapy** paper proposed automation bias as one possible exp
 
 **Source:** [Prostate AI-assisted contouring study](https://pmc.ncbi.nlm.nih.gov/articles/PMC12715409/).
 
-### 19. How have annotators resolved disagreements when assigning pancreatic subregion labels in a CT research dataset?
+### 19. How did researchers settle disagreements about which parts of the pancreas their labels belonged to?
 
 **Expected answer**
 
@@ -262,8 +262,8 @@ The frozen corpus does not provide sufficient evidence for a validated pancreati
 
 ## Review record and detailed evidence
 
-Question numbers map directly to development IDs: question 6 is `q:dev2-06`, for example. The wording and order are unchanged from [development draft v3](../../../configs/evidence/evaluation/development-v3-draft.json). These readable answers summarize its required concepts and qualifications.
+Question numbers map directly to development IDs: question 6 is `q:dev2-06`, for example. The wording and order match [development draft v4](../../../configs/evidence/evaluation/development-v4-draft.json); previous v3 is preserved. Ten question records now have version 2. These readable answers summarize its required concepts and qualifications.
 
-The [follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md) records the four corrections. Exact source excerpts and offsets remain in the revised local evidence packet for deeper checks. This reading copy contains paraphrases and source links.
+The [plain-language review](PLAIN-LANGUAGE-REVIEW-2026-10-17.md) records the latest changes, and the [prior follow-up review](DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md) records the earlier four corrections. Exact v4 source excerpts and offsets are in the local Markdown packet `outputs/prowl/plain-language-20261017/source-evidence-v4.md` for deeper checks. This reading copy contains paraphrases and source links.
 
 The protected evaluation questions are a separate private task. Do not put them in this document or this chat.

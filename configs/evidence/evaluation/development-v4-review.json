@@ -1,0 +1,60 @@
+{
+  "state": "plain_language_draft_pending_human_review",
+  "content_sha256": "7db15aa85606247134675681bb077e056045c9beecce6e2960634bbba0f786aa",
+  "parent_content_sha256": "ca4dacfe39a429493d56fdf8f7ed0f928d2ec76657ee199eea0ad5ca7387a83e",
+  "revised_cases": [
+    "q:dev2-01",
+    "q:dev2-03",
+    "q:dev2-05",
+    "q:dev2-07",
+    "q:dev2-09",
+    "q:dev2-10",
+    "q:dev2-12",
+    "q:dev2-16",
+    "q:dev2-17",
+    "q:dev2-19"
+  ],
+  "unchanged_cases": 20,
+  "revisions_per_family": 2,
+  "counts": {
+    "answered": 20,
+    "refused": 8,
+    "insufficient_evidence": 2
+  },
+  "span_counts": {
+    "direct": 49,
+    "partial_context": 16,
+    "contradicting_or_limiting": 5
+  },
+  "first_question_direct_sources": 4,
+  "source_recall_at_5_ceiling": 1.0,
+  "technical_checks_passed": 42,
+  "prior_v3_compatible": true,
+  "ready_for_tuning": false,
+  "human_adjudication": false,
+  "protected_content_read": false,
+  "corpus_changed": false,
+  "model_calls": 0,
+  "database_calls": 0,
+  "pins": {
+    "configs/evidence/evaluation/development-v4-draft.json": "0ffdc97df533acc2c7e766e182be85e7506e940284c7f350e3ebd07a52503c5f",
+    "configs/evidence/evaluation/development-v3-draft.json": "5a44ee05accdaa8dcd676d6105394ffd33284781f310e486dc2df5bb1fbc87a2",
+    "configs/evidence/corpus-coverage-v1.json": "33043b9fb8253aa64c70db84460b32d76921a79517f98de4dfb621d894ef50c6",
+    "docs/capstone/retrieval/planning/INFORMATION-NEEDS.md": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+    "docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md": "ced6979915f1f728d38dc119b8097ae2846f1f078de32b8a1b2878cdb8354d5e",
+    "docs/capstone/contracts/retrieval/development-draft-v1.schema.json": "fa1401800a4550c45157e155551389828f5f331971fe7d7f4297921db4847a51",
+    "docs/capstone/contracts/retrieval/development-draft-v2.schema.json": "a81f340df75fc8a07d4c50972cbdf1123ea95afa6b6b4b9f2ccb27adcbb7c44f",
+    "src/retrieval/development_set.py": "07f04b3398a8c7b6bf2c926858e1f9cdc331cbaf340356780d3af7340061f6d4",
+    "tests/retrieval/test_development_set.py": "2b8f8114592b3b20f559514f2ec8b6adf2953daf6ffb47b44996bef73beaa57d",
+    "outputs/prowl/plain-language-20261017/tests.xml": "50301b6ddcad48590f53761049a6f5a37530dcdd0e955d83507bb68dc0940378",
+    "outputs/prowl/plain-language-20261017/validation-final.json": "492008c57bb76d295568b300d72e81c220d942adb51694f130cebcd6e2c668b9",
+    "outputs/prowl/plain-language-20261017/validation-v3-compatibility.json": "141c6f8ab82afe1e516d7615ac7fe834899a168c118188c64828ba59c73da6e4",
+    "outputs/prowl/plain-language-20261017/tuning-refusal.json": "91351ce1acaaa486e70f6383def1e1ecd98c2fd898bcd6d2dc93656bf2f0eb74",
+    "outputs/prowl/plain-language-20261017/source-evidence-v4.md": "c270094c5763db7d69419f9b6396d7eae75a9cce8fd3de382d0173ff6da8cbd3",
+    "docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md": "060250a39693e41c0eaf4d53736ff56430428259277ac207d42c399ffc8d3c55",
+    "outputs/prowl/plain-language-20261017/tests-base-pin.xml": "d38fcdf410bf1cc454d99517c5ee8a2f5a6791b7234d686f2e698217babd698a",
+    "outputs/prowl/plain-language-20261017/validation-base-pin.json": "2a6be1c3123dc9076bcf4222f358f2dca710d60c184171e982d0a8d37166138c",
+    "outputs/prowl/plain-language-20261017/validation-v3-base-pin.json": "141c6f8ab82afe1e516d7615ac7fe834899a168c118188c64828ba59c73da6e4",
+    "outputs/prowl/plain-language-20261017/tuning-refusal-base-pin.json": "5008ba2b5ed2295603aaf015eb1ad562ee8af57c71915527a4f25fa02c35dbb4"
+  }
+}

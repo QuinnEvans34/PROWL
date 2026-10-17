@@ -122,3 +122,72 @@ def test_question_symlink_escape_and_heldout_name_refused(tmp_path):
         development_path(path,tmp_path)
     with pytest.raises(ValueError,match='repository development'):
         development_path(folder/'heldout.json',tmp_path)
+
+
+def revised_fixture(fixture):
+    s, *rest = deepcopy(fixture)
+    s['schema_version'] = 'prowl-development-draft-v2'
+    s['information_needs_sha256'] = 'c' * 64
+    s['information_needs_base_sha256'] = 'e' * 64
+    s['cases'][0]['version'] = 2
+    s['cases'][0]['question'] = 'Revised invented wording?'
+    seal(s)
+    return s, *rest
+
+
+def test_v2_revision_requires_matching_needs_pin_and_stays_draft(fixture):
+    f = revised_fixture(fixture)
+    r = validate_draft(*f, manifest_sha256='a'*64, regression_sha256='b'*64,
+                       information_needs_sha256='c'*64, information_needs_base_sha256='e'*64)
+    assert r['ready_for_tuning'] is False
+    assert len(r['human_review_pending']) == 30
+    for pin in (None, 'd'*64):
+        with pytest.raises(ValueError, match='information-needs binding mismatch'):
+            validate_draft(*f, manifest_sha256='a'*64, regression_sha256='b'*64,
+                           information_needs_sha256=pin, information_needs_base_sha256='e'*64)
+
+
+@pytest.mark.parametrize('version', [0, -1, True, '2'])
+def test_v2_rejects_invalid_question_versions(fixture, version):
+    s, *rest = revised_fixture(fixture)
+    s['cases'][0]['version'] = version
+    seal(s)
+    with pytest.raises(ValueError, match='Draft schema violation'):
+        validate_draft(s, *rest, manifest_sha256='a'*64, regression_sha256='b'*64,
+                       information_needs_sha256='c'*64, information_needs_base_sha256='e'*64)
+
+
+@pytest.mark.parametrize('change', [
+    lambda s: s.update(status='frozen'),
+    lambda s: s['cases'][0].update(split='held_out'),
+    lambda s: s['cases'][0]['review'].update(human_adjudication='approved'),
+    lambda s: s['cases'][0]['finding'].update(patient_id='invented'),
+])
+def test_v2_does_not_relax_privacy_or_release_guards(fixture, change):
+    s, *rest = revised_fixture(fixture)
+    change(s); seal(s)
+    with pytest.raises(ValueError, match='Draft schema violation'):
+        validate_draft(s, *rest, manifest_sha256='a'*64, regression_sha256='b'*64,
+                       information_needs_sha256='c'*64, information_needs_base_sha256='e'*64)
+
+
+def test_v1_remains_closed_and_unknown_schema_rejected(fixture):
+    s, *rest = deepcopy(fixture)
+    s['cases'][0]['version'] = 2
+    seal(s)
+    with pytest.raises(ValueError, match='Draft schema violation'):
+        check((s, *rest))
+    for version in ('prowl-heldout-v2', '../../private', ['invalid']):
+        s['schema_version'] = version
+        seal(s)
+        with pytest.raises(ValueError, match='Unsupported development draft schema'):
+            check((s, *rest))
+
+
+def test_v2_rejects_changed_or_missing_inherited_needs(fixture):
+    f = revised_fixture(fixture)
+    for pin in (None, 'f'*64):
+        with pytest.raises(ValueError, match='information-needs binding mismatch'):
+            validate_draft(*f, manifest_sha256='a'*64, regression_sha256='b'*64,
+                           information_needs_sha256='c'*64,
+                           information_needs_base_sha256=pin)

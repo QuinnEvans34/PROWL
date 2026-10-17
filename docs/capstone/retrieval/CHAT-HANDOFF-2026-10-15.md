@@ -1,5 +1,18 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 plain-language v4 delivered:** Read `PLAIN-LANGUAGE-REVIEW-2026-10-17.md` and
+> `DEVELOPMENT-QUESTIONS-AND-ANSWERS.md`. Ten question revisions (01/03/05/07/09/10/12/16/17/19),
+> two per family; 20 other records unchanged. V4 retains 20 answerable/8 refusals/2 gaps, 70 spans
+> (49 direct/16 partial/5 limiting). Q01 now four direct sources; Q10 reports length range, not mean.
+> Canonical SHA `7db15aa85606247134675681bb077e056045c9beecce6e2960634bbba0f786aa`.
+> Needs v2 explicitly expands N3.3 basic size context; original needs/corpus/drafts remain unchanged.
+> Closed draft schema v2 binds both needs hashes and question revisions; 42 checks, real v3/v4 validation
+> pass; --require-ready refuses. Local exact-excerpt packet is Markdown under
+> `outputs/prowl/plain-language-20261017/source-evidence-v4.md`. No model/DB/service/training calls.
+> Next: Quinton reviews revised questions/support, completes semantic/consistency review and
+> independently authors/protects held-out set. All prior versions and demo candidates remain exposed.
+> Spec v1.9; AI-03 In Progress. Required AI-05–07 extension still follows accepted core RAG only.
+
 > **October 17 REQUIRED final-deliverable expansion:** Quinton explicitly requires measurement-aware
 > expert capability after proven core RAG. Read `MEASUREMENT-AWARE-EXPERT-PLAN.md`; spec v1.8 now
 > has 12 steps. Core Steps 1–9 must pass first; then AI-05 verified measurements, AI-06 eligible

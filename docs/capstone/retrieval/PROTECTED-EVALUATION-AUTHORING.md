@@ -34,10 +34,12 @@ The four documented gaps are not supported answers waiting to be invented. If in
 cannot produce adequate coverage, stop before tuning and version the corpus/labels through an explicit
 revision. Do not weaken required concepts or mislabel an unsupported question to meet the counts.
 
-Before writing final wording, privately compare intended questions against both exposed sets:
+Before writing final wording, privately compare intended questions against all exposed versions:
 
 - `configs/evidence/evaluation/development-v1.json`: prior ten-case regression and its history.
-- `configs/evidence/evaluation/development-v2-draft.json`: current 30 drafts, including `intent_group`.
+- `configs/evidence/evaluation/development-v4-draft.json`: current 30 drafts, including `intent_group`.
+- Earlier `development-v2-draft.json` and `development-v3-draft.json`, including replaced wording/intents;
+  the prior anatomy-priors question remains exposed. The twelve demo candidates in PLAIN-LANGUAGE-DEMO-PLAN.md are exposed too.
 
 Keep related intents and paraphrases in one split. A shared broad family or paper alone does not
 prove duplication; a different wording or paper name alone does not prove independence. Check the

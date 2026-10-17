@@ -1639,3 +1639,24 @@ No prior key values found in retrieval planning/launch artifacts. After seed fre
 - confirmation_key: `a546e467d00e6c8ad5d5e24b497caf6cbf282810181524bfc4dbf710c3875465`
 
 No development or confirmation sample drawn.
+
+
+## 2026-10-17: Plain-language needs amendment and development v4 (Codex)
+
+Quinton requested everyday demo questions including pancreas size and instructed continuation of
+that documented next step. Created INFORMATION-NEEDS-V2.md as a pinned-v1-plus-amendment document:
+N3.3 now explicitly includes basic size/reference-statistic context. Original v1 remains unchanged;
+25 needs/five families/refusal boundaries and 60-case design remain fixed. This follows retained
+source inspection and earlier exposed response experiments, not new v4 rankings or held-out access.
+
+Ten development questions revised across all five families. Broad low-contrast question now has
+four direct sources; new length question uses a reported range, not an invented population mean.
+New draft schema supports question revisions with a needs hash; 41 focused checks and actual v3/v4
+validation pass. Draft release is refused. See ../PLAIN-LANGUAGE-REVIEW-2026-10-17.md and public v4
+receipt for exact identities. Same-agent review is not final human adjudication. No corpus mutation,
+model/DB/service/training/selector work or human-hour inference. Next is human revision review and
+protected authoring/freeze; measurement-aware extension remains after core acceptance.
+
+Follow-up in the same checkpoint: bound the inherited v1 needs hash as well as the v2 amendment.
+The final checker now passes 42 focused checks; the earlier 41-check result remains retained.
+Final actual v3/v4 validations pass, and draft release still refuses.
