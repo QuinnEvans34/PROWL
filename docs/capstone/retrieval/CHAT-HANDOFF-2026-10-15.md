@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 plain-language requirement:** Quinton finds all questions on topic and endorses
+> citation/system-information refusals, but needs everyday demo questions (for example average
+> pancreas size). Read `PLAIN-LANGUAGE-DEMO-PLAN.md`; completion spec now v1.7.
+> Next AI-03: anatomy/size coverage review and selected plain-language question drafts before
+> final split freeze. Current v3 remains intact. Basic anatomy expansion needs a versioned need/
+> coverage record, not silent edits to frozen v1. PMC9317715 body-11 supplies a length range,
+> not a demonstrated population mean. Live input still has only three guided IDs; regex is
+> fixture-level. AI-04 owns readable supported answers; later free-text qualification remains open.
+> No tuning, new source acquisition, model call, code, source-label approval or protected access.
+
 > **October 17 follow-up development review:** Quinton found the first five relevant and requested
 > agent review of all 30. Read `DEVELOPMENT-FOLLOWUP-REVIEW-2026-10-17.md`.
 > Revised suite `configs/evidence/evaluation/development-v3-draft.json`: same questions/order,

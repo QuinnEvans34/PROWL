@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.6 — October 17, 2026 (development label review)\
+**Version:** 1.7 — October 17, 2026 (plain-language demo requirement)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; Step 5 drafts prepared, human review/protected authoring pending. Response quality remains open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -176,6 +176,11 @@ record the concrete dependency and return that scope decision to Quinton; do not
 specification. W02-07/W05-02 completion must state the bounded corpus scope actually delivered.
 
 ### Step 5 — Question and label freeze
+
+October 17 user requirement: qualify everyday questions and readable answers under the
+[plain-language demo plan](PLAIN-LANGUAGE-DEMO-PLAN.md). Before final freeze, review anatomy/size
+coverage and version selected plain-language development questions. Preserve the 60-case design,
+all five families and existing specialist evidence tests; no tuning before the revised freeze.
 
 Follow the existing evaluation protocol: 20 answerable + 10 unanswerable/out-of-scope per split;
 all five families, varied difficulty, required concepts, direct/partial/limiting evidence, exact
