@@ -1,5 +1,24 @@
 # AGENTS.md — Agent Context
 
+> **October17 current Mac code integrated and augmentation plan specified:** User requests pulling
+>current other-machine code and writing the next experiment, NOT a training launch. Safety snapshot
+>3f9b64a preserves completed Windows reviews. Merge origin/main7e6796c (52 incoming commits,
+>216paths) into codex/windows-training-readiness; only AGENTS history conflict, both retained.
+>No active trainer/evaluator at merge; existing dashboard untouched. Full Windows trainer/EMA/MLflow
+>preserved. Shared geometry defaults exactly match premerge outputs on3 synthetic affine cases.
+>156focused merged-checkout tests pass/3capability skips; old Mac duration-readiness tests still
+>cannot collect on Windows (Unix resource import), not a full-suite pass. LF-pinned fixture preserved;
+>portable absolute-path fixture corrected; symlink privilege1314 explicitly skipped, no guard weakened.
+>Read docs/capstone/operations/WINDOWS-MAC-INTEGRATION-20261017.md. No push this turn.
+>Next CAP-EXP-019 human title PanTS lesion outlining with varied training views; MD+JSON spec
+>PANTS-AUGMENTED-VIEWS-24K-20261017. Same1333/70, original24k recipe, freshSuPreM, noPANORAMA/EMA;
+>only train-time exact flips/quarter-turns and mild intensity/noise. H0delta<=0; accept>=.02/CI>0
+>plus detection/alarm/pancreas/empty-voxel-burden guards. Control14k .405092; emptybaseline205564voxels.
+>Specified, NOT launchable: augmentation implementation/wiring, boundedCUDArestorequalification,
+>changed-factor audit/newreceipt and explicit launch remain. No old receipt repinning or duplicate
+>audit/cache rebuild. Cropvariation remains separate autonomous-robustness proposal, now behind this.
+>Imported old LIVE/Mac inventory/next-run wording below is historical, not current dispatch authority.
+
 > **October17 selected-native evaluations COMPLETE:** Owned73080 FINISHEDexit0, both70case reports
 >complete/reaped under E:/PROWL/readiness/pants-selected-native-20261017-a01/{raw,ema}/.
 >Ordinary28k nativeDice.399545,detect33/36,alarms33/34;EMA8k .406650,33/36,34/34.
@@ -459,6 +478,29 @@
 > health unproven/no recovery or payload reads. Need usable target storage, verifieddata/cohorts,
 > portablepath observations,source-use/weights,realbatch and independentbackup admission next.
 > No public push or human-runtime credit. Existing app runtime must remain available for this venv.
+> **October8 second transport/resume:** User stopped training at14:20MDT to disconnect drive.
+> Session96730 FINISHED intentional interrupt/exit130; supervisor cleanup returned, lock released.
+> Final journal21207; last checkpoint21000 external/internal SHA94dd0a065d48054980f618b92ac4ab4f00a94248dc3eefd0f92a62291773dfdd;
+> best checkpoint SHA89847675d2e4637571970ca662b74247e49e652d7b502ea1a800ac9b8d44e5c8.
+> Drive safely unmounted then user remounted and explicitly requested restart. Correct UUID/AC/no
+> existing trainer verified; new resume02 preflight passed1333train/75dev/21000state/best0.3953174294791896.
+> New supervised command LIVE in owned execsession28633; actual update21016 confirmed; initial backup hash matches.
+> Config/evidence outputs/prowl/full-segmenter-resume02-mac-20261008/. New output
+> /Volumes/PROWL-Data/PROWL/artifacts/full_segmenter_suprem_mac_01_resume02/; independent internal
+> backup under same run name. Same new engine/cohort/geometry/horizon24000; conservative25000s
+> remaining active budget, unchanged storage limits. Preserve parent journal21207tail; replay207updates.
+> No duplicate launch; older LIVE96730 statements are historical. No human-hours change.
+
+> **October8 clock pause/resume:** Quinton stopped10:00MDT and restarted10:57MDT. HOURS-LOG.md
+> closes08:02–10:00 (1h58elapsed), excludes57minutes training-only, opens10:57session for Week1
+> closeout planning. Existing short-pitch assignment exclusion applies within morning interval;
+> its duration is unseparated, so net project hours pending. No machine runtime credited.
+
+> **October 8 human clock update:** Quinton reports finishing October7 around20:15MDT and
+> starting October8 at08:02MDT. HOURS-LOG.md closes Wednesday and opens Thursday. Preserve
+> Wednesday09:00start and15:15–approximately16:27pause;11h15span minus1h12knownpause leaves
+>10h03before other exclusions, NOT credited active hours. Wednesday net remains pending; Thursday
+> finish/breaks/net pending. Monday–Tuesday9–10h unchanged. No overnight/agent runtime credit.
 
 > **October 8 full SuPreM RESUMED / LIVE at08:12MDT:** user requested continuation at school.
 > New resume implementation867b034 restores pinned13500state into separate segment

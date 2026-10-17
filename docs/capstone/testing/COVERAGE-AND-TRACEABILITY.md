@@ -4,6 +4,9 @@
 **Decision:** P09-16, P09-18, P09-19, and P09-20  
 **Last reviewed:** 2026-09-09
 
+Current 43-requirement evidence/check reconciliation: [October 12 closeout](../weeks/WEEK-01-CLOSEOUT-2026-10-12.md).
+This mapping does not establish a coverage percentage or fresh full-suite pass.
+
 ## Governing principle
 
 September 20 implemented foundation families and their independent oracles are recorded in

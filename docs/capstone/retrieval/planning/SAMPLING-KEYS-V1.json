@@ -1,0 +1,7 @@
+{
+  "version": "prowl-sampling-keys-v1",
+  "created_utc": "2026-10-14T00:17:07.122307+00:00",
+  "reserve_salt": "355cc89017c9876ccf5445826d86be6de029e2f4ed95bc431c87bdad0366f279",
+  "development_key": "b54ecc698df3f1ddfc636141a53aaae75caa3f7400bff2752729756bf627eb5a",
+  "confirmation_key": "a546e467d00e6c8ad5d5e24b497caf6cbf282810181524bfc4dbf710c3875465"
+}

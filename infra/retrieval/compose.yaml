@@ -1,0 +1,42 @@
+name: prowl-retrieval-smoke
+services:
+  db:
+    image: pgvector/pgvector@sha256:88b17bc7a7dd6ef73d46c1b15aaa5936d50acb24e4a78713e134c579bf359e25
+    platform: linux/arm64
+    pull_policy: never
+    restart: "no"
+    cpus: 2
+    mem_limit: 2g
+    memswap_limit: 2g
+    pids_limit: 128
+    shm_size: 128m
+    stop_signal: SIGINT
+    stop_grace_period: 60s
+    environment:
+      POSTGRES_DB: prowl_synthetic
+      POSTGRES_USER: prowl_trial
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "127.0.0.1:${PROWL_DB_PORT:?preflight required}:5432"
+    volumes:
+      - type: bind
+        source: ${PROWL_DB_DATA:?preflight required}
+        target: /var/lib/postgresql/data
+        bind:
+          create_host_path: false
+    secrets:
+      - db_password
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -h 127.0.0.1 -U prowl_trial -d prowl_synthetic"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "2"
+secrets:
+  db_password:
+    file: ${PROWL_DB_PASSWORD_FILE:?local credential required}

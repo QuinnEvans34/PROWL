@@ -35,6 +35,16 @@ Python 3.12.13 and pip 26.1 on macOS 27.0 arm64. Installation reports and test r
 locally under `outputs/prowl/testing/foundation-2026-09-19/`; portable interpretation belongs in
 `docs/capstone/testing/FOUNDATION-2026-09-19.md`.
 
+## Current-source verification
+
+The October 13 clean install reproduced all 58 locked packages on Python 3.12.13 / pip 26.1
+and passed `pip check`. Installation success does not mean every current test is portable:
+the fresh source export exposed a collection-time dependency on ignored diagnostic outputs.
+See [the current reproduction report](../docs/capstone/testing/REPRODUCTION-2026-10-13.md)
+for the original findings and the [readiness test repair](../docs/capstone/testing/READINESS-PORTABILITY-2026-10-13.md)
+for subsequent fresh-export verification. Keep historical September/October 3 results tied to
+their original source versions.
+
 ## Moving the checkout
 
 Virtual-environment activation scripts and installed command launchers contain absolute paths.

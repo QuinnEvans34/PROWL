@@ -1,0 +1,3 @@
+# Isolated retrieval overlay; foundation .venv-prowl supplies torch and contracts.
+transformers==4.57.1
+psycopg[binary]==3.2.10

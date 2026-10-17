@@ -508,6 +508,9 @@ export default function App() {
           <button className={activeTab === 'library' ? 'active' : ''} onClick={() => setActiveTab('library')}>
             Scan library
           </button>
+          <button onClick={() => window.location.assign('/research')}>
+            Research evidence
+          </button>
           <button className={activeTab === 'review' ? 'active' : ''} onClick={() => setActiveTab('review')} disabled={!currentCase}>
             Review workspace
           </button>

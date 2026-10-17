@@ -1596,3 +1596,46 @@ for any non-invented run.
 **N4 remains open.** The only prerequisite is physically connecting the approved drive. When it
 is detected, the next steps are a fresh preflight, the request freeze and the single bounded
 rehearsal. No new decision is needed.
+
+## 2026-10-13: provisional local seed review and exposure ledger initialized
+
+The full title lookup remains incomplete. Direct indexed reads reviewed the 21 located records;
+all match citation checks and all supplied DOIs agree. C-29/C-42 remain unlocated pending the scan.
+All 21 located records have MeSH; the three-no-MeSH target is not met. See
+SEED-READINESS-2026-10-13.md for findings and scope recommendations. No seed freeze or policy change.
+C-25 and C-36 abstracts were read locally for the previously planned factual scope checks.
+C-25's record does not establish pancreas coverage; C-36 supports imaging CAD cueing effects.
+Scope recommendations are recorded for Quinton's review, not silently promoted into frozen seeds.
+
+INSPECTED-PMIDS.jsonl initializes 11 earlier PMID exposures and 21 new local-review events
+(32 events,31 distinct PMIDs), all ineligible for independent confirmation. Duplicate PMID33840636
+is retained as event history. EXPOSURE-MAPPING-PENDING.json retains unresolved identifiers and
+chaining groups; mappings must be appended, never used to clear an exposed record. No sampling,
+keys, frozen seeds, executable admission or real selection was produced. Evidence remains in
+outputs/prowl/seed-readiness-20261013/. No human hours inferred.
+
+## October 13 — final citation review
+
+Lookup completed23/23 unique title matches. See SEED-FINAL-REVIEW-2026-10-13.md for citation/year details, title-led versus DOI-led verification limits, scope recommendations and unresolved direct-need mappings. All23 have MeSH (missing-MeSH coverage0/3). Eight indexed abstract/date reads retained locally;23 final review exposure events appended. Seed freeze and actual selection remain pending; no policy changes, keys or independent sample drawn.
+
+## October 13 — seed gap resolution and concrete proposal
+
+Quinton accepted moving forward on the final review: C-25 probe and C-36 general workflow inclusion applied in SEED-DECISIONS-2026-10-13.md. Existing candidate input preserved for provenance. Identifier concern resolved by exhaustive-title intersection proof (23 resolutions), not global DOI uniqueness. Primary author/publisher documentation confirms C28/C29/C30 pancreas coverage. New C47–49 proposed from S02/C10 reference lists, each locally no-MeSH, with direct scope evidence. C32/C33 background disposition proposed, not silently applied. Proposed23seeds/3withoutMeSH awaits review.
+
+Read reference metadata from S02/MSD/C10 and empty lists from S01/C12/C27/C28/C29. Bounded PMID checks and seven abstracts disclosed in INSPECTED-PMIDS.jsonl; C48/C49 full text via public Europe PMC API. Earlier three classification-only candidates were not promoted. No policy output, term changes, keys, freeze or selector run.
+
+Web disclosure: primary pages for WORD author manuscript, AbdomenAtlas author repository, and MSD publisher paper inspected. Incidental search snippets included PMID39066145,36967355,40682667,33102622,35979154,30888486; PMC11741484,12286379,12737755,12019452,12141495,11240790,11783162,8002279,9038788,11186697,10511555,9695285,8511825,12356900,8151348; arXiv2305.09666,2302.06356,2604.20981,2412.15925,2510.08967,2009.13120,2004.06673,2004.12537,2004.10987 and miscellaneous dataset/CT search snippets. These are disclosed exposures, not newly accepted chained candidates; unresolved identifiers/groups must be excluded/reconciled before independent confirmation. Publisher429/PMC browser checks and EuropePMC web-tool errors retained as access limitations; sanctioned Europe PMC API supplied the two open-access texts.
+
+## October 13 — approved seed freeze v1
+
+Quinton approved the concrete23-paper proposal and continuation. C47/C48/C49 accepted; C32/C33 retained as related background, C25 scope probe, C36 included. Immutable SEED-FROZEN-V1-2026-10-13.json SHA256 496009f5d3d70e4a9daffde138ccef2803b8a655c08f022a75a7c26400e444af. Verified23uniquePMIDs,3withoutMeSH, family counts {"1": 5, "2": 3, "3": 3, "4": 13, "5": 8}. Title-only diagnostics recorded without full-record policy evaluation. No selection output inspected before freeze.
+
+## October 13 — P6 sampling keys created once
+
+No prior key values found in retrieval planning/launch artifacts. After seed freeze and before any sampling, drew three independent32-byte OS random values. Never regenerate these values.
+
+- reserve_salt: `355cc89017c9876ccf5445826d86be6de029e2f4ed95bc431c87bdad0366f279`
+- development_key: `b54ecc698df3f1ddfc636141a53aaae75caa3f7400bff2752729756bf627eb5a`
+- confirmation_key: `a546e467d00e6c8ad5d5e24b497caf6cbf282810181524bfc4dbf710c3875465`
+
+No development or confirmation sample drawn.

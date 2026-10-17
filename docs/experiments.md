@@ -1,5 +1,27 @@
 # PROWL living experiment notebook
 
+## October17 — Next experiment specified: PanTS lesion outlining with varied training views
+
+CAP-EXP-019, version1. User requests a durable plan and current Mac code on this laptop; no training
+launch. [Scientific specification and pickup checklist](capstone/operations/PANTS-AUGMENTED-VIEWS-24K-20261017.md)
+and [structured plan](capstone/operations/PANTS-AUGMENTED-VIEWS-24K-20261017.json).
+
+At the original24k budget, test modest training-only flips/quarter-turns and intensity/noise variation
+on unchanged1333PanTS cases and matched70development. Keep originalSuPreM/freshhead,144cube cache,
+DiceFocal,AdamW,seed42,sampler and native inference fixed. NoPANORAMA/EMA/TTA/crop expansion.
+H0: selected-treatment minus selected-control native positive macro Dice <=0; H1: >0.
+Accept practical benefit only for gain>=.02, paired95%lower>0 and detection/alarm/pancreas/burden
+guardrails. Reject for guardrail failure or CIupper<.02; other valid outcomes inconclusive. Separately
+report H0 rejected/not rejected, never accepted. All36positive cases include misses in their mean.
+Current descriptive record .406650 is not the acceptance bar; retained24k-control selected14k .405092
+is reusable only after compatibility review. Equal12selection opportunities; terminal24k secondary.
+
+Augmentation takes priority for the provided-ROI Dice question; crop variation remains a separate
+autonomous-robustness proposal, not rejected. Existing qualified data/cache and overlap decisions
+are reused. This plan is not executable yet: implementation, bounded CUDA recovery qualification,
+frozen new receipt and separate launch instruction remain. No fake running MLflow record created.
+[Repository integration and verification](capstone/operations/WINDOWS-MAC-INTEGRATION-20261017.md).
+
 ## October17 — Best ordinary28k and EMA8k, native development evaluation
 
 Both authorized70-case evaluations completed/reaped; no optimizer updates or test reads.

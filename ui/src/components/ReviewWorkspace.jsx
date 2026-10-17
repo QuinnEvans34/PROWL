@@ -30,6 +30,7 @@ import {
   X,
 } from 'lucide-react'
 import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
+import GuidedEvidencePanel from './GuidedEvidencePanel.jsx'
 import {
   EVIDENCE_META,
   REVIEW_COLORS,
@@ -1387,6 +1388,7 @@ export default function ReviewWorkspace({
           </section>
         )}
 
+        <GuidedEvidencePanel key={caseId} />
         <div className="review-status-bar">
           <span>Review status</span>
           <button

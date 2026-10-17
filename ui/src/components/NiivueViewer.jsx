@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { DRAG_MODE, Niivue } from '@niivue/niivue'
 import { LoaderCircle, TriangleAlert } from 'lucide-react'
 
+import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
+
 const BASE = '/cases'
 
 const SOURCE_COLORS = {
@@ -395,6 +397,9 @@ function meshOpacity({
 
 export default function NiivueViewer({
   caseData,
+  assetUrls = null,
+  nativeGeometry = null,
+  ctRange = null,
   sources = ['pred'],
   visibleSources = null,
   mode = '2d',
@@ -644,20 +649,20 @@ export default function NiivueViewer({
 
         clearMeshes(nv)
         const volumes = [{
-          url: `${BASE}/${ctPath}`,
+          url: assetUrls?.ct || `${BASE}/${ctPath}`,
           name: 'ct.nii.gz',
           colormap: 'gray',
           opacity: mode === '2d'
             ? 1
             : renderedCtOpacity,
-          ...CT_WINDOWS[ctWindow],
+          ...(ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow]),
           trustCalMinMax: true,
           ignoreZeroVoxels: true,
         }]
 
         availableSources.forEach((source) => {
           volumes.push({
-            url: `${BASE}/${caseData.files[source]}`,
+            url: assetUrls?.[source] || `${BASE}/${caseData.files[source]}`,
             name: `${source}.nii.gz`,
             colormap: 'warm',
             opacity: mode === '2d' ? overlayOpacity : 0,
@@ -685,6 +690,7 @@ export default function NiivueViewer({
 
         await nv.loadVolumes(volumes)
         if (cancelled) return
+        if (nativeGeometry) verifyNativeVolumes(nv.volumes, nativeGeometry)
 
         availableSources.forEach((source, index) => {
           const volumeIndex = index + 1
@@ -839,7 +845,7 @@ export default function NiivueViewer({
 
     try {
       const ctVolume = nv.volumes[0]
-      const windowRange = CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
+      const windowRange = ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
       ctVolume.cal_min = windowRange.cal_min
       ctVolume.cal_max = windowRange.cal_max
 
@@ -1154,7 +1160,7 @@ export default function NiivueViewer({
 
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
-      <canvas ref={canvasRef} aria-label={label} />
+      <canvas ref={canvasRef} aria-label={label} style={nativeGeometry && state.status !== 'ready' ? { visibility: 'hidden' } : undefined} />
       {mode === '2d' && (
         <div className={`viewer-plane-labels viewer-plane-labels--${activePlane}`} aria-label="CT anatomical planes">
           {(activePlane === 'multiplanar'

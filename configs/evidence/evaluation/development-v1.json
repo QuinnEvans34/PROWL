@@ -1,0 +1,146 @@
+{
+  "schema_version": "prowl-retrieval-development-v1",
+  "split": "development",
+  "collection": "research-v1",
+  "source_pmids": [
+    "35406426",
+    "37173876"
+  ],
+  "corpus_record_sha256": "2956ed092c71c787129cceb5237df0c06b98b8993faf5d6319eab7bd831319b8",
+  "corpus_passages": 274,
+  "cases": [
+    {
+      "id": "radiomics",
+      "question": "What is radiomics and how are quantitative features extracted from pancreatic CT images?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "Handcrafted quantitative features from images",
+        "ROI segmentation followed by feature extraction/model building"
+      ],
+      "reference_passage_ids": [
+        "psg:cef6f593a3a616fc671d54a5fc51e2777955a2e0824e82511b2962c15c25c837",
+        "psg:87994b1619ad6dbfa76a70503fbe21be07843244ce2b26fe53925a22df039054",
+        "psg:df9fdd08676c5255e5fce781dbe9505d2c22e8956480b4773b3d9315fd5aa1da",
+        "psg:267691837b65d80bdba149e7ad6113a350a121cbc3792859e6b62f315dec7fe5"
+      ],
+      "scope": "General workflow relevant; CT-specific claims require CT evidence.",
+      "previously_exercised": true
+    },
+    {
+      "id": "eus",
+      "question": "How has artificial intelligence been studied with endoscopic ultrasound for pancreatic cystic lesions?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "EUS or EUS-nCLE AI study for pancreatic cysts/IPMNs",
+        "Study cohort or measured result"
+      ],
+      "reference_passage_ids": [
+        "psg:145a294e841a16386a417bb6c254ab16fdbf0c6c34cf4acafd7b629471038464",
+        "psg:17c562332b735b6111cee449e700fa499996230419ee5b215b00fe9710fd6b63",
+        "psg:a4b4aef1668824df202506d385480546947fbe616d189919b9511ac25647062c"
+      ],
+      "scope": "Exclude MRI/CT-only cyst studies and solid-tumor EUS studies.",
+      "previously_exercised": true
+    },
+    {
+      "id": "ct-detection",
+      "question": "How have CT radiomic models been studied for pancreatic cancer detection?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "Radiomic detection study distinguishing cancer from normal pancreas",
+        "Study cohort or measured result"
+      ],
+      "reference_passage_ids": [
+        "psg:2334e50981b620d1661b0a95d402348e5d70cea8fd689d084a64dcb988eb002d",
+        "psg:973ed876a690949a8e985f5e5ab27d0c45547f38f09694713e20c54d35079196"
+      ],
+      "scope": "CT radiomics detection; exclude PET/CT, MRI, neuroendocrine grading, prognosis, and deep-learning-only evidence.",
+      "previously_exercised": true
+    },
+    {
+      "id": "ncle-study",
+      "question": "What cohort and accuracy were reported for CNN analysis of EUS-nCLE video frames to identify advanced neoplasia in IPMNs?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "35 histologically proven IPMN patients",
+        "82% accuracy for HGD-Ca; comparator optional"
+      ],
+      "reference_passage_ids": [
+        "psg:145a294e841a16386a417bb6c254ab16fdbf0c6c34cf4acafd7b629471038464"
+      ],
+      "scope": "Only EUS-nCLE CNN study; other EUS modalities are not substitutes.",
+      "previously_exercised": false
+    },
+    {
+      "id": "ct-external",
+      "question": "What local and external test performance was reported for the contrast-enhanced CT radiomics model detecting pancreatic cancer in more than 1000 subjects?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "Contrast-enhanced CT radiomics detection in more than 1000 subjects",
+        "Local AUC 0.98 and external AUC 0.91"
+      ],
+      "reference_passage_ids": [
+        "psg:973ed876a690949a8e985f5e5ab27d0c45547f38f09694713e20c54d35079196"
+      ],
+      "scope": "Do not substitute CNN results or prognosis/grade prediction.",
+      "previously_exercised": false
+    },
+    {
+      "id": "mri-differential",
+      "question": "How did MRI radiomics compare with a clinical model for differentiating pancreatic cancer from mass-forming chronic pancreatitis in the study by Deng?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "MRI differential diagnosis and comparison with clinical model",
+        "Different-institution validation AUCs 0.88-0.96 versus 0.65"
+      ],
+      "reference_passage_ids": [
+        "psg:591f1f9e2fcf07ddf05fd57abdcb47b5f78c6e8c77e9145823c6579c49a6a909",
+        "psg:75ec33d3aadd923dbf76bd03ad193433bff778cf3e68af755e83d823cee13b08"
+      ],
+      "scope": "Exclude EUS and PET/CT sentences even when in the same passage.",
+      "previously_exercised": false
+    },
+    {
+      "id": "pet-neuroendocrine",
+      "question": "Which PET/CT tracer and tumor grades were used in the pancreatic neuroendocrine radiomics detection study by Bevilacqua?",
+      "expected_status": "excerpts",
+      "aspects": [
+        "Ga-DOTANOC PET/CT",
+        "Grade 1 and 2 pancreatic neuroendocrine tumors"
+      ],
+      "reference_passage_ids": [
+        "psg:75ec33d3aadd923dbf76bd03ad193433bff778cf3e68af755e83d823cee13b08"
+      ],
+      "scope": "PET/CT neuroendocrine evidence explicitly relevant here; exclude adjacent MRI study.",
+      "previously_exercised": false
+    },
+    {
+      "id": "randomized-survival",
+      "question": "What randomized trial evidence shows that CT radiomics screening reduces pancreatic cancer mortality?",
+      "expected_status": "insufficient_evidence",
+      "aspects": [],
+      "reference_passage_ids": [],
+      "scope": "Prediction/retrospective studies are not randomized mortality-reduction evidence; abstain.",
+      "previously_exercised": false
+    },
+    {
+      "id": "prowl-validation",
+      "question": "What prospective multicenter clinical validation results are reported for the PROWL system?",
+      "expected_status": "insufficient_evidence",
+      "aspects": [],
+      "reference_passage_ids": [],
+      "scope": "PROWL absent from retained reviews; other systems are not evidence for PROWL; abstain.",
+      "previously_exercised": false
+    },
+    {
+      "id": "guaranteed-detection",
+      "question": "Which pancreatic CT radiomics model is proven to detect every cancer with zero false positives in all future patients?",
+      "expected_status": "insufficient_evidence",
+      "aspects": [],
+      "reference_passage_ids": [],
+      "scope": "Finite study estimates cannot prove universal future performance; abstain even for reported AUC 1.00.",
+      "previously_exercised": false
+    }
+  ],
+  "notes": "Corpus-informed, author-reviewed references; not exhaustive relevance labels or held-out evaluation. Three previously exercised regressions and seven new questions. Reference IDs, aspects, expected statuses and scope rubrics are never model inputs. Missing-evidence expectations concern this frozen corpus only."
+}

@@ -5,6 +5,15 @@
 **Target window:** October 8–22, 2026; review October 11 and 18; decision checkpoint October 22  
 **Status:** Living investigation; experiments proposed, no new jobs launched by this document
 
+## October 9 ownership update
+
+Quinton reports training running on Lenovo and the entire dataset downloaded there. All long training
+work now belongs to Lenovo; Mac develops/integrates/evaluates using its4TB drive. This supersedes the
+optional dual-laptop weekend training plan below. The Mac's resume02 result reports24,000 completed
+updates with best reference-crop development Dice0.3953174294791896. Lenovo's implementation/results
+are pending a handback here; no remote action or restart follows from this planning update.
+See the [Week2 development plan](../weeks/WEEK-02-WORK-PLAN.md).
+
 ## Purpose and proposal alignment
 
 Choose an evidence-backed baseline that turns a raw CT into pancreas and lesion predictions without
@@ -201,6 +210,9 @@ local progress.
 
 ### Minimum software work for the first Lenovo job
 
+Implementation handoff: [Lenovo training setup specification](../operations/LENOVO-TRAINING-SETUP-SPEC.md).
+Quinton will relay the Lenovo chat's readiness report for review before selecting the long experiment.
+
 The current new trainer is not yet ready to launch unchanged on Lenovo:
 
 - `segmenter_full_session_v1.py` accepts CPU/MPS only. Add CUDA execution and CUDA random-state
@@ -253,3 +265,159 @@ plan. The present training run is not changed by these edits.
 
 No new downloads, model jobs, source mutations or changes to the current training run were performed
 to create this plan. Update this document rather than create competing architecture investigation queues.
+
+## October 9 first implementation result
+
+Implemented `src/data/segmenter_predicted_roi_v2.py`: a native binary localizer prediction defines
+an all-support10mm region using geometryv2. Image-only preparation shares the current trainer's
+physical mapping and HU normalization; hard three-class predictions can return to the native grid.
+The adapter accepts no reference mask. It checks prediction/source/grid identity and refuses empty
+localization, altered transforms, invalid image values and unknown output classes.
+
+`segmenter_geometry_v2.plan_geometry` now explicitly distinguishes predicted versus reference origin;
+its default retains existing training-record behavior. Added image-only `prepare_image`; the training
+preprocess numerical path was not changed. The v1 adapter remains unchanged. V2 restores hard codes,
+not interpolated probability maps; choose and document that distinction in the eventual scorer.
+
+Verification:74 focused CPU tests passed in1.11s across predicted-ROI v1/v2 and geometryv2, including
+seven new v2 cases. Tilted/sheared synthetic images match the existing training image preparation,
+known tensor targets return to the expected native region, and failure cases are retained as errors.
+No patient/model inference, trained-checkpoint loading, GPU work or new training was used. Lenovo's
+running code was not changed. This is an implemented connection component, not an end-to-end result.
+
+Inventory findings: the historical localizer run-info is retained under
+`outputs/checkpoints/pants-level45/runs/localizer_fullscan_scaledmax__20260717_235833/run_info.txt`:
+16k updates,96-cubed full-scan patches,1.5mm spacing,transfer initialization,DiceFocal,seed42,scaledmax.
+Its leakage history remains disqualifying for the withdrawn validation claim. A filename search of
+repo checkpoints and mounted artifact filenames found that record but did not locate a matching
+historically named weight file; this does not establish that no weight exists in hashed stores.
+The newer localizer code uses a binary SegResNet and sliding-window prediction. CAP-EXP-010/012
+have retained audit evidence, but selecting/restoring an eligible checkpoint and its preprocessing
+still remains to be connected to the new adapter and current segmenter.
+
+Next concrete task: resolve one candidate's checkpoint/identity/preprocessing from its artifact receipt,
+then implement a CT-only inference runner with native exports and explicit per-case failures. Reuse
+existing checkpoint validation; do not silently load a historical three-class localizer into a binary
+architecture. The completed adapter removes the geometry mismatch without deciding which localizer wins.
+
+## October 9 CT-only execution and leakage safeguards
+
+Quinton intends to share results with Johns Hopkins and explicitly requires avoiding oracle inputs
+and leakage. The executable boundary is now `src/inference/autonomous_cascade_v1.py`:
+
+- `run_case` receives one explicit CT path/hash, case ID, output directory and model options. There is
+  no manifest, label path, reference box, outcome label or scoring input. Extra reference arguments fail.
+- Whole-volume localizer preprocessing is called without a target, then sliding-window model logits
+  produce a native binary mask. That prediction alone determines the stage2 region.
+- Stage2 image preparation, inference and native hard-mask export use the geometryv2 predicted route.
+  No component receives case diagnosis as a model feature. Case ID records lineage only.
+- The runner reads the named NIfTI directly without discovering sibling files. Its current supported
+  input is a finite3D CT with millimetre units; DICOM support is not implied. The localizer's inherited
+  96M-source-voxel cap is still narrower than the segmenter's256M cap; refusals remain visible.
+- A fresh output directory retains success or failure. No empty-localizer rescue with a reference crop.
+  Evaluation/threshold selection are absent from this module and belong in a separate scorer.
+
+Verification:19 focused tests pass in2.94s (two upstream TorchScript deprecation warnings). Three
+new integration tests exercise real preprocessing, sliding-window execution, native restoration and
+NIfTI export using **synthetic deterministic torch models**, not trained clinical models. Predictions
+are identical with masks absent, deliberately incorrect masks present, then masks removed. A Python
+file-open guard rejects reference-directory reads during the test and records that the adjacent mask
+was not opened. Hash-mismatched CTs and reference arguments are rejected; empty localization retains a
+failure report. This is code-level isolation evidence, not an OS sandbox or a trained-model benchmark.
+
+The runner currently takes trusted model objects plus their declared checksums; it does not itself
+load or authenticate checkpoint files. The next integration must bind those objects to verified,
+reviewed checkpoint bytes and recipes before any trained-model result is reported. Neither a supplied
+hash nor `reference_inputs_used=false` is, by itself, evidence of model provenance or zero leakage.
+
+### Separate evidence needed for a scientific claim
+
+1. **Inference inputs:** run the fixed executable with a CT-only directory, model artifacts and writable
+   outputs; reference storage unavailable to that process. Preserve input/output identities. The present
+   synthetic read-guard test is an initial check; real isolated inference remains pending.
+2. **Training membership:** compare evaluation cases/patient groups/known duplicates against every model's
+   training membership, including localizer, segmenter, classifier, ancestors and initialization where known.
+3. **Selection:** development data may select checkpoints, crop margins, thresholds and architecture.
+   Lock those choices before final held-out evaluation; repeated development scores are not test results.
+4. **Scoring:** save predictions first; use a separate scorer that can read references and cannot alter
+   predictions. Count every requested case and include failures. Report oracle/reference-crop comparisons
+   as diagnostics only, never as autonomous performance.
+5. **Limits:** distinguish case-ID disjointness from verified biological patient separation and disclose
+   unresolved pretraining membership. Unlabeled scans demonstrate operational independence, but cannot
+   establish Dice or lesion sensitivity without a suitable independent reference.
+
+Read-only membership observation: CAP-EXP-012 attempt inputs at
+`outputs/prowl/twomm-training-a0636d70-2ea5-4e5f-9167-db28bff562ba-execution/attempt/inputs.json`
+contain113 optimizer and40 evaluator IDs. Optimizer IDs overlap current75 segmenter development IDs
+in0 cases; evaluator IDs overlap in3. This is metadata evidence for that attempt only. Its parent
+reference names the cd6be21f localizer checkpoint at step300; full ancestor/cohort reconciliation and
+checkpoint payload verification remain pending. Do not infer parent separation from child separation.
+The earlier historical scaledmax contamination remains withdrawn. The current SuPreM source-use
+review explicitly leaves pretraining/selection membership unverified; this work does not resolve it.
+
+No new real-data predictions, scientific metrics, training runs, data uploads or Johns Hopkins messages
+were produced. Lenovo training was not changed. Next is the verified trained-model loader/lineage
+binding and a small CT-only diagnostic, followed by independent native scoring on eligible cases.
+
+## October 9 trained-model connection completed
+
+See [checkpoint connection results](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md). Actual CAP-EXP-012
+and full-segmenter checkpoints now run through CT-only inference/native export on two development
+cases. One visibly non-abdominal input produced unsupported organ predictions and remains a retained
+failure finding; the second showed abdominal anatomy. Accuracy is unscored. The next step is separate
+reference scoring and input-anatomy/provenance investigation, not another synthetic connection claim.
+
+### October 9: first separate native scores and crop comparison
+
+See [checkpoint connection diagnostic](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) for retained
+results and limitations. The abdominal diagnostic achieved lesion Dice0.726 from CT-only prediction;
+both predicted and reference regions contained all annotated targets. The reference-assisted comparator
+had Dice0.703 with higher recall and more false positives. These are selected development diagnostics.
+The suspicious scan has a74-voxel pancreas annotation and severe autonomous false positives. Its CT/label
+hashes match prior preparation, but anatomical validity is unresolved. Frozen cohorts and Lenovo training
+were not changed. Added independently tested, model-free native scoring; robust unsupported-input
+handling and fixed-cohort evaluation remain unfinished.
+
+### October9 fixed75-case autonomous baseline
+
+All admitted development IDs were frozen before evaluation, with two existing outputs reused.56
+predictions scored;19 failed explicitly (11 oversized predicted-region grids,7 unknown CT units,
+1 projected whole-scan grid). Mean lesion Dice0.244807 over28 scored positive cases;10other positive
+cases failed. This supersedes interpreting the single-case0.726 as typical quality. See the detailed
+[connection report](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) for denominators, resource evidence,
+source-review limits and specific next corrections. No training was changed.
+
+October9 geometry correction recovers all12 prior geometry failures with explicit64M voxel ceilings
+and unchanged numerical settings; measured peak4.16GiB under12GiB. Combined accounting now68/75
+outputs, with seven unknown-unit inputs still unresolved. CT-only hash-bound unit-review support is
+implemented, but no source evidence has been fabricated.31 focused tests pass. Recovered-case quality
+is poor; matched crop/resampling-versus-segmenter analysis remains necessary. See the connection report.
+
+### October9 paired diagnosis: crop scale/context is a major contributor
+
+All68 available cases now have matched autonomous/reference-crop results, with the same segmenter.
+On33 positive cases, lesion Dice is0.225818 versus0.422671; on35 reference-empty cases, predicted lesion
+volume is21.291808 versus1.527572mL. Reference-assisted values are diagnostics, never autonomous scores.
+All41 lesion components survive both resampling paths. Nearest-label roundtrip Dice is0.896041 versus
+0.946782, so complete lesion disappearance does not explain the gap. Median paired crop-volume ratio
+is5.533175 and median lesion-tensor-voxel ratio0.225107: predicted crops present much broader context.
+
+The next controlled experiment should refine the CT-only crop policy and measure both coverage and
+quality with fixed weights. A separate Lenovo experiment should investigate training with realistic
+crop variation. Neither is a reason to modify the currently running job. Four diagnostic tests pass;
+initial near-binary decoding failures and one interrupted attempt are preserved. See the
+[matched results and limits](AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md) before interpreting these
+selected development findings as general performance.
+
+### October9 CT-only crop challenger: largest connected region
+
+Fixed largest26-connected predicted component plus the existing10mm margin ran on all68 available
+cases with zero execution failures. Raw localizer masks match the all-support baseline for every case.
+Mean lesion Dice improves0.225818→0.246612 on33 positive cases; predicted lesion volume on35 empty
+references falls21.291808→13.989806mL. All33 lesions remain fully inside the native crop, but positive
+case Dice improves8/worsens8/ties17. The retained crop still has median volume3.99× the reference crop.
+
+Keep this as an opt-in experimental comparator; do not promote it to default or claim the context
+mismatch solved. Nine focused tests passed. Next investigate a frozen CT-only confidence-based crop
+policy and retain localizer probability artifacts for efficient comparisons. Crop-variation training
+remains a separately specified Lenovo experiment. See the detailed connection report for evidence.

@@ -1,8 +1,27 @@
 # Test environments and command contract
 
-**Status:** Approved design; exact locks belong to Plan 10  
+**Status:** Approved design; foundation lock implemented, current reproduction limits below\
 **Decisions:** P09-01, P09-02, P09-04, P09-09, P09-10, and P09-17 through P09-19  
-**Last reviewed:** 2026-09-09
+**Last reviewed:** 2026-10-13
+
+## Current implementation and reproduction
+
+Python 3.12.13 / pip 26.1 on macOS arm64 installs from the hash-checked
+`requirements/locks/macos-arm64-py312.txt`; see [setup instructions](../../../requirements/README.md).
+This is the foundation/test environment, not the full historical training environment.
+Use Node **24.21.0**, pinned in `ui/.nvmrc`; the October 13 clean run used npm **11.19.0**.
+Select the version explicitly with `cd ui && nvm use`, then verify `node --version` and
+`npm --version` before `npm ci`. The ambient Node 20 shell is not the supported UI baseline.
+The [verified UI tooling update](UI-TOOLING-UPDATE-2026-10-13.md) pins Vite 8.3.4,
+Vitest 5.0.4 and React plugin 6.1.2; UI/build/synthetic and saved-prediction browser checks pass.
+
+[October 13 reproduction evidence](REPRODUCTION-2026-10-13.md) records clean installation,
+UI checks and Python collection/skip reconciliation. The subsequent
+[readiness portability repair](READINESS-PORTABILITY-2026-10-13.md) separates portable checks
+from explicitly selected historical receipt integration and records fresh-export verification.
+The commands below are design intents where wrappers have not yet been implemented; do not assume
+a `verify` executable exists. Actual default Python selection is defined by `pytest.ini`, including
+the exclusion of `local_evidence`. No Linux lock or cross-machine execution is qualified here.
 
 ## Supported baseline
 
@@ -11,8 +30,8 @@
 - macOS/Apple Silicon for authoritative local scientific verification.
 - Linux/Python 3.12/Node 24 for GitHub fast portability checks.
 
-Plan 10 chooses the environment directory name, dependency resolution/lock mechanism, update
-procedure, and artifact root. `.venv312` remains historical evidence until then.
+The implemented foundation uses `.venv-prowl` and the platform lock above. `.venv312` remains
+historical evidence. Preserve existing environments; reproduce in a separate clean source export.
 
 ## Dependency layers
 
@@ -73,7 +92,7 @@ components.
 Equivalent selection:
 
 ```text
-python -m pytest -m "not slow and not licensed_data and not mps and not network and not browser and not release"
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest tests -q -p no:cacheprovider
 ```
 
 Strict marker registration and strict xfail behavior apply. Results may additionally write JUnit and

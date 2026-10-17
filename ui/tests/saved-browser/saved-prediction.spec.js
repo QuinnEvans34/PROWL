@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test'
+// Run against the explicit local package server documented in SAVED-PREDICTION-VIEWER.md.
+test('native CT overlays, layer controls and provenance', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', e => errors.push(e.message))
+  await page.goto('/saved')
+  await expect(page.getByLabel('Prepared result loaded')).toBeVisible({ timeout: 60000 })
+  await page.getByLabel('Predicted pancreas', { exact: true }).uncheck()
+  await expect(page.getByLabel('Prepared result loaded')).toBeVisible()
+  await page.getByLabel('Predicted pancreas', { exact: true }).check()
+  await page.getByLabel('Predicted lesion', { exact: true }).uncheck()
+  await page.getByLabel('Predicted lesion', { exact: true }).check()
+  await page.getByText('Case and model provenance').click()
+  await expect(page.locator('pre')).toContainText('segmenter')
+  expect(errors).toEqual([])
+})
+test('reload removes previous scene while loading and on missing files', async ({ page }) => {
+  await page.goto('/saved')
+  await expect(page.getByLabel('Prepared result loaded')).toBeVisible({ timeout: 60000 })
+  let release
+  const waiting = new Promise(resolve => { release = resolve })
+  await page.route('**/saved-prediction/manifest.json', async route => { await waiting; await route.fulfill({ status: 404, body: 'missing' }) })
+  await page.getByRole('button', { name: 'Reload saved package' }).click()
+  await expect(page.getByRole('status')).toContainText('Loading and verifying')
+  await expect(page.locator('canvas')).toHaveCount(0)
+  release()
+  await expect(page.getByRole('alert')).toContainText('unavailable (404)')
+  await expect(page.locator('canvas')).toHaveCount(0)
+})
+test('failed prediction, missing mask and geometry disagreement are explicit', async ({ page }) => {
+  const original = await (await page.request.get('/saved-prediction/manifest.json')).json()
+  await page.route('**/saved-prediction/manifest.json', route => route.fulfill({ json: { ...original, status: 'failed' } }))
+  await page.goto('/saved')
+  await expect(page.getByRole('alert')).toContainText('failed or is incomplete')
+  await page.unroute('**/saved-prediction/manifest.json')
+  await page.route('**/saved-prediction/prediction.nii.gz', route => route.fulfill({ status:404, body:'missing' }))
+  await page.getByRole('button', { name: 'Reload saved package' }).click()
+  await expect(page.getByRole('alert')).toContainText('Missing pred file')
+  await page.unroute('**/saved-prediction/prediction.nii.gz')
+  const moved = structuredClone(original); moved.geometry.affine[0][3] += 10
+  await page.route('**/saved-prediction/manifest.json', route => route.fulfill({ json: moved }))
+  await page.getByRole('button', { name: 'Reload saved package' }).click()
+  await expect(page.getByRole('alert')).toContainText('geometry mismatch', { timeout: 60000 })
+  await expect(page.locator('canvas')).toBeHidden()
+})

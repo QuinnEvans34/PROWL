@@ -1,0 +1,59 @@
+{
+  "version": "guided-fixture-v2",
+  "notice": "Synthetic demonstration — not published literature",
+  "passages": [
+    {
+      "id": "fixture-workflow-1",
+      "title": "Synthetic reviewer workflow",
+      "locator": "Fixture paragraph 1",
+      "text": "In this demonstration workflow, the reviewer compares a proposed contour with the displayed source image and records whether correction is needed.",
+      "rights": "PROWL-authored synthetic fixture; display permitted"
+    }
+  ],
+  "questions": [
+    {
+      "id": "workflow",
+      "label": "What does this demonstration's review workflow involve?",
+      "state": "answered",
+      "passage_ids": [
+        "fixture-workflow-1"
+      ],
+      "message": "The selected sources support the following…"
+    },
+    {
+      "id": "contour",
+      "label": "What CT contour considerations does the evidence support?",
+      "state": "insufficient_evidence",
+      "passage_ids": [],
+      "message": "The available sources do not provide enough evidence to answer this question."
+    },
+    {
+      "id": "measurement",
+      "label": "How reproducible are these measurements?",
+      "state": "insufficient_evidence",
+      "passage_ids": [],
+      "message": "The available sources do not provide enough evidence to answer this question."
+    },
+    {
+      "id": "anatomy",
+      "label": "What evidence explains pancreas subregion terminology?",
+      "state": "insufficient_evidence",
+      "passage_ids": [],
+      "message": "The available sources do not provide enough evidence to answer this question."
+    },
+    {
+      "id": "limitations",
+      "label": "What are the limitations of this segmentation model?",
+      "state": "insufficient_evidence",
+      "passage_ids": [],
+      "message": "The available sources do not provide enough evidence to answer this question."
+    },
+    {
+      "id": "diagnosis-boundary",
+      "label": "Boundary demonstration: can PROWL diagnose this patient?",
+      "state": "out_of_scope",
+      "passage_ids": [],
+      "message": "PROWL supports research review and cannot diagnose patients or recommend treatment. Please select a question about the evidence or review workflow."
+    }
+  ]
+}

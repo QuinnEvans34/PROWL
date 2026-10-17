@@ -1,0 +1,82 @@
+{
+  "version": "selection-launch-draft-v1",
+  "status": "blocked_on_seed_review_and_freeze",
+  "executable": false,
+  "captured_utc": "2026-10-13T19:25:33.305322+00:00",
+  "local_pins": {
+    "src/retrieval/resumable_selection.py": "03e9d941bb99d2e40f7896ddd08ac93ddff5843d09187524875dc3e15bdb14d3",
+    "src/retrieval/streaming_corpus.py": "3cb7c4323e29f11dc342ae61eeab61420a42f522d18be2c4deefbd91088feb00",
+    "src/retrieval/pubmed_catalog.py": "1905830d9419632530b6d3c46a099edd2877e90b0ad7492193485ffd2eb8e228",
+    "src/retrieval/topic_selection.py": "e91f1c18d3162033d5e653fe75113c8a0757b0ab3b1626324259bbb56bdc2a5d",
+    "scripts/retrieval/select_pubmed_corpus.py": "85eda82262934a25208ad86da0e782a174f02f1d776eeb1a98cbb4b1ed7f9e0b",
+    "docs/capstone/retrieval/planning/SEARCH-AND-SELECTION.md": "1cb96a960f04b58cb07a796a5ef0b2ea53e0337503279c8d373aa849f4b5c46a",
+    "docs/capstone/retrieval/planning/SEARCH-AND-SELECTION-V0.1.md": "08999037d2ef00111cbb5122fbce0f39bb0eabf22aa58126e2d4eae94151141b",
+    "docs/capstone/retrieval/planning/INFORMATION-NEEDS.md": "d71577c27cebd5d54f516a7b2120273c3afba7dc077be3799bae4ccecbde8ac0",
+    "docs/capstone/retrieval/planning/SEED-CANDIDATES.md": "eceaa8bf57c7863f9cb2c1842f893b5e1d386002f05786364ca12099eda195f2"
+  },
+  "catalog": {
+    "path": "/Volumes/PROWL-Data/PROWL/scratch/literature/catalog-streaming-20261010/catalog.sqlite",
+    "bytes": 510130282496,
+    "mtime_ns": 1791777500034174356,
+    "inode": 350921,
+    "expected_volume_uuid": "22750B93-2F3F-499D-87F5-902981BFAB59",
+    "replay_report": {
+      "applied_files": 1656,
+      "database_bytes": 510130282496,
+      "deleted_pmids": 10817,
+      "documents": 41226017,
+      "elapsed_seconds": 20573.331,
+      "engine": "prowl-streaming-corpus-v1",
+      "manifest_sha256": "aaa2a78495cdb92fb4d6d5f4e439532b5826899e0c8498a64f880b34f42a9be3",
+      "rights_qualified": false,
+      "selected_corpus": false,
+      "snapshot_replayed": true,
+      "state": "complete",
+      "total_files": 1656,
+      "version": "prowl-pubmed-catalog-preview-v2"
+    },
+    "manifest_sha256": "aaa2a78495cdb92fb4d6d5f4e439532b5826899e0c8498a64f880b34f42a9be3",
+    "replay_identity_sha256": "eef65bd419c787b945cc485b2ea241b4f912d5abfc57b77550710bd8d916b2e6",
+    "receipts_path": "/Volumes/PROWL-Data/PROWL/scratch/literature/pubmed-2026-20261009/receipts.jsonl",
+    "receipts_sha256": "9cdfc2c2e2804b94492652d322a3219d271085d284f6295cc4d538fece93e846",
+    "current_sqlite_applied_ledger_reverified": false
+  },
+  "mesh": {
+    "path": "/Volumes/PROWL-Data/PROWL/scratch/literature/mesh-2026-20261010/desc2026.xml",
+    "expected_sha256": "449792ed59ba4d60035e44724352f7361ec0dc945b67dcd821a50ff32f81bcdb",
+    "bytes": 312952703,
+    "rehash_this_check": false
+  },
+  "cutoff_year": 2026,
+  "lookup_status": {
+    "state": "scanning_titles",
+    "selection_run": false,
+    "seed_frozen": false,
+    "resumed": true,
+    "records_scanned": 39790000,
+    "title_matches": 21,
+    "seconds_this_invocation": 11106.285195791046
+  },
+  "proposed_output": "/Volumes/PROWL-Data/PROWL/scratch/literature/selection-journals-v01-r01",
+  "proposed_admission": "/Users/quintonevans/Desktop/Quinn/Desktop-Quinn/GitHub/PROWL/outputs/prowl/selection-launch-r01/admission.json",
+  "proposed_internal_log": "/Users/quintonevans/Desktop/Quinn/Desktop-Quinn/GitHub/PROWL/outputs/prowl/selection-launch-r01/invocation-01.jsonl",
+  "proposed_resources": {
+    "hours": 12,
+    "max_gib": 256,
+    "free_gib": 400,
+    "cache_mib": 32,
+    "workers": 1
+  },
+  "observed_free_bytes": {
+    "external": 2252800000000,
+    "internal": 120832000000
+  },
+  "pending": [
+    "lookup completion/exit evidence",
+    "citation and scope decisions",
+    "seed freeze/coverage/MeSH checks",
+    "reserve keys and exposure ledger",
+    "actual output-size/headroom review",
+    "fresh native admission and reviewed launch decision"
+  ]
+}
