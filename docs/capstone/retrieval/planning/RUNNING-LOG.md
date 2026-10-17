@@ -1660,3 +1660,14 @@ protected authoring/freeze; measurement-aware extension remains after core accep
 Follow-up in the same checkpoint: bound the inherited v1 needs hash as well as the v2 amendment.
 The final checker now passes 42 focused checks; the earlier 41-check result remains retained.
 Final actual v3/v4 validations pass, and draft release still refuses.
+
+## 2026-10-17: Explicit development human-review tracking (Codex)
+
+Quinton authorized moving toward evaluation review/freeze. Added an empty, exact-version public
+review record and read-only checker: wording/answer feedback, evidence-label decisions and the
+complete second consistency pass remain distinct. Only explicit human statements can be recorded;
+continuation/topic feedback was not promoted to approval. New content invalidates binding and new
+first-pass decisions reopen consistency. Nineteen invented-input checks pass; actual v4 record
+validates with zero events/30 pending cases at each stage and ready_for_tuning=false. Prior v4
+preparation/evidence pins unchanged. See ../DEVELOPMENT-REVIEW-WORKFLOW.md for human steps and limits.
+No protected content/storage, model/DB/service/selector/training work or inferred human hours.

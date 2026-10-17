@@ -10,7 +10,7 @@ Step 3: [bounded literature workflow qualified](LITERATURE-WORKFLOW-CLOSURE-2026
 Step 4: [seven-source corpus frozen](CORPUS-FREEZE-2026-10-17.md), 693 passages; 6 direct / 15 partial / 4 coverage gaps.
 Step 5: [plain-language revision](PLAIN-LANGUAGE-REVIEW-2026-10-17.md) delivered: ten revised questions, 70 spans, 42 checks; v4 remains human-review pending.
 Read the [plain-language questions and expected answers](DEVELOPMENT-QUESTIONS-AND-ANSWERS.md), grouped in batches of five.
-Next: review the ten revised questions, complete semantic/consistency review and independent protected authoring; AI-03 remains open.
+Next: follow the [development review workflow](DEVELOPMENT-REVIEW-WORKFLOW.md). Exact-version human-review tracking is delivered (19 new checks); no decisions inferred. Complete semantic/consistency review and independent protected authoring; AI-03 remains open.
 The bounded demo/workflow exists; semantic quality, broader evaluation and finding integration remain
 open. Full selection and training stay parked. See the [current handoff](CHAT-HANDOFF-2026-10-15.md)
 for implementation evidence and dated service observations.

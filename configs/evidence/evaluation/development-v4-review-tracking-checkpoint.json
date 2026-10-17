@@ -1,0 +1,20 @@
+{
+  "state": "human_review_tracking_ready_reviews_pending",
+  "test_checks_passed": 19,
+  "actual_review_events": 0,
+  "prior_v4_pins_unchanged": true,
+  "ready_for_tuning": false,
+  "protected_content_read": false,
+  "pins": {
+    "src/retrieval/development_review.py": "03127e9fc93a011cd295bbc61f62001b69ae5b952443793b83610718bad8f2f3",
+    "tests/retrieval/test_development_review.py": "0314039f3bfb7d2b638445dae703b088a1966bf682301186a19036a0291ee510",
+    "docs/capstone/contracts/retrieval/development-review-v1.schema.json": "82b72b4436422ae0583b72278e4b16e3c671e477a2b7c7438ac7ceb76bee3d5d",
+    "docs/capstone/retrieval/DEVELOPMENT-REVIEW-WORKFLOW.md": "9a3bc5f25e18128930a18d70c587bb853fdd0f114b6cf4bf6d72c6ce79acaf0b",
+    "configs/evidence/evaluation/development-v4-human-review.json": "c3f994714c9a1f631eb64b5e479997addb33884d5d21d93356231347c7cefb1c",
+    "configs/evidence/evaluation/development-v4-draft.json": "0ffdc97df533acc2c7e766e182be85e7506e940284c7f350e3ebd07a52503c5f",
+    "docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md": "060250a39693e41c0eaf4d53736ff56430428259277ac207d42c399ffc8d3c55",
+    "outputs/prowl/development-review-20261017/tests.xml": "c1cf6d8698c8f7291bc6c6e28ffe1a7ca22e263d9e724a16e7411fdb81a727f6",
+    "outputs/prowl/development-review-20261017/readiness.json": "2a9e1043f1fcf8a93d0c75f553160a48c21cf7b295942156161624c1e2388946"
+  },
+  "content_sha256": "036e7c5662d62131581fda03c7203f930cf3fb41afd320531bb6d21f69e75a04"
+}

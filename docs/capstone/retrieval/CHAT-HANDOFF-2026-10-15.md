@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 human-review tracking delivered:** `DEVELOPMENT-REVIEW-WORKFLOW.md` gives the next
+> human steps. `development_review.py` and its closed schema track explicit decisions against
+> draft/case/answer hashes; 19 invented-input checks pass. Actual v4 human-review record has zero
+> events, 30 pending cases in each stage, no inferred approval. Keep events append-only; content
+> revisions need a new record. Tracker never releases tuning or reads held-out content. Prior v4
+> draft/evidence pins remain unchanged. Next: Quinton's wording/answer and evidence decisions,
+> second consistency pass, independent protected authoring/backup and final split freeze.
+> No model/DB/service/selector/training/private-storage work. Spec v1.10; AI-03 remains In Progress.
+
 > **October 17 plain-language v4 delivered:** Read `PLAIN-LANGUAGE-REVIEW-2026-10-17.md` and
 > `DEVELOPMENT-QUESTIONS-AND-ANSWERS.md`. Ten question revisions (01/03/05/07/09/10/12/16/17/19),
 > two per family; 20 other records unchanged. V4 retains 20 answerable/8 refusals/2 gaps, 70 spans
