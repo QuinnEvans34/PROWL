@@ -62,11 +62,12 @@ def active(path):
 
 class ResearchWorkflow:
     def __init__(self, directory, retrieve, collection, encoder_id, retrieval_identity,
-                 generate=grounded_answer.generate_answer, generation_identity=None):
+                 generate=grounded_answer.generate_answer, generation_identity=None, admit=None):
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.retrieve, self.generate = retrieve, generate
         self.collection, self.encoder_id = collection, encoder_id
+        self.admit = admit or (lambda: None)
         # Explicit producer identities prevent reuse across changed corpus/query/model code.
         self.binding = dict(collection=collection, encoder_id=encoder_id,
             retrieval_identity=retrieval_identity, generation_identity=generation_identity or dict(
@@ -196,6 +197,7 @@ class ResearchWorkflow:
                 parent = self._snapshot(parent_id)
                 if parent[0]['binding'] != self.binding or parent[0]['question'] != question['label']:
                     raise ValueError('Recovery configuration mismatch')
+            self.admit()  # Reads of existing IDs remain available when storage/services are down.
             folder.mkdir(exist_ok=True)
             with exclusive(folder / 'owner.lock'):
                 manifest = publish(folder / 'request.json', dict(schema_version=SCHEMA, request=request,
@@ -234,6 +236,7 @@ class ResearchWorkflow:
                         continue
                     event(stage, 'running')
                     try:
+                        self.admit()
                         if stage == 'retrieve':
                             value = self.retrieve(question['label'])
                         elif stage == 'select':

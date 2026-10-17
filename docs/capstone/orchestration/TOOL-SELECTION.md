@@ -1,5 +1,13 @@
 # Orchestration tool selection
 
+**October 17 literature implementation checkpoint:** Quinton authorized continued development through
+completion-spec Step 3. The [bounded research workflow and rebuild qualification](../retrieval/LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md)
+is complete using the existing sequential repository adapter. This scope retains that runner without
+a new framework trial/dependency; it does not claim Prefect failed or close general D-201/G3.
+Corpus/query identities, storage admission and remaining literature recovery/rebuild checks now pass.
+Earlier general implementation-gate statements remain historical for this authorized slice; broader
+imaging orchestration and the general tool-selection trial remain separate.
+
 **Status:** Approved candidate plan; spike not run and D-201 remains open  
 **Version:** 0.1 approved design  
 **Owner:** Quinton Evans  

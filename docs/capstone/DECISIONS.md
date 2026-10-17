@@ -1997,3 +1997,15 @@ startupdate2; cause unproven from saved JSON alone. No additional model/weight/s
 for that review or demonstrated coding defect. Next prospective experiment/stop-policy choice
 requires its own concrete scope; this failed outcome and original criteria remain fixed. No public
 push or human runtime credit. Other-lane ownership and all historical decisions remain unchanged.
+
+
+## October 17 — literature runner scope under D-201
+
+Quinton's continuation through AI-expert completion-spec Step 3 authorizes the bounded literature
+implementation. Retain the delivered sequential repository `ResearchWorkflow` adapter for that slice:
+it provides immutable records, stage visibility, independently verified reuse and explicit linked
+recovery without a new orchestration dependency. The [closure evidence](retrieval/LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md)
+adds exact corpus/catalog binding, storage admission and canonical rebuild/parity qualification.
+This records the literature tool choice only. No Prefect trial ran; Prefect has not failed its
+selection criteria. General D-201, cross-workflow scheduling/accelerator coordination, full registry
+operations and broader imaging G3 remain open. No claim of answer-quality acceptance follows.

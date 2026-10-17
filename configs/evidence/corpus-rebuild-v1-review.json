@@ -1,0 +1,56 @@
+{
+  "version": "prowl-corpus-rebuild-review-v1",
+  "date": "2026-10-17",
+  "reference": "research-v1",
+  "destination": "research-workflow-rebuild-20261017",
+  "generation_calls": 0,
+  "inventory": {
+    "batch_count": 9,
+    "content_sha256": "415ca84294b21864c1a12c1a24effec3fd99b3f64be04576cf35c41cd400acc9",
+    "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+    "passage_count": 274,
+    "source_count": 2,
+    "version": "prowl-corpus-inventory-v1"
+  },
+  "queries": [
+    {
+      "exact": true,
+      "passage_ids": [
+        "psg:cef6f593a3a616fc671d54a5fc51e2777955a2e0824e82511b2962c15c25c837",
+        "psg:de4b1c4b1207c65b6cfa9c56a49dc600a83eb5ffa0d82cc5408695361599f56b",
+        "psg:973ed876a690949a8e985f5e5ab27d0c45547f38f09694713e20c54d35079196",
+        "psg:87994b1619ad6dbfa76a70503fbe21be07843244ce2b26fe53925a22df039054",
+        "psg:2e0c7b419607a5a3585bbee4b17142a9e5355fbef262d1b6b2a09577fdf156d1"
+      ],
+      "question_id": "radiomics"
+    },
+    {
+      "exact": true,
+      "passage_ids": [
+        "psg:5517ad3f5db64e34b3ea3819081e36e73527d50f69669530a5882fc09c9f9089",
+        "psg:a4b4aef1668824df202506d385480546947fbe616d189919b9511ac25647062c",
+        "psg:01984d4fda6dc9909db8b16e7b85e3d38addb8f3356c668c73fddf1c237a2d45",
+        "psg:17c562332b735b6111cee449e700fa499996230419ee5b215b00fe9710fd6b63",
+        "psg:32f7cea0430ee375ef6a2885c638051040dc3b8eaceab86848c7ad9cfea53bc8"
+      ],
+      "question_id": "eus"
+    },
+    {
+      "exact": true,
+      "passage_ids": [
+        "psg:75ec33d3aadd923dbf76bd03ad193433bff778cf3e68af755e83d823cee13b08",
+        "psg:973ed876a690949a8e985f5e5ab27d0c45547f38f09694713e20c54d35079196",
+        "psg:b53f30666a52af666b83b29a33e3afa342a7fadbdc12c977752e15290e9c5485",
+        "psg:2fba7694e27eeba0183f431f211bb9621385535b0ea91b7ff2d7a13a6a666722",
+        "psg:2334e50981b620d1661b0a95d402348e5d70cea8fd689d084a64dcb988eb002d"
+      ],
+      "question_id": "ct-detection"
+    }
+  ],
+  "seconds": 3.9017344169551507,
+  "state": "verified",
+  "reference_unchanged": true,
+  "passage_embedding_calls": 0,
+  "query_encoder": "Pinned MiniLM, CPU; one vector per unique guided facet reused for both collections",
+  "scope": "Two-review development corpus only; query parity is not relevance acceptance"
+}

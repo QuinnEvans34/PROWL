@@ -1,5 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 Step3 literature workflow qualified:**
+[Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md): corpus inventory/catalog now pinned;
+repeatable-read verification before retrieval; unchanged storage floors enforced before attempts/stages.
+63Python and3imaging component checks pass, including four artifact/event interruption boundaries,
+changed dependencies, missing artifacts, unavailable services and a real synthetic partial-batch resume.
+First test attempt52pass/5serializationfail retained and repaired. Separate real rebuild274passages/
+9batches/2sources in3.901734s; three guided query outputs exactly equal; originalresearch-v1 unchanged.
+No passage re-embedding/generation/training/full selector. Inventory415ca84294b21864c1a12c1a24effec3fd99b3f64be04576cf35c41cd400acc9.
+Existing sequential repository runner retained for this literature slice; general D-201/Prefect trial,
+broader imaging G3 and answer quality remain open. Historical completed responses remain readable;
+old failed runs require new requests after the producer-binding change. Owned workflow service now
+execsession11852/PID49262 on8015; oldPID3190 verified idle/stopped.8015/5180/11434health200, saved
+response exact after restart. Evidence outputs/prowl/workflow-closure-20261017/; rebuild and four
+syntheticDBrows retained. **Next Step4/W02-07 + W05-02: coverage review and bounded corpus freeze.**
+No inferred human hours. Earlier next-step/service statements remain historical.
+
 **October17 AI-02 complete — choice candidate rejected:**
 [Comparison](CHOICE-SELECTION-2026-10-17.md): ten calls/16.250867s,6/7nonempty positive responses,
 4/7clean,10/14aspects,9/13relevant exact excerpts,2/3correct abstentions,one invalid generation.
