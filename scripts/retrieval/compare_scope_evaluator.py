@@ -78,16 +78,21 @@ def main():
                         help='Frozen structured-span baseline; spans policy reuses only its retrieval')
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--evaluator', choices=scope_answer.EVALUATORS, required=True)
-    parser.add_argument('--policy', choices=['scope', 'records', 'spans'], default='scope')
+    parser.add_argument('--policy', choices=['scope', 'records', 'spans', 'assessed-spans'], default='scope')
     parser.add_argument('--bundles', type=Path, help='Retained source bundle directory for records')
     parser.add_argument('--diagnostic', action='store_true', help='Frozen five-case30B reasoning profile')
     args = parser.parse_args()
     if args.diagnostic and (args.policy != 'spans' or args.evaluator != 'qwen3:30b'):
         raise ValueError('Reasoning diagnostic requires direct30B spans')
+    direct = args.policy in ('spans', 'assessed-spans')
     selected = scope_answer
     bundles = {}
     if args.policy == 'spans':
         from src.retrieval import span_answer as selected
+    if args.policy == 'assessed-spans':
+        from src.retrieval import assessed_span_answer as selected
+        if args.evaluator != selected.MODEL:
+            raise ValueError('Assessed spans require pinned30B')
     if args.policy == 'records':
         from src.retrieval import study_evidence as selected
         if args.evaluator != selected.MODEL or not args.bundles:
@@ -121,6 +126,9 @@ def main():
                          'docs/capstone/retrieval/STUDY-EVIDENCE-2026-10-15.md']
     if args.policy == 'spans':
         source_paths += ['docs/capstone/retrieval/DIRECT-SPAN-COMPARISON-2026-10-15.md']
+    if args.policy == 'assessed-spans':
+        source_paths += ['src/retrieval/assessed_span_answer.py',
+                         'docs/capstone/retrieval/ASSESSED-SELECTION-2026-10-17.md']
     if profile:
         source_paths += ['configs/evidence/evaluation/reasoning-diagnostic-v1.json',
                          'docs/capstone/retrieval/REASONING-DIAGNOSTIC-2026-10-17.md']
@@ -132,13 +140,13 @@ def main():
     manifest = dict(suite=suite, suite_sha256=digest(suite), policy=selected.POLICY,
         started_at=datetime.now(timezone.utc).isoformat(), evaluator=args.evaluator,
         evaluator_sha256=scope_answer.EVALUATORS[args.evaluator], scope_reasoning=False,
-        prompt_sha256=digest(selected.selection_prompt(bool(profile))) if args.policy == 'spans' else (
+        prompt_sha256=digest(selected.selection_prompt(bool(profile))) if direct else (
             digest(selected.SYSTEM) if args.policy == 'scope' else None), source_sha256=sources,
         diagnostic_profile=profile, parent_suite_sha256=parent_suite_sha256,
         record_prompt_sha256=digest(selected.RECORD_SYSTEM) if args.policy == 'records' else None,
         match_prompt_sha256=digest(selected.MATCH_SYSTEM) if args.policy == 'records' else None,
         source_bundle_sha256={k: digest(v) for k, v in bundles.items()},
-        reused_selection_manifest_sha256=digest(previous) if args.policy != 'spans' else None,
+        reused_selection_manifest_sha256=digest(previous) if not direct else None,
         reused_retrieval_manifest_sha256=digest(previous),
         generation_mode=args.policy,
         corpus_record_sha256=suite['corpus_record_sha256'],
@@ -171,7 +179,7 @@ def main():
                 current, raw = case['id'], []
                 old = inputs[current]
                 def generate(q, p):
-                    if args.policy == 'spans':
+                    if direct:
                         return selected.generate_answer(q, p, model=args.evaluator, reasoning=bool(profile))
                     if args.policy == 'records':
                         return selected.verify_answer(q, p, old['generation'], bundles, cache, save_record=save_record)

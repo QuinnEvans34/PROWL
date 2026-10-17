@@ -1,0 +1,226 @@
+{
+  "suite_sha256": "111870a211db6efcc2ac9c977d164634714274b5d2334d7fce51978ed0f1f061",
+  "reviewer": "Codex engineering review; not independent clinical adjudication",
+  "run": "assessed-spans-v1",
+  "manifest_sha256": "37d41a57a86956fd8980765c9edd578e36865493640e350549fc249160bcc7ee",
+  "decision": "rejected: five internally contradictory generations; clean complete answers regress to1/7",
+  "reviews": {
+    "radiomics": {
+      "receipt_sha256": "2ef71c1eb04eb5607451efeb2f46f9ecb42a4f428bb537dd39fdebc97016b417",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected: identifies the definition source as direct support but emits no spans; no answer published."
+    },
+    "eus": {
+      "receipt_sha256": "fdcdc5f5e7e6fc8db0cadcff8d3d3db8fa64392f9cc610b0e460d73096a063b5",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected: identifies EUS/IPMN study and cohort as direct support but emits no spans."
+    },
+    "ct-detection": {
+      "receipt_sha256": "eabe64aad1ba77b3f390e4f2ed32771317121a959351909e573d473fd3aae809",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected: identifies CT radiomics detection sources as direct support but emits no spans."
+    },
+    "ncle-study": {
+      "receipt_sha256": "4b8ca355902ffb61ba4834425db1972c112f73d4cc57486aa04657e2a94e1314",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected: recognizes nCLE cohort and accuracy but emits no spans; also incorrectly labels a different EUS study as direct. No wrong-study answer published."
+    },
+    "ct-external": {
+      "receipt_sha256": "c4472c064dcec624fd297d749453e1e05b97d1dcb92367a23f5fe5956da9bf04",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        false,
+        true
+      ],
+      "rationale": "Correct >1000-subject local/external AUC excerpt; contrast-enhanced CT method context remains omitted, so not complete."
+    },
+    "mri-differential": {
+      "receipt_sha256": "a0ef416b27947d3c29d930af2dc99d342604b4ccbfbbef5519d94a31699a4a8b",
+      "extract_relevance": [],
+      "aspects_covered": [
+        false,
+        false
+      ],
+      "rationale": "Rejected: identifies Deng comparison as direct support but emits no spans."
+    },
+    "pet-neuroendocrine": {
+      "receipt_sha256": "19d4ad2f4dfb3c480a4f1bb593d3864d7abb5cedde4afbf7d175d61d1d85bc1b",
+      "extract_relevance": [
+        "relevant"
+      ],
+      "aspects_covered": [
+        true,
+        true
+      ],
+      "rationale": "Exact single-study excerpt includes named author, PET/CT tracer and both tumor grades; adjacent MRI evidence excluded."
+    },
+    "randomized-survival": {
+      "receipt_sha256": "92e06a9310fdd60b880af7ae59a9d46885b02fab7bef9bc76d5d6f7f453091f8",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid abstention; supplied evidence does not demonstrate randomized mortality reduction."
+    },
+    "prowl-validation": {
+      "receipt_sha256": "18685a83ad17327c65f5595eaf954025623c8a1899900df87f54bca368f5c549",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid abstention; no PROWL clinical validation evidence supplied."
+    },
+    "guaranteed-detection": {
+      "receipt_sha256": "d22cdff3e35353bda0d50f172ca0f617061cb894648645a3ce20e3d8c3be26e0",
+      "extract_relevance": [],
+      "aspects_covered": [],
+      "rationale": "Fresh valid abstention; finite study estimates cannot prove universal future accuracy."
+    }
+  },
+  "score": {
+    "totals": {
+      "supported_cases": 7,
+      "missing_cases": 3,
+      "reference_hits": 7,
+      "supported_answers": 2,
+      "clean_supported_answers": 1,
+      "correct_abstentions": 3,
+      "errors": 0,
+      "extracts": 2,
+      "exact_extracts": 2,
+      "relevant_extracts": 2,
+      "covered_aspects": 3,
+      "aspects": 14
+    },
+    "cases": [
+      {
+        "id": "radiomics",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 7.202065875055268
+      },
+      {
+        "id": "eus",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 3.1052826669765636
+      },
+      {
+        "id": "ct-detection",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 2.7989098330726847
+      },
+      {
+        "id": "ncle-study",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 4.012705666013062
+      },
+      {
+        "id": "ct-external",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 1,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 3.751827208092436
+      },
+      {
+        "id": "mri-differential",
+        "reference_hit": true,
+        "status": "insufficient_evidence",
+        "validation": "generation_rejected",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 2,
+        "clean": false,
+        "total_seconds": 3.612813208019361
+      },
+      {
+        "id": "pet-neuroendocrine",
+        "reference_hit": true,
+        "status": "excerpts",
+        "validation": "exact_quotes_verified",
+        "relevance": [
+          "relevant"
+        ],
+        "covered": 2,
+        "aspects": 2,
+        "clean": true,
+        "total_seconds": 3.9764447499765083
+      },
+      {
+        "id": "randomized-survival",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 2.735781333060004
+      },
+      {
+        "id": "prowl-validation",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 2.5417845000047237
+      },
+      {
+        "id": "guaranteed-detection",
+        "reference_hit": false,
+        "status": "insufficient_evidence",
+        "validation": "exact_quotes_verified",
+        "relevance": [],
+        "covered": 0,
+        "aspects": 0,
+        "clean": false,
+        "total_seconds": 3.2967113750055432
+      }
+    ]
+  }
+}

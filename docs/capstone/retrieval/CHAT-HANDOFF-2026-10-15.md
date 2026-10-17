@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+**October17 assessed selection comparison rejected:**
+[Quality comparison](ASSESSED-SELECTION-2026-10-17.md). New experimental single-call passage
+assessment plus span selector:10calls/37.043s,2/7supported,1/7clean,3/14aspects,3/3fresh abstentions,
+5invalid generations. Each invalid output marks evidence direct then emits no spans; guard rejects.
+PET improves; CT method context still missing; nCLE assessment also mislabels another EUS study.
+No promotion; live v2 unchanged.43focused tests and10exact offline replay/request/input checks pass;
+public score recomputes. Next recommended: one authoritative evidence choice per source with status
+derived by code, frozen contract/tests before one comparison. No next run or extra reviewer stack.
+Full selector/training remain parked; no hours credit.
+
 **October17 controlled HTTP restart recovery passed:**
 [Recovery verification](WORKFLOW-RECOVERY-CHECK-2026-10-17.md). Killed only an isolated synthetic
 HTTP service after selection publication; a fresh process reported interruption. Explicit linked
