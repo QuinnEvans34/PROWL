@@ -1,0 +1,28 @@
+{
+  "version": "disease-fact-review-v1",
+  "catalog_version": "reviewed-disease-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "status": "engineering_reviewed",
+  "reviewer": "single_engineering_agent",
+  "independent_review": "pending",
+  "records": {
+    "schima2020-head-mass-v1": "7f845513292818c9447c3d71d67c3e4727cfc52e055fb1f068638e4993c94080",
+    "schima2020-mfcp-pdac-v1": "e5f0e910c550bc3962c05e8640a265df700aacb7f01e03b793ca7a2b4159389c",
+    "schima2020-focal-aip-pdac-v1": "bbea8404561aac35f971e056c49fda83f159fd757fb210cf300e47d3083ec3d3"
+  },
+  "decisions": [
+    "Read canonical Schima2020 ordinals4,7,9,22,24,37,39,43,44, including surrounding passage context. This is a narrative review, not a new diagnostic-accuracy study.",
+    "Focal enlargement is a mass-forming pattern, not a numerical pancreas-head size cutoff. CP occasionally shows this pattern; pancreatic head location also overlaps PDAC.",
+    "MFCP/PDAC requires combined findings; no single reliable discriminator. This source limitation stays with both MFCP records. Do not broaden PDAC to all pancreatic tumors.",
+    "Duct-penetrating sign strongly favors an inflammatory mass but does not establish a diagnosis; method is MRCP. Omit the cited94percent accuracy because its population/denominator are not curated.",
+    "Calcification combination uses parenchymal OR ductal calcification, not a requirement for both. Tissue is a plain-language paraphrase of parenchymal.",
+    "Complete duct obstruction and arterial encasement by a soft-tissue mass are more likely in PDAC in this comparison; these do not diagnose a current scan.",
+    "Focal AIP homogeneous enhancement is portal-venous phase CT, not every phase or all inflammation. Retain smooth duct/no abrupt cutoff, mild upstream main duct dilatation≤5mm and absent proximal atrophy as a cluster. The5mm figure concerns the duct, not head/lesion diameter.",
+    "AIP overlap comes from ordinal43, not misapplied MFCP-specific single-feature evidence. No AIP exclusion rule or diagnostic certainty inferred.",
+    "Patient diagnosis and numerical head-size threshold exclusions are application policy, labeled separately from source claims. No assessment of the user scan, treatment or probability.",
+    "Records contain reusable source relations and structured comparison scope; no question text, expected answers or evaluation labels. Engineering review binds this interpretation but does not prove it or count as independent/human acceptance."
+  ]
+}

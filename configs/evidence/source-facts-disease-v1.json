@@ -1,0 +1,306 @@
+{
+  "version": "reviewed-disease-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "spans": {
+    "schima2020-7-330-494": {
+      "passage_id": "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 7,
+      "start": 330,
+      "end": 494,
+      "text_sha256": "8698e5192c9e05eccb7cf177d3e69e71b920a8098914350b48f604c6a35251ec"
+    },
+    "schima2020-9-287-416": {
+      "passage_id": "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 9,
+      "start": 287,
+      "end": 416,
+      "text_sha256": "51c62710f6c9432cbe02db23a9fd010f354605485447b284cdf292993e7409bd"
+    },
+    "schima2020-4-156-514": {
+      "passage_id": "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 4,
+      "start": 156,
+      "end": 514,
+      "text_sha256": "f7ca8fc1523da186cb6ad47693b386463f94f16bfab42fb989054ec1149a3d92"
+    },
+    "schima2020-22-0-538": {
+      "passage_id": "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 22,
+      "start": 0,
+      "end": 538,
+      "text_sha256": "c14cdb60cdfdfe5d4f3bda5a81efaf10b580d5d50f8bd1b7b2942250a1a74707"
+    },
+    "schima2020-24-160-345": {
+      "passage_id": "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 24,
+      "start": 160,
+      "end": 345,
+      "text_sha256": "756036bce4167d55285756f64c5a75e2697db65d75cc09050a5c454e0ad15a1d"
+    },
+    "schima2020-37-0-246": {
+      "passage_id": "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 37,
+      "start": 0,
+      "end": 246,
+      "text_sha256": "3f3d7a933f4e239dfe86f04e63d5587fe841192c74d8f36b564c860fbcef43ab"
+    },
+    "schima2020-37-247-382": {
+      "passage_id": "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 37,
+      "start": 247,
+      "end": 382,
+      "text_sha256": "8ac2279ec93e8da607d382713cf8e778351a91a22ddd5a53c8c41760c65e6ea7"
+    },
+    "schima2020-39-0-231": {
+      "passage_id": "psg:18d082ee8c55987c4eb9d2d4be785dfe351ab4815784a50136ddbf858188b7e0",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 39,
+      "start": 0,
+      "end": 231,
+      "text_sha256": "1690a8e6171a10752612c750a5e2a4ede0138fc530accaec178b41c999fd0de4"
+    },
+    "schima2020-43-406-502": {
+      "passage_id": "psg:bb3d25599db010705a41dd127581310f2b8188ef54084a2aca58c837d8a0e001",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 43,
+      "start": 406,
+      "end": 502,
+      "text_sha256": "c12a66e263dfad19df719bd5f857677f109936241ca592154afd716afb1afd21"
+    },
+    "schima2020-44-0-362": {
+      "passage_id": "psg:e4c0179d652101d690e5510e1df5befdb31d4aa50317759df2bc2ce50c872818",
+      "work_id": "work:pmid:32703312",
+      "ordinal": 44,
+      "start": 0,
+      "end": 362,
+      "text_sha256": "28ed76b57171f665abac9ebb9b436d3e4b7e349dd3dc88d5c311d051873fb66f"
+    }
+  },
+  "records": [
+    {
+      "id": "schima2020-head-mass-v1",
+      "work_id": "work:pmid:32703312",
+      "organ": "pancreas",
+      "comparison": [
+        "MFCP",
+        "PDAC"
+      ],
+      "topic": "focal_head_mass",
+      "facts": [
+        {
+          "role": "finding",
+          "subject": "Chronic pancreatitis",
+          "relation": "occasionally_shows",
+          "object": "mass-like focal enlargement, usually in the pancreatic head",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-7-330-494"
+          ]
+        },
+        {
+          "role": "finding",
+          "subject": "The pancreatic head",
+          "relation": "predominant_site_for",
+          "object": "pancreatic ductal adenocarcinoma (PDAC)",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-9-287-416"
+          ]
+        },
+        {
+          "role": "overlap",
+          "subject": "mass-forming chronic pancreatitis (MFCP)",
+          "relation": "can_mimic",
+          "object": "pancreatic ductal adenocarcinoma (PDAC)",
+          "method": "CT or MRI",
+          "phase": null,
+          "evidence": [
+            "schima2020-4-156-514"
+          ]
+        },
+        {
+          "role": "single_feature_limit",
+          "subject": "A single imaging feature",
+          "relation": "cannot_reliably_distinguish",
+          "object": "mass-forming chronic pancreatitis (MFCP) from pancreatic ductal adenocarcinoma (PDAC)",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-37-0-246"
+          ]
+        },
+        {
+          "role": "combination_limit",
+          "subject": "The comparison of MFCP with PDAC",
+          "relation": "depends_on",
+          "object": "the combination of imaging features present or absent",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-37-0-246"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+        "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3"
+      ]
+    },
+    {
+      "id": "schima2020-mfcp-pdac-v1",
+      "work_id": "work:pmid:32703312",
+      "organ": "pancreas",
+      "comparison": [
+        "MFCP",
+        "PDAC"
+      ],
+      "topic": "imaging_differentiation",
+      "facts": [
+        {
+          "role": "finding",
+          "subject": "Smooth narrowing of the pancreatic duct through a mass without abrupt or complete obstruction",
+          "relation": "favors",
+          "object": "an inflammatory mass",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-22-0-538"
+          ]
+        },
+        {
+          "role": "method",
+          "subject": "The duct-penetrating sign",
+          "relation": "best_seen",
+          "object": "magnetic resonance cholangiopancreatography (MRCP)",
+          "method": "MRCP",
+          "phase": null,
+          "evidence": [
+            "schima2020-24-160-345"
+          ]
+        },
+        {
+          "role": "finding",
+          "subject": "mass-forming chronic pancreatitis (MFCP)",
+          "relation": "likely_shows",
+          "object": "diffuse spotted or coarse calcifications in pancreatic tissue, or ductal calcifications, together with a duct-penetrating sign",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-37-247-382"
+          ]
+        },
+        {
+          "role": "finding",
+          "subject": "Complete pancreatic duct obstruction by a mass or arterial encasement by a soft-tissue mass",
+          "relation": "more_likely_in",
+          "object": "pancreatic ductal adenocarcinoma (PDAC) than MFCP",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-39-0-231",
+            "schima2020-37-0-246"
+          ]
+        },
+        {
+          "role": "overlap",
+          "subject": "mass-forming chronic pancreatitis (MFCP)",
+          "relation": "can_mimic",
+          "object": "pancreatic ductal adenocarcinoma (PDAC)",
+          "method": "CT or MRI",
+          "phase": null,
+          "evidence": [
+            "schima2020-4-156-514"
+          ]
+        },
+        {
+          "role": "single_feature_limit",
+          "subject": "A single imaging feature",
+          "relation": "cannot_reliably_distinguish",
+          "object": "mass-forming chronic pancreatitis (MFCP) from pancreatic ductal adenocarcinoma (PDAC)",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-37-0-246"
+          ]
+        },
+        {
+          "role": "combination_limit",
+          "subject": "The comparison of MFCP with PDAC",
+          "relation": "depends_on",
+          "object": "the combination of imaging features present or absent",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-37-0-246"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66",
+        "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab",
+        "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+        "psg:18d082ee8c55987c4eb9d2d4be785dfe351ab4815784a50136ddbf858188b7e0"
+      ]
+    },
+    {
+      "id": "schima2020-focal-aip-pdac-v1",
+      "work_id": "work:pmid:32703312",
+      "organ": "pancreas",
+      "comparison": [
+        "focal_AIP",
+        "PDAC"
+      ],
+      "topic": "imaging_differentiation",
+      "facts": [
+        {
+          "role": "finding",
+          "subject": "Focal autoimmune pancreatitis (AIP)",
+          "relation": "usually_shows",
+          "object": "homogeneous enhancement",
+          "method": "CT",
+          "phase": "portal-venous",
+          "evidence": [
+            "schima2020-44-0-362"
+          ]
+        },
+        {
+          "role": "finding",
+          "subject": "Focal autoimmune pancreatitis (AIP)",
+          "relation": "usually_shows",
+          "object": "smooth pancreatic duct narrowing without abrupt cut-off, only mild upstream main-duct dilatation (≤5 mm), and no proximal pancreatic atrophy",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-44-0-362"
+          ]
+        },
+        {
+          "role": "overlap",
+          "subject": "Focal autoimmune pancreatitis (AIP)",
+          "relation": "can_mimic",
+          "object": "pancreatic ductal adenocarcinoma (PDAC)",
+          "method": null,
+          "phase": null,
+          "evidence": [
+            "schima2020-43-406-502"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:e4c0179d652101d690e5510e1df5befdb31d4aa50317759df2bc2ce50c872818"
+      ]
+    }
+  ]
+}
