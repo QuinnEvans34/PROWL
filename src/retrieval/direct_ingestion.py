@@ -17,13 +17,21 @@ from .records import canonical_bytes, make_revision, make_work, make_rights, may
 LICENSE = 'https://creativecommons.org/licenses/by/4.0/'
 XLINK = '{http://www.w3.org/1999/xlink}href'
 DIMENSIONS = 384
-SOURCE_PROFILES = ('legacy-v1', 'coverage-v1')
+SOURCE_PROFILES = ('legacy-v1', 'coverage-v1', 'disease-v1')
 JATS_HEADER = b'<!DOCTYPE article\n  PUBLIC "-//NLM//DTD JATS (Z39.96) Journal Archiving and Interchange DTD with MathML3 v1.4 20241031//EN" "JATS-archivearticle1-4-mathml3.dtd">'
 ADMIN_SECTIONS = {'acknowledgments', 'acknowledgements', 'author contributions', 'funding',
     'institutional review board statement', 'informed consent statement', 'conflicts of interest',
     'conflict of interest statement', 'ethics statement', 'contributor information',
     'data availability statement', 'footnotes'}
 NON_PROSE = {'table-wrap', 'fig', 'supplementary-material', 'ref-list'}
+# Opt-in publisher headings observed in the disease-reference sources. Earlier
+# profiles retain their exact representations and offsets for accepted labels.
+DISEASE_ADMIN_SECTIONS = ADMIN_SECTIONS | {
+    'abbreviations', 'authors’ contributions', 'authors’ information',
+    'availability of data and materials', 'ethics approval and consent to participate',
+    'consent for publication', 'competing interests', 'conflict of interest',
+    'ethical approval',
+}
 
 
 def prose_text(node):
@@ -51,7 +59,8 @@ def source_bundle(path, *, profile='legacy-v1'):
     if profile not in SOURCE_PROFILES:
         raise ValueError('Unknown source extraction profile')
     parsed = raw
-    if profile == 'coverage-v1' and parsed.lstrip().startswith(JATS_HEADER):
+    modern = profile in ('coverage-v1', 'disease-v1')
+    if modern and parsed.lstrip().startswith(JATS_HEADER):
         # Exact declaration only; never fetch a DTD or resolve an entity. Identity uses raw bytes.
         parsed = parsed.lstrip()[len(JATS_HEADER):]
     if len(raw) > 32 * 1024**2 or b'<!DOCTYPE' in parsed.upper() or b'<!ENTITY' in parsed.upper():
@@ -63,14 +72,14 @@ def source_bundle(path, *, profile='legacy-v1'):
     if meta.findall('related-article'):
         raise ValueError('Related-article notices require review')
     links = [e.get(XLINK, '') for e in meta.findall('./permissions/license//ext-link')]
-    if profile == 'coverage-v1':
+    if modern:
         links.extend(e.get(XLINK, '') for e in meta.findall('./permissions/license'))
         links.extend(text(e) for e in meta.findall(
             './permissions/license/{http://www.niso.org/schemas/ali/1.0/}license_ref'))
     # Older publisher JATS uses HTTP for this same exact licence identifier.
     # Opt in only for coverage extraction; preserve legacy acceptance behavior.
     accepted_licenses = {LICENSE}
-    if profile == 'coverage-v1':
+    if modern:
         accepted_licenses.add('http://creativecommons.org/licenses/by/4.0/')
     if not accepted_licenses.intersection(links):
         raise ValueError('Explicit CC BY 4.0 licence required')
@@ -90,14 +99,15 @@ def source_bundle(path, *, profile='legacy-v1'):
         def walk(node, heading):
             if node.tag in NON_PROSE:
                 return
-            if profile == 'coverage-v1' and node.tag in ('ack', 'fn-group', 'fn', 'bio', 'contrib-group', 'notes'):
+            if modern and node.tag in ('ack', 'fn-group', 'fn', 'bio', 'contrib-group', 'notes'):
                 return
             if node.tag == 'sec':
                 heading = text(node.find('title')) or heading
-                if profile == 'coverage-v1' and heading.strip().lower() in ADMIN_SECTIONS:
+                excluded = DISEASE_ADMIN_SECTIONS if profile == 'disease-v1' else ADMIN_SECTIONS
+                if modern and heading.strip().lower() in excluded:
                     return
             if node.tag == 'p':
-                value = prose_text(node).strip() if profile == 'coverage-v1' else text(node)
+                value = prose_text(node).strip() if modern else text(node)
                 if value:
                     sections.append(dict(section_id=f'{region}-{len(sections)}', title=heading, paragraphs=[value]))
                 return

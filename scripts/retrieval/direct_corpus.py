@@ -12,7 +12,7 @@ import time
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
-from src.retrieval.direct_ingestion import Encoder, source_bundle, source_passages, encoder_passages, frozen_batch, write_once, initialize, load_batch, search, digest
+from src.retrieval.direct_ingestion import Encoder, SOURCE_PROFILES, source_bundle, source_passages, encoder_passages, frozen_batch, write_once, initialize, load_batch, search, digest
 
 
 def read_config(path):
@@ -98,7 +98,7 @@ def main():
     sub=p.add_subparsers(dest='action',required=True)
     sub.add_parser('start');sub.add_parser('stop')
     i=sub.add_parser('ingest');i.add_argument('--sources',nargs='+',required=True);i.add_argument('--artifacts',required=True)
-    i.add_argument('--source-profile',choices=('legacy-v1','coverage-v1'),default='legacy-v1')
+    i.add_argument('--source-profile',choices=SOURCE_PROFILES,default='legacy-v1')
     i.add_argument('--collection',default='research-v1');i.add_argument('--batch-size',type=int,default=32)
     i.add_argument('--seconds',type=float,default=300);i.add_argument('--max-batches',type=int,default=0)
     l=sub.add_parser('load');l.add_argument('--batches',nargs='+',required=True);l.add_argument('--collection',required=True)

@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October17 disease-reference slice COMPLETE:** Quinton approves PanTS plus pancreatitis/cancer
+> sources first, cystic disease later. Read DISEASE-REFERENCE-CORPUS-2026-10-17.md and spec v1.15.
+> Separate research-disease-v1/rebuild:14papers/1,179passages/41batches,232newpassages from
+> PMC8292294/PMC7376657/PMC8578112/PMC7183518; corpusSHAeae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8.
+> New disease-v1 extraction removes publisher administration; all10oldsourcebundles reproduceexact.
+>58affectedtests pass/5optionalDBskips; real build/rebuild and3existing guided query parities pass.
+> All five old collections preserved. No live promotion or disease answer-quality score.
+> New disease-coverage-v1 maps5reference-context needs/1partial/2gaps/1deferred to exactlocators.
+> Four narrative2020–2021reviews, not currentguidelines/universalnormalinterval/diagnosisrules.
+> AI-heavyPMC10887967 inspected but excluded; restrictedPMC10864763 and guideline/reference candidates
+> not admitted. Evidence outputs/prowl/disease-corpus-20261017; AI-08source slice complete.
+> Next: versioned scan-centered capabilities, measurement inputs/tool availability and independent
+> engineering-supported labeling workflow. Quinton writes questions, not evidence spans; earlier
+> private worksheets carry supersession notices. V5acceptance belongs to prior ten-source scope;
+> do not treat it as approval of new disease labels or request30questions before reconciliation.
+> No PanTS patient/report/privateheldout reads, diagnosisauthority, training/fullselector/generation,
+> service restarts or inferred hours. Measurement implementation still follows applicable gates.
+
 > **October 17 role clarification / research discussion:** Quinton wants scan-centered radiologist
 > questions (head size; meaning of size findings), not general anatomy trivia. He can write questions
 > but should not be assigned technical evidence labeling. Independent labeling arrangement and any

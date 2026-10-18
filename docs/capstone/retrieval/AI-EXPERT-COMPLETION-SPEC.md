@@ -1,13 +1,19 @@
 # AI expert completion specification
 
-**Version:** 1.14 — October 17, 2026 (development accepted; private authoring tools)\
+**Version:** 1.15 — October 17, 2026 (pancreatitis and cancer reference corpus)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes. Targeted v2 corpus built/rebuilt: 10 sources, 947 passages. All 30 development v5 cases are accepted for wording, evidence and full consistency. Private authoring templates, source-reading pack and offline checker are delivered; actual protected authoring/backup/freeze remains pending. Response quality remains open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Next reconcile the scan-centered capability contract and engineering-owned evidence labeling before revising evaluation. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
-Use corpus v2 and development v5 for the next freeze. The prior v4 first-pass approval remains historical
-and is carried only where exact content permits. No tuning before both splits are frozen.
+Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.
+
+October 17 direction approved: retain PanTS and prioritize pancreatitis/pancreatic-cancer evidence,
+then dedicated cystic-lesion coverage. The expert serves scan-centered radiologist tasks: verified
+measurements, inspectable findings and cited general disease context. General anatomy trivia is not
+the product focus. Quinton supplies natural questions; engineering arranges evidence labeling and
+independent verification. Do not require him to search articles or enter offsets. Current private
+worksheets are historical technical references pending that revised workflow.
 
 ## 1. Outcome and authority
 
@@ -130,6 +136,7 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 2 | Test one authoritative evidence choice per source — [AI-02](https://trello.com/c/VnFmSvXO) | [One comparison and rejection evidence](CHOICE-SELECTION-2026-10-17.md): 4/7 clean, 10/14 aspects, 2/3 correct abstentions, one invalid generation | **Complete — investigation; quality failed** |
 | 3 | Close literature DAG and rebuild behavior — [W04-01](https://trello.com/c/Z9QSh78P) | [Inventory, invalidation, recovery and exact rebuild evidence](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md) | **Complete — bounded literature scope; broader G3 open** |
 | 4 | Fill corpus coverage gaps and freeze the index — [W02-07](https://trello.com/c/fGxysGgy), [W05-02](https://trello.com/c/OqxGSjju) | [Seven-source freeze and coverage limits](CORPUS-FREEZE-2026-10-17.md); 693 passages, exact rebuild | **Complete — bounded candidate; 4 coverage gaps retained** |
+| 4b | Build pancreatitis/cancer reference sources — [AI-08](https://trello.com/c/HmDLnOYF) | [Source qualification and exact rebuild](DISEASE-REFERENCE-CORPUS-2026-10-17.md); preserve accepted baseline | **Complete — source slice; product integration pending** |
 | 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | **In progress — development review complete; independent protected authoring/freeze pending** |
 | 6 | Measure and select retrieval — [W06-02](https://trello.com/c/zDFlThwi) | Development lexical/dense/hybrid comparison and frozen selection with D-202 disposition | Queued after 5 |
 | 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Queued after 6 |
@@ -189,6 +196,12 @@ specification. W02-07/W05-02 completion must state the bounded corpus scope actu
 
 ### Step 5 — Question and label freeze
 
+**Current next action:** reconcile the scan-centered capability/evidence contract and independent
+labeling workflow with the disease-reference corpus. The older count/family design below is the
+preserved protocol, not an instruction to manufacture answerable questions or assign technical
+labeling to Quinton. Any replacement criteria must be versioned before results; prior accepted v5
+review cannot approve new disease labels. No held-out questions are requested during this reconciliation.
+
 October 17 user requirement: qualify everyday questions and readable answers under the
 [plain-language demo plan](PLAIN-LANGUAGE-DEMO-PLAN.md). Before final freeze, review anatomy/size
 coverage and version selected plain-language development questions. Preserve the 60-case design,
@@ -201,8 +214,7 @@ intents/paraphrases in one split and complete the required second consistency pa
 
 Use the [development review workflow](DEVELOPMENT-REVIEW-WORKFLOW.md) to record explicit wording/
 answer, evidence-label and second-pass decisions against the exact draft/case/answer hashes.
-The delivered tracker has 19 focused checks; its actual record has zero events. It does not grant
-tuning release or replace independent protected authoring and the final split-freeze artifact.
+The current v5 record has three explicit events plus inherited v4 decisions, completing all30 human review stages for the prior scope. It does not grant tuning release or replace the final split-freeze artifact.
 
 Expected answers are evaluation references only: never index them as literature or attach them to
 the generation prompt. [Six boundary checks](ANSWER-KEY-BOUNDARY-2026-10-17.md) pass for the current
@@ -212,7 +224,7 @@ The existing exposed ten-case suite stays a separate development regression; do 
 held-out. Quinton owns protected held-out authoring/storage under the existing encrypted-image,
 independent-backup and read-only evaluation procedure. Agents receive schemas, synthetic fixtures,
 development data and held-out hashes/counts, never the held-out questions/labels or mount credentials.
-This human dependency must be prepared early through a clear authoring template; agent-generated
+The independent labeling arrangement must be resolved without assigning source-search/offset work to Quinton; agent-generated
 questions already exposed to development cannot substitute for it. No image/storage allocation is
 authorized merely by listing the task. Git excludes held-out content and restricted source text.
 
@@ -277,7 +289,7 @@ planning targets, not new runtime or completion guarantees. Beginning early is u
 completion is measured by evidence, not by the calendar or number of passing engineering tests.
 
 Only one implementation task is active in this lane. Steps 1–2 are complete in their stated scopes;
-Steps 3–4 are complete for the bounded literature adapter and corpus, expanded to ten sources before freeze; Step 5 development review is complete and awaits independent protected authoring/backup/freeze. Other new tasks stay
+Steps 3–4 are complete for the bounded literature adapter and corpus, expanded to ten sources before freeze; Step 5 development review is complete for the prior scope; the new disease-source slice is complete, and capability/labeling reconciliation now precedes protected authoring/backup/freeze. Other new tasks stay
 in Backlog. The full-selector card is parked in Backlog, and W02-08 retains the existing prototype
 history pending its scoped closeout. Existing milestone cards remain the roll-up records; new AI
 cards are execution subtasks, not replacement project milestones. Broader-card dates stay unchanged.
@@ -294,7 +306,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 2 / AI-02 | Complete October 17 — rejected investigation | [Comparison](CHOICE-SELECTION-2026-10-17.md); 50 checks and ten exact offline replays; no promotion or second model run. |
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
-| Step 5 / AI-03 | In progress — development review complete | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
+| Step 4b / AI-08 | Complete — source slice only | Four disease references added to a separate14-source/1,179-passage collection; exact rebuild, old inventories and58tests verified. [Report](DISEASE-REFERENCE-CORPUS-2026-10-17.md). |
+| Step 5 / AI-03 | In progress — development review complete for prior scope | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 

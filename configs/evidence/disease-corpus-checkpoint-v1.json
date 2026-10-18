@@ -1,0 +1,167 @@
+{
+  "version": "prowl-disease-corpus-checkpoint-v1",
+  "state": "verified_candidate_not_promoted",
+  "parent_commit": "5dda2c7280371a49943a91242a27b13ce9b61a75",
+  "verification": {
+    "all14_sources_reextract_exact": true,
+    "coverage_locators_verified": true,
+    "db_bytes": 43022003,
+    "generation_calls": 0,
+    "guided_query_parity_count": 3,
+    "health": {
+      "ollama": {
+        "bytes": 892,
+        "status": 200
+      },
+      "ui": {
+        "bytes": 1439,
+        "status": 200
+      },
+      "workflow": {
+        "bytes": 29,
+        "status": 200
+      }
+    },
+    "independent_rebuild_exact": true,
+    "inventory": {
+      "batch_count": 41,
+      "content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+      "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+      "passage_count": 1179,
+      "source_count": 14,
+      "version": "prowl-corpus-inventory-v1"
+    },
+    "old_five_collections_unchanged": true,
+    "prior_development_and_corpus_bytes_unchanged": true,
+    "private_or_patient_content_read": false,
+    "rebuild_seconds": 6.287463500048034,
+    "state": "verified_candidate_corpus",
+    "time": "2026-10-18T00:21:14.641451+00:00",
+    "training_calls": 0
+  },
+  "tests": {
+    "passed": 58,
+    "optional_database_skipped": 5,
+    "failed": 0
+  },
+  "repository_artifacts": [
+    {
+      "path": "configs/evidence/corpus-disease-v1.json",
+      "bytes": 48158,
+      "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+    },
+    {
+      "path": "configs/evidence/disease-coverage-v1.json",
+      "bytes": 10875,
+      "sha256": "7f418f5dfa80232fb04f2665995714bd2a722577ad53c49ed61036614d9ec117"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "bytes": 28983,
+      "sha256": "543a96b42cbcd552a6cbf4631fbf15a22f1f6e7ac80c92ef7f47c853f20337e5"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "bytes": 49595,
+      "sha256": "9bc9fdee707ff5d86b0a42f7a740ea9cb3a2e2af25cff093ac5a4466180c8155"
+    },
+    {
+      "path": "docs/capstone/retrieval/DISEASE-REFERENCE-CORPUS-2026-10-17.md",
+      "bytes": 8129,
+      "sha256": "1dd5887582808a5243d3ab710a8e832aa79949a7731ba0bbbc895567a1a39ab0"
+    },
+    {
+      "path": "docs/capstone/retrieval/MEASUREMENT-AWARE-EXPERT-PLAN.md",
+      "bytes": 10384,
+      "sha256": "1b18ac33cf22ac574fe3e9c5e21dc8702af661449d88148c5e36d18b0e11d821"
+    },
+    {
+      "path": "docs/capstone/retrieval/PRIVATE-EVALUATION-QUICKSTART.md",
+      "bytes": 7761,
+      "sha256": "a9320a3b5414cf595d97a868367500b82d33dfa821ea1877fd1da3ce6082ea44"
+    },
+    {
+      "path": "docs/capstone/retrieval/PROTECTED-EVALUATION-AUTHORING.md",
+      "bytes": 9394,
+      "sha256": "e95d0a3e34a349d42f0be099c081b4c2a0a4b4b5d5005d545298dfec08e2aced"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "bytes": 106679,
+      "sha256": "94b276ab04bd5d8519953d8aa560d8e5d3c421d19492e08a8a39eecc082a5379"
+    },
+    {
+      "path": "scripts/retrieval/direct_corpus.py",
+      "bytes": 7379,
+      "sha256": "f8fbded70af40f52e375a4cd4fd1e9583541e3d4e90ae2f4ce80709a4c6470a9"
+    },
+    {
+      "path": "src/retrieval/direct_ingestion.py",
+      "bytes": 18688,
+      "sha256": "4c2934d0d43d5f97cd1125148f0eb3f7f6e61f0dc3005e3feadffa918927dfac"
+    },
+    {
+      "path": "tests/retrieval/test_disease_source_profile.py",
+      "bytes": 2506,
+      "sha256": "2482f071b6047cc8b5e4ab9721caa5cf2941f9b3e45ba9797455716c1164f7e3"
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/acquisition-plan.json",
+      "bytes": 1062,
+      "sha256": "c886af8fb385ecc8e831c3f6f14da14ee5a3d9533f0cf1fc2964dc8f01d63aab"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/selection-amendment.json",
+      "bytes": 326,
+      "sha256": "c9f7fc076ca43dd3b6c243421aeaac32981058fd59fe7534d565d35e6f6de38d"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/extraction-amendment.json",
+      "bytes": 270,
+      "sha256": "9c80af3c9d03883b3183ff409a5e644356a7c49976f641d681cba565b4ae7903"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/preflight.json",
+      "bytes": 1552,
+      "sha256": "5d78862449b3035a0c968ad97df793d0f5fe3dc1abe7afb1c5eb6b4e1faafc14"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/producer-pins.json",
+      "bytes": 643,
+      "sha256": "2c30bce343b01413fa673cf9176612a609a1139b17ecb8d282911d053259f9c6"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/BUILD-COMPLETE.json",
+      "bytes": 415,
+      "sha256": "da561e49f953ae55e79c792bc25c01038ecec68b72912aca52d138c961bbb8af"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/ingestion-tests.xml",
+      "bytes": 16309,
+      "sha256": "6402add7f38d176fc7ce7807dc7f176ee031a16bb6753b717cd877e2d4b8a409"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/FINAL-VERIFICATION.json",
+      "bytes": 829,
+      "sha256": "ea1837085e29033919bef641f7964c2fa088420a89c66f393e4f1d28dc073233"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/rebuild/COMPLETE.json",
+      "bytes": 1587,
+      "sha256": "1f0ac60b3b01961f9baaef9145a4cba641d3d05b718f6991a3cfde7603414ef3"
+    },
+    {
+      "path": "outputs/prowl/disease-corpus-20261017/build.py",
+      "bytes": 6185,
+      "sha256": "bbdbc753fbc8b42aab099d35467e0ff12efe860c0c782fd0ecc8b011a19f87fc"
+    }
+  ],
+  "limitations": [
+    "Engineering source coverage, not clinical validation or gold labels",
+    "Prior development acceptance applies to original corpus/scope",
+    "Protected evaluation not created; capability and labeling reconciliation next",
+    "No live promotion; measurement and answer integration pending"
+  ]
+}

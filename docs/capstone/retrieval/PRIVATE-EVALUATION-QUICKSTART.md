@@ -1,5 +1,12 @@
 # Independent evaluation: next steps for Quinton
 
+> **October17 workflow revision:** Quinton will supply natural questions but will not search papers,
+> choose evidence spans or enter technical labels. The instructions below describe the earlier
+> authoring arrangement and are retained as a technical reference. Do not ask him to execute them.
+> First reconcile the scan-centered capability contract and an independent engineering-supported
+> labeling process against the [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md).
+> Existing private tooling may be reused by that process; it does not establish completed review.
+
 The 30 development questions are accepted, including evidence and the full consistency pass.
 You do not need to review them again. Step 5 now needs the separate **30-question private test set**.
 This measures performance on questions the development agent has not helped write or seen.

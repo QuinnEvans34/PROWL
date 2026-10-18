@@ -1,5 +1,12 @@
 # Protected evaluation authoring — Quinton's worksheet
 
+> **October17 workflow revision:** Quinton will supply natural questions but will not search papers,
+> choose evidence spans or enter technical labels. The instructions below describe the earlier
+> authoring arrangement and are retained as a technical reference. Do not ask him to execute them.
+> First reconcile the scan-centered capability contract and an independent engineering-supported
+> labeling process against the [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md).
+> Existing private tooling may be reused by that process; it does not establish completed review.
+
 **Status:** Preparation only. No protected questions, encrypted image, backup or evaluation exists as
 part of this checkpoint. This document contains instructions and blank fields, not held-out content.
 

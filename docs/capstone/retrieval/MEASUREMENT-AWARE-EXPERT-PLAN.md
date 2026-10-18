@@ -16,6 +16,20 @@ on top of a proven literature system. Original proposal/appendix files and their
 remain unchanged; this dated user amendment explicitly records the added implementation scope.
 It does not claim institutional approval of a revised proposal or authorize patient diagnosis.
 
+## October 17 disease context clarification
+
+Quinton approved PanTS plus a focused pancreatitis/pancreatic-cancer literature collection, with
+cystic disease later. The [first source slice](DISEASE-REFERENCE-CORPUS-2026-10-17.md) is built as a
+separate candidate. REQ-X03 must distinguish measured facts, cited general disease associations and
+unknown/unmeasured features in the selected scan. Disease names in an article or PanTS report are
+not a diagnosis of the displayed case. Actual measurement and viewer adapters remain required.
+
+The next capability contract must resolve head/body/tail measurement definitions and available
+outputs, report provenance/split eligibility, and disease-context input/output behavior. Existing
+clinical boundaries and numerical acceptance gates remain; source addition alone does not qualify
+this extension. Quinton supplies realistic questions without technical evidence labeling; independent
+label creation/verification is an engineering responsibility to arrange before collecting held-out work.
+
 ## Sequence and entry gate
 
 Finish core RAG Steps 1–9 first. “Working as expected” means recorded acceptance, not a working demo:
@@ -30,7 +44,7 @@ Finish core RAG Steps 1–9 first. “Working as expected” means recorded acce
 
 A rejected summary candidate or excerpt-only fallback does not satisfy this entry gate. Until then,
 only planning/tracking for this extension proceeds. Current implementation priority remains the
-plain-language coverage and evaluation-freeze work in Step 5. No training or full selector restart.
+scan-centered capability and evaluation reconciliation in Step 5. No training or full selector restart.
 
 ## Required capabilities and acceptance
 

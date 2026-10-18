@@ -1822,3 +1822,27 @@ as general cited context; patient-specific diagnosis/probability/staging is not 
 Current coarse-input contract cannot establish enhancement, duct dilation or other unmeasured signs.
 Rights review, evidence eligibility, scan-to-finding tools and prospective evaluation remain required.
 No corpus/model/schema/rubric changes, training, selector, protected-set access or inferred hours.
+
+
+## 2026-10-17: Approved disease references built and independently rebuilt
+
+Quinton said "Great, let’s move forward with that" to retaining PanTS and adding pancreatitis/cancer
+literature first, cystic disease later. Four explicit CC BY4 references admitted: PMC8292294, PMC7376657,
+PMC8578112 and PMC7183518. The AI-focused PMC10887967 snapshot was inspected and retained but not indexed;
+selection amendment explains its replacement. Core/JATS notice checks bounded and clear for admitted4.
+New disease-v1 profile removes publisher administration while all10prior raw-to-bundle outputs remain
+exact.58affected tests pass/5optionalDBskips. No old extraction identity or approved labels rewritten.
+
+Separate research-disease-v1/rebuild holds14sources/1,179passages/41batches,232newpassages. Exact canonical
+and database inventories plus3existing guided-query parities match; five old collections preserved.
+CorpusSHAeae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8.
+Coverage record has5general-reference-context needs/1partial/2gaps/1deferred with exact paragraph hashes
+and passage membership. This is engineering coverage, not gold labels or disease-answer performance.
+Four narrative2020–2021reviews do not replace currentguidelines or establish disease risk from size.
+
+Spec1.15/report/measurementplan/handoff updated; old private worksheets explicitly historical because
+Quinton supplies questions without technical evidence work. Next is scan-centered capability and
+independent-labeling reconciliation before revised evaluation freeze. Counts/quality thresholds not
+relaxed; prior v5acceptance preserved for its exact original scope. No PanTS reports/patient/private
+content read; no generation, training, fullselector, newclinicalauthority or inferred human hours.
+AI-08 source slice complete; live demo remains original, measurement product integration pending.
