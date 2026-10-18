@@ -11,7 +11,7 @@ it('locks prediction and reference before analysis', async () => {
   render(<ReviewWorkspace {...workspaceProps()} />)
   await screen.findByRole('status', { name: 'Synthetic viewer stub' })
   expect(screen.getByRole('button', { name: 'Model prediction' }).disabled).toBe(true)
-  expect(screen.getByRole('button', { name: 'Source of truth' }).disabled).toBe(true)
+  expect(screen.getByRole('button', { name: 'Reference' }).disabled).toBe(true)
   expect(screen.getByRole('button', { name: 'Original CT' }).getAttribute('aria-pressed')).toBe('true')
 })
 

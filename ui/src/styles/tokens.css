@@ -1,0 +1,74 @@
+/*
+ * PROWL design tokens — Concept 01 (graphite / silver / violet).
+ * Source: docs/capstone/interface/ui-redesign/04-VISUAL-DIRECTION-AND-BRANDING.md
+ *
+ * Contrast (measured, WCAG 2.x ratio against --pw-surface #15181D):
+ *   text 15.9 · text-muted 8.2 · text-faint 5.8 · accent 8.3 · ink-on-accent 8.5
+ *   control border 3.5 on surface, 3.2 on raised (non-text minimum 3:1)
+ *
+ * Brand accent never stands in for scientific layer colors. Layer colors mirror
+ * REVIEW_COLORS in src/lib/viewerLayers.js and must stay paired with text labels.
+ */
+:root {
+  --pw-bg: #0d0f12;
+  --pw-sunken: #0a0c0f;
+  --pw-surface: #15181d;
+  --pw-raised: #1d2128;
+  --pw-hover: #242934;
+  --pw-border: #343a46;
+  --pw-border-subtle: #262b34;
+  --pw-border-control: #666e7f;
+
+  --pw-text: #f0f2f6;
+  --pw-text-muted: #a8b0be;
+  --pw-text-faint: #8a93a3;
+
+  --pw-accent: #b7a4ff;
+  --pw-accent-hover: #c9bbff;
+  --pw-accent-ink: #171223;
+  --pw-accent-soft: rgba(183, 164, 255, 0.12);
+  --pw-accent-line: rgba(183, 164, 255, 0.38);
+  --pw-focus: #b7a4ff;
+
+  --pw-silver: #dcddd8;
+
+  --pw-success: #7ad7b0;
+  --pw-warning: #f2c56b;
+  --pw-warning-soft: rgba(242, 197, 107, 0.1);
+  --pw-danger: #ff8a8a;
+  --pw-danger-soft: rgba(255, 138, 138, 0.1);
+
+  /* Scientific layers — keep identical to viewerLayers.js REVIEW_COLORS. */
+  --pw-layer-pred-pancreas: #26c5a6;
+  --pw-layer-pred-lesion: #f96363;
+  --pw-layer-ref-pancreas: #38bdf8;
+  --pw-layer-ref-lesion: #fbbf24;
+
+  --pw-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --pw-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --pw-radius-sm: 6px;
+  --pw-radius: 8px;
+  --pw-radius-lg: 12px;
+
+  --pw-header-h: 56px;
+  --pw-studybar-h: 52px;
+  --pw-footer-h: 30px;
+  --pw-panel-w: 360px;
+
+  --pw-ease: cubic-bezier(0.2, 0, 0, 1);
+  --pw-fast: 120ms;
+  --pw-med: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pw-fast: 0ms;
+    --pw-med: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

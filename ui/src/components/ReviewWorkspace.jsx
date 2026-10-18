@@ -172,7 +172,7 @@ function ObjectChip({ source, anatomy, state, dispatch }) {
     >
       <i style={{ '--object-color': REVIEW_COLORS[source][anatomy] }} aria-hidden="true" />
       <span>{anatomy === 'lesion' ? 'Lesion' : 'Pancreas'}</span>
-      <small>{source === 'gt' ? 'Truth' : 'Model'}</small>
+      <small>{source === 'gt' ? 'Reference' : 'Model'}</small>
     </button>
   )
 }
@@ -220,6 +220,7 @@ function MetricsCard({
   if (!hasResult && !isCurated) return null
 
   const isLive = liveResult?.source === 'live'
+  const volume = Number.isFinite(volumeMm3) ? (volumeMm3 / 1000).toFixed(2) : null
   return (
     <section className="review-metrics-card" aria-label="Model finding summary">
       <div className="review-metrics-card__heading">
@@ -231,19 +232,25 @@ function MetricsCard({
           {isLive ? <Radio size={11} aria-hidden="true" /> : <Database size={11} aria-hidden="true" />}
           {isLive
             ? `Live · ${liveResult.scoredAt} · ${liveResult.result.inference_seconds.toFixed(1)}s`
-            : 'Precomputed'}
+            : 'Saved prediction'}
         </span>
       </div>
       <div className="review-metrics-card__values">
-        <div><span>Volume</span><strong>{(volumeMm3 / 1000).toFixed(2)} <small>cm³</small></strong></div>
-        <div><span>Diameter</span><strong>{diameterMm} <small>mm</small></strong></div>
-        <div><span>Confidence</span><strong>{Math.round(confidence * 100)}<small>%</small></strong></div>
+        <div title="Volume of the predicted lesion mask">
+          <span>Predicted lesion volume</span>
+          <strong>{lesionFlagged && volume !== null ? <>{volume} <small>cm³</small></> : lesionFlagged ? 'Unavailable' : 'None predicted'}</strong>
+        </div>
+        <div title="Diameter of a sphere with the same volume. Derived; not a measured lesion width or length.">
+          <span>Equivalent diameter (derived)</span>
+          <strong>{lesionFlagged && diameterMm ? <>{diameterMm} <small>mm</small></> : '—'}</strong>
+        </div>
+        <div title="Peak model output score. Not a probability of disease.">
+          <span>Peak model score</span>
+          <strong>{Number.isFinite(confidence) ? confidence.toFixed(2) : 'Unavailable'}</strong>
+        </div>
       </div>
-      {endpointStatus === 'offline' && !isAnalyzing && (
-        <p className="review-offline-note">
-          <WifiOff size={12} aria-hidden="true" />
-          endpoint offline — showing cached result
-        </p>
+      {!lesionFlagged && (
+        <p className="review-offline-note">No lesion predicted. This is not evidence that no lesion exists.</p>
       )}
     </section>
   )
@@ -258,6 +265,7 @@ export default function ReviewWorkspace({
   hasLiveResult,
   liveResult,
   isAnalyzing,
+  analysisFailed = false,
   endpointStatus,
   truthRevealed,
   reviewStatus,
@@ -265,6 +273,7 @@ export default function ReviewWorkspace({
   overlap,
   onSelectScan,
   onAnalyze,
+  onShowSavedPrediction,
   onRevealTruth,
   onResetScan,
   onSetReviewStatus,
@@ -398,6 +407,12 @@ export default function ReviewWorkspace({
     if (outcome) {
       dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
       dispatch({ type: 'RESET_VIEW' })
+    }
+  }
+
+  function showSaved() {
+    if (onShowSavedPrediction?.(caseId)) {
+      dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
     }
   }
 
@@ -668,7 +683,7 @@ export default function ReviewWorkspace({
               {[
                 ['both', 'Both'],
                 ['pred', 'Model'],
-                ['gt', 'Truth'],
+                ['gt', 'Reference'],
                 ['difference', 'Difference'],
               ].map(([value, label]) => (
                 <button
@@ -1038,18 +1053,30 @@ export default function ReviewWorkspace({
           {state.evidenceMode === 'ct' && !hasPrediction && (
             <div className="analyze-hero">
               <span><ScanLine size={18} aria-hidden="true" /></span>
-              <small>Stage 1 · Clean CT</small>
-              <h2>Inspect first. Then let the model draw.</h2>
-              <p>No prediction or reference annotation is visible.</p>
-              <button type="button" onClick={analyze} disabled={isAnalyzing}>
-                {isAnalyzing
-                  ? <LoaderCircle size={16} className="spin" aria-hidden="true" />
-                  : <Activity size={16} aria-hidden="true" />}
-                {isAnalyzing ? 'Scoring scan…' : 'Analyze scan'}
-              </button>
-              {endpointStatus === 'offline' && !isAnalyzing && (
+              <small>CT only</small>
+              <h2>Inspect the CT, then show the model’s outlines.</h2>
+              <p>No prediction or reference annotation is visible yet.</p>
+              {endpointStatus === 'online' && (
+                <button type="button" onClick={analyze} disabled={isAnalyzing}>
+                  {isAnalyzing
+                    ? <LoaderCircle size={16} className="spin" aria-hidden="true" />
+                    : <Activity size={16} aria-hidden="true" />}
+                  {isAnalyzing ? 'Analyzing…' : 'Analyze live'}
+                </button>
+              )}
+              {caseData.files?.pred && !isAnalyzing && (
+                <button type="button" className={endpointStatus === 'online' ? 'analyze-hero__secondary' : ''} onClick={showSaved}>
+                  <Database size={16} aria-hidden="true" /> Show saved prediction
+                </button>
+              )}
+              {analysisFailed && (
+                <small className="analyze-hero__offline" role="alert">
+                  <WifiOff size={11} aria-hidden="true" /> Live analysis failed or is offline. No new prediction was produced.
+                </small>
+              )}
+              {endpointStatus !== 'online' && !analysisFailed && (
                 <small className="analyze-hero__offline">
-                  <WifiOff size={11} aria-hidden="true" /> Cached result will keep the demonstration available.
+                  <WifiOff size={11} aria-hidden="true" /> Live analysis is offline. The saved prediction was produced earlier by {'Segmenter v1'}.
                 </small>
               )}
             </div>
@@ -1229,7 +1256,7 @@ export default function ReviewWorkspace({
                   />
                   <LayerToggle
                     checked={state.layerVisibility.gt}
-                    label="Source of truth"
+                    label="Reference annotation"
                     color={REVIEW_COLORS.gt.lesion}
                     onClick={() => dispatch({ type: 'TOGGLE_LAYER', layer: 'gt' })}
                   />
@@ -1349,7 +1376,7 @@ export default function ReviewWorkspace({
           {!isCurated && hasPrediction && !truthUnlocked && (
             <button className="context-primary-action context-primary-action--truth" type="button" onClick={revealTruth}>
               <Microscope size={15} aria-hidden="true" />
-              <span><small>Next</small>Reveal source of truth</span>
+              <span><small>Optional</small>Compare with reference</span>
               <ChevronRight size={14} aria-hidden="true" />
             </button>
           )}
@@ -1363,12 +1390,12 @@ export default function ReviewWorkspace({
         </footer>
 
         {truthUnlocked && state.evidenceMode === 'overlap' && (
-          <section className="overlap-payoff" aria-label="Overlap with source of truth">
+          <section className="overlap-payoff" aria-label="Overlap with reference annotation">
             <div className="overlap-payoff__title">
               <span><ShieldCheck size={17} aria-hidden="true" /></span>
               <div>
                 <small>Scientific comparison</small>
-                <strong>Overlap with source of truth</strong>
+                <strong>Overlap with reference annotation</strong>
               </div>
             </div>
             <div className="overlap-payoff__metric">
@@ -1384,7 +1411,7 @@ export default function ReviewWorkspace({
               </strong>
               {!caseData.gt_has_lesion && !finding.lesionFlagged && <small>Absent in both masks</small>}
             </div>
-            <p>Toggle Model, Truth, Both, or Difference to inspect agreement, over-segmentation, and missed reference regions.</p>
+            <p>Toggle Model, Reference, Both, or Difference to inspect agreement, over-segmentation, and missed reference regions.</p>
           </section>
         )}
 
@@ -1412,7 +1439,7 @@ export default function ReviewWorkspace({
           )}
           {isCurated && (
             <button type="button" className="review-status-bar__comparison" onClick={onOpenComparison}>
-              Scientific comparison <ChevronRight size={13} />
+              Validation comparison <ChevronRight size={13} />
             </button>
           )}
         </div>
