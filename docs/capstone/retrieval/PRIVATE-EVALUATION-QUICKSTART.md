@@ -1,5 +1,25 @@
 # Independent evaluation: next steps for Quinton
 
+## Current status — expanded disease evaluation
+
+The [reconciliation checkpoint](EVALUATION-RECONCILIATION-2026-10-17.md) supersedes the execution
+instructions below. The public inventory now includes 136 distinct normalized wordings and the
+current target is 14 sources / 1,179 passages. The final revised development set and independent
+labeling arrangement are pending. **Do not start private authoring or use the old templates yet.**
+Quinton supplies natural questions; he is not being assigned article search, JSON or offset work.
+
+The only current command is public and reads no protected content:
+
+```sh
+.venv-retrieval/bin/python -m src.retrieval.private_evaluation --public-preflight
+```
+
+Normal validation/`--prepare` now stop before requesting any private path. The lower-level validator
+is retained for invented tests; a future admission/schema version must match the actual frozen scope
+and reviewer roles. Earlier approvals remain valid for their ten-source scope.
+
+## Historical ten-source instructions — not current execution steps
+
 > **October17 workflow revision:** Quinton will supply natural questions but will not search papers,
 > choose evidence spans or enter technical labels. The instructions below describe the earlier
 > authoring arrangement and are retained as a technical reference. Do not ask him to execute them.

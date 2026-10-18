@@ -1976,3 +1976,20 @@ Markdown with actual answers and sources, spec1.23 and handoff updated. AI-03/AI
 Next complete independent label/exposure/protocol freeze, then compare retrieval and revise answer
 policy against ranked failures. Corpus/prompt/ranking unchanged; no protected content, training,
 fullselector, new downloads or inferred human hours. Batch session48152 finished; do not rerun.
+
+
+## 2026-10-17: Public exposure and expanded-scope reconciliation
+
+Continued the accepted next step. Consolidated six immutable exposure inventories into v2, retaining
+262entries/136normalizedwordings/31knownintentIDs and every origin. New public preflight consumes
+current14source/1179passage metadata. Retired old10source private loader; normal CLI stops before
+private prompts/reads pending an actual revised admission, not a readiness-flag bypass. Prior
+inventories/templates/accepted labels preserved. Actual corpus audit verifies80oldspan identities
+and56direct passage containments. Scope ledger keeps30prior+2candidate questions without declaring
+32final cases;80added-source judgments/2gap rechecks/final membership remain. Generated local
+reading pack for all232added passages, no source-text redistribution. Requested independent review
+of the prepared two-question evidence/consistency pack; no answer or acceptance inferred.
+47focused public/private-validator tests pass; backend/UI health still valid, no restart. Spec1.24,
+current quickstart/authoring notices and reconciliation report clarify protected reviewer/operator
+schema work. No source-search/JSON/offset assignment to Quinton, protected access, model/livequery
+calls, training/fullselector or human-hours credit. AI-03 remains in progress; tuning not released.

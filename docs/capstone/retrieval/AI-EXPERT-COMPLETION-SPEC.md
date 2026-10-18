@@ -1,9 +1,9 @@
 # AI expert completion specification
 
-**Version:** 1.23 — October 17, 2026 (fixed answer-quality checkpoint)\
+**Version:** 1.24 — October 17, 2026 (public evaluation reconciliation)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
-**Implementation baseline:** `ce2315f20c14956b30a09d63dade850a649632e1`
+**Implementation baseline:** `cec7ad22dbb82f2d1452198750ec1070e0170b05`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
 Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.
@@ -70,6 +70,15 @@ labels v2 expand five contexts and preserve v1; independent review remains pendi
 is not formal acceptance or tuning authority. Next complete label/exposure/independent-review
 reconciliation, then compare retrieval configurations and address ranked answer-policy failures.
 Readable actual outcomes and evidence pack are linked from the checkpoint. AI-03/AI-04 remain open.
+
+October 17 [public evaluation reconciliation](EVALUATION-RECONCILIATION-2026-10-17.md) consolidates
+262 exposure entries / 136 normalized wordings / 31 known intent IDs. Public preflight now consumes
+that inventory and the 14-source target; the private command stops before private prompts until a
+new admission is qualified. All80 prior span identities and56direct passage containments remain
+valid. Scope ledger retains30prior cases plus2candidates without declaring a32-case final set.
+Four-source impact review (80new source/case judgments),2gap rechecks, final membership and independent
+labeling/review remain pending. Protected schema/operator reconciliation is explicit; Quinton is not
+assigned source-search/JSON/offset work. This does not release tuning or change live search behavior.
 
 ## 1. Outcome and authority
 
@@ -252,8 +261,9 @@ specification. W02-07/W05-02 completion must state the bounded corpus scope actu
 
 ### Step 5 — Question and label freeze
 
-**Current next action:** reconcile the two disease-label candidates and independent verification
-workflow with the evaluation protocol, then integrate the exposure supplement before protected authoring. The older count/family design below is the
+**Current next action:** complete the expanded-source impact review and final development membership,
+then resolve independent verification and protected labeling under a new evaluation admission. Public
+exposure consolidation is complete; final semantic independence review remains. The count/family design below is the
 preserved protocol, not an instruction to manufacture answerable questions or assign technical
 labeling to Quinton. Any replacement criteria must be versioned before results; prior accepted v5
 review cannot approve new disease labels. No held-out questions are requested during this reconciliation.

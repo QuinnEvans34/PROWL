@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 public evaluation reconciliation:** Read EVALUATION-RECONCILIATION-2026-10-17.md
+> and spec1.24. Consolidated exposure v2:262entries/136normalizedwordings/31knownintentIDs; six
+> immutable inventories unioned with original variants/origins, older inventories unchanged.
+> Private CLI --public-preflight now reads current14source/1179passage metadata and union.
+> Default/--prepare STOP before private prompts/reads; old10source loader retired. No flag flip can
+> admit a final freeze; future admission/schema must match actual revised labels and reviewer roles.
+> 47focused tests pass. Compatibility audit: all80oldspan locators valid,56direct spans contained.
+> New scope ledger keeps30prior+2candidates, not a32casefinalset. 80new source/case judgments,
+>2gap rechecks, full disease source judgments and final30membership/needs remain pending.
+> Added-source reading pack contains232passages under outputs/prowl/evaluation-reconciliation-20261017/.
+> Two-question independent evidence/consistency review requested, still pending; no human acceptance
+> inferred. Protected labeling operator/workflow remains unresolved; Quinton supplies natural
+> questions, not article search/JSON/offset work. v1 private schema hardcodes Quinton roles; revise
+> separately before assisted/other-reviewer use. Next source-impact review/final membership, then
+> independent labeling protocol/freeze; no tuning release. Runtime/corpus/prompt/ranking unchanged.
+> Health8016 policyv6/UI5180 HTTP200 verified; owned sessions99570/67009 not restarted.
+> No model/live-query calls, protected content, training/fullselector or human-hours credit.
+
 > **October 17 fixed answer-quality checkpoint:** Read ANSWER-QUALITY-CHECKPOINT-2026-10-17.md
 > and spec1.23. One ten-case development batch FINISHED (session48152), no retries: six literature
 > requests produced two summaries/four failures; four scope blocks correct. All ten provenance

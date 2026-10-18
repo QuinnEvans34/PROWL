@@ -1,0 +1,121 @@
+{
+  "version": "prowl-evaluation-reconciliation-checkpoint-v1",
+  "baseline_commit": "cec7ad22dbb82f2d1452198750ec1070e0170b05",
+  "state": "public_reconciliation_delivered_freeze_pending",
+  "pins": [
+    {
+      "path": "src/retrieval/public_exposure.py",
+      "sha256": "17efc7014bb5c2f01f7ee834fdc1fa66981f40a537d9ef2f3fe0c811bf2d0e0e"
+    },
+    {
+      "path": "src/retrieval/private_evaluation.py",
+      "sha256": "488a64db7d6df5f2785e2fd7688d3659ac383bfd5add04dc07560f0205eee100"
+    },
+    {
+      "path": "tests/retrieval/test_public_exposure.py",
+      "sha256": "efee9029c42887bbe1e35ac24bb274779d46c5b5c4b1ed4d18608b418cc0ef16"
+    },
+    {
+      "path": "tests/retrieval/test_private_evaluation.py",
+      "sha256": "d193de2b934acd52e4f460503054204e9523d506602ea7046dd508e9133a3bb9"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-v2.json",
+      "sha256": "c0b40abae4e6972a6bd12879dc44272f0fce21d94c3dfb257b8fb9d240c162ea"
+    },
+    {
+      "path": "configs/evidence/evaluation/evaluation-reconciliation-v1.json",
+      "sha256": "7c0a678b0a39d39e2b5f46f840ffc9a4eed2aeeed0126f21d1db0b7085206d80"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-scope-reconciliation-v1.json",
+      "sha256": "ac8ff481c071eb4e1ddda8a173837a4e5a22942293ecd507b1aa4647351df97d"
+    },
+    {
+      "path": "docs/capstone/retrieval/EVALUATION-RECONCILIATION-2026-10-17.md",
+      "sha256": "15b3f2e62f97808c94abce830fa6ddcdfb238ec6dc76c5daa71c196b846d47b6"
+    },
+    {
+      "path": "docs/capstone/retrieval/PRIVATE-EVALUATION-QUICKSTART.md",
+      "sha256": "d7a0b28a21c1b354aff6b8127b036014cca202e8dbc9c9eaa048e3fd031e3a90"
+    },
+    {
+      "path": "docs/capstone/retrieval/PROTECTED-EVALUATION-AUTHORING.md",
+      "sha256": "fd44462fabe3376c727428a61f9c779c9d1be7189cc56ad44f3e2a04a9f9c3ad"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "sha256": "dafcb71918918f080cd374feafeae30caccd049931c5f94f5d63f734b024ba71"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "sha256": "029622eec4d9b0de74205298ac585dba8f801ef3ca69423680091fe58d43a9e8"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "138ec38901025b24b1127d65fe4d27b58793eec9cc7e55897f05101ddd72be54"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/added-source-reading/PMC7183518.md",
+      "sha256": "5e18e4409f358ee74b5355c442d07d1192731b3be4808c65d6f738083ad5decf"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/added-source-reading/PMC7376657.md",
+      "sha256": "7d0c8cabd2bab2205ed19bae62f2bf528dd734a32342fbbde78dd0de90db801c"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/added-source-reading/PMC8292294.md",
+      "sha256": "1daf31d9273c8c47a2643de2013f2bf81e0afe38d5376334dbfe7e14d4e7346d"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/added-source-reading/PMC8578112.md",
+      "sha256": "dbccaa0e3198fbf921b4a6283e3df4506d8a1aa97daef8fb25afaa98efb33936"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/added-source-reading/README.md",
+      "sha256": "ad3515a35cd8b2428caacdc24e90de8976105227aa7c4d83faf27013d6db9627"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/audit.py",
+      "sha256": "24722ba49de7e1dea6031a847982a4705b25cad869e1616fed43c5e4553cf4d8"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/compatibility-audit.json",
+      "sha256": "d79fd02275c2f1e7dd63a00ad8725c42321874e3671298624d669b9f822ae98f"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/prepare.py",
+      "sha256": "816a192abf81fd44affe8b2e205a10e47368d5393d5723b62c316511109a4005"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/public-preflight.json",
+      "sha256": "a897e82085a4ed685808bd74709532cc9ebeb862c5f23cb4862f0b6482c9615b"
+    },
+    {
+      "path": "outputs/prowl/evaluation-reconciliation-20261017/tests.txt",
+      "sha256": "7637183fbdf7eb3ca5ef3f450c410ddf8a1bc9211c7543ed9d0934e0781f5913"
+    }
+  ],
+  "tests": {
+    "command": ".venv-retrieval/bin/python -m pytest tests/retrieval/test_public_exposure.py tests/retrieval/test_private_evaluation.py -q",
+    "passed": 47,
+    "failed": 0,
+    "new_checks": 19
+  },
+  "scope": {
+    "exposure_entries": 262,
+    "distinct_normalized_wordings": 136,
+    "known_intent_groups": 31,
+    "prior_span_identities_verified": 80,
+    "direct_span_containments_verified": 56,
+    "added_source_passages": 232
+  },
+  "runtime_changed": false,
+  "live_query_or_model_calls": 0,
+  "private_content_access": false,
+  "training": false,
+  "human_hours_credited": false,
+  "independent_disease_review": "pending",
+  "ready_for_tuning": false,
+  "content_sha256": "6871210811456ffa99c986cff5820d48fa0b6f381bc8fc0c9d3c1192ee43a4c2"
+}

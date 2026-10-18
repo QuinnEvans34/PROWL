@@ -12,9 +12,10 @@ from pathlib import Path
 import sys
 
 from jsonschema import Draft202012Validator, FormatChecker, ValidationError
-from .records import CONTRACTS, canonical_bytes, sha256_hex
+from .records import CONTRACTS, canonical_bytes
 from .direct_ingestion import digest
-from .development_set import checked_json, FAMILIES, NEEDS, REFUSALS
+from .development_set import FAMILIES, NEEDS, REFUSALS
+from .public_exposure import public_preflight
 from .corpus_inventory import frozen_inventory, verify_sources
 from .labels import contains, gold_works, verify_label_set
 from .query import make_query, normalize_question
@@ -133,39 +134,15 @@ def _validate_private(suite, manifest, bundles, batches, *, bindings, exposed_qu
 
 
 def load_public_inputs(root):
-    """Read only named, bounded, hash-pinned public inputs; no private paths accepted."""
-    root=Path(root).resolve();directory=root/'configs/evidence/evaluation'
-    exposure_path=directory/'public-exposure-v1.json'
-    exposure=json.loads(exposure_path.read_text())
-    if len(exposure['files'])>16:raise ValueError('Exposure input count exceeds bound')
-    questions=[];intents=set()
-    for item in exposure['files']:
-        path=(root/item['path']).resolve()
-        if not path.is_relative_to(root) or path.stat().st_size>2*1024**2:
-            raise ValueError('Expected bounded public exposure file')
-        raw=path.read_bytes()
-        if sha256_hex(raw)!=item['sha256']:raise ValueError('Exposure input changed')
-        if item['kind']=='development':
-            for case in json.loads(raw)['cases']:
-                questions.append(case['question'])
-                if case.get('intent_group'):intents.add(case['intent_group'])
-        elif item['kind']=='demo_markdown':
-            rows=[line.split('|')[1].strip() for line in raw.decode().splitlines() if line.startswith('| ')]
-            questions += [q for q in rows if q in exposure['demo_questions']]
-        else:raise ValueError('Unknown public exposure kind')
-    if not set(exposure['demo_questions']).issubset(questions):raise ValueError('Demo exposure mismatch')
-    path=root/'configs/evidence/corpus-coverage-v2.json';manifest=json.loads(path.read_text())
-    if len(manifest['sources'])>32 or len(manifest['batches'])>256:raise ValueError('Corpus input bound exceeded')
-    bundles=[checked_json(s['bundle'],root) for s in manifest['sources']]
-    batches=[checked_json(b,root) for b in manifest['batches']]
-    development=json.loads((directory/'development-v5-draft.json').read_text())
-    bindings=dict(corpus_manifest_sha256=sha256_hex(path.read_bytes()),
-        corpus_content_sha256=manifest['inventory']['content_sha256'],
-        final_development_content_sha256=development['content_sha256'],
-        public_exposure_manifest_sha256=sha256_hex(exposure_path.read_bytes()),
-        information_needs_sha256=sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md').read_bytes()),
-        information_needs_base_sha256=sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS.md').read_bytes()))
-    return manifest,bundles,batches,bindings,questions,intents
+    """Fail before any private read while expanded-scope evaluation is unready.
+
+    The old ten-source loader is retired. A future version must bind a genuinely
+    frozen revised development set; flipping a readiness flag cannot enable it.
+    """
+    public_preflight(root)
+    raise PrivateValidationError(
+        'Expanded disease evaluation is not frozen. Complete public scope/label review '
+        'and the independent labeling arrangement before private authoring.')
 
 
 def private_path(path, root):
@@ -189,10 +166,23 @@ def main():
     import argparse,getpass
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--prepare',action='store_true',help='Hash the authored revision and write a separate validated copy; never supply review decisions.')
+    parser.add_argument('--public-preflight',action='store_true',help='Report public readiness only; never prompt for or open private data.')
     args=parser.parse_args()
+    root=Path(__file__).resolve().parents[2]
+    if args.public_preflight:
+        if args.prepare:parser.error('--public-preflight cannot be combined with --prepare')
+        try:
+            print(json.dumps(public_preflight(root),indent=2))
+        except (ValueError,OSError,KeyError,TypeError):
+            raise SystemExit('Public evaluation preflight failed; check public pins and reconciliation.') from None
+        return
+    # Public readiness precedes TTY checks, private path prompts and all private reads.
+    try:
+        manifest,bundles,batches,bindings,questions,intents=load_public_inputs(root)
+    except (ValueError,OSError,KeyError,TypeError):
+        raise SystemExit('Private authoring is not ready. Run --public-preflight for public status.') from None
     if not sys.stdin.isatty():
         raise SystemExit('Run manually in a private terminal; redirected/agent input is refused.')
-    root=Path(__file__).resolve().parents[2]
     print('Human-only private session. No private content or paths should be shared with agents.')
     if input('Private encrypted workspace and agent-disconnected terminal confirmed? Type PRIVATE: ')!='PRIVATE':
         raise SystemExit('Private session not confirmed.')
@@ -200,7 +190,6 @@ def main():
         path=private_path(getpass.getpass('Private authored JSON path (hidden): '),root)
         suite=json.loads(path.read_text())
         if args.prepare:suite=seal_authored(suite)
-        manifest,bundles,batches,bindings,questions,intents=load_public_inputs(root)
         report=validate_private(suite,manifest,bundles,batches,bindings=bindings,
                                 exposed_questions=questions,exposed_intents=intents)
         write_private_result(path.parent/(path.stem+'.validated'),suite,report)

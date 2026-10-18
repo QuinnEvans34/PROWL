@@ -1,0 +1,32 @@
+{
+  "version": "prowl-evaluation-reconciliation-v1",
+  "state": "pending_expanded_scope_review",
+  "ready_for_private_authoring": false,
+  "ready_for_tuning": false,
+  "corpus": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "exposure": {
+    "path": "configs/evidence/evaluation/public-exposure-v2.json",
+    "sha256": "c0b40abae4e6972a6bd12879dc44272f0fce21d94c3dfb257b8fb9d240c162ea"
+  },
+  "prior_development": {
+    "path": "configs/evidence/evaluation/development-v5-draft.json",
+    "sha256": "a8072c19bc27c3e4047f3d2b289e16e4b6bce96ea2fb4136700b9624bb906520"
+  },
+  "disease_candidates": {
+    "path": "configs/evidence/evaluation/development-disease-candidates-v2.json",
+    "sha256": "5b7d1ff0078f74593ab695875443be9cdc9cf1b1eea77d01978bc7a76eb5ce9d"
+  },
+  "final_development": null,
+  "pending": [
+    "Reconcile final 30-case development membership and information needs with the disease scope; preserve 20 answerable / 10 unsupported and all five families.",
+    "Review the four added sources against retained development cases and both disease candidates; record all known support, limits and uncertain judgments.",
+    "Record independent disease-evidence review and consistency decisions; reviewer response pending.",
+    "Agree an independent protected-labeling operator and private workflow so Quinton supplies natural questions without article searching or offset entry.",
+    "Freeze revised public development labels and protocol, then perform protected authoring, independent labeling/review, storage and backup freeze under a new admission version."
+  ],
+  "notes": "Prior 30-case acceptance covers the ten-source corpus only. Two disease candidates are additional reviewed engineering drafts, not an accepted 32-case replacement. No protected authoring or access is enabled by this record.",
+  "content_sha256": "f14086950f7e083ff603f589d86e698ee7bc03478e79ae050870dd84ac6fbaef"
+}
