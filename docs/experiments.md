@@ -3950,3 +3950,17 @@ promotion criteria, so live dense remains. Hybrid improves aggregate ranks but m
 evidence and returns cancer-cohort signs without the needed inflammatory comparison. Next change
 candidate coverage/source context, not answer prompts or corpus size. Existing14sources/encoder,
 provisional v6labels and all failures preserved; no protected-set use/training/model-generation.
+
+## October 17 — Autonomous quality R2/R3
+
+User explicitly requests autonomous quality improvement. [R2 plan](capstone/retrieval/AUTONOMOUS-QUALITY-PLAN-2026-10-17.md)
+and [R3 plan](capstone/retrieval/RETRIEVAL-R3-PLAN-2026-10-17.md) preceded execution.
+Full-corpus cross-encoder R2:9/20 questions have labeled direct top5 evidence, source recall@5=.93,
+median5.375s. Query reformulation + paper titles R3:8/20, source recall@5=.87, median6.764s;
+some rewrites introduce unwanted emphasis/presupposition. Both rejected, live unchanged. One run
+each: R2 uses zero generative calls, R3 uses exactly20query-rewrite calls, and each experiment
+uses23,580 question/passage classification pairs.20generative calls total; no answer generation. Raw outputs/source snapshots
+under outputs/prowl/cross-encoder-r2-20261017 and r3 equivalent; aggregate pinned results in
+configs/evidence/retrieval-r2-r3-results.json.24new focused tests pass(16ranking/8reformulation).
+No model training, protected questions or label edits. Next evaluate complete source-section
+retrieval because independent short paragraphs lose the answer's study and qualification context.

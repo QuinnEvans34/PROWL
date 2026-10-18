@@ -1,0 +1,72 @@
+{
+  "cross-encoder-r2-20261017": {
+    "receipt": {
+      "path": "outputs/prowl/cross-encoder-r2-20261017/receipt.json",
+      "sha256": "b10eac79932ca8244aa61da358852a177598055507fbf5eecfb4010996963533"
+    },
+    "means": {
+      "depth": 50,
+      "unique_sources": 7.8,
+      "source_mrr": 0.8433333333333334,
+      "passage_mrr": 0.3203159579327382,
+      "top5_direct_hits": 0.6,
+      "top5_source_coverage": 0.87,
+      "diagnostic_span_hit_at_5": 0.2361111111111111,
+      "source_recall_at_1": 0.6725,
+      "passage_recall_at_1": 0.11833333333333333,
+      "source_recall_at_3": 0.8575,
+      "passage_recall_at_3": 0.20717948717948717,
+      "source_recall_at_5": 0.93,
+      "passage_recall_at_5": 0.22935897435897437,
+      "source_recall_at_10": 0.9875,
+      "passage_recall_at_10": 0.2826923076923077
+    },
+    "checks": {
+      "coverage": false,
+      "passage_recall": true,
+      "source_mrr": true,
+      "disease_hits": false,
+      "latency": true
+    },
+    "questions_with_direct_top5": 9,
+    "median_seconds": 5.37528412550455,
+    "max_seconds": 5.7634902079589665,
+    "seconds": 110.72893779096194,
+    "decision": "rejected"
+  },
+  "cross-encoder-r3-20261017": {
+    "receipt": {
+      "path": "outputs/prowl/cross-encoder-r3-20261017/receipt.json",
+      "sha256": "dca8ba7b36d30a31f92181edb023b4e34898c8e3fce0a5d6002dbdec7d5732e7"
+    },
+    "means": {
+      "depth": 50,
+      "unique_sources": 5.7,
+      "source_mrr": 0.81,
+      "passage_mrr": 0.31912589625089627,
+      "top5_direct_hits": 0.5,
+      "top5_source_coverage": 0.81,
+      "diagnostic_span_hit_at_5": 0.2875,
+      "source_recall_at_1": 0.675,
+      "passage_recall_at_1": 0.16,
+      "source_recall_at_3": 0.7975,
+      "passage_recall_at_3": 0.23666666666666666,
+      "source_recall_at_5": 0.87,
+      "passage_recall_at_5": 0.25333333333333335,
+      "source_recall_at_10": 0.915,
+      "passage_recall_at_10": 0.39384615384615385
+    },
+    "checks": {
+      "coverage": false,
+      "passage_recall": true,
+      "source_mrr": true,
+      "disease_hits": false,
+      "latency": true
+    },
+    "questions_with_direct_top5": 8,
+    "median_seconds": 6.763904145511333,
+    "max_seconds": 8.143786208005622,
+    "seconds": 138.98660979198758,
+    "decision": "rejected"
+  }
+}
