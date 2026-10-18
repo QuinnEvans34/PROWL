@@ -4004,3 +4004,8 @@ run:3summaries/3withheld/4blocks, with a manually rejected disease-scope rewrite
 and unsupported drafts retained, not counted as successes.19new boundary tests and24 live search/HTTP
 checks pass. Candidate service stopped/reaped,9GBstore preserved; live dense/v6.1 unchanged. Next
 criterion-specific offline validation repair, not another prompt/model sweep or independent-test claim.
+
+Offline follow-up: `answer_feedback.py` collects all independent mechanical issues and fails closed
+on unexplained model rejection, without returning a partial draft.7newtests/two retained V21 trace
+regressions pass,0model/providercalls. Not integrated with live generation; historical candidate
+policies and producing snapshots unchanged. Integration and semantic-role preservation remain next.

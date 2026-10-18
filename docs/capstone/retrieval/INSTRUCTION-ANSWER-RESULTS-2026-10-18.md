@@ -66,9 +66,14 @@ pancreas/lesion measurement extension remain incomplete. No user acceptance or h
 
 ## Next implementation decision
 
-Do not continue model/prompt sweeps on the same exposed ten questions. First repair the feedback
-collector offline so one guard cannot hide other independent failures, and require actionable
-per-criterion reasons rather than a single qualification boolean. Separate content support from
+Do not continue model/prompt sweeps on the same exposed ten questions. The offline feedback collector is now repaired in `src/retrieval/answer_feedback.py`:
+independent mechanical failures are collected together, failed drafts return no partial claims,
+and unexplained negative reviewer flags stay rejected instead of triggering an uninformative rewrite.
+Seven focused tests pass. Two retained V21 traces confirm percentage + study-boundary + uncertainty
+feedback together and explicit rejection of the blank qualification reason, with zero model calls.
+Receipt: `outputs/prowl/answer-feedback-offline-20261018/receipt.json`. This helper is not wired into
+the live or historical candidate policies; no answer-quality improvement is claimed from offline tests.
+Next integrate explicit per-criterion review reasons rather than one shared qualification boolean. Separate content support from
 style and from task-specific completeness; do not require every answer to carry every qualifier.
 Revisit numerical preservation by semantic role: a scanner field strength is not a participant
 count. Qualify these mechanics against retained failures and invented counterexamples before any

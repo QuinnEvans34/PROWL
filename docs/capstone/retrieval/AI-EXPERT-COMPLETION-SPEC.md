@@ -12,8 +12,9 @@ V20 displays an over-broad disease comparison; V21 produces zero summaries/five 
 one empty result/four scope blocks. Preserve false refusals and unsupported drafts as failures.
 19 new focused tests and24 restored live search/HTTP tests pass; no formal quality acceptance.
 External candidate model is hash-verified and retained, isolated server stopped/reaped. Live dense/
-v6.1 API and UI remain selected. Next repair criterion-specific feedback offline before any fresh
-bounded model run; no further model/prompt sweep. Independent evaluation and measurements stay open.
+v6.1 API and UI remain selected. Offline feedback collection now passes seven new checks and two retained-trace regressions with
+zero model calls; it is not integrated/promoted. Next integrate criterion-specific review reasons
+and qualify preservation by semantic role before any fresh bounded model run; no model/prompt sweep. Independent evaluation and measurements stay open.
 
 October17 autonomous improvement amendment: Quinton explicitly requests continued autonomous work
 until engineering confidence. [Section retrieval](SECTION-RETRIEVAL-RESULTS-2026-10-17.md) finds

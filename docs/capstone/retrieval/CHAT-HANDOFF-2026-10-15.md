@@ -15,8 +15,9 @@
 > 19new focused boundary tests and24 restored live search/HTTP tests pass. Unused rejected preview
 > server changes removed. OriginalAPI66878/dense/v6.1/UI5180/Ollama11434 remain selected and healthy
 > at this checkpoint; no candidate UI integration. Verify current state before any next operation.
-> Next: offline criterion-specific feedback repair (short-circuit guard masks other failures;
-> reviewer false qualification with blank feedback); semantic-role preservation instead of blanket
+> Offline feedback helper now collects independent failures and rejects blank negative review
+> reasons;7newchecks/two retained-trace regressions pass,0modelcalls. Not integrated/promoted.
+> Next: criterion-specific reviewer reasons and semantic-role preservation instead of blanket
 > numerical-token equality. No more model/prompt sweeps on these exposed questions. Corpus14papers/
 > 1179passages and original labels unchanged; protectedfreeze/independentreview/fullconceptquality/
 > measurementextension open. No training/fullselector/protectedcontent/humanhours changes.
