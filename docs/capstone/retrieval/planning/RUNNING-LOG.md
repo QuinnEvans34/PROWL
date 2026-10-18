@@ -1783,3 +1783,42 @@ storage/backup/freeze work. No actual encrypted image, storage allocation, priva
 freeze created. Spec v1.14 and AI-03 retain the open independent-set gate. No services/model/DB/training/
 selector/tuning work or inferred human-hours credit. Next: establish private authoring workspace under
 the shared storage allocation, Quinton authors/reviews30private cases, then the content-free freeze receipt.
+
+
+## 2026-10-17: Radiologist workflow clarification and disease-data reconnaissance
+
+Quinton clarifies that the expert should answer scan-centered radiologist questions, such as the
+size of the pancreatic head and what a size finding could indicate. General anatomy trivia is not
+the product focus. He can author30questions but does not want to locate/label source evidence.
+Discussed separating question authorship from independently checked evidence labeling. Prior chat
+suggestions to change the20/10split or sequencing are proposals, not implemented protocol amendments.
+Resolve product scope/evaluation responsibilities before requesting the private questions. Accepted
+v5 development review remains historical evidence; do not claim it validates a changed product role.
+
+Read-only public-source reconnaissance (no dataset download or patient/report reads):
+
+- [PanTS official repository](https://github.com/MrGiovanni/PanTS) and
+  [class map](https://github.com/MrGiovanni/PanTS/blob/main/data/README.md) document tumors,
+  pancreas head/body/tail and duct labels plus paired image/mask/report packaging. Investigate existing
+  permitted local annotation availability and provenance before proposing a replacement dataset.
+  Public advertised labels do not prove availability/quality in our subset or prediction by our model.
+- [TCIA CPTAC-PDA](https://www.cancerimagingarchive.net/collection/cptac-pda/) is a disease-specific
+  candidate with radiology/pathology and linked clinical data. The current page separates168pathology
+  subjects from110radiology subjects and lists CC BY4 imaging. This is a cancer cohort, not a broad
+  differential/normal-reference population. Actual annotation coverage, access terms and overlap with
+  existing training/pretraining sources remain unaudited; no independent benchmark claim.
+- [Primary comparative study, PMID24298613](https://pubmed.ncbi.nlm.nih.gov/24298613/) compares36AIP
+  and36pancreatic-cancer cases and examines enlargement together with enhancement, rim and duct
+  findings. It is a disease-imaging evidence candidate, not a size-only diagnostic rule or an admitted
+  rights-cleared full-text source. [NIDDK diagnosis overview](https://www.niddk.nih.gov/health-information/digestive-diseases/pancreatitis/diagnosis)
+  likewise describes history/exam/lab/imaging inputs, not organ size alone.
+
+Recommendation for discussion: disease-focused literature coverage plus qualified local measurements
+and reviewer-confirmed findings. First map enlargement/atrophy, pancreatitis, solid/cystic lesions and
+associated duct/imaging findings to accessible evidence; audit existing PanTS metadata before adding
+imaging data. A scan dataset supports measurement/model evaluation; literature supports cited clinical
+context. One does not automatically provide the other. Possible disease associations may be described
+as general cited context; patient-specific diagnosis/probability/staging is not newly authorized here.
+Current coarse-input contract cannot establish enhancement, duct dilation or other unmeasured signs.
+Rights review, evidence eligibility, scan-to-finding tools and prospective evaluation remain required.
+No corpus/model/schema/rubric changes, training, selector, protected-set access or inferred hours.

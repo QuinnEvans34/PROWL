@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 role clarification / research discussion:** Quinton wants scan-centered radiologist
+> questions (head size; meaning of size findings), not general anatomy trivia. He can write questions
+> but should not be assigned technical evidence labeling. Independent labeling arrangement and any
+> evaluation-count/sequencing amendments are under discussion, not implemented. Do not request30
+> private questions until role and responsibilities are reconciled. Development acceptance preserved.
+> Public research finds PanTS already advertises head/body/tail/duct labels; local subset/model support
+> unverified. CPTAC-PDA is a possible disease-specific imaging complement; adding scans alone does
+> not supply RAG disease explanations. Recommend disease-focused literature gap mapping and existing
+> annotation audit first. See newest planning/RUNNING-LOG.md entry and AI-06 Trello comment.
+> No downloads, patient/report/test data reads, changed clinical authority, corpus/rubric/code changes,
+> training or selector. Current measurement-extension gates remain until explicitly revised.
+
 > **October 17 development review COMPLETE / private authoring preparation delivered:** Quinton
 > explicitly accepts changed questions/evidence and confirms the full 30-question consistency pass.
 > V5 now has three appended events; all30 wording/evidence/consistency accepted, prior v4 fixed.
