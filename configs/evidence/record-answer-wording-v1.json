@@ -1,0 +1,136 @@
+{
+  "version": "reviewed-disease-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "schima2020-head-mass-v1": {
+      "reviewed_record_sha256": "7f845513292818c9447c3d71d67c3e4727cfc52e055fb1f068638e4993c94080",
+      "units": [
+        {
+          "id": "head-enlargement",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Chronic pancreatitis can occasionally show a focal, mass-like enlargement, usually in the head of the pancreas.",
+            "A focal, mass-like enlargement can occasionally occur in chronic pancreatitis, usually in the pancreatic head."
+          ]
+        },
+        {
+          "id": "head-overlap",
+          "facts": [
+            1,
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The pancreatic head is also a predominant site for pancreatic ductal adenocarcinoma (PDAC). Mass-forming chronic pancreatitis (MFCP) can resemble PDAC on CT or MRI.",
+            "Pancreatic ductal adenocarcinoma (PDAC) also predominantly occurs in the pancreatic head, and mass-forming chronic pancreatitis (MFCP) can look similar on CT or MRI."
+          ]
+        },
+        {
+          "id": "head-limits",
+          "facts": [
+            3,
+            4
+          ],
+          "qualification": true,
+          "wordings": [
+            "No single imaging feature reliably separates MFCP from PDAC; the combination of findings that are present or absent matters.",
+            "Distinguishing MFCP from PDAC depends on the combination of imaging findings present or absent, rather than any single reliable imaging feature."
+          ]
+        }
+      ]
+    },
+    "schima2020-mfcp-pdac-v1": {
+      "reviewed_record_sha256": "e5f0e910c550bc3962c05e8640a265df700aacb7f01e03b793ca7a2b4159389c",
+      "units": [
+        {
+          "id": "mfcp-duct",
+          "facts": [
+            0,
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "A pancreatic duct that narrows smoothly as it passes through a mass, without an abrupt or complete blockage, favors inflammation. This duct-penetrating sign is best seen with magnetic resonance cholangiopancreatography (MRCP).",
+            "Smooth narrowing of the pancreatic duct through a mass, without abrupt or complete obstruction, favors an inflammatory mass. The duct-penetrating sign is best seen with magnetic resonance cholangiopancreatography (MRCP)."
+          ]
+        },
+        {
+          "id": "mfcp-calcium",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "Mass-forming chronic pancreatitis (MFCP) is likely to show diffuse spotted or coarse calcifications in pancreatic tissue, or ductal calcifications, together with the duct-penetrating sign.",
+            "In mass-forming chronic pancreatitis (MFCP), diffuse spotted or coarse pancreatic tissue calcifications, or ductal calcifications, are likely to occur together with a duct-penetrating sign."
+          ]
+        },
+        {
+          "id": "mfcp-cancer",
+          "facts": [
+            3
+          ],
+          "qualification": false,
+          "wordings": [
+            "Complete pancreatic duct blockage by a mass, or arterial encasement by a soft-tissue mass, is more likely with pancreatic ductal adenocarcinoma (PDAC) than with MFCP.",
+            "Compared with MFCP, pancreatic ductal adenocarcinoma (PDAC) is more likely to show complete pancreatic duct obstruction by a mass or arterial encasement by a soft-tissue mass."
+          ]
+        },
+        {
+          "id": "mfcp-limits",
+          "facts": [
+            4,
+            5,
+            6
+          ],
+          "qualification": true,
+          "wordings": [
+            "MFCP can resemble PDAC on CT or MRI. No single imaging feature reliably distinguishes them; the combination of findings present or absent matters.",
+            "Because MFCP can look like PDAC on CT or MRI, their distinction depends on the combination of imaging findings present or absent. No single imaging feature reliably separates them."
+          ]
+        }
+      ]
+    },
+    "schima2020-focal-aip-pdac-v1": {
+      "reviewed_record_sha256": "bbea8404561aac35f971e056c49fda83f159fd757fb210cf300e47d3083ec3d3",
+      "units": [
+        {
+          "id": "aip-phase",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Focal autoimmune pancreatitis (AIP) usually shows uniform enhancement on the portal-venous phase of CT.",
+            "On portal-venous phase CT, focal autoimmune pancreatitis (AIP) usually enhances uniformly."
+          ]
+        },
+        {
+          "id": "aip-cluster",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "Focal AIP usually shows smooth pancreatic duct narrowing without an abrupt cutoff, only mild widening of the upstream main duct (5 mm or less), and no proximal pancreatic atrophy.",
+            "Smooth pancreatic duct narrowing without an abrupt cutoff, mild upstream main-duct dilatation (5 mm or less), and no proximal pancreatic atrophy are usually seen together in focal AIP."
+          ]
+        },
+        {
+          "id": "aip-overlap",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "Focal AIP can still resemble pancreatic ductal adenocarcinoma (PDAC).",
+            "Focal AIP can mimic pancreatic ductal adenocarcinoma (PDAC)."
+          ]
+        }
+      ]
+    }
+  }
+}
