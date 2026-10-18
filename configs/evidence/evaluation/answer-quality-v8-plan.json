@@ -1,0 +1,110 @@
+{
+  "version": "prowl-answer-quality-v8-plan",
+  "baseline_commit": "369a9ba38eb36216e24ae8289abd78949196657f",
+  "scope": "exposed_development_policy_replay_not_formal_acceptance",
+  "inputs": [
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-01.json",
+      "sha256": "758de2d0f1634e629f7b4da14677945855b083f9ce10646dd208877a146f0cea"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-02.json",
+      "sha256": "09b4fa04ac67e86181d56cfaccf76f44b1ecf6a5bc3d67c71238499a4ecd4921"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-03.json",
+      "sha256": "ff7e5394a7bc63a6b2e0897c159adff048aa49182f6509f92d3bccb47966ff50"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-04.json",
+      "sha256": "dc86e3a0e26d96f0cdb34b08a80829b3e9aef6ca7399683d39f689006340f724"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-05.json",
+      "sha256": "a36a57efde8c40620d5f1f7edee45f9328e17c3e993ea43575dd1f6ef7fe4230"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-06.json",
+      "sha256": "b8978f4992d8693b486e2eeb1829c1db20469b03299d110b7ad07c12ef993e76"
+    }
+  ],
+  "pins": [
+    {
+      "path": "src/retrieval/natural_answer.py",
+      "sha256": "62439146535865bb28e3adf7e61ccacf65fee84a2528e14dff14caffbe535e6b"
+    },
+    {
+      "path": "configs/evidence/natural-answer-v8.json",
+      "sha256": "e970714ff13dc2525b184c6a1bf7cea0f896d99b4f1a570fb855eb894b7c55be"
+    },
+    {
+      "path": "configs/evidence/natural-answer-v6.json",
+      "sha256": "530a32ea60c0af000c0570eb78f78b34d217461208a2dd4e50edcc942a0b8f5f"
+    },
+    {
+      "path": "configs/evidence/development-search-v1.json",
+      "sha256": "64507e9f63fbf0ef4461ec20d64ce3001fc5076eeaff5eae8df2ff49b8b0db6a"
+    },
+    {
+      "path": "configs/evidence/corpus-disease-v1.json",
+      "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+    },
+    {
+      "path": "src/retrieval/development_search.py",
+      "sha256": "cb3b48c6947b94641676ee61f8ed59d8ee1015ae6d2b064d95c0a99020517d42"
+    },
+    {
+      "path": "src/retrieval/quality_checkpoint.py",
+      "sha256": "3a5f604978a3ee999af32ed2fab60de65540b69b79d39693cde9d66f7ee6ea1a"
+    },
+    {
+      "path": "outputs/prowl/live-answer-quality-v8-20261017/replay.py",
+      "sha256": "d1b49bae96122929e6ff267559a762b4bc74fcf339c9cdee4877a6c63db0e674"
+    },
+    {
+      "path": "docs/capstone/retrieval/LIVE-ANSWER-QUALITY-V8-2026-10-17.md",
+      "sha256": "2b578c02613e9b42ec064d1b1375c7721f602db782874fa0e7b7641e01d10568"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-01.json",
+      "sha256": "758de2d0f1634e629f7b4da14677945855b083f9ce10646dd208877a146f0cea"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-02.json",
+      "sha256": "09b4fa04ac67e86181d56cfaccf76f44b1ecf6a5bc3d67c71238499a4ecd4921"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-03.json",
+      "sha256": "ff7e5394a7bc63a6b2e0897c159adff048aa49182f6509f92d3bccb47966ff50"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-04.json",
+      "sha256": "dc86e3a0e26d96f0cdb34b08a80829b3e9aef6ca7399683d39f689006340f724"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-05.json",
+      "sha256": "a36a57efde8c40620d5f1f7edee45f9328e17c3e993ea43575dd1f6ef7fe4230"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-06.json",
+      "sha256": "b8978f4992d8693b486e2eeb1829c1db20469b03299d110b7ad07c12ef993e76"
+    }
+  ],
+  "budget": {
+    "cases": 6,
+    "generation_calls": 12,
+    "total_seconds": 600,
+    "retries": 0
+  },
+  "model_inputs": "Exact retained questions and top5 evidence only. No expected answers or labels.",
+  "promotion": "No observed unsupported displayed claim; known background/mandatory-strength failure removed; at least one readable supported answer; offline checks pass. Human/heldout gates remain open.",
+  "parent_attempt": {
+    "path": "outputs/prowl/live-answer-quality-v7-20261017/replay01/manifest.json",
+    "sha256": "330bbc59f127268768f0b48cbc1076ff50afed0828ea9cd506bbb2fefc241d55"
+  },
+  "rejected_parent_review": {
+    "path": "outputs/prowl/live-answer-quality-v7-20261017/replay01/engineering-review.json",
+    "sha256": "fa26b78631203529e35d09216bb6f1aece145f080701f10487f030b396119e6c"
+  },
+  "content_sha256": "0921e806c1996678aa537ee9338cd7e7592f22ee60bfcf790471ea85c662cc80"
+}

@@ -3928,3 +3928,14 @@ Cohort, cadence, numeric recipe and storage/memory limits remain unchanged. Sepa
 backup directories use the segment name; configuration, engineering checks and launch receipt are
 under `outputs/prowl/full-segmenter-resume-mac-20261008/`. See the full training guide for resume
 validation, retained native comparison failure and scope limitations.
+
+
+## October 17, 2026 — Exposed RAG answer-policy diagnostics
+
+Separate from segmentation training: [v7 game plan](capstone/retrieval/LIVE-ANSWER-QUALITY-V7-2026-10-17.md)
+and [v8 follow-up plan](capstone/retrieval/LIVE-ANSWER-QUALITY-V8-2026-10-17.md) were written/pinned
+before their six retained-evidence runs. Both failed and were not promoted. Full outcomes, changed
+factors, limitations and selected v6.1 mechanical repair are recorded in the
+[results report](capstone/retrieval/LIVE-ANSWER-QUALITY-RESULTS-2026-10-17.md). Same corpus/ranking/
+model; no expected-answer prompt injection, protected evaluation or training. Next recover relevant
+retrieved context under the evaluation protocol before more answer-policy experiments.

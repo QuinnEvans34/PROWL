@@ -4,7 +4,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LiteratureSearchPanel, { validateAnswer } from '../src/components/LiteratureSearchPanel.jsx'
 import config from '../../configs/evidence/development-search-v1.json'
-import answerConfig from '../../configs/evidence/natural-answer-v6.json'
+import answerConfig from '../../configs/evidence/natural-answer-v6.1.json'
 function response(request, state = 'evidence_unassessed') {
   return { schema_version: 'prowl-development-answer-response-v1', request_id: request.request_id,
     question: request.question, collection: config.collection, generation: state === 'evidence_unassessed' ? 'unavailable' : 'not_called', answer: null,
@@ -130,12 +130,15 @@ it('keeps insufficient evidence distinct from an unavailable model', async () =>
   await user.click(screen.getByRole('button', { name: 'Ask question' }))
   expect(await screen.findByText(/couldn’t find enough directly relevant evidence/)).toBeTruthy()
   expect(screen.queryByText(/could not produce a checked answer/)).toBeNull()
+  expect(screen.getByText(/passages returned by this search/)).toBeTruthy()
+  expect(screen.queryByText(/Written by the local AI using/)).toBeNull()
 })
 
 it.each([
   ['timeout', /reached its 60-second answer limit/],
   ['incomplete', /stopped before finishing/],
   ['support_rejected', /could not confirm the draft/],
+  ['qualifier_mismatch', /overstated or changed the source/],
   ['model_unavailable', /local answer model is unavailable/],
   ['validation_failed', /did not pass citation or answer-format checks/],
 ])('explains %s and preserves access to sources', async (code, message) => {

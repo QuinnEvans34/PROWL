@@ -1,9 +1,9 @@
 # AI expert completion specification
 
-**Version:** 1.25 — October 17, 2026 (disease-source review and proposed development v6)\
+**Version:** 1.26 — October 17, 2026 (bounded live qualifier repair; two prompt candidates rejected)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
-**Implementation baseline:** `3876a24728a72e17df82be44b0e06cb1fcd66871`
+**Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
 Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.
@@ -89,6 +89,16 @@ schemas preserve old behavior and user authorship. 132 distinct focused checks p
 attempts. Human review remains pending with zero v6 events; prior approvals are preserved. Read the
 short local change packet and supplied evidence in one pass; no article search or offset work.
 This supersedes the preceding checkpoint's pending engineering work, not its historical evidence.
+
+October 17 live-quality direction: Quinton requested moving to live answer quality now. This permits
+bounded development policy repairs before the final evaluation, without accepting pending labels,
+releasing retrieval tuning or closing formal gates. [Two prompt candidates failed](LIVE-ANSWER-QUALITY-RESULTS-2026-10-17.md)
+and were not promoted. Current live v6.1 preserves v6 prompts/model/options and adds mechanical
+mandatory-strength/population-word checks; both observed offending drafts are blocked. Browser
+head-size smoke rejects the overstated draft; function answer/source navigation works but retains
+jargon.89distinct final-code Python checks across attempts/27UIchecks/build pass. Retrieval coverage,
+readability and independent quality acceptance remain unresolved. Next recover existing source
+context under the applicable evaluation protocol, not another unbounded prompt iteration.
 
 ## 1. Outcome and authority
 

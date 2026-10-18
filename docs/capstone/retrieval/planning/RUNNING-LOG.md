@@ -2011,3 +2011,20 @@ supports onepass changed-scope review without article-search/JSON/offset work. N
 and independent protectedoperator/schema/storage/freeze, then retrieval/answerquality. No model/live
 query, source downloads, training/fullselector, protectedcontent or inferredhours. UI5180 HTTP200;
 wrongworkflow health route404 retained, correct literature health checked separately; no restart.
+
+
+## 2026-10-17: Live answer quality attempts and v6.1 qualifier repair
+
+User requested live quality now; recorded bounded development sequencing amendment. v7 and v8
+candidates were planned/pinned before six retained-evidence replays each;11/12generationcalls,
+213.145/24.222seconds. Both rejected: v7 unsupported population description/jargon/truncation;
+v8 allreviewfailures with unsupported/jargon hidden drafts. Stopped prompt iteration. Preserved
+source snapshots/traces/plans. Livev6.1 retains exactv6prompts/model/options, adds mandatory-strength
+and population-descriptor checks. Both retained offending drafts blocked. Verb-controls falsepositive
+fixed/tested after browser smoke.89distinct final-code Python checks across attempts,27UI/build pass.
+Browserfunctionanswer/source2navigation works but jargon remains; headdiseasequestion now correctly
+blocks its unverified qualifier, with passages accessible. Two browserrequests/no retries/atmost4calls.
+Initial APIrestart failed during Postgresautomaticrecovery; causeunknown, logskept. Fullinventory
+admission passed afterward, no DBrestart/deletion or unrelatedcontainerchanges. FinalAPI66878,
+UI/Ollama preserved. Spec1.26/results/handoff updated. Next relevantpassageretrieval underevaluation
+protocol; no humanlabelapproval/protectedfreeze/tuningrelease/training/fullselector/hoursinferred.

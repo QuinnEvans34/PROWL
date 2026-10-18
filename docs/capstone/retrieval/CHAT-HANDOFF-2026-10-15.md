@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October17 live-quality checkpoint:** Read LIVE-ANSWER-QUALITY-RESULTS-2026-10-17.md/spec1.26.
+> User requested live-quality development now; bounded sequencing amendment, not v6label acceptance,
+> protectedfreeze or retrievaltuning release. v7 replay6/11generationcalls/213.145s:2summaries/3insufficient/
+>1incomplete; unsupported healthy/control label and jargon falsely approved. v8 replay6/12calls/24.222s:
+>all6reviewfailures; hidden percentage-denominator error/jargon. BOTHREJECTED, no thirdpromptcandidate.
+> Keeprawtraces/source snapshots under outputs/prowl/live-answer-quality-v7-20261017/ and v8 equivalent.
+> LIVESELECTED v6.1 retains exactv6prompts/model/options; adds mandatory-strength/population-word
+> lexicalguards and closedqualifierfailure UI. Known v6/v7offendingdrafts bothblocked.89distinct final
+>Pythonchecks across attempts/27UI/build pass. Browserfunction answer/source2navigation works but
+>jargonremains; headquestion now qualifierfailure/fivepassages, no invalidanswer. Two browserrequests,
+>atmost4modelcalls/no retries; no exactlatency/callcount claim. Verb-controls falsepositive repaired
+>offline afterward and service reloaded, no extra modelreplay. APIrestart98592failed:Postgresbackend
+>exited/recoveredautomatically,causeunproven. Subsequentfullinventoryadmission passed; noDBcleanup/
+>restart/datadeletion. Intermediate40867stopped forfinalverbfix; finalownedservice66878, verifyhealth.
+> Original32567stopped. UI5180/Ollama unchanged. No source/ranking/weight changes,protectedreads,
+>training/fullselector orhourscredit. Next retrieveexistingrelevantdiseaseevidence underprotocol;
+>AI03/04 remainopen, pendinghumanreview notinferred. Priorplans/observations preserved.
+
 > **October 17 disease-source review / proposed development v6:** Read
 > DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md and spec1.25. Completed80added-source judgments against
 > all20prior answerable cases,28disease-source judgments and2gap rechecks. Proposed30cases retains

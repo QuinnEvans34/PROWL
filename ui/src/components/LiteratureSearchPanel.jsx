@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
-import answerConfig from '../../../configs/evidence/natural-answer-v6.json'
+import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -13,6 +13,7 @@ const generationFailures = {
   timeout: 'The local AI reached its 60-second answer limit. The retrieved passages are available below.',
   incomplete: 'The local AI stopped before finishing its answer. The retrieved passages are available below.',
   support_rejected: 'The evidence review could not confirm the draft answer. The retrieved passages are available below.',
+  qualifier_mismatch: 'The draft overstated or changed the source’s qualifications. You can inspect the retrieved passages in Sources.',
   model_unavailable: 'The local answer model is unavailable. The retrieved passages are available below.',
   validation_failed: 'The draft did not pass citation or answer-format checks. The retrieved passages are available below.',
 }
@@ -124,7 +125,7 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
         <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.generation === 'completed' ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
-          : result.generation === 'completed' ? 'Written by the local AI using the sources below. Check the citations; this is a development preview.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
+          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · Exact dense search · Local Qwen3 answer model</p>
@@ -150,7 +151,7 @@ function LiteratureReadingView({ evidence, answer }) {
       <button type="button" aria-pressed={view === 'sources'} onClick={() => { setSelected(null); setView('sources') }}>Sources ({evidence.length})</button>
     </div>
     {view === 'answer' ? <div className="literature-search__prose" aria-label="AI answer">
-      {answer.status === 'insufficient' && <p>I couldn’t find enough directly relevant evidence in these sources to answer your question.</p>}
+      {answer.status === 'insufficient' && <p>I couldn’t find enough directly relevant evidence in the passages returned by this search to answer your question. You can inspect them in Sources or try a more specific question.</p>}
       {answer.claims.map((c, i) => <div className="literature-search__passage" key={i}>
         <p>{c.text}{' '}{c.citations.map(x => <button key={x.rank} type="button" className="literature-search__reference"
           aria-label={`View source ${x.rank}`} onClick={() => { setSelected(x.rank); setView('sources') }}>[{x.rank}]</button>)}</p>
