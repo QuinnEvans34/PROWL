@@ -1,9 +1,25 @@
 # AI expert completion specification
 
-**Version:** 1.34 — October 18, 2026 (bounded record search active; answer integration pending)\
+**Version:** 1.35 — October 18, 2026 (reviewed-record AI composition active)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October18 readable answers: [plan](RECORD-ANSWER-PLAN-2026-10-18.md) and
+[results](RECORD-ANSWER-RESULTS-2026-10-18.md). **Ask question now uses reviewed record search and local
+Qwen3 8B constrained composition**: model-selected reviewed wording/paragraphs, mandatory complete
+facts/qualifications and code-attached citations. Twenty reusable wording variants, no question-answer
+lookup. Source admission and exact UI reconstruction prevent arbitrary generated medical prose.
+Explicit application-summary fallback on model failure; outside three disease records return passages
+without a model call. Original broad free-generation is not selected under the new flag.
+Initial DB startup failure preserved (0model calls); automatic recovery/inventory verified, cause
+unproven. Fixed8request attempt:3AI/1formatfallback/4correctboundaries, initial7/8gate FAILED. Layout-only
+normalization qualifies4/4retained plans without new model calls; all10output paragraphs source-reviewed.
+Two fresh browser questions show AI compositions, correct citations and qualifications.81Python/47UI/
+build pass. Active8016PID38141/session83863, originalOllama11434; six total actual composition calls.
+This is bounded, source-locked composition, not unrestricted generation or independent clinical review.
+Next volume/intent/source coverage and recurring DB exit investigation. Formal gates and required
+measurement-aware extension remain open. Older source-only/legacy-live entries below are historical.
 
 October 18 retrieval-to-record selection: [plan](RECORD-SEARCH-PLAN-2026-10-18.md) and
 [results](RECORD-SEARCH-RESULTS-2026-10-18.md). The new **Find sources** action retrieves reviewed disease
