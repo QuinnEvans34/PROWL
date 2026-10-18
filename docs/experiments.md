@@ -3964,3 +3964,17 @@ under outputs/prowl/cross-encoder-r2-20261017 and r3 equivalent; aggregate pinne
 configs/evidence/retrieval-r2-r3-results.json.24new focused tests pass(16ranking/8reformulation).
 No model training, protected questions or label edits. Next evaluate complete source-section
 retrieval because independent short paragraphs lose the answer's study and qualification context.
+
+### October 17 — section retrieval and terminology (R4–R8)
+
+Hypothesis: complete sections recover context lost in 600-character passage ranking. R4/R5/R6
+use local-model paper/section selection; R7/R8 use the pinned CPU cross-encoder over bounded
+section windows, with R8 adding general medical term normalization. Every experiment has a prior
+plan under docs/capstone/retrieval. R4 stopped at oversized menu (15 complete); R5 completed20 but
+failed disease coverage; R6 timed out on its first question; R7 and R8 failed first known-span screen.
+Post-hoc reading found relevant but unlabeled R8 disease sections; explicitly documented continuation
+completed the remaining19 without replaying the head case. Original failed gates preserved.
+R8 source recall@5 .92/MRR .8833/passage recall@5 .3238, 10/20 direct top5, 13/20 packages any direct,
+8/20 all labeled concepts; median6.977s/max7.318s. No retrieval generation for R7/R8; no training.
+Result: promising section evidence, not accepted retrieval or model quality. Full report:
+SECTION-RETRIEVAL-RESULTS-2026-10-17.md; public hashes configs/evidence/section-retrieval-results.json.

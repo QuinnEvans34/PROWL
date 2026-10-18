@@ -1,0 +1,288 @@
+{
+  "version": "prowl-section-retrieval-results-v1",
+  "scope": "exposed_development_not_independent",
+  "experiments": [
+    {
+      "path": "outputs/prowl/section-search-r4-20261017/receipt.json",
+      "sha256": "206e3412c3b7464a27d2bf26509263455722db20119e961192f3b6df47ff604a",
+      "state": "failed",
+      "complete_rankings": 15,
+      "seconds": 161.69022395799402,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R4-PLAN-2026-10-17.md",
+          "sha256": "e9764e47aa35d9bf5e39920dc4e86c118442ac8adb7322fdcbe3db7ea3ae701b"
+        },
+        {
+          "path": "src/retrieval/section_search.py",
+          "sha256": "5f698fb7f4fb2806d61872ad5ef4f2e4ad49d3cd7774cf094a37ccdf1e764377"
+        },
+        {
+          "path": "scripts/retrieval/compare_section_search.py",
+          "sha256": "60930b5c3dc311f8ac6a343db0fd02ca66038257bdb3265ae83cdc995b29e02d"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "failure_type": "ValueError"
+    },
+    {
+      "path": "outputs/prowl/section-search-r5-20261017/receipt.json",
+      "sha256": "aabcef8f1cf8947258719f1c00a0bd20436e8f5a804ce369198af3a0b8d72152",
+      "state": "completed",
+      "complete_rankings": 20,
+      "seconds": 204.30159516702406,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R5-PLAN-2026-10-17.md",
+          "sha256": "a79fb946e28159dc82f46f112fa761efdf16c8d805124b6b70300ad6dbd90ee5"
+        },
+        {
+          "path": "src/retrieval/reasoned_section_search.py",
+          "sha256": "28971f371165de11459e26e2e75cfb884e17ccf8083ed0b6bee4c0e043dc5f82"
+        },
+        {
+          "path": "scripts/retrieval/compare_reasoned_section_search.py",
+          "sha256": "6fcfb97ee482e098d8570b4cb00d096dbd93f5978a9bd7263c98b2389b026c23"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "means": {
+        "depth": 5.45,
+        "unique_sources": 1,
+        "source_mrr": 0.9,
+        "passage_mrr": 0.48,
+        "top5_direct_hits": 1.15,
+        "top5_source_coverage": 0.8225,
+        "diagnostic_span_hit_at_5": 0.5180555555555556,
+        "source_recall_at_1": 0.8225,
+        "passage_recall_at_1": 0.14717948717948717,
+        "source_recall_at_3": 0.8225,
+        "passage_recall_at_3": 0.326025641025641,
+        "source_recall_at_5": 0.8225,
+        "passage_recall_at_5": 0.5026923076923077,
+        "source_recall_at_10": 0.8225,
+        "passage_recall_at_10": 0.5193589743589744
+      },
+      "median_seconds": 9.438487229461316,
+      "max_seconds": 19.816378250019625,
+      "checks": {
+        "old_top5_coverage": false,
+        "passage_recall": true,
+        "source_mrr": true,
+        "disease_hits": false,
+        "latency": true
+      },
+      "package_checks": {
+        "direct_questions": false,
+        "full_concept_questions": false,
+        "disease_concepts": false,
+        "latency": true
+      },
+      "package_counts": {
+        "any_direct": 15,
+        "full_concepts": 10
+      }
+    },
+    {
+      "path": "outputs/prowl/section-search-r6-20261017/receipt.json",
+      "sha256": "d872f5e2241ecf1a6b97392665ffcd1702732ca3d4e7e5668d57a49a155ad69a",
+      "state": "failed",
+      "complete_rankings": 0,
+      "seconds": 61.6620818329975,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R6-PLAN-2026-10-17.md",
+          "sha256": "30d545d0f6bcac7efb9ce023e1fe59db79fe37b115ed9ce7c693281ce1b56905"
+        },
+        {
+          "path": "src/retrieval/thinking_section_search.py",
+          "sha256": "1b36a0cbe0c2f0d8ec086c74d60d7a44477779d1bcacf56247ac0dba43420b89"
+        },
+        {
+          "path": "scripts/retrieval/compare_thinking_section_search.py",
+          "sha256": "9a75ef894f1dd7fe0fd0c54223269e6f6d1560b821f1c7e2478cfdea0ecde426"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "failure_type": "TimeoutError"
+    },
+    {
+      "path": "outputs/prowl/section-ranking-r7-20261017/receipt.json",
+      "sha256": "b846ee0db889dc23a2c8c7ac2db5f05f16dea6c0e3b96131086c610ab815aec2",
+      "state": "failed",
+      "complete_rankings": 1,
+      "seconds": 10.322211917024106,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R7-PLAN-2026-10-17.md",
+          "sha256": "70e217a31c6509c5ca329f6d0b5474a43c648f19c2db73b016a29263d106633c"
+        },
+        {
+          "path": "src/retrieval/section_ranking.py",
+          "sha256": "1c4c5fa6c4bd098006cd563705ad32d3f49259195f6d921a06407caef7fffe80"
+        },
+        {
+          "path": "scripts/retrieval/compare_section_ranking.py",
+          "sha256": "0f87a395e04d69b6d27ffcae64c9930a1106634f956d096e7f848d70b62c564d"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "failure_type": "ValueError"
+    },
+    {
+      "path": "outputs/prowl/section-ranking-r8-20261017/receipt.json",
+      "sha256": "1b2710fd6ddc743b29a65ab597cd8ce6064fbdbf538f0ecd6d0ffe8a6f94f64e",
+      "state": "failed",
+      "complete_rankings": 1,
+      "seconds": 10.16355612501502,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R8-PLAN-2026-10-17.md",
+          "sha256": "77e1f69a42bbf69c0a647a10fe690dae1501c779cd1a0350667caf5d3d749551"
+        },
+        {
+          "path": "src/retrieval/section_ranking.py",
+          "sha256": "1c4c5fa6c4bd098006cd563705ad32d3f49259195f6d921a06407caef7fffe80"
+        },
+        {
+          "path": "src/retrieval/search_terminology.py",
+          "sha256": "05157ad30719e94d790f20aea7ddcc5359875bd0d7e5e483f0c99923aafaa177"
+        },
+        {
+          "path": "scripts/retrieval/compare_normalized_section_ranking.py",
+          "sha256": "53dc114750297d071aff8de0a2bcefcfb6b0ade98fb36a1afae013a87bbfc929"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "failure_type": "ValueError"
+    },
+    {
+      "path": "outputs/prowl/section-ranking-r8-continuation-20261017/receipt.json",
+      "sha256": "ff1d6ee1a25987fb14690ac76baf80f3b999c678959f4f4b316128ef04204aa5",
+      "state": "completed",
+      "complete_rankings": 20,
+      "seconds": 136.2017448330298,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/RETRIEVAL-R8-CONTINUATION-2026-10-17.md",
+          "sha256": "60fdc56cfd2acf6814d8c65e59e56fb04633d56ae6b21699bbed6f069fdd7685"
+        },
+        {
+          "path": "src/retrieval/section_ranking.py",
+          "sha256": "1c4c5fa6c4bd098006cd563705ad32d3f49259195f6d921a06407caef7fffe80"
+        },
+        {
+          "path": "src/retrieval/search_terminology.py",
+          "sha256": "05157ad30719e94d790f20aea7ddcc5359875bd0d7e5e483f0c99923aafaa177"
+        },
+        {
+          "path": "scripts/retrieval/continue_normalized_section_ranking.py",
+          "sha256": "42f680514bbbc30e1bec78a9bf20ebe18c07f379c3e59f1bf2d61ab94aa1f394"
+        },
+        {
+          "path": "scripts/retrieval/compare_development_rankings.py",
+          "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3"
+        },
+        {
+          "path": "configs/evidence/reranker-minilm-v1.json",
+          "sha256": "870424ce003a4cff1b84bd69a90eab29a466c174480e736936907f70236d4756"
+        },
+        {
+          "path": "configs/evidence/development-retrieval-comparison-checkpoint-v1.json",
+          "sha256": "3eb37e0ba8285153d025bbb44b99f9a0efcad7983d3053ce01775a264d9d4c18"
+        }
+      ],
+      "means": {
+        "depth": 14.4,
+        "unique_sources": 2.9,
+        "source_mrr": 0.8833333333333333,
+        "passage_mrr": 0.3480482456140351,
+        "top5_direct_hits": 0.7,
+        "top5_source_coverage": 0.7575,
+        "diagnostic_span_hit_at_5": 0.3263888888888889,
+        "source_recall_at_1": 0.685,
+        "passage_recall_at_1": 0.12884615384615383,
+        "source_recall_at_3": 0.92,
+        "passage_recall_at_3": 0.23051282051282052,
+        "source_recall_at_5": 0.92,
+        "passage_recall_at_5": 0.32384615384615384,
+        "source_recall_at_10": 0.92,
+        "passage_recall_at_10": 0.39384615384615385
+      },
+      "median_seconds": 6.976696187455673,
+      "max_seconds": 7.317581583047286,
+      "checks": {
+        "old_top5_coverage": false,
+        "passage_recall": true,
+        "source_mrr": true,
+        "disease_hits": false,
+        "latency": true
+      },
+      "package_checks": {
+        "direct_questions": false,
+        "full_concept_questions": false,
+        "disease_concepts": false,
+        "latency": true
+      },
+      "package_counts": {
+        "any_direct": 13,
+        "full_concepts": 8
+      }
+    }
+  ]
+}
