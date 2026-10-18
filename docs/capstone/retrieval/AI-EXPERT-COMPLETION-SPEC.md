@@ -1,9 +1,22 @@
 # AI expert completion specification
 
-**Version:** 1.33 — October 18, 2026 (disease fact assembly passes; live retrieval gap retained)\
+**Version:** 1.34 — October 18, 2026 (bounded record search active; answer integration pending)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 18 retrieval-to-record selection: [plan](RECORD-SEARCH-PLAN-2026-10-18.md) and
+[results](RECORD-SEARCH-RESULTS-2026-10-18.md). The new **Find sources** action retrieves reviewed disease
+records from typed questions, expands their canonical qualification passages, and preserves dense
+fallback for unmatched wording. A bounded English topic grammar and lexical source index replace the
+harness-supplied intents for this path; no exact question lookup or evaluation labels in production.
+First HTTP attempt failed at canonical transport hashing and is preserved; correction adds the actual
+FrozenLiterature boundary regression. 57 Python / 33 UI checks pass. Corrected exposed screen24/24:
+12 positives select the intended records,12 boundaries select none;7.528s total,0.419s maximum request,
+zero answer calls. Two live UI questions and citation opening verified. Source policy is active on8016;
+**Ask question** remains dense/v6.1. Finite grammar and three records are not broad semantic/clinical
+qualification. Volume routing, readable fact-answer integration, independent evaluation and measurement
+extension remain open. Next qualify the readable answer adapter without dropping source limitations.
 
 October 18 disease-comparison extension: [plan](DISEASE-FACT-PLAN-2026-10-18.md) and
 [results](DISEASE-FACT-RESULTS-2026-10-18.md). Three reviewed records preserve focal-mass scope,

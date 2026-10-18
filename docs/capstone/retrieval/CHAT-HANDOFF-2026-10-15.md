@@ -1,5 +1,28 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 record search ACTIVE / answer integration pending:** User approved retrieval and free-text
+> selection. Read RECORD-SEARCH-RESULTS-2026-10-18.md/spec1.34. Implementation03a976c adds lexical
+> reviewed-record index, bounded English topic grammar, canonical context expansion and Find sources UI.
+> Attempt1 first request503 retained: wrong digest convention at transport boundary; no evidence/model
+> response. Correction0cdeba6 uses existing canonical transport digest and actual FrozenLiterature test.
+>57Python/33UI checks pass, Vite build passes; initial Node20 collection error retained, installedNode24
+> works without dependencies change. Corrected24case exposed screen completed7.528s/max0.419s:12positive
+> exact scoped matches,12boundary no records (4existing refusal/8densefallback),zero answercalls,1179
+> canonical records checked. Named examples only, not arbitrary-language/clinical qualification.
+> Source-only promotion after pass:8016PID25716/ownedexec35480 LIVE, source-linked-record-search-v1;
+> answer path still originaldense/v6.1. Old71656absent; owned8017candidate23906/session61306 and
+>25004/session61604stopped/reaped143,portclosed. Never rerun the completed canary as a live job.
+> Two original questions verified in live browser,4/7passages; View source6 opens focal-AIP portal-venous
+> CT/duct/atrophy excerpt. Screenshot/promotion/inputs/receipt/readable table retained under
+> outputs/prowl/record-search-v1-attempt2-20261018/. First failure kept in record-search-v1-20261018/.
+> No new model answers, Ollama lifecycle/training/fullselector/protecteddata/ingestion/humanhours.
+> Next readable fact-answer adapter and broader intent qualification; volume-record routing pending.
+> Do not pass expanded source envelopes into existing three-claim generation contract implicitly.
+> Shared checkout changed externally to codex/prowl-ui-redesign during work; scoped retrieval commits
+> only. Preserve untracked PROWL_LOGO.png and docs/capstone/interface/ui-redesign/; do not reset/switch.
+> Publish retrieval history to codex/retrieval-record-search without changing that active checkout.
+> AI-04 remains In Progress; independent evaluation and required measurement deliverable remain open.
+
 > **October18 disease facts assembled; live retrieval gap explicit:** User approved qualitative extension
 > with tests/Trello/commits. Read DISEASE-FACT-RESULTS-2026-10-18.md/spec1.33. Implementation18b1875 adds
 > three Schima2020 records, separately reviewed spans, deterministic relations and mandatory qualifiers.
