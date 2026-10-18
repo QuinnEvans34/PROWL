@@ -1,9 +1,18 @@
 # AI expert completion specification
 
-**Version:** 1.26 — October 17, 2026 (bounded live qualifier repair; two prompt candidates rejected)\
+**Version:** 1.27 — October 17, 2026 (bounded development retrieval comparison; candidates not promoted)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October17 development sequencing amendment: Quinton's continuation after the recommendation to
+recover disease evidence authorizes the [bounded comparison](RETRIEVAL-DEVELOPMENT-COMPARISON-2026-10-17.md)
+ahead of formal Step6. [Results](RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md):20exposed answerable
+questions, fixed dense/keyword/hybrid; neither candidate meets promotion criteria. Keep live dense
+and answer policyv6.1. This narrowly supersedes earlier no-tuning sequencing for this recorded local
+development experiment; it does not accept v6labels, waive protected freeze or complete Step6.
+Next improve candidate coverage/source context before more prompt experiments. Formal gates below
+remain unchanged. Producing baseline for this experiment is30f3e74.
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
 Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.

@@ -3939,3 +3939,14 @@ factors, limitations and selected v6.1 mechanical repair are recorded in the
 [results report](capstone/retrieval/LIVE-ANSWER-QUALITY-RESULTS-2026-10-17.md). Same corpus/ranking/
 model; no expected-answer prompt injection, protected evaluation or training. Next recover relevant
 retrieved context under the evaluation protocol before more answer-policy experiments.
+
+## October 17, 2026 — Exposed retrieval comparison
+
+[Fixed plan and recorded recovery decision](capstone/retrieval/RETRIEVAL-DEVELOPMENT-COMPARISON-2026-10-17.md)
+precede their respective attempts. [Results](capstone/retrieval/RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md):
+attempt1 DBbackend failure preserved; fresh canaries/inventory passed; attempt2 completes all20
+answerable development questions, exact dense/FTS-OR/RRF60. Neither candidate meets declared
+promotion criteria, so live dense remains. Hybrid improves aggregate ranks but misses head-size
+evidence and returns cancer-cohort signs without the needed inflammatory comparison. Next change
+candidate coverage/source context, not answer prompts or corpus size. Existing14sources/encoder,
+provisional v6labels and all failures preserved; no protected-set use/training/model-generation.

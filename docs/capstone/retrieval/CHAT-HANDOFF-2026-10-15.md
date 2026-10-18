@@ -1,5 +1,20 @@
 # PROWL development handoff — October 15, 2026
 
+> **October17 retrieval comparison:** Read RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md/spec1.27.
+> User continuation authorizes one bounded exposed-development comparison ahead of formalStep6;
+> no v6label acceptance/protected access/freeze waiver.20answerable cases,dense/FTS-OR/RRF60,
+> depth50, unchanged14sources/1179passages. Source recall@5 .8775/.755/.880; sourceMRR
+>.7363/.6450/.8321; actualtop5direct-hit questions9/10/10of20. BothcandidatesREJECTED forlive:
+> headsize0directhitsforall; hybridfindings2hitsarecancer-cohortsigns,notdifferentialproof.
+> Trueinflammatorycomparisonpassagesabsentalltop50; rerankingalonecannotrecovermissingcandidates.
+> Nextplan genericterminology/source-awarecandidatecoverage; nonewdata/prompttrialjustifiedyet.
+> Attempt1DBbackendexit2/recoveryafter1embedding,0completerankings; preserved. Canary/fullinventory
+> pass, explicitlyrecordedattempt2 completes4.364s/21embeddings. Causeunproven,noDBcleanup/restart.
+>41tests pass; finalHTTPheadquery5canonicalhitsmatchesdense/.358s/noanswer-generation. Total23query
+>embeddings/0Ollamacalls. LiveAPI66878/UI5180/densev1/answerpolicyv6.1unchanged. Evidenceunder
+>outputs/prowl/retrieval-comparison-v1[-attempt2]-20261017; readable-review.md inattempt2.
+> FormalStep5/6/AI04open, oldlabels/approvals/privateworkflow/training/selector/hoursunchanged.
+
 > **October17 live-quality checkpoint:** Read LIVE-ANSWER-QUALITY-RESULTS-2026-10-17.md/spec1.26.
 > User requested live-quality development now; bounded sequencing amendment, not v6label acceptance,
 > protectedfreeze or retrievaltuning release. v7 replay6/11generationcalls/213.145s:2summaries/3insufficient/

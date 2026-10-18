@@ -1,0 +1,1329 @@
+{
+  "version": "prowl-development-retrieval-comparison-checkpoint-v1",
+  "scope": "exposed_provisional_labels_not_final_selection",
+  "baseline_commit": "30f3e740864bc04937c34c0f0a390687ddb07e96",
+  "decision": "retain_live_dense_neither_candidate_qualifies",
+  "means": {
+    "dense": {
+      "depth": 50.0,
+      "unique_sources": 7.25,
+      "source_mrr": 0.7363095238095239,
+      "passage_mrr": 0.2448271889400922,
+      "top5_direct_hits": 0.5,
+      "top5_source_coverage": 0.745,
+      "diagnostic_span_hit_at_5": 0.20972222222222223,
+      "source_recall_at_1": 0.5599999999999999,
+      "passage_recall_at_1": 0.058333333333333334,
+      "source_recall_at_3": 0.795,
+      "passage_recall_at_3": 0.13666666666666666,
+      "source_recall_at_5": 0.8775000000000001,
+      "passage_recall_at_5": 0.19884615384615384,
+      "source_recall_at_10": 0.9875,
+      "passage_recall_at_10": 0.23320512820512823
+    },
+    "lexical": {
+      "depth": 50.0,
+      "unique_sources": 8.45,
+      "source_mrr": 0.645021645021645,
+      "passage_mrr": 0.21602126040134534,
+      "top5_direct_hits": 0.5,
+      "top5_source_coverage": 0.755,
+      "diagnostic_span_hit_at_5": 0.24047619047619045,
+      "source_recall_at_1": 0.41,
+      "passage_recall_at_1": 0.05,
+      "source_recall_at_3": 0.745,
+      "passage_recall_at_3": 0.15166666666666667,
+      "source_recall_at_5": 0.755,
+      "passage_recall_at_5": 0.24380952380952384,
+      "source_recall_at_10": 0.9025000000000001,
+      "passage_recall_at_10": 0.2788095238095238
+    },
+    "hybrid": {
+      "depth": 50.0,
+      "unique_sources": 8.25,
+      "source_mrr": 0.8321428571428571,
+      "passage_mrr": 0.3601084087481147,
+      "top5_direct_hits": 0.65,
+      "top5_source_coverage": 0.7849999999999999,
+      "diagnostic_span_hit_at_5": 0.20853174603174604,
+      "source_recall_at_1": 0.6725,
+      "passage_recall_at_1": 0.14333333333333334,
+      "source_recall_at_3": 0.845,
+      "passage_recall_at_3": 0.2092857142857143,
+      "source_recall_at_5": 0.8800000000000001,
+      "passage_recall_at_5": 0.22313186813186814,
+      "source_recall_at_10": 0.9875,
+      "passage_recall_at_10": 0.261978021978022
+    }
+  },
+  "candidate_checks": {
+    "lexical": {
+      "source_recall_improves": false,
+      "source_mrr_nonregression": false,
+      "passage_recall_nonregression": true,
+      "both_disease_top5_improve": false,
+      "qualifies": false
+    },
+    "hybrid": {
+      "source_recall_improves": true,
+      "source_mrr_nonregression": true,
+      "passage_recall_nonregression": true,
+      "both_disease_top5_improve": false,
+      "qualifies": false
+    }
+  },
+  "per_question_metrics": [
+    {
+      "id": "q:dev2-01",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 0.4,
+          "diagnostic_span_hit_at_5": 0.1111111111111111,
+          "source_recall_at_1": 0.2,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.4,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.8,
+          "passage_recall_at_5": 0.07692307692307693,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.23076923076923078
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.08333333333333333,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.6,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.2,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.4,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.6,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 0.8,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 0.2,
+          "diagnostic_span_hit_at_5": 0.1111111111111111,
+          "source_recall_at_1": 0.2,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.4,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.6,
+          "passage_recall_at_5": 0.07692307692307693,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.15384615384615385
+        }
+      }
+    },
+    {
+      "id": "q:dev6-31",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.06666666666666667,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.25,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.25,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.25,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 12,
+          "source_mrr": 0.16666666666666666,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 0.5,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 12,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.029411764705882353,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.25,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.25,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.5,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-03",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 8,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.03571428571428571,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.020833333333333332,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-04",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 5,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 7,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 7,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-05",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.25,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 0.14285714285714285,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 0.14285714285714285,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-06",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 3,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.03333333333333333,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.05263157894736842,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 8,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.1,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "q:dev2-07",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 8,
+          "source_mrr": 0.14285714285714285,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.16666666666666666,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-08",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.3333333333333333,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.2,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.2,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.4
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.25,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.16666666666666666,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.2,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.4
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.16666666666666666,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.2,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.4
+        }
+      }
+    },
+    {
+      "id": "q:dev2-09",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 1.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 1.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 1.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 1.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 1.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 1.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-10",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.16666666666666666,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.16666666666666666,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.3333333333333333
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.16666666666666666,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.16666666666666666,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.16666666666666666,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.16666666666666666
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 7,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.16666666666666666,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.16666666666666666,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.16666666666666666,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "q:dev2-11",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.25,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 6,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 1.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 1.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-12",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 8,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.3333333333333333,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.5,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.3333333333333333,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.3333333333333333,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.5,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.3333333333333333,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.5,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.5,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        }
+      }
+    },
+    {
+      "id": "q:dev2-13",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 4,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.03225806451612903,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 4,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.058823529411764705,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 3,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.07692307692307693,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-14",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 4,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.5,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.5,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.25,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.5,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 7,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.5,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.5,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.5,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        }
+      }
+    },
+    {
+      "id": "q:dev6-32",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.06666666666666667,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.25,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.25,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.5,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 0.75,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.2,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 0.5,
+          "diagnostic_span_hit_at_5": 0.14285714285714285,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.5,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.5,
+          "passage_recall_at_5": 0.14285714285714285,
+          "source_recall_at_10": 0.75,
+          "passage_recall_at_10": 0.14285714285714285
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 2,
+          "top5_source_coverage": 0.25,
+          "diagnostic_span_hit_at_5": 0.14285714285714285,
+          "source_recall_at_1": 0.25,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.25,
+          "passage_recall_at_3": 0.2857142857142857,
+          "source_recall_at_5": 0.5,
+          "passage_recall_at_5": 0.2857142857142857,
+          "source_recall_at_10": 0.75,
+          "passage_recall_at_10": 0.2857142857142857
+        }
+      }
+    },
+    {
+      "id": "q:dev2-16",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 5,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 12,
+          "source_mrr": 0.09090909090909091,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 0.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 0.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 0.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 0.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 11,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-17",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 5,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.25,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.2,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.2,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.2
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 9,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.25,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.2,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.2,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.2
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 6,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 2,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.25,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.2,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.4,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.4,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.4
+        }
+      }
+    },
+    {
+      "id": "q:dev2-18",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 2,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 2,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.5,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.16666666666666666,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.3333333333333333,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.3333333333333333,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.5
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 4,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.5,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.25,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.16666666666666666,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.16666666666666666,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.16666666666666666
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 2,
+          "source_mrr": 1.0,
+          "passage_mrr": 1.0,
+          "top5_direct_hits": 2,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.5,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.16666666666666666,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.3333333333333333,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.3333333333333333,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.3333333333333333
+        }
+      }
+    },
+    {
+      "id": "q:dev2-19",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 10,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.0,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 7,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.3333333333333333,
+          "top5_direct_hits": 1,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 1.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 1.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 1.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 1.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 8,
+          "source_mrr": 1.0,
+          "passage_mrr": 0.05,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 1.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    },
+    {
+      "id": "q:dev2-20",
+      "candidates": {
+        "dense": {
+          "depth": 50,
+          "unique_sources": 4,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.047619047619047616,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "lexical": {
+          "depth": 50,
+          "unique_sources": 6,
+          "source_mrr": 0.3333333333333333,
+          "passage_mrr": 0.023255813953488372,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        },
+        "hybrid": {
+          "depth": 50,
+          "unique_sources": 5,
+          "source_mrr": 0.5,
+          "passage_mrr": 0.025,
+          "top5_direct_hits": 0,
+          "top5_source_coverage": 1.0,
+          "diagnostic_span_hit_at_5": 0.0,
+          "source_recall_at_1": 0.0,
+          "passage_recall_at_1": 0.0,
+          "source_recall_at_3": 1.0,
+          "passage_recall_at_3": 0.0,
+          "source_recall_at_5": 1.0,
+          "passage_recall_at_5": 0.0,
+          "source_recall_at_10": 1.0,
+          "passage_recall_at_10": 0.0
+        }
+      }
+    }
+  ],
+  "formal_evaluation_ready": false,
+  "live_search_changed": false,
+  "answer_generation_calls": 0,
+  "query_embeddings": 23,
+  "tests_passed": 41,
+  "pins": [
+    {
+      "path": "docs/capstone/retrieval/RETRIEVAL-DEVELOPMENT-COMPARISON-2026-10-17.md",
+      "sha256": "fd312314c2bfd5ade15b4022cbdb5cee2db6d117d0d6df60a629314c6ee72ef3",
+      "bytes": 4464
+    },
+    {
+      "path": "docs/capstone/retrieval/RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md",
+      "sha256": "037bb4237d06a33f479993ab51cf764dee10dfefd2c9d07fd941b13130e4c45f",
+      "bytes": 6105
+    },
+    {
+      "path": "src/retrieval/development_ranking.py",
+      "sha256": "aeb8df2fcd0fd690b7beff0c502ee3db69c20d59828fb7c311d4091f6088b914",
+      "bytes": 2834
+    },
+    {
+      "path": "scripts/retrieval/compare_development_rankings.py",
+      "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3",
+      "bytes": 8866
+    },
+    {
+      "path": "tests/retrieval/test_development_ranking.py",
+      "sha256": "81585cc8813a87cb9f4a7b98a0fcb4027cee4d11fc8d6a084883f79638eb56ca",
+      "bytes": 2557
+    },
+    {
+      "path": "tests/retrieval/test_development_comparison.py",
+      "sha256": "02f97cab7a3fab44cbdb850a08f643a7c9f6772b5d5e58ee547261df9baefb30",
+      "bytes": 2063
+    },
+    {
+      "path": "configs/evidence/development-search-v1.json",
+      "sha256": "64507e9f63fbf0ef4461ec20d64ce3001fc5076eeaff5eae8df2ff49b8b0db6a",
+      "bytes": 664
+    },
+    {
+      "path": "configs/evidence/natural-answer-v6.1.json",
+      "sha256": "7f4b86d3a0507aa02e9991c03e99d8209489b3fd5b499e2d595b0522f385435e",
+      "bytes": 994
+    },
+    {
+      "path": "configs/evidence/corpus-disease-v1.json",
+      "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af",
+      "bytes": 48158
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v6-draft.json",
+      "sha256": "8d0c8cd96208896a6bc33c2a9880ba3155f6040971a00e715e6b5d186a8b90d3",
+      "bytes": 173830
+    },
+    {
+      "path": "src/retrieval/metrics.py",
+      "sha256": "5f40449c3e647a0e50c0db9ace2d663bb510ecd77aca0a3cfe0516e0cbd5f878",
+      "bytes": 16063
+    },
+    {
+      "path": "src/retrieval/labels.py",
+      "sha256": "c42f33e547c4a89fc69af81316be23349bac4b477c813b0aca5593457995a02c",
+      "bytes": 5060
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/canary.json",
+      "sha256": "900735c2437e2d045515f862f3b3702a6c17ef4b720d7db514d3a86572f61855",
+      "bytes": 547
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/compare_development_rankings.py",
+      "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3",
+      "bytes": 8866
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/database-recovery.txt",
+      "sha256": "8a3d39e2338ae922b5c931952cd145237e81b1cda5f8dabb6d466af6f3ed24fd",
+      "bytes": 4334
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/development_ranking.py",
+      "sha256": "aeb8df2fcd0fd690b7beff0c502ee3db69c20d59828fb7c311d4091f6088b914",
+      "bytes": 2834
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/plan-before-attempt.md",
+      "sha256": "1be375382dfb06a56cef2d8dc8f39c678620820c22056b4ead1b396b9e5f7a21",
+      "bytes": 3379
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/receipt.json",
+      "sha256": "9387ebd8a4eeca4cc6d317add8e0626bec720e2127c835de1500f4bda5abf911",
+      "bytes": 18167
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-20261017/recovery-inventory.json",
+      "sha256": "1db671c319a63e18e8d747762a67f4e988194316d34e88dc6507a8f349d372e7",
+      "bytes": 93
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/compare_development_rankings.py",
+      "sha256": "524bfeb955ebc5862f9fcb73e8813ab86e2ea672b9e4431f7ddf64625c70b2b3",
+      "bytes": 8866
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/development_ranking.py",
+      "sha256": "aeb8df2fcd0fd690b7beff0c502ee3db69c20d59828fb7c311d4091f6088b914",
+      "bytes": 2834
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/live-parity-check.json",
+      "sha256": "964e569f421141c7b6836d7dcb2a0213e6a5021e06004b1e4664ec3c2d1aa62a",
+      "bytes": 245
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/readable-review.md",
+      "sha256": "31fbdeab0d7f8689a371e525f5a4e6ea7c3bc90ce30462e78a313aef94f112dd",
+      "bytes": 22996
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/receipt.json",
+      "sha256": "2763b71e2e14d6c49fd723f8c4a6ad243e95fd2c5b7eba9f7a3f57f26b03a1d3",
+      "bytes": 538729
+    },
+    {
+      "path": "outputs/prowl/retrieval-comparison-v1-attempt2-20261017/tests.txt",
+      "sha256": "755e07089415f65097ea0edbba9ca05d6254b6a013b642087130b9e29d7344a5",
+      "bytes": 342
+    }
+  ]
+}
