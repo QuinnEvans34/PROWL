@@ -1,5 +1,26 @@
 # PROWL development handoff — October 15, 2026
 
+> **October17 autonomous quality investigation active:** User requests autonomous improvements until
+> engineering confidence. Read spec1.28, SECTION-RETRIEVAL-RESULTS and SECTION-ANSWER-RESULTS.
+> Commits7d4c3aa and d2af0d7 pushed: full-corpus reranking/source-selection experiments preserved.
+> R8 deterministic sections+terminology finds directly relevant but provisionally unlabeled disease
+> evidence; original gates still fail.20exposed cases,sourceRecall5 .92/MRR .8833/passageRecall5 .3238,
+> 10/20directtop5,13/20packages anydirect,8/20allconcepts;median6.977/max7.318s. No relabel-to-pass.
+> Answer v6.2/v9–v14 rejected; model review can approve overgeneralization or missing qualifications.
+> No new candidate deployed. LiveAPI66878 stilldense/v6.1; UI5180. OriginalOllama11434 remains.
+> V15 is ONE separately budgeted instruction-model comparison, plan explicit before download:
+> qwen2.5:14b manifest7cdf5a0187d5...,8,988,123,581layerbytes, isolated external model store
+> /Volumes/PROWL-Data/PROWL/scratch/answer-model-v15-20261017/ollama. Owned candidate Ollama
+> session31824/PID87026/loopback11435, cloud off, one model/request; do not duplicate. Pull session38293
+> active at this checkpoint,20min/12GiB/external100GiB/internal104GiBfloors; inspect receipt first.
+> No model/data/cache deletion. After verified manifest/blobs only, two-canary supervised comparison
+> with18GiBownedRSS/4min/60srequests; no retry. See instruction-model-v15 output directory.
+> Existing8B/30B resident models may be unloaded to prevent concurrent inference, never deleted.
+> Formal Step5–7, human/independent evidence acceptance and required measurements remain open.
+> Training/fullselector/protected content/humanhours untouched. This active notice needs a final
+> checkpoint update after the candidate attempt ends; never assume download or quality success.
+
+
 > **October17 retrieval comparison:** Read RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md/spec1.27.
 > User continuation authorizes one bounded exposed-development comparison ahead of formalStep6;
 > no v6label acceptance/protected access/freeze waiver.20answerable cases,dense/FTS-OR/RRF60,

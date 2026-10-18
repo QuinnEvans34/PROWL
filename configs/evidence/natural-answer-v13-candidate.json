@@ -1,0 +1,47 @@
+{
+  "version": "natural-literature-answer-v13",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "b958f3323f45e92929ed0fa48582a2db80c77a8e3755af58f8d1259c425ccac9",
+  "calls_per_request_max": 4,
+  "num_ctx": 16384,
+  "temperature": 0.7,
+  "seed": 42,
+  "retries": 0,
+  "quality": "development_unvalidated",
+  "generation_budget_seconds": 60,
+  "browser_timeout_seconds": 100,
+  "inline_citations": "normalize_only_bracketed_claim_bound_source_ids",
+  "draft_think": false,
+  "review_think": false,
+  "draft_num_predict": 1536,
+  "review_num_predict": 1536,
+  "source_serialization": "unicode_text",
+  "quote_selection": "source_id_selection_bound_to_exact_retrieved_passage",
+  "parent_policy": "natural-literature-answer-v12",
+  "mandatory_strength_guard": "reject_new_mandatory_language_absent_from_cited_passages",
+  "population_guard": "reject_introduced_health_or_control_descriptors_absent_from_cited_passages",
+  "context_amendment": {
+    "max_sources": 50,
+    "max_source_characters_with_titles": 30000,
+    "num_ctx": 16384,
+    "request_seconds": 90
+  },
+  "max_citations_per_claim": 3,
+  "sampling": {
+    "draft": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0
+    },
+    "review": {
+      "temperature": 0.7,
+      "top_p": 0.8,
+      "top_k": 20,
+      "min_p": 0
+    }
+  },
+  "max_quality_revisions": 1,
+  "network_retries": 0
+}

@@ -1,9 +1,20 @@
 # AI expert completion specification
 
-**Version:** 1.27 — October 17, 2026 (bounded development retrieval comparison; candidates not promoted)\
+**Version:** 1.28 — October 17, 2026 (autonomous quality investigation; candidates not promoted)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October17 autonomous improvement amendment: Quinton explicitly requests continued autonomous work
+until engineering confidence. [Section retrieval](SECTION-RETRIEVAL-RESULTS-2026-10-17.md) finds
+useful disease sections that provisional labels omit, but original coverage gates remain unmet.
+[Answer experiments](SECTION-ANSWER-RESULTS-2026-10-17.md) demonstrate that same-model approval is
+insufficient: v6.2/v9–v14 are rejected for source scope, qualifications, readability or runtime.
+Do not deploy these candidates or infer independent acceptance. The [V15 plan](INSTRUCTION-MODEL-V15-PLAN-2026-10-17.md)
+records one bounded instruction-model download/comparison in an isolated external store; this
+narrowly amends the older new-download exclusion, not training/selector/protected evaluation rules.
+Live dense/v6.1 remains unchanged during investigation. Finish the named comparison, source review
+and integration gates before selecting any replacement; preserve all failed attempts and labels.
 
 October17 development sequencing amendment: Quinton's continuation after the recommendation to
 recover disease evidence authorizes the [bounded comparison](RETRIEVAL-DEVELOPMENT-COMPARISON-2026-10-17.md)

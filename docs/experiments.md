@@ -3978,3 +3978,16 @@ R8 source recall@5 .92/MRR .8833/passage recall@5 .3238, 10/20 direct top5, 13/2
 8/20 all labeled concepts; median6.977s/max7.318s. No retrieval generation for R7/R8; no training.
 Result: promising section evidence, not accepted retrieval or model quality. Full report:
 SECTION-RETRIEVAL-RESULTS-2026-10-17.md; public hashes configs/evidence/section-retrieval-results.json.
+
+### October 17 — section-grounded local synthesis (v6.2, v9–v14)
+
+Hypothesis: recovered sections plus canonical abstract/method context enable accurate plain-language
+answers. All fixed exposed runs are preregistered and retained; no protected data or expected answers
+enter generation. v6.2/v9 still overgeneralize or omit qualifiers. v10's three-stage writer sees too
+much source context and reasoning review times out. v11 changes only to installed8B; v12 changes
+sampling to Qwen publisher guidance. v13 adds explicit qualification/readability review and at most
+one revision; reviewers still approve an incomplete volume example and revisions repeat errors.
+v14's two plain-text canaries fail citation/qualifier parsing and source review. All rejected; no
+live promotion, no seed search or network retry. Source review matters more than positive model
+checks. Report: SECTION-ANSWER-RESULTS-2026-10-17.md; public hashes configs/evidence/section-answer-results.json.
+One separately budgeted instruction-model comparison (v15) follows; no training or full selector.

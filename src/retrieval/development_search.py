@@ -28,11 +28,13 @@ class DevelopmentSearch:
     Only public-literature questions belong in this opt-in local research interface.
     """
     def __init__(self, corpus, config, retrieve):
+        bounded_mode = ((config['top_k']==5 and config['query_expansion'] is False)
+            or (config['top_k']==50 and config.get('retriever')=='section-cross-encoder-terminology-v1'
+                and config['query_expansion'] is True))
         if (config['corpus_content_sha256'] != corpus.target['inventory']['content_sha256']
                 or config['encoder_id'] != corpus.target['inventory']['encoder_id']
                 or config['manifest']['sha256'] != corpus.target['manifest_sha256']
-                or config['top_k'] != 5 or config['generation'] is not False
-                or config['query_expansion'] is not False):
+                or not bounded_mode or config['generation'] is not False):
             raise ValueError('Development search configuration mismatch')
         self.corpus, self.config, self.retrieve = corpus, dict(config), retrieve
         self.lock = Lock()

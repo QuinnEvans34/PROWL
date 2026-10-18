@@ -1,0 +1,980 @@
+{
+  "version": "prowl-section-answer-results-v1",
+  "experiments": [
+    {
+      "version": "v62",
+      "path": "outputs/prowl/section-answers-v62-20261017/receipt.json",
+      "sha256": "2c3c7ec513efb60974de0158c6b0f26a5314014c7929869f0f0c89e10be3bb0f",
+      "state": "completed",
+      "seconds": 83.74037999997381,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 13.535463624983095
+        },
+        {
+          "id": "quality-02",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 10.510288666002452
+        },
+        {
+          "id": "quality-03",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 11.440067999996245
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "validation_failed",
+          "status": null,
+          "seconds": 14.719216958037578
+        },
+        {
+          "id": "quality-05",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 18.38702533300966
+        },
+        {
+          "id": "quality-06",
+          "generation": "completed",
+          "failure": null,
+          "status": "insufficient",
+          "seconds": 15.130839374964125
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.000331499963067472
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00019204197451472282
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00013949989806860685
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00013183290138840675
+        }
+      ],
+      "received_generation_responses": 11,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/SECTION-ANSWER-PLAN-2026-10-17.md",
+          "sha256": "accf7cf46fcb2668b8360fdb70cae3cd126382b01ee1f0839703a892bb669f34"
+        },
+        {
+          "path": "scripts/retrieval/check_section_answers.py",
+          "sha256": "76b31e62783ce195fd6c25d259dedf52b92122f8ce968b6f816f2cde91e341f2"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "18415c6d0394e299f5b1a7d425e02ea00a6a0c8ad82b138dd91824c249ddc071"
+        },
+        {
+          "path": "src/retrieval/section_ranking.py",
+          "sha256": "1c4c5fa6c4bd098006cd563705ad32d3f49259195f6d921a06407caef7fffe80"
+        },
+        {
+          "path": "src/retrieval/search_terminology.py",
+          "sha256": "05157ad30719e94d790f20aea7ddcc5359875bd0d7e5e483f0c99923aafaa177"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v6.2-candidate.json",
+          "sha256": "47ca193f8c3e79fe480184b4e465ccaa00d1eaa9461114c4cdd34c3832d46154"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-ranking-r8-continuation-20261017/receipt.json",
+          "sha256": "ff1d6ee1a25987fb14690ac76baf80f3b999c678959f4f4b316128ef04204aa5"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v9",
+      "path": "outputs/prowl/section-answers-v9-20261017/receipt.json",
+      "sha256": "455832f9b9cc6e70d1f7e045c1abfcfbc49fc6f2b417b8e5008e2c9871d1e404",
+      "state": "completed",
+      "seconds": 88.55803716706578,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 15.828485042089596
+        },
+        {
+          "id": "quality-02",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 11.420436667045578
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 14.993359749903902
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "qualifier_mismatch",
+          "status": null,
+          "seconds": 12.67615841596853
+        },
+        {
+          "id": "quality-05",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 12.987551957950927
+        },
+        {
+          "id": "quality-06",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 20.642865041969344
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00030204199720174074
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00018466601613909006
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00013741606380790472
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00013258401304483414
+        }
+      ],
+      "received_generation_responses": 11,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/SECTION-ANSWER-V9-PLAN-2026-10-17.md",
+          "sha256": "9c806484262e44dc1336b9be069d9b6238f1260f6feece21e84756e89c6b07d0"
+        },
+        {
+          "path": "scripts/retrieval/check_plain_section_answers.py",
+          "sha256": "91c47a43c16886b991cb45245844a1e2a5262e24c6376b5db423381789395efa"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "cfe38e37be3f91e6b67815103024d64bce1d5b3a803ad8d10a82001ac92c3279"
+        },
+        {
+          "path": "src/retrieval/source_context.py",
+          "sha256": "a7efe754f8c06877fa6d37d62a17644ab04c05a8b816ac4dc110e7eeb7b34458"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v9-candidate.json",
+          "sha256": "98431862747117c187d7eabd74e0df5cfa7813ac23e59956b5a304384de81967"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/receipt.json",
+          "sha256": "2c3c7ec513efb60974de0158c6b0f26a5314014c7929869f0f0c89e10be3bb0f"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-01.json",
+          "sha256": "bad616439f2dd65e422e4abca9d4ae71eb495263a8b8d3fe0872baa70645635b"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-02.json",
+          "sha256": "8661836d5485525020033f8bfd9e782d9c9396c79b4bfbaf6333b0903e4882e2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-03.json",
+          "sha256": "05ab45ac8cb7249d312870360cb315edf8c4dec51ec2bbf68c69914dc39a0e40"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-04.json",
+          "sha256": "088e7fd2cd3ea7af7798a2573bbe10820574494d20f732143ffb755d803b988c"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-05.json",
+          "sha256": "2d30499601f87dbc95022d078115f22b28651da8d07acf8e8d188088084674f1"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-06.json",
+          "sha256": "8563fc0abd87de941a4cb8ce62be435a840cd8bdebb19d95d63b7dac150d46a2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-07.json",
+          "sha256": "0a92efdc735e23baef713a1d0e3b7869e22bccf7880c304e4bba25f0b44dc151"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-08.json",
+          "sha256": "b0a21d7dfd610d741b401f56b00738de5231bb1d53284cb043a76aad8e41d18a"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-09.json",
+          "sha256": "e2c45a2a9f5f2d246c2891e601df9d8a8c2d732cd656830f03c0d2d144d07ee7"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v62-20261017/quality-10.json",
+          "sha256": "5d4e16544649f4453f6f0aa87fb182a361c4103c87e151995e39b447b0d05056"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v10",
+      "path": "outputs/prowl/section-answers-v10-20261017/receipt.json",
+      "sha256": "ff95592a8ead77bec8aeea716372307debf6ab03c32ebd1a30e3b16d76dd6f4e",
+      "state": "completed",
+      "seconds": 316.741021541995,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "qualifier_mismatch",
+          "status": null,
+          "seconds": 16.698487999965437
+        },
+        {
+          "id": "quality-02",
+          "generation": "unavailable",
+          "failure": "timeout",
+          "status": null,
+          "seconds": 60.003223125007935
+        },
+        {
+          "id": "quality-03",
+          "generation": "unavailable",
+          "failure": "timeout",
+          "status": null,
+          "seconds": 60.00460674997885
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "timeout",
+          "status": null,
+          "seconds": 60.00491358397994
+        },
+        {
+          "id": "quality-05",
+          "generation": "unavailable",
+          "failure": "timeout",
+          "status": null,
+          "seconds": 60.005830624955706
+        },
+        {
+          "id": "quality-06",
+          "generation": "unavailable",
+          "failure": "timeout",
+          "status": null,
+          "seconds": 60.00734375009779
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.0005336670437827706
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00031345803290605545
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00029245810583233833
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00026366603560745716
+        }
+      ],
+      "received_generation_responses": 9,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/SECTION-ANSWER-V10-PLAN-2026-10-17.md",
+          "sha256": "0b126bda67c76ceaf701abe199520c95258753765500a4c438d4d46623eddadb"
+        },
+        {
+          "path": "scripts/retrieval/check_staged_section_answers.py",
+          "sha256": "09c0eeaceb04f0609ae9454ebf82877d215d19487590ba2742f989ba7f828683"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "cfe38e37be3f91e6b67815103024d64bce1d5b3a803ad8d10a82001ac92c3279"
+        },
+        {
+          "path": "src/retrieval/staged_answer.py",
+          "sha256": "f319ed60270b8f8c350cb740c834c2861196d73c9bbca4bac7d4e6213d80c696"
+        },
+        {
+          "path": "src/retrieval/source_context.py",
+          "sha256": "a7efe754f8c06877fa6d37d62a17644ab04c05a8b816ac4dc110e7eeb7b34458"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v10-candidate.json",
+          "sha256": "579635271ca4a1c4d74214049e450de543b4c217bdfa428c20b1221434822601"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/receipt.json",
+          "sha256": "455832f9b9cc6e70d1f7e045c1abfcfbc49fc6f2b417b8e5008e2c9871d1e404"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+          "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-02.json",
+          "sha256": "21c45326cbac38b95937ede14ee7fb87871c449ec2a5dae00fd0aa5fcbab8020"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-03.json",
+          "sha256": "12758b8036cadca2a844ec3114dd0755cfee75e682e502d9b5e11adf3362227c"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-04.json",
+          "sha256": "74e00e892057c0be92ef0684675927f52ca0dfe267cbc89b145884f15006ae11"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-05.json",
+          "sha256": "fdd5b5718193dbea2d7c085e56f1a810cdebf6b7e02372130cce03faa68875a0"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-06.json",
+          "sha256": "78ffa8e0ac4c66077268b0ad2878c653254048546eff099564cc41a470edf4fa"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-07.json",
+          "sha256": "ef372c8a8ac69d80bffb54cb305998ffc406d7b8fefd86f9dcedc8707fa5364b"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-08.json",
+          "sha256": "2f88d491cf98892b9bc85fde20af0a105570d9967e1de4fec58d33407d259400"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-09.json",
+          "sha256": "6e8c3a06d18a7242e0d4f1100921dfb562497791aff0d5b5bb68c4c740f579f2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-10.json",
+          "sha256": "1abf0fa7dc79124915f242edfec2655c240b5e8cdb039dbf42291e604782dc06"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v11",
+      "path": "outputs/prowl/section-answers-v11-20261017/receipt.json",
+      "sha256": "2ba588a7f9ddae58ed81ae19931ed65f02be78a41e84aa9a4bf4b1662be4de01",
+      "state": "completed",
+      "seconds": 190.71855870902073,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "qualifier_mismatch",
+          "status": null,
+          "seconds": 24.486654750071466
+        },
+        {
+          "id": "quality-02",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 26.584146832930855
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 31.980449250084348
+        },
+        {
+          "id": "quality-04",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 46.20945645903703
+        },
+        {
+          "id": "quality-05",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 25.87659887492191
+        },
+        {
+          "id": "quality-06",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 35.56985812506173
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00033304200042039156
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.0001950409496203065
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00014266697689890862
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00014120806008577347
+        }
+      ],
+      "received_generation_responses": 11,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/ANSWER-MODEL-COMPARISON-V11-PLAN-2026-10-17.md",
+          "sha256": "8bb74ee2492c98421a590f490d8d6d59b36cdc5a17aa8efdec4432c8a2ac90f5"
+        },
+        {
+          "path": "scripts/retrieval/check_dense_section_answers.py",
+          "sha256": "97541e2b25acf77c011cb89482afff7d3a84b7fc70464218b2ccfc7c45d1e940"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "6dd36a6452f9d5c8818630a4e8c0abc80820e24131344bed347ee4e31e447e27"
+        },
+        {
+          "path": "src/retrieval/source_context.py",
+          "sha256": "a7efe754f8c06877fa6d37d62a17644ab04c05a8b816ac4dc110e7eeb7b34458"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v11-candidate.json",
+          "sha256": "8000b1dcd70a595f3c3cd03694f3d11ebe13dbf48844894a8fc5ca339fdaefb8"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/receipt.json",
+          "sha256": "455832f9b9cc6e70d1f7e045c1abfcfbc49fc6f2b417b8e5008e2c9871d1e404"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+          "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-02.json",
+          "sha256": "21c45326cbac38b95937ede14ee7fb87871c449ec2a5dae00fd0aa5fcbab8020"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-03.json",
+          "sha256": "12758b8036cadca2a844ec3114dd0755cfee75e682e502d9b5e11adf3362227c"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-04.json",
+          "sha256": "74e00e892057c0be92ef0684675927f52ca0dfe267cbc89b145884f15006ae11"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-05.json",
+          "sha256": "fdd5b5718193dbea2d7c085e56f1a810cdebf6b7e02372130cce03faa68875a0"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-06.json",
+          "sha256": "78ffa8e0ac4c66077268b0ad2878c653254048546eff099564cc41a470edf4fa"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-07.json",
+          "sha256": "ef372c8a8ac69d80bffb54cb305998ffc406d7b8fefd86f9dcedc8707fa5364b"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-08.json",
+          "sha256": "2f88d491cf98892b9bc85fde20af0a105570d9967e1de4fec58d33407d259400"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-09.json",
+          "sha256": "6e8c3a06d18a7242e0d4f1100921dfb562497791aff0d5b5bb68c4c740f579f2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-10.json",
+          "sha256": "1abf0fa7dc79124915f242edfec2655c240b5e8cdb039dbf42291e604782dc06"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v12",
+      "path": "outputs/prowl/section-answers-v12-20261017/receipt.json",
+      "sha256": "0276043a2181cca0a3f9888d6c59bb46b41b0bfeef39f07421c619e0a5603ae3",
+      "state": "completed",
+      "seconds": 125.33812954206951,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "qualifier_mismatch",
+          "status": null,
+          "seconds": 16.234464999986812
+        },
+        {
+          "id": "quality-02",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 24.721718917018734
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 24.661678125034086
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "qualifier_mismatch",
+          "status": null,
+          "seconds": 31.283703708089888
+        },
+        {
+          "id": "quality-05",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 16.662977332947776
+        },
+        {
+          "id": "quality-06",
+          "generation": "completed",
+          "failure": null,
+          "status": "insufficient",
+          "seconds": 11.762527749990113
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00032045808620750904
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00019866600632667542
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00014416698832064867
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00014474999625235796
+        }
+      ],
+      "received_generation_responses": 10,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/ANSWER-SAMPLING-V12-PLAN-2026-10-17.md",
+          "sha256": "c5884a13ca182d278a2953be3b0471ec0c71b084ffe806e795de6f22963dcc1d"
+        },
+        {
+          "path": "scripts/retrieval/check_sampled_section_answers.py",
+          "sha256": "2a76d447369869fa51a74590d5b9a173b2bc5d4cf69858d8bf8f5c1aff88a437"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "563b568135612596a24207f5b99bf3d02dca965349a17dbdb1b9f3f62e2eb589"
+        },
+        {
+          "path": "src/retrieval/source_context.py",
+          "sha256": "a7efe754f8c06877fa6d37d62a17644ab04c05a8b816ac4dc110e7eeb7b34458"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v12-candidate.json",
+          "sha256": "d32b45e1ebb6b3bff6838dab08da4b8de6b8ad972fe41b1de8039aab830772fc"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/receipt.json",
+          "sha256": "455832f9b9cc6e70d1f7e045c1abfcfbc49fc6f2b417b8e5008e2c9871d1e404"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+          "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-02.json",
+          "sha256": "21c45326cbac38b95937ede14ee7fb87871c449ec2a5dae00fd0aa5fcbab8020"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-03.json",
+          "sha256": "12758b8036cadca2a844ec3114dd0755cfee75e682e502d9b5e11adf3362227c"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-04.json",
+          "sha256": "74e00e892057c0be92ef0684675927f52ca0dfe267cbc89b145884f15006ae11"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-05.json",
+          "sha256": "fdd5b5718193dbea2d7c085e56f1a810cdebf6b7e02372130cce03faa68875a0"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-06.json",
+          "sha256": "78ffa8e0ac4c66077268b0ad2878c653254048546eff099564cc41a470edf4fa"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-07.json",
+          "sha256": "ef372c8a8ac69d80bffb54cb305998ffc406d7b8fefd86f9dcedc8707fa5364b"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-08.json",
+          "sha256": "2f88d491cf98892b9bc85fde20af0a105570d9967e1de4fec58d33407d259400"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-09.json",
+          "sha256": "6e8c3a06d18a7242e0d4f1100921dfb562497791aff0d5b5bb68c4c740f579f2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-10.json",
+          "sha256": "1abf0fa7dc79124915f242edfec2655c240b5e8cdb039dbf42291e604782dc06"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v13",
+      "path": "outputs/prowl/section-answers-v13-20261017/receipt.json",
+      "sha256": "bfa54710d40467b07c47c94426d521e4794186a5124becae762dd8e26791a08a",
+      "state": "completed",
+      "seconds": 133.4177837909665,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 14.732053167070262
+        },
+        {
+          "id": "quality-02",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 27.672939209034666
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 13.896459792042151
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 27.338988333009183
+        },
+        {
+          "id": "quality-05",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 15.778074500034563
+        },
+        {
+          "id": "quality-06",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 33.989498082897626
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00023512495681643486
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00013533304445445538
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.0001538330689072609
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00011429202277213335
+        }
+      ],
+      "received_generation_responses": 17,
+      "pins": [
+        {
+          "path": "docs/capstone/retrieval/ANSWER-REPAIR-V13-PLAN-2026-10-17.md",
+          "sha256": "4f6e73c394433331bcab85d50fa4190ac16d84c4b42a580c5eeaf67aaf3ac46f"
+        },
+        {
+          "path": "scripts/retrieval/check_repaired_section_answers.py",
+          "sha256": "8b7dba00957bf66ce99603c9356a5a619fb496bb7272ba444672c5e65106f480"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "563b568135612596a24207f5b99bf3d02dca965349a17dbdb1b9f3f62e2eb589"
+        },
+        {
+          "path": "src/retrieval/repaired_answer.py",
+          "sha256": "b0da95b03c01fad9cb13426f1134c099c86ad436a72455fd31e0355a0338560e"
+        },
+        {
+          "path": "src/retrieval/source_context.py",
+          "sha256": "a7efe754f8c06877fa6d37d62a17644ab04c05a8b816ac4dc110e7eeb7b34458"
+        },
+        {
+          "path": "src/retrieval/development_search.py",
+          "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+        },
+        {
+          "path": "configs/evidence/development-search-v2-candidate.json",
+          "sha256": "1ed0e65176fb3681e2cd10c23e5f3bf307783dc008dbf5f35c24822a78525375"
+        },
+        {
+          "path": "configs/evidence/natural-answer-v13-candidate.json",
+          "sha256": "e03217e3192070c9ec15197764c21a5512c208b8409a9f6ae31e6d2bf87680db"
+        },
+        {
+          "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+          "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/receipt.json",
+          "sha256": "455832f9b9cc6e70d1f7e045c1abfcfbc49fc6f2b417b8e5008e2c9871d1e404"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+          "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-02.json",
+          "sha256": "21c45326cbac38b95937ede14ee7fb87871c449ec2a5dae00fd0aa5fcbab8020"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-03.json",
+          "sha256": "12758b8036cadca2a844ec3114dd0755cfee75e682e502d9b5e11adf3362227c"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-04.json",
+          "sha256": "74e00e892057c0be92ef0684675927f52ca0dfe267cbc89b145884f15006ae11"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-05.json",
+          "sha256": "fdd5b5718193dbea2d7c085e56f1a810cdebf6b7e02372130cce03faa68875a0"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-06.json",
+          "sha256": "78ffa8e0ac4c66077268b0ad2878c653254048546eff099564cc41a470edf4fa"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-07.json",
+          "sha256": "ef372c8a8ac69d80bffb54cb305998ffc406d7b8fefd86f9dcedc8707fa5364b"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-08.json",
+          "sha256": "2f88d491cf98892b9bc85fde20af0a105570d9967e1de4fec58d33407d259400"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-09.json",
+          "sha256": "6e8c3a06d18a7242e0d4f1100921dfb562497791aff0d5b5bb68c4c740f579f2"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-10.json",
+          "sha256": "1abf0fa7dc79124915f242edfec2655c240b5e8cdb039dbf42291e604782dc06"
+        }
+      ],
+      "decision": "rejected"
+    },
+    {
+      "version": "v14",
+      "path": "outputs/prowl/plain-writer-v14-20261017/receipt.json",
+      "sha256": "1e6321480543b289bc1291a6548710910042eb2e37c54fee6be346b4c69502da",
+      "state": "completed",
+      "pins": [
+        {
+          "path": "scripts/retrieval/check_plain_writer.py",
+          "sha256": "ca9a0001478845212a9a731316d8837eeb970244fab27200032f2a8fbdf3fc29"
+        },
+        {
+          "path": "docs/capstone/retrieval/PLAIN-WRITER-V14-PLAN-2026-10-17.md",
+          "sha256": "ddd3940823a47016ca4b35415e851c93c2799f975c2ca04cf0a95b536640a39b"
+        },
+        {
+          "path": "src/retrieval/natural_answer.py",
+          "sha256": "563b568135612596a24207f5b99bf3d02dca965349a17dbdb1b9f3f62e2eb589"
+        },
+        {
+          "path": "src/retrieval/plain_writer.py",
+          "sha256": "39862792bef8378640c0835a09c4e2e4791f9f44451c1ff98c5ee05fdb268442"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+          "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+        },
+        {
+          "path": "outputs/prowl/section-answers-v9-20261017/quality-03.json",
+          "sha256": "12758b8036cadca2a844ec3114dd0755cfee75e682e502d9b5e11adf3362227c"
+        }
+      ],
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "validation": "Unbound embedded references",
+          "done": true,
+          "done_reason": "stop",
+          "seconds": 5.413932084105909
+        },
+        {
+          "id": "quality-03",
+          "validation": "Unrequested percentage",
+          "done": true,
+          "done_reason": "stop",
+          "seconds": 5.021316167083569
+        }
+      ],
+      "decision": "rejected"
+    }
+  ]
+}
