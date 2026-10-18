@@ -28,6 +28,8 @@ import {
 import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
 import { REVIEW_COLORS, objectLabel, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
 import FindingsPanel from './FindingsPanel.jsx'
+import ReviewSummary from './ReviewSummary.jsx'
+import { draftKey, hasHumanContent, predictionIdentity } from '../lib/summaryDraft.js'
 import { PantherBadge } from '../shell/Brand.jsx'
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
@@ -123,7 +125,7 @@ export default function ReviewWorkspace({
   askPanel = null,
   assistantPending = false,
   summaryPanel = null,
-  summaryStatus = null,
+  summaryStore = null,
   onSelectScan,
   onAnalyze,
   onShowSavedPrediction,
@@ -417,6 +419,23 @@ export default function ReviewWorkspace({
               </div>
   )
 
+  const prediction = useMemo(
+    () => predictionIdentity({ hasPrediction, liveResult, modelLabel }),
+    [hasPrediction, liveResult, modelLabel],
+  )
+  const seriesLabel = `Abdomen CT · prepared, ${Array.isArray(caseData.spacing_mm) ? `${caseData.spacing_mm[0]} mm voxels` : 'spacing not recorded'}`
+  const summaryFacts = useMemo(() => ({
+    hasPrediction,
+    lesionFlagged: Boolean(finding.lesionFlagged),
+    volumeMm3: finding.volumeMm3,
+    diameterMm: finding.diameterMm,
+    comparison: comparing
+      ? { pancreas: overlap.pancreas, lesion: overlap.lesion, bothLesionAbsent: !caseData.gt_has_lesion && !finding.lesionFlagged }
+      : null,
+  }), [hasPrediction, finding.lesionFlagged, finding.volumeMm3, finding.diameterMm, comparing, overlap.pancreas, overlap.lesion, caseData.gt_has_lesion])
+  const currentDraft = summaryStore?.drafts[draftKey(caseId, 'prepared-ct', prediction.key)]
+  const summaryStatus = !summaryStore ? null : currentDraft ? (hasHumanContent(currentDraft) ? 'Unsaved draft · edited' : 'Unsaved draft') : 'Not started'
+
   const predictionStatus = !caseData.files?.pred
     ? 'No prediction available'
     : isAnalyzing
@@ -470,8 +489,8 @@ export default function ReviewWorkspace({
           </div>
           <dl className="pw-studybar__meta">
             <div><dt>Series</dt><dd>Abdomen CT · {Array.isArray(caseData.spacing_mm) ? `${caseData.spacing_mm[0]} mm` : 'spacing not recorded'}</dd></div>
-            <div><dt>Prediction</dt><dd>{predictionStatus}</dd></div>
-            {summaryStatus && <div><dt>Summary</dt><dd>{summaryStatus}</dd></div>}
+            <div><dt>Prediction</dt><dd title={predictionStatus}>{predictionStatus}</dd></div>
+            {summaryStatus && <div><dt>Summary</dt><dd title={summaryStatus}>{summaryStatus}</dd></div>}
           </dl>
           <div className="pw-studybar__actions">
             {isCurated && (
@@ -895,7 +914,17 @@ export default function ReviewWorkspace({
           {askPanel}
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-summary" aria-labelledby="pw-tab-summary" hidden={panelTab !== 'summary'}>
-          {summaryPanel}
+          {summaryStore ? (
+            <ReviewSummary
+              studyId={caseId}
+              studyLabel={studyLabel}
+              seriesLabel={seriesLabel}
+              prediction={prediction}
+              facts={summaryFacts}
+              drafts={summaryStore.drafts}
+              onChange={summaryStore.onChange}
+            />
+          ) : summaryPanel}
         </div>
       </aside>
     </main>

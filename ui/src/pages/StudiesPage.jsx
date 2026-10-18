@@ -1,4 +1,15 @@
 import { useMemo, useState } from 'react'
+
+function Thumb({ src }) {
+  const [failed, setFailed] = useState(false)
+  return (
+    <span className="pw-thumb">
+      {src && !failed
+        ? <img src={src} alt="" loading="lazy" onError={() => setFailed(true)} />
+        : <FileStack size={16} aria-hidden="true" />}
+    </span>
+  )
+}
 import { ArrowRight, FileStack, Plus, Search } from 'lucide-react'
 import { PantherBadge } from '../shell/Brand.jsx'
 
@@ -101,11 +112,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
                   <tr key={study.id} className={active ? 'is-active' : ''} onClick={() => onOpen(study.id)}>
                     <td>
                       <div className="pw-study-cell">
-                        <span className="pw-thumb">
-                          {study.thumbnail
-                            ? <img src={study.thumbnail} alt="" loading="lazy" />
-                            : <FileStack size={16} aria-hidden="true" />}
-                        </span>
+                        <Thumb src={study.thumbnail} />
                         <span>
                           <strong className="pw-mono-id">{study.displayId}</strong>
                           <small>

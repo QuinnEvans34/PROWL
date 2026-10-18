@@ -6,6 +6,8 @@ import StudiesPage from './pages/StudiesPage.jsx'
 import ReviewWorkspace from './components/ReviewWorkspace.jsx'
 import LiteratureSearchPanel from './components/LiteratureSearchPanel.jsx'
 import { useRoute } from './lib/router.js'
+import { hasHumanContent } from './lib/summaryDraft.js'
+import ImportStudyDialog from './components/ImportStudyDialog.jsx'
 
 const ValidationComparison = lazy(() => import('./components/ValidationComparison.jsx'))
 const ResearchPage = lazy(() => import('./pages/ResearchPage.jsx'))
@@ -105,14 +107,17 @@ function ViewerSuspense({ children, label = 'Preparing medical viewer…' }) {
   return <Suspense fallback={<div className="pw-empty" role="status"><p>{label}</p></div>}>{children}</Suspense>
 }
 
-function WorkbenchEmpty({ onStudies }) {
+function WorkbenchEmpty({ onStudies, onImport, missingStudy }) {
   return (
     <main className="pw-empty" aria-labelledby="wb-empty-title">
       <PantherBadge size="empty" />
-      <h1 id="wb-empty-title">No study open</h1>
-      <p>Open a prepared study to inspect the CT and its predicted outlines. Reviews without a reference annotation are complete reviews.</p>
+      <h1 id="wb-empty-title">{missingStudy ? 'Study not found' : 'No study open'}</h1>
+      <p>{missingStudy
+        ? `“${missingStudy}” is not in this workstation’s prepared studies.`
+        : 'Open a prepared study to inspect the CT and its predicted outlines. Reviews without a reference annotation are complete reviews.'}</p>
       <div className="pw-empty__actions">
         <button type="button" className="pw-btn pw-btn--primary" onClick={onStudies}>Browse studies</button>
+        <button type="button" className="pw-btn pw-btn--secondary" onClick={onImport}>Import CT</button>
       </div>
     </main>
   )
@@ -120,13 +125,15 @@ function WorkbenchEmpty({ onStudies }) {
 
 function AboutDialog({ onClose }) {
   const closeRef = useRef(null)
+  const onCloseRef = useRef(onClose)
+  onCloseRef.current = onClose
   useEffect(() => {
     const previous = document.activeElement
     closeRef.current?.focus()
-    function onKey(event) { if (event.key === 'Escape') onClose() }
+    function onKey(event) { if (event.key === 'Escape') onCloseRef.current() }
     window.addEventListener('keydown', onKey)
     return () => { window.removeEventListener('keydown', onKey); previous?.focus?.() }
-  }, [onClose])
+  }, [])
   return (
     <div className="pw-backdrop" role="presentation" onMouseDown={onClose}>
       <section className="pw-dialog" role="dialog" aria-modal="true" aria-labelledby="about-title" onMouseDown={(event) => event.stopPropagation()}>
@@ -160,6 +167,28 @@ export default function App() {
   const [inferenceState, setInferenceState] = useState({ status: 'idle', caseId: null })
   const [truthRevealedCaseId, setTruthRevealedCaseId] = useState(null)
   const [askPending, setAskPending] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
+  // Review drafts: in memory only (session). Never written to localStorage.
+  const [drafts, setDrafts] = useState({})
+  const updateDraft = useCallback((key, draft) => {
+    setDrafts((previous) => {
+      const next = { ...previous }
+      if (draft) next[key] = draft
+      else delete next[key]
+      return next
+    })
+  }, [])
+  const summaryStore = useMemo(() => ({ drafts, onChange: updateDraft }), [drafts, updateDraft])
+  const dirtyDraft = Object.values(drafts).some(hasHumanContent)
+
+  // In-app navigation keeps drafts (they live above the routes); only reload/close can lose
+  // them, so warn there.
+  useEffect(() => {
+    if (!dirtyDraft) return undefined
+    function onBeforeUnload(event) { event.preventDefault(); event.returnValue = '' }
+    window.addEventListener('beforeunload', onBeforeUnload)
+    return () => window.removeEventListener('beforeunload', onBeforeUnload)
+  }, [dirtyDraft])
 
   useEffect(() => {
     fetch(`${BASE}/results.json`)
@@ -240,9 +269,9 @@ export default function App() {
         ? 'analyzing'
         : validation || liveResults[id] ? 'ready' : item.files?.pred ? 'saved' : 'image',
       mark: reviewStatuses[id] === 'reviewed' || reviewStatuses[id] === 'discussion' ? reviewStatuses[id] : null,
-      draft: false,
+      draft: Object.values(drafts).some((draft) => draft.studyId === id && hasHumanContent(draft)),
     }
-  }), [cases, inferenceState, liveResults, reviewStatuses])
+  }), [cases, inferenceState, liveResults, reviewStatuses, drafts])
 
   const reviewCaseItems = useMemo(() => studies.map((study) => ({
     id: study.id,
@@ -353,7 +382,7 @@ export default function App() {
       {content}
       {!loadError && route.view === 'studies' && (
         cases
-          ? <StudiesPage studies={studies} activeStudy={caseId} onOpen={openStudy} onImport={() => {}} importAvailable={false} />
+          ? <StudiesPage studies={studies} activeStudy={caseId} onOpen={openStudy} onImport={() => setImportOpen(true)} importAvailable={false} />
           : <main className="pw-empty" role="status"><p>Loading studies…</p></main>
       )}
 
@@ -373,6 +402,7 @@ export default function App() {
             analysisFailed={inferenceState.status === 'failed' && inferenceState.caseId === caseId}
             modelLabel={MODEL_LABEL}
             assistantPending={askPending}
+            summaryStore={summaryStore}
             askPanel={(
               <LiteratureSearchPanel
                 variant="panel"
@@ -415,7 +445,11 @@ export default function App() {
         </ViewerSuspense>
       )}
       {!loadError && showWorkbench && cases && !currentCase && (
-        <WorkbenchEmpty onStudies={() => navigate({ view: 'studies' })} />
+        <WorkbenchEmpty
+          onStudies={() => navigate({ view: 'studies' })}
+          onImport={() => setImportOpen(true)}
+          missingStudy={route.study && !cases[route.study] ? route.study : null}
+        />
       )}
 
       {route.view === 'research' && (
@@ -433,6 +467,7 @@ export default function App() {
       )}
 
       {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
+      {importOpen && <ImportStudyDialog onClose={() => setImportOpen(false)} onOpenStudies={() => navigate({ view: 'studies' })} />}
     </AppShell>
   )
 }
