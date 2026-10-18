@@ -64,3 +64,14 @@ recovery, not a container restart or reported OOM. Cause is unproven; similar ea
 Fresh read-only size/inventory/floor checks pass after recovery. Keep the original receipt/log/snapshots.
 Add explicit attempt2 output namespace only; same cases/model/prompts/criteria, no generation from
 attempt1 to tune against. This is a service-recovery continuation, not a model/prompt sweep.
+
+Attempt2 completed8requests/4model calls/4responses in25.148s:3compositions,1explicit fallback,
+4correct no-generation boundaries; original gate7/8 FAILED and remains unchanged. All model plans
+contain complete source units and qualifications. Head plan used3paragraphs instead of2, causing a
+format-only rejection. Amend normalization to join adjacent same-record/same-kind paragraphs after
+all coverage/order/source checks pass. No prose rewrite, added fact, changed prompt/model or relaxed
+qualification. Test the exact failure shape and replay all4 retained model plans through the final
+adapter (zero new model calls); inspect resulting text/citations and retain separate correction receipt.
+Only if corrected4/4, all boundary checks and manual audit pass, activate and use the two allowed
+browser checks for the original screenshot question and this head-format regression. This specifically
+repairs an unnecessary refusal; it is not a claim that original attempt2 passed its initial gate.

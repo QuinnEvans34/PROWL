@@ -135,3 +135,14 @@ def test_second_wordings_and_record_order_are_valid_choices(sample):
     for p in plan['paragraphs']:
         for unit in p['sentences']:unit['wording']=1
     assert len(c.assemble(plan,records,e))==6
+
+
+def test_complete_model_plan_with_extra_paragraph_break_is_normalized_not_refused(sample):
+    c,r,_=sample;records,e=c.material(r)
+    rid='schima2020-head-mass-v1';records={rid:records[rid]}
+    plan=c.default_plan(records);expected=c.assemble(plan,records,e)
+    split=dict(record_id=rid,sentences=[plan['paragraphs'][0]['sentences'].pop()])
+    plan['paragraphs'].insert(1,split)
+    assert c.assemble(plan,records,e)==expected
+    plan['paragraphs'][1]['sentences'][0]['text']='Unauthorized addition'
+    with pytest.raises(ValueError):c.assemble(plan,records,e)
