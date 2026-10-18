@@ -111,14 +111,46 @@ export async function searchLiterature(request, signal) {
   return validateAnswer(await response.json(), request)
 }
 
-export default function LiteratureSearchPanel({ search = searchLiterature, findSources = findLiteratureSources }) {
+export const SUGGESTED_QUESTIONS = [
+  'What imaging findings help distinguish mass-forming chronic pancreatitis from pancreatic cancer?',
+  'How can focal autoimmune pancreatitis be distinguished from PDAC on imaging?',
+  'Could pancreatic head enlargement indicate disease?',
+]
+
+// variant="panel" renders inside the Workbench assistant. Validation, request identity,
+// timeouts and answer/source semantics are identical in both variants.
+// contextKey: the active study. Literature answers are general; switching study cancels a
+// pending request (its late result is discarded) and labels earlier results as general.
+export default function LiteratureSearchPanel({
+  search = searchLiterature,
+  findSources = findLiteratureSources,
+  variant = 'page',
+  contextKey = null,
+  contextLabel = null,
+  onPendingChange = null,
+  suggestions = variant === 'panel' ? SUGGESTED_QUESTIONS : [],
+}) {
+  const panel = variant === 'panel'
   const [question, setQuestion] = useState('')
   const [result, setResult] = useState(null)
   const [phase, setPhase] = useState('idle')
   const [elapsed, setElapsed] = useState(0)
   const [sourceMode, setSourceMode] = useState(false)
+  const [askedFor, setAskedFor] = useState(null)
+  const [contextNotice, setContextNotice] = useState('')
   const active = useRef(null)
+  const contextRef = useRef(contextKey)
   useEffect(() => () => active.current?.abort(), [])
+  useEffect(() => { onPendingChange?.(phase === 'loading') }, [phase, onPendingChange])
+  useEffect(() => {
+    if (contextRef.current === contextKey) return
+    contextRef.current = contextKey
+    if (active.current) {
+      active.current.abort(); active.current = null
+      setPhase('idle'); setResult(null)
+      setContextNotice('Your pending question was cancelled because you switched studies. The question is kept; ask again if it still applies.')
+    }
+  }, [contextKey])
   useEffect(() => {
     if (phase !== 'loading') return
     const started = Date.now()
@@ -127,7 +159,7 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
   }, [phase])
   function change(value) {
     active.current?.abort(); active.current = null
-    setQuestion(value); setResult(null); setPhase('idle')
+    setQuestion(value); setResult(null); setPhase('idle'); setContextNotice('')
   }
   async function submit(event, sourcesOnly = phase === 'error' && sourceMode) {
     event.preventDefault()
@@ -135,7 +167,8 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 90000)
-    setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null)
+    setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setContextNotice('')
+    setAskedFor({ key: contextKey, label: contextLabel })
     try {
       const response = sourcesOnly
         ? validateSourceSearch(await findSources(request, control.signal), request)
@@ -145,11 +178,21 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
     } catch { if (active.current === control) setPhase('error') }
     finally { clearTimeout(timeout); if (active.current === control) active.current = null }
   }
-  return <section className="guided-evidence literature-search" aria-labelledby="literature-search-title">
-    <h2 id="literature-search-title">Search pancreatic literature</h2>
-    <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
+  const staleContext = result && askedFor && askedFor.key !== contextKey
+  return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
+    {panel ? <>
+      <p className="literature-search__scope"><span aria-hidden="true" />Literature only · Scan context not connected</p>
+      <h2 id="literature-search-title">A second perspective. Your decision.</h2>
+      <p>Ask a general question about the pancreas. Answers cite {config.source_count} research papers; they do not see this scan and do not remember earlier questions.</p>
+    </> : <>
+      <h2 id="literature-search-title">Search pancreatic literature</h2>
+      <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
+    </>}
     <p className="literature-search__notice">Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.</p>
-    <p>Ask question turns reviewed disease comparisons into a readable summary. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>
+    {!panel && <p>Ask question turns reviewed disease comparisons into a readable summary. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>}
+    {suggestions.length > 0 && !result && phase !== 'loading' && <div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
+      {suggestions.map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
+    </div>}
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
       <textarea id="literature-question" rows={3} maxLength={500} value={question}
@@ -163,9 +206,11 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
       </div>
     </form>
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {phase === 'loading' && <p>{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'You can cancel while the local model works.'}</p>}
+      {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
+      {phase === 'loading' && <p className="literature-search__pending"><span className="literature-search__pulse" aria-hidden="true" />{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'You can cancel while the local model works.'}</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
+        {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
@@ -180,7 +225,7 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
         </details>}
       </article>}
     </div>
-    <small>Questions and results are not automatically saved. No scan is attached.</small>
+    <small>{panel ? 'Each question is answered independently. Questions and results are not saved. No scan is attached.' : 'Questions and results are not automatically saved. No scan is attached.'}</small>
   </section>
 }
 

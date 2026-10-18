@@ -4,10 +4,11 @@ import AppShell from './shell/AppShell.jsx'
 import { PantherBadge } from './shell/Brand.jsx'
 import StudiesPage from './pages/StudiesPage.jsx'
 import ReviewWorkspace from './components/ReviewWorkspace.jsx'
+import LiteratureSearchPanel from './components/LiteratureSearchPanel.jsx'
 import { useRoute } from './lib/router.js'
 
 const ValidationComparison = lazy(() => import('./components/ValidationComparison.jsx'))
-const ResearchDemo = lazy(() => import('./components/ResearchDemo.jsx'))
+const ResearchPage = lazy(() => import('./pages/ResearchPage.jsx'))
 const SavedPredictionView = lazy(() => import('./components/SavedPredictionView.jsx'))
 
 const BASE = '/cases'
@@ -158,6 +159,7 @@ export default function App() {
   const [liveResults, setLiveResults] = useState({})
   const [inferenceState, setInferenceState] = useState({ status: 'idle', caseId: null })
   const [truthRevealedCaseId, setTruthRevealedCaseId] = useState(null)
+  const [askPending, setAskPending] = useState(false)
 
   useEffect(() => {
     fetch(`${BASE}/results.json`)
@@ -370,6 +372,15 @@ export default function App() {
             isAnalyzing={isAnalyzing}
             analysisFailed={inferenceState.status === 'failed' && inferenceState.caseId === caseId}
             modelLabel={MODEL_LABEL}
+            assistantPending={askPending}
+            askPanel={(
+              <LiteratureSearchPanel
+                variant="panel"
+                contextKey={caseId}
+                contextLabel={formatStudyId(caseId)}
+                onPendingChange={setAskPending}
+              />
+            )}
             endpointStatus={endpointStatus}
             truthRevealed={isTruthRevealed}
             reviewStatus={reviewStatuses[caseId] || 'unreviewed'}
@@ -409,7 +420,10 @@ export default function App() {
 
       {route.view === 'research' && (
         <ViewerSuspense label="Loading research…">
-          <div className="pw-page"><ResearchDemo /></div>
+          <ResearchPage
+            activeStudyLabel={currentCase ? formatStudyId(caseId) : null}
+            onReturnToStudy={() => navigate({ view: 'workbench', study: caseId })}
+          />
         </ViewerSuspense>
       )}
       {route.view === 'saved' && (

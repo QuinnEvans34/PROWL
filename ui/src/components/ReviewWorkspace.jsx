@@ -121,6 +121,7 @@ export default function ReviewWorkspace({
   referenceCompatibility = 'compatible',
   modelLabel = 'Segmenter v1 · step 18000',
   askPanel = null,
+  assistantPending = false,
   summaryPanel = null,
   summaryStatus = null,
   onSelectScan,
@@ -407,6 +408,15 @@ export default function ReviewWorkspace({
     setPanelOpen(true)
   }
 
+  const snapPad = state.settingsOpen ? null : (
+    <div className="pw-snap" role="group" aria-label="Snap 3D camera to an anatomical view">
+                {[['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]].map(([label, azimuth, elevation]) => (
+                  <button type="button" key={label} onClick={() => issueViewerCommand({ type: 'camera', azimuth, elevation })}>{label}</button>
+                ))}
+                <button type="button" onClick={() => issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 })}>Home</button>
+              </div>
+  )
+
   const predictionStatus = !caseData.files?.pred
     ? 'No prediction available'
     : isAnalyzing
@@ -563,6 +573,7 @@ export default function ReviewWorkspace({
                 <section className="pw-split__pane" aria-label="3D surfaces">
                   <span className="pw-split__label">3D surfaces <small>camera independent</small></span>
                   <NiivueViewer {...viewerProps} mode="3d" interactionMode="rotate" label={`${viewerLabel} · 3D surfaces`} />
+                  {snapPad}
                 </section>
               </div>
             ) : (
@@ -575,6 +586,8 @@ export default function ReviewWorkspace({
               />
             )}
           </ViewerSuspense>
+
+          {state.viewMode === '3d' && snapPad}
 
           {state.evidenceMode === 'ct' && !hasPrediction && (
             <div className="pw-ct-only" role="region" aria-label="Prediction not shown">
@@ -623,18 +636,10 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-          {is3dLike && !state.settingsOpen && (
-            <div className={`pw-snap${state.viewMode === 'split' ? ' pw-snap--split' : ''}`} role="group" aria-label="Snap 3D camera to an anatomical view">
-              {[['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]].map(([label, azimuth, elevation]) => (
-                <button type="button" key={label} onClick={() => issueViewerCommand({ type: 'camera', azimuth, elevation })}>{label}</button>
-              ))}
-              <button type="button" onClick={() => issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 })}>Home</button>
-            </div>
-          )}
 
           <p className="pw-viewer__hint" aria-hidden="true" hidden={state.evidenceMode === 'ct' && !hasPrediction}>
             {state.viewMode === 'split'
-              ? 'Left: scroll slices, drag the crosshair · Right: drag to orbit'
+              ? '2D: scroll slices, drag the crosshair · 3D: drag to orbit'
               : state.viewMode === '3d'
               ? state.interactionMode === 'move' ? 'Drag to reframe · scroll to zoom' : 'Drag to orbit · scroll to zoom · click a surface to focus'
               : state.interactionMode === 'pan' ? 'Drag to reposition · scroll to zoom'
@@ -827,7 +832,7 @@ export default function ReviewWorkspace({
         }}
       >
         <header className="pw-panel__head">
-          <PantherBadge size="sm" />
+          <PantherBadge size="sm" pulse={assistantPending} />
           <div>
             <h2>PROWL Assistant</h2>
             <p>Evidence alongside your expertise.</p>
@@ -859,6 +864,7 @@ export default function ReviewWorkspace({
               }}
             >
               {label}
+              {key === 'ask' && assistantPending && <span className="pw-tab-dot" aria-label="working" />}
             </button>
           ))}
         </div>
