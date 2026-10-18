@@ -264,3 +264,15 @@ body {
 
 /* ---------- Route containers ---------- */
 .pw-route { height: 100%; min-height: 0; }
+
+/* Studies table reflows instead of scrolling sideways at narrow widths / high zoom */
+@media (max-width: 860px) {
+  .pw-table { min-width: 0; }
+  .pw-table th:nth-child(2), .pw-table td:nth-child(2) { display: none; }
+  .pw-search input { width: 130px; }
+}
+@media (max-width: 600px) {
+  .pw-table th:nth-child(3), .pw-table td:nth-child(3) { display: none; }
+  .pw-table td { padding: 10px 6px; }
+  .pw-thumb { display: none; }
+}

@@ -19,7 +19,7 @@ test('synthetic controls, case reset, and viewport baseline', async ({ page }, t
   await page.goto('/')
   await expect(page.getByRole('status', { name: 'Synthetic viewer stub' })).toBeVisible()
   await expect(page.getByRole('button', { name: /^Prediction/ })).toBeDisabled()
-  const list = page.getByRole('complementary', { name: 'Study list' })
+  const list = page.getByRole('complementary', { name: 'Study list', includeHidden: true })
   if (await page.getByRole('button', { name: 'Collapse study list' }).isVisible()) {
     await page.getByRole('button', { name: 'Collapse study list' }).click()
   }

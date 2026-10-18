@@ -24,6 +24,8 @@ function ViewerSuspense({ children }) {
 // whose package permits reference comparison. Only rendered for those studies.
 export default function ValidationComparison({ caseId, caseData, caseOptions, profile, onSelectCase, onBack }) {
   const [mode, setMode] = useState('2d')
+  // Each view is a third of the width, so show one plane at a time for legibility.
+  const [plane, setPlane] = useState('axial')
   const bothAbsent = !caseData.gt_has_lesion && !caseData.pred_has_lesion
   const views = [
     ['pred', ['pred'], 'Model prediction', 'Prediction', [['pred-pancreas', 'Predicted pancreas'], ['pred-lesion', 'Predicted lesion']]],
@@ -49,9 +51,16 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
             </select>
           </label>
           <div className="pw-segmented" role="group" aria-label="Comparison view">
-            <button type="button" aria-pressed={mode === '2d'} onClick={() => setMode('2d')}>Three planes</button>
+            <button type="button" aria-pressed={mode === '2d'} onClick={() => setMode('2d')}>2D planes</button>
             <button type="button" aria-pressed={mode === '3d'} onClick={() => setMode('3d')}>3D surfaces</button>
           </div>
+          {mode === '2d' && (
+            <div className="pw-segmented" role="group" aria-label="Comparison plane">
+              {[['axial', 'Axial'], ['coronal', 'Coronal'], ['sagittal', 'Sagittal']].map(([value, label]) => (
+                <button type="button" key={value} aria-pressed={plane === value} onClick={() => setPlane(value)}>{label}</button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -78,6 +87,7 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
                 caseData={caseData}
                 sources={sources}
                 mode={mode}
+                activePlane={plane}
                 overlayOpacity={key === 'both' ? 0.6 : 0.72}
                 ctOpacity={mode === '3d' ? 0 : 0.1}
                 compact
