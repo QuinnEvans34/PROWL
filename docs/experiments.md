@@ -4009,3 +4009,19 @@ Offline follow-up: `answer_feedback.py` collects all independent mechanical issu
 on unexplained model rejection, without returning a partial draft.7newtests/two retained V21 trace
 regressions pass,0model/providercalls. Not integrated with live generation; historical candidate
 policies and producing snapshots unchanged. Integration and semantic-role preservation remain next.
+
+
+## October 18 — separate answer review V22 (planned before execution)
+
+User explicitly requests feedback integration, separate factual-support/completeness/readability
+checks, one bounded quality check and promotion only on pass. See
+[plan](capstone/retrieval/SEPARATE-REVIEW-V22-PLAN-2026-10-18.md). Existing14B/paper focus/canonical
+retained evidence; no post-review rewrite, at most one complete-feedback revision. Ten exposed cases,
+48generationcalls/6unloads/15min/18GiB, unchanged storage floors. Original manual source/concept gates
+remain mandatory. No new model, protected data, corpus/labels or training. Result pending.
+
+V22 attempt1 retained as stopped/partial: first cold-load timeout60.006s; second request canceled with
+100provider-log tokens, no delivered draft. No quality result. Model now resident/idle. Before
+attempt2, recorded readiness amendment and corrected test transport55s inference/5s cleanup (the
+candidate default already used55s). Same prompts/model/questions; max50combinedchatattempts. Attempt2
+must record resident16384context; cold-start latency is not included or claimed solved.

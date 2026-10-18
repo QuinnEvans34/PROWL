@@ -1,0 +1,30 @@
+{
+  "version": "natural-literature-answer-v22",
+  "model": "qwen2.5:14b",
+  "model_sha256": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "prompt_sha256": "d9eff9d24bc166dffed344aa2283f80c7be3c997ca7ef537f402370424a02503",
+  "provider_port": 11435,
+  "calls_per_request_max": 8,
+  "max_quality_revisions": 1,
+  "temperature": 0,
+  "seed": 42,
+  "num_ctx": 16384,
+  "num_predict": 1536,
+  "generation_budget_seconds": 55,
+  "cleanup_budget_seconds": 5,
+  "model_budget_seconds": 60,
+  "source_scope": "top_ranked_paper",
+  "max_sources": 50,
+  "max_source_characters_with_titles": 30000,
+  "max_citations_per_claim": 3,
+  "review_criteria": [
+    "factual_support",
+    "completeness",
+    "readability"
+  ],
+  "review_context": "claim_bound_citations_except_readability_text_only",
+  "post_review_rewrite": false,
+  "retries": 0,
+  "cleanup": "empty_prompt_unload_after_each_attempt",
+  "quality": "development_unvalidated"
+}
