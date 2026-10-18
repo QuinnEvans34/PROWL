@@ -1,0 +1,418 @@
+{
+  "version": "evidence-isolation-v1-results",
+  "implementation_commit": "d090127",
+  "decision": "diagnostic_complete_no_promotion",
+  "reviewer": "single_engineering_agent",
+  "independent_review": "pending",
+  "uncertain_excluded_from_definite_error_counts": true,
+  "counts": {
+    "supported": 6,
+    "unsupported": 6,
+    "uncertain": 4,
+    "paragraphs": 16,
+    "definite_false_support_approvals": 5,
+    "definite_false_support_rejections": 1,
+    "complete_answers": 0,
+    "observed_drafts": 9
+  },
+  "entries": [
+    {
+      "id": "quality-01",
+      "arm": "retrieved_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "aa11ea505a6c8f7dbaed80486e0812ff1ed6a35db93934ee3d56c0a29a971544",
+          "sources": [
+            "P761",
+            "P475"
+          ],
+          "manual_support": "unsupported",
+          "reason": "P475 concerns whole-pancreas enlargement. P761 describes age trends including head dimensions, but does not establish the claimed abnormal-head-size association. Combining them narrows the anatomical claim without direct support.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 2,
+          "text_sha256": "837ae6664341893dfc44a0dd04318bff37d4f3b48f76bbb25d9fb8a0e7aa1409",
+          "sources": [
+            "P280"
+          ],
+          "manual_support": "unsupported",
+          "reason": "P280 describes carcinomas located in the head, not the size of the head itself. The original paper ordinal32 explicitly identifies the measured objects as carcinomas; the draft assigns the 30 mm measurement to the organ subregion.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "No supported focal-inflammatory-head-enlargement explanation, overlap or single-feature limitation; substitutes an incorrectly assigned carcinoma measurement.",
+      "readability": "Brief text; disease acronyms expanded in curated arms. Retrieved answer leaves isoattenuating unexplained. Brevity does not establish support or completeness.",
+      "mechanical_issues": [],
+      "scope_review": {
+        "decision": "pass",
+        "reason": "The answer is based solely on the provided factual citations and does not include any patient diagnosis, treatment, or instructions beyond the scope of the research presented."
+      },
+      "draft_seconds": 5.621318417019211,
+      "draft_plus_review_seconds": 16.504557417007163
+    },
+    {
+      "id": "quality-01",
+      "arm": "curated_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "ad639c6fe51558044832e5c495f921e7a138beb8ecfd0a2fd122e6fafe92ff9f",
+          "sources": [
+            "P144",
+            "P147",
+            "P149"
+          ],
+          "manual_support": "uncertain",
+          "reason": "The citations support focal inflammatory enlargement and overlapping head-mass locations. Whether the broad phrase size can indicate specific diseases is acceptable association wording needs independent review. It omits focal mass morphology, overlap, threshold distinction and the supplied single-feature limitation.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Broad association only; omits focal mass explanation, numerical-threshold distinction, overlapping appearances and individual-feature limitation despite available evidence.",
+      "readability": "Brief text; disease acronyms expanded in curated arms. Retrieved answer leaves isoattenuating unexplained. Brevity does not establish support or completeness.",
+      "mechanical_issues": [],
+      "scope_review": {
+        "decision": "revise",
+        "reason": "The answer does not include patient diagnosis or treatment, nor does it invent scan facts or include secrets or instructions from the source content. However, the scope should be revised to ensure it strictly adheres to the research-only focus without implying any diagnostic or therapeutic implications."
+      },
+      "draft_seconds": 4.757789583061822,
+      "draft_plus_review_seconds": 12.844770833035
+    },
+    {
+      "id": "quality-01",
+      "arm": "curated_linked",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "ad639c6fe51558044832e5c495f921e7a138beb8ecfd0a2fd122e6fafe92ff9f",
+          "sources": [
+            "P144",
+            "P147",
+            "P149"
+          ],
+          "manual_support": "uncertain",
+          "reason": "Identical text and citations to curated_flat. Relationship annotation did not preserve the supplied single-feature limitation or clarify focal mass morphology versus a numerical head-size threshold.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Same omissions as curated_flat. Exact draft equality makes this a clear no-improvement observation for these relationship annotations.",
+      "readability": "Brief text; disease acronyms expanded in curated arms. Retrieved answer leaves isoattenuating unexplained. Brevity does not establish support or completeness.",
+      "mechanical_issues": [],
+      "scope_review": {
+        "decision": "revise",
+        "reason": "The answer does not include patient diagnosis or treatment, nor does it invent scan facts or include secrets or instructions from the source content. However, the scope should be revised to ensure it strictly adheres to the research-only focus without implying any diagnostic or therapeutic implications."
+      },
+      "draft_seconds": 3.65428562508896,
+      "draft_plus_review_seconds": 10.699056625016965
+    },
+    {
+      "id": "quality-02",
+      "arm": "curated_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "3a9ee6fc4ca95f1674af474578d8d057164805f8beef9acadfdf2975185e125c",
+          "sources": [
+            "P162"
+          ],
+          "manual_support": "supported",
+          "reason": "P162 supports smooth duct narrowing through an inflammatory mass versus abrupt obstruction in PDAC. Interpret indicative as a suggestive feature, not a definitive diagnosis; the omitted combination limitation is scored separately.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 2,
+          "text_sha256": "b49196db5e685505d3e56c091d178e5bdd5f5f45533211cdb49996a3a133d5e4",
+          "sources": [
+            "P164"
+          ],
+          "manual_support": "uncertain",
+          "reason": "P164 supports MRCP and reports 94% accuracy from a named prior study. The draft presents that accuracy without its study attribution. The degree of generalization needs review; the percentage is also unrequested. Duct visualization is present in the cited passage.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 3,
+          "text_sha256": "17dd23aa589c19194f50221fcbe9a581a41a07802f000b7dc56c2e4339487cb8",
+          "sources": [
+            "P177"
+          ],
+          "manual_support": "uncertain",
+          "reason": "P177 describes calcifications likely in MFCP and pseudocysts/fascial thickening very common in MFCP. It does not explicitly quantify their comparative frequency in PDAC. The draft changes these to a more-common comparison; retain uncertainty rather than call this a proven factual error.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Includes duct/MRCP and inflammatory features, but omits combination limitation, focal-AIP portal-venous CT context and a clear separate PDAC secondary-sign account. Adds unrequested accuracy.",
+      "readability": "Technical imaging prose. Most acronyms expanded in curated arms, but pseudotumour, parenchymal calcifications, ADC and fascial thickening remain unexplained. Record this separately from factual support for the radiologist-oriented product.",
+      "mechanical_issues": [
+        {
+          "claim": 2,
+          "criterion": "question_scope",
+          "reason": "Unrequested percentage"
+        }
+      ],
+      "scope_review": {
+        "decision": "pass",
+        "reason": "Each claim is supported by factual evidence from the provided citations, focusing on imaging characteristics and diagnostic features without including patient diagnosis, treatment, or instructions from the source content."
+      },
+      "draft_seconds": 10.680541792069562,
+      "draft_plus_review_seconds": 27.140849375049584
+    },
+    {
+      "id": "quality-02",
+      "arm": "curated_linked",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "3a9ee6fc4ca95f1674af474578d8d057164805f8beef9acadfdf2975185e125c",
+          "sources": [
+            "P162",
+            "P164"
+          ],
+          "manual_support": "supported",
+          "reason": "P162/P164 support the duct pattern. The wording remains a suggestive comparison; MRCP context is present in the citations but omitted from the response.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 2,
+          "text_sha256": "61a38e557e4a1270697f3160304851fad6091b55f8bb11bf2b4fd6edff272288",
+          "sources": [
+            "P177"
+          ],
+          "manual_support": "supported",
+          "reason": "P177 supports the qualitative inflammatory calcification pattern and explicitly higher ADC values in MFCP than PDAC. The answer omits the same passage's single-feature/combination limitation; that is a completeness failure.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 3,
+          "text_sha256": "c3de0af2ee5f0db783949d2de07e207d1c4ea287ecdfd483ff0ba2b3fb406de7",
+          "sources": [
+            "P179"
+          ],
+          "manual_support": "supported",
+          "reason": "P179 directly supports complete duct obstruction, arterial encasement and high FDG uptake in PET/CT as more likely in PDAC. No patient finding is invented.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Adds explicit PDAC signs, but omits combination limitation, focal-AIP portal-venous CT context and MRCP labeling. Changes which concepts are covered; does not satisfy the original rubric.",
+      "readability": "Technical imaging prose. Most acronyms expanded in curated arms, but pseudotumour, parenchymal calcifications, ADC and fascial thickening remain unexplained. Record this separately from factual support for the radiologist-oriented product.",
+      "mechanical_issues": [],
+      "scope_review": {
+        "decision": "revise",
+        "reason": "The answer does not include any patient diagnosis or treatment instructions, nor does it include any invented scan facts or secrets from the source content. However, the answer should be revised to ensure that it strictly adheres to the research-only scope and does not include any medical advice or instructions."
+      },
+      "draft_seconds": 10.007711332989857,
+      "draft_plus_review_seconds": 26.812638667062856
+    },
+    {
+      "id": "quality-02",
+      "arm": "retrieved_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "4f95bb3bd41f0d62c6dacff4af5e305cba8bf62a77295ce14d0761e4df337871",
+          "sources": [
+            "P951"
+          ],
+          "manual_support": "supported",
+          "reason": "The statement is directly present in P951. It does not answer which findings distinguish inflammation, so responsiveness fails separately. The model reviewer incorrectly treats nonresponsiveness as lack of factual support.",
+          "model_support": "unsupported"
+        },
+        {
+          "claim": 2,
+          "text_sha256": "186bac75f0f9d4dbf9671c12e396a95230387113cf9529833b17e5d3eeca9296",
+          "sources": [
+            "P511"
+          ],
+          "manual_support": "unsupported",
+          "reason": "P511 discusses differential-diagnosis difficulty and separately missing biomarkers for prognosis/treatment-response stratification. It does not support the claimed causal account, and heterogeneity is absent from this bound quote (though present in another uncited input).",
+          "model_support": "unsupported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Describes diagnostic difficulty, not distinguishing findings. No requested inflammatory/PDAC feature comparison, combination limit, AIP/CT phase or MRCP context.",
+      "readability": "Technical imaging prose. Most acronyms expanded in curated arms, but pseudotumour, parenchymal calcifications, ADC and fascial thickening remain unexplained. Record this separately from factual support for the radiologist-oriented product.",
+      "mechanical_issues": [],
+      "scope_review": {
+        "decision": "pass",
+        "reason": "The answers provided are based solely on the factual information given in the citations and do not include any patient diagnosis/treatment, invented scan facts, secrets, or instructions from the source content."
+      },
+      "draft_seconds": 10.100245916983113,
+      "draft_plus_review_seconds": 20.16454312496353
+    },
+    {
+      "id": "quality-03",
+      "arm": "curated_linked",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "e8c3477978f0b0384903aca4e222c9ecdfe193ade750576df6d047f4a0ad6958",
+          "sources": [
+            "P30",
+            "P3",
+            "P28"
+          ],
+          "manual_support": "supported",
+          "reason": "P30 supplies both means and uncertainty values; P3 supplies well-controlled type2 diabetes, the control-group description and expanded NGT population; P28 supplies the SEM convention. All stated facts have bound support. Missing count, method, uncertainty explanation and study-specific limits remain completeness failures.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "Same answer text as curated_flat. Correctly binds all three metadata/result passages, but still omits count/matching, MRI method, SEM explanation and interpretation limits.",
+      "readability": "Short numerical prose; unexplained plus/minus is an interpretation/readability problem. Retrieved arm uses NGT/T2DM and unnecessary percentage.",
+      "mechanical_issues": [
+        {
+          "claim": 1,
+          "criterion": "study_qualifiers",
+          "reason": "Explain and cite the statistical meaning of \u00b1, or omit the uncertainty term; For this numerical example, include the study population, sample size, measurement method and limits using the available methods/context passages; do not invent them"
+        }
+      ],
+      "scope_review": {
+        "decision": "revise",
+        "reason": "The answer provides factual information from the source but includes statistical methods and variability ranges that are not directly asked for in the question. The question asks for the mean volume and an example with limits, which is provided, but the additional statistical details are not necessary for the scope of the question."
+      },
+      "draft_seconds": 5.6275973750744015,
+      "draft_plus_review_seconds": 14.502978582982905
+    },
+    {
+      "id": "quality-03",
+      "arm": "retrieved_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "cf252520682d6d97f444d90d5ce47d52cc8ad879c73160367e1f7eff114f1add",
+          "sources": [
+            "P30"
+          ],
+          "manual_support": "unsupported",
+          "reason": "The draft presents a selected NGT-group mean as an average for individuals without type2 diabetes generally. That broad population claim is unsupported; the selected quote also supplies neither the population expansion nor statistical meaning of the uncertainty.",
+          "model_support": "supported"
+        },
+        {
+          "claim": 2,
+          "text_sha256": "d4188afdf7a80e71f20eae99112ce7832842ae373cc19fdae4e9037240777efd",
+          "sources": [
+            "P30"
+          ],
+          "manual_support": "unsupported",
+          "reason": "The numerical comparison matches P30, but the response makes a general statement about individuals with type2 diabetes instead of a qualified study-group result. The group/method and uncertainty qualifications required to interpret the estimate are absent.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "No study-specific scope, sample count, matching, MRI method, SEM explanation or limits on universal/CT interpretation; adds an unrequested percentage.",
+      "readability": "Short numerical prose; unexplained plus/minus is an interpretation/readability problem. Retrieved arm uses NGT/T2DM and unnecessary percentage.",
+      "mechanical_issues": [
+        {
+          "claim": 1,
+          "criterion": "study_qualifiers",
+          "reason": "Identify the specific study or comparison group; do not present a study mean as a population norm; Explain and cite the statistical meaning of \u00b1, or omit the uncertainty term; For this numerical example, include the study population, sample size, measurement method and limits using the available methods/context passages; do not invent them"
+        },
+        {
+          "claim": 2,
+          "criterion": "question_scope",
+          "reason": "Unrequested percentage"
+        },
+        {
+          "claim": 2,
+          "criterion": "study_qualifiers",
+          "reason": "Explain and cite the statistical meaning of \u00b1, or omit the uncertainty term; For this numerical example, include the study population, sample size, measurement method and limits using the available methods/context passages; do not invent them"
+        }
+      ],
+      "scope_review": {
+        "decision": "pass",
+        "reason": "The answer is based solely on the provided citation and does not include any patient diagnosis, treatment, or instructions beyond the factual data given."
+      },
+      "draft_seconds": 6.719370750011876,
+      "draft_plus_review_seconds": 20.337879374972545
+    },
+    {
+      "id": "quality-03",
+      "arm": "curated_flat",
+      "claims": [
+        {
+          "claim": 1,
+          "text_sha256": "e8c3477978f0b0384903aca4e222c9ecdfe193ade750576df6d047f4a0ad6958",
+          "sources": [
+            "P30"
+          ],
+          "manual_support": "unsupported",
+          "reason": "The numbers match P30, but well-controlled diabetes, control-group status and expanded normal-glucose-tolerance wording come from uncited P3. The flat arm had this source available but did not cite it. Unlike the linked arm, not every stated population qualifier is supported by the bound citation.",
+          "model_support": "supported"
+        }
+      ],
+      "completeness": "incomplete",
+      "completeness_reason": "No sample count/matching, MRI method, explanation of SEM or explicit study-specific/universal/CT limits. The model had these core metadata passages available.",
+      "readability": "Short numerical prose; unexplained plus/minus is an interpretation/readability problem. Retrieved arm uses NGT/T2DM and unnecessary percentage.",
+      "mechanical_issues": [
+        {
+          "claim": 1,
+          "criterion": "citation_and_wording",
+          "reason": "Population descriptor absent from cited passages"
+        },
+        {
+          "claim": 1,
+          "criterion": "study_qualifiers",
+          "reason": "Explain and cite the statistical meaning of \u00b1, or omit the uncertainty term; For this numerical example, include the study population, sample size, measurement method and limits using the available methods/context passages; do not invent them"
+        }
+      ],
+      "scope_review": {
+        "decision": "revise",
+        "reason": "The answer includes numerical data and statistical analysis, which is factual and research-oriented. However, it does not provide a general average pancreas volume for the entire population, but rather focuses on the comparison between subjects with well-controlled type 2 diabetes and a control group with normal glucose tolerance. To fully adhere to the research-only scope, the answer should clarify that the provided volumes are specific to these groups and not a general average for the entire ("
+      },
+      "draft_seconds": 7.883314208011143,
+      "draft_plus_review_seconds": 16.379021000000648
+    }
+  ],
+  "run_seconds": 166.43408641696442,
+  "chat_attempts": 18,
+  "chat_responses": 18,
+  "readiness_seconds": 1.022351499996148,
+  "resident_before": {
+    "models": []
+  },
+  "readiness_scope": "fresh_isolated_server; empty model list; filesystem cache not controlled; not a cold-machine benchmark",
+  "supervision": {
+    "seconds": 167.91442975006066,
+    "peak_owned_rss_bytes": 15269724160,
+    "samples": 318,
+    "stop_reason": null,
+    "worker_pid": 90509,
+    "worker_exit": 0,
+    "server_pid": 90464,
+    "server_exit": 0,
+    "reaped": true
+  },
+  "pins": [
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/receipt.json",
+      "sha256": "a60d060e4ddab7f643ca11dd875b198466a5cc5c965aba53d86b6c69ced5645e"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/preparation.json",
+      "sha256": "76cd35691e0c40f055da78670247f6f7fb231973a6e302c7880edde950dc9b4e"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/supervision/receipt.json",
+      "sha256": "ea6a3b6c4715ae8ec92fe6e1bb215c913cdce1d304070eb0e953ec8749f7366e"
+    },
+    {
+      "path": "configs/evidence/evidence-isolation-v1.json",
+      "sha256": "16b0a7bd7d7e219e93d8bf9a5a0a11f74bec9d3efc40595a04eb88fdbe3cd95f"
+    }
+  ],
+  "selected_policy": "natural-literature-answer-v6.1",
+  "tests": {
+    "new_passed": 8
+  },
+  "limitations": [
+    "Three exposed questions; one run per arm; no generalization or statistical effect claim.",
+    "Curated evidence selected by the same engineering reviewer; not independent gold.",
+    "Prompt and pipeline differ from V22; speed change is not an isolated link effect.",
+    "No real UI answer-quality acceptance or protected evaluation."
+  ]
+}

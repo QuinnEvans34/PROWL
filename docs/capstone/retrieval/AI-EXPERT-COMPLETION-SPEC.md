@@ -1,9 +1,23 @@
 # AI expert completion specification
 
-**Version:** 1.30 — October 18, 2026 (separate review integrated; V22 not promoted)\
+**Version:** 1.31 — October 18, 2026 (controlled failure isolation complete; no promotion)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October18 controlled experiment approved and completed: [plan](EVIDENCE-ISOLATION-PLAN-2026-10-18.md)
+and [results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md). Three unchanged exposed questions, actual dense
+top5 versus checked passages versus identical checked passages with explicit relationships. Fixed
+model/prompt, nine drafts/eighteen chat responses, no revisions/timeouts, no promotion. Eight focused
+tests pass. Manual16paragraph review separates6supported/6unsupported/4uncertain; factual reviewer
+falsely approves5definite errors and rejects1supported but nonresponsive paragraph. All nine drafts
+remain incomplete under original requirements. Links improve volume citation binding, but identical
+answer wording still omits count/MRI/SEM/limits; head drafts are identical too. Retrieval, generation
+and validation all contribute failures. Next proposed prototype binds measured object and required
+qualifiers in source-linked fact records and code-controlled assembly, then separately tests selection
+and rendering. No further prompt sweep, implementation or UI promotion is implied by this checkpoint.
+Independent evaluation, original gates and measurement extension remain required. Baseline dense/v6.1
+stays selected; candidate server stopped/reaped, model store retained.
 
 October18 requested three-part implementation/checkpoint is complete: [V22 results](SEPARATE-REVIEW-V22-RESULTS-2026-10-18.md).
 Complete validation feedback now feeds one revision; factual-support, completeness and readability
@@ -435,6 +449,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
 | Step 4b / AI-08 | Complete — source slice only | Four disease references added to a separate14-source/1,179-passage collection; exact rebuild, old inventories and58tests verified. [Report](DISEASE-REFERENCE-CORPUS-2026-10-17.md). |
 | Step 5 / AI-03 | In progress — proposed v6 engineering review complete; changed-scope human review pending | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
+| Controlled answer diagnosis / AI-04 | Experiment complete; feature In Progress | [Three-by-three results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md): all nine drafts observed without timeout, zero complete answers, evidence omissions and semantic/citation/reviewer failures isolated. No replacement promoted. Next source-linked fact records and explicit qualifier assembly, subject to its own bounded plan. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |

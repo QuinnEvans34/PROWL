@@ -1,5 +1,29 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 controlled failure isolation complete:** Quinton approved the fixed evidence experiment
+> and coherent commits/Trello tracking. Read spec1.31 and EVIDENCE-ISOLATION-RESULTS-2026-10-18.md.
+> Plan/code/prepared inputs committed d090127 before generation. Three existing questions, three real
+> dense source-only searches, nine drafts: retrieved flat / curated flat / identical curated passages
+> with within-paper links. Same14B/options/prompt, no revisions;18chatattempts/18responses, one empty
+> readiness call1.022s and one successful unload. Initial isolated ps empty; disk cache uncontrolled,
+> no cold-machine benchmark. Batch166.434s; supervisor167.914s/15,269,724,160B/reaped exit0 for both
+> server90464 and worker90509. Execsession39559 FINISHED; never poll/relaunch as live. Port11435closed,
+> externalmodel retained. Baseline8016 dense/v6.1 verified unchanged; no production edits/promotion.
+> Eight new tests pass. Canonical1179spans/hash/offsets and nine prepared inputs validated. Manual
+>16paragraph review:6supported/6unsupported/4uncertain (one engineering agent, not independent gold).
+> Reviewer falsely approves5definite unsupported paragraphs and rejects1supported but nonresponsive
+> paragraph. All9drafts incomplete against original rubric. Head flat/linked drafts identical; volume
+> text identical, linked citations now include methods/population/statistics but wording still omits
+> samplecount/MRI/SEM explanation/limits. Retrieval also misses necessary passages; R8 retained
+> coverage better but disease combination/AIP-CT limits still absent. Full local traces and readable
+> all-answers.md/evidence.md under outputs/prowl/evidence-isolation-v1-20261018/. Tracked aggregate:
+> configs/evidence/evidence-isolation-v1-results.json. No earlier failure/label/corpus overwritten.
+> Next proposed implementation: source-linked fact records binding measured object/population/method/
+> statistic/qualifications, required qualifiers assembled by code, then separate selection/rendering
+> tests. Hints alone did not solve generation. Do not repeat this experiment or infer new sweep/UI
+> authority. AI-04 remains In Progress; independent evaluation/retrieval/measurement gates open.
+> No training/fullselector/protectedcontent/download/deletion/human-hours change.
+
 > **October18 separate-review V22 finished/not promoted:** User explicitly requested full feedback
 > integration, separate factual-support/completeness/readability checks and one bounded source-reviewed
 > quality check, promotion only on pass. Read spec1.30 and SEPARATE-REVIEW-V22-RESULTS-2026-10-18.md.
