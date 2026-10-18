@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 routing foundation delivered:** Read QUESTION-ROUTING-FOUNDATION-2026-10-17.md and
+> spec v1.17. New opt-in question_routing.py plus closed expert-request/route-v1 schemas accept free
+> text for deterministic offline planning only; no live endpoint or execution. Measurement/comparison
+> unavailable, literature needs scope review or verified findings, mixed/unknown input clarifies.
+> Plans cannot contain answers/citations or executed states; caller-bound verification rejects tampering.
+> 155 targeted checks pass (69 new); attempt01 false refusal preserved and fixed only in new policy.
+> Eight exposed plans saved in configs/evidence/question-routing-v1-examples.json; no runtime catalog.
+> Existing query/live behavior, corpus, old producing receipts and v5 acceptance unchanged. Next:
+> literature adapter/development label coverage and independent labeling arrangement before protected
+> authoring/freeze/tuning. Measurement adapters still follow core acceptance. No services/model/DB,
+> private content/training/full selector or inferred hours. No clinical or answer-quality qualification.
+
 > **October 17 shared question drafting:** Quinton accepts the five scan-centered examples as the
 > intended question style and adds three wordings about head-size disease context, average comparison
 > and lesion size. SCAN-CENTERED-DEVELOPMENT-QUESTIONS.md records eight wordings/five task groups.

@@ -1,0 +1,236 @@
+{
+  "version": "prowl-question-routing-examples-v1",
+  "scope": "exposed_development_routing_only",
+  "answer_quality_evaluated": false,
+  "examples": [
+    {
+      "id": "route-dev-01",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "question": "What is the size of the pancreatic head in this scan?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000001",
+        "request_sha256": "d645ad854d85abb77c3043369989f62415627fab76e1fa9d134e3578c20cb465",
+        "question_original": "What is the size of the pancreatic head in this scan?",
+        "question_normalized": "What is the size of the pancreatic head in this scan?",
+        "route": "measurement",
+        "status": "unavailable",
+        "reason_codes": [
+          "measurement_adapter_unavailable"
+        ],
+        "required_capabilities": [
+          "validated_measurement",
+          "qualified_subregion"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "b0fdf220da4c90080d8856ce54ba3fed5d698590e684c1af621532b524198be2"
+      }
+    },
+    {
+      "id": "route-dev-02",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000002",
+        "question": "Is this pancreas enlarged?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000002",
+        "request_sha256": "a2a535f494c792c32a686daaf33797c5e60bdce20244fea84a909d56c57bbcac",
+        "question_original": "Is this pancreas enlarged?",
+        "question_normalized": "Is this pancreas enlarged?",
+        "route": "reference_comparison",
+        "status": "unavailable",
+        "reason_codes": [
+          "comparison_adapter_unavailable"
+        ],
+        "required_capabilities": [
+          "validated_measurement",
+          "eligible_reference"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "8b1dfcf64b9fab84a82cf558b14a86a5fbfbb194ca63881ca03242f2b31e3ccb"
+      }
+    },
+    {
+      "id": "route-dev-03",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000003",
+        "question": "How does the size of this pancreas look compared to the average?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000003",
+        "request_sha256": "3d226e9151dcb72fff2f52fa148d1cf7e858d9110eec325a28d1f2294396853d",
+        "question_original": "How does the size of this pancreas look compared to the average?",
+        "question_normalized": "How does the size of this pancreas look compared to the average?",
+        "route": "reference_comparison",
+        "status": "unavailable",
+        "reason_codes": [
+          "comparison_adapter_unavailable"
+        ],
+        "required_capabilities": [
+          "validated_measurement",
+          "eligible_reference"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "d19150513251d735d51f4a78ab8bd7ac4706a8d6a0b28e5ae71c511913b024f7"
+      }
+    },
+    {
+      "id": "route-dev-04",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000004",
+        "question": "What conditions can cause this pattern of pancreatic enlargement?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000004",
+        "request_sha256": "0e4d826243b3edbb78ff601c784001ec8a8730d0846e610cfb87c50a499030ee",
+        "question_original": "What conditions can cause this pattern of pancreatic enlargement?",
+        "question_normalized": "What conditions can cause this pattern of pancreatic enlargement?",
+        "route": "literature",
+        "status": "unavailable",
+        "reason_codes": [
+          "verified_findings_required"
+        ],
+        "required_capabilities": [
+          "verified_findings",
+          "qualified_literature_retrieval"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "6ebfc24d8b28e044274dd9a655707f8966fdfaa94acdf72d707ab8f6b3d9582c"
+      }
+    },
+    {
+      "id": "route-dev-05",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000005",
+        "question": "Could the size of the pancreas head indicate any specific diseases?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000005",
+        "request_sha256": "cb8a73f0f58551b57d4ff3090fd0d91e12b2438138ab98b79e07136056715c95",
+        "question_original": "Could the size of the pancreas head indicate any specific diseases?",
+        "question_normalized": "Could the size of the pancreas head indicate any specific diseases?",
+        "route": "literature",
+        "status": "needs_scope_review",
+        "reason_codes": [
+          "literature_candidate_only"
+        ],
+        "required_capabilities": [
+          "qualified_literature_retrieval"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "12b83398a97914a2e5218923a25d3382f4a735e1d5e751b16d2dd9fe9d16ca23"
+      }
+    },
+    {
+      "id": "route-dev-06",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000006",
+        "question": "How large is the outlined lesion, and where is it located?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000006",
+        "request_sha256": "8bfa3cd35ef6eb42fec47ceb90375f242d849a2ff7154cea5fec44f0b2f9cf65",
+        "question_original": "How large is the outlined lesion, and where is it located?",
+        "question_normalized": "How large is the outlined lesion, and where is it located?",
+        "route": "measurement",
+        "status": "unavailable",
+        "reason_codes": [
+          "measurement_adapter_unavailable"
+        ],
+        "required_capabilities": [
+          "validated_measurement",
+          "validated_location"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "47c6688cf4121cd3af1286743af9f0f954dfa885b1960c01cee710c29bbaf065"
+      }
+    },
+    {
+      "id": "route-dev-07",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000007",
+        "question": "What is the size of the lesion in this scan?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000007",
+        "request_sha256": "5260e92c936bb00d10c0fe1e6e278ff79b634f58ce4db57b6a79e557a17bcc07",
+        "question_original": "What is the size of the lesion in this scan?",
+        "question_normalized": "What is the size of the lesion in this scan?",
+        "route": "measurement",
+        "status": "unavailable",
+        "reason_codes": [
+          "measurement_adapter_unavailable"
+        ],
+        "required_capabilities": [
+          "validated_measurement"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "ae0c0507bbf1b7d24395d4e722d9b02c512c2180b2cba1aec1cde730dfb99eaa"
+      }
+    },
+    {
+      "id": "route-dev-08",
+      "request": {
+        "schema_version": "prowl-expert-request-v1",
+        "request_id": "00000000-0000-4000-8000-000000000008",
+        "question": "What additional findings help distinguish inflammation from a pancreatic tumor?"
+      },
+      "plan": {
+        "schema_version": "prowl-expert-route-v1",
+        "policy_version": "scan-question-routing-v1",
+        "request_id": "00000000-0000-4000-8000-000000000008",
+        "request_sha256": "7bf153b4c59888cd496bfdcd83c071d3c4d233cf16971ba6853b06288d531752",
+        "question_original": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+        "question_normalized": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+        "route": "literature",
+        "status": "needs_scope_review",
+        "reason_codes": [
+          "literature_candidate_only"
+        ],
+        "required_capabilities": [
+          "qualified_literature_retrieval"
+        ],
+        "execution": "not_started",
+        "answer": null,
+        "citations": [],
+        "content_sha256": "6ee40d557639d717cad504f20384215135187479747f35dbe28cd6232b35b731"
+      }
+    }
+  ]
+}

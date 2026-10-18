@@ -1861,3 +1861,21 @@ included in a versioned exposure inventory before protected authoring. Existing 
 v5 acceptance, corpus, evaluation counts and thresholds are unchanged. Spec v1.16 and handoff link
 this draft; AI-03 tracks the next capability/independent-labeling reconciliation. Documentation only;
 no runtime/model/test-set access, new question request or inferred human hours.
+
+
+## 2026-10-17: Offline question routing foundation
+
+User approved continuing the request/response and routing implementation. Added closed expert-request
+and route-v1 schemas, deterministic local planner/verifier and eight actual exposed development plans.
+No runtime question catalog; no retrieval/measurement/generation/persistence or live endpoint. Missing
+measurement/comparison tools are unavailable; literature is only a candidate pending scope review or
+verified findings. Plans cannot contain answers/citations or executed states. Unknown/negated/mixed
+requests clarify; recognized scope/privacy violations refuse before other routes.
+
+First run:151pass/1failure (old broad what-disease refusal). Retained source/tests/report; opt-in
+policy narrows general literature prefix without changing old query gate, improves measurement intent
+and mixed-location routing. Final155pass:69new +41query +3guided +42response-contract. Actual eight
+plans replay exactly; documentation links and preservation checks recorded in checkpoint. Spec1.17,
+report and handoff updated; AI-03 tracks continuation. Next literature adapter/label coverage and
+independent labeling workflow before protected freeze/tuning. No evaluation thresholds relaxed,
+services/DB/model/private data/training/fullselector work or human-hours credit.

@@ -1,0 +1,97 @@
+{
+  "version": "prowl-question-routing-checkpoint-v1",
+  "parent_commit": "e7f9bcc190c5c37f390e3c39defb1f75420a6d5b",
+  "verification": {
+    "state": "offline_routing_foundation_verified",
+    "examples_verified": 8,
+    "new_routing_checks": 69,
+    "final_tests_passed": 155,
+    "first_attempt": {
+      "passed": 151,
+      "failed": 1,
+      "reason": "general disease question false refusal"
+    },
+    "live_code_and_old_contracts_unchanged": true,
+    "prior_corpus_and_evaluation_artifacts_unchanged": true,
+    "database_calls": 0,
+    "generation_calls": 0,
+    "training_calls": 0,
+    "protected_content_accessed": false,
+    "semantic_scope_qualified": false,
+    "answer_quality_evaluated": false
+  },
+  "artifacts": [
+    {
+      "path": "configs/evidence/question-routing-v1-examples.json",
+      "sha256": "902d93898eb1f385f13a021991ca03d7c3818452792a19e413a7f3d8529ff289",
+      "bytes": 9435
+    },
+    {
+      "path": "docs/capstone/contracts/retrieval/expert-request-v1.schema.json",
+      "sha256": "c8289aaf4efa8258e98d6c09333c4beba71359d3851c4913228f87fbb9dca9b8",
+      "bytes": 555
+    },
+    {
+      "path": "docs/capstone/contracts/retrieval/expert-route-v1.schema.json",
+      "sha256": "c39f0fd9f33466642a3175a56fa8b64657128dc4cf29d09763f5fbc75f6b19e5",
+      "bytes": 2423
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "sha256": "c6c5267e46763882065e5246fec3e873b4d32eeee559213575aeebe1367ec67a",
+      "bytes": 29867
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "sha256": "d51fd653aa86b85dff559856a782bd25c1762a4c859d2e6230fda67bbcea914a",
+      "bytes": 51607
+    },
+    {
+      "path": "docs/capstone/retrieval/QUESTION-ROUTING-FOUNDATION-2026-10-17.md",
+      "sha256": "30986f9f9471d7cde31ca4c896dffd374d0fcb12061d476413737d7c7cf95b6d",
+      "bytes": 6781
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "a051cc194d09772c6f3846241547adbb0b3c49a2dddb1bab11e864946d977946",
+      "bytes": 109112
+    },
+    {
+      "path": "src/retrieval/question_routing.py",
+      "sha256": "5d9a520cdac89b794fa3b47b9817282ade12ba28fd4a81c5cd402d7ee4882663",
+      "bytes": 5371
+    },
+    {
+      "path": "tests/retrieval/test_question_routing.py",
+      "sha256": "1c23e04d99071d66934c8960bc4e54f6589d0942e68fc9c75120cfef24b62a43",
+      "bytes": 7671
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": "outputs/prowl/question-routing-v1-20261017/attempt-01-question_routing.py",
+      "sha256": "34b7690671839b3d189f2209f26f3264970a13ce3fb63f9a5e195fca5f38637f",
+      "bytes": 4982
+    },
+    {
+      "path": "outputs/prowl/question-routing-v1-20261017/attempt-01-test_question_routing.py",
+      "sha256": "3a5cdd67ca25ace890b9f0485284ad785599afcce3661c466578b637dd2b0942",
+      "bytes": 7447
+    },
+    {
+      "path": "outputs/prowl/question-routing-v1-20261017/tests-01.xml",
+      "sha256": "1c2561b0f50ab5eb07c450704aabe1de3d5d5af4a71970bf5a7ed1461776076b",
+      "bytes": 26513
+    },
+    {
+      "path": "outputs/prowl/question-routing-v1-20261017/tests-02.xml",
+      "sha256": "037a7be1ee60860619219318f4116343c89fe341ca49cff1682e55acd50165f5",
+      "bytes": 25507
+    },
+    {
+      "path": "outputs/prowl/question-routing-v1-20261017/verification.json",
+      "sha256": "6e49f5bccd36dfe37aad142d9c7543a315a7995766752a573a514636a0039c72",
+      "bytes": 545
+    }
+  ]
+}
