@@ -67,9 +67,19 @@ def create_record_search(baseline):
     return RecordAwareSearch(baseline, index, spec)
 
 
-def handler_for(service, source_search=None):
+def create_record_answers(source_search):
+    from src.retrieval.record_answer import RecordComposer, RecordAnswerService
+    spec = json.loads((ROOT/'configs/evidence/record-answer-v1.json').read_text())
+    wording = checked_json(spec['wording'], ROOT)
+    search_spec = source_search.config
+    composer = RecordComposer(source_search.index.engine, checked_json(search_spec['catalog'], ROOT),
+        checked_json(search_spec['review'], ROOT), wording, spec)
+    return RecordAnswerService(source_search, composer)
+
+
+def handler_for(service, source_search=None, record_answers=None):
     source_search = source_search or service
-    answers = NaturalAnswerService(service)
+    answers = record_answers or NaturalAnswerService(service)
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
             super().setup(); self.connection.settimeout(10)
@@ -99,8 +109,9 @@ def handler_for(service, source_search=None):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
             if self.path != '/literature-search/health': return self.reply(404, {'error':'Unknown route.'})
             self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection'],
-                'answer_policy':POLICY, 'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
-                'answer_retrieval_policy':service.config.get('retriever', 'dense-exact-cosine-v1')})
+                'answer_policy':'source-record-answer-v1' if record_answers else POLICY,
+                'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
+                'answer_retrieval_policy':(source_search if record_answers else service).config.get('retriever', 'dense-exact-cosine-v1')})
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
@@ -130,9 +141,12 @@ if __name__ == '__main__':
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
     parser.add_argument('--port', type=int, default=8016)
     parser.add_argument('--record-search', action='store_true', help='Enable reviewed disease-record search for sources only')
+    parser.add_argument('--record-answers', action='store_true', help='Enable reviewed-record local AI composition (includes record search)')
     args = parser.parse_args()
     service = create_service(args.config)
-    server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, create_record_search(service) if args.record_search else None))
+    sources = create_record_search(service) if args.record_search or args.record_answers else None
+    server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources,
+        create_record_answers(sources) if args.record_answers else None))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()
     except KeyboardInterrupt: pass

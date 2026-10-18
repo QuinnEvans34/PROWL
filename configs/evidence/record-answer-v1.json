@@ -1,0 +1,19 @@
+{
+  "version": "source-record-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "0d67985d379e8bf91a9ed5852a8e337f6c9cc67efdac65c2e449309edf68ea7b",
+  "wording": {
+    "path": "configs/evidence/record-answer-wording-v1.json",
+    "sha256": "c5dfe658e3668da0ec71dc4281c126d614c45018f69bee37a8b792b04a5379c5"
+  },
+  "wording_content_sha256": "d8c7161ed84a2735aba856b20a7c31ad81bb234eb589e87732f5d0a1cf03ec6d",
+  "max_generation_seconds": 30,
+  "model_calls": 1,
+  "composition": "reviewed_sentence_choices_and_paragraphs",
+  "fallback": "explicit_reviewed_source_summary",
+  "outside_record_coverage": "sources_only",
+  "independent_review": "pending",
+  "scope": "These are named literature comparisons with pancreatic ductal adenocarcinoma (PDAC), not a survey of all pancreatic tumors.",
+  "limitation": "These are literature comparisons, not findings from your scan. They do not establish an individual diagnosis or a numerical pancreas-head size threshold."
+}
