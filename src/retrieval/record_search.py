@@ -10,7 +10,7 @@ import re
 import unicodedata
 
 from .disease_fact_records import DiseaseFactCatalog
-from .fact_records import digest
+from .direct_ingestion import digest
 
 POLICY = 'source-linked-record-search-v1'
 

@@ -9,7 +9,7 @@ from uuid import uuid4
 from src.retrieval.evidence_experiment import corpus_records
 
 ROOT=Path(__file__).resolve().parents[2]
-OUT=ROOT/'outputs/prowl/record-search-v1-20261018'
+OUT=ROOT/'outputs/prowl/record-search-v1-attempt2-20261018'
 BASE='http://127.0.0.1:8017'
 
 

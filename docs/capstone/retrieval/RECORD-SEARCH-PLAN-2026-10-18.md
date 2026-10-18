@@ -59,3 +59,18 @@ model answer policy or formal feature acceptance.
 
 Preparation note: the first UI test invocation used system Node20 and failed before collecting tests
 (`webidl.util.markAsUncloneable`). Use the already installed compatible runtime; no package replacement.
+
+## Preserved first-attempt failure and correction
+
+Implementation03a976c was committed before attempt1. Its first HTTP request returned503: a local,
+model-free reproduction against the actual FrozenLiterature boundary found `Invalid trusted ticket
+binding`. The new wrapper imported the fact-catalog digest (no trailing newline) rather than the
+transport canonical digest (trailing newline). Synthetic boundary stubs had missed this integration
+error. No evidence response or answer-model call occurred; one HTTP request is retained in
+`outputs/prowl/record-search-v1-20261018/receipt.json`, including original producing snapshots.
+
+Use the existing transport digest without weakening verification and add an actual FrozenLiterature
+regression. Then explicitly run one corrected attempt2 in a fresh directory under the same24questions,
+120second/20MiB bounds and promotion gates. This is a repair within the user-authorized implementation,
+not an automatic retry or change to expected outcomes. Stop/reap the old owned8017candidate before
+loading the correction. The original failure remains visible in final results and Trello.

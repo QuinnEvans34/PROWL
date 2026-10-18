@@ -142,3 +142,17 @@ def test_record_source_http_dispatch_never_calls_answer_model(service, monkeypat
             headers={'Content-Type':'application/json'}),timeout=5))
         assert result['dispatch']=='legacy_answer' and len(answer_calls)==1 and len(source_calls)==1
     finally:server.shutdown();server.server_close();worker.join(3)
+
+
+def test_record_expansion_uses_actual_frozen_boundary_digest(service):
+    from src.retrieval.record_search import RecordAwareSearch, POLICY
+    from types import SimpleNamespace
+    base,request,calls=service
+    hits=base.retrieve('fixture');calls.clear()
+    index=SimpleNamespace(search=lambda question:dict(
+        route=dict(reason='literature_examples_not_exhaustive'),matches=[dict(record_id='fixture')],hits=hits))
+    cfg=dict(base.config,retriever=POLICY,top_k=20)
+    result=RecordAwareSearch(base,index,cfg).search(request)
+    assert result['record_selection']['status']=='matched'
+    assert [h['record'] for h in result['evidence']]==[h['record'] for h in hits]
+    assert len(calls)==1 and result['generation']=='not_called'
