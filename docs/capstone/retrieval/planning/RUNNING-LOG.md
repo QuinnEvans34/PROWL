@@ -1929,3 +1929,17 @@ navigation checked on the already visible general question. Backend/ranking/corp
 retrieval or generation call. Spec1.20 records plain-language synthesis as remaining AI-04 requirement;
 this visual improvement does not close that quality gate. Original receipts preserved. No human hours
 inferred. Screenshot retained locally as live-search-20261017/reading-view.jpg.
+
+
+## 2026-10-17: Local natural-answer preview
+
+User explicitly requests local AI formulation from evidence. Added separate development synthesis
+contract/endpoint, pinned Qwen3:30b reasoning, structured cited paragraphs plus exact-quote/numeric
+checks and separate model review, answer-first UI and source fallback. Spec1.21 records sequencing
+amendment; formal acceptance unchanged. Five bounded exposed smoke candidates (25case attempts)
+retained; v1/v3 model-reviewed factual/citation errors and v4 relevance problems were not promoted.
+Finalv5 yields a concise size answer; four other cases rejected, including false failures. Same-model
+review is not independent validation.76Python/30UIchecks/build pass; initial fixture setup failure
+retained. New live service session48296 on8016. See NATURAL-ANSWERS-2026-10-17.md for limitations,
+local trial artifacts and exact runtime bounds. AI-04 in progress; no formal quality completion,
+protected content/training/fullselector/newcorpus/modeldownload or inferred human hours.

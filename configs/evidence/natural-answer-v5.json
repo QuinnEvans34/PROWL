@@ -1,0 +1,15 @@
+{
+  "version": "natural-literature-answer-v5",
+  "model": "qwen3:30b",
+  "model_sha256": "ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226",
+  "prompt_sha256": "0ff24d0df2d667568108378aeb688e34eaf50bb90c2b586f5f9e084556cd79d0",
+  "calls_per_request_max": 2,
+  "call_timeout_seconds": 60,
+  "think": true,
+  "num_ctx": 8192,
+  "num_predict": 4096,
+  "temperature": 0,
+  "seed": 42,
+  "retries": 0,
+  "quality": "development_unvalidated"
+}

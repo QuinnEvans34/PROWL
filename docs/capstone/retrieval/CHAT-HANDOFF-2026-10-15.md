@@ -1,5 +1,18 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 natural-answer development preview:** Quinton explicitly requests local AI synthesis
+> now; spec1.21 records sequencing amendment without relaxing formal acceptance. Read
+> NATURAL-ANSWERS-2026-10-17.md. New /literature-search/answer uses pinned Qwen3:30b reasoning,
+> one draft + one review, exact retrieved quotes/numeric checks, no generation retry. UI Answer first,
+> citations/Sources and original passages; invalid/unavailable generation preserves evidence fallback.
+> Old /query remains excerpts-only.76Python/30UIchecks/build pass. Five candidates/25exposed smoke
+> cases retained; earlier mechanically passed but semantically poor drafts NOT promoted. v5 yields
+> concise size answer; four other cases rejected, including false failures. Development preview is
+> not AI-04 quality acceptance; same-model review is fallible. Server restarted in owned session48296
+> on8016; check current state before restart. No protected content, training/fullselector, newcorpus,
+> download, automatic query persistence or humanhours. Next improve retrieval/answer reliability and
+> reconcile labels/independent evaluation; required measurement extension remains after core.
+
 > **October 17 text-first UI refinement:** spec1.20 records Quinton's preference for a clear text
 > response and separate Sources access. Live search displays original paragraphs immediately;
 > numbered source buttons focus/open matching citation/excerpt in a separate view.22UIchecks/build

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
+import answerConfig from '../../../configs/evidence/natural-answer-v5.json'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -30,11 +31,34 @@ export function validateSearch(result, request) {
   return result
 }
 
+export function validateAnswer(result, request) {
+  if (result?.schema_version !== 'prowl-development-answer-response-v1'
+      || !['not_called', 'completed', 'unavailable'].includes(result.generation)) throw new Error('Invalid answer envelope')
+  validateSearch({ ...result, schema_version: 'prowl-development-search-response-v1', generation: 'not_called', answer: null }, request)
+  if (result.generation !== 'completed') {
+    if (result.answer !== null || (result.generation === 'unavailable' && result.state !== 'evidence_unassessed')
+      || (result.generation === 'not_called' && result.state === 'evidence_unassessed')) throw new Error('Invalid answer state')
+    return result
+  }
+  const a = result.answer
+  if (result.state !== 'evidence_unassessed' || !a || !['summarized', 'insufficient'].includes(a.status)
+    || a.model !== answerConfig.model || a.model_sha256 !== answerConfig.model_sha256 || a.policy !== answerConfig.version
+    || a.prompt_sha256 !== answerConfig.prompt_sha256 || a.validation !== 'exact_quotes_and_model_review'
+    || a.quality !== 'development_unvalidated' || !Array.isArray(a.claims) || a.claims.length > 3
+    || (a.status === 'insufficient') !== (a.claims.length === 0)
+    || !a.claims.every(c => typeof c.text === 'string' && c.text.trim().length > 0 && c.text.length <= 900
+      && Array.isArray(c.citations) && c.citations.length >= 1 && c.citations.length <= 2
+      && new Set(c.citations.map(x => x.rank)).size === c.citations.length
+      && c.citations.every(x => Number.isInteger(x.rank) && typeof x.quote === 'string' && x.quote.length >= 20
+        && result.evidence.find(e => e.rank === x.rank)?.record.text.includes(x.quote)))) throw new Error('Invalid cited answer')
+  return result
+}
+
 export async function searchLiterature(request, signal) {
-  const response = await fetch('/literature-search/query', { method: 'POST',
+  const response = await fetch('/literature-search/answer', { method: 'POST',
     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request), signal })
   if (!response.ok) throw new Error('Search unavailable')
-  return validateSearch(await response.json(), request)
+  return validateAnswer(await response.json(), request)
 }
 
 export default function LiteratureSearchPanel({ search = searchLiterature }) {
@@ -52,10 +76,10 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
     if (!question.trim() || active.current) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
-    const timeout = setTimeout(() => control.abort(), 45000)
+    const timeout = setTimeout(() => control.abort(), 165000)
     setPhase('loading'); setResult(null)
     try {
-      const response = validateSearch(await search(request, control.signal), request)
+      const response = validateAnswer(await search(request, control.signal), request)
       if (active.current === control && !control.signal.aborted) { setResult(response); setPhase('done') }
       else if (active.current === control) setPhase('error')
     } catch { if (active.current === control) setPhase('error') }
@@ -64,29 +88,29 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
   return <section className="guided-evidence literature-search" aria-labelledby="literature-search-title">
     <h2 id="literature-search-title">Search pancreatic literature</h2>
     <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
-    <p className="literature-search__notice">Development search · Source excerpts, not generated answers. Use general questions; do not enter patient information.</p>
+    <p className="literature-search__notice">Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.</p>
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
       <textarea id="literature-question" rows={3} maxLength={500} value={question}
         placeholder="What imaging findings help distinguish pancreatitis from pancreatic cancer?"
         onChange={e => change(e.target.value)} />
       <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading'}>{phase === 'loading' ? 'Searching…' : phase === 'error' ? 'Retry search' : 'Search literature'}</button>
+        <button type="submit" disabled={!question.trim() || phase === 'loading'}>{phase === 'loading' ? 'Writing answer…' : phase === 'error' ? 'Try again' : 'Ask question'}</button>
         {phase === 'loading' && <button type="button" onClick={() => change(question)}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
     </form>
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {phase === 'loading' && <p>Searching the local literature collection…</p>}
+      {phase === 'loading' && <p>Finding evidence and writing a source-checked answer with the local model…</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
-        <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : 'Retrieved passages'}</h3>
+        <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.generation === 'completed' ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
-          : 'Original text from the search results, shown in ranked order. These passages have not yet been combined into an AI answer.'}</p>
-        {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} />}
+          : result.generation === 'completed' ? 'Written by the local AI using the sources below. Check the citations; this is a development preview.' : 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
+        {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
-          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · Exact dense search · No generated answer</p>
+          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · Exact dense search · Local Qwen3 answer model</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
         </details>}
       </article>}
@@ -95,8 +119,8 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
   </section>
 }
 
-function LiteratureReadingView({ evidence }) {
-  const [view, setView] = useState('reading')
+function LiteratureReadingView({ evidence, answer }) {
+  const [view, setView] = useState(answer ? 'answer' : 'reading')
   const [selected, setSelected] = useState(null)
   const sources = useRef({})
   useEffect(() => {
@@ -104,10 +128,17 @@ function LiteratureReadingView({ evidence }) {
   }, [view, selected])
   return <div className="literature-search__reading-view">
     <div className="literature-search__view-switch" role="group" aria-label="Result view">
+      {answer && <button type="button" aria-pressed={view === 'answer'} onClick={() => setView('answer')}>Answer</button>}
       <button type="button" aria-pressed={view === 'reading'} onClick={() => setView('reading')}>Read passages</button>
       <button type="button" aria-pressed={view === 'sources'} onClick={() => { setSelected(null); setView('sources') }}>Sources ({evidence.length})</button>
     </div>
-    {view === 'reading' ? <div className="literature-search__prose" aria-label="Retrieved text">
+    {view === 'answer' ? <div className="literature-search__prose" aria-label="AI answer">
+      {answer.status === 'insufficient' && <p>I couldn’t find enough directly relevant evidence in these sources to answer your question.</p>}
+      {answer.claims.map((c, i) => <div className="literature-search__passage" key={i}>
+        <p>{c.text}{' '}{c.citations.map(x => <button key={x.rank} type="button" className="literature-search__reference"
+          aria-label={`View source ${x.rank}`} onClick={() => { setSelected(x.rank); setView('sources') }}>[{x.rank}]</button>)}</p>
+      </div>)}
+    </div> : view === 'reading' ? <div className="literature-search__prose" aria-label="Retrieved text">
       {evidence.map(({ rank, record: r }) => <div className="literature-search__passage" key={r.passage.passage_id}>
         <p>{r.text}</p>
         <button type="button" className="literature-search__reference" aria-label={`View source ${rank}`}

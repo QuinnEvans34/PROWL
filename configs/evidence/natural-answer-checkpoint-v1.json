@@ -1,0 +1,553 @@
+{
+  "version": "prowl-natural-answer-checkpoint-v1",
+  "parent_commit": "e591a318815db3847e68dce0516808d19e3da53c",
+  "verification": {
+    "state": "local_synthesis_preview_verified_quality_incomplete",
+    "python_tests_passed": 76,
+    "ui_tests_passed": 30,
+    "build": "passed_with_existing_large_chunk_warning",
+    "candidate_smoke_attempts": 25,
+    "trial_model_calls": 41,
+    "browser_answer_and_citation_verified": true,
+    "browser_additional_model_calls": 2,
+    "browser_errors_observed": 0,
+    "clinical_or_formal_quality_accepted": false,
+    "protected_content_accessed": false,
+    "trials": [
+      {
+        "path": "outputs/prowl/natural-answers-20261017/actual-1.json",
+        "case": "actual-1",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 10.072128458996303,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/actual-2.json",
+        "case": "actual-2",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 1.2686924579320475,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/actual-average.json",
+        "case": "actual-average",
+        "error": null,
+        "model_calls": 2,
+        "elapsed_seconds": 4.626976958010346,
+        "mechanical_model_review_passed": true
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/invented-injection.json",
+        "case": "invented-injection",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 0.5077612079912797,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/invented-irrelevant.json",
+        "case": "invented-irrelevant",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 0.630210333969444,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/revised/actual-1.json",
+        "case": "actual-1",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 6.89660279196687,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/revised/actual-2.json",
+        "case": "actual-2",
+        "error": "ValueError: Invalid status",
+        "model_calls": 1,
+        "elapsed_seconds": 5.243571209022775,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/revised/actual-average.json",
+        "case": "actual-average",
+        "error": "ValueError: Invalid status",
+        "model_calls": 1,
+        "elapsed_seconds": 5.6035230830311775,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/revised/invented-injection.json",
+        "case": "invented-injection",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 5.748502041911706,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/revised/invented-irrelevant.json",
+        "case": "invented-irrelevant",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 3.9782635420560837,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-1.json",
+        "case": "actual-1",
+        "error": "ValueError: Invalid citation",
+        "model_calls": 1,
+        "elapsed_seconds": 3.307560959015973,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-2.json",
+        "case": "actual-2",
+        "error": "ValueError: Incomplete or foreign generation",
+        "model_calls": 2,
+        "elapsed_seconds": 25.24040441692341,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-average.json",
+        "case": "actual-average",
+        "error": null,
+        "model_calls": 2,
+        "elapsed_seconds": 13.889909959048964,
+        "mechanical_model_review_passed": true
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/contract-corrected/invented-injection.json",
+        "case": "invented-injection",
+        "error": "ValueError: Incomplete or foreign generation",
+        "model_calls": 2,
+        "elapsed_seconds": 22.43675341596827,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/contract-corrected/invented-irrelevant.json",
+        "case": "invented-irrelevant",
+        "error": "ValueError: Unsupported average terminology",
+        "model_calls": 1,
+        "elapsed_seconds": 2.1845954169984907,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-1.json",
+        "case": "actual-1",
+        "error": "ValueError: Invalid citation",
+        "model_calls": 1,
+        "elapsed_seconds": 3.659314875025302,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-2.json",
+        "case": "actual-2",
+        "error": "ValueError: Number absent from cited quotes",
+        "model_calls": 1,
+        "elapsed_seconds": 3.5712309589143842,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-average.json",
+        "case": "actual-average",
+        "error": null,
+        "model_calls": 2,
+        "elapsed_seconds": 7.533574541914277,
+        "mechanical_model_review_passed": true
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/final-candidate/invented-injection.json",
+        "case": "invented-injection",
+        "error": "ValueError: Source support review rejected",
+        "model_calls": 2,
+        "elapsed_seconds": 2.711231250083074,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/final-candidate/invented-irrelevant.json",
+        "case": "invented-irrelevant",
+        "error": null,
+        "model_calls": 2,
+        "elapsed_seconds": 1.4418791249627247,
+        "mechanical_model_review_passed": true
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-1.json",
+        "case": "actual-1",
+        "error": "ValueError: Number absent from cited quotes",
+        "model_calls": 1,
+        "elapsed_seconds": 6.102356957970187,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-2.json",
+        "case": "actual-2",
+        "error": "ValueError: Incomplete or foreign generation",
+        "model_calls": 2,
+        "elapsed_seconds": 57.74937345797662,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-average.json",
+        "case": "actual-average",
+        "error": null,
+        "model_calls": 2,
+        "elapsed_seconds": 42.17570045799948,
+        "mechanical_model_review_passed": true
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/reasoning/invented-injection.json",
+        "case": "invented-injection",
+        "error": "ValueError: Number absent from cited quotes",
+        "model_calls": 1,
+        "elapsed_seconds": 6.898906624992378,
+        "mechanical_model_review_passed": false
+      },
+      {
+        "path": "outputs/prowl/natural-answers-20261017/reasoning/invented-irrelevant.json",
+        "case": "invented-irrelevant",
+        "error": "ValueError: Invalid claim",
+        "model_calls": 1,
+        "elapsed_seconds": 21.585084291989915,
+        "mechanical_model_review_passed": false
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "configs/evidence/evaluation/public-exposure-natural-answers-v1.json",
+      "bytes": 1301,
+      "sha256": "a78936bfc83b3aaafb465304428e536f04711eebd0836c869b22a4bfa7690b62"
+    },
+    {
+      "path": "configs/evidence/natural-answer-v5.json",
+      "bytes": 454,
+      "sha256": "ba6a3ae94ee07ff271c3919d9c8e8d3ab098e317e2d3a3106335aa74dbd5e76e"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "bytes": 32887,
+      "sha256": "ca9dc23d7245a903ce63edee05051a2f0a497bef8a683ff19088c6fbcb2988eb"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "bytes": 55860,
+      "sha256": "04a0e091528efa16f47b73162483f25d711d096fe4a1d4cda18e862a0934d3a7"
+    },
+    {
+      "path": "docs/capstone/retrieval/LIVE-DEVELOPMENT-SEARCH-2026-10-17.md",
+      "bytes": 7385,
+      "sha256": "0e146057dc6f1d93134627b2cd0a59846afb36cf3f99dba2c40259ae707161fb"
+    },
+    {
+      "path": "docs/capstone/retrieval/NATURAL-ANSWERS-2026-10-17.md",
+      "bytes": 7484,
+      "sha256": "fc02c900f0713f138b73e5acf53db360b9af86e62f02c89b7756058b6eec92a7"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "bytes": 113884,
+      "sha256": "849e0b3edb14dde19966d72570f7890d8bfb54edd297e48bf24827e30ef04325"
+    },
+    {
+      "path": "scripts/serve_literature_search.py",
+      "bytes": 6111,
+      "sha256": "28dd2186be3cc496502f57e4c6d17b73542f5d63c956a0f7e25935c5aaf7d7f8"
+    },
+    {
+      "path": "src/retrieval/natural_answer.py",
+      "bytes": 10365,
+      "sha256": "f0122f55bef2a248d0f9a037770042f2cb0eca63a01f76e25cb2dfc6d5d1f454"
+    },
+    {
+      "path": "tests/retrieval/test_natural_answer.py",
+      "bytes": 4746,
+      "sha256": "a5d25939d4e76e493dba373c3479a0544ac70e3d51791be5f8a0db2016fc9406"
+    },
+    {
+      "path": "ui/src/components/LiteratureSearchPanel.jsx",
+      "bytes": 11715,
+      "sha256": "37d40cdee7bf18a36c5c6835cd5c68d43b4cc6bb16defb27353f3760c41880e2"
+    },
+    {
+      "path": "ui/tests/LiteratureSearchPanel.test.jsx",
+      "bytes": 8820,
+      "sha256": "085acd000d327cd989095840273dc45ed7c8b7d94f7c05661621cef81cc7dbe4"
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": "outputs/prowl/natural-answers-20261017/actual-1.json",
+      "bytes": 17830,
+      "sha256": "7cb43935df19baa010f6c578cfd7eb0f80d3c52a604a2f4ed2425ca018c0ba5e"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/actual-2.json",
+      "bytes": 12890,
+      "sha256": "9ea0e4dfac25a2499019fb390b3e188ed8d2455613974323bcbd315ea9098f75"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/actual-average.json",
+      "bytes": 16948,
+      "sha256": "cc5acd1c61de730fee69ebee202f2a3f7e164551de3edf14f5f66d972f0ce924"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/candidate-v1.py",
+      "bytes": 7678,
+      "sha256": "0e9701178c03d843894282012db7986242027ac9e59e0814a627b8568e07e1c3"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/candidate-v2.py",
+      "bytes": 9555,
+      "sha256": "84b13a00df8e67c1df06bd46a0bac3f24fa99e1113b5a6ce6569e60e6435445f"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/candidate-v3.py",
+      "bytes": 9607,
+      "sha256": "1976658c021d3c76d10de97af3c6331fd31ad620fc019cc78c61dcb6a904df92"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/candidate-v4.py",
+      "bytes": 10386,
+      "sha256": "e432c7a94f7343b297eb88fc9c8371f774d89699a00f2d9aeb84e9e9b1dc2aed"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/checkpoint.py",
+      "bytes": 2914,
+      "sha256": "1bc97e0b790ad70000df547387ef7713b237823a4605cd80482235036002fedb"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-1.json",
+      "bytes": 10988,
+      "sha256": "eb218e190937af2166d8e1b5d332060121c1b477fb204619993a78e1c2143a2d"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-2.json",
+      "bytes": 25818,
+      "sha256": "1d10c86d5b3e6feed653ba4b236f8fc74bcc1d18c17dede1117c11814b798abc"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/actual-average.json",
+      "bytes": 22363,
+      "sha256": "97c5b24698be593cb41d611512af35963d0983f42d5757d6300cee788501d5e1"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/frozen-cases.json",
+      "bytes": 50222,
+      "sha256": "fcba61fc6512023e619223ce8a2bd7299dbb01ccb019b6aa6cc906fd4b962cd8"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/invented-injection.json",
+      "bytes": 20201,
+      "sha256": "e84798f68918566e948fa6d686b84e95b437f8a10842a8157c303a4a8acb35d1"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/contract-corrected/invented-irrelevant.json",
+      "bytes": 7312,
+      "sha256": "f645e034da3ec5002385971cb636ebee4d678785ca25c6b88201a4f4e484ee93"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-1.json",
+      "bytes": 11386,
+      "sha256": "f2335c4582339a6c9cb3c980101d8c9695d9b746f2a81e4b416d444d7b31b90d"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-2.json",
+      "bytes": 10265,
+      "sha256": "82e42c2e8a5ef1100c450f569266bc232742556117e2ea98ae4f17ed24322974"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/actual-average.json",
+      "bytes": 19555,
+      "sha256": "be2b301a9e1d926ed6dc7079b75fc46e77c390a64ad8e8197c968f027a4a23d3"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/frozen-cases.json",
+      "bytes": 50222,
+      "sha256": "3835349c2f40831dbeabf9312c3c33f174e1c27c1c8cd114407514ac73568987"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/invented-injection.json",
+      "bytes": 11600,
+      "sha256": "8a4f66528e80feb104bb01fd69c574a19b010f1d7baee987b416b277e9d605f2"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/final-candidate/invented-irrelevant.json",
+      "bytes": 10996,
+      "sha256": "9e58383584deb1cc3a3bf7b4dd3a782d859d70819b50150aa81cbd3ac63410f5"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/frozen-cases.json",
+      "bytes": 50222,
+      "sha256": "00292df1197215e63f4eed4ba854be8e972632b625d0a9577493540ac534bbf0"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/invented-injection.json",
+      "bytes": 8708,
+      "sha256": "a32234d35c34b33c69a12b81ffc4b376cb3befeb84285037d14d66b92b18c27a"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/invented-irrelevant.json",
+      "bytes": 8500,
+      "sha256": "3cb6ae4b06b30b515043585c6e437857d8398bff730f5388636d8f4764777b82"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/live-answer.jpg",
+      "bytes": 78364,
+      "sha256": "311dd5267ad49499181839e683754ecbb2183c393d14548d88afc165284d8ee3"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/natural-answer-v2.json",
+      "bytes": 345,
+      "sha256": "e236a35be5dfa3372b723b8219058af9cdd688a0986de5885c0cd01fce086c66"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/natural-answer-v3.json",
+      "bytes": 345,
+      "sha256": "a3b873582cc75d48a8b23ce112584e3520a9cfd44a41b491a81acbfb85d1ca0a"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/natural-answer-v4.json",
+      "bytes": 345,
+      "sha256": "9e3fe67bb33c6c3627e60e7eaba89e6aa7b202d7b17f1f22fd1dc8bb1295d419"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-1.json",
+      "bytes": 12676,
+      "sha256": "66cf469a7a1354d23ae1e6b80098f170fdf45a56588dbffcc8d4ae196eb440b3"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-2.json",
+      "bytes": 36959,
+      "sha256": "af20e3afb3de4b171631064ba2184b939c05550ad19b4f5be0e977beeeb77a8d"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/actual-average.json",
+      "bytes": 30828,
+      "sha256": "508bf0f224f06ca4491f8a5bda7bb8f9a21eed4ad6d3c096576c4ad7fbff11be"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/frozen-cases.json",
+      "bytes": 50222,
+      "sha256": "33c98166fac4e39ae3792f5bbfe60128ca5b7c6cef8400de93c7b385dd2be411"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/invented-injection.json",
+      "bytes": 9284,
+      "sha256": "d71dc67945c9c8f3956b21badcba17d3598a29af7f49c70a06c168a5d7eb4b46"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/reasoning/invented-irrelevant.json",
+      "bytes": 14881,
+      "sha256": "22cd7e3bba86f9ff9638cca06ef6f5eac9367eec0f49fd1697551d1e451dc3ae"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/actual-1.json",
+      "bytes": 19713,
+      "sha256": "038fee7fcd53ca6bfabd3fabe9ff005f9fbd86ac00106d791878a8856dbc9734"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/actual-2.json",
+      "bytes": 10635,
+      "sha256": "56dfd41c37768aeaac93048acc40c9619776d5d571a80cbef351a237d4244847"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/actual-average.json",
+      "bytes": 10770,
+      "sha256": "2681c65fcde593844e4fe750a2838acea076a588ab25ae701f5ad4b2c5ee4870"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/frozen-cases.json",
+      "bytes": 50222,
+      "sha256": "a27246f7dc53ce319823f5a4d6635ec3e1c74ba2560669b639958ea6bef3530e"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/invented-injection.json",
+      "bytes": 12993,
+      "sha256": "f86001eacc2d732b400477a58ef07873a518b37e895a8ae69c388dc073d316aa"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/revised/invented-irrelevant.json",
+      "bytes": 12074,
+      "sha256": "1213d1a1405a2a8c637add451b23f8660aaec2b0718aaeec29680852915f807b"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/smoke-contract.py",
+      "bytes": 2342,
+      "sha256": "a78aafa54be12566a4b735907d9028b132838f13162ad7afa35e2dc724c59c45"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/smoke-final.py",
+      "bytes": 2339,
+      "sha256": "40cd3a8d50f3f9121219d121de404311595136a2f9035e6e7cd201a3c8dd50e4"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/smoke-reasoning.py",
+      "bytes": 2333,
+      "sha256": "40b0729c7af8746a35a0992f558004664266332b9f535bca086b373edcf9377d"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/smoke-revised.py",
+      "bytes": 2331,
+      "sha256": "59a181b27545143cd54410465ca3b2fdfec6cfba4d2303d5faa141a314abd2bd"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/smoke.py",
+      "bytes": 2298,
+      "sha256": "c3b611107cf0e7a67d310783421c4786f8c2347208bb66bd67e718755bee4b1f"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-01.xml",
+      "bytes": 13073,
+      "sha256": "053851237ac44f4accdd55ecdb8fcd95ad75a71c36a5e71a4f6f24a0143a695b"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-02.xml",
+      "bytes": 10663,
+      "sha256": "db6a184928f390eb0eee4cb80c4a04397ea8ce6f634845ce2b7c609901eb5c01"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-03.xml",
+      "bytes": 2461,
+      "sha256": "b2c94105c9376ff6eddece74fea950ecf5e292672d6f520491d82dd938b582f7"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-04.xml",
+      "bytes": 2461,
+      "sha256": "00a231fb78602ae56e29febbdefec5412e4314251961109fac230e62582e3fad"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-05.xml",
+      "bytes": 2582,
+      "sha256": "5ed211bf6211f78651c115e7a55966b5ba73e061c27f2fea6947b464dbfc1cee"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/tests-final.xml",
+      "bytes": 10922,
+      "sha256": "3584360bd39862aaf2a00b4c7cf323c4b8c46d709cffd8d1d6b6b1e9c8dfab1a"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/ui-build.log",
+      "bytes": 1432,
+      "sha256": "749be7e493beadbb71ec5f2acb933e45a6184a923b3398bdf4130c8bafb69200"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/ui-tests.xml",
+      "bytes": 5603,
+      "sha256": "360f431b69b200cfe991f14134653e0490b106069419949f9f548f694994d88d"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/verification.json",
+      "bytes": 7835,
+      "sha256": "9afdce521c28bd7a5ec9543432942bf5af84b8133165e6d93f2b223a081c7276"
+    },
+    {
+      "path": "outputs/prowl/natural-answers-20261017/write-config.py",
+      "bytes": 581,
+      "sha256": "2bcd2b84a3383fe5c4754df4d19b5b43ceaae42c820aa7f079342b99d5cbdbda"
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Live development literature search
 
+> Later October17 update: [natural-answer development preview](NATURAL-ANSWERS-2026-10-17.md)
+> now supplies a separate /answer endpoint and answer-first UI under explicit user authorization.
+> The original /query behavior and the source-search observations below are preserved history.
+
 October 17, 2026 — delivered and verified in the local browser. [AI-09](https://trello.com/c/AcXlKWQg).
 
 Quinton explicitly authorizes: “Continue autonomously until I can type a literature question and

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Opt-in loopback development search; fixed corpus/config, no generation or query storage."""
+"""Loopback development literature search and local cited summaries; no query storage."""
 import argparse
 import json
 from pathlib import Path
@@ -12,6 +12,7 @@ from src.retrieval.corpus_inventory import database_inventory
 from src.retrieval.direct_ingestion import search
 from src.retrieval.literature_adapter import FrozenLiterature
 from src.retrieval.development_search import DevelopmentSearch
+from src.retrieval.natural_answer import NaturalAnswerService
 from src.retrieval.records import canonical_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +56,7 @@ def create_service(config_path):
 
 
 def handler_for(service):
+    answers = NaturalAnswerService(service)
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
             super().setup(); self.connection.settimeout(10)
@@ -83,11 +85,13 @@ def handler_for(service):
         def do_GET(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
             if self.path != '/literature-search/health': return self.reply(404, {'error':'Unknown route.'})
-            self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection']})
+            self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection'],
+                'answer_policy':'natural-literature-answer-v5'})
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
-            if self.path != '/literature-search/query': return self.reply(404, {'error':'Unknown route.'})
+            if self.path not in {'/literature-search/query', '/literature-search/answer'}:
+                return self.reply(404, {'error':'Unknown route.'})
             try:
                 size = int(self.headers.get('Content-Length','0'))
                 if (not 0 < size <= 4096 or self.headers.get('Content-Type') != 'application/json'
@@ -100,7 +104,7 @@ def handler_for(service):
             except (ValueError, TypeError, KeyError, UnicodeError, OSError):
                 return self.reply(400, {'error':'Use a general literature question of 1–500 characters.'})
             try:
-                result = service.search(request)
+                result = answers.answer(request) if self.path.endswith('/answer') else service.search(request)
             except Exception:
                 return self.reply(503, {'error':'Literature search unavailable. Check the service and drive, then retry.'})
             self.reply(200, result)

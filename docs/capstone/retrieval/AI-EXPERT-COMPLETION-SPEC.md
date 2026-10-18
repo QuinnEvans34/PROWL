@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.20 — October 17, 2026 (text-first reading and source navigation)\
+**Version:** 1.21 — October 17, 2026 (local natural-answer development preview)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search is delivered under the user-authorized sequencing amendment; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
@@ -46,6 +46,13 @@ This is presentation only. AI-04 must deliver the remaining concise plain-langua
 short direct response, claim-level source references, optional technical detail, explicit missing
 information, and no unsupported inference. The local embedding model already powers search;
 Ollama generation remains absent from this new endpoint. Existing summary/evaluation gates remain.
+
+October 17 synthesis amendment: Quinton explicitly asks the local AI to formulate human-readable
+answers from retrieved evidence now. [Natural-answer development](NATURAL-ANSWERS-2026-10-17.md)
+adds an ephemeral local Qwen3 draft/review path and answer-first UI under a separate development
+contract. This supersedes the earlier generation sequencing for this preview only. Frozen retrieval,
+protected evaluation and formal AI-04 acceptance remain open; engineering checks and model self-review
+cannot certify factual correctness. Original gates and prior rejected trials remain preserved.
 
 ## 1. Outcome and authority
 
@@ -171,7 +178,7 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 4b | Build pancreatitis/cancer reference sources — [AI-08](https://trello.com/c/HmDLnOYF) | [Source qualification and exact rebuild](DISEASE-REFERENCE-CORPUS-2026-10-17.md); preserve accepted baseline | **Complete — source slice; product integration pending** |
 | 5 | Author, adjudicate and freeze the evaluation set — [AI-03](https://trello.com/c/NctoNxr8) | 30 development + 30 protected held-out questions, complete labels and second consistency pass | **In progress — development review complete; independent protected authoring/freeze pending** |
 | 6 | Measure and select retrieval — [W06-02](https://trello.com/c/zDFlThwi) | Development lexical/dense/hybrid comparison and frozen selection with D-202 disposition | Queued after 5 |
-| 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Queued after 6 |
+| 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Development preview implemented by explicit amendment; formal qualification remains after 6 |
 | 8 | Connect finding → question → evidence in the viewer — [W07-01](https://trello.com/c/IM0zPvP9) | Browser-tested finding/context/citation flow and all failure states | Queued after 7 disposition |
 | 9 | Run protected core acceptance and package the baseline — [W08-01](https://trello.com/c/s827dTBE), [W07-02](https://trello.com/c/cfVFZT2a) | Frozen held-out report, final integration/recovery evidence, walkthrough and operator handoff | Queued after 8; all release dependencies required |
 | 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Required; queued after accepted core Step 9 |
