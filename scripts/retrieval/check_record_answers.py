@@ -1,5 +1,6 @@
 """One bounded, exposed end-to-end HTTP composition check; preserves raw local plans."""
 import hashlib
+import argparse
 import json
 from pathlib import Path
 import signal
@@ -31,6 +32,11 @@ def write(path,obj):
 
 
 def main():
+ global OUT
+ parser=argparse.ArgumentParser(description=__doc__)
+ parser.add_argument('--attempt',type=int,choices=(1,2),default=1)
+ args=parser.parse_args()
+ if args.attempt==2:OUT=ROOT/'outputs/prowl/record-answer-v1-attempt2-20261018'
  OUT.mkdir(exist_ok=True)
  if (OUT/'receipt.json').exists():raise ValueError('Attempt already exists')
  start=monotonic();receipt=dict(state='started',cases=[],chat_attempts=0,chat_responses=0);server=None;worker=None

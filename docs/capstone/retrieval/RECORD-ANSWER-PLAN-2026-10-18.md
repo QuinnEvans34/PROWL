@@ -57,3 +57,10 @@ claim. Report the bounded nature and coverage tradeoff. Update spec/handoff/AI-0
 Initial test attempt:79pass/1fail because the invented fixture accidentally shared its citation object
 with its expected source. Corrected fixture copies that object; the actual immutable canonical path
 was not implicated. Added provider-shape checks. Subsequent80Python/47UI checks pass before live run.
+
+Attempt1 stopped at startup before HTTP/model work: PostgreSQL closed the connection during
+`pg_database_size`;0chat calls/0cases/8.166s. Logs show one backend exit2 and automatic PostgreSQL
+recovery, not a container restart or reported OOM. Cause is unproven; similar earlier events retained.
+Fresh read-only size/inventory/floor checks pass after recovery. Keep the original receipt/log/snapshots.
+Add explicit attempt2 output namespace only; same cases/model/prompts/criteria, no generation from
+attempt1 to tune against. This is a service-recovery continuation, not a model/prompt sweep.
