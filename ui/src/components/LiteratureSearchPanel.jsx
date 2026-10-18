@@ -163,7 +163,7 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
       </div>
     </form>
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {phase === 'loading' && <p>{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'Local AI generation has a 60-second limit after retrieval.'}</p>}
+      {phase === 'loading' && <p>{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'You can cancel while the local model works.'}</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
         <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>

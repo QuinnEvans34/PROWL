@@ -1,5 +1,26 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 readable record answers ACTIVE:** Read RECORD-ANSWER-RESULTS-2026-10-18.md/spec1.35.
+> a479c74 adds source-record-answer-v1: Qwen3:8b pinned500a1f06 on originalOllama11434 chooses reviewed
+> sentence variants/paragraphs; exact complete fact/citation coverage checked in backend and UI. This
+> is constrained composition, not unrestricted prose.20wordings/10units/15facts/3disease records;
+> no exact-question table. Outside record coverage now sources-only; model failures explicitly labeled
+> application-source summaries. Source admission still failclosed. Original server modes retained.
+> Attempt1 DB startup exit2 before HTTP/model calls,8.166s; recovered automatically/no containerrestart/
+> reportedOOM; size43,022,003B/inventory1179verified. Cause unproven, recurring reliability follow-up.
+> 3cab23f retains recovery attempt2:8HTTP/4chat/4responses/25.148s;3AI/1formatfallback/4nogeneration,
+> original7/8gate FAILED.586d860 normalizes adjacent valid paragraph breaks AFTER complete-unit checks;
+> 4/4exact retained plans qualify with0newcalls, all10paragraphs manually source-reviewed. Independent
+> review pending.81Python/47UI/buildpass. Two fresh browser requests(originalcomparison/head) show AI
+> answers with7/4sources; source6CTphase/duct/atrophy navigation verified. Six actual composition calls.
+> Active8016PID38141/ownedexec83863 --record-answers; old25716/session35480reaped143. Harness8017closed;
+> no11435launch/download/training/fullselector/protecteddata/hours. Do not rerun completedcanary.
+> Evidence outputs/prowl/record-answer-v1-20261018/failed; -attempt2-20261018/actuals/format-correction/
+> receipts/readable-review/screenshots/promotion. SharedUIbranch/otherchat70ad7a2 preserved; publish only
+> our scoped changes onto codex/retrieval-record-search via temporaryindex, no checkout switch/reset.
+> Next volume adapter/broader evidence+intent coverage and DB reliability; AI-04/formal independent
+> evaluation/measurement extension remain open. Older source-only/legacy selected statuses historical.
+
 > **October18 record search ACTIVE / answer integration pending:** User approved retrieval and free-text
 > selection. Read RECORD-SEARCH-RESULTS-2026-10-18.md/spec1.34. Implementation03a976c adds lexical
 > reviewed-record index, bounded English topic grammar, canonical context expansion and Find sources UI.
