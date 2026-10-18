@@ -1,0 +1,72 @@
+{
+  "state": "prepared",
+  "cases": [
+    {
+      "id": "quality-01",
+      "question": "Could the size of the pancreas head indicate any specific diseases?",
+      "retrieved_sources": 5,
+      "curated_sources": 4,
+      "curated_passages_in_top5": 0
+    },
+    {
+      "id": "quality-02",
+      "question": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+      "retrieved_sources": 5,
+      "curated_sources": 6,
+      "curated_passages_in_top5": 0
+    },
+    {
+      "id": "quality-03",
+      "question": "By volume, how large is the pancreas on average? Give a published example, with its limits.",
+      "retrieved_sources": 5,
+      "curated_sources": 3,
+      "curated_passages_in_top5": 1
+    }
+  ],
+  "search_calls": 3,
+  "live_health": {
+    "answer_policy": "natural-literature-answer-v6.1",
+    "collection": "research-disease-v1",
+    "mode": "local_development_excerpts"
+  },
+  "input_pins": [
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-01-curated_flat-input.json",
+      "sha256": "e3c2cbbdbaa3bec23025e21ed09dcd5f0ffcd4f0fc490bb7f5a6e22510ab38df"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-01-curated_linked-input.json",
+      "sha256": "8797b53f001e5bff420888904b71670c88bcbd3a233fdf62ceccd1bb1b24d841"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-01-retrieved_flat-input.json",
+      "sha256": "ef099b539d33f94c9a8fcc2527974cf2c2f86319f127943b63164badce8dee3b"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-02-curated_flat-input.json",
+      "sha256": "ffe36184e60466298d8da36f05e39e3b6cc79058f43965018054a18ae210f09a"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-02-curated_linked-input.json",
+      "sha256": "43fe621cc6f05d22852d4ebeeb0ce53c42afda77182ba0da360b46d2506f3d16"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-02-retrieved_flat-input.json",
+      "sha256": "d1aa7741cac9f5e83135870f663d8751b3968e04208e4bf8eccee6d36824bc96"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-03-curated_flat-input.json",
+      "sha256": "7e79b75802782d37737ff32bbc9a03f2279728dec734c4252610da59c4d9acc9"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-03-curated_linked-input.json",
+      "sha256": "e08cf69ce566b55f81027c5262ad889228fd91de4d4aecc1190d919a5a7e93ce"
+    },
+    {
+      "path": "outputs/prowl/evidence-isolation-v1-20261018/quality-03-retrieved_flat-input.json",
+      "sha256": "32a5911f6068eb1c995fd2ecddaba8e8854b59c4f69c8f77068a0a661609ae9d"
+    }
+  ],
+  "local_artifact": "outputs/prowl/evidence-isolation-v1-20261018/preparation.json",
+  "interpretation": "Exact selected-passage overlap only; not semantic recall or proof of no useful retrieved evidence."
+}

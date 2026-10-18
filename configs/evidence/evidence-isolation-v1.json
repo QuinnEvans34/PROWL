@@ -1,0 +1,224 @@
+{
+  "version": "evidence-isolation-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "question_plan": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+  "model": "qwen2.5:14b",
+  "model_sha256": "7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6",
+  "prompt_sha256": "d551b37c12b0c4dce4c42a0c4df7f552aed130b5234341c88d329d488f0ffa83",
+  "cases": [
+    {
+      "id": "quality-01",
+      "passages": [
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 4,
+          "passage_id": "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+          "text_sha256": "940368d7d81cbeb10ab6c164d8980ff33cbed8963755da2a568bf4cac8fc704c"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 7,
+          "passage_id": "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+          "text_sha256": "694c5a10071c7e96a590241235561b8a42d810bc276b0604f6b7a0fcc5d793b7"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 9,
+          "passage_id": "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+          "text_sha256": "298d3f27ed8a4c0e19d73a1d8dc30c7cd1fcf55ff1dfd18814ab2794bb2242ad"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 37,
+          "passage_id": "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+          "text_sha256": "4f438b5172cf6545f220869a76e1fe0c90abe0b51666f2296343e1ff86eb3544"
+        }
+      ],
+      "evidence_links": [
+        {
+          "work_id": "work:pmid:32703312",
+          "roles": {
+            "finding": [
+              "P144",
+              "P147",
+              "P149"
+            ],
+            "qualification": [
+              "P177"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "quality-02",
+      "passages": [
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 0,
+          "passage_id": "psg:0c88e089da2e88095787c93df10b5d1bf4d1340214209768ee7dabfe3fedddfe",
+          "text_sha256": "231bf9e2349918b13f088a9696ad82c3907f50306e21830e24717b07abd12723"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 22,
+          "passage_id": "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66",
+          "text_sha256": "c14cdb60cdfdfe5d4f3bda5a81efaf10b580d5d50f8bd1b7b2942250a1a74707"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 24,
+          "passage_id": "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab",
+          "text_sha256": "a92f18e83dc4ac02f63ad1b45bce5598a5e70c5039a27ba23e4e44e7cb2bbc55"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 37,
+          "passage_id": "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+          "text_sha256": "4f438b5172cf6545f220869a76e1fe0c90abe0b51666f2296343e1ff86eb3544"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 39,
+          "passage_id": "psg:18d082ee8c55987c4eb9d2d4be785dfe351ab4815784a50136ddbf858188b7e0",
+          "text_sha256": "17a2895f9ed2b6269f0c04dda89479dfc95e4d9f59290a9d6a318e1b1fc478af"
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "ordinal": 44,
+          "passage_id": "psg:e4c0179d652101d690e5510e1df5befdb31d4aa50317759df2bc2ce50c872818",
+          "text_sha256": "38a8e1a98b5973c7e07b2ee12d3cd19c02d2b924cb9e74ec83c43962bd7c343f"
+        }
+      ],
+      "evidence_links": [
+        {
+          "work_id": "work:pmid:32703312",
+          "roles": {
+            "finding": [
+              "P162"
+            ],
+            "method": [
+              "P164"
+            ],
+            "qualification": [
+              "P177"
+            ]
+          }
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "roles": {
+            "finding": [
+              "P179"
+            ],
+            "qualification": [
+              "P177"
+            ]
+          }
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "roles": {
+            "finding": [
+              "P184"
+            ],
+            "method": [
+              "P184"
+            ],
+            "qualification": [
+              "P140",
+              "P177"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "quality-03",
+      "passages": [
+        {
+          "work_id": "work:pmid:25950180",
+          "ordinal": 2,
+          "passage_id": "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+          "text_sha256": "56dc1c9d68544dfabe6ab7b628ae7d0f8ce697d15d343346da949ff66a43db63"
+        },
+        {
+          "work_id": "work:pmid:25950180",
+          "ordinal": 27,
+          "passage_id": "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+          "text_sha256": "9bece7abd38c7bee4e32b8c66b27762ffa57762862c2d005f4f38c2d1cb55c29"
+        },
+        {
+          "work_id": "work:pmid:25950180",
+          "ordinal": 29,
+          "passage_id": "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7",
+          "text_sha256": "25d6948adc1284f4dcf0ab0b3288fee2e2bd3b7168ada0d176b4f76976355081"
+        }
+      ],
+      "evidence_links": [
+        {
+          "work_id": "work:pmid:25950180",
+          "roles": {
+            "finding": [
+              "P30"
+            ],
+            "population": [
+              "P3"
+            ],
+            "method": [
+              "P3"
+            ],
+            "statistic": [
+              "P28"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "arms": [
+    "retrieved_flat",
+    "curated_flat",
+    "curated_linked"
+  ],
+  "order": [
+    [
+      "retrieved_flat",
+      "curated_flat",
+      "curated_linked"
+    ],
+    [
+      "curated_flat",
+      "curated_linked",
+      "retrieved_flat"
+    ],
+    [
+      "curated_linked",
+      "retrieved_flat",
+      "curated_flat"
+    ]
+  ],
+  "options": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "num_predict": 1536
+  },
+  "budget": {
+    "chat_calls": 18,
+    "readiness_calls": 1,
+    "unload_calls": 1,
+    "call_seconds": 60,
+    "readiness_seconds": 120,
+    "batch_seconds": 1200,
+    "peak_owned_gib": 18,
+    "internal_floor_gib": 104,
+    "external_floor_gib": 408,
+    "output_bytes": 12582912
+  },
+  "review": "frozen_v22_support_only_no_gate_no_revision",
+  "promotion": false
+}
