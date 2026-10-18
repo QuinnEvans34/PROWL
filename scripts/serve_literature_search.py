@@ -55,7 +55,20 @@ def create_service(config_path):
     return DevelopmentSearch(corpus, spec, retrieve)
 
 
-def handler_for(service):
+def create_record_search(baseline):
+    from src.retrieval.record_search import RecordSearchIndex, RecordAwareSearch
+    from src.retrieval.evidence_experiment import corpus_records
+    spec = json.loads((ROOT/'configs/evidence/development-search-v3-records.json').read_text())
+    catalog = checked_json(spec['catalog'], ROOT)
+    review = checked_json(spec['review'], ROOT)
+    if catalog['manifest'] != spec['manifest']:
+        raise ValueError('Catalog/corpus mismatch')
+    index = RecordSearchIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
+    return RecordAwareSearch(baseline, index, spec)
+
+
+def handler_for(service, source_search=None):
+    source_search = source_search or service
     answers = NaturalAnswerService(service)
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
@@ -86,7 +99,8 @@ def handler_for(service):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
             if self.path != '/literature-search/health': return self.reply(404, {'error':'Unknown route.'})
             self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection'],
-                'answer_policy':POLICY})
+                'answer_policy':POLICY, 'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
+                'answer_retrieval_policy':service.config.get('retriever', 'dense-exact-cosine-v1')})
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
@@ -104,7 +118,7 @@ def handler_for(service):
             except (ValueError, TypeError, KeyError, UnicodeError, OSError):
                 return self.reply(400, {'error':'Use a general literature question of 1–500 characters.'})
             try:
-                result = answers.answer(request) if self.path.endswith('/answer') else service.search(request)
+                result = answers.answer(request) if self.path.endswith('/answer') else source_search.search(request)
             except Exception:
                 return self.reply(503, {'error':'Literature search unavailable. Check the service and drive, then retry.'})
             self.reply(200, result)
@@ -115,9 +129,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
     parser.add_argument('--port', type=int, default=8016)
+    parser.add_argument('--record-search', action='store_true', help='Enable reviewed disease-record search for sources only')
     args = parser.parse_args()
     service = create_service(args.config)
-    server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service))
+    server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, create_record_search(service) if args.record_search else None))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()
     except KeyboardInterrupt: pass

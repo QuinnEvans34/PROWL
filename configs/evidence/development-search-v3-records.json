@@ -1,0 +1,28 @@
+{
+  "version": "prowl-development-search-v3-records",
+  "mode": "local_development_excerpts",
+  "collection": "research-disease-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "corpus_content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+  "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+  "source_count": 14,
+  "passage_count": 1179,
+  "retriever": "source-linked-record-search-v1",
+  "top_k": 20,
+  "query_expansion": false,
+  "generation": false,
+  "scope_policy": "general-literature-search-v1",
+  "record_scope": "bounded_disease_comparisons",
+  "fallback": "dense-exact-cosine-v1",
+  "catalog": {
+    "path": "configs/evidence/source-facts-disease-v1.json",
+    "sha256": "b6b6d14414c5b4e8e68643511ac806b8065a483b741832fe42fac43bec66a7a4"
+  },
+  "review": {
+    "path": "configs/evidence/source-facts-disease-v1-review.json",
+    "sha256": "702eab2e2372792fa592633c51da757e4c2d2b2ccd93f9474cb3b792822a1697"
+  }
+}

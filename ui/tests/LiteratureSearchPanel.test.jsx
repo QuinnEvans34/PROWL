@@ -170,3 +170,41 @@ it('shows elapsed time and exits a stalled request at the browser limit', async 
     expect(screen.getByRole('button', { name: 'Try again' }).disabled).toBe(false)
   } finally { vi.useRealTimers() }
 })
+
+// Source retrieval and generated answers have separate contracts and actions.
+import { validateSourceSearch } from '../src/components/LiteratureSearchPanel.jsx'
+import diseaseCatalog from '../../configs/evidence/source-facts-disease-v1.json'
+import recordConfig from '../../configs/evidence/development-search-v3-records.json'
+function sourceResponse(request) {
+  const result = response(request), record = diseaseCatalog.records[0]
+  const ids = [...new Set(record.facts.flatMap(f => f.evidence.map(id => diseaseCatalog.spans[id].passage_id)))].sort()
+  result.schema_version = 'prowl-development-search-response-v1'; result.generation = 'not_called'
+  result.retrieval_policy = recordConfig.retriever
+  result.record_selection = { policy: recordConfig.retriever, status: 'matched', reason: 'literature_examples_not_exhaustive',
+    matches: [{ record_id: record.id, comparison: record.comparison, topic: record.topic, score: 1,
+      anchor_passage_ids: record.retrieval_anchors, evidence_passage_ids: ids }] }
+  const original = result.evidence[0]
+  result.evidence = ids.map((id, i) => ({ ...original, rank: i + 1, record: { ...original.record,
+    passage: { ...original.record.passage, passage_id: id }, text: `Artificial source context ${i + 1}.` } }))
+  return result
+}
+it('finds sources without calling the answer path and keeps citations accessible', async () => {
+  const user = userEvent.setup(), search = vi.fn(), findSources = vi.fn(async r => sourceResponse(r))
+  render(<LiteratureSearchPanel search={search} findSources={findSources} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Pancreatic head swelling and disease')
+  await user.click(screen.getByRole('button', { name: 'Find sources' }))
+  expect(await screen.findByText(/Relevant comparison sources/)).toBeTruthy()
+  expect(search).not.toHaveBeenCalled(); expect(findSources).toHaveBeenCalledOnce()
+  expect(screen.queryByText(/could not produce a checked answer/)).toBeNull()
+  await user.click(screen.getByRole('button', { name: 'View source 1' }))
+  expect(screen.getAllByRole('link', { name: /Read full source/ }).length).toBe(4)
+})
+it.each(['missing', 'unknown', 'extra', 'wrongPair', 'answerPath'])('rejects %s source-record mismatch', kind => {
+  const request = { request_id: 'test', question: 'Pancreatic head swelling' }, result = sourceResponse(request)
+  if (kind === 'missing') result.evidence.pop()
+  if (kind === 'unknown') result.record_selection.matches[0].record_id = 'invented'
+  if (kind === 'extra') result.record_selection.matches.push(result.record_selection.matches[0])
+  if (kind === 'wrongPair') result.record_selection.matches[0].comparison = ['all inflammation', 'all tumors']
+  if (kind === 'answerPath') expect(() => validateAnswer(result, request)).toThrow()
+  else expect(() => validateSourceSearch(result, request)).toThrow()
+})

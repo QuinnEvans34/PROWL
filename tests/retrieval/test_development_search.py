@@ -114,3 +114,31 @@ def test_http_oversize_and_unknown_fields(http):
         with pytest.raises(HTTPError) as err:call(base,dict(r,**change))
         assert err.value.code==400
     assert not calls
+
+
+def test_record_source_http_dispatch_never_calls_answer_model(service, monkeypatch):
+    root=Path(__file__).resolve().parents[2];sys.path.insert(0,str(root/'scripts'))
+    spec=importlib.util.spec_from_file_location('record_search_http',root/'scripts/serve_literature_search.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    base,request,_=service;request['question']='Pancreatitis and pancreatic cancer imaging'
+    source_calls=[];answer_calls=[]
+    class Sources:
+        config=dict(base.config,retriever='source-linked-record-search-v1')
+        def search(self,r):source_calls.append(r);return base.search(r)
+    class Answers:
+        def __init__(self,s):assert s is base
+        def answer(self,r):answer_calls.append(r);return dict(dispatch='legacy_answer')
+    monkeypatch.setattr(module,'NaturalAnswerService',Answers)
+    server=module.LocalFixtureServer(('127.0.0.1',0),module.handler_for(base,Sources()))
+    worker=Thread(target=server.serve_forever,daemon=True);worker.start()
+    address=f'http://127.0.0.1:{server.server_port}'
+    try:
+        health=json.load(urlopen(address+'/literature-search/health'))
+        assert health['retrieval_policy']=='source-linked-record-search-v1'
+        assert health['answer_retrieval_policy']=='dense-exact-cosine-v1'
+        assert json.load(call(address,request))['generation']=='not_called'
+        assert len(source_calls)==1 and not answer_calls
+        result=json.load(urlopen(Request(address+'/literature-search/answer',data=json.dumps(request).encode(),
+            headers={'Content-Type':'application/json'}),timeout=5))
+        assert result['dispatch']=='legacy_answer' and len(answer_calls)==1 and len(source_calls)==1
+    finally:server.shutdown();server.server_close();worker.join(3)
