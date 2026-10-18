@@ -1,0 +1,265 @@
+{
+  "version": "reviewed-volume-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "spans": {
+    "total_volume": {
+      "passage_id": "psg:6dff442bce3a216387f35150262d9c69718df394ad741f0fd4a41ff9ca3245c9",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 18,
+      "start": 455,
+      "end": 560,
+      "text_sha256": "d02e5eed55d3d50464f45030471a598ea7f20cdd3039638160dab1410a078764"
+    },
+    "method": {
+      "passage_id": "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 2,
+      "start": 25,
+      "end": 59,
+      "text_sha256": "7eb7d2dcb03883f38d8c48bc2d04154a7242b0563fb13a4951a288721d39e1d6"
+    },
+    "ngt_population": {
+      "passage_id": "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 2,
+      "start": 423,
+      "end": 511,
+      "text_sha256": "d7761677145c99e1c947a00ea7a01eef56ca14668c1ce20dc6bbd95e9045165c"
+    },
+    "t2dm_population": {
+      "passage_id": "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 2,
+      "start": 289,
+      "end": 385,
+      "text_sha256": "b2015a573bd72de9b69036ff22c656a741cc5fbb039bb748a1ec8a5a0353caa4"
+    },
+    "statistics": {
+      "passage_id": "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 27,
+      "start": 0,
+      "end": 31,
+      "text_sha256": "75f60f928a80b417042cfca62237e11559531259fe797f87cb9d2b99847c8e6d"
+    },
+    "ngt_mean": {
+      "passage_id": "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 29,
+      "start": 77,
+      "end": 81,
+      "text_sha256": "42d0b5a700e8f8646d99acdf1d23088ca721da919ea25b4741955dc4d59d11d2"
+    },
+    "ngt_uncertainty": {
+      "passage_id": "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 29,
+      "start": 82,
+      "end": 85,
+      "text_sha256": "9c7f38a9ac4f5de592be486948ac944aff688f914e3b74e6917c7fe4715a561e"
+    },
+    "t2dm_mean": {
+      "passage_id": "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 29,
+      "start": 64,
+      "end": 68,
+      "text_sha256": "8a38b65af33f1e09db109b5ef0ad014ce6ecb84b56f5cd29fb8ce060997f7d0b"
+    },
+    "t2dm_uncertainty": {
+      "passage_id": "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7",
+      "work_id": "work:pmid:25950180",
+      "ordinal": 29,
+      "start": 69,
+      "end": 72,
+      "text_sha256": "c020bad937ece011339d7447ee0ac9fa11686eea100845466c64863f161899f1"
+    }
+  },
+  "records": [
+    {
+      "id": "fact:25950180:whole-pancreas-volume:ngt:v1",
+      "work_id": "work:pmid:25950180",
+      "fields": {
+        "object": {
+          "value": "pancreas",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "extent": {
+          "value": "whole_organ",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "quantity": {
+          "value": "volume",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "unit": {
+          "value": "cm3",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "population": {
+          "value": "normal_glucose_tolerance_comparison",
+          "evidence": [
+            "ngt_population"
+          ]
+        },
+        "sample_size": {
+          "value": 14,
+          "evidence": [
+            "ngt_population"
+          ]
+        },
+        "method": {
+          "value": "MRI",
+          "evidence": [
+            "method"
+          ]
+        },
+        "statistic": {
+          "value": "mean",
+          "evidence": [
+            "statistics"
+          ]
+        },
+        "mean": {
+          "value": "82.6",
+          "evidence": [
+            "ngt_mean"
+          ]
+        },
+        "uncertainty": {
+          "value": "4.8",
+          "evidence": [
+            "ngt_uncertainty"
+          ]
+        },
+        "uncertainty_kind": {
+          "value": "SEM",
+          "evidence": [
+            "statistics"
+          ]
+        },
+        "matching": {
+          "value": [
+            "age",
+            "weight",
+            "sex"
+          ],
+          "evidence": [
+            "ngt_population"
+          ]
+        }
+      },
+      "limitations": [
+        "selected_study_group",
+        "not_universal_average",
+        "not_ct_reference",
+        "not_patient_normality"
+      ],
+      "retrieval_anchors": [
+        "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+      ]
+    },
+    {
+      "id": "fact:25950180:whole-pancreas-volume:t2dm:v1",
+      "work_id": "work:pmid:25950180",
+      "fields": {
+        "object": {
+          "value": "pancreas",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "extent": {
+          "value": "whole_organ",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "quantity": {
+          "value": "volume",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "unit": {
+          "value": "cm3",
+          "evidence": [
+            "total_volume"
+          ]
+        },
+        "population": {
+          "value": "well_controlled_type2_metformin",
+          "evidence": [
+            "t2dm_population"
+          ]
+        },
+        "sample_size": {
+          "value": 41,
+          "evidence": [
+            "t2dm_population"
+          ]
+        },
+        "method": {
+          "value": "MRI",
+          "evidence": [
+            "method"
+          ]
+        },
+        "statistic": {
+          "value": "mean",
+          "evidence": [
+            "statistics"
+          ]
+        },
+        "mean": {
+          "value": "55.5",
+          "evidence": [
+            "t2dm_mean"
+          ]
+        },
+        "uncertainty": {
+          "value": "2.8",
+          "evidence": [
+            "t2dm_uncertainty"
+          ]
+        },
+        "uncertainty_kind": {
+          "value": "SEM",
+          "evidence": [
+            "statistics"
+          ]
+        },
+        "matching": {
+          "value": [
+            "age",
+            "weight",
+            "sex"
+          ],
+          "evidence": [
+            "ngt_population"
+          ]
+        }
+      },
+      "limitations": [
+        "selected_study_group",
+        "not_universal_average",
+        "not_ct_reference",
+        "not_patient_normality"
+      ],
+      "retrieval_anchors": [
+        "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": "source-fact-engineering-review-v1",
+  "catalog_version": "reviewed-volume-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "status": "engineering_reviewed",
+  "reviewer": "single_engineering_agent",
+  "independent_review": "pending",
+  "records": {
+    "fact:25950180:whole-pancreas-volume:ngt:v1": "6f231e42e0c3f778edbd08c8cfcc032a69dbe110cc3fa7f5fca7b588f108d3bc",
+    "fact:25950180:whole-pancreas-volume:t2dm:v1": "5fc30ef8bc109816beb97c605bacbfd032523f892a31e477ebb2bde7aecf9aef"
+  },
+  "decisions": [
+    "Read canonical ordinals2,18,27,29. Result order is T2DM then NGT; values bound separately rather than interchangeable numbers.",
+    "Use analyzed sample41 from abstract, not recruited44 from body ordinal12. NGT comparator n14.",
+    "MRI measures total pancreas volume, not head/lesion size or a CT reference interval.",
+    "Both groups use mean plus/minus SEM; do not relabel SEM as SD or infer an individual range.",
+    "NGT comparator matched to diabetes group by age, weight and sex. T2DM group well controlled on metformin only.",
+    "Interpretation limits are application policy based on selected population and modality, not verbatim author conclusions. Statistical glossary is controlled mathematical explanation, not an extra medical finding.",
+    "No expert/human/independent acceptance is claimed; registry admission preserves this review rather than proving its correctness."
+  ]
+}
