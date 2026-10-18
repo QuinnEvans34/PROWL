@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.15 — October 17, 2026 (pancreatitis and cancer reference corpus)\
+**Version:** 1.16 — October 17, 2026 (shared scan-centered question drafts)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Next reconcile the scan-centered capability contract and engineering-owned evidence labeling before revising evaluation. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -14,6 +14,11 @@ measurements, inspectable findings and cited general disease context. General an
 the product focus. Quinton supplies natural questions; engineering arranges evidence labeling and
 independent verification. Do not require him to search articles or enter offsets. Current private
 worksheets are historical technical references pending that revised workflow.
+
+The [shared scan-centered question list](SCAN-CENTERED-DEVELOPMENT-QUESTIONS.md) records five assistant
+examples accepted for product relevance plus three Quinton-authored variants, grouped into five tasks.
+These are exposed development drafts, not new gold labels or a replacement evaluation freeze. Quinton
+offers to author 30 independent questions later; technical evidence labeling remains engineering work.
 
 ## 1. Outcome and authority
 

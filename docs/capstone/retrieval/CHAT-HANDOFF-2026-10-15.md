@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 shared question drafting:** Quinton accepts the five scan-centered examples as the
+> intended question style and adds three wordings about head-size disease context, average comparison
+> and lesion size. SCAN-CENTERED-DEVELOPMENT-QUESTIONS.md records eight wordings/five task groups.
+> Product relevance accepted; evidence labels and implemented capability not accepted by this exchange.
+> Joint drafting is allowed for development. Quinton offers 30 independent questions later, without
+> evidence-search/offset work. Near-duplicate intents stay together; broad task categories may recur.
+> New draft is exposed; version the exposure inventory before protected authoring, preserve old pins.
+> Next remains capability/independent-labeling reconciliation. Spec v1.16; no test set requested,
+> runtime changes, new clinical answers, protected access, training or human-hours credit.
+
 > **October17 disease-reference slice COMPLETE:** Quinton approves PanTS plus pancreatitis/cancer
 > sources first, cystic disease later. Read DISEASE-REFERENCE-CORPUS-2026-10-17.md and spec v1.15.
 > Separate research-disease-v1/rebuild:14papers/1,179passages/41batches,232newpassages from

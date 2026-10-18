@@ -1846,3 +1846,18 @@ independent-labeling reconciliation before revised evaluation freeze. Counts/qua
 relaxed; prior v5acceptance preserved for its exact original scope. No PanTS reports/patient/private
 content read; no generation, training, fullselector, newclinicalauthority or inferred human hours.
 AI-08 source slice complete; live demo remains original, measurement product integration pending.
+
+
+## 2026-10-17: Shared scan-centered question drafts
+
+Quinton confirms the five assistant examples match his intended questions, then contributes three
+wordings: head-size disease context, comparison with the average and lesion size. New shared list
+preserves all eight wordings and groups them into five tasks with input/fallback dependencies.
+Acceptance is product relevance only; no gold labels, measurements or clinical answer claims.
+Quinton offers to author 30 non-overlapping test questions later; source discovery and technical
+labeling are engineering responsibilities. Near-duplicate intents/paraphrases remain within one
+split; broad capability coverage can recur. The draft is exposed development material and must be
+included in a versioned exposure inventory before protected authoring. Existing pinned inventories,
+v5 acceptance, corpus, evaluation counts and thresholds are unchanged. Spec v1.16 and handoff link
+this draft; AI-03 tracks the next capability/independent-labeling reconciliation. Documentation only;
+no runtime/model/test-set access, new question request or inferred human hours.
