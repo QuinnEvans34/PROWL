@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.21 — October 17, 2026 (local natural-answer development preview)\
+**Version:** 1.22 — October 17, 2026 (answer failure and latency repair)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -53,6 +53,13 @@ adds an ephemeral local Qwen3 draft/review path and answer-first UI under a sepa
 contract. This supersedes the earlier generation sequencing for this preview only. Frozen retrieval,
 protected evaluation and formal AI-04 acceptance remain open; engineering checks and model self-review
 cannot certify factual correctness. Original gates and prior rejected trials remain preserved.
+
+October 17 reliability repair: [answer failure diagnosis](ANSWER-FAILURE-REPAIR-2026-10-17.md)
+replaces model-copied quotations with source-ID selection and code-bound exact retrieved passages.
+Policy v6 keeps exact membership/numeric checks and a concise separate model review, adds a shared
+60-second generation budget, elapsed UI feedback and distinct failure explanations. The reported
+function question now completes in the real UI. This focused repair is not a broad quality pass;
+jargon, source-support reliability and formal evaluation remain AI-04 work. Prior trials stay intact.
 
 ## 1. Outcome and authority
 

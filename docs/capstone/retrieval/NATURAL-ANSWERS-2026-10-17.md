@@ -1,5 +1,8 @@
 # Natural local literature answers
 
+> Current policy is v6: see [failure and latency repair](ANSWER-FAILURE-REPAIR-2026-10-17.md).
+> The v5 mechanics, bounds and trials below are preserved historical evidence, not current settings.
+
 October 17, 2026 — local development synthesis implemented; formal quality acceptance remains open.
 
 Quinton explicitly requests that the local AI take retrieved evidence and formulate a human-readable

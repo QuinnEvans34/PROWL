@@ -1,0 +1,141 @@
+{
+  "version": "prowl-natural-answer-checkpoint-v2",
+  "parent_commit": "acd197528837315acc5435e1e021e6a72d72497c",
+  "verification": {
+    "state": "reported_failure_repaired_broader_quality_open",
+    "python_tests_passed": 94,
+    "ui_tests_passed": 41,
+    "build": "passed_existing_large_chunk_warning",
+    "browser_question": "What does the pancreas do?",
+    "browser_answer_observed_within_seconds": 6.524,
+    "browser_additional_model_calls": 2,
+    "browser_citation_navigation_verified": true,
+    "prior_vite_missing_module_errors": "resolved_by_owned_dev_server_restart",
+    "formal_quality_accepted": false,
+    "protected_content_accessed": false
+  },
+  "trials": [
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v5.json",
+      "sha256": "9c81b2fc801cc0871442d1dd3c16b9422ae5d1a1053f68c49b090fca9bbc3653",
+      "elapsed_seconds": 6.8879948750836775,
+      "error": "ValueError: Number absent from cited quotes",
+      "model_calls": 1,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-bound.json",
+      "sha256": "d4fde47be1cb22085969ed5813013dbbd65512503b0bfa441be0c9a3b4b8cf4d",
+      "elapsed_seconds": 8.7421057500178,
+      "error": "ValueError: Invalid citation",
+      "model_calls": 1,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-final.json",
+      "sha256": "cd51df9fae938e2b36c5306e3918d3d4407120f0896a4f60380d8d3efc386aac",
+      "elapsed_seconds": 7.33624375006184,
+      "error": null,
+      "model_calls": 2,
+      "mechanically_completed": true,
+      "agent_disposition": "focused_question_supported_jargon_remains"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-focused.json",
+      "sha256": "b174e60dbc5155dc2ec5b12bf5eb5f12f28de5807e06c73480b71eb6b4795292",
+      "elapsed_seconds": 8.702562083024532,
+      "error": "ValueError: Invalid citation",
+      "model_calls": 1,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-review.json",
+      "sha256": "f47117c786c542bc50c43760863e634c8c3067b1e42cecd944b4417af3967f39",
+      "elapsed_seconds": 12.59779937507119,
+      "error": "AnswerFailure: Claim support review rejected",
+      "model_calls": 2,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-selected.json",
+      "sha256": "a4436adff8c911da72bd2c40887d542702122e6054dee23d7b14d4fb1210242d",
+      "elapsed_seconds": 9.09080291702412,
+      "error": null,
+      "model_calls": 2,
+      "mechanically_completed": true,
+      "agent_disposition": "not_promoted_unsupported_extra_detail"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6-unicode.json",
+      "sha256": "d5f19f47fbd5a41953aee34bde79a8a2c687780620db4b9a707f9adf5335d7ac",
+      "elapsed_seconds": 60.002104999963194,
+      "error": "TimeoutError: timed out",
+      "model_calls": 2,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/reproduction-v6.json",
+      "sha256": "42378e40602472522f51da07c3aeaf3df08b81610daa2e5299266c673ca1e80b",
+      "elapsed_seconds": 9.175856665940955,
+      "error": "ValueError: Invalid citation",
+      "model_calls": 1,
+      "mechanically_completed": false,
+      "agent_disposition": "retained_failed_diagnostic"
+    }
+  ],
+  "producing_files": [
+    {
+      "path": "src/retrieval/natural_answer.py",
+      "sha256": "59daed50a6408fb4905b8d850b36f020c28a042bdcddae1216bc5e20aea84d8d"
+    },
+    {
+      "path": "scripts/serve_literature_search.py",
+      "sha256": "6815c44f4f8df2e6507e2306828dca1a607236e187644e96e24678375f16dee4"
+    },
+    {
+      "path": "tests/retrieval/test_natural_answer.py",
+      "sha256": "bfbedc012ce30300658bf6825dc2e48c03712cd769a5d07428e7499858f93f1e"
+    },
+    {
+      "path": "ui/src/components/LiteratureSearchPanel.jsx",
+      "sha256": "8e4673db4cc84f0a1f5e9091c7f8fa9e3bb15027626a1002f7d2082bc4a05fad"
+    },
+    {
+      "path": "ui/tests/LiteratureSearchPanel.test.jsx",
+      "sha256": "109de791e79edfa7f18c901001d43bec8fe1964c98ed3a9795497567027dc064"
+    },
+    {
+      "path": "configs/evidence/natural-answer-v6.json",
+      "sha256": "530a32ea60c0af000c0570eb78f78b34d217461208a2dd4e50edcc942a0b8f5f"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "outputs/prowl/answer-failure-20261017/retrieved.json",
+      "sha256": "89bbae8169ab6348b61cad6c266e85aedf48caa76e4359300c7bd1caa2c6b0f2"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/live-fixed-answer.jpg",
+      "sha256": "725f4ad3de3b79a8b5880d9ddc4f32648246755cf48d1f9886cb40a442322181"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/final-python-tests.txt",
+      "sha256": "551fc6c98d388c7a23aed0393200b464edd004a4f810eb7c7188313c2e8a8978"
+    },
+    {
+      "path": "outputs/prowl/answer-failure-20261017/final-ui-tests.txt",
+      "sha256": "4d9560d9089cac098a75a330b120e1c53dae287ae79bac17b66e5ad21bbec856"
+    }
+  ],
+  "limits": [
+    "Same-model review is fallible; intermediate selected-source trial passed it with an unsupported insulin detail and was not promoted.",
+    "Focused final reproduction and browser observation are not a quality benchmark or latency guarantee.",
+    "Intermediate diagnostics retain raw results and outcomes; only final producing code is snapshotted here.",
+    "No runtime query persistence, protected data, corpus/ranking changes, training or human-hours credit."
+  ]
+}

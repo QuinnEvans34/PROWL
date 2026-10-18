@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
-import answerConfig from '../../../configs/evidence/natural-answer-v5.json'
+import answerConfig from '../../../configs/evidence/natural-answer-v6.json'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -8,6 +8,13 @@ const reasons = {
   case_context_unavailable: 'This search does not have access to your scan. Ask about a general topic, such as pancreatic enlargement.',
   measurement_unavailable: 'Scan measurements are not connected yet. You can search the literature for general measurement or imaging information.',
   pancreas_topic_required: 'Include a pancreatic topic in your question, such as pancreatitis, pancreas size, or PDAC.',
+}
+const generationFailures = {
+  timeout: 'The local AI reached its 60-second answer limit. The retrieved passages are available below.',
+  incomplete: 'The local AI stopped before finishing its answer. The retrieved passages are available below.',
+  support_rejected: 'The evidence review could not confirm the draft answer. The retrieved passages are available below.',
+  model_unavailable: 'The local answer model is unavailable. The retrieved passages are available below.',
+  validation_failed: 'The draft did not pass citation or answer-format checks. The retrieved passages are available below.',
 }
 
 export function validateSearch(result, request) {
@@ -38,9 +45,12 @@ export function validateAnswer(result, request) {
   if (result.generation !== 'completed') {
     if (result.answer !== null || (result.generation === 'unavailable' && result.state !== 'evidence_unassessed')
       || (result.generation === 'not_called' && result.state === 'evidence_unassessed')) throw new Error('Invalid answer state')
+    if (result.generation_failure !== undefined
+      && (result.generation !== 'unavailable' || !Object.hasOwn(generationFailures, result.generation_failure))) throw new Error('Invalid failure category')
     return result
   }
   const a = result.answer
+  if (result.generation_failure !== undefined) throw new Error('Unexpected generation failure')
   if (result.state !== 'evidence_unassessed' || !a || !['summarized', 'insufficient'].includes(a.status)
     || a.model !== answerConfig.model || a.model_sha256 !== answerConfig.model_sha256 || a.policy !== answerConfig.version
     || a.prompt_sha256 !== answerConfig.prompt_sha256 || a.validation !== 'exact_quotes_and_model_review'
@@ -65,8 +75,15 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
   const [question, setQuestion] = useState('')
   const [result, setResult] = useState(null)
   const [phase, setPhase] = useState('idle')
+  const [elapsed, setElapsed] = useState(0)
   const active = useRef(null)
   useEffect(() => () => active.current?.abort(), [])
+  useEffect(() => {
+    if (phase !== 'loading') return
+    const started = Date.now()
+    const timer = setInterval(() => setElapsed(Math.floor((Date.now() - started) / 1000)), 1000)
+    return () => clearInterval(timer)
+  }, [phase])
   function change(value) {
     active.current?.abort(); active.current = null
     setQuestion(value); setResult(null); setPhase('idle')
@@ -76,8 +93,8 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
     if (!question.trim() || active.current) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
-    const timeout = setTimeout(() => control.abort(), 165000)
-    setPhase('loading'); setResult(null)
+    const timeout = setTimeout(() => control.abort(), 90000)
+    setElapsed(0); setPhase('loading'); setResult(null)
     try {
       const response = validateAnswer(await search(request, control.signal), request)
       if (active.current === control && !control.signal.aborted) { setResult(response); setPhase('done') }
@@ -101,13 +118,13 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
       </div>
     </form>
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {phase === 'loading' && <p>Finding evidence and writing a source-checked answer with the local model…</p>}
+      {phase === 'loading' && <p>Finding evidence, writing an answer, and checking its citations… {elapsed}s elapsed. Local AI generation has a 60-second limit after retrieval.</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
         <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.generation === 'completed' ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
-          : result.generation === 'completed' ? 'Written by the local AI using the sources below. Check the citations; this is a development preview.' : 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
+          : result.generation === 'completed' ? 'Written by the local AI using the sources below. Check the citations; this is a development preview.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · Exact dense search · Local Qwen3 answer model</p>

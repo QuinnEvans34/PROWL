@@ -1,0 +1,32 @@
+{
+  "version": "prowl-natural-answer-exposure-v2",
+  "wordings": [
+    "Could the size of the pancreas head indicate any specific diseases?",
+    "Does this pancreas have cancer?",
+    "How big is the average pancreas?",
+    "How does pancreatic cancer appear on CT?",
+    "How large is the average pancreas?",
+    "How large is the pancreatic head?",
+    "In this artificial study, the pancreas length ranged from 12 to 15 cm in adults.",
+    "Measure this pancreas",
+    "PanTS_00000001 pancreas",
+    "Pancreas report at /Volumes/private/case",
+    "Pancreas size?",
+    "The average pancreas is 12\u201315 cm long.",
+    "The pancreas was 33% smaller in that cohort.",
+    "The study reported an adult pancreas length of 12\u201315 cm.",
+    "What did the study report about pancreas length?",
+    "What diseases can cause pancreatic enlargement?",
+    "What does the pancreas do?",
+    "What imaging findings help distinguish pancreatitis from pancreatic cancer?",
+    "What is the average pancreas volume reported in research?",
+    "What is the size of the lesion in this scan?",
+    "pancreas_topic_required"
+  ],
+  "integration_state": "merge_with_prior_public_exposures_before_protected_authoring",
+  "note": "Adds the user-visible function question used in failure diagnosis; prior wordings retained. Artificial unit-test variants remain exposed engineering content. Merge with prior inventories before protected authoring; semantic independence requires human review.",
+  "prior_inventory": {
+    "path": "configs/evidence/evaluation/public-exposure-natural-answers-v1.json",
+    "sha256": "a78936bfc83b3aaafb465304428e536f04711eebd0836c869b22a4bfa7690b62"
+  }
+}

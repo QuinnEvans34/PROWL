@@ -1,10 +1,10 @@
 import React from 'react'
 import { expect, it, vi } from 'vitest'
-import { act, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LiteratureSearchPanel, { validateAnswer } from '../src/components/LiteratureSearchPanel.jsx'
 import config from '../../configs/evidence/development-search-v1.json'
-import answerConfig from '../../configs/evidence/natural-answer-v5.json'
+import answerConfig from '../../configs/evidence/natural-answer-v6.json'
 function response(request, state = 'evidence_unassessed') {
   return { schema_version: 'prowl-development-answer-response-v1', request_id: request.request_id,
     question: request.question, collection: config.collection, generation: state === 'evidence_unassessed' ? 'unavailable' : 'not_called', answer: null,
@@ -130,4 +130,40 @@ it('keeps insufficient evidence distinct from an unavailable model', async () =>
   await user.click(screen.getByRole('button', { name: 'Ask question' }))
   expect(await screen.findByText(/couldn’t find enough directly relevant evidence/)).toBeTruthy()
   expect(screen.queryByText(/could not produce a checked answer/)).toBeNull()
+})
+
+it.each([
+  ['timeout', /reached its 60-second answer limit/],
+  ['incomplete', /stopped before finishing/],
+  ['support_rejected', /could not confirm the draft/],
+  ['model_unavailable', /local answer model is unavailable/],
+  ['validation_failed', /did not pass citation or answer-format checks/],
+])('explains %s and preserves access to sources', async (code, message) => {
+  const user = userEvent.setup()
+  render(<LiteratureSearchPanel search={async r => ({ ...response(r), generation_failure: code })} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Pancreas size')
+  await user.click(screen.getByRole('button', { name: 'Ask question' }))
+  expect(await screen.findByText(message)).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Sources (1)' })).toBeTruthy()
+})
+it('rejects arbitrary provider error text', () => {
+  const request = { request_id: 'test', question: 'Pancreas size' }
+  expect(() => validateAnswer({ ...response(request), generation_failure: 'PRIVATE_ERROR' }, request)).toThrow()
+})
+it('shows elapsed time and exits a stalled request at the browser limit', async () => {
+  vi.useFakeTimers()
+  const search = vi.fn((r, signal) => new Promise((resolve, reject) => {
+    signal.addEventListener('abort', () => reject(new Error('aborted')))
+  }))
+  try {
+    render(<LiteratureSearchPanel search={search} />)
+    fireEvent.change(screen.getByLabelText('Literature question'), { target: { value: 'Pancreas size' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Ask question' }))
+    await act(async () => vi.advanceTimersByTime(4000))
+    expect(screen.getByText(/4s elapsed/)).toBeTruthy()
+    await act(async () => vi.advanceTimersByTime(86000))
+    expect(search.mock.calls[0][1].aborted).toBe(true)
+    expect(screen.getByRole('alert').textContent).toMatch(/timed out/)
+    expect(screen.getByRole('button', { name: 'Try again' }).disabled).toBe(false)
+  } finally { vi.useRealTimers() }
 })

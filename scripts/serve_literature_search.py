@@ -12,7 +12,7 @@ from src.retrieval.corpus_inventory import database_inventory
 from src.retrieval.direct_ingestion import search
 from src.retrieval.literature_adapter import FrozenLiterature
 from src.retrieval.development_search import DevelopmentSearch
-from src.retrieval.natural_answer import NaturalAnswerService
+from src.retrieval.natural_answer import NaturalAnswerService, POLICY
 from src.retrieval.records import canonical_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -86,7 +86,7 @@ def handler_for(service):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
             if self.path != '/literature-search/health': return self.reply(404, {'error':'Unknown route.'})
             self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection'],
-                'answer_policy':'natural-literature-answer-v5'})
+                'answer_policy':POLICY})
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})

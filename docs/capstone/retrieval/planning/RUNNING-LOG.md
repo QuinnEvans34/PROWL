@@ -1943,3 +1943,18 @@ review is not independent validation.76Python/30UIchecks/build pass; initial fix
 retained. New live service session48296 on8016. See NATURAL-ANSWERS-2026-10-17.md for limitations,
 local trial artifacts and exact runtime bounds. AI-04 in progress; no formal quality completion,
 protected content/training/fullselector/newcorpus/modeldownload or inferred human hours.
+
+
+## 2026-10-17: Answer failure and latency repair
+
+Quinton reports waiting over two minutes, then a generic checked-answer error. Reproduction of the
+visible function question found source IDs counted as factual numbers. Further retained diagnostics
+found escaped/altered quotes, duplicate references, a reasoning-review timeout, and a model-review
+false acceptance of an uncited detail. Final v6 selects source IDs and binds exact retrieved passages
+in code, normalizes verified inline markers, uses literal Unicode and concise separate review, and
+shares a60s generation budget. UI shows elapsed time and distinct failure categories;90s browser cap.
+Final focused run7.336s and actual UI observation within6.524s produced a short cited answer; source
+navigation verified.94Python/41UIchecks/build pass. Eight diagnostics/12model calls plus2browser calls
+retained; intermediate false pass not promoted. Broader quality and jargon remain open, not a full
+AI-04 acceptance. Spec1.22, checkpoint-v2 and exposure-v2 preserve earlier records. Owned backend
+session99570 and UI67009 restored; no training/corpus/ranking/protected data or human-hours changes.

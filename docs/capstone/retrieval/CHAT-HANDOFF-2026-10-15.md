@@ -1,5 +1,18 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 answer failure repair:** Read ANSWER-FAILURE-REPAIR-2026-10-17.md and spec1.22.
+> User's visible function question reproduced citation-marker numeric rejection; further diagnosis
+> found copied-quote/Unicode/duplicate-reference failures and a slow reasoning review. Final v6
+> model selects source IDs; code attaches exact full retrieved passages, preserving all postchecks.
+> Concise review remains mandatory; draft reasoning retained. Shared generation budget60s,
+> browser90s, elapsed display and closed failure categories. Final focused run7.336s; real browser
+> answer observed within6.524s and citation navigation passed.94Python/41UIchecks/build pass.
+> Eight retained diagnostic attempts/12model calls plus2browser calls; one intermediate model-review
+> pass contained unsupported detail and was NOT promoted. Formal quality/jargon still open.
+> Current service session99570 on8016; UI session67009 on5180 after stale-module-cache restart.
+> Verify state before further work. Checkpoint-v2 and exposure-v2 preserve old receipts/pins.
+> No corpus/ranking changes, training/fullselector, protected data or human-hours credit.
+
 > **October 17 natural-answer development preview:** Quinton explicitly requests local AI synthesis
 > now; spec1.21 records sequencing amendment without relaxing formal acceptance. Read
 > NATURAL-ANSWERS-2026-10-17.md. New /literature-search/answer uses pinned Qwen3:30b reasoning,
