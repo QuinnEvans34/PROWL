@@ -528,6 +528,9 @@ export default function NiivueViewer({
       show3Dcrosshair: false,
       isColorbar: false,
       multiplanarShowRender: 0,
+      // ROW (3): keep axial/coronal/sagittal in one row so the plane labels below
+      // always sit over the matching view. AUTO switched to a 2x2 grid in tall viewers.
+      multiplanarLayout: 3,
       clipPlaneColor: [0, 0, 0, 0],
       isClipPlanesCutaway: true,
       isClipAllVolumes: false,

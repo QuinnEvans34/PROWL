@@ -136,7 +136,7 @@ body {
 }
 .pw-panther img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
 .pw-panther--sm { width: 40px; height: 40px; border-radius: 10px; }
-.pw-panther--sm img { transform: scale(1.45); }
+.pw-panther--sm img { object-fit: contain; transform: scale(1.08); }
 .pw-panther--hero { width: 180px; height: 140px; border-radius: 14px; }
 .pw-panther--hero img { object-fit: contain; transform: scale(1.12); }
 .pw-panther--empty { width: 220px; height: 160px; border-radius: 16px; }
@@ -258,8 +258,9 @@ body {
 }
 @media (max-width: 480px) {
   .pw-wordmark__name { letter-spacing: 0.18em; font-size: 16px; }
+  .pw-service { display: none; }
+  .pw-nav a { padding: 0 6px; font-size: 13.5px; }
 }
 
 /* ---------- Route containers ---------- */
 .pw-route { height: 100%; min-height: 0; }
-.pw-route > .review-workspace-v2 { height: 100%; min-height: 0; }

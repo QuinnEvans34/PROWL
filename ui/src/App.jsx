@@ -369,6 +369,7 @@ export default function App() {
             liveResult={currentLive}
             isAnalyzing={isAnalyzing}
             analysisFailed={inferenceState.status === 'failed' && inferenceState.caseId === caseId}
+            modelLabel={MODEL_LABEL}
             endpointStatus={endpointStatus}
             truthRevealed={isTruthRevealed}
             reviewStatus={reviewStatuses[caseId] || 'unreviewed'}
