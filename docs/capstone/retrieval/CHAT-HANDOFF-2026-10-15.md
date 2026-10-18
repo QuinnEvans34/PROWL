@@ -1,5 +1,25 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 source-linked volume prototype passes bounded assembly:** User approved fact records
+> and qualification tests with Trello/Git updates. Read SOURCE-FACT-RESULTS-2026-10-18.md/spec1.32.
+> Implementation f2ec3f2:two reviewed MRI study-group records, twelve bound source fields and required
+> limits, exact span/hash/record-review admission, structured selection, deterministic assembly and
+> exact post-render verification.33new tests pass. Initial preparation literal-matcher punctuation
+> failure fixed/retained before canary; no model/HTTP work during that failure. Actual canary
+> session19231 FINISHED exit0:one source-only query/zero modelcalls/5.415s; search5.312s, both records
+> select and expand3missingcontextpassages, seven typed mismatches select nothing. Both answers
+> preserve counts14/41, MRI, SEM explanation, matching and study limits. Eight rendered statements
+> manually source-reviewed by one engineering agent, not independent acceptance. Local artifacts:
+> outputs/prowl/source-facts-volume-v1-20261018/readable-review.md and retained inputs/outputs/pins.
+> Tracked source-facts-volume-v1[-review|-results].json; src/retrieval/fact_records.py is opt-in only.
+> No UI promotion or source changes; baseline8016 dense/v6.1 remains selected. No Ollama lifecycle
+> operation, training/fullselector/protecteddata/download/humanhours. Hashes bind the reviewed
+> interpretation, not semantic truth; curated extraction still needs independent review. Typed intents
+> are supplied by harness, NOT inferred from the natural question. Four statements/four source
+> passages require a qualified adapter for existing three-claim/three-citation generation contract.
+> Next qualitative disease records retaining focal-mass/overlap/single-feature qualifications, then
+> free-text selection/output integration. AI-04 and formal evaluation/measurement gates remain open.
+
 > **October18 controlled failure isolation complete:** Quinton approved the fixed evidence experiment
 > and coherent commits/Trello tracking. Read spec1.31 and EVIDENCE-ISOLATION-RESULTS-2026-10-18.md.
 > Plan/code/prepared inputs committed d090127 before generation. Three existing questions, three real

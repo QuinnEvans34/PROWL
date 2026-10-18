@@ -1,9 +1,19 @@
 # AI expert completion specification
 
-**Version:** 1.31 — October 18, 2026 (controlled failure isolation complete; no promotion)\
+**Version:** 1.32 — October 18, 2026 (volume fact assembly qualified in bounded prototype)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October18 source-linked fact prototype: [plan](SOURCE-FACT-PLAN-2026-10-18.md) and
+[results](SOURCE-FACT-RESULTS-2026-10-18.md). Two separately reviewed MRI study-group records now
+retain sample count, method, SEM meaning, matching and applicability limits through deterministic
+assembly.33focused tests pass; one real source-only search expands missing context, both records
+render completely, seven mismatched typed requests select nothing. Zero model calls. This fixes the
+tested omissions in code-controlled assembly, not LLM reasoning or free-text selection. Eight statements
+source-reviewed by one engineering agent; independent review pending. Live dense/v6.1 unchanged.
+Next qualitative disease records, then qualified natural-language selection/output adapter; current
+four-statement/four-source prototype does not automatically fit the existing generation contract.
 
 October18 controlled experiment approved and completed: [plan](EVIDENCE-ISOLATION-PLAN-2026-10-18.md)
 and [results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md). Three unchanged exposed questions, actual dense
@@ -450,6 +460,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 4b / AI-08 | Complete — source slice only | Four disease references added to a separate14-source/1,179-passage collection; exact rebuild, old inventories and58tests verified. [Report](DISEASE-REFERENCE-CORPUS-2026-10-17.md). |
 | Step 5 / AI-03 | In progress — proposed v6 engineering review complete; changed-scope human review pending | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Controlled answer diagnosis / AI-04 | Experiment complete; feature In Progress | [Three-by-three results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md): all nine drafts observed without timeout, zero complete answers, evidence omissions and semantic/citation/reviewer failures isolated. No replacement promoted. Next source-linked fact records and explicit qualifier assembly, subject to its own bounded plan. |
+| Source-linked volume facts / AI-04 | Bounded assembly pass; feature In Progress | [Results](SOURCE-FACT-RESULTS-2026-10-18.md): two complete reviewed group examples,33mutation/selection checks, seven actual-corpus typed mismatches rejected, one source query/zero model calls. Qualitative records, free-text selection, output adapter and independent evaluation remain open; no UI promotion. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |

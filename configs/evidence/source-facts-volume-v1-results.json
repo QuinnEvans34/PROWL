@@ -1,0 +1,169 @@
+{
+  "version": "source-fact-results-v1",
+  "implementation_commit": "f2ec3f2",
+  "decision": "bounded_record_assembly_pass_no_ui_promotion",
+  "scope": "two_reviewed_groups_from_one_existing_study",
+  "engineering_reviewer": "single_agent",
+  "independent_review": "pending",
+  "new_tests_passed": 33,
+  "actual_canary": {
+    "seconds": 5.415382707957178,
+    "search_seconds": 5.312275083037093,
+    "source_only_requests": 1,
+    "model_generation_calls": 0,
+    "rendered_records": 2,
+    "matched_intents": 2,
+    "mismatched_intents_rejected": 7,
+    "canonical_passages_verified": 1179,
+    "expanded_passages_per_record": 3
+  },
+  "reviews": [
+    {
+      "record_id": "fact:25950180:whole-pancreas-volume:ngt:v1",
+      "statements": [
+        {
+          "statement": 1,
+          "kind": "source_fact",
+          "text_sha256": "7a3a27fecff940ee412bced5b0b5a702b6a4440742e1b6f31a2fc2394dcafec9",
+          "judgment": "supported",
+          "reason": "Result magnitude and paired group assignment verified against ordinal29; analyzed count/population/MRI against ordinal2; whole-organ extent and units against ordinal18; mean convention against ordinal27. No head or lesion measurement inferred.",
+          "passage_ids": [
+            "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+            "psg:6dff442bce3a216387f35150262d9c69718df394ad741f0fd4a41ff9ca3245c9",
+            "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+          ]
+        },
+        {
+          "statement": 2,
+          "kind": "source_fact_with_statistical_glossary",
+          "text_sha256": "db591fb2dc44f01fb8715a1b539c175845edbe873590150904c2b7202f5a43b7",
+          "judgment": "supported_with_declared_glossary_or_policy",
+          "reason": "Uncertainty magnitude verified in the same result pair; SEM convention against ordinal27. The explanatory definition is a controlled statistical glossary, not an additional finding attributed to the authors.",
+          "passage_ids": [
+            "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+            "psg:6dff442bce3a216387f35150262d9c69718df394ad741f0fd4a41ff9ca3245c9",
+            "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+          ]
+        },
+        {
+          "statement": 3,
+          "kind": "source_fact",
+          "text_sha256": "0467cec6ab408458fd32359e56bd3e411b3d9240fb6464a87224ca8ad7acbd9f",
+          "judgment": "supported",
+          "reason": "Control/comparison group is matched for age, weight and sex in ordinal2. This is a study-group relationship, not a patient-matching inference.",
+          "passage_ids": [
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78"
+          ]
+        },
+        {
+          "statement": 4,
+          "kind": "interpretation_limit",
+          "text_sha256": "d227f2980993f4344392534d1bffb5692e4da574cefa2afdd19939b7a2f2d790",
+          "judgment": "supported_with_declared_glossary_or_policy",
+          "reason": "Explicitly labeled application interpretation limits, grounded in this selected group/MRI method. Does not assert that the authors tested CT norms or individual normality.",
+          "passage_ids": [
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78"
+          ]
+        }
+      ],
+      "qualification_check": {
+        "measured_object": true,
+        "study_specific": true,
+        "population": true,
+        "sample_size": true,
+        "method": true,
+        "statistic": true,
+        "uncertainty_kind_explained": true,
+        "matching": true,
+        "universal_ct_patient_limits": true
+      }
+    },
+    {
+      "record_id": "fact:25950180:whole-pancreas-volume:t2dm:v1",
+      "statements": [
+        {
+          "statement": 1,
+          "kind": "source_fact",
+          "text_sha256": "6437a8045563a98d9ce46de97f2e838138803806452af367a267a0e12b9dd00d",
+          "judgment": "supported",
+          "reason": "Result magnitude and paired group assignment verified against ordinal29; analyzed count/population/MRI against ordinal2; whole-organ extent and units against ordinal18; mean convention against ordinal27. No head or lesion measurement inferred.",
+          "passage_ids": [
+            "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78",
+            "psg:6dff442bce3a216387f35150262d9c69718df394ad741f0fd4a41ff9ca3245c9",
+            "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+          ]
+        },
+        {
+          "statement": 2,
+          "kind": "source_fact_with_statistical_glossary",
+          "text_sha256": "f7f3991ed5a4663b987152e3612d4c6777f67dda7733114c68bedb263574f8aa",
+          "judgment": "supported_with_declared_glossary_or_policy",
+          "reason": "Uncertainty magnitude verified in the same result pair; SEM convention against ordinal27. The explanatory definition is a controlled statistical glossary, not an additional finding attributed to the authors.",
+          "passage_ids": [
+            "psg:0269c791356fbfc72e25169edb0900fb62101173dbb9523bcfe35df7a82350e3",
+            "psg:6dff442bce3a216387f35150262d9c69718df394ad741f0fd4a41ff9ca3245c9",
+            "psg:940c3a11500801fc12c705cf6cd7cd74124fb4aa66c167bf187e2ae57c4048d7"
+          ]
+        },
+        {
+          "statement": 3,
+          "kind": "source_fact",
+          "text_sha256": "0467cec6ab408458fd32359e56bd3e411b3d9240fb6464a87224ca8ad7acbd9f",
+          "judgment": "supported",
+          "reason": "Control/comparison group is matched for age, weight and sex in ordinal2. This is a study-group relationship, not a patient-matching inference.",
+          "passage_ids": [
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78"
+          ]
+        },
+        {
+          "statement": 4,
+          "kind": "interpretation_limit",
+          "text_sha256": "d227f2980993f4344392534d1bffb5692e4da574cefa2afdd19939b7a2f2d790",
+          "judgment": "supported_with_declared_glossary_or_policy",
+          "reason": "Explicitly labeled application interpretation limits, grounded in this selected group/MRI method. Does not assert that the authors tested CT norms or individual normality.",
+          "passage_ids": [
+            "psg:37125366974500c29d4e04c765d6d3a39ea1963fdf565dc79202950e9589df78"
+          ]
+        }
+      ],
+      "qualification_check": {
+        "measured_object": true,
+        "study_specific": true,
+        "population": true,
+        "sample_size": true,
+        "method": true,
+        "statistic": true,
+        "uncertainty_kind_explained": true,
+        "matching": true,
+        "universal_ct_patient_limits": true
+      }
+    }
+  ],
+  "pins": [
+    {
+      "path": "outputs/prowl/source-facts-volume-v1-20261018/receipt.json",
+      "sha256": "7a2edd7813ca35af72ac84597f9f9a76ed8a4aab6d52cbd571691dd845bb98ce"
+    },
+    {
+      "path": "outputs/prowl/source-facts-volume-v1-20261018/live-search.json",
+      "sha256": "3adc7270c1948de7df54226d8f63a9fb3adfca4f57edb969b11a2a5778611770"
+    },
+    {
+      "path": "outputs/prowl/source-facts-volume-v1-20261018/normal_glucose_tolerance_comparison-answer.json",
+      "sha256": "d9393ce6b911597d60607f2ac619afaf9f9c2a52d5d6d43149197a022210ca2b"
+    },
+    {
+      "path": "outputs/prowl/source-facts-volume-v1-20261018/well_controlled_type2_metformin-answer.json",
+      "sha256": "c3cc6bb9afb3d2d7ea5d6026ebfd8018ae6d06587b4abfb4d15c5b7fce13e09e"
+    }
+  ],
+  "limitations": [
+    "Structured intents explicitly supplied by harness; free-text routing not qualified.",
+    "Reviewed extraction is a curation obligation; hashes and lexical checks do not prove arbitrary entailment.",
+    "Deterministic record assembly fixes tested omissions; not evidence of improved LLM reasoning.",
+    "Four original citations and four typed statements require a separately qualified adapter to existing three-claim/three-citation generation contract.",
+    "Disease comparisons and general corpus coverage not qualified; independent review and formal acceptance remain open."
+  ]
+}
