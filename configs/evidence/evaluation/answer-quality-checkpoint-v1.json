@@ -1,0 +1,134 @@
+{
+  "version": "prowl-answer-quality-checkpoint-v1",
+  "baseline_commit": "ce2315f20c14956b30a09d63dade850a649632e1",
+  "state": "diagnostic_complete_quality_not_accepted",
+  "pins": [
+    {
+      "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+      "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-disease-candidates-v2.json",
+      "sha256": "5b7d1ff0078f74593ab695875443be9cdc9cf1b1eea77d01978bc7a76eb5ce9d"
+    },
+    {
+      "path": "configs/evidence/evaluation/answer-quality-review-v1.json",
+      "sha256": "bde3dff155e21691c1bd0b71d098e76dc140364a877b5f4ced78e0c253b5e946"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-answer-quality-v1.json",
+      "sha256": "9a83a8f8ca65cc74e6774073b59b6f6d5e13a331f691ddbab2b7301163ee709c"
+    },
+    {
+      "path": "src/retrieval/quality_checkpoint.py",
+      "sha256": "3a5f604978a3ee999af32ed2fab60de65540b69b79d39693cde9d66f7ee6ea1a"
+    },
+    {
+      "path": "scripts/retrieval/run_answer_quality_checkpoint.py",
+      "sha256": "6efb4f7fdb156cf4d9223c213b1e8aed1adf90fe2ca57d66636bd279c7ae16ee"
+    },
+    {
+      "path": "tests/retrieval/test_quality_checkpoint.py",
+      "sha256": "486dabb78bfe3dcd55204ff57cfac9abb979240dddd3b925624759ca10103bf2"
+    },
+    {
+      "path": "docs/capstone/retrieval/ANSWER-QUALITY-CHECKPOINT-2026-10-17.md",
+      "sha256": "1068104e831d360967e499ab771b36c1e6887a048bde7d1057c94c2241a3951b"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "sha256": "e08ee3a5eb7ed63179eaadd2608b07c5f32e911498ee6aa3408f08fab9830bb8"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "sha256": "41bef9fc4ce417ca04e41d3f5e233c94a8576348f2b050c36e6980784196ae67"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "81cfe6fcdb7f683161687ed8eba32963f0a6792f005c67ca2b86aeefc9fd208f"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/prepare.py",
+      "sha256": "c2ffbc8ba25484fe4a573059744bb5bf1d5a0c971b1673412be18de5779ed9f6"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/review.py",
+      "sha256": "6462c2a017b1b12faf47fb65b9299ab462414f11cdef3245049c1add3899f9cb"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/answer-quality-review.md",
+      "sha256": "a602ba234836c06c1aa63355b3a78ef6d4b0abfbf152f1b819baee1a33d1097a"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/disease-evidence-review.md",
+      "sha256": "328c786595e3bf865eba5514107a2303c95a42a71bba30ad09359a482a8ced92"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/admission.json",
+      "sha256": "452eea098420fd39e05d6c9017d675d65b4efbac0ebb4c6e8bad3838d4e7e18f"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/manifest.json",
+      "sha256": "0f62e2216a246a28b03f20309fd7b8db0c6b2267de5cacd088d9046ec6ac95cb"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-01.json",
+      "sha256": "758de2d0f1634e629f7b4da14677945855b083f9ce10646dd208877a146f0cea"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-02.json",
+      "sha256": "09b4fa04ac67e86181d56cfaccf76f44b1ecf6a5bc3d67c71238499a4ecd4921"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-03.json",
+      "sha256": "ff7e5394a7bc63a6b2e0897c159adff048aa49182f6509f92d3bccb47966ff50"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-04.json",
+      "sha256": "dc86e3a0e26d96f0cdb34b08a80829b3e9aef6ca7399683d39f689006340f724"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-05.json",
+      "sha256": "a36a57efde8c40620d5f1f7edee45f9328e17c3e993ea43575dd1f6ef7fe4230"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-06.json",
+      "sha256": "b8978f4992d8693b486e2eeb1829c1db20469b03299d110b7ad07c12ef993e76"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-07.json",
+      "sha256": "07afc08c0e97a47b0b28e6e7f5bdee8e02968d5b75f60884e2c836f3dec0a494"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-08.json",
+      "sha256": "bf3d14181aac417235c0fa65981a0ff23f8b3ccfbd4b74a949d602e8657d2bd8"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-09.json",
+      "sha256": "d27e1b98b0ac756a4a86ce617d4de4f5b3ee058149f76a9d729c666f696300c5"
+    },
+    {
+      "path": "outputs/prowl/answer-quality-20261017/run01/quality-10.json",
+      "sha256": "722210c12cd13308af4c478c17fea457bfa62495479905fea26c1151b2525b7c"
+    }
+  ],
+  "tests": {
+    "command": ".venv-retrieval/bin/python -m pytest tests/retrieval/test_quality_checkpoint.py tests/retrieval/test_labels.py tests/retrieval/test_corpus_inventory.py -q",
+    "passed": 39,
+    "failed": 0,
+    "new_harness_checks": 15
+  },
+  "verification": {
+    "plan_pins_unchanged": true,
+    "content_digests": true,
+    "disease_candidate_span_hashes_and_containment": true,
+    "response_identity_passes": 10,
+    "backend_health_policy": "natural-literature-answer-v6",
+    "ui_http_status": 200
+  },
+  "independent_review": "pending",
+  "protected_data_access": false,
+  "training": false,
+  "human_hours_credited": false,
+  "content_sha256": "7c3c069d6717bfe7bb627b2e7097db245f20cf162fcbf92c95ab1a45f5b9dd8f"
+}

@@ -1,9 +1,9 @@
 # AI expert completion specification
 
-**Version:** 1.22 — October 17, 2026 (answer failure and latency repair)\
+**Version:** 1.23 — October 17, 2026 (fixed answer-quality checkpoint)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
-**Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
+**Implementation baseline:** `ce2315f20c14956b30a09d63dade850a649632e1`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
 Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.
@@ -60,6 +60,16 @@ Policy v6 keeps exact membership/numeric checks and a concise separate model rev
 60-second generation budget, elapsed UI feedback and distinct failure explanations. The reported
 function question now completes in the real UI. This focused repair is not a broad quality pass;
 jargon, source-support reliability and formal evaluation remain AI-04 work. Prior trials stay intact.
+
+October 17 fixed [answer-quality checkpoint](ANSWER-QUALITY-CHECKPOINT-2026-10-17.md): ten serial
+requests under unchanged v6/corpus/ranking, no retries. Six literature requests yielded two summaries
+and four generation failures; four scope blocks were correct. Only one answer covered its intended
+content, with unexplained jargon; another overstated a recommendation and missed its disease focus.
+Both disease questions missed all known direct spans despite their presence in the corpus. Disease
+labels v2 expand five contexts and preserve v1; independent review remains pending. This diagnostic
+is not formal acceptance or tuning authority. Next complete label/exposure/independent-review
+reconciliation, then compare retrieval configurations and address ranked answer-policy failures.
+Readable actual outcomes and evidence pack are linked from the checkpoint. AI-03/AI-04 remain open.
 
 ## 1. Outcome and authority
 

@@ -1,0 +1,423 @@
+{
+  "version": "prowl-disease-label-candidates-v2",
+  "state": "engineering_reconciled_independent_review_pending",
+  "corpus_manifest_sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af",
+  "corpus_content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+  "ready_for_tuning": false,
+  "cases": [
+    {
+      "id": "q:disease-dev-05",
+      "question": "Could the size of the pancreas head indicate any specific diseases?",
+      "authorship": "Quinton",
+      "answerability": "answerable_general_context_candidate",
+      "scope_limit": "general_context_only; no supported head-size-to-disease rule",
+      "concepts": [
+        {
+          "id": "c:inflammatory-enlargement",
+          "requirement": "Describe reported inflammatory enlargement as a general association.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:inflammatory-head-masses",
+          "requirement": "Distinguish focal inflammatory head masses from a numerical head-size threshold.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:inflammatory-mimic",
+          "requirement": "Preserve overlap between inflammatory mass appearances and cancer.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:non-specific-finding",
+          "requirement": "State the source limitation on an individual imaging feature.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:reference-context",
+          "requirement": "Background only: reference eligibility depends on population context.",
+          "role": "background"
+        }
+      ],
+      "candidate_spans": [
+        {
+          "representation_id": "repr:e468633caa7cbc93d52539833d2fbb59269c891ee5c041924f059eee78e9e3f4",
+          "representation_sha256": "34a887352031f2ec17a449c20b5738801b799614fd5a615537c64f3790e8d421",
+          "start": 7238,
+          "end": 7442,
+          "grade": "direct",
+          "concept_ids": [
+            "c:inflammatory-enlargement"
+          ],
+          "work_id": "work:pmid:33982269",
+          "pmcid": "PMC8292294",
+          "section_id": "body-12",
+          "text_sha256": "8aa248f5ff62ee86e8b85fd036e4b9b30595f39d4e68be3184eb7f8ad792b375",
+          "passage_ids": [
+            "psg:66fefb66affdc5225ddb463ba871e1e955d40164d8110eb473cea79c35865b76"
+          ],
+          "qualification": "This is interstitial edematous pancreatitis within acute pancreatitis, not a prevalence statement about every enlarged pancreas."
+        },
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 6613,
+          "end": 6947,
+          "grade": "direct",
+          "concept_ids": [
+            "c:inflammatory-head-masses"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-9",
+          "text_sha256": "cf17b8dc976e0d221dd698090911a75064a7db10094cbf8da423f5b350456deb",
+          "passage_ids": [
+            "psg:161f313d357dd15d69402985e2db3a3c25c5328409b98a80dc3851c17fc2c237"
+          ],
+          "qualification": "The subject is mass-forming chronic pancreatitis (MFCP), not every pancreatic head mass."
+        },
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 15972,
+          "end": 16474,
+          "grade": "direct",
+          "concept_ids": [
+            "c:inflammatory-mimic"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-20",
+          "text_sha256": "fecead1b4033c0a9dbe62743cf339b123c25c2863ada5cdee7fdbf54559fe108",
+          "passage_ids": [
+            "psg:bb3d25599db010705a41dd127581310f2b8188ef54084a2aca58c837d8a0e001"
+          ],
+          "qualification": "The subject is focal autoimmune pancreatitis (AIP), which may mimic pancreatic ductal adenocarcinoma (PDAC)."
+        },
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 13793,
+          "end": 13914,
+          "grade": "direct",
+          "concept_ids": [
+            "c:non-specific-finding"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-18",
+          "text_sha256": "52f2f72f6139ebce6796ba156606adaf55c2b52841d5488f0a763f97aa685627",
+          "passage_ids": [
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        },
+        {
+          "representation_id": "repr:13ba89f0085954a270b297197f4014aaecf00c4fa57c418333b9d17c2135edba",
+          "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+          "start": 3590,
+          "end": 3688,
+          "grade": "partial_context",
+          "concept_ids": [
+            "c:reference-context"
+          ],
+          "work_id": "work:pmid:34698963",
+          "pmcid": "PMC8578112",
+          "section_id": "body-5",
+          "text_sha256": "d2371cf01f22fdb9074b1127bb7355665da25df6dddd2add8be7bbd4db3b4fdf",
+          "passage_ids": [
+            "psg:035b32e965a41d4b5e00ded080a8bf2ae28eea6f210ae36eaf123bed58ead7be"
+          ]
+        }
+      ],
+      "review": {
+        "source_review": "development_agent",
+        "agent_consistency_pass": "complete",
+        "independent_verification": "pending",
+        "human_evidence_acceptance": "not_recorded",
+        "clinical_validation": false
+      },
+      "source_search_scope": "Selected relevant sections of four new disease reviews; other corpus sources unjudged, not irrelevant.",
+      "scope_qualifications": [
+        "General inflammatory associations are answerable; a numerical head-diameter-to-disease rule is not supplied.",
+        "Do not interpret a particular scan or assign disease probability from size alone.",
+        "The non-specific imaging limitation is explicitly about MFCP versus PDAC; do not claim an exhaustive diagnostic rule.",
+        "Reference-population background remains optional, excluded from required concept and direct-gold counts."
+      ],
+      "labels": {
+        "schema_version": "1.0.0",
+        "question_id": "q:disease-dev-05",
+        "label_version": "disease-development-v2",
+        "answerable": true,
+        "required_concepts": [
+          "c:inflammatory-enlargement",
+          "c:inflammatory-head-masses",
+          "c:inflammatory-mimic",
+          "c:non-specific-finding"
+        ],
+        "spans": [
+          {
+            "representation_id": "repr:e468633caa7cbc93d52539833d2fbb59269c891ee5c041924f059eee78e9e3f4",
+            "representation_sha256": "34a887352031f2ec17a449c20b5738801b799614fd5a615537c64f3790e8d421",
+            "start": 7238,
+            "end": 7442,
+            "grade": "direct",
+            "concept_ids": [
+              "c:inflammatory-enlargement"
+            ]
+          },
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 6613,
+            "end": 6947,
+            "grade": "direct",
+            "concept_ids": [
+              "c:inflammatory-head-masses"
+            ]
+          },
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 15972,
+            "end": 16474,
+            "grade": "direct",
+            "concept_ids": [
+              "c:inflammatory-mimic"
+            ]
+          },
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 13793,
+            "end": 13914,
+            "grade": "direct",
+            "concept_ids": [
+              "c:non-specific-finding"
+            ]
+          }
+        ]
+      },
+      "minimum_known_passages_for_concept_coverage": 4,
+      "known_direct_work_ids": [
+        "work:pmid:32703312",
+        "work:pmid:33982269"
+      ],
+      "corpus_review_limit": "Selected source contexts reviewed; other sources are unjudged. This is not a complete 14-source gold set or the formal 30-case freeze.",
+      "content_sha256": "dbb75d87e4d3f3ae30c50b882df1a544fbab32f87e555d30a1f76b1f8b258a75"
+    },
+    {
+      "id": "q:disease-dev-08",
+      "question": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+      "authorship": "assistant; product relevance accepted by Quinton",
+      "answerability": "answerable_general_context_candidate",
+      "scope_limit": "general imaging context; no findings attributed to the selected scan",
+      "concepts": [
+        {
+          "id": "c:combination-required",
+          "requirement": "Preserve the limitation that a combination of findings matters.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:inflammatory-features",
+          "requirement": "Describe the reported inflammatory feature combination without assigning it to a scan.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:pdac-secondary-signs",
+          "requirement": "Describe cited secondary signs in the PDAC source context.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:ct-phase-context",
+          "requirement": "Keep contrast-phase and autoimmune-pancreatitis context attached to the CT claim.",
+          "role": "required_general_context"
+        },
+        {
+          "id": "c:mr-modality-context",
+          "requirement": "Keep MRCP evidence labeled as MRCP, not a finding measurable from any CT outline.",
+          "role": "required_general_context"
+        }
+      ],
+      "candidate_spans": [
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 13793,
+          "end": 14039,
+          "grade": "direct",
+          "concept_ids": [
+            "c:combination-required"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-18",
+          "text_sha256": "3f3d7a933f4e239dfe86f04e63d5587fe841192c74d8f36b564c860fbcef43ab",
+          "passage_ids": [
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        },
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 14040,
+          "end": 14175,
+          "grade": "direct",
+          "concept_ids": [
+            "c:inflammatory-features"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-18",
+          "text_sha256": "8ac2279ec93e8da607d382713cf8e778351a91a22ddd5a53c8c41760c65e6ea7",
+          "passage_ids": [
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        },
+        {
+          "representation_id": "repr:7f926ce2b482c8640fffa87d1a5102daabbc83ac2e193bf79da5e857fd2a1800",
+          "representation_sha256": "34b09317d7cb7d5e81cf807830d05bc7afb306cf9f107b8e58b1955c4dc7c539",
+          "start": 6339,
+          "end": 6781,
+          "grade": "direct",
+          "concept_ids": [
+            "c:pdac-secondary-signs"
+          ],
+          "work_id": "work:pmid:32335790",
+          "pmcid": "PMC7183518",
+          "section_id": "body-7",
+          "text_sha256": "277779fcf4a65aa9e72f1bea1da74082c7fca54a0b685c003e91b683fea39971",
+          "passage_ids": [
+            "psg:51c39ff184675d5f6014adcd6d0d110aa60aa0c8110670b7ada454e48f443256"
+          ],
+          "qualification": "Preserve the subtle/small isoattenuating PDAC context; these signs are not proof of cancer."
+        },
+        {
+          "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "start": 16559,
+          "end": 16837,
+          "grade": "direct",
+          "concept_ids": [
+            "c:ct-phase-context"
+          ],
+          "work_id": "work:pmid:32703312",
+          "pmcid": "PMC7376657",
+          "section_id": "body-20",
+          "text_sha256": "445fc2238f4b7c0deeddc989e9b789959f459f6bc9433c9c1bb317b4611d2d87",
+          "passage_ids": [
+            "psg:e4c0179d652101d690e5510e1df5befdb31d4aa50317759df2bc2ce50c872818"
+          ]
+        },
+        {
+          "representation_id": "repr:13ba89f0085954a270b297197f4014aaecf00c4fa57c418333b9d17c2135edba",
+          "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+          "start": 6704,
+          "end": 7162,
+          "grade": "direct",
+          "concept_ids": [
+            "c:mr-modality-context"
+          ],
+          "work_id": "work:pmid:34698963",
+          "pmcid": "PMC8578112",
+          "section_id": "body-12",
+          "text_sha256": "3116d0f2f18abab13ea0415750eae1df49c1cc15d9e728fccfabb99a00f6dde7",
+          "passage_ids": [
+            "psg:43063da3144fefc571577fcf2ea71bc3c4656e82a1a08b5d0f31b9fc1a9f6863"
+          ],
+          "qualification": "These are AIP-related main-duct findings described with MRCP; do not imply measurement from a CT outline."
+        }
+      ],
+      "review": {
+        "source_review": "development_agent",
+        "agent_consistency_pass": "complete",
+        "independent_verification": "pending",
+        "human_evidence_acceptance": "not_recorded",
+        "clinical_validation": false
+      },
+      "source_search_scope": "Selected relevant sections of four new disease reviews; other corpus sources unjudged, not irrelevant.",
+      "scope_qualifications": [
+        "Describe general imaging evidence, not findings detected in the selected scan.",
+        "Name the inflammation subtype, imaging modality and contrast phase when stating subtype/phase-specific findings.",
+        "The whole combination and its limitations matter; avoid a single-feature diagnostic conclusion.",
+        "MRCP findings must not be presented as measurements obtained from a CT segmentation."
+      ],
+      "labels": {
+        "schema_version": "1.0.0",
+        "question_id": "q:disease-dev-08",
+        "label_version": "disease-development-v2",
+        "answerable": true,
+        "required_concepts": [
+          "c:combination-required",
+          "c:inflammatory-features",
+          "c:pdac-secondary-signs",
+          "c:ct-phase-context",
+          "c:mr-modality-context"
+        ],
+        "spans": [
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 13793,
+            "end": 14039,
+            "grade": "direct",
+            "concept_ids": [
+              "c:combination-required"
+            ]
+          },
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 14040,
+            "end": 14175,
+            "grade": "direct",
+            "concept_ids": [
+              "c:inflammatory-features"
+            ]
+          },
+          {
+            "representation_id": "repr:7f926ce2b482c8640fffa87d1a5102daabbc83ac2e193bf79da5e857fd2a1800",
+            "representation_sha256": "34b09317d7cb7d5e81cf807830d05bc7afb306cf9f107b8e58b1955c4dc7c539",
+            "start": 6339,
+            "end": 6781,
+            "grade": "direct",
+            "concept_ids": [
+              "c:pdac-secondary-signs"
+            ]
+          },
+          {
+            "representation_id": "repr:7d9c55993717476eab871c27d5905d8d227307908f44a202aad1ad6dea3edc7d",
+            "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+            "start": 16559,
+            "end": 16837,
+            "grade": "direct",
+            "concept_ids": [
+              "c:ct-phase-context"
+            ]
+          },
+          {
+            "representation_id": "repr:13ba89f0085954a270b297197f4014aaecf00c4fa57c418333b9d17c2135edba",
+            "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+            "start": 6704,
+            "end": 7162,
+            "grade": "direct",
+            "concept_ids": [
+              "c:mr-modality-context"
+            ]
+          }
+        ]
+      },
+      "minimum_known_passages_for_concept_coverage": 4,
+      "known_direct_work_ids": [
+        "work:pmid:32335790",
+        "work:pmid:32703312",
+        "work:pmid:34698963"
+      ],
+      "corpus_review_limit": "Selected source contexts reviewed; other sources are unjudged. This is not a complete 14-source gold set or the formal 30-case freeze.",
+      "content_sha256": "b922aa6bc67973760bcdd5924bd0a1aee5e71f40fe47652bd52b312113a80eca"
+    }
+  ],
+  "parent": {
+    "path": "configs/evidence/evaluation/development-disease-candidates-v1.json",
+    "sha256": "68fc89d9a4891153c27458d4c8e2539da1838893be90c9692cf806a94c92c0d9"
+  },
+  "content_sha256": "0b26ac3c04807f1dfc5f253d710d53e0215cd7061aa14009f861e667e0e0c66e"
+}

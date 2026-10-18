@@ -1,5 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 fixed answer-quality checkpoint:** Read ANSWER-QUALITY-CHECKPOINT-2026-10-17.md
+> and spec1.23. One ten-case development batch FINISHED (session48152), no retries: six literature
+> requests produced two summaries/four failures; four scope blocks correct. All ten provenance
+> checks passed, but 01 is nonresponsive and strengthens a recommendation; 05 supports both functions
+> yet retains jargon. Only1/5 intended answerable cases content-complete;0/5 fully clean with readability.
+> Known disease spans missed0/4 and0/5; volume case1/6. Actual latency6.427–15.574s, not a benchmark.
+> Three exact citations; four atomic claims/three supported/one unsupported strengthening.
+> New harness, pinned plan, per-case review and checkpoint receipt;39focused Python checks pass.
+> Local readable report/raw run outputs/prowl/answer-quality-20261017/; no raw source text committed.
+> Disease labels v2 expand5/10 spans, preserve v1; independent reviewer/decisions PENDING.
+> Ask no article-search/offset work of Quinton. Public exposure supplement remains unintegrated;
+> private checker still uses older inventory. No protected authoring until scope/exposures reconciled.
+> Next finish independent labels/protocol freeze, then retrieval comparison and ranked policy fixes.
+> Runtime/corpus/ranking/UI unchanged; backend99570/UI67009 last owned sessions, verify fresh state.
+> No rerun of finished batch, training/fullselector, private data or human-hours credit.
+
 > **October 17 answer failure repair:** Read ANSWER-FAILURE-REPAIR-2026-10-17.md and spec1.22.
 > User's visible function question reproduced citation-marker numeric rejection; further diagnosis
 > found copied-quote/Unicode/duplicate-reference failures and a slow reasoning review. Final v6

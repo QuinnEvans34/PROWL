@@ -1958,3 +1958,21 @@ navigation verified.94Python/41UIchecks/build pass. Eight diagnostics/12model ca
 retained; intermediate false pass not promoted. Broader quality and jargon remain open, not a full
 AI-04 acceptance. Spec1.22, checkpoint-v2 and exposure-v2 preserve earlier records. Owned backend
 session99570 and UI67009 restored; no training/corpus/ranking/protected data or human-hours changes.
+
+
+## 2026-10-17: Fixed answer-quality checkpoint
+
+User accepted starting the proposed checkpoint. Reconciled two disease candidates into v2, expanding
+five source contexts and preserving all original labels. Independent reviewer/decisions remain
+pending; supplied a two-question source pack requiring no article search. Pinned a ten-case exposed
+diagnostic before execution; retained one response per case, no retries and no expected-answer input.
+Six literature requests: two summaries/four generation failures; four scope blocks correct. Agent
+review found only one content-complete answer with jargon, plus one nonresponsive background answer
+that strengthens a recommendation. Three exact citation bindings do not establish semantic support:
+four atomic claims/three supported/one unsupported. Disease known spans0/4 and0/5, volume1/6;
+retrieval misses evidence already present. Six literature latencies6.427–15.574s; no percentile claim.
+39targeted Python checks pass. Public plan/review/checkpoint/exposure supplement, local readable
+Markdown with actual answers and sources, spec1.23 and handoff updated. AI-03/AI-04 remain open.
+Next complete independent label/exposure/protocol freeze, then compare retrieval and revise answer
+policy against ranked failures. Corpus/prompt/ranking unchanged; no protected content, training,
+fullselector, new downloads or inferred human hours. Batch session48152 finished; do not rerun.
