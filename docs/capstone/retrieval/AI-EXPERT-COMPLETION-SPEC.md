@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.18 — October 17, 2026 (offline literature adapter and candidate labels)\
+**Version:** 1.19 — October 17, 2026 (live development source search)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Offline routing and literature evidence adapter delivered; two disease-label candidates prepared. Next reconcile these labels and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search is delivered under the user-authorized sequencing amendment; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
@@ -30,6 +30,14 @@ supplied rankings to canonical corpus evidence without generating answers. 127 t
 two actual-corpus membership replays pass. Ten source spans for two disease questions remain
 provisional; independent review and answerability adjudication are pending. A 44-wording exposure
 supplement is recorded for integration before private authoring. No search/tuning release follows.
+
+October 17 sequencing amendment: Quinton explicitly requested autonomous work until a typed literature
+question returns real inspectable results in the local UI. [Live development search](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md)
+is now delivered as [AI-09](https://trello.com/c/AcXlKWQg), before final evaluation. It uses the unchanged
+14-source corpus and existing dense exact top5 configuration. This supersedes the earlier no-live-search
+sequencing statements only for this local source-excerpt interface. No configuration tuning, generation,
+protected-set access, clinical acceptance or measurement integration follows. Steps 5–9 and their
+thresholds remain open. The earlier offline reviewed-question path keeps its admission contract.
 
 ## 1. Outcome and authority
 
@@ -325,6 +333,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 4b / AI-08 | Complete — source slice only | Four disease references added to a separate14-source/1,179-passage collection; exact rebuild, old inventories and58tests verified. [Report](DISEASE-REFERENCE-CORPUS-2026-10-17.md). |
 | Step 5 / AI-03 | In progress — development review complete for prior scope | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
+| Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 
 Excluded from this completion plan: actual training/fine-tuning runs (reviewed feedback integration is required), autonomous clinical decisions, broad report

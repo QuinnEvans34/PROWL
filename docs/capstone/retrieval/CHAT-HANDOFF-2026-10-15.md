@@ -1,5 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 LIVE development source search delivered:** User explicitly authorized autonomous
+> continuation until typed literature questions return real results in local UI. This documented
+> sequencing amendment allows fixed development source retrieval before final evaluation; no tuning.
+> Read LIVE-DEVELOPMENT-SEARCH-2026-10-17.md and spec1.19. /research on5180 has free-text panel;
+> new loopback service8016 runs scripts/serve_literature_search.py (owned session40479 at handoff).
+> Existing research-disease-v1:14papers/1179passages/41batches; exactdense top5, pinned localencoder,
+> read-only inventory-verified queries. Evidence excerpts/citations only, no generation or scan data.
+> 127Python/22UIchecks pass; build passes with large imaging/compression chunk warning. Real API
+> and browser verify two questions/fivehits each, source expansion, stale clearing and scan refusal.
+> No browserconsoleerrors observed. Screenshot/local evidence outputs/prowl/live-search-20261017/.
+> Queries not automatically saved/logged; intentional engineering smoke artifacts remain development
+> exposures. AI-09 complete. Next AI-03 labels/independentverification/exposure reconciliation before
+> protected freeze/configuration comparison, then summaries. Keep measurement extension after core.
+> No protected-content access, newsource/modeldownloads, training/fullselector or humanhours credit.
+> Earlier no-live-endpoint passages below are historical. Service availability must be checked afresh.
+
 > **October 17 literature evidence adapter delivered:** Read LITERATURE-ADAPTER-2026-10-17.md,
 > spec v1.18. New literature_adapter.py verifies canonical corpus, caller-owned scope reviews,
 > request/config-bound tickets and supplied ordered snapshots; evidence is never an answer.

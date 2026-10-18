@@ -1,0 +1,66 @@
+"""Ephemeral local library search, deliberately separate from clinical question answering."""
+import re
+import unicodedata
+from threading import Lock
+
+from .direct_ingestion import digest
+from .question_routing import plan_request
+
+
+def search_scope(request):
+    plan = plan_request(request)  # Closed input, UUID/text checks, known refusals.
+    text = unicodedata.normalize('NFKC', plan['question_normalized']).casefold()
+    if plan['status'] == 'refused':
+        return 'out_of_scope'
+    if re.search(r'\b(this|my|our)\b|\b(the|a) patient\b', text):
+        return 'case_context_unavailable'
+    if plan['route'] == 'measurement':
+        return 'measurement_unavailable'
+    if not re.search(r'\b(pancrea\w*|pdac)\b', text):
+        return 'pancreas_topic_required'
+    return None
+
+
+class DevelopmentSearch:
+    """One bounded exact-search call; no answer catalog, labels, prompt or persistence.
+
+    Keyword checks are a conservative convenience, not semantic privacy certification.
+    Only public-literature questions belong in this opt-in local research interface.
+    """
+    def __init__(self, corpus, config, retrieve):
+        if (config['corpus_content_sha256'] != corpus.target['inventory']['content_sha256']
+                or config['encoder_id'] != corpus.target['inventory']['encoder_id']
+                or config['manifest']['sha256'] != corpus.target['manifest_sha256']
+                or config['top_k'] != 5 or config['generation'] is not False
+                or config['query_expansion'] is not False):
+            raise ValueError('Development search configuration mismatch')
+        self.corpus, self.config, self.retrieve = corpus, dict(config), retrieve
+        self.lock = Lock()
+
+    def search(self, request):
+        reason = search_scope(request)
+        base = dict(schema_version='prowl-development-search-response-v1',
+            request_id=request['request_id'], question=request['question'],
+            collection=self.config['collection'], target=self.corpus.target,
+            configuration_sha256=digest(self.config), generation='not_called', answer=None)
+        if reason:
+            return dict(base, state='not_searched', reason=reason, evidence=[])
+        if not self.lock.acquire(blocking=False):
+            raise OSError('Search busy')
+        try:
+            ticket = dict(version='prowl-development-search-ticket-v1',
+                request_id=request['request_id'], request_sha256=digest(request),
+                question=request['question'], target=self.corpus.target,
+                configuration_sha256=digest(self.config), limit=self.config['top_k'])
+            ticket['content_sha256'] = digest(ticket)
+            hits = self.retrieve(request['question'])
+            if not isinstance(hits, list) or len(hits) > self.config['top_k']:
+                raise ValueError('Invalid search result count')
+            snapshot = dict(version='prowl-literature-snapshot-v1',
+                ticket_sha256=ticket['content_sha256'], state='complete', failure_code=None,
+                hits=[dict(passage_id=h['record']['passage']['passage_id'],
+                    record_sha256=digest(h['record']), score=h['score']) for h in hits])
+            evidence = self.corpus.bind_snapshot(ticket, snapshot)
+            return dict(base, state=evidence['state'], reason=None, evidence=evidence['evidence'])
+        finally:
+            self.lock.release()

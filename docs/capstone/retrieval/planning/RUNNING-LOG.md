@@ -1898,3 +1898,23 @@ unreviewed papers unjudged. Added44-wording exposure supplement; old inventory/a
 fixed and private-checker integration remains next. Spec1.18/report/handoff/Trello track current scope.
 Next reconcile labels/evaluation and independent verification before protected authoring/freeze/tuning.
 No protected-content access, patient/report reads, training/fullselector work or inferred human hours.
+
+
+## 2026-10-17: Live development literature search
+
+Quinton authorized autonomous implementation until he can type a literature question and inspect
+real source results locally. Spec1.19 records this sequencing amendment before final evaluation;
+fixed dense exact top5/source excerpts only. New loopback8016 API + /research free-text panel reuse
+research-disease-v1 (14papers/1179passages), pinned encoder, read-only DB transactions and exact
+inventory/canonical evidence validation. Existing reviewed adapter admission stays intact; separate
+local-library policy is versioned. No saved question/answer catalog, query expansion or generation.
+
+127 Python and22UI checks pass; production build passes with large imaging/compression chunk warning.
+Three real API smokes and real browser interaction verify five results for two literature questions,
+source expansion/link/attribution, changed-question clearing and unavailable scan guidance. Browser
+console has no observed errors. Report LIVE-DEVELOPMENT-SEARCH-2026-10-17.md, local evidence and
+screenshot outputs/prowl/live-search-20261017/. AI-09 complete; AI-03 remains evaluation in progress.
+All implementation/smoke question wordings are exposed development material; reconcile exposure
+supplements before private authoring. No held-out reads, thresholds changed, corpus mutations,
+training/fullselector/newmodeldownload or inferred human hours. Next evaluation-label reconciliation
+and independent verification, then frozen retrieval comparison and readable summaries.

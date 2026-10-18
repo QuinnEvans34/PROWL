@@ -13,3 +13,13 @@
 .guided-evidence [role=alert] { color: #f5ce88; }
 .guided-evidence :focus-visible { outline: 2px solid #f5ce88; outline-offset: 3px; }
 .review-stage:has(.guided-evidence[open]) { overflow-y: auto; }
+
+.literature-search { padding: 24px; margin: 24px 0 32px; }
+.literature-search h2 { margin: 0 0 12px; }
+.literature-search textarea { box-sizing: border-box; width: 100%; resize: vertical; min-height: 90px; font: inherit; padding: 12px; color: #e6edf5; background: #1d2b40; border: 1px solid #6e819b; border-radius: 6px; }
+.literature-search__notice { color: #c8d5e5; font-size: 14px; margin-top: 8px !important; }
+.literature-search__actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.literature-search__actions span { margin-left: auto; font-size: 13px; color: #bac8d9; }
+.literature-search__result { padding: 14px; border: 1px solid #3c4d65; border-radius: 6px; }
+.literature-search__result summary { line-height: 1.5; }
+.literature-search > small { display: block; margin-top: 16px; color: #bac8d9; }

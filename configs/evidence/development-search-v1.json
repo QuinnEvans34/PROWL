@@ -1,0 +1,18 @@
+{
+  "version": "prowl-development-search-v1",
+  "mode": "local_development_excerpts",
+  "collection": "research-disease-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "corpus_content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+  "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+  "source_count": 14,
+  "passage_count": 1179,
+  "retriever": "dense-exact-cosine-v1",
+  "top_k": 5,
+  "query_expansion": false,
+  "generation": false,
+  "scope_policy": "general-literature-search-v1"
+}

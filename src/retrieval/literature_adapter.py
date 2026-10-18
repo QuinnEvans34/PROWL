@@ -81,6 +81,20 @@ class FrozenLiterature:
         The adapter preserves order and scores; it does not rank, select or judge support.
         """
         ticket = self.prepare(request, plan, scope_review=scope_review, retriever=retriever, limit=limit)
+        return self.bind_snapshot(ticket, snapshot)
+
+    def bind_snapshot(self, ticket, snapshot):
+        """Resolve evidence for a trusted caller-created ticket, without granting scope.
+
+        The live development search uses its separately versioned local-library policy.
+        Its service constructs tickets; neither HTTP clients nor providers choose them.
+        Existing reviewed-question admission remains in prepare()/accept().
+        """
+        if (ticket.get('target') != self.target or ticket.get('content_sha256') != digest(
+                {k: v for k, v in ticket.items() if k != 'content_sha256'})
+                or type(ticket.get('limit')) is not int or not 1 <= ticket['limit'] <= 50):
+            raise ValueError('Invalid trusted ticket binding')
+        limit = ticket['limit']
         _closed(snapshot, ('version', 'ticket_sha256', 'state', 'failure_code', 'hits'))
         if snapshot['version'] != 'prowl-literature-snapshot-v1' or snapshot['ticket_sha256'] != ticket['content_sha256']:
             raise ValueError('Snapshot request/corpus/configuration mismatch')
@@ -108,7 +122,7 @@ class FrozenLiterature:
                 raise ValueError('Invalid ranking score')
             seen.add(pid)
             evidence.append(dict(rank=rank, score=hit['score'], record=json.loads(self._records[pid])))
-        result = dict(version='prowl-literature-evidence-v1', request_id=request['request_id'],
+        result = dict(version='prowl-literature-evidence-v1', request_id=ticket['request_id'],
             ticket_sha256=ticket['content_sha256'], snapshot_sha256=digest(snapshot), target=self.target,
             state='retrieval_failed' if snapshot['state'] == 'failed' else
                 ('evidence_unassessed' if evidence else 'no_results'),
