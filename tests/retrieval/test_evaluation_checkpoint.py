@@ -71,3 +71,13 @@ def test_external_receipt_symlink_rejected_before_open(tmp_path):
     (p/'heldout-receipt-v2.json').symlink_to(tmp_path/'private.json')
     with pytest.raises(ValueError,match='bounded public'):
         checkpoint(tmp_path,'heldout-receipt-v2.json')
+
+
+def test_no_sole_source_cases_has_zero_concentration():
+    r=frozen();r['maximum_single_gold_source_question_count']=0
+    assert check(r)['freeze_attested']
+
+
+def test_one_sole_source_may_not_dominate_heldout():
+    r=frozen();r['maximum_single_gold_source_question_count']=11
+    with pytest.raises(ValueError,match='Source concentration'):check(r)

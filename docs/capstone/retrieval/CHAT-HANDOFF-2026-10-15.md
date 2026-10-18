@@ -1,5 +1,20 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 development review COMPLETE / private authoring preparation delivered:** Quinton
+> explicitly accepts changed questions/evidence and confirms the full 30-question consistency pass.
+> V5 now has three appended events; all30 wording/evidence/consistency accepted, prior v4 fixed.
+> Corpus v2 and draft v5/80spans unchanged. Read PRIVATE-EVALUATION-QUICKSTART.md next.
+> Offline human-only private checker, closed schema, blank templates and pinned public-exposure
+> inventory delivered. 28 invented private-validator tests +36 public-checkpoint tests pass.
+> Source-reading pack: outputs/prowl/evaluation-private-preparation-20261017/source-reading/README.md,
+> ten sources/947passages. Exposure inventory142records/64wordings/31intents; semantic duplication
+> remains human review. Agent must not author/read actual protected questions or run private CLI.
+> No encrypted image/storage allocation/backup/private validation performed; heldout receipt remains
+> not_created. Private authoring/semantic review/backup/freeze is next, then Step6 development
+> comparisons. Source concentration allows0sole-source questions but rejects >10from one source.
+> No tuning/model/DB/service/training/fullselector operations or inferred hours. Spec v1.14,
+> AI-03 remains In Progress. Earlier pending-development/undelivered-checker text is historical.
+
 > **October 17 targeted coverage v2 / checkpoint prepared:** Quinton authorized one targeted update
 > followed by evaluation. Separate v2/rebuild: 10 sources/947 passages/32 batches, SHA
 > `6978c2f0aaef592efaec76792c615d2fd96e63fde37688d0b595e2f003baeb8d`; all 23 old batches and

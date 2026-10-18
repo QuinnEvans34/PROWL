@@ -1,0 +1,44 @@
+{
+  "id": "q:heldout-NN",
+  "version": 1,
+  "split": "held_out",
+  "primary_need": "",
+  "family": "",
+  "difficulty": "",
+  "intent_group": "",
+  "question": "",
+  "finding": {
+    "modality": "CT",
+    "anatomy": "pancreas",
+    "task": "review",
+    "finding_state": "candidate"
+  },
+  "authorship": {
+    "author": "Quinton Evans",
+    "basis": "",
+    "exposed": false
+  },
+  "expected": {
+    "status": "",
+    "reason": "",
+    "boundary": ""
+  },
+  "concepts": [],
+  "labels": {
+    "schema_version": "1.0.0",
+    "question_id": "q:heldout-NN",
+    "label_version": "heldout-v1",
+    "answerable": false,
+    "required_concepts": [],
+    "spans": []
+  },
+  "source_judgments": [],
+  "review": {
+    "reviewer": "Quinton Evans",
+    "reviewed_at": "",
+    "human_adjudication": "pending",
+    "second_consistency": "pending",
+    "notes": ""
+  },
+  "content_sha256": ""
+}

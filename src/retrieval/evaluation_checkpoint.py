@@ -50,8 +50,9 @@ def validate_heldout_receipt(receipt, *, corpus_sha256, development_sha256):
         raise ValueError('All answerable families must be represented')
     if difficulty is None or sum(difficulty.values()) != 30 or min(difficulty.values()) < 1:
         raise ValueError('All difficulty categories must be represented')
-    if receipt['maximum_single_gold_source_question_count'] is None:
-        raise ValueError('Source concentration review count missing')
+    concentration = receipt['maximum_single_gold_source_question_count']
+    if concentration is None or concentration > 10:
+        raise ValueError('Source concentration missing or one paper solely supports most answerable cases')
     return dict(state='freeze_attested', freeze_attested=True,
                 limitation='Public structural checks and human attestations; no private content or backup was inspected by the agent.')
 

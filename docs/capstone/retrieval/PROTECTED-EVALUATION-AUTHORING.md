@@ -83,7 +83,8 @@ gate, generated answers or whichever retriever happens to succeed.
 
 The development-draft validator deliberately refuses held-out records and self-attested approval.
 Do not point it at the protected store. This worksheet reuses the shared query/span conventions;
-a private held-out authoring/validation runner has not been delivered or executed here.
+the [private offline checker and quickstart](PRIVATE-EVALUATION-QUICKSTART.md) are now delivered,
+qualified with invented inputs only. No actual protected content has been validated here.
 
 ## 4. Freeze only after both splits are ready
 
