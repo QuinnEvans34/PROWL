@@ -1,5 +1,25 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 separate-review V22 finished/not promoted:** User explicitly requested full feedback
+> integration, separate factual-support/completeness/readability checks and one bounded source-reviewed
+> quality check, promotion only on pass. Read spec1.30 and SEPARATE-REVIEW-V22-RESULTS-2026-10-18.md.
+> Implementation616c416:one complete-feedback revision, three distinct review inputs/schemas, no
+> unchecked final rewrite.12new+7existing tests pass. Attempt1 first coldloadtimeout60.006s, second
+> request canceled after100provider-logtokens;2chatattempts/0responses, worker reaped exit-15. Preserve
+> started/partial receipt and separate stop receipt. Attempt2 records resident-model readiness and
+> corrects custom transport55s inference/5s cleanup; same policy/prompts/model/questions. All10done:
+>0summaries/5withheld(3timeouts/2validation)/1empty/4blocks,35chatattempts/32responses/6unloads/277.555s;
+> supervisor279.082s/14,300,217,344B/reaped. Manual11paragraph citation audit still finds unsupported
+> details and false model approvals; no quality improvement claimed. No UI promotion, no candidate
+> rerun/sweep. Aggregate configs/evidence/separate-review-v22-results.json; local readable-review.md
+> in outputs/prowl/section-answers-v22-attempt2-20261018/. All producing snapshots/pins retained.
+> Services were stopped on arrival except DB; baseline restored:API62517/PID71656/8016 densev6.1,
+> UI96908/PID71727/5180, originalOllama91143/PID71550/11434. Verify current health before reuse.
+> Candidate71619/session1770 stopped/unloaded exit0, modelstore preserved; do not poll as live.
+> Next explicit evidence-bound study metadata/qualifiers and bounded evidence-located review issues,
+> with measured latency; no more same-question prompt/model sweep. Formal retrieval/evaluation/
+> independent review/measurement gates open. No training/fullselector/protectedcontent/hours change.
+
 > **October18 autonomous quality checkpoint complete; answer quality NOT accepted:** Read spec1.29,
 > INSTRUCTION-ANSWER-RESULTS-2026-10-18.md and earlier section retrieval/answer reports. R8 retrieves
 > useful sections but original label/gates remain unmet. No relabeling. V15 model download completed;

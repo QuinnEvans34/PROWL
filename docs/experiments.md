@@ -4025,3 +4025,11 @@ V22 attempt1 retained as stopped/partial: first cold-load timeout60.006s; second
 attempt2, recorded readiness amendment and corrected test transport55s inference/5s cleanup (the
 candidate default already used55s). Same prompts/model/questions; max50combinedchatattempts. Attempt2
 must record resident16384context; cold-start latency is not included or claimed solved.
+
+V22 complete/rejected: [results](capstone/retrieval/SEPARATE-REVIEW-V22-RESULTS-2026-10-18.md).
+Attempt2 all10cases/277.555s:0summaries,5withheld(3timeouts/2validation),1empty,4scopeblocks;
+35chatattempts/32responses/6unloads. Supervisor279.082s/14,300,217,344B/reaped. All11final retained
+draft paragraphs source-audited: unsupported metadata/scope and false model approvals remain.
+12new orchestration+7existing feedback tests pass. No promotion or demonstrated quality improvement.
+Baseline demo restored, candidate stopped/store preserved. No corpus/labels/protected/training/hours
+changes. Next evidence-bound metadata and evidence-located review issues/latency, not another sweep.

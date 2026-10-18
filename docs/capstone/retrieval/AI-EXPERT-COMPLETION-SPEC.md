@@ -1,9 +1,19 @@
 # AI expert completion specification
 
-**Version:** 1.29 — October 18, 2026 (instruction-model checkpoint; candidates rejected)\
+**Version:** 1.30 — October 18, 2026 (separate review integrated; V22 not promoted)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October18 requested three-part implementation/checkpoint is complete: [V22 results](SEPARATE-REVIEW-V22-RESULTS-2026-10-18.md).
+Complete validation feedback now feeds one revision; factual-support, completeness and readability
+have separate calls/schemas/inputs, with no later unchecked rewrite.12new+7existing tests pass.
+One cold-load attempt was stopped and retained; one readiness-corrected ten-case run completed:
+0summaries/5withheld/1empty/4scopeblocks,35chatattempts/32responses/277.555s. Manual review of all
+11withheld draft paragraphs finds unsupported source qualifications and same-model false approvals.
+Three timeouts show the added review cost. No quality improvement or formal acceptance claimed;
+V22 is rejected and not promoted. Baseline dense/v6.1 demo restored, candidate server stopped.
+Next evidence-bound metadata/criterion issues and measured review latency, not another prompt sweep.
 
 October18 checkpoint: [instruction-model results](INSTRUCTION-ANSWER-RESULTS-2026-10-18.md).
 V15–V21 remain unpromoted. Citation-isolated review, paper focus, complete numerical feedback and
