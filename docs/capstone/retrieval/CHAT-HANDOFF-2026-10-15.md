@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October18 disease facts assembled; live retrieval gap explicit:** User approved qualitative extension
+> with tests/Trello/commits. Read DISEASE-FACT-RESULTS-2026-10-18.md/spec1.33. Implementation18b1875 adds
+> three Schima2020 records, separately reviewed spans, deterministic relations and mandatory qualifiers.
+>46focused invented tests pass; pytest reserved-name collection error fixed before any execution and
+> retained in plan/results. One actual canary FINISHED exit0,0.838s/two source-only queries/zero modelcalls;
+>1179canonical passages checked. Live dense selects0/3typed requests, retained R8+context selects2/3,
+> seeded canonical anchors3/3. Do not count seeds/replay as live retrieval success. Five rendered outputs,
+> three distinct envelopes;15source-statement instances source-reviewed supported, three application
+> limits separately labeled. Single engineering reviewer, independent acceptance pending. Local evidence:
+> outputs/prowl/source-facts-disease-v1-20261018/readable-review.md plus receipt/snapshots/answers.
+> Preserve MRCP, focal-AIP portal-venousCT and duct/atrophy cluster, calcification morphology, MFCP/PDAC
+> overlap/single-feature/combination limits.≤5mm refers to upstream main duct, not head/lesion size.
+> No production promotion:8016dense/v6.1unchanged,UI5180HTTP200,no service changes. No Ollama/training/
+> fullselector/protecteddata/download/humanhours. Structured intents remain harness-supplied; hash pins
+> do not prove semantic truth. Next qualify retrieval-to-record selection/free-text intent, especially
+> focal-AIP anchor44gap, then output adapter.6/8/4statements exceed existing three-claim contract; do not
+> relax implicitly. AI-04 remains In Progress; independent evaluation/measurement gates remain open.
+
 > **October18 source-linked volume prototype passes bounded assembly:** User approved fact records
 > and qualification tests with Trello/Git updates. Read SOURCE-FACT-RESULTS-2026-10-18.md/spec1.32.
 > Implementation f2ec3f2:two reviewed MRI study-group records, twelve bound source fields and required

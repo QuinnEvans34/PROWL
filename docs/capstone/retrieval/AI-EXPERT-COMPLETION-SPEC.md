@@ -1,9 +1,20 @@
 # AI expert completion specification
 
-**Version:** 1.32 — October 18, 2026 (volume fact assembly qualified in bounded prototype)\
+**Version:** 1.33 — October 18, 2026 (disease fact assembly passes; live retrieval gap retained)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 18 disease-comparison extension: [plan](DISEASE-FACT-PLAN-2026-10-18.md) and
+[results](DISEASE-FACT-RESULTS-2026-10-18.md). Three reviewed records preserve focal-mass scope,
+MFCP/PDAC overlap and combined-feature limits, MRCP identity, calcification morphology and focal-AIP
+portal-venous CT/duct/atrophy qualifications. 46 focused tests pass. One canary: two source-only searches,
+zero model calls, 0.838s. Fresh dense search selects 0/3 structured record requests; retained R8+context
+selects 2/3; deliberately seeded canonical anchors assemble 3/3. Seeds are not retrieval successes.
+Fifteen source-statement instances source-reviewed by one engineering agent; independent review pending.
+This qualifies bounded deterministic assembly, not free-text routing, model reasoning or full answers.
+Next retrieval-to-record selection/intent binding (especially focal-AIP coverage), then a qualified
+output adapter; live dense/v6.1 remains unchanged. Existing evaluation/measurement gates remain open.
 
 October18 source-linked fact prototype: [plan](SOURCE-FACT-PLAN-2026-10-18.md) and
 [results](SOURCE-FACT-RESULTS-2026-10-18.md). Two separately reviewed MRI study-group records now

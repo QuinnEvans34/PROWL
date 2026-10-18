@@ -1,0 +1,675 @@
+{
+  "version": "disease-fact-results-v1",
+  "implementation_commit": "18b1875",
+  "status": "bounded_assembly_pass_live_retrieval_gap",
+  "corpus": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "canary_receipt": {
+    "path": "outputs/prowl/source-facts-disease-v1-20261018/receipt.json",
+    "sha256": "13d5e8447f5628137921fb8c1f2539f02ae984b9cf438f69f36b64841a03310c"
+  },
+  "producing_pins": [
+    {
+      "path": "src/retrieval/disease_fact_records.py",
+      "sha256": "332e0a69499f7d41c5512cd31d3db19b963e7c63966c1f9957b0b6398bf005f5"
+    },
+    {
+      "path": "src/retrieval/fact_records.py",
+      "sha256": "6b48fce15ea9c2db34297a0428b97d83c2af9f7f5a021bf7311e7289b1c368e7"
+    },
+    {
+      "path": "src/retrieval/evidence_experiment.py",
+      "sha256": "ca95b7aae0e252e1db7a2afdb5606921f0b4a25fd4af34f55fd5203b9ad99fa8"
+    },
+    {
+      "path": "src/retrieval/development_set.py",
+      "sha256": "f0679ec252662c8e5100d99fb045c295f28a38d73e898e080ca026f6fed121d1"
+    },
+    {
+      "path": "configs/evidence/source-facts-disease-v1.json",
+      "sha256": "b6b6d14414c5b4e8e68643511ac806b8065a483b741832fe42fac43bec66a7a4"
+    },
+    {
+      "path": "configs/evidence/source-facts-disease-v1-review.json",
+      "sha256": "702eab2e2372792fa592633c51da757e4c2d2b2ccd93f9474cb3b792822a1697"
+    },
+    {
+      "path": "tests/retrieval/test_disease_fact_records.py",
+      "sha256": "24fdf0544b1bc68373b2e9adaf9f0671c30d40d9579b985d05b6fcc05dbeceb1"
+    },
+    {
+      "path": "scripts/retrieval/check_disease_source_facts.py",
+      "sha256": "d40b71f065e2f211913a99d35bd52487d86688f2b57a7fbaaae32e58471be83d"
+    },
+    {
+      "path": "docs/capstone/retrieval/DISEASE-FACT-PLAN-2026-10-18.md",
+      "sha256": "dbc6bd22619196cb1081140d974eb81982a82390f43cbde7eb835565291d3aba"
+    },
+    {
+      "path": "configs/evidence/evaluation/answer-quality-plan-v1.json",
+      "sha256": "20394a297b054d8928a24a6b42d8283ad729f64a984f4688c8dec2bd2f3f552e"
+    },
+    {
+      "path": "outputs/prowl/section-answers-v9-20261017/quality-01.json",
+      "sha256": "d8c894b157d0d6b60ba6307986975e1faf37a87607743b9a3df8dcfce1764262"
+    },
+    {
+      "path": "outputs/prowl/section-answers-v9-20261017/quality-02.json",
+      "sha256": "21c45326cbac38b95937ede14ee7fb87871c449ec2a5dae00fd0aa5fcbab8020"
+    },
+    {
+      "path": "configs/evidence/corpus-disease-v1.json",
+      "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+    }
+  ],
+  "tests": {
+    "passed": 46,
+    "scope": "invented_source_and_relation_mutation_fixtures",
+    "seconds": 0.05
+  },
+  "execution": {
+    "seconds": 0.8379927920177579,
+    "search_calls": 2,
+    "model_calls": 0,
+    "canonical_passages_checked": 1179,
+    "output_bytes_at_completion": 388721,
+    "live_policy": {
+      "answer_policy": "natural-literature-answer-v6.1",
+      "collection": "research-disease-v1",
+      "mode": "local_development_excerpts"
+    },
+    "service_lifecycle_changes": 0,
+    "ui_promoted": false
+  },
+  "selections": [
+    {
+      "mode": "live_dense",
+      "question_id": "quality-01",
+      "label": "head",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "focal_head_mass",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "no_eligible_record",
+        "record_ids": []
+      },
+      "retrieved_passage_ids": [
+        "psg:50ccd3ef93f6dd6a0cd58678e731a3d546e7a64c2d353be24fb4295ad5f615c3",
+        "psg:909447c57d44108002886678b7df70f26a87cab1d9d8135651baed9298358d8b",
+        "psg:1a3862c76596790c63cd2c98dab04e6ebeaa58ad9c6e95870b3d750d0c946195",
+        "psg:22c7a1a8a2a876c81c5cbe2f1632a80b87e7b1ab8ae867389059a8b3c206576e",
+        "psg:b63b369db665a3ef7e3d8f6f853e3311dd13ebdde9f9c91579e7462eeec2ff94"
+      ],
+      "answers": []
+    },
+    {
+      "mode": "live_dense",
+      "question_id": "quality-02",
+      "label": "mfcp",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "no_eligible_record",
+        "record_ids": []
+      },
+      "retrieved_passage_ids": [
+        "psg:d0731639f9515d97646846d9b3a772813ee8ec951b79787b302c6442e739347e",
+        "psg:bb2c5a9627b77dee434c6d4882babe07f78c6759563205aff520277dbbe30929",
+        "psg:485d8a8005c19435dde36bbd30b2e6ebd38fbe00fb4bfd3c736434b4bb0ed538",
+        "psg:8fa553fb65f393530ddeeec6de44d5e19bb430b24f8cd440c2ef480f463951b8",
+        "psg:353ae9aaacec0e06ab9bc3942ebaa23201aaec64c60dad5bfd7b68d57eb67ee0"
+      ],
+      "answers": []
+    },
+    {
+      "mode": "live_dense",
+      "question_id": "quality-02",
+      "label": "aip",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "focal_AIP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "no_eligible_record",
+        "record_ids": []
+      },
+      "retrieved_passage_ids": [
+        "psg:d0731639f9515d97646846d9b3a772813ee8ec951b79787b302c6442e739347e",
+        "psg:bb2c5a9627b77dee434c6d4882babe07f78c6759563205aff520277dbbe30929",
+        "psg:485d8a8005c19435dde36bbd30b2e6ebd38fbe00fb4bfd3c736434b4bb0ed538",
+        "psg:8fa553fb65f393530ddeeec6de44d5e19bb430b24f8cd440c2ef480f463951b8",
+        "psg:353ae9aaacec0e06ab9bc3942ebaa23201aaec64c60dad5bfd7b68d57eb67ee0"
+      ],
+      "answers": []
+    },
+    {
+      "mode": "retained_r8_with_context",
+      "question_id": "quality-01",
+      "label": "head",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "focal_head_mass",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "selected",
+        "record_ids": [
+          "schima2020-head-mass-v1"
+        ]
+      },
+      "retrieved_passage_ids": [
+        "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+        "psg:0a40e9a7f5489d704b6538894875dc97850fffd6165e8815f5e9a271ea08729f",
+        "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+        "psg:909447c57d44108002886678b7df70f26a87cab1d9d8135651baed9298358d8b",
+        "psg:4caa195e1e116c9e5572ecd25530c222707a1f2adb3ca27aaa7f31ba0b2557f8",
+        "psg:13331f6a2a3e2d4ccc84260f1742b67761a9473f6a5f3c65b88d6d9c3579f7b5",
+        "psg:ebe353202057be1250ce6f90ae8f2b7767d208138fc84a0dd863df53913d58ec",
+        "psg:85d541bcd046c6d6b091cc2b91e18b4dc512313c604e3a48c6b9f98f6df6eb50",
+        "psg:035b32e965a41d4b5e00ded080a8bf2ae28eea6f210ae36eaf123bed58ead7be",
+        "psg:1a3862c76596790c63cd2c98dab04e6ebeaa58ad9c6e95870b3d750d0c946195",
+        "psg:b1c2969349e23a39e9fb7046a82c20842e0b67a1afd811ef6bb13236139603a4",
+        "psg:73ee8afd1b1009a508c5a6b3cc2bd2544adaefcaec1a7dae45d68ab7150c4f19",
+        "psg:434ce6b1f25c092b17d47b2a9bf7eb70a31f2389d04808dbe7d0d1ac8cebb7e0",
+        "psg:18328c230999e4b3fb8e536e5f216dbbe9cf634f3d06dd62f2ee90efdf6f6a53",
+        "psg:bb22743d272221017adc3566fca1ba80353a56dd5e1eb58734b0f91d53158621",
+        "psg:0c88e089da2e88095787c93df10b5d1bf4d1340214209768ee7dabfe3fedddfe",
+        "psg:e914f685625716edbc8fce1f4a9d15fc9a3d1e2a1df3fee55236c60b6becb518",
+        "psg:97f868bb6a861e012859f2b7d6cb1b4c7654a91ebe6517b604f2b31b24355fb9",
+        "psg:ad9d1fb02572065114a21e7a9d549852cc3332b1ee0d4f2ae79b6ec45d2aa3d0",
+        "psg:6af49eef24154f5c1c1f98b121100f5b7f07a1b20b3ecfbe0a5bf72ea776f007",
+        "psg:49607ab02d4531695ecb190cc00ba4d531c80c0435dba04373e2f97e482dc11b",
+        "psg:42ed2a89346138996d23dbc02b9592d1e07906dcc0a4040e6b222279f78ea362",
+        "psg:0966e43fd5442f16899cb1d55590a78d5784fab2e56af3f5da49b6ca8d106a2a",
+        "psg:0e9be4ffdfefa54553958a284395f10681499cc3acd7df04f9d7e99e819bf9b3"
+      ],
+      "answers": [
+        {
+          "record_id": "schima2020-head-mass-v1",
+          "path": "retained_r8_with_context-head-answer.json",
+          "statement_count": 6,
+          "expanded_passages": [
+            "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "retained_r8_with_context",
+      "question_id": "quality-02",
+      "label": "mfcp",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "selected",
+        "record_ids": [
+          "schima2020-mfcp-pdac-v1"
+        ]
+      },
+      "retrieved_passage_ids": [
+        "psg:abb8420433dbbc59226ec0a59ef977012dcb35c5a2bcc3b991b90ee26de1bc06",
+        "psg:9c46c6a40c1300abc2b1ab32e363f11ad62896e13c506695be411a1147a9320b",
+        "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+        "psg:0a40e9a7f5489d704b6538894875dc97850fffd6165e8815f5e9a271ea08729f",
+        "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+        "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66",
+        "psg:b30bc5e31f27bef3500cc40181a8f899918d98b39368d7afae4d793d28776102",
+        "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab",
+        "psg:66fefb66affdc5225ddb463ba871e1e955d40164d8110eb473cea79c35865b76",
+        "psg:0c88e089da2e88095787c93df10b5d1bf4d1340214209768ee7dabfe3fedddfe",
+        "psg:e914f685625716edbc8fce1f4a9d15fc9a3d1e2a1df3fee55236c60b6becb518",
+        "psg:97f868bb6a861e012859f2b7d6cb1b4c7654a91ebe6517b604f2b31b24355fb9",
+        "psg:ad9d1fb02572065114a21e7a9d549852cc3332b1ee0d4f2ae79b6ec45d2aa3d0",
+        "psg:bc405af170e64237500cec5a207825d9da95679ca2d04b080634b26a6fa13c27",
+        "psg:2a475102faa6c9527a032f360356a809bd9ea443455a2e7f911e5f0a6a1ff640",
+        "psg:11e230d5e85c3e0a7354089b2caf75541dbc2f5cb0a29009f2d5c1848112d03d",
+        "psg:1176d7239c0adb4756a88bc026c940479111a1a2952514fff7d8572f35f2c3ff",
+        "psg:6af49eef24154f5c1c1f98b121100f5b7f07a1b20b3ecfbe0a5bf72ea776f007",
+        "psg:49607ab02d4531695ecb190cc00ba4d531c80c0435dba04373e2f97e482dc11b",
+        "psg:42ed2a89346138996d23dbc02b9592d1e07906dcc0a4040e6b222279f78ea362",
+        "psg:0966e43fd5442f16899cb1d55590a78d5784fab2e56af3f5da49b6ca8d106a2a"
+      ],
+      "answers": [
+        {
+          "record_id": "schima2020-mfcp-pdac-v1",
+          "path": "retained_r8_with_context-mfcp-answer.json",
+          "statement_count": 8,
+          "expanded_passages": [
+            "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+            "psg:18d082ee8c55987c4eb9d2d4be785dfe351ab4815784a50136ddbf858188b7e0",
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "retained_r8_with_context",
+      "question_id": "quality-02",
+      "label": "aip",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "focal_AIP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "no_eligible_record",
+        "record_ids": []
+      },
+      "retrieved_passage_ids": [
+        "psg:abb8420433dbbc59226ec0a59ef977012dcb35c5a2bcc3b991b90ee26de1bc06",
+        "psg:9c46c6a40c1300abc2b1ab32e363f11ad62896e13c506695be411a1147a9320b",
+        "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4",
+        "psg:0a40e9a7f5489d704b6538894875dc97850fffd6165e8815f5e9a271ea08729f",
+        "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+        "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66",
+        "psg:b30bc5e31f27bef3500cc40181a8f899918d98b39368d7afae4d793d28776102",
+        "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab",
+        "psg:66fefb66affdc5225ddb463ba871e1e955d40164d8110eb473cea79c35865b76",
+        "psg:0c88e089da2e88095787c93df10b5d1bf4d1340214209768ee7dabfe3fedddfe",
+        "psg:e914f685625716edbc8fce1f4a9d15fc9a3d1e2a1df3fee55236c60b6becb518",
+        "psg:97f868bb6a861e012859f2b7d6cb1b4c7654a91ebe6517b604f2b31b24355fb9",
+        "psg:ad9d1fb02572065114a21e7a9d549852cc3332b1ee0d4f2ae79b6ec45d2aa3d0",
+        "psg:bc405af170e64237500cec5a207825d9da95679ca2d04b080634b26a6fa13c27",
+        "psg:2a475102faa6c9527a032f360356a809bd9ea443455a2e7f911e5f0a6a1ff640",
+        "psg:11e230d5e85c3e0a7354089b2caf75541dbc2f5cb0a29009f2d5c1848112d03d",
+        "psg:1176d7239c0adb4756a88bc026c940479111a1a2952514fff7d8572f35f2c3ff",
+        "psg:6af49eef24154f5c1c1f98b121100f5b7f07a1b20b3ecfbe0a5bf72ea776f007",
+        "psg:49607ab02d4531695ecb190cc00ba4d531c80c0435dba04373e2f97e482dc11b",
+        "psg:42ed2a89346138996d23dbc02b9592d1e07906dcc0a4040e6b222279f78ea362",
+        "psg:0966e43fd5442f16899cb1d55590a78d5784fab2e56af3f5da49b6ca8d106a2a"
+      ],
+      "answers": []
+    },
+    {
+      "mode": "canonical_seed_not_retrieval",
+      "question_id": "quality-01",
+      "label": "head",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "focal_head_mass",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "selected",
+        "record_ids": [
+          "schima2020-head-mass-v1"
+        ]
+      },
+      "retrieved_passage_ids": [
+        "psg:5f6500ad18992aee82c0929c9d9d17d70f0d0d2cf37def1e03c2dafcd97031c4"
+      ],
+      "answers": [
+        {
+          "record_id": "schima2020-head-mass-v1",
+          "path": "canonical_seed_not_retrieval-head-answer.json",
+          "statement_count": 6,
+          "expanded_passages": [
+            "psg:0b651af008e12b72f598f3532f3fc15c01acd296540f88d6b64555c52f3d5fb3",
+            "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "canonical_seed_not_retrieval",
+      "question_id": "quality-02",
+      "label": "mfcp",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "MFCP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "selected",
+        "record_ids": [
+          "schima2020-mfcp-pdac-v1"
+        ]
+      },
+      "retrieved_passage_ids": [
+        "psg:53994eacdacf05d6b579e1fda169b54cea4fbfe76a207a51b5281c5f76739c66"
+      ],
+      "answers": [
+        {
+          "record_id": "schima2020-mfcp-pdac-v1",
+          "path": "canonical_seed_not_retrieval-mfcp-answer.json",
+          "statement_count": 8,
+          "expanded_passages": [
+            "psg:0bd2a6b27e15480af472aa77bd2b88ef8dd6840c2bf15736bd2630d14567bee5",
+            "psg:18d082ee8c55987c4eb9d2d4be785dfe351ab4815784a50136ddbf858188b7e0",
+            "psg:3f17082e30eda69b41fdf48cd58535734c9e13cfe028d18300b261fc49225c12",
+            "psg:f65634e375f47b5017b30561b9bfb3966b4678e8e4b0c3398885bf0564168eab"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "canonical_seed_not_retrieval",
+      "question_id": "quality-02",
+      "label": "aip",
+      "intent": {
+        "organ": "pancreas",
+        "comparison": [
+          "focal_AIP",
+          "PDAC"
+        ],
+        "topic": "imaging_differentiation",
+        "use": "literature_comparison"
+      },
+      "selection": {
+        "status": "selected",
+        "record_ids": [
+          "schima2020-focal-aip-pdac-v1"
+        ]
+      },
+      "retrieved_passage_ids": [
+        "psg:e4c0179d652101d690e5510e1df5befdb31d4aa50317759df2bc2ce50c872818"
+      ],
+      "answers": [
+        {
+          "record_id": "schima2020-focal-aip-pdac-v1",
+          "path": "canonical_seed_not_retrieval-aip-answer.json",
+          "statement_count": 4,
+          "expanded_passages": [
+            "psg:bb3d25599db010705a41dd127581310f2b8188ef54084a2aca58c837d8a0e001"
+          ]
+        }
+      ]
+    }
+  ],
+  "answers": [
+    {
+      "path": "outputs/prowl/source-facts-disease-v1-20261018/canonical_seed_not_retrieval-head-answer.json",
+      "sha256": "b971dd471a849b9c6ce2bf13c09b66680e4f6ef3adee581cf455c3a51f338d89"
+    },
+    {
+      "path": "outputs/prowl/source-facts-disease-v1-20261018/canonical_seed_not_retrieval-mfcp-answer.json",
+      "sha256": "aaafc0df609d00c5652f8208a9ce4897b94276a87259f694cf20a92d8b51e11b"
+    },
+    {
+      "path": "outputs/prowl/source-facts-disease-v1-20261018/canonical_seed_not_retrieval-aip-answer.json",
+      "sha256": "d637f5772b165aabf6a2a8024d7a8896f05b5c8c570422ff85ee4d915106bff4"
+    }
+  ],
+  "manual_review": {
+    "reviewer": "single_engineering_agent",
+    "independent_review": "pending",
+    "source_statement_instances": 15,
+    "unique_source_sentence_texts": 12,
+    "application_limit_instances": 3,
+    "supported_source_instances": 15,
+    "unsupported_source_instances": 0,
+    "uncertain_source_instances": 0,
+    "entries": [
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 1,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "f9bf931c9eef0d845395d558232c528407df925e1ccf1070399c2b47a7583768",
+        "span_ids": [
+          "schima2020-7-330-494"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal7 supports occasional focal mass-like enlargement, usually in the head; not a numerical size cutoff."
+      },
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 2,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "c2caa173600b85e813f8e7680bf0db7345b6a2b8edaaef5c6ee6369e1e85895c",
+        "span_ids": [
+          "schima2020-9-287-416"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal9 locates predominant PDAC occurrence in the head; no claim that head enlargement establishes cancer."
+      },
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 3,
+        "role": "overlap",
+        "kind": "source_fact",
+        "text_sha256": "7c26de064ff40e5b705be41479e642e1028e937bf2fb184adb9492a2fc6e3bc4",
+        "span_ids": [
+          "schima2020-4-156-514"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal4 supports mass-forming CP mimicking PDAC at CT/MRI; disease scope preserved."
+      },
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 4,
+        "role": "single_feature_limit",
+        "kind": "source_fact",
+        "text_sha256": "634dd27b0f73af4ea63b8495875723f8a43fe68861f3c03f9c2b719445de424d",
+        "span_ids": [
+          "schima2020-37-0-246"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal37 explicitly denies a reliable single-feature MFCP/PDAC discriminator."
+      },
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 5,
+        "role": "combination_limit",
+        "kind": "source_fact",
+        "text_sha256": "161b1b718493bb0cdcd2acbf00de33c873dd9a321f685c168a7e5a23e2f45b4a",
+        "span_ids": [
+          "schima2020-37-0-246"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal37 requires the combination of features present or absent; no individual diagnosis inferred."
+      },
+      {
+        "record_id": "schima2020-head-mass-v1",
+        "statement_index": 6,
+        "role": "scope_limit",
+        "kind": "application_limit",
+        "text_sha256": "ab439c9c9532cacf065be11f788735f0eba3f1355a6e45f8ff05562e099d2757",
+        "span_ids": [],
+        "assessment": "separate_application_policy",
+        "review_note": "Application policy, not a quoted medical finding: no current-scan diagnosis or head-size threshold."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 1,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "f3dcc39d6c6e1f5e469de098433acd1b6b6dfb3e82a6b2d7df2783e148627227",
+        "span_ids": [
+          "schima2020-22-0-538"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal22 supports smooth duct passage/narrowing without abrupt or complete obstruction favoring an inflammatory mass; favors does not mean proves."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 2,
+        "role": "method",
+        "kind": "source_fact",
+        "text_sha256": "ecaf91a5c131f79382fbd422e028201264d0aff3cedda279893571a339db3d96",
+        "span_ids": [
+          "schima2020-24-160-345"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal24 explicitly specifies MRCP; no CT-mask inference and uncurated94percent accuracy omitted."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 3,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "cf0d37eedc96f601f90ec8d6df405bdc856997fb0d35560265637d297da80468",
+        "span_ids": [
+          "schima2020-37-247-382"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal37 supports diffuse spotted/coarse tissue calcifications OR duct calcifications with duct-penetrating sign. Morphology and combined signs preserved; no requirement for both calcification locations."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 4,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "fc6c4a295370a1450cb0c3b368b71cf256d31133fe56e8d26e196c1fb16adee4",
+        "span_ids": [
+          "schima2020-37-0-246",
+          "schima2020-39-0-231"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal39 plus comparison context37 supports complete obstruction by a mass or arterial encasement by a soft-tissue mass as more likely in PDAC than MFCP. No generic tumor claim."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 5,
+        "role": "overlap",
+        "kind": "source_fact",
+        "text_sha256": "7c26de064ff40e5b705be41479e642e1028e937bf2fb184adb9492a2fc6e3bc4",
+        "span_ids": [
+          "schima2020-4-156-514"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal4 supports MFCP/PDAC appearance overlap on CT/MRI."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 6,
+        "role": "single_feature_limit",
+        "kind": "source_fact",
+        "text_sha256": "634dd27b0f73af4ea63b8495875723f8a43fe68861f3c03f9c2b719445de424d",
+        "span_ids": [
+          "schima2020-37-0-246"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal37 single-feature limit preserved."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 7,
+        "role": "combination_limit",
+        "kind": "source_fact",
+        "text_sha256": "161b1b718493bb0cdcd2acbf00de33c873dd9a321f685c168a7e5a23e2f45b4a",
+        "span_ids": [
+          "schima2020-37-0-246"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal37 combined-feature limit preserved."
+      },
+      {
+        "record_id": "schima2020-mfcp-pdac-v1",
+        "statement_index": 8,
+        "role": "scope_limit",
+        "kind": "application_limit",
+        "text_sha256": "ab439c9c9532cacf065be11f788735f0eba3f1355a6e45f8ff05562e099d2757",
+        "span_ids": [],
+        "assessment": "separate_application_policy",
+        "review_note": "Application policy separately labeled; no patient diagnosis or head-size threshold."
+      },
+      {
+        "record_id": "schima2020-focal-aip-pdac-v1",
+        "statement_index": 1,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "fec84b53e29758d024ef99380a23c9138d3c33cf32c00bd1f4eb23b0c0d570d7",
+        "span_ids": [
+          "schima2020-44-0-362"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal44 supports homogeneous enhancement specifically for focal AIP on portal-venous phase CT; not all inflammation or every phase."
+      },
+      {
+        "record_id": "schima2020-focal-aip-pdac-v1",
+        "statement_index": 2,
+        "role": "finding",
+        "kind": "source_fact",
+        "text_sha256": "ef6d674bcdbb81d2d187d8d3de63cfc97bf307e983c528c09c6aa393e0e12b11",
+        "span_ids": [
+          "schima2020-44-0-362"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal44 supports smooth duct/no abrupt cutoff, mild upstream main-duct dilation≤5mm and absent proximal atrophy as a cluster. The numerical quantity belongs to the duct, not head/lesion."
+      },
+      {
+        "record_id": "schima2020-focal-aip-pdac-v1",
+        "statement_index": 3,
+        "role": "overlap",
+        "kind": "source_fact",
+        "text_sha256": "84732b97416fb7f30fc5e2ac50631ebabf5b541e1b33dfadb5615107253615c0",
+        "span_ids": [
+          "schima2020-43-406-502"
+        ],
+        "assessment": "supported_within_stated_scope",
+        "review_note": "Ordinal43 supports focal AIP mimicking PDAC. MFCP-specific single-feature sentence is not falsely attributed as AIP evidence."
+      },
+      {
+        "record_id": "schima2020-focal-aip-pdac-v1",
+        "statement_index": 4,
+        "role": "scope_limit",
+        "kind": "application_limit",
+        "text_sha256": "ab439c9c9532cacf065be11f788735f0eba3f1355a6e45f8ff05562e099d2757",
+        "span_ids": [],
+        "assessment": "separate_application_policy",
+        "review_note": "Application policy separately labeled; no current-patient inference or unproven exclusion rule."
+      }
+    ]
+  },
+  "coverage": {
+    "quality_01": "Seeded head record covers unchanged exposed concepts; current live retrieval selects nothing.",
+    "quality_02": "MFCP plus separately seeded focal-AIP record cover unchanged exposed concepts together; replay selects only MFCP, live selects neither. No single live complete answer."
+  },
+  "limitations": [
+    "Engineering-curated narrative-review relations, not independent clinical acceptance.",
+    "Explicit structured intents supplied by diagnostic harness; no natural-language routing tested.",
+    "Zero model calls; deterministic qualification retention does not improve or qualify LLM generation.",
+    "Two exposed questions and one paper do not establish general retrieval performance.",
+    "Seeded canonical anchors isolate assembly and never count as retrieved hits.",
+    "Existing generation contract remains unchanged; output adapter still unqualified.",
+    "No protected set, labels, corpus, prior results or patient data changed."
+  ],
+  "next_step": "Qualify retrieval-to-record selection and natural-language intent binding, especially the focal-AIP anchor gap, before output integration or UI promotion."
+}
