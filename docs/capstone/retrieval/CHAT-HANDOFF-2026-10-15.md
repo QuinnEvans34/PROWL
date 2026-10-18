@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 literature evidence adapter delivered:** Read LITERATURE-ADAPTER-2026-10-17.md,
+> spec v1.18. New literature_adapter.py verifies canonical corpus, caller-owned scope reviews,
+> request/config-bound tickets and supplied ordered snapshots; evidence is never an answer.
+> 127 checks pass (34new); two actual-corpus first-three-ID replays verify provenance, NOT search.
+> Two disease-question candidates have10exact fully contained spans; answerability/adjudication and
+> independent review pending. No new human evidence approval inferred. 44-wording public exposure
+> supplement preserves old inventory; integrate with versioned private checker before authoring.
+> Next label/protocol and independent verification reconciliation. No request for private questions,
+> DB/model/service/live endpoint/training/fullselector activity or inferred hours; original artifacts
+> preserved. Current core/measurement sequencing and acceptance thresholds remain unchanged.
+
 > **October 17 routing foundation delivered:** Read QUESTION-ROUTING-FOUNDATION-2026-10-17.md and
 > spec v1.17. New opt-in question_routing.py plus closed expert-request/route-v1 schemas accept free
 > text for deterministic offline planning only; no live endpoint or execution. Measurement/comparison

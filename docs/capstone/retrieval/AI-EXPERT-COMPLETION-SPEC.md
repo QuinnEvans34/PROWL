@@ -1,8 +1,8 @@
 # AI expert completion specification
 
-**Version:** 1.17 — October 17, 2026 (offline question-routing foundation)\
+**Version:** 1.18 — October 17, 2026 (offline literature adapter and candidate labels)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Offline scan-centered request/routing foundation delivered; next reconcile literature adapter coverage and independent evidence labeling before revising evaluation. Protected freeze, response quality and measurement integration remain open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Offline routing and literature evidence adapter delivered; two disease-label candidates prepared. Next reconcile these labels and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
@@ -24,6 +24,12 @@ The [routing foundation](QUESTION-ROUTING-FOUNDATION-2026-10-17.md) now supplies
 schemas and deterministic offline planning. Measurement/comparison tools are unavailable; literature
 routes need scope review. All routes remain unexecuted. 155 targeted checks pass; live guided behavior
 and the frozen query contract are unchanged. This is not free-text or disease-answer qualification.
+
+The [literature adapter checkpoint](LITERATURE-ADAPTER-2026-10-17.md) binds reviewed requests and
+supplied rankings to canonical corpus evidence without generating answers. 127 targeted checks and
+two actual-corpus membership replays pass. Ten source spans for two disease questions remain
+provisional; independent review and answerability adjudication are pending. A 44-wording exposure
+supplement is recorded for integration before private authoring. No search/tuning release follows.
 
 ## 1. Outcome and authority
 
@@ -206,8 +212,8 @@ specification. W02-07/W05-02 completion must state the bounded corpus scope actu
 
 ### Step 5 — Question and label freeze
 
-**Current next action:** build on the offline routing contract to reconcile literature adapter
-coverage and the independent labeling workflow with the disease-reference corpus. The older count/family design below is the
+**Current next action:** reconcile the two disease-label candidates and independent verification
+workflow with the evaluation protocol, then integrate the exposure supplement before protected authoring. The older count/family design below is the
 preserved protocol, not an instruction to manufacture answerable questions or assign technical
 labeling to Quinton. Any replacement criteria must be versioned before results; prior accepted v5
 review cannot approve new disease labels. No held-out questions are requested during this reconciliation.

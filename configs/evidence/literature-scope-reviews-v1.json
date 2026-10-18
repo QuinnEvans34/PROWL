@@ -1,0 +1,28 @@
+{
+  "version": "prowl-literature-development-reviews-v1",
+  "scope": "offline_contract_replay_only",
+  "reviews": [
+    {
+      "example_id": "route-dev-05",
+      "scope_review": {
+        "version": "prowl-literature-scope-review-v1",
+        "request_sha256": "cb8a73f0f58551b57d4ff3090fd0d91e12b2438138ab98b79e07136056715c95",
+        "plan_sha256": "12b83398a97914a2e5218923a25d3382f4a735e1d5e751b16d2dd9fe9d16ca23",
+        "decision": "general_literature_only",
+        "reviewer": "codex-development-source-review"
+      },
+      "limitation": "Engineering admission for offline provenance replay only; no clinical acceptance or live execution approval."
+    },
+    {
+      "example_id": "route-dev-08",
+      "scope_review": {
+        "version": "prowl-literature-scope-review-v1",
+        "request_sha256": "7bf153b4c59888cd496bfdcd83c071d3c4d233cf16971ba6853b06288d531752",
+        "plan_sha256": "6ee40d557639d717cad504f20384215135187479747f35dbe28cd6232b35b731",
+        "decision": "general_literature_only",
+        "reviewer": "codex-development-source-review"
+      },
+      "limitation": "Engineering admission for offline provenance replay only; no clinical acceptance or live execution approval."
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "version": "prowl-literature-adapter-checkpoint-v1",
+  "parent_commit": "85e0c7db5267af4b16493c4d08747fdcf46b9a85",
+  "verification": {
+    "state": "offline_adapter_and_candidate_labels_verified",
+    "corpus": {
+      "batch_count": 41,
+      "content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+      "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+      "passage_count": 1179,
+      "source_count": 14,
+      "version": "prowl-corpus-inventory-v1"
+    },
+    "replays": [
+      {
+        "id": "route-dev-05",
+        "state": "evidence_unassessed",
+        "evidence_count": 3,
+        "result_sha256": "1902a363c12b47a389f6d62cd40d87154110d0cbf2a12cd7c1960d0704fb147e"
+      },
+      {
+        "id": "route-dev-08",
+        "state": "evidence_unassessed",
+        "evidence_count": 3,
+        "result_sha256": "9c67dd9f5c6f55428e6360f7ed5edb418a0cd9ab119fae23ed6802616bd311bd"
+      }
+    ],
+    "replay_is_search": false,
+    "candidate_cases": 2,
+    "candidate_spans": 10,
+    "spans_fully_contained": true,
+    "independent_review": "pending",
+    "exposure_supplement_wordings": 44,
+    "database_calls": 0,
+    "model_calls": 0,
+    "training_calls": 0,
+    "protected_content_accessed": false,
+    "final_targeted_tests_passed": 127,
+    "new_adapter_tests": 34,
+    "final_code_actual_replay_verified": true,
+    "old_tracked_code_corpus_and_evaluation_unchanged": true,
+    "exposure_and_document_links_verified": true
+  },
+  "artifacts": [
+    {
+      "path": "configs/evidence/evaluation/development-disease-candidates-v1.json",
+      "bytes": 10991,
+      "sha256": "68fc89d9a4891153c27458d4c8e2539da1838893be90c9692cf806a94c92c0d9"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-scan-supplement-v1.json",
+      "bytes": 3801,
+      "sha256": "099f1c15f732236c3b9f833f1152fbd7f720fae255b881800163c36c47e8dcf9"
+    },
+    {
+      "path": "configs/evidence/literature-scope-reviews-v1.json",
+      "bytes": 1229,
+      "sha256": "728cda3c54bbfa0cf633778d444bdea6f69989c48f0b0bb4d6ab81e4f209085f"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "bytes": 30413,
+      "sha256": "322f777666067789d8dba3f7dbd02c5ba20ceafa74440f07f5aa2068b13e21d1"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "bytes": 52580,
+      "sha256": "e7d5cb4147770d426d154113e045452c070355cbd66aeb13b488fbc00c9f4030"
+    },
+    {
+      "path": "docs/capstone/retrieval/LITERATURE-ADAPTER-2026-10-17.md",
+      "bytes": 7810,
+      "sha256": "1466c82a28a87fbe15687561e057011630cef7c598935138fbe54b52da14e987"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "bytes": 110595,
+      "sha256": "e41cc2212858a93a19e5da90d7283c1fd25b6a49f7f94e1e9e6ae8dfafefa7d7"
+    },
+    {
+      "path": "src/retrieval/literature_adapter.py",
+      "bytes": 6853,
+      "sha256": "e7a6f80d39704a865f75721e50174e07004e98f9e81efe5eab7e75f6c6e92a4a"
+    },
+    {
+      "path": "tests/retrieval/test_literature_adapter.py",
+      "bytes": 6924,
+      "sha256": "3df48839dbc077a197590c2ccab52b6567fcf5965894e3bbb7889cb785e172e4"
+    }
+  ],
+  "local_evidence": [
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/actual-verification.json",
+      "bytes": 1075,
+      "sha256": "b0967b32ca42a5285d707b79e96fb4170ff2185d2f7aa06c8103c1e52b6846a5"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/candidate-excerpts.json",
+      "bytes": 7982,
+      "sha256": "34f13f18a3254a6df86f3087e5114fc28453ed7c22bca59da77f0d78f0d5548a"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/final-verification.json",
+      "bytes": 1293,
+      "sha256": "01f7eb822d55f0ab89f459f5b8b219b733f9d505e5a383fe5149b7d921940818"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/prepare_labels.py",
+      "bytes": 5685,
+      "sha256": "931a52174c592d0baba773340991e154d72d197cdf06e2eed8ac656e2cf68223"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/route-dev-05-replay.json",
+      "bytes": 12768,
+      "sha256": "06a580f58a59d4bdeafeeafd3192d2224b8e642da5b1d2f0c9b6404aa5b060c1"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/route-dev-08-replay.json",
+      "bytes": 12780,
+      "sha256": "b364dd1621821b01b882f8ceaaa09d4159d633465d1956f9019bee5551b51d10"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/tests-01.xml",
+      "bytes": 19891,
+      "sha256": "f744165b39e3e0b43f51ff371deb64cd52ad081b7fdef6342fdf2722e03513d8"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/tests-02.xml",
+      "bytes": 20144,
+      "sha256": "c1f62b3099a9a345b867831636e36de828fff9fbd513a10f0531a81166f53cfd"
+    },
+    {
+      "path": "outputs/prowl/literature-adapter-v1-20261017/verify_actual.py",
+      "bytes": 5476,
+      "sha256": "829c4d87a091af640748fec635e30df6fc26e5cb853608fd623d2073460814ea"
+    }
+  ]
+}

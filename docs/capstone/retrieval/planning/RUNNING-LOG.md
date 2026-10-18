@@ -1879,3 +1879,22 @@ plans replay exactly; documentation links and preservation checks recorded in ch
 report and handoff updated; AI-03 tracks continuation. Next literature adapter/label coverage and
 independent labeling workflow before protected freeze/tuning. No evaluation thresholds relaxed,
 services/DB/model/private data/training/fullselector work or human-hours credit.
+
+
+## 2026-10-17: Literature adapter and disease label candidates
+
+Delivered opt-in FrozenLiterature contract: verified canonical corpus, request/plan/scope-review and
+retriever-config bound ticket, ordered supplied snapshot validation and provenance-preserving evidence.
+No search callback or generated answer; empty/failure/evidence-unassessed are distinct. Invalid,
+foreign, duplicate or tampered evidence fails. Final127 checks pass:34new/69routing/15inventory/9labels.
+Initial125passed; review added numeric overflow/type integrity cases and final run passed. Two actual
+corpus replay packets use deliberately arbitrary first-three-ID ordering, not search or gold ranking.
+All14sources/41batches/1179passages remain exact; no DB/model calls or live behavior changes.
+
+Prepared two exposed disease-question candidates with10exact spans, all fully contained in frozen
+passages. Head-size question remains general context only; no numeric disease rule. Labels are agent
+proposals, answerability/adjudication and independent verification pending. Source inspection bounded;
+unreviewed papers unjudged. Added44-wording exposure supplement; old inventory/accepted v5 remain
+fixed and private-checker integration remains next. Spec1.18/report/handoff/Trello track current scope.
+Next reconcile labels/evaluation and independent verification before protected authoring/freeze/tuning.
+No protected-content access, patient/report reads, training/fullselector work or inferred human hours.
