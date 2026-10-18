@@ -1,0 +1,197 @@
+{
+  "version": "prowl-development-v6-checkpoint-v1",
+  "baseline_commit": "3876a24728a72e17df82be44b0e06cb1fcd66871",
+  "state": "engineering_review_complete_human_review_pending",
+  "distinct_focused_checks_passed": 132,
+  "test_attempts": [
+    "90 passed / 11 fixture setup errors",
+    "11 repaired checks passed",
+    "nonexistent review test path: no tests collected",
+    "31 review checks passed"
+  ],
+  "ready_for_tuning": false,
+  "ready_for_private_authoring": false,
+  "new_human_events": 0,
+  "pins": [
+    {
+      "path": "configs/evidence/evaluation/development-v5-draft.json",
+      "sha256": "a8072c19bc27c3e4047f3d2b289e16e4b6bce96ea2fb4136700b9624bb906520"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v6-draft.json",
+      "sha256": "8d0c8cd96208896a6bc33c2a9880ba3155f6040971a00e715e6b5d186a8b90d3"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v6-human-review.json",
+      "sha256": "0ee99cc6f9af668d13242db4b664ade23bca58d216296848030ccdd2417f6a0f"
+    },
+    {
+      "path": "configs/evidence/evaluation/disease-source-impact-v1.json",
+      "sha256": "3e2d07bebe346c5bda2476064d92b42392e37107ab41d3de7270bc059a21b5b4"
+    },
+    {
+      "path": "configs/evidence/evaluation/evaluation-reconciliation-checkpoint-v1.json",
+      "sha256": "fe1b28b7195d53c6e4230b1c5e65453427bed1a7d3986d75ad3f9b56ffbb51b7"
+    },
+    {
+      "path": "configs/evidence/evaluation/evaluation-reconciliation-v2.json",
+      "sha256": "778048aaf2e0d9c81372e5667524d8b3577f62fe206d256a297cb205092d2684"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-v2.json",
+      "sha256": "c0b40abae4e6972a6bd12879dc44272f0fce21d94c3dfb257b8fb9d240c162ea"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-v3.json",
+      "sha256": "1a712f026aa1a500314ad4b1e17e7ac7f0b6e62248dcd9ba56338ed691503c46"
+    },
+    {
+      "path": "docs/capstone/contracts/retrieval/development-draft-v3.schema.json",
+      "sha256": "3ff015554e41edf2190a5122c50246fb19658118348a7256172094e468963e9f"
+    },
+    {
+      "path": "docs/capstone/contracts/retrieval/development-review-v2.schema.json",
+      "sha256": "521dd180400512b768f9b8603596f1405fb8d151857b5334811ee0ef37767b30"
+    },
+    {
+      "path": "docs/capstone/retrieval/AI-EXPERT-COMPLETION-SPEC.md",
+      "sha256": "d17c87c4a6a5ace723d2ca9b6f594bdb9db7d2b024aaab53fead2372d923f45e"
+    },
+    {
+      "path": "docs/capstone/retrieval/CHAT-HANDOFF-2026-10-15.md",
+      "sha256": "6ffdd6b9fe3a3ed4d19be47554383bd511c37c177c98ebc86c11c7493c2bc0e2"
+    },
+    {
+      "path": "docs/capstone/retrieval/DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md",
+      "sha256": "46c46ed86e71a8dc202244ae515fabc1559ebc01cf80375c7cba444769436604"
+    },
+    {
+      "path": "docs/capstone/retrieval/PRIVATE-EVALUATION-QUICKSTART.md",
+      "sha256": "a43b17eb7d8f423cc78d0350c9a5431c54ad69b7e490d72418596366f53b6f3e"
+    },
+    {
+      "path": "docs/capstone/retrieval/PROTECTED-EVALUATION-AUTHORING.md",
+      "sha256": "fc7efde3d192c87e84947308d0c0fe8726a5cb0554fcfe0814a8a9e873444b14"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/INFORMATION-NEEDS-V3.md",
+      "sha256": "4b948199808246f7e2a1c60e21babb2251ef7871654d5b47c6f20eb561307649"
+    },
+    {
+      "path": "docs/capstone/retrieval/planning/RUNNING-LOG.md",
+      "sha256": "87eb68c4eab6886903920bdccf2794d8649a34e826d4724ab8305b887c2e7808"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/all-questions.md",
+      "sha256": "0a2ecb904fb35ba79b9d014fca66dfecf61387152e666f59741d924a853ba88f"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/attempt01.txt",
+      "sha256": "662644a343ae2852df13046cdfba26c35c28d87abc526c03be21ea294d9b9aff"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/changes-to-review.md",
+      "sha256": "6142aa10c8d63b75aef53277d8e4fb8510f2fc21256c01243d652d968854652b"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/cli-validation.json",
+      "sha256": "16e2e1bd9feed36e0412920ed71ee12d33c7ac2329233a8498224632c7be598e"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/final-public-preflight.json",
+      "sha256": "8e68c2fe2e799300585707ff5386599b663c297bfe1934a07a6478a0d2e8d64b"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/human-review-cli.json",
+      "sha256": "120d5ff220feddfc5fe7d9ab503489c79b403168b5c909db8910daa0fff469a3"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/human-review-validation.json",
+      "sha256": "120d5ff220feddfc5fe7d9ab503489c79b403168b5c909db8910daa0fff469a3"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/literature-health.json",
+      "sha256": "201a1d8dd980f179d263e03c125b242713b668d5fe4fe092ebb242051d087b27"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/prepare-attempt01.py",
+      "sha256": "40cde4c645900aaa324d48c2182092af153e1bfcdc30b47d6c26b9c300b329e2"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/prepare.py",
+      "sha256": "c94e6937c348cd0f72046f9a5839f8b6110e98b52ec18afeed6b625c6793f5ed"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/public-preflight.json",
+      "sha256": "8e68c2fe2e799300585707ff5386599b663c297bfe1934a07a6478a0d2e8d64b"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/reading-pack-verification.json",
+      "sha256": "090106a76c313212759efac5df3d1670ba4d2c14cb5c3b6dbe2505a4362462ae"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/review-tests-repair.txt",
+      "sha256": "6dd5a8b5bce4795cba9c64179183e12de2a5806100fe1018348f5229f3791cb1"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/review-tests.txt",
+      "sha256": "114cf7e9041cf267cbadf60e42d1ec3d3b920d73d5203aebee7d7ee637713a69"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/review.py",
+      "sha256": "5ab3f02ee1f0ed6fc7ce9b7a3202876efe557b7cfe255f026ad2079539930c29"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/service-health.json",
+      "sha256": "63316a6e9d4ee863cf492f03bb1be880cc940aa2b054342bc6a9f5d24654a5bf"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/test_development_v3-attempt01.py",
+      "sha256": "57f25efa5b8cbe68cdaf9cf99c19a3b14bfb715e8d7d4e02f54d5431d80f29ed"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/tests-repair.txt",
+      "sha256": "73568766c79d2428c7ba8911cc82a9588294497573ed2f582ac5bb56fe219d06"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/tests.txt",
+      "sha256": "a864b1aa0903813ed74be8d7de862d2f93ba01724549a6420153dba006842a66"
+    },
+    {
+      "path": "outputs/prowl/development-v6-review-20261017/validation.json",
+      "sha256": "16e2e1bd9feed36e0412920ed71ee12d33c7ac2329233a8498224632c7be598e"
+    },
+    {
+      "path": "src/retrieval/development_review.py",
+      "sha256": "ceb0b4d252e2c5969b75dcc2d10cad89201716d67b4114a111352660da004ab0"
+    },
+    {
+      "path": "src/retrieval/development_set.py",
+      "sha256": "f0679ec252662c8e5100d99fb045c295f28a38d73e898e080ca026f6fed121d1"
+    },
+    {
+      "path": "src/retrieval/private_evaluation.py",
+      "sha256": "9efea59ac4a9752d7e346d234a23206a325422e44cbecb5c1a89afaa82e112dc"
+    },
+    {
+      "path": "src/retrieval/public_exposure.py",
+      "sha256": "dbc81403d8f6f1033a0201c124bbd8b882f2381fd0972c98e8f9e87d0ffbbd82"
+    },
+    {
+      "path": "tests/retrieval/test_development_review_v2.py",
+      "sha256": "2b7b4fce890484b00bc0b5218ec51cee0d97a24aa9ac34257dfa6c354814da68"
+    },
+    {
+      "path": "tests/retrieval/test_development_v3.py",
+      "sha256": "5241d2cefcb6633fc428e24662d5a92c9f87ca638285f81a09f83e4bc4d0409f"
+    },
+    {
+      "path": "tests/retrieval/test_public_exposure.py",
+      "sha256": "1ea6e2669597f072270253a67134e4e277d77a47465caa9fce501d0e098bc94e"
+    },
+    {
+      "path": "tests/retrieval/test_public_exposure_v3.py",
+      "sha256": "1d493b610444fd1141f6125a5acbb16a326eff897a823dce96c8cf5dd95b140b"
+    }
+  ]
+}

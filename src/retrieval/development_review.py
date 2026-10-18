@@ -18,7 +18,8 @@ STAGES = ('wording_and_answer', 'evidence_labels', 'second_consistency')
 
 def verify_development(suite):
     versions = {'prowl-development-draft-v1': 'development-draft-v1.schema.json',
-                'prowl-development-draft-v2': 'development-draft-v2.schema.json'}
+                'prowl-development-draft-v2': 'development-draft-v2.schema.json',
+                'prowl-development-draft-v3': 'development-draft-v3.schema.json'}
     version = suite.get('schema_version') if isinstance(suite, dict) else None
     if not isinstance(version, str) or version not in versions:
         raise ValueError('Expected exposed development draft')
@@ -36,7 +37,8 @@ def verify_development(suite):
 def new_record(suite, answers_sha256):
     """Create an empty record. No user decisions can be inferred by this function."""
     verify_development(suite)
-    record = dict(schema_version='prowl-development-review-v1',
+    version = 'v2' if suite['schema_version'] == 'prowl-development-draft-v3' else 'v1'
+    record = dict(schema_version=f'prowl-development-review-{version}',
                   development_content_sha256=suite['content_sha256'],
                   answers_sha256=answers_sha256, events=[])
     record['content_sha256'] = digest(record)
@@ -50,7 +52,8 @@ def validate_review(record, suite, *, answers_sha256):
 
 def _validate_review(record, suite, *, answers_sha256, inherited=None):
     verify_development(suite)
-    schema = json.loads((CONTRACTS / 'development-review-v1.schema.json').read_text())
+    version = 'v2' if suite['schema_version'] == 'prowl-development-draft-v3' else 'v1'
+    schema = json.loads((CONTRACTS / f'development-review-{version}.schema.json').read_text())
     try:
         Draft202012Validator(schema, format_checker=FormatChecker()).validate(record)
     except ValidationError:
@@ -167,6 +170,8 @@ def main():
         suite = read_public_json(args.development, root)
         record = read_public_json(args.review, root)
         answers = root / 'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md'
+        if suite['schema_version'] == 'prowl-development-draft-v3':
+            answers = root / 'outputs/prowl/development-v6-review-20261017/all-questions.md'
         report = validate_review(record, suite, answers_sha256=sha256_hex(answers.read_bytes()))
     except (ValueError, OSError):
         # Do not echo rejected input content or private paths in routine CLI failures.

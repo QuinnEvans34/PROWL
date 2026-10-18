@@ -119,7 +119,9 @@ def test_public_path_bounds_and_symlinks(tmp_path):
     with pytest.raises(ValueError): public_bytes(tmp_path, 'data')
 
 
-def test_current_public_inputs_cannot_fall_back_to_old_freeze(public_fixture):
+def test_current_public_inputs_cannot_fall_back_to_old_freeze(public_fixture, monkeypatch):
+    from src.retrieval import private_evaluation
+    monkeypatch.setattr(private_evaluation, 'public_preflight', public_preflight)
     from src.retrieval.private_evaluation import load_public_inputs, PrivateValidationError
     with pytest.raises(PrivateValidationError, match='not frozen'):
         load_public_inputs(public_fixture[0])

@@ -29,9 +29,11 @@ def verify_hash(record):
 
 
 def validate_draft(suite, manifest, bundles, batches, *, manifest_sha256, regression_sha256,
-                   information_needs_sha256=None, information_needs_base_sha256=None):
+                   information_needs_sha256=None, information_needs_base_sha256=None,
+                   information_needs_parent_sha256=None):
     schemas = {'prowl-development-draft-v1': 'development-draft-v1.schema.json',
-               'prowl-development-draft-v2': 'development-draft-v2.schema.json'}
+               'prowl-development-draft-v2': 'development-draft-v2.schema.json',
+               'prowl-development-draft-v3': 'development-draft-v3.schema.json'}
     version = suite.get('schema_version') if isinstance(suite, dict) else None
     if not isinstance(version, str) or version not in schemas:
         raise ValueError('Unsupported development draft schema')
@@ -42,12 +44,17 @@ def validate_draft(suite, manifest, bundles, batches, *, manifest_sha256, regres
         # Do not echo rejected fields or question text in routine error output.
         raise ValueError('Draft schema violation') from None
     verify_hash(suite)
-    if version == 'prowl-development-draft-v2' and (
+    if version in ('prowl-development-draft-v2', 'prowl-development-draft-v3') and (
             information_needs_sha256 is None
             or suite['information_needs_sha256'] != information_needs_sha256
             or information_needs_base_sha256 is None
             or suite['information_needs_base_sha256'] != information_needs_base_sha256):
         raise ValueError('Draft information-needs binding mismatch')
+    if version == 'prowl-development-draft-v3' and (
+            information_needs_parent_sha256 is None
+            or suite['information_needs_parent_sha256'] != information_needs_parent_sha256):
+        raise ValueError('Draft information-needs parent binding mismatch')
+    allowed_needs = NEEDS | {'N1.6'} if version == 'prowl-development-draft-v3' else NEEDS
     if (suite['corpus_manifest_sha256'] != manifest_sha256
             or suite['baseline_regression_sha256'] != regression_sha256
             or suite['corpus_content_sha256'] != manifest['inventory']['content_sha256']):
@@ -66,7 +73,7 @@ def validate_draft(suite, manifest, bundles, batches, *, manifest_sha256, regres
         if case['id'] in ids or normalized in wording:
             raise ValueError('Duplicate question ID or normalized wording')
         ids.add(case['id']); wording.add(normalized)
-        if case['primary_need'] not in NEEDS or FAMILIES[case['primary_need'][1]] != case['family']:
+        if case['primary_need'] not in allowed_needs or FAMILIES[case['primary_need'][1]] != case['family']:
             raise ValueError('Need/family mismatch')
         # Validate coarse input separately; do not use this keyword gate as the answer key.
         query = make_query(case['finding'], case['question'])
@@ -151,30 +158,34 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--development', type=Path, required=True)
-    parser.add_argument('--corpus-version', choices=('v1', 'v2'), default='v1')
+    parser.add_argument('--corpus-version', choices=('v1', 'v2', 'disease-v1'), default='v1')
     parser.add_argument('--require-ready', action='store_true')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     development = development_path(args.development, root)
-    path = root / f'configs/evidence/corpus-coverage-{args.corpus_version}.json'
+    corpus_name = 'corpus-disease-v1.json' if args.corpus_version == 'disease-v1' else f'corpus-coverage-{args.corpus_version}.json'
+    path = root / 'configs/evidence' / corpus_name
     manifest = json.loads(path.read_text())
     if len(manifest['sources']) > 32 or len(manifest['batches']) > 256:
         raise ValueError('Corpus input count exceeds draft bound')
     if development.stat().st_size > 2 * 1024**2:
         raise ValueError('Development draft exceeds 2 MiB')
     suite = json.loads(development.read_text())
+    needs_version = 'V3' if suite.get('schema_version') == 'prowl-development-draft-v3' else 'V2'
     result = validate_draft(suite, manifest,
         [checked_json(s['bundle'], root) for s in manifest['sources']],
         [checked_json(b, root) for b in manifest['batches']],
         manifest_sha256=sha256_hex(path.read_bytes()),
         regression_sha256=sha256_hex((root/'configs/evidence/evaluation/development-v1.json').read_bytes()),
-        information_needs_sha256=(sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md').read_bytes())
-            if suite.get('schema_version') == 'prowl-development-draft-v2' else None),
+        information_needs_sha256=(sha256_hex((root/f'docs/capstone/retrieval/planning/INFORMATION-NEEDS-{needs_version}.md').read_bytes())
+            if suite.get('schema_version') in ('prowl-development-draft-v2','prowl-development-draft-v3') else None),
         information_needs_base_sha256=(sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS.md').read_bytes())
-            if suite.get('schema_version') == 'prowl-development-draft-v2' else None))
+            if suite.get('schema_version') in ('prowl-development-draft-v2','prowl-development-draft-v3') else None),
+        information_needs_parent_sha256=(sha256_hex((root/'docs/capstone/retrieval/planning/INFORMATION-NEEDS-V2.md').read_bytes())
+            if suite.get('schema_version') == 'prowl-development-draft-v3' else None))
     print(json.dumps(result, indent=2))
     if args.require_ready:
-        # Both schemas accept development DRAFTS only. No self-attested promotion switch.
+        # All supported schemas accept development DRAFTS only. No self-attested promotion switch.
         raise SystemExit('Draft is not released for tuning; complete the documented human/protected gates.')
 
 

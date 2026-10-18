@@ -5,6 +5,7 @@ files have changed. Verify the supplement itself, not an obsolete producer again
 checkout. Exact matching is conservative and cannot establish semantic independence.
 """
 import json
+from copy import deepcopy
 from pathlib import Path
 
 from .direct_ingestion import digest
@@ -141,6 +142,82 @@ def public_preflight(root):
                 corpus_sources=corpus['inventory']['source_count'],
                 corpus_passages=corpus['inventory']['passage_count'],
                 prior_development_cases=len(prior['cases']), disease_candidates=len(candidates['cases']),
+                exposed_records=exposure['inventory']['record_count'],
+                distinct_exposed_wordings=exposure['inventory']['distinct_wording_count'],
+                known_intent_groups=len(exposure['inventory']['intent_groups']),
+                exposure_content_sha256=exposure['content_sha256'],
+                pending=state['pending'], private_content_read=False)
+
+
+def extend_with_development(root, parent_pin, development_pin):
+    """Preserve v2 origins and add the revised public development wording and intents."""
+    if (parent_pin['path'] != DIRECTORY + 'public-exposure-v2.json'
+            or development_pin['path'] != DIRECTORY + 'development-v6-draft.json'):
+        raise ValueError('Unexpected public exposure revision inputs')
+    parent = _checked(root, parent_pin)
+    if parent != load_public_exposure(root):
+        raise ValueError('Public exposure parent mismatch')
+    development = _checked(root, development_pin)
+    if (development['schema_version'] != 'prowl-development-draft-v3'
+            or development['status'] != 'draft_pending_human_review'
+            or len(development['cases']) != 30
+            or development['content_sha256'] != digest({k: v for k, v in development.items() if k != 'content_sha256'})):
+        raise ValueError('Expected pinned public development draft')
+    inventory = deepcopy(parent['inventory'])
+    rows = {r['normalized_wording']: r for r in inventory['rows']}
+    intents = set(inventory['intent_groups'])
+    for case in development['cases']:
+        if case['split'] != 'development' or case['authorship']['exposed'] is not True:
+            raise ValueError('Only exposed development enters public inventory')
+        wording = case['question']
+        normalized = normalize_question(wording).casefold()
+        row = rows.setdefault(normalized, dict(normalized_wording=normalized, variants=[], origins=[]))
+        if wording not in row['variants']:
+            row['variants'].append(wording)
+        row['origins'].append(dict(inventory=DIRECTORY + 'public-exposure-v3.json',
+                                  file=development_pin['path'], case_id=case['id']))
+        intents.add(case['intent_group'])
+    inventory.update(rows=[rows[k] for k in sorted(rows)], intent_groups=sorted(intents),
+                     record_count=inventory['record_count'] + len(development['cases']),
+                     distinct_wording_count=len(rows))
+    return inventory
+
+
+def load_current_exposure(root):
+    data = json.loads(public_bytes(root, DIRECTORY + 'public-exposure-v3.json'))
+    if (data['version'] != 'prowl-public-exposure-v3'
+            or data['content_sha256'] != digest({k: v for k, v in data.items() if k != 'content_sha256'})
+            or data['inventory'] != extend_with_development(root, data['parent'], data['development'])):
+        raise ValueError('Current public exposure mismatch')
+    return data
+
+
+def current_public_preflight(root):
+    """Reviewed engineering proposal is still not a human/protected evaluation freeze."""
+    exposure = load_current_exposure(root)
+    state = json.loads(public_bytes(root, DIRECTORY + 'evaluation-reconciliation-v2.json'))
+    if (state['version'] != 'prowl-evaluation-reconciliation-v2'
+            or state['state'] != 'engineering_review_complete_human_review_pending'
+            or state['ready_for_private_authoring'] is not False
+            or state['ready_for_tuning'] is not False or state['final_development'] is not None
+            or state['content_sha256'] != digest({k: v for k, v in state.items() if k != 'content_sha256'})):
+        raise ValueError('Human/protected evaluation admission remains unimplemented')
+    if (state['exposure']['path'] != DIRECTORY + 'public-exposure-v3.json'
+            or state['proposed_development']['path'] != DIRECTORY + 'development-v6-draft.json'
+            or state['corpus']['path'] != 'configs/evidence/corpus-disease-v1.json'):
+        raise ValueError('Current public proposal binding mismatch')
+    if _checked(root, state['exposure']) != exposure:
+        raise ValueError('Current exposure binding mismatch')
+    corpus = _checked(root, state['corpus'])
+    proposed = _checked(root, state['proposed_development'])
+    if (state['proposed_development'] != exposure['development']
+            or proposed['corpus_manifest_sha256'] != state['corpus']['sha256']
+            or proposed['corpus_content_sha256'] != corpus['inventory']['content_sha256']):
+        raise ValueError('Proposed development corpus/exposure mismatch')
+    return dict(state=state['state'], ready_for_private_authoring=False, ready_for_tuning=False,
+                corpus_sources=corpus['inventory']['source_count'],
+                corpus_passages=corpus['inventory']['passage_count'],
+                proposed_development_cases=len(proposed['cases']),
                 exposed_records=exposure['inventory']['record_count'],
                 distinct_exposed_wordings=exposure['inventory']['distinct_wording_count'],
                 known_intent_groups=len(exposure['inventory']['intent_groups']),

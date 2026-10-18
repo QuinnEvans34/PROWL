@@ -1,9 +1,9 @@
 # AI expert completion specification
 
-**Version:** 1.24 — October 17, 2026 (public evaluation reconciliation)\
+**Version:** 1.25 — October 17, 2026 (disease-source review and proposed development v6)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
-**Implementation baseline:** `cec7ad22dbb82f2d1452198750ec1070e0170b05`
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
+**Implementation baseline:** `3876a24728a72e17df82be44b0e06cb1fcd66871`
 
 October 17 continuation: [targeted coverage and evaluation checkpoint](TARGETED-COVERAGE-UPDATE-2026-10-17.md).
 Corpus v2/development v5 retain their accepted baseline identities. The [disease-reference update](DISEASE-REFERENCE-CORPUS-2026-10-17.md) creates a separate candidate; its scope and labels must be reconciled before the next freeze. No tuning before the applicable evaluation freeze.
@@ -79,6 +79,16 @@ valid. Scope ledger retains30prior cases plus2candidates without declaring a32-c
 Four-source impact review (80new source/case judgments),2gap rechecks, final membership and independent
 labeling/review remain pending. Protected schema/operator reconciliation is explicit; Quinton is not
 assigned source-search/JSON/offset work. This does not release tuning or change live search behavior.
+
+October 17 [disease-source review](DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md) completes 80 added-source
+judgments, 28 disease-source judgments and two gap rechecks. Proposed development v6 replaces the
+phase-timing/TAGS-detail cases with both disease questions, retaining 20 answered/8 refused/2 gaps
+and all five families. Needs v3 adds the accepted general disease-context direction as N1.6. All100
+spans validate,73direct; exposure v3 retains292entries/136wordings/33intentIDs. New draft/review
+schemas preserve old behavior and user authorship. 132 distinct focused checks pass across retained
+attempts. Human review remains pending with zero v6 events; prior approvals are preserved. Read the
+short local change packet and supplied evidence in one pass; no article search or offset work.
+This supersedes the preceding checkpoint's pending engineering work, not its historical evidence.
 
 ## 1. Outcome and authority
 
@@ -261,9 +271,9 @@ specification. W02-07/W05-02 completion must state the bounded corpus scope actu
 
 ### Step 5 — Question and label freeze
 
-**Current next action:** complete the expanded-source impact review and final development membership,
-then resolve independent verification and protected labeling under a new evaluation admission. Public
-exposure consolidation is complete; final semantic independence review remains. The count/family design below is the
+**Current next action:** review the proposed v6 membership, added-source evidence and consistency
+delta, then resolve independent protected labeling/operator/schema under a new evaluation admission.
+Engineering source review and exposure consolidation are complete; semantic independence review remains. The count/family design below is the
 preserved protocol, not an instruction to manufacture answerable questions or assign technical
 labeling to Quinton. Any replacement criteria must be versioned before results; prior accepted v5
 review cannot approve new disease labels. No held-out questions are requested during this reconciliation.
@@ -373,7 +383,7 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 3 / W04-01 literature slice | Complete October 17 — broader card/G3 remains open | [Closure report](LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md); 63 Python and three imaging component checks, exact 274-passage rebuild and three-query parity; zero generation calls. |
 | Step 4 / W02-07 | Complete October 17 — bounded candidate | [Freeze report](CORPUS-FREEZE-2026-10-17.md): 7 sources / 693 passages, 35 offline checks, exact rebuild/three-query parity; coverage 6 direct / 15 partial / 4 gaps. W05-02 broader roll-up open. |
 | Step 4b / AI-08 | Complete — source slice only | Four disease references added to a separate14-source/1,179-passage collection; exact rebuild, old inventories and58tests verified. [Report](DISEASE-REFERENCE-CORPUS-2026-10-17.md). |
-| Step 5 / AI-03 | In progress — development review complete for prior scope | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
+| Step 5 / AI-03 | In progress — proposed v6 engineering review complete; changed-scope human review pending | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
 | Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |

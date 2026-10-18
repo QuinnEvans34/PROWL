@@ -1,0 +1,33 @@
+{
+  "version": "prowl-evaluation-reconciliation-v2",
+  "state": "engineering_review_complete_human_review_pending",
+  "ready_for_private_authoring": false,
+  "ready_for_tuning": false,
+  "corpus": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "exposure": {
+    "path": "configs/evidence/evaluation/public-exposure-v3.json",
+    "sha256": "1a712f026aa1a500314ad4b1e17e7ac7f0b6e62248dcd9ba56338ed691503c46"
+  },
+  "proposed_development": {
+    "path": "configs/evidence/evaluation/development-v6-draft.json",
+    "sha256": "8d0c8cd96208896a6bc33c2a9880ba3155f6040971a00e715e6b5d186a8b90d3"
+  },
+  "final_development": null,
+  "source_impact": {
+    "path": "configs/evidence/evaluation/disease-source-impact-v1.json",
+    "sha256": "3e2d07bebe346c5bda2476064d92b42392e37107ab41d3de7270bc059a21b5b4"
+  },
+  "parent": {
+    "path": "configs/evidence/evaluation/evaluation-reconciliation-v1.json",
+    "sha256": "7c0a678b0a39d39e2b5f46f840ffc9a4eed2aeeed0126f21d1db0b7085206d80"
+  },
+  "pending": [
+    "Human review of proposed membership, new need N1.6, added-source judgments/new spans and the full-set consistency delta. Prior accepted wording remains preserved.",
+    "Resolve independent protected-labeling operator/workflow and version authorship/reviewer schema; Quinton supplies natural questions without article search, JSON or offsets.",
+    "Freeze accepted development/protocol, then independent protected authoring/labeling/review and verified storage/backup before retrieval tuning."
+  ],
+  "content_sha256": "14c4f6a86dbc5b56aac2b656c2e01cc551d293e1067653c2ce0b71fdd6152eb7"
+}

@@ -1993,3 +1993,21 @@ of the prepared two-question evidence/consistency pack; no answer or acceptance 
 current quickstart/authoring notices and reconciliation report clarify protected reviewer/operator
 schema work. No source-search/JSON/offset assignment to Quinton, protected access, model/livequery
 calls, training/fullselector or human-hours credit. AI-03 remains in progress; tuning not released.
+
+
+## 2026-10-17: Disease-source impact review and development v6 proposal
+
+Completed80added-source judgments across20prior cases,28disease judgments and2gap rechecks.
+Proposed30-case membership replaces phase-timing/TAGS-detail questions with both disease questions;
+28old wordings/boundaries/concepts unchanged.100spans/73direct validated,280sourcejudgments; five
+families/20answerable/8refused/2gaps preserved. NeedsV3 addsN1.6, draftschemaV3 records Quinton's
+head-question authorship. Public exposureV3 preserves allorigins:292entries/136wordings/33intentIDs.
+ReviewV2/newemptyrecord binds readablelocalpack with0human events; oldv5/v4approvals preserved.
+132distinct focused checks pass across retained attempts; firstproducer invalidconcept,11fixture
+setuperrors and nonexistentreview-testpath retained/corrected. Actualcorpus/publicpreflight/reviewCLI
+validation passes. No tuning/privateauthoring release. Source judgments are bounded engineering
+review, not independent exhaustive gold. Spec1.25/report/handoff/quickstart updated; supplied evidence
+supports onepass changed-scope review without article-search/JSON/offset work. Next human delta
+and independent protectedoperator/schema/storage/freeze, then retrieval/answerquality. No model/live
+query, source downloads, training/fullselector, protectedcontent or inferredhours. UI5180 HTTP200;
+wrongworkflow health route404 retained, correct literature health checked separately; no restart.

@@ -2,10 +2,10 @@
 
 ## Current status — expanded disease evaluation
 
-The [reconciliation checkpoint](EVALUATION-RECONCILIATION-2026-10-17.md) supersedes the execution
-instructions below. The public inventory now includes 136 distinct normalized wordings and the
-current target is 14 sources / 1,179 passages. The final revised development set and independent
-labeling arrangement are pending. **Do not start private authoring or use the old templates yet.**
+The [disease-source review](DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md) supersedes the execution
+instructions below. Proposed development v6 and exposure v3 are now prepared (292 entries/33 known intents). The public inventory now includes 136 distinct normalized wordings and the
+current target is 14 sources / 1,179 passages. Human review of the proposed revised development set and the independent
+labeling arrangement are pending; engineering source review is complete. **Do not start private authoring or use the old templates yet.**
 Quinton supplies natural questions; he is not being assigned article search, JSON or offset work.
 
 The only current command is public and reads no protected content:

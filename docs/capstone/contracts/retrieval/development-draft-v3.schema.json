@@ -1,0 +1,422 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "status",
+    "corpus_manifest_sha256",
+    "corpus_content_sha256",
+    "baseline_regression_sha256",
+    "authorship",
+    "review_scope",
+    "cases",
+    "content_sha256",
+    "information_needs_sha256",
+    "information_needs_base_sha256",
+    "information_needs_parent_sha256"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "prowl-development-draft-v3"
+    },
+    "status": {
+      "const": "draft_pending_human_review"
+    },
+    "corpus_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "corpus_content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "baseline_regression_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "authorship": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 30,
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "version",
+          "split",
+          "primary_need",
+          "family",
+          "difficulty",
+          "intent_group",
+          "question",
+          "finding",
+          "authorship",
+          "expected",
+          "concepts",
+          "labels",
+          "source_judgments",
+          "review",
+          "content_sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^q:dev(2|6)-[0-9]{2}$"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "split": {
+            "const": "development"
+          },
+          "primary_need": {
+            "type": "string",
+            "pattern": "^N[1-5]\\.[1-6]$"
+          },
+          "family": {
+            "enum": [
+              "appearance",
+              "measurement",
+              "anatomy",
+              "ai_limits",
+              "review"
+            ]
+          },
+          "difficulty": {
+            "enum": [
+              "easy",
+              "paraphrase",
+              "multi_passage",
+              "limiting"
+            ]
+          },
+          "intent_group": {
+            "type": "string",
+            "minLength": 1
+          },
+          "question": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "finding": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "modality",
+              "anatomy",
+              "task",
+              "finding_state"
+            ],
+            "properties": {
+              "modality": {
+                "const": "CT"
+              },
+              "anatomy": {
+                "const": "pancreas"
+              },
+              "task": {
+                "enum": [
+                  "localization",
+                  "pancreas_contour",
+                  "suspected_lesion_contour",
+                  "measurement",
+                  "review"
+                ]
+              },
+              "finding_state": {
+                "enum": [
+                  "no_candidate",
+                  "candidate",
+                  "multiple_candidates",
+                  "processing_failed"
+                ]
+              },
+              "lesion_count_bin": {
+                "enum": [
+                  "0",
+                  "1",
+                  "2_or_more"
+                ]
+              },
+              "size_bin": {
+                "enum": [
+                  "lt_10mm",
+                  "10_to_20mm",
+                  "gt_20mm"
+                ]
+              },
+              "warning_category": {
+                "enum": [
+                  "localization_uncertain",
+                  "empty_prediction",
+                  "multiple_components",
+                  "geometry_mismatch",
+                  "processing_error"
+                ]
+              }
+            }
+          },
+          "authorship": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "author",
+              "basis",
+              "exposed"
+            ],
+            "properties": {
+              "author": {
+                "enum": [
+                  "Codex",
+                  "Quinton Evans"
+                ]
+              },
+              "basis": {
+                "enum": [
+                  "literature_inspection",
+                  "adversarial_design",
+                  "documented_corpus_gap",
+                  "stakeholder_input"
+                ]
+              },
+              "exposed": {
+                "const": true
+              }
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "reason",
+              "boundary"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "answered",
+                  "insufficient_evidence",
+                  "refused"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "boundary": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "concepts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "description"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^c:[a-z0-9-]+$"
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 0
+          },
+          "labels": {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://prowl.local/schemas/retrieval/span-label/1.0.0",
+            "title": "Plan 07 question label set with evidence spans",
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "schema_version",
+              "question_id",
+              "label_version",
+              "answerable",
+              "required_concepts",
+              "spans"
+            ],
+            "properties": {
+              "schema_version": {
+                "const": "1.0.0"
+              },
+              "question_id": {
+                "type": "string",
+                "pattern": "^q:[a-z0-9][a-z0-9-]{0,62}$"
+              },
+              "label_version": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9._-]{1,62}$"
+              },
+              "answerable": {
+                "type": "boolean"
+              },
+              "required_concepts": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^c:[a-z0-9][a-z0-9-]{0,62}$"
+                }
+              },
+              "spans": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "representation_id",
+                    "representation_sha256",
+                    "start",
+                    "end",
+                    "grade",
+                    "concept_ids"
+                  ],
+                  "properties": {
+                    "representation_id": {
+                      "type": "string",
+                      "pattern": "^repr:[0-9a-f]{64}$"
+                    },
+                    "representation_sha256": {
+                      "type": "string",
+                      "pattern": "^[0-9a-f]{64}$"
+                    },
+                    "start": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "end": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "grade": {
+                      "enum": [
+                        "direct",
+                        "partial_context",
+                        "contradicting_or_limiting",
+                        "uncertain"
+                      ]
+                    },
+                    "concept_ids": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "items": {
+                        "type": "string",
+                        "pattern": "^c:[a-z0-9][a-z0-9-]{0,62}$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "source_judgments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "work_id",
+                "grade",
+                "rationale"
+              ],
+              "properties": {
+                "work_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "grade": {
+                  "enum": [
+                    "direct",
+                    "partial_context",
+                    "contradicting_or_limiting",
+                    "not_relevant"
+                  ]
+                },
+                "rationale": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 0
+          },
+          "review": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "agent_first_pass",
+              "agent_second_pass",
+              "human_adjudication",
+              "notes"
+            ],
+            "properties": {
+              "agent_first_pass": {
+                "enum": [
+                  "complete"
+                ]
+              },
+              "agent_second_pass": {
+                "enum": [
+                  "pending",
+                  "complete"
+                ]
+              },
+              "human_adjudication": {
+                "enum": [
+                  "pending"
+                ]
+              },
+              "notes": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "content_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "information_needs_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "information_needs_base_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "information_needs_parent_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

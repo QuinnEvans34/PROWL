@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 disease-source review / proposed development v6:** Read
+> DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md and spec1.25. Completed80added-source judgments against
+> all20prior answerable cases,28disease-source judgments and2gap rechecks. Proposed30cases retains
+>20answered/8refused/2gaps/fivefamilies; q:dev6-31/32 replace q:dev2-02/15. Old cases/approvals remain
+> in v5/history.28wordings/expectedboundaries/concepts unchanged.100spans/73direct validated;280
+> answerable source judgments, bounded engineering review not exhaustive independent gold.
+> NeedsV3 addsN1.6; schemaV3 records actual user head-question authorship and allneeds ancestry.
+> ExposureV3:292entries/136wordings/33intentIDs, originalorigins preserved. ReviewV2 supports newIDs;
+> actual v6humanreview has0events. No acceptance inferred. Local changes-to-review.md/all-questions.md
+> under outputs/prowl/development-v6-review-20261017/. Review changes/consistency in onepass, no
+> source-search/JSON/offset work. Priorv5/v4approvalchain preserved, not automatically carried to v6.
+>132distinct focused checks pass across retained attempts; failures and repaired fixture/command
+> attempts retained. Current publicpreflight blocks privateauthoring/tuning; actual draft/reviewCLI
+> validations pass. Protected operator/schema/storage/backup/freeze remain open. Next actual human
+> delta decision and independent labeling workflow, then retrieval comparisons/answerquality.
+> No livequery/modelcalls, corpus/prompt/ranking changes, protectedreads, training/fullselector or
+> humanhourscredit. Prior batch48152 remains finished. Verify services freshly; no restart this turn.
+
 > **October 17 public evaluation reconciliation:** Read EVALUATION-RECONCILIATION-2026-10-17.md
 > and spec1.24. Consolidated exposure v2:262entries/136normalizedwordings/31knownintentIDs; six
 > immutable inventories unioned with original variants/origins, older inventories unchanged.

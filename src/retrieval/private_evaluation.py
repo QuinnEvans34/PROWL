@@ -15,7 +15,7 @@ from jsonschema import Draft202012Validator, FormatChecker, ValidationError
 from .records import CONTRACTS, canonical_bytes
 from .direct_ingestion import digest
 from .development_set import FAMILIES, NEEDS, REFUSALS
-from .public_exposure import public_preflight
+from .public_exposure import current_public_preflight as public_preflight
 from .corpus_inventory import frozen_inventory, verify_sources
 from .labels import contains, gold_works, verify_label_set
 from .query import make_query, normalize_question

@@ -1,0 +1,912 @@
+{
+  "version": "prowl-disease-source-impact-v1",
+  "prior": {
+    "path": "configs/evidence/evaluation/development-v5-draft.json",
+    "sha256": "a8072c19bc27c3e4047f3d2b289e16e4b6bce96ea2fb4136700b9624bb906520"
+  },
+  "corpus": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "method": "Four added normalized source texts read in full against all 20 prior concept lists; broad lexical/context search across ten prior sources for two new disease cases. Candidate contexts reviewed; judgments are agent-authored, not exhaustive independent gold.",
+  "added_source_reviews": [
+    {
+      "work_id": "work:pmid:33982269",
+      "representation_sha256": "34a887352031f2ec17a449c20b5738801b799614fd5a615537c64f3790e8d421",
+      "normalized_characters": 24409,
+      "scope": "Acute-pancreatitis imaging/classification review"
+    },
+    {
+      "work_id": "work:pmid:32703312",
+      "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+      "normalized_characters": 19607,
+      "scope": "Mass-forming chronic-pancreatitis versus PDAC imaging review"
+    },
+    {
+      "work_id": "work:pmid:34698963",
+      "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+      "normalized_characters": 11147,
+      "scope": "Autoimmune-pancreatitis CT/MRI review"
+    },
+    {
+      "work_id": "work:pmid:32335790",
+      "representation_sha256": "34b09317d7cb7d5e81cf807830d05bc7afb306cf9f107b8e58b1955c4dc7c539",
+      "normalized_characters": 29975,
+      "scope": "PDAC detection and differential-imaging review"
+    }
+  ],
+  "prior_answerable_judgments": [
+    {
+      "case_id": "q:dev2-01",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested tumor-to-normal-pancreas attenuation explanation."
+    },
+    {
+      "case_id": "q:dev2-01",
+      "work_id": "work:pmid:32703312",
+      "grade": "partial_context",
+      "rationale": "Discusses similar appearances of inflammatory masses and PDAC, not the requested similarity between a tumor and surrounding normal pancreas."
+    },
+    {
+      "case_id": "q:dev2-01",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested tumor-to-normal-pancreas attenuation explanation."
+    },
+    {
+      "case_id": "q:dev2-01",
+      "work_id": "work:pmid:32335790",
+      "grade": "direct",
+      "rationale": "Explicit similar attenuation relative to normal pancreas explains missed small/isoattenuating PDAC; exact source spans added."
+    },
+    {
+      "case_id": "q:dev2-02",
+      "work_id": "work:pmid:33982269",
+      "grade": "partial_context",
+      "rationale": "Describes this review institution's acute-pancreatitis protocol; its timing is not the isoattenuating-carcinoma study protocol."
+    },
+    {
+      "case_id": "q:dev2-02",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-02",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-02",
+      "work_id": "work:pmid:32335790",
+      "grade": "partial_context",
+      "rationale": "Gives general pancreatic/portal phase timings; not the specific carcinoma-study acquisition or relative timing."
+    },
+    {
+      "case_id": "q:dev2-03",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-03",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-03",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-03",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-04",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-04",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-04",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-04",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-05",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-05",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-05",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-05",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-06",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-06",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-06",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-06",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-07",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-07",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-07",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-07",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-08",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-08",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-08",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-08",
+      "work_id": "work:pmid:32335790",
+      "grade": "partial_context",
+      "rationale": "Discusses limits of post-treatment tumor size and DW-volume; not the requested CT diameter-versus-3D-volume study example."
+    },
+    {
+      "case_id": "q:dev2-09",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-09",
+      "work_id": "work:pmid:32703312",
+      "grade": "partial_context",
+      "rationale": "Describes the groove between head and duodenum, but not the specific encircling intestinal relationship."
+    },
+    {
+      "case_id": "q:dev2-09",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-09",
+      "work_id": "work:pmid:32335790",
+      "grade": "partial_context",
+      "rationale": "Describes groove/duodenal invasion anatomy, not the requested curve around the head."
+    },
+    {
+      "case_id": "q:dev2-10",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-10",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-10",
+      "work_id": "work:pmid:34698963",
+      "grade": "partial_context",
+      "rationale": "Age/background and prior-image context for enlargement; no normal-glucose-tolerance control mean, cohort or SEM."
+    },
+    {
+      "case_id": "q:dev2-10",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-11",
+      "work_id": "work:pmid:33982269",
+      "grade": "partial_context",
+      "rationale": "Reports inflammation-associated changes in pancreatic size/appearance, but not the subregion model assumptions or surgical limitation being asked about."
+    },
+    {
+      "case_id": "q:dev2-11",
+      "work_id": "work:pmid:32703312",
+      "grade": "partial_context",
+      "rationale": "Reports inflammation-associated changes in pancreatic size/appearance, but not the subregion model assumptions or surgical limitation being asked about."
+    },
+    {
+      "case_id": "q:dev2-11",
+      "work_id": "work:pmid:34698963",
+      "grade": "partial_context",
+      "rationale": "Reports inflammation-associated changes in pancreatic size/appearance, but not the subregion model assumptions or surgical limitation being asked about."
+    },
+    {
+      "case_id": "q:dev2-11",
+      "work_id": "work:pmid:32335790",
+      "grade": "partial_context",
+      "rationale": "Reports inflammation-associated changes in pancreatic size/appearance, but not the subregion model assumptions or surgical limitation being asked about."
+    },
+    {
+      "case_id": "q:dev2-12",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-12",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-12",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-12",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-13",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-13",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-13",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-13",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-14",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-14",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-14",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-14",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-15",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-15",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-15",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-15",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-16",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-16",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-16",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-16",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-17",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-17",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-17",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-17",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-18",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-18",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-18",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-18",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-19",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-19",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-19",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-19",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-20",
+      "work_id": "work:pmid:33982269",
+      "grade": "not_relevant",
+      "rationale": "Acute-pancreatitis imaging/classification review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-20",
+      "work_id": "work:pmid:32703312",
+      "grade": "not_relevant",
+      "rationale": "Mass-forming chronic-pancreatitis versus PDAC imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-20",
+      "work_id": "work:pmid:34698963",
+      "grade": "not_relevant",
+      "rationale": "Autoimmune-pancreatitis CT/MRI review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    },
+    {
+      "case_id": "q:dev2-20",
+      "work_id": "work:pmid:32335790",
+      "grade": "not_relevant",
+      "rationale": "PDAC detection and differential-imaging review does not report the requested study-specific facts, methods or anatomical relationship; shared pancreatic subject matter is insufficient."
+    }
+  ],
+  "disease_source_judgments": [
+    {
+      "case_id": "q:dev6-31",
+      "judgments": [
+        {
+          "work_id": "work:pmid:37173876",
+          "grade": "partial_context",
+          "rationale": "AI screening/risk and chronic-pancreatitis context; no explicit required morphological feature combination or head-size diagnostic rule."
+        },
+        {
+          "work_id": "work:pmid:41414851",
+          "grade": "not_relevant",
+          "rationale": "Prostate contouring/automation review study, not pancreatic inflammatory or tumor imaging."
+        },
+        {
+          "work_id": "work:pmid:42738357",
+          "grade": "not_relevant",
+          "rationale": "TAGS tumor segmentation/evaluation study, not inflammatory-versus-tumor diagnostic imaging features."
+        },
+        {
+          "work_id": "work:pmid:25950180",
+          "grade": "partial_context",
+          "rationale": "Whole-pancreas volume in type 2 diabetes; not pancreatic-head diameter or the required inflammatory differential findings."
+        },
+        {
+          "work_id": "work:pmid:33027288",
+          "grade": "partial_context",
+          "rationale": "CT diameter versus reconstructed tumor volume study; tumor measurement is not organ-head enlargement or an inflammatory diagnostic discriminator."
+        },
+        {
+          "work_id": "work:pmid:33925859",
+          "grade": "partial_context",
+          "rationale": "Cancer-only cohort reports head-lesion size and indirect CT signs; it cannot establish a size-to-disease rule or compare cancer against inflammation."
+        },
+        {
+          "work_id": "work:pmid:34381070",
+          "grade": "not_relevant",
+          "rationale": "Interobserver tumor-contour/radiomics variability, not the requested disease features."
+        },
+        {
+          "work_id": "work:pmid:35406426",
+          "grade": "partial_context",
+          "rationale": "Radiomics/EUS/MRI machine-learning differential studies and accuracy figures; does not directly supply the required qualitative feature combination."
+        },
+        {
+          "work_id": "work:pmid:35877639",
+          "grade": "partial_context",
+          "rationale": "Inflammation may alter subregion sizes/model assumptions; no quantified head-disease rule or required discriminating feature combination."
+        },
+        {
+          "work_id": "work:pmid:36834922",
+          "grade": "partial_context",
+          "rationale": "Senescence, atrophy, endocrine/exocrine pathology and age-related diseases; not a head-enlargement rule or the required differential imaging combination."
+        },
+        {
+          "work_id": "work:pmid:33982269",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        },
+        {
+          "work_id": "work:pmid:34698963",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        },
+        {
+          "work_id": "work:pmid:32335790",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        }
+      ]
+    },
+    {
+      "case_id": "q:dev6-32",
+      "judgments": [
+        {
+          "work_id": "work:pmid:37173876",
+          "grade": "partial_context",
+          "rationale": "AI screening/risk and chronic-pancreatitis context; no explicit required morphological feature combination or head-size diagnostic rule."
+        },
+        {
+          "work_id": "work:pmid:41414851",
+          "grade": "not_relevant",
+          "rationale": "Prostate contouring/automation review study, not pancreatic inflammatory or tumor imaging."
+        },
+        {
+          "work_id": "work:pmid:42738357",
+          "grade": "not_relevant",
+          "rationale": "TAGS tumor segmentation/evaluation study, not inflammatory-versus-tumor diagnostic imaging features."
+        },
+        {
+          "work_id": "work:pmid:25950180",
+          "grade": "partial_context",
+          "rationale": "Whole-pancreas volume in type 2 diabetes; not pancreatic-head diameter or the required inflammatory differential findings."
+        },
+        {
+          "work_id": "work:pmid:33027288",
+          "grade": "partial_context",
+          "rationale": "CT diameter versus reconstructed tumor volume study; tumor measurement is not organ-head enlargement or an inflammatory diagnostic discriminator."
+        },
+        {
+          "work_id": "work:pmid:33925859",
+          "grade": "direct",
+          "rationale": "Direct support only for reported cancer secondary signs. Retained limiting span explicitly says this cancer-only cohort did not evaluate differences from other diagnoses."
+        },
+        {
+          "work_id": "work:pmid:34381070",
+          "grade": "not_relevant",
+          "rationale": "Interobserver tumor-contour/radiomics variability, not the requested disease features."
+        },
+        {
+          "work_id": "work:pmid:35406426",
+          "grade": "partial_context",
+          "rationale": "Radiomics/EUS/MRI machine-learning differential studies and accuracy figures; does not directly supply the required qualitative feature combination."
+        },
+        {
+          "work_id": "work:pmid:35877639",
+          "grade": "partial_context",
+          "rationale": "Inflammation may alter subregion sizes/model assumptions; no quantified head-disease rule or required discriminating feature combination."
+        },
+        {
+          "work_id": "work:pmid:36834922",
+          "grade": "partial_context",
+          "rationale": "Senescence, atrophy, endocrine/exocrine pathology and age-related diseases; not a head-enlargement rule or the required differential imaging combination."
+        },
+        {
+          "work_id": "work:pmid:33982269",
+          "grade": "partial_context",
+          "rationale": "Acute-pancreatitis enlargement, enhancement and fat-stranding context; does not establish the specific MFCP-versus-PDAC combination required here."
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        },
+        {
+          "work_id": "work:pmid:34698963",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        },
+        {
+          "work_id": "work:pmid:32335790",
+          "grade": "direct",
+          "rationale": "Exact required-concept spans retained with disease subtype/modality/phase qualifications; direct support is concept-specific, not a diagnostic guarantee."
+        }
+      ]
+    }
+  ],
+  "gap_rechecks": [
+    {
+      "case_id": "q:dev2-29",
+      "expected_status": "insufficient_evidence",
+      "agent_judgment": "Duct signs, MRCP and contour irregularities describe imaging; none of the four added reviews specifies including/excluding ducts in a whole-pancreas segmentation mask.",
+      "scope": "Prior ten-source gap judgment plus full normalized text review of the four added sources; bounded corpus absence, not a universal absence claim.",
+      "added_sources": [
+        {
+          "work_id": "work:pmid:33982269",
+          "representation_sha256": "34a887352031f2ec17a449c20b5738801b799614fd5a615537c64f3790e8d421",
+          "keyword_offsets": [
+            1148,
+            1173,
+            3658,
+            6953,
+            9818,
+            10330,
+            11769,
+            14120,
+            14984,
+            15177,
+            16008,
+            17008,
+            17136,
+            18297,
+            18345,
+            18627,
+            18755,
+            18871,
+            18928,
+            19063,
+            19290,
+            19353,
+            19828,
+            19870,
+            20669,
+            21059,
+            21190,
+            21360,
+            21407,
+            21461,
+            21861,
+            22000,
+            22269,
+            22405,
+            22525,
+            22714,
+            22965,
+            23876
+          ]
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "keyword_offsets": [
+            72,
+            540,
+            594,
+            631,
+            1454,
+            2675,
+            2759,
+            2769,
+            3424,
+            3445,
+            7574,
+            7759,
+            7945,
+            8306,
+            8500,
+            8654,
+            8766,
+            8952,
+            9068,
+            9166,
+            9264,
+            9299,
+            9472,
+            9516,
+            9578,
+            9612,
+            9767,
+            9943,
+            9981,
+            10130,
+            10223,
+            10409,
+            10496,
+            10589,
+            10670,
+            10839,
+            10930,
+            11040,
+            11097,
+            11251,
+            11281,
+            11436,
+            11514,
+            12648,
+            14126,
+            14153,
+            14646,
+            14671,
+            16670,
+            16750,
+            17373,
+            17732,
+            17778,
+            18688,
+            18941
+          ]
+        },
+        {
+          "work_id": "work:pmid:34698963",
+          "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+          "keyword_offsets": [
+            361,
+            424,
+            539,
+            804,
+            1156,
+            1325,
+            1531,
+            1594,
+            4687,
+            5497,
+            5552,
+            6732,
+            7239,
+            7253,
+            7686,
+            7742,
+            7967,
+            8114
+          ]
+        },
+        {
+          "work_id": "work:pmid:32335790",
+          "representation_sha256": "34b09317d7cb7d5e81cf807830d05bc7afb306cf9f107b8e58b1955c4dc7c539",
+          "keyword_offsets": [
+            11,
+            795,
+            1218,
+            1282,
+            1599,
+            2902,
+            3106,
+            4210,
+            5005,
+            6505,
+            6579,
+            6654,
+            6720,
+            6852,
+            8477,
+            9185,
+            10444,
+            11331,
+            13090,
+            13560,
+            14155,
+            15187,
+            17766,
+            18446,
+            18556,
+            18615,
+            19550,
+            21193,
+            21772,
+            22054,
+            22383,
+            22824,
+            22981,
+            23807,
+            23897,
+            24771,
+            24956,
+            25048,
+            25406,
+            25464,
+            26229,
+            26642,
+            26674,
+            27886,
+            28013,
+            29485
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "q:dev2-30",
+      "expected_status": "insufficient_evidence",
+      "agent_judgment": "Diagnostic uncertainty, imaging sensitivity/specificity and fibrosis are not calibrated pancreatic boundary-segmentation uncertainty validation. No such validation was identified in the added reviews.",
+      "scope": "Prior ten-source gap judgment plus full normalized text review of the four added sources; bounded corpus absence, not a universal absence claim.",
+      "added_sources": [
+        {
+          "work_id": "work:pmid:33982269",
+          "representation_sha256": "34a887352031f2ec17a449c20b5738801b799614fd5a615537c64f3790e8d421",
+          "keyword_offsets": []
+        },
+        {
+          "work_id": "work:pmid:32703312",
+          "representation_sha256": "f9c95f31c1a4674e6fb937a9d02cc14d3e79bb5d327144e35c07766f2f4e3cd3",
+          "keyword_offsets": []
+        },
+        {
+          "work_id": "work:pmid:34698963",
+          "representation_sha256": "44f3a52ec187422635be4d68fcc69e74ab33d06b17e20f599e7ed0473a8b0604",
+          "keyword_offsets": [
+            1531,
+            7239
+          ]
+        },
+        {
+          "work_id": "work:pmid:32335790",
+          "representation_sha256": "34b09317d7cb7d5e81cf807830d05bc7afb306cf9f107b8e58b1955c4dc7c539",
+          "keyword_offsets": [
+            24956,
+            25979
+          ]
+        }
+      ]
+    }
+  ],
+  "proposed_replacements": [
+    {
+      "old": "q:dev2-02",
+      "new": "q:dev6-31",
+      "reason": "Replace narrow single-study phase timing with stakeholder head-size disease associations; contrast-phase qualifications remain in disease findings."
+    },
+    {
+      "old": "q:dev2-15",
+      "new": "q:dev6-32",
+      "reason": "Replace redundant TAGS metric/grid detail with disease differential imaging; N4.6 benchmark-comparison limits remain in Q13."
+    }
+  ],
+  "human_review": "pending",
+  "ready_for_tuning": false,
+  "content_sha256": "fed26518358ccc1214a3041f7f8d5590f022b8ff5afdd8dbdbf5fe1fb59c5e18"
+}
