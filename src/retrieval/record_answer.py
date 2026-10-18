@@ -94,7 +94,10 @@ class RecordComposer:
     def assemble(self, plan, records, evidence):
         if not isinstance(plan, dict) or set(plan) != {'paragraphs'} or not isinstance(plan['paragraphs'], list):
             raise ValueError('Invalid composition plan')
-        if not 1 <= len(plan['paragraphs']) <= 2 * len(records): raise ValueError('Paragraph budget')
+        # The model may split two adjacent factual units into separate paragraphs.
+        # Check every unit first, then normalize only paragraph breaks. No text repair.
+        if not 1 <= len(plan['paragraphs']) <= min(6, sum(len(r['units']) for r in records.values())):
+            raise ValueError('Paragraph budget')
         observed = []; blocks = []; claims = []
         for paragraph in plan['paragraphs']:
             if set(paragraph) != {'record_id', 'sentences'}: raise ValueError('Unexpected prose')
@@ -112,7 +115,7 @@ class RecordComposer:
                 for index in unit['facts']:
                     pids.update(records[rid]['rendered']['statements'][index]['citations'])
             if len(qualifiers) != 1: raise ValueError('Keep qualifications separate')
-            claims.append(dict(record_id=rid, units=unit_refs, text=' '.join(texts), citations=[
+            claims.append(dict(record_id=rid, qualification=next(iter(qualifiers)), units=unit_refs, text=' '.join(texts), citations=[
                 dict(rank=evidence[pid]['rank'], quote=evidence[pid]['record']['text'])
                 for pid in sorted(pids, key=lambda p: evidence[p]['rank'])]))
         expected = [(rid, u['id']) for rid, record in records.items() for u in record['units']]
@@ -120,7 +123,19 @@ class RecordComposer:
                 or any([uid for r, uid in observed if r == rid] != [u['id'] for u in record['units']]
                        for rid, record in records.items())):
             raise ValueError('Incomplete, repeated or reordered source facts')
-        return claims
+        normalized = []
+        for claim in claims:
+            if (normalized and normalized[-1]['record_id'] == claim['record_id']
+                    and normalized[-1]['qualification'] == claim['qualification']):
+                previous = normalized[-1]
+                previous['text'] += ' ' + claim['text']
+                previous['units'].extend(claim['units'])
+                cites = {c['rank']: c for c in previous['citations'] + claim['citations']}
+                previous['citations'] = [cites[rank] for rank in sorted(cites)]
+            else:
+                normalized.append(claim)
+        for claim in normalized: del claim['qualification']
+        return normalized
 
     def compose(self, question, result, call=None):
         records, evidence = self.material(result)
