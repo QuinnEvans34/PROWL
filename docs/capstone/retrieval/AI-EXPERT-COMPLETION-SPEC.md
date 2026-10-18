@@ -1,9 +1,19 @@
 # AI expert completion specification
 
-**Version:** 1.28 — October 17, 2026 (autonomous quality investigation; candidates not promoted)\
+**Version:** 1.29 — October 18, 2026 (instruction-model checkpoint; candidates rejected)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October18 checkpoint: [instruction-model results](INSTRUCTION-ANSWER-RESULTS-2026-10-18.md).
+V15–V21 remain unpromoted. Citation-isolated review, paper focus, complete numerical feedback and
+source-locked rendering improve two narrow regression examples, but full V20/V21 runs fail quality.
+V20 displays an over-broad disease comparison; V21 produces zero summaries/five withheld answers,
+one empty result/four scope blocks. Preserve false refusals and unsupported drafts as failures.
+19 new focused tests and24 restored live search/HTTP tests pass; no formal quality acceptance.
+External candidate model is hash-verified and retained, isolated server stopped/reaped. Live dense/
+v6.1 API and UI remain selected. Next repair criterion-specific feedback offline before any fresh
+bounded model run; no further model/prompt sweep. Independent evaluation and measurements stay open.
 
 October17 autonomous improvement amendment: Quinton explicitly requests continued autonomous work
 until engineering confidence. [Section retrieval](SECTION-RETRIEVAL-RESULTS-2026-10-17.md) finds

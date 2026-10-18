@@ -30,3 +30,12 @@ Use same exact-quote/number/qualifier guards and separate source review. No repa
 expected answers. Pin model/code before execution. Both must give useful supported readable answers
 with appropriate qualifications before a separately documented continuation or live integration.
 Every source claim is inspected as engineering review; formal/protected/clinical acceptance stays open.
+
+Admission follow-up (October18, before any inference): pull reports success, but the initial local
+manifest raw-byte equality assertion fails. Retain pull-receipt.json as failed verification. Local
+manifest6cc76deb... contains the exact original config/four layers plus one additional manifest layer
+with the original registry digest7cdf5a.../858bytes. API tags still report the pinned registry identity.
+Verify this exact additive structure, the embedded registry bytes and every config/model/template/
+system/license/provenance blob. Save a separate verification receipt; do not redownload, rewrite the
+failed receipt, remove provenance, or accept arbitrary extra layers. Inference remains conditional
+on this complete strict verification and the unchanged resource bounds.

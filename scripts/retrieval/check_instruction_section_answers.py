@@ -20,6 +20,7 @@ def main():
     paths=['docs/capstone/retrieval/INSTRUCTION-MODEL-V15-PLAN-2026-10-17.md',
         'scripts/retrieval/check_instruction_section_answers.py','scripts/retrieval/supervise_instruction_canary.py',
         'outputs/prowl/instruction-model-v15-20261017/pull-receipt.json',
+        'outputs/prowl/instruction-model-v15-20261017/verification-receipt.json',
         'outputs/prowl/instruction-model-v15-20261017/registry-manifest.json','src/retrieval/natural_answer.py',
         'src/retrieval/source_context.py',
         'src/retrieval/development_search.py','configs/evidence/development-search-v2-candidate.json',

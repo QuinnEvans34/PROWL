@@ -15,7 +15,7 @@ STORE=Path('/Volumes/PROWL-Data/PROWL/scratch/answer-model-v15-20261017/ollama')
 def main():
     from retrieval.direct_corpus import read_config,limits
     limits(read_config(str(ROOT/'infra/retrieval/.env.ingestion.json')))
-    assert json.loads((OUT/'pull-receipt.json').read_text())['state']=='verified'
+    assert json.loads((OUT/'verification-receipt.json').read_text())['state']=='verified'
     server=int(subprocess.check_output(['lsof','-t','-iTCP:11435','-sTCP:LISTEN'],text=True).strip())
     command=subprocess.check_output(['ps','-p',str(server),'-o','command='],text=True).strip()
     if command!='/usr/local/bin/ollama serve':raise ValueError('Unexpected candidate server owner')

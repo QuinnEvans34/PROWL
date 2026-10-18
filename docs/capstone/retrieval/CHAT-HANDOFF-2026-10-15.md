@@ -1,24 +1,27 @@
 # PROWL development handoff — October 15, 2026
 
-> **October17 autonomous quality investigation active:** User requests autonomous improvements until
-> engineering confidence. Read spec1.28, SECTION-RETRIEVAL-RESULTS and SECTION-ANSWER-RESULTS.
-> Commits7d4c3aa and d2af0d7 pushed: full-corpus reranking/source-selection experiments preserved.
-> R8 deterministic sections+terminology finds directly relevant but provisionally unlabeled disease
-> evidence; original gates still fail.20exposed cases,sourceRecall5 .92/MRR .8833/passageRecall5 .3238,
-> 10/20directtop5,13/20packages anydirect,8/20allconcepts;median6.977/max7.318s. No relabel-to-pass.
-> Answer v6.2/v9–v14 rejected; model review can approve overgeneralization or missing qualifications.
-> No new candidate deployed. LiveAPI66878 stilldense/v6.1; UI5180. OriginalOllama11434 remains.
-> V15 is ONE separately budgeted instruction-model comparison, plan explicit before download:
-> qwen2.5:14b manifest7cdf5a0187d5...,8,988,123,581layerbytes, isolated external model store
-> /Volumes/PROWL-Data/PROWL/scratch/answer-model-v15-20261017/ollama. Owned candidate Ollama
-> session31824/PID87026/loopback11435, cloud off, one model/request; do not duplicate. Pull session38293
-> active at this checkpoint,20min/12GiB/external100GiB/internal104GiBfloors; inspect receipt first.
-> No model/data/cache deletion. After verified manifest/blobs only, two-canary supervised comparison
-> with18GiBownedRSS/4min/60srequests; no retry. See instruction-model-v15 output directory.
-> Existing8B/30B resident models may be unloaded to prevent concurrent inference, never deleted.
-> Formal Step5–7, human/independent evidence acceptance and required measurements remain open.
-> Training/fullselector/protected content/humanhours untouched. This active notice needs a final
-> checkpoint update after the candidate attempt ends; never assume download or quality success.
+> **October18 autonomous quality checkpoint complete; answer quality NOT accepted:** Read spec1.29,
+> INSTRUCTION-ANSWER-RESULTS-2026-10-18.md and earlier section retrieval/answer reports. R8 retrieves
+> useful sections but original label/gates remain unmet. No relabeling. V15 model download completed;
+> initial verification assertion failed on Ollama's added provenance layer, separate exact manifest/
+> blob/API verification passed. Both receipts retained. Model qwen2.5:14b SHA7cdf5a0187d5... remains
+> only in /Volumes/PROWL-Data/PROWL/scratch/answer-model-v15-20261017/ollama (8,988,130,944B).
+> Candidate server87026/session31824 FINISHED: unloaded, SIGTERM, exit0; never poll as live or duplicate.
+> V15–V21 rejected/not promoted. Two V19 source-locked rewrite regressions are clearer but V20 full
+> pipeline still broadens a disease comparison; three summaries/three withheld/four blocks. V21
+> final:0summaries/5withheld/1empty/4blocks;19generationcalls/6unloads/111.431s, supervisor113.085s/
+> 13,611,171,840B peak/reaped. All raw drafts/failed checks/code snapshots retained. Empty means no
+> supported answer produced, not a certified corpus-wide gap. Same-model review is fallible.
+> 19new focused boundary tests and24 restored live search/HTTP tests pass. Unused rejected preview
+> server changes removed. OriginalAPI66878/dense/v6.1/UI5180/Ollama11434 remain selected and healthy
+> at this checkpoint; no candidate UI integration. Verify current state before any next operation.
+> Next: offline criterion-specific feedback repair (short-circuit guard masks other failures;
+> reviewer false qualification with blank feedback); semantic-role preservation instead of blanket
+> numerical-token equality. No more model/prompt sweeps on these exposed questions. Corpus14papers/
+> 1179passages and original labels unchanged; protectedfreeze/independentreview/fullconceptquality/
+> measurementextension open. No training/fullselector/protectedcontent/humanhours changes.
+> Readable local review: outputs/prowl/instruction-answer-review-20261018.md. Aggregate pins/results:
+> configs/evidence/instruction-answer-results.json. Earlier active/download claims below historical.
 
 
 > **October17 retrieval comparison:** Read RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md/spec1.27.

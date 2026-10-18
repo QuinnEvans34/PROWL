@@ -3991,3 +3991,16 @@ v14's two plain-text canaries fail citation/qualifier parsing and source review.
 live promotion, no seed search or network retry. Source review matters more than positive model
 checks. Report: SECTION-ANSWER-RESULTS-2026-10-17.md; public hashes configs/evidence/section-answer-results.json.
 One separately budgeted instruction-model comparison (v15) follows; no training or full selector.
+
+
+## October 18 — source-isolated instruction-answer checkpoint (V15–V21)
+
+See [full report](capstone/retrieval/INSTRUCTION-ANSWER-RESULTS-2026-10-18.md) and
+`configs/evidence/instruction-answer-results.json`. One hash-verified Qwen2.5:14b model in an isolated
+external store; no source/evaluation changes. V15/16/17 canaries fail; V18 fixes partial numerical
+feedback in one retained-draft regression; V19 produces two clearer source-locked rewrites. V20 full
+run:3summaries/3withheld/4blocks, with a manually rejected disease-scope rewrite. V21:0summaries/
+5withheld/1empty/4blocks,111.431s/19generationresponses/6unloads. No candidate promoted. False refusals
+and unsupported drafts retained, not counted as successes.19new boundary tests and24 live search/HTTP
+checks pass. Candidate service stopped/reaped,9GBstore preserved; live dense/v6.1 unchanged. Next
+criterion-specific offline validation repair, not another prompt/model sweep or independent-test claim.

@@ -1,0 +1,283 @@
+{
+  "version": "prowl-instruction-answer-results-v1",
+  "promoted": false,
+  "live_policy": "natural-literature-answer-v6.1",
+  "experiments": [
+    {
+      "path": "outputs/prowl/section-answers-v15-20261017/receipt.json",
+      "sha256": "26a427d49af7c7f8a9881549ecb8b74930d05025060518a5c96906fae3c3b018",
+      "state": "completed",
+      "seconds": 46.450303208082914,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 23.159325332962908
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 23.289097666973248
+        }
+      ],
+      "received_generation_responses": 4,
+      "unload_calls": 0,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/section-answers-v16-20261018/receipt.json",
+      "sha256": "431b09ef8f9dcb023f07fd786be8d6391c0a79656091c9742811199349debba2",
+      "state": "completed",
+      "seconds": 49.27822341595311,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 31.58480329194572
+        },
+        {
+          "id": "quality-03",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 17.69143870798871
+        }
+      ],
+      "received_generation_responses": 5,
+      "unload_calls": 0,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/section-answers-v17-20261018/receipt.json",
+      "sha256": "dba99c6c1f3cc7beb410bd664efdb3b0b5b448825aabc7432b70a7a17a48fda4",
+      "state": "completed",
+      "seconds": 24.834179915953428,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 12.713294000015594
+        },
+        {
+          "id": "quality-03",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 12.11839904205408
+        }
+      ],
+      "received_generation_responses": 4,
+      "unload_calls": 0,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/section-answers-v18-20261018/receipt.json",
+      "sha256": "07385310500d07cb8a32252e05fa8c2970b02226641c70cbeed4c6f1836c554a",
+      "state": "completed",
+      "seconds": 14.415445458027534,
+      "outcomes": [
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 14.414495249977335
+        }
+      ],
+      "received_generation_responses": 2,
+      "unload_calls": 0,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/readable-render-v19-20261018/receipt.json",
+      "sha256": "de8c347c9997b5e5f33e3b257dee21c1c7e034a319af3765b0df55f6905f88de",
+      "state": "completed",
+      "seconds": null,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "state": "completed",
+          "seconds": 6.0643152500269935
+        },
+        {
+          "id": "quality-03",
+          "state": "completed",
+          "seconds": 7.6349625419825315
+        }
+      ],
+      "received_generation_responses": 4,
+      "unload_calls": 0,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/section-answers-v20-20261018/receipt.json",
+      "sha256": "c9a024c34e9ed5263c067c5c97602e7e0715e984748fbae4ba5b5139ef943edb",
+      "state": "completed",
+      "seconds": 123.50353124993853,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 12.676429124898277
+        },
+        {
+          "id": "quality-02",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 33.117803708068095
+        },
+        {
+          "id": "quality-03",
+          "generation": "completed",
+          "failure": null,
+          "status": "summarized",
+          "seconds": 29.55693445901852
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "validation_failed",
+          "status": null,
+          "seconds": 23.500566917005926
+        },
+        {
+          "id": "quality-05",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 14.96199316601269
+        },
+        {
+          "id": "quality-06",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 9.681917499983683
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00021712505258619785
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00012945802882313728
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 9.820901323109865e-05
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00010079098865389824
+        }
+      ],
+      "received_generation_responses": 23,
+      "unload_calls": 6,
+      "promoted": false
+    },
+    {
+      "path": "outputs/prowl/section-answers-v21-20261018/receipt.json",
+      "sha256": "b6a176c052de6d6f6a4b8c28d67ae6e697248505ea78796509f32c92529a7b7c",
+      "state": "completed",
+      "seconds": 111.43063249997795,
+      "outcomes": [
+        {
+          "id": "quality-01",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 19.824800957925618
+        },
+        {
+          "id": "quality-02",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 22.13149591605179
+        },
+        {
+          "id": "quality-03",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 14.500772250001319
+        },
+        {
+          "id": "quality-04",
+          "generation": "unavailable",
+          "failure": "validation_failed",
+          "status": null,
+          "seconds": 29.461258916999213
+        },
+        {
+          "id": "quality-05",
+          "generation": "unavailable",
+          "failure": "support_rejected",
+          "status": null,
+          "seconds": 18.45013666700106
+        },
+        {
+          "id": "quality-06",
+          "generation": "completed",
+          "failure": null,
+          "status": "insufficient",
+          "seconds": 7.053272958029993
+        },
+        {
+          "id": "quality-07",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00020558398682624102
+        },
+        {
+          "id": "quality-08",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 0.00012674997560679913
+        },
+        {
+          "id": "quality-09",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 9.466707706451416e-05
+        },
+        {
+          "id": "quality-10",
+          "generation": "not_called",
+          "failure": null,
+          "status": null,
+          "seconds": 9.416602551937103e-05
+        }
+      ],
+      "received_generation_responses": 19,
+      "unload_calls": 6,
+      "promoted": false
+    }
+  ]
+}
