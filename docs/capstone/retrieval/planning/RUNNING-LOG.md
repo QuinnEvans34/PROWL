@@ -1918,3 +1918,14 @@ All implementation/smoke question wordings are exposed development material; rec
 supplements before private authoring. No held-out reads, thresholds changed, corpus mutations,
 training/fullselector/newmodeldownload or inferred human hours. Next evaluation-label reconciliation
 and independent verification, then frozen retrieval comparison and readable summaries.
+
+
+## 2026-10-17: Text-first literature results
+
+Quinton requests clearer response text and citations in a separate tab/button. Implemented immediate
+reading view for original passages, Sources switch and focused numbered-source navigation. Existing
+request clearing and response validation retained.22UIchecks/build pass; real browser reading/source
+navigation checked on the already visible general question. Backend/ranking/corpus unchanged, no new
+retrieval or generation call. Spec1.20 records plain-language synthesis as remaining AI-04 requirement;
+this visual improvement does not close that quality gate. Original receipts preserved. No human hours
+inferred. Screenshot retained locally as live-search-20261017/reading-view.jpg.

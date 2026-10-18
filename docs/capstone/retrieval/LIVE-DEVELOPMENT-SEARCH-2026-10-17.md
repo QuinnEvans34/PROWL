@@ -92,3 +92,18 @@ Next reconcile disease-label candidates, independent verification and exposure t
 then freeze evaluation and compare retrieval configurations. Readable cited summaries and viewer
 context follow their acceptance gates. The required measurement-aware extension remains after core
 acceptance. This delivery closes the requested live-source-search milestone only.
+
+
+## October 17 reading-view refinement
+
+At Quinton's request, results now open as readable original paragraphs with a separate Sources
+button. Numbered source buttons switch views, focus the corresponding citation heading and expand
+its exact excerpt. Paper titles, authors, licenses, links and offsets remain inspectable. Each entry
+represents a retrieved passage, so multiple entries can belong to the same paper. Changing the
+question clears the entire view. This does not generate or simplify the article wording; the
+requested concise plain-language answer remains AI-04 work, recorded in spec1.20.
+
+22 focused UI checks and production build pass (existing large-chunk warning). Real browser checked
+reading→source1→reading against the user's already displayed general question; no question was
+replaced and no extra model/search call was needed. Screenshot: local
+`outputs/prowl/live-search-20261017/reading-view.jpg`. Original checkpoint hashes remain historical.

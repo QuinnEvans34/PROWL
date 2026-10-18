@@ -23,3 +23,14 @@
 .literature-search__result { padding: 14px; border: 1px solid #3c4d65; border-radius: 6px; }
 .literature-search__result summary { line-height: 1.5; }
 .literature-search > small { display: block; margin-top: 16px; color: #bac8d9; }
+
+.literature-search__view-switch { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 20px; }
+.literature-search__view-switch button { background: transparent; color: #bac8d9; border-color: #3c4d65; }
+.literature-search__view-switch button[aria-pressed="true"] { background: #285e90; color: #fff; border-color: #81b9e9; }
+.literature-search__prose { max-width: 74ch; font-size: 16px; }
+.literature-search__passage { margin-bottom: 24px; }
+.literature-search__passage p { color: #e6edf5; line-height: 1.85; white-space: pre-wrap; }
+.literature-search button.literature-search__reference { padding: 3px 0; margin-top: 6px; border: 0; background: transparent; color: #a7d6ff; font-size: 13px; text-decoration: underline; }
+.literature-search__sources { display: grid; gap: 14px; }
+.literature-search__sources h4 { margin: 0 0 10px; line-height: 1.5; }
+.literature-search__sources details { margin-top: 12px; }

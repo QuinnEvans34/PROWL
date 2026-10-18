@@ -80,18 +80,11 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
       {phase === 'loading' && <p>Searching the local literature collection…</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
-        <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : `${result.evidence.length} source passages`}</h3>
+        <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : 'Retrieved passages'}</h3>
         <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
-          : 'Ranked by text similarity. Read each excerpt and its context; relevance and completeness have not been validated.'}</p>
-        {result.evidence.map(({ rank, record: r }) => <details className="literature-search__result" key={r.passage.passage_id}>
-          <summary>{rank}. {r.citation.title} ({r.citation.year})</summary>
-          <blockquote>{r.text}</blockquote>
-          <p>{r.citation.authors.join('; ')}</p>
-          <p><a href={`https://pmc.ncbi.nlm.nih.gov/articles/${r.citation.pmcid}/`} target="_blank" rel="noreferrer">Read full source · PMID {r.citation.pmid}</a></p>
-          <p>{r.citation.attribution} · CC BY 4.0 · DOI: {r.citation.doi || 'Not recorded'}</p>
-          <small>Section {r.passage.section_id}, characters {r.passage.start}–{r.passage.end}. Source status reflects the retained snapshot.</small>
-        </details>)}
+          : 'Original text from the search results, shown in ranked order. These passages have not yet been combined into an AI answer.'}</p>
+        {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · Exact dense search · No generated answer</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
@@ -100,4 +93,40 @@ export default function LiteratureSearchPanel({ search = searchLiterature }) {
     </div>
     <small>Questions and results are not automatically saved. No scan is attached.</small>
   </section>
+}
+
+function LiteratureReadingView({ evidence }) {
+  const [view, setView] = useState('reading')
+  const [selected, setSelected] = useState(null)
+  const sources = useRef({})
+  useEffect(() => {
+    if (view === 'sources' && selected !== null) sources.current[selected]?.focus()
+  }, [view, selected])
+  return <div className="literature-search__reading-view">
+    <div className="literature-search__view-switch" role="group" aria-label="Result view">
+      <button type="button" aria-pressed={view === 'reading'} onClick={() => setView('reading')}>Read passages</button>
+      <button type="button" aria-pressed={view === 'sources'} onClick={() => { setSelected(null); setView('sources') }}>Sources ({evidence.length})</button>
+    </div>
+    {view === 'reading' ? <div className="literature-search__prose" aria-label="Retrieved text">
+      {evidence.map(({ rank, record: r }) => <div className="literature-search__passage" key={r.passage.passage_id}>
+        <p>{r.text}</p>
+        <button type="button" className="literature-search__reference" aria-label={`View source ${rank}`}
+          onClick={() => { setSelected(rank); setView('sources') }}>Source [{rank}]</button>
+      </div>)}
+    </div> : <section className="literature-search__sources" aria-label="Sources">
+      {evidence.map(({ rank, record: r }) => <section className="literature-search__result" key={r.passage.passage_id}
+        aria-labelledby={`literature-source-${rank}`}>
+        <h4 id={`literature-source-${rank}`} tabIndex={-1} ref={node => { sources.current[rank] = node }}>
+          [{rank}] {r.citation.title} ({r.citation.year})
+        </h4>
+        <p>{r.citation.authors.join('; ')}</p>
+        <p><a href={`https://pmc.ncbi.nlm.nih.gov/articles/${r.citation.pmcid}/`} target="_blank" rel="noreferrer">Read full source · PMID {r.citation.pmid}</a></p>
+        <p>{r.citation.attribution} · CC BY 4.0 · DOI: {r.citation.doi || 'Not recorded'}</p>
+        <details open={selected === rank}><summary>Original excerpt [{rank}]</summary>
+          <blockquote>{r.text}</blockquote>
+          <small>Section {r.passage.section_id}, characters {r.passage.start}–{r.passage.end}. Source status reflects the retained snapshot.</small>
+        </details>
+      </section>)}
+    </section>}
+  </div>
 }

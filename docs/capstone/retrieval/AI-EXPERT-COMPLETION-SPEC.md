@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.19 — October 17, 2026 (live development source search)\
+**Version:** 1.20 — October 17, 2026 (text-first reading and source navigation)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search is delivered under the user-authorized sequencing amendment; two disease-label candidates remain provisional. Next reconcile labels, exposures and independent verification before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `cede35cea79fd7ee51896b24063f17ef13a44d79`
@@ -38,6 +38,14 @@ is now delivered as [AI-09](https://trello.com/c/AcXlKWQg), before final evaluat
 sequencing statements only for this local source-excerpt interface. No configuration tuning, generation,
 protected-set access, clinical acceptance or measurement integration follows. Steps 5–9 and their
 thresholds remain open. The earlier offline reviewed-question path keeps its admission contract.
+
+October 17 presentation requirement: Quinton requests an easily interpreted text response first,
+with citations behind a separate Sources button. The local search now shows original passages in a
+readable text view with numbered source buttons; source details and exact excerpts are separate.
+This is presentation only. AI-04 must deliver the remaining concise plain-language synthesis:
+short direct response, claim-level source references, optional technical detail, explicit missing
+information, and no unsupported inference. The local embedding model already powers search;
+Ollama generation remains absent from this new endpoint. Existing summary/evaluation gates remain.
 
 ## 1. Outcome and authority
 

@@ -1,5 +1,12 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 17 text-first UI refinement:** spec1.20 records Quinton's preference for a clear text
+> response and separate Sources access. Live search displays original paragraphs immediately;
+> numbered source buttons focus/open matching citation/excerpt in a separate view.22UIchecks/build
+> pass; real browser reading/source navigation verified. No generation added: MiniLM embeds queries;
+> existing Ollama guided prototypes are separate. Plain-language synthesized response remains AI-04
+> after evidence/retrieval qualification. No corpus/backend/config/evaluation changes or humanhours.
+
 > **October 17 LIVE development source search delivered:** User explicitly authorized autonomous
 > continuation until typed literature questions return real results in local UI. This documented
 > sequencing amendment allows fixed development source retrieval before final evaluation; no tuning.
