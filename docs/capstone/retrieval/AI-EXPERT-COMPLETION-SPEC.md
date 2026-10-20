@@ -7,8 +7,9 @@
 
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
 training pipeline uses a provided pancreas mask to define its region. It requires a separately
-versioned assisted-result adapter; autonomous v2 guards remain intact. Actual retained prediction
-availability and current producer schema are pending the training owner's metadata handoff.
+versioned assisted-result adapter; autonomous v2 guards remain intact. The authorized training-owner
+handoff confirms the current evaluator retains metrics but no native prediction masks. A separate
+qualified prediction export is the next dependency, followed by assisted-adapter intake.
 No new inference, artifact transfer or runtime change occurred in this discovery checkpoint.
 
 October 20 [native measurement provenance](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md): opt-in v2

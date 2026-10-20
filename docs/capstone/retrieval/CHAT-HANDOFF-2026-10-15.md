@@ -5,8 +5,9 @@
 > published9d7e87a/9141a00. Historical native example correctly withholds volume for boundary
 > contact; no current model-quality conclusion. Training chat's current run is pancreas-assisted,
 > not autonomous: preserve v2 rejection and implement a separate adapter after actual producer
-> metadata arrives. Retained native prediction availability is unconfirmed. Concrete metadata-only
-> request prepared; cross-chat delivery requires explicit human authorization. No inference,
+> metadata arrives. Authorized metadata handoff received: current evaluator retains metrics and
+> reconstruction JSON but no native prediction arrays (step6000/70dev). Next separate opt-in
+> export implementation/qualification before assisted intake; do not modify the live run. No inference,
 > training, transfer or runtime change during discovery. AI-05 active; W03-04/05 remain pending.
 
 > **October 20 volume answers LIVE:** Read VOLUME-COMPOSITION-RESULTS-2026-10-20.md/spec1.39
