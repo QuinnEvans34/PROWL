@@ -7,14 +7,24 @@ from .direct_ingestion import digest
 from .record_answer import RecordComposer, SYSTEM as DISEASE_SYSTEM
 from .record_answer import PLAN_SCHEMA, SCHEMA_VERSION as DISEASE_SCHEMA, POLICY as DISEASE_POLICY
 from .record_search import RecordAwareSearch
-from .volume_record_search import POLICY as SEARCH_POLICY
+from .volume_record_search import POLICY as SEARCH_POLICY, route_volume_question
+from .development_search import search_scope
 
-POLICY = 'source-volume-answer-v1'
+POLICY = 'source-volume-answer-v1.1'
 SCHEMA_VERSION = 'prowl-volume-answer-response-v1'
 SYSTEM = DISEASE_SYSTEM.replace(
     'These are named literature comparisons, not patient diagnoses.',
     'These are selected MRI study-group volume examples, not universal averages, normal ranges or patient diagnoses.')
 PROMPT_SHA = digest(dict(system=SYSTEM, schema=PLAN_SCHEMA))
+
+
+def volume_scope(request):
+    reason = search_scope(request)
+    # Only an admitted general study-mean intent can supersede the old scan-measurement
+    # classification. Refusal, individual context and all other gates keep precedence.
+    if reason == 'measurement_unavailable' and route_volume_question(request['question'])['status'] == 'candidate':
+        return None
+    return reason
 
 
 class VolumeComposer(RecordComposer):
@@ -25,6 +35,17 @@ class VolumeComposer(RecordComposer):
 
     def fact_count(self, record):
         return len(self.engine.render(record['id'])['statements'])
+
+    def assemble(self, plan, records, evidence):
+        # Stable grouping changes only layout. The shared validator still checks every
+        # original unit, order within each group, qualifier separation and exact coverage.
+        if (not isinstance(plan, dict) or set(plan) != {'paragraphs'}
+                or not isinstance(plan['paragraphs'], list)
+                or any(not isinstance(p, dict) or p.get('record_id') not in records
+                       for p in plan['paragraphs'])):
+            raise ValueError('Invalid volume composition plan')
+        grouped = [p for rid in records for p in plan['paragraphs'] if p['record_id'] == rid]
+        return super().assemble(dict(paragraphs=grouped), records, evidence)
 
 
 class VolumeAwareSearch(RecordAwareSearch):

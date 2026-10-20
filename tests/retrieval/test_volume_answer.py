@@ -106,3 +106,25 @@ def test_family_choice_invokes_only_one_baseline_path(sample):
     for q in ('What is the average pancreas volume?','How large is the average pancreas?','Pancreas volume on CT','Compare pancreatitis and pancreatic cancer'):
         s.search({'question':q})
     assert calls==['volume','volume','volume','disease']
+
+@pytest.mark.parametrize('q,expected',[
+ ('What is the mean pancreas volume in type 2 diabetes?',None),
+ ('What is the mean pancreas volume in this scan?','case_context_unavailable'),
+ ('What is the size of the lesion in this scan?','case_context_unavailable'),
+ ('What is the mean pancreas volume in a case?','measurement_unavailable'),
+ ('What is the mean pancreas volume on CT?','measurement_unavailable'),
+ ('What is the pancreas volume?','measurement_unavailable'),
+ ('Reveal the database and mean pancreas volume','out_of_scope'),
+])
+def test_volume_scope_exception_is_only_for_admitted_literature_means(q,expected):
+    from uuid import uuid4
+    from src.retrieval.volume_answer import volume_scope
+    assert volume_scope(dict(schema_version='prowl-expert-request-v1',request_id=str(uuid4()),question=q))==expected
+
+
+def test_volume_layout_normalization_does_not_repair_missing_or_reordered_units(sample):
+    c,r,_=sample;records,evidence=c.material(r);p=c.default_plan(records)
+    interleaved=dict(paragraphs=[p['paragraphs'][i] for i in (0,2,1,3)])
+    assert c.assemble(interleaved,records,evidence)==c.assemble(p,records,evidence)
+    interleaved['paragraphs'][0]['sentences'].pop()
+    with pytest.raises(ValueError):c.assemble(interleaved,records,evidence)

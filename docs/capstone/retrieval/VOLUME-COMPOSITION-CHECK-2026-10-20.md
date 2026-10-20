@@ -50,3 +50,28 @@ incorrect Unicode JSON content hash. The hash was regenerated using the composer
 all 18 new checks then passed. No model calls preceded the fix.
 UI: first run63pass/1fail from changing existing disease source-copy wording. Disease copy was
 preserved and volume-specific copy separated; final64pass. Build passes (existing large-chunk warning).
+
+## Attempt 1 result and bounded repair
+
+Attempt1 completed 6/8, three actual model calls. The mean-volume diabetes question was blocked by
+legacy scan-measurement routing before retrieval. The two-group model plan included every unit but
+interleaved each group's qualification paragraph, which failed the contiguous-record layout rule.
+Neither failure was hidden; outputs/prowl/volume-answer-v1-20261020 retains all plans/responses.
+No promotion occurred.
+
+Candidate1.1 changes code only: a separately scoped volume baseline may supersede only
+measurement_unavailable for an admitted general study-mean intent; original refusal/case gates
+retain precedence. Case/current wording is explicitly excluded. Stable grouping of volume paragraphs
+precedes the same exact unit/order/qualification/citation validation. No wording or prompt change,
+missing-fact repair, citation replacement, or relaxed clinical boundary. Disease behavior is unchanged.
+
+Attempt2 is a single fresh repetition of the same eight cases and unchanged gates, at most four
+model calls, under the same resource limits. It is a targeted integration repair check, not a model
+or prompt sweep. Preserve both attempts separately. No further automatic retries follow a failure.
+
+Attempt2 stopped at admission with zero chat attempts because the earlier model was still resident
+within its keep-alive window. This is not evidence of another active request. Its failed receipt is
+retained; the namespace is not reused. After residency naturally clears, attempt3 is the single
+remaining eight-case code-repair check (same four-call ceiling/criteria). No model unload or concurrent
+job interruption is performed. Final repair checks:83 pass, including the original scope gates,
+volume selection, exact composition and interleaved-layout regression.
