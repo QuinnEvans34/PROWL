@@ -3,9 +3,10 @@ import wording from '../../../configs/evidence/record-answer-wording-v1.json'
 import catalog from '../../../configs/evidence/source-facts-disease-v1.json'
 
 // Verify the displayed prose itself, not just a model's self-reported checks.
-export function validateRecordAnswer(result, request, validateSources) {
+export function validateRecordAnswer(result, request, validateSources, contracts = { config, wording, catalog, schema: 'prowl-record-answer-response-v1' }) {
+  const { config, wording, catalog, schema } = contracts
   const fail = () => { throw new Error('Invalid reviewed-record answer') }
-  if (result.schema_version !== 'prowl-record-answer-response-v1' || result.answer_policy !== config.version
+  if (result.schema_version !== schema || result.answer_policy !== config.version
     || !['not_called', 'completed', 'fallback'].includes(result.generation)) fail()
   validateSources({ ...result, schema_version: 'prowl-development-search-response-v1', generation: 'not_called', answer: null }, request)
   if (result.record_selection.status !== 'matched') {
