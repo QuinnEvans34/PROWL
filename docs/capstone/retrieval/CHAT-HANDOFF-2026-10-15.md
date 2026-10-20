@@ -3,8 +3,9 @@
 > **October20 activation intake:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.45.
 > Fixed step6000 checkpoint hash verified on Windows/backup; deterministic exposed case00000029.
 > Mac CT+provided-pancreas hashes match; finite/aligned/mm/binary checks and exact region/30windows
-> pass. No weights transferred or model inference yet. Existing SMB reachable; Finder sign-in needs
-> Quinton credentials directly in OS dialog. User authorized checkpoint-transfer coordination.
+> pass. No weights transferred or model inference yet. Existing SMB reachable; password unavailable and Guest
+> explicitly denied. Temporary encrypted single-file transfer proposed, not activated. User
+> authorized checkpoint-transfer coordination.
 > 8017 remains unconfigured; resume verified copy/configuration/one bounded walkthrough after login.
 
 > **October 20 on-demand implemented, unconfigured:** Read ON-DEMAND-INFERENCE-2026-10-20.md/spec1.44.

@@ -10,7 +10,7 @@ explicit assisted-result contract and shared outline/measurement UI are implemen
 and 57 UI/library checks plus the build pass; synthetic HTTP-to-JS measurement integration passes.
 [Activation intake](ON-DEMAND-ACTIVATION-2026-10-20.md) verifies the fixed checkpoint digest on
 Windows and exact matching development CT/pancreas files on the Mac. Geometry preflight matches
-the producer region and30 windows. Checkpoint transfer awaits Windows share sign-in; local Run
+the producer region and30 windows. SMB Guest access was denied; a temporary encrypted one-file transfer is proposed. Local Run
 remains disabled until configuration. No real current-model prediction or accuracy acceptance yet.
 
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current

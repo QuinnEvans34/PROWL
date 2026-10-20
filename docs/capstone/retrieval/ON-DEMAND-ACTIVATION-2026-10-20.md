@@ -1,6 +1,6 @@
 # Current-model activation intake — October 20
 
-**State:** input and geometry preflight passed; checkpoint transfer awaits Windows share sign-in.
+**State:** input and geometry preflight passed; existing SMB login unavailable and Guest explicitly denied.
 AI-05 remains In Progress. This is not a successful inference or accuracy review.
 
 Quinton authorized obtaining the current checkpoint and one development scan for a bounded Mac
@@ -44,7 +44,9 @@ as documented in the implementation report; the evaluator's class1-only metric i
 
 The existing Windows SMB share is reachable on the same local subnet. Finder was opened on the
 existing E$ share; sign-in did not complete using the prefilled account. Quinton was asked to
-enter credentials directly in the OS dialog, not in chat. No new share/server, firewall change,
+enter credentials directly in the OS dialog, not in chat. He does not know the password and
+requested Guest access; one Guest attempt was explicitly denied by Windows. The refusal is
+retained in private `guest-denied.png`. Do not enable Guest or change Windows authentication. No new share/server, firewall change,
 cloud upload, saved credential or training-drive disconnection was performed. The checkpoint
 is not yet on the Mac. The exact remote path and network address remain in the private intake.
 
@@ -63,3 +65,23 @@ time-specific and must be refreshed before execution.
 Private evidence: `outputs/prowl/on-demand-activation-20261020/remote-intake.md`,
 `local-input-intake.json`, `geometry-preflight.json`. No model deserialization or forward pass
 has occurred in this activation block. Existing implementation checks were not repeated.
+
+## Proposed password-free transfer (not activated)
+
+Use a temporary HTTPS receiver on the Mac's current LAN address, with one fixed checkpoint upload
+route. Restrict accepted requests to the training laptop's current LAN address and a newly generated
+single-use bearer token. Give the sender the exact generated certificate through the existing
+private chat handoff and require certificate verification; never use insecure TLS bypass. Do not
+put the token in URLs, public docs, Git, Trello or user-facing output.
+
+Accept only56,576,803 bytes with SHA-256
+`ac50b534eb5e5334bfb29626743ed626a1d16363d8ac1c3374165140318f397f` into one new private checkpoint
+file on PROWL-Data. No directory listing, arbitrary filename, overwrite, download or command route.
+Bound the receiver to5 minutes and one successful upload, then close it. Reject wrong source/token,
+length or digest; preserve a failed-transfer receipt without activation. No firewall change,
+public tunnel, guest enabling, reusable credentials, training change or scan upload is included.
+A separate removable-drive copy remains the alternative.
+
+This would create a new network listener; Quinton's choice/approval is pending. No listener,
+certificate, token or remote upload request has been created. Once approved, implement and verify
+these controls with artificial small fixtures before moving the actual checkpoint.
