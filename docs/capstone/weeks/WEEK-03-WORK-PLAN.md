@@ -3,13 +3,19 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 20, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-04 and W03-05 complete; Quinton accepted the packet/UI; annotation/boundary follow-up delivered; measurement accuracy still open\
+**Status:** W03-04 and W03-05 complete; Quinton accepted the packet/UI; retained error/source audit delivered; measurement accuracy still open\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
 ## Post-demo review — October20
 
-**Latest measurement update:** [CP04](../retrieval/MEASUREMENT-CP04-RESULTS-2026-10-20.md)
+**Latest measurement update:** [CP05](../retrieval/MEASUREMENT-CP05-RESULTS-2026-10-20.md)
+finds bidirectional pancreas/lesion class errors. Source decoding, ROI, numerical helpers and
+bounded synthetic preprocessing comparisons agree; CUDA/MPS output equivalence remains unverified.
+Next obtain already-saved producer metrics for the same raw step6000 cases before tuning. Prepared
+metadata-only request awaits explicit cross-chat authorization. No new inference; AI-05 stays open.
+
+**Prior measurement update:** [CP04](../retrieval/MEASUREMENT-CP04-RESULTS-2026-10-20.md)
 resolves927's integer/scaling representation without rounding; five of six cases now score.
 Only2/5 pass the relative screen, and927 lesion recall is5.91%. Case698's main prediction and
 provided reference meet the CT source edge; whole-organ coverage remains unverified.18new checks
@@ -85,7 +91,7 @@ The table below is the October 20 planning snapshot; update it with material pro
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Complete:4/4; exact selection17/20→20/20 | Reopen for a demonstrated new wording/coverage gap | Closed Tuesday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Complete:4/4; engineering and Quinton review passed | Reopen for demonstrated regression; independent evaluation remains separate | Closed Tuesday |
-| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Fixed6-case follow-up:5 scored,1 size exclusion; no promotion | Review missed-lesion/false-positive mechanisms and preprocessing/label mapping | Next bounded measurement block |
+| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Fixed6-case follow-up:5 scored,1 size exclusion; no promotion | Compare original saved step6000 producer counts before a correction | Prepared metadata request; authorization pending |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 

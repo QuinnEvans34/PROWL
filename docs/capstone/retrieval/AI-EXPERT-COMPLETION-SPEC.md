@@ -1,9 +1,17 @@
 # AI expert completion specification
 
-**Version:** 1.51 — October 20, 2026 (annotation representation resolved; source-boundary coverage confirmed)\
+**Version:** 1.52 — October 20, 2026 (retained class-error and preprocessing audit)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 [CP05 source/error audit](MEASUREMENT-CP05-RESULTS-2026-10-20.md):98.53% of927's missed
+lesion voxels are labeled pancreas;514/698 also contain lesion predictions inside the provided
+pancreas despite empty lesion references. All36 received source files verify;11 numerical helper
+ASTs,3 synthetic pipeline comparisons/7 windows, actual ROIs and original source-decoded references
+agree with the local adapter. Six new synthetic diagnostic tests pass. No model/device parity claim,
+weight load, inference or promotion. Next compare original saved raw step6000 producer case counts;
+metadata-only request prepared, explicit cross-chat authorization pending. AI-05 remains open.
 
 October20 [CP04 retained-output review](MEASUREMENT-CP04-RESULTS-2026-10-20.md): exact full-range
 int8 annotation decoder preserves927's11,301 foreground positions; strict comparison now succeeds.

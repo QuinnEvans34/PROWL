@@ -1,5 +1,18 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 CP05 complete:** Read MEASUREMENT-CP05-PLAN/RESULTS-2026-10-20.md/spec1.52.
+> Code/plan9de0e26;6newsynthtests,3source-pipelinecomparisons/7artificialwindowsexact;36handoff
+> fileshashverified,11helperASTsexact. Originalsource decoder matches927/514/698 references;
+> ROIandarchitecture declarations agree. No source preprocessing/class-map mismatch demonstrated.
+> 927misses10,477lesionvoxelsaspancreas,156asbackground;514/698retain1,265/3,192insidepancreasFPs.
+> Native927largestlesionplanez94 reviewed. Child3.87s/983187456B/reaped;0modelcalls/weightloads.
+> Next compare already-saved raw6000 producer metrics for927/514/698; prepared exactrequest
+> MEASUREMENT-PRODUCER-COMPARISON-REQUEST-2026-10-20.md. Asyncexplicitpermissionasked; NOT SENT.
+> RecipientPlan capstone experiment workflow/thread01a12c40-1490-7cf2-8e20-6498c71bf685,
+> hostremote-control:env_e_6ac8e708cb888333ab2fd23ee0691050. Do not infer broader messaging authority.
+> No calibration/newinference/training/UIpromotion. Logits/probabilityarraysnotretained;deviceparityunknown.
+> Privateoutputs /Volumes/PROWL-Data/PROWL/artifacts/measurement-cp05-20261020/. AI-05open.
+
 > **October20 CP04 complete:** Read MEASUREMENT-CP04-PLAN/RESULTS-2026-10-20.md/spec1.51.
 > Explicit user request; code/plan1fe91c6 before actual derivation.927 exact int8 endpoint encoding
 > (-128/127, canonicalfloat32 scale/intercept) converts to uint8 with11,301foregroundpositions fixed;
