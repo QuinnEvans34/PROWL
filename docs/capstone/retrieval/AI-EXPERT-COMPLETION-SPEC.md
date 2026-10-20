@@ -1,9 +1,22 @@
 # AI expert completion specification
 
-**Version:** 1.48 — October 20, 2026 (CP01 reference comparison failed; residual lesion error identified)\
+**Version:** 1.49 — October 20, 2026 (Week3 wording/quality engineering pass; CP02 metadata pending)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 [fixed wording/quality check](WEEK3-QUALITY-RESULTS-2026-10-20.md): baseline13/20
+supported answers and10/10 boundaries; four complete-model-plan layout failures, two routing misses
+and one false refusal. Strict full-choice validation followed by deterministic layout fixes the
+largest cause; bounded wording/scope repairs address the three misses. Same frozen candidate:
+20/20 supported,10/10 boundaries, no fallback,3.54–13.47s supported HTTP latency. Manual50-paragraph/
+110-citation-instance review,225 distinct backend and66UI checks/build pass. Local source-record1.1/
+volume1.2 promoted; two Vite-proxy probes pass. W03-04 complete; W03-05 engineering complete with
+Quinton's walkthrough decision pending. Formal independent gates and broader coverage remain open.
+[CP02 measurement protocol](MEASUREMENT-SUBSET-PLAN-2026-10-20.md) freezes first3positive/3empty
+current development cases and unchanged raw/CP01 comparison. Current-split metadata is not on the
+Mac; prepared metadata handoff awaits explicit cross-chat authorization. No additional measurement
+case selected, reference opened or inference launched. CP01 and current measurement guard stay fixed.
 
 October20 [CP01 component-selection comparison](COMPONENT-SELECTION-RESULTS-2026-10-20.md):
 frozen prediction-only largest26-connected union rule removes4,398 false-positive voxels on the

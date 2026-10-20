@@ -3,11 +3,19 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 20, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** In progress; planning complete, demo restored and first live check passed\
+**Status:** W03-04 complete; W03-05 engineering passed/live, Quinton walkthrough pending; CP02 metadata pending\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
 ## Post-demo review — October20
+
+**Execution update:** the [fixed30-case check](../retrieval/WEEK3-QUALITY-RESULTS-2026-10-20.md)
+improved from13/20 to20/20 supported answers while preserving10/10 safe boundaries. Largest
+failure was complete model choices rejected for layout, repaired without adding or rewriting facts.
+W03-04 complete; W03-05 engineering review/deployment complete with Quinton's walkthrough decision
+open. [CP02](../retrieval/MEASUREMENT-SUBSET-PLAN-2026-10-20.md) is frozen before case selection;
+current development/train-exclusion metadata handoff awaits cross-chat authorization. The
+following recommendation paragraph is the pre-execution snapshot, superseded by this update.
 
 Quinton reports the meeting/demo went well and requests an effectiveness review. Current
 integration is demonstrable, but this does not complete answer-quality, independent evaluation,
@@ -34,7 +42,7 @@ instead of rerunning until success. Reuse verified evidence and existing cards. 
 once per meaningful checkpoint and keep commits coherent. Do not add corpus breadth, redesign
 the UI, or repeat infrastructure work absent a demonstrated need. No human-hour estimate is inferred.
 PANORAMA's Week3 commitment still needs its evidence handoff; the successful AI demo does not
-establish overall schedule completion. W03-04/05 remain To Do until their execution begins.
+establish overall schedule completion. See the execution update above for current W03-04/05 status.
 
 October20 AI-05 [CP01 reference comparison](../retrieval/COMPONENT-SELECTION-RESULTS-2026-10-20.md):
 largest26-union candidate removes only annotation-negative fragments on this exploratory case,
@@ -66,9 +74,9 @@ The table below is the October 20 planning snapshot; update it with material pro
 |---|---|---|---|
 | [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | Done for bounded scope: 5/5 steps | Reopen on recurrence; historical exit2 cause remains unknown | Closed Tuesday |
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
-| [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Ready; candidate adapter delivered | Fixed before/after paraphrase and boundary results | Thursday–Friday |
-| [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Pending candidate and fixed check | Readable answer/source packet, complete scores and Quinton walkthrough | Friday–weekend |
-| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Integration works; CP01 accuracy screen failed | Fixed broader lesion-precision/measurement-error packet; no live size promotion | In progress; acceptance date unproven |
+| [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Complete:4/4; exact selection17/20→20/20 | Reopen for a demonstrated new wording/coverage gap | Closed Tuesday |
+| [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Engineering passed/live;3/4 | Quinton's readable packet and UI walkthrough decision | Human review pending |
+| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | CP01 failed; CP02 protocol frozen | Current metadata, fixed3positive/3empty comparison; no size promotion | Metadata handoff authorization pending |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 

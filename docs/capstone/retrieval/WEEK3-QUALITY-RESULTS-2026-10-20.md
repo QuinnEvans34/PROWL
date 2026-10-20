@@ -54,5 +54,56 @@ had a test typo, corrected against the actual reviewed wording. All26 volume tes
 225 distinct affected backend checks are qualified across those runs. UI:65 tests pass, including
 all30 original HTTP responses through current validation, forged-text and unknown-policy rejection.
 
-Candidate batch, manual source/answer review, deployment and walkthrough: pending. No acceptance
-or model accuracy is inferred from the baseline or offline repair. Formal independent gates stay open.
+## Candidate result and manual review
+
+Candidate producers frozen at `79a9458`; unchanged matrix. Retained at
+`outputs/prowl/week3-quality-candidate-20261020`: **20/20 supported,10/10 boundaries**,20 chat
+calls,135.08seconds total. No retry, timeout or fallback. All20 intended record sets matched.
+
+| Dimension | Candidate result | Meaning |
+|---|---|---|
+| Factual support | 20/20 engineering review | Each emitted assertion checked against the retained source passages; not independent adjudication |
+| Completeness | 20/20 | All91 required unit instances and their qualifications retained |
+| Readability | 20/20 engineering review | Complete sentences, terminology introduced, factual paragraphs followed by separate limitations |
+| Citations | 110/110 paragraph-source links | Exact canonical text/locator binding;13 distinct source passages |
+| Direct model composition | 20/20 | No source fallback counted as success |
+| Boundary behavior | 10/10 | Zero model calls, no composed answer |
+| Supported latency | 3.54–13.47s; median6.80s | End-to-end HTTP including retrieval; all below40s |
+| Boundary latency | maximum0.66s | No generation |
+
+Manual review covers50 paragraph instances/16 distinct emitted paragraphs. Disease sources preserve
+the focal-head context, MRCP, calcification morphology, combined-feature limitation and focal-AIP
+portal-venous phase/duct/atrophy qualifications. Volume sources preserve the study population, MRI,
+sample sizes, means, SEM identity, matching and non-universal/non-CT applicability. Citation review
+used canonical PMID32703312 passages4/7/9/22/24/37/39/43/44 and PMID25950180 passages2/18/27/29;
+the complete retained text and character locators are in the separate source packet.
+
+`engineering-review.json` binds these observations to receipt SHA-256
+`21d7689edc52ed5f3bd4faa5b7bb553fab5411812a5626646f23e2fc9755763f`.
+The original producer receipt's manual-pending field is retained; the separate review records the
+subsequent check. This is one engineering reviewer and exposed data, not independent or clinical review.
+
+Readable files: `all-questions.md`, individual D01–D12/V01–V08/B01–B10 files, and `sources.md` in
+the candidate directory. The renderer is `scripts/retrieval/render_week3_review.py`. Complete claims
+remain visible separately from long source excerpts, with exact per-paragraph source links.
+
+## UI and deployment
+
+All60 baseline/candidate responses pass the actual UI validator; forged claims and unknown policies
+remain rejected. A retained-response React test renders every candidate question, checks all answer
+paragraphs, opens the exact cited excerpt and switches back to Answer; all30 cases pass. Combined
+with the existing UI checks,66 distinct tests qualified. Production build passes with the existing
+large-chunk advisory. No additional browser automation was attempted: the app's earlier localhost
+URL-policy rejection remains binding. These are React/HTTP checks, not a fresh visual-browser review.
+
+After the gate/manual review, every candidate producer hash was reverified. Only the verified old
+literature PID9015 was stopped. Replacement8016 runs in owned session37988 using the existing
+`.venv-retrieval` and `--volume-answers`; DB/Ollama/inference/Vite preserved. Two additional, separately
+counted rollout probes through Vite5180 completed: volume1.2 in6.93s and disease1.1 in7.24s.
+These are not added to the30-case denominator. Evidence: `week3-quality-promotion-20261020`.
+
+W03-04 is complete for this declared slice. W03-05 engineering checks and deployment are complete;
+Quinton's packet/UI walkthrough decision is requested and remains pending, so the card stays In
+Progress with that single review item open. Formal independent evaluation, arbitrary wording,
+unreviewed diseases/modalities/populations and measurement accuracy remain open. No corpus expansion,
+new medical wording, training or protected evaluation occurred.

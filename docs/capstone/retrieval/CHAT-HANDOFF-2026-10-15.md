@@ -1,5 +1,23 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 Week3 quality LIVE:** Read WEEK3-QUALITY-PLAN/RESULTS-2026-10-20.md/spec1.49.
+> Frozen30case baseline13/20supported+10/10boundaries; four complete-plan layout failures,
+> two wording misses, one false scope refusal. Commit79a9458 strict unit-choice membership before
+> deterministic ordering/qualifier paragraphs; source selector1.1, diseaseanswer1.1, volumeanswer1.2.
+> Same candidate20/20+10/10,20calls/135.08s,3.54–13.47s;50paragraph/110citation instances manually
+> checked,13distinct canonical passages.225distinct backend/66UI/buildpass. All60retainedresponses
+> validate;30candidate React question/source/back interactions pass. Live8016 PID17173 owned37988;
+> old9015 stopped; two Vite5180 proxy probes6.93s/7.24s pass. Other services untouched.
+> W03-04 movedComplete/4of4; W03-05InProgress/3of4, Quinton reviewpending (async question asked).
+> Readable outputs/prowl/week3-quality-candidate-20261020/all-questions.md +sources.md.
+> No new browser automation after earlier localhostURL-policy rejection; React/HTTP validation only.
+> CP02 protocolcf4005f freezes first3positive/3annotationempty from CURRENT70dev, unchangedstep6k
+> raw/CP01 comparison; no sourcearrays/extra inference yet. Currentdev/train-exclusion metadata missing
+> onMac. Async authorization requested to message trainingchat; do NOT send beforeuseragrees.
+> Prepared exactrequest MEASUREMENT-SUBSET-HANDOFF-2026-10-20.md; recipient01a12c40-1490-7cf2-8e20-6498c71bf685,
+> hostremote-control:env_e_6ac8e708cb888333ab2fd23ee0691050. Oldsplits insufficient; don't infer IDs,
+> replacefailures, tunefilter orpromotemeasurements. CP01 remainsfailed. No training/protectedreads/humanhours.
+
 > **October20 CP01 reference comparison complete/FAILED:** Read COMPONENT-SELECTION-PLAN/
 > RESULTS-2026-10-20.md/spec1.48. Plan d0d6686 frozen before lesion reference; code b3b8ace
 > before comparison. Largest26-union removes4,398 voxels, all zero overlap with pancreas/lesion;
