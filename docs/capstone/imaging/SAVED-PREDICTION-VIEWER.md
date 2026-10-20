@@ -88,3 +88,7 @@ UI checks successfully without changing dependencies. Build warnings for large N
 The seven unresolved source-unit cases and the head-study issue remain tracked under W02-02;
 this viewer delivery does not close them. Durable review decisions, full transport-neutral case
 packages and routine case selection remain later work.
+
+## October 20 measurement extension
+
+V1 remains display-only. Opt-in `--measurement-provenance` writes a fresh v2 package with original result JSON and canonical evidence JSON, each hash-bound in the manifest. The private middleware also serves these two named files. The viewer adds native mask-volume questions and refuses source/crop-boundary contact; it does not certify full-organ coverage. See [native measurement results](../retrieval/NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) for limits, current local configuration and the historical example’s coverage refusal.

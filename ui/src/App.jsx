@@ -376,7 +376,7 @@ export default function App() {
       navigate={navigate}
       activeStudy={caseId}
       endpointStatus={endpointStatus}
-      modelLabel={MODEL_LABEL}
+      modelLabel={route.view === 'saved' ? 'Saved package · see model provenance' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
       {content}
