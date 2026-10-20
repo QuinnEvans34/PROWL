@@ -104,8 +104,10 @@ class RecordSearchIndex:
 
 class RecordAwareSearch:
     """Source-only service: exact reviewed-record retrieval, otherwise unchanged dense fallback."""
+    policy = POLICY
+
     def __init__(self, baseline, index, config):
-        if (config['retriever'] != POLICY or config['top_k'] != 20 or config['generation'] is not False
+        if (config['retriever'] != self.policy or config['top_k'] != 20 or config['generation'] is not False
                 or config['manifest'] != baseline.config['manifest']
                 or config['corpus_content_sha256'] != baseline.config['corpus_content_sha256']):
             raise ValueError('Record search configuration mismatch')
@@ -114,8 +116,8 @@ class RecordAwareSearch:
     def search(self, request):
         # Retains input/privacy/scope gates, DB identity and storage checks on every request.
         base=self.baseline.search(request)
-        result=dict(base,configuration_sha256=digest(self.config),retrieval_policy=POLICY)
-        selection=dict(policy=POLICY,status='not_searched',reason=base['reason'],matches=[])
+        result=dict(base,configuration_sha256=digest(self.config),retrieval_policy=self.policy)
+        selection=dict(policy=self.policy,status='not_searched',reason=base['reason'],matches=[])
         if base['state']!='not_searched':
             found=self.index.search(request['question'])
             selection.update(status='matched' if found['matches'] else 'dense_fallback',

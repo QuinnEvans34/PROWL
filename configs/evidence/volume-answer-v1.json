@@ -1,0 +1,19 @@
+{
+  "version": "source-volume-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "3dd24bf4667b92c6401f604eb022ba8aee9f80d4db8670a9b1c1a7b8a6f1306d",
+  "wording": {
+    "path": "configs/evidence/volume-answer-wording-v1.json",
+    "sha256": "7d419efa096f905022784d8f32f5db65184dbe005fe9fa8bd02471c9c8ca0098"
+  },
+  "wording_content_sha256": "cb393a02ce755a6f0a5eedf4269d2c68b9a5bc8784a26d30d362f3a0b085156b",
+  "max_generation_seconds": 30,
+  "model_calls": 1,
+  "composition": "reviewed_sentence_choices_and_paragraphs",
+  "fallback": "explicit_reviewed_source_summary",
+  "outside_record_coverage": "sources_only",
+  "independent_review": "pending",
+  "scope": "These are whole-pancreas volume results from selected MRI study groups.",
+  "limitation": "These study results are not measurements of your scan and cannot diagnose disease."
+}

@@ -34,14 +34,22 @@ PROMPT_SHA = digest(dict(system=SYSTEM, schema=PLAN_SCHEMA))
 
 
 class RecordComposer:
+    policy = POLICY
+    system = SYSTEM
+    prompt_sha = PROMPT_SHA
+    wording_version = 'reviewed-disease-wording-v1'
+
+    def fact_count(self, record):
+        return len(record['facts'])
+
     def __init__(self, engine, catalog, review, wording, config):
         self.engine = engine
         self.wording = deepcopy(wording)
         self.config = deepcopy(config)
-        if (config['version'] != POLICY or config['model'] != DENSE_MODEL
-                or config['model_sha256'] != DENSE_MODEL_SHA or config['prompt_sha256'] != PROMPT_SHA
+        if (config['version'] != self.policy or config['model'] != DENSE_MODEL
+                or config['model_sha256'] != DENSE_MODEL_SHA or config['prompt_sha256'] != self.prompt_sha
                 or digest(wording) != config['wording_content_sha256']
-                or wording['version'] != 'reviewed-disease-wording-v1'
+                or wording['version'] != self.wording_version
                 or wording['review'] != 'single_engineering_review_independent_pending'):
             raise ValueError('Unqualified composition policy')
         records = {r['id']: r for r in catalog['records']}
@@ -59,7 +67,7 @@ class RecordComposer:
                         or any(not isinstance(s, str) or not 1 <= len(s) <= 600 for s in unit['wordings'])):
                     raise ValueError('Invalid reviewed wording')
                 facts.extend(unit['facts']); seen.add(unit['id'])
-            if sorted(facts) != list(range(len(records[rid]['facts']))):
+            if sorted(facts) != list(range(self.fact_count(records[rid]))):
                 raise ValueError('Wording must cover every fact exactly once')
 
     def material(self, result):
@@ -151,7 +159,7 @@ class RecordComposer:
                 raise AnswerFailure('model_unavailable', 'Model identity differs')
             body = dict(question=question, records=[dict(record_id=rid, units=r['units'])
                                                    for rid, r in records.items()])
-            response = call('chat', dict(model=DENSE_MODEL, messages=[dict(role='system', content=SYSTEM),
+            response = call('chat', dict(model=DENSE_MODEL, messages=[dict(role='system', content=self.system),
                 dict(role='user', content=json.dumps(body, ensure_ascii=False))], format=PLAN_SCHEMA,
                 stream=False, think=False, keep_alive='2m',
                 options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=768)))
@@ -166,14 +174,13 @@ class RecordComposer:
                        error.code if isinstance(error, AnswerFailure) else
                        'model_unavailable' if isinstance(error, OSError) else 'invalid_composition')
             plan = self.default_plan(records); claims = self.assemble(plan, records, evidence)
-        return dict(status='summarized', policy=POLICY, provenance=provenance, failure=failure,
+        return dict(status='summarized', policy=self.policy, provenance=provenance, failure=failure,
             model=DENSE_MODEL if provenance == 'local_model_composition' else None,
             model_sha256=DENSE_MODEL_SHA if provenance == 'local_model_composition' else None,
-            prompt_sha256=PROMPT_SHA, wording_content_sha256=self.config['wording_content_sha256'],
+            prompt_sha256=self.prompt_sha, wording_content_sha256=self.config['wording_content_sha256'],
             validation='complete_reviewed_units_and_exact_citations',
             quality='engineering_reviewed_independent_review_pending', claims=claims,
-            scope='These are named literature comparisons with pancreatic ductal adenocarcinoma (PDAC), not a survey of all pancreatic tumors.',
-            limitation=APPLICATION_LIMIT)
+            scope=self.config['scope'], limitation=self.config['limitation'])
 
 
 class RecordAnswerService:

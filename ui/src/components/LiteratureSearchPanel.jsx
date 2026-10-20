@@ -4,6 +4,7 @@ import recordConfig from '../../../configs/evidence/development-search-v3-record
 import diseaseCatalog from '../../../configs/evidence/source-facts-disease-v1.json'
 import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
 import { validateRecordAnswer } from './recordAnswer'
+import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -43,6 +44,7 @@ export function validateSearch(result, request, limit = 5) {
 }
 
 export function validateSourceSearch(result, request) {
+  if (result?.retrieval_policy === 'source-linked-volume-search-v1') return validateVolumeSources(result, request, validateSearch)
   validateSearch(result, request, 20)
   const selection = result.record_selection
   if (result.retrieval_policy !== recordConfig.retriever || selection?.policy !== recordConfig.retriever
@@ -77,6 +79,7 @@ export async function findLiteratureSources(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  if (result?.schema_version === 'prowl-volume-answer-response-v1') return validateVolumeAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-record-answer-response-v1') return validateRecordAnswer(result, request, validateSourceSearch)
   if (result?.retrieval_policy !== undefined || result?.record_selection !== undefined
       || result?.schema_version !== 'prowl-development-answer-response-v1'
@@ -149,7 +152,7 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
     <h2 id="literature-search-title">Search pancreatic literature</h2>
     <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
     <p className="literature-search__notice">Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.</p>
-    <p>Ask question turns reviewed disease comparisons into a readable summary. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>
+    <p>Ask question turns reviewed disease comparisons and MRI volume study results into readable summaries. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
       <textarea id="literature-question" rows={3} maxLength={500} value={question}
@@ -166,13 +169,13 @@ export default function LiteratureSearchPanel({ search = searchLiterature, findS
       {phase === 'loading' && <p>{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'You can cancel while the local model works.'}</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
-        <h3>{result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
-        <p>{result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
+        <h3>{result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
+        <p>{result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
           : result.answer?.provenance === 'local_model_composition' ? 'The local AI selected reviewed wording and arranged the source facts below. Citations and required qualifications are preserved.'
           : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
-          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.' : 'No reviewed disease comparison matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
-        {sourceMode && result.record_selection.matches.length > 0 && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
+          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
+        {sourceMode && result.record_selection.policy === 'source-linked-record-search-v1' && result.record_selection.matches.length > 0 && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
