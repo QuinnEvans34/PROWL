@@ -3,9 +3,45 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 20, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-04 and W03-05 complete; Quinton accepted the packet/UI; retained error/source audit delivered; measurement accuracy still open\
+**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation, measurement accuracy and PANORAMA evidence remain open\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
+
+## October 20 board review and remaining-week priorities
+
+Trello was reconciled against the reports and Quinton's recorded acceptance. W03-04/05 were already
+in Week 3 Complete but their completion flags were false; those flags are now corrected. Dashboard,
+AI-03, AI-04 and AI-05 descriptions now lead with current results rather than superseded next steps.
+Historical comments and earlier version-specific approvals remain intact. No new duplicate cards.
+
+**Assessment:** substantial implementation progress and a successful bounded literature checkpoint.
+The selected system answers20/20 supported questions with10/10 boundaries, source review and Quinton's
+walkthrough acceptance. This is exposed development evidence, not independent evaluation or general
+medical capability. On-demand prediction/viewer integration works, while reliable measurements do
+not yet pass. The original producer comparison narrows the next investigation toward model quality;
+it does not establish a better candidate. Overall schedule confidence remains conditional on the
+required PANORAMA evidence and the open acceptance work; no overall ahead-of-schedule claim.
+
+| Priority / work block | Existing card and owner | Concrete result before advancing |
+| --- | --- | --- |
+| 1. Resume formal RAG evaluation preparation | AI-03; this chat + Quinton | Reconcile current public question/evidence version and exposure history; present only changed-scope review; identify an independent protected-labeling operator/workflow. Preserve prior approvals and do not use the accepted Week3 packet as held-out evidence. |
+| 2. Resolve measurement candidate decision | AI-05; coordinate with data/training owner | Compare completed development reports before choosing one candidate. Freeze variant, cases and recall/FP/measurement-error/coverage criteria before any new local comparison. Deliver adopt/reject/inconclusive, not just a higher Dice score. |
+| 3. Verify the proposal's Week3 data milestone | W03-01; Quinton + data/training owner | PANORAMA provenance, labels, exclusions, separation and mixed-source smoke receipt, or an explicit unresolved blocker and revised plan. PanTS work does not establish this milestone. |
+| 4. Close the week against evidence | W03-06 plus W01-05/W02-05 | Sunday evidence and supplied human-hours reconciliation, remaining dependencies and Week4 handoff. Do not infer hours or success from unattended runs. |
+
+Planning order: evaluation reconciliation is ready now and can proceed while model/data handoffs
+are arranged. Midweek targets are the review/workflow decision and model-report comparison; later
+work is conditional on their evidence. The end-of-week target is to preserve the accepted demo,
+resolve evaluation logistics and reach a defensible measurement-candidate decision, not promise
+reliable measurements before an eligible model passes. AI-06 cited measurement comparisons and
+AI-07 reviewed feedback/extension acceptance remain required final deliverables after their gates.
+
+Use one declared question per work block and stop when its decision is supported. Reuse retained
+outputs; change one demonstrated cause; keep the corpus/UI/model stable unless a specific failure
+justifies a change. New data volume and additional prompt iterations are not current priorities.
+Track answer coverage, factual support, completeness, citations and latency separately from lesion
+recall, false-positive volume, measurement error and scan coverage. No combined percentage across
+parent/child cards or different acceptance scopes.
 
 ## Post-demo review — October20
 
@@ -44,7 +80,7 @@ measurement or proposal milestones. The pre-call disease answer used local-model
 in7.77s; the volume question used a reviewed-source fallback after invalid composition. Both
 outcomes remain in the evidence. No new benchmark or whole-system reliability claim follows.
 
-Recommended next work order:
+Historical post-demo execution order (completed for W03-04/05; current priorities above):
 
 1. **W03-04 wording/selection:** freeze the planned matrix, run one baseline against the current
    version, and classify failures as routing, missing evidence, composition, or refusal. Deliver
@@ -109,7 +145,7 @@ Volume scope and offline selection now have [first-block evidence](../retrieval/
 64 focused checks and seven exposed corpus examples pass. Subsequent
 [composition/UI qualification](../retrieval/VOLUME-COMPOSITION-RESULTS-2026-10-20.md) passed the
 corrected8/8 check, ten-paragraph source review and exact UI replay; local promotion/browser
-verification complete. Earlier failures remain retained. W03-04/05 are next.
+verification complete. Earlier failures remain retained. W03-04/05 subsequently completed as above.
 
 **Waiting on review/input:** AI-03 needs changed-scope review and independent-evaluation
 responsibilities; W02-02 needs the model/source handoff; W01-05 and W02-05 need missing personal
@@ -186,8 +222,8 @@ layout normalization and two browser checks do not erase those failures or estab
 | [W03-01](https://trello.com/c/yfk5R2Vi) PANORAMA integration | Required / Ready for owner handoff | Quinton + data/training chat | W02-01 and source qualification | Mapping, provenance, exclusions, separation and mixed-source smoke receipt |
 | [W03-02](https://trello.com/c/KCcUA5kn) Integrated AI demo reliability | Done for bounded scope; historical exit2 cause unknown | DAG/RAG chat | Existing runtime/data availability | [Closeout](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md): 6 diagnostic tests, corrected recovery/503 check, exact inventory; recurrence procedure retained |
 | [W03-03](https://trello.com/c/pnaJmVIz) Readable volume answers | Done for bounded scope, 4/4 steps | DAG/RAG chat; Quinton walkthrough remains W03-05 | Existing volume facts; W03-02 bounded closeout complete | [Results](../retrieval/VOLUME-COMPOSITION-RESULTS-2026-10-20.md), readable examples, corrected8/8 check, source review and live browser proof |
-| [W03-04](https://trello.com/c/Avfr7Oei) Question wording and selection | Planned / Ready for matrix preparation | DAG/RAG chat | W03-03 candidate for comparison | Fixed development matrix, before/after selections, exposure and coverage-gap record |
-| [W03-05](https://trello.com/c/cNjc35Bn) Quality checkpoint and demo | Planned / Pending dependencies | DAG/RAG chat + Quinton | W03-02/03/04 | Frozen candidate/checks, full per-case report and walkthrough; failures retained |
+| [W03-04](https://trello.com/c/Avfr7Oei) Question wording and selection | Complete for fixed development scope | DAG/RAG chat | W03-03 complete | Exact selection17/20→20/20; baseline failures and coverage exclusions retained in WEEK3-QUALITY-RESULTS-2026-10-20.md |
+| [W03-05](https://trello.com/c/cNjc35Bn) Quality checkpoint and demo | Complete, including Quinton acceptance | DAG/RAG chat + Quinton | W03-02/03/04 complete |20/20 supported,10/10 boundaries, source review,3.54–13.47s supported latency; accepted packet/UI. Independent acceptance separate. |
 | [W03-06](https://trello.com/c/c8WDYybO) Weekly closeout | Required / Pending outcomes | Quinton + both work areas | Actual reports and supplied hours | Reconciled evidence, hours, carryovers and Week 4 plan |
 
 [AI-04](https://trello.com/c/dWDF81CH) remains the parent answer-quality card. The new tasks are
