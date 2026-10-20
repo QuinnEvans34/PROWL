@@ -1,9 +1,15 @@
 # AI expert completion specification
 
-**Version:** 1.43 — October 20, 2026 (on-demand inference selected; optional prediction caching)\
+**Version:** 1.44 — October 20, 2026 (on-demand worker/UI implemented; real-model activation pending)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [on-demand implementation](ON-DEMAND-INFERENCE-2026-10-20.md): bounded worker/API,
+explicit assisted-result contract and shared outline/measurement UI are implemented. 22 Python
+and 57 UI/library checks plus the build pass; synthetic HTTP-to-JS measurement integration passes.
+Actual current checkpoint and exposed CT/pancreas inputs remain on the training host; local Run
+is disabled until configuration. No real current-model prediction or accuracy acceptance yet.
 
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
 training pipeline uses a provided pancreas mask to define its region. It requires a separately

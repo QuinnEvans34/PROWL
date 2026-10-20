@@ -11,6 +11,7 @@ import ImportStudyDialog from './components/ImportStudyDialog.jsx'
 
 const ValidationComparison = lazy(() => import('./components/ValidationComparison.jsx'))
 const ResearchPage = lazy(() => import('./pages/ResearchPage.jsx'))
+const OnDemandPredictionView = lazy(() => import('./components/OnDemandPredictionView.jsx'))
 const SavedPredictionView = lazy(() => import('./components/SavedPredictionView.jsx'))
 
 const BASE = '/cases'
@@ -162,6 +163,7 @@ export default function App() {
   const [caseId, setCaseId] = useState(null)
   const [reviewStatuses, setReviewStatuses] = useState(readStoredStatuses)
   const [showAbout, setShowAbout] = useState(false)
+  const [predictionEndpointStatus, setPredictionEndpointStatus] = useState('checking')
   const [endpointStatus, setEndpointStatus] = useState('checking')
   const [liveResults, setLiveResults] = useState({})
   const [inferenceState, setInferenceState] = useState({ status: 'idle', caseId: null })
@@ -247,6 +249,7 @@ export default function App() {
       studies: 'Studies',
       research: 'Research',
       saved: 'Saved prediction',
+      predict: 'Analyze scan',
       workbench: currentCase ? `${formatStudyId(caseId)} · Workbench` : 'Workbench',
     }
     document.title = `${titles[route.view]} · PROWL`
@@ -375,8 +378,8 @@ export default function App() {
       route={route}
       navigate={navigate}
       activeStudy={caseId}
-      endpointStatus={endpointStatus}
-      modelLabel={route.view === 'saved' ? 'Saved package · see model provenance' : MODEL_LABEL}
+      endpointStatus={route.view === 'predict' ? predictionEndpointStatus : endpointStatus}
+      modelLabel={route.view === 'predict' ? 'On-demand prediction · see result provenance' : route.view === 'saved' ? 'Saved package · see model provenance' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
       {content}
@@ -466,9 +469,10 @@ export default function App() {
           />
         </ViewerSuspense>
       )}
+      {route.view === 'predict' && <ViewerSuspense label="Loading prediction workspace…"><OnDemandPredictionView onServiceStatus={setPredictionEndpointStatus} /></ViewerSuspense>}
       {route.view === 'saved' && (
         <ViewerSuspense label="Loading saved viewer…">
-          <div className="pw-page"><SavedPredictionView /></div>
+          <div className="pw-page"><SavedPredictionView onDemandHref="/predict" /></div>
         </ViewerSuspense>
       )}
 

@@ -3,12 +3,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 // Minimal history-backed routing for the PROWL shell. No router dependency:
 // existing deep links (/research, /saved) keep working, and the active study
 // lives in the URL (?study=) so back/forward and reload restore it.
-export const VIEWS = ['studies', 'workbench', 'research', 'saved']
+export const VIEWS = ['studies', 'workbench', 'research', 'saved', 'predict']
 
 export function parseLocation(location = window.location) {
   const path = location.pathname.replace(/\/+$/, '') || '/'
   const params = new URLSearchParams(location.search)
   const view = path === '/research' ? 'research'
+    : path === '/predict' ? 'predict'
     : path === '/saved' ? 'saved'
       : path === '/workbench' ? 'workbench'
         : 'studies'

@@ -1,5 +1,12 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 on-demand implemented, unconfigured:** Read ON-DEMAND-INFERENCE-2026-10-20.md/spec1.44.
+> Independent assisted inference worker + bounded job API + shared native mask/measurement UI.
+> 22Python/57UI checks and build pass; synthetic HTTP-to-JS0.008mL exact. Source-only ZIP verified;
+> no real checkpoint/scans transferred or model inference. Current raw checkpoint digest/local copy
+> and exposed CT+provided-pancreas inputs still needed.8017owned97229 unconfigured; /predictRun
+> disabled honestly. Do not substitute old model or alter live training. AI-05 InProgress.
+
 > **October 20 on-demand decision:** Quinton selected on-demand inference with optional caching.
 > Read spec1.43 and the selected-workflow section of ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md.
 > Reuse one native prediction for both outline and measurements; session retention is sufficient.
