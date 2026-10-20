@@ -64,8 +64,11 @@ files. It serves only the explicitly configured folder on loopback and does not 
 in production builds. No retrieval/DB/Ollama restart was needed. Native measurements require no LLM.
 
 The exporter opts into v2 with `--measurement-provenance` and refuses existing output directories.
-A current-pipeline output should be handed over as its saved CT, prediction and completed result JSON;
-then package it using the same geometry/identity/coverage checks. Do not infer a new model's identity
+A current-pipeline output needs a producer-specific intake before packaging. The subsequent
+[handoff review](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md) identified a pancreas-assisted producer,
+which cannot use autonomous v2. Request its retained prediction and provenance metadata, then
+implement a separate assisted adapter with the same geometry/identity/coverage principles.
+Do not infer a new model's identity
 from a filename or the legacy global UI model label. Review actual anatomical coverage separately:
 absence of boundary contact never proves the full pancreas is captured.
 
