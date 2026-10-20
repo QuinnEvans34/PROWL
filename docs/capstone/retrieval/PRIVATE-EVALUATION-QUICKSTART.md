@@ -4,15 +4,15 @@
 
 Use the [change-only review packet](../../../outputs/prowl/evaluation-preparation-20261020/changes-to-review.md)
 and [independent workflow](INDEPENDENT-LABELING-WORKFLOW-2026-10-20.md). Prior v4/v5 acceptance is
-verified and preserved; two replacements and changed evidence/consistency remain pending.
+verified and preserved; Quinton has accepted the two replacements and changed evidence/consistency.
 The public CLI now verifies exposure v4 preparation:346 origins/182 distinct wordings, including
 the source-record and Week3 matrices. It remains unable to admit protected authoring. The current
 demo's narrower coverage is documented in [preparation results](EVALUATION-PREPARATION-2026-10-20.md).
-Do not write protected questions here or use historical v1 private templates. Operator choice,
-revised role schema/tool qualification and storage/admission remain required. No source search,
+Do not write protected questions here or use historical v1 private templates. The separate human-operated
+assistant is selected; revised role schema/tool qualification and storage/admission remain required. No source search,
 offset entry or JSON authoring is assigned to Quinton.
 
-## Current status — expanded disease evaluation
+## Historical October17 status — superseded by the acceptance above
 
 The [disease-source review](DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md) supersedes the execution
 instructions below. Proposed development v6 and exposure v3 are now prepared (292 entries/33 known intents). The public inventory now includes 136 distinct normalized wordings and the

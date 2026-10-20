@@ -1,19 +1,20 @@
-# Independent labeling: concrete workflow for selection
+# Independent labeling: selected assisted workflow
 
-**Status:** Preferred process prepared; operator choice pending. Not an active private authoring tool.
+**Status:** Quinton selected the separate human-operated assisted workflow on October20.
+Preparation is complete; the protected authoring host is not yet qualified or active.
 
 The independence required here is separation from development exposure and tuning. Assisted labels
 remain machine-proposed until reviewed; this process does not establish clinical or inter-rater
 validation. The current private v1 schema cannot truthfully represent all these roles and must not
 be used with invented author/reviewer fields.
 
-## Recommended arrangement
+## Selected arrangement
 
 1. Quinton authors fresh natural questions privately, after public scope and admission are ready.
    He does not paste them into this chat, Trello, Git or an agent-connected terminal.
 2. A separate human-operated labeling assistant searches the frozen source-reading corpus and
    prepares proposed concepts, attributed exact excerpts, limitations, source judgments and
-   answerability. An independently nominated person can fill this role instead. Neither uses
+   answerability. No independent person was nominated. The assistant does not use
    candidate system answers as gold labels or copies development expected answers.
 3. The tool derives offsets and hashes from selected canonical text, never from free-form model
    offsets. It shows excerpt context and provenance next to the proposed meaning. Uncertain support,
@@ -49,6 +50,25 @@ as independent raters. A development agent is not an eligible protected label pr
 - Version admission and validator against current needs/corpus/exposure. Keep the existing CLI
   blocked until these conditions and the actual protected storage/backup receipt are satisfied.
 
-The next decision is the operator arrangement, not writing30 questions now. Implementation and
-qualification follow that selection. No new chat, service, private image, assistant model run or
-protected data access was created by this preparation.
+## Implemented preparation boundary
+
+`src/retrieval/assisted_labeling.py` is a pure prototype: no filesystem, network, model calls or
+acceptance writes. It builds per-source requests from a question, proposed concepts and canonical
+source text; validates source hashes; reconstructs exact unique quotes into Unicode character
+offsets; rejects invented/ambiguous quotes, unknown concepts, missing sources and model offsets;
+and renders an escaped review page with missing/contradicting/uncertain evidence visible.
+Every output remains `machine_proposed_human_review_required`, with both acceptance/readiness false.
+Seventeen invented-data checks cover these boundaries, malformed types and safe errors. Exact
+matching is not entailment, completeness or semantic-independence verification.
+
+This prototype is not the whole labeling application. The next implementation must supply a
+separate human-operated host, actual model identity and token-budget/chunking policy, canonical
+corpus passage alignment, concept/answerability proposals, role/history schema and human correction/
+consistency controls. Qualify those on invented cases first, including failure logging, network
+behavior, semantic-overlap adjudication and refusal to freeze unresolved labels. Only then complete
+storage/backup and frozen admission before real private questions. Existing CLI access remains shut.
+
+Quinton will enter fresh questions and review supplied meaning/citations, without paper search,
+offsets or JSON editing. This development chat may implement/test the tool on invented content,
+but may not operate it on the real held-out questions. No new chat, service, private image, model
+run or protected-content access was created. No further operator-choice question is pending.

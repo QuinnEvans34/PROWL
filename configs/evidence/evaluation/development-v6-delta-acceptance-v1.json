@@ -1,0 +1,95 @@
+{
+  "version": "development-v6-delta-acceptance-v1",
+  "recorded_at": "2026-10-20T23:05:17Z",
+  "timestamp_semantics": "Receipt time; not claimed as exact human reading time",
+  "human_statement": "I reviewed and accept these changes and consistency",
+  "packet": {
+    "path": "configs/evidence/evaluation/review-packets/development-v6-changes-to-review.md",
+    "sha256": "eff9e86a36decaece8841f61e5f6e42f15747c6a12a91a3d47b4ebb33aefe32d",
+    "reviewed_at_path": "outputs/prowl/evaluation-preparation-20261020/changes-to-review.md"
+  },
+  "appendix": {
+    "path": "configs/evidence/evaluation/review-packets/development-v6-source-judgment-changes.md",
+    "sha256": "e2f39135235a029820a5a7d8b8f6eff924cae40fdcffc79c686cca555683398a",
+    "reviewed_at_path": "outputs/prowl/evaluation-preparation-20261020/source-judgment-changes.md"
+  },
+  "suite": {
+    "path": "configs/evidence/evaluation/development-v6-draft.json",
+    "sha256": "8d0c8cd96208896a6bc33c2a9880ba3155f6040971a00e715e6b5d186a8b90d3"
+  },
+  "review": {
+    "path": "configs/evidence/evaluation/development-v6-delta-human-review.json",
+    "sha256": "5859f7009268594ab619f35dae2fdfa791e6300f2644171a3898536030e7bbf0"
+  },
+  "report": {
+    "state": "review_record_valid",
+    "development_content_sha256": "5b43a030def4cab54c9992d2941f5ae8fba18156afed2a0ce4fb32cd33eb4979",
+    "review_content_sha256": "6a90ba38ee1b84e65b3200c0db632d96ac239614383b82f584f2737a40b7dcde",
+    "event_count": 3,
+    "decision_counts": {
+      "wording_and_answer": {
+        "accept": 30
+      },
+      "evidence_labels": {
+        "accept": 30
+      },
+      "second_consistency": {
+        "accept": 30
+      }
+    },
+    "pending": {
+      "wording_and_answer": [],
+      "evidence_labels": [],
+      "second_consistency": []
+    },
+    "development_review_attested_complete": true,
+    "ready_for_tuning": false,
+    "limitation": "Attestations only; corpus validation, protected authoring and split freeze remain separate.",
+    "inherited_acceptances": {
+      "wording_and_answer": [
+        "q:dev2-01",
+        "q:dev2-03",
+        "q:dev2-04",
+        "q:dev2-05",
+        "q:dev2-06",
+        "q:dev2-07",
+        "q:dev2-08",
+        "q:dev2-09",
+        "q:dev2-10",
+        "q:dev2-11",
+        "q:dev2-12",
+        "q:dev2-13",
+        "q:dev2-14",
+        "q:dev2-16",
+        "q:dev2-17",
+        "q:dev2-18",
+        "q:dev2-19",
+        "q:dev2-20",
+        "q:dev2-21",
+        "q:dev2-22",
+        "q:dev2-23",
+        "q:dev2-24",
+        "q:dev2-25",
+        "q:dev2-26",
+        "q:dev2-27",
+        "q:dev2-28",
+        "q:dev2-29",
+        "q:dev2-30"
+      ],
+      "evidence_labels": [
+        "q:dev2-21",
+        "q:dev2-22",
+        "q:dev2-23",
+        "q:dev2-24",
+        "q:dev2-25",
+        "q:dev2-26",
+        "q:dev2-27",
+        "q:dev2-28"
+      ]
+    },
+    "prior_review_content_sha256": "39dd3608376bd7589d7094d4a1f2522fbaccf591db425c7d797d1c8df8d1c91f",
+    "prior_development_content_sha256": "62a4f4f2833ab82ccaddf8684a0a1fc686725e477d68bccdbeedf951d9774d92"
+  },
+  "ready_for_private_authoring": false,
+  "ready_for_tuning": false
+}

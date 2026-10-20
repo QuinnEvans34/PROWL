@@ -15,7 +15,7 @@ from jsonschema import Draft202012Validator, FormatChecker, ValidationError
 from .records import CONTRACTS, canonical_bytes
 from .direct_ingestion import digest
 from .development_set import FAMILIES, NEEDS, REFUSALS
-from .public_exposure import latest_public_preflight as public_preflight
+from .public_exposure import accepted_public_preflight as public_preflight
 from .corpus_inventory import frozen_inventory, verify_sources
 from .labels import contains, gold_works, verify_label_set
 from .query import make_query, normalize_question
@@ -141,8 +141,8 @@ def load_public_inputs(root):
     """
     public_preflight(root)
     raise PrivateValidationError(
-        'Expanded disease evaluation is not frozen. Complete public scope/label review '
-        'and the independent labeling arrangement before private authoring.')
+        'Protected evaluation is not admitted. Complete the separate labeling tool, '
+        'role schema, storage/backup and frozen admission before private authoring.')
 
 
 def private_path(path, root):

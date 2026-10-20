@@ -123,7 +123,7 @@ def test_current_public_inputs_cannot_fall_back_to_old_freeze(public_fixture, mo
     from src.retrieval import private_evaluation
     monkeypatch.setattr(private_evaluation, 'public_preflight', public_preflight)
     from src.retrieval.private_evaluation import load_public_inputs, PrivateValidationError
-    with pytest.raises(PrivateValidationError, match='not frozen'):
+    with pytest.raises(PrivateValidationError, match='not admitted'):
         load_public_inputs(public_fixture[0])
 
 

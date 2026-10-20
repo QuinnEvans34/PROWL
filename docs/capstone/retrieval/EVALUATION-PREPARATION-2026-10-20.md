@@ -1,26 +1,32 @@
 # Evaluation preparation and current coverage
 
-**Status:** Public reconciliation delivered; human delta review and independent workflow choice pending.
+**Status:** Public delta and consistency accepted; separate assisted workflow selected/prepared.
 AI-03 remains open. This preparation does not freeze private questions or admit evaluation/tuning.
 
 ## Current versions and preserved approvals
 
 The current corpus is `corpus-disease-v1`:14 papers/1,179 passages. Proposed development v6 remains
 30 questions:20 answerable,8 refusals,2 evidence gaps. The v4→v5 review chain verifies as complete;
-the v6 review is a separate empty record. Quinton's Week3 answer/UI acceptance applies to that
+the original empty v6 record is preserved; a separate delta acceptance now records the actual decision. Quinton's Week3 answer/UI acceptance applies to that
 exposed quality packet, not automatically to the formal v6 source-label changes.
 
 The new [change-only packet](../../../outputs/prowl/evaluation-preparation-20261020/changes-to-review.md)
 contains two replacement questions,23 added/changed spans and a separate appendix of100 changed
 source judgments.28 retained cases have unchanged core fields/expected concepts. This avoids
 repeating their entire review; it does not silently copy acceptance to new evidence. The two
-corpus-gap judgments and consistency of modality, population and limits still need confirmation.
+corpus-gap judgments and consistency of modality, population and limits are included in Quinton’s
+explicit acceptance: “I reviewed and accept these changes and consistency.”
 The earlier complete v6 packet and all v5/v4 records remain unchanged.
 
 `scripts/retrieval/prepare_evaluation_delta.py` verifies the prior acceptance chain, current draft,
 actual canonical evidence, content hashes and current review binding before rendering. It writes
 only to a new fixed public-output directory and records no review events. It refuses overwriting
-that directory. Review has been requested against this concrete packet.
+that directory. Quinton reviewed and accepted this concrete packet. Byte-identical archived copies under
+`configs/evidence/evaluation/review-packets/` make the binding portable without rewriting what he read.
+`development-v6-delta-human-review.json` records two wording decisions,22 evidence decisions and
+30 consistency decisions. The validated v4→v5 chain supplies28 unchanged wording/eight refusal-label
+acceptances; label-version metadata alone does not reopen semantics. The receipt preserves original
+review paths and exact hashes. Receipt time is not claimed as the precise human reading time.
 
 ## Exposures and admission
 
@@ -56,12 +62,17 @@ must remain excluded from runtime prompts/indexing. No live answer policy change
 
 ## Independent labeling workflow
 
-See [the concrete workflow](INDEPENDENT-LABELING-WORKFLOW-2026-10-20.md). A choice between a separate
-human-operated assistant and a nominated independent labeler has been requested. No person, model,
-isolation, storage or qualification is claimed settled before that choice and its required checks.
+See [the concrete workflow](INDEPENDENT-LABELING-WORKFLOW-2026-10-20.md). Quinton selected a separate
+human-operated assistant. The workflow and invented-data preparation prototype are delivered; actual
+model/host, role schema, isolation, storage and private qualification remain explicit next steps.
 Quinton supplies natural questions and reviews prepared evidence; he is not assigned article
 search, offsets or JSON authoring. Protected prompts must not enter this development chat.
 
-Private evidence: `outputs/prowl/evaluation-preparation-20261020/` includes validation, source delta,
+Local public-preparation evidence: `outputs/prowl/evaluation-preparation-20261020/` includes validation, source delta,
 public preflight, new exposure inventory and offline route results. No private content, model calls,
 training, corpus expansion, source-label edits or inferred human hours occurred.
+
+The latest public command verifies the archived packet, receipt and complete review lineage; it
+reports `public_delta_accepted_private_preparation_pending`. Both readiness flags remain false.
+The current focused regression run passes112 checks; the first attempt exposed only a stale test
+expecting the superseded refusal wording, which was updated without weakening private admission.

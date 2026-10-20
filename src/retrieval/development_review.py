@@ -159,6 +159,41 @@ def read_public_json(path, root):
     return json.loads(path.read_text())
 
 
+def validate_prepared_delta_review(record, suite, *, packet_sha256, prior_suite,
+                                  prior_record, prior_answers, earlier_suite,
+                                  earlier_record, earlier_answers):
+    """Validate change-only concept review against the actual accepted two-step chain.
+
+    The packet preserves prior prose; unchanged core/labels may inherit, never new
+    evidence or consistency. No new events are manufactured by this validator.
+    """
+    from .evaluation_delta import CORE
+    prior = validate_delta_review(prior_record, prior_suite, prior_answers,
+        prior_suite=earlier_suite, prior_record=earlier_record, prior_answers=earlier_answers)
+    if not prior['development_review_attested_complete']:
+        raise ValueError('Prior acceptance chain is incomplete')
+    verify_development(suite)
+    old = {c['id']: c for c in prior_suite['cases']}
+    inherited = {s: [] for s in STAGES[:2]}
+    changed_corpus = suite['corpus_content_sha256'] != prior_suite['corpus_content_sha256']
+    for case in suite['cases']:
+        previous = old.get(case['id'])
+        same = previous is not None and all(case[k] == previous[k] for k in CORE)
+        if same:
+            inherited['wording_and_answer'].append(case['id'])
+        # The new label-set version is provenance, not a new semantic judgment.
+        label_meaning = lambda labels: {k:v for k,v in labels.items() if k != 'label_version'}
+        if (same and label_meaning(case['labels']) == label_meaning(previous['labels'])
+                and case['source_judgments'] == previous['source_judgments']
+                and not (changed_corpus and case['expected']['status'] == 'insufficient_evidence')):
+            inherited['evidence_labels'].append(case['id'])
+    result = _validate_review(record, suite, answers_sha256=packet_sha256, inherited=inherited)
+    result.update(inherited_acceptances=inherited,
+        prior_review_content_sha256=prior_record['content_sha256'],
+        prior_development_content_sha256=prior_suite['content_sha256'])
+    return result
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)

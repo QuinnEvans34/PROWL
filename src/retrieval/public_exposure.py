@@ -256,3 +256,37 @@ def latest_public_preflight(root):
         exposure_content_sha256=data['content_sha256'], exposure_version=data['version'],
         exposure_limitations=data['limitations'])
     return report
+
+
+def accepted_public_preflight(root):
+    """Recognize the real delta acceptance without opening private admission."""
+    from .development_review import validate_prepared_delta_review
+    report = latest_public_preflight(root)
+    receipt = json.loads(public_bytes(root, DIRECTORY+'development-v6-delta-acceptance-v1.json'))
+    required = {'suite': DIRECTORY+'development-v6-draft.json',
+        'review': DIRECTORY+'development-v6-delta-human-review.json',
+        'packet': DIRECTORY+'review-packets/development-v6-changes-to-review.md',
+        'appendix': DIRECTORY+'review-packets/development-v6-source-judgment-changes.md'}
+    if (receipt['version'] != 'development-v6-delta-acceptance-v1'
+            or receipt['ready_for_private_authoring'] is not False or receipt['ready_for_tuning'] is not False
+            or any(receipt[k]['path'] != v for k,v in required.items())):
+        raise ValueError('Unexpected public acceptance binding')
+    for key in required:
+        public_bytes(root, receipt[key]['path'], receipt[key]['sha256'])
+    read = lambda path: json.loads(public_bytes(root, path))
+    review = validate_prepared_delta_review(read(required['review']), read(required['suite']),
+        packet_sha256=receipt['packet']['sha256'],
+        prior_suite=read(DIRECTORY+'development-v5-draft.json'),
+        prior_record=read(DIRECTORY+'development-v5-human-review.json'),
+        prior_answers=public_bytes(root, 'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS-V5.md').decode(),
+        earlier_suite=read(DIRECTORY+'development-v4-draft.json'),
+        earlier_record=read(DIRECTORY+'development-v4-human-review.json'),
+        earlier_answers=public_bytes(root, 'docs/capstone/retrieval/DEVELOPMENT-QUESTIONS-AND-ANSWERS.md').decode())
+    if receipt['report'] != review or not review['development_review_attested_complete']:
+        raise ValueError('Accepted delta review does not verify')
+    report.update(state='public_delta_accepted_private_preparation_pending',
+        development_review_attested_complete=True, review_content_sha256=review['review_content_sha256'],
+        pending=['Qualify the selected separate human-operated labeling assistant and revised role schema.',
+                 'Resolve broader formal answer coverage without narrowing accepted evaluation to demo topics.',
+                 'Complete private authoring, semantic independence, storage/backup and frozen admission.'])
+    return report
