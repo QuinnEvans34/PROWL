@@ -1,5 +1,13 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 volume selector qualified offline:** Read VOLUME-ANSWER-PLAN-2026-10-20.md and
+> VOLUME-ROUTING-RESULTS-2026-10-20.md/spec1.38. W03-02 bounded reliability is closed; W03-03 is
+> In Progress, 1/4 checklist items complete. Isolated volume_record_search.py uses existing reviewed
+> MRI facts with canonical anchors/context. 64 focused checks pass; first T2DM numeric-guard failure
+> retained/corrected. Seven exposed offline corpus cases pass; 0DB/0model calls, live policy unchanged.
+> Next reviewed wording/local-model contract and exact backend/UI reconstruction, then bounded
+> citation review before promotion. Independent evaluation and measurement extension remain open.
+
 > **October20 bounded reliability closed:** Read RELIABILITY-CLOSEOUT-2026-10-20.md/spec1.37.
 > Lifecycle CLI now preserves bounded Compose errors/unknown timeout state without retry.
 > Six tests pass. Two actual cleanstop/startcycles: first outage request lacked schema/UUID,400,
