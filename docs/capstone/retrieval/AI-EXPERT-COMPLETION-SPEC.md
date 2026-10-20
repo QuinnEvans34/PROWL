@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.42 — October 20, 2026 (current producer handoff and assisted-input distinction; formal acceptance unchanged)\
+**Version:** 1.43 — October 20, 2026 (on-demand inference selected; optional prediction caching)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
@@ -8,8 +8,10 @@
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
 training pipeline uses a provided pancreas mask to define its region. It requires a separately
 versioned assisted-result adapter; autonomous v2 guards remain intact. The authorized training-owner
-handoff confirms the current evaluator retains metrics but no native prediction masks. A separate
-qualified prediction export is the next dependency, followed by assisted-adapter intake.
+handoff confirms the current evaluator retains metrics but no native prediction masks. Quinton selected
+on-demand inference: the viewer and measurements consume the same prediction, retained for the
+session with optional persistent caching. A separate inference worker/API and assisted-result
+contract are next; training does not need to save every prediction.
 No new inference, artifact transfer or runtime change occurred in this discovery checkpoint.
 
 October 20 [native measurement provenance](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md): opt-in v2

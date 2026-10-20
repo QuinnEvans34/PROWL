@@ -1,6 +1,6 @@
 # Current training output → measurement viewer handoff
 
-**Status:** Handoff received; no native prediction mask is retained by the current evaluator.
+**Status:** Quinton selected on-demand inference with optional caching. Retained training predictions are not a prerequisite.
 **Owner:** AI-05 / DAG-RAG integration; training artifacts remain owned by the training chat.
 
 ## Finding and correction
@@ -109,32 +109,53 @@ assistance and outside-region background policy, but are not standalone spatial 
 Viewer resource compliance remains **unassessed**: no candidate pair exists. No arrays/weights
 were loaded, inference launched, artifacts copied, producer changed or training interrupted.
 
-### Next implementation dependency
+## Selected workflow — on-demand inference
 
-The training owner needs a separate opt-in prediction-export entry point using the exact current
-restoration/window logic. It should write to a fresh private directory and emit native labels with
-explicit units plus hash-bound source, checkpoint, assistance, geometry and coverage provenance.
-First qualify serialization/restoration with synthetic data and review actual producer code. Do
-not patch the live evaluator or use aggregate metrics to fabricate a prediction. Real single-case
-execution needs an explicit idle-resource window and selected immutable checkpoint; it is not
-authorized by the metadata-only request. No automatic post-training job has been scheduled.
+Quinton selected on-demand inference on October 20 after reviewing this handoff. This supersedes
+an export-first product workflow. The missing historical mask only prevents reusing an existing
+prediction for the integration check; training does not need to save every prediction.
 
-After the export path exists, freeze a development case without quality-based selection, assess
-the existing viewer limits, and perform a bounded export/intake. This dependency precedes step 1
-below; it does not require restarting training. The current historical viewer remains unchanged.
+1. The user selects a scan and requests prediction, or reuses the matching prediction already
+   produced by the viewer. Use an immutable, explicitly selected model checkpoint.
+2. A bounded inference worker runs the current restoration/window logic once and returns a native
+   prediction with source, model, geometry, label and assistance provenance. Temporary result files
+   are permitted for transport; a permanent saved package is not required.
+3. The viewer displays that exact prediction. Deterministic measurement code calculates volumes
+   from the same native labels and affine. Asking another measurement question reuses the result;
+   it does not trigger a second segmentation or ask the language model to estimate size.
+4. Keep the result for the session. Persistent caching and explicit Save are optional. Cache keys
+   bind CT content, checkpoint hash, preprocessing/restoration/postprocessing version, inference
+   settings and any supplied region/reference-input identity. Never reuse on case name alone.
+5. Switching scan, model or region invalidates the displayed answer. Cancel obsolete requests where
+   supported and discard late results; pending/failed/cancelled output must not become a measurement.
 
-## Integration sequence and completion evidence
+The current pipeline is pancreas-assisted: the supplied pancreas mask defines its region. Model
+output labels, not that reference, supply the measured volume. Expose the assistance in the UI;
+a new CT without a provided region requires a qualified localization path. Preserve autonomous
+v2's strict contract and implement a separate explicit assisted-result contract.
 
-1. Obtain the producer's metadata response and pin the actual schema and selected artifacts.
-2. Implement an explicit assisted-result contract, preserving autonomous v2 rejection behavior.
-   UI wording must say “Pancreas-assisted prediction” and disclose the provided outline's role.
-3. Validate synthetic source/model/reference-role/geometry/coverage contradictions and successful
-   arithmetic. Keep current boundary, resource and stale-study protections.
-4. Copy the selected immutable files into a fresh private package only after metadata fits;
-   verify original hashes, native geometry, label support and actual inference-region coverage.
-5. Review the outline in the viewer with Quinton. Show a number only when calculation checks
-   pass, with model/assistance provenance and unresolved accuracy limitations visible. A rejected
-   case remains an honest integration result. No normal-range or disease conclusion follows.
+## Next implementation and completion evidence
+
+- Inspect the actual current producer code and extract/reuse its inference and native restoration
+  entry point behind a separate worker/API. Do not modify the running training evaluator.
+- Define the job/result contract and UI states: queued, running, ready, failed and cancelled.
+  Bind the displayed mask and measurement summary to one prediction identity. Enforce bounded
+  memory, execution time and concurrency; reject unavailable/busy inference resources clearly.
+- Qualify synthetic geometry, assistance/provenance, measurement arithmetic, stale-result handling
+  and optional-cache invalidation. Existing source/region boundary and resource checks remain.
+- Run one exposed development case in an available inference-resource window using a pinned
+  checkpoint and the required assisted inputs. This does not require a training restart or a
+  full evaluation run. Review the native outline with Quinton; retain this validation receipt
+  even though routine application predictions need not be saved permanently.
+- Compare the displayed outline, computed measurements and provenance. Keep coverage/accuracy
+  limitations visible and withhold unsupported measurements. Individual-lesion measurements,
+  reference accuracy, normal-range eligibility and disease explanations remain separate work.
+
+Current viewer limits remain as recorded above; worker and transfer limits must be assessed against
+actual native cases before implementation promotion. The selected architecture is approved; no
+inference job, resource competition with training or automatic post-training execution was started
+by this planning update. The metadata-only cross-chat request is complete; no further message was
+sent to the training chat.
 
 AI-05 stays In Progress. Per-lesion components/defined diameter and reference-reviewed measurement
 accuracy remain open. W03-04/05 and formal RAG acceptance remain in the weekly plan. This handoff

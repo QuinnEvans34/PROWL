@@ -1,5 +1,12 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 on-demand decision:** Quinton selected on-demand inference with optional caching.
+> Read spec1.43 and the selected-workflow section of ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md.
+> Reuse one native prediction for both outline and measurements; session retention is sufficient.
+> Next separate current-producer inference worker/API and assisted-result contract, then bounded
+> integration. Historical saved-mask discovery below does not require training to persist every
+> prediction. No live-run modification, inference launch or further cross-chat message occurred.
+
 > **October 20 current measurement input:** Read ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md/spec1.42.
 > Saved-mask volumes and native autonomous v2 delivered in local6180122/9d7c579; portable work
 > published9d7e87a/9141a00. Historical native example correctly withholds volume for boundary
