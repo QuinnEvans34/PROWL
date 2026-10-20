@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 original producer comparison complete:** User explicitly authorized prepared request;
+> training chat returned existing raw6000 report rows. All18 class counts/6 Dice values match Mac
+> for927/514/698;78 local metadata assertions pass. ReceiptSHAaf6cad753674d8fc25822471850b891f9410b113d5795291fe3aa3163ac83b07.
+> Read MEASUREMENT-PRODUCER-COMPARISON-RESULTS-2026-10-20.md/spec1.53. Report lacks checkpointSHA;
+> prior verified handoff supplies association. No voxelwise/probability/device equivalence claim.
+> Original producer already has the low recall/FPs. No new inference/weights/arrays/training/UIchange.
+> AI-05 open/guard retained. Next coordinate controlled model-quality comparison using completed
+> development reports before candidate selection; no newer-report request or checkpoint substitution
+> made. Private evidence outputs/prowl/measurement-producer-comparison-20261020/. Earlier pending
+> permission/request text below is historical. No human-hours credit.
+
 > **October20 CP05 complete:** Read MEASUREMENT-CP05-PLAN/RESULTS-2026-10-20.md/spec1.52.
 > Code/plan9de0e26;6newsynthtests,3source-pipelinecomparisons/7artificialwindowsexact;36handoff
 > fileshashverified,11helperASTsexact. Originalsource decoder matches927/514/698 references;

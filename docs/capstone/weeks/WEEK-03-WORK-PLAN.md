@@ -9,11 +9,17 @@ development AI demo for explicitly covered literature topics.
 
 ## Post-demo review — October20
 
-**Latest measurement update:** [CP05](../retrieval/MEASUREMENT-CP05-RESULTS-2026-10-20.md)
+**Latest measurement update:** [producer comparison](../retrieval/MEASUREMENT-PRODUCER-COMPARISON-RESULTS-2026-10-20.md)
+matches all18 class counts and6 Dice values for927/514/698 with the saved Windows raw6000 report;
+78 metadata assertions pass. Original producer already has the low recall/false positives. Keep
+measurement guard; next coordinate a controlled model-quality comparison using completed development
+reports before selecting a candidate. No new inference or promotion; AI-05 stays open.
+
+**Prior measurement update:** [CP05](../retrieval/MEASUREMENT-CP05-RESULTS-2026-10-20.md)
 finds bidirectional pancreas/lesion class errors. Source decoding, ROI, numerical helpers and
 bounded synthetic preprocessing comparisons agree; CUDA/MPS output equivalence remains unverified.
 Next obtain already-saved producer metrics for the same raw step6000 cases before tuning. Prepared
-metadata-only request awaits explicit cross-chat authorization. No new inference; AI-05 stays open.
+metadata-only request subsequently authorized/completed above. No new inference; AI-05 stays open.
 
 **Prior measurement update:** [CP04](../retrieval/MEASUREMENT-CP04-RESULTS-2026-10-20.md)
 resolves927's integer/scaling representation without rounding; five of six cases now score.
@@ -91,7 +97,7 @@ The table below is the October 20 planning snapshot; update it with material pro
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Complete:4/4; exact selection17/20→20/20 | Reopen for a demonstrated new wording/coverage gap | Closed Tuesday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Complete:4/4; engineering and Quinton review passed | Reopen for demonstrated regression; independent evaluation remains separate | Closed Tuesday |
-| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Fixed6-case follow-up:5 scored,1 size exclusion; no promotion | Compare original saved step6000 producer counts before a correction | Prepared metadata request; authorization pending |
+| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Fixed6-case follow-up:5 scored,1 size exclusion; original producer counts agree; no promotion | Coordinate controlled model-quality comparison from completed development reports | Accuracy and coverage remain open; no new inference selected |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 

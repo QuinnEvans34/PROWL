@@ -1,6 +1,8 @@
 # Prepared request: retained step6000 producer comparison
 
-**Status:** prepared; requires explicit authorization to message the training chat.
+**Status:** Quinton explicitly authorized “Great. I give permission. Carry on.” on October20.
+The metadata-only response is received and independently compared: all three cases agree in both
+classes. See [results](MEASUREMENT-PRODUCER-COMPARISON-RESULTS-2026-10-20.md). No inference/training requested.
 **Recipient:** Plan capstone experiment workflow on Quinns-Laptop.
 
 ## Request text
