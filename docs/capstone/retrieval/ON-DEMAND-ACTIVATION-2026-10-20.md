@@ -45,7 +45,10 @@ as documented in the implementation report; the evaluator's class1-only metric i
 The existing Windows SMB share is reachable on the same local subnet. Finder was opened on the
 existing E$ share; sign-in did not complete using the prefilled account. Quinton was asked to
 enter credentials directly in the OS dialog, not in chat. He does not know the password and
-requested Guest access; one Guest attempt was explicitly denied by Windows. The refusal is
+requested Guest access; one Guest attempt was explicitly denied by Windows. Quinton then corrected
+the account name and entered credentials directly in the OS dialog. Windows again denied access.
+The dialog does not distinguish a password error from administrative-share permission; neither
+cause is established. The refusal is
 retained in private `guest-denied.png`. Do not enable Guest or change Windows authentication. No new share/server, firewall change,
 cloud upload, saved credential or training-drive disconnection was performed. The checkpoint
 is not yet on the Mac. The exact remote path and network address remain in the private intake.
