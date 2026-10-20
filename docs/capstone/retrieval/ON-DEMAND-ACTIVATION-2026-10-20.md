@@ -163,4 +163,19 @@ The merge is engineering integration, not an AI-05 or clinical quality acceptanc
 Private evidence under `outputs/prowl/on-demand-activation-20261020/`: transfer receipt,
 private configuration, actual-job(request/log/execution/package and independent-mask-audit),
 UI screenshot, test/build logs. One frozen validation package is retained for this review;
-production prediction retention remains session-only. Local UI remains at `/predict` with the result.
+production prediction retention remains session-only. The initial live result is preserved in the evidence package and screenshot.
+
+## Merge closeout
+
+[PR1](https://github.com/QuinnEvans34/PROWL/pull/1) merged into main at20:24:14UTC on October20,
+merge commit`3d53c55129a47a17663142633e85f7eb307079b6`, reviewed head`050b7b7`.
+GitHub reported clean/mergeable and no configured status checks; local validation above supplies
+check evidence. The merge tree exactly matches the tested integration head. Local main was
+fast-forwarded to the merge; original integration and portable publication branches are retained.
+
+Switching through the older local main briefly triggered Vite restarts and the browser's connection
+error page. The existing Vite process recovered; a fresh in-app tab verifies the merged `/predict`
+page, connected service and admitted case with Run enabled. The original server job remains ready;
+its private frozen evidence is preserved. No second inference was performed to restore the page.
+Do not describe the new tab as retaining the earlier in-memory answer. Service8017/config remain
+unchanged; next substantive work is the boundary/measurement qualification issue, not another merge.
