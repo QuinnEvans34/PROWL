@@ -46,6 +46,10 @@ export function measureMask(ct, pred, labels, spacingMm, { maxVoxels = 16000000,
   if (roi && (!Array.isArray(roi) || roi.length !== 2 || roi.some(r => !Array.isArray(r) || r.length !== 3 || r.some(n => !Number.isInteger(n)))
     || roi[0].some((n, i) => n < 0 || roi[1][i] <= n || roi[1][i] > g.shape[i]))) fail('Invalid native inference region.')
   let pancreas = 0; let lesion = 0; let boundary = false; let cropBoundary = false
+  const coverageDiagnostics = { schema: 'mask-boundary-counts-v1',
+    cropContact: { pancreasLabel: 0, lesionLabel: 0 }, imageContact: { pancreasLabel: 0, lesionLabel: 0 },
+    cropFaces: [] }
+  const faceCounts = Array.from({ length: 6 }, () => ({ pancreasLabel: 0, lesionLabel: 0 }))
   const [nx, ny, nz] = g.shape
   for (let i = 0; i < labels.length; i++) {
     const v = labels[i]
@@ -53,17 +57,27 @@ export function measureMask(ct, pred, labels, spacingMm, { maxVoxels = 16000000,
     if (!v) continue
     pancreas++; if (v === 2) lesion++
     const x = i % nx; const y = Math.floor(i / nx) % ny; const z = Math.floor(i / (nx * ny))
+    const labelKey = v === 1 ? 'pancreasLabel' : 'lesionLabel'
     if (roi) {
       const xyz = [x, y, z]
       if (xyz.some((v, j) => v < roi[0][j] || v >= roi[1][j])) fail('Predicted labels fall outside the recorded inference region.')
-      if (xyz.some((v, j) => v === roi[0][j] || v === roi[1][j] - 1)) cropBoundary = true
+      let contact = false
+      for (let axis = 0; axis < 3; axis++) {
+        if (xyz[axis] === roi[0][axis]) { faceCounts[axis * 2][labelKey]++; contact = true }
+        if (xyz[axis] === roi[1][axis] - 1) { faceCounts[axis * 2 + 1][labelKey]++; contact = true }
+      }
+      if (contact) { cropBoundary = true; coverageDiagnostics.cropContact[labelKey]++ }
     }
-    if (x === 0 || y === 0 || z === 0 || x === nx - 1 || y === ny - 1 || z === nz - 1) boundary = true
+    if (x === 0 || y === 0 || z === 0 || x === nx - 1 || y === ny - 1 || z === nz - 1) {
+      boundary = true; coverageDiagnostics.imageContact[labelKey]++
+    }
   }
   if (!pancreas || pancreas === lesion) fail('A usable pancreas outline is not available.')
   if (boundary || cropBoundary) {
+    coverageDiagnostics.cropFaces = faceCounts.flatMap((counts, i) => counts.pancreasLabel || counts.lesionLabel
+      ? [{ axis: Math.floor(i / 2), side: i % 2 ? 'high' : 'low', ...counts }] : [])
     const error = new Error(`The predicted outline touches the ${cropBoundary ? 'inference crop' : 'image'} boundary and may be cut off. Its size cannot be reported reliably.`)
-    error.code = 'mask_coverage'; throw error
+    error.code = 'mask_coverage'; error.coverageDiagnostics = coverageDiagnostics; throw error
   }
   return { schema: MEASUREMENT_POLICY, shape: g.shape, affine: g.affine, voxelMm3: g.voxel,
     pancreasVoxels: pancreas, lesionVoxels: lesion, pancreasMl: pancreas * g.voxel / 1000,

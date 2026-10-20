@@ -22,3 +22,17 @@ it('does not turn a measurement into a disease interpretation', async () => {
   await user.click(screen.getByRole('button',{name:'Calculate volume'}))
   expect(screen.getByText(/Individual dimensions/)).toBeTruthy(); expect(screen.queryByText(/about 44/)).toBeNull()
 })
+it('explains boundary counts and preserves provenance without releasing the lesion total', async () => {
+  const user = userEvent.setup()
+  render(<NativeMeasurementPanel live measurement={{status:'unavailable',reason:'Crop boundary contact.',
+    predictionSha256:'verified-mask-hash',modelSha256:{segmenter:'verified-model-hash'},
+    coverageDiagnostics:{schema:'mask-boundary-counts-v1',cropContact:{pancreasLabel:67,lesionLabel:0},
+      imageContact:{pancreasLabel:0,lesionLabel:0},cropFaces:[]}}} />)
+  await user.type(screen.getByLabelText('Measurement question'),'How big is this lesion?')
+  await user.click(screen.getByRole('button',{name:'Calculate volume'}))
+  expect(screen.getByText(/67 pancreas-label voxels and 0 lesion-label voxels/)).toBeTruthy()
+  expect(screen.getByText(/counts cannot distinguish/)).toBeTruthy()
+  expect(screen.getByText(/verified-mask-hash/)).toBeTruthy()
+  expect(screen.queryByText(/mL/)).toBeNull()
+  expect(screen.queryByText('Predicted outline volume')).toBeNull()
+})

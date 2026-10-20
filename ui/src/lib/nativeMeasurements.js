@@ -66,19 +66,21 @@ export async function measureNativePackage(manifest, buffers, roi, signal) {
   const prediction = await decodeMeasurementFile(buffers.pred, signal, limits)
   verifyNativeVolumes([{ hdr: ctHeader }, { hdr: prediction.header }], manifest.geometry)
   const labels = labelsFrom(prediction)
-  let measurement
-  try { measurement = measureMask(ctHeader, prediction.header, labels, undefined, { maxVoxels: limits.maxVoxels, roi }) }
-  catch (error) {
-    if (error.code !== 'mask_coverage') throw error
-    return { status: 'unavailable', reason: error.message }
-  }
-  signal?.throwIfAborted()
-  return { status: 'ready', ...measurement, schema: 'native-mask-volume-v1',
+  const provenance = { schema: 'native-mask-volume-v1',
     assisted: manifest.schema_version === 'assisted-prediction-view-v1',
     ctSha256: manifest.files.ct.content_sha256, predictionSha256: manifest.files.pred.content_sha256,
     hashBasis: 'Original package files; SHA-256 verified against the manifest',
     modelLineage: 'Model hashes agree with the retained inference record; weights and training history were not re-audited',
     modelSha256: manifest.model_sha256, resultSha256: manifest.result_sha256,
-    inferenceSha256: manifest.inference_evidence_sha256, nativeRegion: roi,
+    inferenceSha256: manifest.inference_evidence_sha256, nativeRegion: roi }
+  let measurement
+  try { measurement = measureMask(ctHeader, prediction.header, labels, undefined, { maxVoxels: limits.maxVoxels, roi }) }
+  catch (error) {
+    if (error.code !== 'mask_coverage') throw error
+    signal?.throwIfAborted()
+    return { ...provenance, status: 'unavailable', reason: error.message, coverageDiagnostics: error.coverageDiagnostics }
+  }
+  signal?.throwIfAborted()
+  return { status: 'ready', ...measurement, ...provenance,
     coverage: 'Native CT and inference grids agree. No predicted label touches the recorded crop edge. Anatomical completeness remains unverified' }
 }

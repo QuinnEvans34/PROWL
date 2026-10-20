@@ -1,5 +1,18 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 boundary audit complete:** Read BOUNDARY-AUDIT-2026-10-20.md/spec1.47.
+> All67 crop-contact voxels are four isolated, single-slice label1 fragments; both6/26 connectivity
+> agree. Main46,697-voxel union component has no crop contact; fragments89–135mm away.
+> Other detached predictions/lesion regions remain; no cleanup or numeric-volume promotion.
+> Same original prediction SHA75fcf8e0 retained; no new inference or lesion-reference read.
+> UI unavailable answers now include per-label boundary counts and verified provenance.
+>11Python/93affectedUI/buildpass; actual /saved browser reports67/0crop and0/0CT contacts.
+> Vite5180 restarted as owned30806; PROWL_SAVED_PREDICTION_DIR now points to
+> outputs/prowl/on-demand-activation-20261020/actual-job/package (the CURRENT retained output,
+> not the older native example).8017owned63294 remains configured. Browser tab2 /saved.
+> Next qualify explicit component selection and reference-reviewed pancreas/lesion errors;
+> do not remove fragments just to pass the guard. AI-05 stays In Progress.
+
 > **October20 current model LIVE:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.46.
 > Approved one-file TLS transfer completed/hash matches; listener closed/token+key removed.
 > MPS case00000029 completed30windows/19.1s/1.12GiB sampledRSS/reaped; real UI overlay displayed.

@@ -29,6 +29,18 @@ describe('deterministic mask arithmetic and validity', () => {
     const ct = header(); ct.affine[0][3] += 1
     expect(() => measureMask(ct, header(), labels())).toThrow(/grids/)
   })
+  it('retains per-label edge counts, counting corners once, without allowing volume', () => {
+    const h = header(); const a = labels(); a[0] = 1; a[124] = 2
+    let failure
+    try { measureMask(h, h, a, undefined, { roi: [[0,0,0],[5,5,5]] }) } catch (e) { failure = e }
+    expect(failure.code).toBe('mask_coverage')
+    const d = failure.coverageDiagnostics
+    expect(d.cropContact).toEqual({ pancreasLabel: 1, lesionLabel: 1 })
+    expect(d.imageContact).toEqual(d.cropContact)
+    expect(d.cropFaces).toHaveLength(6)
+    expect(d.cropFaces.find(f => f.axis === 2 && f.side === 'high').lesionLabel).toBe(1)
+    expect(failure.pancreasMl).toBeUndefined(); expect(failure.lesionMl).toBeUndefined()
+  })
   it.each(['empty', 'all-lesion', 'edge', 'fraction', 'short', 'NaN'])('rejects %s masks', kind => {
     let a = Array.from(labels())
     if (kind === 'empty') a.fill(0)

@@ -1,9 +1,18 @@
 # AI expert completion specification
 
-**Version:** 1.46 — October 20, 2026 (current-model inference live; boundary blocks volume acceptance)\
+**Version:** 1.47 — October 20, 2026 (boundary fragments diagnosed; measurement qualification remains open)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [boundary investigation](BOUNDARY-AUDIT-2026-10-20.md): all67 crop-contact voxels
+are four isolated components, disconnected from the main pancreas under both6/26 connectivity.
+Their89–135mm separation supports stray predictions, not main-outline truncation. Other detached
+predictions remain, including suspicious lesion components; simply dropping edge voxels is insufficient.
+Original mask and measurement guard preserved. UI now retains boundary counts and source/model
+provenance for unavailable measurements.11Python/93affectedUI checks/build and actual retained-mask
+browser inspection pass. Next freeze component-selection/reference comparison criteria, review
+development lesion evidence and qualify a candidate before reporting reliable sizes. No new inference.
 
 October 20 [on-demand implementation](ON-DEMAND-INFERENCE-2026-10-20.md): bounded worker/API,
 explicit assisted-result contract and shared outline/measurement UI are implemented. 22 Python

@@ -7,6 +7,13 @@
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
+October20 AI-05 [boundary investigation](../retrieval/BOUNDARY-AUDIT-2026-10-20.md): the67 edge
+voxels are detached fragments, while the main pancreas does not touch the crop. Other disconnected
+regions, especially lesion labels, prevent reliable total-volume acceptance. Read-only audit and
+clearer unavailable-measurement evidence delivered;11Python/93UI checks/build and retained-result
+browser review pass. No cleanup or new inference. Next explicit component-selection and reference
+comparison checkpoint; AI-05 remains In Progress.
+
 October20 AI-05 [activation results](../retrieval/ON-DEMAND-ACTIVATION-2026-10-20.md): checkpoint
 transferred and verified; real MPS prediction displayed in19.1s. Independent mask audit confirms
 region-boundary contact, so volume is correctly withheld.182Python/213UI/build checks pass. [PR1](https://github.com/QuinnEvans34/PROWL/pull/1) merged the verified integration into main

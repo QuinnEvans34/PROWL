@@ -1,5 +1,11 @@
 # Native saved-package measurements — bounded development contract
 
+October20 additive diagnostics: boundary refusals retain verified package/model provenance and
+`mask-boundary-counts-v1` per-label counts at crop and CT faces. A corner counts once in each
+overall contact total, though it may appear on several named faces. These counts do not classify
+stray predictions versus truncation, release an unaffected target, alter labels or change the
+existing acceptance guard. See [the retained-output audit](BOUNDARY-AUDIT-2026-10-20.md).
+
 Continue AI-05 under Quinton's October 20 instruction. Add an opt-in `saved-prediction-view-v2`
 package, preserving v1 display and the separate prepared-mask preview. V2 binds the original CT,
 prediction, result JSON and canonical inference-evidence JSON by byte count and SHA-256. The

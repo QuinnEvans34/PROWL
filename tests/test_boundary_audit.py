@@ -1,5 +1,8 @@
 import numpy as np
 import pytest
+import hashlib
+import json
+import nibabel as nib
 
 from src.inference.boundary_audit import audit_boundary
 
@@ -64,3 +67,35 @@ def test_invalid_inputs_are_rejected(fault):
     if fault == 'affine': affine[2] = 0
     if fault == 'roi': roi[1][0] = 13
     with pytest.raises(ValueError): audit_boundary(a, ref, affine, roi)
+
+
+@pytest.mark.parametrize('fault', [None, 'hash', 'geometry'])
+def test_package_pins_and_geometry_before_analysis(tmp_path, fault):
+    from scripts.audit_prediction_boundary import audit_package
+    a, ref, affine, roi = fixture()
+    for name, data in [('ct', a), ('prediction', a), ('assistance', ref)]:
+        img = nib.Nifti1Image(data, affine)
+        img.header.set_xyzt_units('mm')
+        if fault == 'geometry' and name == 'assistance':
+            img.header.set_xyzt_units('unknown')
+        nib.save(img, tmp_path / f'{name}.nii.gz')
+    sha = lambda name: hashlib.sha256((tmp_path / name).read_bytes()).hexdigest()
+    e = {'assistance': {'sha256': sha('assistance.nii.gz')}, 'prediction_id': 'synthetic',
+         'model_sha256': {'segmenter': 'a'*64}, 'source_identity': {'ct_sha256': sha('ct.nii.gz')},
+         'reconstruction': {'native_box': roi}}
+    (tmp_path/'evidence.json').write_text(json.dumps(e))
+    (tmp_path/'result.json').write_text('{}')
+    files = {k: {'uri': n, 'bytes': (tmp_path/n).stat().st_size, 'content_sha256': sha(n)}
+             for k, n in [('ct', 'ct.nii.gz'), ('pred', 'prediction.nii.gz'), ('evidence', 'evidence.json'), ('result', 'result.json')]}
+    m = {'schema_version': 'assisted-prediction-view-v1', 'files': files, 'request_identity': 'test',
+         'prediction_id': 'synthetic', 'model_sha256': e['model_sha256'],
+         'assistance_sha256': sha('assistance.nii.gz'), 'geometry': {'shape': list(a.shape), 'affine': affine.tolist()}}
+    (tmp_path/'manifest.json').write_text(json.dumps(m))
+    if fault == 'hash':
+        with (tmp_path/'prediction.nii.gz').open('ab') as f: f.write(b'bad')
+    if fault:
+        with pytest.raises(ValueError, match='mismatch'): audit_package(tmp_path, tmp_path/'assistance.nii.gz')
+    else:
+        r = audit_package(tmp_path, tmp_path/'assistance.nii.gz')
+        assert r['targets']['pancreas_union']['voxels'] == 27
+        assert r['identity']['package_files'] == files

@@ -80,3 +80,25 @@ checkpoint load, training, or additional source transfer was used.
 
 AI-05 stays In Progress. Individual-lesion diameter, reliable whole-organ measurement,
 normal-reference comparison and final acceptance remain open.
+
+## Delivered diagnostics and verification
+
+The UI now retains source/prediction/model/result/evidence hashes for boundary refusals and
+offers **Why this measurement is unavailable** with separate pancreas-label/lesion-label
+counts. It explains that counts alone cannot distinguish fragments from truncation. No
+component-selection or per-target measurement admission policy changed; both volumes remain
+unavailable for this package. Diagnostic counts include no computed volume.
+
+- **11 Python checks pass**, including synthetic package hash substitution and geometry rejection.
+- **93 affected UI/library checks pass** across scanMeasurements, nativeMeasurements,
+  NativeMeasurementPanel, OnDemandPredictionView, NativeSavedView, savedPrediction and
+  onDemandPrediction; production build passes with its existing large-chunk warning.
+- Actual retained package loaded in the browser; asking for pancreas size shows unavailable,
+  crop counts67/0, image counts0/0 and low/high-z52/15, matching the independent Python audit.
+- Vite5180 now serves this retained current-model package at `/saved`; the original historical
+  package remains intact. On-demand8017 remains configured; no new job was launched.
+- Private screenshot: `outputs/prowl/on-demand-activation-20261020/boundary-ui.png`.
+
+The saved page's existing shell still reports the legacy analysis endpoint as offline; the
+on-demand service8017 is independently confirmed configured. That banner does not describe the
+retained result or imply a failed measurement load. No runtime or hours credit is claimed.

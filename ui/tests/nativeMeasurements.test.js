@@ -70,8 +70,16 @@ it.each(['model','ct','prediction','reference','geometry','roi','localizer','evi
   expect(() => validateNativeEvidence(f.m,r,e)).toThrow()
 })
 it('withholds volume at an internal inference boundary even when CT boundary is clear', async () => {
-  serve(await fixture({boundary:true})); const loaded = await loadSavedPrediction('/saved')
-  try { expect(loaded.measurement.status).toBe('unavailable'); expect(loaded.measurement.reason).toContain('inference crop'); expect(loaded.measurement.pancreasMl).toBeUndefined() }
+  const f = await fixture({boundary:true}); serve(f); const loaded = await loadSavedPrediction('/saved')
+  try {
+    const m = loaded.measurement
+    expect(m.status).toBe('unavailable'); expect(m.reason).toContain('inference crop'); expect(m.pancreasMl).toBeUndefined()
+    expect(m.lesionMl).toBeUndefined()
+    expect(m.coverageDiagnostics.cropContact).toEqual({pancreasLabel:1,lesionLabel:0})
+    expect(m.coverageDiagnostics.imageContact).toEqual({pancreasLabel:0,lesionLabel:0})
+    expect(m.predictionSha256).toBe(f.m.files.pred.content_sha256)
+    expect(m.modelSha256).toEqual(f.m.model_sha256)
+  }
   finally { loaded.release() }
 })
 it.each([{outside:true},{units:0},{shifted:true}])('rejects invalid native data %j', async options => {
