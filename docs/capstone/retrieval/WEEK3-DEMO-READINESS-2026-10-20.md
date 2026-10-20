@@ -75,3 +75,20 @@ W03-02 remains open for the earlier unexplained backend exits and final recovery
 Offline W03-03 volume-adapter preparation can proceed; W03-04/05 then qualify wording and quality
 before replacement promotion. No patient arrays, training, full selector or protected evaluation
 was accessed; no human-time credit is inferred.
+# Pre-call recheck after CP01
+
+UI5180, literature8016, on-demand8017, Ollama11434 and the healthy literature database55433
+are running. Current-model checkpoint, inputs and worker/code hashes match the private config;
+retained prediction job is ready and `/saved` serves its unchanged package. No fresh segmentation
+inference or service restart was needed. Browser verification was blocked by browser security
+policy; these are direct service checks, not a new browser walkthrough.
+
+Two fresh literature checks were retained privately under `outputs/prowl/demo-readiness-20261020/`:
+“What is the average pancreas volume?” returned the reviewed-source fallback in9.87s because
+composition validation failed. “What additional findings help distinguish inflammation from a
+pancreatic tumor?” returned Qwen3:8b local-model composition with seven evidence passages in7.77s.
+Ollama confirms the model is loaded. Preserve the fallback failure for follow-up; no pre-demo
+policy changes or success-only reporting. Scan-size answers remain unavailable under the existing
+boundary guard and failed CP01 qualification. Demonstrate literature answers/citations and the
+retained segmentation overlay; do not present scan measurements as validated.
+
