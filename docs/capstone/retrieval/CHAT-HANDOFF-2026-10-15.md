@@ -1,5 +1,20 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 CP04 complete:** Read MEASUREMENT-CP04-PLAN/RESULTS-2026-10-20.md/spec1.51.
+> Explicit user request; code/plan1fe91c6 before actual derivation.927 exact int8 endpoint encoding
+> (-128/127, canonicalfloat32 scale/intercept) converts to uint8 with11,301foregroundpositions fixed;
+> no rounding/tolerance/generic threshold. Existing prediction scored once into separateCP04.
+> Five of six scored;139stilloversize.927relative screenpasses butlesionrecall0.05911/Dice0.10447,
+> all11,301reflesionvoxels insideinferenceROI. Overall2/5relativepasses,notaccuracyacceptance.
+> 698main105,667voxelcomponent touchesCTz0 at1,440voxels;providedreference touchesat2,280;991overlap.
+> Both6/26 agree; nativeCTslices0/1/3+orthogonalcontext reviewed. Fullorgancoverageunverified;
+> keepguard.18newsynthpass,6targetrows/96faceplanes verified. No new inference/training/UIchange.
+> Boundedanalysis15.01s/1.05GiB/reaped computedresults thenfailedmissingmatplotlib; failurekept.
+> SeparatePillowrenderonly completed, no repeatednumerics; renderingRSSunsampled. PrivateCP04artifacts
+> /Volumes/PROWL-Data/PROWL/artifacts/measurement-cp04-20261020/. OriginalCP03failureunchanged.
+> Next retainedlesionerror/preprocessing-labelmapping review balancing927misses and514/698FPs;
+> no component-selection promotion. W03-04/05complete;AI-05open. Older pendingfollowuptext historical.
+
 > **October20 CP02/CP03 completed:** Read MEASUREMENT-SUBSET-RESULTS-2026-10-20.md/spec1.50.
 > Remote current70dev/1333train disjoint metadata received; all18local source hashes match.
 > Frozen six:positive29/84/927,empty139/514/698. CP02 five missing-unit admissions;139alsooversize.

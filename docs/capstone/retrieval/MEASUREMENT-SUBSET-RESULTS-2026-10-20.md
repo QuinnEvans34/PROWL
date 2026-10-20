@@ -1,5 +1,11 @@
 # Fixed development measurement comparison — CP02 / CP03
 
+## Follow-up
+
+[CP04](MEASUREMENT-CP04-RESULTS-2026-10-20.md) resolves the annotation encoding and inspects
+source-boundary contact without new inference. Five cases now score; the original CP03 outcomes
+below remain unchanged. Measurement accuracy and whole-organ coverage are still unqualified.
+
 ## Outcome
 
 The bounded comparison is complete with explicit missing results: six cases selected before quality

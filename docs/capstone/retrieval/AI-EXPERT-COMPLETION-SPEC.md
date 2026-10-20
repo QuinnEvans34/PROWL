@@ -1,9 +1,18 @@
 # AI expert completion specification
 
-**Version:** 1.50 — October 20, 2026 (Week3 human acceptance; fixed measurement-subset findings)\
+**Version:** 1.51 — October 20, 2026 (annotation representation resolved; source-boundary coverage confirmed)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 [CP04 retained-output review](MEASUREMENT-CP04-RESULTS-2026-10-20.md): exact full-range
+int8 annotation decoder preserves927's11,301 foreground positions; strict comparison now succeeds.
+Five of six fixed cases scored;139 remains size-excluded. Candidate passes2/5 relative screens,
+but927 lesion recall is only5.91% despite all reference lesion voxels lying inside the inference ROI.
+Case698's main component and provided pancreas reference both reach CT slice0;991 candidate
+boundary voxels overlap the reference. Native slices reviewed; retain whole-organ coverage refusal.
+18 new synthetic checks pass; no new inference/training/UI promotion. Next lesion false-negative/
+false-positive error review and preprocessing/label-mapping audit before another correction.
 
 October20 [fixed wording/quality check](WEEK3-QUALITY-RESULTS-2026-10-20.md): baseline13/20
 supported answers and10/10 boundaries; four complete-model-plan layout failures, two routing misses
@@ -19,9 +28,7 @@ admission failures. Separately frozen CP03 qualifies explicit exact-grid CT-unit
 with7synthetic tests and byte-preserving real derivations. Four new predictions succeed; four
 cases score including reused29,139 is size-excluded,927 fails strict binary annotation validation.
 Only1/4 scored cases passes the relative CP01 screen; both scored empty references retain false
-lesion volume. No UI promotion or reliable measurement acceptance. Next qualify927's scaled
-near-binary reference representation and audit698's persistent boundary contact, using retained
-outputs before another segmentation correction. AI-05 remains open.
+lesion volume. No UI promotion or reliable measurement acceptance. These two follow-ups are resolved by CP04 above; AI-05 remains open for reliable measurements.
 
 October20 [CP01 component-selection comparison](COMPONENT-SELECTION-RESULTS-2026-10-20.md):
 frozen prediction-only largest26-connected union rule removes4,398 false-positive voxels on the
