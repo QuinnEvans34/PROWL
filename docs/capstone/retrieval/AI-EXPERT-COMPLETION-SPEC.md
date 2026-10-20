@@ -1,9 +1,16 @@
 # AI expert completion specification
 
-**Version:** 1.38 — October 20, 2026 (offline volume selection; acceptance unchanged)\
+**Version:** 1.39 — October 20, 2026 (volume composition/UI promoted; formal acceptance unchanged)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [volume composition/UI](VOLUME-COMPOSITION-RESULTS-2026-10-20.md): W03-03 bounded slice
+complete. First candidate6/8 and admission-only failure retained; corrected candidate8/8,
+all ten answer paragraphs source-reviewed, all eight responses replayed through UI validation.
+Local promotion uses `--volume-answers`: aggregate source-literature-answer-v2; volume1.1 and
+unchanged disease1 contracts. Browser clarification, real answer and numerical citation verified.
+Next W03-04 wording matrix and W03-05 quality review; independent gates remain open.
 
 October 20 [volume selection](VOLUME-ROUTING-RESULTS-2026-10-20.md): W03-03 starts with explicit
 size/volume and study-applicability behavior plus an isolated source-admitted selector. Sixty-four

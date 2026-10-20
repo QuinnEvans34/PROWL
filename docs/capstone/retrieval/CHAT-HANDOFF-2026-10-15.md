@@ -1,5 +1,16 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 volume answers LIVE:** Read VOLUME-COMPOSITION-RESULTS-2026-10-20.md/spec1.39
+> and readable VOLUME-ANSWER-REVIEW-2026-10-20.md. W03-03 bounded slice complete; next W03-04/05.
+> API PID9015/session21308 uses --volume-answers; previous73251 stopped. Aggregate health
+> source-literature-answer-v2/source-linked-literature-search-v2; volume source-volume-answer-v1.1,
+> disease source-record-answer-v1 unchanged. Existing DB/Ollama/Vite preserved; no duplicate launch.
+> First candidate6/8 (legacy scope/layout failures), second preflight0calls, corrected third8/8.
+> Ten paragraphs manually reviewed; eight responses pass actual UI validation. Browser clarification,
+> real volume answer and numerical source4 verified. Eight total model calls in this block.
+> 83 affected backend +55 earlier disease checks,68 distinct UI checks/build pass. Initial hash/copy
+> test failures retained. No independent evaluation/core acceptance/training/measurement claim.
+
 > **October 20 volume selector qualified offline:** Read VOLUME-ANSWER-PLAN-2026-10-20.md and
 > VOLUME-ROUTING-RESULTS-2026-10-20.md/spec1.38. W03-02 bounded reliability is closed; W03-03 is
 > In Progress, 1/4 checklist items complete. Isolated volume_record_search.py uses existing reviewed

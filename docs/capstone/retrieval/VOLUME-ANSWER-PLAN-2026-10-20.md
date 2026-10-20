@@ -1,6 +1,6 @@
 # Week 3 volume-answer slice
 
-**Status:** Offline selector qualified; composition/integration pending; live policy unchanged.\
+**Status:** Bounded composition/UI slice delivered; candidate1.1 promoted locally.\
 **Card:** [W03-03](https://trello.com/c/pnaJmVIz).\
 **Inputs:** Existing reviewed volume facts and their source/review hashes; no corpus expansion.
 
@@ -37,7 +37,10 @@ one offline admission check without database/model calls. W03-04 subsequently br
 wording matrix; W03-05 is the weekly quality checkpoint.
 
 [First-block results](VOLUME-ROUTING-RESULTS-2026-10-20.md): 64 focused checks pass and seven
-offline corpus examples select the expected records or boundaries. Continue at step 2.
+offline corpus examples select the expected records or boundaries.
+[Composition/UI results](VOLUME-COMPOSITION-RESULTS-2026-10-20.md): corrected8/8 bounded check,
+manual citation review and UI replay pass; local promotion/browser verification complete.
+Continue with W03-04 wording coverage, then W03-05 weekly quality review.
 
 ## Risks and limits
 
