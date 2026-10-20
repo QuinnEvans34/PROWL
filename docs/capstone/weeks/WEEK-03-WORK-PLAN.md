@@ -7,6 +7,48 @@
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
+## Week at a glance — visible progress
+
+**Start here:** [Trello weekly dashboard](https://trello.com/c/cWuIVLyG).
+Every current Week 3 card now has a **Week 3 — steps and evidence** checklist.
+The table below is the October 20 planning snapshot; update it with material progress.
+
+| Workstream | Status now | Next observable result | Target window |
+|---|---|---|---|
+| [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | In progress: 3 of 5 checklist steps evidenced | Disposition earlier DB exits and finish recovery closeout | Tuesday; carry unresolved investigation explicitly |
+| [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Queued; reviewed source facts already exist | Readable study-specific volume answer with verified citations and limits | Wednesday–Thursday |
+| [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Queued; depends on candidate adapter | Fixed before/after paraphrase and boundary results | Thursday–Friday |
+| [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Pending candidate and fixed check | Readable answer/source packet, complete scores and Quinton walkthrough | Friday–weekend |
+| [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
+| [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
+
+**Already evidenced:** services restored; UI contract-loading repair, 50 UI checks and build;
+one real model-composed answer with working citation navigation. These are the three checked
+W03-02 items, not three completed weekly deliverables.
+
+**Waiting on review/input:** AI-03 needs changed-scope review and independent-evaluation
+responsibilities; W02-02 needs the model/source handoff; W01-05 and W02-05 need missing personal
+hours and closeout confirmation. These remain visible in Week 3 To Do and do not block independent
+AI implementation. AI-04 is the parent quality milestone; its checklist links the weekly work and
+retains formal acceptance separately. Parent and child checklists must not be added together as a
+completion percentage.
+
+**How we will keep this current**
+
+1. Before starting a task, mark its card In Progress and identify the next checklist item.
+2. Check off a step only when its stated result has evidence. Attach the relevant report, test result
+   or commit; a started run or promising example alone does not close a quality gate.
+3. At each meaningful work-block handback, update the card and this plan with **completed work,
+   evidence, remaining blocker and next step**. Commit coherent repository changes as we work.
+4. Move a card to Week 3 Complete only when its finish criterion is satisfied. Mark blocked work
+   explicitly with the needed input/owner; keep completed earlier-week history unchanged.
+5. Before changing this week's scope, record what is added or deferred and why. Sunday review uses
+   actual results, not a guessed project-completion percentage.
+
+This is the week's full working specification, including carryovers below. Targets are planning
+windows rather than promised completion dates. No implementation is started merely by checking
+that this planning setup is complete.
+
 ## Approved proposal commitment
 
 The [approved delivery outline](PROJECT-DELIVERY-OUTLINE-2026-10-09.md), based on proposal v3.8
