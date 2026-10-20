@@ -8,6 +8,12 @@
 
 ## 1. Commitment and alignment
 
+**October 20 rollover:** [Week 3](WEEK-03-WORK-PLAN.md) is now the current execution plan.
+Week 2's final hours/acceptance reconciliation remains open under W02-05. W02-08's bounded
+pgvector/workflow prototype is closed against retained evidence; broader AI quality remains AI-04.
+Existing completed history is preserved. The later disease corpus and record-answer results are
+linked from Week 3; older counts and next actions below are dated historical checkpoints.
+
 **October 17 AI follow-on sequencing update:** the
 [AI expert completion specification](../retrieval/AI-EXPERT-COMPLETION-SPEC.md) now governs the
 remaining literature feature work. AI-01 contracts/acceptance are complete for the offline contract
