@@ -22,7 +22,7 @@ def route_volume_question(question):
             dict(object='pancreas', extent='whole_organ', quantity='volume', population=p,
                  method='MRI', uncertainty_kind='SEM', use='literature_example') for p in populations])
 
-    if has(r"\b(this|my|our|patient|scan|diagnos\w*|treat\w*|biopsy|risk|odds|probability|survival)\b"):
+    if has(r"\b(this|my|our|patient|case|current|scan|diagnos\w*|treat\w*|biopsy|risk|odds|probability|survival)\b"):
         return result('unmatched', 'individual_or_clinical_request')
     if has(r"\b(no|not|never|without|except|exclude|ignore|instead|prompt|database|secret\w*)\b"
            r"|\b(don't|doesn't|isn't|can't)\b"):

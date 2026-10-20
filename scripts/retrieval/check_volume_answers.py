@@ -34,7 +34,9 @@ def write(path,obj):
 def main():
  global OUT
  parser=argparse.ArgumentParser(description=__doc__)
- parser.parse_args()
+ parser.add_argument('--attempt', type=int, choices=(1,2,3), default=1)
+ args=parser.parse_args()
+ if args.attempt>1:OUT=ROOT/f'outputs/prowl/volume-answer-v1-attempt{args.attempt}-20261020'
  OUT.mkdir(exist_ok=True)
  if (OUT/'receipt.json').exists():raise ValueError('Attempt already exists')
  start=monotonic();receipt=dict(state='started',cases=[],chat_attempts=0,chat_responses=0);server=None;worker=None

@@ -79,14 +79,15 @@ def create_record_answers(source_search):
 
 def create_volume_answers(baseline, disease_search):
     from src.retrieval.volume_record_search import VolumeRecordSearchIndex
-    from src.retrieval.volume_answer import VolumeAwareSearch, VolumeComposer, LiteratureSearch, LiteratureAnswers
+    from src.retrieval.volume_answer import VolumeAwareSearch, VolumeComposer, LiteratureSearch, LiteratureAnswers, volume_scope
     from src.retrieval.evidence_experiment import corpus_records
     spec = json.loads((ROOT/'configs/evidence/development-volume-search-v1.json').read_text())
     catalog, review = checked_json(spec['catalog'], ROOT), checked_json(spec['review'], ROOT)
     if catalog['manifest'] != spec['manifest']:
         raise ValueError('Volume catalog/corpus mismatch')
     index = VolumeRecordSearchIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
-    volume = VolumeAwareSearch(baseline, index, spec)
+    volume_baseline = DevelopmentSearch(baseline.corpus, baseline.config, baseline.retrieve, scope_policy=volume_scope)
+    volume = VolumeAwareSearch(volume_baseline, index, spec)
     config = json.loads((ROOT/'configs/evidence/volume-answer-v1.json').read_text())
     composer = VolumeComposer(index.engine, catalog, review, checked_json(config['wording'], ROOT), config)
     sources = LiteratureSearch(disease_search, volume)

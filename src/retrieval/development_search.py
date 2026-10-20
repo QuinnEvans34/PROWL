@@ -27,7 +27,7 @@ class DevelopmentSearch:
     Keyword checks are a conservative convenience, not semantic privacy certification.
     Only public-literature questions belong in this opt-in local research interface.
     """
-    def __init__(self, corpus, config, retrieve):
+    def __init__(self, corpus, config, retrieve, *, scope_policy=search_scope):
         bounded_mode = ((config['top_k']==5 and config['query_expansion'] is False)
             or (config['top_k']==50 and config.get('retriever')=='section-cross-encoder-terminology-v1'
                 and config['query_expansion'] is True))
@@ -37,10 +37,11 @@ class DevelopmentSearch:
                 or not bounded_mode or config['generation'] is not False):
             raise ValueError('Development search configuration mismatch')
         self.corpus, self.config, self.retrieve = corpus, dict(config), retrieve
+        self.scope_policy = scope_policy
         self.lock = Lock()
 
     def search(self, request):
-        reason = search_scope(request)
+        reason = self.scope_policy(request)
         base = dict(schema_version='prowl-development-search-response-v1',
             request_id=request['request_id'], question=request['question'],
             collection=self.config['collection'], target=self.corpus.target,

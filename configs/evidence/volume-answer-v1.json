@@ -1,5 +1,5 @@
 {
-  "version": "source-volume-answer-v1",
+  "version": "source-volume-answer-v1.1",
   "model": "qwen3:8b",
   "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
   "prompt_sha256": "3dd24bf4667b92c6401f604eb022ba8aee9f80d4db8670a9b1c1a7b8a6f1306d",
@@ -15,5 +15,6 @@
   "outside_record_coverage": "sources_only",
   "independent_review": "pending",
   "scope": "These are whole-pancreas volume results from selected MRI study groups.",
-  "limitation": "These study results are not measurements of your scan and cannot diagnose disease."
+  "limitation": "These study results are not measurements of your scan and cannot diagnose disease.",
+  "layout": "stable_record_grouping_before_exact_unit_validation"
 }
