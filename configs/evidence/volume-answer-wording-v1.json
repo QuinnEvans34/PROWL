@@ -1,0 +1,104 @@
+{
+  "version": "reviewed-volume-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "fact:25950180:whole-pancreas-volume:ngt:v1": {
+      "reviewed_record_sha256": "6f231e42e0c3f778edbd08c8cfcc032a69dbe110cc3fa7f5fca7b588f108d3bc",
+      "units": [
+        {
+          "id": "fact:25950180:whole-pancreas-volume:ngt:v1:0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "One MRI study reported a mean whole-pancreas volume of 82.6 cm³ in 14 people with normal glucose tolerance in the comparison group.",
+            "In one MRI study, the average volume of the whole pancreas was 82.6 cm³ among 14 people in a comparison group with normal glucose tolerance."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:ngt:v1:1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The reported ±4.8 cm³ is the standard error of the mean (SEM): uncertainty in the estimated group mean, rather than a range of individual sizes.",
+            "The study reported a standard error of the mean (SEM) of ±4.8 cm³. This describes uncertainty in the group's average, not the spread of individual pancreas sizes."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:ngt:v1:2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The study groups were matched for age, weight and sex.",
+            "The comparison groups were matched for age, weight and sex."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:ngt:v1:3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "Treat this as a result from a selected study group, not a universal average or a CT reference range. It cannot determine whether an individual scan is normal or abnormal.",
+            "This selected study group does not provide a universal average or a CT reference range. Its average cannot tell you whether an individual scan is normal or abnormal."
+          ]
+        }
+      ]
+    },
+    "fact:25950180:whole-pancreas-volume:t2dm:v1": {
+      "reviewed_record_sha256": "5fc30ef8bc109816beb97c605bacbfd032523f892a31e477ebb2bde7aecf9aef",
+      "units": [
+        {
+          "id": "fact:25950180:whole-pancreas-volume:t2dm:v1:0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "One MRI study reported a mean whole-pancreas volume of 55.5 cm³ in 41 people with well-controlled type 2 diabetes taking only metformin.",
+            "In one MRI study, the average volume of the whole pancreas was 55.5 cm³ among 41 people with well-controlled type 2 diabetes who were taking only metformin."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:t2dm:v1:1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The reported ±2.8 cm³ is the standard error of the mean (SEM): uncertainty in the estimated group mean, rather than a range of individual sizes.",
+            "The study reported a standard error of the mean (SEM) of ±2.8 cm³. This describes uncertainty in the group's average, not the spread of individual pancreas sizes."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:t2dm:v1:2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The study groups were matched for age, weight and sex.",
+            "The comparison groups were matched for age, weight and sex."
+          ]
+        },
+        {
+          "id": "fact:25950180:whole-pancreas-volume:t2dm:v1:3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "Treat this as a result from a selected study group, not a universal average or a CT reference range. It cannot determine whether an individual scan is normal or abnormal.",
+            "This selected study group does not provide a universal average or a CT reference range. Its average cannot tell you whether an individual scan is normal or abnormal."
+          ]
+        }
+      ]
+    }
+  }
+}

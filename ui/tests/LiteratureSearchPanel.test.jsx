@@ -170,3 +170,103 @@ it('shows elapsed time and exits a stalled request at the browser limit', async 
     expect(screen.getByRole('button', { name: 'Try again' }).disabled).toBe(false)
   } finally { vi.useRealTimers() }
 })
+
+// Source retrieval and generated answers have separate contracts and actions.
+import { validateSourceSearch } from '../src/components/LiteratureSearchPanel.jsx'
+import diseaseCatalog from '../../configs/evidence/source-facts-disease-v1.json'
+import recordConfig from '../../configs/evidence/development-search-v3-records.json'
+function sourceResponse(request) {
+  const result = response(request), record = diseaseCatalog.records[0]
+  const ids = [...new Set(record.facts.flatMap(f => f.evidence.map(id => diseaseCatalog.spans[id].passage_id)))].sort()
+  result.schema_version = 'prowl-development-search-response-v1'; result.generation = 'not_called'
+  result.retrieval_policy = recordConfig.retriever
+  result.record_selection = { policy: recordConfig.retriever, status: 'matched', reason: 'literature_examples_not_exhaustive',
+    matches: [{ record_id: record.id, comparison: record.comparison, topic: record.topic, score: 1,
+      anchor_passage_ids: record.retrieval_anchors, evidence_passage_ids: ids }] }
+  const original = result.evidence[0]
+  result.evidence = ids.map((id, i) => ({ ...original, rank: i + 1, record: { ...original.record,
+    passage: { ...original.record.passage, passage_id: id }, text: `Artificial source context ${i + 1}.` } }))
+  return result
+}
+it('finds sources without calling the answer path and keeps citations accessible', async () => {
+  const user = userEvent.setup(), search = vi.fn(), findSources = vi.fn(async r => sourceResponse(r))
+  render(<LiteratureSearchPanel search={search} findSources={findSources} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Pancreatic head swelling and disease')
+  await user.click(screen.getByRole('button', { name: 'Find sources' }))
+  expect(await screen.findByText(/Relevant comparison sources/)).toBeTruthy()
+  expect(search).not.toHaveBeenCalled(); expect(findSources).toHaveBeenCalledOnce()
+  expect(screen.queryByText(/could not produce a checked answer/)).toBeNull()
+  await user.click(screen.getByRole('button', { name: 'View source 1' }))
+  expect(screen.getAllByRole('link', { name: /Read full source/ }).length).toBe(4)
+})
+it.each(['missing', 'unknown', 'extra', 'wrongPair', 'answerPath'])('rejects %s source-record mismatch', kind => {
+  const request = { request_id: 'test', question: 'Pancreatic head swelling' }, result = sourceResponse(request)
+  if (kind === 'missing') result.evidence.pop()
+  if (kind === 'unknown') result.record_selection.matches[0].record_id = 'invented'
+  if (kind === 'extra') result.record_selection.matches.push(result.record_selection.matches[0])
+  if (kind === 'wrongPair') result.record_selection.matches[0].comparison = ['all inflammation', 'all tumors']
+  if (kind === 'answerPath') expect(() => validateAnswer(result, request)).toThrow()
+  else expect(() => validateSourceSearch(result, request)).toThrow()
+})
+
+import composerConfig from '../../configs/evidence/record-answer-v1.json'
+import wording from '../../configs/evidence/record-answer-wording-v1.json'
+function composed(request, fallback = false) {
+  const result = sourceResponse(request), record = diseaseCatalog.records[0]
+  result.schema_version = 'prowl-record-answer-response-v1'; result.answer_policy = composerConfig.version
+  result.generation = fallback ? 'fallback' : 'completed'
+  const units = wording.records[record.id].units
+  result.answer = { status: 'summarized', policy: composerConfig.version,
+    provenance: fallback ? 'reviewed_source_fallback' : 'local_model_composition', failure: fallback ? 'timeout' : null,
+    model: fallback ? null : composerConfig.model, model_sha256: fallback ? null : composerConfig.model_sha256,
+    prompt_sha256: composerConfig.prompt_sha256, wording_content_sha256: composerConfig.wording_content_sha256,
+    validation: 'complete_reviewed_units_and_exact_citations', quality: 'engineering_reviewed_independent_review_pending',
+    scope: composerConfig.scope, limitation: composerConfig.limitation,
+    claims: [false, true].map(limit => {
+      const selected = units.filter(u => u.qualification === limit)
+      const ids = new Set(selected.flatMap(u => u.facts.flatMap(i => record.facts[i].evidence.map(s => diseaseCatalog.spans[s].passage_id))))
+      return { record_id: record.id, units: selected.map(u => ({ unit_id: u.id, wording: 0 })), text: selected.map(u => u.wordings[0]).join(' '),
+        citations: result.evidence.filter(e => ids.has(e.record.passage.passage_id)).map(e => ({ rank: e.rank, quote: e.record.text })) }
+    }),
+  }
+  return result
+}
+it.each([false, true])('shows readable composition, honest fallback=%s, and opens precise citations', async fallback => {
+  const user = userEvent.setup()
+  render(<LiteratureSearchPanel search={async r => composed(r, fallback)} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Could pancreatic head enlargement indicate disease?')
+  await user.click(screen.getByRole('button', { name: 'Ask question' }))
+  expect(await screen.findByText(fallback ? /not model-written text/ : /local AI selected reviewed wording/)).toBeTruthy()
+  expect(screen.getByText(/No single imaging feature reliably separates MFCP/)).toBeTruthy()
+  expect(screen.queryByText('Artificial source context 1.')).toBeNull()
+  await user.click(screen.getAllByRole('button', { name: 'View source 1' })[0])
+  expect(screen.getByText('Original excerpt [1]').closest('details').open).toBe(true)
+  expect(document.activeElement.textContent).toContain('[1]')
+})
+it.each(['text', 'omittedLimit', 'unit', 'scope', 'quote', 'rank', 'pin', 'falseAI', 'failure', 'noCall', 'reorder'])('rejects record composition %s corruption', kind => {
+  const request = { request_id: 'test', question: 'Head enlargement' }, r = composed(request)
+  if (kind === 'text') r.answer.claims[0].text += ' This proves cancer.'
+  if (kind === 'omittedLimit') r.answer.claims.pop()
+  if (kind === 'unit') r.answer.claims[0].units[0].wording = true
+  if (kind === 'scope') r.answer.scope = 'All pancreatic tumors can be diagnosed.'
+  if (kind === 'quote') r.answer.claims[0].citations[0].quote = 'Invented support'
+  if (kind === 'rank') r.answer.claims[0].citations[0].rank = 9
+  if (kind === 'pin') r.answer.wording_content_sha256 = 'changed'
+  if (kind === 'falseAI') r.generation = 'fallback'
+  if (kind === 'failure') r.answer.failure = 'PRIVATE_PROVIDER_TRACE'
+  if (kind === 'noCall') r.generation = 'not_called'
+  if (kind === 'reorder') r.answer.claims.reverse()
+  expect(() => validateAnswer(r, request)).toThrow()
+})
+it('explains coverage fallback without pretending the AI answered', async () => {
+  const user = userEvent.setup()
+  render(<LiteratureSearchPanel search={async request => {
+    const r = composed(request);r.generation = 'not_called';r.answer = null
+    r.record_selection.status = 'dense_fallback';r.record_selection.matches = []
+    return r
+  }} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Pancreatic enzymes')
+  await user.click(screen.getByRole('button', { name: 'Ask question' }))
+  expect(await screen.findByText(/outside the reviewed summary coverage/)).toBeTruthy()
+  expect(screen.queryByLabelText('AI answer')).toBeNull()
+})

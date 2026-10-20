@@ -26,8 +26,8 @@ export const EVIDENCE_META = {
     description: 'Model-proposed contours',
   },
   truth: {
-    label: 'Source of truth',
-    shortLabel: 'Source of truth',
+    label: 'Reference annotation',
+    shortLabel: 'Reference',
     description: 'Independent JHU reference contours',
   },
   overlap: {

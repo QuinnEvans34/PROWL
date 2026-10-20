@@ -221,3 +221,19 @@ is credited until supplied.
 
 These are activity descriptions supported by task records, not inferred durations or new submitted
 portal entries. Week 2 hours and final Sunday review remain open.
+
+## Week 3 — October 19–25
+
+| Date | Activity / owner | Human hours | Basis / limits |
+|---|---|---:|---|
+| Monday Oct 19 | Quinton prepared model runs and validated CT inputs for full pancreas and lesion coverage in the other chat | At least 3 hours | User-reported lower-bound estimate, supplied Oct 20; no exact clock times or successful-run claim |
+| Tuesday Oct 20 | Week 3 planning, Trello reconciliation and AI demo readiness review in this chat | Pending Quinton | No agent time or automatic session duration credited |
+
+Copy-ready October 19 description: “I prepared model runs and validated the CT input data, checking
+that the scans supplied to the model included the entire pancreas and lesion. I focused on input
+completeness so subsequent experiments would use correctly prepared data.”
+
+The October 19 estimate describes the same activity if also recorded in the training chat; do not
+add it twice. Other activity, breaks, weekly total and any portal submission remain unconfirmed.
+Unattended training/agent runtime is excluded. This chat's retrospective wording is not additional
+implementation time. Prior weeks' unresolved hours are unchanged.

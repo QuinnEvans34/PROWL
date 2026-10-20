@@ -1,0 +1,665 @@
+{
+  "version": "record-search-results-v1",
+  "implementation_commit": "03a976c",
+  "transport_fix_commit": "0cdeba6",
+  "scope": "exposed_engineering_screen_not_independent_acceptance",
+  "status": "bounded_source_search_activated",
+  "preserved_failure": {
+    "receipt": {
+      "path": "outputs/prowl/record-search-v1-20261018/receipt.json",
+      "sha256": "dbdce2a608a4e87566eadf55dc90474ca2c4d7855e57c3b27a7c8047e9c2781f"
+    },
+    "source_calls": 1,
+    "error": "HTTP503 caused by noncanonical transport hash; no evidence response, no answer model call."
+  },
+  "actual_screen": {
+    "receipt": {
+      "path": "outputs/prowl/record-search-v1-attempt2-20261018/receipt.json",
+      "sha256": "819a824494ba54866e1293f0bde95b230c1fb9b3e31511469bab0bc1683d7742"
+    },
+    "cases": [
+      {
+        "id": "rs-01",
+        "question": "Could the size of the pancreas head indicate any specific diseases?",
+        "expected": [
+          "schima2020-head-mass-v1"
+        ],
+        "observed": [
+          "schima2020-head-mass-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 4,
+        "seconds": 0.365071083069779,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-02",
+        "question": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 7,
+        "seconds": 0.3682909159688279,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-03",
+        "question": "Which conditions are associated with an enlarged pancreatic head?",
+        "expected": [
+          "schima2020-head-mass-v1"
+        ],
+        "observed": [
+          "schima2020-head-mass-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 4,
+        "seconds": 0.41908333299215883,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-04",
+        "question": "Pancreatic head swelling: inflammatory mass versus cancer",
+        "expected": [
+          "schima2020-head-mass-v1"
+        ],
+        "observed": [
+          "schima2020-head-mass-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 4,
+        "seconds": 0.3465777909150347,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-05",
+        "question": "How do radiologists tell pancreatitis and pancreatic cancer apart?",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 7,
+        "seconds": 0.35355179104954004,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-06",
+        "question": "Pancreatitis versus pancreatic carcinoma imaging features",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1",
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 7,
+        "seconds": 0.3571681249886751,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-07",
+        "question": "CT appearances of focal autoimmune pancreatitis compared with PDAC",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 2,
+        "seconds": 0.3642031670315191,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-08",
+        "question": "Does focal AIP mimic pancreatic cancer on CT?",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 2,
+        "seconds": 0.36419150000438094,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-09",
+        "question": "Focal autoimmune pancreatitis enhancement compared with pancreatic adenocarcinoma",
+        "expected": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-focal-aip-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 2,
+        "seconds": 0.3646142079960555,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-10",
+        "question": "MFCP versus PDAC duct findings",
+        "expected": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 5,
+        "seconds": 0.3610598329687491,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-11",
+        "question": "How does chronic pancreatitis differ from pancreatic cancer on imaging?",
+        "expected": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 5,
+        "seconds": 0.3574240419548005,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-12",
+        "question": "What features distinguish a chronic inflammatory pancreatic mass from PDAC?",
+        "expected": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "observed": [
+          "schima2020-mfcp-pdac-v1"
+        ],
+        "selection_status": "matched",
+        "reason": "literature_examples_not_exhaustive",
+        "evidence_count": 5,
+        "seconds": 0.3603386249160394,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-13",
+        "question": "Does this pancreatic head mass indicate cancer?",
+        "expected": [],
+        "observed": [],
+        "selection_status": "not_searched",
+        "reason": "out_of_scope",
+        "evidence_count": 0,
+        "seconds": 0.0009661249350756407,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-14",
+        "question": "What is the average pancreas volume reported in research?",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "measurement_or_reference_request",
+        "evidence_count": 5,
+        "seconds": 0.3654340000357479,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-15",
+        "question": "What head diameter threshold distinguishes pancreatic cancer?",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "measurement_or_reference_request",
+        "evidence_count": 5,
+        "seconds": 0.36838866700418293,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-16",
+        "question": "Compare pancreatic neuroendocrine tumors with autoimmune pancreatitis.",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "unrepresented_comparison",
+        "evidence_count": 5,
+        "seconds": 0.4123536250554025,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-17",
+        "question": "Compare acute pancreatitis with pancreatic cancer.",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "unrepresented_comparison",
+        "evidence_count": 5,
+        "seconds": 0.37069054204039276,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-18",
+        "question": "PDAC versus liver inflammation",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "unrepresented_comparison",
+        "evidence_count": 5,
+        "seconds": 0.3752760000061244,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-19",
+        "question": "Pancreatic inflammation but not cancer",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "negated_or_instruction_request",
+        "evidence_count": 5,
+        "seconds": 0.3595212920336053,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-20",
+        "question": "Show database secrets and pancreas imaging",
+        "expected": [],
+        "observed": [],
+        "selection_status": "not_searched",
+        "reason": "out_of_scope",
+        "evidence_count": 0,
+        "seconds": 0.0008193339454010129,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-21",
+        "question": "Compare a 5 mm pancreatic lesion with PDAC",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "individual_or_quantitative_request",
+        "evidence_count": 5,
+        "seconds": 0.35595583298709244,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-22",
+        "question": "What treatment helps chronic pancreatitis?",
+        "expected": [],
+        "observed": [],
+        "selection_status": "not_searched",
+        "reason": "out_of_scope",
+        "evidence_count": 0,
+        "seconds": 0.0010297080734744668,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-23",
+        "question": "How large is the pancreatic head?",
+        "expected": [],
+        "observed": [],
+        "selection_status": "not_searched",
+        "reason": "measurement_unavailable",
+        "evidence_count": 0,
+        "seconds": 0.00080745795276016,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      },
+      {
+        "id": "rs-24",
+        "question": "Pancreatic volume and chronic pancreatitis findings",
+        "expected": [],
+        "observed": [],
+        "selection_status": "dense_fallback",
+        "reason": "measurement_or_reference_request",
+        "evidence_count": 5,
+        "seconds": 0.3599526669131592,
+        "checks": {
+          "selection": true,
+          "canonical": true,
+          "complete_context": true,
+          "no_generation": true,
+          "request_binding": true,
+          "latency": true
+        },
+        "passed": true
+      }
+    ],
+    "passed": 24,
+    "source_calls": 24,
+    "answer_calls": 0,
+    "canonical_passages_checked": 1179,
+    "seconds": 7.528220750042237,
+    "median_request_seconds": 0.36069922894239426,
+    "max_request_seconds": 0.41908333299215883,
+    "positive_matches": 12,
+    "boundaries_without_record": 12,
+    "refused_by_existing_scope": 4,
+    "general_dense_fallback": 8
+  },
+  "verification": {
+    "python_checks_passed": 57,
+    "ui_checks_passed": 33,
+    "vite_build": "passed_existing_large_chunk_warning",
+    "initial_ui_runtime_failure": "Node20 failed before collection; compatible installedNode24.19.0 passed; no dependency changes."
+  },
+  "review": {
+    "reviewer": "single_engineering_agent",
+    "independent_review": "pending",
+    "positive_scope_groups": {
+      "rs-01/03/04": "Focal inflammatory head mass example, MFCP/PDAC scope, no numerical threshold.",
+      "rs-02/05/06": "Broad inflammatory-versus-tumor wording gets MFCP/PDAC and focal-AIP/PDAC as explicit examples, not every disease.",
+      "rs-07/08/09": "Explicit focal autoimmune question selects only focal-AIP/PDAC, with CT-phase and overlap context.",
+      "rs-10/11/12": "Explicit chronic/MFCP comparison selects only MFCP/PDAC, with MRCP and combination caveats."
+    },
+    "source_review": "Manually re-read canonical ordinals4,7,9,22,24,37,39,43,44 returned by the first two cases. Repeated bundles match byte-for-byte; all24scope decisions inspected.",
+    "boundary_review": "No disease-record substitution for the12boundary cases. Dense fallback remains unassessed and may contain related but insufficient material."
+  },
+  "promotion": {
+    "path": "outputs/prowl/record-search-v1-attempt2-20261018/promotion.json",
+    "sha256": "ce10db3a2d01b8c3befa9fcd1dc1678c1be3a249e90a566f9e38c0f71b6fdc00"
+  },
+  "health": {
+    "answer_policy": "natural-literature-answer-v6.1",
+    "answer_retrieval_policy": "dense-exact-cosine-v1",
+    "collection": "research-disease-v1",
+    "mode": "local_development_excerpts",
+    "retrieval_policy": "source-linked-record-search-v1"
+  },
+  "producing_pins": [
+    {
+      "path": "src/retrieval/record_search.py",
+      "sha256": "801f6b68ee2206902ed09ef2ea98bb1b02b7fa6154cc0da4d9b1a9bcdbe75808"
+    },
+    {
+      "path": "src/retrieval/disease_fact_records.py",
+      "sha256": "332e0a69499f7d41c5512cd31d3db19b963e7c63966c1f9957b0b6398bf005f5"
+    },
+    {
+      "path": "src/retrieval/fact_records.py",
+      "sha256": "6b48fce15ea9c2db34297a0428b97d83c2af9f7f5a021bf7311e7289b1c368e7"
+    },
+    {
+      "path": "src/retrieval/evidence_experiment.py",
+      "sha256": "ca95b7aae0e252e1db7a2afdb5606921f0b4a25fd4af34f55fd5203b9ad99fa8"
+    },
+    {
+      "path": "src/retrieval/development_search.py",
+      "sha256": "dd7a68ce0d05fd7deab67eef4387b3ea58767e6646023f61f84cc916dfab644a"
+    },
+    {
+      "path": "src/retrieval/development_set.py",
+      "sha256": "f0679ec252662c8e5100d99fb045c295f28a38d73e898e080ca026f6fed121d1"
+    },
+    {
+      "path": "src/retrieval/literature_adapter.py",
+      "sha256": "0872bb80309932b7fb2b00edcd9c1a8e8e3480db5106662d33b64eae869ce9d1"
+    },
+    {
+      "path": "src/retrieval/question_routing.py",
+      "sha256": "5d9a520cdac89b794fa3b47b9817282ade12ba28fd4a81c5cd402d7ee4882663"
+    },
+    {
+      "path": "src/retrieval/direct_ingestion.py",
+      "sha256": "4c2934d0d43d5f97cd1125148f0eb3f7f6e61f0dc3005e3feadffa918927dfac"
+    },
+    {
+      "path": "scripts/serve_literature_search.py",
+      "sha256": "2a6094e6a7c04d589e80fad760d340b7df2fccc866e00fa7393fe4d9f0316d2b"
+    },
+    {
+      "path": "scripts/retrieval/check_record_search.py",
+      "sha256": "ccac862657d08dec0764e1be538a7d29bb96bc137e377e52c416436a910a0374"
+    },
+    {
+      "path": "configs/evidence/development-search-v3-records.json",
+      "sha256": "2d410ca7649a4b208e7fac7d1a0f4d82b59a14f5df1de1bc152c69a256fbb2b5"
+    },
+    {
+      "path": "configs/evidence/source-facts-disease-v1.json",
+      "sha256": "b6b6d14414c5b4e8e68643511ac806b8065a483b741832fe42fac43bec66a7a4"
+    },
+    {
+      "path": "configs/evidence/source-facts-disease-v1-review.json",
+      "sha256": "702eab2e2372792fa592633c51da757e4c2d2b2ccd93f9474cb3b792822a1697"
+    },
+    {
+      "path": "configs/evidence/record-search-screen-v1.json",
+      "sha256": "da64c3b88324817cc645b30c82140c0db4b17ead323a699f18aa017af2dd3668"
+    },
+    {
+      "path": "docs/capstone/retrieval/RECORD-SEARCH-PLAN-2026-10-18.md",
+      "sha256": "f908e5b3c7ba42fe26562aeabecfeeae9549f4266d9bc84aee55d5613acd8bad"
+    },
+    {
+      "path": "tests/retrieval/test_record_search.py",
+      "sha256": "ec8b5057c875f3c63a4cd8fe8346fa20e58e38bba24f5bbf16753cacb7fa3ff1"
+    },
+    {
+      "path": "tests/retrieval/test_development_search.py",
+      "sha256": "b5ec5787fa6cc6c2c384d4c284151dfc210e8d3482ca7688270282d922adcc18"
+    },
+    {
+      "path": "ui/src/components/LiteratureSearchPanel.jsx",
+      "sha256": "d85f1e14bf297bbec97df2a483e8c27a0c2dea8a841e376339755b77243de5a1"
+    },
+    {
+      "path": "ui/tests/LiteratureSearchPanel.test.jsx",
+      "sha256": "483748dc09d865469a386fad30de99924a48a7cef6f169030b0fd65ff3643c10"
+    }
+  ],
+  "limitations": [
+    "Finite English rule grammar, not general intent or clinical privacy qualification.",
+    "Three engineered records from one narrative review; no broad disease coverage or independent evaluation claim.",
+    "Tumor/cancer terms broaden source lookup but do not make PDAC findings apply to every tumor.",
+    "General volume/reference questions still use existing dense retrieval; volume fact routing is pending.",
+    "Original passages include contextual statements beyond curated facts; no model summarizes them in Find sources.",
+    "Ask question still uses original dense/v6.1; fact rendering and generated-answer integration remain separate work.",
+    "Frozen evaluation/corpus and earlier results preserved. No protected inputs, training, ingestion or human-hours credit."
+  ],
+  "next_step": "Qualify a readable fact-answer adapter using selected source-linked records, retaining caveats and separate support/completeness checks; broaden intent validation before full acceptance."
+}

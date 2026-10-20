@@ -18,13 +18,15 @@ test('synthetic controls, case reset, and viewport baseline', async ({ page }, t
   })
   await page.goto('/')
   await expect(page.getByRole('status', { name: 'Synthetic viewer stub' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Model prediction', exact: true })).toBeDisabled()
-  await page.getByRole('button', { name: 'Collapse scan library' }).click()
-  // Existing drawer uses opacity/width, not display:none. This is not an accessibility assertion.
-  await expect(page.getByRole('complementary', { name: 'Scan library' })).toHaveCSS('opacity', '0')
-  await expect(page.getByRole('complementary', { name: 'Scan library' })).toHaveCSS('pointer-events', 'none')
-  await page.getByRole('button', { name: 'Open scan library' }).click()
-  await expect(page.getByRole('complementary', { name: 'Scan library' })).toHaveCSS('opacity', '1')
+  await expect(page.getByRole('button', { name: /^Prediction/ })).toBeDisabled()
+  const list = page.getByRole('complementary', { name: 'Study list', includeHidden: true })
+  if (await page.getByRole('button', { name: 'Collapse study list' }).isVisible()) {
+    await page.getByRole('button', { name: 'Collapse study list' }).click()
+  }
+  // Collapsed list is visibility:hidden and inert, so it leaves the tab order.
+  await expect(list).toHaveCSS('visibility', 'hidden')
+  await page.getByRole('button', { name: 'Open study list' }).click()
+  await expect(list).toHaveCSS('visibility', 'visible')
   await page.getByRole('button', { name: '3D', exact: true }).click()
   await expect(page.getByRole('button', { name: '3D', exact: true })).toHaveAttribute('aria-pressed', 'true')
   await page.getByRole('button', { name: 'Switch synthetic case' }).click()

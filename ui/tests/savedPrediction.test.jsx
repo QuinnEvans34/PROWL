@@ -20,7 +20,7 @@ describe('saved prediction admission', () => {
   ]) it(`refuses ${name}`, () => { const data = fixture(); change(data); expect(() => validateSavedPrediction(data)).toThrow() })
   it('refuses missing package', async () => { vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 404 })); await expect(loadSavedPrediction('/saved')).rejects.toThrow('unavailable') })
   it('refuses changed payload', async () => {
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce({ ok: true, json: async () => fixture() }).mockResolvedValueOnce({ ok: true, arrayBuffer: async () => new ArrayBuffer(10) }))
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(fixture()))).mockResolvedValueOnce(new Response(new ArrayBuffer(10))))
     vi.stubGlobal('crypto', { subtle: { digest: async () => new Uint8Array(32).buffer } })
     await expect(loadSavedPrediction('/saved')).rejects.toThrow('identity mismatch')
   })

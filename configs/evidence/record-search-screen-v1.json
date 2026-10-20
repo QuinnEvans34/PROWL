@@ -1,0 +1,153 @@
+{
+  "version": "record-search-development-screen-v1",
+  "scope": "exposed_engineering_screen_not_independent_evaluation",
+  "cases": [
+    {
+      "id": "rs-01",
+      "question": "Could the size of the pancreas head indicate any specific diseases?",
+      "expected_record_ids": [
+        "schima2020-head-mass-v1"
+      ]
+    },
+    {
+      "id": "rs-02",
+      "question": "What additional findings help distinguish inflammation from a pancreatic tumor?",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1",
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-03",
+      "question": "Which conditions are associated with an enlarged pancreatic head?",
+      "expected_record_ids": [
+        "schima2020-head-mass-v1"
+      ]
+    },
+    {
+      "id": "rs-04",
+      "question": "Pancreatic head swelling: inflammatory mass versus cancer",
+      "expected_record_ids": [
+        "schima2020-head-mass-v1"
+      ]
+    },
+    {
+      "id": "rs-05",
+      "question": "How do radiologists tell pancreatitis and pancreatic cancer apart?",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1",
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-06",
+      "question": "Pancreatitis versus pancreatic carcinoma imaging features",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1",
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-07",
+      "question": "CT appearances of focal autoimmune pancreatitis compared with PDAC",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-08",
+      "question": "Does focal AIP mimic pancreatic cancer on CT?",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-09",
+      "question": "Focal autoimmune pancreatitis enhancement compared with pancreatic adenocarcinoma",
+      "expected_record_ids": [
+        "schima2020-focal-aip-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-10",
+      "question": "MFCP versus PDAC duct findings",
+      "expected_record_ids": [
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-11",
+      "question": "How does chronic pancreatitis differ from pancreatic cancer on imaging?",
+      "expected_record_ids": [
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-12",
+      "question": "What features distinguish a chronic inflammatory pancreatic mass from PDAC?",
+      "expected_record_ids": [
+        "schima2020-mfcp-pdac-v1"
+      ]
+    },
+    {
+      "id": "rs-13",
+      "question": "Does this pancreatic head mass indicate cancer?",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-14",
+      "question": "What is the average pancreas volume reported in research?",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-15",
+      "question": "What head diameter threshold distinguishes pancreatic cancer?",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-16",
+      "question": "Compare pancreatic neuroendocrine tumors with autoimmune pancreatitis.",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-17",
+      "question": "Compare acute pancreatitis with pancreatic cancer.",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-18",
+      "question": "PDAC versus liver inflammation",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-19",
+      "question": "Pancreatic inflammation but not cancer",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-20",
+      "question": "Show database secrets and pancreas imaging",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-21",
+      "question": "Compare a 5 mm pancreatic lesion with PDAC",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-22",
+      "question": "What treatment helps chronic pancreatitis?",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-23",
+      "question": "How large is the pancreatic head?",
+      "expected_record_ids": []
+    },
+    {
+      "id": "rs-24",
+      "question": "Pancreatic volume and chronic pancreatitis findings",
+      "expected_record_ids": []
+    }
+  ]
+}

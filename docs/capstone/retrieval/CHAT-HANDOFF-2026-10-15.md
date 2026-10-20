@@ -1,5 +1,143 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 current model LIVE:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.46.
+> Approved one-file TLS transfer completed/hash matches; listener closed/token+key removed.
+> MPS case00000029 completed30windows/19.1s/1.12GiB sampledRSS/reaped; real UI overlay displayed.
+>67predictedpancreas voxels touch low/high-z region faces, no CT-face contact; volume correctly
+> withheld. Cause unproven, no cleanup/rerun/quality acceptance.8017owned63294 configured, job
+>d8f8cca5d508413c9ba5f96114857c19.182Python/213UI/buildpass. Main merge authorized and next after
+> documentation/commit; retain full shared UI integration, no private data/weights/images in Git.
+
+> **October20 closeout amendment:** Quinton requests merging the branch to `main` after current
+> activation work. Finish transfer/local inference, review the full shared integration diff and
+> relevant checks, then merge/publish while preserving UI and retrieval work. Merge is authorized;
+> pending encrypted-transfer listener is not yet approved. See activation report.
+
+> **October20 activation intake:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.45.
+> Fixed step6000 checkpoint hash verified on Windows/backup; deterministic exposed case00000029.
+> Mac CT+provided-pancreas hashes match; finite/aligned/mm/binary checks and exact region/30windows
+> pass. No weights transferred or model inference yet. Existing SMB reachable; password unavailable and Guest
+> explicitly denied. Temporary encrypted single-file transfer proposed, not activated. User
+> authorized checkpoint-transfer coordination.
+> 8017 remains unconfigured; resume verified copy/configuration/one bounded walkthrough after login.
+
+> **October 20 on-demand implemented, unconfigured:** Read ON-DEMAND-INFERENCE-2026-10-20.md/spec1.44.
+> Independent assisted inference worker + bounded job API + shared native mask/measurement UI.
+> 22Python/57UI checks and build pass; synthetic HTTP-to-JS0.008mL exact. Source-only ZIP verified;
+> no real checkpoint/scans transferred or model inference. Current raw checkpoint digest/local copy
+> and exposed CT+provided-pancreas inputs still needed.8017owned97229 unconfigured; /predictRun
+> disabled honestly. Do not substitute old model or alter live training. AI-05 InProgress.
+
+> **October 20 on-demand decision:** Quinton selected on-demand inference with optional caching.
+> Read spec1.43 and the selected-workflow section of ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md.
+> Reuse one native prediction for both outline and measurements; session retention is sufficient.
+> Next separate current-producer inference worker/API and assisted-result contract, then bounded
+> integration. Historical saved-mask discovery below does not require training to persist every
+> prediction. No live-run modification, inference launch or further cross-chat message occurred.
+
+> **October 20 current measurement input:** Read ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md/spec1.42.
+> Saved-mask volumes and native autonomous v2 delivered in local6180122/9d7c579; portable work
+> published9d7e87a/9141a00. Historical native example correctly withholds volume for boundary
+> contact; no current model-quality conclusion. Training chat's current run is pancreas-assisted,
+> not autonomous: preserve v2 rejection and implement a separate adapter after actual producer
+> metadata arrives. Authorized metadata handoff received: current evaluator retains metrics and
+> reconstruction JSON but no native prediction arrays (step6000/70dev). Next separate opt-in
+> export implementation/qualification before assisted intake; do not modify the live run. No inference,
+> training, transfer or runtime change during discovery. AI-05 active; W03-04/05 remain pending.
+
+> **October 20 volume answers LIVE:** Read VOLUME-COMPOSITION-RESULTS-2026-10-20.md/spec1.39
+> and readable VOLUME-ANSWER-REVIEW-2026-10-20.md. W03-03 bounded slice complete; next W03-04/05.
+> API PID9015/session21308 uses --volume-answers; previous73251 stopped. Aggregate health
+> source-literature-answer-v2/source-linked-literature-search-v2; volume source-volume-answer-v1.1,
+> disease source-record-answer-v1 unchanged. Existing DB/Ollama/Vite preserved; no duplicate launch.
+> First candidate6/8 (legacy scope/layout failures), second preflight0calls, corrected third8/8.
+> Ten paragraphs manually reviewed; eight responses pass actual UI validation. Browser clarification,
+> real volume answer and numerical source4 verified. Eight total model calls in this block.
+> 83 affected backend +55 earlier disease checks,68 distinct UI checks/build pass. Initial hash/copy
+> test failures retained. No independent evaluation/core acceptance/training/measurement claim.
+
+> **October 20 volume selector qualified offline:** Read VOLUME-ANSWER-PLAN-2026-10-20.md and
+> VOLUME-ROUTING-RESULTS-2026-10-20.md/spec1.38. W03-02 bounded reliability is closed; W03-03 is
+> In Progress, 1/4 checklist items complete. Isolated volume_record_search.py uses existing reviewed
+> MRI facts with canonical anchors/context. 64 focused checks pass; first T2DM numeric-guard failure
+> retained/corrected. Seven exposed offline corpus cases pass; 0DB/0model calls, live policy unchanged.
+> Next reviewed wording/local-model contract and exact backend/UI reconstruction, then bounded
+> citation review before promotion. Independent evaluation and measurement extension remain open.
+
+> **October20 bounded reliability closed:** Read RELIABILITY-CLOSEOUT-2026-10-20.md/spec1.37.
+> Lifecycle CLI now preserves bounded Compose errors/unknown timeout state without retry.
+> Six tests pass. Two actual cleanstop/startcycles: first outage request lacked schema/UUID,400,
+> harnessfailed/recoverycompleted; corrected attempt200baseline→503outage→identical200recovery.
+> All1,179canonicalpassages unchanged, sameDBcontainer/XML-Adventure unchanged,0modelcalls.
+> Earlier exit2 remains unexplained, not fixed; recurrence procedure reopensW03-02 and blocks promotion.
+> Live answer policy unchanged; proceed W03-03 volume scope/selection. No training/fullselector.
+
+> **October20 demo restored after planning:** Read WEEK3-DEMO-READINESS-2026-10-20.md.
+> Drive reconnected/UUID verified; stale Docker bind required Desktop restart and restoration of
+> previously running XML-Adventure. Existing DB recovered/healthy, no reinit. Vite denied imported
+> evidence contracts; exact ten-file allowlist fixes dev serving, unrelated README remains403.
+> 50UI checks/buildpass; one live comparison gives localAI composition/fourparagraphs/sevenpassages;
+> citation6 opened/matched. One model call9.870s, not end-to-end/quality benchmark.
+> Current owned sessions Ollama3015/API2188/Vite29391; record-answer-v1 selected on8016 and proxy5180.
+> Earlier Oct18 exit2 causes unresolved; W03-02 remains open. W03-03 volume adapter is next coverage
+> work. Plan commitc58197a; preserve shared UI branch and scope publication to retrieval branch.
+
+> **October 20 Week 3 prepared:** Read `../weeks/WEEK-03-WORK-PLAN.md` and spec1.36.
+> Trello active lanes rolled to Week 3; new Week 3 Complete column, W03-02–06 task cards;
+> existing PANORAMA W03-01 reused. W02-08 bounded prototype/AI-08 source slice closed against
+> retained evidence; AI-03 review/freeze and AI-04 quality remain open. First task W03-02:
+> runtime and integrated UI reliability, then volume answers/wording/quality checkpoint.
+> At17:42UTC UI5180/API8016/Ollama11434/DB55433 refused connections and PROWL-Data was absent.
+> Quinton will reconnect drive; never infer old PIDs live or create replacement database directories.
+> Shared branch `claude/prowl-ui-implementation` at c5ca63e on inspection includes another chat's
+> redesign; preserve it and publish only scoped retrieval/planning changes. No training/full selector.
+> Oct19 at least3human hours reported for other-chat CT/run preparation, recorded once as estimate;
+> no new agent-runtime credit or portal submission. End-week demo target does not waive formal gates.
+
+> **October18 readable record answers ACTIVE:** Read RECORD-ANSWER-RESULTS-2026-10-18.md/spec1.35.
+> a479c74 adds source-record-answer-v1: Qwen3:8b pinned500a1f06 on originalOllama11434 chooses reviewed
+> sentence variants/paragraphs; exact complete fact/citation coverage checked in backend and UI. This
+> is constrained composition, not unrestricted prose.20wordings/10units/15facts/3disease records;
+> no exact-question table. Outside record coverage now sources-only; model failures explicitly labeled
+> application-source summaries. Source admission still failclosed. Original server modes retained.
+> Attempt1 DB startup exit2 before HTTP/model calls,8.166s; recovered automatically/no containerrestart/
+> reportedOOM; size43,022,003B/inventory1179verified. Cause unproven, recurring reliability follow-up.
+> 3cab23f retains recovery attempt2:8HTTP/4chat/4responses/25.148s;3AI/1formatfallback/4nogeneration,
+> original7/8gate FAILED.586d860 normalizes adjacent valid paragraph breaks AFTER complete-unit checks;
+> 4/4exact retained plans qualify with0newcalls, all10paragraphs manually source-reviewed. Independent
+> review pending.81Python/47UI/buildpass. Two fresh browser requests(originalcomparison/head) show AI
+> answers with7/4sources; source6CTphase/duct/atrophy navigation verified. Six actual composition calls.
+> Active8016PID38141/ownedexec83863 --record-answers; old25716/session35480reaped143. Harness8017closed;
+> no11435launch/download/training/fullselector/protecteddata/hours. Do not rerun completedcanary.
+> Evidence outputs/prowl/record-answer-v1-20261018/failed; -attempt2-20261018/actuals/format-correction/
+> receipts/readable-review/screenshots/promotion. SharedUIbranch/otherchat70ad7a2 preserved; publish only
+> our scoped changes onto codex/retrieval-record-search via temporaryindex, no checkout switch/reset.
+> Next volume adapter/broader evidence+intent coverage and DB reliability; AI-04/formal independent
+> evaluation/measurement extension remain open. Older source-only/legacy selected statuses historical.
+
+> **October18 record search ACTIVE / answer integration pending:** User approved retrieval and free-text
+> selection. Read RECORD-SEARCH-RESULTS-2026-10-18.md/spec1.34. Implementation03a976c adds lexical
+> reviewed-record index, bounded English topic grammar, canonical context expansion and Find sources UI.
+> Attempt1 first request503 retained: wrong digest convention at transport boundary; no evidence/model
+> response. Correction0cdeba6 uses existing canonical transport digest and actual FrozenLiterature test.
+>57Python/33UI checks pass, Vite build passes; initial Node20 collection error retained, installedNode24
+> works without dependencies change. Corrected24case exposed screen completed7.528s/max0.419s:12positive
+> exact scoped matches,12boundary no records (4existing refusal/8densefallback),zero answercalls,1179
+> canonical records checked. Named examples only, not arbitrary-language/clinical qualification.
+> Source-only promotion after pass:8016PID25716/ownedexec35480 LIVE, source-linked-record-search-v1;
+> answer path still originaldense/v6.1. Old71656absent; owned8017candidate23906/session61306 and
+>25004/session61604stopped/reaped143,portclosed. Never rerun the completed canary as a live job.
+> Two original questions verified in live browser,4/7passages; View source6 opens focal-AIP portal-venous
+> CT/duct/atrophy excerpt. Screenshot/promotion/inputs/receipt/readable table retained under
+> outputs/prowl/record-search-v1-attempt2-20261018/. First failure kept in record-search-v1-20261018/.
+> No new model answers, Ollama lifecycle/training/fullselector/protecteddata/ingestion/humanhours.
+> Next readable fact-answer adapter and broader intent qualification; volume-record routing pending.
+> Do not pass expanded source envelopes into existing three-claim generation contract implicitly.
+> Shared checkout changed externally to codex/prowl-ui-redesign during work; scoped retrieval commits
+> only. Preserve untracked PROWL_LOGO.png and docs/capstone/interface/ui-redesign/; do not reset/switch.
+> Publish retrieval history to codex/retrieval-record-search without changing that active checkout.
+> AI-04 remains In Progress; independent evaluation and required measurement deliverable remain open.
+
 > **October18 disease facts assembled; live retrieval gap explicit:** User approved qualitative extension
 > with tests/Trello/commits. Read DISEASE-FACT-RESULTS-2026-10-18.md/spec1.33. Implementation18b1875 adds
 > three Schima2020 records, separately reviewed spans, deterministic relations and mandatory qualifiers.

@@ -1,9 +1,100 @@
 # AI expert completion specification
 
-**Version:** 1.33 — October 18, 2026 (disease fact assembly passes; live retrieval gap retained)\
+**Version:** 1.46 — October 20, 2026 (current-model inference live; boundary blocks volume acceptance)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [on-demand implementation](ON-DEMAND-INFERENCE-2026-10-20.md): bounded worker/API,
+explicit assisted-result contract and shared outline/measurement UI are implemented. 22 Python
+and 57 UI/library checks plus the build pass; synthetic HTTP-to-JS measurement integration passes.
+[Activation and real walkthrough](ON-DEMAND-ACTIVATION-2026-10-20.md): encrypted checkpoint transfer
+verified; existing development inputs hash-match. One30-window MPS prediction completed in19.1s
+and displays in the UI. Independent counts confirm67 pancreas voxels on the inference boundary;
+size is correctly withheld.182 Python/213 UI checks and production build pass. User requests merge
+to main after integration verification. AI-05 measurement accuracy/coverage acceptance remains open.
+
+October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
+training pipeline uses a provided pancreas mask to define its region. It requires a separately
+versioned assisted-result adapter; autonomous v2 guards remain intact. The authorized training-owner
+handoff confirms the current evaluator retains metrics but no native prediction masks. Quinton selected
+on-demand inference: the viewer and measurements consume the same prediction, retained for the
+session with optional persistent caching. A separate inference worker/API and assisted-result
+contract are next; training does not need to save every prediction.
+No new inference, artifact transfer or runtime change occurred in this discovery checkpoint.
+
+October 20 [native measurement provenance](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md): opt-in v2
+packages bind the original CT, prediction, result and inference evidence; source/model/geometry
+links and inference-crop boundaries are checked. The exposed historical native example correctly
+withholds size due to boundary contact; no numeric result or whole-organ acceptance is promoted.
+145 distinct UI/library checks, eleven Python checks and the build pass. Current-pipeline saved-result
+admission and anatomical coverage review are the next AI-05 handoff; no model rerun is implied.
+
+October 20 [current-scan volumes](CURRENT-SCAN-VOLUME-RESULTS-2026-10-20.md): user explicitly
+prioritized connecting current-scan measurements. The saved-mask preview calculates pancreas extent
+and total suspected-lesion volume with geometry/unit checks, source disclosure and case-switch
+invalidation. 107 focused checks and local browser/arithmetic verification pass. Whole-organ coverage,
+native lineage, individual-lesion measurements and clinical acceptance remain open. AI-05 stays active;
+W03-04/W03-05 follow this bounded development slice. This supersedes the earlier development order,
+not the formal core acceptance criteria.
+
+October 20 [volume composition/UI](VOLUME-COMPOSITION-RESULTS-2026-10-20.md): W03-03 bounded slice
+complete. First candidate6/8 and admission-only failure retained; corrected candidate8/8,
+all ten answer paragraphs source-reviewed, all eight responses replayed through UI validation.
+Local promotion uses `--volume-answers`: aggregate source-literature-answer-v2; volume1.1 and
+unchanged disease1 contracts. Browser clarification, real answer and numerical citation verified.
+Next W03-04 wording matrix and W03-05 quality review; independent gates remain open.
+
+October 20 [volume selection](VOLUME-ROUTING-RESULTS-2026-10-20.md): W03-03 starts with explicit
+size/volume and study-applicability behavior plus an isolated source-admitted selector. Sixty-four
+focused checks and seven exposed offline corpus examples pass. No database/model calls or live
+policy change. Reviewed composition and backend/UI integration are next; W03-03 remains open.
+
+October20 [reliability closeout](RELIABILITY-CLOSEOUT-2026-10-20.md): Compose failures now retain
+bounded diagnostics, with no automatic retry. Six checks pass. Corrected live stop/start check
+returns503 during outage and identical200 search after recovery; canonical1,179passages unchanged,
+unrelated container unchanged, zero model calls. First invalid-request harness attempt retained.
+Earlier exit2 cause remains explicitly unknown; recurrence reopens reliability and blocks promotion.
+W03-02 closes only this bounded operational scope. Continue W03-03 volume-answer work.
+
+October 20: the [Week 3 plan](../weeks/WEEK-03-WORK-PLAN.md) orders runtime/UI reliability,
+reviewed volume answers, broader wording/selection and a bounded quality checkpoint. Target a
+dependable development demo by October 25; PANORAMA remains the proposal's Week 3 commitment.
+Formal thresholds, independent evaluation and the required measurement extension remain unchanged.
+Fresh inventory found UI/API/Ollama/DB offline and PROWL-Data unmounted; Quinton will reconnect it.
+Subsequent [readiness work](WEEK3-DEMO-READINESS-2026-10-20.md) restored the existing services after
+reconnection/Docker sharing repair and fixed the UI dev-server contract allowlist. Selected policy
+verified; 50 UI checks/build and one live answer/source check pass. Earlier DB exit causes and
+broader quality remain open. Older PIDs below are historical.
+
+October18 readable answers: [plan](RECORD-ANSWER-PLAN-2026-10-18.md) and
+[results](RECORD-ANSWER-RESULTS-2026-10-18.md). **Ask question now uses reviewed record search and local
+Qwen3 8B constrained composition**: model-selected reviewed wording/paragraphs, mandatory complete
+facts/qualifications and code-attached citations. Twenty reusable wording variants, no question-answer
+lookup. Source admission and exact UI reconstruction prevent arbitrary generated medical prose.
+Explicit application-summary fallback on model failure; outside three disease records return passages
+without a model call. Original broad free-generation is not selected under the new flag.
+Initial DB startup failure preserved (0model calls); automatic recovery/inventory verified, cause
+unproven. Fixed8request attempt:3AI/1formatfallback/4correctboundaries, initial7/8gate FAILED. Layout-only
+normalization qualifies4/4retained plans without new model calls; all10output paragraphs source-reviewed.
+Two fresh browser questions show AI compositions, correct citations and qualifications.81Python/47UI/
+build pass. Active8016PID38141/session83863, originalOllama11434; six total actual composition calls.
+This is bounded, source-locked composition, not unrestricted generation or independent clinical review.
+Next volume/intent/source coverage and recurring DB exit investigation. Formal gates and required
+measurement-aware extension remain open. Older source-only/legacy-live entries below are historical.
+
+October 18 retrieval-to-record selection: [plan](RECORD-SEARCH-PLAN-2026-10-18.md) and
+[results](RECORD-SEARCH-RESULTS-2026-10-18.md). The new **Find sources** action retrieves reviewed disease
+records from typed questions, expands their canonical qualification passages, and preserves dense
+fallback for unmatched wording. A bounded English topic grammar and lexical source index replace the
+harness-supplied intents for this path; no exact question lookup or evaluation labels in production.
+First HTTP attempt failed at canonical transport hashing and is preserved; correction adds the actual
+FrozenLiterature boundary regression. 57 Python / 33 UI checks pass. Corrected exposed screen24/24:
+12 positives select the intended records,12 boundaries select none;7.528s total,0.419s maximum request,
+zero answer calls. Two live UI questions and citation opening verified. Source policy is active on8016;
+**Ask question** remains dense/v6.1. Finite grammar and three records are not broad semantic/clinical
+qualification. Volume routing, readable fact-answer integration, independent evaluation and measurement
+extension remain open. Next qualify the readable answer adapter without dropping source limitations.
 
 October 18 disease-comparison extension: [plan](DISEASE-FACT-PLAN-2026-10-18.md) and
 [results](DISEASE-FACT-RESULTS-2026-10-18.md). Three reviewed records preserve focal-mass scope,
@@ -303,7 +394,7 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Development preview implemented by explicit amendment; formal qualification remains after 6 |
 | 8 | Connect finding → question → evidence in the viewer — [W07-01](https://trello.com/c/IM0zPvP9) | Browser-tested finding/context/citation flow and all failure states | Queued after 7 disposition |
 | 9 | Run protected core acceptance and package the baseline — [W08-01](https://trello.com/c/s827dTBE), [W07-02](https://trello.com/c/cfVFZT2a) | Frozen held-out report, final integration/recovery evidence, walkthrough and operator handoff | Queued after 8; all release dependencies required |
-| 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Required; queued after accepted core Step 9 |
+| 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Bounded development in progress under October 20 amendment; formal acceptance remains after core Step 9 |
 | 11 | Add eligible reference comparisons and explanations — [AI-06](https://trello.com/c/TKCLH5PZ) | REQ-X02–X03 cited comparison and failure/refusal evidence | Required; queued after 10 |
 | 12 | Integrate reviewed training feedback and accept extension — [AI-07](https://trello.com/c/pL25Swot) | REQ-X04, separate extension assessment, viewer and final handoff | Required; queued after 11 |
 
@@ -472,7 +563,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 5 / AI-03 | In progress — proposed v6 engineering review complete; changed-scope human review pending | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Controlled answer diagnosis / AI-04 | Experiment complete; feature In Progress | [Three-by-three results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md): all nine drafts observed without timeout, zero complete answers, evidence omissions and semantic/citation/reviewer failures isolated. No replacement promoted. Next source-linked fact records and explicit qualifier assembly, subject to its own bounded plan. |
 | Source-linked volume facts / AI-04 | Bounded assembly pass; feature In Progress | [Results](SOURCE-FACT-RESULTS-2026-10-18.md): two complete reviewed group examples,33mutation/selection checks, seven actual-corpus typed mismatches rejected, one source query/zero model calls. Qualitative records, free-text selection, output adapter and independent evaluation remain open; no UI promotion. |
-| Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
+| Step 10 / AI-05 | Bounded development in progress; formal acceptance open | [Native provenance results](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) and [assisted producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md). Current artifact intake, anatomical review, individual-lesion measurements and accuracy validation remain open. |
+| Steps 11–12 / AI-06–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); acceptance follows core acceptance; final release includes REQ-X01–X04. |
 | Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 

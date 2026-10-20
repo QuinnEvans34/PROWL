@@ -1,6 +1,6 @@
 # Measurement-aware AI expert final-deliverable extension
 
-**Status:** Required final deliverable; implementation queued after core RAG acceptance.
+**Status:** Required final deliverable; bounded current-scan volume development started October 20 by explicit user sequencing amendment. Formal acceptance remains open.
 
 **Authority:** Quinton's explicit October 17, 2026 instruction: “This is now a part of our plan and
 must be part of the final deliverable.”
@@ -30,7 +30,11 @@ clinical boundaries and numerical acceptance gates remain; source addition alone
 this extension. Quinton supplies realistic questions without technical evidence labeling; independent
 label creation/verification is an engineering responsibility to arrange before collecting held-out work.
 
-## Sequence and entry gate
+## October 20 implementation sequencing amendment
+
+Quinton requested connecting current-scan measurements now. The [bounded contract](CURRENT-SCAN-VOLUME-CONTRACT-2026-10-20.md) permits a saved-mask volume development preview before core acceptance. It preserves the final acceptance criteria below; preview implementation does not satisfy or waive them.
+
+## Original sequence and formal acceptance gate
 
 Finish core RAG Steps 1–9 first. “Working as expected” means recorded acceptance, not a working demo:
 
@@ -128,3 +132,7 @@ requirements and Steps 10–12 must pass. If a dependency or reference source ca
 report the unmet requirement and resolve it explicitly; do not silently downgrade it to stretch work.
 Schedule impact must be reconciled at the next planning checkpoint; existing dates are not evidence
 that the increased scope fits. This documentation amendment launches no code, model or training job.
+
+## Native provenance progress — October 20
+
+The [native package adapter and coverage result](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) now bind CT/prediction/result/evidence identities and inspect inference-region boundaries. The historical example triggers a justified size refusal. Native restoration is not anatomical completeness. Next admit a current-pipeline saved result, review coverage, then qualify components/diameter against reviewed references. AI-05 remains open.
