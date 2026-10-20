@@ -7,6 +7,35 @@
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
+## Post-demo review — October20
+
+Quinton reports the meeting/demo went well and requests an effectiveness review. Current
+integration is demonstrable, but this does not complete answer-quality, independent evaluation,
+measurement or proposal milestones. The pre-call disease answer used local-model composition
+in7.77s; the volume question used a reviewed-source fallback after invalid composition. Both
+outcomes remain in the evidence. No new benchmark or whole-system reliability claim follows.
+
+Recommended next work order:
+
+1. **W03-04 wording/selection:** freeze the planned matrix, run one baseline against the current
+   version, and classify failures as routing, missing evidence, composition, or refusal. Deliver
+   the full table, including failures. Keep existing acceptance criteria and protected data separate.
+2. **Targeted repair, then W03-05:** fix the largest demonstrated cause within this scope, run
+   relevant regressions and a bounded quality check, and inspect every claim/citation. Report
+   direct-answer versus fallback outcomes, readability, qualifications and latency separately.
+3. **AI-05 measurement track:** retain CP01 as failed; prepare a fixed broader development
+   measurement/lesion-precision packet. Avoid another filter tuned to this one case. Model/source
+   coordination remains with the data/training owner; no training or new cross-chat message is
+   authorized by this planning note. Measurements and final required extensions remain open.
+
+Time-use discipline: one concrete decision/deliverable per work block; freeze inputs before
+experiments; change one diagnosed cause at a time; retain failures; stop after the declared check
+instead of rerunning until success. Reuse verified evidence and existing cards. Update tracking
+once per meaningful checkpoint and keep commits coherent. Do not add corpus breadth, redesign
+the UI, or repeat infrastructure work absent a demonstrated need. No human-hour estimate is inferred.
+PANORAMA's Week3 commitment still needs its evidence handoff; the successful AI demo does not
+establish overall schedule completion. W03-04/05 remain To Do until their execution begins.
+
 October20 AI-05 [CP01 reference comparison](../retrieval/COMPONENT-SELECTION-RESULTS-2026-10-20.md):
 largest26-union candidate removes only annotation-negative fragments on this exploratory case,
 but fails the frozen volume-error rule. Candidate lesion total6.229mL versus2.911mL reference
@@ -39,6 +68,7 @@ The table below is the October 20 planning snapshot; update it with material pro
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Ready; candidate adapter delivered | Fixed before/after paraphrase and boundary results | Thursday–Friday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Pending candidate and fixed check | Readable answer/source packet, complete scores and Quinton walkthrough | Friday–weekend |
+| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Integration works; CP01 accuracy screen failed | Fixed broader lesion-precision/measurement-error packet; no live size promotion | In progress; acceptance date unproven |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 
