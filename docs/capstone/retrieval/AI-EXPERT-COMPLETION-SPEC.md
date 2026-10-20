@@ -1,6 +1,6 @@
 # AI expert completion specification
 
-**Version:** 1.45 — October 20, 2026 (development inputs verified; checkpoint transfer pending)\
+**Version:** 1.46 — October 20, 2026 (current-model inference live; boundary blocks volume acceptance)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
@@ -8,10 +8,11 @@
 October 20 [on-demand implementation](ON-DEMAND-INFERENCE-2026-10-20.md): bounded worker/API,
 explicit assisted-result contract and shared outline/measurement UI are implemented. 22 Python
 and 57 UI/library checks plus the build pass; synthetic HTTP-to-JS measurement integration passes.
-[Activation intake](ON-DEMAND-ACTIVATION-2026-10-20.md) verifies the fixed checkpoint digest on
-Windows and exact matching development CT/pancreas files on the Mac. Geometry preflight matches
-the producer region and30 windows. SMB Guest access was denied; a temporary encrypted one-file transfer is proposed. Local Run
-remains disabled until configuration. No real current-model prediction or accuracy acceptance yet.
+[Activation and real walkthrough](ON-DEMAND-ACTIVATION-2026-10-20.md): encrypted checkpoint transfer
+verified; existing development inputs hash-match. One30-window MPS prediction completed in19.1s
+and displays in the UI. Independent counts confirm67 pancreas voxels on the inference boundary;
+size is correctly withheld.182 Python/213 UI checks and production build pass. User requests merge
+to main after integration verification. AI-05 measurement accuracy/coverage acceptance remains open.
 
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
 training pipeline uses a provided pancreas mask to define its region. It requires a separately

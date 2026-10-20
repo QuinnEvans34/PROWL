@@ -1,5 +1,13 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 current model LIVE:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.46.
+> Approved one-file TLS transfer completed/hash matches; listener closed/token+key removed.
+> MPS case00000029 completed30windows/19.1s/1.12GiB sampledRSS/reaped; real UI overlay displayed.
+>67predictedpancreas voxels touch low/high-z region faces, no CT-face contact; volume correctly
+> withheld. Cause unproven, no cleanup/rerun/quality acceptance.8017owned63294 configured, job
+>d8f8cca5d508413c9ba5f96114857c19.182Python/213UI/buildpass. Main merge authorized and next after
+> documentation/commit; retain full shared UI integration, no private data/weights/images in Git.
+
 > **October20 closeout amendment:** Quinton requests merging the branch to `main` after current
 > activation work. Finish transfer/local inference, review the full shared integration diff and
 > relevant checks, then merge/publish while preserving UI and retrieval work. Merge is authorized;

@@ -7,10 +7,11 @@
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
-October20 AI-05 [activation intake](../retrieval/ON-DEMAND-ACTIVATION-2026-10-20.md): fixed
-checkpoint digest and development membership received; Mac inputs hash-match and region/30-window
-preflight passes. SMB Guest access was denied; a temporary encrypted transfer is proposed. One bounded real inference
-and outline/measurement review remain. No accuracy acceptance or training change.
+October20 AI-05 [activation results](../retrieval/ON-DEMAND-ACTIVATION-2026-10-20.md): checkpoint
+transferred and verified; real MPS prediction displayed in19.1s. Independent mask audit confirms
+region-boundary contact, so volume is correctly withheld.182Python/213UI/build checks pass. Merge
+to main is authorized after integration review. AI-05 stays open for reliable measurements and
+reference-reviewed accuracy; W03-04/05 remain the core RAG follow-ups. No training change.
 
 ## Week at a glance — visible progress
 

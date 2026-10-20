@@ -6,10 +6,11 @@ remote refs, review the complete integration diff (including the shared UI redes
 conflicts without losing either lane's work, run relevant checks and merge/publish to `main`.
 The current integration branch is `claude/prowl-ui-implementation`; earlier scoped retrieval
 publications must be reconciled without duplicating or discarding changes. This authorizes the
-eventual merge; it does not approve the pending temporary network listener or waive verification.
+eventual merge. Quinton subsequently explicitly approved the temporary encrypted transfer.
 
-**State:** input and geometry preflight passed; existing SMB login unavailable and Guest explicitly denied.
-AI-05 remains In Progress. This is not a successful inference or accuracy review.
+**State:** checkpoint transferred and verified; one real MPS prediction completed and displayed.
+The output touches the inference-region boundary, so the UI correctly withholds volume.
+AI-05 remains In Progress; pipeline integration passed, reliable measurement/accuracy acceptance did not.
 
 Quinton authorized obtaining the current checkpoint and one development scan for a bounded Mac
 walkthrough, then explicitly authorized the checkpoint-transfer request to **Plan capstone
@@ -48,7 +49,7 @@ opened. The supplied pancreas is region assistance, never the prediction being m
 The UI measures output pancreas extent as labels1+2 and suspected-lesion volume as label2,
 as documented in the implementation report; the evaluator's class1-only metric is different.
 
-## Transfer and next execution
+## Initial transfer attempt (historical)
 
 The existing Windows SMB share is reachable on the same local subnet. Finder was opened on the
 existing E$ share; sign-in did not complete using the prefilled account. Quinton was asked to
@@ -64,7 +65,7 @@ is not yet on the Mac. The exact remote path and network address remain in the p
 After authentication, copy only the pinned checkpoint into a new private external artifact folder,
 verify its byte count and SHA-256, and retain a transfer receipt. Recheck AC, idle inference resources
 and free storage. Build the private configuration with the existing helper, restart only the owned
-unconfigured8017 service, and run one case through `/predict` with the current600s/8GiB limits.
+unconfigured 8017 service, and run one case through `/predict` with the current600s / 8GiB limits.
 Record success or failure, elapsed time and available resource evidence. Inspect the native outline
 and same-mask measurement identity; any boundary refusal remains visible. Do not promote accuracy
 or anatomical completeness from one development example. No automatic retry or case substitution.
@@ -77,7 +78,7 @@ Private evidence: `outputs/prowl/on-demand-activation-20261020/remote-intake.md`
 `local-input-intake.json`, `geometry-preflight.json`. No model deserialization or forward pass
 has occurred in this activation block. Existing implementation checks were not repeated.
 
-## Proposed password-free transfer (not activated)
+## Approved password-free transfer design
 
 Use a temporary HTTPS receiver on the Mac's current LAN address, with one fixed checkpoint upload
 route. Restrict accepted requests to the training laptop's current LAN address and a newly generated
@@ -93,6 +94,73 @@ length or digest; preserve a failed-transfer receipt without activation. No fire
 public tunnel, guest enabling, reusable credentials, training change or scan upload is included.
 A separate removable-drive copy remains the alternative.
 
-This would create a new network listener; Quinton's choice/approval is pending. No listener,
-certificate, token or remote upload request has been created. Once approved, implement and verify
-these controls with artificial small fixtures before moving the actual checkpoint.
+Quinton explicitly approved this listener. Five artificial TLS checks passed before activation:
+wrong token/path/length rejection, peer restriction, digest rejection, no overwrite, one-success
+shutdown and deadline enforcement including a stalled TLS handshake. The implementation is
+`scripts/receive_checkpoint_once.py`; configuration and credentials stay private.
+
+## Actual transfer and real prediction
+
+The sender returned HTTP201 with normal TLS certificate/hostname verification. Exactly 56,576,803
+bytes arrived and the Mac independently rehashed the checkpoint to the frozen digest. Sender
+transfer time 22.062s; receiver lifetime 69.828s including coordination. The source checkpoint was
+unchanged, the sender's one-use token was removed after acknowledgment, the receiver's generated
+private key was removed, and a fresh connection confirmed its listener closed. No firewall or
+Guest changes, public endpoint, training interruption or scan transfer occurred.
+
+Local original CT and assistance were reused. AC/free-space/no-local-trainer checks were refreshed.
+Private configuration pins the current code closure, checkpoint, recipe and inputs; device is MPS,
+600s / 8GiB sampled-RSS limits unchanged. Only the owned unconfigured 8017 server was replaced;
+configured server is owned session 63294. The independent loader does not restore an optimizer.
+
+One user-interface request created job `d8f8cca5d508413c9ba5f96114857c19`:
+
+| Observation | Result |
+|---|---|
+| Worker | ready, exit0, reaped;19.1039s elapsed |
+| Sampled peak worker process-group RSS |1,207,795,712 bytes, about1.12GiB; not a total GPU-allocation measurement |
+| Physical reconstruction |30 windows, zero uncovered region voxels; minimum blend weight0.0010000000475 |
+| Predicted native mask SHA-256 |`75fcf8e07d9a8c2650ce842004ad160e4879912debfcd8df944c778416e2ca49` |
+| Label1 / label2 counts |44,548 /6,547; diagnostic counts, not accepted whole-organ volumes |
+| Boundary contact |52 label1 voxels on low-z source plane5;15 on high-z plane98 |
+| Other contacts |No lesion voxels on region faces; no foreground on CT exterior faces |
+| UI question |“how big is this pancreas?” correctly returns Measurement unavailable with crop-boundary reason |
+
+The real native CT, green pancreas prediction and red lesion prediction display together. The
+verified viewer and measurement code consume the same mask identity. Independent Python face
+counts agree with the browser's rejection. The provided pancreas selected the search region and
+was not substituted for the model output. No lesion reference was opened and no second inference
+or cleanup/postprocessing was used to obtain a more favorable result.
+
+**Interpretation:** region coverage and transport work, but boundary contact can reflect stray
+predictions or truncated segmentation; its cause is unproven. This development example cannot
+support a reliable whole-pancreas size answer. Preserve it for model/native-boundary investigation;
+do not suppress the guard, silently remove components, select a better case or claim CUDA/MPS
+parity. Per-target measurement qualification and reference-reviewed accuracy remain open.
+
+The supervisor now retains private `worker.log` (sampled 1MiB cap) and `execution.json` with elapsed
+seconds, sampled peak RSS, return code, failure category and reaping status. Neither is exposed
+through the HTTP artifact allowlist. Failure causes can be inspected without leaking paths in UI.
+
+## Integration validation and merge scope
+
+- 5 transfer tests; 22 inference/geometry/lifecycle tests; 155 affected retrieval/lifecycle/saved-viewer
+checks: 182 Python checks pass. Two existing Torch deprecation warnings remain.
+- 212 UI unit/library tests pass; the optional retained-volume replay was then run with its evidence
+directory and passed separately, for 213 distinct UI checks total, with zero new literature-model calls.
+- Production build passes with the existing bundle-size warning.
+- Real browser prediction, native overlay and measurement rejection inspected; real NIfTI hashes,
+labels, face contacts and request identity independently retained. Broader historical Playwright
+suites were not rerun in this block; earlier redesign handback and current unit checks remain their evidence.
+
+Before merge, refreshed main is `5a86f27`; it is an ancestor of the integration branch. Of 87 files
+changed on the portable retrieval publication, only the newer handoff/activation docs and the
+shared-shell LiteratureSearchPanel differ in integration HEAD; reviewed differences preserve the
+panel context/measurement wiring. Merge includes the existing UI redesign and all completed
+retrieval/measurement changes, not raw inputs/checkpoints/private configurations or result images.
+The merge is engineering integration, not an AI-05 or clinical quality acceptance.
+
+Private evidence under `outputs/prowl/on-demand-activation-20261020/`: transfer receipt,
+private configuration, actual-job(request/log/execution/package and independent-mask-audit),
+UI screenshot, test/build logs. One frozen validation package is retained for this review;
+production prediction retention remains session-only. Local UI remains at `/predict` with the result.

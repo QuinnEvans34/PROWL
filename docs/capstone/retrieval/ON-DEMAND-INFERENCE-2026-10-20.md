@@ -1,6 +1,8 @@
 # On-demand prediction and shared native measurements
 
-**State:** implementation and synthetic integration complete; current trained checkpoint activation pending.
+**State:** current model activated and one real prediction displayed; volume withheld for region-boundary contact.
+See [activation results](ON-DEMAND-ACTIVATION-2026-10-20.md) for current services and evidence;
+initial unconfigured-state details below are historical.
 **Scope:** AI-05 development slice, selected by Quinton on October 20. No formal quality acceptance.
 
 ## User workflow
