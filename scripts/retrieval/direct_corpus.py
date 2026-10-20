@@ -34,9 +34,26 @@ def read_config(path):
     return c
 
 
+class ComposeFailure(RuntimeError):
+    """An attempted lifecycle operation failed; no retry or recovery is implied."""
+
+
 def compose(c,*args):
     env=dict(os.environ,PROWL_DB_PORT=str(c['port']),PROWL_DB_DATA=c['data'],PROWL_DB_PASSWORD_FILE=c['password_file'])
-    return subprocess.run(['docker','--context','desktop-linux','compose','-p','prowl-literature','-f',str(ROOT/'infra/retrieval/compose.literature.yaml'),*args],env=env,check=True,capture_output=True,timeout=90)
+    try:
+        return subprocess.run(['docker','--context','desktop-linux','compose','-p','prowl-literature','-f',str(ROOT/'infra/retrieval/compose.literature.yaml'),*args],env=env,check=True,capture_output=True,timeout=90)
+    except subprocess.CalledProcessError as error:
+        detail=error.stderr or b'No Docker diagnostic was returned.'
+        if isinstance(detail,bytes):detail=detail.decode('utf-8',errors='replace')
+        raise ComposeFailure(
+            f'Literature database operation failed (exit {error.returncode}). '
+            f'Inspect the existing container and drive before retrying. Docker: {detail[-4000:].strip()}'
+        ) from None
+    except subprocess.TimeoutExpired:
+        raise ComposeFailure(
+            'Literature database operation exceeded 90 seconds; container state is unknown. '
+            'Inspect the existing container before retrying; no automatic retry was performed.'
+        ) from None
 
 
 def limits(c):
@@ -132,4 +149,8 @@ def main():
         print(json.dumps(result,indent=2))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    try:main()
+    except ComposeFailure as error:
+        print(json.dumps(dict(error=str(error))),file=sys.stderr)
+        sys.exit(1)
