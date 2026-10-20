@@ -239,3 +239,7 @@ review is inferred. Trello is the status/evidence record; this file is the order
 - Formal evaluation and measurement-extension gates: open.
 - Human hours/exclusions and Week 2 closeout: pending confirmation; Oct 19 lower bound recorded.
 - Lessons and Week 4 first implementation-ready task: pending review.
+
+## October 20 current-scan amendment
+
+Quinton prioritized connecting current-scan measurements after the volume literature closeout. AI-05 is now Week 3 In Progress under the [bounded contract](../retrieval/CURRENT-SCAN-VOLUME-CONTRACT-2026-10-20.md). Implement and test saved-mask volumes and safe current-study routing first, then return to W03-04 wording and W03-05 quality checks. This adds development scope, not a promise of whole-organ measurement accuracy or a waiver of formal RAG acceptance.

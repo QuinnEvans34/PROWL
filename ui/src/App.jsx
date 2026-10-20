@@ -409,6 +409,12 @@ export default function App() {
                 contextKey={caseId}
                 contextLabel={formatStudyId(caseId)}
                 onPendingChange={setAskPending}
+                measurementContext={{
+                  key: `${caseId}:${isValidation || hasLiveResult}:${currentLive?.source || 'saved'}:${currentLive?.scoredAt || 'saved'}:${isAnalyzing}:${currentCase.files?.pred}`,
+                  caseId, files: currentCase.files, spacingMm: currentCase.spacing_mm,
+                  available: (isValidation || hasLiveResult) && !isAnalyzing,
+                  source: currentLive?.source || 'saved',
+                }}
               />
             )}
             endpointStatus={endpointStatus}

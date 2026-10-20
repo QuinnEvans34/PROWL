@@ -1,6 +1,6 @@
 # Measurement-aware AI expert final-deliverable extension
 
-**Status:** Required final deliverable; implementation queued after core RAG acceptance.
+**Status:** Required final deliverable; bounded current-scan volume development started October 20 by explicit user sequencing amendment. Formal acceptance remains open.
 
 **Authority:** Quinton's explicit October 17, 2026 instruction: “This is now a part of our plan and
 must be part of the final deliverable.”
@@ -30,7 +30,11 @@ clinical boundaries and numerical acceptance gates remain; source addition alone
 this extension. Quinton supplies realistic questions without technical evidence labeling; independent
 label creation/verification is an engineering responsibility to arrange before collecting held-out work.
 
-## Sequence and entry gate
+## October 20 implementation sequencing amendment
+
+Quinton requested connecting current-scan measurements now. The [bounded contract](CURRENT-SCAN-VOLUME-CONTRACT-2026-10-20.md) permits a saved-mask volume development preview before core acceptance. It preserves the final acceptance criteria below; preview implementation does not satisfy or waive them.
+
+## Original sequence and formal acceptance gate
 
 Finish core RAG Steps 1–9 first. “Working as expected” means recorded acceptance, not a working demo:
 

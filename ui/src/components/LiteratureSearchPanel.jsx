@@ -5,6 +5,7 @@ import diseaseCatalog from '../../../configs/evidence/source-facts-disease-v1.js
 import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
 import { validateRecordAnswer } from './recordAnswer'
 import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
+import { loadScanMeasurements, scanQuestion, measurementText } from '../lib/scanMeasurements.js'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -132,9 +133,20 @@ export default function LiteratureSearchPanel({
   contextKey = null,
   contextLabel = null,
   onPendingChange = null,
+  measurementContext = null,
+  measure = loadScanMeasurements,
   suggestions = variant === 'panel' ? SUGGESTED_QUESTIONS : [],
 }) {
   const panel = variant === 'panel'
+  const measurementKey = measurementContext?.key ?? null
+  const [scanResult, setScanResult] = useState(null)
+  const measurementRef = useRef(measurementKey)
+  useEffect(() => {
+    if (measurementRef.current === measurementKey) return
+    measurementRef.current = measurementKey
+    if (active.current) { active.current.abort(); active.current = null; setPhase('idle') }
+    setScanResult(null)
+  }, [measurementKey])
   const [question, setQuestion] = useState('')
   const [result, setResult] = useState(null)
   const [phase, setPhase] = useState('idle')
@@ -163,7 +175,7 @@ export default function LiteratureSearchPanel({
   }, [phase])
   function change(value) {
     active.current?.abort(); active.current = null
-    setQuestion(value); setResult(null); setPhase('idle'); setContextNotice('')
+    setQuestion(value); setScanResult(null); setResult(null); setPhase('idle'); setContextNotice('')
   }
   async function submit(event, sourcesOnly = phase === 'error' && sourceMode) {
     event.preventDefault()
@@ -171,9 +183,26 @@ export default function LiteratureSearchPanel({
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 90000)
-    setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setContextNotice('')
+    setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
     try {
+      const target = measurementContext ? scanQuestion(question) : null
+      if (target) {
+        let value
+        if (sourcesOnly) value = { message: 'Use Ask question to calculate the saved outline volume. Find sources searches general literature.' }
+        else if (target === 'unsupported') value = { message: 'I can calculate the loaded pancreas or total suspected-lesion mask volume. Head measurements, individual lesion dimensions, normal-range comparisons and disease interpretations of this scan are not connected yet.' }
+        else {
+          try {
+            const measurement = await measure(measurementContext, control.signal)
+            if (measurement.contextKey !== measurementKey) throw new Error('The prediction changed. Ask again for the current study.')
+            value = { measurement, target }
+          } catch (error) { value = { message: error.message || 'The saved mask could not be measured.' } }
+        }
+        if (active.current === control && !control.signal.aborted) {
+          setScanResult({ ...value, key: measurementKey }); setPhase('done')
+        } else if (active.current === control) setPhase('error')
+        return
+      }
       const response = sourcesOnly
         ? validateSourceSearch(await findSources(request, control.signal), request)
         : validateAnswer(await search(request, control.signal), request)
@@ -185,17 +214,17 @@ export default function LiteratureSearchPanel({
   const staleContext = result && askedFor && askedFor.key !== contextKey
   return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
     {panel ? <>
-      <p className="literature-search__scope"><span aria-hidden="true" />Literature only · Scan context not connected</p>
+      <p className="literature-search__scope"><span aria-hidden="true" />{measurementContext ? 'Saved-mask volumes · General literature' : 'Literature only · Scan context not connected'}</p>
       <h2 id="literature-search-title">A second perspective. Your decision.</h2>
-      <p>Ask a general question about the pancreas. Answers cite {config.source_count} research papers; they do not see this scan and do not remember earlier questions.</p>
+      <p>{measurementContext ? 'Ask how big this pancreas is to calculate the saved outline volume, or ask a general literature question. Whole-organ coverage and disease interpretation of this scan are not verified.' : `Ask a general question about the pancreas. Answers cite ${config.source_count} research papers; they do not see this scan and do not remember earlier questions.`}</p>
     </> : <>
       <h2 id="literature-search-title">Search pancreatic literature</h2>
       <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
     </>}
-    <p className="literature-search__notice">Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.</p>
+    <p className="literature-search__notice">{measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>
     {!panel && <p>Ask question turns reviewed disease comparisons and MRI volume study results into readable summaries. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>}
-    {suggestions.length > 0 && !result && phase !== 'loading' && <div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
-      {suggestions.map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
+    {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
+      {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
     </div>}
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
@@ -203,15 +232,29 @@ export default function LiteratureSearchPanel({
         placeholder="What imaging findings help distinguish pancreatitis from pancreatic cancer?"
         onChange={e => change(e.target.value)} />
       <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading'}>{phase === 'loading' ? (sourceMode ? 'Finding sources…' : 'Writing answer…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+        <button type="submit" disabled={!question.trim() || phase === 'loading'}>{phase === 'loading' ? (sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(question) ? 'Measuring saved outline…' : 'Writing answer…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
         {phase === 'loading' && <button type="button" onClick={() => change(question)}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
     </form>
     <div aria-live="polite" aria-busy={phase === 'loading'}>
+      {scanResult?.key === measurementKey && scanResult && <article aria-label="Current scan measurement">
+        <h3>{scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
+        <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
+        {scanResult.measurement && <>
+          <p>Calculated locally from the saved prediction mask, not estimated by the AI. The model outline needs human review.</p>
+          <details><summary>Measurement source and limitations</summary>
+            <p>{scanResult.measurement.unitsBasis}. {scanResult.measurement.coverage}. {scanResult.measurement.modelLineage}.</p>
+            <p>Method: label count × absolute affine determinant. Pancreas includes labels 1 and 2; suspected-lesion total includes label 2 only. No reference annotation is used.</p>
+            <p>Grid: {scanResult.measurement.shape.join(' × ')}; voxel volume: {scanResult.measurement.voxelMm3} mm³.</p>
+            <p>{scanResult.measurement.hashBasis}.</p>
+            <small>CT SHA-256: {scanResult.measurement.ctSha256}<br />Prediction SHA-256: {scanResult.measurement.predictionSha256}</small>
+          </details>
+        </>}
+      </article>}
       {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
-      {phase === 'loading' && <p className="literature-search__pending"><span className="literature-search__pulse" aria-hidden="true" />{sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && 'You can cancel while the local model works.'}</p>}
+      {phase === 'loading' && <p className="literature-search__pending"><span className="literature-search__pulse" aria-hidden="true" />{measurementContext && scanQuestion(question) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Finding evidence, writing an answer, and checking its citations…'} {elapsed}s elapsed. {!sourceMode && !(measurementContext && scanQuestion(question)) && 'You can cancel while the local model works.'}</p>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
@@ -229,7 +272,7 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
-    <small>{panel ? 'Each question is answered independently. Questions and results are not saved. No scan is attached.' : 'Questions and results are not automatically saved. No scan is attached.'}</small>
+    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved.' : 'Each question is answered independently. Questions and results are not saved. No scan is attached.' : 'Questions and results are not automatically saved. No scan is attached.'}</small>
   </section>
 }
 
