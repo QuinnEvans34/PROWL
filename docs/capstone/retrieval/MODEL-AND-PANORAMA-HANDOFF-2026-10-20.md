@@ -1,6 +1,9 @@
-# Prepared model comparison and PANORAMA evidence handoff
+# Model comparison and PANORAMA evidence handoff
 
-**Status:** Request prepared; explicit additional cross-chat permission requested and pending.
+**Status:** Quinton explicitly authorized both requests; sent and completed. Original receipts
+received, SHA256 verified and metadata arithmetic reconciled. See [model decision](MODEL-CANDIDATE-COMPARISON-2026-10-20.md)
+and [PANORAMA handoff](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md). The request/criteria below
+are preserved as the pre-comparison record.
 Recipient: *Plan capstone experiment workflow* on Quinns-Laptop. This expands beyond the completed
 three-case step6000 request; it is not a retry or checkpoint transfer.
 

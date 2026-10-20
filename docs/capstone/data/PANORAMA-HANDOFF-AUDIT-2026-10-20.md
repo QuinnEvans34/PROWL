@@ -1,7 +1,9 @@
 # PANORAMA handoff audit — October20
 
-**Status:** Acquisition/transfer evidence recovered; integration acceptance remains unverified.
-W03-01 stays open pending the data owner's implementation handback. No voxel or model work.
+**Status:** Evidence handoff completed. Retained Windows evidence confirms the earlier exploratory
+crop/resize production adapter, eligibility manifest and mixed-source smoke. Current physical-window
+PANORAMA integration is not established; W03-01 remains open for that explicit remaining scope.
+No new voxel or model work occurred in this audit.
 
 The older inventory's missing-data statements are historical. Four CT archives and the pinned
 label archive are present under `/Volumes/PROWL-Data/PROWL/sources/panorama/`. Retained acquisition
@@ -23,7 +25,7 @@ Evidence:
 - `outputs/prowl/extraction-2026-09-22/panorama.jsonl` — completed extraction, no source admission.
 - `outputs/prowl/inventory-2026-09-22/panorama-classes.md` — manual/automatic structural inventory.
 
-## Required unresolved handoff
+## Earlier Mac-only findings — superseded by the received handoff below
 
 | Evidence | Current disposition |
 | --- | --- |
@@ -39,3 +41,54 @@ ground truth; manual/automatic lesion methods remain separate; declared imports 
 duplicates cannot silently enter an eligible pool. Acquisition completion cannot close W03-01.
 The [prepared owner request](../retrieval/MODEL-AND-PANORAMA-HANDOFF-2026-10-20.md) asks only for
 existing evidence or exact missing items. No training/data mutation or implied hours.
+
+## Received owner evidence and local reconciliation
+
+Quinton authorized the combined evidence-only request. *Plan capstone experiment workflow* returned
+`w03-panorama-retained-evidence-20261020.json`,154,069 original bytes, received in18 numbered chunks
+and verified as SHA256 `91580c4d3aac0b385a00237a071a2b13af5f935192998603176303e826cd45c4`.
+It is retained in `outputs/prowl/model-panorama-handoff-20261020/`. This supersedes “missing handback”
+above; it does not turn old-pipeline evidence into current-pipeline acceptance.
+
+| Required evidence | Received disposition |
+| --- | --- |
+| Mapping and uses | Raw1→lesion2; raw4→pancreas1; other codes→background. Physical union crop +10mm, linear CT/nearest-label resampling into resized/padded144cube. Manual PDAC lesions only in primary arm; machine pancreas is silver-standard crop/training support, not expert evaluation truth. |
+| Eligibility |345 studies/344 source subjects. Experiment-specific accepted development-use review authorizes this narrow arm; immutable source-catalog fields remain unassigned, not blanket admission. |
+| Exclusions and separation |194MSD+80NIH declared imports excluded. Five uncertain PanTS development cases held out, not moved into training. Repeated studies grouped by source subject; these are not proven unique patients across datasets. Non-PDAC is not generic-lesion negative, automatic lesions excluded from primary arm. |
+| Label/header qualification |2238 accounted:1905 technical passes,274 declared-import exclusions,59 technical holds. Technical pass alone did not admit training. |
+| CT union qualification |2238 accounted:1904 passes,333 prior exclusions/holds,1 additional component-loss hold. Study100965_00001 lost component3 and is not among345 admitted studies. |
+| Visual review |Five selected expert-case previews, engineering only. Earlier generic30-case review was not completed; no whole-cohort/radiologist certification. |
+| Production cache/binding |345/345 new cache members checked;1678train=1333PanTS+345PANORAMA;70PanTSdevelopment=36positive+34empty. PanTS original control unchanged. |
+| Production smoke |Five optimizer updates using two unique PanTS and two unique PANORAMA members; two PanTS development evaluations. Cold exact restore and one repeated update agree within declared tolerance, max difference7.45e-9. Workers reaped. This is an earlier completed smoke, not new work today or accuracy evidence. |
+
+The local reconciliation script verifies received membership uniqueness/group counts, exclusion
+nonintersection, audit denominators, held-case absence, cache count and mixed-source smoke sequence,
+as well as the independent model comparison arithmetic. Source IDs/per-case hashes remain in ignored
+receipts. The public aggregate is `configs/evidence/evaluation/model-panorama-reconciliation-20261020.json`.
+These checks establish receipt integrity and internal consistency; they do not freshly hash the
+Windows original files, inspect arrays, or independently certify their reported semantics.
+
+Key producing bindings from the receipt:
+
+- Selection: `71d169df76c26d42632c061d120f63e12f153de9d7cbfbbb46c060900b4df032`.
+- Manifest: `cf6d72f050af5dcb888d64c7e4250a857624ac98b1d3c11407caf20b56b2c1eb`.
+- Mixed-input adapter: `a4ab6269684b3a43fa6418e823c248caf7483bc93495b38bdcd87ec787e1c072`.
+- PANORAMA geometry: `e7bd3bd6a77da1cefdef2bf5a0140986091722ed85a34f8ff61093974187e844`.
+
+## Exact remaining scope and owner
+
+The current physical-window producer needs its own PANORAMA mapping/support/patient-role binding,
+whole-target coverage/fidelity audit, explicit exclusions and mixed-source smoke before current
+integration can be claimed. Data/training owner owns that execution; this RAG chat records its
+handoff and admission implications. Reuse the345-study manifest only after revalidating the new
+pipeline's requirements. Do not redownload data or replay the old smoke to fill this gap.
+
+Undeclared cross-source overlap remains unruled-out;118 ambiguous training records carry redundancy
+risk,80 ambiguous original test records remain protected, and SuPreM source membership is unknown.
+Component survival alone does not prove full-field lesion preservation or boundary/detail fidelity.
+The old narrow exploratory acceptance and its limits are preserved; no current-run changes, new
+training eligibility, clean-benchmark claim or whole-organ measurement qualification are inferred.
+
+The requested W03-01 evidence handoff is resolved. The board now records both the completed earlier
+integration and the specific current-pipeline dependency instead of saying no integration evidence
+exists. This checkpoint does not declare the entire proposal milestone complete.

@@ -26,7 +26,8 @@ that directory. Quinton reviewed and accepted this concrete packet. Byte-identic
 `development-v6-delta-human-review.json` records two wording decisions,22 evidence decisions and
 30 consistency decisions. The validated v4→v5 chain supplies28 unchanged wording/eight refusal-label
 acceptances; label-version metadata alone does not reopen semantics. The receipt preserves original
-review paths and exact hashes. Receipt time is not claimed as the precise human reading time.
+review paths and exact hashes. Receipt time is not claimed as the precise human reading time. The archived appendix retains
+its original trailing blank line despite the Git whitespace warning, preserving the reviewed hash.
 
 ## Exposures and admission
 

@@ -3,19 +3,30 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 20, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation, measurement accuracy and PANORAMA evidence remain open\
+**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation, measurement accuracy and current-pipeline PANORAMA qualification remain open\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
 ## October 20 board review and remaining-week priorities
 
-**Execution update:** [AI-03 preparation](../retrieval/EVALUATION-PREPARATION-2026-10-20.md) delivers
-the change-only packet, verifies prior approvals and updates public exposure/preflight;71 checks pass.
-Human review/operator choice remain pending. Offline routing exposes a broader formal-coverage gap
-(4/20 candidates, not4 correct answers); retain scope and record the missing capability before freeze.
-[PANORAMA audit](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md) recovers acquisition/transfer evidence
-and verifies4,480 current paths/sizes; integration qualification remains unverified. Combined saved
-model-report/PANORAMA owner request is prepared, with cross-chat permission pending. No new inference.
+**Execution update:** AI-03 delta/consistency accepted and separate assisted workflow selected;
+112 focused checks pass. Preparation prototype is implemented on invented inputs; private host/role
+schema, semantic-independence checks and storage/admission remain. No fresh questions needed yet.
+Formal coverage gap remains4/20 candidate routes including one unsuitable route, not an answer score.
+
+[Model comparison](../retrieval/MODEL-CANDIDATE-COMPARISON-2026-10-20.md) is complete: reject raw8000
+preference because positive mean recall drops44.88→25.74% on matched70cases. FP/volume reductions
+do not override the rule. No new inference or promotion. [PANORAMA handoff](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md)
+is complete: earlier345-study crop/resize production integration/smoke verified from retained
+receipts; current physical-window integration still requires qualification. Board retains that
+specific remaining dependency. Both receipts hash-match and local metadata arithmetic reconciles.
+
+**Next work blocks:** (1) qualify the selected private-labeling host and role/history schema on
+invented data, without exposing real test questions; (2) extend source-linked evidence coverage for
+formal anatomy/visibility/reader/measurement/AI-limit questions under the approved development
+sequence, then make a bounded selection/composition check; (3) obtain current-pipeline PANORAMA
+qualification from its owner before claiming the proposal milestone. No repeat review/choice prompt,
+new checkpoint run or repeated old smoke follows automatically from this checkpoint.
 
 Trello was reconciled against the reports and Quinton's recorded acceptance. W03-04/05 were already
 in Week 3 Complete but their completion flags were false; those flags are now corrected. Dashboard,

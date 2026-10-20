@@ -1,5 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
+
+> **October20 acceptance/evidence handoffs completed:** Quinton accepted exact v6 delta/consistency
+> and chose separate human-operated labeling assistant. Acceptance receipt/archived packet/chain
+> verify;112 focused checks pass. Prototype prepares exact quoted evidence from invented inputs;
+> actual private host/model/token budget/role schema/isolation/storage/admission remain unqualified.
+> No protected questions requested/read; CLI stays closed. See spec1.55 and independent workflow.
+> Authorized combined training-owner request completed: raw8000 compared with6000 on matched70;
+> reject preference (mean positive recall.4488→.2574), despite lower FP/volume errors and better Dice.
+> Full receipts SHA verified; local arithmetic agrees. No local run/weights/model promotion.
+> PANORAMA old crop/resize adapter+345-study eligibility+mixed smoke confirmed; current physical-window
+> PANORAMA integration is not established. W03-01 handoff resolved, current integration scope stillopen.
+> Read MODEL-CANDIDATE-COMPARISON and PANORAMA-HANDOFF-AUDIT. Original receipts retained under
+> outputs/prowl/model-panorama-handoff-20261020; public aggregate tracked. No training/fullselector
+> or runtime mutation. Next RAG work: qualify separate authoring tool/roles and formal coverage;
+> no repeat operator/review approval needed. Earlier pending permission/review/handback text historical.
+
 > **October20 autonomous preparation checkpoint:** user requests AI-03/AI-05/W03-01 progress.
 > Read EVALUATION-PREPARATION-2026-10-20.md/spec1.54. Change-only packet under
 > outputs/prowl/evaluation-preparation-20261020/;28unchangedcores/2new/23spans/100judgments.

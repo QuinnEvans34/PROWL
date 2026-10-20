@@ -1,9 +1,23 @@
 # AI expert completion specification
 
-**Version:** 1.54 — October 20, 2026 (evaluation delta and coverage reconciliation)\
+**Version:** 1.55 — October 20, 2026 (accepted evaluation delta and completed evidence handoffs)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Changed evidence/membership and consistency are accepted; the separate human-operated labeling workflow is selected. Qualify its host/role schema and private admission before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 accepted/handoff checkpoint: Quinton explicitly accepted the v6 delta/consistency and
+selected the separate assisted labeling workflow. Archived review bytes and inherited approvals
+verify;112 focused checks pass, protected admission stays closed. A pure invented-data labeling
+proposal prototype is delivered, not an active private authoring host. See [selected workflow](INDEPENDENT-LABELING-WORKFLOW-2026-10-20.md).
+[Saved model comparison](MODEL-CANDIDATE-COMPARISON-2026-10-20.md) rejects raw8000 preference:
+mean positive recall44.88→25.74% despite better FP/volume/Dice aggregates. No new inference/promotion.
+[PANORAMA handoff](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md) confirms old-pipeline345-study
+integration/smoke; current physical-window qualification remains missing. Receipt hashes and
+local metadata arithmetic verify. AI-03/AI-05/W03-01 remain open for their remaining acceptance
+work. Next qualify private tooling and close documented formal RAG coverage gaps; do not replace
+independent evaluation with the narrower accepted demo.
+
+Earlier preparation checkpoint (superseded where noted above):
 
 October20 [evaluation preparation](EVALUATION-PREPARATION-2026-10-20.md): v4/v5 acceptance verified;
 v6 change-only packet has28 unchanged cores,2 replacements,23 changed/added spans and100 changed

@@ -1,0 +1,52 @@
+{
+  "receipt_sha256": {
+    "ai05-native-6000-vs-8000-20261020.json": "bd6520f106b509c84fb2997f24cff599be6f15f60b9e65f497ae91900e91ac05",
+    "w03-panorama-retained-evidence-20261020.json": "91580c4d3aac0b385a00237a071a2b13af5f935192998603176303e826cd45c4"
+  },
+  "recomputed": {
+    "baseline": {
+      "cases": 70,
+      "positive": 36,
+      "empty": 34,
+      "positive_lesion_recall_mean": 0.448826476610931,
+      "positive_lesion_recall_median": 0.38363180029532196,
+      "positive_lesion_absolute_volume_error_mean_mm3": 9984.762224886921,
+      "positive_lesion_absolute_volume_error_median_mm3": 8063.57647706346,
+      "all_lesion_absolute_volume_error_mean_mm3": 9897.802930957774,
+      "pancreas_absolute_volume_error_mean_mm3": 55062.327304500934,
+      "empty_false_alarm_count": 34,
+      "empty_FP_volume_total_mm3": 333394.765071115,
+      "empty_FP_volume_mean_mm3": 9805.728384444557,
+      "positive_dice_mean": 0.21749310315717535,
+      "positive_any_overlap_count": 33
+    },
+    "candidate": {
+      "cases": 70,
+      "positive": 36,
+      "empty": 34,
+      "positive_lesion_recall_mean": 0.25736649689302843,
+      "positive_lesion_recall_median": 0.17221362425387454,
+      "positive_lesion_absolute_volume_error_mean_mm3": 4162.737113670355,
+      "positive_lesion_absolute_volume_error_median_mm3": 2897.4442206694403,
+      "all_lesion_absolute_volume_error_mean_mm3": 3326.3476952895726,
+      "pancreas_absolute_volume_error_mean_mm3": 46990.209434739736,
+      "empty_false_alarm_count": 32,
+      "empty_FP_volume_total_mm3": 82985.80257813729,
+      "empty_FP_volume_mean_mm3": 2440.758899356979,
+      "positive_dice_mean": 0.2397427798308979,
+      "positive_any_overlap_count": 28
+    }
+  },
+  "candidate_decision": "reject_preference_recall_worse",
+  "preferred": false,
+  "panorama": {
+    "studies": 345,
+    "source_subjects": 344,
+    "excluded_imports": 274,
+    "source_audit_denominator": 2238,
+    "visual_sample": 5,
+    "production_smoke_updates": 5,
+    "current_physical_window_qualified": false
+  },
+  "scope": "Saved development metadata arithmetic and internal consistency; no independent array audit or clinical acceptance"
+}
