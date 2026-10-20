@@ -46,6 +46,11 @@ def test_result_bound_to_request_and_private_files(tmp_path,config):
         job=jobs.submit('one'); done=finish(jobs,job);assert done['status']=='ready'
         manifest=json.loads(jobs.artifact(job['job_id'],'manifest.json').read_bytes())
         assert manifest['request_identity']==done['request_identity']
+        receipt=json.loads((jobs.jobs[job['job_id']]['directory']/'execution.json').read_bytes())
+        assert receipt['worker_reaped'] and receipt['returncode']==0 and receipt['outcome']=='ready'
+        assert receipt['elapsed_seconds']>0 and receipt['sampled_peak_rss_bytes']>0
+        for private in ('worker.log','execution.json','request.json'):
+            with pytest.raises(JobError):jobs.artifact(job['job_id'],private)
         with pytest.raises(JobError):jobs.artifact(job['job_id'],'../../checkpoint.txt')
         assert 'path' not in json.dumps(jobs.catalog())
         jobs.artifact(job['job_id'],'prediction.nii.gz').write_bytes(b'changed')
@@ -74,6 +79,8 @@ def test_failure_never_publishes(tmp_path,config,mutation):
     jobs=PredictionJobs(tmp_path/'jobs',config)
     try:
         job=jobs.submit(case);assert finish(jobs,job)['status']=='failed'
+        receipt=json.loads((jobs.jobs[job['job_id']]['directory']/'execution.json').read_bytes())
+        assert receipt['worker_reaped'] and receipt['failure_type']
         with pytest.raises(JobError):jobs.artifact(job['job_id'],'manifest.json')
     finally:jobs.close()
 

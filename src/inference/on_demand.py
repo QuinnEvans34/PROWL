@@ -183,6 +183,10 @@ class PredictionJobs:
 
     def _run(self, job):
         proc = None
+        log = None
+        started = time.monotonic()
+        peak_rss = 0
+        failure = None
         outcome = 'failed'
         try:
             with self.lock:
@@ -195,11 +199,12 @@ class PredictionJobs:
                 checked_ref(ref)
             directory = job['directory']
             wrapper = Path(__file__).resolve().parents[2]/'scripts/run_on_demand_worker.py'
+            # Private diagnostics are never served through the artifact allowlist.
+            log = (directory/'worker.log').open('xb')
             proc = subprocess.Popen([self.config['python'], str(wrapper), self.config['worker']['path'],
                                      str(directory/'request.json'), str(directory/'package')],
-                                    stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,
-                                    stderr=subprocess.DEVNULL, start_new_session=True)
-            started = time.monotonic()
+                                    stdin=subprocess.DEVNULL, stdout=log,
+                                    stderr=log, start_new_session=True)
             while proc.poll() is None:
                 if job['cancel'].is_set():
                     raise InterruptedError()
@@ -208,8 +213,11 @@ class PredictionJobs:
                 # RSS of the dedicated process group, including worker children.
                 rows = subprocess.check_output(['ps','-axo','pgid=,rss='], timeout=3).decode().splitlines()
                 rss = sum(int(r.split()[1])*1024 for r in rows if len(r.split()) == 2 and int(r.split()[0]) == proc.pid)
+                peak_rss = max(peak_rss, rss)
                 if rss > self.config['rss_limit_mib']*1024**2:
                     raise MemoryError()
+                if (directory/'worker.log').stat().st_size > 1024**2:
+                    raise ValueError('Diagnostic output budget exceeded')
                 size = sum(p.lstat().st_size for p in directory.rglob('*') if p.is_file())
                 if size > 132*1024**2:
                     raise ValueError('Output budget exceeded')
@@ -222,13 +230,23 @@ class PredictionJobs:
                 outcome = 'cancelled' if job['cancel'].is_set() else 'ready'
         except InterruptedError:
             outcome = 'cancelled'
-        except Exception:
+        except Exception as error:
+            failure = type(error).__name__
             outcome = 'cancelled' if job['cancel'].is_set() else 'failed'
         finally:
             if proc is not None:
                 try: os.killpg(proc.pid, signal.SIGKILL)
                 except ProcessLookupError: pass
                 proc.wait()
+            if log is not None:
+                log.close()
+            try:
+                (job['directory']/'execution.json').write_bytes(canonical(dict(
+                    elapsed_seconds=time.monotonic()-started, sampled_peak_rss_bytes=peak_rss,
+                    returncode=proc.returncode if proc is not None else None,
+                    outcome=outcome, failure_type=failure, worker_reaped=proc is None or proc.poll() is not None)))
+            except OSError:
+                outcome = 'failed'
             with self.lock:
                 job['status'] = 'cancelled' if job['cancel'].is_set() else outcome
                 job['error'] = 'Prediction failed validation or exceeded its resource budget.' if job['status'] == 'failed' else None
