@@ -9,7 +9,7 @@ development AI demo for explicitly covered literature topics.
 
 October20 AI-05 [activation intake](../retrieval/ON-DEMAND-ACTIVATION-2026-10-20.md): fixed
 checkpoint digest and development membership received; Mac inputs hash-match and region/30-window
-preflight passes. Checkpoint copy awaits Windows share authentication; one bounded real inference
+preflight passes. SMB Guest access was denied; a temporary encrypted transfer is proposed. One bounded real inference
 and outline/measurement review remain. No accuracy acceptance or training change.
 
 ## Week at a glance — visible progress
