@@ -98,3 +98,45 @@ it('enforces a declared byte cap while streaming',async()=>{
   const f=await fixture();serve(f,(k,b)=>k==='ct'?new Uint8Array(b.byteLength+1):b)
   await expect(loadSavedPrediction('/saved')).rejects.toThrow('size limit')
 })
+
+async function assistedFixture() {
+  const f=await fixture();const m=f.m
+  Object.assign(m,{schema_version:'assisted-prediction-view-v1',prediction_mode:'pancreas_assisted',reference_inputs_used:true,
+    prediction_id:'1'.repeat(32),request_identity:'2'.repeat(64),recipe_sha256:'3'.repeat(64),assistance_sha256:'4'.repeat(64),model_sha256:{segmenter:'b'.repeat(64)}})
+  f.e={component:'assisted-native-inference-v1',reference_inputs_used:true,prediction_id:m.prediction_id,request_identity:m.request_identity,
+    recipe_sha256:m.recipe_sha256,model_sha256:m.model_sha256,source_identity:{study_id:m.case_id,ct_sha256:m.files.ct.content_sha256},
+    assistance:{kind:'provided_pancreas',sha256:m.assistance_sha256,lesion_reference_used_for_prediction:false},
+    transform:{source_shape:geometry.shape,source_affine:geometry.affine,units:'mm',native_box:[[2,2,2],[7,7,7]]},
+    reconstruction:{uncovered_region_voxels:0,outside_region:'background'}}
+  f.r={...f.r,reference_inputs_used:true,evidence:f.e}
+  f.files.result=new TextEncoder().encode(JSON.stringify(f.r));f.files.evidence=new TextEncoder().encode(JSON.stringify(f.e))
+  for(const k of ['result','evidence'])m.files[k]={uri:`${k}.json`,bytes:f.files[k].byteLength,content_sha256:await sha(f.files[k])}
+  m.result_sha256=m.files.result.content_sha256;m.inference_evidence_sha256=m.files.evidence.content_sha256
+  return f
+}
+it('measures an assisted result bound to the requested job without using the provided mask',async()=>{
+  const f=await assistedFixture();serve(f)
+  const loaded=await loadSavedPrediction('/job',undefined,{case_id:f.m.case_id,job_id:f.m.prediction_id,request_identity:f.m.request_identity})
+  try{expect(loaded.measurement.assisted).toBe(true);expect(loaded.measurement.pancreasMl).toBe(.048)}finally{loaded.release()}
+})
+it('rejects a valid result belonging to a different job before downloading volumes',async()=>{
+  const f=await assistedFixture();const fetcher=serve(f)
+  await expect(loadSavedPrediction('/job',undefined,{case_id:f.m.case_id,job_id:'9'.repeat(32),request_identity:f.m.request_identity})).rejects.toThrow('different request')
+  expect(fetcher).toHaveBeenCalledTimes(1)
+})
+it.each(['source','model','assistance','reference','gap','geometry','region','recipe','request'])('rejects assisted %s contradictions',async fault=>{
+  const {validateAssistedEvidence}=await import('../src/lib/nativeMeasurements.js');const f=await assistedFixture()
+  if(fault==='source')f.e.source_identity.ct_sha256='0'.repeat(64)
+  if(fault==='model')f.e.model_sha256={segmenter:'0'.repeat(64)}
+  if(fault==='assistance')f.e.assistance.sha256='0'.repeat(64)
+  if(fault==='reference')f.e.assistance.lesion_reference_used_for_prediction=true
+  if(fault==='gap')f.e.reconstruction.uncovered_region_voxels=1
+  if(fault==='geometry')f.e.transform.source_shape=[1,2,3]
+  if(fault==='region')f.e.transform.native_box=[[0,0,0],[20,20,20]]
+  if(fault==='recipe')f.e.recipe_sha256='0'.repeat(64)
+  if(fault==='request')f.e.request_identity='0'.repeat(64)
+  expect(()=>validateAssistedEvidence(f.m,f.r,f.e)).toThrow()
+})
+it('does not admit assisted evidence through the autonomous v2 validator',async()=>{
+  const f=await assistedFixture();expect(()=>validateNativeEvidence(f.m,f.r,f.e)).toThrow()
+})
