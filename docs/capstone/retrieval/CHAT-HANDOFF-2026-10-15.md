@@ -1,5 +1,19 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 CP02/CP03 completed:** Read MEASUREMENT-SUBSET-RESULTS-2026-10-20.md/spec1.50.
+> Remote current70dev/1333train disjoint metadata received; all18local source hashes match.
+> Frozen six:positive29/84/927,empty139/514/698. CP02 five missing-unit admissions;139alsooversize.
+> CP03plan/code68355b9: explicit CT-linked unknown-unit derivation, exactgrid, onlybyte123changed;
+> seven synthetic tests and all five real derived-copy byte checks pass. Originals unchanged.
+> Four new MPS jobs succeed/reaped,69.53s total/max1.59GiB sampledRSS;29reused. Scored29/84/514/698;
+> 139excludedsize;927comparisonfails scaledlesion1.0000000591389835, no rounding/retry.
+> Only514passesrelativeCP01screen butstill6.905mLfalse lesion;698boundarypersists,positivesvolumeerrorfails.
+> No UI promotion/reliable-size acceptance.24metricrows arithmetic checked. OriginalUI/services unchanged.
+> Private CP03evidence /Volumes/PROWL-Data/PROWL/artifacts/measurement-subset-cp03-20261020/.
+> Next explicitnear-binaryreferencepolicy and698boundaryaudit usingretainedoutputs before another
+> correction; no new inference needed. W03-04/05 COMPLETE including Quintonacceptance;AI-05open.
+> Earlier pending metadata/review statements below historical. No training/protectedreads/humanhours.
+
 > **October20 human acceptance/CP02 coordination:** Quinton explicitly accepts the Week3 packet
 > and UI walkthrough; W03-05 nowComplete4/4. He also explicitly authorizes the current development
 > metadata request; sent to Plan capstone experiment workflow, response pending. Earlier pending

@@ -3,7 +3,7 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 20, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-04 and W03-05 complete; Quinton accepted the packet/UI; CP02 metadata requested\
+**Status:** W03-04 and W03-05 complete; Quinton accepted the packet/UI; fixed measurement comparison delivered; accuracy still open\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
@@ -12,10 +12,12 @@ development AI demo for explicitly covered literature topics.
 **Execution update:** the [fixed30-case check](../retrieval/WEEK3-QUALITY-RESULTS-2026-10-20.md)
 improved from13/20 to20/20 supported answers while preserving10/10 safe boundaries. Largest
 failure was complete model choices rejected for layout, repaired without adding or rewriting facts.
-W03-04 complete; W03-05 engineering review/deployment complete with Quinton's walkthrough decision
-open. [CP02](../retrieval/MEASUREMENT-SUBSET-PLAN-2026-10-20.md) is frozen before case selection;
-current development/train-exclusion metadata handoff awaits cross-chat authorization. The
-following recommendation paragraph is the pre-execution snapshot, superseded by this update.
+W03-04 complete; W03-05 complete after Quinton accepted the packet/UI.
+[CP02/CP03 results](../retrieval/MEASUREMENT-SUBSET-RESULTS-2026-10-20.md): six fixed cases, four
+scored, one size exclusion, one annotation-value scoring failure. Four new inferences succeed;
+missing mask units explicitly qualified in derived copies. Only1/4 scored cases passes the relative
+screen; measurements remain unqualified. Next near-binary reference qualification and persistent
+boundary audit, reusing predictions. The recommendation below is the pre-execution snapshot.
 
 Quinton reports the meeting/demo went well and requests an effectiveness review. Current
 integration is demonstrable, but this does not complete answer-quality, independent evaluation,
@@ -76,7 +78,7 @@ The table below is the October 20 planning snapshot; update it with material pro
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Complete:4/4; exact selection17/20→20/20 | Reopen for a demonstrated new wording/coverage gap | Closed Tuesday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Complete:4/4; engineering and Quinton review passed | Reopen for demonstrated regression; independent evaluation remains separate | Closed Tuesday |
-| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | CP01 failed; CP02 protocol frozen | Current metadata, fixed3positive/3empty comparison; no size promotion | Authorized metadata response pending |
+| [AI-05 Measurements](https://trello.com/c/Ob3VE0MN) | Fixed6-case attempt:4 scored,2 explicit missing; no promotion | Qualify scaled annotation values; inspect persistent boundary contact | Next bounded measurement block |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 

@@ -2,8 +2,10 @@
 
 Recipient: Codex chat **Plan capstone experiment workflow**, on Quinns-Laptop.
 Status: Quinton explicitly authorized “Yes, request the development metadata” on October20.
-The metadata-only request was sent to the named training chat. Response pending; no training
-changes or remote inference requested.
+The metadata-only request completed after Quinton reconnected the laptop. It verifies current70
+development /1,333training disjointness, fixed selection and admitted source identities. No training
+changes or remote inference requested. Local18-file matching and CP02/CP03 outcomes are recorded in
+[the result report](MEASUREMENT-SUBSET-RESULTS-2026-10-20.md). The request text below is preserved.
 
 ## Request text
 

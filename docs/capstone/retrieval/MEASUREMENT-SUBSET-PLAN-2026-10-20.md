@@ -65,5 +65,8 @@ next hypothesis. Next correction must address a demonstrated cross-case error me
 receive its own frozen comparison. No absolute measurement acceptance threshold is invented
 after observing these cases; reliable-size release and human outline review remain separate.
 
-Current status: protocol frozen; authorized current-split metadata request sent; response pending.
-No additional case selected, array opened or inference run for CP02 yet.
+Current status: metadata received; fixed six selected and all18 local hashes matched. CP02
+header admission is limited by missing mask units in five cases and size in one. No new CP02
+inference or array decoding. Separate CP03 input-unit qualification and the bounded comparison
+are complete with four scored/two explicit missing results. See
+[results](MEASUREMENT-SUBSET-RESULTS-2026-10-20.md); no UI promotion or reliable-size acceptance.
