@@ -5,8 +5,10 @@
 > MPS case00000029 completed30windows/19.1s/1.12GiB sampledRSS/reaped; real UI overlay displayed.
 >67predictedpancreas voxels touch low/high-z region faces, no CT-face contact; volume correctly
 > withheld. Cause unproven, no cleanup/rerun/quality acceptance.8017owned63294 configured, job
->d8f8cca5d508413c9ba5f96114857c19.182Python/213UI/buildpass. Main merge authorized and next after
-> documentation/commit; retain full shared UI integration, no private data/weights/images in Git.
+>d8f8cca5d508413c9ba5f96114857c19.182Python/213UI/buildpass. PR1 merged to main as3d53c55;
+> local checkout main, original branches retained. Vite recovered after checkout restart; fresh
+> /predict tab connected/case selected/Run enabled, no second inference. First result frozen
+> privately. Next boundary/measurement qualification; earlier pending approvals/merge are historical.
 
 > **October20 closeout amendment:** Quinton requests merging the branch to `main` after current
 > activation work. Finish transfer/local inference, review the full shared integration diff and

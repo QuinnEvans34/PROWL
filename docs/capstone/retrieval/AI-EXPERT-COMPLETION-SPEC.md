@@ -11,8 +11,9 @@ and 57 UI/library checks plus the build pass; synthetic HTTP-to-JS measurement i
 [Activation and real walkthrough](ON-DEMAND-ACTIVATION-2026-10-20.md): encrypted checkpoint transfer
 verified; existing development inputs hash-match. One30-window MPS prediction completed in19.1s
 and displays in the UI. Independent counts confirm67 pancreas voxels on the inference boundary;
-size is correctly withheld.182 Python/213 UI checks and production build pass. User requests merge
-to main after integration verification. AI-05 measurement accuracy/coverage acceptance remains open.
+size is correctly withheld.182 Python/213 UI checks and production build pass. The verified integration
+was merged into main through [PR1](https://github.com/QuinnEvans34/PROWL/pull/1), commit3d53c55.
+AI-05 measurement accuracy/coverage acceptance remains open.
 
 October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
 training pipeline uses a provided pancreas mask to define its region. It requires a separately
