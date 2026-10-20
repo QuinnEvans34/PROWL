@@ -1,9 +1,15 @@
 # AI expert completion specification
 
-**Version:** 1.41 — October 20, 2026 (native measurement provenance and coverage guards; formal acceptance unchanged)\
+**Version:** 1.42 — October 20, 2026 (current producer handoff and assisted-input distinction; formal acceptance unchanged)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [current producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md): the current
+training pipeline uses a provided pancreas mask to define its region. It requires a separately
+versioned assisted-result adapter; autonomous v2 guards remain intact. Actual retained prediction
+availability and current producer schema are pending the training owner's metadata handoff.
+No new inference, artifact transfer or runtime change occurred in this discovery checkpoint.
 
 October 20 [native measurement provenance](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md): opt-in v2
 packages bind the original CT, prediction, result and inference evidence; source/model/geometry
@@ -376,7 +382,7 @@ quality gate remains open. Only advance past it when the next step does not depe
 | 7 | Qualify short grounded responses and refusal — [AI-04](https://trello.com/c/dWDF81CH), under W06-02 | Claim/citation coverage and semantic review on development, chosen policy or explicit fallback | Development preview implemented by explicit amendment; formal qualification remains after 6 |
 | 8 | Connect finding → question → evidence in the viewer — [W07-01](https://trello.com/c/IM0zPvP9) | Browser-tested finding/context/citation flow and all failure states | Queued after 7 disposition |
 | 9 | Run protected core acceptance and package the baseline — [W08-01](https://trello.com/c/s827dTBE), [W07-02](https://trello.com/c/cfVFZT2a) | Frozen held-out report, final integration/recovery evidence, walkthrough and operator handoff | Queued after 8; all release dependencies required |
-| 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Required; queued after accepted core Step 9 |
+| 10 | Qualify measurements and summary adapter — [AI-05](https://trello.com/c/Ob3VE0MN) | REQ-X01 verified geometry, measurements and lineage | Bounded development in progress under October 20 amendment; formal acceptance remains after core Step 9 |
 | 11 | Add eligible reference comparisons and explanations — [AI-06](https://trello.com/c/TKCLH5PZ) | REQ-X02–X03 cited comparison and failure/refusal evidence | Required; queued after 10 |
 | 12 | Integrate reviewed training feedback and accept extension — [AI-07](https://trello.com/c/pL25Swot) | REQ-X04, separate extension assessment, viewer and final handoff | Required; queued after 11 |
 
@@ -545,7 +551,8 @@ experiments and unrelated changes. Never infer human working hours from agent or
 | Step 5 / AI-03 | In progress — proposed v6 engineering review complete; changed-scope human review pending | Three explicit v5 events accept changed wording/evidence and full 30-case consistency; unchanged v4 approvals preserved. [Private authoring quickstart](PRIVATE-EVALUATION-QUICKSTART.md), blank templates, ten-source reading pack and offline checker delivered. 28 private-validator and 36 public-checkpoint tests pass. Actual protected authoring/validation/backup/freeze remain pending; public receipt stays not_created. No protected content accessed or tuning release. |
 | Controlled answer diagnosis / AI-04 | Experiment complete; feature In Progress | [Three-by-three results](EVIDENCE-ISOLATION-RESULTS-2026-10-18.md): all nine drafts observed without timeout, zero complete answers, evidence omissions and semantic/citation/reviewer failures isolated. No replacement promoted. Next source-linked fact records and explicit qualifier assembly, subject to its own bounded plan. |
 | Source-linked volume facts / AI-04 | Bounded assembly pass; feature In Progress | [Results](SOURCE-FACT-RESULTS-2026-10-18.md): two complete reviewed group examples,33mutation/selection checks, seven actual-corpus typed mismatches rejected, one source query/zero model calls. Qualitative records, free-text selection, output adapter and independent evaluation remain open; no UI promotion. |
-| Steps 10–12 / AI-05–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); only after core acceptance; final release includes REQ-X01–X04. |
+| Step 10 / AI-05 | Bounded development in progress; formal acceptance open | [Native provenance results](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) and [assisted producer handoff](ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md). Current artifact intake, anatomical review, individual-lesion measurements and accuracy validation remain open. |
+| Steps 11–12 / AI-06–AI-07 | Required; not started | [Measurement-aware extension](MEASUREMENT-AWARE-EXPERT-PLAN.md); acceptance follows core acceptance; final release includes REQ-X01–X04. |
 | Development source search / AI-09 | Complete — sequencing amendment | Typed general literature questions return real source excerpts in the local UI; 127 Python / 22 UI checks, production build and real browser verification. [Report](LIVE-DEVELOPMENT-SEARCH-2026-10-17.md). No answer-quality acceptance. |
 | Steps 6–9 | Open | Await complete Step 5 freeze before retrieval tuning. Response quality gate remains open for Step 7. |
 

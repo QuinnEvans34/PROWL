@@ -1,5 +1,14 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 current measurement input:** Read ASSISTED-MEASUREMENT-HANDOFF-2026-10-20.md/spec1.42.
+> Saved-mask volumes and native autonomous v2 delivered in local6180122/9d7c579; portable work
+> published9d7e87a/9141a00. Historical native example correctly withholds volume for boundary
+> contact; no current model-quality conclusion. Training chat's current run is pancreas-assisted,
+> not autonomous: preserve v2 rejection and implement a separate adapter after actual producer
+> metadata arrives. Retained native prediction availability is unconfirmed. Concrete metadata-only
+> request prepared; cross-chat delivery requires explicit human authorization. No inference,
+> training, transfer or runtime change during discovery. AI-05 active; W03-04/05 remain pending.
+
 > **October 20 volume answers LIVE:** Read VOLUME-COMPOSITION-RESULTS-2026-10-20.md/spec1.39
 > and readable VOLUME-ANSWER-REVIEW-2026-10-20.md. W03-03 bounded slice complete; next W03-04/05.
 > API PID9015/session21308 uses --volume-answers; previous73251 stopped. Aggregate health
