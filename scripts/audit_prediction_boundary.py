@@ -21,7 +21,8 @@ def digest(path):
     return h.hexdigest()
 
 
-def audit_package(package, assistance):
+def verified_package_images(package, assistance):
+    """Verify identities and headers without decoding arrays or repeating diagnostics."""
     manifest = json.loads((package / 'manifest.json').read_text())
     if manifest.get('schema_version') != 'assisted-prediction-view-v1':
         raise ValueError('Expected an assisted native package')
@@ -48,6 +49,11 @@ def audit_package(package, assistance):
                 or list(img.shape) != g['shape'] or img.header.get_xyzt_units()[0] != 'mm'
                 or not np.allclose(img.affine, g['affine'], atol=1e-5, rtol=0)):
             raise ValueError('Geometry/units mismatch')
+    return manifest, evidence, pred, ref
+
+
+def audit_package(package, assistance):
+    manifest, evidence, pred, ref = verified_package_images(package, assistance)
     result = audit_boundary(np.asanyarray(pred.dataobj), np.asanyarray(ref.dataobj),
                             pred.affine, evidence['reconstruction']['native_box'])
     result['identity'] = {k: manifest[k] for k in ('prediction_id', 'request_identity', 'model_sha256', 'assistance_sha256')}
