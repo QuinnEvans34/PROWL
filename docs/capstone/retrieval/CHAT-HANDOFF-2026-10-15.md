@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+> **October 20 Week 3 prepared:** Read `../weeks/WEEK-03-WORK-PLAN.md` and spec1.36.
+> Trello active lanes rolled to Week 3; new Week 3 Complete column, W03-02–06 task cards;
+> existing PANORAMA W03-01 reused. W02-08 bounded prototype/AI-08 source slice closed against
+> retained evidence; AI-03 review/freeze and AI-04 quality remain open. First task W03-02:
+> runtime and integrated UI reliability, then volume answers/wording/quality checkpoint.
+> At17:42UTC UI5180/API8016/Ollama11434/DB55433 refused connections and PROWL-Data was absent.
+> Quinton will reconnect drive; never infer old PIDs live or create replacement database directories.
+> Shared branch `claude/prowl-ui-implementation` at c5ca63e on inspection includes another chat's
+> redesign; preserve it and publish only scoped retrieval/planning changes. No training/full selector.
+> Oct19 at least3human hours reported for other-chat CT/run preparation, recorded once as estimate;
+> no new agent-runtime credit or portal submission. End-week demo target does not waive formal gates.
+
 > **October18 readable record answers ACTIVE:** Read RECORD-ANSWER-RESULTS-2026-10-18.md/spec1.35.
 > a479c74 adds source-record-answer-v1: Qwen3:8b pinned500a1f06 on originalOllama11434 chooses reviewed
 > sentence variants/paragraphs; exact complete fact/citation coverage checked in backend and UI. This

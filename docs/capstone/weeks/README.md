@@ -4,8 +4,9 @@ Quinton adopted a Sunday planning routine on October8,2026. Each week has one li
 `WEEK-NN-WORK-PLAN.md`. It is the daily task/specification list, not a replacement for the approved
 proposal, master schedule, experiment records or component contracts.
 
-**Current:** [Week 2 work plan and delivery benchmark](WEEK-02-WORK-PLAN.md), October 12–18.
-**Previous:** [Week 1 closeout](WEEK-01-WORK-PLAN.md), October 5–11; evidence/hour carryovers remain visible.
+**Current:** [Week 3 work plan and delivery benchmark](WEEK-03-WORK-PLAN.md), October 19–25.
+**Previous:** [Week 2 plan](WEEK-02-WORK-PLAN.md), October 12–18, and
+[Week 1 closeout](WEEK-01-WORK-PLAN.md), October 5–11; evidence/hour carryovers remain visible.
 **Template:** [Weekly work plan](WEEKLY-WORK-PLAN-TEMPLATE.md).
 **Human time:** [Hours log](HOURS-LOG.md).
 

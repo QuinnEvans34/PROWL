@@ -1,9 +1,16 @@
 # AI expert completion specification
 
-**Version:** 1.35 — October 18, 2026 (reviewed-record AI composition active)\
+**Version:** 1.36 — October 20, 2026 (Week 3 execution plan; acceptance unchanged)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20: the [Week 3 plan](../weeks/WEEK-03-WORK-PLAN.md) orders runtime/UI reliability,
+reviewed volume answers, broader wording/selection and a bounded quality checkpoint. Target a
+dependable development demo by October 25; PANORAMA remains the proposal's Week 3 commitment.
+Formal thresholds, independent evaluation and the required measurement extension remain unchanged.
+Fresh inventory found UI/API/Ollama/DB offline and PROWL-Data unmounted; Quinton will reconnect it.
+The October 18 selected policy below is historical selection, not proof of current liveness.
 
 October18 readable answers: [plan](RECORD-ANSWER-PLAN-2026-10-18.md) and
 [results](RECORD-ANSWER-RESULTS-2026-10-18.md). **Ask question now uses reviewed record search and local
