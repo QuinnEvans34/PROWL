@@ -10,7 +10,10 @@ reviewed volume answers, broader wording/selection and a bounded quality checkpo
 dependable development demo by October 25; PANORAMA remains the proposal's Week 3 commitment.
 Formal thresholds, independent evaluation and the required measurement extension remain unchanged.
 Fresh inventory found UI/API/Ollama/DB offline and PROWL-Data unmounted; Quinton will reconnect it.
-The October 18 selected policy below is historical selection, not proof of current liveness.
+Subsequent [readiness work](WEEK3-DEMO-READINESS-2026-10-20.md) restored the existing services after
+reconnection/Docker sharing repair and fixed the UI dev-server contract allowlist. Selected policy
+verified; 50 UI checks/build and one live answer/source check pass. Earlier DB exit causes and
+broader quality remain open. Older PIDs below are historical.
 
 October18 readable answers: [plan](RECORD-ANSWER-PLAN-2026-10-18.md) and
 [results](RECORD-ANSWER-RESULTS-2026-10-18.md). **Ask question now uses reviewed record search and local
