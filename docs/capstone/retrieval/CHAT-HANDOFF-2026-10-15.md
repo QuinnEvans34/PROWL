@@ -1,5 +1,15 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 demo restored after planning:** Read WEEK3-DEMO-READINESS-2026-10-20.md.
+> Drive reconnected/UUID verified; stale Docker bind required Desktop restart and restoration of
+> previously running XML-Adventure. Existing DB recovered/healthy, no reinit. Vite denied imported
+> evidence contracts; exact ten-file allowlist fixes dev serving, unrelated README remains403.
+> 50UI checks/buildpass; one live comparison gives localAI composition/fourparagraphs/sevenpassages;
+> citation6 opened/matched. One model call9.870s, not end-to-end/quality benchmark.
+> Current owned sessions Ollama3015/API2188/Vite29391; record-answer-v1 selected on8016 and proxy5180.
+> Earlier Oct18 exit2 causes unresolved; W03-02 remains open. W03-03 volume adapter is next coverage
+> work. Plan commitc58197a; preserve shared UI branch and scope publication to retrieval branch.
+
 > **October 20 Week 3 prepared:** Read `../weeks/WEEK-03-WORK-PLAN.md` and spec1.36.
 > Trello active lanes rolled to Week 3; new Week 3 Complete column, W03-02–06 task cards;
 > existing PANORAMA W03-01 reused. W02-08 bounded prototype/AI-08 source slice closed against
