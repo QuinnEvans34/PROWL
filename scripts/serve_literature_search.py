@@ -56,7 +56,7 @@ def create_service(config_path):
 
 
 def create_record_search(baseline):
-    from src.retrieval.record_search import RecordSearchIndex, RecordAwareSearch
+    from src.retrieval.record_search import RecordSearchIndex, RecordAwareSearch, disease_scope
     from src.retrieval.evidence_experiment import corpus_records
     spec = json.loads((ROOT/'configs/evidence/development-search-v3-records.json').read_text())
     catalog = checked_json(spec['catalog'], ROOT)
@@ -64,7 +64,8 @@ def create_record_search(baseline):
     if catalog['manifest'] != spec['manifest']:
         raise ValueError('Catalog/corpus mismatch')
     index = RecordSearchIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
-    return RecordAwareSearch(baseline, index, spec)
+    disease_baseline = DevelopmentSearch(baseline.corpus, baseline.config, baseline.retrieve, scope_policy=disease_scope)
+    return RecordAwareSearch(disease_baseline, index, spec)
 
 
 def create_record_answers(source_search):

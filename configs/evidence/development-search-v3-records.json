@@ -10,7 +10,7 @@
   "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
   "source_count": 14,
   "passage_count": 1179,
-  "retriever": "source-linked-record-search-v1",
+  "retriever": "source-linked-record-search-v1.1",
   "top_k": 20,
   "query_expansion": false,
   "generation": false,
@@ -24,5 +24,8 @@
   "review": {
     "path": "configs/evidence/source-facts-disease-v1-review.json",
     "sha256": "702eab2e2372792fa592633c51da757e4c2d2b2ccd93f9474cb3b792822a1697"
-  }
+  },
+  "compatible_response_versions": [
+    "source-linked-record-search-v1"
+  ]
 }

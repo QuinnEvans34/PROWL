@@ -6,7 +6,9 @@ import catalog from '../../../configs/evidence/source-facts-disease-v1.json'
 export function validateRecordAnswer(result, request, validateSources, contracts = { config, wording, catalog, schema: 'prowl-record-answer-response-v1' }) {
   const { config, wording, catalog, schema } = contracts
   const fail = () => { throw new Error('Invalid reviewed-record answer') }
-  if (result.schema_version !== schema || result.answer_policy !== config.version
+  // Prior policies listed by the config share this exact wording/citation contract.
+  const policies = [config.version, ...(config.compatible_response_versions || [])]
+  if (result.schema_version !== schema || !policies.includes(result.answer_policy)
     || !['not_called', 'completed', 'fallback'].includes(result.generation)) fail()
   validateSources({ ...result, schema_version: 'prowl-development-search-response-v1', generation: 'not_called', answer: null }, request)
   if (result.record_selection.status !== 'matched') {
@@ -15,7 +17,7 @@ export function validateRecordAnswer(result, request, validateSources, contracts
   }
   const a = result.answer, generated = result.generation === 'completed'
   if (!a || !['completed', 'fallback'].includes(result.generation) || a.status !== 'summarized'
-    || a.policy !== config.version || a.prompt_sha256 !== config.prompt_sha256
+    || a.policy !== result.answer_policy || a.prompt_sha256 !== config.prompt_sha256
     || a.wording_content_sha256 !== config.wording_content_sha256
     || a.validation !== 'complete_reviewed_units_and_exact_citations'
     || a.quality !== 'engineering_reviewed_independent_review_pending'

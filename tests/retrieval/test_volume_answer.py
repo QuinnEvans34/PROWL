@@ -53,12 +53,24 @@ def test_both_groups_complete_and_distinct_with_canonical_context(sample):
     lambda p:p['paragraphs'][0]['sentences'].pop(1),
     lambda p:p['paragraphs'][0]['sentences'][0].update(text='A normal pancreas is 82.6 cm3'),
     lambda p:p['paragraphs'][0]['sentences'][0].update(wording=True),
-    lambda p:p['paragraphs'][0]['sentences'].reverse(),
     lambda p:p['paragraphs'][0].update(record_id='other-population'),
 ])
 def test_invalid_model_plan_keeps_all_source_facts_in_explicit_fallback(sample,mutate):
     c,r,_=sample;call,_=provider(c,r,mutate);a=c.compose('Q',r,call)
     assert a['provenance']=='reviewed_source_fallback' and a['model'] is None and len(a['claims'])==4
+
+
+def test_reordered_complete_volume_plan_is_arranged_without_losing_model_choices(sample):
+    c, r, _ = sample
+    def reorder(plan):
+        for paragraph in plan['paragraphs']:
+            paragraph['sentences'].reverse()
+            for choice in paragraph['sentences']: choice['wording'] = 1
+    call, _ = provider(c, r, reorder)
+    a = c.compose('Q', r, call)
+    assert a['provenance'] == 'local_model_composition' and a['failure'] is None
+    assert all(choice['wording'] == 1 for claim in a['claims'] for choice in claim['units'])
+    assert 'standard error' in a['claims'][0]['text'] and 'does not provide a universal' in a['claims'][1]['text']
 
 
 @pytest.mark.parametrize('kind',['text','citation','missing','extra','population'])
@@ -93,7 +105,7 @@ def test_service_has_one_lock_no_generation_outside_coverage_and_no_disease_rela
     s.lock.release();calls.clear();r['record_selection'].update(status='dense_fallback',matches=[])
     assert s.answer({'question':'Q'})['answer'] is None and calls==[]
     r['record_selection']['policy']='source-linked-record-search-v1'
-    assert s.answer({'question':'Q'})['answer_policy']=='source-record-answer-v1'
+    assert s.answer({'question':'Q'})['answer_policy']=='source-record-answer-v1.1'
 
 
 def test_family_choice_invokes_only_one_baseline_path(sample):

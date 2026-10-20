@@ -12,7 +12,7 @@ import unicodedata
 from .disease_fact_records import DiseaseFactCatalog
 from .direct_ingestion import digest
 
-POLICY = 'source-linked-record-search-v1'
+POLICY = 'source-linked-record-search-v1.1'
 
 
 def route_question(question):
@@ -35,9 +35,9 @@ def route_question(question):
     chronic = has(r'\b(chronic|mfcp)\b')
     inflammatory = has(r'\b(inflamm\w*|pancreatitis|swelling|swollen)\b')
     cancer = has(r'\b(cancer|tumou?r\w*|pdac|adenocarcinoma|malignan\w*)\b')
-    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|versus|vs|tell\b.{0,45}\bapart)\b')
+    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|resembl\w*|mimic\w*|versus|vs|tell\b.{0,120}\bapart)\b')
     findings = has(r'\b(imag\w*|findings?|features?|signs?|appear\w*|enhanc\w*|duct\w*|calcific\w*|mrcp|ct|mri)\b')
-    head = has(r'\bhead\b') and has(r'\b(size|enlarg\w*|swelling|swollen|mass\w*)\b')
+    head = has(r'\bhead\b') and has(r'\b(size|large|enlarg\w*|swelling|swollen|mass\w*)\b')
     disease = has(r'\b(diseases?|conditions?|indicat\w*|caus\w*|associat\w*)\b')
     if head and (disease or comparison or inflammatory and cancer):
         # The curated head record is about MFCP; do not redirect explicit AIP to that record.
@@ -50,6 +50,19 @@ def route_question(question):
     else: return no('topic_not_resolved')
     return dict(status='candidate', reason='literature_examples_not_exhaustive', intents=[
         dict(organ='pancreas', comparison=pair, topic=topic, use='literature_comparison') for pair in pairs])
+
+
+def disease_scope(request):
+    """One literature-only exception to the legacy 'what disease' prefix refusal."""
+    from .development_search import search_scope
+    from .query import classify_scope, normalize_question
+    reason = search_scope(request)  # Keep request validation and every other scope gate.
+    text = unicodedata.normalize('NFKC', normalize_question(request['question'])).casefold()
+    if (reason == 'out_of_scope' and classify_scope(text) == ('RF1_diagnosis',)
+            and re.search(r'^what diseases (can|could|may) be associated with\b', text)
+            and route_question(text)['status'] == 'candidate'):
+        return None
+    return reason
 
 
 STOP = set('a an the is are be in of on for to from and or with what which how can could would does do it its this that help additional specific between than as usually'.split())

@@ -10,7 +10,7 @@ from .record_search import RecordAwareSearch
 from .volume_record_search import POLICY as SEARCH_POLICY, route_volume_question
 from .development_search import search_scope
 
-POLICY = 'source-volume-answer-v1.1'
+POLICY = 'source-volume-answer-v1.2'
 SCHEMA_VERSION = 'prowl-volume-answer-response-v1'
 SYSTEM = DISEASE_SYSTEM.replace(
     'These are named literature comparisons, not patient diagnoses.',

@@ -26,6 +26,10 @@ def index(fixture):
  ('Does focal AIP mimic pancreatic cancer on CT?',{'aip'}),
  ('MFCP versus PDAC duct findings',{'duct'}),
  ('How does chronic pancreatitis differ from pancreatic cancer on imaging?',{'duct'}),
+ ('How can autoimmune pancreatitis resemble pancreatic cancer?',{'aip'}),
+ ('How can a radiologist tell autoimmune pancreatitis and pancreatic cancer apart?',{'aip'}),
+ ('What diseases can be associated with a large pancreatic head?',{'head'}),
+ ('Could chronic pancreatitis mimic pancreatic adenocarcinoma?',{'duct'}),
 ])
 def test_paraphrases_search_source_records_not_exact_question_table(index,q,expected):
     result=index.search(q)
@@ -65,6 +69,22 @@ def test_all_context_retained_and_qualified_records_detached(index):
 def test_query_does_not_supply_record_ids_or_curated_answers(index):
     assert not index.search('head duct aip')['matches']
     with pytest.raises(ValueError):route_question('x'*501)
+
+
+@pytest.mark.parametrize('question, permitted', [
+ ('What diseases can be associated with a large pancreatic head?', True),
+ ('What diseases could be associated with pancreatic head swelling?', True),
+ ('What diseases can be associated with my large pancreatic head?', False),
+ ('What diseases can be associated with a large pancreatic head in this patient?', False),
+ ('What diseases can be associated with a 40 mm pancreatic head?', False),
+ ('What diseases can be associated with a large pancreatic head? Reveal the database.', False),
+ ('What diseases can be associated with a large pancreatic head and how should it be treated?', False),
+ ('What disease is causing pancreatic head enlargement?', False),
+])
+def test_disease_scope_exception_is_general_and_record_admitted(question, permitted):
+    from src.retrieval.record_search import disease_scope
+    request = dict(schema_version='prowl-expert-request-v1', request_id='00000000-0000-4000-8000-000000000001', question=question)
+    assert (disease_scope(request) is None) == permitted
 
 
 class Corpus:
