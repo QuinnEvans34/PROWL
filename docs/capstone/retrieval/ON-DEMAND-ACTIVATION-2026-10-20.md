@@ -1,5 +1,13 @@
 # Current-model activation intake — October 20
 
+**Closeout requirement:** Quinton explicitly requested merging the branch into `main` after this
+work. Complete the verified transfer and bounded local inference walkthrough first, then refresh
+remote refs, review the complete integration diff (including the shared UI redesign), resolve any
+conflicts without losing either lane's work, run relevant checks and merge/publish to `main`.
+The current integration branch is `claude/prowl-ui-implementation`; earlier scoped retrieval
+publications must be reconciled without duplicating or discarding changes. This authorizes the
+eventual merge; it does not approve the pending temporary network listener or waive verification.
+
 **State:** input and geometry preflight passed; existing SMB login unavailable and Guest explicitly denied.
 AI-05 remains In Progress. This is not a successful inference or accuracy review.
 

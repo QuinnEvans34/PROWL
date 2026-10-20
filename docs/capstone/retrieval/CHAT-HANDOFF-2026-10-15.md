@@ -1,5 +1,10 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 closeout amendment:** Quinton requests merging the branch to `main` after current
+> activation work. Finish transfer/local inference, review the full shared integration diff and
+> relevant checks, then merge/publish while preserving UI and retrieval work. Merge is authorized;
+> pending encrypted-transfer listener is not yet approved. See activation report.
+
 > **October20 activation intake:** Read ON-DEMAND-ACTIVATION-2026-10-20.md/spec1.45.
 > Fixed step6000 checkpoint hash verified on Windows/backup; deterministic exposed case00000029.
 > Mac CT+provided-pancreas hashes match; finite/aligned/mm/binary checks and exact region/30windows
