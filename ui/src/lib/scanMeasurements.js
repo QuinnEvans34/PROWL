@@ -15,11 +15,11 @@ export function scanQuestion(question) {
   return null
 }
 
-function grid(header) {
+function grid(header, maxVoxels = 16000000) {
   if (!header || header.dims?.[0] !== 3 || header.dims.slice(4).some(n => n > 1)) fail('Only a single 3D mask is supported.')
   const shape = header.dims.slice(1, 4)
   const n = shape.reduce((a, b) => a * b, 1)
-  if (shape.some(n => !Number.isInteger(n) || n <= 0) || n > 16000000) fail('Invalid or oversized measurement grid.')
+  if (shape.some(n => !Number.isInteger(n) || n <= 0) || n > maxVoxels) fail('Invalid or oversized measurement grid.')
   const a = header.affine
   if (!(header.sform_code > 0 || header.qform_code > 0) || !Array.isArray(a) || a.length !== 4
     || a.some(r => !Array.isArray(r) || r.length !== 4 || r.some(v => !Number.isFinite(v)))
@@ -32,8 +32,8 @@ function grid(header) {
 }
 
 // Pure calculation. No reference mask, probability score, mesh or LLM is an input.
-export function measureMask(ct, pred, labels, spacingMm) {
-  const g = grid(pred); const c = grid(ct)
+export function measureMask(ct, pred, labels, spacingMm, { maxVoxels = 16000000, roi = null } = {}) {
+  const g = grid(pred, maxVoxels); const c = grid(ct, maxVoxels)
   if (g.shape.some((n, i) => n !== c.shape[i]) || g.affine.some((r, i) => r.some((v, j) => !close(v, c.affine[i][j])))) fail('The CT and prediction grids do not match.')
   const units = [ct, pred].map(h => h.xyzt_units & 7)
   let unitsBasis = 'NIfTI millimeter units'
@@ -43,7 +43,9 @@ export function measureMask(ct, pred, labels, spacingMm) {
     unitsBasis = 'Legacy manifest spacing_mm; NIfTI units missing'
   }
   if (labels.length !== g.n) fail('The prediction payload is incomplete.')
-  let pancreas = 0; let lesion = 0; let boundary = false
+  if (roi && (!Array.isArray(roi) || roi.length !== 2 || roi.some(r => !Array.isArray(r) || r.length !== 3 || r.some(n => !Number.isInteger(n)))
+    || roi[0].some((n, i) => n < 0 || roi[1][i] <= n || roi[1][i] > g.shape[i]))) fail('Invalid native inference region.')
+  let pancreas = 0; let lesion = 0; let boundary = false; let cropBoundary = false
   const [nx, ny, nz] = g.shape
   for (let i = 0; i < labels.length; i++) {
     const v = labels[i]
@@ -51,10 +53,18 @@ export function measureMask(ct, pred, labels, spacingMm) {
     if (!v) continue
     pancreas++; if (v === 2) lesion++
     const x = i % nx; const y = Math.floor(i / nx) % ny; const z = Math.floor(i / (nx * ny))
+    if (roi) {
+      const xyz = [x, y, z]
+      if (xyz.some((v, j) => v < roi[0][j] || v >= roi[1][j])) fail('Predicted labels fall outside the recorded inference region.')
+      if (xyz.some((v, j) => v === roi[0][j] || v === roi[1][j] - 1)) cropBoundary = true
+    }
     if (x === 0 || y === 0 || z === 0 || x === nx - 1 || y === ny - 1 || z === nz - 1) boundary = true
   }
   if (!pancreas || pancreas === lesion) fail('A usable pancreas outline is not available.')
-  if (boundary) fail('The predicted outline touches the image boundary and may be cut off. Its size cannot be reported reliably.')
+  if (boundary || cropBoundary) {
+    const error = new Error(`The predicted outline touches the ${cropBoundary ? 'inference crop' : 'image'} boundary and may be cut off. Its size cannot be reported reliably.`)
+    error.code = 'mask_coverage'; throw error
+  }
   return { schema: MEASUREMENT_POLICY, shape: g.shape, affine: g.affine, voxelMm3: g.voxel,
     pancreasVoxels: pancreas, lesionVoxels: lesion, pancreasMl: pancreas * g.voxel / 1000,
     lesionMl: lesion * g.voxel / 1000, unitsBasis, coverage: 'Whole-organ coverage unverified',
@@ -62,7 +72,7 @@ export function measureMask(ct, pred, labels, spacingMm) {
     modelLineage: 'Saved prepared prediction; producing checkpoint hash unavailable' }
 }
 
-async function boundedStream(stream, signal) {
+export async function boundedStream(stream, signal, limit = LIMIT) {
   const reader = stream.getReader(); const chunks = []; let size = 0
   const abort = () => { void reader.cancel().catch(() => {}) }
   signal?.addEventListener('abort', abort, { once: true })
@@ -72,7 +82,7 @@ async function boundedStream(stream, signal) {
       const { done, value } = await reader.read()
       if (done) break
       size += value.byteLength
-      if (size > LIMIT) fail('Measurement file exceeds the preview size limit.')
+      if (size > limit) fail('Measurement file exceeds the preview size limit.')
       chunks.push(value)
     }
     signal?.throwIfAborted()
@@ -86,20 +96,21 @@ async function boundedStream(stream, signal) {
   }
 }
 
-export async function decodeMeasurementFile(raw, signal) {
+export async function decodeMeasurementFile(raw, signal, { maxVoxels = 16000000, decodedLimit = LIMIT } = {}) {
   if (raw.byteLength > LIMIT) fail('Measurement file exceeds the preview size limit.')
   const prefix = new Uint8Array(raw, 0, Math.min(2, raw.byteLength))
   const data = prefix[0] === 31 && prefix[1] === 139
-    ? await boundedStream(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip')), signal) : raw
+    ? await boundedStream(new Blob([raw]).stream().pipeThrough(new DecompressionStream('gzip')), signal, decodedLimit) : raw
   signal?.throwIfAborted()
+  if (data.byteLength > decodedLimit) fail('Decoded image exceeds the preview size limit.')
   const header = readHeader(data)
-  const g = grid(header)
+  const g = grid(header, maxVoxels)
   const bytes = header.numBitsPerVoxel / 8
   if (!Number.isInteger(header.vox_offset) || header.vox_offset < 352 || header.vox_offset + g.n * bytes > data.byteLength) fail('The image payload is incomplete.')
   return { header, data }
 }
 
-function labelsFrom({ header: h, data }) {
+export function labelsFrom({ header: h, data }) {
   if (!((h.scl_slope === 0) || (h.scl_slope === 1 && h.scl_inter === 0))) fail('Scaled prediction labels are unsupported.')
   const getter = { 2: ['getUint8', 1], 4: ['getInt16', 2], 512: ['getUint16', 2], 8: ['getInt32', 4] }[h.datatypeCode]
   if (!getter || getter[1] * 8 !== h.numBitsPerVoxel) fail('Unsupported prediction data type.')
@@ -112,7 +123,7 @@ function labelsFrom({ header: h, data }) {
   }
   return labels
 }
-const sha = async raw => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', raw)), b => b.toString(16).padStart(2, '0')).join('')
+export const sha = async raw => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', raw)), b => b.toString(16).padStart(2, '0')).join('')
 
 export async function loadScanMeasurements(context, signal) {
   if (!context?.available) fail('Show a saved prediction for this study before asking for its volume.')

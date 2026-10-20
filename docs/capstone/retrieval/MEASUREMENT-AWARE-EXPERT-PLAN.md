@@ -132,3 +132,7 @@ requirements and Steps 10–12 must pass. If a dependency or reference source ca
 report the unmet requirement and resolve it explicitly; do not silently downgrade it to stretch work.
 Schedule impact must be reconciled at the next planning checkpoint; existing dates are not evidence
 that the increased scope fits. This documentation amendment launches no code, model or training job.
+
+## Native provenance progress — October 20
+
+The [native package adapter and coverage result](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) now bind CT/prediction/result/evidence identities and inspect inference-region boundaries. The historical example triggers a justified size refusal. Native restoration is not anatomical completeness. Next admit a current-pipeline saved result, review coverage, then qualify components/diameter against reviewed references. AI-05 remains open.

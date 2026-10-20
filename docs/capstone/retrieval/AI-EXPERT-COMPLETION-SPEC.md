@@ -1,9 +1,16 @@
 # AI expert completion specification
 
-**Version:** 1.40 — October 20, 2026 (current-scan saved-mask volume preview; formal acceptance unchanged)\
+**Version:** 1.41 — October 20, 2026 (native measurement provenance and coverage guards; formal acceptance unchanged)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October 20 [native measurement provenance](NATIVE-MEASUREMENT-RESULTS-2026-10-20.md): opt-in v2
+packages bind the original CT, prediction, result and inference evidence; source/model/geometry
+links and inference-crop boundaries are checked. The exposed historical native example correctly
+withholds size due to boundary contact; no numeric result or whole-organ acceptance is promoted.
+145 distinct UI/library checks, eleven Python checks and the build pass. Current-pipeline saved-result
+admission and anatomical coverage review are the next AI-05 handoff; no model rerun is implied.
 
 October 20 [current-scan volumes](CURRENT-SCAN-VOLUME-RESULTS-2026-10-20.md): user explicitly
 prioritized connecting current-scan measurements. The saved-mask preview calculates pancreas extent

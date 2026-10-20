@@ -243,3 +243,5 @@ review is inferred. Trello is the status/evidence record; this file is the order
 ## October 20 current-scan amendment
 
 Quinton prioritized connecting current-scan measurements after the volume literature closeout. AI-05 is now Week 3 In Progress under the [bounded contract](../retrieval/CURRENT-SCAN-VOLUME-CONTRACT-2026-10-20.md). Implement and test saved-mask volumes and safe current-study routing first, then return to W03-04 wording and W03-05 quality checks. This adds development scope, not a promise of whole-organ measurement accuracy or a waiver of formal RAG acceptance.
+
+AI-05 native follow-up: [provenance and coverage adapter](../retrieval/NATIVE-MEASUREMENT-RESULTS-2026-10-20.md) is implemented and tested. The historical native example reaches a CT/inference boundary and correctly withholds size. Next measurement input is a saved result from the current coverage-checked pipeline; no new inference/training is launched by this handoff. W03-04/W03-05 core checkpoints remain pending.

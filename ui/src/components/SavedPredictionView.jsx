@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import NativeMeasurementPanel from './NativeMeasurementPanel.jsx'
 import NiivueViewer from './NiivueViewer.jsx'
 import { loadSavedPrediction } from '../lib/savedPrediction.js'
 
@@ -36,6 +37,7 @@ export default function SavedPredictionView({ base = '/saved-prediction' }) {
           assetUrls={state.urls} nativeGeometry={state.manifest.geometry} ctRange={state.manifest.ct_window}
           showPancreas={showPancreas} showLesion={showLesion} label={`Saved CT and prediction for ${state.manifest.case_id}`} />
       </div>
+      {state.measurement && <NativeMeasurementPanel key={`${base}:${revision}:${state.manifest.result_sha256}`} measurement={state.measurement} />}
       <details><summary>Case and model provenance</summary><pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere' }}>{JSON.stringify({ case_id: state.manifest.case_id, models: state.manifest.model_sha256, source_ct: state.manifest.files.ct.content_sha256, prediction: state.manifest.files.pred.content_sha256, result: state.manifest.result_sha256, inference: state.manifest.inference_evidence_sha256 }, null, 2)}</pre></details>
     </>}
   </main>

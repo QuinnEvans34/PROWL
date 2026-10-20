@@ -7,7 +7,7 @@ export function savedPredictionPlugin() {
       const directory = process.env.PROWL_SAVED_PREDICTION_DIR
       if (!directory) { res.statusCode = 404; res.end('No saved package configured'); return }
       const name = req.url?.split('?')[0]
-      if (!['/manifest.json', '/ct.nii.gz', '/prediction.nii.gz'].includes(name) || !['GET', 'HEAD'].includes(req.method)) { res.statusCode = 404; res.end(); return }
+      if (!['/manifest.json', '/ct.nii.gz', '/prediction.nii.gz', '/result.json', '/evidence.json'].includes(name) || !['GET', 'HEAD'].includes(req.method)) { res.statusCode = 404; res.end(); return }
       try {
         const root = realpathSync(directory)
         const path = realpathSync(resolve(root, name.slice(1)))
