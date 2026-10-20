@@ -1,6 +1,6 @@
 # Current training output → measurement viewer handoff
 
-**Status:** Input discovery complete; current saved prediction and producer schema pending.
+**Status:** Handoff received; no native prediction mask is retained by the current evaluator.
 **Owner:** AI-05 / DAG-RAG integration; training artifacts remain owned by the training chat.
 
 ## Finding and correction
@@ -22,7 +22,7 @@ Read-only evidence: training chat `01a12c40-1490-7cf2-8e20-6498c71bf685`, turns
 `01a15a8d-1752-7cd2-a2aa-838548a60719` (interim report). These are historical snapshots,
 not a current training-health check. Native reports were recorded under
 `E:/PROWL/artifacts/pants_pancreas_region_24k_20261019/execution/native-*.json`.
-Whether the current evaluator retains its native prediction arrays is still unknown.
+The subsequent authorized handoff below confirms that it does not retain native prediction arrays.
 
 Fetched training branch `codex/windows-training-readiness` at
 `1e427dd66d9eb85e2eb31e760eb972ae05744b27` without changing the checkout.
@@ -73,8 +73,55 @@ or an unreviewed limit increase. Initially return metadata/paths only, not CT or
 > the producer or copy arrays for this request. Leave the metadata handoff in this chat so the
 > DAG/RAG chat can read it; no reply message to another chat is necessary.
 
-This message has not been sent. The desktop messaging tool requires explicit human authorization
-to message another chat. Preparing and reviewing the request does not authorize delivery.
+Quinton explicitly answered “Yes, send the handoff request.” The message was sent and the training
+chat completed its read-only inspection in turn `01a15acb-75e2-74f0-b94c-f52f76f23059`.
+
+## Received result — missing export, not an intake failure
+
+At inspection, the latest completed evaluation was step 6,000 (raw checkpoint, 70 development
+cases). Neither the run directory nor its independent backup retained native prediction masks.
+The producer reconstructs labels in memory, scores them and returns only `case_id`, `step`,
+`scope`, `reconstruction` and `metrics`; the executor serializes those records as JSON.
+There is no CT/prediction pair for this adapter to admit. No case was selected or quality screened.
+
+| Retained evidence reported by training owner | Identity |
+|---|---|
+| `execution/native-006000.json` | 62,421 bytes; SHA-256 `c70d3fd952efbbec3dffb1dd7fb6428f243927761c6b21cdd921ec4a22b0398f` |
+| Journal completion | `native_completed`, step 6000, variant `raw`, UTC milliseconds 1792509576893 |
+| `execution/step-006000.pt` | 56,576,803 bytes; checkpoint hash **not computed**, weights not loaded |
+| Run `ready.json` | SHA-256 `53b264490b2eb6e50b3e7b9c38e17ccf9e8b244b692b8edbf12fa3434edc1ffe` |
+| `segmenter_pancreas_region_session_v1.py` | SHA-256 `105f4f75e2193559e714e66a0a7b87e55de0238a862761995a3ead4f5906b8f8`; reported matching frozen receipt |
+| `segmenter_pancreas_region_executor_v1.py` | SHA-256 `26db95b7e47145f80e4731faf78c66b386992ea399137add9dc94769790eb67e`; reported matching frozen receipt |
+
+These are the remote owner's reported identities, not a second local hash verification. Current
+producer code is not present in this checkout. Coverage was reported in
+`E:/PROWL/readiness/pancreas-region-20261019-a01/cohort-final/result.json` for all 1,403 cases;
+`cuda/cold.json` is a restoration qualification, not a per-case prediction-export receipt.
+
+Confirmed semantics: provided development pancreas masks select regions and support scoring;
+fixed margins were derived from training annotations. Development lesion masks support coverage
+auditing/scoring and do not select or repair inference regions. CT is the model's only image
+channel, which does not remove the region's reference assistance. The class-1 predicted count
+comes from the model, not the provided mask. Labels are 0 background, 1 pancreas, 2 lesion.
+Per-case reconstruction records contain region bounds, spacing, tile count, gap/blending details,
+assistance and outside-region background policy, but are not standalone spatial artifacts.
+
+Viewer resource compliance remains **unassessed**: no candidate pair exists. No arrays/weights
+were loaded, inference launched, artifacts copied, producer changed or training interrupted.
+
+### Next implementation dependency
+
+The training owner needs a separate opt-in prediction-export entry point using the exact current
+restoration/window logic. It should write to a fresh private directory and emit native labels with
+explicit units plus hash-bound source, checkpoint, assistance, geometry and coverage provenance.
+First qualify serialization/restoration with synthetic data and review actual producer code. Do
+not patch the live evaluator or use aggregate metrics to fabricate a prediction. Real single-case
+execution needs an explicit idle-resource window and selected immutable checkpoint; it is not
+authorized by the metadata-only request. No automatic post-training job has been scheduled.
+
+After the export path exists, freeze a development case without quality-based selection, assess
+the existing viewer limits, and perform a bounded export/intake. This dependency precedes step 1
+below; it does not require restarting training. The current historical viewer remains unchanged.
 
 ## Integration sequence and completion evidence
 
