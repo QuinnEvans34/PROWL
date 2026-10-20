@@ -1,9 +1,17 @@
 # AI expert completion specification
 
-**Version:** 1.53 — October 20, 2026 (original producer count comparison)\
+**Version:** 1.54 — October 20, 2026 (evaluation delta and coverage reconciliation)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 [evaluation preparation](EVALUATION-PREPARATION-2026-10-20.md): v4/v5 acceptance verified;
+v6 change-only packet has28 unchanged cores,2 replacements,23 changed/added spans and100 changed
+source judgments. Public preflight binds exposure-v4 preparation346origins/182wordings and stays
+closed to private authoring.71 tests pass. Offline routers produce candidates for only4/20 formal
+answerable questions, including one unsuitable contour-variation route; no answer-score claim.
+The bounded Week3 success does not cover the full formal scope. Human delta/consistency review,
+operator choice and independent admission remain pending. No corpus/answer policy changes.
 
 October20 [producer comparison](MEASUREMENT-PRODUCER-COMPARISON-RESULTS-2026-10-20.md): authorized
 saved raw6000 report comparison matches all18 target/prediction/TP counts and6 Dice values for both

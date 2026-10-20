@@ -9,6 +9,14 @@ development AI demo for explicitly covered literature topics.
 
 ## October 20 board review and remaining-week priorities
 
+**Execution update:** [AI-03 preparation](../retrieval/EVALUATION-PREPARATION-2026-10-20.md) delivers
+the change-only packet, verifies prior approvals and updates public exposure/preflight;71 checks pass.
+Human review/operator choice remain pending. Offline routing exposes a broader formal-coverage gap
+(4/20 candidates, not4 correct answers); retain scope and record the missing capability before freeze.
+[PANORAMA audit](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md) recovers acquisition/transfer evidence
+and verifies4,480 current paths/sizes; integration qualification remains unverified. Combined saved
+model-report/PANORAMA owner request is prepared, with cross-chat permission pending. No new inference.
+
 Trello was reconciled against the reports and Quinton's recorded acceptance. W03-04/05 were already
 in Week 3 Complete but their completion flags were false; those flags are now corrected. Dashboard,
 AI-03, AI-04 and AI-05 descriptions now lead with current results rather than superseded next steps.

@@ -1,5 +1,19 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 autonomous preparation checkpoint:** user requests AI-03/AI-05/W03-01 progress.
+> Read EVALUATION-PREPARATION-2026-10-20.md/spec1.54. Change-only packet under
+> outputs/prowl/evaluation-preparation-20261020/;28unchangedcores/2new/23spans/100judgments.
+> Prior v4/v5 review chain complete; no v6 human decisions inferred. Public CLI now consumes
+> exposure-v4-preparation346origins/182wordings;71tests pass; private admission stays closed.
+> Offline formal20answerable router screen:4candidates including unsuitableq:dev2-05;
+> bounded Week3 quality is narrower than formal scope. No protected/model/runtime changes.
+> PANORAMA acquired/extracted/transported: fresh4480path-size checks pass;2238CT/2238labels,
+> manual482/automatic1756; no array/hash reread. Mapping/role/QC/smoke handoff still missing.
+> Prepared MODEL-AND-PANORAMA-HANDOFF-2026-10-20.md; additional message permission pending.
+> Async questions also ask independent-labeler arrangement and exact delta/consistency acceptance.
+> Do not send new request or infer review before replies. No candidate chosen/new inference.
+> INDEPENDENT-LABELING-WORKFLOW-2026-10-20.md is prepared, not implemented/accepted private tooling.
+
 > **October20 original producer comparison complete:** User explicitly authorized prepared request;
 > training chat returned existing raw6000 report rows. All18 class counts/6 Dice values match Mac
 > for927/514/698;78 local metadata assertions pass. ReceiptSHAaf6cad753674d8fc25822471850b891f9410b113d5795291fe3aa3163ac83b07.

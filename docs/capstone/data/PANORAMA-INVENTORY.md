@@ -8,6 +8,14 @@
 This file distinguishes what is physically available now from what the approved appendix observed
 earlier. It is not permission to train from an unpinned live dataset.
 
+## October20 handoff reconciliation
+
+The missing-archive statements below are historical. The [handoff audit](PANORAMA-HANDOFF-AUDIT-2026-10-20.md)
+recovers completed extraction/transfer records and verifies current paths/sizes for4,480 files:
+2,238 CTs and2,238 labels with matching study-ID sets. No current-byte rehash or array inspection.
+Acquisition is evidenced; mapping/eligibility/duplicate/geometry/mixed-source smoke acceptance still
+requires the data owner's handback. W03-01 is open, not blocked on downloading the same data again.
+
 ## September 19 acquisition update
 
 The old drive is unavailable and excluded from acquisition/backup assumptions. A fresh public

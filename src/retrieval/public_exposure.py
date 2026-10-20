@@ -223,3 +223,36 @@ def current_public_preflight(root):
                 known_intent_groups=len(exposure['inventory']['intent_groups']),
                 exposure_content_sha256=exposure['content_sha256'],
                 pending=state['pending'], private_content_read=False)
+
+
+def latest_public_preflight(root):
+    """Include post-v3 exposed matrices; still cannot admit any private authoring."""
+    from .evaluation_delta import extend_exposure
+    report = current_public_preflight(root)
+    parent = load_current_exposure(root)
+    path = DIRECTORY + 'public-exposure-v4-preparation.json'
+    data = json.loads(public_bytes(root, path))
+    expected = ('configs/evidence/record-search-screen-v1.json',
+                'configs/evidence/week3-quality-matrix-v1.json')
+    if (data['version'] != 'prowl-public-exposure-v4-preparation'
+            or data['status'] != 'preparation_not_private_admission'
+            or data['parent']['path'] != DIRECTORY + 'public-exposure-v3.json'
+            or _checked(root, data['parent']) != parent
+            or tuple(p['path'] for p in data['sources']) != expected
+            or data['content_sha256'] != digest({k:v for k,v in data.items() if k != 'content_sha256'})):
+        raise ValueError('Post-v3 exposure preparation mismatch')
+    for source in data['sources']:
+        raw = _checked(root, source)
+        if raw.get('scope', raw.get('exposure')) not in (
+                'exposed_engineering_screen_not_independent_evaluation', 'development_only_not_independent'):
+            raise ValueError('Unexpected public matrix scope')
+        if source['cases'] != [dict(id=c['id'], question=c['question']) for c in raw['cases']]:
+            raise ValueError('Exposed matrix wording was omitted or changed')
+    inventory = extend_exposure(parent['inventory'], data['sources'])
+    if inventory != data['inventory']:
+        raise ValueError('Post-v3 exposure union mismatch')
+    report.update(exposed_records=inventory['record_count'],
+        distinct_exposed_wordings=inventory['distinct_wording_count'],
+        exposure_content_sha256=data['content_sha256'], exposure_version=data['version'],
+        exposure_limitations=data['limitations'])
+    return report
