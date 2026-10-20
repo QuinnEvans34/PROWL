@@ -5,7 +5,7 @@ import nibabel as nib
 import numpy as np
 import pytest
 
-from src.inference.component_selection import select_largest_union, compare_selection, binary_metrics
+from src.inference.component_selection import select_largest_union, compare_selection, binary_metrics, lesion_component_matches
 
 
 def fixture():
@@ -57,6 +57,16 @@ def test_diagonal_connections_and_no_reference_in_selector():
     candidate, info = select_largest_union(raw)
     assert candidate[2, 2, 2] == 2 and info['removed_voxels'] == 0
     assert list(__import__('inspect').signature(select_largest_union).parameters) == ['prediction']
+
+
+def test_residual_lesion_matching_is_descriptive_and_does_not_remove_false_regions():
+    raw, p, l, a, box = fixture()
+    raw[6, 6, 6] = 2  # Connected diagonally to pancreas but separate from center lesion.
+    original = raw.copy()
+    rows = lesion_component_matches(raw, l)
+    assert [x['reference_overlap_voxels'] for x in rows] == [1, 0]
+    assert rows[1]['false_positive_voxels'] == 1 and rows[1]['box'] == [[6,6,6],[7,7,7]]
+    np.testing.assert_array_equal(raw, original)
 
 
 @pytest.mark.parametrize('fault', ['empty', 'tie', 'lesion_only', 'bad_label'])

@@ -56,6 +56,22 @@ def binary_metrics(prediction, reference, voxel_ml):
             'reference_state': 'positive' if m else 'empty_annotation_not_verified_healthy'}
 
 
+def lesion_component_matches(prediction, lesion):
+    """Describe residual lesion regions; never select them using the reference."""
+    prediction = _labels(prediction)
+    lesion = np.asarray(lesion)
+    if lesion.shape != prediction.shape or not np.isin(lesion, [0, 1]).all():
+        raise ValueError('Lesion reference must be aligned and binary')
+    ids, n = _components(prediction == 2)
+    sizes = np.bincount(ids.ravel(), minlength=n + 1)
+    overlap = np.bincount(ids[lesion == 1], minlength=n + 1)
+    objects = ndimage.find_objects(ids)
+    return [{'id': i, 'voxels': int(sizes[i]), 'reference_overlap_voxels': int(overlap[i]),
+             'false_positive_voxels': int(sizes[i] - overlap[i]),
+             'box': [[s.start for s in objects[i - 1]], [s.stop for s in objects[i - 1]]]}
+            for i in range(1, n + 1)]
+
+
 def _coverage(prediction, roi):
     shape = np.array(prediction.shape); box = np.asarray(roi)
     if (box.shape != (2, 3) or not np.issubdtype(box.dtype, np.integer)

@@ -7,6 +7,13 @@
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
 
+October20 AI-05 [CP01 reference comparison](../retrieval/COMPONENT-SELECTION-RESULTS-2026-10-20.md):
+largest26-union candidate removes only annotation-negative fragments on this exploratory case,
+but fails the frozen volume-error rule. Candidate lesion total6.229mL versus2.911mL reference
+remains unreliable; residual false-positive lesion inside the main pancreas identified.27Python
+checks pass; no promotion/new inference. Next fixed broader lesion-precision and measurement-error
+evaluation. AI-05 stays In Progress; W03-04/05 core RAG scope remains pending.
+
 October20 AI-05 [boundary investigation](../retrieval/BOUNDARY-AUDIT-2026-10-20.md): the67 edge
 voxels are detached fragments, while the main pancreas does not touch the crop. Other disconnected
 regions, especially lesion labels, prevent reliable total-volume acceptance. Read-only audit and

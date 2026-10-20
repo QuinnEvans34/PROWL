@@ -1,9 +1,18 @@
 # AI expert completion specification
 
-**Version:** 1.47 — October 20, 2026 (boundary fragments diagnosed; measurement qualification remains open)\
+**Version:** 1.48 — October 20, 2026 (CP01 reference comparison failed; residual lesion error identified)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Next review the changed evidence/membership and resolve independent protected labeling before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October20 [CP01 component-selection comparison](COMPONENT-SELECTION-RESULTS-2026-10-20.md):
+frozen prediction-only largest26-connected union rule removes4,398 false-positive voxels on the
+same exploratory case without losing correct annotation overlap. Candidate boundary clears;
+pancreas-extent Dice rises0.86567→0.90643, lesion Dice0.36250→0.58401. Frozen screen FAILS because
+parenchyma absolute volume error worsens. Lesion volume remains6.229mL versus2.911mL reference;
+one retained lesion region has zero reference overlap.27Python checks pass; failed candidate and
+source identities retained privately. No new inference, UI promotion or acceptance. Next a frozen
+broader lesion-precision/measurement-error comparison; AI-05 remains open.
 
 October 20 [boundary investigation](BOUNDARY-AUDIT-2026-10-20.md): all67 crop-contact voxels
 are four isolated components, disconnected from the main pancreas under both6/26 connectivity.

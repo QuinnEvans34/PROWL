@@ -1,5 +1,17 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 CP01 reference comparison complete/FAILED:** Read COMPONENT-SELECTION-PLAN/
+> RESULTS-2026-10-20.md/spec1.48. Plan d0d6686 frozen before lesion reference; code b3b8ace
+> before comparison. Largest26-union removes4,398 voxels, all zero overlap with pancreas/lesion;
+> no correct voxels lost, boundary clears. Frozen screen fails parenchyma absolute-volume-error
+> nonworsening (0.989→3.340mL). Lesion volume11.815→6.229mL vs2.911reference; Dice.3625→.5840;
+> recall.916925 unchanged. Residual two lesion regions:2067vox/1479TP/588FP and1385vox/0TP.
+> No second candidate/cleanup/retuning/UI promotion; original mask remains in /saved and /predict.
+> New local lesion hash f7bd672e, native geometry exact; no independently matched Windows lesionhash.
+> Private outputs/prowl/component-selection-cp01-20261020 includes candidate,comparison,inputpins,
+> residual diagnostic.27distinctPythonpass. No inference/training/service changes. Next frozen
+> broader lesion-precision/error packet; do not keep-largest-lesion based on this outcome.
+
 > **October20 boundary audit complete:** Read BOUNDARY-AUDIT-2026-10-20.md/spec1.47.
 > All67 crop-contact voxels are four isolated, single-slice label1 fragments; both6/26 connectivity
 > agree. Main46,697-voxel union component has no crop contact; fragments89–135mm away.
