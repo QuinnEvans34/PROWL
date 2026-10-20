@@ -15,16 +15,17 @@ The table below is the October 20 planning snapshot; update it with material pro
 
 | Workstream | Status now | Next observable result | Target window |
 |---|---|---|---|
-| [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | In progress: 3 of 5 checklist steps evidenced | Disposition earlier DB exits and finish recovery closeout | Tuesday; carry unresolved investigation explicitly |
+| [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | Done for bounded scope: 5/5 steps | Reopen on recurrence; historical exit2 cause remains unknown | Closed Tuesday |
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Queued; reviewed source facts already exist | Readable study-specific volume answer with verified citations and limits | Wednesday–Thursday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Queued; depends on candidate adapter | Fixed before/after paraphrase and boundary results | Thursday–Friday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Pending candidate and fixed check | Readable answer/source packet, complete scores and Quinton walkthrough | Friday–weekend |
 | [W03-01 PANORAMA](https://trello.com/c/yfk5R2Vi) | Awaiting data/training evidence handoff | Reviewed mapping, provenance, exclusions and mixed-source smoke evidence | Parallel required Week 3 outcome |
 | [W03-06 Closeout](https://trello.com/c/c8WDYybO) | Pending weekly outcomes and supplied hours | Evidence/hours reconciliation and Week 4 handoff | Sunday |
 
-**Already evidenced:** services restored; UI contract-loading repair, 50 UI checks and build;
-one real model-composed answer with working citation navigation. These are the three checked
-W03-02 items, not three completed weekly deliverables.
+**Already evidenced:** services restored; UI contract-loading repair, 50 UI checks/build and one real
+model-composed answer/citation; six lifecycle diagnostic tests; corrected clean recovery check with
+503 during outage, identical recovered search result and exact 1,179-passage inventory. W03-02's
+five steps are complete for this bounded scope; its historical unknown-cause risk remains explicit.
 
 **Waiting on review/input:** AI-03 needs changed-scope review and independent-evaluation
 responsibilities; W02-02 needs the model/source handoff; W01-05 and W02-05 need missing personal
@@ -99,7 +100,7 @@ layout normalization and two browser checks do not erase those failures or estab
 | ID | Priority / status | Owner | Dependency | Finish evidence |
 |---|---|---|---|---|
 | [W03-01](https://trello.com/c/yfk5R2Vi) PANORAMA integration | Required / Ready for owner handoff | Quinton + data/training chat | W02-01 and source qualification | Mapping, provenance, exclusions, separation and mixed-source smoke receipt |
-| [W03-02](https://trello.com/c/KCcUA5kn) Integrated AI demo reliability | First / In progress; startup/UI repaired, older DB exits unresolved | DAG/RAG chat | Existing runtime/data availability | [Readiness result](../retrieval/WEEK3-DEMO-READINESS-2026-10-20.md): 50 UI checks, build, one live answer/citation; recovery closeout remains |
+| [W03-02](https://trello.com/c/KCcUA5kn) Integrated AI demo reliability | Done for bounded scope; historical exit2 cause unknown | DAG/RAG chat | Existing runtime/data availability | [Closeout](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md): 6 diagnostic tests, corrected recovery/503 check, exact inventory; recurrence procedure retained |
 | [W03-03](https://trello.com/c/pnaJmVIz) Readable volume answers | Planned / Ready for offline design | DAG/RAG chat + Quinton review | Existing volume facts; W03-02 before live promotion | Scoped adapter, selection/citation checks, readable source-reviewed examples |
 | [W03-04](https://trello.com/c/Avfr7Oei) Question wording and selection | Planned / Ready for matrix preparation | DAG/RAG chat | W03-03 candidate for comparison | Fixed development matrix, before/after selections, exposure and coverage-gap record |
 | [W03-05](https://trello.com/c/cNjc35Bn) Quality checkpoint and demo | Planned / Pending dependencies | DAG/RAG chat + Quinton | W03-02/03/04 | Frozen candidate/checks, full per-case report and walkthrough; failures retained |
@@ -218,6 +219,7 @@ verified coverage slice and report the remainder instead of expanding into unrev
 | Oct 20 | User requested Week 3 board preparation and an effective AI expert by week end | Five missing task cards created; existing PANORAMA and parent AI cards reused |
 | Oct 20 | All four local service endpoints offline; data drive absent | Quinton will reconnect drive; fresh admission before live verification |
 | Oct 20 | Drive reconnected; stale Docker bind repaired, existing DB recovered, UI contract access fixed | [Readiness result](../retrieval/WEEK3-DEMO-READINESS-2026-10-20.md); selected policy and one live answer verified; older DB exits still unexplained |
+| Oct 20 | Bounded reliability closeout passed after retaining an invalid-request harness attempt | Earlier exit2 cause dispositioned as unknown; reopen on recurrence; advance to W03-03 |
 | Oct 20 | User reports at least three active hours Oct 19 on CT input/run preparation elsewhere | Record as lower-bound estimate in [hours log](HOURS-LOG.md); no inferred extra time |
 | Oct 20 | UI redesign is another chat's committed work in the shared checkout | Preserve it; publish only this chat's scoped changes to the retrieval branch |
 

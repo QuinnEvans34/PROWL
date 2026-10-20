@@ -1,5 +1,13 @@
 # PROWL development handoff — October 15, 2026
 
+> **October20 bounded reliability closed:** Read RELIABILITY-CLOSEOUT-2026-10-20.md/spec1.37.
+> Lifecycle CLI now preserves bounded Compose errors/unknown timeout state without retry.
+> Six tests pass. Two actual cleanstop/startcycles: first outage request lacked schema/UUID,400,
+> harnessfailed/recoverycompleted; corrected attempt200baseline→503outage→identical200recovery.
+> All1,179canonicalpassages unchanged, sameDBcontainer/XML-Adventure unchanged,0modelcalls.
+> Earlier exit2 remains unexplained, not fixed; recurrence procedure reopensW03-02 and blocks promotion.
+> Live answer policy unchanged; proceed W03-03 volume scope/selection. No training/fullselector.
+
 > **October20 demo restored after planning:** Read WEEK3-DEMO-READINESS-2026-10-20.md.
 > Drive reconnected/UUID verified; stale Docker bind required Desktop restart and restoration of
 > previously running XML-Adventure. Existing DB recovered/healthy, no reinit. Vite denied imported
