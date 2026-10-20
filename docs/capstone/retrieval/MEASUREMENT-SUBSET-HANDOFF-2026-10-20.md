@@ -1,8 +1,9 @@
 # Prepared CP02 metadata request
 
 Recipient: Codex chat **Plan capstone experiment workflow**, on Quinns-Laptop.
-Status: prepared; sending requires the user's explicit cross-chat authorization, requested in
-this chat. No message sent yet. No training changes or remote inference requested.
+Status: Quinton explicitly authorized “Yes, request the development metadata” on October20.
+The metadata-only request was sent to the named training chat. Response pending; no training
+changes or remote inference requested.
 
 ## Request text
 

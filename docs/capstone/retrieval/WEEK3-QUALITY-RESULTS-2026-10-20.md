@@ -107,3 +107,10 @@ Quinton's packet/UI walkthrough decision is requested and remains pending, so th
 Progress with that single review item open. Formal independent evaluation, arbitrary wording,
 unreviewed diseases/modalities/populations and measurement accuracy remain open. No corpus expansion,
 new medical wording, training or protected evaluation occurred.
+
+## Human acceptance — October20
+
+Quinton explicitly answered: “I accept the packet and UI walkthrough.” This accepts the current
+20/20+10/10 development candidate and source presentation. W03-05 now completes4/4 checklist
+items and moves to Week3Complete. The earlier pending-review status above records the sequence;
+this acceptance supersedes it. Independent/protected and measurement acceptance remain open.

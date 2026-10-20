@@ -65,5 +65,5 @@ next hypothesis. Next correction must address a demonstrated cross-case error me
 receive its own frozen comparison. No absolute measurement acceptance threshold is invented
 after observing these cases; reliable-size release and human outline review remain separate.
 
-Current status: protocol frozen; current-split metadata requested through an authorization question.
+Current status: protocol frozen; authorized current-split metadata request sent; response pending.
 No additional case selected, array opened or inference run for CP02 yet.
