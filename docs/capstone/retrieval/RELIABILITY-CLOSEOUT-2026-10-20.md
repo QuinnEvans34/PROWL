@@ -78,3 +78,31 @@ If the database exits again:
 No automatic watchdog or restart loop was added. Historical root cause, power-loss durability and
 arbitrary drive disconnection remain unqualified. The live policy remains `source-record-answer-v1`;
 new volume selection is a separate offline development task.
+
+
+## October21 recurrence — reopened
+
+The October20 bounded recovery result above remains historical evidence. On October21 at
+22:15:42 UTC, literature startup lost its PostgreSQL backend during the database-size check;
+Docker logs record backend exit2 and automatic database recovery. The mounted drive UUID and
+existing data directory matched. One bounded literature-service restart succeeded. A source-only
+query through the UI proxy then returned503 at22:17:43 UTC, alongside another backend exit2.
+No further query/restart attempts followed this repeated failure.
+
+The health endpoint returned200 but does not verify a live database query. A separate read-only
+connection/size/canonical-inventory diagnostic afterward passed:14 sources,1,179 passages,41 batches,
+43,022,003 database bytes; content SHA256
+`eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8`.
+This does not establish that search works or isolate the cause. Docker reports OOMKilled=false and
+RestartCount0; backend recycling is visible in its logs despite the container remaining running.
+
+W03-02 is reopened for recurrence disposition; candidate promotion is blocked. Preserve the corpus
+and diagnose the demonstrated database failure before further assistant expansion. Review recording
+is independent and remains available. No training, real-case inference or LLM generation was requested;
+the source-only path can invoke the existing CPU embedding encoder. Unrelated containers were untouched.
+
+Private evidence: `outputs/prowl/review-navigation-20261021/database-recurrence.log`,
+`database-recurrence-state.json`, `database-recurrence.json`, and `database-stage-check.json`.
+The source request's503 status was observed, but its body was not retained because the verification
+harness raised an HTTPError. No response-body reconstruction or fresh query was used to replace it.
+Trello's recurrence comment was confirmed; list movement is tracked separately in the Week3 plan.

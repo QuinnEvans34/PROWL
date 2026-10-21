@@ -3,9 +3,21 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 21, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation and measurement accuracy remain open; PANORAMA’s completed exploratory integration/comparison is now reconciled\
+**Status:** W03-02 reopened after October21 database recurrence; W03-03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation and measurement accuracy remain open; PANORAMA’s completed exploratory integration/comparison is now reconciled\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
+
+## October21 reliability recurrence — immediate blocker
+
+Navigation integration is committed/pushed as `874d273`: Analyze/Saved reviews navigation,
+exact-prediction links and unsaved-decision guards;25 affected UI checks/build pass. Human walkthrough
+remains open. W07-01's progress comment is confirmed on Trello.
+
+The real source query returned503 after the one bounded recovery attempt, with another PostgreSQL
+backend exit2. Inventory still matches14 sources/1,179 passages. W03-02 is reopened; its recurrence
+comment is confirmed on Trello. Stop recovery retries and block promotion until disposition. Review
+recording remains independent. See [retained evidence](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md#october21-recurrence--reopened).
+This operational blocker precedes additional assistant expansion; it does not erase prior quality results.
 
 ## October21 priority correction — current
 
@@ -36,7 +48,7 @@ AI-06 published-reference comparisons and AI-07 reviewed training-feedback remai
 Their deferral was recommended during reassessment but **has not been approved**. No training,
 full-selector restart, new real-case inference or protected-evaluation access follows this change.
 
-**Board sync:** W03-01 description update timed out; a subsequent read still showed October20 text.
+**Earlier board sync attempts:** W03-01 description update timed out; a subsequent read still showed October20 text.
 W07-01 reads and board listing also timed out. Pending: apply the PANORAMA correction and update the
 existing W07-01 with this integration result and remaining walkthrough. Do not create replacement
 cards or claim the board is current. Existing card links and histories remain preserved.
@@ -197,7 +209,7 @@ The table below is the October 20 planning snapshot; update it with material pro
 
 | Workstream | Status now | Next observable result | Target window |
 |---|---|---|---|
-| [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | Done for bounded scope: 5/5 steps | Reopen on recurrence; historical exit2 cause remains unknown | Closed Tuesday |
+| [W03-02 Reliability](https://trello.com/c/KCcUA5kn) | Reopened October21 after repeated backend exit2 | Prior5/5 closeout retained; query503 after recovery, cause unknown | Immediate reliability blocker |
 | [W03-03 Volume answers](https://trello.com/c/pnaJmVIz) | Done for bounded scope: 4/4 steps | Local model composition, citations and clarification verified | Closed Tuesday |
 | [W03-04 Question selection](https://trello.com/c/Avfr7Oei) | Complete:4/4; exact selection17/20→20/20 | Reopen for a demonstrated new wording/coverage gap | Closed Tuesday |
 | [W03-05 Quality review](https://trello.com/c/cNjc35Bn) | Complete:4/4; engineering and Quinton review passed | Reopen for demonstrated regression; independent evaluation remains separate | Closed Tuesday |
@@ -288,7 +300,7 @@ layout normalization and two browser checks do not erase those failures or estab
 | ID | Priority / status | Owner | Dependency | Finish evidence |
 |---|---|---|---|---|
 | [W03-01](https://trello.com/c/yfk5R2Vi) PANORAMA integration | Required / Ready for owner handoff | Quinton + data/training chat | W02-01 and source qualification | Mapping, provenance, exclusions, separation and mixed-source smoke receipt |
-| [W03-02](https://trello.com/c/KCcUA5kn) Integrated AI demo reliability | Done for bounded scope; historical exit2 cause unknown | DAG/RAG chat | Existing runtime/data availability | [Closeout](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md): 6 diagnostic tests, corrected recovery/503 check, exact inventory; recurrence procedure retained |
+| [W03-02](https://trello.com/c/KCcUA5kn) Integrated AI demo reliability | Reopened October21; source query503/repeated exit2 | DAG/RAG chat | Existing runtime/data availability | [Closeout](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md): 6 diagnostic tests, corrected recovery/503 check, exact inventory; recurrence procedure retained |
 | [W03-03](https://trello.com/c/pnaJmVIz) Readable volume answers | Done for bounded scope, 4/4 steps | DAG/RAG chat; Quinton walkthrough remains W03-05 | Existing volume facts; W03-02 bounded closeout complete | [Results](../retrieval/VOLUME-COMPOSITION-RESULTS-2026-10-20.md), readable examples, corrected8/8 check, source review and live browser proof |
 | [W03-04](https://trello.com/c/Avfr7Oei) Question wording and selection | Complete for fixed development scope | DAG/RAG chat | W03-03 complete | Exact selection17/20→20/20; baseline failures and coverage exclusions retained in WEEK3-QUALITY-RESULTS-2026-10-20.md |
 | [W03-05](https://trello.com/c/cNjc35Bn) Quality checkpoint and demo | Complete, including Quinton acceptance | DAG/RAG chat + Quinton | W03-02/03/04 complete |20/20 supported,10/10 boundaries, source review,3.54–13.47s supported latency; accepted packet/UI. Independent acceptance separate. |

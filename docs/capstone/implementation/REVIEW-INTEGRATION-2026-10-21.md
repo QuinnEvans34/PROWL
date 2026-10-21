@@ -129,3 +129,12 @@ Initial literature startup failed when PostgreSQL terminated a backend with exit
 check. PostgreSQL recovered automatically; one service restart was attempted afterward. This is a
 retained recurrence of the earlier unexplained backend fault, not proof that it has been repaired.
 Trello reads still time out; pending prior updates have not been verified.
+
+
+Follow-up runtime verification: the one service restart reached health200, but a real source-only
+query returned503 and another PostgreSQL backend exit2. The canonical inventory still matches;
+search readiness is **not confirmed**. Recovery retries stopped under the existing recurrence
+procedure, and W03-02 was reopened. See the [recurrence evidence](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md#october21-recurrence--reopened).
+Review recording remains independent; no actual review decisions were invented. Navigation changes
+were committed/pushed as `874d273`. The W07-01 integration comment was confirmed on Trello;
+prior description corrections remain separate pending work.
