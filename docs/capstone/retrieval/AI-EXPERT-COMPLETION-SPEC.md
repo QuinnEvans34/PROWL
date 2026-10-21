@@ -1,9 +1,21 @@
 # AI expert completion specification
 
-**Version:** 1.57 — October 21, 2026 (CT measurement-method coverage)\
+**Version:** 1.58 — October 21, 2026 (connect existing review workflow)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
-**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Changed evidence/membership and consistency are accepted; the separate human-operated labeling workflow is selected. Qualify its host/role schema and private admission before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
+**State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Changed evidence/membership and consistency are accepted; the separate human-operated labeling workflow is selected. Labeling-app expansion is now parked while the existing review workflow is connected; independent evaluation and its unchanged criteria remain required. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October21 **current priority, approved by Quinton:** connect and finish the software already built.
+The [native saved-review integration](../implementation/REVIEW-INTEGRATION-2026-10-21.md) adds
+exact prediction retention, durable decisions, reopen/history and append-only revisions beside
+existing measurements/limitations and cited general literature. Human walkthrough remains open.
+Pause additional labeling infrastructure and new answer-family experiments during consolidation.
+Then reconcile supported scope and complete independent evaluation using the simplest existing
+workflow; do not lower the frozen criteria or substitute development success. Formal routing is
+5/20 candidates, one unsuitable, not an end-to-end score. PANORAMA's completed exploratory training
+comparison is now [reconciled](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md). Proposed deferrals of
+published-reference comparisons and training-feedback tooling are **not approved**; their commitments
+remain. Earlier next-step ordering below is historical where it conflicts with this update.
 
 October21 [CT measurement-method coverage](MEASUREMENT-INTERPRETATION-2026-10-21.md):
 existing-source CT tumor diameter versus segmented volume explanation added after fixed baseline.

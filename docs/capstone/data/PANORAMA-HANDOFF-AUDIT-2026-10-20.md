@@ -1,9 +1,39 @@
 # PANORAMA handoff audit — October20
 
-**Status:** Evidence handoff completed. Retained Windows evidence confirms the earlier exploratory
-crop/resize production adapter, eligibility manifest and mixed-source smoke. Current physical-window
-PANORAMA integration is not established; W03-01 remains open for that explicit remaining scope.
-No new voxel or model work occurred in this audit.
+**Status, corrected October21:** The earlier exploratory integration and controlled training
+comparison are complete within their documented scope. The training owner confirmed the completed
+24,000-update mixed run. A port to the newer physical-detail pipeline remains unqualified but is
+separate work; it is not a reason to treat the original integration as unfinished. Historical
+October20 findings below remain preserved and are superseded where the correction says so.
+
+## October21 owner clarification
+
+After Quinton authorized a clarification request, *Plan capstone experiment workflow* reported:
+
+- Completed `pants_plus_expert_panorama_dicefocal_24k_20261012`, MLflow
+  `c038332411df4f38bf52d650810c77c0`: 19,055 PanTS plus 4,945 PANORAMA updates, totaling 24,000.
+- 1,333 PanTS plus 345 manual-PDAC PANORAMA studies/344 source subjects; 70 PanTS development cases
+  (36 positive, 34 annotation-empty). Existing exclusions and narrow exploratory admission remain.
+- `segmenter-mixed-inputs-1`, `segmenter-geometry-v2`, `panorama-union-geometry-1` /
+  `panorama-union-transform-1`: physical union crop/resampling, then uniform resize/pad to 144³.
+- Matched selected PanTS-only14k versus mixed8k: lesion Dice .405092 versus .371897;
+  any-overlap 34/36 versus 33/36; empty-case false positives 32/34 versus 34/34.
+  Delta −.033195, reported interval [−.102249,+.028561]. Practical intervention rejected;
+  null not rejected; mixed model not promoted. The proposal did not guarantee improvement.
+
+Owner source: Windows `docs/capstone/operations/PANORAMA-POSITIVE-RESULTS-20261013.md` and
+`E:/PROWL/readiness/panorama-positive-review-20261013-a01/results.json`.
+Reported result SHA256 `ddecd2cc37307b3bb85e92b4b6080e82cefcf45dcf87d99fde85223d3f861c15`;
+reported run-journal SHA256 `4abe5ee0104ce9615d564c7913e330510fb016cf64d50c35745877918f9e601c`.
+These new facts are attributed to the training owner's response, not a fresh local rehash of those
+Windows files. The October20 transferred evidence and its local checks remain independently retained.
+
+The newer physical-detail/provided-pancreas-region runs are PanTS-only. Porting PANORAMA there
+requires its own justification and qualification. Do not rerun the completed experiment merely to
+close a tracking discrepancy. Undeclared overlap, silver-standard pancreas support, limited visual
+review and unknown SuPreM membership remain explicit limitations; no broad clean-benchmark claim.
+
+## Historical October20 audit
 
 The older inventory's missing-data statements are historical. Four CT archives and the pinned
 label archive are present under `/Volumes/PROWL-Data/PROWL/sources/panorama/`. Retained acquisition

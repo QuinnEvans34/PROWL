@@ -3,9 +3,43 @@
 **Dates:** October 19–25, 2026, America/Denver\
 **Updated:** October 21, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
-**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation, measurement accuracy and current-pipeline PANORAMA qualification remain open\
+**Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation and measurement accuracy remain open; PANORAMA’s completed exploratory integration/comparison is now reconciled\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
+
+## October21 priority correction — current
+
+Quinton approved shifting the next priority to connecting and finishing existing software.
+This supersedes the earlier next-work ordering below; it does not delete a deliverable or lower
+acceptance criteria. Pause labeling-app expansion and new answer-family experiments while closing
+the existing case workflow.
+
+1. **Saved review integration (existing W07-01, brought forward):** inspect CT/contours, read valid
+   measurements or the explicit coverage limitation, inspect cited literature, and record
+   accept/edit-required/reject against the exact prediction. Reopen the retained result and append
+   a revision. The [first connected slice](../implementation/REVIEW-INTEGRATION-2026-10-21.md) is
+   implemented; human walkthrough and broader workstation acceptance remain.
+2. **Assistant consolidation:** preserve the functioning covered topics, reconcile the supported
+   scope, and finish independent evaluation using the simplest usable existing workflow. Do not
+   mistake exposed development success for independent acceptance. The current formal routing
+   check finds 5/20 candidates, including one unsuitable route (reader contour variation); it is
+   not an end-to-end answer score. Frozen criteria remain unchanged.
+3. **Measurement quality:** compare existing eligible model evidence before another run. Keep
+   boundary/coverage warnings and distinguish model output from anatomical truth.
+
+The training owner clarified that PANORAMA already completed a 24,000-update mixed-source run and
+controlled comparison, not only a smoke test. The [handoff correction](../data/PANORAMA-HANDOFF-AUDIT-2026-10-20.md)
+records the completed exploratory scope and negative result. A port to the newer PanTS-only
+physical-detail pipeline is separate work, not a newly imposed condition on the original milestone.
+
+AI-06 published-reference comparisons and AI-07 reviewed training-feedback remain commitments.
+Their deferral was recommended during reassessment but **has not been approved**. No training,
+full-selector restart, new real-case inference or protected-evaluation access follows this change.
+
+**Board sync:** W03-01 description update timed out; a subsequent read still showed October20 text.
+W07-01 reads and board listing also timed out. Pending: apply the PANORAMA correction and update the
+existing W07-01 with this integration result and remaining walkthrough. Do not create replacement
+cards or claim the board is current. Existing card links and histories remain preserved.
 
 ## October21 execution update
 

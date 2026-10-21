@@ -100,3 +100,7 @@ returned ready without reinitialization. UI5180, review8018, configured inferenc
 and Ollama11434 are running. Proxy checks returned200, confirmed the configured manifest hash and
 zero recorded real-case decisions. Retained operational check: `outputs/prowl/review-integration-20261021/activation.json`.
 No real inference or generation request was made during this restoration.
+
+Read-only live verification also loaded the actual configured CT/mask/result through the JavaScript
+native loader and matched its manifest hash to the review API. It still reports measurement
+unavailable because the outline touches the inference crop boundary. Zero real decisions were written.
