@@ -11,13 +11,15 @@ development AI demo for explicitly covered literature topics.
 
 Navigation integration is committed/pushed as `874d273`: Analyze/Saved reviews navigation,
 exact-prediction links and unsaved-decision guards;25 affected UI checks/build pass. Human walkthrough
-remains open. W07-01's progress comment is confirmed on Trello.
+remains open. W07-01's progress comment and move to Week3 In Progress are confirmed on Trello.
 
 The real source query returned503 after the one bounded recovery attempt, with another PostgreSQL
 backend exit2. Inventory still matches14 sources/1,179 passages. W03-02 is reopened; its recurrence
 comment is confirmed on Trello. Stop recovery retries and block promotion until disposition. Review
 recording remains independent. See [retained evidence](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md#october21-recurrence--reopened).
 This operational blocker precedes additional assistant expansion; it does not erase prior quality results.
+The W03-02 move timed out; a fresh read still shows Week3 Complete/complete=true. Its reopening
+comment is saved, but moving the card and clearing its completion marker remain pending board sync.
 
 ## October21 priority correction — current
 
