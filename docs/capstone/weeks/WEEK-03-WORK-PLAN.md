@@ -36,7 +36,9 @@ the existing case workflow.
    measurements or the explicit coverage limitation, inspect cited literature, and record
    accept/edit-required/reject against the exact prediction. Reopen the retained result and append
    a revision. The [first connected slice](../implementation/REVIEW-INTEGRATION-2026-10-21.md) is
-   implemented; human walkthrough and broader workstation acceptance remain.
+   implemented and now linked from Studies home through the existing saved-review service.
+   Exact-prediction reopening remains available when older prepared examples fail to load;
+   human walkthrough and broader workstation acceptance remain.
 2. **Assistant consolidation:** preserve the functioning covered topics, reconcile the supported
    scope, and finish independent evaluation using the simplest usable existing workflow. Do not
    mistake exposed development success for independent acceptance. The current formal routing

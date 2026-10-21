@@ -11,6 +11,7 @@ const NAV = [
 ]
 
 function ServiceStatus({ status }) {
+  if (status === null) return <span className="pw-hint">Local research workspace</span>
   const label = status === 'online'
     ? 'Live analysis connected'
     : status === 'offline'

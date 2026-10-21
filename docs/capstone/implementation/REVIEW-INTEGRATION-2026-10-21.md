@@ -138,3 +138,25 @@ procedure, and W03-02 was reopened. See the [recurrence evidence](../retrieval/R
 Review recording remains independent; no actual review decisions were invented. Navigation changes
 were committed/pushed as `874d273`. The W07-01 integration comment was confirmed on Trello;
 prior description corrections remain separate pending work.
+
+
+## Studies-home integration — October21
+
+The Studies home now lists retained native reviews from the existing review service, newest first,
+with exact prediction identity, latest decision/revision, reviewer and time. Two predictions of the
+same study remain separate. Reopen links use the existing exact-hash route; Analyze links to the
+existing explicit-run screen. No prediction starts merely by loading this list. Invalid/duplicate or
+mismatched identities fail closed; unavailable storage is distinct from an empty archive, with a
+read-only refresh. Leaving the page cancels its outstanding list request.
+
+Older prepared-example manifest failures no longer display on unrelated Analyze/Saved/Research
+pages or hide the home review list. Home/Saved pages no longer show the older workbench's inference
+status or imply its fixed model produced every prediction. Prepared examples and their browser marks
+remain available with their existing distinction from durable records.
+
+12 affected component/navigation/integration tests and the production build pass (existing chunk-size
+advisory unchanged). Tests include same-study/different-prediction identity, invalid-target refusal,
+o-write refresh, and a failed legacy manifest followed by reopening a saved target and Analyze.
+The actual UI proxy returned200 with zero retained reviews; no human decisions or predictions were
+created for demonstration. Browser/keyboard/layout walkthrough and broader W07-01 acceptance remain
+open, as do failed-analysis review support and the original database recurrence disposition.

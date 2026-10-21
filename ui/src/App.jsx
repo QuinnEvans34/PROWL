@@ -3,6 +3,7 @@ import { Database, Microscope, Radio, ShieldCheck, X } from 'lucide-react'
 import AppShell from './shell/AppShell.jsx'
 import { PantherBadge } from './shell/Brand.jsx'
 import StudiesPage from './pages/StudiesPage.jsx'
+import SavedReviewList from './components/SavedReviewList.jsx'
 import ReviewWorkspace from './components/ReviewWorkspace.jsx'
 import LiteratureSearchPanel from './components/LiteratureSearchPanel.jsx'
 import { useRoute } from './lib/router.js'
@@ -365,7 +366,7 @@ export default function App() {
   const showCompare = showWorkbench && route.layout === 'compare' && currentCase && isValidation
 
   let content
-  if (loadError) {
+  if (loadError && ['studies', 'workbench'].includes(route.view)) {
     content = (
       <main className="pw-empty">
         <Database size={28} aria-hidden="true" />
@@ -380,10 +381,11 @@ export default function App() {
       route={route}
       navigate={navigate}
       activeStudy={caseId}
-      endpointStatus={route.view === 'predict' ? predictionEndpointStatus : endpointStatus}
-      modelLabel={route.view === 'predict' ? 'On-demand prediction · see result provenance' : route.view === 'saved' ? 'Saved package · see model provenance' : MODEL_LABEL}
+      endpointStatus={route.view === 'predict' ? predictionEndpointStatus : route.view === 'workbench' ? endpointStatus : null}
+      modelLabel={route.view === 'predict' ? 'On-demand prediction · see result provenance' : ['saved','studies'].includes(route.view) ? 'Model identity is shown with each prediction' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
+      {route.view === 'studies' && <SavedReviewList navigate={navigate} />}
       {content}
       {!loadError && route.view === 'studies' && (
         cases
