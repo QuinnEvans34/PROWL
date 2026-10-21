@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PROWL · Evidence review rehearsal</title><link rel="stylesheet" href="/style.css"></head>
+<body><main>
+<header><p class="eyebrow">PROWL / EVALUATION WORKSPACE</p><h1>Review evidence, in plain language.</h1><p>Ask a question. Inspect the proposed meaning and its sources. Correct it before you accept it.</p></header>
+<aside class="notice"><strong>Invented-data rehearsal</strong><span>Use fictional Luma sensor questions only. This session cannot release an evaluation set. Nothing is saved automatically; export your session before stopping the app.</span></aside>
+<div class="layout"><section class="question-panel"><h2>1. Ask a question</h2>
+<label for="author">Your name</label><input id="author" maxlength="100" placeholder="Name recorded with your decisions" autocomplete="off">
+<label for="question">Question about the fictional sources</label><textarea id="question" maxlength="500" rows="5" placeholder="How often were indoor Luma sensors checked?"></textarea>
+<div id="examples" class="examples"></div><button id="propose" class="primary">Prepare evidence</button>
+<p class="small">The local model reads all three fictional sources. Expect up to 90 seconds per request; no automatic retries.</p>
+<hr><label for="cases">Questions in this session</label><select id="cases"><option value="">No questions yet</option></select>
+<button id="export">Export session and review history</button><p class="small">Export contains questions, proposals and your decisions. Reloading reconnects; restarting the server clears this session.</p>
+</section><section class="review-panel"><h2>2. Review the proposal</h2><p id="status" role="status" aria-live="polite">Connecting to the local rehearsal…</p><div id="review"><p class="empty">Your proposed meaning and source excerpts will appear here.</p></div>
+<div id="actions" hidden><h3>Accept or request a correction</h3><label class="check"><input id="meaning-reviewed" type="checkbox">I checked the proposed meaning, its limits, and the evidence below.</label>
+<label for="correction">Correction or review note</label><textarea id="correction" maxlength="1500" rows="3" placeholder="For example: make it clear that the seven-day schedule was studied indoors only."></textarea>
+<div class="buttons"><button id="revise">Request a revised proposal</button><button id="accept" class="primary">Accept this revision</button><button id="reject">Reject this revision</button></div>
+<button id="consistency">Record separate consistency review</button><p class="small">For consistency, compare the meaning and limits with your other reviewed questions, then describe what you checked in the note. Acceptance is a human judgment, not automatic factual verification.</p></div>
+</section></div><footer>Local rehearsal · Qwen3:8b · Fictional evidence only · No protected evaluation admission</footer>
+</main><script type="module" src="/app.js"></script></body></html>
