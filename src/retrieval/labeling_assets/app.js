@@ -34,6 +34,16 @@ export function startApp(doc=document, fetcher=fetch, download=defaultDownload) 
       const label=node('label',undefined,'check'),checkbox=node('input');checkbox.type='checkbox';checkbox.dataset.source=row.source_id;
       label.append(checkbox,node('span','I reviewed this source and its proposed relevance.'));section.append(label);root.append(section);
     }
+    const history=node('details');history.append(node('summary','Earlier proposals and review history'));
+    const labels={proposal_created:'Proposal prepared',accept:'Accepted for rehearsal',reject:'Rejected',consistency:'Consistency reviewed'};
+    for(const event of (state.history||[]).filter(e=>e.case_id===c.id)){
+      const entry=node('article',undefined,'source');entry.append(node('h3',`Revision ${event.revision} · ${labels[event.kind]}`),node('p',event.actor,'small'));
+      if(event.proposal)entry.append(node('p',event.proposal.meaning));
+      if(event.correction)entry.append(node('p','Correction: '+event.correction));
+      if(event.note)entry.append(node('p',event.note));
+      history.append(entry);
+    }
+    root.append(history);
     buttons();
   }
   async function refresh(selected){
@@ -48,10 +58,12 @@ export function startApp(doc=document, fetcher=fetch, download=defaultDownload) 
     finally{busy=false;buttons();}
   }
   $('propose').onclick=()=>run(async()=>{
+    if(!$('author').value.trim() || !$('question').value.trim())throw Error('Enter your name and a fictional question first.');
     const c=await api('/api/propose',{question:$('question').value,author:$('author').value,correction:'',case_id:null,revision:null});
     await refresh(c.id);notice('Proposal ready. Check the meaning and every source before deciding.');
   },'Reading the fictional sources with the local model…');
   $('revise').onclick=()=>run(async()=>{
+    if(!$('correction').value.trim())throw Error('Describe the correction you want first.');
     const c=await api('/api/propose',{question:current.question,author:$('author').value,correction:$('correction').value,case_id:current.id,revision:current.revision});
     await refresh(c.id);notice('Revised proposal ready. Previous reviews are preserved; review this revision again.');
   },'Preparing a revision from your correction…');

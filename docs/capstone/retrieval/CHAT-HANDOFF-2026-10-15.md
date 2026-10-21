@@ -1,6 +1,21 @@
 # PROWL development handoff — October 15, 2026
 
 
+> **October21 usable labeling rehearsal:** Read LABELING-APPLICATION-2026-10-21.md/spec1.56.
+> Separate stdlib app on127.0.0.1:5182, fixed fictional Luma library, local Qwen3:8b pinned digest.
+> No protected import/real questions/evaluation release. Source-specific sentence IDs derive quotes;
+> natural correction, accept/reject, separate consistency, readable history and export implemented.
+>44Python+2UI checks pass;7bounded real model calls on invented content. Initial source mismatch
+> rejected; corrected interval semantic overclaim repaired; humidity gap retains irrelevant context
+> and was rejected. Engineering simulated decisions are NOT Quinton approval.9event export retained
+> outputs/prowl/labeling-app-20261021/http-session-export.json, SHA24982b95165edbf6c761d9d43c2de278216644b5e4eef0c650ef9b26037009c0.
+> Live app reset to fresh session after preserving rehearsal. Memory-only; export before stopping.
+> Runtime app/asset hashes in new exports. No real-browser visual verification; jsdom+HTTP verified.
+> Trello progress write outcome unconfirmed due stalled connector; pending final update in report,
+> read before retry to avoid duplicate. Private isolation/storage/corpus/semantic-independence gates
+> remain open. Next product block formal source-record coverage; no training/measurement changes.
+
+
 > **October20 acceptance/evidence handoffs completed:** Quinton accepted exact v6 delta/consistency
 > and chose separate human-operated labeling assistant. Acceptance receipt/archived packet/chain
 > verify;112 focused checks pass. Prototype prepares exact quoted evidence from invented inputs;

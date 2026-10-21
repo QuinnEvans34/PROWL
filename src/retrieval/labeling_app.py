@@ -17,6 +17,11 @@ from .assisted_labeling import assemble_proposal, LabelPreparationError
 
 MODEL = 'qwen3:8b'
 MODEL_SHA = '500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41'
+ASSETS = {name:(Path(__file__).parent/'labeling_assets'/name).read_bytes()
+          for name in ('index.html','app.js','style.css')}
+TOOL_IDENTITY = dict(version='labeling-rehearsal-v1',
+    source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+    assets={name:hashlib.sha256(raw).hexdigest() for name,raw in ASSETS.items()})
 SOURCES = [dict(id='fiction:indoor', title='Fictional Luma indoor trial', text=
     'In a fictional trial of 12 indoor Luma sensors, inspectors checked each sensor every seven days. '
     'This schedule was studied indoors only and does not establish a safe schedule for outdoor sensors.'),
@@ -158,7 +163,7 @@ class ReviewSession:
     def snapshot(self):
         with self.lock:
             return deepcopy(dict(scope='invented_rehearsal_only',sources=SOURCES,cases=list(self.cases.values()),
-                busy=self.busy,ready_for_evaluation=False,examples=[
+                busy=self.busy,history=self.events,ready_for_evaluation=False,examples=[
                     'How often were indoor Luma sensors checked, and does this apply outdoors?',
                     'Does an amber indicator mean a Luma sensor must be replaced?',
                     'What humidity threshold requires replacing a Luma sensor?']))
@@ -234,7 +239,7 @@ class ReviewSession:
         with self.lock:
             require(not self.busy,'Wait for the current proposal to finish before exporting.')
             value=deepcopy(dict(version='assisted-label-rehearsal-session-v1',scope='invented_rehearsal_only',
-                sources=SOURCES,source_library_sha256=digest(SOURCES),cases=list(self.cases.values()),events=self.events,
+                sources=SOURCES,source_library_sha256=digest(SOURCES),tool=TOOL_IDENTITY,cases=list(self.cases.values()),events=self.events,
                 ready_for_evaluation=False,independent_raters_claimed=False))
             value['sha256']=digest(value)
             return value
@@ -267,7 +272,7 @@ def server(session,port=5182):
             if self.path in ('/','/app.js','/style.css'):
                 name={'/':'index.html','/app.js':'app.js','/style.css':'style.css'}[self.path]
                 kind={'/':'text/html','/app.js':'text/javascript','/style.css':'text/css'}[self.path]
-                return self.reply(200,(Path(__file__).parent/'labeling_assets'/name).read_bytes(),kind)
+                return self.reply(200,ASSETS[name],kind)
             return self.reply(404,dict(error='Not found.'))
         def do_POST(self):
             if not self.allowed(True):return self.reply(403,dict(error='Reload this local page before making changes.'))

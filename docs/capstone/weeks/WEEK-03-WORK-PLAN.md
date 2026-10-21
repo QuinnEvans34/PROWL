@@ -1,11 +1,26 @@
 # Week 3 work plan and delivery benchmark
 
 **Dates:** October 19–25, 2026, America/Denver\
-**Updated:** October 20, 2026\
+**Updated:** October 21, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
 **Status:** W03-02/03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation, measurement accuracy and current-pipeline PANORAMA qualification remain open\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
+
+## October21 execution update
+
+The [labeling rehearsal](../retrieval/LABELING-APPLICATION-2026-10-21.md) is usable locally on5182.
+It provides proposed meaning/source evidence, corrections, explicit decisions, consistency and
+readable history/export, with44Python+2UI checks. Real-model rehearsal caught and retained source
+misattribution/semantic-overclaim/relevance failures; source-linked sentence selection and a human
+correction repaired the supported interval case. The gap case remains rejected. These are invented
+engineering checks, not independent acceptance. Protected authoring remains closed.
+
+Next: real-corpus passage/budget/role/admission qualification remains for AI-03. The next separate
+product-development block is a fixed, source-supported formal answer-coverage improvement, as agreed;
+no automatic expansion of this rehearsal into hidden-question operation. Measurement/PANORAMA
+remaining scope is unchanged. Commits preserve implementation/results. Trello connector did not
+confirm its progress write; report includes the pending board update, not a false sync claim.
 
 ## October 20 board review and remaining-week priorities
 

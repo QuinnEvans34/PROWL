@@ -46,6 +46,7 @@ def test_full_revision_review_history_and_consistency():
     for i,event in enumerate(export['events']):
         assert event['sha256']==digest({k:v for k,v in event.items() if k!='sha256'})
         assert event['previous_sha256']==(export['events'][i-1]['sha256'] if i else None)
+    assert export['tool']['version']=='labeling-rehearsal-v1' and len(export['tool']['source_sha256'])==64
     assert export['sha256']==digest({k:v for k,v in export.items() if k!='sha256'})
     # Caller cannot mutate retained original evidence.
     export['events'][0]['proposal']['meaning']='changed'

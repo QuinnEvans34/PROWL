@@ -1,7 +1,8 @@
 # Independent labeling: selected assisted workflow
 
 **Status:** Quinton selected the separate human-operated assisted workflow on October20.
-Preparation is complete; the protected authoring host is not yet qualified or active.
+Preparation is complete. October21: the [invented-data application](LABELING-APPLICATION-2026-10-21.md)
+is implemented and running separately on5182; protected authoring remains unqualified/inactive.
 
 The independence required here is separation from development exposure and tuning. Assisted labels
 remain machine-proposed until reviewed; this process does not establish clinical or inter-rater
@@ -72,3 +73,15 @@ Quinton will enter fresh questions and review supplied meaning/citations, withou
 offsets or JSON editing. This development chat may implement/test the tool on invented content,
 but may not operate it on the real held-out questions. No new chat, service, private image, model
 run or protected-content access was created. No further operator-choice question is pending.
+
+
+## October21 implementation update
+
+The separate rehearsal now provides local-model proposals, source-linked sentence selection,
+full source context, natural-language revision, explicit accept/reject, separate consistency,
+readable history and export.44Python+2UI checks and a bounded real-model rehearsal are complete.
+The local assistant still makes semantic/relevance errors; one corrected supported case passed
+engineering rehearsal, while the gap case was rejected for unnecessary context. No Quinton
+acceptance or independent-label quality is inferred. See the application report for exact limits,
+latency, failed attempts and remaining real-corpus/private-use work. Earlier prototype-only language
+above describes the prior checkpoint.

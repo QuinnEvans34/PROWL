@@ -1,9 +1,18 @@
 # AI expert completion specification
 
-**Version:** 1.55 — October 20, 2026 (accepted evaluation delta and completed evidence handoffs)\
+**Version:** 1.56 — October 21, 2026 (usable invented-data labeling rehearsal)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Changed evidence/membership and consistency are accepted; the separate human-operated labeling workflow is selected. Qualify its host/role schema and private admission before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October21 [labeling application](LABELING-APPLICATION-2026-10-21.md) delivered separately on5182:
+question → local-model meaning/evidence → natural-language revision → accept/reject → consistency →
+readable history/export.44Python+2UI checks pass. Source-bound sentence selection fixes observed
+misattribution. Real-model rehearsal preserves failures: corrected interval meaning accepted only
+in simulated engineering review, humidity-gap case rejected for weak source relevance. No real
+protected questions or Quinton acceptance inferred. Full corpus/isolation/storage/admission remain
+open; AI-03 is not frozen. Existing literature UI/model and training remain unchanged. Trello write
+outcome unconfirmed; final update text preserved in the report pending connector recovery.
 
 October20 accepted/handoff checkpoint: Quinton explicitly accepted the v6 delta/consistency and
 selected the separate assisted labeling workflow. Archived review bytes and inherited approvals
