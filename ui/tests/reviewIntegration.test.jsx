@@ -17,6 +17,7 @@ it('connects review and literature without bypassing unavailable measurements; g
   render(<SavedPredictionView />)
   await screen.findByText('No recorded decisions for this prediction.')
   expect(screen.getByText('Search supporting literature')).toBeTruthy()
+  expect(screen.getByRole('note').textContent).toContain('Measurements are withheld: Outline touches its inference boundary.')
   fireEvent.change(screen.getByLabelText('Measurement question'),{target:{value:'How big is this pancreas?'}})
   fireEvent.click(screen.getByText('Calculate volume'))
   expect(screen.getByText('Measurement unavailable')).toBeTruthy()

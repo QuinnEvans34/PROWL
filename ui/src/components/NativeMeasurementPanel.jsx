@@ -8,6 +8,7 @@ export default function NativeMeasurementPanel({ measurement, live = false }) {
   return <section aria-label="Native scan measurements" style={{ maxWidth: 760, marginTop: 24 }}>
     <h2>Ask about this {live ? 'prediction' : 'saved prediction'}</h2>
     <p>Calculate outline volumes from the verified native-grid mask. Whole-pancreas coverage and disease interpretation remain unverified.</p>
+    {measurement?.status === 'unavailable' && <p role="note">Measurements are withheld: {measurement.reason || 'No verified measurement is available.'}</p>}
     <form onSubmit={e => { e.preventDefault(); setTarget(scanQuestion(question) || 'unsupported') }}>
       <label htmlFor="native-question">Measurement question</label>
       <input id="native-question" value={question} maxLength={500} style={{ display: 'block', width: '100%', margin: '12px 0' }}

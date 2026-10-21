@@ -21,7 +21,9 @@ no recorded decision until a person submits one.
 
 General literature uses the existing answer/citation/refusal component, alongside the native
 measurement panel. It does not infer a diagnosis from the scan or send scan identifiers/voxels to
-the LLM. Existing geometry, boundary and missing-coverage limitations remain unchanged.
+the LLM. Existing geometry, boundary and missing-coverage limitations remain unchanged. An unavailable
+measurement warning is visible before a question or review decision, so a reviewer does not have to
+ask for volume to discover the limitation.
 
 ## Small local contract
 
