@@ -106,3 +106,26 @@ No real inference or generation request was made during this restoration.
 Read-only live verification also loaded the actual configured CT/mask/result through the JavaScript
 native loader and matched its manifest hash to the review API. It still reports measurement
 unavailable because the outline touches the inference crop boundary. Zero real decisions were written.
+
+## Navigation follow-through — October21
+
+Analyze and Saved reviews now appear in the existing main navigation. A recorded review includes
+`/saved?review=<manifest-hash>` to reopen that exact retained prediction; the saved selector also
+keeps the chosen identity in the URL. A missing requested archive reports an error rather than
+silently substituting the configured demo. The shell's existing router guard now receives native
+review draft state, so in-app navigation and Back/Forward cannot silently discard that draft.
+Declining navigation restores the exact review URL; accepting it leaves recorded events untouched.
+Legacy session drafts continue to live above their routes and keep their existing unload warning.
+
+25 affected UI checks and the production build pass. They cover the direct archive handoff without
+an intermediate demo load, header links, exact-target URL validation, and rejected/accepted navigation.
+No backend event format, scientific inference, measurement policy or literature answer policy changed.
+Manual browser/keyboard/layout walkthrough remains outstanding; no human acceptance is inferred.
+
+The service processes were absent again while the database stayed healthy. Existing services were
+started detached from the chat's command sessions, with private PID/log receipts under
+`outputs/prowl/review-navigation-20261021/`; no operating-system startup service was installed.
+Initial literature startup failed when PostgreSQL terminated a backend with exit2 during its size
+check. PostgreSQL recovered automatically; one service restart was attempted afterward. This is a
+retained recurrence of the earlier unexplained backend fault, not proof that it has been repaired.
+Trello reads still time out; pending prior updates have not been verified.

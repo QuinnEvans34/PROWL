@@ -14,18 +14,21 @@ export function parseLocation(location = window.location) {
       : path === '/workbench' ? 'workbench'
         : 'studies'
   const study = params.get('study')
+  const review = params.get('review')
   return {
     view,
+    review: view === 'saved' && /^[a-f0-9]{64}$/.test(review || '') ? review : null,
     study: study && /^[A-Za-z0-9_-]{1,80}$/.test(study) ? study : null,
     layout: params.get('layout') === 'compare' ? 'compare' : null,
   }
 }
 
-export function hrefFor({ view = 'studies', study = null, layout = null } = {}) {
+export function hrefFor({ view = 'studies', study = null, layout = null, review = null } = {}) {
   const path = view === 'studies' ? '/' : `/${view}`
   const params = new URLSearchParams()
   if (study && view === 'workbench') params.set('study', study)
   if (layout && view === 'workbench') params.set('layout', layout)
+  if (view === 'saved' && /^[a-f0-9]{64}$/.test(review || '')) params.set('review', review)
   const query = params.toString()
   return query ? `${path}?${query}` : path
 }
@@ -54,7 +57,7 @@ export function useRoute({ guard } = {}) {
   }, [])
 
   const navigate = useCallback((to, { replace = false } = {}) => {
-    const next = { ...routeRef.current, layout: null, ...to }
+    const next = { ...routeRef.current, layout: null, review: null, ...to }
     if (guardRef.current && guardRef.current(next, { popstate: false }) === false) return false
     const href = hrefFor(next)
     if (href !== window.location.pathname + window.location.search) {

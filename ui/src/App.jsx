@@ -157,7 +157,9 @@ function AboutDialog({ onClose }) {
 }
 
 export default function App() {
-  const [route, navigate] = useRoute()
+  const [nativeReviewDirty, setNativeReviewDirty] = useState(false)
+  const [route, navigate] = useRoute({ guard: () => !nativeReviewDirty
+    || window.confirm('Discard this unsaved review draft? Recorded decisions will remain saved.') })
   const [cases, setCases] = useState(null)
   const [loadError, setLoadError] = useState('')
   const [caseId, setCaseId] = useState(null)
@@ -469,10 +471,10 @@ export default function App() {
           />
         </ViewerSuspense>
       )}
-      {route.view === 'predict' && <ViewerSuspense label="Loading prediction workspace…"><OnDemandPredictionView onServiceStatus={setPredictionEndpointStatus} /></ViewerSuspense>}
+      {route.view === 'predict' && <ViewerSuspense label="Loading prediction workspace…"><OnDemandPredictionView onServiceStatus={setPredictionEndpointStatus} onReviewDirty={setNativeReviewDirty} /></ViewerSuspense>}
       {route.view === 'saved' && (
         <ViewerSuspense label="Loading saved viewer…">
-          <div className="pw-page"><SavedPredictionView onDemandHref="/predict" /></div>
+          <div className="pw-page"><SavedPredictionView onDemandHref="/predict" reviewHash={route.review} onSelectReview={hash => navigate({ view: 'saved', review: hash })} onReviewDirty={setNativeReviewDirty} /></div>
         </ViewerSuspense>
       )}
 

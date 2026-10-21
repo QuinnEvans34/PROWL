@@ -1,3 +1,4 @@
+import { hrefFor } from '../lib/router.js'
 import React, { useEffect, useRef, useState } from 'react'
 
 const labels = { accept: 'Accept', edit_required: 'Needs correction', reject: 'Reject' }
@@ -83,6 +84,7 @@ export default function ReviewDecisionPanel({ base, manifestHash, manifest, onSa
     {history === null && !error && <p role="status">Loading recorded decisions…</p>}
     <button disabled={busy || !!pending.current} onClick={() => reload().catch(e => setError(e.message))}>Reload review history</button>
     {history !== null && <>
+      {history.length > 0 && <p><a href={hrefFor({view:'saved',review:manifestHash})}>Reopen this saved prediction</a></p>}
       <h3>Recorded history</h3>
       {history.length === 0 ? <p>No recorded decisions for this prediction.</p> : <ol>{history.map(({event, receipt}) => <li key={event.review_event_id}>
         <strong>Revision {event.revision}: {labels[event.action]}</strong> — {event.reviewer.reviewer_id} · {new Date(event.recorded_at).toLocaleString()}

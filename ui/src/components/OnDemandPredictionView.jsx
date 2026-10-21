@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { predictionCatalog, predictStudy, disposePrediction } from '../lib/onDemandPrediction.js'
 import SavedPredictionView from './SavedPredictionView.jsx'
 
-export default function OnDemandPredictionView({ onServiceStatus } = {}) {
+export default function OnDemandPredictionView({ onServiceStatus, onReviewDirty } = {}) {
   const [catalog, setCatalog] = useState(null)
   const [caseId, setCaseId] = useState('')
   const [error, setError] = useState('')
   const [status, setStatus] = useState('idle')
   const [reviewDirty, setReviewDirty] = useState(false)
+  const changedReview = useCallback(value => { setReviewDirty(value); onReviewDirty?.(value) }, [onReviewDirty])
   const canLeaveReview = () => !reviewDirty || window.confirm('Discard this unsaved review draft? Recorded decisions will remain saved.')
   const [result, setResult] = useState(null)
   const active = useRef(null)
@@ -56,6 +57,6 @@ export default function OnDemandPredictionView({ onServiceStatus } = {}) {
     {busy && <button onClick={() => { stop(); setStatus('cancelled'); setResult(null) }}>Cancel prediction</button>}
     <p role="status">{busy ? (status === 'queued' ? 'Starting prediction…' : 'Predicting the outline…') : status === 'cancelled' ? 'Prediction cancelled.' : ''}</p>
     {error && <p role="alert">{error}</p>}
-    {result && <SavedPredictionView key={result.job_id} base={`/scan-inference/jobs/${result.job_id}/files`} expected={result} live onReviewDirty={setReviewDirty} />}
+    {result && <SavedPredictionView key={result.job_id} base={`/scan-inference/jobs/${result.job_id}/files`} expected={result} live onReviewDirty={changedReview} />}
   </section>
 }

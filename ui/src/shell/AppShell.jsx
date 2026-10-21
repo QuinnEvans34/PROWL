@@ -5,6 +5,8 @@ import { Wordmark } from './Brand.jsx'
 const NAV = [
   ['studies', 'Studies'],
   ['workbench', 'Workbench'],
+  ['predict', 'Analyze'],
+  ['saved', 'Saved reviews'],
   ['research', 'Research'],
 ]
 
@@ -28,7 +30,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
     event.preventDefault()
     navigate(view === 'workbench' ? { view, study: activeStudy } : { view })
   }
-  const current = route.view === 'saved' ? 'workbench' : route.view
+  const current = route.view
   return (
     <div className="pw-app">
       <a className="pw-skip" href="#pw-main">Skip to content</a>

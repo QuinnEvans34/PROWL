@@ -24,11 +24,23 @@ it('connects review and literature without bypassing unavailable measurements; g
   expect(screen.getByText('Outline touches its inference boundary.')).toBeTruthy()
   fireEvent.change(screen.getByLabelText('Decision'),{target:{value:'reject'}})
   const selector=screen.getByLabelText('Prediction')
-  fireEvent.change(selector,{target:{value:`/review-records/packages/${b}/files`}})
+  fireEvent.change(selector,{target:{value:b}})
   expect(confirm).toHaveBeenCalledTimes(1)
   expect(selector.value).toBe('')
-  fireEvent.change(selector,{target:{value:`/review-records/packages/${b}/files`}})
+  fireEvent.change(selector,{target:{value:b}})
   await screen.findByText('invented_b',{selector:'h2'})
   await waitFor(()=>expect(screen.getByLabelText('Decision').value).toBe(''))
   expect(loadSavedPrediction.mock.calls.at(-1)[0]).toBe(`/review-records/packages/${b}/files`)
+})
+
+it('opens a linked archived prediction directly, without loading the configured demo first',async()=>{
+  loadSavedPrediction.mockClear()
+  loadSavedPrediction.mockResolvedValue(loaded(b))
+  vi.stubGlobal('fetch',vi.fn(async url=>new Response(JSON.stringify(url.endsWith('/packages') ? {packages:[]} : {
+    manifest_sha256:b,case_package_id:`case-package:${b}`,prediction_id:`prediction:${b}`,history:[],
+  }))))
+  render(<SavedPredictionView reviewHash={b} onSelectReview={vi.fn()} />)
+  await screen.findByText('invented_b',{selector:'h2'})
+  expect(loadSavedPrediction.mock.calls.map(call=>call[0])).toEqual([`/review-records/packages/${b}/files`])
+  expect(screen.getByLabelText('Prediction').value).toBe(b)
 })

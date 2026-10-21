@@ -33,6 +33,7 @@ describe('durable decisions',()=>{
     expect(screen.queryByText(/Saved locally/)).toBeNull()
     resolve(new Response(JSON.stringify(record)))
     await screen.findByText(/Saved locally — revision 1/)
+    expect(screen.getByRole('link',{name:'Reopen this saved prediction'}).getAttribute('href')).toBe(`/saved?review=${hash}`)
     const sent=JSON.parse(fetch.mock.calls[1][1].body)
     expect(sent.expected_latest_id).toBeNull();expect(sent.manifest_sha256).toBe(hash)
     view.unmount();fetch.mockImplementation(()=>ok({...target,history:[record]}));renderPanel()

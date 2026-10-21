@@ -5,11 +5,18 @@ import LiteratureSearchPanel from './LiteratureSearchPanel.jsx'
 import NiivueViewer from './NiivueViewer.jsx'
 import { loadSavedPrediction } from '../lib/savedPrediction.js'
 
-export default function SavedPredictionView({ base: initialBase = '/saved-prediction', expected = null, live = false, onDemandHref = null, onReviewDirty }) {
+export default function SavedPredictionView({ base: initialBase = '/saved-prediction', expected = null, live = false, onDemandHref = null, onReviewDirty, reviewHash = null, onSelectReview }) {
   const [dirty, setDirty] = useState(false)
   const changedDraft = useCallback(value => { setDirty(value); onReviewDirty?.(value) }, [onReviewDirty])
   const canLeaveDraft = () => !dirty || window.confirm('Discard this unsaved review draft? Recorded decisions will remain saved.')
-  const [archivedBase, setArchivedBase] = useState(null)
+  const [localReview, setLocalReview] = useState(null)
+  const selectedReview = onSelectReview ? reviewHash : localReview
+  const archivedBase = selectedReview ? `/review-records/packages/${selectedReview}/files` : null
+  function selectReview(hash) {
+    // Controlled navigation uses the shell's guard, avoiding a second confirmation.
+    if (onSelectReview) onSelectReview(hash)
+    else if (canLeaveDraft()) setLocalReview(hash)
+  }
   const base = live ? initialBase : archivedBase || initialBase
   const [packages, setPackages] = useState([])
   const [archiveError, setArchiveError] = useState('')
@@ -40,9 +47,10 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
       <p>Recorded decisions retain the original CT, contours, and provenance.</p>
       {archiveError && <p>{archiveError}</p>}
       <button onClick={refreshPackages}>Refresh saved reviews</button>{' '}
-      <label>Prediction <select value={archivedBase || ''} onChange={e => { if (canLeaveDraft()) setArchivedBase(e.target.value || null) }}>
+      <label>Prediction <select value={selectedReview || ''} onChange={e => selectReview(e.target.value || null)}>
         <option value="">Configured demonstration package</option>
-        {packages.map(p => <option key={p.manifest_sha256} value={`/review-records/packages/${p.manifest_sha256}/files`}>{p.case_id} — {p.latest.action.replace('_',' ')} — revision {p.latest.revision} — {p.manifest_sha256.slice(0,8)}</option>)}
+        {selectedReview && !packages.some(p => p.manifest_sha256 === selectedReview) && <option value={selectedReview}>Requested saved prediction · {selectedReview.slice(0,8)}</option>}
+        {packages.map(p => <option key={p.manifest_sha256} value={p.manifest_sha256}>{p.case_id} — {p.latest.action.replace('_',' ')} — revision {p.latest.revision} — {p.manifest_sha256.slice(0,8)}</option>)}
       </select></label>
     </section>}
     <button onClick={() => { if (canLeaveDraft()) setRevision(n => n + 1) }}>{live ? 'Recheck this result' : 'Reload saved package'}</button>
