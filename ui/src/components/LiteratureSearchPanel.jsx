@@ -5,6 +5,7 @@ import diseaseCatalog from '../../../configs/evidence/source-facts-disease-v1.js
 import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
 import { validateRecordAnswer } from './recordAnswer'
 import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
+import { validateMeasurementAnswer, validateMeasurementSources } from './measurementAnswer'
 import { loadScanMeasurements, scanQuestion, measurementText } from '../lib/scanMeasurements.js'
 import './GuidedEvidencePanel.css'
 
@@ -45,6 +46,7 @@ export function validateSearch(result, request, limit = 5) {
 }
 
 export function validateSourceSearch(result, request) {
+  if (result?.retrieval_policy === 'source-linked-measurement-search-v1') return validateMeasurementSources(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-volume-search-v1') return validateVolumeSources(result, request, validateSearch)
   validateSearch(result, request, 20)
   const selection = result.record_selection
@@ -81,6 +83,7 @@ export async function findLiteratureSources(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  if (result?.schema_version === 'prowl-measurement-answer-response-v1') return validateMeasurementAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-volume-answer-response-v1') return validateVolumeAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-record-answer-response-v1') return validateRecordAnswer(result, request, validateSourceSearch)
   if (result?.retrieval_policy !== undefined || result?.record_selection !== undefined
@@ -121,6 +124,7 @@ export const SUGGESTED_QUESTIONS = [
   'How can focal autoimmune pancreatitis be distinguished from PDAC on imaging?',
   'Could pancreatic head enlargement indicate disease?',
   'What is the average pancreas volume reported in research?',
+  'How does measuring pancreatic tumor diameter differ from measuring its volume on CT?',
 ]
 
 // variant="panel" renders inside the Workbench assistant. Validation, request identity,
@@ -223,7 +227,7 @@ export default function LiteratureSearchPanel({
       <p>Ask a question or enter a topic. Search {config.source_count} papers about the pancreas, pancreatitis and pancreatic cancer.</p>
     </>}
     <p className="literature-search__notice">{measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>
-    {!panel && <p>Ask question turns reviewed disease comparisons and MRI volume study results into readable summaries. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>}
+    {!panel && <p>Ask question summarizes reviewed disease comparisons, MRI volume study results and CT tumor measurement methods. Open Sources to inspect the supporting passages. Other topics currently return search results.</p>}
     {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
       {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
     </div>}

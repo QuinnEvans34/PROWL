@@ -54,12 +54,15 @@ class VolumeAwareSearch(RecordAwareSearch):
 
 class LiteratureSearch:
     """Choose a record family, preserving the baseline request/storage gates in both."""
-    def __init__(self, disease, volume):
+    def __init__(self, disease, volume, measurement=None):
         self.disease, self.volume = disease, volume
-        self.config = dict(disease.config, retriever='source-linked-literature-search-v2')
+        self.measurement = measurement
+        self.config = dict(disease.config, retriever='source-linked-literature-search-v3' if measurement else 'source-linked-literature-search-v2')
 
     def search(self, request):
         question = request['question']
+        if self.measurement and self.measurement.index.search(question)['route']['status'] == 'candidate':
+            return self.measurement.search(request)
         route = self.volume.index.search(question)['route']
         text = unicodedata.normalize('NFKC', question).casefold()
         use_volume = route['status'] in ('candidate', 'clarification') or re.search(r'\bvolume\b', text)
@@ -69,10 +72,13 @@ class LiteratureSearch:
 class LiteratureAnswers:
     policy = 'source-literature-answer-v2'
 
-    def __init__(self, search, disease_composer, volume_composer, call=None):
+    def __init__(self, search, disease_composer, volume_composer, call=None, measurement_composer=None):
         self.search = search
         self.disease_composer, self.volume_composer = disease_composer, volume_composer
         self.call = call
+        self.measurement_composer = measurement_composer
+        if measurement_composer:
+            self.policy = 'source-literature-answer-v3'
         self.lock = Lock()
 
     def answer(self, request):
@@ -80,11 +86,13 @@ class LiteratureAnswers:
             raise OSError('Answer service busy')
         try:
             result = self.search.search(request)
+            from .measurement_interpretation import POLICY as METHOD_SEARCH, ANSWER_POLICY as METHOD_ANSWER, SCHEMA as METHOD_SCHEMA
+            measurement = result['record_selection']['policy'] == METHOD_SEARCH
             volume = result['record_selection']['policy'] == SEARCH_POLICY
-            result.update(schema_version=SCHEMA_VERSION if volume else DISEASE_SCHEMA,
-                          answer_policy=POLICY if volume else DISEASE_POLICY)
+            result.update(schema_version=METHOD_SCHEMA if measurement else SCHEMA_VERSION if volume else DISEASE_SCHEMA,
+                          answer_policy=METHOD_ANSWER if measurement else POLICY if volume else DISEASE_POLICY)
             if result['record_selection']['status'] == 'matched':
-                composer = self.volume_composer if volume else self.disease_composer
+                composer = self.measurement_composer if measurement else self.volume_composer if volume else self.disease_composer
                 result['answer'] = composer.compose(request['question'], result, self.call)
                 result['generation'] = ('completed' if result['answer']['provenance'] == 'local_model_composition'
                                         else 'fallback')

@@ -10,6 +10,8 @@ const evidenceContracts = [
   'development-search-v3-records.json', 'source-facts-disease-v1.json',
   'development-volume-search-v1.json', 'source-facts-volume-v1.json',
   'volume-answer-v1.json', 'volume-answer-wording-v1.json',
+  'development-measurement-search-v1.json', 'source-facts-measurement-v1.json',
+  'measurement-answer-v1.json', 'measurement-answer-wording-v1.json',
   'natural-answer-v6.1.json', 'record-answer-v1.json', 'record-answer-wording-v1.json',
 ].map(name => fileURLToPath(new URL(`../configs/evidence/${name}`, import.meta.url)))
 

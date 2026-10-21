@@ -1,9 +1,17 @@
 # AI expert completion specification
 
-**Version:** 1.56 — October 21, 2026 (usable invented-data labeling rehearsal)\
+**Version:** 1.57 — October 21, 2026 (CT measurement-method coverage)\
 **Owners:** Quinton Evans and this DAG/RAG development chat\
 **State:** Steps 1–4 complete for their bounded scopes; disease-reference source slice built/rebuilt separately: 14 papers, 1,179 passages. Development v5 review is complete for the prior ten-source scope. Live development literature search and local cited synthesis preview are delivered under user-authorized sequencing amendments; source-impact review is complete and development v6 proposes both disease questions in a 30-case set. Changed evidence/membership and consistency are accepted; the separate human-operated labeling workflow is selected. Qualify its host/role schema and private admission before the evaluation freeze. Protected freeze, response quality and measurement integration remain open.\
 **Implementation baseline:** `369a9ba38eb36216e24ae8289abd78949196657f`
+
+October21 [CT measurement-method coverage](MEASUREMENT-INTERPRETATION-2026-10-21.md):
+existing-source CT tumor diameter versus segmented volume explanation added after fixed baseline.
+Three supported questions move from source-only results to complete local-model composition;
+nine boundaries and two existing routes remain unchanged. Canonical methods/rationale/study
+limitations reviewed,162Python/76UI checks and build pass. This is exposed development coverage,
+not independent evaluation or reliable current-scan measurement. Trello sync pending connector
+recovery. Labeling rehearsal parked at the user's direction; next close bounded live coverage gaps.
 
 October21 [labeling application](LABELING-APPLICATION-2026-10-21.md) delivered separately on5182:
 question → local-model meaning/evidence → natural-language revision → accept/reject → consistency →

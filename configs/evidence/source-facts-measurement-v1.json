@@ -1,0 +1,83 @@
+{
+  "version": "reviewed-measurement-methods-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "spans": {
+    "ct-method-16": {
+      "passage_id": "psg:fc067cc026f4ad4cb068167b772f4a8eed2620604de9c8cc92fbe6d09efbc11e",
+      "work_id": "work:pmid:33027288",
+      "ordinal": 16,
+      "start": 0,
+      "end": 554,
+      "text_sha256": "e8d160ed5c453f139b28e236f423ad99aa8791714ec22a444ae87cbb33394343"
+    },
+    "ct-method-17": {
+      "passage_id": "psg:d4cc9071d4bc1ef101ec32448a41cee63893806fd3f7ff4f669fb3b0fd11df49",
+      "work_id": "work:pmid:33027288",
+      "ordinal": 17,
+      "start": 0,
+      "end": 357,
+      "text_sha256": "d8318fc049f93f8e4808ec42d56565a7906c0cb1c53cfe5e2c8ad541165e024c"
+    },
+    "ct-method-38": {
+      "passage_id": "psg:852344fa34ea28db053651327c618cfbd8ba787bbd7c3d875a8fbd71c9112716",
+      "work_id": "work:pmid:33027288",
+      "ordinal": 38,
+      "start": 0,
+      "end": 597,
+      "text_sha256": "e6b908c93277d4305fd575b403dec155332a2575169adece7197f32f55bdc0b1"
+    },
+    "ct-method-46": {
+      "passage_id": "psg:5df74666645ee0b3d7f3fbf0f32c3ff1bf8a5d271f2821690521028ee60061c3",
+      "work_id": "work:pmid:33027288",
+      "ordinal": 46,
+      "start": 0,
+      "end": 563,
+      "text_sha256": "664febcb4b94798b177b087e923357383abe55a07c8b7f0cac3f6a091ca1b889"
+    }
+  },
+  "records": [
+    {
+      "id": "ct-tumor-dimensions",
+      "work_id": "work:pmid:33027288",
+      "topic": "ct_tumor_diameter_versus_segmented_volume",
+      "facts": [
+        {
+          "role": "definition",
+          "text": "Diameter describes a length, while volume describes the segmented tumor in three dimensions. In a CT study of pancreatic cancer, these were measured separately.",
+          "evidence": [
+            "ct-method-17",
+            "ct-method-38"
+          ]
+        },
+        {
+          "role": "method",
+          "text": "In that study, a radiologist refined a semi-automated tumor outline slice by slice and measured maximum diameters in the axial, coronal and sagittal planes. Software then measured volume from the completed three-dimensional reconstruction.",
+          "evidence": [
+            "ct-method-16",
+            "ct-method-17"
+          ]
+        },
+        {
+          "role": "rationale",
+          "text": "The authors suggest that volume may better represent the full extent of an irregular lesion. That is their rationale for volumetric analysis, not a guarantee that volume is always the better measurement.",
+          "evidence": [
+            "ct-method-38"
+          ]
+        },
+        {
+          "role": "study_limit",
+          "text": "The study was retrospective, came from one institution and included Korean patients with pancreatic cancer undergoing upfront surgery. Its findings cannot be applied directly to patients receiving treatment before surgery.",
+          "evidence": [
+            "ct-method-46"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:d4cc9071d4bc1ef101ec32448a41cee63893806fd3f7ff4f669fb3b0fd11df49"
+      ]
+    }
+  ]
+}

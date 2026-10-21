@@ -1,0 +1,55 @@
+{
+  "version": "reviewed-measurement-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "ct-tumor-dimensions": {
+      "reviewed_record_sha256": "4a907c56c22a39b433c740020e4d5154d5575220dc4dfaf87cf23d0eebb2d138",
+      "units": [
+        {
+          "id": "ct-method-unit-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Diameter describes a length, while volume describes the segmented tumor in three dimensions. In a CT study of pancreatic cancer, these were measured separately.",
+            "A tumor’s diameter and volume describe different aspects of its size: a length versus its segmented three-dimensional extent. A pancreatic cancer CT study measured both separately."
+          ]
+        },
+        {
+          "id": "ct-method-unit-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "In that study, a radiologist refined a semi-automated tumor outline slice by slice and measured maximum diameters in the axial, coronal and sagittal planes. Software then measured volume from the completed three-dimensional reconstruction.",
+            "The CT workflow used semi-automated segmentation, with a radiologist trimming the tumor boundary on each slice. Maximum diameters were measured in three planes—axial, coronal and sagittal—and volume was measured automatically after three-dimensional reconstruction."
+          ]
+        },
+        {
+          "id": "ct-method-unit-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The authors suggest that volume may better represent the full extent of an irregular lesion. That is their rationale for volumetric analysis, not a guarantee that volume is always the better measurement.",
+            "For an irregularly shaped lesion, the authors describe a possible advantage of volume: representing its full extent. They present this as a potential advantage, rather than a universal rule."
+          ]
+        },
+        {
+          "id": "ct-method-unit-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "The study was retrospective, came from one institution and included Korean patients with pancreatic cancer undergoing upfront surgery. Its findings cannot be applied directly to patients receiving treatment before surgery.",
+            "This evidence comes from a retrospective, single-institution study of Korean pancreatic cancer patients undergoing upfront surgery; the authors caution against directly applying the findings to patients receiving treatment before surgery."
+          ]
+        }
+      ]
+    }
+  }
+}

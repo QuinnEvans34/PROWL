@@ -1,0 +1,11 @@
+{
+  "catalog_version": "reviewed-measurement-methods-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "status": "engineering_reviewed",
+  "records": {
+    "ct-tumor-dimensions": "4a907c56c22a39b433c740020e4d5154d5575220dc4dfaf87cf23d0eebb2d138"
+  }
+}

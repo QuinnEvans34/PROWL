@@ -154,6 +154,25 @@ def handler_for(service, source_search=None, record_answers=None):
     return Handler
 
 
+def create_measurement_answers(baseline, disease_search):
+    from src.retrieval.measurement_interpretation import MeasurementIndex, MeasurementSearch, MeasurementComposer, measurement_scope
+    from src.retrieval.evidence_experiment import corpus_records
+    from src.retrieval.volume_answer import LiteratureSearch, LiteratureAnswers
+    sources, answers = create_volume_answers(baseline, disease_search)
+    spec = json.loads((ROOT/'configs/evidence/development-measurement-search-v1.json').read_text())
+    catalog, review = checked_json(spec['catalog'], ROOT), checked_json(spec['review'], ROOT)
+    if catalog['manifest'] != spec['manifest']:
+        raise ValueError('Measurement catalog/corpus mismatch')
+    index = MeasurementIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
+    base = DevelopmentSearch(baseline.corpus, baseline.config, baseline.retrieve, scope_policy=measurement_scope)
+    measurement = MeasurementSearch(base, index, spec)
+    config = json.loads((ROOT/'configs/evidence/measurement-answer-v1.json').read_text())
+    composer = MeasurementComposer(index.engine, catalog, review, checked_json(config['wording'], ROOT), config)
+    sources = LiteratureSearch(sources.disease, sources.volume, measurement)
+    return sources, LiteratureAnswers(sources, answers.disease_composer, answers.volume_composer,
+                                      measurement_composer=composer)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
@@ -161,12 +180,15 @@ if __name__ == '__main__':
     parser.add_argument('--record-search', action='store_true', help='Enable reviewed disease-record search for sources only')
     parser.add_argument('--record-answers', action='store_true', help='Enable reviewed-record local AI composition (includes record search)')
     parser.add_argument('--volume-answers', action='store_true', help='Enable reviewed MRI volume composition alongside disease answers')
+    parser.add_argument('--measurement-answers', action='store_true', help='Include CT tumor measurement-method composition with volume and disease answers')
     args = parser.parse_args()
     service = create_service(args.config)
-    sources = create_record_search(service) if args.record_search or args.record_answers or args.volume_answers else None
+    sources = create_record_search(service) if args.record_search or args.record_answers or args.volume_answers or args.measurement_answers else None
     answers = create_record_answers(sources) if args.record_answers else None
     if args.volume_answers:
         sources, answers = create_volume_answers(service, sources)
+    if args.measurement_answers:
+        sources, answers = create_measurement_answers(service, create_record_search(service))
     server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources, answers))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()

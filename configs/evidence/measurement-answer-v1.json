@@ -1,0 +1,15 @@
+{
+  "version": "source-measurement-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "60b7ed0e396aefc781504d12546edd97821bfdb9abb03dbcc22559f1bc535abb",
+  "wording": {
+    "path": "configs/evidence/measurement-answer-wording-v1.json",
+    "sha256": "e693f04f1c2d68d8178ac8f56def8c119cce9143140e3e35c3e74983dd3565fa"
+  },
+  "wording_content_sha256": "a59294333507b3cb429fe8162d8e3c1d2317df2cf5a08af6a8fb03b53c02e964",
+  "scope": "A CT study example of pancreatic tumor measurement methods.",
+  "limitation": "This explanation supplies no measurement of your scan, diameter-to-volume conversion, diagnosis, staging or prognosis.",
+  "max_generation_seconds": 30,
+  "model_calls": 1
+}
