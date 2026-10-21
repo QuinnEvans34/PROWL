@@ -1,6 +1,6 @@
 # Review interface and recorded decisions
 
-**Status:** Approved design — schema, testing, operations, and D-208 dependencies remain  
+**Status:** Native saved-review slice implemented October21; broader workstation acceptance and D-208 dependencies remain\
 **Target weeks:** 1 and 7  
 **Depends on:** Plans 01, 05–07, 09, 10, and 11; D-208 before a reviewer-ordering score is shown  
 **Last reviewed:** 2026-09-18 (testing/stakeholder design handoffs)
@@ -8,6 +8,15 @@
 Quinton approved P08-01 through P08-18 on 2026-09-09. This locks the interface workflow,
 migration, persistence, evidence, accessibility, and verification design. It does not authorize UI
 implementation before Plans 09/10 complete the named contracts and environment boundaries.
+
+## October21 implementation update
+
+Quinton brought integration forward to finish existing software. The
+[native saved-review slice](REVIEW-INTEGRATION-2026-10-21.md) reuses the current viewer and literature
+component with local FastAPI append-only decisions, exact prediction retention, reopen/history and
+revisions. Its engineering tests pass; human walkthrough and the wider interface requirements
+below remain open. Historical browser-only workbench drafts remain explicitly unsaved; this slice
+supports native `/saved` and `/predict` packages rather than inventing durable IDs for legacy results.
 
 ## Outcome
 

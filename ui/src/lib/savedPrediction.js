@@ -32,7 +32,9 @@ export function validateSavedPrediction(data) {
 export async function loadSavedPrediction(base, signal, expected = null) {
   const response = await fetch(`${base}/manifest.json`, { signal, cache: 'no-store' })
   if (!response.ok) throw new Error(`Saved package unavailable (${response.status}).`)
-  const manifest = validateSavedPrediction(JSON.parse(new TextDecoder().decode(await boundedStream(response.body, signal, 1024*1024))))
+  const manifestBytes = await boundedStream(response.body, signal, 1024*1024)
+  const manifestHash = await sha(manifestBytes)
+  const manifest = validateSavedPrediction(JSON.parse(new TextDecoder().decode(manifestBytes)))
   if (expected && (manifest.case_id !== expected.case_id || manifest.prediction_id !== expected.job_id
     || manifest.request_identity !== expected.request_identity)) throw new Error('Prediction belongs to a different request.')
   const urls = {}; const buffers = {}
@@ -55,7 +57,7 @@ export async function loadSavedPrediction(base, signal, expected = null) {
       measurement = await measureNativePackage(manifest, buffers, roi, signal)
     }
     signal?.throwIfAborted()
-    return { manifest, urls, measurement, release: () => Object.values(urls).forEach(url => URL.revokeObjectURL(url)) }
+    return { manifest, manifestHash, urls, measurement, release: () => Object.values(urls).forEach(url => URL.revokeObjectURL(url)) }
   } catch (error) {
     Object.values(urls).forEach(url => URL.revokeObjectURL(url))
     throw error

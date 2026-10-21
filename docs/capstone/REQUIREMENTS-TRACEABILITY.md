@@ -18,7 +18,7 @@ G0-verification remains partial.
 |---|---|---|---|---|---|
 | REQ-P01 | Support an autonomous scan-to-review workflow | 01, 04, 05, 08, 12 | End-to-end run package | Unseen full-volume case completes without ground-truth ROI | Planned |
 | REQ-P02 | Remain annotation-assist/research use, not diagnostic | 01, 08, 12 | UI copy, docs, risk/ethics record | Claim review across UI/API/report/presentation | Planned |
-| REQ-P03 | Support accept/edit/reject review action and record the decision | 08 | Validated review request, append-only event, durable receipt, and history UI | Append/reload/revision/idempotency round-trip against exact prediction identity | Design in progress |
+| REQ-P03 | Support accept/edit/reject review action and record the decision | 08 | Validated review request, append-only event, durable receipt, and history UI | Append/reload/revision/idempotency round-trip against exact prediction identity | [Native saved-review slice implemented and engineering-tested](implementation/REVIEW-INTEGRATION-2026-10-21.md); human walkthrough and broader workstation acceptance pending |
 | REQ-P04 | Extend the existing UI rather than rebuild from zero | 08 | Current-state map and scoped UI changes | Regression test of retained workflows | Planned |
 | REQ-P05 | Distinguish prior foundation from new capstone work | Master plan, 12 | Lineage table and final report section | Artifact/source audit | In progress |
 | REQ-P06 | Do not reuse a model trained during the preceding project | 05, 06, 10 | Initialization audits, historical-checkpoint denylist, and new localizer/segmenter model manifests | Registry/run manifest contains permitted initialization only | Planned |

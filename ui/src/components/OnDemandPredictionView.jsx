@@ -7,6 +7,8 @@ export default function OnDemandPredictionView({ onServiceStatus } = {}) {
   const [caseId, setCaseId] = useState('')
   const [error, setError] = useState('')
   const [status, setStatus] = useState('idle')
+  const [reviewDirty, setReviewDirty] = useState(false)
+  const canLeaveReview = () => !reviewDirty || window.confirm('Discard this unsaved review draft? Recorded decisions will remain saved.')
   const [result, setResult] = useState(null)
   const active = useRef(null)
   useEffect(() => {
@@ -24,9 +26,11 @@ export default function OnDemandPredictionView({ onServiceStatus } = {}) {
     if (previous?.id) void disposePrediction(previous.id)
   }
   function select(value) {
+    if (!canLeaveReview()) return
     stop(); setCaseId(value); setResult(null); setStatus('idle'); setError('')
   }
   async function predict() {
+    if (!canLeaveReview()) return
     stop(); setResult(null); setError(''); setStatus('queued')
     const task = { controller: new AbortController(), id: null }
     active.current = task
@@ -52,6 +56,6 @@ export default function OnDemandPredictionView({ onServiceStatus } = {}) {
     {busy && <button onClick={() => { stop(); setStatus('cancelled'); setResult(null) }}>Cancel prediction</button>}
     <p role="status">{busy ? (status === 'queued' ? 'Starting prediction…' : 'Predicting the outline…') : status === 'cancelled' ? 'Prediction cancelled.' : ''}</p>
     {error && <p role="alert">{error}</p>}
-    {result && <SavedPredictionView key={result.job_id} base={`/scan-inference/jobs/${result.job_id}/files`} expected={result} live />}
+    {result && <SavedPredictionView key={result.job_id} base={`/scan-inference/jobs/${result.job_id}/files`} expected={result} live onReviewDirty={setReviewDirty} />}
   </section>
 }
