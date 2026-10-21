@@ -1,8 +1,9 @@
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { fireEvent, waitFor } from '@testing-library/dom'
 import { beforeEach, expect, it, vi } from 'vitest'
 import { startApp } from '../../src/retrieval/labeling_assets/app.js'
-const html=readFileSync('../src/retrieval/labeling_assets/index.html','utf8')
+const asset='src/retrieval/labeling_assets/index.html'
+const html=readFileSync(existsSync(asset)?asset:'../'+asset,'utf8')
 const sources=[{id:'invented',text:'Exact invented source <script>unsafe()</script>'}]
 const makeCase=(revision=1)=>({id:'one',revision,question:'Invented question?',state:'needs_review',consistency_reviewed:false,proposal_sha256:`hash${revision}`,provenance:{model:'Invented test model',seconds:0},proposal:{answerability:'answerable',meaning:revision===1?'Original meaning':'Corrected meaning',concepts:{c1:'Invented point'},evidence:{missing_direct_concepts:[],unresolved:[],rows:[{source_id:'invented',title:'Invented title',judgment:'direct',rationale:'Invented rationale',spans:[{quote:sources[0].text,grade:'direct',concept_ids:['c1']}]}]}}})
 beforeEach(()=>{document.documentElement.innerHTML=html})

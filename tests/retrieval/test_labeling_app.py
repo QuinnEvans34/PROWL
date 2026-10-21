@@ -6,14 +6,14 @@ from urllib.request import Request,urlopen
 
 import pytest
 
-from src.retrieval.labeling_app import ReviewError,ReviewSession,SOURCES,digest,server,validate_output
+from src.retrieval.labeling_app import ReviewError,ReviewSession,SOURCES,SENTENCES,digest,server,validate_output
 
 
 def output():
     return dict(meaning='The fictional indoor trial used seven-day checks; outdoor applicability is unproven.',
-        answerability='answerable',concepts=['Indoor interval and its scope'],sources=[
-            dict(source_id=s['id'],judgment='direct' if i==0 else 'not_relevant',rationale='Invented test judgment.',
-                 spans=[dict(quote=s['text'],grade='direct',concept_ids=['c1'])] if i==0 else []) for i,s in enumerate(SOURCES)])
+        answerability='answerable',concepts=['Indoor interval and its scope'],sources={
+            s['id']:dict(judgment='direct' if i==0 else 'not_relevant',rationale='Invented test judgment.',
+                 excerpts=[dict(sentence_id=SENTENCES[s['id']][0]['id'],grade='direct',concept_ids=['c1'])] if i==0 else []) for i,s in enumerate(SOURCES)})
 
 
 def provider(question,correction,previous):
@@ -60,15 +60,15 @@ def test_incomplete_or_stale_review_cannot_accept(change):
     assert len(s.events)==1 and s.cases[c['id']]['state']=='needs_review'
 
 
-@pytest.mark.parametrize('problem',['invented_quote','duplicate_source','model_offset','unknown_concept','uncertain','missing'])
+@pytest.mark.parametrize('problem',['invented_sentence','wrong_source','model_offset','unknown_concept','uncertain','missing'])
 def test_bad_or_unresolved_evidence_not_accepted(problem):
-    raw=output()
-    if problem=='invented_quote':raw['sources'][0]['spans'][0]['quote']='SECRET fabricated quote'
-    if problem=='duplicate_source':raw['sources'][1]=deepcopy(raw['sources'][0])
-    if problem=='model_offset':raw['sources'][0]['spans'][0]['start']=0
-    if problem=='unknown_concept':raw['sources'][0]['spans'][0]['concept_ids']=['c8']
-    if problem=='uncertain':raw['sources'][0]['judgment']='uncertain'
-    if problem=='missing':raw['sources'][0].update(judgment='not_relevant',spans=[])
+    raw=output();first=raw['sources']['fiction:indoor']
+    if problem=='invented_sentence':first['excerpts'][0]['sentence_id']='SECRET fabricated sentence'
+    if problem=='wrong_source':first['excerpts'][0]['sentence_id']='fiction:outdoor:s1'
+    if problem=='model_offset':first['excerpts'][0]['start']=0
+    if problem=='unknown_concept':first['excerpts'][0]['concept_ids']=['c8']
+    if problem=='uncertain':first['judgment']='uncertain'
+    if problem=='missing':first.update(judgment='not_relevant',excerpts=[])
     s=ReviewSession(lambda *args:(raw,{'model':'invented'}))
     with pytest.raises(ReviewError) as e:
         c=s.propose(request());s.decide(decision(c))
@@ -78,7 +78,7 @@ def test_bad_or_unresolved_evidence_not_accepted(problem):
 
 def test_gap_review_does_not_invent_support_or_release_evaluation():
     raw=output();raw['answerability']='insufficient_evidence';raw['meaning']='The fictional sources do not give a humidity threshold.'
-    for row in raw['sources']:row.update(judgment='not_relevant',spans=[])
+    for row in raw['sources'].values():row.update(judgment='not_relevant',excerpts=[])
     s=ReviewSession(lambda *args:(raw,{'model':'invented'}));c=s.propose(request(question='Invented humidity threshold?'))
     c=s.decide(decision(c));assert c['state']=='human_accepted_invented' and not c['ready_for_evaluation']
 
@@ -139,3 +139,32 @@ def test_private_import_not_available(running):
     assert e.value.code==404
     _,raw,_=call('/api/session');auth={'X-Review-Token':json.loads(raw)['token']}
     with pytest.raises(HTTPError):call('/api/propose',dict(request(),private_path='/secret'),auth)
+
+
+def test_local_model_identity_truncation_and_prior_feedback(monkeypatch):
+    from src.retrieval.labeling_app import LocalModel,MODEL,MODEL_SHA
+    model=LocalModel();calls=[]
+    def transport(path,payload=None,timeout=85):
+        calls.append((path,payload))
+        if path=='tags':return {'models':[{'name':MODEL,'digest':MODEL_SHA}]}
+        return dict(done=True,done_reason='stop',message={'content':json.dumps(output())})
+    monkeypatch.setattr(model,'request',transport)
+    result,identity=model('Invented question?','Clarify scope.','Original meaning.')
+    body=json.loads(calls[-1][1]['messages'][1]['content'])
+    assert body['previous_meaning']=='Original meaning.' and body['correction']=='Clarify scope.'
+    assert identity['model_sha256']==MODEL_SHA and len(calls)==2
+    assert body['sources'][0]['sentences'][0]['text'] in SOURCES[0]['text']
+    def truncated(path,payload=None,timeout=85):
+        if path=='tags':return {'models':[{'name':MODEL,'digest':MODEL_SHA}]}
+        return dict(done=True,done_reason='length',message={'content':json.dumps(output())})
+    monkeypatch.setattr(model,'request',truncated)
+    with pytest.raises(ReviewError,match='finishing'):model('Invented?','')
+    monkeypatch.setattr(model,'request',lambda *a,**k:{'models':[{'name':MODEL,'digest':'wrong'}]})
+    with pytest.raises(ReviewError,match='identity changed'):model('Invented?','')
+
+
+def test_busy_session_cannot_duplicate_or_accept_during_revision():
+    s=ReviewSession(provider);c=s.propose(request());s.busy=True
+    for action in (lambda:s.propose(request()),lambda:s.decide(decision(c)),s.export):
+        with pytest.raises(ReviewError):action()
+    assert len(s.events)==1
