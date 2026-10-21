@@ -4,6 +4,9 @@ services:
     image: pgvector/pgvector@sha256:88b17bc7a7dd6ef73d46c1b15aaa5936d50acb24e4a78713e134c579bf359e25
     platform: linux/arm64
     pull_policy: never
+    # Correlate backend exits with clients; never enable statement/parameter logging.
+    command: [postgres, -c, log_connections=on, -c, log_disconnections=on,
+              -c, log_error_verbosity=verbose, -c, "log_line_prefix=%m [%p] %a %e "]
     restart: "no"
     cpus: 2
     mem_limit: 2g

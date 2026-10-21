@@ -22,7 +22,9 @@ def service(setup):
     def retrieve(q):
         calls.append(q)
         return [dict(record=i['record'],score=.5) for i in b['items']]
-    return DevelopmentSearch(c,cfg,retrieve),r,calls
+    s = DevelopmentSearch(c,cfg,retrieve)
+    s.check_backend = lambda: None
+    return s,r,calls
 
 def test_free_question_passed_unchanged_and_evidence_bound(service):
     s,r,calls=service;r['question']='Pancreatitis and pancreatic cancer imaging'
@@ -100,6 +102,69 @@ def test_http_health_search_refusal_and_error(http):
     r['question']='Pancreatitis';s.retrieve=lambda q:(_ for _ in ()).throw(OSError('PRIVATE_CANARY'))
     with pytest.raises(HTTPError) as err:call(base,r)
     assert err.value.code==503 and b'PRIVATE_CANARY' not in err.value.read()
+
+
+def test_readiness_checks_backend_and_does_not_retry_or_generate(http, caplog):
+    base,(s,r,calls)=http
+    probes=[]
+    def unavailable():
+        probes.append(1)
+        raise OSError('PRIVATE_SQL_QUESTION_PASSWORD')
+    s.check_backend=unavailable
+    with pytest.raises(HTTPError) as err:
+        urlopen(base+'/literature-search/health')
+    assert err.value.code==503
+    assert json.load(err.value)['backend']=='unavailable'
+    assert probes==[1] and not calls
+    assert 'PRIVATE_SQL_QUESTION_PASSWORD' not in caplog.text
+    assert 'readiness' in caplog.text and 'OSError' in caplog.text
+    s.check_backend=lambda:probes.append(2)
+    result=json.load(urlopen(base+'/literature-search/health'))
+    assert result['backend']=='checked' and result['generation_checked'] is False
+    assert probes==[1,2] and not calls
+
+
+def test_source_failure_logs_metadata_only(http, caplog):
+    base,(s,r,_)=http
+    r['question']='What is pancreatic inflammation?'
+    class DatabaseFailure(Exception):
+        sqlstate='08006'
+    def fail(q):raise DatabaseFailure('PRIVATE_SQL_QUESTION_PASSWORD')
+    s.retrieve=fail
+    with pytest.raises(HTTPError):call(base,r)
+    assert 'PRIVATE_SQL_QUESTION_PASSWORD' not in caplog.text
+    assert r['question'] not in caplog.text
+    assert 'DatabaseFailure' in caplog.text and '08006' in caplog.text
+
+
+@pytest.mark.parametrize('failure', ['size','inventory','vector','none'])
+def test_database_readiness_stages_preserve_validation(failure, monkeypatch, caplog):
+    from types import SimpleNamespace
+    root=Path(__file__).resolve().parents[2];sys.path.insert(0,str(root/'scripts'))
+    spec=importlib.util.spec_from_file_location('readiness_checks',root/'scripts/serve_literature_search.py')
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    expected={'content_sha256':'fixture'}
+    monkeypatch.setattr(module,'database_inventory',lambda *a:{} if failure=='inventory' else expected)
+    calls=[]
+    class DB:
+        info=SimpleNamespace(backend_pid=123)
+        def execute(self,sql,args=None):
+            calls.append(sql)
+            if 'pg_database_size' in sql:
+                value=9*1024**3 if failure=='size' else 100
+            else:value=float('nan') if failure=='vector' else 0.0
+            return SimpleNamespace(fetchone=lambda:(value,))
+    if failure=='none':
+        module.check_database(DB(),{'collection':'fixture'},expected,vector_probe=True)
+        assert len(calls)==2
+        assert not caplog.records
+    else:
+        with pytest.raises((ValueError,OSError)):
+            module.check_database(DB(),{'collection':'fixture'},expected,vector_probe=True)
+        assert len(calls)==(2 if failure=='vector' else 1)
+        event=json.loads(caplog.records[-1].message)
+        assert event['backend_pid']==123
+        assert event['stage']=={'size':'database_size','inventory':'corpus_inventory','vector':'vector_probe'}[failure]
 
 @pytest.mark.parametrize('headers,code',[({'Origin':'https://evil.example'},403),
     ({'Host':'evil.example'},403),({'Sec-Fetch-Site':'cross-site'},403)])

@@ -106,3 +106,48 @@ Private evidence: `outputs/prowl/review-navigation-20261021/database-recurrence.
 The source request's503 status was observed, but its body was not retained because the verification
 harness raised an HTTPError. No response-body reconstruction or fresh query was used to replace it.
 Trello's recurrence comment was confirmed; list movement is tracked separately in the Week3 plan.
+
+
+## October21 investigation and readiness repair — operational, cause still open
+
+Quinton authorized addressing the recurrence. Before code changes, a staged read-only size/inventory/
+exact-vector query passed, as did10 fresh database connections and the exposed source question through
+Vite. Thus the intermittent failure was **not reproduced**, and those successes cannot be attributed
+to this patch. Container memory and PID-limit event counters showed no limit/OOM events; no specific
+storage, pgvector, signal, or client cause is established. PostgreSQL17's
+[termination handler](https://github.com/postgres/postgres/blob/REL_17_STABLE/src/backend/tcop/postgres.c)
+can exit2 for SIGQUIT, but our retained logs do not prove that path or a signal sender. No speculative
+image upgrade, storage migration, corpus rebuild or automatic retry was made.
+
+Two confirmed defects were repaired: `/literature-search/health` now checks the configured mount,
+resource limits, database size, exact frozen inventory and one stored-vector self-distance, returning
+503 when unavailable. A200 response identifies `backend=checked` and `generation_checked=false`;
+it is a point-in-time backend check, not an Ollama/answer-quality or future-availability guarantee.
+No query embedding or generation is invoked by this check. Request/startup stages retain timestamp,
+exception type, SQLSTATE and backend PID in local diagnostics without recording question, SQL,
+exception message or credential text. Query/inventory validation remains mandatory; no retry is added.
+
+The dedicated Compose service now logs connection/disconnection and verbose error metadata with
+application/PID/SQLSTATE correlation. Statement/parameter logging was not enabled; existing two10MiB
+Docker log limits remain. The client identifies itself as `prowl-literature`. One controlled container
+recreation applied the settings while preserving the original bind directory and exact canonical
+inventory. XML-Adventure's container identity/start time were unchanged. The first API launcher
+incorrectly resolved the virtualenv Python symlink and failed on missing jsonschema before DB/model
+work; this attempt is retained, and the corrected launcher uses the virtualenv path directly.
+
+38 focused HTTP/readiness/lifecycle tests pass, including unavailable/recovered backend responses,
+no retries/generation, metadata privacy, size cap, inventory mismatch and invalid-vector refusal.
+Live proxy checks passed: backend health200 in0.358s, source query200 in0.365s and one local-model
+inflammation-versus-cancer answer summarized in6.453s. All six citation references match their five
+retrieved source passages. Manual response inspection confirmed the smooth-versus-abrupt duct
+contrast, MRCP qualification, calcification context, cancer-favoring findings and explicit no-single-
+feature limitation. This is an exposed smoke check, not independent acceptance or a latency benchmark.
+No new backend exit appeared in the retained post-restart window.
+
+Private evidence: `outputs/prowl/database-repair-20261021/` contains the staged query, fresh-connection
+results, pre-change source result, restart/inventory receipt, both launcher logs, live verification and
+bounded PostgreSQL log/state. W03-02's move to Week3 In Progress and latest evidence comment are
+confirmed. Its historical completion checkbox remains stale because the connected write tool does
+not expose clearing it; the card is operationally **open**. Root cause/recurrence disposition and
+candidate-promotion gate remain open. The local UI is usable now; readiness/diagnostics are repaired,
+but a permanent database fix is not claimed. No training, inference or held-out evaluation occurred.

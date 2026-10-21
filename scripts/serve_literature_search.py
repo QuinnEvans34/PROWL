@@ -2,6 +2,10 @@
 """Loopback development literature search and local cited summaries; no query storage."""
 import argparse
 import json
+import logging
+import math
+from contextlib import contextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 from http.server import BaseHTTPRequestHandler
 
@@ -16,6 +20,42 @@ from src.retrieval.natural_answer import NaturalAnswerService, POLICY
 from src.retrieval.records import canonical_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
+LOG = logging.getLogger('prowl.literature')
+
+
+def report_failure(stage, error, backend_pid=None):
+    """Retain correlation metadata, never exception text, SQL, or user content."""
+    state = getattr(error, 'sqlstate', None)
+    LOG.error(json.dumps(dict(event='literature_backend_failure',
+        at=datetime.now(timezone.utc).isoformat(), stage=stage,
+        error_type=type(error).__name__,
+        sqlstate=state if isinstance(state, str) and len(state) == 5 and state.isalnum() else None,
+        backend_pid=backend_pid)))
+
+
+@contextmanager
+def backend_stage(stage, db=None):
+    backend_pid = getattr(getattr(db, 'info', None), 'backend_pid', None)
+    try:
+        yield
+    except Exception as error:
+        report_failure(stage, error, backend_pid)
+        raise
+
+
+def check_database(db, spec, inventory, *, vector_probe=False):
+    with backend_stage('database_size', db):
+        if db.execute('SELECT pg_database_size(current_database())').fetchone()[0] > 8*1024**3:
+            raise OSError('Database size cap reached')
+    with backend_stage('corpus_inventory', db):
+        if database_inventory(db, spec['collection']) != inventory:
+            raise ValueError('Corpus changed; restart after review')
+    if vector_probe:
+        with backend_stage('vector_probe', db):
+            row = db.execute('SELECT embedding <=> embedding FROM literature.passages '
+                'WHERE collection_id=%s ORDER BY passage_id LIMIT 1', (spec['collection'],)).fetchone()
+            if row is None or not math.isfinite(row[0]) or abs(row[0]) > 1e-5:
+                raise ValueError('Stored vector probe failed')
 
 
 def create_service(config_path):
@@ -29,30 +69,36 @@ def create_service(config_path):
     if model.id != spec['encoder_id']:
         raise ValueError('Configured encoder differs from corpus')
 
-    def check(db):
-        if db.execute('SELECT pg_database_size(current_database())').fetchone()[0] > 8*1024**3:
-            raise OSError('Database size cap reached')
-        if database_inventory(db, spec['collection']) != manifest['inventory']:
-            raise ValueError('Corpus changed; restart after review')
+    @contextmanager
+    def checked_connection():
+        with backend_stage('configuration'):
+            current = read_config(config_path); limits(current)
+            if current != config:
+                raise OSError('Configuration changed; restart required')
+        with backend_stage('connect'):
+            db = connect(config)
+        with db:
+            with db.transaction():
+                with backend_stage('transaction', db):
+                    db.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
+                    db.execute("SET LOCAL statement_timeout='30s'")
+                yield db
 
-    with connect(config) as db:
-        with db.transaction():
-            db.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
-            db.execute("SET LOCAL statement_timeout='30s'")
-            check(db)
+    def check_backend():
+        with checked_connection() as db:
+            check_database(db, spec, manifest['inventory'], vector_probe=True)
+
+    check_backend()
 
     def retrieve(question):
-        current = read_config(config_path); limits(current)
-        if current != config:
-            raise OSError('Configuration changed; restart required')
-        with connect(config) as db:
-            with db.transaction():
-                db.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY')
-                db.execute("SET LOCAL statement_timeout='30s'")
-                check(db)
+        with checked_connection() as db:
+            check_database(db, spec, manifest['inventory'])
+            with backend_stage('retrieval', db):
                 return search(db, spec['collection'], model, question, spec['top_k'])
 
-    return DevelopmentSearch(corpus, spec, retrieve)
+    service = DevelopmentSearch(corpus, spec, retrieve)
+    service.check_backend = check_backend
+    return service
 
 
 def create_record_search(baseline):
@@ -126,7 +172,13 @@ def handler_for(service, source_search=None, record_answers=None):
         def do_GET(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
             if self.path != '/literature-search/health': return self.reply(404, {'error':'Unknown route.'})
-            self.reply(200, {'mode':'local_development_excerpts','collection':service.config['collection'],
+            try:
+                service.check_backend()
+            except Exception as error:
+                report_failure('readiness', error)
+                return self.reply(503, {'backend':'unavailable', 'error':'Literature backend unavailable.'})
+            self.reply(200, {'mode':'local_development_excerpts','backend':'checked',
+                'generation_checked':False,'collection':service.config['collection'],
                 'answer_policy':getattr(record_answers, 'policy', 'source-record-answer-v1') if record_answers else POLICY,
                 'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
                 'answer_retrieval_policy':(source_search if record_answers else service).config.get('retriever', 'dense-exact-cosine-v1')})
@@ -148,7 +200,8 @@ def handler_for(service, source_search=None, record_answers=None):
                 return self.reply(400, {'error':'Use a general literature question of 1–500 characters.'})
             try:
                 result = answers.answer(request) if self.path.endswith('/answer') else source_search.search(request)
-            except Exception:
+            except Exception as error:
+                report_failure('answer' if self.path.endswith('/answer') else 'source_request', error)
                 return self.reply(503, {'error':'Literature search unavailable. Check the service and drive, then retry.'})
             self.reply(200, result)
     return Handler

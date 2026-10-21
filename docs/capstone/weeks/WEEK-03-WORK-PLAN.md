@@ -18,8 +18,12 @@ backend exit2. Inventory still matches14 sources/1,179 passages. W03-02 is reope
 comment is confirmed on Trello. Stop recovery retries and block promotion until disposition. Review
 recording remains independent. See [retained evidence](../retrieval/RELIABILITY-CLOSEOUT-2026-10-20.md#october21-recurrence--reopened).
 This operational blocker precedes additional assistant expansion; it does not erase prior quality results.
-The W03-02 move timed out; a fresh read still shows Week3 Complete/complete=true. Its reopening
-comment is saved, but moving the card and clearing its completion marker remain pending board sync.
+Follow-up: W03-02 is now confirmed in Week3 In Progress with an updated evidence comment. Its
+historical completion checkbox remains stale (the connected tool does not expose clearing it).
+The live path is operational again: health/source query200 and a cited local-model answer in6.45s;
+38 focused tests pass. Health now verifies the backend and failures retain private stage metadata.
+The intermittent exit2 was not reproduced before the patch, so its root cause and promotion gate
+remain open. See the investigation/readiness repair in the linked report.
 
 ## October21 priority correction — current
 

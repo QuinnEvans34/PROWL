@@ -65,7 +65,8 @@ def limits(c):
 def connect(c):
     import psycopg
     return psycopg.connect(host=c['host'],port=c['port'],dbname=c['database'],user=c['user'],
-        password=Path(c['password_file']).read_text().strip(),connect_timeout=5,autocommit=True)
+        password=Path(c['password_file']).read_text().strip(),connect_timeout=5,autocommit=True,
+        application_name='prowl-literature')
 
 
 def encoder(c):
