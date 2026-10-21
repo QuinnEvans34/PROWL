@@ -10,7 +10,8 @@ existing-source CT tumor diameter versus segmented volume explanation added afte
 Three supported questions move from source-only results to complete local-model composition;
 nine boundaries and two existing routes remain unchanged. Canonical methods/rationale/study
 limitations reviewed,162Python/76UI checks and build pass. This is exposed development coverage,
-not independent evaluation or reliable current-scan measurement. Trello sync pending connector
+not independent evaluation or reliable current-scan measurement. Tested policy is active on8016/5180;
+Trello sync pending connector
 recovery. Labeling rehearsal parked at the user's direction; next close bounded live coverage gaps.
 
 October21 [labeling application](LABELING-APPLICATION-2026-10-21.md) delivered separately on5182:

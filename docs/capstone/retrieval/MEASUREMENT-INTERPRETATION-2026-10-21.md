@@ -97,3 +97,17 @@ MEASUREMENT-INTERPRETATION-2026-10-21.md.” Sync this once the connector recove
 Next bounded family: contour/reader variability, if actual canonical evidence supports it. Keep
 protected labeling parked until its isolation/admission work is selected; do not call this narrow
 coverage improvement completion of the expert system or measurement-aware extension.
+
+## Local activation
+
+After passing the fixed candidate and source review, implementation commit `0d89eb6` was activated
+on8016 with `--measurement-answers` (owned session22902). API and Vite5180 proxy both report
+`source-literature-answer-v3` / `source-linked-literature-search-v3`. A real query through the UI
+proxy selected the four canonical passages; all four newly imported public contracts returned200.
+No additional generation call was made beyond the three-call experiment. Database is healthy;
+XML-Adventure is restored. The old5182 invented labeling app remains separate.
+
+After adding the suggested question,59 affected UI checks were repeated and passed; this does not
+increase the76distinct UI count above. Activation receipt is retained locally as `activation.json`.
+Try: “How does measuring pancreatic tumor diameter differ from measuring its volume on CT?”
+Trello remains pending because the read connector timed out; no successful sync is claimed.
