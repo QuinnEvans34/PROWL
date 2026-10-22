@@ -1,0 +1,12 @@
+{
+  "catalog_version": "reviewed-ct-study-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "status": "engineering_reviewed",
+  "records": {
+    "ct-visibility": "646fb1b5cd44818d561afbc7dd1055b24644c6dab2ad5b3b90c4906bcc7606f2",
+    "ct-study-limits": "a90c54ca80079ff66d54881752b13279d2d7ce62bb1d241d3f4cb48804743488"
+  }
+}

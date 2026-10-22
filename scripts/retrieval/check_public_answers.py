@@ -19,8 +19,11 @@ def run(suite, output, port):
     if port not in (5180, 8016, 8019):
         raise ValueError('Only local production/candidate ports allowed')
     suite = suite.resolve()
-    if not suite.is_relative_to(ROOT/'configs/evidence'):
-        raise ValueError('Only public development configurations allowed')
+    allowed = {ROOT/'configs/evidence/evaluation'/name for name in (
+        'development-v6-draft.json', 'rag-interpretation-development-v1.json')}
+    allowed.add(ROOT/'configs/evidence/week3-quality-matrix-v1.json')
+    if suite not in allowed:
+        raise ValueError('Only the three named exposed development suites are allowed')
     data = json.loads(suite.read_text())
     cases = data['cases']
     if not 1 <= len(cases) <= 60 or any(c.get('split', 'development') != 'development' for c in cases):

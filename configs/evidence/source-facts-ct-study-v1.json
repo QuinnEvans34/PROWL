@@ -1,0 +1,121 @@
+{
+  "version": "reviewed-ct-study-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "spans": {
+    "iso-6": {
+      "passage_id": "psg:02ec62abb0b23f7a02c5ba4c59a16d41159ab58a3408731259e26ba3131564d0",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 6,
+      "start": 0,
+      "end": 454,
+      "text_sha256": "b11ed380e64db6fffee4f633a1471d29a6ec681157d32f91c74475593134dc20"
+    },
+    "iso-7": {
+      "passage_id": "psg:866841c35b200aaaa415d9f2ba9f9ed5a65f1d3cf150166c1a10101fda101f12",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 7,
+      "start": 0,
+      "end": 320,
+      "text_sha256": "f1dbc993f95e13f725d6d7275a3b5853fdbe7bf991f7f2994d93e4c805809c44"
+    },
+    "iso-55": {
+      "passage_id": "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 55,
+      "start": 0,
+      "end": 582,
+      "text_sha256": "2c4f09ead5b30d1c56b83bb5c6b1939e17e7800d4229dfedd6bef861b73d1364"
+    },
+    "iso-56": {
+      "passage_id": "psg:efc79fa74ffcf82cabd648074f8f9195119a303baf6c56116ea0d28282fa572c",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 56,
+      "start": 0,
+      "end": 499,
+      "text_sha256": "86741f3692a189b0527ef948c02d314a40f29ea5d44344b618465b60833e3d48"
+    },
+    "iso-57": {
+      "passage_id": "psg:5e3511f9763354b3cbba920d63b60f36f56fba1f15f8d7aba1908645a56c730f",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 57,
+      "start": 0,
+      "end": 561,
+      "text_sha256": "3edd2a3bfdd0a4b85eba3f719a988971d2185a32e7fecdbf85ad8089895fff21"
+    }
+  },
+  "records": [
+    {
+      "id": "ct-visibility",
+      "work_id": "work:pmid:33925859",
+      "topic": "ct_isoattenuating_visibility",
+      "facts": [
+        {
+          "role": "definition",
+          "text": "Some pancreatic cancers have nearly the same density as the surrounding pancreas on contrast-enhanced CT. This weak contrast can make the tumor difficult to see; the term isoattenuating describes that similar appearance.",
+          "evidence": [
+            "iso-6"
+          ]
+        },
+        {
+          "role": "context",
+          "text": "The paper describes indirect clues such as a widened or interrupted pancreatic duct, widening of the common bile duct, shrinkage of tissue beyond the tumor, or an abnormal pancreatic contour.",
+          "evidence": [
+            "iso-7"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The cited study included patients with confirmed pancreatic cancer. It did not compare these tumors with other diagnoses, so its findings do not establish that a similar-looking finding in another patient is cancer.",
+          "evidence": [
+            "iso-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:02ec62abb0b23f7a02c5ba4c59a16d41159ab58a3408731259e26ba3131564d0"
+      ]
+    },
+    {
+      "id": "ct-study-limits",
+      "work_id": "work:pmid:33925859",
+      "topic": "ct_isoattenuating_study_limits",
+      "facts": [
+        {
+          "role": "design",
+          "text": "The study of isoattenuating pancreatic carcinomas used retrospective data from one center and a small sample, which the authors identify as possible sources of bias.",
+          "evidence": [
+            "iso-55"
+          ]
+        },
+        {
+          "role": "selection",
+          "text": "It included only pancreatic tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA). False-positive EUS-FNA cases were excluded, so the study could not determine the test’s specificity.",
+          "evidence": [
+            "iso-55",
+            "iso-56"
+          ]
+        },
+        {
+          "role": "reference_limit",
+          "text": "Only cytology samples were collected. These could not establish tumor type or grade, or compare the tissue-level density of tumor cells, vessels and fibrous tissue between the tumor groups.",
+          "evidence": [
+            "iso-56"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "Because the study focused on patients with confirmed pancreatic cancer, it could not evaluate how isoattenuating carcinomas differed from other diagnoses.",
+          "evidence": [
+            "iso-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937"
+      ]
+    }
+  ]
+}

@@ -226,6 +226,24 @@ def create_measurement_answers(baseline, disease_search):
                                       measurement_composer=composer)
 
 
+def create_study_answers(baseline):
+    from src.retrieval.study_answer import StudyIndex, StudySearch, StudyComposer
+    from src.retrieval.evidence_experiment import corpus_records
+    from src.retrieval.volume_answer import LiteratureSearch, LiteratureAnswers
+    sources, answers = create_measurement_answers(baseline, create_record_search(baseline))
+    spec = json.loads((ROOT/'configs/evidence/development-study-search-v1.json').read_text())
+    catalog, review = checked_json(spec['catalog'], ROOT), checked_json(spec['review'], ROOT)
+    if catalog['manifest'] != spec['manifest']:
+        raise ValueError('Study catalog/corpus mismatch')
+    index = StudyIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
+    study = StudySearch(baseline, index, spec)
+    config = json.loads((ROOT/'configs/evidence/ct-study-answer-v1.json').read_text())
+    composer = StudyComposer(index.engine, catalog, review, checked_json(config['wording'], ROOT), config)
+    sources = LiteratureSearch(sources.disease, sources.volume, sources.measurement, study)
+    return sources, LiteratureAnswers(sources, answers.disease_composer, answers.volume_composer,
+        measurement_composer=answers.measurement_composer, study_composer=composer)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
@@ -234,6 +252,7 @@ if __name__ == '__main__':
     parser.add_argument('--record-answers', action='store_true', help='Enable reviewed-record local AI composition (includes record search)')
     parser.add_argument('--volume-answers', action='store_true', help='Enable reviewed MRI volume composition alongside disease answers')
     parser.add_argument('--measurement-answers', action='store_true', help='Include CT tumor measurement-method composition with volume and disease answers')
+    parser.add_argument('--study-answers', action='store_true', help='Include CT visibility and named study limitations')
     args = parser.parse_args()
     service = create_service(args.config)
     sources = create_record_search(service) if args.record_search or args.record_answers or args.volume_answers or args.measurement_answers else None
@@ -242,6 +261,8 @@ if __name__ == '__main__':
         sources, answers = create_volume_answers(service, sources)
     if args.measurement_answers:
         sources, answers = create_measurement_answers(service, create_record_search(service))
+    if args.study_answers:
+        sources, answers = create_study_answers(service)
     server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources, answers))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()

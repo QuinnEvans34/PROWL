@@ -1,0 +1,93 @@
+{
+  "version": "reviewed-ct-study-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "ct-visibility": {
+      "reviewed_record_sha256": "646fb1b5cd44818d561afbc7dd1055b24644c6dab2ad5b3b90c4906bcc7606f2",
+      "units": [
+        {
+          "id": "ct-visibility-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Some pancreatic cancers have nearly the same density as the surrounding pancreas on contrast-enhanced CT. This weak contrast can make the tumor difficult to see; the term isoattenuating describes that similar appearance.",
+            "On contrast-enhanced CT, some pancreatic cancers look very similar in density to the surrounding pancreas. This is called an isoattenuating appearance, and the lack of contrast makes the tumor hard to see."
+          ]
+        },
+        {
+          "id": "ct-visibility-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The paper describes indirect clues such as a widened or interrupted pancreatic duct, widening of the common bile duct, shrinkage of tissue beyond the tumor, or an abnormal pancreatic contour.",
+            "Indirect signs described in the paper include pancreatic duct widening or interruption, a widened common bile duct, tissue shrinkage beyond the tumor and an abnormal contour of the pancreas."
+          ]
+        },
+        {
+          "id": "ct-visibility-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The cited study included patients with confirmed pancreatic cancer. It did not compare these tumors with other diagnoses, so its findings do not establish that a similar-looking finding in another patient is cancer.",
+            "This study examined confirmed pancreatic cancers and did not compare them with other diagnoses. Its findings therefore cannot establish that a similar-looking finding in a different patient is cancer."
+          ]
+        }
+      ]
+    },
+    "ct-study-limits": {
+      "reviewed_record_sha256": "a90c54ca80079ff66d54881752b13279d2d7ce62bb1d241d3f4cb48804743488",
+      "units": [
+        {
+          "id": "ct-study-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The study of isoattenuating pancreatic carcinomas used retrospective data from one center and a small sample, which the authors identify as possible sources of bias.",
+            "The authors identify three limitations in their isoattenuating pancreatic carcinoma study: retrospective data collection, a single center and a small sample, with potential bias."
+          ]
+        },
+        {
+          "id": "ct-study-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "It included only pancreatic tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA). False-positive EUS-FNA cases were excluded, so the study could not determine the test’s specificity.",
+            "Only tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA) were included. Excluding false-positive EUS-FNA cases meant the researchers could not calculate its specificity."
+          ]
+        },
+        {
+          "id": "ct-study-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "Only cytology samples were collected. These could not establish tumor type or grade, or compare the tissue-level density of tumor cells, vessels and fibrous tissue between the tumor groups.",
+            "The samples were cytology only, so tumor type and grade could not be assessed. They also could not assess differences in the density of tumor cells, blood vessels and fibrous tissue between the groups."
+          ]
+        },
+        {
+          "id": "ct-study-limits-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "Because the study focused on patients with confirmed pancreatic cancer, it could not evaluate how isoattenuating carcinomas differed from other diagnoses.",
+            "The study included only patients with a definitive pancreatic cancer diagnosis. It could not compare isoattenuating carcinomas with other diagnoses."
+          ]
+        }
+      ]
+    }
+  }
+}

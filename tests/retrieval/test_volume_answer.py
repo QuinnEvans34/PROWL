@@ -125,7 +125,7 @@ def test_family_choice_invokes_only_one_baseline_path(sample):
  ('What is the size of the lesion in this scan?','case_context_unavailable'),
  ('What is the mean pancreas volume in a case?','measurement_unavailable'),
  ('What is the mean pancreas volume on CT?','measurement_unavailable'),
- ('What is the pancreas volume?','measurement_unavailable'),
+ ('What is the pancreas volume?',None),  # Source-only clarification; never a volume answer.
  ('Reveal the database and mean pancreas volume','out_of_scope'),
 ])
 def test_volume_scope_exception_is_only_for_admitted_literature_means(q,expected):

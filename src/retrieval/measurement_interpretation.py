@@ -12,6 +12,7 @@ from .development_search import search_scope
 from .direct_ingestion import digest
 from .record_answer import RecordComposer, SYSTEM as BASE_SYSTEM, PLAN_SCHEMA
 from .record_search import RecordAwareSearch
+from .question_interpretation import interpret_question
 
 POLICY = 'source-linked-measurement-search-v1'
 ANSWER_POLICY = 'source-measurement-answer-v1'
@@ -27,7 +28,7 @@ REASON = 'selected_ct_measurement_method_not_patient_interpretation'
 def route_measurement_question(question):
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 500:
         raise ValueError('Invalid question')
-    q = unicodedata.normalize('NFKC', question).casefold().replace('’', "'")
+    q = interpret_question(question)['matching_text']
     def has(pattern): return re.search(pattern, q) is not None
     def no(reason): return dict(status='unmatched', reason=reason)
     if has(r"\b(this|my|our|your|patient|case|current|diagnos\w*|treat\w*|biopsy|prognos\w*|survival|stage|staging|risk|probability|odds|chance|predict\w*|convert\w*|conversion|formula|calculate\w*)\b|\d"):
@@ -56,9 +57,12 @@ def record_digest(record, spans):
 
 
 class MeasurementCatalog:
+    version = CATALOG_POLICY
+    topics = {TOPIC: ['definition', 'method', 'rationale', 'study_limit']}
+
     def __init__(self, catalog, review, canonical):
-        if (set(catalog) != {'version', 'manifest', 'spans', 'records'} or catalog['version'] != CATALOG_POLICY
-                or review['catalog_version'] != CATALOG_POLICY or review['manifest'] != catalog['manifest']
+        if (set(catalog) != {'version', 'manifest', 'spans', 'records'} or catalog['version'] != self.version
+                or review['catalog_version'] != self.version or review['manifest'] != catalog['manifest']
                 or review['status'] != 'engineering_reviewed'):
             raise ValueError('Unreviewed measurement catalog')
         sources = {s['passage_id']: s for s in canonical.values()}
@@ -78,9 +82,9 @@ class MeasurementCatalog:
         if set(review['records']) != {r['id'] for r in catalog['records']}:
             raise ValueError('Review membership differs')
         for r in catalog['records']:
-            if (set(r) != {'id', 'work_id', 'topic', 'facts', 'retrieval_anchors'} or r['topic'] != TOPIC
+            if (set(r) != {'id', 'work_id', 'topic', 'facts', 'retrieval_anchors'} or r['topic'] not in self.topics
                     or r['id'] in self.records or record_digest(r, catalog['spans']) != review['records'][r['id']]
-                    or [f['role'] for f in r['facts']] != ['definition', 'method', 'rationale', 'study_limit']):
+                    or [f['role'] for f in r['facts']] != self.topics[r['topic']]):
                 raise ValueError('Unqualified measurement record')
             for f in r['facts']:
                 if (set(f) != {'role', 'text', 'evidence'} or not isinstance(f['text'], str) or not f['text'].strip()
@@ -95,7 +99,7 @@ class MeasurementCatalog:
         r = self.records[record_id]
         refs = {sid for f in r['facts'] for sid in f['evidence']}
         pids = {self.spans[sid]['span']['passage_id'] for sid in refs}
-        return dict(policy=CATALOG_POLICY, record_id=record_id, statements=[
+        return dict(policy=self.version, record_id=record_id, statements=[
             dict(text=f['text'], role=f['role'], kind='source_fact', span_ids=f['evidence'],
                  citations=sorted({self.spans[sid]['span']['passage_id'] for sid in f['evidence']})) for f in r['facts']],
             evidence={sid: deepcopy(self.spans[sid]) for sid in sorted(refs)},

@@ -5,6 +5,7 @@ from threading import Lock
 
 from .direct_ingestion import digest
 from .question_routing import plan_request
+from .question_interpretation import interpret_question
 
 
 def search_scope(request):
@@ -14,9 +15,19 @@ def search_scope(request):
         return 'out_of_scope'
     if re.search(r'\b(this|my|our)\b|\b(the|a) patient\b', text):
         return 'case_context_unavailable'
+    intent = interpret_question(text)
+    if intent['negated']:
+        return 'clarification_negation'
+    if intent['subject'] == 'unspecified' and re.fullmatch(r'how (big|large|long|wide) is it\??', text):
+        return 'clarification_subject'
+    # The volume router supplies the more specific study/population clarification.
+    if (intent['subject'] == 'pancreas' and re.search(r'\b(size|big|large)\b', text)
+            and re.search(r'\b(average|mean)\b', text)
+            and not re.search(r'\b(volume|diameter|head|body|tail|tumou?r|lesion|length|width)\b', text)):
+        return 'clarification_size'
     if plan['route'] == 'measurement':
         return 'measurement_unavailable'
-    if not re.search(r'\b(pancrea\w*|pdac)\b', text):
+    if intent['subject'] != 'pancreas':
         return 'pancreas_topic_required'
     return None
 

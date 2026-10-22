@@ -1,0 +1,15 @@
+{
+  "version": "source-study-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "27bae917aa66c417e729ea68d593a89364217bb6653a139015b5b8523a4a2ed6",
+  "wording": {
+    "path": "configs/evidence/ct-study-answer-wording-v1.json",
+    "sha256": "9cad84ed050c2bd5da1c07459740c905d18d23d17a21b565f7739eeb0d2160a1"
+  },
+  "wording_content_sha256": "1a439e64048defd0a7fefc2cdf3397de2f5115b671e310efe1fedff10e9d966a",
+  "scope": "CT visibility and limitations of a named pancreatic carcinoma study.",
+  "limitation": "General source explanations; no current-scan finding, diagnosis or contour certification.",
+  "max_generation_seconds": 30,
+  "model_calls": 1
+}

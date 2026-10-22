@@ -6,13 +6,17 @@ import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
 import { validateRecordAnswer } from './recordAnswer'
 import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
 import { validateMeasurementAnswer, validateMeasurementSources } from './measurementAnswer'
+import { validateStudyAnswer, validateStudySources } from './studyAnswer'
 import { loadScanMeasurements, scanQuestion, measurementText } from '../lib/scanMeasurements.js'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
+  clarification_negation: 'Your question includes a negative or an exclusion. Which finding or comparison do you want explained? Please ask that part directly; I will not assume the opposite meaning.',
+  clarification_subject: 'Which organ or lesion do you mean, and are you asking about a published study or the current scan?',
+  clarification_size: 'Do you mean whole-pancreas volume or a length such as the head diameter? For volume, ask for a published study example; it is not a universal normal range.',
   out_of_scope: 'Use a general literature question. This search cannot diagnose a case, recommend treatment, or disclose private information.',
   case_context_unavailable: 'This search does not have access to your scan. Ask about a general topic, such as pancreatic enlargement.',
-  measurement_unavailable: 'Scan measurements are not connected yet. You can search the literature for general measurement or imaging information.',
+  measurement_unavailable: 'This literature search cannot measure a scan. Open a saved prediction for available measurements, or ask a general literature question.',
   pancreas_topic_required: 'Include a pancreatic topic in your question, such as pancreatitis, pancreas size, or PDAC.',
 }
 const generationFailures = {
@@ -46,6 +50,7 @@ export function validateSearch(result, request, limit = 5) {
 }
 
 export function validateSourceSearch(result, request) {
+  if (result?.retrieval_policy === 'source-linked-study-search-v1') return validateStudySources(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-measurement-search-v1') return validateMeasurementSources(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-volume-search-v1') return validateVolumeSources(result, request, validateSearch)
   validateSearch(result, request, 20)
@@ -83,6 +88,7 @@ export async function findLiteratureSources(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  if (result?.schema_version === 'prowl-study-answer-response-v1') return validateStudyAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-measurement-answer-response-v1') return validateMeasurementAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-volume-answer-response-v1') return validateVolumeAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-record-answer-response-v1') return validateRecordAnswer(result, request, validateSourceSearch)
@@ -263,7 +269,7 @@ export default function LiteratureSearchPanel({
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
-        <h3>{result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
+        <h3>{result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
           : result.answer?.provenance === 'local_model_composition' ? 'The local AI selected reviewed wording and arranged the source facts below. Citations and required qualifications are preserved.'

@@ -22,7 +22,7 @@ def volume_scope(request):
     reason = search_scope(request)
     # Only an admitted general study-mean intent can supersede the old scan-measurement
     # classification. Refusal, individual context and all other gates keep precedence.
-    if reason == 'measurement_unavailable' and route_volume_question(request['question'])['status'] == 'candidate':
+    if reason == 'measurement_unavailable' and route_volume_question(request['question'])['status'] in ('candidate', 'clarification'):
         return None
     return reason
 
@@ -54,13 +54,16 @@ class VolumeAwareSearch(RecordAwareSearch):
 
 class LiteratureSearch:
     """Choose a record family, preserving the baseline request/storage gates in both."""
-    def __init__(self, disease, volume, measurement=None):
+    def __init__(self, disease, volume, measurement=None, study=None):
         self.disease, self.volume = disease, volume
         self.measurement = measurement
-        self.config = dict(disease.config, retriever='source-linked-literature-search-v3' if measurement else 'source-linked-literature-search-v2')
+        self.study = study
+        self.config = dict(disease.config, retriever='source-linked-literature-search-v4' if study else 'source-linked-literature-search-v3' if measurement else 'source-linked-literature-search-v2')
 
     def search(self, request):
         question = request['question']
+        if self.study and self.study.index.search(question)['route']['status'] == 'candidate':
+            return self.study.search(request)
         if self.measurement and self.measurement.index.search(question)['route']['status'] == 'candidate':
             return self.measurement.search(request)
         route = self.volume.index.search(question)['route']
@@ -72,13 +75,16 @@ class LiteratureSearch:
 class LiteratureAnswers:
     policy = 'source-literature-answer-v2'
 
-    def __init__(self, search, disease_composer, volume_composer, call=None, measurement_composer=None):
+    def __init__(self, search, disease_composer, volume_composer, call=None, measurement_composer=None, study_composer=None):
         self.search = search
         self.disease_composer, self.volume_composer = disease_composer, volume_composer
         self.call = call
         self.measurement_composer = measurement_composer
+        self.study_composer = study_composer
         if measurement_composer:
             self.policy = 'source-literature-answer-v3'
+        if study_composer:
+            self.policy = 'source-literature-answer-v4'
         self.lock = Lock()
 
     def answer(self, request):
@@ -87,12 +93,14 @@ class LiteratureAnswers:
         try:
             result = self.search.search(request)
             from .measurement_interpretation import POLICY as METHOD_SEARCH, ANSWER_POLICY as METHOD_ANSWER, SCHEMA as METHOD_SCHEMA
+            from .study_answer import POLICY as STUDY_SEARCH, ANSWER_POLICY as STUDY_ANSWER, SCHEMA as STUDY_SCHEMA
+            study = result['record_selection']['policy'] == STUDY_SEARCH
             measurement = result['record_selection']['policy'] == METHOD_SEARCH
             volume = result['record_selection']['policy'] == SEARCH_POLICY
-            result.update(schema_version=METHOD_SCHEMA if measurement else SCHEMA_VERSION if volume else DISEASE_SCHEMA,
-                          answer_policy=METHOD_ANSWER if measurement else POLICY if volume else DISEASE_POLICY)
+            result.update(schema_version=STUDY_SCHEMA if study else METHOD_SCHEMA if measurement else SCHEMA_VERSION if volume else DISEASE_SCHEMA,
+                          answer_policy=STUDY_ANSWER if study else METHOD_ANSWER if measurement else POLICY if volume else DISEASE_POLICY)
             if result['record_selection']['status'] == 'matched':
-                composer = self.measurement_composer if measurement else self.volume_composer if volume else self.disease_composer
+                composer = self.study_composer if study else self.measurement_composer if measurement else self.volume_composer if volume else self.disease_composer
                 result['answer'] = composer.compose(request['question'], result, self.call)
                 result['generation'] = ('completed' if result['answer']['provenance'] == 'local_model_composition'
                                         else 'fallback')

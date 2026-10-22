@@ -4,7 +4,8 @@ import config from '../../../configs/evidence/measurement-answer-v1.json'
 import wording from '../../../configs/evidence/measurement-answer-wording-v1.json'
 import { validateRecordAnswer } from './recordAnswer'
 
-export function validateMeasurementSources(result, request, validateSearch) {
+export function validateMeasurementSources(result, request, validateSearch, contracts = { searchConfig, catalog, reasons: ['selected_ct_measurement_method_not_patient_interpretation'] }) {
+  const { searchConfig, catalog, reasons } = contracts
   const fail = () => { throw new Error('Invalid measurement method selection') }
   validateSearch(result, request, 20)
   const s = result.record_selection
@@ -14,7 +15,7 @@ export function validateMeasurementSources(result, request, validateSearch) {
     || (s.status === 'matched') !== (s.matches.length === 1)
     || (s.status === 'not_searched') !== (result.state === 'not_searched')
     || (s.status !== 'matched' && result.evidence.length > 5)
-    || (s.status === 'matched' && s.reason !== 'selected_ct_measurement_method_not_patient_interpretation')) fail()
+    || (s.status === 'matched' && !reasons.includes(s.reason))) fail()
   const returned = new Set(result.evidence.map(e => e.record.passage.passage_id)), expected = new Set()
   for (const m of s.matches) {
     const r = catalog.records.find(r => r.id === m.record_id)

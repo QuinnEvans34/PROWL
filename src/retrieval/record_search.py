@@ -11,6 +11,7 @@ import unicodedata
 
 from .disease_fact_records import DiseaseFactCatalog
 from .direct_ingestion import digest
+from .question_interpretation import interpret_question
 
 POLICY = 'source-linked-record-search-v1.1'
 
@@ -18,9 +19,14 @@ POLICY = 'source-linked-record-search-v1.1'
 def route_question(question):
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 500:
         raise ValueError('Invalid question')
-    q = unicodedata.normalize('NFKC', question).casefold().replace('’', "'")
+    interpreted = interpret_question(question)
+    q = interpreted['matching_text']
     def has(pattern): return re.search(pattern, q) is not None
     def no(reason): return dict(status='unmatched', reason=reason, intents=[])
+    if interpreted['task'] in ('contour_review', 'study_limitations'):
+        return no('different_research_task')
+    if any(m in interpreted['modalities'] for m in ('ultrasound', 'PET')):
+        return no('unrepresented_modality')
     if has(r"\b(this|my|our|patient|case|diagnos\w*|treat\w*|biopsy|prognos\w*|survival|risk|probability|odds|chance)\b|\d"):
         return no('individual_or_quantitative_request')
     if has(r"\b(no|not|never|without|except|exclude|instead|ignore|prompt|database|secrets?)\b|\b(don't|doesn't|isn't|can't)\b"):
@@ -35,7 +41,7 @@ def route_question(question):
     chronic = has(r'\b(chronic|mfcp)\b')
     inflammatory = has(r'\b(inflamm\w*|pancreatitis|swelling|swollen)\b')
     cancer = has(r'\b(cancer|tumou?r\w*|pdac|adenocarcinoma|malignan\w*)\b')
-    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|resembl\w*|mimic\w*|versus|vs|tell\b.{0,120}\bapart)\b')
+    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|resembl\w*|mimic\w*|separat\w*|versus|vs|(?:tell|told)\b.{0,120}\bapart)\b')
     findings = has(r'\b(imag\w*|findings?|features?|signs?|appear\w*|enhanc\w*|duct\w*|calcific\w*|mrcp|ct|mri)\b')
     head = has(r'\bhead\b') and has(r'\b(size|large|enlarg\w*|swelling|swollen|mass\w*)\b')
     disease = has(r'\b(diseases?|conditions?|indicat\w*|caus\w*|associat\w*)\b')
