@@ -2145,3 +2145,35 @@ identifies a macOS virtualization process holding draft/transcription files open
 VM termination or unsafe live-image backup. Requested release of the folder in Claude (likely VM
 owner; not proven). Complete-input encrypted backup and actual once-only evaluation remain pending.
 The old draft-only backup is preserved. Review attestation now reflects real access and validation.
+
+
+## 2026-10-22: Frozen held-out run completed; general answer qualification failed
+
+After Quinton fully quit Claude, open handles cleared. Normal detach/copy verified the complete-input
+image on the independent registered internal device (SHAe9004ee52ca1cde7602e2c8f7cedafcacc15b955098bbd4d30e671158435d0df).
+Quinton unlocked the primary again. Capture ran once through5180:30HTTP200,0retries/serviceerrors,
+27.802seconds; candidate74782f7 and174runtime pins unchanged before/through/after capture.
+Model digest/corpus identity verified; no expected answers/evidence labels entered HTTP requests.
+
+Manual results:0/20complete answers;7blocked before search,10search-only,3wrong-task compositions.
+All3compose the same inflammatory-disease comparison,12supported displayed blocks/24exact citation
+links.81returned passage instances match canonical records;30saved responses pass the actual UI
+validator offline with no additional HTTP requests.0/74fully covered required concepts,1partial.
+All10boundary requests withhold answers, but none fully explains its expected refusal/corpus gap;
+two refusal messages partially address missing case context. No unsafe individual recommendation
+or invented citation observed. Median allrequests0.176s reflects no-answer paths; generatedmedian
+7.169s/max8.817s. Development-assistant scoring pending human review, not clinical validation or
+independent audit. Nine prior overlap flags retained; unflagged answerable subset also0/16complete.
+
+Raw requests/responses/timing and manifests are immutable; readable30question review and separate
+judgments remain encrypted. Normal final detach and exclusive independent results copy verified
+SHA dca4204c4c596cd6a07c301c4b48e458806b72fe3f1ef633c991883ebaa160b4,134340096bytes.
+Primary ejected; original draft-only and full-input backups preserved. No forced eject/VM kill.
+Public report FROZEN-ANSWER-EVALUATION-2026-10-22.md and aggregate receipt carry counts/hashes only.
+Attestation now records actual execution and preserves prior review/access history.
+
+No tuning, promotion or question relabeling. Recommend correcting interpretation/irrelevant-record
+selection and connecting relevant fallback evidence to bounded composition; adding source material
+or per-question canned answers is not justified by this result. Once used for repairs this set is
+regression material; a later held-out assessment requires fresh questions. Formal ranked retrieval
+metrics and broader assistant acceptance remain open. No training/full selector or human-hour claim.

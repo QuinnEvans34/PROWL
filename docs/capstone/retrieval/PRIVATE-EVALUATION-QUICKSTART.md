@@ -1,5 +1,7 @@
 # Independent evaluation: next steps for Quinton
 
+**Latest result:** The once-only frozen run is complete. See [October22 results](FROZEN-ANSWER-EVALUATION-2026-10-22.md): 0/20 complete answers, with source integrity preserved. Inputs and results have verified independent encrypted backups. Do not rerun the preparation/capture instructions below for this attempt; they are history. Scoring review and a repair decision remain separate from completing the run.
+
 > **Current October 22 decision:** Quinton authorized the development assistant to access the
 > reviewed questions and administer one evaluation of the frozen candidate. Follow the
 > [approved amendment](QUESTION-SET-AND-EVALUATION.md#october-22-amendment-frozen-evaluation-administered-by-the-development-assistant).
