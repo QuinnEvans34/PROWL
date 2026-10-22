@@ -2104,3 +2104,17 @@ is committed here. The separate transcription JSON is not in that image; request
 from Quinton rather than duplicate its preparation or fabricate missing labels. No candidate
 requests/evaluation, runtime change, or final input/backup completion is claimed. The new audit
 will require inclusion in the next closed-image backup. Live health retains expected v4 policies.
+
+
+## 2026-10-22: Access provenance reconciled; cloud transcription transfer pending
+
+Updated the existing assisted-review attestation: development-agent access is now true, the
+original draft hash is bound, and amendment commit7503cf5 plus the subsequent audit recording
+are explicit events. Original human review statements and their recording timestamp are retained;
+no invented exact access/approval time or transcription review is asserted. The user's relayed
+Claude handoff supplies transcription-v2.json SHA256
+a92da2b93a38809caf6a0d103e040416687ea107cacaeac51e54ff6b251d93ce.
+That file exists in Claude's cloud workspace/file cards, not the unlocked image or the Mac's
+Downloads at the exact filename checked. No cloud filesystem access is available through local
+shell paths. Await download to the existing image, then verify the supplied hash before validation.
+No candidate change, evaluation, new review requirement or question-payload commit.

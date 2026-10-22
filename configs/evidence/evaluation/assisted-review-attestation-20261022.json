@@ -15,11 +15,38 @@
       "stage": "whole_set_consistency",
       "statement": "Yes, I completed that consistency check",
       "context": "Response to explicit duplicate-intent, prior-exposure overlap and consistent-evidence-label review question."
+    },
+    {
+      "stage": "procedure_amendment",
+      "statement": "Great, I agree. do you have access to the questions? they should be in the repo. Lets fix this and start working on this.",
+      "context": "User approved development-assistant access and administration: freeze first, evaluate once, preserve results, then improve.",
+      "decision_date": "2026-10-22",
+      "recorded_in_commit": "7503cf5",
+      "commit_recorded_at": "2026-10-22T15:09:55-06:00",
+      "timestamp_semantics": "Commit time records the amendment, not the exact time of user approval.",
+      "procedure": "docs/capstone/retrieval/QUESTION-SET-AND-EVALUATION.md"
+    },
+    {
+      "stage": "development_assistant_read_reviewed_draft",
+      "actor": "Codex development assistant",
+      "audit_recorded_at": "2026-10-22T21:12:23.652444+00:00",
+      "timestamp_semantics": "Audit recording time; access occurred before this time in the same turn.",
+      "draft_content_sha256": "cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16",
+      "question_count": 30,
+      "evaluation_run": false
     }
   ],
-  "draft_content_sha256": null,
-  "binding_status": "pending_private_operator_binding_to_original_reviewed_bytes",
-  "private_content_read_by_development_agent": false,
+  "draft_content_sha256": "cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16",
+  "binding_status": "original_reviewed_draft_hash_verified_by_development_assistant",
+  "private_content_read_by_development_agent": true,
   "independent_evaluation_run": false,
-  "limitation": "Human attestations preserved; no private contents, actual item counts, exact source correctness, encryption or backup are verified by this receipt."
+  "limitation": "Human review statements are preserved; the development assistant has read the original under the approved amended procedure. Original hash and 30 questions verified; 103 extracted quotes match frozen passages, not a complete semantic audit. Transcription remains unavailable; no evaluation ran. This receipt does not independently verify current backup completeness or authenticate human review.",
+  "updated_at": "2026-10-22T21:14:06.856242+00:00",
+  "transcription": {
+    "status": "not_received_on_mac",
+    "expected_filename": "transcription-v2.json",
+    "expected_sha256": "a92da2b93a38809caf6a0d103e040416687ea107cacaeac51e54ff6b251d93ce",
+    "hash_provenance": "User-relayed separate Claude handoff; not verified against a local file.",
+    "content_read_by_development_agent": false
+  }
 }
