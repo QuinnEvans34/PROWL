@@ -2118,3 +2118,30 @@ That file exists in Claude's cloud workspace/file cards, not the unlocked image 
 Downloads at the exact filename checked. No cloud filesystem access is available through local
 shell paths. Await download to the existing image, then verify the supplied hash before validation.
 No candidate change, evaluation, new review requirement or question-payload commit.
+
+
+## 2026-10-22: Original/transcription bound and validated; backup blocked by open handles
+
+All user-supplied hashes match: source draft68826bytes/e2eed1233f67892e4ed4605854d80440e9797372a123e5f72fea403a23a9e54f,
+chat-copy draft70037bytes/cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16,
+transcription204348bytes/a92da2b93a38809caf6a0d103e040416687ea107cacaeac51e54ff6b251d93ce.
+The reviewed body is identical; chat copy adds16introductory narration lines and differs only at
+final newline otherwise. All30question strings and required-concept descriptions match the source.
+Existing prepare_assisted_quotes/validate_private pass without changing inputs or criteria:
+20answerable/5refusal/5gap; fivefamilies/fourdifficulties; maximum5sole-source questions;103exact
+unique quotations. The draft's121quote narrative count is not corroborated. Validated content
+SHA36dd927e53f142df9f0b335822552d40192778a7212ca588969d0b877a43b915.
+Original roles remain preserved; execution receipt explicitly identifies Codex as administrator,
+not the historical human private_operator field. Nine overlap flags retained with prior review.
+
+Prepared a single-use observation script/plan inside encrypted storage using the existing local
+request shape and rubric. Four invented checks cover excluded expected-answer fields, preserved
+timeout, continuing once to next case, and rejection of a repeated output attempt.174runtime files
+match frozen candidate74782f7; public health and Ollama model digest match. No real model requests.
+The attempt directory is not created until execution; script/plan and input hashes will be retained.
+
+Registered storage/free-space/cap checks pass. Normal image detach failed Resource busy; lsof
+identifies a macOS virtualization process holding draft/transcription files open. No forced eject,
+VM termination or unsafe live-image backup. Requested release of the folder in Claude (likely VM
+owner; not proven). Complete-input encrypted backup and actual once-only evaluation remain pending.
+The old draft-only backup is preserved. Review attestation now reflects real access and validation.

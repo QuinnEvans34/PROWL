@@ -37,16 +37,25 @@
     }
   ],
   "draft_content_sha256": "cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16",
-  "binding_status": "original_reviewed_draft_hash_verified_by_development_assistant",
+  "binding_status": "both_equivalent_reviewed_drafts_verified_transcription_bound_to_original_source",
   "private_content_read_by_development_agent": true,
   "independent_evaluation_run": false,
-  "limitation": "Human review statements are preserved; the development assistant has read the original under the approved amended procedure. Original hash and 30 questions verified; 103 extracted quotes match frozen passages, not a complete semantic audit. Transcription remains unavailable; no evaluation ran. This receipt does not independently verify current backup completeness or authenticate human review.",
-  "updated_at": "2026-10-22T21:14:06.856242+00:00",
+  "limitation": "Original human reviews preserved. Both draft identities verified; reviewed body identical. Transcription passes mechanical checks for 30 questions/103 exact quotations. Author-reported 121 quotations is not the verified count. Mechanical validation does not prove entailment or semantic independence. Development assistant is current administrator; private_operator in immutable transcription is historical. Current complete-input backup is pending because VM handles prevent normal ejection. No evaluation ran.",
+  "updated_at": "2026-10-22T21:22:28.013665+00:00",
   "transcription": {
-    "status": "not_received_on_mac",
+    "status": "received_hash_verified_mechanically_validated",
     "expected_filename": "transcription-v2.json",
     "expected_sha256": "a92da2b93a38809caf6a0d103e040416687ea107cacaeac51e54ff6b251d93ce",
     "hash_provenance": "User-relayed separate Claude handoff; not verified against a local file.",
-    "content_read_by_development_agent": false
+    "content_read_by_development_agent": true,
+    "verified_sha256": "a92da2b93a38809caf6a0d103e040416687ea107cacaeac51e54ff6b251d93ce",
+    "source_draft_sha256": "e2eed1233f67892e4ed4605854d80440e9797372a123e5f72fea403a23a9e54f",
+    "validated_content_sha256": "36dd927e53f142df9f0b335822552d40192778a7212ca588969d0b877a43b915"
+  },
+  "equivalent_reviewed_drafts": {
+    "original_source_sha256": "e2eed1233f67892e4ed4605854d80440e9797372a123e5f72fea403a23a9e54f",
+    "chat_copy_sha256": "cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16",
+    "reviewed_body_identical": true,
+    "difference": "Chat copy adds 16 introductory narration lines and differs in final newline; no question or appendix changes."
   }
 }
