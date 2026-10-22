@@ -2089,3 +2089,18 @@ health endpoint reports the frozen v4 answer/retrieval policies. Runtime diff fr
 shows only evaluation/preparation changes, no answer-path changes; health is not a generation test.
 Pending: unlock/access, locate the original and separate transcription, validate/preserve them,
 then capture the first evaluation and separately review its scoring. No completion or score claimed.
+
+
+## 2026-10-22: Reviewed draft accessible under amended procedure
+
+Quinton unlocked the existing encrypted primary and the development assistant read the original
+under the approved amendment. Confirmed30questions and preserved original bytes (SHA256
+cc5870faecb33ba76f13ca56e7371753aa3952bae5b55001f09e9c9bc4ba2b16).
+A bounded extraction checked103 quotations on lines with full passage IDs:103 uniquely match
+canonical frozen text. This is not full validation of the author's declared121 quotations or
+semantic entailment. Nine author overlap flags and prior human review remain preserved.
+Saved the detailed access/quote audit only inside the encrypted workspace; no question payload
+is committed here. The separate transcription JSON is not in that image; requested its location
+from Quinton rather than duplicate its preparation or fabricate missing labels. No candidate
+requests/evaluation, runtime change, or final input/backup completion is claimed. The new audit
+will require inclusion in the next closed-image backup. Live health retains expected v4 policies.
