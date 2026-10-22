@@ -3,7 +3,7 @@ import { render, screen, cleanup } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import fs from 'node:fs'
 import path from 'node:path'
-import LiteratureSearchPanel, { validateAnswer } from '../src/components/LiteratureSearchPanel'
+import LiteratureSearchPanel, { validateAnswer, validateSourceSearch } from '../src/components/LiteratureSearchPanel'
 import config from '../../configs/evidence/development-search-v1.json'
 import catalog from '../../configs/evidence/source-facts-ct-study-v2.json'
 import wording from '../../configs/evidence/ct-study-answer-wording-v2.json'
@@ -53,7 +53,7 @@ it.skipIf(!dirs.length)('accepts every actual public HTTP response through the U
   const receipt=JSON.parse(fs.readFileSync(path.join(dir,'receipt.json'),'utf8'));expect(receipt.state).toBe('completed')
   receipt.cases.forEach((c,i)=>{
    const {request,response}=JSON.parse(fs.readFileSync(path.join(dir,`${String(i+1).padStart(2,'0')}.json`),'utf8'))
-   expect(validateAnswer(response,request)).toBe(response)
+   expect(response.schema_version==='prowl-development-search-response-v1' ? validateSourceSearch(response,request) : validateAnswer(response,request)).toBe(response)
   })
  }
 })

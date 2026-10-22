@@ -3,6 +3,26 @@
 **Outcome:** W03-02's bounded startup/recovery scope is complete, with the historical exit-code-2
 cause explicitly unresolved. This is not a claim of permanent storage reliability.
 
+## October22 bounded development disposition
+
+The newer October22 incident is a confirmed stale Docker share: the Mac volume UUID/files
+matched, while Docker rejected that same mount as not a directory. One start was refused;
+the user then explicitly approved restarting Docker and restoring XML-Adventure. Both were
+restored. XML-Adventure ran for about14minutes and later exited normally (exit0); that later
+state is left untouched rather than assuming it needs another restart.
+
+After PostgreSQL recovery, exact inventory/vector readiness passed. The final quality candidate
+completed104HTTP requests (51model compositions) with no service failures or fallback. Retained
+post-recovery logs contain no new backend exit/FATAL/PANIC; the startup WAL end-of-log message
+is preserved. Earlier failed readiness and composition attempts are retained, not counted as
+passing. See [October22 quality evidence](RAG-QUALITY-2026-10-22.md).
+
+Disposition: permit the bounded local development-preview promotion after its quality/UI checks;
+retain the external-drive dependency and this recurrence procedure. Stop the literature database
+before disconnecting the drive. Do not declare the unexplained October21 exit2 cause fixed or
+claim durability/uptime acceptance. W03-02 remains open for operational reliability; this explicit
+disposition supersedes its blanket candidate-promotion block for the checked October22 version.
+
 ## Investigation and disposition
 
 The retained October19 PostgreSQL logs show lost access to database paths, bad descriptors and an

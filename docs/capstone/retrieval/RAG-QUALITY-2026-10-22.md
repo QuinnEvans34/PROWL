@@ -125,3 +125,44 @@ per-case table and separate-dimension judgments are `results-table.md` and
 `public-engineering-review.json`. Raw responses, failed attempts and producer snapshots
 remain beside them. The new exposure supplement must be consolidated before private
 authoring; the private checker was not changed and no hidden questions were read.
+
+## Verification and promotion
+
+- Final candidate: **104 HTTP requests**, comprising public30, contour12,
+  interpretation32 and existing regression30; **51 local-model compositions**, no
+  final fallback/service error. The existing regression retained20/20supported and
+  10/10boundaries. Contour selection passed12/12 (six supported, six rejected).
+- Interpretation:15/15original supported prompts answered, useful clarification on
+  all five ambiguous/negated cases, no answer on the remaining unsupported/refusal
+  cases, except the contour row now answered using its newly qualified study record.
+  The old row expected abstention and is not silently rescored as an unchanged pass.
+- All final candidate citations/records matched canonical content. Answer latency
+  across the four suites:2.95–15.17seconds, median4.31seconds. The larger two-group
+  volume comparisons take longer; the public-suite range is separately shown above.
+- **226 focused Python tests** passed. **84 UI tests** passed, including validation
+  of every actual candidate response; one unrelated opt-in retained fixture test
+  was skipped. Production UI build passed (existing large-bundle advisory remains).
+  DOM interaction tests cover prose, source buttons and clarification; no new native
+  browser/keyboard/layout walkthrough is claimed.
+- The model-ID typo diagnostic and initial round-2 fallback are preserved, along
+  with the readiness failures. Final success does not erase earlier attempts.
+
+The candidate was promoted locally on October22 after the bounded database recurrence
+disposition. The answer service now starts with:
+
+```sh
+PYTHONPATH=. .venv-retrieval/bin/python scripts/serve_literature_search.py --study-answers
+```
+
+This includes the prior disease, volume and measurement-method paths. The fresh live
+health response identifies `source-literature-answer-v4`. Two answer checks through
+the UI endpoint completed in4.33/3.93seconds, and a source-only CT visibility check in
+0.37seconds. These three live checks are additional to104candidate requests. Live
+receipt/logs are in `live-launch.json`, `live.log` and `live-canary/`; the candidate
+listener is stopped after handoff. Database files/corpus/model identity are unchanged.
+
+This is a promotion of an improved **bounded development preview**, not acceptance
+of the general AI expert. AI-04 and operational reliability remain open. The most
+useful next coverage block is the existing TAGS/subregion research evidence, with
+the same complete-answer and boundary checks, rather than another model sweep or
+new labeling infrastructure.

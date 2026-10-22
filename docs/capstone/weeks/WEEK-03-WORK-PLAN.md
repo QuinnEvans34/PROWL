@@ -1,11 +1,37 @@
 # Week 3 work plan and delivery benchmark
 
 **Dates:** October 19–25, 2026, America/Denver\
-**Updated:** October 21, 2026\
+**Updated:** October 22, 2026\
 **Owner:** Quinton; this chat owns DAG/RAG software, the other chat owns data/training execution\
 **Status:** W03-02 reopened after October21 database recurrence; W03-03/04/05 bounded scopes complete; Quinton accepted the packet/UI; independent evaluation and measurement accuracy remain open; PANORAMA’s completed exploratory integration/comparison is now reconciled\
 **Weekly commitment:** Retain the approved PANORAMA integration milestone and deliver a dependable
 development AI demo for explicitly covered literature topics.
+
+## October22 autonomous quality pass — current
+
+Quinton authorized the four-block RAG baseline/interpretation/coverage/integration pass,
+with two targeted repair rounds. The [result and retained evidence](../retrieval/RAG-QUALITY-2026-10-22.md)
+supersede the older routing-only count: the complete public answer path improved from
+4/20 to9/20 relevant, complete answers, with10/10 correct no-answer boundaries. The prior
+reader-contour misroute is repaired, five source-bound CT explanations are added, and
+identifier-constrained composition removes a demonstrated invalid-plan failure.
+
+Final checks:104candidate HTTP requests,51model compositions, no final fallback/service error;
+existing20supported/10boundary regression retained.226focused Python checks and84UI checks pass;
+the UI checks include all104actual candidate responses. Build passes. The checked version is
+live with `--study-answers`, followed by two successful answer checks and one source-only check
+through5180. Today's stale Docker-share incident is explicitly dispositioned for this bounded
+preview; W03-02 remains open for operational reliability and earlier unexplained exits.
+
+**Still open:**11formal answerable questions (six scope refusals/five missing reviewed answer
+families), independent evaluation, measurement accuracy and the existing final-deliverable
+commitments. The18/20answerable acceptance threshold is unchanged and not met. No protected
+questions, training, new inference, corpus expansion or model sweep occurred. Next RAG work
+should cover the remaining existing-paper research tasks, especially TAGS and subregion
+workflow, then prepare independent evaluation with exposure supplements consolidated.
+
+All earlier milestones below remain history; no successful narrow demo is substituted for
+formal acceptance. Trello AI-04 stays In Progress.
 
 ## October21 reliability recurrence — immediate blocker
 
