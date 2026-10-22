@@ -46,3 +46,48 @@ Claude is an external service, so this arrangement is not an all-local authoring
 Candidate code is pinned to commit 74782f7 (full identity in `configs/evidence/evaluation/candidate-freeze-20261022.json`). The prior 20/20 supported and 10/10 boundary results remain exposed development evidence. No independent evaluation has run.
 
 Exposure v5 preserves v4 and adds six named supplementary inventories/matrices plus a conservative tracked-code inventory: 771 origins and 396 normalized wordings. Dynamic constructions and prior conversation are not exhaustively certified; human semantic overlap review remains necessary. V5 is preparation data; the existing private CLI still uses v4 preflight and stays closed. Private schema/admission must bind v5 before any evaluation. No candidate runtime behavior changed.
+
+
+## After Quinton accepts the draft: conversion handoff for the same separate Claude chat
+
+The following prepares the already-reviewed content; it must not generate replacements or run PROWL.
+The original draft is preserved. The private operator establishes storage separately. No protected
+question or answer belongs in a development-chat response or a repository commit.
+
+```text
+Quinton has confirmed review of the questions, proposed answers and evidence, and separately
+confirmed consistency, duplicate-intent and prior-exposure checks. Preserve the exact reviewed draft.
+Do not rewrite questions or expected answers, fill evidence gaps by guessing, or query PROWL.
+
+In the PROWL repository, read only these preparation references in addition to our existing sources:
+- docs/capstone/contracts/retrieval/private-evaluation-v2.schema.json
+- docs/capstone/retrieval/planning/INFORMATION-NEEDS-V3.md and its referenced V2/base needs
+- src/retrieval/private_evaluation.py (format/preparation only, not runtime answers)
+- configs/evidence/evaluation/assisted-review-attestation-20261022.json
+The public command below supplies exact public bindings without reading our draft:
+PYTHONPATH=. .venv-retrieval/bin/python -m src.retrieval.private_evaluation --assisted-bindings
+
+Prepare a faithful structured transcription of our reviewed draft for --prepare-assisted. Match the
+v2 schema except that each case replaces labels with quote_evidence: a list of objects with exactly
+passage_id, quote, grade and concept_ids. Do not enter offsets. The existing command will derive them
+from canonical passages. Unsupported/refused cases use an empty quote_evidence list and no positive
+source judgments. Preserve every required concept and scope qualification; list actual source
+judgments for all14 papers on answerable cases. If our draft lacks these details, report the missing
+items privately rather than inferring that they were reviewed or inventing them.
+
+Record the actual question-author and label-preparer identity/model (unknown if unavailable),
+Quinton as the human semantic/consistency reviewer and operator, and the actual review statements.
+A human model_version is not_applicable. Case authorship.author is question_author;
+case authorship.basis is separate_ai_draft_human_reviewed. Use source_draft_sha256 and
+reviewed_draft_sha256 for the exact original reviewed file, calculated locally in our separate
+workflow. Do not invent hashes or exact reading times. Record the attestation's timestamp only as
+recording time. The preparation command seals derived case/content hashes; no manual hash editing
+is assigned to Quinton. It also verifies the original draft file's actual hash before preparation.
+
+Keep this transcription and the original in the user-controlled private evaluation workspace,
+outside the repository. If that workspace is not ready, retain the transcription privately in this
+Claude conversation; do not create another repository copy. Keep draft/history and corrections.
+Do not run private preparation from an agent terminal. Quinton runs --prepare-assisted manually
+once the private workspace is ready and confirms faithful transcription. Do not mark the run,
+encryption, backup, admission or evaluation complete. Do not send private content back to Codex.
+```

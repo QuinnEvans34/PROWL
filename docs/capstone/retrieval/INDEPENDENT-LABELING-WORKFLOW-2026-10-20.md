@@ -92,3 +92,14 @@ engineering rehearsal, while the gap case was rejected for unnecessary context. 
 acceptance or independent-label quality is inferred. See the application report for exact limits,
 latency, failed attempts and remaining real-corpus/private-use work. Earlier prototype-only language
 above describes the prior checkpoint.
+
+
+## October22 reviewed-draft preparation update
+
+Both human review stages are now explicitly attested, without exposing the draft here. V5 public
+preflight and the AI-authored v2 schema are implemented. The existing CLI's manual `--prepare-assisted`
+mode converts exact passage quotes to verified source offsets and retains the original reviewed-draft
+hash; it never evaluates the candidate or certifies semantic review/storage automatically. The
+[quickstart](PRIVATE-EVALUATION-QUICKSTART.md) describes this current path. Earlier statements that
+v2 roles/v5 preflight are wholly unimplemented are historical. Private format conversion, source/balance
+validation, encrypted storage/backup and execution admission remain pending for the actual set.

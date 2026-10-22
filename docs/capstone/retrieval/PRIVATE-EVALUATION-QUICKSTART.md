@@ -1,5 +1,38 @@
 # Independent evaluation: next steps for Quinton
 
+## October22 reviewed draft: assisted preparation implemented
+
+Quinton confirmed individual questions/answers/evidence review and separately confirmed whole-set
+consistency, duplicate-intent and prior-exposure review. The exact statements are retained in
+`configs/evidence/evaluation/assisted-review-attestation-20261022.json`; a private operator must bind
+them to the original reviewed draft bytes. This development agent has not opened the questions.
+
+The existing CLI now checks exposure v5 (771 origins/396 wordings). A v2 schema records AI author and
+label preparer separately from Quinton's semantic review, consistency review and operator roles.
+`--prepare-assisted` is a **manual private mechanical-preparation command**, not execution admission.
+It takes an assistant-produced transcription with exact passage quotations, derives offsets, verifies
+original-draft hashes, and applies the existing evidence/balance/overlap checks. Quinton does not enter
+technical labels. The legacy `--prepare` path remains closed. No candidate requests are made.
+
+Use the conversion handoff at the end of [the Claude prompt](CLAUDE-EVALUATION-PROMPT-2026-10-22.md).
+Public bindings are available with `.venv-retrieval/bin/python -m src.retrieval.private_evaluation --assisted-bindings`.
+After the private workspace is ready, the operator runs the same module with `--prepare-assisted` in
+an ordinary private terminal. It prompts for the transcription and original reviewed draft paths
+without echo, accepts only bounded nonsymlink files outside the repository, and saves a new owner-only
+`.validated` directory. It does not overwrite inputs or fabricate review decisions. Do not run that
+mode in an agent-connected terminal or supply the protected paths/content to this development chat.
+
+Storage/independent encrypted backup and once-only execution admission are still pending. This step
+must not be reported as an independent score or a completed protected freeze. Git ignoring a file
+inside the repository is not isolation. Preserve the original draft/history when relocating it.
+
+Verification:80 focused checks passed in the final combined run (28 new,52 existing); the first
+attempt had42 passes/17 setup errors due to a missing invented-fixture import, corrected before those
+17 tests executed. Added operator-flow checks verify exact original binding, owner-only output and
+no content echo. Actual public preflight/bindings verified against14 papers/1179 passages. No actual
+protected data, live questions, model calls or candidate changes were used in these checks.
+
+
 ## October22: Claude drafting selected; evaluation admission still pending
 
 Use the [copyable Claude prompt](CLAUDE-EVALUATION-PROMPT-2026-10-22.md) with its two public attachments.

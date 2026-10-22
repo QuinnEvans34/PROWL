@@ -1,0 +1,25 @@
+{
+  "version": "prowl-assisted-review-attestation-v1",
+  "recorded_at": "2026-10-22T20:36:35Z",
+  "timestamp_semantics": "Recording time, not asserted reading time",
+  "reviewer": "Quinton Evans",
+  "question_author": "Claude in a separate user-operated chat",
+  "author_model_version": "unknown",
+  "events": [
+    {
+      "stage": "questions_answers_and_evidence",
+      "statement": "Yes, I reviewed them. They look good. Lets continue.",
+      "context": "Response to whether the supplied draft includes proposed answers/supporting quotations and whether they were reviewed."
+    },
+    {
+      "stage": "whole_set_consistency",
+      "statement": "Yes, I completed that consistency check",
+      "context": "Response to explicit duplicate-intent, prior-exposure overlap and consistent-evidence-label review question."
+    }
+  ],
+  "draft_content_sha256": null,
+  "binding_status": "pending_private_operator_binding_to_original_reviewed_bytes",
+  "private_content_read_by_development_agent": false,
+  "independent_evaluation_run": false,
+  "limitation": "Human attestations preserved; no private contents, actual item counts, exact source correctness, encryption or backup are verified by this receipt."
+}

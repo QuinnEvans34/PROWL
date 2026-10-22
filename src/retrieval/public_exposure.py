@@ -290,3 +290,53 @@ def accepted_public_preflight(root):
                  'Resolve broader formal answer coverage without narrowing accepted evaluation to demo topics.',
                  'Complete private authoring, semantic independence, storage/backup and frozen admission.'])
     return report
+
+
+V5_SOURCES = tuple(DIRECTORY + name for name in (
+    'measurement-method-development-v1.json', 'rag-interpretation-development-v1.json',
+    'rag-contour-development-v1.json', 'rag-study-coverage-development-v1.json',
+    'public-exposure-measurement-method-v1.json', 'public-exposure-rag-quality-v1.json',
+    'public-exposure-code-20261022.json'))
+
+
+def load_prepared_exposure(root):
+    """Verify v5 without opening protected content or changing historical v4 receipts."""
+    from .evaluation_delta import extend_exposure
+    latest_public_preflight(root)
+    data = json.loads(public_bytes(root, DIRECTORY+'public-exposure-v5.json'))
+    if (data['version'] != 'prowl-public-exposure-v5'
+            or data['status'] != 'public_preparation_private_admission_pending'
+            or data['parent']['path'] != DIRECTORY+'public-exposure-v4-preparation.json'
+            or tuple(s['path'] for s in data['sources']) != V5_SOURCES
+            or data['content_sha256'] != digest({k:v for k,v in data.items() if k!='content_sha256'})):
+        raise ValueError('Current exposure preparation binding mismatch')
+    parent = _checked(root, data['parent'])
+    for index, source in enumerate(data['sources']):
+        raw = _checked(root, source)
+        if index in (4, 5):
+            cases = [dict(id=f'wording-{i+1}', question=q) for i,q in enumerate(raw['wordings'])]
+        else:
+            cases = [dict(id=c['id'], question=c['question'])
+                     for c in raw['questions' if index==0 else 'cases']]
+        if source['exposure'] != 'development_only' or source['cases'] != cases:
+            raise ValueError('Current exposed wording was omitted or changed')
+        # Code producer pins describe the frozen extraction, not today's potentially
+        # edited tests. The pinned inventory preserves those historical literal bytes.
+    if data['inventory'] != extend_exposure(parent['inventory'], data['sources']):
+        raise ValueError('Current public exposure union mismatch')
+    return data
+
+
+def prepared_public_preflight(root):
+    """Current public preparation, including accepted development and v5 exclusions."""
+    report = accepted_public_preflight(root)
+    data = load_prepared_exposure(root)
+    inventory = data['inventory']
+    report.update(exposed_records=inventory['record_count'],
+        distinct_exposed_wordings=inventory['distinct_wording_count'],
+        exposure_content_sha256=data['content_sha256'], exposure_version=data['version'],
+        known_intent_groups=len(inventory['intent_groups']), exposure_limitations=data['limitations'],
+        ready_for_evaluation=False,
+        pending=['Prepare the separately reviewed AI-authored set using exact frozen-source evidence.',
+                 'Bind private review, storage/backup and single-run admission before evaluation.'])
+    return report
