@@ -2070,3 +2070,22 @@ symlink on this Mac. No Linux environment or interpreter was altered.
 No private file was opened/requested/searched, no private CLI mode was run, and no model request
 was made. No encryption, backup, admission, private preparation or evaluation completion is marked.
 Quinton remains the operator for the manual --prepare-assisted step.
+
+
+## 2026-10-22: Simplified frozen-evaluation administration approved
+
+Quinton agreed to freeze first, evaluate once, preserve results, then improve, and explicitly
+asked this assistant to access the questions and proceed. Updated the governing evaluation
+procedure and linked the decision prominently from the three existing operator/workflow documents.
+Permanent agent exclusion and mandatory manual-terminal operation are superseded; scoring,
+evidence checks, authorship disclosure and the frozen runtime remain unchanged. No new app,
+framework or validator bypass is needed: existing pure validation functions can be called directly.
+
+QUESTIONS.md is absent from the checkout; the known encrypted primary image exists and is ejected.
+The user's earlier setup transcript reports relocation as reviewed-draft.md. Opened that image
+with macOS for the user to unlock, without requesting/capturing a password. No questions have
+been read or evaluated at this checkpoint. Existing seven assisted bindings still match; the UI
+health endpoint reports the frozen v4 answer/retrieval policies. Runtime diff from candidate74782f7
+shows only evaluation/preparation changes, no answer-path changes; health is not a generation test.
+Pending: unlock/access, locate the original and separate transcription, validate/preserve them,
+then capture the first evaluation and separately review its scoring. No completion or score claimed.

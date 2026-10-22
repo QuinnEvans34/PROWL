@@ -6,6 +6,44 @@
 **Decision:** P07-13, P07-14, and P07-16  
 **Governing plan:** [`../implementation/07-literature-retrieval.md`](../implementation/07-literature-retrieval.md)
 
+## October 22 amendment: frozen evaluation administered by the development assistant
+
+Quinton explicitly approved replacing permanent agent exclusion with: **freeze first, evaluate
+once, preserve results, then improve**. This amendment supersedes conflicting human-terminal-only,
+agent-disconnected, and no-agent-access instructions in the earlier authoring/workflow documents.
+It changes who may administer the evaluation, not the evidence requirements or scoring criteria.
+
+- Keep candidate commit `74782f71532cf571b6925617bd71db33bba1317b`, its model, corpus,
+  retrieval settings and answer behavior frozen through the first evaluation. Preparation fixes
+  must not change the candidate. Preserve the existing freeze artifact and its hashes.
+- The development assistant may read the reviewed questions, original draft and transcription,
+  check existing evidence with the existing validator functions, and administer the evaluation.
+  The legacy interactive CLI is optional; its TTY restriction is not a requirement of this amended
+  procedure. Do not fake human confirmations or role fields to satisfy that CLI.
+- Record separate Claude authorship/preparation, Quinton's actual semantic and consistency review,
+  and development-assistant administration/scoring in the execution receipt. Preserve original
+  role attestations; do not claim Quinton executed commands that the assistant executed.
+- Preserve original question wording and expected evidence before candidate requests. Record
+  mechanical transcription corrections separately; unresolved semantic changes require review.
+  Do not derive expected answers from the candidate's responses or relax labels to make it pass.
+- Retain the existing encrypted workspace and independent backup. The user unlocks the image in
+  macOS; passwords stay outside chat. The assistant handles validation, output preservation and
+  backup work after access is available. Do not commit question payloads to Git or post them to
+  Trello. No additional labeling application or storage framework is required.
+- Send only question text and ordinary request metadata to the answer service. Preserve each
+  first attempt, response/error, timing and producing identity; never retry failed questions
+  silently. Assess factual support, completeness, readability, citations, refusals and latency
+  separately. Service errors count as errors, not exclusions from the denominator.
+- Describe the result as a held-out evaluation of a frozen candidate, with AI-assisted authorship
+  and development-assistant administration/scoring subject to human review. It is not a fully
+  independent audit. Independence from past exposed intents remains a substantive check.
+- After results guide changes, these questions become regression tests. Fresh questions are
+  required for a subsequent held-out assessment. Formal retrieval ranking metrics remain
+  separate from end-to-end answer evaluation; do not relabel context expansion as ranked retrieval.
+
+Approval changes the procedure only; it does not establish file validation, a complete backup,
+execution, human acceptance of scoring, or a passing result. Older status entries below are history.
+
 ## Purpose
 
 This document defines what “good retrieval” means before chunking, embeddings, or hybrid settings are

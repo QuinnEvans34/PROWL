@@ -1,5 +1,12 @@
 # Independent evaluation: next steps for Quinton
 
+> **Current October 22 decision:** Quinton authorized the development assistant to access the
+> reviewed questions and administer one evaluation of the frozen candidate. Follow the
+> [approved amendment](QUESTION-SET-AND-EVALUATION.md#october-22-amendment-frozen-evaluation-administered-by-the-development-assistant).
+> The user only needs to unlock encrypted storage; running the validator by hand is no longer
+> required. Earlier agent-exclusion/manual-only instructions below are superseded. Existing
+> evidence criteria, original drafts, backups and first-pass failures remain preserved.
+
 ## Encrypted workspace setup (October22)
 
 Quinton requested help setting up the required private workspace and independent backup. Use

@@ -1,5 +1,12 @@
 # Independent labeling: selected assisted workflow
 
+> **Current October 22 decision:** Quinton authorized the development assistant to access the
+> reviewed questions and administer one evaluation of the frozen candidate. Follow the
+> [approved amendment](QUESTION-SET-AND-EVALUATION.md#october-22-amendment-frozen-evaluation-administered-by-the-development-assistant).
+> The user only needs to unlock encrypted storage; running the validator by hand is no longer
+> required. Earlier agent-exclusion/manual-only instructions below are superseded. Existing
+> evidence criteria, original drafts, backups and first-pass failures remain preserved.
+
 **October22 amendment:** Quinton selected a separate Claude chat to draft fresh questions.
 The [Claude handoff](CLAUDE-EVALUATION-PROMPT-2026-10-22.md) supplies public sources/exclusions and
 records AI authorship with human semantic/consistency review. The earlier human-only authoring

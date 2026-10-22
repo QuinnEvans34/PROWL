@@ -1,5 +1,12 @@
 # Protected evaluation authoring — Quinton's worksheet
 
+> **Current October 22 decision:** Quinton authorized the development assistant to access the
+> reviewed questions and administer one evaluation of the frozen candidate. Follow the
+> [approved amendment](QUESTION-SET-AND-EVALUATION.md#october-22-amendment-frozen-evaluation-administered-by-the-development-assistant).
+> The user only needs to unlock encrypted storage; running the validator by hand is no longer
+> required. Earlier agent-exclusion/manual-only instructions below are superseded. Existing
+> evidence criteria, original drafts, backups and first-pass failures remain preserved.
+
 ## Current status — expanded disease evaluation
 
 The [disease-source review](DEVELOPMENT-DISEASE-REVIEW-2026-10-17.md) supersedes the execution
