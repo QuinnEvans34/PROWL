@@ -2028,3 +2028,45 @@ Initial APIrestart failed during Postgresautomaticrecovery; causeunknown, logske
 admission passed afterward, no DBrestart/deletion or unrelatedcontainerchanges. FinalAPI66878,
 UI/Ollama preserved. Spec1.26/results/handoff updated. Next relevantpassageretrieval underevaluation
 protocol; no humanlabelapproval/protectedfreeze/tuningrelease/training/fullselector/hoursinferred.
+
+## 2026-10-22: Public-only N1.6 assisted-validator repair
+
+Quinton relayed the separate assistant's public need-ID mismatch report. INFORMATION-NEEDS-V3
+explicitly adds N1.6, and development-draft-v3 already permits it using a version-local extension
+of the historical NEEDS set. The assisted private-v2 validator omitted that extension. Applied the
+same version-local union there; shared NEEDS, development validation, private-v1 behavior, schemas,
+needs documents, corpus, candidate configuration and protected content are unchanged. Repository
+Python search found NEEDS consumers only in development_set.py and private_evaluation.py; the
+historical evaluation checkpoint calls the development validator and retains its prior behavior.
+
+Invented tests now prove private-v2 N1.6 acceptance, N1.7 and wrong-family rejection, private-v1
+N1.6 rejection, development-v1/v2 N1.6 rejection, and development-v3 N1.6 acceptance/N1.7 rejection.
+Targeted tests:37 passed. Full existing tests/retrieval suite:1714 passed,5 integration skips,2 failures
+in38.01s. Failures are test_pipeline.py's whole-directory ban on the string "requests" (already
+present in prepare_requests) and test_records.py's historical exact12-schema assertion (23 now
+exist). Replayed those two inspections using committed HEAD bytes for the sole changed production
+file, without checkout changes:both still fail. They predate this repair; neither assertion nor
+runtime behavior was weakened to claim a green suite. Dedicated DB integration configuration was
+not supplied; the five integration tests remain skipped.
+
+--public-preflight passes with exposurev5/771origins/396wordings and readiness still false.
+--assisted-bindings matches all seven values supplied in the handoff exactly: needs, base needs,
+corpus manifest/content, accepted development content, exposure manifest and candidate freeze.
+No private transcription binding update is needed for this code repair. Receipts are under
+outputs/prowl/independent-preparation-20261022/need-scope-fix/ (public-tests.txt,
+baseline-failures.txt, public-preflight.json, public-bindings.json, public-audit.json).
+
+Public quote audit: reconstructed frozen-literature.md byte-for-byte from the same pinned
+corpus-disease-v1 batches via corpus_records; all14papers/1179passages and the frozen pack SHA match.
+prepare_assisted_quotes selects record.text by passage_id from those batches and uses exact unique
+substring matching, then adds the passage start to derive representation offsets. It does not
+normalize whitespace, punctuation or Unicode, and excludes Markdown headings from quote matching.
+This verifies the public source path, not any protected quotation or its semantic support.
+
+Mac interpreter check: .venv-retrieval/bin/python -> python3.12 -> the existing Homebrew3.12.13
+binary; invoking the venv entrypoint succeeds and retains the venv prefix. It is not a broken
+symlink on this Mac. No Linux environment or interpreter was altered.
+
+No private file was opened/requested/searched, no private CLI mode was run, and no model request
+was made. No encryption, backup, admission, private preparation or evaluation completion is marked.
+Quinton remains the operator for the manual --prepare-assisted step.

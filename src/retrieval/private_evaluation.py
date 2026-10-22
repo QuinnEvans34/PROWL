@@ -89,6 +89,8 @@ def _validate_private(suite, manifest, bundles, batches, *, bindings, exposed_qu
     works={b['work']['work_id'] for b in bundles}
     passages=[x['record']['passage'] for b in batches for x in b['items']]
     public_wording={normalize_question(q).casefold() for q in exposed_questions}
+    # Assisted v2 binds information-needs v3; preserve the legacy v1 scope.
+    allowed_needs = NEEDS | {'N1.6'} if version == 'prowl-private-evaluation-v2' else NEEDS
     ids=set();wording=set();intents=set();sole=Counter();family=Counter();difficulty=Counter();counts=Counter()
     for case in suite['cases']:
         _hash(case)
@@ -98,7 +100,7 @@ def _validate_private(suite, manifest, bundles, batches, *, bindings, exposed_qu
         if question in public_wording or case['intent_group'] in exposed_intents:
             raise PrivateValidationError('Exact exposed wording or intent reused; revise privately before freeze.')
         ids.add(case['id']);wording.add(question);intents.add(case['intent_group'])
-        if case['primary_need'] not in NEEDS or FAMILIES[case['primary_need'][1]] != case['family']:
+        if case['primary_need'] not in allowed_needs or FAMILIES[case['primary_need'][1]] != case['family']:
             raise PrivateValidationError('Need/family mismatch.')
         # Structural validation only: a keyword gate must not set the expected answer.
         make_query(case['finding'],case['question'])

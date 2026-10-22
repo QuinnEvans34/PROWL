@@ -31,6 +31,26 @@ def test_ai_authorship_is_truthful_and_not_execution_admission(assisted):
     assert not report['ready_for_tuning']
 
 
+def test_v2_accepts_v3_disease_need_on_invented_case(assisted):
+    suite,*rest=deepcopy(assisted)
+    suite['cases'][0].update(primary_need='N1.6',family='appearance')
+    assert check((seal_authored(suite),*rest))['question_count']==30
+
+
+@pytest.mark.parametrize('need,family',[('N1.7','appearance'),('N1.6','measurement')])
+def test_v2_still_rejects_unknown_need_or_wrong_family(assisted,need,family):
+    suite,*rest=deepcopy(assisted)
+    suite['cases'][0].update(primary_need=need,family=family)
+    with pytest.raises(PrivateValidationError):check((seal_authored(suite),*rest))
+
+
+def test_private_v1_keeps_legacy_needs(private_fixture):
+    suite,*rest=deepcopy(private_fixture)
+    suite['cases'][0].update(primary_need='N1.6',family='appearance')
+    with pytest.raises(PrivateValidationError,match='Need/family mismatch'):
+        check((seal_authored(suite),*rest))
+
+
 @pytest.mark.parametrize('change',['human_author','ai_reviewer','draft','freeze','binding','human_version','basis','uncertain','exposure'])
 def test_bad_roles_and_unresolved_evidence_refused(assisted,change):
     s,m,bs,batches,b=deepcopy(assisted)

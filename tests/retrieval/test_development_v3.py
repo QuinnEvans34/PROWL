@@ -57,12 +57,22 @@ def test_scope_change_does_not_relax_existing_guards(fixture, mutate):
     with pytest.raises(ValueError): check([seal(suite), *rest])
 
 
-def test_v2_does_not_silently_inherit_new_disease_need(fixture):
+@pytest.mark.parametrize('version',['v1','v2'])
+def test_older_development_does_not_silently_inherit_new_disease_need(fixture,version):
     suite, *rest = revision(fixture)
-    suite['schema_version'] = 'prowl-development-draft-v2'
+    suite['schema_version'] = 'prowl-development-draft-'+version
     suite.pop('information_needs_parent_sha256')
+    if version=='v1':
+        suite.pop('information_needs_sha256')
+        suite.pop('information_needs_base_sha256')
     case = suite['cases'][0]
     case['id'] = case['labels']['question_id'] = 'q:dev2-01'
     case['authorship'].update(author='Codex', basis='literature_inspection')
     with pytest.raises(ValueError, match='Need/family mismatch'):
         check([seal(suite), *rest])
+
+
+def test_v3_does_not_admit_unlisted_seventh_need(fixture):
+    suite,*rest=revision(fixture)
+    suite['cases'][0]['primary_need']='N1.7'
+    with pytest.raises(ValueError):check([seal(suite),*rest])
