@@ -164,7 +164,7 @@ it('shows elapsed time and exits a stalled request at the browser limit', async 
     fireEvent.click(screen.getByRole('button', { name: 'Ask question' }))
     await act(async () => vi.advanceTimersByTime(4000))
     expect(screen.getByText(/4s elapsed/)).toBeTruthy()
-    await act(async () => vi.advanceTimersByTime(86000))
+    await act(async () => vi.advanceTimersByTime(146000))
     expect(search.mock.calls[0][1].aborted).toBe(true)
     expect(screen.getByRole('alert').textContent).toMatch(/timed out/)
     expect(screen.getByRole('button', { name: 'Try again' }).disabled).toBe(false)

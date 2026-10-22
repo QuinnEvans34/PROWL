@@ -3,6 +3,7 @@ import config from '../../../configs/evidence/development-search-v1.json'
 import recordConfig from '../../../configs/evidence/development-search-v3-records.json'
 import diseaseCatalog from '../../../configs/evidence/source-facts-disease-v1.json'
 import answerConfig from '../../../configs/evidence/natural-answer-v6.1.json'
+import { validateEvidenceAnswer } from './evidenceAnswer'
 import { validateRecordAnswer } from './recordAnswer'
 import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
 import { validateMeasurementAnswer, validateMeasurementSources } from './measurementAnswer'
@@ -50,6 +51,7 @@ export function validateSearch(result, request, limit = 5) {
 }
 
 export function validateSourceSearch(result, request) {
+  if (result?.schema_version === 'prowl-evidence-answer-response-v1') return validateEvidenceAnswer(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-study-search-v1') return validateStudySources(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-measurement-search-v1') return validateMeasurementSources(result, request, validateSearch)
   if (result?.retrieval_policy === 'source-linked-volume-search-v1') return validateVolumeSources(result, request, validateSearch)
@@ -88,6 +90,7 @@ export async function findLiteratureSources(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  if (result?.schema_version === 'prowl-evidence-answer-response-v1') return validateEvidenceAnswer(result, request, validateSearch)
   if (result?.schema_version === 'prowl-study-answer-response-v1') return validateStudyAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-measurement-answer-response-v1') return validateMeasurementAnswer(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-volume-answer-response-v1') return validateVolumeAnswer(result, request, validateSourceSearch)
@@ -193,7 +196,7 @@ export default function LiteratureSearchPanel({
     if (!question.trim() || active.current) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
-    const timeout = setTimeout(() => control.abort(), 90000)
+    const timeout = setTimeout(() => control.abort(), 150000)
     setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
     try {
@@ -270,15 +273,15 @@ export default function LiteratureSearchPanel({
       {result && <article aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
-        <p>{result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
+        <p>{result.message || (result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
           : result.answer?.provenance === 'local_model_composition' ? 'The local AI selected reviewed wording and arranged the source facts below. Citations and required qualifications are preserved.'
           : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
-          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.'}</p>
-        {sourceMode && result.record_selection.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
+          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
+        {sourceMode && result.record_selection?.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
-          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
+          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen3 8B · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
         </details>}
       </article>}
@@ -302,7 +305,7 @@ function LiteratureReadingView({ evidence, answer }) {
     </div>
     {view === 'answer' ? <div className="literature-search__prose" aria-label="AI answer">
       {answer.scope && <p>{answer.scope}</p>}
-      {answer.status === 'insufficient' && <p>I couldn’t find enough directly relevant evidence in the passages returned by this search to answer your question. You can inspect them in Sources or try a more specific question.</p>}
+      {answer.status === 'insufficient' && !answer.limitation && <p>I couldn’t find enough directly relevant evidence in the passages returned by this search to answer your question. You can inspect them in Sources or try a more specific question.</p>}
       {answer.claims.map((c, i) => <div className="literature-search__passage" key={i}>
         <p>{c.text}{' '}{c.citations.map(x => <button key={x.rank} type="button" className="literature-search__reference"
           aria-label={`View source ${x.rank}`} onClick={() => { setSelected(x.rank); setView('sources') }}>[{x.rank}]</button>)}</p>

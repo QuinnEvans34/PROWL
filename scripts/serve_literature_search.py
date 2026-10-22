@@ -245,6 +245,14 @@ def create_study_answers(baseline):
         measurement_composer=answers.measurement_composer, study_composer=composer)
 
 
+def create_evidence_answers(baseline):
+    from src.retrieval.evidence_answer import EvidenceAnswers
+    manifest = checked_json(baseline.config['manifest'], ROOT)
+    bundles = [checked_json(s['bundle'], ROOT) for s in manifest['sources']]
+    records = [i['record'] for pin in manifest['batches'] for i in checked_json(pin, ROOT)['items']]
+    return EvidenceAnswers(baseline, bundles, records)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', default=str(ROOT/'infra/retrieval/.env.ingestion.json'))
@@ -254,6 +262,7 @@ if __name__ == '__main__':
     parser.add_argument('--volume-answers', action='store_true', help='Enable reviewed MRI volume composition alongside disease answers')
     parser.add_argument('--measurement-answers', action='store_true', help='Include CT tumor measurement-method composition with volume and disease answers')
     parser.add_argument('--study-answers', action='store_true', help='Include CT visibility and named study limitations')
+    parser.add_argument('--evidence-answers', action='store_true', help='Evidence-led general local answers (candidate)')
     args = parser.parse_args()
     service = create_service(args.config)
     sources = create_record_search(service) if args.record_search or args.record_answers or args.volume_answers or args.measurement_answers else None
@@ -264,6 +273,8 @@ if __name__ == '__main__':
         sources, answers = create_measurement_answers(service, create_record_search(service))
     if args.study_answers:
         sources, answers = create_study_answers(service)
+    if args.evidence_answers:
+        sources = answers = create_evidence_answers(service)
     server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources, answers))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()

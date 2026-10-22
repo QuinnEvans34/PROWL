@@ -2177,3 +2177,14 @@ selection and connecting relevant fallback evidence to bounded composition; addi
 or per-question canned answers is not justified by this result. Once used for repairs this set is
 regression material; a later held-out assessment requires fresh questions. Formal ranked retrieval
 metrics and broader assistant acceptance remain open. No training/full selector or human-hour claim.
+
+### October 22 — evidence-led repair started
+
+User authorized autonomous repair of the failed evaluation cases. Preserved the original 0/20
+frozen result and encrypted inputs/results; the used suite is now explicitly regression material.
+Added an opt-in public-source-only section-selection/composition candidate and separate UI contract.
+Initial live diagnostics exposed a missing adapter ticket ID, reviewer positive-as-error output,
+stale critique contamination and overexpanded tasks; fixes are covered by invented-source checks.
+51 affected Python checks and 56 UI checks pass; Vite build passes with existing bundle-size warning.
+No candidate promotion, source ingestion, training or human-hour claim. See
+`EVIDENCE-LED-REPAIR-2026-10-22.md`; bounded live quality/citation review continues.
