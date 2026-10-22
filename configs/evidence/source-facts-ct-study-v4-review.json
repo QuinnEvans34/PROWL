@@ -1,0 +1,26 @@
+{
+  "catalog_version": "reviewed-ct-study-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "status": "engineering_reviewed",
+  "records": {
+    "ct-visibility": "646fb1b5cd44818d561afbc7dd1055b24644c6dab2ad5b3b90c4906bcc7606f2",
+    "ct-study-limits": "a90c54ca80079ff66d54881752b13279d2d7ce62bb1d241d3f4cb48804743488",
+    "ct-reader-variation": "36c7af790aa76af64946e4a9d956d0a5613e92eedf3b9dcfc77542257b04223f",
+    "ct-radiomics-limits": "cd604e021ee41f61644bff2d3501b62c4db4534e0e070647205eee85a9d6784b",
+    "ct-contour-protocol": "514b25680c4f031f172d2566a91bfa9ac6f8e15f60ca9c0e260dbed50c71a658",
+    "tags-reader-reliability": "c9e0e502d94a6e0ed09724e73cf1fef791d1e1c136f8cf15e1b9ccae4c724a30",
+    "tags-reference-masks": "fd736bafb8d5b58270e035044f3446d9e7916411ff52ca0fe4305fd6cbbcdcfc",
+    "tags-comparison-limits": "185680a37a76de067e58d3f462be75426738065e82b6ffbace1b4e31c864fbab",
+    "tags-center-transfer": "c08583ca33d6a2ece5b3a53a451eacc808915bf5399141f2c28ff5059b9d0761",
+    "tags-workflow-limits": "fcaaeb0150f73e5c3f36debe3d15a458cc12d61da5a0c265d7647aa988ff8010",
+    "subregion-limitations": "430d84448e865b572b7b23b39f99f6bab7120b9a719b2e07f84a6300cdcea9f2",
+    "subregion-localization": "b72520fe4ada3d905658cc65d73d5f2d984b7eb5f0a2da05710bd90ed200dc89",
+    "subregion-label-consensus": "574fb82783d1ff3ab5ca931dceb8b52f70e506164cd3b0dc9de2479a5eba94ff",
+    "pancreas-head-anatomy": "9b87073d6e5fb0af54295bffacb2c08a4708cad037bf770599ef53d7e85b88cd",
+    "reviewer-agreement-accuracy": "e646f5a1739ce41d6f8bd9eec3a016df6bc00a37d974ddb1560a073766053052",
+    "reviewer-acceptance": "307822ebac64fbd2abf359aaad2a627c4f0d93649506ecf511d85565256fa3ec"
+  }
+}

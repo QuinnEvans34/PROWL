@@ -54,6 +54,12 @@ class RecordComposer:
     prompt_sha = PROMPT_SHA
     wording_version = 'reviewed-disease-wording-v1'
 
+    def generation_schema(self, records):
+        return bounded_plan_schema(records)
+
+    def decode_plan(self, content, records):
+        return json.loads(content)
+
     def fact_count(self, record):
         return len(record['facts'])
 
@@ -210,13 +216,13 @@ class RecordComposer:
             body = dict(question=question, records=[dict(record_id=rid, units=r['units'])
                                                    for rid, r in records.items()])
             response = call('chat', dict(model=DENSE_MODEL, messages=[dict(role='system', content=self.system),
-                dict(role='user', content=json.dumps(body, ensure_ascii=False))], format=bounded_plan_schema(records),
+                dict(role='user', content=json.dumps(body, ensure_ascii=False))], format=self.generation_schema(records),
                 stream=False, think=False, keep_alive='2m',
                 options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=768)))
             if (not isinstance(response, dict) or response.get('model') != DENSE_MODEL or response.get('done') is not True
                     or response.get('done_reason') != 'stop'):
                 raise AnswerFailure('incomplete', 'Incomplete composition')
-            plan = self.normalize_layout(json.loads(response['message']['content']), records)
+            plan = self.normalize_layout(self.decode_plan(response['message']['content'], records), records)
             claims = self.assemble(plan, records, evidence)
         except (OSError, TimeoutError, ValueError, KeyError, TypeError, AnswerFailure) as error:
             provenance = 'reviewed_source_fallback'

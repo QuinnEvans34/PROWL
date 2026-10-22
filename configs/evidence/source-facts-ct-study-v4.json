@@ -1,0 +1,912 @@
+{
+  "version": "reviewed-ct-study-facts-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "spans": {
+    "iso-6": {
+      "passage_id": "psg:02ec62abb0b23f7a02c5ba4c59a16d41159ab58a3408731259e26ba3131564d0",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 6,
+      "start": 0,
+      "end": 454,
+      "text_sha256": "b11ed380e64db6fffee4f633a1471d29a6ec681157d32f91c74475593134dc20"
+    },
+    "iso-7": {
+      "passage_id": "psg:866841c35b200aaaa415d9f2ba9f9ed5a65f1d3cf150166c1a10101fda101f12",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 7,
+      "start": 0,
+      "end": 320,
+      "text_sha256": "f1dbc993f95e13f725d6d7275a3b5853fdbe7bf991f7f2994d93e4c805809c44"
+    },
+    "iso-55": {
+      "passage_id": "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 55,
+      "start": 0,
+      "end": 582,
+      "text_sha256": "2c4f09ead5b30d1c56b83bb5c6b1939e17e7800d4229dfedd6bef861b73d1364"
+    },
+    "iso-56": {
+      "passage_id": "psg:efc79fa74ffcf82cabd648074f8f9195119a303baf6c56116ea0d28282fa572c",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 56,
+      "start": 0,
+      "end": 499,
+      "text_sha256": "86741f3692a189b0527ef948c02d314a40f29ea5d44344b618465b60833e3d48"
+    },
+    "iso-57": {
+      "passage_id": "psg:5e3511f9763354b3cbba920d63b60f36f56fba1f15f8d7aba1908645a56c730f",
+      "work_id": "work:pmid:33925859",
+      "ordinal": 57,
+      "start": 0,
+      "end": 561,
+      "text_sha256": "3edd2a3bfdd0a4b85eba3f719a988971d2185a32e7fecdbf85ad8089895fff21"
+    },
+    "reader-20": {
+      "passage_id": "psg:5669fa705129190625c15c851e6f1c2ebbd5deff2abe1a74f7943cb89b6a17ae",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 20,
+      "start": 0,
+      "end": 366,
+      "text_sha256": "d3297102670630397d7f81d5b9671777c1db27ea2162e3cf8765bee642531dd1"
+    },
+    "reader-56": {
+      "passage_id": "psg:d041abba78b3190799efd8a6ccdfc5c16154d32742d0f1240c277f5351eef499",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 56,
+      "start": 0,
+      "end": 523,
+      "text_sha256": "0a19f4ed7820bb8bc09655e31b8d4ed4d60c951acfeca3edb8d11d65bee5335f"
+    },
+    "reader-57": {
+      "passage_id": "psg:ee1f79e762a4480a369a5a2f4fbfb65058ae61f7ddc95486aa9cbebe4cec367f",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 57,
+      "start": 0,
+      "end": 584,
+      "text_sha256": "f8350483e6d41cbf2748c573aa64b9423ba640ed60507e7c9a78cea798cf0e82"
+    },
+    "reader-61": {
+      "passage_id": "psg:afe73fb1820b712b4ff083b2a1e312ca33d854683e2e460ba67567b2a41f668e",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 61,
+      "start": 0,
+      "end": 575,
+      "text_sha256": "d4ca02404803329068e2538199893d30286095d713e328f37928b7d384950cff"
+    },
+    "reader-64": {
+      "passage_id": "psg:50531ff972f03e300286f6e3153db4b0f946dd7f4288cd06b76f6e56592fe3fb",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 64,
+      "start": 0,
+      "end": 564,
+      "text_sha256": "5b3b6f28ac5f1e54c1a0ea86d45cdb161bfeb908dff569f8c7e28284a4c1aa17"
+    },
+    "reader-65": {
+      "passage_id": "psg:48eb12848fc019af9246851bf407e60f52957dd6a47daf2ce0516130af409e88",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 65,
+      "start": 0,
+      "end": 598,
+      "text_sha256": "dae93b6d7b8e1f6ddc951c43e6c49ac18c82621a0eff4b85a7352d3008432979"
+    },
+    "reader-67": {
+      "passage_id": "psg:bd9b5b88077802eb7230eb74a24376bfff4f1bf6ee1fc983a6330baecfb7ccf6",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 67,
+      "start": 0,
+      "end": 209,
+      "text_sha256": "b4059e27f6810a9a455fd401d5279c787a723da55a35d13a456893f9c4f7eb99"
+    },
+    "reader-77": {
+      "passage_id": "psg:1913db885ff24435c0223a76460a287a1d5c5006d3eb0a114d215089dbfcd74f",
+      "work_id": "work:pmid:34381070",
+      "ordinal": 77,
+      "start": 0,
+      "end": 460,
+      "text_sha256": "5008b107eb83778a50690a6144f0e8b1b8e4ca0b4015d0394240c4d3dc004c91"
+    },
+    "work:pmid:42738357-20": {
+      "passage_id": "psg:b93e0689b2458b99d3e8ab56ab56b706dda295bde368cc5982f628d0d29ad2f1",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 20,
+      "start": 0,
+      "end": 438,
+      "text_sha256": "6048ff160aca8bb08a492e95c552712e87683ab32aaf774372072d85590e479d"
+    },
+    "work:pmid:42738357-21": {
+      "passage_id": "psg:74c76779f102588aa73970c61e7f94e709db61f54321e2e1ea7ca9407a6e27da",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 21,
+      "start": 0,
+      "end": 556,
+      "text_sha256": "5f3b5623ad478a5401434091b2706c7285db8e3dd67c91145cc502057d4007c3"
+    },
+    "work:pmid:42738357-22": {
+      "passage_id": "psg:61855a094e3c4d4fbd20a5daf8017a8918e42f880c30e1806ceeac85f7a74f25",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 22,
+      "start": 0,
+      "end": 258,
+      "text_sha256": "11bc2caa2cdb1b95ddb9177217454272955a010adff92c8f4a7dcc0e03954c20"
+    },
+    "work:pmid:42738357-18": {
+      "passage_id": "psg:7efdacb2237292cfe126a4f68121a12fcf73aa924dd9af46279c712856c30216",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 18,
+      "start": 0,
+      "end": 470,
+      "text_sha256": "7814c598d9930ee5c50ee4a7840e5687ddcb2beee3ff2a92cbb6625933ffc233"
+    },
+    "work:pmid:42738357-19": {
+      "passage_id": "psg:c2d9dee902b32fc651342d175074757245be33f201de581e8155808c656c9cb2",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 19,
+      "start": 0,
+      "end": 299,
+      "text_sha256": "5cddddea231bd404a080a2fa51cd18061e4eab913f3c5af98cb189c238de46d9"
+    },
+    "work:pmid:42738357-38": {
+      "passage_id": "psg:9f58ae3b663a9aec82887da861c101ae1c72cc8d997f7fdc4e33c05a5cc37b58",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 38,
+      "start": 0,
+      "end": 412,
+      "text_sha256": "ba3c92aca5447374afcd4771000e4ccafa9c9edcd17ee224e1e6b75f8ea8c95d"
+    },
+    "work:pmid:42738357-39": {
+      "passage_id": "psg:d8daf0b76c73c757077271bb54c0e1361bf9fbef9885941f38cdab082daaf50c",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 39,
+      "start": 0,
+      "end": 600,
+      "text_sha256": "f9336bca0df7e2d5615283d0bb4a275349a672393818983b212c9dd340ebe580"
+    },
+    "work:pmid:42738357-35": {
+      "passage_id": "psg:50b39e8335d9b738a038e8bd258cef69880996cbab552c79cb409e2eb5f4bea5",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 35,
+      "start": 0,
+      "end": 540,
+      "text_sha256": "3312a950687357ab2aa67ff7575ec8a544e3cd80398b5979925e6998261d4177"
+    },
+    "work:pmid:42738357-36": {
+      "passage_id": "psg:ae1153f05b9362ec8fa978b5bca954b87eb51cd1924afd420a2da6618bae3dd6",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 36,
+      "start": 0,
+      "end": 481,
+      "text_sha256": "422c80d835a6247fbafd345c881251537bbe9d86ea800a6570b160d1eebbca96"
+    },
+    "work:pmid:42738357-55": {
+      "passage_id": "psg:7b6298f59153507efd2b7dfdd9ef7c64ab895451532efd3584ffd3d769e58611",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 55,
+      "start": 0,
+      "end": 512,
+      "text_sha256": "a104f424f3838c2793345dbea546cb956dbf2b2af5db9e0192377ae1ac77b6b6"
+    },
+    "work:pmid:42738357-77": {
+      "passage_id": "psg:975a5ae8dc17b8db97906f4a58b060c5860be6d84fb99600f039155385f95e77",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 77,
+      "start": 0,
+      "end": 579,
+      "text_sha256": "d749a67cf92e6725d6ae7d88d3bc8c65b9d241eaeb5722bccd363d12bee2f9fd"
+    },
+    "work:pmid:35877639-28": {
+      "passage_id": "psg:ce12eb10f1f8dddb0f750d432c8122b91cab2e2dd12655d2fad010fb40442001",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 28,
+      "start": 0,
+      "end": 570,
+      "text_sha256": "9bc318dfe95bd2b015cc81df343211a45ae40e102f9764164f2f2ef460333a2d"
+    },
+    "work:pmid:35877639-59": {
+      "passage_id": "psg:90a15bd151811a3da4272a3c3bdbb1af30573620bd7f938926b6cf5b61eb32d3",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 59,
+      "start": 0,
+      "end": 576,
+      "text_sha256": "0fd5dc9f3829151782d65c698463b1d2282b91b0bd46649ddfe0b5fb658fa63d"
+    },
+    "work:pmid:35877639-60": {
+      "passage_id": "psg:7c689cf214413bbfb3a1df655712baae23988d5273bf360b4d180c31578fed98",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 60,
+      "start": 0,
+      "end": 355,
+      "text_sha256": "0c316f6b23538011d7e7637f5cd8fe8a0cf51b1919e35f4625beb4d6a053fdda"
+    },
+    "work:pmid:35877639-23": {
+      "passage_id": "psg:ce9cecad171dc5632f56356621b9a7a2e075b2dbaa6679a14dd34ee160567619",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 23,
+      "start": 0,
+      "end": 512,
+      "text_sha256": "d7bdb9115d577896ed0b23cc6687c7194f4159d39b64fecac9ad9ecb25545841"
+    },
+    "work:pmid:35877639-29": {
+      "passage_id": "psg:27658d769da1df9783826930a40262fd62925756e76e1af171de0166b84d9aaa",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 29,
+      "start": 0,
+      "end": 593,
+      "text_sha256": "c3847061361737b3021346a42e769b9348a8c02dac9e7500576864c4516a4b3d"
+    },
+    "work:pmid:35877639-24": {
+      "passage_id": "psg:513263fa4c51df62a711138c548025b57b4627fb440b7a68844dade882e77ad9",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 24,
+      "start": 0,
+      "end": 324,
+      "text_sha256": "7710fc8ba4a5f203c2cfc44bdbdd5b6c0e08a2571255006e823d05730701b928"
+    },
+    "work:pmid:35877639-26": {
+      "passage_id": "psg:baa64c457cae269ce83843795c2afd18149fc4455e0e99b6d91b1cee21f53d50",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 26,
+      "start": 0,
+      "end": 520,
+      "text_sha256": "f4ae3d66a464f22a7998888651db70c1111257602588fc9ff197ac7e30f3d495"
+    },
+    "work:pmid:41414851-0": {
+      "passage_id": "psg:6352ffddbbfdc92ea88aaa452a9664a97111d3d09d8db4e72e4b8b5e6b101306",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 0,
+      "start": 0,
+      "end": 221,
+      "text_sha256": "c211f0e016da76d26859f7cc5eaa71e325e078369287e922b13e7d1a64a7f5e9"
+    },
+    "work:pmid:41414851-1": {
+      "passage_id": "psg:76edcb3a06e7df06f4b1926cb25ae0362abb54a17c4a6026df998c19c2bbb8fe",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 1,
+      "start": 0,
+      "end": 486,
+      "text_sha256": "889ed9829ad94803e8ca768f74a50ce3ccf22432d095766447380ab1f9bcd4ab"
+    },
+    "work:pmid:41414851-2": {
+      "passage_id": "psg:53dd806385d418bf173e2d6b6d22b1dcf80c321648fe027f41ab1d48d22adb1a",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 2,
+      "start": 0,
+      "end": 529,
+      "text_sha256": "2322452032565bc9ee5d847b58d454f6ed706d0241c119f1040c47ac8f5c2c94"
+    },
+    "work:pmid:41414851-109": {
+      "passage_id": "psg:1005cfb5c5ea9b3fda951ad5edf8ce8bcbc038b57172cf76b3d99663146889de",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 109,
+      "start": 0,
+      "end": 579,
+      "text_sha256": "b9cc4f7e03e4fef6d701fec5ae69a853e828c3b1c70b534be961afddc2349997"
+    },
+    "work:pmid:41414851-5": {
+      "passage_id": "psg:9d8401708b02aef2cb37d0d65b1b3db7d0cb4ace82c855e940d06a7d17ae2101",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 5,
+      "start": 0,
+      "end": 308,
+      "text_sha256": "2a5972f4f2e0563c41b719e6f8886c440a0b5be559cfa913ec6b56b89e859db1"
+    },
+    "work:pmid:41414851-110": {
+      "passage_id": "psg:0efe83ef8629fa99809ef43e5286e13d56e1d10e07ba15b9da26733e8be08530",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 110,
+      "start": 0,
+      "end": 484,
+      "text_sha256": "cca6145e902ad23837b21ba8a2fd2f55f129f0080055d7949d95eb4fa1d25aff"
+    },
+    "work:pmid:41414851-71": {
+      "passage_id": "psg:135bfef04e8836b2bc4a8cfe9a8ab630931f48ab3d3dcf06a463b0d2eab72482",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 71,
+      "start": 0,
+      "end": 429,
+      "text_sha256": "623de77d1f2ad62cc5b5e8c4b6ff95d25a275f8f500a5f584cfce262807144a3"
+    },
+    "work:pmid:41414851-72": {
+      "passage_id": "psg:d2d50ff2879e0d3766c76439fc5b651e6ef7c80ece35622c5901b2f38273f77e",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 72,
+      "start": 0,
+      "end": 462,
+      "text_sha256": "1ff4eec3b89c39e8f7975ed1467df1edfa6b36e21592adde538550525b09cb8b"
+    },
+    "work:pmid:41414851-73": {
+      "passage_id": "psg:50f9301b6e6b045d1369350ba986bb24bb92a191076fba3fd79e0b9fcb04471f",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 73,
+      "start": 0,
+      "end": 531,
+      "text_sha256": "9bf81124252db6eb9fdb9a59c1e1c1dba218e4d84f272b41976773510e2c8ad8"
+    },
+    "work:pmid:41414851-111": {
+      "passage_id": "psg:d7df4560603db20b1b1c0a3f50b20afa9463d73ef6cf95d7f24d0abb732f8a67",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 111,
+      "start": 0,
+      "end": 428,
+      "text_sha256": "1da6817ec26b500b82232a7fc425ec2552643dff000b14d987dd44fea57488b5"
+    },
+    "work:pmid:41414851-75": {
+      "passage_id": "psg:3c219581ca83d2c49a1d4ac95619052ada8c42e635f689eacf390712386730e7",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 75,
+      "start": 0,
+      "end": 570,
+      "text_sha256": "0f76113351e13e5fcc4bb9d434d2d2f96168b0ddacecfc09ce646002c29a2957"
+    },
+    "work:pmid:41414851-107": {
+      "passage_id": "psg:b7cd260137744e4d13d8dfb6b0f54a441496f449644020c509a9a23fceb49702",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 107,
+      "start": 0,
+      "end": 552,
+      "text_sha256": "18ea6b23eaa295a21a4bb7f9a39c5b70ff89fe47a5da54f7d1a7d28c8ff12134"
+    },
+    "work:pmid:41414851-108": {
+      "passage_id": "psg:fd94ef854858d454b292f2d31ff7ca720421b8dd68ebb08cc87c14c142b6d334",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 108,
+      "start": 0,
+      "end": 416,
+      "text_sha256": "23daffd114e4afb1c53a4f80f3a5b361e8a5a1a4000c5d0c0924952935b36614"
+    },
+    "work:pmid:35877639-39": {
+      "passage_id": "psg:1bd6b8450d59661933e9910c05d53f9e0b3b7e38e8e906ce0a9162d28af4a48c",
+      "work_id": "work:pmid:35877639",
+      "ordinal": 39,
+      "start": 0,
+      "end": 535,
+      "text_sha256": "e21dbd95e7737182d86d9d37ef03a707979a262dd2356ec8e727b58833ae4a67"
+    },
+    "work:pmid:42738357-50": {
+      "passage_id": "psg:cef2c1713eecb1ca99dc971d533ac3aa0f398b53d2d117abf20c6fbbbddf3e77",
+      "work_id": "work:pmid:42738357",
+      "ordinal": 50,
+      "start": 0,
+      "end": 564,
+      "text_sha256": "3a2d90200c44873068f1ee3073649472bf3d5585bff564067c94d51a1f02bafd"
+    },
+    "work:pmid:41414851-70": {
+      "passage_id": "psg:c451829f660f1006a3137a8c59210223ea76aa2ea8c018d3afb696469c39b64e",
+      "work_id": "work:pmid:41414851",
+      "ordinal": 70,
+      "start": 0,
+      "end": 572,
+      "text_sha256": "57fce6707bac1160647743e86b4c39343bae5774c11673c317f2ed95c4e70dfd"
+    }
+  },
+  "records": [
+    {
+      "id": "ct-visibility",
+      "work_id": "work:pmid:33925859",
+      "topic": "ct_isoattenuating_visibility",
+      "facts": [
+        {
+          "role": "definition",
+          "text": "Some pancreatic cancers have nearly the same density as the surrounding pancreas on contrast-enhanced CT. This weak contrast can make the tumor difficult to see; the term isoattenuating describes that similar appearance.",
+          "evidence": [
+            "iso-6"
+          ]
+        },
+        {
+          "role": "context",
+          "text": "The paper describes indirect clues such as a widened or interrupted pancreatic duct, widening of the common bile duct, shrinkage of tissue beyond the tumor, or an abnormal pancreatic contour.",
+          "evidence": [
+            "iso-7"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The cited study included patients with confirmed pancreatic cancer. It did not compare these tumors with other diagnoses, so its findings do not establish that a similar-looking finding in another patient is cancer.",
+          "evidence": [
+            "iso-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:02ec62abb0b23f7a02c5ba4c59a16d41159ab58a3408731259e26ba3131564d0"
+      ]
+    },
+    {
+      "id": "ct-study-limits",
+      "work_id": "work:pmid:33925859",
+      "topic": "ct_isoattenuating_study_limits",
+      "facts": [
+        {
+          "role": "design",
+          "text": "The study of isoattenuating pancreatic carcinomas used retrospective data from one center and a small sample, which the authors identify as possible sources of bias.",
+          "evidence": [
+            "iso-55"
+          ]
+        },
+        {
+          "role": "selection",
+          "text": "It included only pancreatic tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA). False-positive EUS-FNA cases were excluded, so the study could not determine the test’s specificity.",
+          "evidence": [
+            "iso-55",
+            "iso-56"
+          ]
+        },
+        {
+          "role": "reference_limit",
+          "text": "Only cytology samples were collected. These could not establish tumor type or grade, or compare the tissue-level density of tumor cells, vessels and fibrous tissue between the tumor groups.",
+          "evidence": [
+            "iso-56"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "Because the study focused on patients with confirmed pancreatic cancer, it could not evaluate how isoattenuating carcinomas differed from other diagnoses.",
+          "evidence": [
+            "iso-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:3abe34581145cb3559f5a921f52f5b4ab98d6df42bb9aec4ff17f273d3dd8937"
+      ]
+    },
+    {
+      "id": "ct-reader-variation",
+      "work_id": "work:pmid:34381070",
+      "topic": "ct_reader_variation",
+      "facts": [
+        {
+          "role": "finding",
+          "text": "Yes. In one pancreatic cancer CT study, radiologists drew smaller tumor contours on average than radiation oncologists: reported mean volumes were 35.6 ± 15.0 cm³ and 54.1 ± 15.9 cm³, respectively. The ± terms are reproduced as reported; this passage does not define them.",
+          "evidence": [
+            "reader-20"
+          ]
+        },
+        {
+          "role": "population",
+          "text": "The retrospective study included 21 patients. Three radiologists and three radiation oncologists independently outlined the tumors in the full cohort.",
+          "evidence": [
+            "reader-61",
+            "reader-64",
+            "reader-65"
+          ]
+        },
+        {
+          "role": "reference_method",
+          "text": "The researchers combined all six observers’ contours with the STAPLE algorithm to create a consensus volume as a ground-truth surrogate. That is an observer-derived reference, not an independent proof of the true tumor boundary.",
+          "evidence": [
+            "reader-67"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The study limited CT acquisition settings and fixed the display window and level. The authors caution that their findings may need validation before being generalized to other settings.",
+          "evidence": [
+            "reader-56",
+            "reader-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:5669fa705129190625c15c851e6f1c2ebbd5deff2abe1a74f7943cb89b6a17ae"
+      ]
+    },
+    {
+      "id": "ct-radiomics-limits",
+      "work_id": "work:pmid:34381070",
+      "topic": "ct_radiomics_limits",
+      "facts": [
+        {
+          "role": "acquisition",
+          "text": "The pancreatic radiomics study restricted scanner types and acquisition parameters, and used a fixed display window and level to isolate differences between observers from imaging and display differences.",
+          "evidence": [
+            "reader-56",
+            "reader-57"
+          ]
+        },
+        {
+          "role": "voxel_processing",
+          "text": "Before extracting radiomic features, images were resampled to isotropic 5 × 5 × 5 mm voxels using sinc interpolation. The authors warn that these relatively large voxels could introduce edge and partial-volume effects.",
+          "evidence": [
+            "reader-57",
+            "reader-77"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The findings therefore reflect the study’s specific acquisition, reconstruction and display settings. The authors say they may need validation before generalization to other cases.",
+          "evidence": [
+            "reader-57"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:d041abba78b3190799efd8a6ccdfc5c16154d32742d0f1240c277f5351eef499"
+      ]
+    },
+    {
+      "id": "ct-contour-protocol",
+      "work_id": "work:pmid:34381070",
+      "topic": "ct_contour_protocol",
+      "facts": [
+        {
+          "role": "uncertainty",
+          "text": "In the pancreatic CT study, observers were told to outline only tissue they felt certain was gross tumor and to exclude uncertain areas.",
+          "evidence": [
+            "reader-65"
+          ]
+        },
+        {
+          "role": "instructions",
+          "text": "The instructions also excluded major vessels, stents, markers and lymph nodes when applicable. Observers worked independently using only the assigned CT, with a fixed window width of 400 and level of 50; they were not to use MRI or other CT data.",
+          "evidence": [
+            "reader-65"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "These were the study’s contouring instructions under fixed acquisition and display conditions. The authors caution that their results may need validation before being generalized to other cases.",
+          "evidence": [
+            "reader-56",
+            "reader-57",
+            "reader-65"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:48eb12848fc019af9246851bf407e60f52957dd6a47daf2ce0516130af409e88"
+      ]
+    },
+    {
+      "id": "tags-reader-reliability",
+      "work_id": "work:pmid:42738357",
+      "topic": "tags_reader_reliability",
+      "facts": [
+        {
+          "role": "inter_reader",
+          "text": "In the multicenter TAGS study, two radiologists independently outlined tumors on 30 randomly selected CT examinations that neither had previously segmented. Mean agreement between readers was Dice 0.742.",
+          "evidence": [
+            "work:pmid:42738357-20",
+            "work:pmid:42738357-21"
+          ]
+        },
+        {
+          "role": "repeat_reader",
+          "text": "One radiologist then repeated tumor segmentation on 30 randomly selected CT examinations after a three-week washout. Mean repeat-reader Dice was 0.838.",
+          "evidence": [
+            "work:pmid:42738357-21",
+            "work:pmid:42738357-22"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "Agreement was assessed using Dice, 95th-percentile Hausdorff distance and normalized surface Dice at 5 mm. The 30 inter-reader cases belonged to the 500-case cohort; their additional reliability contours were not reference labels for model evaluation.",
+          "evidence": [
+            "work:pmid:42738357-20",
+            "work:pmid:42738357-21"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:b93e0689b2458b99d3e8ab56ab56b706dda295bde368cc5982f628d0d29ad2f1"
+      ]
+    },
+    {
+      "id": "tags-reference-masks",
+      "work_id": "work:pmid:42738357",
+      "topic": "tags_reference_masks",
+      "facts": [
+        {
+          "role": "creation",
+          "text": "For the multicenter TAGS dataset, one of two abdominal radiologists manually outlined the pancreas and tumor in 3D Slicer. Each had more than five years of abdominal radiology experience, and each CT was initially labeled by one reader rather than by consensus.",
+          "evidence": [
+            "work:pmid:42738357-18"
+          ]
+        },
+        {
+          "role": "review",
+          "text": "Senior abdominal radiologists with at least 15 years of experience reviewed every segmentation and directly edited masks needing correction.",
+          "evidence": [
+            "work:pmid:42738357-19"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The separate inter-reader reliability exercise used 30 cases from the 500-case cohort. Its second set of contours was used only for reliability assessment and did not replace the reference labels.",
+          "evidence": [
+            "work:pmid:42738357-20",
+            "work:pmid:42738357-21"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:7efdacb2237292cfe126a4f68121a12fcf73aa924dd9af46279c712856c30216"
+      ]
+    },
+    {
+      "id": "tags-comparison-limits",
+      "work_id": "work:pmid:42738357",
+      "topic": "tags_comparison_limits",
+      "facts": [
+        {
+          "role": "prompting",
+          "text": "The multicenter TAGS comparison supplied tumor-location information: most methods received a foreground point sampled from the reference tumor mask, while MedSAM2 used a bounding-box prompt. It therefore did not test fully automatic tumor discovery.",
+          "evidence": [
+            "work:pmid:42738357-38",
+            "work:pmid:42738357-39"
+          ]
+        },
+        {
+          "role": "systems",
+          "text": "The methods used different native inference pipelines. TAGS also used a TotalSegmentator pancreas mask and text embeddings, so the authors describe a comparison of complete systems rather than matched prompting conditions.",
+          "evidence": [
+            "work:pmid:42738357-38",
+            "work:pmid:42738357-39"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "SAM-TAGS and MSD-TAGS did share identical prompts and differed only in initialization. That narrower comparison isolates initialization; it does not make the full comparison a matched, autonomous detection benchmark.",
+          "evidence": [
+            "work:pmid:42738357-38",
+            "work:pmid:42738357-39"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:9f58ae3b663a9aec82887da861c101ae1c72cc8d997f7fdc4e33c05a5cc37b58"
+      ]
+    },
+    {
+      "id": "tags-center-transfer",
+      "work_id": "work:pmid:42738357",
+      "topic": "tags_center_transfer",
+      "facts": [
+        {
+          "role": "design",
+          "text": "The multicenter TAGS study tested transfer with leave-one-center-out evaluation: train on three institutions and evaluate on the fourth, repeating this for each of four centers. This was separate from pooled patient-level five-fold cross-validation.",
+          "evidence": [
+            "work:pmid:42738357-35",
+            "work:pmid:42738357-36"
+          ]
+        },
+        {
+          "role": "finding",
+          "text": "MSD-TAGS mean Dice decreased from 0.703 in pooled evaluation to 0.678 in leave-one-center-out evaluation, an absolute drop of 0.025.",
+          "evidence": [
+            "work:pmid:42738357-55"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "This measures transfer within the study’s four-center evaluation. The inference pipeline still used a point from the reference tumor mask, so these results concern prompted segmentation rather than automatic tumor detection.",
+          "evidence": [
+            "work:pmid:42738357-36",
+            "work:pmid:42738357-38",
+            "work:pmid:42738357-39"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:50b39e8335d9b738a038e8bd258cef69880996cbab552c79cb409e2eb5f4bea5"
+      ]
+    },
+    {
+      "id": "tags-workflow-limits",
+      "work_id": "work:pmid:42738357",
+      "topic": "tags_workflow_limits",
+      "facts": [
+        {
+          "role": "finding",
+          "text": "Better tumor outlines do not by themselves demonstrate that doctors save time. In the pancreatic TAGS study, the proportion of cases with Dice below 0.50 was 47.0% for zero-shot TAGS versus 15.8% for each fine-tuned variant, SAM-TAGS and MSD-TAGS.",
+          "evidence": [
+            "work:pmid:42738357-50",
+            "work:pmid:42738357-77"
+          ]
+        },
+        {
+          "role": "unmeasured",
+          "text": "The researchers did not assess interaction time, re-prompting frequency or radiologist workload, and they evaluated no downstream clinical endpoint.",
+          "evidence": [
+            "work:pmid:42738357-77"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The paper therefore cannot quantify clinical workflow benefit from those segmentation scores. The authors note that low-Dice cases are especially likely to need substantial manual correction.",
+          "evidence": [
+            "work:pmid:42738357-77"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:cef2c1713eecb1ca99dc971d533ac3aa0f398b53d2d117abf20c6fbbbddf3e77"
+      ]
+    },
+    {
+      "id": "subregion-limitations",
+      "work_id": "work:pmid:35877639",
+      "topic": "subregion_limitations",
+      "facts": [
+        {
+          "role": "assumption",
+          "text": "The pancreatic subregion model assumes that the whole pancreas is present and uses the relative length, volume and arrangement of its parts. Surgery such as pancreatectomy or a Whipple procedure can alter that anatomy, while inflammation can change subregion sizes.",
+          "evidence": [
+            "work:pmid:35877639-28",
+            "work:pmid:35877639-59"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The authors caution that the model may be led astray in these settings; they do not establish reliable performance for postoperative or inflamed pancreases. They identify broader training with conditions such as pancreatitis as future work.",
+          "evidence": [
+            "work:pmid:35877639-59",
+            "work:pmid:35877639-60"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:ce12eb10f1f8dddb0f750d432c8122b91cab2e2dd12655d2fad010fb40442001"
+      ]
+    },
+    {
+      "id": "subregion-localization",
+      "work_id": "work:pmid:35877639",
+      "topic": "subregion_localization",
+      "facts": [
+        {
+          "role": "task",
+          "text": "No. The pancreatic CT subregion study used reference pancreas outlines to crop the images and set all remaining non-pancreas pixels to zero. Its head, body and tail labeling therefore started with the pancreas already identified.",
+          "evidence": [
+            "work:pmid:35877639-39",
+            "work:pmid:35877639-59"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "The authors explicitly left whole-pancreas segmentation outside the paper’s scope. The model also assumed that the whole pancreas was present, with cautions for surgery and inflammation.",
+          "evidence": [
+            "work:pmid:35877639-59"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:1bd6b8450d59661933e9910c05d53f9e0b3b7e38e8e906ce0a9162d28af4a48c"
+      ]
+    },
+    {
+      "id": "subregion-label-consensus",
+      "work_id": "work:pmid:35877639",
+      "topic": "subregion_label_consensus",
+      "facts": [
+        {
+          "role": "independent_labels",
+          "text": "Two radiologists with over 12 years of experience independently labeled pancreatic subregions inside the outlined pancreas across all three study datasets. Their initial labels overlapped by approximately 84%.",
+          "evidence": [
+            "work:pmid:35877639-23"
+          ]
+        },
+        {
+          "role": "reconciliation",
+          "text": "The radiologists then shared, reviewed and updated their labels, reaching 96% overall consistency. They settled the remaining 4% by mutual agreement.",
+          "evidence": [
+            "work:pmid:35877639-24"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "These percentages describe agreement during reference-label construction. They are not the AI model’s segmentation accuracy.",
+          "evidence": [
+            "work:pmid:35877639-23",
+            "work:pmid:35877639-24"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:ce9cecad171dc5632f56356621b9a7a2e075b2dbaa6679a14dd34ee160567619"
+      ]
+    },
+    {
+      "id": "pancreas-head-anatomy",
+      "work_id": "work:pmid:35877639",
+      "topic": "pancreas_head_anatomy",
+      "facts": [
+        {
+          "role": "location",
+          "text": "The duodenum curves around the head of the pancreas. The anatomy description in the pancreatic subregion paper places the expanded head within that curve.",
+          "evidence": [
+            "work:pmid:35877639-26"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "This is a general anatomical relationship; the same description distinguishes the head from the body and tapered tail.",
+          "evidence": [
+            "work:pmid:35877639-26"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:baa64c457cae269ce83843795c2afd18149fc4455e0e99b6d91b1cee21f53d50"
+      ]
+    },
+    {
+      "id": "reviewer-agreement-accuracy",
+      "work_id": "work:pmid:41414851",
+      "topic": "reviewer_agreement_accuracy",
+      "facts": [
+        {
+          "role": "setting",
+          "text": "Yes—greater agreement between reviewers can coexist with poorer agreement with a reference. One example comes from prostate radiotherapy, where two oncologists compared manual contours with reviewed and adjusted AI contours against a consensus reference.",
+          "evidence": [
+            "work:pmid:41414851-0",
+            "work:pmid:41414851-1",
+            "work:pmid:41414851-2"
+          ]
+        },
+        {
+          "role": "finding",
+          "text": "For the clinical target volume, mean agreement between observers rose from Dice 0.78 for manual contours to 0.89 for adjusted AI contours. Yet adjusted AI contours remained less accurate than manual outlines against the reference for the clinical target volume and rectum.",
+          "evidence": [
+            "work:pmid:41414851-2",
+            "work:pmid:41414851-70"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "This was a prostate study at one institution with two oncologists and one AI tool. Its findings do not establish pancreatic contour accuracy or prove that agreement between readers equals correctness.",
+          "evidence": [
+            "work:pmid:41414851-0",
+            "work:pmid:41414851-1",
+            "work:pmid:41414851-2",
+            "work:pmid:41414851-5"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:6352ffddbbfdc92ea88aaa452a9664a97111d3d09d8db4e72e4b8b5e6b101306"
+      ]
+    },
+    {
+      "id": "reviewer-acceptance",
+      "work_id": "work:pmid:41414851",
+      "topic": "reviewer_acceptance",
+      "facts": [
+        {
+          "role": "setting",
+          "text": "In the prostate radiotherapy study, adjusted AI contours did not consistently outperform manual outlines for the clinical target volume and rectum. The authors discuss why reviewers might still retain or only lightly edit AI contours.",
+          "evidence": [
+            "work:pmid:41414851-109",
+            "work:pmid:41414851-110"
+          ]
+        },
+        {
+          "role": "interpretations",
+          "text": "One possible explanation is automation bias—over-reliance on the AI output. Another is deliberate clinical judgment: reviewers may consider a contour good enough and balance minor geometric differences against workflow efficiency.",
+          "evidence": [
+            "work:pmid:41414851-71",
+            "work:pmid:41414851-72",
+            "work:pmid:41414851-73",
+            "work:pmid:41414851-110",
+            "work:pmid:41414851-111"
+          ]
+        },
+        {
+          "role": "scope_limit",
+          "text": "Those explanations were not proven causes. Contouring times were not recorded, so the study could not directly evaluate the accuracy–efficiency trade-off; decision tracking or interviews were proposed to distinguish unconscious bias from deliberate judgment.",
+          "evidence": [
+            "work:pmid:41414851-75",
+            "work:pmid:41414851-107",
+            "work:pmid:41414851-108"
+          ]
+        }
+      ],
+      "retrieval_anchors": [
+        "psg:1005cfb5c5ea9b3fda951ad5edf8ce8bcbc038b57172cf76b3d99663146889de"
+      ]
+    }
+  ]
+}

@@ -231,14 +231,14 @@ def create_study_answers(baseline):
     from src.retrieval.evidence_experiment import corpus_records
     from src.retrieval.volume_answer import LiteratureSearch, LiteratureAnswers
     sources, answers = create_measurement_answers(baseline, create_record_search(baseline))
-    spec = json.loads((ROOT/'configs/evidence/development-study-search-v3.json').read_text())
+    spec = json.loads((ROOT/'configs/evidence/development-study-search-v4.json').read_text())
     catalog, review = checked_json(spec['catalog'], ROOT), checked_json(spec['review'], ROOT)
     if catalog['manifest'] != spec['manifest']:
         raise ValueError('Study catalog/corpus mismatch')
     index = StudyIndex(catalog, review, corpus_records(ROOT, spec['manifest']))
     base = DevelopmentSearch(baseline.corpus, baseline.config, baseline.retrieve, scope_policy=study_scope)
     study = StudySearch(base, index, spec)
-    config = json.loads((ROOT/'configs/evidence/ct-study-answer-v3.json').read_text())
+    config = json.loads((ROOT/'configs/evidence/ct-study-answer-v4.json').read_text())
     composer = StudyComposer(index.engine, catalog, review, checked_json(config['wording'], ROOT), config)
     sources = LiteratureSearch(sources.disease, sources.volume, sources.measurement, study)
     return sources, LiteratureAnswers(sources, answers.disease_composer, answers.volume_composer,

@@ -36,3 +36,28 @@ and UI remain on the earlier qualified version until end-to-end checks and sourc
 inspection pass. Retained run evidence: `outputs/prowl/rag-coverage-20261022/`.
 
 Actual results and promotion decision will be appended here.
+
+## Retained first attempt and focused repair
+
+The first candidate produced text for all 20 answerable questions, but only 17 were
+complete under the existing concepts: the subregion input needed reference-guided
+cropping and zero masking; the TAGS workflow example needed explicit zero-shot versus
+SAM-TAGS/MSD-TAGS attribution; the reviewer example needed the 0.78→0.89 comparison.
+All10 boundaries remained unanswered. Three answers separately used the explicitly
+labeled fallback (anatomy, subregion limitations and localization); these are not
+counted as successful model composition. Version3 and its full HTTP results remain.
+
+A single captured diagnostic reproduced the model returning both wording variants
+for each of two units. The study composer now requests a closed object with one
+required 0/1 choice per source unit. It rejects missing/extra/duplicate keys and
+noninteger choices before the existing complete-fact, qualification and citation
+checks. Code already owned layout; no omitted model choice is invented or repaired.
+Disease, volume and measurement composers retain their previous plan protocol.
+The study prompt/config pin changes explicitly. One actual same-case diagnostic
+passes after repair. No retries were added to runtime generation.
+
+Version4 adds the missing details from canonical passages 35877639:39/59,
+42738357:50/77 and 41414851:2/70. No expected answer is supplied to the application.
+All289 focused Python checks pass. One intermediate test invocation used a stale
+version3 review fixture with version4 records and correctly rejected it; the fixture
+was corrected, with integrity checks unchanged. Final real replays remain pending.

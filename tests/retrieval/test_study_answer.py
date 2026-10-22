@@ -77,7 +77,7 @@ def test_study_exception_never_bypasses_refusal(suffix):
     assert study_scope(request) == 'out_of_scope'
 
 
-@pytest.mark.parametrize('rid',[r['id'] for r in read('source-facts-ct-study-v3.json')['records']])
+@pytest.mark.parametrize('rid',[r['id'] for r in read('source-facts-ct-study-v4.json')['records']])
 def test_every_record_keeps_all_facts_and_exact_source_quotes(sample, rid):
     idx,c = sample
     r = idx.engine.records[rid]
@@ -105,9 +105,9 @@ def test_full_modality_name_does_not_bypass_volume_gate():
 
 @pytest.fixture
 def sample():
-    cat=read('source-facts-ct-study-v3.json');review=read('source-facts-ct-study-v3-review.json')
+    cat=read('source-facts-ct-study-v4.json');review=read('source-facts-ct-study-v4-review.json')
     idx=StudyIndex(cat,review,corpus_records(ROOT,cat['manifest']))
-    composer=StudyComposer(idx.engine,cat,review,read('ct-study-answer-wording-v3.json'),read('ct-study-answer-v3.json'))
+    composer=StudyComposer(idx.engine,cat,review,read('ct-study-answer-wording-v4.json'),read('ct-study-answer-v4.json'))
     return idx,composer
 
 @pytest.mark.parametrize('question,rid',[
@@ -121,7 +121,7 @@ def test_source_bound_composition_preserves_complete_qualifiers(sample,question,
     records,_=c.material(r)
     def call(path,payload=None):
         if path=='tags':return dict(models=[dict(name=DENSE_MODEL,digest=DENSE_MODEL_SHA)])
-        return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(c.default_plan(records))))
+        return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps({'choices': {rid: {u['id']: 0 for u in record['units']} for rid,record in records.items()}})))
     a=c.compose(question,r,call)
     assert a['provenance']=='local_model_composition'
     assert 'diagnoses' in a['claims'][-1]['text']
@@ -143,3 +143,25 @@ def test_generation_schema_excludes_identifier_typos_but_assembler_still_rejects
     incomplete=deepcopy(plan);incomplete['paragraphs'].pop()
     validate(incomplete,schema)  # Membership alone is deliberately insufficient.
     with pytest.raises(ValueError):c.normalize_layout(incomplete,records)
+
+
+def test_short_answer_chooses_each_wording_once_and_rejects_observed_duplicate_plan(sample):
+    from jsonschema import validate, ValidationError
+    idx,c = sample
+    rid = 'pancreas-head-anatomy'
+    records = {rid: dict(units=c.wording['records'][rid]['units'])}
+    selected = {u['id']: i % 2 for i,u in enumerate(records[rid]['units'])}
+    choices = dict(choices={rid:selected})
+    validate(choices, c.generation_schema(records))
+    plan = c.decode_plan(json.dumps(choices), records)
+    assert [s['wording'] for p in plan['paragraphs'] for s in p['sentences']] == [0,1]
+    assert len(plan['paragraphs']) == 2
+    # The actual failing model repeated both sentence variants in two paragraphs.
+    old = c.default_plan(records)
+    old['paragraphs'].extend(deepcopy(old['paragraphs']))
+    with pytest.raises(ValidationError): validate(old, c.generation_schema(records))
+    with pytest.raises(ValueError): c.decode_plan(json.dumps(old), records)
+    for altered in ({}, {**selected, 'extra':0}, {**selected, next(iter(selected)):True}):
+        with pytest.raises(ValueError): c.decode_plan(json.dumps(dict(choices={rid:altered})), records)
+    duplicate = '{"choices":{"pancreas-head-anatomy":{"pancreas-head-anatomy-0":0,"pancreas-head-anatomy-0":1,"pancreas-head-anatomy-1":0}}}'
+    with pytest.raises(ValueError): c.decode_plan(duplicate, records)
