@@ -1,5 +1,10 @@
 # October 22 public development quality pass
 
+**Later continuation:** Quinton authorized further improvement beyond9/20. See
+[RAG-COVERAGE-2026-10-22.md](RAG-COVERAGE-2026-10-22.md) for the subsequent20/20 public
+answer result, preserved10/10boundaries and remaining independent acceptance work.
+This report preserves the earlier two-round history.
+
 Authorized scope: the four-block work order (baseline, interpretation, largest
 evidence-to-answer gap, verification/integration), with at most two targeted repair
 rounds. Preserve the current corpus, model and independent evaluation boundaries.
