@@ -1,5 +1,39 @@
 # Independent evaluation: next steps for Quinton
 
+## Encrypted workspace setup (October22)
+
+Quinton requested help setting up the required private workspace and independent backup. Use
+`scripts/retrieval/setup-private-storage.command` in the ordinary macOS Terminal. This small helper
+uses native AES-256 disk-image tooling; passwords go directly to macOS prompts, never Python,
+command arguments, this chat or a logfile. Expect password creation followed by unlock prompts for
+the new primary and the backup verification. Save the password in your password manager.
+
+The helper checks the registered external/internal UUIDs, different device roles, the shared26GiB
+backup cap and100GiB free-space floors. It reserves128MiB per encrypted image (conservative256MiB
+headroom per root), creates unique owner-only directories, copies the reviewed original into the
+primary image, closes it, copies/checksums the encrypted image to the independent internal device,
+reopens that backup read-only and verifies the original bytes. Only after both images are detached
+and verified does it relocate the unchanged original out of the repository. Changed originals,
+tracked files, failures and partial images are preserved; no overwrite, automatic retry or forced
+detach. A lock prevents duplicate setup processes.
+
+Actual image locations are shown only in the private Terminal. The public `outputs/prowl/independent-preparation-20261022/storage-*/status.json`
+receipt contains state/booleans/hashes, never questions, paths or passwords. Its success state is
+`workspace_ready_not_evaluation_freeze`. Later transcription/results require a fresh verified
+backup before the final evaluation freeze. Do not mistake an initial-draft backup for the frozen
+complete test set. Mounted images are accessible to other processes under your macOS account;
+keep development agents away from them and eject them after the private session.
+
+Verification:8 storage tests plus one completed native invented-only128MiB AES-256 rehearsal on the actual
+registered external/internal roots. The rehearsal passed encrypted-image identity, read-only backup
+reopen, original-byte equality and source relocation, then removed only its own invented images.
+A preliminary metadata check caught diskutil's requirement for the mounted-volume path rather than
+a nested artifact directory. An initial external-mountpoint rehearsal and a focused reproduction
+failed with Permission denied; using an owner-only internal mountpoint passed the complete rehearsal.
+These failures were corrected before any real draft handling. No real storage
+completion is inferred from this rehearsal; rely on the separate actual setup receipt.
+
+
 ## October22 reviewed draft: assisted preparation implemented
 
 Quinton confirmed individual questions/answers/evidence review and separately confirmed whole-set
