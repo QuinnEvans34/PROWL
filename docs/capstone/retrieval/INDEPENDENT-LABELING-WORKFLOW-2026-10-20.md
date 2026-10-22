@@ -1,5 +1,12 @@
 # Independent labeling: selected assisted workflow
 
+**October22 amendment:** Quinton selected a separate Claude chat to draft fresh questions.
+The [Claude handoff](CLAUDE-EVALUATION-PROMPT-2026-10-22.md) supplies public sources/exclusions and
+records AI authorship with human semantic/consistency review. The earlier human-only authoring
+arrangement below is historical. External Claude drafting is not all-local storage or proof of
+independence; protected evaluation admission remains closed. No real questions are available here.
+
+
 **Status:** Quinton selected the separate human-operated assisted workflow on October20.
 Preparation is complete. October21: the [invented-data application](LABELING-APPLICATION-2026-10-21.md)
 is implemented and running separately on5182; protected authoring remains unqualified/inactive.

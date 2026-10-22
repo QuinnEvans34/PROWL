@@ -1,0 +1,58 @@
+{
+  "version": "prowl-candidate-freeze-20261022",
+  "status": "candidate_pinned_private_evaluation_not_admitted",
+  "candidate_commit": "74782f71532cf571b6925617bd71db33bba1317b",
+  "launch_command": [
+    "scripts/serve_literature_search.py",
+    "--study-answers"
+  ],
+  "model": {
+    "name": "qwen3:8b",
+    "sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+  },
+  "corpus_content_sha256": "eae607b2aaeec5e55bb15a71cd0cd49b54e2c110f2989a2b21de4d052d673fd8",
+  "encoder_id": "68c0c08b71fc04772bdb09fff408b4ce40c8c5ca734efb24215300499ad214d4",
+  "source_count": 14,
+  "passage_count": 1179,
+  "pins": [
+    {
+      "path": "configs/evidence/development-study-search-v4.json",
+      "sha256": "4c71097965675bd73fc8b3f6ba656df54ac3665bac43cca27f8acd8d73e4e002"
+    },
+    {
+      "path": "configs/evidence/ct-study-answer-v4.json",
+      "sha256": "d06fbcc6e81c91d598f2bac92c5648398789254717613baddba73e87392c5dcf"
+    },
+    {
+      "path": "configs/evidence/corpus-disease-v1.json",
+      "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+    },
+    {
+      "path": "configs/evidence/evaluation/development-v6-draft.json",
+      "sha256": "8d0c8cd96208896a6bc33c2a9880ba3155f6040971a00e715e6b5d186a8b90d3"
+    },
+    {
+      "path": "configs/evidence/evaluation/public-exposure-v5.json",
+      "sha256": "5e167930ec9d96a082aa9ac5f8e4dd8925d7b2bdb080e2712cc65dfa209a4a56"
+    }
+  ],
+  "public_author_pack": [
+    {
+      "path": "outputs/prowl/independent-preparation-20261022/claude-input/already-used-questions.md",
+      "sha256": "eca13a4294b53f959f0a1c99d8961a3f01475c6b9ab0e3d6707d63724692a9c3"
+    },
+    {
+      "path": "outputs/prowl/independent-preparation-20261022/claude-input/frozen-literature.md",
+      "sha256": "17e8911e3ac745cea01d99176e3869ea1025bbbbce59d9e47155785d22a82fd3"
+    }
+  ],
+  "constraints": [
+    "No candidate tuning after this pin for the intended single evaluation.",
+    "Public development 20/20 supported and 10/10 boundaries is not independent accuracy.",
+    "Protected question set, role schema, semantic overlap review, storage/backup and evaluation admission remain pending.",
+    "Public v5 exposure is not yet wired into private admission; existing CLI remains closed.",
+    "Evaluate support, completeness, readability, citations, refusals and latency separately; preserve all first-pass failures.",
+    "Formal retrieval ranks require the existing evaluation protocol; do not relabel source context closure as ranked retrieval."
+  ],
+  "content_sha256": "f32cf8b8265f1287e22d2ff1a50e9ddc65d4d5bcf5677b526213a5fb5305f7f2"
+}

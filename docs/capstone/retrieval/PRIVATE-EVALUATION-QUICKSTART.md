@@ -1,5 +1,17 @@
 # Independent evaluation: next steps for Quinton
 
+## October22: Claude drafting selected; evaluation admission still pending
+
+Use the [copyable Claude prompt](CLAUDE-EVALUATION-PROMPT-2026-10-22.md) with its two public attachments.
+Quinton selected a separate Claude chat to draft questions; record AI authorship and human review
+honestly. Keep proposed questions/evidence outside this development chat and do not enter them in
+the fictional-source rehearsal app. Candidate commit74782f7 is pinned. Public exposure v5 now
+reconciles771 origins/396 wordings; the existing CLI still checks v4 and remains closed. This is
+public preparation, not private admission or an independent result. Role/schema adaptation, v5
+admission binding, private storage/backup, semantic review and the once-only evaluator remain
+pending. See the prompt document for the current limits and operator handoff.
+
+
 ## October20 preparation update
 
 Use the [change-only review packet](../../../outputs/prowl/evaluation-preparation-20261020/changes-to-review.md)
