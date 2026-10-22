@@ -1,4 +1,8 @@
-"""CT visibility and study limits using the existing source-bound record contract."""
+"""Named research tasks using the existing source-bound record contract.
+
+Explicit task selection is conservative, not a general semantic classifier. Ambiguous
+or compound requests remain unmatched; a study result never certifies a current scan.
+"""
 from copy import deepcopy
 import re
 
@@ -13,22 +17,73 @@ POLICY = 'source-linked-study-search-v1'
 ANSWER_POLICY = 'source-study-answer-v1'
 SCHEMA = 'prowl-study-answer-response-v1'
 SYSTEM = BASE_SYSTEM.replace('These are named literature comparisons, not patient diagnoses.',
-    'These are explanations of CT visibility and limitations of one named study, not patient diagnoses.')
+    'These are source-bound anatomy and named research examples. Preserve the organ, methods and limitations of each study; they are not patient diagnoses.')
 PROMPT_SHA = digest(dict(system=SYSTEM, schema=PLAN_SCHEMA))
+
+
+def research_topic(intent):
+    """Identify one covered research task, independently of the legacy pancreas gate."""
+    q = intent['matching_text']; has = lambda p: re.search(p, q) is not None
+    topics = []
+    if has(r'\btags\b'):
+        if has(r'\bprostate\b'): return None
+        if has(r'\b(inter.?reader|repeat.?reader|interobserver|intraobserver|reproducib\w*|agreement|reliability)\b') and has(r'\b(assess\w*|dice|dsc|results?|reproducib\w*|agreement)\b'):
+            topics.append('tags_reader_reliability')
+        if has(r'\b(reference|annotations?)\b') and has(r'\b(produc\w*|creat\w*|check\w*|used|included|extra|build)\b'):
+            topics.append('tags_reference_masks')
+        if has(r'\b(comparison|benchmark|prompts?|prompting)\b') and has(r'\b(matched|equivalent|automatic|detection|prompts?|prompting)\b'):
+            topics.append('tags_comparison_limits')
+        if has(r'\b(transfer|unseen|excluded|leave.one.center.out|loco)\b'):
+            topics.append('tags_center_transfer')
+        if has(r'\b(time|workload|saves?|saving\w*)\b') and not has(r'\b(how many|minutes?|seconds?|faster|inference)\b'):
+            topics.append('tags_workflow_limits')
+    elif has(r'\bpancrea\w*\b'):
+        subregion = has(r'\b(subregion\w*|parts|head.*body.*tail)\b')
+        if subregion:
+            if has(r'\b(surg\w*|whipple|pancreatectomy|inflam\w*)\b') and has(r'\b(why|assumptions?|caution\w*|affect|violate)\b') and not has(r'\b(accuracy|dice|dsc|how much|how well)\b'):
+                topics.append('subregion_limitations')
+            if has(r'\b(find|detect\w*|localiz\w*|entire|whole.pancreas|whole pancreas)\b'):
+                topics.append('subregion_localization')
+            if has(r'\b(labels?|labeling|labelling|annotat\w*)\b') and has(r'\b(disagreements?|consensus|settle|resolve\w*|steps)\b'):
+                topics.append('subregion_label_consensus')
+        if has(r'\bhead\b') and has(r'\b(intestin\w*|duodenum)\b') and has(r'\b(curves?|wraps?|around|relative)\b'):
+            topics.append('pancreas_head_anatomy')
+        if has(r'\b(outlin\w*|segment\w*|delineat\w*)\b') and has(r'\b(saves?|saving\w*|workload)\b') and has(r'\b(prove|demonstrate|improv\w*|better)\b'):
+            topics.append('tags_workflow_limits')
+    # The general workflow example is explicitly labelled prostate in every answer.
+    # Never use it as evidence about pancreatic accuracy or another named model.
+    if not has(r'\b(pancrea\w*|tags|radiomics|kidney|liver|lung)\b'):
+        contours = has(r'\b(contour\w*|outlines?)\b') and has(r'\bai\b')
+        if contours and has(r'\b(why|explanations?)\b') and has(r'\b(keep|retain\w*|accept\w*|bias)\b'):
+            topics.append('reviewer_acceptance')
+        elif contours and has(r'\b(agree\w*|consisten\w*|variab\w*)\b') and has(r'\b(accurac\w*|accurate|reference)\b'):
+            topics.append('reviewer_agreement_accuracy')
+    return topics[0] if len(set(topics)) == 1 else None
 
 
 def route_study_question(question):
     intent = interpret_question(question); q = intent['matching_text']
     has = lambda p: re.search(p, q) is not None
     def no(reason): return dict(status='unmatched', reason=reason, topic=None)
-    if intent['subject'] != 'pancreas' or intent['context'] != 'literature' or intent['negated']:
+    topic = research_topic(intent)
+    if intent['context'] != 'literature':
         return no('unresolved_subject_context_or_negation')
-    if has(r'\b(this|my|our|your|patient|case|diagnos\w*|treat\w*|biopsy|stage|staging|prognos\w*|survival|risk|probability|odds|chance|prompt|database|secret\w*|ignore|cysts?|ipmn|neuroendocrine|kidney|liver|lung)\b|\d'):
+    if has(r'\b(this|these|my|our|your|patient|case|diagnos\w*|treat\w*|biopsy|stage|staging|prognos\w*|survival|risk|probability|odds|chance|database|secret\w*|ignore|invent\w*|cysts?|ipmn|neuroendocrine|kidney|liver|lung|prowl)\b|\d') or has(r'\bsystem prompt\b'):
         return no('individual_or_unrepresented_request')
     if any(m != 'CT' for m in intent['modalities']):
         return no('unrepresented_modality_or_task')
-    if has(r'\b(dice|dsc|always|certif\w*|correct|accurate|accuracy)\b'):
+    # Only the covered benchmark question admits a negative comparison. Do not
+    # remove negation generally or turn an excluded topic into a positive answer.
+    if intent['negated'] and not (topic == 'tags_comparison_limits'
+            and has(r'\bnot (?:be read as |a |an )*(?:matched|fully automatic)\b')
+            and len(re.findall(r'\b(no|not|never|without|except|exclude|instead)\b', q)) == 1):
+        return no('unresolved_subject_context_or_negation')
+    if has(r'\b(always|certif\w*|correct|safe)\b'):
         return no('unrepresented_metric_or_certification')
+    if topic:
+        return dict(status='candidate', reason='selected_'+topic, topic=topic)
+    if intent['subject'] != 'pancreas' or has(r'\b(tags|subregion\w*|dice|dsc|accurate|accuracy|prompt)\b'):
+        return no('unrepresented_research_task')
     # Three tasks from the same CT reader-variability study. Do not replace a
     # methods question with a convenient disease comparison or a numeric result.
     if has(r'\bradiomic\w*\b') and has(r'\b(limit\w*|weakness\w*|bias\w*|cautions?)\b'):
@@ -54,13 +109,32 @@ def route_study_question(question):
     return no('specific_ct_visibility_topic_required')
 
 
+def study_scope(request):
+    reason = search_scope(request)  # Includes closed schema, identifiers and refusals.
+    if (reason in ('pancreas_topic_required', 'clarification_negation', 'measurement_unavailable')
+            and route_study_question(request['question'])['status'] == 'candidate'):
+        return None
+    return reason
+
+
 class StudyCatalog(MeasurementCatalog):
     version = 'reviewed-ct-study-facts-v1'
     topics = {'ct_isoattenuating_visibility': ['definition', 'context', 'scope_limit'],
               'ct_isoattenuating_study_limits': ['design', 'selection', 'reference_limit', 'scope_limit'],
               'ct_reader_variation': ['finding', 'population', 'reference_method', 'scope_limit'],
               'ct_radiomics_limits': ['acquisition', 'voxel_processing', 'scope_limit'],
-              'ct_contour_protocol': ['uncertainty', 'instructions', 'scope_limit']}
+              'ct_contour_protocol': ['uncertainty', 'instructions', 'scope_limit'],
+              'tags_reader_reliability': ['inter_reader', 'repeat_reader', 'scope_limit'],
+              'tags_reference_masks': ['creation', 'review', 'scope_limit'],
+              'tags_comparison_limits': ['prompting', 'systems', 'scope_limit'],
+              'tags_center_transfer': ['design', 'finding', 'scope_limit'],
+              'tags_workflow_limits': ['finding', 'unmeasured', 'scope_limit'],
+              'subregion_limitations': ['assumption', 'scope_limit'],
+              'subregion_localization': ['task', 'scope_limit'],
+              'subregion_label_consensus': ['independent_labels', 'reconciliation', 'scope_limit'],
+              'pancreas_head_anatomy': ['location', 'scope_limit'],
+              'reviewer_agreement_accuracy': ['setting', 'finding', 'scope_limit'],
+              'reviewer_acceptance': ['setting', 'interpretations', 'scope_limit']}
 
 
 class StudyIndex(MeasurementIndex):

@@ -1,0 +1,603 @@
+{
+  "version": "reviewed-ct-study-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "ct-visibility": {
+      "reviewed_record_sha256": "646fb1b5cd44818d561afbc7dd1055b24644c6dab2ad5b3b90c4906bcc7606f2",
+      "units": [
+        {
+          "id": "ct-visibility-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Some pancreatic cancers have nearly the same density as the surrounding pancreas on contrast-enhanced CT. This weak contrast can make the tumor difficult to see; the term isoattenuating describes that similar appearance.",
+            "On contrast-enhanced CT, some pancreatic cancers look very similar in density to the surrounding pancreas. This is called an isoattenuating appearance, and the lack of contrast makes the tumor hard to see."
+          ]
+        },
+        {
+          "id": "ct-visibility-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The paper describes indirect clues such as a widened or interrupted pancreatic duct, widening of the common bile duct, shrinkage of tissue beyond the tumor, or an abnormal pancreatic contour.",
+            "Indirect signs described in the paper include pancreatic duct widening or interruption, a widened common bile duct, tissue shrinkage beyond the tumor and an abnormal contour of the pancreas."
+          ]
+        },
+        {
+          "id": "ct-visibility-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The cited study included patients with confirmed pancreatic cancer. It did not compare these tumors with other diagnoses, so its findings do not establish that a similar-looking finding in another patient is cancer.",
+            "This study examined confirmed pancreatic cancers and did not compare them with other diagnoses. Its findings therefore cannot establish that a similar-looking finding in a different patient is cancer."
+          ]
+        }
+      ]
+    },
+    "ct-study-limits": {
+      "reviewed_record_sha256": "a90c54ca80079ff66d54881752b13279d2d7ce62bb1d241d3f4cb48804743488",
+      "units": [
+        {
+          "id": "ct-study-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The study of isoattenuating pancreatic carcinomas used retrospective data from one center and a small sample, which the authors identify as possible sources of bias.",
+            "The authors identify three limitations in their isoattenuating pancreatic carcinoma study: retrospective data collection, a single center and a small sample, with potential bias."
+          ]
+        },
+        {
+          "id": "ct-study-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "It included only pancreatic tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA). False-positive EUS-FNA cases were excluded, so the study could not determine the test’s specificity.",
+            "Only tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA) were included. Excluding false-positive EUS-FNA cases meant the researchers could not calculate its specificity."
+          ]
+        },
+        {
+          "id": "ct-study-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "Only cytology samples were collected. These could not establish tumor type or grade, or compare the tissue-level density of tumor cells, vessels and fibrous tissue between the tumor groups.",
+            "The samples were cytology only, so tumor type and grade could not be assessed. They also could not assess differences in the density of tumor cells, blood vessels and fibrous tissue between the groups."
+          ]
+        },
+        {
+          "id": "ct-study-limits-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "Because the study focused on patients with confirmed pancreatic cancer, it could not evaluate how isoattenuating carcinomas differed from other diagnoses.",
+            "The study included only patients with a definitive pancreatic cancer diagnosis. It could not compare isoattenuating carcinomas with other diagnoses."
+          ]
+        }
+      ]
+    },
+    "ct-reader-variation": {
+      "reviewed_record_sha256": "36c7af790aa76af64946e4a9d956d0a5613e92eedf3b9dcfc77542257b04223f",
+      "units": [
+        {
+          "id": "ct-reader-variation-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Yes. In one pancreatic cancer CT study, radiologists drew smaller tumor contours on average than radiation oncologists: reported mean volumes were 35.6 ± 15.0 cm³ and 54.1 ± 15.9 cm³, respectively. The ± terms are reproduced as reported; this passage does not define them.",
+            "Yes—specialty-related differences were reported in a pancreatic cancer CT study. The mean outlined tumor volume was 35.6 ± 15.0 cm³ for radiologists versus 54.1 ± 15.9 cm³ for radiation oncologists. The cited passage does not define the ± terms."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The retrospective study included 21 patients. Three radiologists and three radiation oncologists independently outlined the tumors in the full cohort.",
+            "This was a retrospective study of 21 patients. Six experts—three from radiology and three from radiation oncology—each contoured the entire cohort independently."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The researchers combined all six observers’ contours with the STAPLE algorithm to create a consensus volume as a ground-truth surrogate. That is an observer-derived reference, not an independent proof of the true tumor boundary.",
+            "All six sets of contours were combined using STAPLE to make a consensus reference, described as a ground-truth surrogate. Agreement with that reference is not independent proof of the true boundary."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "The study limited CT acquisition settings and fixed the display window and level. The authors caution that their findings may need validation before being generalized to other settings.",
+            "CT acquisition and display settings were restricted in this study. Its authors caution that the findings may require validation before applying them to other settings."
+          ]
+        }
+      ]
+    },
+    "ct-radiomics-limits": {
+      "reviewed_record_sha256": "cd604e021ee41f61644bff2d3501b62c4db4534e0e070647205eee85a9d6784b",
+      "units": [
+        {
+          "id": "ct-radiomics-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The pancreatic radiomics study restricted scanner types and acquisition parameters, and used a fixed display window and level to isolate differences between observers from imaging and display differences.",
+            "To focus on observer variability, the researchers selected limited scanner types and acquisition parameters and held the display window and level fixed."
+          ]
+        },
+        {
+          "id": "ct-radiomics-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "Before extracting radiomic features, images were resampled to isotropic 5 × 5 × 5 mm voxels using sinc interpolation. The authors warn that these relatively large voxels could introduce edge and partial-volume effects.",
+            "The images were resampled with sinc interpolation to 5 mm isotropic voxels—5 mm on each side—before radiomic feature extraction. The authors note possible edge and partial-volume effects from these voxels."
+          ]
+        },
+        {
+          "id": "ct-radiomics-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The findings therefore reflect the study’s specific acquisition, reconstruction and display settings. The authors say they may need validation before generalization to other cases.",
+            "The results are tied to those acquisition, reconstruction and display choices. The authors caution that validation may be needed before generalizing to other cases."
+          ]
+        }
+      ]
+    },
+    "ct-contour-protocol": {
+      "reviewed_record_sha256": "514b25680c4f031f172d2566a91bfa9ac6f8e15f60ca9c0e260dbed50c71a658",
+      "units": [
+        {
+          "id": "ct-contour-protocol-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "In the pancreatic CT study, observers were told to outline only tissue they felt certain was gross tumor and to exclude uncertain areas.",
+            "The study instructed observers to include only tissue they were confident was gross tumor, leaving out uncertain regions."
+          ]
+        },
+        {
+          "id": "ct-contour-protocol-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The instructions also excluded major vessels, stents, markers and lymph nodes when applicable. Observers worked independently using only the assigned CT, with a fixed window width of 400 and level of 50; they were not to use MRI or other CT data.",
+            "Major vessels, stents, markers and lymph nodes were to be excluded when applicable. Each observer contoured independently from the assigned CT alone, without MRI or other CT data, using a preset window width of 400 and level of 50."
+          ]
+        },
+        {
+          "id": "ct-contour-protocol-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "These were the study’s contouring instructions under fixed acquisition and display conditions. The authors caution that their results may need validation before being generalized to other cases.",
+            "This describes the protocol of that study, with its fixed acquisition and display conditions. The authors caution that results may need validation before being generalized."
+          ]
+        }
+      ]
+    },
+    "tags-reader-reliability": {
+      "reviewed_record_sha256": "c9e0e502d94a6e0ed09724e73cf1fef791d1e1c136f8cf15e1b9ccae4c724a30",
+      "units": [
+        {
+          "id": "tags-reader-reliability-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "In the multicenter TAGS study, two radiologists independently outlined tumors on 30 randomly selected CT examinations that neither had previously segmented. Mean agreement between readers was Dice 0.742.",
+            "For the TAGS inter-reader check, two radiologists independently contoured 30 randomly selected CT examinations, previously unsegmented by either reader. The mean Dice score was 0.742."
+          ]
+        },
+        {
+          "id": "tags-reader-reliability-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "One radiologist then repeated tumor segmentation on 30 randomly selected CT examinations after a three-week washout. Mean repeat-reader Dice was 0.838.",
+            "Repeat-reader reliability was measured by having one radiologist segment 30 randomly selected CT examinations again after three weeks. The mean Dice score was 0.838."
+          ]
+        },
+        {
+          "id": "tags-reader-reliability-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "Agreement was assessed using Dice, 95th-percentile Hausdorff distance and normalized surface Dice at 5 mm. The 30 inter-reader cases belonged to the 500-case cohort; their additional reliability contours were not reference labels for model evaluation.",
+            "The reliability measures were Dice, 95th-percentile Hausdorff distance and normalized surface Dice with a 5 mm tolerance. The inter-reader examinations were part of the 500-case cohort, but the extra contours were used only to assess reliability, not as model reference masks."
+          ]
+        }
+      ]
+    },
+    "tags-reference-masks": {
+      "reviewed_record_sha256": "fd736bafb8d5b58270e035044f3446d9e7916411ff52ca0fe4305fd6cbbcdcfc",
+      "units": [
+        {
+          "id": "tags-reference-masks-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "For the multicenter TAGS dataset, one of two abdominal radiologists manually outlined the pancreas and tumor in 3D Slicer. Each had more than five years of abdominal radiology experience, and each CT was initially labeled by one reader rather than by consensus.",
+            "The TAGS reference masks began as manual pancreas and tumor contours in 3D Slicer, drawn by one of two abdominal radiologists with over five years of experience. Initial labeling used one reader per CT, not a consensus."
+          ]
+        },
+        {
+          "id": "tags-reference-masks-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "Senior abdominal radiologists with at least 15 years of experience reviewed every segmentation and directly edited masks needing correction.",
+            "All masks then underwent review by senior abdominal radiologists with at least 15 years of experience, who edited them directly when corrections were needed."
+          ]
+        },
+        {
+          "id": "tags-reference-masks-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The separate inter-reader reliability exercise used 30 cases from the 500-case cohort. Its second set of contours was used only for reliability assessment and did not replace the reference labels.",
+            "Extra contours for the 30-case inter-reader reliability assessment were not used as reference labels. Those examinations were included in the 500-case cohort, but their second segmentations served a separate reliability purpose."
+          ]
+        }
+      ]
+    },
+    "tags-comparison-limits": {
+      "reviewed_record_sha256": "185680a37a76de067e58d3f462be75426738065e82b6ffbace1b4e31c864fbab",
+      "units": [
+        {
+          "id": "tags-comparison-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The multicenter TAGS comparison supplied tumor-location information: most methods received a foreground point sampled from the reference tumor mask, while MedSAM2 used a bounding-box prompt. It therefore did not test fully automatic tumor discovery.",
+            "These were prompted segmentation systems, not a test of finding tumors without location information. Most methods received a point sampled from the reference tumor mask; MedSAM2 required a bounding box."
+          ]
+        },
+        {
+          "id": "tags-comparison-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The methods used different native inference pipelines. TAGS also used a TotalSegmentator pancreas mask and text embeddings, so the authors describe a comparison of complete systems rather than matched prompting conditions.",
+            "Each method retained its own inference pipeline. TAGS additionally used a TotalSegmentator-derived pancreas mask and text embeddings, making this a complete-system comparison with unequal prompting conditions."
+          ]
+        },
+        {
+          "id": "tags-comparison-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "SAM-TAGS and MSD-TAGS did share identical prompts and differed only in initialization. That narrower comparison isolates initialization; it does not make the full comparison a matched, autonomous detection benchmark.",
+            "The matched comparison was narrower: SAM-TAGS and MSD-TAGS used the same prompts and differed in initialization. The broader set of methods still had different prompting conditions and received tumor-location cues."
+          ]
+        }
+      ]
+    },
+    "tags-center-transfer": {
+      "reviewed_record_sha256": "c08583ca33d6a2ece5b3a53a451eacc808915bf5399141f2c28ff5059b9d0761",
+      "units": [
+        {
+          "id": "tags-center-transfer-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The multicenter TAGS study tested transfer with leave-one-center-out evaluation: train on three institutions and evaluate on the fourth, repeating this for each of four centers. This was separate from pooled patient-level five-fold cross-validation.",
+            "To test an unseen institution, the TAGS researchers held out one of four centers, trained on the other three and repeated the process for every center. They reported this separately from pooled patient-level five-fold cross-validation."
+          ]
+        },
+        {
+          "id": "tags-center-transfer-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "MSD-TAGS mean Dice decreased from 0.703 in pooled evaluation to 0.678 in leave-one-center-out evaluation, an absolute drop of 0.025.",
+            "For MSD-TAGS, mean Dice was 0.703 in the pooled evaluation and 0.678 when a center was held out—a decrease of 0.025."
+          ]
+        },
+        {
+          "id": "tags-center-transfer-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "This measures transfer within the study’s four-center evaluation. The inference pipeline still used a point from the reference tumor mask, so these results concern prompted segmentation rather than automatic tumor detection.",
+            "The result describes the four-center study’s transfer test, with tumor-location prompts still supplied from reference masks. It is evidence about prompted segmentation, not independent tumor detection."
+          ]
+        }
+      ]
+    },
+    "tags-workflow-limits": {
+      "reviewed_record_sha256": "9b9186874ba27929cc062edb9042f4e3352b876640118b228bc37333596639d2",
+      "units": [
+        {
+          "id": "tags-workflow-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Better tumor outlines do not by themselves demonstrate that doctors save time. In the pancreatic TAGS study, fine-tuning reduced cases with Dice below 0.50 from 47.0% to 15.8%, but that was a segmentation result.",
+            "Improved pancreatic tumor segmentation alone does not establish time savings for clinicians. The TAGS paper reported a decrease in cases with Dice below 0.50 from 47.0% to 15.8% after fine-tuning."
+          ]
+        },
+        {
+          "id": "tags-workflow-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The researchers did not assess interaction time, re-prompting frequency or radiologist workload, and they evaluated no downstream clinical endpoint.",
+            "Interaction time, the frequency of additional prompts and radiologist workload were unmeasured. The study also did not evaluate a downstream clinical endpoint."
+          ]
+        },
+        {
+          "id": "tags-workflow-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The paper therefore cannot quantify clinical workflow benefit from those segmentation scores. The authors note that low-Dice cases are especially likely to need substantial manual correction.",
+            "These scores cannot quantify clinical benefit or prove reduced workload. The authors specifically identify the low-Dice cases as those most likely to require substantial manual correction."
+          ]
+        }
+      ]
+    },
+    "subregion-limitations": {
+      "reviewed_record_sha256": "430d84448e865b572b7b23b39f99f6bab7120b9a719b2e07f84a6300cdcea9f2",
+      "units": [
+        {
+          "id": "subregion-limitations-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The pancreatic subregion model assumes that the whole pancreas is present and uses the relative length, volume and arrangement of its parts. Surgery such as pancreatectomy or a Whipple procedure can alter that anatomy, while inflammation can change subregion sizes.",
+            "This model divides the pancreas using the spatial arrangement and relative lengths and volumes of its parts, assuming the whole organ is present. Partial removal or inflammation can violate those assumptions by changing anatomy or subregion size."
+          ]
+        },
+        {
+          "id": "subregion-limitations-1",
+          "facts": [
+            1
+          ],
+          "qualification": true,
+          "wordings": [
+            "The authors caution that the model may be led astray in these settings; they do not establish reliable performance for postoperative or inflamed pancreases. They identify broader training with conditions such as pancreatitis as future work.",
+            "Postoperative and inflamed pancreases are limitations of the published model, not established use cases. The authors describe possible model deviation and propose broader training with pancreatic conditions, including pancreatitis, as future work."
+          ]
+        }
+      ]
+    },
+    "subregion-localization": {
+      "reviewed_record_sha256": "0c71907fca63b5b21c8b73e18ae2ba45f53df1e58a26ea5dec3643b4e4faff27",
+      "units": [
+        {
+          "id": "subregion-localization-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "No. A published pancreatic CT subregion model assigned head, body and tail labels within an already outlined pancreas. Dividing an identified organ into parts is a different task from locating and segmenting the entire pancreas.",
+            "An AI can label the parts of a pancreas without demonstrating that it can find the organ on its own. The CT subregion study worked within an outlined pancreas to assign head, body and tail labels."
+          ]
+        },
+        {
+          "id": "subregion-localization-1",
+          "facts": [
+            1
+          ],
+          "qualification": true,
+          "wordings": [
+            "The authors explicitly left whole-pancreas segmentation outside the paper’s scope. The model also assumed that the whole pancreas was present, with cautions for surgery and inflammation.",
+            "Whole-pancreas segmentation was explicitly out of scope for that study. Its assumption of a complete pancreas also limits application to surgically altered or inflamed organs."
+          ]
+        }
+      ]
+    },
+    "subregion-label-consensus": {
+      "reviewed_record_sha256": "574fb82783d1ff3ab5ca931dceb8b52f70e506164cd3b0dc9de2479a5eba94ff",
+      "units": [
+        {
+          "id": "subregion-label-consensus-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Two radiologists with over 12 years of experience independently labeled pancreatic subregions inside the outlined pancreas across all three study datasets. Their initial labels overlapped by approximately 84%.",
+            "The subregion reference labels began with two experienced radiologists independently labeling the parts of an outlined pancreas in all three datasets. Initial overlap was about 84%."
+          ]
+        },
+        {
+          "id": "subregion-label-consensus-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The radiologists then shared, reviewed and updated their labels, reaching 96% overall consistency. They settled the remaining 4% by mutual agreement.",
+            "After exchanging their labels, the two graders reviewed and revised them to reach 96% consistency. The final 4% was resolved through agreement between the graders."
+          ]
+        },
+        {
+          "id": "subregion-label-consensus-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "These percentages describe agreement during reference-label construction. They are not the AI model’s segmentation accuracy.",
+            "The 84% and 96% figures concern the radiologists’ labeling process, not model performance."
+          ]
+        }
+      ]
+    },
+    "pancreas-head-anatomy": {
+      "reviewed_record_sha256": "9b87073d6e5fb0af54295bffacb2c08a4708cad037bf770599ef53d7e85b88cd",
+      "units": [
+        {
+          "id": "pancreas-head-anatomy-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The duodenum curves around the head of the pancreas. The anatomy description in the pancreatic subregion paper places the expanded head within that curve.",
+            "It is the duodenum. The pancreatic subregion paper describes the head of the pancreas as lying in its curve."
+          ]
+        },
+        {
+          "id": "pancreas-head-anatomy-1",
+          "facts": [
+            1
+          ],
+          "qualification": true,
+          "wordings": [
+            "This is a general anatomical relationship; the same description distinguishes the head from the body and tapered tail.",
+            "The source describes general pancreas anatomy, with an expanded head, a connecting body and a tapered tail."
+          ]
+        }
+      ]
+    },
+    "reviewer-agreement-accuracy": {
+      "reviewed_record_sha256": "a970327f2c9317ec0a6a2f56375a8f351c9911d5cc32c5dca5f98545a9997862",
+      "units": [
+        {
+          "id": "reviewer-agreement-accuracy-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Yes—greater agreement between reviewers can coexist with poorer agreement with a reference. One example comes from prostate radiotherapy, where two oncologists compared manual contours with reviewed and adjusted AI contours against a consensus reference.",
+            "The prostate radiotherapy study illustrates this distinction. Two oncologists produced manual and adjusted AI contours, using a consensus contour as the reference for accuracy."
+          ]
+        },
+        {
+          "id": "reviewer-agreement-accuracy-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "AI assistance improved agreement between and within observers, but adjusted AI contours generally did not surpass manual contours for the clinical target volume and rectum when compared with the reference.",
+            "Reviewers were more consistent with AI assistance, yet the adjusted AI contours did not consistently outperform manual outlines against the reference for the clinical target volume and rectum."
+          ]
+        },
+        {
+          "id": "reviewer-agreement-accuracy-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "This was a prostate study at one institution with two oncologists and one AI tool. Its findings do not establish pancreatic contour accuracy or prove that agreement between readers equals correctness.",
+            "The example concerns prostate radiotherapy, not pancreas segmentation. Its single-institution setting, two oncologists and single AI tool limit generalization; reader consistency and reference accuracy remain different measures."
+          ]
+        }
+      ]
+    },
+    "reviewer-acceptance": {
+      "reviewed_record_sha256": "307822ebac64fbd2abf359aaad2a627c4f0d93649506ecf511d85565256fa3ec",
+      "units": [
+        {
+          "id": "reviewer-acceptance-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "In the prostate radiotherapy study, adjusted AI contours did not consistently outperform manual outlines for the clinical target volume and rectum. The authors discuss why reviewers might still retain or only lightly edit AI contours.",
+            "A prostate radiotherapy study found that adjusted AI contours did not consistently beat manual outlines for the clinical target volume and rectum, despite reviewers accepting or minimally changing some AI outputs."
+          ]
+        },
+        {
+          "id": "reviewer-acceptance-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "One possible explanation is automation bias—over-reliance on the AI output. Another is deliberate clinical judgment: reviewers may consider a contour good enough and balance minor geometric differences against workflow efficiency.",
+            "The authors offer two interpretations: automation bias, or a conscious judgment that a contour is adequate and that further geometric refinement is not worth the perceived workflow cost."
+          ]
+        },
+        {
+          "id": "reviewer-acceptance-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "Those explanations were not proven causes. Contouring times were not recorded, so the study could not directly evaluate the accuracy–efficiency trade-off; decision tracking or interviews were proposed to distinguish unconscious bias from deliberate judgment.",
+            "The study did not record contouring time or directly establish the accuracy–efficiency trade-off. The explanations remain interpretations; decision tracking and post-contouring interviews were suggested to separate bias from conscious judgment."
+          ]
+        }
+      ]
+    }
+  }
+}

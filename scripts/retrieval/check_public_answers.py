@@ -21,7 +21,7 @@ def run(suite, output, port):
     suite = suite.resolve()
     allowed = {ROOT/'configs/evidence/evaluation'/name for name in (
         'development-v6-draft.json', 'rag-interpretation-development-v1.json',
-        'rag-contour-development-v1.json')}
+        'rag-contour-development-v1.json', 'rag-study-coverage-development-v1.json')}
     allowed.add(ROOT/'configs/evidence/week3-quality-matrix-v1.json')
     if suite not in allowed:
         raise ValueError('Only the named exposed development suites are allowed')

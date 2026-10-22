@@ -1,0 +1,15 @@
+{
+  "version": "source-study-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "9ea08b4f62a62c201d3d874105d12a39ded2f82b382bfa34dd16caa3b5f24d23",
+  "wording": {
+    "path": "configs/evidence/ct-study-answer-wording-v3.json",
+    "sha256": "1a86a2ea5e32738717a22c8bd936e39565033aa55257f4a0f0b96ae504f79736"
+  },
+  "wording_content_sha256": "ab2aabf66784bd8f01a813dd223642a99fe2732242733f2cb3325291d164efb0",
+  "scope": "Published anatomy and research examples, preserving each source organ, methods and limitations.",
+  "limitation": "General source explanations; no current-scan finding, diagnosis or contour certification.",
+  "max_generation_seconds": 30,
+  "model_calls": 1
+}
