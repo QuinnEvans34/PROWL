@@ -1,0 +1,218 @@
+{
+  "version": "reviewed-ct-study-wording-v1",
+  "review": "single_engineering_review_independent_pending",
+  "records": {
+    "ct-visibility": {
+      "reviewed_record_sha256": "646fb1b5cd44818d561afbc7dd1055b24644c6dab2ad5b3b90c4906bcc7606f2",
+      "units": [
+        {
+          "id": "ct-visibility-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Some pancreatic cancers have nearly the same density as the surrounding pancreas on contrast-enhanced CT. This weak contrast can make the tumor difficult to see; the term isoattenuating describes that similar appearance.",
+            "On contrast-enhanced CT, some pancreatic cancers look very similar in density to the surrounding pancreas. This is called an isoattenuating appearance, and the lack of contrast makes the tumor hard to see."
+          ]
+        },
+        {
+          "id": "ct-visibility-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The paper describes indirect clues such as a widened or interrupted pancreatic duct, widening of the common bile duct, shrinkage of tissue beyond the tumor, or an abnormal pancreatic contour.",
+            "Indirect signs described in the paper include pancreatic duct widening or interruption, a widened common bile duct, tissue shrinkage beyond the tumor and an abnormal contour of the pancreas."
+          ]
+        },
+        {
+          "id": "ct-visibility-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The cited study included patients with confirmed pancreatic cancer. It did not compare these tumors with other diagnoses, so its findings do not establish that a similar-looking finding in another patient is cancer.",
+            "This study examined confirmed pancreatic cancers and did not compare them with other diagnoses. Its findings therefore cannot establish that a similar-looking finding in a different patient is cancer."
+          ]
+        }
+      ]
+    },
+    "ct-study-limits": {
+      "reviewed_record_sha256": "a90c54ca80079ff66d54881752b13279d2d7ce62bb1d241d3f4cb48804743488",
+      "units": [
+        {
+          "id": "ct-study-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The study of isoattenuating pancreatic carcinomas used retrospective data from one center and a small sample, which the authors identify as possible sources of bias.",
+            "The authors identify three limitations in their isoattenuating pancreatic carcinoma study: retrospective data collection, a single center and a small sample, with potential bias."
+          ]
+        },
+        {
+          "id": "ct-study-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "It included only pancreatic tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA). False-positive EUS-FNA cases were excluded, so the study could not determine the test’s specificity.",
+            "Only tumors confirmed by endoscopic ultrasound-guided fine-needle aspiration (EUS-FNA) were included. Excluding false-positive EUS-FNA cases meant the researchers could not calculate its specificity."
+          ]
+        },
+        {
+          "id": "ct-study-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "Only cytology samples were collected. These could not establish tumor type or grade, or compare the tissue-level density of tumor cells, vessels and fibrous tissue between the tumor groups.",
+            "The samples were cytology only, so tumor type and grade could not be assessed. They also could not assess differences in the density of tumor cells, blood vessels and fibrous tissue between the groups."
+          ]
+        },
+        {
+          "id": "ct-study-limits-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "Because the study focused on patients with confirmed pancreatic cancer, it could not evaluate how isoattenuating carcinomas differed from other diagnoses.",
+            "The study included only patients with a definitive pancreatic cancer diagnosis. It could not compare isoattenuating carcinomas with other diagnoses."
+          ]
+        }
+      ]
+    },
+    "ct-reader-variation": {
+      "reviewed_record_sha256": "36c7af790aa76af64946e4a9d956d0a5613e92eedf3b9dcfc77542257b04223f",
+      "units": [
+        {
+          "id": "ct-reader-variation-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "Yes. In one pancreatic cancer CT study, radiologists drew smaller tumor contours on average than radiation oncologists: reported mean volumes were 35.6 ± 15.0 cm³ and 54.1 ± 15.9 cm³, respectively. The ± terms are reproduced as reported; this passage does not define them.",
+            "Yes—specialty-related differences were reported in a pancreatic cancer CT study. The mean outlined tumor volume was 35.6 ± 15.0 cm³ for radiologists versus 54.1 ± 15.9 cm³ for radiation oncologists. The cited passage does not define the ± terms."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The retrospective study included 21 patients. Three radiologists and three radiation oncologists independently outlined the tumors in the full cohort.",
+            "This was a retrospective study of 21 patients. Six experts—three from radiology and three from radiation oncology—each contoured the entire cohort independently."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-2",
+          "facts": [
+            2
+          ],
+          "qualification": false,
+          "wordings": [
+            "The researchers combined all six observers’ contours with the STAPLE algorithm to create a consensus volume as a ground-truth surrogate. That is an observer-derived reference, not an independent proof of the true tumor boundary.",
+            "All six sets of contours were combined using STAPLE to make a consensus reference, described as a ground-truth surrogate. Agreement with that reference is not independent proof of the true boundary."
+          ]
+        },
+        {
+          "id": "ct-reader-variation-3",
+          "facts": [
+            3
+          ],
+          "qualification": true,
+          "wordings": [
+            "The study limited CT acquisition settings and fixed the display window and level. The authors caution that their findings may need validation before being generalized to other settings.",
+            "CT acquisition and display settings were restricted in this study. Its authors caution that the findings may require validation before applying them to other settings."
+          ]
+        }
+      ]
+    },
+    "ct-radiomics-limits": {
+      "reviewed_record_sha256": "cd604e021ee41f61644bff2d3501b62c4db4534e0e070647205eee85a9d6784b",
+      "units": [
+        {
+          "id": "ct-radiomics-limits-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "The pancreatic radiomics study restricted scanner types and acquisition parameters, and used a fixed display window and level to isolate differences between observers from imaging and display differences.",
+            "To focus on observer variability, the researchers selected limited scanner types and acquisition parameters and held the display window and level fixed."
+          ]
+        },
+        {
+          "id": "ct-radiomics-limits-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "Before extracting radiomic features, images were resampled to isotropic 5 × 5 × 5 mm voxels using sinc interpolation. The authors warn that these relatively large voxels could introduce edge and partial-volume effects.",
+            "The images were resampled with sinc interpolation to 5 mm isotropic voxels—5 mm on each side—before radiomic feature extraction. The authors note possible edge and partial-volume effects from these voxels."
+          ]
+        },
+        {
+          "id": "ct-radiomics-limits-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "The findings therefore reflect the study’s specific acquisition, reconstruction and display settings. The authors say they may need validation before generalization to other cases.",
+            "The results are tied to those acquisition, reconstruction and display choices. The authors caution that validation may be needed before generalizing to other cases."
+          ]
+        }
+      ]
+    },
+    "ct-contour-protocol": {
+      "reviewed_record_sha256": "514b25680c4f031f172d2566a91bfa9ac6f8e15f60ca9c0e260dbed50c71a658",
+      "units": [
+        {
+          "id": "ct-contour-protocol-0",
+          "facts": [
+            0
+          ],
+          "qualification": false,
+          "wordings": [
+            "In the pancreatic CT study, observers were told to outline only tissue they felt certain was gross tumor and to exclude uncertain areas.",
+            "The study instructed observers to include only tissue they were confident was gross tumor, leaving out uncertain regions."
+          ]
+        },
+        {
+          "id": "ct-contour-protocol-1",
+          "facts": [
+            1
+          ],
+          "qualification": false,
+          "wordings": [
+            "The instructions also excluded major vessels, stents, markers and lymph nodes when applicable. Observers worked independently using only the assigned CT, with a fixed window width of 400 and level of 50; they were not to use MRI or other CT data.",
+            "Major vessels, stents, markers and lymph nodes were to be excluded when applicable. Each observer contoured independently from the assigned CT alone, without MRI or other CT data, using a preset window width of 400 and level of 50."
+          ]
+        },
+        {
+          "id": "ct-contour-protocol-2",
+          "facts": [
+            2
+          ],
+          "qualification": true,
+          "wordings": [
+            "These were the study’s contouring instructions under fixed acquisition and display conditions. The authors caution that their results may need validation before being generalized to other cases.",
+            "This describes the protocol of that study, with its fixed acquisition and display conditions. The authors caution that results may need validation before being generalized."
+          ]
+        }
+      ]
+    }
+  }
+}

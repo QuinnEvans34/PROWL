@@ -33,6 +33,21 @@ PLAN_SCHEMA = {'type': 'object', 'additionalProperties': False, 'required': ['pa
 PROMPT_SHA = digest(dict(system=SYSTEM, schema=PLAN_SCHEMA))
 
 
+def bounded_plan_schema(records):
+    """Constrain identifiers at generation time; never repair an invalid choice.
+
+    The template/prompt pin stays fixed. Enums are derived solely from the same
+    source-pinned records supplied in the prompt. Assembly still rejects missing,
+    duplicated or cross-record units and checks complete citation closure.
+    """
+    schema = deepcopy(PLAN_SCHEMA)
+    fields = schema['properties']['paragraphs']['items']['properties']
+    fields['record_id']['enum'] = list(records)
+    fields['sentences']['items']['properties']['unit_id']['enum'] = [
+        u['id'] for record in records.values() for u in record['units']]
+    return schema
+
+
 class RecordComposer:
     policy = POLICY
     system = SYSTEM
@@ -195,7 +210,7 @@ class RecordComposer:
             body = dict(question=question, records=[dict(record_id=rid, units=r['units'])
                                                    for rid, r in records.items()])
             response = call('chat', dict(model=DENSE_MODEL, messages=[dict(role='system', content=self.system),
-                dict(role='user', content=json.dumps(body, ensure_ascii=False))], format=PLAN_SCHEMA,
+                dict(role='user', content=json.dumps(body, ensure_ascii=False))], format=bounded_plan_schema(records),
                 stream=False, think=False, keep_alive='2m',
                 options=dict(temperature=0, seed=42, num_ctx=8192, num_predict=768)))
             if (not isinstance(response, dict) or response.get('model') != DENSE_MODEL or response.get('done') is not True

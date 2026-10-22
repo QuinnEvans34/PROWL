@@ -6,6 +6,7 @@ import re
 import unicodedata
 
 from .fact_records import FactCatalog
+from .question_interpretation import interpret_question
 
 POLICY = 'source-linked-volume-search-v1'
 NGT = 'normal_glucose_tolerance_comparison'
@@ -15,7 +16,7 @@ T2DM = 'well_controlled_type2_metformin'
 def route_volume_question(question):
     if not isinstance(question, str) or not 1 <= len(question.strip()) <= 500:
         raise ValueError('Invalid question')
-    text = unicodedata.normalize('NFKC', question).casefold().replace('’', "'")
+    text = interpret_question(question)['matching_text']
     has = lambda pattern: re.search(pattern, text) is not None
     def result(status, reason, populations=()):
         return dict(status=status, reason=reason, intents=[

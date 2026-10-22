@@ -25,8 +25,23 @@ def route_study_question(question):
         return no('unresolved_subject_context_or_negation')
     if has(r'\b(this|my|our|your|patient|case|diagnos\w*|treat\w*|biopsy|stage|staging|prognos\w*|survival|risk|probability|odds|chance|prompt|database|secret\w*|ignore|cysts?|ipmn|neuroendocrine|kidney|liver|lung)\b|\d'):
         return no('individual_or_unrepresented_request')
-    if any(m != 'CT' for m in intent['modalities']) or intent['task'] == 'contour_review':
+    if any(m != 'CT' for m in intent['modalities']):
         return no('unrepresented_modality_or_task')
+    if has(r'\b(dice|dsc|always|certif\w*|correct|accurate|accuracy)\b'):
+        return no('unrepresented_metric_or_certification')
+    # Three tasks from the same CT reader-variability study. Do not replace a
+    # methods question with a convenient disease comparison or a numeric result.
+    if has(r'\bradiomic\w*\b') and has(r'\b(limit\w*|weakness\w*|bias\w*|cautions?)\b'):
+        return dict(status='candidate', reason='selected_ct_radiomics_limits', topic='ct_radiomics_limits')
+    if intent['task'] == 'contour_review':
+        if (has(r'\b(uncertain|uncertainty)\b') and has(r'\b(study|research)\b')
+                and has(r'\b(handle\w*|instructions?|protocol|guidelines?)\b')):
+            return dict(status='candidate', reason='selected_ct_contour_protocol', topic='ct_contour_protocol')
+        if (has(r'\b(interobserver|interdisciplinary|readers?|observers?|specialists?|radiologists?|oncologists?)\b')
+                and has(r'\b(differ\w*|variab\w*|variation|compar\w*)\b')
+                and has(r'\b(tumou?rs?|cancer)\b')):
+            return dict(status='candidate', reason='selected_ct_reader_variation', topic='ct_reader_variation')
+        return no('unrepresented_contour_task')
     iso = has(r'\bisoattenuat\w*\b')
     appearance = iso or has(r'\b(blend\w*|similar|same|like|resembl\w*)\b.{0,70}\b(tissue|density|intensity|pancreas)\b')
     tumor = has(r'\b(tumou?rs?|cancer|carcinomas?|pdac)\b')
@@ -42,7 +57,10 @@ def route_study_question(question):
 class StudyCatalog(MeasurementCatalog):
     version = 'reviewed-ct-study-facts-v1'
     topics = {'ct_isoattenuating_visibility': ['definition', 'context', 'scope_limit'],
-              'ct_isoattenuating_study_limits': ['design', 'selection', 'reference_limit', 'scope_limit']}
+              'ct_isoattenuating_study_limits': ['design', 'selection', 'reference_limit', 'scope_limit'],
+              'ct_reader_variation': ['finding', 'population', 'reference_method', 'scope_limit'],
+              'ct_radiomics_limits': ['acquisition', 'voxel_processing', 'scope_limit'],
+              'ct_contour_protocol': ['uncertainty', 'instructions', 'scope_limit']}
 
 
 class StudyIndex(MeasurementIndex):

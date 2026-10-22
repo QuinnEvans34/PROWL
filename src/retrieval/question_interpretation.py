@@ -20,7 +20,7 @@ def interpret_question(question):
     subject = 'pancreas' if has(r'\b(pancrea\w*|pdac|mfcp)\b') else 'unspecified'
     modalities = [m for m, p in [('CT', r'\bct\b'), ('MRI', r'\b(mri|mrcp)\b'),
         ('ultrasound', r'\b(ultrasound|eus|us)\b'), ('PET', r'\bpet\b')] if has(p)]
-    task = ('contour_review' if has(r'\b(contours?|outlines?|outlining|segment\w*|delineat\w*|radiomics|dice|dsc)\b')
+    task = ('contour_review' if has(r'\b(contour\w*|outlines?|outlining|segment\w*|delineat\w*|radiomics|dice|dsc)\b')
         else 'study_limitations' if has(r'\b(limitations?|weakness\w*|bias\w*|cautions?)\b')
         else 'measurement' if has(r'\b(size|volume|diameter|large|big)\b')
         else 'literature_explanation')

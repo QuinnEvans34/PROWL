@@ -5,9 +5,9 @@ import fs from 'node:fs'
 import path from 'node:path'
 import LiteratureSearchPanel, { validateAnswer } from '../src/components/LiteratureSearchPanel'
 import config from '../../configs/evidence/development-search-v1.json'
-import catalog from '../../configs/evidence/source-facts-ct-study-v1.json'
-import wording from '../../configs/evidence/ct-study-answer-wording-v1.json'
-import composer from '../../configs/evidence/ct-study-answer-v1.json'
+import catalog from '../../configs/evidence/source-facts-ct-study-v2.json'
+import wording from '../../configs/evidence/ct-study-answer-wording-v2.json'
+import composer from '../../configs/evidence/ct-study-answer-v2.json'
 afterEach(cleanup)
 function fixture(request) {
  const r=catalog.records[1],pids=[...new Set(r.facts.flatMap(f=>f.evidence.map(id=>catalog.spans[id].passage_id)))].sort()

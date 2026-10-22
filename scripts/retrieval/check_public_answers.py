@@ -20,10 +20,11 @@ def run(suite, output, port):
         raise ValueError('Only local production/candidate ports allowed')
     suite = suite.resolve()
     allowed = {ROOT/'configs/evidence/evaluation'/name for name in (
-        'development-v6-draft.json', 'rag-interpretation-development-v1.json')}
+        'development-v6-draft.json', 'rag-interpretation-development-v1.json',
+        'rag-contour-development-v1.json')}
     allowed.add(ROOT/'configs/evidence/week3-quality-matrix-v1.json')
     if suite not in allowed:
-        raise ValueError('Only the three named exposed development suites are allowed')
+        raise ValueError('Only the named exposed development suites are allowed')
     data = json.loads(suite.read_text())
     cases = data['cases']
     if not 1 <= len(cases) <= 60 or any(c.get('split', 'development') != 'development' for c in cases):
@@ -33,6 +34,16 @@ def run(suite, output, port):
         git_head=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
         port=port, state='started', cases=[], semantic_review='pending')
     begin = monotonic()
+    receipt['producing_files'] = []
+    names = subprocess.check_output(['git', 'ls-files', '--cached', '--others', '--exclude-standard',
+        'src/retrieval', 'configs/evidence', 'scripts/serve_literature_search.py',
+        'scripts/retrieval/check_public_answers.py', 'ui/src/components'], cwd=ROOT, text=True).splitlines()
+    for name in names:
+        content = (ROOT/name).read_bytes()
+        target = output/'producing'/name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(content)
+        receipt['producing_files'].append(dict(path=name, sha256=hashlib.sha256(content).hexdigest()))
 
     def write():
         (output/'receipt.json').write_text(json.dumps(receipt, indent=2)+'\n')

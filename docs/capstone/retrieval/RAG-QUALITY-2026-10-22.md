@@ -59,3 +59,69 @@ are exposed development material and must not enter protected evaluation.
 
 Candidate findings and final disposition will be appended here rather than creating
 another planning framework.
+
+## Interpretation comparison and two repair rounds
+
+The existing encoder and frozen canonical anchor vectors were used unchanged. Raw
+cosine ranking is **not promoted as a router**: an explicit MRI question ranked the
+CT visibility record first (0.636), a negated CT question scored 0.748 against that
+record, and the two population-specific volume records tied because their anchor
+passage is shared. Even an MFCP question ranked focal-AIP evidence first. Similarity
+is useful for retrieval, but does not establish task, modality, negation or population
+compatibility. The retained experiment is `semantic-comparison.json` and its producing
+script in the private output directory; no expected answer was embedded.
+
+Round 1 introduced a small shared matching interpretation (subject, task, modality,
+scan/literature context and negation), task/modality exclusions, useful clarification,
+and natural measurement phrasing. CT visibility and the isoattenuating-carcinoma
+study's limitations reuse the existing bound-source catalog/composer/UI contracts.
+The original public suite improved to 6/20 supported answers and the incorrect
+contour-to-disease response became an honest abstention.
+
+Round 2 addressed that contour question using the actual CT reader-variability study,
+plus its acquisition/voxel limitations and contouring protocol. A separate 12-case
+exposed matrix was frozen before implementation. The original 32-case matrix is
+preserved: its contour row originally requested abstention while uncovered; the new
+supported answer is assessed against the unchanged formal public question's evidence,
+not counted as satisfying that old abstention expectation.
+
+The first round-2 replay exposed an internal identifier typo: the model returned
+`ct-radi.omics-limits-1`. Validation rejected it and used the explicitly labeled
+source fallback. A retained single diagnostic reproduced the typo. Generation now
+receives exact record/unit enums derived from the same pinned source records; the
+assembler still rejects omissions, duplicates and wrong-record assignments. There
+is no string correction or weakening of the validator. The generic prompt/schema
+template hash remains fixed; concrete enums and source content are bound by the
+catalog/wording pins and retained producer snapshots.
+
+Both study-record versions are retained. The contour example preserves the paper's
+35.6 ± 15.0 versus 54.1 ± 15.9 cm³ values and says the cited passage does not define
+the ± terms; it does not guess SD/SEM. Every new fact and both wording variants were
+checked against canonical source passages. Engineering review is not independent
+or clinician acceptance.
+
+## Final public-suite review
+
+| Dimension | Baseline | Final candidate |
+| --- | ---: | ---: |
+| Relevant, complete answers / 20 | 4 | 9 |
+| Wrong-topic composed answers | 1 | 0 |
+| Unnecessary scope refusals | 6 | 6 |
+| Missing reviewed answer coverage | 9 | 5 |
+| Correct no-answer boundaries / 10 | 10 | 10 |
+| Model compositions among relevant answers | 4 | 9 |
+| Relevant-answer latency | 3.91–7.08 s | 2.95–6.45 s |
+
+All nine final answers passed manual factual-support, completeness and readability
+review, with exact canonical citation identity checks. Source qualification is
+preserved in separate paragraphs. Public acceptance **fails** the unchanged 18/20
+answerable criterion. Independent acceptance remains unperformed. Remaining questions
+are TAGS reader/reference/transfer comparisons, subregion workflow, reviewer/automation
+effects and anatomy; existing conservative scope rules also reject some legitimate
+research phrasing. These are not relabeled as unanswerable to improve the score.
+
+The readable packet is `outputs/prowl/rag-quality-20261022/all-questions.md`; the
+per-case table and separate-dimension judgments are `results-table.md` and
+`public-engineering-review.json`. Raw responses, failed attempts and producer snapshots
+remain beside them. The new exposure supplement must be consolidated before private
+authoring; the private checker was not changed and no hidden questions were read.

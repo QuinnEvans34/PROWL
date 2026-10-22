@@ -1,0 +1,15 @@
+{
+  "version": "source-study-answer-v1",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "prompt_sha256": "27bae917aa66c417e729ea68d593a89364217bb6653a139015b5b8523a4a2ed6",
+  "wording": {
+    "path": "configs/evidence/ct-study-answer-wording-v2.json",
+    "sha256": "02dbd5441edaa93add0919ebdd3551fe2671a68460bcefc7e12f1ea1a5291ca5"
+  },
+  "wording_content_sha256": "d4121f9925c0f1dd87b7ce908ebaf1f6410190b8428801468b5d620300e2f2a1",
+  "scope": "Published CT study examples: visibility, limitations and reader contouring.",
+  "limitation": "General source explanations; no current-scan finding, diagnosis or contour certification.",
+  "max_generation_seconds": 30,
+  "model_calls": 1
+}

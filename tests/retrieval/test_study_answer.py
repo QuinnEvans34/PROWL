@@ -50,11 +50,22 @@ def test_measurement_paraphrase_keeps_modality_limit():
     assert route_measurement_question(q)['status']=='candidate'
     assert route_measurement_question(q+' Use ultrasound.')['status']=='unmatched'
 
+
+@pytest.mark.parametrize('case',read('evaluation/rag-contour-development-v1.json')['cases'])
+def test_frozen_second_round_selection(sample,case):
+    idx,_=sample
+    assert [m['record_id'] for m in idx.search(case['question'])['matches']] == case['expected_records']
+
+
+def test_full_modality_name_does_not_bypass_volume_gate():
+    from src.retrieval.volume_record_search import route_volume_question
+    assert route_volume_question('What mean pancreas volume was reported on computed tomography?')['status']=='unmatched'
+
 @pytest.fixture
 def sample():
-    cat=read('source-facts-ct-study-v1.json');review=read('source-facts-ct-study-v1-review.json')
+    cat=read('source-facts-ct-study-v2.json');review=read('source-facts-ct-study-v2-review.json')
     idx=StudyIndex(cat,review,corpus_records(ROOT,cat['manifest']))
-    composer=StudyComposer(idx.engine,cat,review,read('ct-study-answer-wording-v1.json'),read('ct-study-answer-v1.json'))
+    composer=StudyComposer(idx.engine,cat,review,read('ct-study-answer-wording-v2.json'),read('ct-study-answer-v2.json'))
     return idx,composer
 
 @pytest.mark.parametrize('question,rid',[
@@ -76,3 +87,17 @@ def test_source_bound_composition_preserves_complete_qualifiers(sample,question,
     broken=deepcopy(r);broken['evidence'].pop()
     with pytest.raises((ValueError,KeyError)):
         c.compose(question,broken,lambda *args:pytest.fail('Model called before evidence validation'))
+
+
+def test_generation_schema_excludes_identifier_typos_but_assembler_still_rejects_missing_units(sample):
+    from src.retrieval.record_answer import bounded_plan_schema
+    from jsonschema import validate, ValidationError
+    idx,c=sample;found=idx.search('What acquisition limitations did the pancreatic radiomics study report?')
+    result=dict(record_selection=dict(status='matched',matches=found['matches']),evidence=[dict(rank=i+1,**h) for i,h in enumerate(found['hits'])])
+    records,evidence=c.material(result);plan=c.default_plan(records);schema=bounded_plan_schema(records)
+    validate(plan,schema)
+    broken=deepcopy(plan);broken['paragraphs'][0]['sentences'][1]['unit_id']='ct-radi.omics-limits-1'
+    with pytest.raises(ValidationError):validate(broken,schema)
+    incomplete=deepcopy(plan);incomplete['paragraphs'].pop()
+    validate(incomplete,schema)  # Membership alone is deliberately insufficient.
+    with pytest.raises(ValueError):c.normalize_layout(incomplete,records)

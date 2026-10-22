@@ -1,0 +1,90 @@
+{
+  "version": "rag-contour-development-v1",
+  "scope": "Exposed second-round cases frozen before contour records; no independent acceptance claim",
+  "cases": [
+    {
+      "id": "reader_plain",
+      "split": "development",
+      "question": "Can radiologists and radiation oncologists draw different-sized outlines of the same pancreatic tumor?",
+      "expected_records": [
+        "ct-reader-variation"
+      ]
+    },
+    {
+      "id": "reader_variation",
+      "split": "development",
+      "question": "What interobserver variation in pancreatic tumor contour volume was reported?",
+      "expected_records": [
+        "ct-reader-variation"
+      ]
+    },
+    {
+      "id": "reader_mri",
+      "split": "development",
+      "question": "What interobserver variation in pancreatic tumor contour volume was reported on MRI?",
+      "expected_records": []
+    },
+    {
+      "id": "reader_certify",
+      "split": "development",
+      "question": "Are radiologists always correct when outlining pancreatic tumors?",
+      "expected_records": []
+    },
+    {
+      "id": "protocol_plain",
+      "split": "development",
+      "question": "How did the pancreatic CT study handle uncertain tumor edges and nearby structures when outlining the tumor?",
+      "expected_records": [
+        "ct-contour-protocol"
+      ]
+    },
+    {
+      "id": "protocol_repeat",
+      "split": "development",
+      "question": "What contouring instructions did the pancreatic CT study give for uncertain areas and nearby vessels?",
+      "expected_records": [
+        "ct-contour-protocol"
+      ]
+    },
+    {
+      "id": "protocol_patient",
+      "split": "development",
+      "question": "How should I contour this pancreatic tumor when its edge is uncertain?",
+      "expected_records": []
+    },
+    {
+      "id": "radiomics_limits",
+      "split": "development",
+      "question": "What acquisition and voxel-processing limitations did the interobserver pancreatic radiomics study report?",
+      "expected_records": [
+        "ct-radiomics-limits"
+      ]
+    },
+    {
+      "id": "radiomics_plain",
+      "split": "development",
+      "question": "How did scan settings and voxel size limit the pancreatic radiomics study?",
+      "expected_records": [
+        "ct-radiomics-limits"
+      ]
+    },
+    {
+      "id": "radiomics_mri",
+      "split": "development",
+      "question": "What acquisition limitations did the pancreatic MRI radiomics study report?",
+      "expected_records": []
+    },
+    {
+      "id": "dice",
+      "split": "development",
+      "question": "What Dice values did the pancreatic radiomics readers achieve?",
+      "expected_records": []
+    },
+    {
+      "id": "sample",
+      "split": "development",
+      "question": "How many patients in the pancreatic CT study had cancer?",
+      "expected_records": []
+    }
+  ]
+}
