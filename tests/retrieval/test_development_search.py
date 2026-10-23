@@ -241,3 +241,12 @@ def test_question_preview_endpoint_is_separate_and_private(http, monkeypatch):
     assert len(seen)==1 and not calls
     with pytest.raises(HTTPError) as error:send({'Origin':'https://untrusted.example'})
     assert error.value.code==403 and len(seen)==1
+
+
+def test_general_location_is_literature_but_scan_location_is_not(service):
+    s,r,calls=service;r['question']='Where is the pancreas located?'
+    assert s.search(r)['state']=='evidence_unassessed'
+    assert len(calls)==1
+    r['question']='Where is the pancreas in this scan?'
+    assert s.search(r)['state']=='not_searched'
+    assert len(calls)==1

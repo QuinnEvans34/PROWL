@@ -284,7 +284,10 @@ if __name__ == '__main__':
     parser.add_argument('--evidence-thinking', action='store_true', help='Reasoning in evidence selection and review (candidate only)')
     parser.add_argument('--evidence-composition', choices=['units','direct'], default='units', help='Candidate composition comparison')
     parser.add_argument('--evidence-trace', action='store_true', help='Include candidate drafts in local regression responses; never enable for the demo')
+    parser.add_argument('--general-extracts', action='store_true', help='Use checked source-sentence fallback after reviewed study answers')
     args = parser.parse_args()
+    if args.general_extracts and (not args.study_answers or args.evidence_answers):
+        parser.error('--general-extracts requires --study-answers without --evidence-answers')
     service = create_service(args.config)
     sources = create_record_search(service) if args.record_search or args.record_answers or args.volume_answers or args.measurement_answers else None
     answers = create_record_answers(sources) if args.record_answers else None
@@ -296,6 +299,9 @@ if __name__ == '__main__':
         sources, answers = create_study_answers(service)
     if args.evidence_answers:
         sources = answers = create_evidence_answers(service, args.evidence_model, args.evidence_trace, args.evidence_thinking, args.evidence_composition)
+    if args.general_extracts:
+        from src.retrieval.general_extract import GeneralExtractAnswers
+        answers = GeneralExtractAnswers(answers)
     server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources, answers))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()

@@ -25,6 +25,11 @@ def search_scope(request):
             and re.search(r'\b(average|mean)\b', text)
             and not re.search(r'\b(volume|diameter|head|body|tail|tumou?r|lesion|length|width)\b', text)):
         return 'clarification_size'
+    # General anatomical location is literature, not localization in an attached image.
+    if (plan['required_capabilities'] == ['validated_location'] and intent['subject'] == 'pancreas'
+            and intent['context'] == 'literature'
+            and not re.search(r'\b(scan|image|case|patient)\b', text)):
+        return None
     if plan['route'] == 'measurement':
         return 'measurement_unavailable'
     if intent['subject'] != 'pancreas':
