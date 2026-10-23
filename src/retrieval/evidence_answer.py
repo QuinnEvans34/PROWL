@@ -321,7 +321,7 @@ class EvidenceAnswers:
         self.composition=composition
         self.baseline=baseline;self.index=EvidenceIndex(bundles,records,context_links);self.transport=transport
         self.config={**baseline.config,'retriever':POLICY,'top_k':MAX_PASSAGES,
-            'model_sha256':self.model_sha,'thinking':thinking,'selection':selection,'composition':composition,'api_mode':'raw_chatml' if model==INSTRUCTION_MODEL else 'chat','context_tokens':16384,'generation_token_limits':dict(selection=650,extraction=1600,coverage=650,composition=3600,review=1000,thinking=4096),'prompts_sha256':digest([SELECT,EXTRACT,COVERAGE,WRITE,REVIEW,DIRECT,GAP_REVIEW,AVAILABILITY]),
+            'model_sha256':self.model_sha,'thinking':thinking,'selection':selection,'composition':composition,'api_mode':'raw_chatml' if model==INSTRUCTION_MODEL else 'chat','context_tokens':16384,'generation_token_limits':dict(selection=650,availability=600,extraction=1600,coverage=650,composition=3600,review=1000,thinking=4096),'prompts_sha256':digest([SELECT,EXTRACT,COVERAGE,WRITE,REVIEW,DIRECT,GAP_REVIEW,AVAILABILITY]),
             'context_policy':'selected-parts-same-section-adjacency-abstract-conclusion-v2','context_links_sha256':digest(list(context_links)),'max_sections':12,'max_context_characters':MAX_CONTEXT,'deadline_seconds':DEADLINE_SECONDS}
         self.lock=Lock();self.metrics=[]
 

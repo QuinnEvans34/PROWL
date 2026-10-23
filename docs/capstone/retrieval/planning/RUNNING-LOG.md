@@ -2240,3 +2240,5 @@ bring methods and limitations with retrieved results. Exposed-set span-delivery 
 2026-10-22: Linked-context30-case regression completed; no supported answer met all unchanged completeness labels. Five hard boundaries explained correctly; five evidence gaps still withheld. Dedicated gap review added with contradictory-feedback rejection;78focused backend checks pass. Candidate remains unpromoted; original evaluation unchanged.
 
 2026-10-22: Coverage-audit canary failed completeness and admitted one wrong-comparator answer; retained/unpromoted. Added source-availability plus confirmation before composition. Controlled gap probe5/5 correct with two answerable controls not withheld;81focused checks pass. Live qualification pending; no test-label changes or human-hour credit.
+
+2026-10-22: Actual API boundary regression10/10 accepted on manual review and UI contract validation; gap response times6.74–14.59s. Original3input hashes unchanged. Supported answers remain unqualified; dense14B cold-start timeout preserved before separate warm comparison.

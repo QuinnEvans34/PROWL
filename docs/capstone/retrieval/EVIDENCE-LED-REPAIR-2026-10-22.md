@@ -263,3 +263,15 @@ The controlled probe confirmed all five missing-evidence explanations and correc
 proposed gap on an answerable control. A second answerable control selected ordinary composition.
 81focused backend tests pass. End-to-end live qualification follows; supported-answer completeness
 and the original independent result remain unchanged.
+
+Live boundary regression `regression-evidence-22-availability` completed10/10requests successfully.
+Manual review accepts all five scope/privacy/fabrication explanations and all five precise evidence
+gaps against unchanged expectations. No clinical claims are emitted in gap answers. Five gap calls
+took6.74–14.59seconds; the hard boundaries did not call the model. All ten saved responses pass the
+actual UI evidence-answer validator and search-envelope function. The three original input hashes
+remain unchanged. These are exposed development checks, not a new independent result.
+
+The already-installed dense14B comparison initially reached its120second deadline during a110.89s
+cold model load plus partial prompt processing; zero answer tokens and cancellation are recorded.
+This is a startup failure, not an answer-quality score. A separate warm comparison preserves the
+same source payload and required-role prompt; no download or model change is involved.
