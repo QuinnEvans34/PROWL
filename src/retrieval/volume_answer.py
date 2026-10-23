@@ -20,9 +20,11 @@ PROMPT_SHA = digest(dict(system=SYSTEM, schema=PLAN_SCHEMA))
 
 def volume_scope(request):
     reason = search_scope(request)
-    # Only an admitted general study-mean intent can supersede the old scan-measurement
-    # classification. Refusal, individual context and all other gates keep precedence.
-    if reason == 'measurement_unavailable' and route_volume_question(request['question'])['status'] in ('candidate', 'clarification'):
+    # General study means and source-only method questions are not requests to measure a scan.
+    # Refusal, individual context and all other gates keep precedence.
+    route = route_volume_question(request['question'])
+    if reason == 'measurement_unavailable' and (route['status'] in ('candidate', 'clarification')
+            or route['reason'] == 'measurement_method_not_mean'):
         return None
     return reason
 

@@ -95,3 +95,11 @@ def test_volume_methods_are_not_mean_results():
               'What techniques calculate pancreatic volume on MRI?'):
         assert route_volume_question(q)['reason']=='measurement_method_not_mean'
     assert route_volume_question('What mean pancreas volume was reported in the MRI study?')['status']=='candidate'
+
+
+def test_method_sources_do_not_require_scan_measurement():
+    from uuid import uuid4
+    from src.retrieval.volume_answer import volume_scope
+    def request(q): return dict(schema_version='prowl-expert-request-v1',request_id=str(uuid4()),question=q)
+    assert volume_scope(request('How do papers measure pancreas volume on MRI?')) is None
+    assert volume_scope(request('How do I measure this pancreas volume on MRI?'))=='case_context_unavailable'
