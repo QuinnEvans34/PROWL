@@ -467,3 +467,17 @@ def test_source_stated_definition_and_unexpanded_term_remain_allowed():
     source='The method uses computed tomography (CT).'
     assert not unsupported_expansions(source, 'It uses computed tomography (CT).')
     assert not unsupported_expansions(source, 'It uses CT.')
+
+
+@pytest.mark.parametrize('limitation', ['Does the research report a comparison?', '  DOES the research report a comparison.  '])
+def test_gap_repeating_question_cannot_pass_even_when_model_review_approves(engine, limitation):
+    from time import monotonic
+    s,*_=engine
+    def approve(path,payload,**kwargs):
+        return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(
+            answer_available=False,limit_supported=True,readable=True,issues=[]))))
+    s.transport=approve
+    review=s.review_draft('Does the research report a comparison?',[],
+                         dict(status='insufficient',limitation=limitation,claims=[]),monotonic()+10)
+    assert not review['readability']['passed']
+    assert 'Repeating the question' in review['readability']['issues'][0]

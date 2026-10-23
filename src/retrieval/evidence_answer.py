@@ -405,6 +405,12 @@ class EvidenceAnswers:
             flags=dict(support=gap['limit_supported'],completeness=not gap['answer_available'],readability=gap['readable'])
             # Contradictory feedback cannot silently approve a gap.
             if gap['issues'] and all(flags.values()):flags['support']=False
+            # The model has returned the question itself as a supposedly checked gap.
+            # That states no limitation, even if its separate reviewer approves it.
+            normalized=lambda text: ' '.join(text.casefold().split()).rstrip('?.! ')
+            if normalized(draft['limitation']) == normalized(question):
+                flags['readability']=False
+                gap['issues'].append('Repeating the question does not explain an evidence gap.')
             return {k:dict(passed=v,issues=[] if v else gap['issues'] or ['Evidence-gap check failed.']) for k,v in flags.items()}
         schema=obj({k:obj(dict(issues=strings(3),passed=dict(type='boolean')))
                     for k in ('support','completeness','readability')})

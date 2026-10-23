@@ -111,3 +111,40 @@ The three original input hashes are unchanged. The private image was cleanly eje
 confirmed. A new independent encrypted backup was copied exclusively and both source and copy rehashed:
 134,340,096 bytes, SHA-256 `f7701e790f714eb19d4c94063f704f1b0f5e290ebc9f421ce066e2655c46e7b4`.
 Older backups remain intact. The local receipt records the new backup location; the image remains ejected.
+
+## Follow-up: answerability isolation
+
+Quinton authorized the next focused improvement. The following probes use public questions and
+canonical public excerpts; the private image remained ejected. Curated-context results are diagnostic,
+not retrieval or independent-evaluation scores. Receipts, exact prompts, source IDs, drafts and the
+rejected code patch are retained in `outputs/prowl/answerability-isolation-20261023/`.
+
+| Check | Finding and disposition |
+| --- | --- |
+| Current availability prompt, short canonical context | Both supported controls still became missing-evidence messages; the absent numerical-value control was correctly withheld. Context size alone does not explain the false gaps. |
+| Quote-first short-context probe | Retrieved relevant quotations for both supported controls and withheld the absent number. One status was internally inconsistent (`partial` with no missing detail), so this alone was not a qualification pass. |
+| Quote-first integration, five full API requests | Negative-test evidence was found, then discarded by sentence extraction. The returned gap merely repeated the question and passed model review. Infection failed exact-quote validation; focal-fat extraction claimed answerability with no facts. Both real gap controls were correctly withheld. No qualifying supported answer; integration rolled back with its patch retained. Its 91 test passes did not establish answer quality. |
+| Existing direct composer, short context | Both supported controls were rejected after manufacturing demands for stronger evidence. The absent-number response contained uncited contextual facts. |
+| Simpler composer, short context | Produced source-supported direct answers, including the fistula qualification, but the number-gap control put an absence claim into its cited claims. Needed further checking. |
+| Simpler composer, same full evidence for five questions | Direct answers appeared, but added irrelevant results, mixed groove pancreatitis into a focal-fat question, and supplied disease-group stiffness values instead of a normal-range gap. No qualifying replacement. Draft calls took 11.20–15.39 seconds; these exclude retrieval and answer review. |
+| Reasoning enabled on the same 8B model, two full-context controls | Improved the direct negative-test answer and acknowledged the missing normal stiffness range, but retained unnecessary clinical/disease context and omitted source qualifications. Structured stiffness citations point to the appropriate excerpts; raw inline bibliography numbers remain confusing in the app's citation convention. This is not an invalid structured-citation binding claim. Calls took 15.43 and 15.90 seconds. No promotion. |
+
+The surviving repair is deliberately narrow: a gap explanation identical to the question is rejected
+even if model review approves it. Two invented cases cover case/whitespace/punctuation variants;
+**87 focused backend tests pass**. This fixes a demonstrated false acceptance, not the broader
+answerability problem. The quote-first production changes and their tests were rolled back because
+the full-path check failed; no new composition mode or supporting application was added.
+
+The evidence supports stopping prompt/review expansion here. A simpler draft can recover the main
+answer, but the current model still needs a proven way to preserve relevance and qualifications with
+the full retrieved context. A further change must demonstrate that capability before another full
+regression or UI promotion. The live assistant remains unchanged, and these five public probe questions
+do not replace or rescore the original exposed set. Experimental 8019 was stopped after the probes;
+no training, model download, private evaluation, measurement change or new backup was needed.
+
+The retained retrieval plans identify a concrete next controlled variable: the infection question's
+first section is Complications, but later selections include recurrent pancreatitis and extrapancreatic
+lesions. The focal-fat question selects a mixed PDAC-mimics section, then paraduodenal and focal
+autoimmune pancreatitis sections. Test a smaller automatically selected context against the same
+composer next, preserving exceptions and companion passages; do not hand-select answers or count
+lost qualifications as a success. This context experiment has not been run in this block.
