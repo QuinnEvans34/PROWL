@@ -446,3 +446,24 @@ def test_unfaithful_gap_explanation_cannot_pass_or_fall_through_to_invented_answ
     responses.extend([plan,failed]);result=s.answer(r)
     assert result['generation']=='unavailable' and result['answer'] is None
     assert not any(c['messages'][0]['content']==EXTRACT for c in calls)
+
+
+def test_mixed_case_source_abbreviations_remain_protected():
+    from src.retrieval.evidence_answer import abbreviations
+    assert abbreviations('The nCLE and IPMNs findings used MRI in April.') == {'nCLE','IPMNs','MRI'}
+
+
+@pytest.mark.parametrize('rewrite', [
+    'The nCLE (narrowband imaging) technique needs training.',
+    'The narrowband imaging (nCLE) technique needs training.',
+])
+def test_retaining_acronym_cannot_authorize_a_guessed_definition(rewrite):
+    from src.retrieval.evidence_answer import unsupported_expansions
+    assert unsupported_expansions('The nCLE technique needs training.', rewrite)
+
+
+def test_source_stated_definition_and_unexpanded_term_remain_allowed():
+    from src.retrieval.evidence_answer import unsupported_expansions
+    source='The method uses computed tomography (CT).'
+    assert not unsupported_expansions(source, 'It uses computed tomography (CT).')
+    assert not unsupported_expansions(source, 'It uses CT.')

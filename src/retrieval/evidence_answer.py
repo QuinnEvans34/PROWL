@@ -161,7 +161,37 @@ def numbers(text):
 
 
 def abbreviations(text):
-    return set(re.findall(r'\b[A-Z][A-Z0-9]{1,8}\b',text))
+    # Include mixed-case source terminology (nCLE, IPMNs), not ordinary title words.
+    return {word for word in re.findall(r'\b[A-Za-z][A-Za-z0-9]{1,9}\b', text)
+            if sum(c.isupper() for c in word) >= 2}
+
+
+def unsupported_expansions(source, rewritten):
+    """Reject newly introduced parenthetical definitions; not a semantic verifier.
+
+    Keeping an acronym alone did not prevent a composer from attaching a guessed
+    definition. Check explicit definition forms against this same supporting fact.
+    Ordinary prose outside these explicit definition forms still needs source review.
+    """
+    normalized = ' '.join(source.casefold().split())
+    issues = []
+    for term in abbreviations(source):
+        escaped = re.escape(term)
+        for match in re.finditer(r'\b'+escaped+r'\s*\(([^()]+)\)', rewritten):
+            definition = ' '.join(match[1].casefold().split())
+            if definition not in normalized:
+                issues.append(f'Unsupported definition for {term}: {match[1]}')
+        for match in re.finditer(r'([^.!?;:()]+)\s*\('+escaped+r'\)', rewritten):
+            # A newly parenthesized acronym is an explicit definition even when
+            # the guessed words do not share its initials (the observed failure).
+            words = re.findall(r'[A-Za-z]+', match[1])
+            suffix = ' '.join(words[-2:]).casefold()
+            original = re.findall(r'([^.!?;:()]+)\s*\('+escaped+r'\)', source)
+            supported = any(' '.join(re.findall(r'[A-Za-z]+', item)[-2:]).casefold() == suffix
+                            for item in original)
+            if not supported:
+                issues.append(f'Unsupported parenthetical definition for {term}: {match[1].strip()}')
+    return issues
 
 
 def tokens(text):
@@ -322,7 +352,7 @@ class EvidenceAnswers:
         self.baseline=baseline;self.index=EvidenceIndex(bundles,records,context_links);self.transport=transport
         self.config={**baseline.config,'retriever':POLICY,'top_k':MAX_PASSAGES,
             'model_sha256':self.model_sha,'thinking':thinking,'selection':selection,'composition':composition,'api_mode':'raw_chatml' if model==INSTRUCTION_MODEL else 'chat','context_tokens':16384,'generation_token_limits':dict(selection=650,availability=600,extraction=1600,coverage=650,composition=3600,review=1000,thinking=4096),'prompts_sha256':digest([SELECT,EXTRACT,COVERAGE,WRITE,REVIEW,DIRECT,GAP_REVIEW,AVAILABILITY]),
-            'context_policy':'selected-parts-same-section-adjacency-abstract-conclusion-v2','context_links_sha256':digest(list(context_links)),'max_sections':12,'max_context_characters':MAX_CONTEXT,'deadline_seconds':DEADLINE_SECONDS}
+            'terminology_policy':'mixed-case-and-parenthetical-definitions-v1','context_policy':'selected-parts-same-section-adjacency-abstract-conclusion-v2','context_links_sha256':digest(list(context_links)),'max_sections':12,'max_context_characters':MAX_CONTEXT,'deadline_seconds':DEADLINE_SECONDS}
         self.lock=Lock();self.metrics=[]
 
     def call(self, system, body, schema, deadline, *, budget=1800):
@@ -547,6 +577,7 @@ class EvidenceAnswers:
                     if missing:mechanical.append('Preserve numerical qualifications from supporting facts: '+str(sorted(missing)))
                     lost=abbreviations(support)-abbreviations(rewritten)
                     if lost:mechanical.append('Retain source abbreviations verbatim; do not guess their expansion: '+str(sorted(lost)))
+                    mechanical.extend(unsupported_expansions(support, rewritten))
                 if mechanical:
                     review['support']['passed']=False
                     review['support']['issues'].extend(mechanical)
