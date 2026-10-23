@@ -385,13 +385,14 @@ export default function App() {
       modelLabel={route.view === 'predict' ? 'On-demand prediction · see result provenance' : ['saved','studies'].includes(route.view) ? 'Model identity is shown with each prediction' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
-      {route.view === 'studies' && <SavedReviewList navigate={navigate} />}
       {content}
       {!loadError && route.view === 'studies' && (
         cases
           ? <StudiesPage studies={studies} activeStudy={caseId} onOpen={openStudy} onImport={() => setImportOpen(true)} importAvailable={false} />
           : <main className="pw-empty" role="status"><p>Loading studies…</p></main>
       )}
+
+      {route.view === 'studies' && <SavedReviewList navigate={navigate} />}
 
       {/* The workbench stays mounted once a study is open so Research and back keep
           the viewer, layers, and drafts exactly where the reviewer left them. */}

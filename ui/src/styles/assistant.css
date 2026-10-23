@@ -190,3 +190,20 @@
 .pw-import__meta { padding: 10px 12px; border: 1px solid var(--pw-border-subtle); border-radius: var(--pw-radius); grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .pw-import .pw-dialog__foot { align-items: center; margin-top: 4px; }
 @media (max-width: 560px) { .pw-import__meta { grid-template-columns: 1fr 1fr; } }
+
+/* A compact composer and progressive disclosure keep the assistant ready to use. */
+.pw-app .literature-search--panel { gap: 14px; }
+.pw-app .literature-search--panel h2 { font-size: 20px; letter-spacing: -0.025em; }
+.pw-app .literature-search--panel textarea { min-height: 106px; background: var(--pw-sunken); }
+.pw-app .literature-search__tools summary, .pw-app .literature-search__question-ideas summary { color: var(--pw-text-muted); cursor: pointer; }
+.pw-app .literature-search__tools[open] .literature-search__actions,
+.pw-app .literature-search__question-ideas[open] .literature-search__suggestions { margin-top: 10px; }
+.pw-app .literature-search__question { display: grid; gap: 5px; margin: 0 0 16px 20px; padding: 12px; background: var(--pw-raised); border-radius: 12px 12px 3px 12px; font-size: 13px; overflow-wrap: anywhere; }
+.pw-app .literature-search__question small { color: var(--pw-text-muted); }
+.pw-app .literature-search__activity { padding: 14px; border: 1px solid var(--pw-border); border-radius: 12px; background: var(--pw-surface); }
+.pw-app .literature-search__activity-head { display: flex; align-items: center; gap: 9px; font-size: 13px; }
+.pw-app .literature-search__activity-head small { margin-left: auto; color: var(--pw-text-muted); font-variant-numeric: tabular-nums; }
+.pw-app .literature-search__activity p { color: var(--pw-text-muted); font-size: 13px; line-height: 1.6; }
+@media (prefers-reduced-motion: reduce) {
+  .pw-app .literature-search__pulse { animation: none; }
+}

@@ -266,31 +266,44 @@ export default function LiteratureSearchPanel({
   const staleContext = result && askedFor && askedFor.key !== contextKey
   return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
     {panel ? <>
-      <p className="literature-search__scope"><span aria-hidden="true" />{measurementContext ? `Saved case: ${contextLabel || 'current study'} · Outline measurements available for checking` : 'General literature · No scan attached'}</p>
-      <h2 id="literature-search-title">Ask about the pancreas</h2>
-      <p>{measurementContext ? 'Ask about the saved outline or published research. Measurements are shown only when the coverage checks pass; they cannot establish a diagnosis.' : 'Use your own words. For help turning a question into search terms, choose Help phrase my question.'}</p>
+      <p className="literature-search__scope"><span aria-hidden="true" />{measurementContext ? `Saved case: ${contextLabel || 'current study'} · ${measurementContext.available ? 'Outline measurements available for checking' : 'Show a saved prediction to enable measurements'}` : 'General literature · No scan attached'}</p>
+      <h2 id="literature-search-title">{phase === 'loading' ? 'On it.' : result || scanResult ? 'Let’s review the evidence' : 'How can I help?'}</h2>
+      {phase !== 'loading' && !result && !scanResult && <p>{measurementContext ? 'Ask me about the saved outline or explore the research behind your question.' : 'Use your own words. For help turning a question into search terms, choose Help phrase my question.'}</p>}
     </> : <>
       <h2 id="literature-search-title">Ask about pancreatic research</h2>
       <p>Use your own words. Get a cited explanation when the evidence supports one, or inspect the research passages.</p>
     </>}
-    <p className="literature-search__notice">{measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>
+    {(!panel || (phase !== 'loading' && !result && !scanResult)) && <p className="literature-search__notice">{panel ? 'Development preview · Do not enter patient information.' : measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>}
     {!panel && <p className="literature-search__scope">General literature · No scan attached</p>}
-    {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
-      {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
-    </div>}
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
       <textarea ref={questionInput} id="literature-question" rows={3} maxLength={500} value={question}
-        placeholder="What imaging findings help distinguish pancreatitis from pancreatic cancer?"
+        placeholder={panel ? "Ask PROWL a question…" : "What imaging findings help distinguish pancreatitis from pancreatic cancer?"}
+        aria-describedby="literature-question-shortcut"
+        onKeyDown={e => {
+          if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
+          e.preventDefault()
+          if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
+        }}
         onChange={e => change(e.target.value)} />
+      <small id="literature-question-shortcut">Enter to send · Shift+Enter for a new line</small>
       <div className="literature-search__actions">
         <button type="submit" disabled={!question.trim() || phase === 'loading'}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(question) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
-        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
-        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading'} onClick={helpWithQuestion}>Help phrase my question</button>
         {phase === 'loading' && <button type="button" onClick={() => change(question)}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
+      {panel ? phase !== 'loading' && <details className="literature-search__tools"><summary>Search tools</summary><div className="literature-search__actions">
+        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading'} onClick={helpWithQuestion}>Help phrase my question</button>
+      </div></details> : <div className="literature-search__actions">
+        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading'} onClick={helpWithQuestion}>Help phrase my question</button>
+      </div>}
     </form>
+    {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <details className="literature-search__question-ideas"><summary>Explore suggested questions</summary><div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
+      {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
+    </div></details>}
+
     {originalQuestion && <details className="literature-search__interpretation"><summary>Original question</summary><p>{originalQuestion}</p></details>}
     {helpError && <p role="status">Question help is unavailable or timed out. Your question is unchanged; you can still use Ask question.</p>}
     {preview && <section className="literature-search__interpretation" aria-label="Question interpretation">
@@ -304,6 +317,7 @@ export default function LiteratureSearchPanel({
       <button type="button" onClick={() => setPreview(null)}>Keep my question</button>
     </section>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
+      {panel && (phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>You asked</small>{question}</p>}
       {scanResult?.key === measurementKey && scanResult && <article aria-label="Current scan measurement">
         <h3>{scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
         <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
@@ -319,7 +333,11 @@ export default function LiteratureSearchPanel({
         </>}
       </article>}
       {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
-      {phase === 'loading' && <p className="literature-search__pending"><span className="literature-search__pulse" aria-hidden="true" />{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(question) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Your question is being processed. The answer will appear after the evidence checks finish.'} {elapsed}s elapsed. {!helpMode && !sourceMode && !(measurementContext && scanQuestion(question)) && 'You can cancel while the local model works.'}</p>}
+      {phase === 'loading' && <div className="literature-search__activity" role="status">
+        <div className="literature-search__activity-head"><span className="literature-search__pulse" aria-hidden="true" /><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(question) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
+        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(question) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'I’m waiting for the local research service to return a checked answer and supporting sources.'}</p>
+        <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(question) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
+      </div>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Check the local search service and data drive, then retry.</p>}
       {result && <article aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}

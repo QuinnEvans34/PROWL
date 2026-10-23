@@ -479,8 +479,8 @@ export default function ReviewWorkspace({
       <section className="pw-wb__center">
         <header className="pw-studybar">
           {!studyListOpen && (
-            <button type="button" className="pw-icon-btn" onClick={() => setStudyListOpen(true)} aria-label="Open study list" title="Open study list">
-              <PanelLeftOpen size={16} aria-hidden="true" />
+            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => setStudyListOpen(true)} aria-label="Open study list" title="Open study list">
+              <PanelLeftOpen size={16} aria-hidden="true" /> Studies <span className="pw-library-count">{caseItems.length}</span>
             </button>
           )}
           <div className="pw-studybar__id">
@@ -530,6 +530,7 @@ export default function ReviewWorkspace({
               }],
             ]}
           />
+          {is2dLike && <label className="pw-toolbar__plane"><span className="sr-only">Plane</span><select aria-label="Plane" value={state.activePlane} onChange={e => dispatch({ type: 'SET_ACTIVE_PLANE', value: e.target.value })}><option value="multiplanar">All 3 planes</option><option value="axial">Axial</option><option value="coronal">Coronal</option><option value="sagittal">Sagittal</option></select></label>}
           {is2dLike && (
             <Segmented
               label="Plane"
@@ -581,6 +582,32 @@ export default function ReviewWorkspace({
           </button>
         </div>
 
+          {state.evidenceMode === 'ct' && !hasPrediction && (
+            <div className="pw-ct-only" role="region" aria-label="Prediction not shown">
+              <strong>CT only</strong>
+              <span>Model outlines are hidden.</span>
+              <div>
+                {endpointStatus === 'online' && (
+                  <button type="button" className="pw-btn pw-btn--primary pw-btn--sm" onClick={analyze} disabled={isAnalyzing}>
+                    {isAnalyzing ? <LoaderCircle size={14} className="spin" aria-hidden="true" /> : <Activity size={14} aria-hidden="true" />}
+                    {isAnalyzing ? 'Analyzing…' : 'Analyze live'}
+                  </button>
+                )}
+                {caseData.files?.pred && !isAnalyzing && (
+                  <button type="button" className={`pw-btn pw-btn--sm ${endpointStatus === 'online' ? 'pw-btn--secondary' : 'pw-btn--primary'}`} onClick={showSaved}>
+                    <Database size={14} aria-hidden="true" /> Show saved prediction
+                  </button>
+                )}
+              </div>
+              {analysisFailed && (
+                <small role="alert"><WifiOff size={11} aria-hidden="true" /> Live analysis failed or is offline. No new prediction was produced.</small>
+              )}
+              {!analysisFailed && endpointStatus !== 'online' && caseData.files?.pred && (
+                <small><WifiOff size={11} aria-hidden="true" /> Live analysis offline · the saved prediction was produced earlier.</small>
+              )}
+            </div>
+          )}
+
         <div className="pw-viewer">
           <ViewerSuspense>
             {state.viewMode === 'split' ? (
@@ -607,32 +634,6 @@ export default function ReviewWorkspace({
           </ViewerSuspense>
 
           {state.viewMode === '3d' && snapPad}
-
-          {state.evidenceMode === 'ct' && !hasPrediction && (
-            <div className="pw-ct-only" role="region" aria-label="Prediction not shown">
-              <strong>CT only</strong>
-              <span>Model outlines are hidden.</span>
-              <div>
-                {endpointStatus === 'online' && (
-                  <button type="button" className="pw-btn pw-btn--primary pw-btn--sm" onClick={analyze} disabled={isAnalyzing}>
-                    {isAnalyzing ? <LoaderCircle size={14} className="spin" aria-hidden="true" /> : <Activity size={14} aria-hidden="true" />}
-                    {isAnalyzing ? 'Analyzing…' : 'Analyze live'}
-                  </button>
-                )}
-                {caseData.files?.pred && !isAnalyzing && (
-                  <button type="button" className={`pw-btn pw-btn--sm ${endpointStatus === 'online' ? 'pw-btn--secondary' : 'pw-btn--primary'}`} onClick={showSaved}>
-                    <Database size={14} aria-hidden="true" /> Show saved prediction
-                  </button>
-                )}
-              </div>
-              {analysisFailed && (
-                <small role="alert"><WifiOff size={11} aria-hidden="true" /> Live analysis failed or is offline. No new prediction was produced.</small>
-              )}
-              {!analysisFailed && endpointStatus !== 'online' && caseData.files?.pred && (
-                <small><WifiOff size={11} aria-hidden="true" /> Live analysis offline · the saved prediction was produced earlier.</small>
-              )}
-            </div>
-          )}
 
           {state.selectedObject && (
             <div className="viewer-selection-card pw-selection" role="status">
