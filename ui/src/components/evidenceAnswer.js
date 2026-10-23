@@ -1,5 +1,6 @@
 const policy = 'evidence-led-answer-v1'
-const modelSha = '500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41'
+const models = { 'qwen3:8b': '500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41',
+  'qwen3:30b': 'ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226' }
 
 // Transport integrity only. Semantic support is checked separately on the server;
 // neither a valid JSON envelope nor an exact citation proves clinical correctness.
@@ -8,7 +9,8 @@ export function validateEvidenceAnswer(result, request, validateSearch) {
   if (result?.schema_version !== 'prowl-evidence-answer-response-v1'
     || result.answer_policy !== policy || result.retrieval_policy !== policy
     || !['not_called', 'completed', 'unavailable'].includes(result.generation)) fail()
-  validateSearch({ ...result, schema_version: 'prowl-development-search-response-v1',
+  if (result.state === 'retrieval_failed' && (result.generation !== 'unavailable' || result.evidence?.length)) fail()
+  validateSearch({ ...result, state: result.state === 'retrieval_failed' ? 'no_results' : result.state, schema_version: 'prowl-development-search-response-v1',
     generation: 'not_called', answer: null }, request, 50)
   if (result.message !== undefined && (typeof result.message !== 'string' || result.message.length > 1000)) fail()
   if (result.generation !== 'completed') {
@@ -17,12 +19,13 @@ export function validateEvidenceAnswer(result, request, validateSearch) {
   }
   const a = result.answer
   if (result.state !== 'evidence_unassessed' || !a || a.policy !== policy
-    || a.model !== 'qwen3:8b' || a.model_sha256 !== modelSha
+    || !Object.hasOwn(models, a.model) || a.model_sha256 !== models[a.model]
     || a.validation !== 'canonical_citations_and_separate_criteria'
     || a.quality !== 'development_regression'
-    || !['summarized', 'insufficient'].includes(a.status)
+    || !['summarized', 'insufficient', 'refused'].includes(a.status)
     || typeof a.limitation !== 'string' || a.limitation.length > 1000
-    || (a.status === 'insufficient' && !a.limitation.trim())
+    || (['insufficient', 'refused'].includes(a.status) && !a.limitation.trim())
+    || (a.status === 'refused' && a.claims?.length)
     || !Array.isArray(a.claims) || a.claims.length > 8
     || (a.status === 'summarized' && !a.claims.length)
     || !a.claims.every(c => typeof c.text === 'string' && c.text.trim() && c.text.length <= 1800

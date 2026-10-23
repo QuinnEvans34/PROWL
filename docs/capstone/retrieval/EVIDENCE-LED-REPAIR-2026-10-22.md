@@ -35,3 +35,33 @@ not an acceptable typical-latency target. Actual useful-answer latency will be r
 Candidate promotion requires manual support/completeness/citation/boundary checks, comparison with
 existing public development cases, and UI validation. The frozen record-based service stays live
 on port 8016 while the candidate is tested on 8019. Results are pending; no 20/20 claim is made.
+
+## Subsequent repair probes (not promotion)
+
+The encrypted workspace retains each attempted configuration and its responses. The section-menu
+selector, both fast models, and a 30B reasoning variant did not qualify. Failures included unrelated
+section selection, false evidence gaps, unsupported morphology, missing qualifications, contradictory
+review feedback, token exhaustion and database interruptions. The separate database repair is recorded
+in RELIABILITY-CLOSEOUT-2026-10-20.md (commit68161f0); it does not establish answer quality.
+
+A lexical+dense retrieval diagnostic initially overlapped61/74 required concept spans in12/20 complete
+sets; the existing cross-encoder overlapped54/74 in10/20. These are permissive **span-delivery checks**,
+not Recall@k, complete conceptual support or answer accuracy. Adding adjacent canonical context changed
+the six-section result to60/74 in11/20; bounded budgets of8/10/12 sections yielded62/68/69 spans and
+12/15/16 complete sets respectively. No expected label or corpus changed. Query reformulation was also
+probed; it did not resolve several missing-evidence cases and is not integrated.
+
+The candidate now selects exact source sentences, removes duplicate sentences, requests one required
+rewritten unit per selected fact, and binds citations in code. It checks numeric preservation separately
+from the model's support/completeness/readability review. Reference and figure/table numbers are excluded
+from that mechanical check. This catches some dropped qualifications but is not semantic proof: selecting
+irrelevant facts still produces an irrelevant answer. Additional context is restricted to selected source
+section parts. The original whole-library selection experiment remains available only as a nondefault
+constructor option; default selection is lexical+dense.
+
+A demonstrated gap-review defect is repaired: when no facts are selected, the reviewer now receives the
+retrieved original passages, rather than an empty source list. It must distinguish a correctly explained
+missing fact from an incomplete answer to an available fact. Drafts/selection traces are excluded from
+ordinary responses; explicit `--evidence-trace` is for the private local regression harness only. The
+candidate on8019 remains separate from the live8016 service. No broader answer-accuracy claim follows
+from schema, UI or source-integrity tests.

@@ -2198,3 +2198,13 @@ inner/outer timeouts to the dedicated literature service. Recreated only that co
 its existing database bind, then verified exact corpus inventory and vector readiness. Temporary
 probe containers were removed. Original child creator remains unproven; continued load checks
 are pending. Details appended to RELIABILITY-CLOSEOUT-2026-10-20.md.
+
+### October22 — evidence composition repair remains under qualification
+
+Retained bounded failed probes; no original evaluation overwrite or candidate promotion. Compared
+existing retrieval configurations and section budgets; span delivery alone does not establish correct
+answers. Added exact sentence selection, mandatory per-fact rewrite units, duplicate removal and numeric
+qualification checks; corrected evidence-gap review receiving empty sources. Explicit private trace mode
+keeps unchecked drafts out of normal responses. Separate model criteria and manual source review remain
+required. Full results are pending in EVIDENCE-LED-REPAIR-2026-10-22.md; no20/20 or independent acceptance
+claim. No new training, corpus, checkpoint, model download, source label or human-hours change.
