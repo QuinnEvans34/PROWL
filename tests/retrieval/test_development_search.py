@@ -221,3 +221,23 @@ def test_record_expansion_uses_actual_frozen_boundary_digest(service):
     assert result['record_selection']['status']=='matched'
     assert [h['record'] for h in result['evidence']]==[h['record'] for h in hits]
     assert len(calls)==1 and result['generation']=='not_called'
+
+
+def test_question_preview_endpoint_is_separate_and_private(http, monkeypatch):
+    from src.retrieval import search_reformulation
+    base,(service,request,calls)=http
+    seen=[]
+    def preview(r):
+        seen.append(r)
+        return dict(schema_version='prowl-question-preview-v1', request_id=r['request_id'],
+                    question=r['question'], status='suggested', query='Pancreatic findings', message='Review wording.')
+    monkeypatch.setattr(search_reformulation,'preview_question',preview)
+    def send(headers=None):
+        return urlopen(Request(base+'/literature-search/interpret', data=json.dumps(request).encode(),
+                       headers={'Content-Type':'application/json',**(headers or {})}),timeout=5)
+    response=send()
+    assert response.headers['Cache-Control']=='no-store'
+    assert json.load(response)['question']==request['question']
+    assert len(seen)==1 and not calls
+    with pytest.raises(HTTPError) as error:send({'Origin':'https://untrusted.example'})
+    assert error.value.code==403 and len(seen)==1

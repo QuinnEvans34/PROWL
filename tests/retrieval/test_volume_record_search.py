@@ -86,3 +86,12 @@ def test_changed_reviewed_record_requires_new_admission(fixture):
     c['records'][0]['fields']['mean']['value'] = '999'
     with pytest.raises(ValueError, match='reviewed'):
         VolumeRecordSearchIndex(c, r, sources)
+
+
+def test_volume_methods_are_not_mean_results():
+    from src.retrieval.volume_record_search import route_volume_question
+    for q in ('How do papers measure pancreas volume on MRI?',
+              'How is pancreas volume measured on MRI in research papers?',
+              'What techniques calculate pancreatic volume on MRI?'):
+        assert route_volume_question(q)['reason']=='measurement_method_not_mean'
+    assert route_volume_question('What mean pancreas volume was reported in the MRI study?')['status']=='candidate'

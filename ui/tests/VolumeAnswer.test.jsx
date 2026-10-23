@@ -42,7 +42,7 @@ it.each([false,true])('renders separate groups and opens exact sources; fallback
  expect(screen.getByText(/55.5 cm³ among 41 people/)).toBeTruthy()
  expect(screen.getAllByText(/cannot tell you whether an individual scan/)).toHaveLength(2)
  expect(screen.queryByText('Invented volume source 1.')).toBeNull()
- expect(screen.getByText(fallback?/not model-written text/:/local AI selected reviewed wording/)).toBeTruthy()
+ expect(screen.getByText(fallback?/not model-written text/:/Local AI summary/)).toBeTruthy()
  await user.click(screen.getAllByRole('button',{name:'View source 1'})[0])
  expect(screen.getByText('Original excerpt [1]').closest('details').open).toBe(true)
 })

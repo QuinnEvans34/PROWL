@@ -31,7 +31,7 @@ def route_question(question):
         return no('individual_or_quantitative_request')
     if has(r"\b(no|not|never|without|except|exclude|instead|ignore|prompt|database|secrets?)\b|\b(don't|doesn't|isn't|can't)\b"):
         return no('negated_or_instruction_request')
-    if has(r'\b(liver|kidney|renal|spleen|lung|neuroendocrine|pnet|ipmn|cysts?|cystic|metasta\w*|diabetes|metformin|acute)\b'):
+    if has(r'\b(liver|kidney|renal|spleen|lung|neuroendocrine|pnet|ipmn|fat|fatty|lipomatosis|cysts?|cystic|metasta\w*|diabetes|metformin|acute)\b'):
         return no('unrepresented_comparison')
     if not has(r'\b(pancrea\w*|pdac|mfcp)\b'):
         return no('pancreatic_topic_required')
@@ -41,7 +41,7 @@ def route_question(question):
     chronic = has(r'\b(chronic|mfcp)\b')
     inflammatory = has(r'\b(inflamm\w*|pancreatitis|swelling|swollen)\b')
     cancer = has(r'\b(cancer|tumou?r\w*|pdac|adenocarcinoma|malignan\w*)\b')
-    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|resembl\w*|mimic\w*|separat\w*|versus|vs|(?:tell|told)\b.{0,120}\bapart)\b')
+    comparison = has(r'\b(distinguish\w*|differentiat\w*|differen\w*|compar\w*|resembl\w*|mimic\w*|separat\w*|versus|vs|(?:tell|told)\b.{0,120}\b(?:apart|from))\b')
     findings = has(r'\b(imag\w*|findings?|features?|signs?|appear\w*|enhanc\w*|duct\w*|calcific\w*|mrcp|ct|mri)\b')
     head = has(r'\bhead\b') and has(r'\b(size|large|enlarg\w*|swelling|swollen|mass\w*)\b')
     disease = has(r'\b(diseases?|conditions?|indicat\w*|caus\w*|associat\w*)\b')

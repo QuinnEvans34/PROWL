@@ -47,6 +47,8 @@ def route_volume_question(question):
     if not has(r'\bvolume\b'):
         return result('clarification', 'specify_volume_or_linear_size') if has(
             r'\b(size|large|big|long|wide)\b') else result('unmatched', 'volume_topic_required')
+    if has(r'\b(methods?|protocols?|techniques?)\b|\bhow\b.{0,160}\b(measur\w*|calculat\w*|quantif\w*)\b'):
+        return result('unmatched', 'measurement_method_not_mean')
     if has(r'\b(normal|abnormal|reference|enlarged)\b') and not has(r'\bnormal glucose tolerance\b'):
         return result('unmatched', 'normality_reference_unavailable')
     diabetes = has(r'\b(diabetes|diabetic|t2dm)\b')

@@ -98,6 +98,7 @@ def create_service(config_path):
 
     service = DevelopmentSearch(corpus, spec, retrieve)
     service.check_backend = check_backend
+    service.check_resources = lambda: limits(read_config(config_path))
     return service
 
 
@@ -185,7 +186,7 @@ def handler_for(service, source_search=None, record_answers=None):
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
-            if self.path not in {'/literature-search/query', '/literature-search/answer'}:
+            if self.path not in {'/literature-search/query', '/literature-search/answer', '/literature-search/interpret'}:
                 return self.reply(404, {'error':'Unknown route.'})
             try:
                 size = int(self.headers.get('Content-Length','0'))
@@ -198,6 +199,14 @@ def handler_for(service, source_search=None, record_answers=None):
                 search_scope(request)
             except (ValueError, TypeError, KeyError, UnicodeError, OSError):
                 return self.reply(400, {'error':'Use a general literature question of 1–500 characters.'})
+            if self.path.endswith('/interpret'):
+                try:
+                    from src.retrieval.search_reformulation import preview_question
+                    if hasattr(service, 'check_resources'): service.check_resources()
+                    return self.reply(200, preview_question(request))
+                except Exception as error:
+                    report_failure('interpretation', error)
+                    return self.reply(503, {'error':'Question help is unavailable. You can still ask your original question.'})
             try:
                 result = answers.answer(request) if self.path.endswith('/answer') else source_search.search(request)
             except Exception as error:

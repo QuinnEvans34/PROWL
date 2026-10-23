@@ -34,3 +34,10 @@
 .literature-search__sources { display: grid; gap: 14px; }
 .literature-search__sources h4 { margin: 0 0 10px; line-height: 1.5; }
 .literature-search__sources details { margin-top: 12px; }
+
+.literature-search__interpretation { margin: 16px 0; padding: 16px; border: 1px solid var(--pw-border, #45556b); border-radius: 10px; }
+.literature-search__interpretation h3 { margin-top: 0; }
+.literature-search__interpretation textarea { display: block; width: 100%; box-sizing: border-box; margin: 8px 0 12px; }
+.literature-search__interpretation button { margin: 0 8px 8px 0; }
+.literature-search__qualification { padding-left: 12px; border-left: 2px solid var(--pw-border, #45556b); }
+.literature-search__help-button { font-size: 0.9em; }

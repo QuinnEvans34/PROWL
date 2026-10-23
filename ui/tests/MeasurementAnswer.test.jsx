@@ -28,7 +28,7 @@ it.each([false,true])('shows readable methods, separate qualifications and sourc
  expect(await screen.findByText(/Diameter describes a length/)).toBeTruthy()
  expect(screen.getByText(/study was retrospective/)).toBeTruthy()
  expect(screen.getByText(/no measurement of your scan/)).toBeTruthy()
- expect(screen.getByText(fallback?/not model-written text/:/local AI selected reviewed wording/)).toBeTruthy()
+ expect(screen.getByText(fallback?/not model-written text/:/Local AI summary/)).toBeTruthy()
  expect(screen.queryByText('Invented method source 1.')).toBeNull()
  await user.click(screen.getAllByRole('button',{name:'View source 1'})[0])
  expect(screen.getByText('Original excerpt [1]').closest('details').open).toBe(true)

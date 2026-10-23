@@ -123,3 +123,11 @@ def test_binding_expands_hits_without_generation(index):
     assert len(s.baseline.calls)==1 and len(r['evidence'])==5
     assert r['generation']=='not_called' and r['answer'] is None
     assert r['record_selection']['status']=='matched'
+
+
+def test_plain_tell_from_comparison_and_fat_exclusion():
+    from src.retrieval.record_search import route_question
+    assert route_question('How can you tell inflammation from a tumor in the pancreas?')['status']=='candidate'
+    for q in ('How can fat in the pancreas head look different from a tumor on CT?',
+              'How do fatty deposits in the pancreatic head differ from tumors on CT imaging?'):
+        assert route_question(q)['status']=='unmatched'

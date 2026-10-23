@@ -695,3 +695,10 @@ is required; actual retraining remains a separately scoped experiment. Trello, t
 record and the Git checkpoint must agree. If a required gate fails, report **partial/blocked with a
 specific remaining gap**, even when the demo is usable. No percentage-complete estimate substitutes
 for those results.
+
+October23 amendment: Quinton requested autonomous natural-language/UX improvements followed by
+hands-on review. [Bounded UX specification](NATURAL-QUESTION-UX-SPEC-2026-10-23.md) defines the current
+block: simplify the existing answer/source interface and qualify an editable local interpretation
+preview. Automatic query replacement stays unpromoted pending meaning-preservation evidence.
+October22 independent failure and October23 composition failures remain authoritative; older bounded
+20/20 figures above do not establish broad acceptance. No new labeling infrastructure or scope removal.
