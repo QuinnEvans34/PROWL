@@ -171,3 +171,33 @@ confirmed. Its historical completion checkbox remains stale because the connecte
 not expose clearing it; the card is operationally **open**. Root cause/recurrence disposition and
 candidate-promotion gate remain open. The local UI is usable now; readiness/diagnostics are repaired,
 but a permanent database fix is not claimed. No training, inference or held-out evaluation occurred.
+
+## October22 — orphan-process restart reproduced and contained
+
+The answer diagnostics encountered two further recycle events at 23:58:16 and 00:06:49 UTC.
+Each logged an unexpected child exit2, followed by termination of all PostgreSQL workers. The
+container remained running and OOMKilled was false. These are service failures, not answer failures.
+
+A controlled experiment used the already-pinned PostgreSQL/pgvector image in two temporary,
+network-disabled containers with 128MiB tmpfs data, 256MiB memory and one CPU. No project data,
+credentials or published ports were used. In the first, PostgreSQL was PID1. A detached shell child
+(`(sleep 1; exit 2) ... & exit 0`) reproduced the same sequence at00:08:25 UTC: child PID81 exited2,
+all workers terminated, automatic recovery. With Docker `--init`, PostgreSQL was PID7 and the same
+orphan exit caused no restart; readiness remained successful. Both probe containers were stopped
+and removed. Probe logs were observed in the tool transcript, not saved as standalone artifacts.
+A separate `ps` inspection failed because that binary is absent from the image; it did not affect
+the orphan/readiness test.
+
+This behavior follows PostgreSQL17's [child cleanup implementation](https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/backend/postmaster/postmaster.c):
+unrecognized child exits reach CleanupBackend, which handles an exit other than0/1 as a crash before
+checking BackendList membership. A PID1 postmaster can therefore mistake an adopted orphan for a
+failed database backend. This reproduces a concrete failure mechanism; the original recurring child
+was not traced, so its exact creator remains unproven. The previous shell healthcheck and equal
+three-second inner/outer timeouts were a plausible source, not a proven attribution.
+
+`compose.literature.yaml` now uses `init: true`, an exec-form healthcheck, pg_isready's own two-second
+limit and a ten-second outer limit. The unchanged dedicated service was recreated once with the
+existing bind path. Source/model/credential files were not changed. The API then verified the exact
+14-paper/1,179-passage/41-batch inventory and vector probe. Host mount, source content hash and
+published port remain unchanged. No unrelated container was restarted. Continued answer testing
+will check for recurrence under model load; this is not an unlimited uptime guarantee.

@@ -2188,3 +2188,13 @@ stale critique contamination and overexpanded tasks; fixes are covered by invent
 51 affected Python checks and 56 UI checks pass; Vite build passes with existing bundle-size warning.
 No candidate promotion, source ingestion, training or human-hour claim. See
 `EVIDENCE-LED-REPAIR-2026-10-22.md`; bounded live quality/citation review continues.
+
+### October22 — database orphan-process fix
+
+Two answer diagnostics lost the database to the prior exit2/recovery recurrence. A network-isolated,
+tmpfs-only PostgreSQL PID1 probe reproduced the same crash when an adopted child exited2; the
+same probe with Docker init did not restart. Applied init plus exec-form healthcheck with distinct
+inner/outer timeouts to the dedicated literature service. Recreated only that container, preserving
+its existing database bind, then verified exact corpus inventory and vector readiness. Temporary
+probe containers were removed. Original child creator remains unproven; continued load checks
+are pending. Details appended to RELIABILITY-CLOSEOUT-2026-10-20.md.

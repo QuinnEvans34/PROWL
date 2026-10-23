@@ -3,6 +3,8 @@ services:
   db:
     image: pgvector/pgvector@sha256:88b17bc7a7dd6ef73d46c1b15aaa5936d50acb24e4a78713e134c579bf359e25
     platform: linux/arm64
+    # Reap orphaned healthcheck children outside PostgreSQL PID 1.
+    init: true
     pull_policy: never
     # Correlate backend exits with clients; never enable statement/parameter logging.
     command: [postgres, -c, log_connections=on, -c, log_disconnections=on,
@@ -31,9 +33,9 @@ services:
     secrets:
       - db_password
     healthcheck:
-      test: [CMD-SHELL, "pg_isready -h 127.0.0.1 -U prowl_literature -d prowl_literature"]
+      test: [CMD, pg_isready, -t, "2", -h, 127.0.0.1, -U, prowl_literature, -d, prowl_literature]
       interval: 5s
-      timeout: 3s
+      timeout: 10s
       retries: 12
     logging:
       driver: json-file
