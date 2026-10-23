@@ -148,3 +148,41 @@ lesions. The focal-fat question selects a mixed PDAC-mimics section, then paradu
 autoimmune pancreatitis sections. Test a smaller automatically selected context against the same
 composer next, preserving exceptions and companion passages; do not hand-select answers or count
 lost qualifications as a success. This context experiment has not been run in this block.
+
+## Follow-up: fixed smaller-context comparison completed
+
+The next authorized block compared two automatic subsets of the same retained 50-passage results:
+the first ranked section, and the top six whole passages by BM25 using corpus-wide token statistics.
+Both preserve existing explicit source-context links. Neither uses question-specific answers or
+evaluation labels. The five public questions, composer prompt, model/digest, non-thinking mode,
+16,384-token context setting and 1,800-token generation allowance are unchanged from the preceding
+full-context composer probe. Source IDs remain their original ranks. All selected records were
+checked against the canonical corpus; all 49 generated claim citation IDs resolve within their inputs.
+
+The Mac initially fell below the existing 104 GiB internal reserve, and literature readiness returned
+503. The idle model was unloaded; no files were moved/deleted and no reserve was weakened. Preparation
+and source inspection continued offline. After Quinton freed space, 107.57 GiB and HTTP 200 were
+verified. Each of the ten calls checked the storage reserve before running; all completed. Final
+internal free space was 106.96 GiB and the unchanged literature service remained healthy.
+
+| Automatic subset | Size | Observed draft-call median | Qualification result |
+| --- | --- | --- | --- |
+| First ranked section | 3–6 passages | 5.62 seconds | No qualifying replacement: irrelevant facts remain; important context is lost. |
+| Six BM25-ranked passages | 6 passages | 7.91 seconds | No qualifying replacement: repeated/mismatched comparisons and incorrect evidence-gap handling remain. |
+
+These timings exclude retrieval/review and differ in cache/warmup state; they are not an end-to-end
+latency benchmark. Faster drafts do not establish better answers. Both arms retain the core negative
+EUS-FNA answer and infection gas/wall/fistula facts, but neither retains the full infection MRI
+qualification delivered in baseline passages 35–36. The focal-fat answer still includes other disease
+comparisons; neither arm preserves the full practical qualification in baseline passage 28. The normal
+stiffness question adds unrelated duct or disease-cohort findings. Both surveillance drafts improperly
+turn missing detail in these excerpts into guideline-wide statements and leave their gap field empty.
+The unchanged qualification requirements therefore fail; neither method is promoted and no broad
+regression is justified by this focused result. Merely reducing passage count is not a demonstrated fix
+for semantic relevance or completeness. No production code, source labels or live UI policy changed.
+
+Reproducible local plan/script, all ten results and case-by-case manual review are retained in
+`outputs/prowl/context-selection-20261023/`. Plan SHA-256:
+`bae647f53abc9afb8002e75f926850a680c4d58918aa81217989e5d359ff79f0`.
+These are exposed public diagnostic questions, not a new independent evaluation or a rescore of the
+30-case regression. No private image was opened, and no training or new model download was performed.
