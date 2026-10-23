@@ -56,9 +56,16 @@ def compose(c,*args):
         ) from None
 
 
+# October 23 user decision: 50 GB internal reserve for literature work.
+# Independent imaging/training and external-volume allocations are unchanged.
+INTERNAL_FREE_RESERVE_BYTES = 50_000_000_000
+
+
 def limits(c):
-    if shutil.disk_usage('/System/Volumes/Data').free<104*1024**3 or shutil.disk_usage(c['mount']).free<408*1024**3:
-        raise OSError('Storage floor/reservation reached')
+    if shutil.disk_usage('/System/Volumes/Data').free < INTERNAL_FREE_RESERVE_BYTES:
+        raise OSError('Internal storage reserve reached (50 GB required)')
+    if shutil.disk_usage(c['mount']).free < 408*1024**3:
+        raise OSError('External storage floor/reservation reached (408 GiB required)')
     # Data-size checks use Docker's database size during ingestion; no recursive walk of huge stores.
 
 

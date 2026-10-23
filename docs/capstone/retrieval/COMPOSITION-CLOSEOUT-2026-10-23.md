@@ -234,3 +234,21 @@ unchanged literature backend reports unavailable through its storage guard. Quin
 free about5GiB for headroom. No unrelated apps/files were stopped or removed, and no reserve was
 weakened. The matched comparison remains incomplete pending resource recovery; there is no basis
 yet to select14B or conclude that every installed model fails this exact test.
+
+## Approved reserve revision and comparison resumption
+
+Quinton explicitly chose a50GB internal reserve on October23 so this Mac can also accommodate an
+approximately50GB dataset for another project. The active literature guard now uses50,000,000,000
+bytes (decimal GB, about46.57GiB), replacing its104GiB internal cutoff. This is an operational policy,
+not a measured minimum for macOS or model inference. The408GiB external allocation,8GiB database
+cap and separate imaging/training limits remain unchanged. Historical plans, failed receipts and
+retired experiment supervisors retain their original limits; they are not authorization for new runs.
+
+The resumed matched14B supervisor imports the same internal reserve constant as the query/ingestion
+path, preserving all other model/time/memory/input bounds. A new attempt directory keeps the stopped
+startup intact: `outputs/prowl/matched-composer-20261023/resumed-50gb/`. The original five-packet plan
+and8B responses are unchanged; no answered case is rerun.31focused storage/lifecycle/ingestion checks
+pass,4dedicated-database integration checks skip without their explicit fixture. Boundary tests verify
+admission at50GB, rejection one byte below, and the unchanged external floor. Literature service was
+restarted with its same `--study-answers` policy and health reports checked again; generation quality
+is not established by health.14B comparison resumed after this verification.
