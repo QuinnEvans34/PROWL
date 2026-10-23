@@ -58,9 +58,19 @@ means what you intended and whether the answer reads naturally. Select a citatio
 1. How can you tell inflammation from a tumor in the pancreas?
 2. What clues on CT help tell pancreatic inflammation from cancer?
 3. What mean pancreas volume was reported in the MRI study?
-4. How big is a pancreas? — question help should clarify volume versus dimensions.
+4. How big is a pancreas? — answers directly with the supported whole-pancreas volume study example.
 5. How do papers measure pancreas volume on MRI? — passages are available, but no qualified summary yet.
 
 Try your own paraphrases too. Report the original question, any unwanted wording change, and what
 felt unclear or missing. No need to supply technical labels. Broader faithful composition, independent
 evaluation and measurement qualification remain separate unfinished requirements.
+
+
+## User feedback: default general size to volume
+
+Quinton requested a direct answer for “How big is the pancreas?” rather than choosing a measurement
+first. General whole-pancreas size wording now selects the existing cited MRI study-volume example.
+Question help leaves that wording usable without clarification or a model rewrite. Explicit length,
+head size, current-scan, population and clinical questions do not inherit this default. No unsupported
+length or universal normal range was added. This supersedes the size-clarification walkthrough above;
+the earlier probe results remain historical.172 affected backend checks pass.

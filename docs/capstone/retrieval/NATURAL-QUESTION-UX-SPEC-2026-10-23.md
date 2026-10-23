@@ -41,3 +41,9 @@ No conversational memory in this block. Independent evaluation, broader faithful
 qualified scan measurements, reference comparisons and reviewed training feedback remain commitments.
 Do not reopen larger-model startup experiments during this UX block. Use the approved50GB internal
 literature reserve and preserve all previous experimental evidence.
+
+
+User feedback amendment: general whole-pancreas size questions should answer directly using the
+supported whole-organ volume study result, with its population and limitations. Do not require a
+volume-versus-length clarification for that general wording. Explicit dimensions and scan requests
+remain distinct; do not invent length evidence or call a selected study mean a universal average.

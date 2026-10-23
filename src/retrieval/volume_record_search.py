@@ -44,6 +44,10 @@ def route_volume_question(question):
     if has(r'\b(range|percentile\w*|threshold|cutoff|cut-off|standard deviation|sd|median|'
            r'minimum|maximum|length|width|diameter|weight|mass)\b'):
         return result('unmatched', 'unrepresented_quantity_or_statistic')
+    # General size questions default to the supported whole-organ volume example.
+    # Explicit dimensions, populations, scan context and clinical intent were gated above.
+    if has(r'^(how (big|large) is (a|the|an average|the average) pancreas|what is the (average )?(pancreas size|size of (a|the) pancreas))[?.! ]*$'):
+        return result('candidate', 'general_size_defaults_to_study_volume', (NGT,))
     if not has(r'\bvolume\b'):
         return result('clarification', 'specify_volume_or_linear_size') if has(
             r'\b(size|large|big|long|wide)\b') else result('unmatched', 'volume_topic_required')

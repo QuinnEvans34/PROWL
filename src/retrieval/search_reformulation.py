@@ -57,6 +57,10 @@ def preview_question(request, call=None):
     if re.search(r'\b(it|that|those|they)\b', original.casefold()) and intent['subject'] == 'unspecified':
         result['message'] = 'Which organ, finding or test do you mean? Include it in your question; earlier questions are not remembered.'
         return result
+    from .volume_record_search import route_volume_question
+    if route_volume_question(original)['reason'] == 'general_size_defaults_to_study_volume':
+        result.update(status='unchanged', message='You can ask this as written. I’ll answer using the available whole-pancreas volume study and explain its limits.')
+        return result
     if re.search(r'\b(size|big|large)\b', original.casefold()) and not re.search(r'\b(volume|diameter|length|width|head|body|tail)\b', original.casefold()):
         result['message'] = 'Do you mean pancreas volume or a length such as the head diameter? Add the measurement you want, and say whether you mean a published study or a saved scan.'
         return result

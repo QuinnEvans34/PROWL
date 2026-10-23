@@ -43,9 +43,6 @@ def test_unrepresented_scope_never_returns_population_intents(question):
 
 
 @pytest.mark.parametrize('question', [
-    'How large is the average pancreas?',
-    'How big is the pancreas?',
-    'What is the pancreas size?',
     'What is the average pancreas volume in diabetes?',
     'Compare average pancreas volume.',
     'Mean pancreas volume in normal glucose tolerance and type 2 diabetes?',
@@ -103,3 +100,18 @@ def test_method_sources_do_not_require_scan_measurement():
     def request(q): return dict(schema_version='prowl-expert-request-v1',request_id=str(uuid4()),question=q)
     assert volume_scope(request('How do papers measure pancreas volume on MRI?')) is None
     assert volume_scope(request('How do I measure this pancreas volume on MRI?'))=='case_context_unavailable'
+
+
+@pytest.mark.parametrize('question', ['How big is the pancreas?', 'How big is a pancreas?',
+    'How large is the average pancreas?', 'What is the pancreas size?', 'What is the size of the pancreas?'])
+def test_general_size_defaults_to_supported_volume(question):
+    route = route_volume_question(question)
+    assert route['status'] == 'candidate'
+    assert route['reason'] == 'general_size_defaults_to_study_volume'
+    assert [i['population'] for i in route['intents']] == [NGT]
+
+
+@pytest.mark.parametrize('question', ['How long is the pancreas?', 'How big is this pancreas?',
+    'How big is the pancreas head?', 'Why is the pancreas large?', 'How big is the pancreas in children?'])
+def test_size_default_does_not_guess_other_intents(question):
+    assert route_volume_question(question)['status'] != 'candidate'
