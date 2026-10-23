@@ -47,3 +47,11 @@ it('shows specific boundary explanations', async () => {
   await user.click(screen.getByRole('button', { name: 'Ask question' }))
   expect(await screen.findByText(/I cannot invent a citation/)).toBeTruthy()
 })
+it('binds the instruction variant to its own digest, not the thinking model', () => {
+  const r = response()
+  r.answer.model = 'qwen3:30b-a3b-instruct-2507-q4_K_M'
+  r.answer.model_sha256 = '19e422b0231392335cfc49cfd172de7034bb1aeabb08aa307cce745c60b272fe'
+  expect(validateAnswer(r, request)).toBe(r)
+  r.answer.model_sha256 = 'ad815644918f0eaab341c12b67837cc6dd4562342cdaf118f83d5d554cb37226'
+  expect(() => validateAnswer(r, request)).toThrow()
+})

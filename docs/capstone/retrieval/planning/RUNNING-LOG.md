@@ -2208,3 +2208,16 @@ qualification checks; corrected evidence-gap review receiving empty sources. Exp
 keeps unchecked drafts out of normal responses. Separate model criteria and manual source review remain
 required. Full results are pending in EVIDENCE-LED-REPAIR-2026-10-22.md; no20/20 or independent acceptance
 claim. No new training, corpus, checkpoint, model download, source label or human-hours change.
+
+October22 follow-up:58 focused backend checks pass, including review feedback changing the selected
+facts before rewriting and reviewers receiving full retrieved context. Public suite1740passed/5skipped/
+2known pre-existing failures. Diagnosed installed30B as Thinking-2507, rejected incompatible non-thinking
+use, reused verified14B instruction model without qualification, and began one correctly pinned30B
+instruction-only comparison. Separate external store, unchanged storage floors, failed first admission
+and corrective generated-build preservation are detailed in the existing repair report. No live promotion.
+
+October22 storage stop: the instruction download's second attempt stopped at the unchanged104GiB
+internal reserve; partial transfer and failure preserved, experimental servers stopped. Awaiting Quinton's
+choice about the verified18.6GB existing thinking-model relocation versus freeing space himself; shared
+Ollama storage has not been changed. Latest59backend/57UI checks pass; five hard boundaries checked
+offline, not a full-suite answer pass. Original evaluation inputs unchanged; no replacement promoted.

@@ -246,11 +246,14 @@ def create_study_answers(baseline):
 
 
 def create_evidence_answers(baseline, model='qwen3:8b', trace=False, thinking=False):
-    from src.retrieval.evidence_answer import EvidenceAnswers
+    from src.retrieval.evidence_answer import EvidenceAnswers, INSTRUCTION_MODEL
+    from src.retrieval.natural_answer import api
+    from functools import partial
     manifest = checked_json(baseline.config['manifest'], ROOT)
     bundles = [checked_json(s['bundle'], ROOT) for s in manifest['sources']]
     records = [i['record'] for pin in manifest['batches'] for i in checked_json(pin, ROOT)['items']]
-    return EvidenceAnswers(baseline, bundles, records, model=model, trace=trace, thinking=thinking)
+    return EvidenceAnswers(baseline, bundles, records, model=model, trace=trace, thinking=thinking,
+        transport=partial(api,port=11436 if model==INSTRUCTION_MODEL else 11435 if model=='qwen2.5:14b' else 11434))
 
 
 if __name__ == '__main__':
@@ -263,7 +266,7 @@ if __name__ == '__main__':
     parser.add_argument('--measurement-answers', action='store_true', help='Include CT tumor measurement-method composition with volume and disease answers')
     parser.add_argument('--study-answers', action='store_true', help='Include CT visibility and named study limitations')
     parser.add_argument('--evidence-answers', action='store_true', help='Evidence-led general local answers (candidate)')
-    parser.add_argument('--evidence-model', choices=['qwen3:8b','qwen3:30b'], default='qwen3:8b')
+    parser.add_argument('--evidence-model', choices=['qwen3:8b','qwen3:30b','qwen2.5:14b','qwen3:30b-a3b-instruct-2507-q4_K_M'], default='qwen3:8b')
     parser.add_argument('--evidence-thinking', action='store_true', help='Reasoning in evidence selection and review (candidate only)')
     parser.add_argument('--evidence-trace', action='store_true', help='Include candidate drafts in local regression responses; never enable for the demo')
     args = parser.parse_args()

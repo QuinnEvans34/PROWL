@@ -65,3 +65,54 @@ missing fact from an incomplete answer to an available fact. Drafts/selection tr
 ordinary responses; explicit `--evidence-trace` is for the private local regression harness only. The
 candidate on8019 remains separate from the live8016 service. No broader answer-accuracy claim follows
 from schema, UI or source-integrity tests.
+
+## Model compatibility correction and next controlled comparison
+
+Local `/api/show` on Ollama0.40.2 identifies the installed `qwen3:30b` digestad815644… as
+`general.finetune=Thinking`, version2507. Its template unconditionally opens a thinking block.
+The [publisher tag inventory](https://ollama.com/library/qwen3/tags) maps that digest to
+`30b-a3b-thinking-2507-q4_K_M`; the instruction variant has digest19e422b0…. Thus the earlier
+30B non-thinking probes are incompatible-mode failures, **not** a fair comparison of instruction
+models. An explicit non-thinking prefix also failed and is retained; no template override was
+installed. The candidate now rejects that unsupported mode. Genuine reasoning mode exceeded token
+budgets or took81–94seconds in retained probes and did not qualify.
+
+The previously admitted Qwen2.5-14B instruction model was reused from its existing external store;
+all six stored blobs were hash-verified again. It generated focused prose, but subsequent evidence
+selection/review still failed. This exposed another repair defect: fixing prose could not remove
+wrong facts because the required unit schema kept them. Review feedback now returns to evidence
+selection before the one rewrite attempt, and completeness review receives the complete retrieved
+passages. The extra context-selection call was removed after it repeatedly added unrelated facts.
+
+Under Quinton's current autonomous repair request, one correctly named instruction variant is being
+prepared: `qwen3:30b-a3b-instruct-2507-q4_K_M`, registry manifest SHA256
+`19e422b0231392335cfc49cfd172de7034bb1aeabb08aa307cce745c60b272fe`,18,556,699,186 declared bytes.
+Separate external scratch store `answer-instruct-20261022/ollama`,24GiB cap,20minute download cap,
+unchanged104GiB internal/408GiB external free-space floors; isolated loopback11436, cloud disabled,
+one loaded model/request. Existing stores/models are preserved. This is inference-only qualification,
+not training or an open model sweep. Hash and capability verification precede use; no promotion yet.
+
+First pull stopped after0.031seconds at the storage guard, before reported model-byte transfer.
+The generated ignored UI build (197files,215,150,663bytes) was copied to the new external scratch area,
+verified file-by-file by SHA256, then removed internally; Vite5180 serves source, not that directory.
+Receipt and member hashes are retained. A separately recorded second pull follows the resolved
+admission, without changing the floor or overwriting the failure. Experimental servers/models were
+stopped/unloaded before the download. Receipts: `outputs/prowl/answer-instruct-20261022/`.
+
+Public retrieval-suite check:1740passed,5skipped,2previously recorded failures (repository-wide
+absolute-path scan and stale12-schema count versus23 present). Focused feedback-reselection checks
+pass. No private preparation/evaluation rerun or label change follows from these engineering checks.
+
+The second pull stopped at190.369seconds when internal free space again crossed the unchanged
+reserve; approximately4.58GB transferred at its last progress sample. Its partial files and separate
+failure receipt remain, and the isolated download server was stopped. No new model has been loaded.
+Quinton has been asked to choose between freeing space himself and moving the existing unused
+thinking-model weights to the external drive with verified content and preserved Ollama name. Read-only
+inspection found one18,556,685,856byte internal blob referenced only by `qwen3/30b`; nothing in that
+shared store has been moved or deleted. Other apps were not stopped. The live service was not promoted.
+
+Latest focused checks:59backend and57UI tests pass. An offline boundary-only check of the five
+clinical/privacy/fabrication regression requests produced the intended explanations; this is not a
+30-case end-to-end pass. Original reviewed-draft and transcription hashes remain unchanged. The new
+regression artifacts remain in the working encrypted image; a fresh independent backup is pending
+closeout, and existing frozen-input/result backups remain preserved.
