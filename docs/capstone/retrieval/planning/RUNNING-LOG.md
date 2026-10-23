@@ -2244,3 +2244,5 @@ bring methods and limitations with retrieved results. Exposed-set span-delivery 
 2026-10-22: Actual API boundary regression10/10 accepted on manual review and UI contract validation; gap response times6.74–14.59s. Original3input hashes unchanged. Supported answers remain unqualified; dense14B cold-start timeout preserved before separate warm comparison.
 
 2026-10-22: Dense14B warm, focused-section and source-preserving composition comparisons retained; none meets supported-answer completeness/fidelity. One wrong abbreviation expansion reinforces that exact citations are not semantic validation. No new composition mode promoted. Boundary improvement10/10 remains distinct from20supported cases still open; original independent0/20 unchanged. Preparing new encrypted regression backup and releasing experimental model resources.
+
+2026-10-22 preservation checkpoint: new encrypted regression-image backup hash verified after clean ejection; older backups unchanged. Experimental8019/11435/11436 stopped, normal8016checked/5180HTTP200. No candidate promoted; all-cases completion remains open.

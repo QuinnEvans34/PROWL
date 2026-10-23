@@ -297,3 +297,12 @@ regression10/10adequate explanations; supported-answer completion still open. Th
 measures. Original independent checkpoint remains0/20complete. Live UI stays on source-literature-
 answer-v4. Experimental replacements must not be promoted based on model self-review or source
 availability alone.81focused backend checks and10actual response/UI-envelope checks pass.
+
+Preservation checkpoint at03:17UTC October23 (October22local): the evaluation image ejected
+cleanly, encryption was confirmed, and a new independent134,340,096byte encrypted image copy was
+verified by rereading SHA256c3ac0972118146ff6b0a234bde0ee125d9a1210d1ad7d07327f8c603a1cddbfd.
+Older backups were retained; original input identities were checked before ejection. Local receipt:
+outputs/prowl/answer-instruct-20261022/regression-backup.json. The private image remains ejected.
+Owned candidate8019 and experimental Ollama11435/11436 are stopped; the normal8016backend reports
+checked and5180/research returnsHTTP200. The verified thinking-model symlink remains correct.
+The all-cases request is not complete: supported-answer composition still needs a qualified repair.
