@@ -275,3 +275,25 @@ The already-installed dense14B comparison initially reached its120second deadlin
 cold model load plus partial prompt processing; zero answer tokens and cancellation are recorded.
 This is a startup failure, not an answer-quality score. A separate warm comparison preserves the
 same source payload and required-role prompt; no download or model change is involved.
+
+### Later composition comparisons: still not qualified
+
+The warm dense14B required-role comparison completed three drafts in16.48,30.70and35.70seconds.
+It still omitted required qualifications, included an unrelated condition's confirming test, and
+repeated source text. Restricting it to selected canonical sections and removing bibliographic
+markers completed in10.29,26.59and12.38seconds but did not resolve completeness. The corresponding
+instruction-model required-role probe also added unsupported claims. These modes are private
+diagnostics only; no new production mode or prepared answer catalog was added.
+
+Question-independent rewriting of complete selected source paragraphs retained more qualifications
+(22.16,40.85and26.00seconds), but introduced a wrong abbreviation expansion and retained duplicates
+and unrelated context. It is not a qualified answer pipeline. A future source-preserving approach
+would still need appropriate evidence selection, faithful terminology and coherent assembly; these
+results do not justify claiming completion. No supported-case completeness improvement is accepted
+from these probes. All original evaluation outputs and expectations remain unchanged.
+
+Current engineering checkpoint: source coverage diagnostic74/74overlapping concepts; live boundary
+regression10/10adequate explanations; supported-answer completion still open. These are different
+measures. Original independent checkpoint remains0/20complete. Live UI stays on source-literature-
+answer-v4. Experimental replacements must not be promoted based on model self-review or source
+availability alone.81focused backend checks and10actual response/UI-envelope checks pass.
