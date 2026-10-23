@@ -56,3 +56,58 @@ A note-navigation guard check blocked the in-app browser's automation; its nativ
 not available through the browser dialog API, and native Codex control is prohibited by the tool.
 Quinton was asked to dismiss a visible dialog while backend work continues. This interaction is
 not reported as passed. Browser screenshots show the successful synthetic save, not human acceptance.
+
+## Final exposed regression result
+
+All 30 requests completed once against the optional candidate on port 8019 with pinned `qwen3:8b`.
+Only questions went into the answer path. Expected concepts and labels were used afterward for
+engineering review. The original independent evaluation remains unchanged.
+
+| Dimension | Observed result |
+| --- | --- |
+| Supported answers | **0/20 fully qualified**: 19 incorrect evidence-gap responses; one cited answer incomplete. |
+| Factual support | The 19 absence claims contradict available relevant evidence. The one composed answer's literal claims match its citation, but omit qualifications. |
+| Completeness | Case 4 omits the pancreatic-enteric fistula alternative and MRI qualification. Its model reviewer nevertheless marked completeness passed. |
+| Boundary behavior | **10/10 appropriate**: five hard boundaries and five actual corpus gaps. Separate from supported-answer accuracy. |
+| Retrieval | Text overlapping all **74/74 required concepts** was delivered. Individual labeled-span overlap was **96/103**; this does not prove full context delivery or answer correctness. |
+| Citation integrity | All 1,250 delivered passage records match the frozen canonical records; the sole composed claim has an exact citation. |
+| Citation coverage | Cases 10, 11, 19 and 20 put factual content in uncited limitation text. Exact citation validation does not catch this. |
+| Readability | Most responses are readable refusals, but case 11 cuts off mid-word and includes tangential triglyceride material. Fluent text is not an answer-quality pass. |
+| Latency | The 25 model-path responses took 15.56–37.34 seconds, median 21.48 seconds, by server timing. Five hard boundaries bypassed generation. No transport failure in this run. |
+| UI contract | 30/30 responses pass the actual client envelope validator; semantic failures still remain. |
+
+The three-case paragraph approach clearly failed and was stopped. The full existing unit-path candidate
+also fails qualification and **was not promoted**. This is not a causal comparison against the earlier
+30B run because the model changed. More papers, extra review passes, or another model download are
+not justified by this result alone. The next composition experiment should isolate answerability on
+a small relevant source context and explicitly check omitted exceptions; it should not restart broad
+infrastructure work. No claim of a reliable general expert, fresh independent acceptance, or reliable
+patient measurements follows.
+
+Private retained evidence includes all request/response pairs, the mechanical summary, canonical
+citation audit and per-case manual review under `regression-evidence-23-terminology-8b`.
+
+## Workflow closeout and service restoration
+
+After Quinton acknowledged the dialog request, browser automation recovered. Refreshing Studies
+removed the cached synthetic listing and showed no normal recorded reviews. The real demonstration
+case is open again with its CT, both contour controls, explicit withheld-measurement warning and empty
+review history. The native unsaved-note cancel path remains **not verified in the actual browser**;
+the automated navigation tests pass, and the successful save/restart/reopen is independently verified.
+
+The relevant UI suites pass **30/30** using the bundled Node runtime. An initial system-Node invocation
+failed before workers started; the subsequent run exposed an ambiguous test assertion because the
+boundary warning now appears both before and after a question. The test now checks both locations
+explicitly. No measurement behavior or production UI code was changed to make it pass. Backend
+composition checks pass 85/85; review/restart checks pass 17/17. These are focused suites, not a fresh
+full-repository test claim.
+
+Experimental 8019 and 11436 are stopped. The normal UI returns HTTP 200, literature 8016 reports its
+database checked with the unchanged source-literature-answer-v4 policy, review 8018 lists zero normal
+packages, prediction 8017 remains listening, and the main Ollama service remains available. The health
+endpoint does not validate generated answer quality. No training or scientific inference was launched.
+
+The three original input hashes are unchanged. The private image was cleanly ejected and its encryption
+confirmed. A new independent encrypted backup was copied exclusively and both source and copy rehashed:
+134,340,096 bytes, SHA-256 `f7701e790f714eb19d4c94063f704f1b0f5e290ebc9f421ce066e2655c46e7b4`.
+Older backups remain intact. The local receipt records the new backup location; the image remains ejected.
