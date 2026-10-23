@@ -202,3 +202,21 @@ supported cases, versus69/74and16/20before. This permissive span-delivery result
 concept coverage or correct answers.72focused backend checks pass. The instruction/units canary
 returned one supported but incomplete answer and rejected two; full answer qualification remains
 open. The next retained regression uses the complete source path, with independent dimension review.
+
+### Evidence-selection audit and wording scope (qualification pending)
+
+The full regression of e9872a5 is retained separately as `regression-evidence-20-linked-units`.
+Early published answers remain incomplete against unchanged labels; rejected drafts show both real
+errors and false reviewer complaints. One draft guessed an incorrect anatomical expansion of an
+abbreviation. Source availability alone has therefore not completed the task.
+
+The next candidate adds a bounded pre-composition coverage audit over the full retrieved sentence
+list. It can select only canonical IDs to add missing anatomical/study context, exceptions, confirming
+methods or source-stated implications, and remove irrelevant IDs. The writer must preserve the
+resulting evidence units. Wording review then receives complete canonical paragraphs for those
+selected units; gaps still receive the full retrieved evidence. This separates source coverage from
+wording support instead of asking one broad critique to do both. No evaluation label is an input.
+Numbers must stay as digits, and source abbreviations must remain verbatim to prevent an unchecked
+expansion from silently replacing them. These checks do not prove semantic equivalence.75focused
+backend tests pass, including a missing-context addition and rejection of unknown sentence IDs.
+The new flow has not yet passed live quality checks; it is not promoted.

@@ -3,7 +3,7 @@ from copy import deepcopy
 import json
 from types import SimpleNamespace
 import pytest
-from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT
+from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT, COVERAGE
 from tests.retrieval.test_direct_ingestion import bundle
 from tests.retrieval.test_literature_adapter import setup
 
@@ -37,6 +37,8 @@ def engine(setup,bundle):
     def transport(path,payload=None,**kwargs):
         if path=='tags':return {'models':[dict(name=DENSE_MODEL,digest=DENSE_MODEL_SHA)]}
         calls.append(payload)
+        if payload['messages'][0]['content']==COVERAGE:
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(additional_facts=[],irrelevant_facts=[]))))
         if payload['messages'][0]['content']==EXTRACT:
             return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(answerable=True,missing='',facts=[2,3]))))
         return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(responses.pop(0))))
@@ -53,25 +55,25 @@ def test_canonical_source_binding_and_no_catalog(engine):
     assert result['generation']=='completed'
     claim=result['answer']['claims'][0]
     assert claim['citations'][0]['quote']==result['evidence'][1]['record']['text']
-    assert len(calls)==4 and not s.lock.locked()
+    assert len(calls)==5 and not s.lock.locked()
 
 
 def test_all_feedback_reaches_one_bounded_repair(engine):
     s,r,calls,responses,plan,draft,passed=engine
     feedback={k:dict(passed=False,issues=[v]) for k,v in dict(support='Citation does not support the asserted outcome.',completeness='Omitted method.',readability='Unclear referent.').items()}
     responses.extend([plan,draft,feedback,draft,passed]);assert s.answer(r)['generation']=='completed'
-    repair=json.loads(calls[5]['messages'][1]['content'])
+    repair=json.loads(calls[7]['messages'][1]['content'])
     assert repair['review_feedback']==feedback and repair['previous_draft']==draft
-    assert len(calls)==7
-    assert 'review_feedback' not in json.loads(calls[6]['messages'][1]['content'])
-    assert 'previous_draft' not in json.loads(calls[6]['messages'][1]['content'])
+    assert len(calls)==9
+    assert 'review_feedback' not in json.loads(calls[8]['messages'][1]['content'])
+    assert 'previous_draft' not in json.loads(calls[8]['messages'][1]['content'])
 
 
 def test_repeated_rejection_does_not_publish_draft(engine):
     s,r,calls,responses,plan,draft,passed=engine
     fail={**passed,'support':dict(passed=False,issues=['Unsupported assertion.'])}
     responses.extend([plan,draft,fail,draft,fail]);result=s.answer(r)
-    assert result['answer'] is None and result['generation']=='unavailable' and len(calls)==7
+    assert result['answer'] is None and result['generation']=='unavailable' and len(calls)==9
 
 
 def test_unknown_citation_cannot_be_bound(engine):
@@ -185,7 +187,9 @@ def test_review_can_change_evidence_selection_before_rewriting(engine):
     result=s.answer(r)
     assert result['generation']=='completed'
     assert result['answer']['claims'][0]['text']==draft['2']
-    assert len(json.loads(calls[-1]['messages'][1]['content'])['sources'])==len(result['evidence'])
+    coverage=json.loads(next(c for c in reversed(calls) if c['messages'][0]['content']==COVERAGE)['messages'][1]['content'])
+    assert {x['source'] for x in coverage['sentences']}=={e['rank'] for e in result['evidence']}
+    assert len(json.loads(calls[-1]['messages'][1]['content'])['sources'])==1
 
 
 def test_instruction_variant_rejects_unsupported_thinking_mode(engine,bundle):
@@ -325,3 +329,40 @@ def test_context_links_do_not_recursively_activate_other_links(bundle):
     idx=EvidenceIndex([bundle],records,links)
     group=next(g for g in idx.groups if 'Abstract' in g['heading'])
     assert [r['passage']['passage_id'] for r in idx.with_context(group)]==ids[:2]
+
+
+def test_coverage_audit_adds_source_context_before_required_unit_composition(engine):
+    s,r,calls,responses,plan,draft,passed=engine;original=s.transport
+    def audited(path,payload=None,**kw):
+        if path=='chat' and payload['messages'][0]['content']==COVERAGE:
+            calls.append(payload)
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(
+                dict(additional_facts=[1],irrelevant_facts=[]))))
+        return original(path,payload,**kw)
+    s.transport=audited;draft['1']='Research methods are described here.'
+    responses.extend([plan,draft,passed]);result=s.answer(r)
+    assert result['generation']=='completed'
+    assert 'Research methods are described here.' in result['answer']['claims'][0]['text']
+    writer=next(c for c in calls if 'facts' in json.loads(c['messages'][1]['content']) and c['messages'][0]['content']!=EXTRACT)
+    assert set(writer['format']['required'])=={'1','2','3'}
+
+
+def test_coverage_audit_cannot_introduce_unknown_source_sentence(engine):
+    s,r,calls,responses,plan,*_=engine;original=s.transport
+    def invalid(path,payload=None,**kw):
+        if path=='chat' and payload['messages'][0]['content']==COVERAGE:
+            calls.append(payload)
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(
+                dict(additional_facts=[99999],irrelevant_facts=[]))))
+        return original(path,payload,**kw)
+    s.transport=invalid;responses.append(plan)
+    result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None
+
+
+def test_rewrite_cannot_replace_source_abbreviation_with_an_unchecked_expansion(engine):
+    s,r,calls,responses,plan,draft,passed=engine
+    draft['2']='The research uses a catheter technique.'
+    responses.extend([plan,draft,deepcopy(passed),draft,deepcopy(passed)])
+    result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None
