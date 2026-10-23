@@ -1,5 +1,595 @@
 # AGENTS.md — Agent Context
 
+> **October23 CPU error review/comparison/checklist COMPLETE; no training change:**
+> User approved report-only error analysis, future KD comparison tooling and
+> teacher-pilot checklist. Read PANTS-DISTILLATION-ERROR-REVIEW-20261023.md and
+> PANTS-DISTILLATION-REVIEW-PROTOCOL-20261023.md (new additive docs; oldspecintact).
+> Evidence E:/PROWL/readiness/distillation-error-review-20261023-a01/analysis-02:
+>18native JSON snapshots,20inputpins,analysis.json SHA36d1d1ab572c58ba3f23b52c5e2c7dccc1c966a116a94e99b39e78bfbd2ec24c.
+> ScopeFIXEDthrough10k;12kstillvalidatingat19:40UTC. Current10kDice.241350 vs
+> parent10k.164295,pairedexploratorydelta+.077055 CI[.035588,.120215],28better/
+>4worse/4same. NOinterimH0/practicalverdict; full24kselectionstillrequired.
+> Small5casesDice.0661/precision.0372/all5>=2xtargetvolume;large7alloverlapbut
+> allmiss>halfannotation/recall.2068. AggregatevoxelerrorsNOTspatialdiagnoses.
+> New native_error_review_v1 + compare_native_distillation.py supports matched
+> full12nativechecks,recipe/receipt/cohortchecks,pairedCI/guards,selected+terminal.
+> Proposed<1mLcomponentguardrequiresactualboundsidecars;currentpatient-sizebins
+> areNOTsubstitute. Missingguardblockspracticalacceptance; nonegeneratednow.
+> TemplateUNBOUND,12pilotreviewrecordsPENDING; same12cases/order,noimagesreviewed.
+> TeacherpilotstillNOTstarted; checklistnotes missingcomponent/confidencesummaries
+> requirelaterboundedadditiveaudit ofpilotoutputs,not edits tofrozenproducer.
+>35CPUtests PASS inclsyntheticfullCLI/mockMLflow,7.954s/70950912B/reaped;
+> analysis1.390s/54702080B/reaped. Firstanalysisfailurelegacytop/rowscopes retained;
+> exactlegacyadapteronly, cross-scopecomparisonstillrejected. NoCT/mask/testreads,
+> GPU/inference/MLflowwrites/dashboard/schedules/launch. All3275current+1835teacher
+> prep pins and20reportinput+4finaltestpins match19:40UTC; preservebotholdreceipts.
+
+> **October23 distillation CPU engineering PREPARED; real pilot/GPU pending:**
+> User authorizes autonomous setup and explicitly accepts teacher-assisted/
+> exploratory scope (teacher development membership unknown). NOT scientific
+> launch authority. Current varied-focus run unchanged, still10k native validation;
+> same60980/51832 present. Do not compete for its GPU or enable AI schedules.
+> Acquired MedFormerPanTS revision b854c8248af1e21f729dc2dfd489bd400472cf65,
+> source checkpoint ff0f0868...; strict26-channel/lesion19/sigmoid resolved.
+> EMA tensor SHA10853b9d568240294b499cd424bd5fd8baa93c6032a89cbfda9fff6a4ff996d3.
+> Restricted inert-record weights_only conversion; initial legacy inspection
+> failure preserved, NO unsafe pickle fallback. External source unmodified/local
+> under E:/PROWL/teachers/medformer-pants-b854c824; isolatedeinops,livevenvunchanged.
+> ModelcardMIT/sourceCCBYNCND4 distinct; reviewbeforepublicredistribution.
+> Actualteacher2syntheticCPUforwards exact/frozen,14.547s/921264128B/reaped.
+> New nativeprobabilitycache/worldgeometry/KDSession/restore/MLflowadapter/pilot
+> helper additive only. Final124CPUtests pass/32.891s/883683328B/reaped; student
+> optimizer tests use tiny synthetic network,NOT actualSegResNetCUDAqualification.
+> tests-02 fixturestride failure preserved; finalverification-01 sourcepinsmatch.
+> Preparation E:/PROWL/readiness/distillation-preparation-20261023-a01/preparation.json
+> SHA181ec8a676d1a27e08be43382863dc5fd88c2a7bdc2dd6b8506cc62022bc5395;
+> all1835preparedpins and3275currentpins match at16:40UTC. Preservepins; no silent
+> source/doc edits, repinning or retry. This is NOTready.json orlaunchreceipt.
+> Read PANTS-TEACHER-DISTILLATION-20261023.md for exactlimits/remaininggates.
+> prepare_distillation.py --prepare DONE. --pilot NOTstarted:12existingtraincases,
+>837metadata-estimated128cube/64stridefullCTtiles,90min/12GiBRSS/6GiBGPU/2GiBpilotcache.
+> Teacherpolicycandidate singlepass/noTTA differsupstreamdefaulttwo-pass; notyet
+> realqualityqualified. Pilot requiresnormalparent24k/final70/backups/reaped/
+> MLflowFINISHED/exclusiveGPUlock; no automaticlaunch orretry. Actuallyreview12PNGs.
+> Rawuint16targets30.36GB+existingcache22.96GB exceeds32GiB; compressionunmeasured,
+> fullcacheNOTauthorized. NoCT/test/duplicateauditreads,noGPU,newMLflowRUNNING,
+> dashboardchange orwatcher. Afterpilot: quality/storage/time review,complete
+> targets,actualCUDAzero-KD/positiveKD+independentbackup/coldrestore,matchedcontrol/
+> recipefreeze,qualifiedreceipt,explicitlaunch. Priorfoundation-only statushistorical.
+
+> **October23 KD-first preparation authorized; NO successor launch:** User wants
+> knowledge distillation logged/implemented first, then a separate false-positive
+> verifier/ensemble. Read new PANTS-TEACHER-DISTILLATION-20261023.md and
+> PANTS-FALSE-POSITIVE-VERIFIER-20261023.md plus notebook entries. New additive
+> segmenter_distillation_v1 and segmenter_teacher_targets_v1 are synthetic-only
+> foundations, NOT a teacher loader/KD Session/scientific launcher. Exactteacher,
+> 42vs26classmapping/EMA/protectedmembership/geometry/cachebudget unresolved;
+> documentedlocalcheckpointpath absent, no download/inference/CTaudit/testreads.
+> Oldteacher-reference-only superseded for plans/code ONLY; keep teacher-assisted
+> evidence label. Resolvecontrol aftercurrentreview; no unmatchedrecord comparator.
+> Current variedfocus run/pins intact; no source edits to3275receiptpins, noGPU
+> diagnostics/merge/retry/resume. New synthetic CPU test evidence under
+> E:/PROWL/readiness/distillation-foundation-20261023-a01:83pass/80.015s/841965568B,
+> exit0/reaped,sourcepinsunchanged; CPUonly,NOTrealteacher/trainingqualification.
+> Finalread-onlycheck:all3275liveproducinghashesmatch,receipt1269337a...unchanged;
+> existingjournaladvanced9733->9861updates duringpreparation. No trainerchange.
+> UserdeclinesAIpolling duecredituse: heartbeat remains PAUSED. Local deterministic
+> one-shot qualified-receipt handoff documented only, NOTinstalled/armed; cannot
+> promisechatwakeup. No newMLflowRUNNING, schedule, verifiertraining orautomaticnext.
+
+> **October22 20:46MDT varied-focus launch VERIFIED:** Same owned69209 remains live,
+> supervisor60980/worker51832 (venvwrappers62292/47468). Actual journal/API advanced
+> 10->17->25->36updates;statusAPI38/120.984s/loss1.1446966. MLflow
+> a84c0a6ae0cb424ca182350425adc7aa RUNNING, storedtrain/loss at1and25 verified,
+> step25loss1.1886061429977417;no trackingwarning. InitialE:/C:backupmatches SHA256
+> 342691bd730908646ee8874f0530203e5e1cf96ec9decfaa069fd0f097072a17.
+> Existingphoneconfigs ONLY switched to thisjournal;server18840/28440 unchanged,
+> privateURLauthenticatedbrowserverified live25stepcard and retainedsixhistoricalruns.
+> Totalhoursjournalderived:751607.078historicalseconds+115.484new=751722.562,
+> arithmeticcomplete/verified;engineeringexcluded. FirstDiceafter2k+full70native.
+> Preserve3275receiptpins/oneownedrun;NOmerge/sourceedit/retry/resume/newexperiment.
+> Previous pendingverification entries now historical. Heartbeat remains PAUSED.
+
+> **October22 qualified varied-focus scientific dispatch LIVE / verification pending:**
+> Owned exec69209 runs train_varied_qualified.py --launch-sha256 with frozen receipt
+> 1269337a16c04fc0b9a62d142945afd649011886c004d55b0a41af96947ce49e at
+> E:/PROWL/readiness/varied-deterministic-20261022-a02/ready.json;3275 producing pins.
+> DO NOT EDIT pins, duplicate/retry/resume, merge or start another experiment.
+> Allfour amended stages PASS/reaped:33+33 controlled updates EXACT full state;
+> deterministiccold exact, actualordinaryCUDAcold maxdiff1.862645149230957e-9.
+> Original failures preserved; no tolerancechange, dataaudit/cache/pilotrepeat.
+> Scientific model uses originalCUDA/threeoriginalUpsample, NOTtestonlyadapter.
+> NewMLflow a84c0a6ae0cb424ca182350425adc7aa created. Actualupdates/backup/phone
+> verification still pending at this entry. Journal E:/PROWL/artifacts/
+> pants_varied_focus_24k_20261022/execution/history.jsonl is authoritative.
+> Human title Varied lesion-focused views without losing coverage;onefresh24k.
+> KeepAC/app/D:/E:connected;96hwall/12GiBRSS/100GiBfloors/existingcachebackupcaps.
+> Heartbeat remains PAUSED. Follow same69209, never redispatch an existing stage.
+
+> **October22 deterministic qualification a02 LIVE / launch handoff prepared:**
+> Owned12249 runs qualify_varied_deterministic_v2.py --stage reference (latest23/33).
+> a01failedbeforeCT/update onwrapperalign_cornersTrue;actualMONAIusesFalse;16.437s
+> failurepreserved/reaped andchargedto a02reference1200sbudget. Newv2adapter/runner
+> frozen by a02request,8tests passincludingactualSegResNetgeometry/paramidentity.
+> DO NOTEDIT requestpinsor duplicate. Nextsamev2runner producer,cold,production-cold.
+> Newadditive scripts/train_varied_qualified.py --prepare DONE at a02,9launchtests
+> pass;cfgexactprior,oneexistingintendedscientificoutput,realmodelrejectsadapter.
+> AfterallchecksPASS: --freeze,exacthash --launch-sha256 HASH --explicit-user-launch.
+> Userexplicitlyauthorizesautonomousone-runlaunch. Alloldfailures/pinsremainintact.
+> PhoneexistingprivateURLreadable/authenticatedinIABtab1/browser2,208.78h/sixruns;
+> liveconfigsnotchangedyet. Usea02dashboard-handoff afterlaunch;retainallhistory.
+> No newnetworksettings/schedule. FinalverificationMLflowstoredloss/backups/steps/API.
+
+> **October22 autonomous qualification THEN ONE SCIENTIFIC LAUNCH AUTHORIZED:**
+> Userasks workautonomously/gettrainingrunningbeforebed. This supersedes prior
+> setup-only/no-launch FORtheoneagreedvariedfocus24k only. No schedules/retries/new
+> sciencefactors. Deterministicqualificationrequest frozen at
+> E:/PROWL/readiness/varied-deterministic-20261022-a01/request.json; preserveALLpins.
+> TrilinearCUDAbackward hasno strictdeterministic implementation(PyTorch2.11).
+> Qualification-only adapter uses SAMECUDAforward/nativeCPUadjoint inBOTHarms,
+> strictdeterministicalgorithms/cuDNN/CUBLAS;scientificarchitecture/numericsUNCHANGED.
+> Sevenadaptertests pass,includingexactCPUforward/backward/gradcheck/stateidentity.
+> qualify_varied_deterministic.py stages reference33,producer33,cold1,production-cold1;
+> latterreplayssavednormalCUDAcheckpointwithoutadapter. Each1200s/12GiB; require
+> oldrtol1.3e-6/atol1e-5,exactinputs,cleanreaping; no tolerancewaiver/oldfailureoverwrite.
+> Reuseold12pilot/1333cache/2nativecaseproofs. NativevalidationNOTrepeatedinpair.
+> Reference stagejustdispatched;inspectsameownedprocess/filesbeforeeverlaunchingnext.
+> Afterallpass:newadditive launcher/receipt,actualMLflowrun,phoneconfigswitch,initial
+> backupverification/advancingsteps/storedloss. Oldfastlauncher gates remainhistorical.
+
+> **October22 original repeatability control COMPLETE / baseline drift demonstrated:**
+> Explicitlyapproved ONE33update control finished0/reaped324.281s/2539991040BpeakRSS.
+> Owned12588 finished; no trainingworkers active. Samefrozen original_worker,onlyOUT
+> redirected to region-throughput-20261022-a01/original-repeatability-a01. Sevennew
+> wrappertests pass. All33inputs/order/LR/identity/savedRNG/counters EXACT versusoldref.
+> Original-v-original fails SAMErtol1.3e-6/atol1e-5:5889/14102876floatelements,
+> maxabs.00015291665,modelL2.00300545;oldoriginal-v-fast2561/max.00012248009/
+> modelL2.00204479. Lossfirstdiff2/max.00009691715. Newref-v-fast4966/max.00015226379.
+> These are descriptive comparisons from one addedcontrol, NOT a calibrated noise
+> distribution or pass. Livebackendflagsdeterministicalgorithmsfalse/cuDNNdeterministic
+> false/benchmarkfalse;baseline nonrepeatability observed,exactkernelcausenotproven.
+> Originalfailedqualification/tolerances/pinsallpreserved. No cold/freeze/scientific
+> launch/UI/MLflow/schedulechanges; heartbeatPAUSED. Nextrecommended USERAPPROVAL:
+> separatelyversioned matched deterministic-GPU equivalence+independentcold check,
+> sameinput/recipe/originaltolerance, no CTaudit/cache/pilotrepeat. Notlaunched.
+
+> **October22 original-loader repeatability control AUTHORIZED / LIVE:** User says
+> "Yes, run it" to ONE33update unchanged-original control,600s/12GiB. Ownedexec12588
+> runs control_original_repeatability.py --run; new evidence subdir
+> region-throughput-20261022-a01/original-repeatability-a01. Calls frozen original_worker
+> with outputdestination changed ONLY; same12traincases/config/no native evaluation.
+> Seven control-wrapper tests pass. Request pins newrunner/tests and existingevidence.
+> Do not edit/duplicate/retry. Inspect sameprocess/result/resources; require reaping.
+> No coldstage/freeze/scientificlaunch authorized by this approval; numericalfailure
+> remains preserved and heartbeatPAUSED. No audit/cache/pilot repeat orUIchanges.
+
+> **October22 fast-input CUDA qualification BLOCKED / no scientific launch:**
+> Reference33updates PASS/reaped325.125s; candidate33updates+2nativecases complete,
+> allbatchhashes/traces/order/LR EXACT, but finalstate closeness gate FAILED.
+> Frozenrtol1.3e-6/atol1e-5; CPU-onlysaved-evidencereview finds2561/14102876floating
+> elementsoutsidebound,maxabs.0001224801,lossfirstdiffstep2/max.0000525713.
+> Integer/scalar/RNG/exposure/focusstatesexact. Candidate424.296s/2336419840BpeakRSS,
+> exit1/reaped; no workers active exceptexistingphonemonitor. Owned30500finished.
+> Descriptiveupdates8.3707s->3.0085s(2.7823x),NOTaqualificationpass. All1333cache
+> members/12pilotimages/121+19tests remainvalid; doNOTrepeatcache/audit/pilot.
+> Evidencefailure-review.json andcuda-producer.log underregion-throughput-20261022-a01.
+> No producer.json/ready.json/coldstage/scientificoutput/newMLflowRUNNING. Preserve
+> ALLold503/515andnewrequestpins/failureartifacts; no tolerancechange orautomaticretry.
+> Proposednext: separatelyapproved33update original-loader repeatabilitycontrol,
+> same12traincases/schedule,600s/12GiB,notlaunched. TestsordinaryGPUvariationagainst
+> existingoriginalreference beforeblamingprefetch; causeNOTproven. Awaituserdecision.
+> HeartbeatPAUSED;livephoneconfigsunchanged. EarlierLIVEentrybelow nowhistorical.
+
+> **October22 fast-input cache COMPLETE / paired CUDA qualification LIVE:** All1333
+> training targets converted (12reused/1321new),zeroCTvoxelreads/testreads/exclusions;
+> 30,781,377cachebytes,2862.906supervisedseconds,4542889984BpeakownedRSS,reaped.
+> Newcuda-request.json freezes the33update original/candidate schedule plus1cold,
+> allnewproducingcode/spec/cachemanifest. DO NOT EDIT orduplicate/retry these stages.
+> Ownedexec22168 runs qualify_fast_varied.py --stage reference. After success/reaped,
+> inspectthen --stage producer and --stage cold once; stoponfailedquality/speedgate.
+> EvidenceE:/PROWL/readiness/region-throughput-20261022-a01. ScientifictrainingNOT
+> launched,heartbeatPAUSED,livephoneconfigunchanged. Preserve503/515oldpins too.
+> New human handoff PANTS-VARIED-FOCUS-FAST-24K-20261022.md; finalreceiptpending.
+
+> **October22 equivalent-fast input PILOT PASS / cache conversion LIVE:** Setup-only
+> approval, NOT scientific training. New target-cache/prefetch modules ADDITIVE;
+> preserve both503/515old pins AND pilot/cache-request producing pins. Owned exec
+>21958 runs build_fast_varied_cache.py (supervisor50324,worker22440,pool22704/50104).
+> Do not duplicate/retry/modify pinned modules while active. 12pilot members reused,
+>1321remaining TRAIN label conversions, zeroCTvoxelreads; existing1403coverageproof
+> reused. Same12GiBcombinedRSS/32GiBcombinedcache/100GiBC-Efloors/7200s/AC.
+> EvidenceE:/PROWL/readiness/region-throughput-20261022-a01/cache-complete/.
+> All12realpilots EXACTregion/window/target/augmentation/context; all12PNGs actually
+> reviewed,visual-review.jsonsaved. Pilot276.406s/1942638592B/reaped.121regressions
+> +19monitor tests passed. Full24klookahead permutation/counters/RNG/mixexact.
+> Parentjournalbackupclosedwithpreservedprefix/hashmatch. Profileroriginalv1failed
+> CUDAguard;newv2failedreportpathbeforeCT;userexplicitlyapprovedcorrectedv3,which
+> passed6cases/53.047s/reaped. Originalattemptsretained. Newlaunchconfiguration+
+> parentbinding+dashboardhandoffprepared;liveUIunchanged,APIOK,scientifichoursunchanged.
+> Aftercachecomplete/reaped: qualify_fast_varied.py --prepare, then --stage reference,
+> --stage producer,--stage cold (eachinspectfirst/noauto-retry).32–40pairednonpromotable
+> updates+1cold;actualexecutor2nativecases;speedandinput/stategates. Then finalfreeze
+> via train_fast_varied_region.py --freeze. NewscientificspecFASTjsoninheritsoriginal
+> unchangedscientificdesign. No ready.json/scientific output/newMLflowRUNNING yet.
+> Freeze/launchcode not yet qualified; scheduledheartbeat remainsPAUSED.
+
+> **October22 throughput SETUP AUTHORIZED, not scientific launch:** User approves
+> faster equivalent input preparation then varied-focus qualification before training.
+> Preserve503/515pins; additive versions/newreceipt only. Schedule remainsPAUSED.
+> PlanPANTS-INPUT-THROUGHPUT-20261022.md; newCPUprofilev2 authorized explicitly,
+> CUDA_VISIBLE_DEVICES=-1 verified unavailable; oldfailedprofile retained. No
+> duplicateaudit/testreads/automaticretry/budgetexpansion. New evidence root
+> E:/PROWL/readiness/region-throughput-20261022-a01. Inspectprocess/files before
+> eachstage. No next scientific launch until readiness review/user direction.
+
+> **October22 completed-parent REVIEW / performance proposal, NO successor launch:**
+> Parent24k complete/12native70/workersreaped/MLflowFINISHED;961loss points verified.
+> Selected22k.356714,terminal24k.354326. Vsaugmentedselected18k.423761:
+> delta-.067047CI[-.124709,-.014553];H0failtoreject,practicalREJECT(alarm/pancreas/
+> emptyvoxelguardsfail). Coveragequalificationnotinvalidated.72.117h vs21.281h;
+> outsidevalidation59.411hvs20.776h;nativevalidation12.707hvs.505h. FullsourceCT
+> repeatedload/CPUworkislikelymajoravoidablecost;metadata/journalcorrelation.955672.
+> SixcaseCPUprofileFAILEDguardbeforeCTreads,workersreaped,no retry/resultsinvented.
+> Review evidenceE:/PROWL/readiness/pancreas-region-review-20261022-a01/results.json;
+> reportPANTS-PANCREAS-REGION-RESULTS-20261022.md;3reviewtests pass.503/515pinsmatch,
+> 15checkpoints+nativereportsbackups match;Cjournalexactprefixmissing3finalevents,
+> NOTrepaired. Proposedlosslesscache/prefetch/equivalencepassNOTimplemented/approved;
+> rawtrainingROIcache70.696GiBexceeds32GiBcap. Latestrequestreview/planningonly;
+> no bind-parent/pilot/qualify/freeze/launch performed. HeartbeatremainsPAUSED.
+> Preserveoriginalparentandsuccessorpins;performancecandidate requiresnewversion/
+> evidence/receipt,notin-placepatch. Preparedsamplerstillnextscientificproposal.
+
+> **October22 scheduled handoff PAUSED by user:** User says "stop the scheduled
+> tasks, I will tell you when it is finished." Heartbeat
+> launch-the-qualified-varied-lesion-view-experiment is PAUSED, verified by app.
+> No more scheduled checks or automatic successor launch; wait for the user's
+> next message. Current scientific training is untouched. Keep all parent and
+> successor producing pins/evidence intact. This supersedes the ACTIVE heartbeat
+> wording below; the prepared experiment remains available for later continuation.
+
+> **October22 next sampler experiment AUTHORIZED / PREPARED, NOT LAUNCHED:** User
+> approves "Varied lesion-focused views without losing coverage" after current
+> pancreas-region24k run finishes normally. Current trainer unchanged, still22k
+> native validation during setup. New MD+JSON PANTS-VARIED-FOCUS-24K-20261022 governs;
+> same1333/70, freshSuPreM,24k/originalrecipe/augmentation, same region/inference,
+> only focused views change. H0 selectednativeDice delta<=0 vs completed current
+> parent; practical+.02/CI>0 plus existingguards and new macrovoxelrecall delta>=-.03.
+> Additive varied_region sampler/session/launcher;97focusedtests pass, including
+> old region/physical/augmentation regression. First prefreeze test-fixture typo
+> corrected, not a production failure. Existing503parent pins unchanged.
+> E:/PROWL/readiness/varied-focus-20261022-a01/setup.json has515producingpins,
+> SHA256019e28d74bb8a116338234d36153fc74422de1a46bb87fefea8ba63afdd03306.
+> PRESERVE these new pins too. Preparation replayed unchanged24k permutation only:
+>2518reservedbankupdates+15482componentjitter+6000unchangedcontext; all1333banks
+> retained, zeroCT/duplicateaudit replay. Actual pilot/CUDA qualification pending.
+> After parentcomplete+final70+backups+reaped+MLflowFINISHED: train_varied_region.py
+> --bind-parent; --pilot; actuallyreview12images/writevisual-review; --qualify
+> (5producer+1cold,nonpromotable); --freeze; --launch-sha256 exactreadyhash.
+> No ready.json/scientific output/newMLflowRUNNING yet. No automaticretry/resume.
+> Heartbeat launch-the-qualified-varied-lesion-view-experiment ACTIVE every15min
+> in thischat: waitparent, then qualify/launch ONE authorizedrun and updateexisting
+> dashboard/MLflow. Quietwhileunchanged; pauseafterverifiedlaunch orfailedgate.
+> This explicitone-successor authority supersedes historical no-successor/no-AI-
+> schedule statements ONLY for this handoff. Do not duplicate processes/stages.
+> KeepAC/app/drivesconnected. Same96h/12GiB/100GiBfloors/storagecaps. No testreads.
+
+> **October19 launch handoff15:35MDT verified:** Same owned20285 pipeline/scientific
+>run reached27updates/232.781seconds,loss1.1740663. MLflowRUNNING actualtrain/loss
+>points1and25verified(25loss1.1886060),no trackingwarning. Keep single run/pins intact;
+>no duplicate/retry/resume. Dashboardmonitor32408 remains active/privateURL unchanged.
+
+> **October19 PANCREAS-ASSISTED SCIENTIFIC TRAINING LIVE:** Authorized one fresh
+>24k run dispatched by owned pipeline20285; actual11updates observed15:33MDT.
+>New journal E:/PROWL/artifacts/pants_pancreas_region_24k_20261019/execution/history.jsonl.
+>Receipt readiness/pancreas-region-20261019-a01/ready.json SHA256
+>53b264490b2eb6e50b3e7b9c38e17ccf9e8b244b692b8edbf12fa3434edc1ffe; all503pins match.
+>DO NOT EDIT producing pins, merge, switch, duplicate, retry or resume this run.
+>All1403=1333train/70dev passed completepancreas+lesion coverage/exactwindowroundtrip;
+>7145665lesionvoxels retained; zero exclusions/testreads/CTauditreplay. Audit78672
+>finished/reaped; finalcombinedRSS2537549824B,totalcharged5173.937s. Full24kschedule
+>passed18kfocus/6kcontext, global3:1, everypatientcompletebank. Twelve pilotimages
+>reviewed;62trainingtests pass.4CUDA+1coldpassed:exactrestore/input,nextmaxdiff
+>1.7462298274040222e-8,bothworkersreaped. InitialE/CbackupSHA
+>be17b7d73df2d214b0873580432a3f26e3f213a913ff79a3fd51bda0f3e2a3d8 matches.
+>MLflow1edf56ad4b7b48a5a5baa0e729e46a5c RUNNING,train/loss stored/no warning.
+>Monitor32408:6thcardlive,21tests pass,privateURLphonewidth+metricspanelchecked;
+>viewportreset,actualsteps4→7→11 andtotalhoursadvance. No newnetworkexposure/schedule.
+>Providedpancreas-assisted nativeevaluation,NOTautonomousfullCT;2600tiles/70dev,
+>every2k.144cube/72stride,train-onlyfixedextra81/43/71mm margins,unionannotationbank;
+>freshSuPreM/originalaugmented24krecipe, noEMA/PANORAMA.96hwallcapincludesvalidation,
+>12GiBRSS/C-E100GiBfloors/AC/existingstoragecaps. KeepAC/app/D:/E:connected.
+>No scientificDice until firstcomplete2k+70native. Earlierpendingtext historical.
+
+> **October19 authorized region pipeline QUEUED / producing files FROZEN:** Owned
+>20285 runs run_pancreas_region_pipeline.py --audit-pid48852, waiting for SAME
+>coverage continuation78672 (supervisor48852). pipeline-request.json pins allsrc/
+>scripts Python,new tests/spec/results: DO NOT EDIT those files while pipeline
+>active. After full1403/pass/reaped it performs prepare→4CUDA+1cold→freeze→single
+>authorized24klaunch, no retry. No scientific updates yet. Latest510/1403pass.
+>Monitor32408 replaces40759, APIs show preparing/livecounts,21tests pass;62training
+>tests pass. All12pilot images reviewed. No new MLflowRUNNING record until dispatch.
+>Check pipeline.jsonl, cohort-final/progress.jsonl and eventually scientific journal
+>before claiming progress. Earlier pipeline-not-bound wording now historical.
+
+> **October19 region audit reporting repair / continuation LIVE:** First two-worker
+> continuation70790 stopped safely after a Windows sharing violation replacing
+> progress.json (not a mask/coverage failure). All workers reaped;431unique
+> completed/pass records preserved. New append-only reporting continuation78672
+> uses continue_pancreas_region_v2.py and IDENTICAL original pinned audit function,
+> reuses431/checks972remaining, at readiness/pancreas-region-20261019-a01/cohort-final/.
+> Original7200s budget charged1706s,5494remaining,12GiBcombinedRSS. Do not edit its
+> pinned source or duplicate it. Launcher now consumes cohort-final.62tests pass;
+> realCUDA qualification and scientific launch STILL pending. Pipeline first
+> attempted binding found previous supervisor already absent and exited before
+> writing a request or launching any stage; must bind the actual v2 supervisor.
+> Phone monitor40759 active; next restart will be recorded. No data exclusions.
+
+> **October19 pancreas-assisted successor AUTHORIZED / qualification active:**
+> User explicitly approves provided pancreas masks, full pancreas/lesion coverage
+> verification, sampling verification, then ONE fresh scientific launch+MLflow+
+> dashboard. New spec PANTS-PANCREAS-REGION-24K-20261019. No scientific run yet.
+> Serial region audit18790 intentionally stopped after162qualified cases; all
+> owned processes absent, prefix preserved. Two-worker continuation70790 active
+> at E:/PROWL/readiness/pancreas-region-20261019-a01/cohort-complete/, reuses162
+> and checks1241remaining with IDENTICAL pinned audit function;12GiBcombinedRSS,
+> original7200s minus868serial seconds. Do not duplicate or edit its pinned source.
+> All12realpilot images reviewed;58focusedtests pass after preserved import-error
+> XML. New region/session/executor/launcher are ADDITIVE; original sources intact.
+> After complete/reaped coverage gate: train_pancreas_region.py --prepare (full24k
+> schedule accounting), --qualify (4CUDA+1cold,2native cases), --freeze, then exact
+> --launch-sha256 only if qualified. No automatic retry/resume. User already
+> authorizes this one launch; earlier no-launch text historical. Monitor18037
+> currently preparation banner; no preparation/engineering hours counted as training.
+
+> **October19 successor launch requested, NOT yet ready/launched:** User requests
+> pancreas-focused successor plus dashboard. Existing coverage inventory reused:
+> worst annotation requires79.98mm additional margin beyond old crop. No new CT
+> audit/cache/optimizer run. Crop design still unresolved (whole-region resize vs
+> focused physical tiling; provided pancreas assistance vs predicted localizer).
+> Do not infer a frozen launch receipt. Monitor53123 replaces99880 only;20tests
+> pass, both APIs honor operator-stop.json, old run shows stopped with real totals.
+
+> **October19 full-coverage run STOPPED by explicit user request:** Owned95776
+> interrupted; supervisor/worker38328/45104/32996/14284 verified absent. Last journal
+> 6270updates/78830.906s; last scheduled checkpoint6k. Preserve all original pins,
+> journals/checkpoints/reports. Full70 native6k Dice.061095,pancreas.364512,
+> detect32/36,alarms34/34,emptyvox2556346; no reconstruction gaps. Planned24k
+> hypothesis unresolved, not rejection of coverage preservation. Separate
+> operator-stop.json records action. Discuss pancreas-focused complete-coverage
+> successor; NO restart/new training authorized. Earlier LIVE entries historical.
+
+> **October18 launch handoff verified15:48MDT:** Sameowned95776 scientificrun reached25updates/
+>171.828elapsedseconds,loss1.1752286. MLflowRUNNING with actual loss points atsteps1and25,
+> no trackingwarning; everylaunchreceiptpin stillmatches. Dashboardlivevalues advanced
+> independently (3→11→22),mobilemetricspanel works; temporary390×844override reset.
+> KeepAC/app/D:/E:connected. Do not edit pins or duplicate existingrun.
+
+> **October18 FULL-COVERAGE SCIENTIFIC TRAINING LIVE:** Owned95776 runs
+> scripts/train_physical_segmenter.py --launch-sha25663d1aeb3abf8af1a71366a6e18086151fcf3972eba05df3a07c5fed679608d2c.
+> Actual9updates/53.844seconds confirmed15:46MDT; dashboardlater11updates. Monitor samejob,
+> neverduplicate/retry/resume. E:/PROWL/artifacts/pants_full_coverage_physical_24k_20261018/
+> execution/history.jsonl authoritative. Setup pants-full-coverage-24k-20261018-a01 hasreceipt,
+> training-worker.log/live-tracking.json. DO NOTEDIT anyreceipt-pinned producingfile.
+> LiveMLflowecb6e402f0f84bc8a9df5e11239e5972 RUNNING,trainmetricsreadbackverified/no warning.
+> InitialE/Ccheckpoint SHA1a6922e10a33f63d649254c002dfc6808fa5effefa947f69b8e95dd23caaf56b matches.
+> Full70nativeevery2k (not oldtensor);144physicalwindows/72stride;24krecipe retained;
+>96h hardcapincludesvalidation;12GiBRSS/AC/C-E100GiBfloors/existingstoragecaps. NoEMA/PANORAMA.
+> Phone dashboard5thcardlive/nativefullCTlabels,progressduringvalidation,actualruntime totals.
+> Monitorowned99880 replacedonly39260;18tests pass/privateURL390×844review. ScientificDice
+> unmeasureduntilfirstcomplete2k+nativevalidation. No newnetworkexposure or AIschedules.
+> New scientificspec PANTS-FULL-COVERAGE-24K-20261018.md/json governs; earlier no-launch and
+> intake-review-required text below is historical for this explicitly approved one run.
+
+> **October18 scientific full-coverage run AUTHORIZED / dispatch requested:** User explicitly
+> approves autonomous finalsetup thenlaunch+MLflow+phonedashboard. This supersedes earlier
+> review-required/no-scientificlaunch for THISrun only. New PANTS-FULL-COVERAGE-24K-20261018
+> spec:24k,originalSuPreM/seed42/DiceFocal/AdamW1e-4/500warmup24kcosine/augmentation unchanged;
+> physical-detail-windows-1,full70nativeevery2k,checkpoint500,retainallnativecheckpoints.
+> 96h hardwatchdog includesvalidation;12GiBRSS/100GiBfloors/existingcache+backupcaps/AC.
+>11orchestrationtests pass;actual2update/2devcaseintegration107.719s/reaped2102202368B,
+> independentcheckpointcopiesmatch; nonpromotable and excludedfromscientifictraininghours.
+> Ready E:/PROWL/readiness/pants-full-coverage-24k-20261018-a01/ready.json SHA256
+>63d1aeb3abf8af1a71366a6e18086151fcf3972eba05df3a07c5fed679608d2c. PreserveALLproducingpins.
+> scripts/train_physical_segmenter.py --launch-sha256 dispatched; inspectlive-tracking.json
+> and artifact pants_full_coverage_physical_24k_20261018/execution/history.jsonl before
+> assertingupdates. No duplicate/retry/resume/schedule. DashboardmonitorONLY39260stopped,
+> replacementowned99880;18dashboardtests pass;newnativeprogress/scopelabels,5thcardregistered.
+
+> **October18 SEVEN-STAGE INTAKE QUALIFICATION COMPLETE / REVIEW REQUIRED:** Physical
+> input path accepted; NO scientificlaunch. Report PANTS-NATIVE-INTAKE-QUALIFICATION-20261018.md.
+> All1333train+70dev/671+36positive verified; fullfield/native target exact,7,145,665lesionvoxels/
+>868components preserved,0newexclusions/testreads. Old43clipped trainingcases retained/fixed.
+> physical-detail-windows-1 upsamplescoarseaxesonly<=1.00001mm,144cube/72stride,CT-only fullCT
+> inference. Pilot12exacttiledoracle/allimagesreviewed;178tests pass/1Macskip (legacyUnixsuite
+> collection failure retained separately). All445baselinepinsmatch; originalpipeline preserved.
+> CUDA87333 FINISHED0:4producer+1cold,exactrestore/input,nextmaxdiff7.450580596923828e-9,
+> independentCbackupmatched,420/294tile nativeinfer gapfree,workersreaped. PeakGPUreserved
+>3883925504B,producerRSS8231505920B. Physicalcohort25288 FINISHED1403/reaped2978.406s.
+> Frozen E:/PROWL/readiness/physical-intake-20261018-a01/ready.json SHA256
+>837bfbce8f81198c4ee1fd1a939456e7d1ea2e49551d90ff07fec5cb2ad924da. Preserve allreceiptpins.
+> MLflow engineering2a7376bd21fc45d5aa679946a8af1cd2 FINISHED/10metricsverified,nonpromotable,
+> NOTmodelDice/traininghours. Scope engineering acceptance only; learnedDice hypothesisuntested.
+> Userreview and scientificconfiguration/budget/productionlaunchintegration stillrequired.
+> Full70dev7698tiles/validation; do not silentlyreuseoldcheapcropcadence. Nojobactive, no
+> automatic scientificrun/retry/resume/schedule. EarlierLIVE/pendingtextbelow historical.
+
+> **October18 full physical intake PASSED / CUDA qualification LIVE:** Owned25288 finished0,
+>1403=1333train+70dev allpass,100%field/native-target preservation,0newexclusions/testreads.
+> Physicalcohort2978.406s/1866088448BpeakRSS/reaped; sourceCTaudit reused,0newcohortCTreads.
+> Owned87333 now runs qualify_native_windows_cuda.py --kind physical --run:4nonpromotable
+> producerupdates,independentCbackup,largestpositive/emptyfullCTinference,1coldnextupdate.
+> ALLsrc/scripts/configs frozen by physical-intake-20261018-a01/cuda-request.json:DO NOTEDIT.
+> Monitor cuda/producer.log and producer-updates.jsonl; no duplicate/retry/scientificlaunch.
+>178focusedtests passed/1Macskip. Finalreceipt/MLflow/report pending CUDA completion.
+
+> **October18 physical pilot PASSED / complete physical intake LIVE:** All12physical pilot
+> cases exact full-tiled native oracle/100%field exposure; all12three-plane images reviewed.
+> Pilot87594 finished/reaped536.75s/2437160960BpeakRSS. Physicalcohort owned25288 now runs
+> qualify_physical_intake.py --run cohort:12pilotrecords reused,1391label-only checks;
+> preserve request-pinned src/helper/spec. No CTcontent/duplicate replay. Evidence physical-
+> intake-20261018-a01/cohort. After complete/reaped use GPU helper --kind physical --run;
+> four nonpromotable updates +onecold only, no scientific training. Finalfreeze/MLflowpending.
+
+> **October18 source audit COMPLETE / physical pilot LIVE:** Native continuation5716 finished,
+> all1403=1333train+70dev passed, combined4710.093s/2932871168BpeakRSS/reaped. Do not repeat.
+> Physical request now frozen at E:/PROWL/readiness/physical-intake-20261018-a01/request.json;
+> owned87594 runs physical12casepilot (6complete at last check). Preserve its producing pins.
+> Regression60159:125passed/1explicitMacskip. Next review all12physical images, then label-only
+> physicalcohort audit, then4producer+1coldCUDA via --kind physical. No scientific launch.
+> Earlier not-created/native-audit-live wording below is historical.
+
+> **October18 final candidate REFINED to physical-detail-windows-1:** Native-only candidate
+> preserved labels but training geometry exposed spacing up to10mm (144voxels=1.44m field),
+> an avoidable physical-scale risk. User's autonomous spacing-design authority used to choose
+> UPSAMPLE-ONLY integer voxel-cell subdivision to <=1.00001mm, retain finer axes/obliquity,
+>144cube/72stride/on-demand sampling/native-grid probability reconstruction. NOdownsampling,
+> no dense fine cache, no GT inference cropping. All671positive train fields still <=2cover
+> windows. Spec PANTS-PHYSICAL-DETAIL-INTAKE-20261018.json. New physical data/session modules
+> separate from native and prior scientific pipeline;14focusedtests pass. Native sourceaudit
+>5716 still finishing; preserve its frozen files. Its1403 CT-content checks will be reused.
+> Next: qualify_physical_intake.py --prepare AFTER nativeauditcomplete, --run pilot, review12
+> images, --run cohort (labels only, priorCTcontent reused), GPU helper --kind physical --run.
+> Physical output E:/PROWL/readiness/physical-intake-20261018-a01 not yet created. No realGPU
+> qualification/scientific training launched. Old native-only final-candidate wording superseded.
+
+> **October18 intake AUDIT bounded parallel continuation LIVE:** Serial34568 intentionally
+> stopped/reaped for CPU-bound throughput, not quality failure. Its prefix is preserved.
+> Owned5716 now runs continue_native_intake.py --run, TWO workers, unchanged numerical pins,
+> same12GiBcombinedRSS/100GiBfloors/original6hbudget minus serial time. Reuses153qualified
+> cases (stopped prefix plus remaining pilot cases), verifies1250remaining only. Evidence
+> E:/PROWL/readiness/native-intake-20261018-a02/cohort-complete/; monitor worker.log/new-cases.jsonl.
+> No duplicate/retry/edit of pinned producing code or continuation script. Downstream GPU and
+> freeze scripts now consume cohort-complete, not partial cohort. Three continuation tests
+> pass after correcting a mock key; initial fixture failure retained. Scientific training
+> still NOTauthorized; CUDA qualification,receipt,MLflow and final docs remain pending.
+
+> **October18 complete native intake AUDIT LIVE:** Owned34568 runs ONLY cohort verification
+> via scripts/diagnostics/qualify_native_intake.py --run cohort; no scientific training.
+> E:/PROWL/readiness/native-intake-20261018-a02/cohort/{worker.log,cases.jsonl} authoritative.
+> Stronger a02 pilot61045 FINISHED/reaped157.422s,peakRSS2497478656B;12/12 exact target and
+> tiled-oracle reconstruction,100%annotated-field exposure18visits,all12images reviewed.
+> Initial cohort parser failed before reading any case; preserved in cohort-failed-parser.
+> parser-amendment.json binds newline-reader-only correction and reused pilot hash; source,
+> geometry and sampling unchanged. Do NOT rerun/duplicate34568 or edit request-pinned code.
+> 108Windows regressions pass/1explicitnative-MPSskip. Legacy test_segmenter_content.py
+> collection fails Unix-only resource import, retained in regression-tests.xml (not pass).
+> All445old scientific receipt pins match. After1403accounted: run prepared
+> qualify_native_windows_cuda.py --run (4producer+1cold,nonpromotable), freeze_native_intake.py,
+> log_native_intake_mlflow.py, finish docs. These three scripts NOT executed yet. No launch
+> approval for scientific training. GPU session/new loader not yet realCUDAqualified.
+
+> **October18 autonomous intake qualification IN PROGRESS:** User authorizes all seven
+> implementation/qualification stages, NOT scientific training. Inventory33929 completed
+> 671/671:43clipped,22below90%,10below50%. Versioned native-grid windows preserve acquired
+> voxels with closest-RAS permutations/flips (NOT1mm resampling/deobliquing). Original pipeline
+> unchanged. Preliminary12casepilot a01 finished/reaped148.937s,2.46GBpeakRSS,exactroundtrips.
+> Strengthened native-windows-2 sampler adds guaranteed full-annotation cover windows plus
+> component jitter and every-fourth uniformCT;18visit union coverage must equal100%.
+> Owned61045 runs a02 pilot at E:/PROWL/readiness/native-intake-20261018-a02/.
+> DO NOT EDIT request-pinned src or qualify_native_intake.py/plan while active. No duplicate
+> pilot/retry. Ten focused native-window tests pass; broader32tests passed before amendment.
+> After pilot: review12images, complete1333train/70dev intake, fourCUDA+onecold qualification,
+> finalfrozenreceipt. New CUDA script/session added but NOTrun. No schedules/testreads/longrun.
+
+> **October18 intake FIX PLAN / label inventory LIVE:** Userrequestsorderedfixandverification
+> beforescientifictraining. Plan docs/capstone/operations/PANTS-COVERAGE-INTAKE-FIX-20261018.md.
+> Owned33929inventory_training_lesion_coverage.py readsONLY671positivetrainlesionmasks+metadata,
+> outputE:/PROWL/readiness/training-coverage-inventory-20261018-a01/;30min/8GiB/100GiBfloors,
+> noCT/dev/test/models/cachechanges. Do notduplicate/retry. 1accountingtestpassed;resultspending.
+> Sourceclippedcase pancreatic_lesion.nii.gz/hash/affineconfirmed,notclinicaladjudication.
+> Full1mmcacheprojection199.33GiB exceeds32GiBcap;median40tileinferences/case(range4–360).
+> Stage2policy/resourcefreeze thenversionedimplementation,12casepilot,cohortqualityverification,
+> boundedCUDA+coldrestore,readinessreview;NOTyetfixed/launchable. No longtrainingauthorized.
+
+> **October18 coverage-first research priority:** User wants a coverage-corrected augmentedrun
+> beforeagreedLR5e-5trial;research/discussiononly,NOlaunch/newcache/inventoryperformed. Logged
+> docs/experiments.md. Candidate fixedphysicalgrid+overlapping3Dwindows avoidsoversqueezing;
+> exactmargin/spacingnotfrozen. Verifyclippedannotationsemantics,training-onlycoverageinventory
+> proposedfirst;neverGTlesion-guideddev/inferencecrops. Preservecohorts/reference/testroles.
+> If tiling/sampling/inferencechange, callbundledrepresentationexperiment,notjustQAorLRchange.
+
+> **October18 focused INPUT REVIEW complete / LR launch on hold:** Authorized27case diagnostic
+> (12train/15dev) found1severelyclippedtraincasePanTS_00002720:11.6316%lesioncoverage,
+> 167565/189621voxelsoutsidecrop,targetroundtripDice.207229. Component survival is NOT fullcoverage.
+> Other26fullycovered,medianroundtrip.963064/min.7976;all7largedevfullcoverage/.9584–.9941roundtrip.
+> Worstlargeregressionmodel.7711→.1381despite.9674targetfidelity;donotattributeallerrorstocropping.
+> Evidence E:/PROWL/readiness/input-fidelity-20261018-a01/;8localfigures,7uniqueCTs,27labelpairs,
+> no models/testreads/cachechanges;2tests pass. Docs/capstone/operations/PANTS-INPUT-FIDELITY-20261018.md.
+> Discuss annotationsemantics andcoverage-preservingROI/resolutionbeforetraining;noautomaticlabel
+> exclusion/newfullaudit/rebuild. NeveruseGTlesionfordev/inferencecropwithoutoraclelabel. LR5e-5
+> remainsagreedbutnotlaunched;representationchange mustbeseparateintervention. Imagesstayprivate.
+
+> **October18 next LR experiment AGREED but do not launch:** User agrees sameaugmentedPanTS24k
+> freshSuPreM/seed42 withonlyLR1e-4→5e-5, asksinputrepresentationdiscussionBEFOREtraining.
+> Loggedindocs/experiments.md; no executablefrozenreceipt/launch/schedule/newMLflowRUNNINGrecord.
+> Code+1333cachedmetadata confirmwhole3Dpancreasbox+10mm,not2Dslice/notfullabdomen;144cube,
+> physicalRAS/1mmintermediate/uniformresize+padding,medianfinalspacing1.0556mm,p901.2708,
+> max1.7569;medianrectangularsupport40.51%. Maskslabels/cropselectiononly,notinputchannels.
+> Noentirelylostcomponents doesNOTprovefullcoverage/contourfidelity. Discussboundedoverlay/crop
+> coverage/labelroundtripreview; no newdataaudit/CTreads/inference/cachechangeperformed.
+
+> **October18 varied training views COMPLETE and reviewed:** 24kcontiguousupdates/12validations,
+> bothnative70reportscomplete/workersreaped. Selected18k tensor.424281/native.423761 newcurrent
+> matched70record;vsoriginal14k.405092delta+.018668CI[-.047826,.081128]. Allpointguardspass:
+> detect33vs34/36,alarms27vs32/34,emptyvox100767vs205564. PracticalINCONCLUSIVE,H0NOTREJECTED.
+> Finalnative.393723vs.319538delta+.074185CI[.000404,.151294];secondaryDiceH0rejectedbutpractical
+> REJECTED(alarms25vs18/34,emptyvox72314vs20652). Never substitute secondary for primary.
+> All445pins/E:Ccheckpoints/reports/finaljournalmatch;training75647.875s,supervised76635.312s.
+> Review E:/PROWL/readiness/pants-augmentation-review-20261018-a01/results.json;3tests pass.
+> See docs/capstone/operations/PANTS-AUGMENTED-VIEWS-RESULTS-20261018.md. ExistingMLflow
+> dbf1a562e9eb4d5a96301718a19d07a8;retrospective metrics separate. Proposednextsameaug24kLR5e-5
+> NOTapproved/launched;reviewlarge-lesionregressionsfirst. Usergoalnative.50,distillationconsideration
+> nextweekreopened(nottrainingauthority);keepteacher-assistedlineexplicit/provenancereviewrequired.
+> No newrun/resume/schedule/testevaluation/duplicateaudit. Earlier LIVE wording belowhistorical.
+
+> **October17 total training counter and MLflow verified:** Phone page bottom now has prominent
+>total hours plus h/m/s across the four registered scientific runs, recomputed from journal durations
+>every15s; no extrapolated wallclock. Browserauto-refresh observed94h01m26s→94h02m18s. Includes
+>in-runvalidation, excludes prep/separate diagnostics/unregistered oldercourse runs; footerdiscloses
+>oldlast-update durationbound. Register future approved runs in PROWL-Monitor/experiments.json.
+>17monitorchecks pass, total arithmetic/append-not-wallclock tested. MLflowcurrentdbf1a562e9eb4d5a96301718a19d07a8
+>RUNNING, storedlossrecords13→14/step300→325, recenttimestamp/no trackingwarning. LocalSQLite
+>logging verified, not a claim of separate MLflow webserver. HTML-only servicechange/no restart;
+>trainer/pins/network untouched, no schedules. Monitorowned41838 remains current.
+
+> **October17 phone dashboard simplified and data-driven:** User requests compact experiments/real
+>hours/Dice/metrics. Monitor-only C:/Users/quinn/PROWL-Monitor/{experiments.py,experiments.json,index.html,
+>server.py} now serves four-run list via /api/experiments; all numeric metrics/runtime/steps from
+>journals+native reports, no hardcoded demo totals. Baseline75tensor filtered to matched70; ordinary/
+>EMA and tensor/native separated. Oldjournal duration uses last recorded update, disclosed; completed
+>72k uses completedelapsed, newrun training_completed excludesposttrainnative. Cacheunchangedjournals,
+>refresh15s, no caseIDs/paths/CT/checkpoints exposed.16tests pass/mobile390px nooverflow/noJSerrors.
+>Only monitor11748/30756 replaced, ownedexec41838; privateServe unchanged. Trainer67038 uninterrupted,
+>226updates confirmed duringwork; all445frozenpins unchanged. No scientificcode/config edits/schedules.
+
+> **October17 PanTS varied training views 24k SCIENTIFIC TRAINING LIVE:** Single authorized run
+>ownedexec67038 runs scripts/train_augmented_segmenter.py; supervisor18176/worker43864 (venv
+>launcher wrappers17808/35088). Journal confirms27updates/57.609s; MLflowdbf1a562e9eb4d5a96301718a19d07a8
+>RUNNING with step25metrics verified. Run pants_only_augmented_views_24k_win_20261017, E:/PROWL/artifacts/
+>same/execution/history.jsonl authoritative. Receipt E:/PROWL/readiness/pants-augmentation-24k-20261017-a01/
+>ready.json SHA139dd1a6ad52569c2567a713c37599c882de92e93c4a91fd46966ce3688db246. All producing
+>src/scripts/spec/config/test pins FROZEN; do not edit, merge, switch or duplicate/retry this livejob.
+>Original1333PanTS train/70dev; freshSuPreM+DiceFocal,24kcosine500warmup, train-only exactspatial
+>flips/RAquarterturns andmildintensity/noise; noPANORAMA/EMA/cropchanges. Ordinarytensorvalidate2k,
+>checkpoint500 retain8k/24k; selected+terminalnative70 aftertraining.30h/12GiBworker/32GiBcache/
+>100GiBC/Efloors/existingbackupcap/AC/sleepinhibit/WindowsJob. Noautomaticresume/retry/schedules.
+>Initial E:/C:backupSHA7eef9641018203ccda111e186eaa0620c6cde07b0b1d5e8ece15713a002b0355 matches.
+>Phone monitor owned51227 serves existingprivateTailscaleURL; live27/24000verified. Mobile390px
+>layout nooverflow; no exposurechange.75focusedtests/1MPSskip,8monitorchecks; realCUDA4+1passes,
+>exactrestore,nextmaxdiff7.45058e-9,bothqualificationworkersreaped. Earlierpendingtext historical.
+
+> **October17 augmentation launch authorized, CUDA qualification next:** User explicitly requests
+>updating phone dashboard then starting if qualified. Single PanTS24k varied-training-views run,
+>not PANORAMA/EMA/retry/resume/schedules. Setup metadata passes at E:/PROWL/readiness/
+>pants-augmentation-24k-20261017-a01; setup.json binds source/scripts/spec/config/control/environment.
+>Do not edit those producing pins during qualification or training. New optimizer-only wrapper,
+>ordinary executor/MLflow/native endpoints; original trainer unchanged.75focusedtests pass/1nativeMPSskip.
+>Four CUDA producer+onecold qualification PASS/reaped92531; exactrestore,nextmaxdiff7.45058e-9,
+>two native devcases. ReceiptSHA139dd1a6ad52569c2567a713c37599c882de92e93c4a91fd46966ce3688db246.
+>Final read-only admission then scientific dispatch next; not yet optimizertraining at this entry.
+>Monitor active-run nowtargets new24k; existing private TailscaleServe stays unchanged. Old no-launch
+>instruction below superseded by latest explicit user request; preserve all historical artifacts.
+
 > **October17 current Mac code integrated and augmentation plan specified:** User requests pulling
 >current other-machine code and writing the next experiment, NOT a training launch. Safety snapshot
 >3f9b64a preserves completed Windows reviews. Merged origin/main throughd121330 (53 incoming commits,
