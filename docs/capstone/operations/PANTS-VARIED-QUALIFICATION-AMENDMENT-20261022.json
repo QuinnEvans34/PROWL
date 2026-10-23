@@ -1,0 +1,34 @@
+{
+  "title": "Varied lesion-focused views without losing coverage",
+  "scientific_name": "pants_varied_focus_24k_20261022",
+  "scientific_recipe_changed": false,
+  "authority": "User approves deterministic qualification and autonomous work to start the agreed training run tonight, October22.",
+  "reason": "Unchanged original pipeline independently exceeds cross-run state tolerance; CUDA trilinear backward is documented nondeterministic.",
+  "preserve_failed_qualification": true,
+  "qualification": {
+    "paired_updates_each": 33,
+    "same_frozen_twelve_training_cases": true,
+    "strict_deterministic_algorithms": true,
+    "cublas_workspace_config": ":4096:8",
+    "trilinear_forward": "unchanged PyTorch operation on CUDA",
+    "trilinear_backward": "qualification-only native PyTorch CPU adjoint; both arms identically adapted",
+    "rtol": 0.0000013,
+    "atol": 0.00001,
+    "deterministic_cold_updates": 1,
+    "ordinary_production_cold_updates": 1,
+    "max_seconds_per_stage": 1200,
+    "max_owned_rss_bytes": 12884901888,
+    "minimum_observed_production_speedup": 1.10,
+    "reuse_successful_input_and_native_path_evidence": true,
+    "no_audit_cache_or_pilot_repeat": true
+  },
+  "scientific_execution": {
+    "unchanged_original_cuda_numerics": true,
+    "qualification_adapter_installed": false,
+    "max_updates": 24000,
+    "max_seconds": 345600,
+    "single_authorized_launch": true,
+    "automatic_retry_resume": false,
+    "scheduled_followups": false
+  }
+}

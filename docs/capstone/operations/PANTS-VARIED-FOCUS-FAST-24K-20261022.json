@@ -1,0 +1,31 @@
+{
+  "title": "Varied lesion-focused views without losing coverage",
+  "name": "pants_varied_focus_24k_20261022",
+  "scientific_spec": "docs/capstone/operations/PANTS-VARIED-FOCUS-24K-20261022.json",
+  "scientific_changes_from_prepared_sampler": "None; exact-equivalent throughput implementation must qualify separately",
+  "throughput_policy": "equivalent-varied-target-cache-prefetch-1",
+  "target_cache": "E:/PROWL/cache/varied-targets-20261022-a01",
+  "cache_scope": "1333 training targets and deterministic metadata only; validation reader and native reconstruction unchanged",
+  "combined_cache_cap_bytes": 34359738368,
+  "cpu_workers_during_cache_conversion": 2,
+  "training_prefetch_windows": 1,
+  "qualification": {
+    "pilot_training_cases": 12,
+    "reference_updates_minimum": 32,
+    "reference_updates_maximum": 40,
+    "candidate_updates": "Same frozen count as reference; final update must exercise component jitter",
+    "cold_replay_updates": 1,
+    "candidate_native_development_cases": 2,
+    "warmup_updates_excluded_from_timing": 6,
+    "exclude_updates_immediately_after_qualification_checkpoint": true,
+    "minimum_measured_mean_update_speedup": 1.10,
+    "exact_batch_and_trace_match_required": true,
+    "state_rtol": 0.0000013,
+    "state_atol": 0.00001,
+    "max_seconds_per_stage": 3600,
+    "combined_rss_bytes": 12884901888,
+    "scientific_hours": false
+  },
+  "launch_authority": "Setup and nonpromotable qualification approved October22. Scientific launch requires a subsequent explicit user instruction and exact readiness hash; no schedule or automatic handoff.",
+  "automatic_retry": false
+}
