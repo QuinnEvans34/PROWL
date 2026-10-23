@@ -35,7 +35,7 @@ export function validateVolumeSources(result, request, validateSearch) {
     || (s.status === 'not_searched') !== (result.state === 'not_searched')
     || new Set(s.matches.map(m => m.record_id)).size !== s.matches.length
     || (s.status !== 'matched' && result.evidence.length > 5)
-    || (s.status === 'matched' && s.reason !== 'selected_study_examples_not_reference_ranges')) fail()
+    || (s.status === 'matched' && !['selected_study_examples_not_reference_ranges', 'general_size_defaults_to_study_volume'].includes(s.reason))) fail()
   const returned = new Set(result.evidence.map(e => e.record.passage.passage_id)), expected = new Set()
   for (const match of s.matches) {
     const r = catalog.records.find(r => r.id === match.record_id)

@@ -76,3 +76,17 @@ it('accepts source-only volume context without an answer',()=>{
  const r=fixture(request);r.schema_version='prowl-development-search-response-v1';r.answer=null;r.generation='not_called'
  expect(validateSourceSearch(r,request)).toBe(r)
 })
+
+it('renders the general-size volume answer instead of a service error',async()=>{
+ const user=userEvent.setup();render(<LiteratureSearchPanel search={async q=>{
+  const r=fixture(q);r.record_selection.reason='general_size_defaults_to_study_volume';return r
+ }}/>)
+ await user.type(screen.getByLabelText('Literature question'),'How big is the pancreas?')
+ await user.click(screen.getByRole('button',{name:'Ask question'}))
+ expect(await screen.findByText(/82.6 cm³ among 14 people/)).toBeTruthy()
+ expect(screen.queryByText(/Search is unavailable or timed out/)).toBeNull()
+})
+it('rejects unknown matched volume reasons',()=>{
+ const r=fixture(request);r.record_selection.reason='unrecognized_reason'
+ expect(()=>validateAnswer(r,request)).toThrow()
+})
