@@ -1,4 +1,5 @@
 import { readHeader } from 'nifti-reader-js'
+import volumeFacts from '../../../configs/evidence/source-facts-volume-v1.json'
 
 export const MEASUREMENT_POLICY = 'prepared-mask-volume-v1'
 const LIMIT = 64 * 1024 * 1024
@@ -11,6 +12,13 @@ export function scanQuestion(question) {
   const q = question.toLowerCase().trim().replace(/[?.!]+$/, '').replace(/\s+/g, ' ')
   const match = q.match(/^(?:how (?:big|large) is|what is the (?:size|volume) of) (?:this|the|my) (pancreas|lesion)(?: (?:in|on) (?:this|the|my) (?:scan|image))?$/)
   if (match) return match[1]
+  const subject = '(?:this|my|the current) pancreas'
+  const comparisons = [
+    `^is ${subject} (?:big or small|large or small|big|small|large|enlarged|normal(?: in size)?|(?:bigger|smaller|larger) than (?:the )?average)$`,
+    `^how does (?:the size of )?${subject} compare (?:to|with) (?:the )?average$`,
+    `^compare ${subject} (?:to|with) (?:the )?average$`,
+  ]
+  if (comparisons.some(pattern => new RegExp(pattern).test(q))) return 'pancreas_comparison'
   if (/\b(?:this|my|current)\b/.test(q) && /\b(?:scan|pancreas|lesion|tumou?r|image)\b/.test(q)) return 'unsupported'
   return null
 }
@@ -160,7 +168,20 @@ export async function loadScanMeasurements(context, signal) {
     contextKey: context.key, ctSha256: loaded[0].digest, predictionSha256: loaded[1].digest }
 }
 
+export const pancreasReference = volumeFacts.records.find(r => r.id === 'fact:25950180:whole-pancreas-volume:ngt:v1')
+export const pancreasReferenceUrl = 'https://pubmed.ncbi.nlm.nih.gov/25950180/'
+
+export function comparisonText(measurement) {
+  const volume = measurement.pancreasMl
+  if (!Number.isFinite(volume) || volume <= 0) throw new Error('A valid outline volume is required.')
+  const mean = Number(pancreasReference.fields.mean.value)
+  const delta = volume - mean
+  const difference = Math.abs(delta) < 0.05 ? 'approximately equal to' : `${Math.abs(delta).toFixed(1)} mL (${(Math.abs(delta) / mean * 100).toFixed(1)}%) ${delta > 0 ? 'above' : 'below'}`
+  return `The saved pancreas outline measures ${volume.toFixed(2)} mL, ${difference} the published study mean of ${mean} mL. That mean came from ${pancreasReference.fields.sample_size.value} participants with normal glucose tolerance, measured using MRI. This is a numerical comparison of a CT model outline with a study mean—not a finding that your pancreas is enlarged, small, or normal. Whole-organ coverage and model accuracy are unverified, and the measurement methods differ; a cropped or incomplete outline could appear artificially small. The study mean is not an individual normal range.`
+}
+
 export function measurementText(measurement, target) {
+  if (target === 'pancreas_comparison') return comparisonText(measurement)
   const volume = target === 'pancreas' ? measurement.pancreasMl : measurement.lesionMl
   if (target === 'lesion' && measurement.lesionVoxels === 0) return 'The saved prediction contains no lesion-labeled voxels. This does not establish that no lesion is present.'
   const amount = volume < 0.01 ? 'less than 0.01' : `about ${volume.toFixed(2)}`

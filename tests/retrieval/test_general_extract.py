@@ -52,3 +52,38 @@ def test_unrepresented_volume_population_does_not_start_slow_selection():
         def answer(self,r):return result
     def unexpected(*args):raise AssertionError('No fallback for existing volume boundary')
     assert GeneralExtractAnswers(Reviewed(),unexpected).answer({'question':'Pancreas volume in children?'}) is result
+
+def test_cache_reuses_only_same_question_evidence_and_returns_independent_copy():
+    from copy import deepcopy
+    from src.retrieval.general_extract import GeneralExtractAnswers
+    class Reviewed:
+        evidence = deepcopy(EVIDENCE)
+        def answer(self,r):
+            return dict(answer=None,state='evidence_unassessed',record_selection=dict(status='dense_fallback'),evidence=self.evidence)
+    calls=[]
+    def produce(q,e):
+        calls.append(q)
+        return dict(status='summarized',claims=[dict(text=e[0]['record']['text'])])
+    reviewed=Reviewed(); service=GeneralExtractAnswers(reviewed,produce)
+    first=service.answer({'question':'function?'})
+    first['answer']['claims'].clear()
+    second=service.answer({'question':'function?'})
+    assert second['answer']['claims'] and len(calls)==1
+    assert second['timing']['checked_answer_cache_hit'] is True
+    service.answer({'question':'location?'})
+    reviewed.evidence[0]['record']['text']='Changed source.'
+    service.answer({'question':'function?'})
+    assert len(calls)==3
+
+def test_cache_has_a_bounded_lifetime(monkeypatch):
+    import src.retrieval.general_extract as module
+    clock=[0]; monkeypatch.setattr(module,'monotonic',lambda:clock[0])
+    class Reviewed:
+        def answer(self,r):
+            return dict(answer=None,state='evidence_unassessed',record_selection=dict(status='dense_fallback'),evidence=EVIDENCE)
+    calls=[]
+    def produce(q,e): calls.append(q); return dict(claims=[])
+    service=module.GeneralExtractAnswers(Reviewed(),produce)
+    service.answer({'question':'test'});clock[0]=601
+    service.answer({'question':'test'})
+    assert len(calls)==2

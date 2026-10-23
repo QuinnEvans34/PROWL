@@ -9,7 +9,7 @@ import { validateRecordAnswer } from './recordAnswer'
 import { validateVolumeAnswer, validateVolumeSources, volumeReasons } from './volumeAnswer'
 import { validateMeasurementAnswer, validateMeasurementSources } from './measurementAnswer'
 import { validateStudyAnswer, validateStudySources } from './studyAnswer'
-import { loadScanMeasurements, scanQuestion, measurementText } from '../lib/scanMeasurements.js'
+import { loadScanMeasurements, scanQuestion, measurementText, pancreasReferenceUrl } from '../lib/scanMeasurements.js'
 import './GuidedEvidencePanel.css'
 
 const reasons = {
@@ -242,7 +242,7 @@ export default function LiteratureSearchPanel({
       if (target) {
         let value
         if (sourcesOnly) value = { message: 'Use Ask question to calculate the saved outline volume. Find sources searches general literature.' }
-        else if (target === 'unsupported') value = { message: 'I can calculate the loaded pancreas or total suspected-lesion mask volume. Head measurements, individual lesion dimensions, normal-range comparisons and disease interpretations of this scan are not connected yet.' }
+        else if (target === 'unsupported') value = { message: 'I can calculate the loaded pancreas or total suspected-lesion mask volume. I can also compare the pancreas outline volume with a published study mean. Head measurements, individual lesion dimensions, clinical normal-range classification and disease interpretations of this scan are not connected yet.' }
         else {
           try {
             const measurement = await measure(measurementContext, control.signal)
@@ -319,8 +319,9 @@ export default function LiteratureSearchPanel({
     <div aria-live="polite" aria-busy={phase === 'loading'}>
       {panel && (phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>You asked</small>{question}</p>}
       {scanResult?.key === measurementKey && scanResult && <article aria-label="Current scan measurement">
-        <h3>{scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
+        <h3>{scanResult.measurement && scanResult.target === 'pancreas_comparison' ? 'Outline compared with a published study' : scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
         <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
+        {scanResult.measurement && scanResult.target === 'pancreas_comparison' && <p><a href={pancreasReferenceUrl} target="_blank" rel="noreferrer">Study source: MRI pancreas volume (PMID 25950180)</a></p>}
         {scanResult.measurement && <>
           <p>Calculated locally from the saved prediction mask, not estimated by the AI. The model outline needs human review.</p>
           <details><summary>Measurement source and limitations</summary>
@@ -356,7 +357,7 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
-    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved.' : 'Each question is answered independently. Questions and results are not saved. No scan is attached.' : 'Questions and results are not automatically saved. No scan is attached.'}</small>
+    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not written to disk.' : 'No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not written to disk.'}</small>
   </section>
 }
 

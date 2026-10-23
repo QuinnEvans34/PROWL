@@ -2274,3 +2274,33 @@ bring methods and limitations with retrieved results. Exposed-set span-delivery 
 2026-10-23 general-fallback attempt: user approved evidence-based composition outside reviewed topics. Fixed6public probes and original baseline retained; reused separate-review machinery with installed8B and actual5passage packets. Focused repair shortened prose, reviewed empty drafts and exposed full evidence to completeness check. Manual review rejects returned paraphrase: insulin not established by its cited passage though model support reviewer approved it. Other generation attempts reject, and general location is wrongly blocked as measurement upstream.0qualifying summaries from5repair generation attempts;1upstream block.25canonical records verified;25focused tests pass. No live integration/full exposed regression/promotion follows failed gate. Existing service healthy. Code is an unpromoted candidate, not a completed user-facing fix; details GENERAL-FALLBACK-2026-10-23.md. No training/private evaluation/human-hours change.
 
 2026-10-23 general source-answer preview: continued per user request. Existing span selector and non-thinking sentence audit retained wrong-topic evidence; reasoning-mode exact sentence selection/audit removed unrelated AIP in focal-fat question and provided4supported extract responses/1gap on fixed public probes.11quote bindings verified. Added optional --general-extracts after reviewed study answers, separate UI envelope and explicit source-copy label. General anatomy location no longer requires scan measurement; scan boundaries preserved. Public30matrix:20supported expected records/citations intact,10boundaries no claims.90.73snormal-volume timeout prompted preserving original volume scope before fallback;3finalboundaryHTTPrechecks no model/0.36–0.43s. ExtraHTTPlocation49.21s/function30.54s/gap14.46s.165backend checks;86UIpass/1skip plus8pin checks;buildpass. Normal browser function answer/citation/return verified. Live8016updated,temporary8020stopped. GENERAL-SOURCE-ANSWER-2026-10-23.md records walkthrough/tradeoff: ready for source-extract user feedback, NOT fluent synthesis or broad independent acceptance. Failed free composer unchanged. No human-hours credit.
+
+## October 23 — scan/study comparison and repeated-answer latency
+
+User requested faster answers and scan-relative “big or small” questions. Added a local
+comparison intent for common whole-pancreas size phrasings; existing mask/geometry/boundary
+checks still run before any number. Arithmetic uses the existing reviewed NGT record
+(fact:25950180:whole-pancreas-volume:ngt:v1): 82.6 cm³ mean, 14 participants, MRI.
+The UI names the CT model-outline/MRI-study mismatch, unverified whole-organ coverage and
+model accuracy, and explicitly declines clinical large/small/normal classification. No
+normal range inferred from SEM, no disease interpretation, no reference annotations read,
+no scan data sent to literature service. Existing demo scans are not a normal cohort.
+Browser check on PanTS_00009005: 60.33 mL outline, 22.3 mL / 27.0% below study mean,
+with source link and limitations visible. Broader arbitrary scan interpretation remains open.
+
+General sentence selection now keeps the existing model warm for 10 minutes and reuses
+checked answers in process for up to 10 minutes / 32 entries. Key binds exact question,
+complete evidence, pinned model and prompt fingerprint; retrieval is rerun. Failures are
+not cached; responses are copied. No response content is written to disk by the service.
+Added retrieval/selection-check/cache timing plus per-model-pass Ollama counters (nanosecond
+durations; cached answers retain original generation counters). Both reasoning passes remain.
+Actual function question: first 52.16s (retrieval .365s; model path 51.776s), identical repeat
+.45s. Loading ~1.79s; token generation ~48.06s is the dominant cost. Repeated-response
+speed improves; first-answer latency and excessive quotation detail are NOT resolved.
+Exact answer equality and all source quote bindings checked. Public probe receipts retained
+under outputs/prowl/general-spans-20261023/cache-probe-{0,1}.json; no independent evaluation claim.
+
+Validation: 12 backend tests; 111 affected UI tests; production build passes (existing large
+chunk warning). Tests cover changed evidence/question, expiry, defensive copies, comparison
+arithmetic, semantic boundary preservation, local-only UI and citation rendering. Live service
+restarted with same --study-answers --general-extracts flags. No training or new model run.

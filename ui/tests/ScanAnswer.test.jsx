@@ -56,3 +56,12 @@ it('shows an invalid geometry refusal without a numeric answer', async () => {
   expect(await screen.findByText(/grids do not match/)).toBeTruthy()
   expect(screen.queryByText(/Calculated locally/)).toBeNull()
 })
+
+it('answers study comparisons locally with a source and explicit limits', async () => {
+  const user = userEvent.setup(); const search = vi.fn()
+  render(<LiteratureSearchPanel measurementContext={context} measure={async () => measurement} search={search} />)
+  await ask(user, 'Is this pancreas big or small?')
+  expect(await screen.findByText(/10.6 mL .* below/)).toBeTruthy()
+  expect(screen.getByRole('link', {name: /Study source/}).getAttribute('href')).toContain('25950180')
+  expect(search).not.toHaveBeenCalled()
+})

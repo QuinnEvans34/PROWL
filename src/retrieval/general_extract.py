@@ -1,5 +1,7 @@
 """General fallback: local model selects sentences; application copies their exact text."""
 from time import monotonic
+from collections import OrderedDict
+from copy import deepcopy
 from jsonschema import validate, ValidationError
 from .evidence_spans import sentence_offsets
 from .search_reformulation import MODEL, MODEL_SHA
@@ -46,11 +48,17 @@ def generate(question,evidence,call=None,trace=None):
     schema=dict(type='object',additionalProperties=False,required=['coverage','sentence_ids'],properties=dict(
         coverage=dict(type='string',enum=['supported','partial','none']),
         sentence_ids=dict(type='array',maxItems=6,uniqueItems=True,items=dict(type='string',enum=list(lookup)))))
+    model_timings=[]
     deadline=monotonic()+90
     def bounded(path,payload=None):
         if monotonic()>=deadline:raise TimeoutError('Selection deadline')
+        if path == 'chat':
+            payload = dict(payload, keep_alive='10m')
         r=api(path,payload,deadline=deadline) if call is None else call(path,payload)
         if monotonic()>=deadline:raise TimeoutError('Selection deadline')
+        if path == 'chat':
+            model_timings.append({key: r.get(key) for key in
+                ('total_duration', 'load_duration', 'prompt_eval_duration', 'eval_duration', 'prompt_eval_count', 'eval_count')})
         if trace is not None and path=='chat':trace.append(dict(request=payload,response=r))
         return r
     if not any(m['name']==MODEL and m['digest']==MODEL_SHA for m in bounded('tags')['models']):raise OSError('Pinned model unavailable')
@@ -62,7 +70,7 @@ def generate(question,evidence,call=None,trace=None):
         body=dict(body,proposed=selected)
     claims=[dict(text=lookup[sid]['quote'],citations=[lookup[sid]]) for sid in selected['sentence_ids']]
     return dict(status='summarized' if claims else 'insufficient',claims=claims,
-        coverage=selected['coverage'],provenance='model_selected_source_sentences',policy=POLICY,
+        model_timings=model_timings,coverage=selected['coverage'],provenance='model_selected_source_sentences',policy=POLICY,
         model=MODEL,model_sha256=MODEL_SHA,prompt_sha256=fingerprint(),validation='exact_source_sentences',
         limitation='These are selected research quotations, not findings from your scan.' if claims else 'The retrieved passages did not provide a directly supported answer to this question.')
 
@@ -72,11 +80,14 @@ class GeneralExtractAnswers:
     def __init__(self, reviewed, generate_fn=generate):
         from threading import Lock
         self.reviewed,self.generate_fn,self.lock=reviewed,generate_fn,Lock()
+        self.cache = OrderedDict()
 
     def answer(self,request):
         if not self.lock.acquire(blocking=False):raise OSError('Answer service busy')
         try:
+            started = monotonic()
             result=self.reviewed.answer(request)
+            retrieval_seconds = monotonic() - started
             selection=result.get('record_selection',{})
             clarifications={'specify_volume_or_linear_size','diabetes_population_unspecified',
                 'comparison_groups_unspecified','comparison_relationship_unspecified','study_mean_scope_required'}
@@ -89,7 +100,22 @@ class GeneralExtractAnswers:
                     or selection.get('status')!='dense_fallback' or selection.get('reason') in clarifications):return result
             result.update(schema_version='prowl-general-extract-response-v1',answer_policy=POLICY)
             try:
-                result['answer']=self.generate_fn(request['question'],result['evidence'])
+                key = digest([request['question'], result['evidence'], MODEL_SHA, fingerprint()])
+                cached = self.cache.get(key)
+                hit = cached is not None and monotonic() - cached[0] < 600
+                selection_started = monotonic()
+                if hit:
+                    result['answer'] = deepcopy(cached[1])
+                    self.cache.move_to_end(key)
+                else:
+                    result['answer']=self.generate_fn(request['question'],result['evidence'])
+                    self.cache[key] = (monotonic(), deepcopy(result['answer']))
+                    self.cache.move_to_end(key)
+                    while len(self.cache) > 32:
+                        self.cache.popitem(last=False)
+                result['timing'] = dict(retrieval_seconds=round(retrieval_seconds, 3),
+                    selection_and_check_seconds=round(monotonic()-selection_started, 3),
+                    checked_answer_cache_hit=hit, total_seconds=round(monotonic()-started, 3))
                 result['generation']='completed'
             except (OSError,ValueError,TimeoutError,KeyError,TypeError,ValidationError) as error:
                 result.update(answer=None,generation='unavailable',message='The local AI could not select a checked source-based answer. The retrieved passages are still available.')

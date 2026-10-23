@@ -77,7 +77,7 @@ describe('deterministic mask arithmetic and validity', () => {
 })
 
 it.each(['how big is this pancreas?', 'What is the volume of my pancreas?', 'What is the size of the pancreas in this scan?'])('routes %s', q => expect(scanQuestion(q)).toBe('pancreas'))
-it.each(['How large is this pancreas and is it cancer?', 'What is the size of this pancreas head?', 'Is this lesion malignant?', 'Compare my pancreas to average'])('does not discard qualifiers in %s', q => expect(scanQuestion(q)).toBe('unsupported'))
+it.each(['How large is this pancreas and is it cancer?', 'What is the size of this pancreas head?', 'Is this lesion malignant?'])('does not discard qualifiers in %s', q => expect(scanQuestion(q)).toBe('unsupported'))
 it('keeps general literature separate', () => expect(scanQuestion('What is the average pancreas volume?')).toBe(null))
 
 function nifti({ invalidLabel = false, slope = 0 } = {}) {
@@ -121,4 +121,15 @@ it('gzip transport and HTTP-decoded NIfTI yield the same content identity', asyn
     expect(a.predictionSha256).toBe(b.predictionSha256)
     expect(a.ctSha256).toBe(b.ctSha256)
   } finally { vi.unstubAllGlobals() }
+})
+
+ it.each(['Is this pancreas big or small?', 'Is this pancreas larger than average?', 'Compare my pancreas to average', 'How does the size of this pancreas compare to the average?'])('routes a bounded scan comparison: %s', q => expect(scanQuestion(q)).toBe('pancreas_comparison'))
+it.each(['Is this pancreas big or small and is it cancer?', 'Is this pancreas not larger than average?', 'Is this lesion larger than average?'])('does not silently drop comparison qualifiers: %s', q => expect(scanQuestion(q)).toBe('unsupported'))
+it('compares a mask with a study mean without declaring clinical normality', () => {
+  const text = measurementText({pancreasMl: 100}, 'pancreas_comparison')
+  expect(text).toContain('17.4 mL (21.1%) above')
+  expect(text).toContain('14 participants')
+  expect(text).toContain('MRI')
+  expect(text).toContain('not an individual normal range')
+  expect(text).toContain('coverage and model accuracy are unverified')
 })
