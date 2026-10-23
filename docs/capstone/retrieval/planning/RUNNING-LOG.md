@@ -2221,3 +2221,10 @@ internal reserve; partial transfer and failure preserved, experimental servers s
 choice about the verified18.6GB existing thinking-model relocation versus freeing space himself; shared
 Ollama storage has not been changed. Latest59backend/57UI checks pass; five hard boundaries checked
 offline, not a full-suite answer pass. Original evaluation inputs unchanged; no replacement promoted.
+
+### October22: verified model relocation and optional direct composition
+
+User-approved thinking-model relocation recovered18.55GB internally after two hash checks;
+Ollama identity preserved,8B remains internal. New instruction download resumed with its remaining
+original budget. Optional direct answer/review comparison adds no label lookup and passes65focused
+backend tests; live service and original evaluation remain unchanged. See EVIDENCE-LED-REPAIR report.

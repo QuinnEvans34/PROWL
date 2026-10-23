@@ -245,14 +245,14 @@ def create_study_answers(baseline):
         measurement_composer=answers.measurement_composer, study_composer=composer)
 
 
-def create_evidence_answers(baseline, model='qwen3:8b', trace=False, thinking=False):
+def create_evidence_answers(baseline, model='qwen3:8b', trace=False, thinking=False, composition='units'):
     from src.retrieval.evidence_answer import EvidenceAnswers, INSTRUCTION_MODEL
     from src.retrieval.natural_answer import api
     from functools import partial
     manifest = checked_json(baseline.config['manifest'], ROOT)
     bundles = [checked_json(s['bundle'], ROOT) for s in manifest['sources']]
     records = [i['record'] for pin in manifest['batches'] for i in checked_json(pin, ROOT)['items']]
-    return EvidenceAnswers(baseline, bundles, records, model=model, trace=trace, thinking=thinking,
+    return EvidenceAnswers(baseline, bundles, records, model=model, trace=trace, thinking=thinking, composition=composition,
         transport=partial(api,port=11436 if model==INSTRUCTION_MODEL else 11435 if model=='qwen2.5:14b' else 11434))
 
 
@@ -268,6 +268,7 @@ if __name__ == '__main__':
     parser.add_argument('--evidence-answers', action='store_true', help='Evidence-led general local answers (candidate)')
     parser.add_argument('--evidence-model', choices=['qwen3:8b','qwen3:30b','qwen2.5:14b','qwen3:30b-a3b-instruct-2507-q4_K_M'], default='qwen3:8b')
     parser.add_argument('--evidence-thinking', action='store_true', help='Reasoning in evidence selection and review (candidate only)')
+    parser.add_argument('--evidence-composition', choices=['units','direct'], default='units', help='Candidate composition comparison')
     parser.add_argument('--evidence-trace', action='store_true', help='Include candidate drafts in local regression responses; never enable for the demo')
     args = parser.parse_args()
     service = create_service(args.config)
@@ -280,7 +281,7 @@ if __name__ == '__main__':
     if args.study_answers:
         sources, answers = create_study_answers(service)
     if args.evidence_answers:
-        sources = answers = create_evidence_answers(service, args.evidence_model, args.evidence_trace, args.evidence_thinking)
+        sources = answers = create_evidence_answers(service, args.evidence_model, args.evidence_trace, args.evidence_thinking, args.evidence_composition)
     server = LocalFixtureServer(('127.0.0.1',args.port),handler_for(service, sources, answers))
     print(f'Development literature search ready on 127.0.0.1:{args.port}',flush=True)
     try: server.serve_forever()

@@ -193,3 +193,52 @@ def test_instruction_variant_rejects_unsupported_thinking_mode(engine,bundle):
     s,*_=engine
     with pytest.raises(ValueError,match='does not support thinking'):
         EvidenceAnswers(s.baseline,[bundle],s.index.records,model=INSTRUCTION_MODEL,thinking=True)
+
+
+def test_direct_composition_binds_canonical_citations_without_fact_selection(engine):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    draft=dict(status='summarized',limitation='',claims=[dict(text='The research uses CT.',citations=[2])])
+    responses.extend([plan,draft,passed]);result=s.answer(r)
+    assert result['generation']=='completed' and len(calls)==3
+    assert result['answer']['claims'][0]['citations'][0]['quote']==result['evidence'][1]['record']['text']
+    assert all(c['messages'][0]['content']!=EXTRACT for c in calls)
+
+
+def test_direct_repair_receives_all_feedback_and_original_sources(engine):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    draft=dict(status='summarized',limitation='',claims=[dict(text='The research uses CT.',citations=[2])])
+    feedback={k:dict(passed=False,issues=[k+' issue']) for k in passed}
+    responses.extend([plan,draft,feedback,draft,passed]);result=s.answer(r)
+    assert result['generation']=='completed'
+    repair=json.loads(calls[3]['messages'][1]['content'])
+    assert repair['review_feedback']==feedback and repair['previous_draft']==draft
+    assert len(repair['sources'])==len(result['evidence'])
+    assert len(calls)==5
+
+
+@pytest.mark.parametrize('claim',[
+    dict(text='The research reports 97% sensitivity.',citations=[2]),
+    dict(text='The research uses CT.',citations=[999]),
+])
+def test_direct_cannot_publish_invented_numbers_or_citation_ids(engine,claim):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    draft=dict(status='summarized',limitation='',claims=[claim])
+    responses.extend([plan,draft,deepcopy(passed),draft,deepcopy(passed)])
+    result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None
+
+
+def test_direct_gap_has_explicit_limit_and_no_unsupported_assertions(engine):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    draft=dict(status='insufficient',limitation='The sources do not report that comparison.',claims=[])
+    responses.extend([plan,draft,passed]);result=s.answer(r)
+    assert result['generation']=='completed' and result['answer']['status']=='insufficient'
+    assert result['answer']['claims']==[] and 'review' not in result
+
+
+def test_direct_repeated_incompleteness_remains_withheld(engine):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    draft=dict(status='summarized',limitation='',claims=[dict(text='The research uses CT.',citations=[2])])
+    fail={**passed,'completeness':dict(passed=False,issues=['Missing qualification.'])}
+    responses.extend([plan,draft,fail,draft,fail]);result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None

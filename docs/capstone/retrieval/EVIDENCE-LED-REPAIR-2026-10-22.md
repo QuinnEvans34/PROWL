@@ -116,3 +116,24 @@ clinical/privacy/fabrication regression requests produced the intended explanati
 30-case end-to-end pass. Original reviewed-draft and transcription hashes remain unchanged. The new
 regression artifacts remain in the working encrypted image; a fresh independent backup is pending
 closeout, and existing frozen-input/result backups remain preserved.
+
+### Direct composition comparison
+
+An opt-in `--evidence-composition direct` candidate now composes from the complete retrieved
+passages, then performs the same separate support/completeness/readability review. One bounded
+revision receives all feedback and original sources. Citation IDs are restricted to retrieved
+canonical passages; unknown numeric values in a paragraph’s cited sources force rejection. This
+removes forced sentence-by-sentence rewriting from the comparison without relaxing acceptance
+criteria. The existing units method remains the default and the live service is unchanged.
+65 focused backend tests pass, including invented citations/numbers, repeated incompleteness and
+repair feedback. These are engineering checks, not a semantic accuracy result.
+
+Quinton approved relocating the unused thinking-model weights. The exact18,556,685,856byte
+blob was copied to `PROWL/artifacts/retained-models/qwen3-thinking-2507` on the registered external
+drive, checked during copying and independently reread against SHA25658574f2e…c8eabf, then linked
+atomically at its original Ollama location. Only `qwen3/30b` references that blob; Ollama tags/show
+remained identical and8B stayed internal. Internal free space increased from111,856,410,624 to
+130,410,762,240bytes (about18.55GB recovered). The thinking model now requires the external drive.
+Receipt: `outputs/prowl/answer-instruct-20261022/thinking-relocation.json`. No storage floor was
+lowered. Download attempt03 resumes retained instruction-model partials within the remaining1009
+seconds of the original20minute active budget. Earlier failed receipts remain unchanged.
