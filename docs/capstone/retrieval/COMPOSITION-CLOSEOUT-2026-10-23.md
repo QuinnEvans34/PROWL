@@ -252,3 +252,23 @@ pass,4dedicated-database integration checks skip without their explicit fixture.
 admission at50GB, rejection one byte below, and the unchanged external floor. Literature service was
 restarted with its same `--study-answers` policy and health reports checked again; generation quality
 is not established by health.14B comparison resumed after this verification.
+
+The resumed14B attempt did not reach scored questions: its180second warmup request timed out while
+loading tensors. Including cleanup, supervision lasted190.89seconds with8,975,826,944bytes peak
+sampled owned RSS. The worker exited1; the server required SIGKILL after its10second graceful-stop
+allowance, then was reaped and11435released. The receipt's null `stop_reason` means no resource
+monitor threshold fired; the warmup traceback and server log establish the actual timeout. No
+storage stop occurred under the revised rule. No further startup retry or timeout extension was
+made. Matched14Banswer quality remains unmeasured; prior14Bquality failures remain historical
+results with different inputs. The operational blocker has therefore changed from a policy refusal
+to slow model startup. Do not attribute this to the model's reading ability or claim a model winner.
+
+A real request through the existing8016demo policy returned a local8B-composed inflammation/tumor
+answer in10.04seconds: four claim blocks, seven canonical passages and eight exact citation excerpts.
+The important “no single feature” qualification and literature-only scope are present. This verifies
+recovery of the existing narrow answer path, not qualification of the broad experimental composer.
+The first smoke request omitted the required schema/request ID and correctly returned400; its receipt
+is retained separately from the corrected valid request. Citation checking used the project virtual
+environment after system Python lacked jsonschema. UI5180, literature8016 and reviews8018 all return200.
+Final measured internal free105.83GB exceeds the new50GB floor. There is no new candidate promotion;
+next work is diagnosing model startup before another scored14Battempt, not repeating8Bprompt changes.
