@@ -186,3 +186,51 @@ Reproducible local plan/script, all ten results and case-by-case manual review a
 `bae647f53abc9afb8002e75f926850a680c4d58918aa81217989e5d359ff79f0`.
 These are exposed public diagnostic questions, not a new independent evaluation or a rescore of the
 30-case regression. No private image was opened, and no training or new model download was performed.
+
+## Follow-up: matched small-packet model comparison (partially blocked)
+
+Quinton authorized comparing existing local models on identical manually verified evidence. This
+adds no production mode. The previous 14B required-role/source-rewriting probes used different inputs
+and prompts; this comparison fixes both to isolate composition. The repeated 30B startup failures
+are not retried. Local receipts: `outputs/prowl/matched-composer-20261023/`.
+
+The five public questions are unchanged. Canonical whole passages supply the three supported cases:
+negative EUS-FNA (one paragraph), infection (three, including fistula and MRI qualifications), and
+focal fat (three, including benign-mimic/surgery context). Two gap controls retain adjacent stiffness
+research and guideline excerpts without the requested adult normal range or branch-duct interval.
+The gap judgment here is relative to the supplied packet; it is not proof of corpus-wide absence.
+Source text, identities, offsets and hashes were checked against canonical representations. An initial
+preparation lookup used the wrong key type and stopped before any model call; it was corrected to
+passage-ID lookup without changing source bytes.
+
+Before generation, the packets and manual criteria were frozen in `plan.json`, SHA-256
+`ad6e9b5ebb6c7b23c6a32a517f39510eee04d1765cfd7c9502d0d2ea76f1f1e1`.
+The same preceding minimal-composer prompt/schema is used, with only supplied citation IDs restricted
+per packet. Model inputs contain question and sources only, not the manual criteria. Settings remain
+non-thinking, temperature0, seed42, context16384, output1800tokens,60seconds per scored call.
+
+| Public diagnostic | 8B result against the fixed checks |
+| --- | --- |
+| Negative EUS-FNA | Correct, directly cited “no”; omits the provided false-negative/low-NPV explanation. This is an incomplete correct answer, not a false answer. |
+| Infection | Gas, wall-enhancement limitation, fistula and MRI gas qualifier retained. Clinical suspicion omitted; unrelated APFC/pseudocyst MRI detail added. |
+| Focal fat | Correct CT border/no obstruction, complementary MRI and anatomy. Practical benign-mimic/unnecessary-surgery qualification omitted; extra ultrasound detail retained. |
+| Normal stiffness | Precise missing normal range named, but also asserted as a cited fact and followed by unrequested age/disease values. Disease values remain labeled AIP/PDAC; they are not literally labeled normal. |
+| Surveillance interval | Unsupported guideline-wide claim that no particular interval exists, inferred risk-based monitoring and an empty gap field. |
+
+All five 8B calls completed; all18claim citation bindings resolve to their actual inputs. Literal
+clinical facts in the three supported answers are source-supported, but none meets all frozen
+completeness/relevance checks. Exact binding does not validate the absence claims. Draft-call times
+1.07–6.79seconds, median4.67seconds; these exclude retrieval/review and are not end-to-end latency.
+Manual judgments are development-assistant review, not independent adjudication. No original
+30-case score was changed and no replacement was promoted.
+
+The idle 8B model was unloaded before starting the existing isolated14B store on11435. Startup
+began with104.21GiB internal free. After38.14seconds the supervisor stopped at the unchanged104GiB
+reserve, while tensors were still loading; no scored14B request ran. Peak sampled owned RSS was
+3,430,875,136bytes. Owned worker/server were stopped/reaped and11435released. This is a resource
+blockage, not a14B answer-quality result. There was one bounded startup attempt, no retry/download.
+The main Ollama service has no resident model afterward. Internal space remained103.95GiB, so the
+unchanged literature backend reports unavailable through its storage guard. Quinton was asked to
+free about5GiB for headroom. No unrelated apps/files were stopped or removed, and no reserve was
+weakened. The matched comparison remains incomplete pending resource recovery; there is no basis
+yet to select14B or conclude that every installed model fails this exact test.
