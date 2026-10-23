@@ -137,3 +137,41 @@ remained identical and8B stayed internal. Internal free space increased from111,
 Receipt: `outputs/prowl/answer-instruct-20261022/thinking-relocation.json`. No storage floor was
 lowered. Download attempt03 resumes retained instruction-model partials within the remaining1009
 seconds of the original20minute active budget. Earlier failed receipts remain unchanged.
+
+A bounded retrieval-only comparison used the same20exposed supported questions: reciprocal-rank
+fusion of20dense hits and lexical section scores delivered58/74labeled concept spans, with all spans
+for10/20questions, versus69/74and16/20for the existing12-section hybrid. These overlap diagnostics
+are not answer accuracy or proof of full semantic support. The weaker fusion was not integrated.
+The live8016health check again reports backend checked after storage recovery.
+
+The direct candidate now also supports an explained semantic refusal when the initial narrow
+wording checks do not match. It cannot attach assertions to that refusal, and review distinguishes
+prohibited requests from ordinary literature questions or evidence gaps.67focused backend tests pass.
+Download03 transferred the full blobs but its client timed out at608.448seconds during Ollama’s
+server-side verification. The failure receipt is retained; no inference follows until manifest,
+all blob hashes and model capabilities are independently verified.
+
+Ollama completed installation immediately after the download client’s timeout; the pinned tag
+appeared with exact registry digest19e422b0…. An independent full reread verified all six blobs,
+including weights, config, template, license, parameters and embedded registry manifest. The first
+verification script then rejected an overly broad assumption that the template contained no think
+tags anywhere. Inspection confirmed those tags parse historical assistant messages; the actual
+generation prefix does not open a thinking block, and GGUF metadata explicitly says Instruct2507.
+That failed assumption and the corrected capability inspection are retained separately. No template
+override or blob modification was made. Controlled instruction-model inference can now proceed.
+
+The new instruction model’s chat endpoint still produced reasoning content with `think:false`,
+incomplete drafts and false review complaints. Direct raw ChatML generation produced structured
+answers from its first token and preserved an ANC exception previously lost, but also included
+unsupported context. The opt-in candidate now uses that explicit format only for the pinned
+instruction model, with all untrusted `<` characters JSON-escaped to prevent role-token injection.
+68focused backend tests pass. This transport change is not semantic qualification; the first
+end-to-end raw answer still failed support/completeness review, with both real answer errors and
+contradictory reviewer complaints retained. No live promotion.
+
+The instruction-model navigation-menu probe was weaker on the four remaining retrieval-gap cases:
+only5/15concept-span overlaps, versus10/15under the current hybrid. It was not integrated.
+Official references used to inspect the transport: https://docs.ollama.com/api/generate and
+https://raw.githubusercontent.com/ollama/ollama/v0.40.2/server/routes.go (raw format applies from
+the first token); https://github.com/QwenLM/Qwen3/blob/main/docs/source/getting_started/quickstart.md
+(Instruct2507 uses non-thinking mode). The exact cause of chat-mode reasoning output is unproven.
