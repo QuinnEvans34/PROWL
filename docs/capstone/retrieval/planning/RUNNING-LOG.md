@@ -2238,3 +2238,5 @@ bring methods and limitations with retrieved results. Exposed-set span-delivery 
 72focused backend tests pass. Original corpus/evaluation/labels remain unchanged.
 
 2026-10-22: Linked-context30-case regression completed; no supported answer met all unchanged completeness labels. Five hard boundaries explained correctly; five evidence gaps still withheld. Dedicated gap review added with contradictory-feedback rejection;78focused backend checks pass. Candidate remains unpromoted; original evaluation unchanged.
+
+2026-10-22: Coverage-audit canary failed completeness and admitted one wrong-comparator answer; retained/unpromoted. Added source-availability plus confirmation before composition. Controlled gap probe5/5 correct with two answerable controls not withheld;81focused checks pass. Live qualification pending; no test-label changes or human-hour credit.

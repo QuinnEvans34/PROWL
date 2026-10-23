@@ -3,7 +3,7 @@ from copy import deepcopy
 import json
 from types import SimpleNamespace
 import pytest
-from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT, COVERAGE, GAP_REVIEW
+from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT, COVERAGE, GAP_REVIEW, AVAILABILITY
 from tests.retrieval.test_direct_ingestion import bundle
 from tests.retrieval.test_literature_adapter import setup
 
@@ -37,6 +37,8 @@ def engine(setup,bundle):
     def transport(path,payload=None,**kwargs):
         if path=='tags':return {'models':[dict(name=DENSE_MODEL,digest=DENSE_MODEL_SHA)]}
         calls.append(payload)
+        if payload['messages'][0]['content']==AVAILABILITY:
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(requested_information='Explain the research.',missing_information=''))))
         if payload['messages'][0]['content']==GAP_REVIEW:
             review=responses.pop(0)
             value=dict(answer_available=not review['completeness']['passed'],limit_supported=review['support']['passed'],readable=review['readability']['passed'],issues=[issue for v in review.values() for issue in v['issues']])
@@ -59,25 +61,25 @@ def test_canonical_source_binding_and_no_catalog(engine):
     assert result['generation']=='completed'
     claim=result['answer']['claims'][0]
     assert claim['citations'][0]['quote']==result['evidence'][1]['record']['text']
-    assert len(calls)==5 and not s.lock.locked()
+    assert len(calls)==6 and not s.lock.locked()
 
 
 def test_all_feedback_reaches_one_bounded_repair(engine):
     s,r,calls,responses,plan,draft,passed=engine
     feedback={k:dict(passed=False,issues=[v]) for k,v in dict(support='Citation does not support the asserted outcome.',completeness='Omitted method.',readability='Unclear referent.').items()}
     responses.extend([plan,draft,feedback,draft,passed]);assert s.answer(r)['generation']=='completed'
-    repair=json.loads(calls[7]['messages'][1]['content'])
+    repair=json.loads(calls[8]['messages'][1]['content'])
     assert repair['review_feedback']==feedback and repair['previous_draft']==draft
-    assert len(calls)==9
-    assert 'review_feedback' not in json.loads(calls[8]['messages'][1]['content'])
-    assert 'previous_draft' not in json.loads(calls[8]['messages'][1]['content'])
+    assert len(calls)==10
+    assert 'review_feedback' not in json.loads(calls[9]['messages'][1]['content'])
+    assert 'previous_draft' not in json.loads(calls[9]['messages'][1]['content'])
 
 
 def test_repeated_rejection_does_not_publish_draft(engine):
     s,r,calls,responses,plan,draft,passed=engine
     fail={**passed,'support':dict(passed=False,issues=['Unsupported assertion.'])}
     responses.extend([plan,draft,fail,draft,fail]);result=s.answer(r)
-    assert result['answer'] is None and result['generation']=='unavailable' and len(calls)==9
+    assert result['answer'] is None and result['generation']=='unavailable' and len(calls)==10
 
 
 def test_unknown_citation_cannot_be_bound(engine):
@@ -207,7 +209,7 @@ def test_direct_composition_binds_canonical_citations_without_fact_selection(eng
     s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
     draft=dict(status='summarized',limitation='',claims=[dict(text='The research uses CT.',citations=[2])])
     responses.extend([plan,draft,passed]);result=s.answer(r)
-    assert result['generation']=='completed' and len(calls)==3
+    assert result['generation']=='completed' and len(calls)==4
     assert result['answer']['claims'][0]['citations'][0]['quote']==result['evidence'][1]['record']['text']
     assert all(c['messages'][0]['content']!=EXTRACT for c in calls)
 
@@ -218,10 +220,10 @@ def test_direct_repair_receives_all_feedback_and_original_sources(engine):
     feedback={k:dict(passed=False,issues=[k+' issue']) for k in passed}
     responses.extend([plan,draft,feedback,draft,passed]);result=s.answer(r)
     assert result['generation']=='completed'
-    repair=json.loads(calls[3]['messages'][1]['content'])
+    repair=json.loads(calls[4]['messages'][1]['content'])
     assert repair['review_feedback']==feedback and repair['previous_draft']==draft
     assert len(repair['sources'])==len(result['evidence'])
-    assert len(calls)==5
+    assert len(calls)==6
 
 
 @pytest.mark.parametrize('claim',[
@@ -405,3 +407,42 @@ def test_gap_review_cannot_approve_contradictory_flags_and_issues(engine):
     result=s.review_draft('A question.',[],dict(status='insufficient',limitation='Not reported.',claims=[]),monotonic()+10)
     assert result['support']['passed'] is False
     assert result['support']['issues']==['Unsupported statement.']
+
+
+@pytest.mark.parametrize('available', [False, True])
+def test_availability_limit_requires_gap_confirmation_or_returns_to_composition(engine,available):
+    s,r,calls,responses,plan,draft,passed=engine
+    original=s.transport
+    def transport(path,payload=None,**kwargs):
+        if path=='chat' and payload['messages'][0]['content']==AVAILABILITY:
+            calls.append(payload)
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(
+                requested_information='The requested comparison.',missing_information='The comparison is absent.'))))
+        return original(path,payload,**kwargs)
+    s.transport=transport
+    check=deepcopy(passed)
+    if available:check['completeness']=dict(passed=False,issues=['The comparison is provided.'])
+    responses.extend([plan,check]+([draft,passed] if available else []))
+    result=s.answer(r)
+    assert result['generation']=='completed'
+    assert result['answer']['status']==('summarized' if available else 'insufficient')
+    if not available:
+        assert result['answer']['claims']==[]
+        assert not any(c['messages'][0]['content']==EXTRACT for c in calls)
+    assert 'availability' not in result
+
+
+def test_unfaithful_gap_explanation_cannot_pass_or_fall_through_to_invented_answer(engine):
+    s,r,calls,responses,plan,draft,passed=engine
+    original=s.transport
+    def transport(path,payload=None,**kwargs):
+        if path=='chat' and payload['messages'][0]['content']==AVAILABILITY:
+            calls.append(payload)
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(
+                requested_information='The requested comparison.',missing_information='No related study exists.'))))
+        return original(path,payload,**kwargs)
+    s.transport=transport
+    failed=deepcopy(passed);failed['support']=dict(passed=False,issues=['Related studies exist; only the comparison is absent.'])
+    responses.extend([plan,failed]);result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None
+    assert not any(c['messages'][0]['content']==EXTRACT for c in calls)

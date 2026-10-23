@@ -244,3 +244,22 @@ limit is faithful, and whether the explanation is clear. Related studies cannot 
 missing modality, comparison or number. Contradictory flags and issues cannot approve a gap. This
 retains the same evidence requirements while separating absence checking from summary completeness.
 78focused backend checks passed; live qualification of this revision remains pending.
+
+### Availability check before composition
+
+The coverage-audit canary did not qualify: four of six supported cases returned incomplete answers;
+two were withheld. Of two gap cases, one was withheld and one incorrectly returned an adjacent
+comparison as a complete answer. This regression remains preserved and unpromoted. Plain-text
+composition and paragraph/section selection probes recovered some detail but still added unsupported
+claims or omitted qualifications; none qualifies as a replacement. Required-role composition is a
+diagnostic only, not a selected implementation.
+
+A narrower failure is now isolated: the model can explain that the requested comparison is absent
+while also setting an answerable flag. A source-availability pass now states the requested information
+and any precise missing information before composition; a separate gap review must confirm the
+limit. Only a confirmed limit is returned without clinical claims. If the reviewer finds the answer
+in the sources, ordinary composition continues; if the limit itself is unfaithful, it is withheld.
+The controlled probe confirmed all five missing-evidence explanations and correctly rejected the
+proposed gap on an answerable control. A second answerable control selected ordinary composition.
+81focused backend tests pass. End-to-end live qualification follows; supported-answer completeness
+and the original independent result remain unchanged.
