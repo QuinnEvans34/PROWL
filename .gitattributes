@@ -1,0 +1,3 @@
+# This public source-path inventory is byte-pinned by the portable readiness tests.
+# Preserve its published LF bytes on Windows as well as macOS.
+tests/fixtures/duration_readiness_script_paths.json text eol=lf

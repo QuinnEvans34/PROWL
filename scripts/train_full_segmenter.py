@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Supervised full-cohort capstone session/executor entry point; no legacy training loop."""
 import argparse
-import fcntl
 import json
 import os
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT))
 from src.training import experiment_config as E
 from src.data.manifest_records import canonical
 from src.data.source_inventory_records import require
+from src.operations.full_training_platform import durable_replace, training_guard, require_ac
 
 
 def session_config(cfg):
@@ -62,7 +63,24 @@ def preflight(cfg, inspect=False):
 
 
 def tree_bytes(root):
-    return sum(p.stat().st_size for p in Path(root).rglob('*') if p.is_file()) if Path(root).exists() else 0
+    root = Path(root)
+    if not root.exists():
+        return 0
+    # Cache writers atomically rename .tmp files. Restart the entire scan when
+    # an enumerated name disappears, so the replacement is counted, not skipped.
+    for attempt in range(3):
+        try:
+            root.stat()
+            total = 0
+            for path in root.rglob('*'):
+                info = path.stat()
+                if stat.S_ISREG(info.st_mode):
+                    total += info.st_size
+            root.stat()
+            return total
+        except FileNotFoundError:
+            if attempt == 2:
+                raise
 
 
 def worker(cfg, report, resume=None):
@@ -90,10 +108,7 @@ def worker(cfg, report, resume=None):
         with path.open('rb') as src, temp.open('xb') as dest:
             shutil.copyfileobj(src, dest); dest.flush(); os.fsync(dest.fileno())
         require(E.sha256(temp) == E.sha256(path), 'Backup verification failed')
-        os.replace(temp, backup / path.name)
-        fd = os.open(backup, os.O_RDONLY)
-        try: os.fsync(fd)
-        finally: os.close(fd)
+        durable_replace(temp, backup / path.name)
     def backup_checkpoint(path):
         copy_backup(path)
         copy_backup(path.parent / 'history.jsonl')
@@ -118,7 +133,9 @@ def worker(cfg, report, resume=None):
     result = execute(session, provider, output / 'execution',
         validate_every=cfg['_experiment']['run']['validate_every'],
         checkpoint_every=cfg['_experiment']['run']['checkpoint_every'], tick=tick,
-        checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation)
+        checkpoint_hook=backup_checkpoint, initial_best=initial_best, continuation=continuation,
+        target_seconds=cfg['_experiment']['run'].get('target_seconds'),
+        retain_steps=cfg['_experiment']['run'].get('retain_steps', []))
     copy_backup(output / 'execution' / 'history.jsonl')
     (output / 'result.json').write_bytes(canonical(result))
     copy_backup(output / 'result.json')
@@ -136,6 +153,8 @@ def main():
     args = parser.parse_args(); cfg = E.load_experiment(args.experiment)
     require(bool(args.resume_checkpoint) == bool(args.resume_sha256), 'Resume checkpoint and SHA-256 required together')
     resume = dict(checkpoint=str(Path(args.resume_checkpoint).resolve()), checkpoint_sha256=args.resume_sha256) if args.resume_checkpoint else None
+    require(not (resume and cfg['_experiment']['run'].get('target_seconds')),
+            'Timed-run resume needs an explicitly reconciled remaining duration; automatic timer reset refused')
     if 'full_segmenter' in cfg:
         cfg['paths']['output_dir'] = cfg['full_segmenter']['output_dir']
     report = preflight(cfg, inspect=args.inspect_input_paths or not args.preflight)
@@ -155,15 +174,18 @@ def main():
     if args.worker:
         require(os.environ.get('PROWL_FULL_SUPERVISED') == '1', 'Use the supervised entry point')
         print(json.dumps(worker(cfg, report, resume))); return 0
-    from src.operations.segmenter_duration_dispatch_v1 import watch
-    lock_path = ROOT / 'outputs/prowl/.mps-profile.lock'
+    if os.name == 'nt':
+        from src.operations.full_training_platform import watch_windows as watch
+    else:
+        from src.operations.segmenter_duration_dispatch_v1 import watch
+    lock_path = ROOT / ('outputs/prowl/.cuda-training.lock' if os.name == 'nt' else 'outputs/prowl/.mps-profile.lock')
     lock_path.parent.mkdir(parents=True, exist_ok=True)
-    with lock_path.open('a') as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        require('AC Power' in subprocess.check_output(['pmset', '-g', 'batt'], text=True), 'AC power required')
+    with training_guard(lock_path):
         env = dict(os.environ, PYTORCH_ENABLE_MPS_FALLBACK='0', PROWL_FULL_SUPERVISED='1')
-        command = ['/usr/bin/caffeinate', '-dimsu', sys.executable, str(Path(__file__).resolve()),
+        command = [sys.executable, str(Path(__file__).resolve()),
                    '--experiment', str(Path(args.experiment).resolve()), '--worker']
+        if os.name != 'nt':
+            command = ['/usr/bin/caffeinate', '-dimsu'] + command
         if resume:
             command += ['--resume-checkpoint', resume['checkpoint'], '--resume-sha256', resume['checkpoint_sha256']]
         full = cfg['full_segmenter']; last_scan = [0.]
@@ -171,6 +193,7 @@ def main():
             E.check_resources(cfg, elapsed=0)
             # The inherited watchdog also bounds stalled kernels and owned process memory.
             if time.monotonic() - last_scan[0] >= 30:
+                require_ac()
                 require(tree_bytes(full['cache_dir']) <= full['cache_max_bytes'], 'Derived cache budget exceeded')
                 require(tree_bytes(full['backup_dir']) <= full['backup_cap_bytes'], 'Backup budget exceeded')
                 last_scan[0] = time.monotonic()

@@ -81,8 +81,8 @@ def reusable(tmp_path):
 
 def test_reuse_on_different_drive_roots_without_ct_or_models(tmp_path):
     plan = reusable(tmp_path)
-    plan['cases'][0]['ct']['path'] = '/absent/new-root/ct.nii.gz'
-    for model in plan['inference']['models'].values(): model['path'] = '/absent/weights.pt'
+    plan['cases'][0]['ct']['path'] = str(tmp_path / 'absent/new-root/ct.nii.gz')
+    for model in plan['inference']['models'].values(): model['path'] = str(tmp_path / 'absent/weights.pt')
     def forbidden(*args): raise AssertionError('Compatible reuse must not execute models')
     journal = run_predictions(plan, PIN, tmp_path / 'reuse', forbidden)
     assert json.loads(journal.read_text())['status'] == 'reused'

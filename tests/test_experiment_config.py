@@ -22,7 +22,7 @@ def experiment(tmp_path, monkeypatch):
         path = tmp_path / f'{key}.txt'; path.write_text('\n'.join(values)); cohort[key] = str(path)
     path = tmp_path / 'manifest.csv'; cohort['manifest'] = str(path)
     payload = tmp_path / 'invented-placeholder'; payload.write_text('metadata fixture, never decoded')
-    with path.open('w') as stream:
+    with path.open('w', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=['case_id', 'ct_path', 'pancreas_path', 'lesion_path']); writer.writeheader()
         for name in names['train_ids'] + names['development_ids']:
             writer.writerow(dict(case_id=name, ct_path=str(payload), pancreas_path=str(payload), lesion_path=str(payload)))
@@ -34,6 +34,19 @@ def experiment(tmp_path, monkeypatch):
 
 def load(experiment):
     spec, path, _ = experiment; path.write_text(yaml.safe_dump(spec)); return E.load_experiment(path)
+
+
+@pytest.mark.parametrize('target', [0, -1, True, 60, 61])
+def test_endurance_target_must_fit_watchdog(experiment, target):
+    experiment[0]['run']['target_seconds'] = target
+    with pytest.raises(ValueError, match='duration target'): load(experiment)
+
+
+def test_endurance_target_keeps_step_and_runtime_bounds(experiment):
+    experiment[0]['run']['target_seconds'] = 50
+    cfg = load(experiment)
+    assert cfg['_experiment']['run']['target_seconds'] == 50
+    assert cfg['_experiment']['run']['max_seconds'] == 60
 
 
 @pytest.mark.parametrize('steps', [24000, 72000, 100000])
@@ -53,6 +66,24 @@ def test_duplicate_and_cross_role_members_refused(experiment):
     errors = E.preflight(load(experiment))['errors']
     assert any('overlap' in s for s in errors)
     assert any('original training' in s for s in errors)
+
+
+def test_explicit_panorama_addition_preserves_original_roles(experiment):
+    from src.data.segmenter_mixed_inputs_v1 import DOMAIN, EXCLUDED
+    spec,_,root=experiment;cohort=spec['cohort'];name='panorama:study:unit'
+    original=E.resolve(cohort['original_train_ids']).read_bytes()
+    train=E.resolve(cohort['train_ids']);train.write_text(train.read_text()+'\n'+name)
+    manifest=E.resolve(cohort['manifest']);payload=root/'invented-placeholder'
+    with manifest.open('a') as f:f.write(f'{name},{payload},{payload},{payload}\n')
+    review_path=E.resolve(cohort['review']);review=json.loads(review_path.read_text())
+    review.update(domain=DOMAIN,policy='declared_imports_excluded_five_dev_holds_exploratory',
+        excluded_development=sorted(EXCLUDED),panorama_cache={'members':{name:{}}})
+    review['input_sha256']={k:E.sha256(v) for k,v in cohort.items() if k!='review'}
+    review_path.write_text(json.dumps(review))
+    assert E.preflight(load(experiment))['ready']
+    assert E.resolve(cohort['original_train_ids']).read_bytes()==original
+    review['policy']='unapproved';review_path.write_text(json.dumps(review))
+    assert not E.preflight(load(experiment))['ready']
 
 
 def test_manifest_missing_member_and_stale_review(experiment):

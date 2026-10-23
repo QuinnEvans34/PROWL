@@ -6,12 +6,17 @@ at once. Update a machine's section in place when its facts change; keep the dat
 
 Created 2026-10-07 at Quinton's request (two laptops → two concurrent training jobs).
 
+October17 synchronization: the Windows laptop is the primary stationary trainer, as selected on
+October8. Its qualified environment and completed experiments supersede the old inventory-pending
+assumption below. Source histories are now integrated locally; ignored data, checkpoints and tracking
+databases do not move through Git. Recheck runtime/resource state at launch, not by reinstalling.
+
 ## Machines
 
 | Tag | Machine | Role | Status |
 |---|---|---|---|
-| `mac` | 14" MacBook Pro, Apple M5 Pro | Canonical repository checkout, data caches, primary training | Active |
-| `win` | Windows laptop | Second concurrent training job | **Inventory pending**: run `scripts/diagnostics/machine_inventory.ps1` and paste the result below |
+| `mac` | 14" MacBook Pro, Apple M5 Pro | Development, research/UI and historical training | Incoming source through October17 integrated; runtime not inspected from Windows |
+| `win` | Lenovo ThinkPad P1 Gen 6, RTX 4060 8 GB | Primary stationary trainer | PanTS24k, mixed24k and PanTS72k completed; next augmentation experiment specified, not launched |
 
 Use the tag in every run name (for example `cap_baseline_wholebox_rspancreas_mac`) so archives,
 ledgers and MLflow runs always say where they ran.
@@ -45,11 +50,15 @@ Notable caches (folder name → cases):
 
 ## `win` — Windows laptop
 
-**Not yet inventoried.** Paste the output of `scripts/diagnostics/machine_inventory.ps1` here,
-then summarize: GPU model and VRAM, driver/CUDA version, RAM, free disk, Python/torch/MONAI,
-and whether a PROWL clone exists.
+**Inventory and training qualification complete.** Hardware source: [Windows machine inventory](WINDOWS_LAPTOP_SPECS.md).
+RTX4060 Laptop GPU with8GB VRAM,32GB RAM,Windows11; checkout `C:/Users/quinn/Desktop/PROWL`.
+Use `.venv-prowl-windows` (Python3.12, CUDA Torch2.11.0+cu128, MONAI1.6.1 and MLflow3.17.0,
+qualified October8), not a system interpreter or the Mac lockfile. Current experiments use CUDA
+float32/TF32off, batch1 and144-cube inputs. External data/cache/artifacts stay on the configured
+D:/E: roots; independent backups and local MLflow stay on C:. Free space and drive/AC state are
+launch-time checks. Read the dated experiment receipts for exact package and model identities.
 
-Known constraints before inventory:
+Historical pre-inventory notes for the legacy trainer (not instructions to redo setup):
 
 - `configs/level45.yaml` says `device: mps`. On Windows, `src/training/trainer.py:get_device`
   silently falls back to **CPU** unless the device is set to `cuda`. A CUDA device override must
@@ -65,8 +74,9 @@ Known constraints before inventory:
 ## Rules for two concurrent jobs
 
 1. One training job per machine at a time. Never run the same run name on both.
-2. The Mac checkout is the canonical repository. Windows works from a clone at the same commit;
-   record that commit in the run notes.
+2. Synchronize committed source between machines before freezing a new run; record the exact
+   local commit and receipt pins. Neither checkout's uncommitted work automatically reaches the
+   other. Do not merge or change producing code underneath an active training/evaluation process.
 3. Pre-register each run in `docs/experiments.md` (plan first, outcome after) and name the machine.
 4. A comparison between a `mac` run and a `win` run is not single-variable: MPS and CUDA differ
    numerically and in speed. Prefer putting both arms of a controlled comparison on one machine,

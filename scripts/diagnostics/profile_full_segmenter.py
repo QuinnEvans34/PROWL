@@ -18,7 +18,7 @@ def worker(output):
     import numpy as np
     import torch
     from src.data import segmenter_geometry_v2 as g
-    from src.data import segmenter_training_inputs_v1 as boundary
+    from src.data import segmenter_full_batch_v1 as boundary
     from src.data.manifest_records import canonical,digest
     from src.training.segmenter_full_session_v1 import Session
     from src.training.segmenter_full_executor_v1 import atomic_checkpoint

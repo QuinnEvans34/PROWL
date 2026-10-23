@@ -7,7 +7,7 @@ import numpy as np
 
 from src.data.manifest_records import canonical,digest
 from src.data.source_inventory_records import require
-from src.data import segmenter_training_inputs_v1 as boundary
+from src.data import segmenter_full_batch_v1 as boundary
 from src.data.segmenter_full_inputs_v1 import Inputs
 from src.training.experiment_config import resolve,ids,sha256
 
@@ -16,6 +16,12 @@ class PreparedInputs:
     def __init__(self,cfg,recipe):
         cohort=cfg['_experiment']['cohort']
         review=json.loads(resolve(cohort['review']).read_text())
+        if review.get('domain') == 'exploratory_pants_panorama_20261012':
+            from src.data.segmenter_mixed_inputs_v1 import MixedInputs
+            self.mixed = MixedInputs(cfg, recipe)
+            for key in ('control','pin','root','rows','source'):
+                setattr(self, key, getattr(self.mixed, key))
+            return
         require(review.get('decision')=='accepted' and review.get('evidence'), 'Reviewed cohort required')
         train=ids(resolve(cohort['train_ids']));dev=ids(resolve(cohort['development_ids']));names=set(train+dev)
         require(len(names)==len(train+dev), 'Overlapping input roles')
@@ -40,6 +46,8 @@ class PreparedInputs:
         self.pin=digest(canonical(self.control))
 
     def get(self,name,*,role,operation):
+        if hasattr(self, 'mixed'):
+            return self.mixed.get(name, role=role, operation=operation)
         require(role in ('train','validation') and operation in ('optimizer','evaluator') and
             name in self.control['train' if role=='train' else 'validation'] and
             (operation!='optimizer' or role=='train'), 'Protected input role violation')

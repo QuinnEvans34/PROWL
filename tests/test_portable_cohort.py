@@ -81,7 +81,12 @@ def test_rehashed_bad_package_still_fails_semantic_guards(tmp_path, monkeypatch,
 
 def test_symlink_escape_refused(tmp_path, monkeypatch):
     plan=fixture(tmp_path,monkeypatch);b=plan['cohort_binding'];root=Path(b['roots']['pants_source']);root.mkdir()
-    (root/'PanTS_00000002').symlink_to(tmp_path, target_is_directory=True)
+    try:
+        (root/'PanTS_00000002').symlink_to(tmp_path, target_is_directory=True)
+    except OSError as exc:
+        if getattr(exc, 'winerror', None) == 1314:
+            pytest.skip('Windows symlink creation privilege unavailable; escape check not qualified here')
+        raise
     with pytest.raises(ValueError,match='escapes'): validate_plan(plan)
 
 

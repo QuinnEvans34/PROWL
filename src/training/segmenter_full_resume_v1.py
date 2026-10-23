@@ -45,6 +45,8 @@ def read_checkpoint(cfg, control, *, checkpoint, checkpoint_sha256):
         interrupted_tail_policy='preserve_parent_replay_only_updates_after_saved_state',
         restored_fields=['model', 'optimizer', 'step', 'exposure', 'cpu_rng', 'mps_rng'],
         comparison_scope='same_experiment_development_continuation_not_bit_exact_native_replay_claim')
+    if cfg['device'] == 'cuda':
+        provenance['restored_fields'].append('cuda_rng')
     return payload, expected, provenance
 
 

@@ -1,0 +1,17 @@
+{
+  "title": "PanTS + PANORAMA staged readiness pass",
+  "scope": "Finish mixed-source setup; no long training, source edits, public publishing, or scheduled AI checks",
+  "reuse": "PanTS 1408-case cache/1333 train/75 development qualification; PANORAMA completed CT/union audit and all prior holds",
+  "stages": [
+    {"id": "quality_packet", "work": "Render CT/mask overlays for at least 10 expert PDAC, 10 automatic PDAC, 10 non-PDAC, all three manual anomalies, every repeated-subject family and observed scanner groups; include the resampling-loss case", "gate": "Review each selected case, record coverage/crop defects and dispositions; expand review for systematic defects. Rendering is not approval."},
+    {"id": "duplicate_calibration", "work": "Build CT-only canonical exact hashes and a versioned physical fingerprint; plant at least 20 transformations covering gzip/header, orientation, rounding, resampling and crop/pad changes. Include both-source distractors and report candidate burden.", "gate": "At least 19/20 source retrieval, no hidden failures, reviewed negative controls and manageable candidate burden; freeze parameters before full scan."},
+    {"id": "full_overlap_scan", "work": "Inventory original PanTS train/development/test CTs and import-clean PANORAMA CTs; fingerprint with bounded memory, source hashes and role evidence; retrieve cross-source candidates", "gate": "Complete protected-role coverage or explicit blocker; exact matches excluded, approximate candidates adjudicated, unresolved candidates quarantined. Test labels/inference/evaluation forbidden."},
+    {"id": "cohort_freeze", "work": "Preserve PanTS roles and all original exclusions; assemble eligible expert-PDAC primary pool, separate optional automatic pool and subject groups; version manifests and issue dispositions", "gate": "No unresolved QC/duplicate issues in admitted studies; unknown generic-lesion cases never become negatives; no silent cohort shrinkage."},
+    {"id": "mixed_provider", "work": "Add source-aware prepared-cache provider with PanTS pancreas-only and PANORAMA union transforms; validate per-member source/geometry/annotation provenance", "gate": "Synthetic regression/role guards, source-specific batch tests and verified derived-cache hashes pass; frozen PanTS cache remains unchanged."},
+    {"id": "mixed_smoke", "work": "Bounded CUDA test exercising PanTS positive/reference-empty, approved expert PANORAMA, separately disclosed automatic transport case, repeated-subject cases, validation and checkpoint/independent backup/cold restore", "gate": "At most 12 producer updates plus one cold continuation update, 75 unchanged PanTS development evaluations, no test model access, 30-minute watchdog/12GiB memory/100GiB free-space floors; no automatic long run."}
+  ],
+  "first_dispatch": "Quality and duplicate-calibration evidence generation only, then explicit review-needed stop. Later stages are planned, not automatically authorized by file presence.",
+  "first_dispatch_limits": {"seconds": 14400, "owned_rss_bytes": 12884901888, "output_growth_bytes": 4294967296, "free_space_floor_bytes": 107374182400, "AC_required": true},
+  "failure_policy": "Stop on source/hash/storage/power/resource faults; preserve logs and artifacts; no retries or silent repairs. Case-level technical holds remain explicit.",
+  "definition_of_done": "All gates passed with evidence, combined frozen configuration and mixed smoke verified; ready for a separately chosen long experiment, not a model-quality or clean SuPreM benchmark claim."
+}

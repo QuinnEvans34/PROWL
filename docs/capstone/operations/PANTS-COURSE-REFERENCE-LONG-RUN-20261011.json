@@ -1,0 +1,80 @@
+{
+  "title": "PanTS-only long run: recover the project-course recipe and establish a reference for adding PANORAMA",
+  "version": 1,
+  "status": "proposed_specification_not_executable_or_launched",
+  "date": "2026-10-11",
+  "purpose": "Train a fresh SuPreM-initialized PanTS model at project-course scale, report historical context honestly, and establish a reproducible control for the subsequent PANORAMA-positive experiment.",
+  "correction": "The qualified cohort contains 1333 train and 75 development cases. The previously reported 118/5 counts describe an ambiguous-provenance subset relevant to PANORAMA overlap, not the full cohort.",
+  "historical_comparators": [
+    {"title": "Clean whole-box SuPreM baseline", "id": "EXP-24", "horizon": 24000, "selected_step": 18000, "evaluation": "provided union ROI, development 40 positive/40 reference-empty", "lesion_dice_raw": 0.415, "lesion_dice_cleaned": 0.412, "pancreas_dice": 0.817, "case_detection": "38/40, historical definition", "specificity_raw": 0.15, "use": "Primary historical recipe/performance reference, descriptive only without matched evaluation"},
+    {"title": "More reference-empty training cases, approximately 1:9", "id": "EXP-25", "outcome": "Rejected: historical test specificity rose 17% to 46%, detection fell 96% to 88%, lesion Dice fell 0.474 to 0.374", "lesson": "Do not adopt the 1:9 ratio; track small-lesion misses", "use": "Historical context only; no test re-evaluation or threshold selection"},
+    {"title": "Head/body/tail auxiliary supervision", "id": "EXP-26", "outcome": "Rejected at 24k: lesion gain uncertain, pancreas regression; promising 12k result overturned", "lesson": "Use the plain three-class model and judge the declared endpoint"}
+  ],
+  "recommended_recipe": {
+    "design": "Historical-recipe-inspired current-cohort baseline; not an exact EXP-24 reproduction or single-factor comparison with it",
+    "model": {"name": "SegResNet", "in_channels": 1, "out_channels": 3, "init_filters": 16, "blocks_down": [1,2,2,4], "blocks_up": [1,1,1], "normalization": "GroupNorm, 8 groups", "dropout": 0},
+    "initialization": "Original released SuPreM backbone with fresh three-class head; no previous project or retired Lenovo trained model",
+    "suprem_sha256": "2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3",
+    "source_limit": "Existing accepted_for_development source review; upstream training/selection membership remains unverified",
+    "cohort": {"train": 1333, "development": 75, "expected_train_positive": 671, "expected_train_reference_empty": 662, "expected_development_positive": 38, "expected_development_reference_empty": 37, "counts_status": "Target-state class counts must be confirmed from current admitted ledger before freeze", "preserve": "Ordered admitted IDs, original roles and 84 historical exclusions", "test_use": "None", "panorama_use": "None"},
+    "inputs": "Reuse qualified 144-cubed physical-RAS provided-pancreas cache, 1 mm sampling setting, 10 mm margin, HU -100 to 250; effective geometry recorded per case",
+    "loss": "Proposed MONAI DiceFocal: softmax, one-hot targets, include_background=false, gamma=2, lambda_dice=1, lambda_focal=1",
+    "loss_status": "Requires a versioned optional loss path: current full session hardcodes normalized CE plus present-foreground Dice. Changing base YAML alone does not select DiceFocal. Preserve current loss and prior identities.",
+    "optimizer": "AdamW, base learning rate 0.0001, weight decay 0.00001, batch size 1",
+    "sampling": "Existing seeded full-cohort permutation; seed 42; one case per update, no additional positive oversampling",
+    "augmentation": "None for this proposed baseline, matching the qualified cached full-session route; explicit difference from historical light augmentation",
+    "encoder": "Train all layers from update 1; explicit difference from historical encoder-freeze warmup",
+    "schedule": "500-update linear warmup then existing cosine schedule over 24000 updates; no automatic extension",
+    "precision": "CUDA float32, TF32 disabled",
+    "updates": 24000,
+    "case_exposures": "About 18 passes over 1333 cases; 24000 = 18*1333 + 6",
+    "validation_every": 2000,
+    "checkpoint_every": 500,
+    "fixed_checkpoints_to_retain": [8000,24000],
+    "other_retention": "Initial, rolling latest, best-development checkpoint and journal; explicitly preserve 8000 before rolling replacement",
+    "selection": "Highest positive-case macro tensor-grid lesion Dice at scheduled evaluations; earliest step wins an exact tie. Report this selected model and terminal 24000 separately. Fixed endpoint comparison uses 8000 and 24000 only."
+  },
+  "qualification": {
+    "reuse": "Existing 1408-case cache/content audit, original split checks, 3 CUDA updates/75 development evaluations, backup and cold continuation qualification; no complete rebuild or repeated source hashing",
+    "new_checks": ["Confirm current metadata identities and target-state counts", "Implement and test only the proposed versioned DiceFocal path if recipe is selected", "Check real selected SuPreM initialization compatibility without importing retired models", "Qualify the changed loss with a bounded fresh CUDA smoke and recovery check, reusing existing input evidence", "Confirm native restoration and proposed lesion/false-alarm metric definitions using focused fixtures", "Verify milestone retention, run-specific output paths, storage allocation, AC and single-worker ownership", "Freeze resolved configuration, code/environment and evidence hashes before launch"],
+    "no_repeated_research_gates": "No new two-case memorization study or short scientific training arm"
+  },
+  "measurement": {
+    "development_only": true,
+    "primary_quality": "Patient-macro raw lesion Dice across every development-positive case, including zero-Dice misses",
+    "routine": "Existing tensor-grid metrics every 2000 updates; retain per-case values and voxel counts",
+    "endpoint_reporting": "Restore predictions to native CT grids at fixed 8000 and 24000 and the selected checkpoint; score against original references, including lesion portions outside the supplied crop",
+    "prediction_rule": "Three-class argmax; no TTA, threshold search, anatomical cleanup or largest-lesion-component pruning for primary Dice",
+    "case_detection": "Proposed overlap-based detection: at least one native reference lesion component overlaps at least one predicted lesion voxel; report its limitation and lesion-wise count separately",
+    "lesion_detection": "26-connected native reference components with any predicted overlap; declare component matching rule in evaluator contract before freeze",
+    "false_alarms": "Fraction of reference-empty cases with any predicted lesion, plus total predicted lesion volume and component count; 50 mm3 case-alert analysis reported separately for historical context",
+    "historical_detection_limit": "Historical >=50 mm3 predicted-volume case positivity is not necessarily localized lesion detection. Never equate the two silently.",
+    "subgroups": "Native lesion volume <1 cm3, 1-10 cm3, >10 cm3; source/phase where metadata exists; report denominators and missing metadata",
+    "uncertainty": "Paired patient bootstrap, 10000 resamples, fixed seed 20261011, 95% percentile intervals; one training seed supports within-run conclusions only",
+    "evaluator_status": "Native endpoint and component metrics require implementation/verification assessment before launch; existing tensor Dice and voxel counts alone do not satisfy this specification"
+  },
+  "hypotheses_and_decisions": {
+    "baseline": "Establish a measured reference; no fabricated superiority claim from a standalone run",
+    "secondary_prespecified_question": "Does later training on this fixed trajectory improve native development lesion Dice from 8000 to 24000 without material detection or false-alarm deterioration?",
+    "proposed_accept": "Dice difference >=0.02 and its paired 95% interval lower bound >0; case-detection difference >=-0.03 and false-alarm-rate difference <=0.03 on point estimates",
+    "guardrail_precision": "If counts confirm 38 positives/37 empty references, a 3-percentage-point margin allows at most one net additional missed positive and one net additional false-alarm case. Report paired gained/lost cases and uncertainty. Point-estimate passage does not prove statistical noninferiority.",
+    "reject": "At the valid full endpoint a guardrail point estimate breaches its margin, or the Dice interval upper bound is below the 0.02 practical improvement target",
+    "inconclusive": "All other valid comparisons that fail the accept rule; particularly intervals too wide to distinguish useful improvement",
+    "failure": "Invalid evaluation is invalid; interrupted/runtime-failed training is incomplete or operationally_failed; neither is scientific rejection",
+    "historical_comparison": "Report new and old metrics with cohort, ROI, loss and metric differences adjacent. No causal improvement or benchmark equivalence claim against 0.415/0.474. A matched historical-recipe control would be a separate future experiment."
+  },
+  "resources_and_operations": {
+    "duration": "24000 updates is the endpoint. Proposed watchdog 24 elapsed active hours, not a prediction of runtime or requirement to waste compute until 24 hours.",
+    "worker_rss_gib": 12,
+    "cache_gib": 32,
+    "free_space_floor_each_drive_gib": 100,
+    "backup": "Independent C: copy within existing 27917287424-byte aggregate cap; verify space for milestones before launch",
+    "outputs": "Fresh run-specific E: outputs and C: backup directories to be frozen with final configuration",
+    "stops": "Nonfinite computation, invalid data/state, resource/AC/storage/checkpoint failure, watchdog, or user stop; no ad hoc early quality stop",
+    "resume": "Explicit continuation from verified state into separate attempt after reconciliation; preserve interrupted journal and unsaved tail, no automatic retry",
+    "automation": "No recurring AI checks or automatic successor runs configured by this specification"
+  },
+  "deliverables": ["Frozen preregistration and resolved executable configuration", "Per-case development predictions/metrics and native endpoint report", "Learning curves and exposure accounting", "Historical comparison table with disclosed recipe differences", "Fixed-checkpoint hypothesis decision and selected reference model identity", "Failure-case review and proposed next PANORAMA intervention"],
+  "remaining_before_freeze": ["Review proposed historical DiceFocal restoration versus keeping current loss; recommendation is DiceFocal for course-recipe continuity", "Verify runtime augmentation/freeze choices are deliberate recorded departures", "Confirm admitted positive/empty counts", "Close evaluator and checkpoint-retention gaps", "Bind concrete resource and output identities", "Register selected design under the next unused CAP-EXP ID with a descriptive title; temporary TRN/RUN names are not authoritative IDs"],
+  "evidence": ["docs/experiments.md#EXP-24", "docs/experiments.md#EXP-25", "docs/experiments.md#EXP-26", "docs/capstone/evaluation/EXPERIMENT-PROTOCOL.md", "src/training/segmenter_full_session_v1.py", "src/training/segmenter_normalized_loss_v1.py", "E:/PROWL/readiness/panorama-narrow-readiness-20261011-a01/pants-reuse.json", "E:/PROWL/readiness/data-setup-20261010-a01/pants-admitted/smoke.yaml"]
+}

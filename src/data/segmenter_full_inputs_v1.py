@@ -10,14 +10,14 @@ import numpy as np
 
 from src.data import segmenter_geometry_v2 as geometry
 from src.data import segmenter_content_v1 as content
-from src.data import segmenter_training_inputs_v1 as boundary
+from src.data import segmenter_full_batch_v1 as boundary
 from src.data.manifest_records import canonical, digest
 from src.data.source_inventory_records import require
 from src.training.experiment_config import ids, resolve, sha256
 
 
 class Inputs:
-    def __init__(self, cfg, recipe, *, cache_dir=None, audit_only=False):
+    def __init__(self, cfg, recipe, *, cache_dir=None, audit_only=False, resume_cache=False):
         spec = cfg['_experiment']; cohort = spec['cohort']
         self.audit_only = audit_only
         review = {} if audit_only else json.loads(resolve(cohort['review']).read_text())
@@ -46,9 +46,15 @@ class Inputs:
             geometry=recipe, observations=self.observations)
         self.pin = digest(canonical(self.control))
         self.cache = Path(cache_dir) / self.pin if cache_dir else None
+        require(not resume_cache or (audit_only and self.cache is not None), 'Only explicit audit caches can continue')
         if self.cache:
-            self.cache.mkdir(parents=True, exist_ok=False)
-            (self.cache/'control.json').write_bytes(canonical(self.control))
+            if resume_cache:
+                require(self.cache.is_dir() and not self.cache.is_symlink() and
+                        (self.cache/'control.json').read_bytes() == canonical(self.control),
+                        'Continuation cache/source observations changed')
+            else:
+                self.cache.mkdir(parents=True, exist_ok=False)
+                (self.cache/'control.json').write_bytes(canonical(self.control))
 
     @staticmethod
     def observe(path):

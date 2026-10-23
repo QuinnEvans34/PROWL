@@ -1029,6 +1029,12 @@ detection, EU Horizon 2020 PANCAIM funded, published in *Lancet Oncology* (2025)
 | Netherlands | 0 | **0** |
 | `site nationality` exactly `NL` | — | **0** |
 
+> **October 12 clarification:** “overlap passed” and “usable, non-overlapping” in this historical
+> research mean the declared NIH/MSD imports were reconciled, not that undeclared overlap was
+> disproved. Counts below precede technical/annotation holds. Current exploratory training uses
+> the [approved admission amendment](capstone/operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md),
+> excluding five uncertain current-development cases without a new broad scan.
+
 **PanTS Mini contains no single-institution Dutch cases.** Every mention of Radboud sits inside a
 multi-center aggregate provenance string (the 411 / 64 / 58 groups), i.e. cases inherited from a
 pooled public collection where per-case origin is not recorded.
@@ -1175,7 +1181,9 @@ Repeat patients: 13 histopathology-confirmed (6 PDAC), 12 radiology-confirmed.
 The `level` column resolves the *declared* imports. It cannot rule out undeclared duplicates —
 notably the 533 PanTS records carrying "Radboud" inside a pooled multi-institution provenance string.
 The pixel-level duplicate detector (32³ downsample + hash, recall measured on planted duplicates)
-remains the answer for that, and stays a Week 3 deliverable.
+was planned as a stronger control. For CAP-EXP-017, the October 12 user-approved amendment
+supersedes that launch gate with documented exclusions and exploratory limitations; this is not
+evidence that a full image-level scan occurred.
 
 ## Still to verify (needs the label masks, not just the spreadsheet)
 - [ ] `ls manual_labels | wc -l` = 482 and `ls automatic_labels | wc -l` = 194

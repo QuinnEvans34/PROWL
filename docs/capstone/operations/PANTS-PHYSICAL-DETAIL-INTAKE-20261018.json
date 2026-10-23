@@ -1,0 +1,18 @@
+{
+  "title": "Preserve the full lesion field without reducing acquired detail",
+  "status": "engineering qualification only; scientific launch requires review",
+  "supersedes": "native-windows-2 as the proposed scientific input; native source audit remains reusable evidence",
+  "reason": "Training geometry exposed native axis spacing up to 10 mm. Native 144-voxel windows therefore had excessive physical-scale variation despite perfect target preservation.",
+  "spacing": "For each closest-RAS source axis, factor=max(1,ceil(spacing_mm-1e-5)); subdivide each acquired voxel cell by that integer. No spatial downsampling. Resulting axis spacing is at most 1.00001 mm.",
+  "orientation": "Lossless closest-RAS reorientation; preserve acquired obliquity and exact physical field edges",
+  "window_voxels": [144, 144, 144],
+  "stride_voxels": [72, 72, 72],
+  "image_interpolation": "Linear interpolation of HU-windowed normalized CT; no dense fine-grid cache",
+  "target_interpolation": "Nearest neighbor on integer subdivisions; source labels remain unchanged",
+  "inference": "All full-CT fine-grid tiles selected using CT geometry only. Interpolate tile probabilities at original native voxel centers and blend with positive triangular weights. Invert the axis reorientation after argmax.",
+  "sampling": "Retain case permutation. Cycle complete lesion-field coverage windows then component-centered jitter; every fourth visit is uniform CT. Empty cases cover the pancreas then use one pancreas anchor. Require full annotated-field exposure within 18 visits.",
+  "cohort": {"train": 1333, "train_positive": 671, "development": 70, "development_positive": 36, "new_exclusions": 0},
+  "gates": ["Exact source field edges", "No input spatial downsampling", "Every native annotation voxel accounted for", "Exact original-grid target restoration", "Complete scheduled annotation-field exposure", "No inference use of annotation crops", "Real pilot and bounded CUDA checkpoint/cold-restore qualification"],
+  "resource_policy": "One native source case at a time per worker; on-demand 144-cubed fine windows; native-grid reconstruction accumulators. Combined audit RSS 12 GiB, C/E free floors 100 GiB. Reuse completed native CT-content checks; no repeat duplicate research or full CT payload audit.",
+  "scientific_claim": "A bundled coverage, representation, sampling and inference intervention; no learned-Dice improvement established by engineering checks. Lower-learning-rate trial remains deferred."
+}

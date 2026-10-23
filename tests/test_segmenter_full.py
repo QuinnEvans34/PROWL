@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 import torch
 
-from src.data import segmenter_training_inputs_v1 as boundary
+from src.data import segmenter_full_batch_v1 as boundary
 from src.data.manifest_records import canonical, digest
 from src.data.segmenter_geometry_v2 import recipe
 from src.data.segmenter_full_inputs_v1 import Inputs

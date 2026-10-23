@@ -5,6 +5,7 @@ rule. Cohort size and horizon are configuration, and update accounting is O(1), 
 of the entire history on every update. The executor journals history outside checkpoints.
 """
 from copy import deepcopy
+from contextlib import contextmanager
 import hashlib
 import math
 import os
@@ -13,26 +14,39 @@ import numpy as np
 import torch
 
 from src.data.manifest_records import canonical, digest
-from src.data.segmenter_training_inputs_v1 import Batch
+from src.data.segmenter_full_batch_v1 import Batch
 from src.data.source_inventory_records import require
 from src.models.segresnet import build_model
 from src.training import segmenter_session_v1 as numerical
 from src.training import segmenter_normalized_loss_v1 as loss
-from src.training.segmenter_pretrained_session_v1 import Session as PretrainedSession
 from src.training.experiment_config import load_suprem_checked
 
 POLICY = 'full_cohort_seeded_permutation_v1'
+DICE_FOCAL = 'monai_dice_focal_bg0_gamma2_v1'
+
+
+def objective(logits, target, config):
+    if config.get('loss_id', loss.LOSS) == loss.LOSS:
+        return loss.objective(logits, target)
+    require(config['loss_id'] == DICE_FOCAL, 'Unsupported full-session loss')
+    from monai.losses import DiceFocalLoss
+    return DiceFocalLoss(include_background=False, to_onehot_y=True, softmax=True,
+        gamma=2., lambda_dice=1., lambda_focal=1.)(logits, target[:, None])
 
 
 def identity_for(config, control, device, initialization):
-    return deepcopy(dict(version='segmenter-full-session-1', config=config,
+    identity = dict(version='segmenter-full-session-1', config=config,
         control=control, device=device, initialization=initialization,
-        architecture=numerical.ARCH, loss=loss.LOSS, sampling=POLICY))
+        architecture=numerical.ARCH, loss=config.get('loss_id', loss.LOSS), sampling=POLICY)
+    if device == 'cuda':
+        identity['precision'] = 'float32_tf32_disabled'
+    return deepcopy(identity)
 
 
 def validate_config(c):
-    require(set(c) == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
+    require(set(c) - {'lr_horizon_steps', 'loss_id'} == {'max_steps', 'tensor_shape', 'seed', 'learning_rate', 'weight_decay',
                        'warmup_steps', 'lr_schedule'}, 'Full session configuration fields')
+    require(c.get('loss_id', loss.LOSS) in (loss.LOSS, DICE_FOCAL), 'Unsupported full-session loss')
     require(type(c['max_steps']) is int and c['max_steps'] > 0, 'Positive training horizon required')
     require(type(c['seed']) is int and 0 <= c['seed'] < 2**32, 'Invalid seed')
     require(len(c['tensor_shape']) == 3 and all(type(v) is int and 16 <= v <= 192 and v % 8 == 0
@@ -41,16 +55,62 @@ def validate_config(c):
             for k in ('learning_rate', 'weight_decay')) and c['learning_rate'] > 0, 'Invalid optimizer')
     require(type(c['warmup_steps']) is int and 0 <= c['warmup_steps'] < c['max_steps']
             and c['lr_schedule'] in ('constant', 'warmup_cosine'), 'Invalid schedule')
+    if 'lr_horizon_steps' in c:
+        require(type(c['lr_horizon_steps']) is int and c['warmup_steps'] < c['lr_horizon_steps'] <= c['max_steps'],
+                'Invalid independent learning-rate horizon')
+
+
+def learning_rate_factor(c, step):
+    if c['lr_schedule'] == 'constant': return 1.
+    if step < c['warmup_steps']: return (step + 1) / max(1, c['warmup_steps'])
+    horizon = c.get('lr_horizon_steps', c['max_steps'])
+    # Retain the last original update's rate after the selected schedule is exhausted.
+    schedule_step = min(step, horizon - 1)
+    return .5 * (1 + math.cos(math.pi * (schedule_step-c['warmup_steps']) / (horizon-c['warmup_steps'])))
 
 
 class Session:
-    rng_scope = PretrainedSession.rng_scope
+    @contextmanager
+    def rng_scope(self):
+        if self.device != 'cuda':
+            old = torch.get_rng_state()
+            other = torch.mps.get_rng_state() if self.device == 'mps' else None
+            torch.set_rng_state(self.cpu_rng)
+            if other is not None:
+                torch.mps.set_rng_state(self.mps_rng)
+            try:
+                yield
+            finally:
+                self.cpu_rng = torch.get_rng_state().clone()
+                torch.set_rng_state(old)
+                if other is not None:
+                    self.mps_rng = torch.mps.get_rng_state().cpu().clone()
+                    torch.mps.set_rng_state(other)
+            return
+        old_cpu, old_cuda = torch.get_rng_state(), torch.cuda.get_rng_state()
+        old_matmul = torch.backends.cuda.matmul.allow_tf32
+        old_cudnn = torch.backends.cudnn.allow_tf32
+        try:
+            torch.set_rng_state(self.cpu_rng)
+            torch.cuda.set_rng_state(self.cuda_rng)
+            torch.backends.cuda.matmul.allow_tf32 = False
+            torch.backends.cudnn.allow_tf32 = False
+            yield
+        finally:
+            self.cpu_rng = torch.get_rng_state().clone()
+            self.cuda_rng = torch.cuda.get_rng_state().cpu().clone()
+            torch.set_rng_state(old_cpu)
+            torch.cuda.set_rng_state(old_cuda)
+            torch.backends.cuda.matmul.allow_tf32 = old_matmul
+            torch.backends.cudnn.allow_tf32 = old_cudnn
 
     def __init__(self, config, control, *, device, initialization, initialize=True):
         validate_config(config)
         train, dev = control['train'], control['validation']
         require(train and dev and len(set(train + dev)) == len(train + dev), 'Distinct nonempty roles required')
-        require(device in ('cpu', 'mps'), 'Explicit supported device required')
+        require(device in ('cpu', 'mps', 'cuda'), 'Explicit supported device required')
+        if device == 'cuda':
+            require(torch.cuda.is_available(), 'Native CUDA required')
         if device == 'mps':
             require(torch.backends.mps.is_available() and os.environ.get('PYTORCH_ENABLE_MPS_FALLBACK') == '0',
                     'Native MPS with fallback disabled required')
@@ -58,7 +118,7 @@ class Session:
         self.config, self.control = self.identity['config'], self.identity['control']
         self.identity_pin = digest(canonical(self.identity))
         self.control_pin = digest(canonical(control))
-        with torch.random.fork_rng(devices=[]):
+        with torch.random.fork_rng(devices=[torch.cuda.current_device()] if device == 'cuda' else []):
             torch.manual_seed(config['seed'])
             self.model = build_model({'model': numerical.ARCH})
         if initialize and initialization['kind'] == 'suprem':
@@ -71,6 +131,14 @@ class Session:
                                           weight_decay=config['weight_decay'])
         self.cpu_rng = torch.Generator().manual_seed(config['seed']).get_state()
         self.mps_rng = None
+        self.cuda_rng = None
+        if device == 'cuda':
+            old = torch.cuda.get_rng_state()
+            try:
+                torch.cuda.manual_seed(config['seed'])
+                self.cuda_rng = torch.cuda.get_rng_state().cpu().clone()
+            finally:
+                torch.cuda.set_rng_state(old)
         if device == 'mps':
             old = torch.mps.get_rng_state()
             try:
@@ -108,14 +176,12 @@ class Session:
         self._clean(); name = self.next_member()
         b, x, y = self._batch(provider, name, 'train', 'optimizer')
         c = self.config
-        if c['lr_schedule'] == 'constant': factor = 1.
-        elif self.step < c['warmup_steps']: factor = (self.step + 1) / max(1, c['warmup_steps'])
-        else: factor = .5 * (1 + math.cos(math.pi * (self.step-c['warmup_steps']) / (c['max_steps']-c['warmup_steps'])))
+        factor = learning_rate_factor(c, self.step)
         for group in self.optimizer.param_groups: group['lr'] = c['learning_rate'] * factor
         self.dirty = True
         with self.rng_scope():
             self.model.train(); self.optimizer.zero_grad(set_to_none=True)
-            value = loss.objective(self.model(x[None].to(self.device)), y[None].to(self.device))
+            value = objective(self.model(x[None].to(self.device)), y[None].to(self.device), c)
             require(torch.isfinite(value).item(), 'Nonfinite loss')
             value.backward()
             require(all(p.grad is not None and torch.isfinite(p.grad).all().item() for p in self.model.parameters()),
@@ -145,13 +211,16 @@ class Session:
 
     def state(self):
         self._clean()
-        return numerical.cpu_tree(dict(version=1, identity=self.identity, identity_sha256=self.identity_pin,
+        state = dict(version=1, identity=self.identity, identity_sha256=self.identity_pin,
             step=self.step, exposure=self.exposure, model=self.model.state_dict(),
-            optimizer=self.optimizer.state_dict(), cpu_rng=self.cpu_rng, mps_rng=self.mps_rng))
+            optimizer=self.optimizer.state_dict(), cpu_rng=self.cpu_rng, mps_rng=self.mps_rng)
+        if self.device == 'cuda':
+            state.update(version=2, cuda_rng=self.cuda_rng)
+        return numerical.cpu_tree(state)
 
     @classmethod
     def restore(cls, state, expected_identity):
-        require(state['version'] == 1 and state['identity'] == expected_identity and
+        require(state['version'] == (2 if expected_identity['device'] == 'cuda' else 1) and state['identity'] == expected_identity and
             state['identity_sha256'] == digest(canonical(expected_identity)) and numerical.finite(state),
             'Checkpoint identity/state mismatch')
         i = expected_identity
@@ -178,10 +247,15 @@ class Session:
                     all(moment[k].shape == param.shape and moment[k].dtype == param.dtype
                         for k in ('exp_avg', 'exp_avg_sq')) and (moment['exp_avg_sq'] >= 0).all().item(),
                     'Invalid optimizer moments/step')
-        require((i['device'] == 'cpu' and state['mps_rng'] is None) or
+        require((i['device'] in ('cpu', 'cuda') and state['mps_rng'] is None) or
             (i['device'] == 'mps' and type(state['mps_rng']) is torch.Tensor and
              state['mps_rng'].dtype == torch.uint8 and state['mps_rng'].shape == s.mps_rng.shape),
             'Checkpoint native RNG mismatch')
+        if i['device'] == 'cuda':
+            require(type(state.get('cuda_rng')) is torch.Tensor and
+                state['cuda_rng'].dtype == torch.uint8 and state['cuda_rng'].shape == s.cuda_rng.shape,
+                'Checkpoint CUDA RNG mismatch')
+            s.cuda_rng = state['cuda_rng'].clone()
         s.model.load_state_dict(state['model'], strict=True); s.optimizer.load_state_dict(state['optimizer'])
         s.step, s.exposure = state['step'], deepcopy(state['exposure'])
         s.cpu_rng, s.mps_rng = state['cpu_rng'].clone(), state['mps_rng']
