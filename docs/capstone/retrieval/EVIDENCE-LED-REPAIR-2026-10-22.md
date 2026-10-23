@@ -175,3 +175,30 @@ Official references used to inspect the transport: https://docs.ollama.com/api/g
 https://raw.githubusercontent.com/ollama/ollama/v0.40.2/server/routes.go (raw format applies from
 the first token); https://github.com/QwenLM/Qwen3/blob/main/docs/source/getting_started/quickstart.md
 (Instruct2507 uses non-thinking mode). The exact cause of chat-mode reasoning output is unproven.
+
+### Reviewed context relationships
+
+Further broad rewrites were rejected: question-facet expansion delivered57/74span overlaps across
+20supported cases (10all-covered), and splitting every representation paragraph into an independent
+retrieval group delivered58/74(11all-covered). Neither was integrated. The12-part hybrid remains.
+
+The repeated failure is that a result can be retrieved without the same paper’s methodological
+qualification. `source-context-links-v1.json` adds four engineering-reviewed relationships within
+two existing papers: cyst-model results→selection/validation limitations; clinical risk models→
+screening context; performance comparisons→overfitting/external testing; and technical approaches→
+segmentation, data requirements and fusion context. These are canonical passage IDs only, with no
+questions, expected answers, labels or generated claims. Current exposed failures motivated this
+curation; it is development work, not a new independent evaluation. No corpus or label changed.
+
+Links activate only from primary retrieved passages, never recursively. They are admitted with
+their anchors inside the existing50passage/38,000character/three-paper bounds; all citations still
+bind to immutable canonical records. Cross-paper and unknown references are rejected. Context links
+are included in the configuration digest. Neighbor expansion now stays within the selected section
+family. A closer source inspection also showed that same-title merged groups can themselves contain
+multiple conditions, so adjacency alone was not the cause of the earlier wrong-condition borrowing.
+
+The linked-context diagnostic delivered overlapping labeled evidence for74/74concepts and20/20
+supported cases, versus69/74and16/20before. This permissive span-delivery result does not prove full
+concept coverage or correct answers.72focused backend checks pass. The instruction/units canary
+returned one supported but incomplete answer and rejected two; full answer qualification remains
+open. The next retained regression uses the complete source path, with independent dimension review.

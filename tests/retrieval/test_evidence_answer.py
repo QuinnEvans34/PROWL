@@ -277,3 +277,51 @@ def test_instruction_raw_transport_escapes_untrusted_role_tokens(engine):
     body=payload['prompt'].split('<|im_start|>user\n')[1].split('<|im_end|>')[0]
     assert json.loads(body)==data and '<script>' not in body
     assert payload['think'] is False and payload['format']['properties']['ok']['type']=='boolean'
+
+
+def test_context_adjacency_does_not_cross_into_a_different_section(tmp_path):
+    from tests.retrieval.test_direct_ingestion import XML,batch
+    from src.retrieval.direct_ingestion import source_bundle
+    xml=XML.replace('</body>', '<sec><title>Unrelated condition</title><p>This different condition has different diagnostic criteria.</p></sec></body>')
+    path=tmp_path/'sections.xml';path.write_text(xml);b=source_bundle(path)
+    records=[x['record'] for x in batch(b)['items']];idx=EvidenceIndex([b],records)
+    methods=next(g['id'] for g in idx.groups if g['heading']=='Methods')
+    hits=idx.select([methods],'Explain imaging research methods.')
+    assert any('independent evaluation' in h['record']['text'] for h in hits)
+    assert not any('different diagnostic criteria' in h['record']['text'] for h in hits)
+
+
+def test_source_context_links_expand_canonical_evidence_without_question_lookup(bundle):
+    from tests.retrieval.test_direct_ingestion import batch
+    records=[x['record'] for x in batch(bundle)['items']]
+    ids=[r['passage']['passage_id'] for r in records]
+    link=dict(id='method-context',anchors=[ids[0]],context=[ids[1]],relation='same_paper_methods_and_limitations')
+    idx=EvidenceIndex([bundle],records,[link]);abstract=next(g['id'] for g in idx.groups if 'Abstract' in g['heading'])
+    selected=idx.select([abstract],'An invented question.')
+    assert {x['record']['passage']['passage_id'] for x in selected}==set(ids)
+    assert all(x['record'] in records for x in selected)
+    link['context'].clear()
+    assert idx.context_links[0]['context']==[ids[1]]
+
+
+def test_context_links_reject_unknown_or_cross_paper_passages(bundle):
+    from tests.retrieval.test_direct_ingestion import batch
+    records=[x['record'] for x in batch(bundle)['items']]
+    ids=[r['passage']['passage_id'] for r in records]
+    link=dict(id='context',anchors=[ids[0]],context=['unknown'],relation='same_paper_methods_and_limitations')
+    with pytest.raises(ValueError,match='Unknown canonical'):
+        EvidenceIndex([bundle],records,[link])
+    link['context']=[ids[1]];records[1]['passage']['work_id']='different-paper'
+    with pytest.raises(ValueError,match='crosses papers'):
+        EvidenceIndex([bundle],records,[link])
+
+
+def test_context_links_do_not_recursively_activate_other_links(bundle):
+    from tests.retrieval.test_direct_ingestion import batch
+    records=[x['record'] for x in batch(bundle)['items']]
+    extra=deepcopy(records[1]);extra['passage']['passage_id']='third-passage';extra['passage']['ordinal']=99
+    records.append(extra);ids=[r['passage']['passage_id'] for r in records]
+    links=[dict(id=str(i),anchors=[ids[i]],context=[ids[i+1]],relation='same_paper_methods_and_limitations') for i in range(2)]
+    idx=EvidenceIndex([bundle],records,links)
+    group=next(g for g in idx.groups if 'Abstract' in g['heading'])
+    assert [r['passage']['passage_id'] for r in idx.with_context(group)]==ids[:2]

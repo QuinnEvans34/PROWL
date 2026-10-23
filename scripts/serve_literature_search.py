@@ -252,7 +252,12 @@ def create_evidence_answers(baseline, model='qwen3:8b', trace=False, thinking=Fa
     manifest = checked_json(baseline.config['manifest'], ROOT)
     bundles = [checked_json(s['bundle'], ROOT) for s in manifest['sources']]
     records = [i['record'] for pin in manifest['batches'] for i in checked_json(pin, ROOT)['items']]
+    context = json.loads((ROOT/'configs/evidence/source-context-links-v1.json').read_text())
+    if (context['version']!='source-context-links-v1' or context['manifest']!=baseline.config['manifest']
+            or context['review']!='engineering_source_reviewed'):
+        raise ValueError('Source context links require the matching reviewed corpus')
     return EvidenceAnswers(baseline, bundles, records, model=model, trace=trace, thinking=thinking, composition=composition,
+        context_links=context['links'],
         transport=partial(api,port=11436 if model==INSTRUCTION_MODEL else 11435 if model=='qwen2.5:14b' else 11434))
 
 

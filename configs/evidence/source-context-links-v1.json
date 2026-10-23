@@ -1,0 +1,101 @@
+{
+  "version": "source-context-links-v1",
+  "manifest": {
+    "path": "configs/evidence/corpus-disease-v1.json",
+    "sha256": "8eeda9f2929adba6d9696e23481cdec55adf71c80614c27533ffe36d05fcf3af"
+  },
+  "review": "engineering_source_reviewed",
+  "links": [
+    {
+      "id": "cyst-model-selection-and-validation",
+      "anchors": [
+        "psg:e1db44e8db1226d277cdd1d75650017b6bf192198f263f0be2411513b88b15cc",
+        "psg:26ddb1b29613889db43f9accafd871553666dc3db45a43a970ca8fe4ebe75035",
+        "psg:24e21a03335ffa2c3f3e9f0f9460ba77fa448157e2efc23b326328695df51026",
+        "psg:f902cf168a3a7ae5aaeb5eb1e849b3795655be781c4993d56b9bd0bdebfd7b61",
+        "psg:9ca09797abe700f639d9dcae2ec87aed48f002e681c2899bb6c9da4985169ed3",
+        "psg:3b5840018c62c356db5fc6dfa8a7055399cbcb563acf5d38ad9d7304bc9f4e97",
+        "psg:fa53aa3db78d4cb69577d79a973daf7ca0bbab8a045b7c57ac64de02927d62f1",
+        "psg:2ac5ac38bec9f933fd605b094412cefffd7cc2b3a858eb8bd057ad02136f21cd",
+        "psg:2c255b1b7d1fb2edaafdc9f3e5cda89de57abf0b1afbc653e072f093132b6a91",
+        "psg:cdbfd5c81ce4dc60420cd9a701c39330719ca63556a626c2111d87b6e945a4a0",
+        "psg:f75fb9d3b83908bde65d6fa2942abc753be93265ade087860441930b975fb10b",
+        "psg:1435f473a5dd3a76458e11432109a9898f63d5656474f79a5df293a1e93f6f76",
+        "psg:4b77d2612fd3fb471ab92c025dcfe13b8698967172a762f4d40f4059a030dbbd",
+        "psg:0204c7767e0a276b36bb570f97b296e50910be838c5b5f70300a3445487c8dab",
+        "psg:5517ad3f5db64e34b3ea3819081e36e73527d50f69669530a5882fc09c9f9089",
+        "psg:dde8cff695d3157156aa2dca76abf9304ed1946cd886759d94563208e2164fe6",
+        "psg:0409a043ade9aff731893687a56a6857bbaaf0912d4df3a965c81e65702ed943",
+        "psg:470430b3a224b405e98d70f5a5f37b7770510b5a601ae355f5ff59f866456204",
+        "psg:3f2e041bcaaa3c5e5951f9205b9ed3e9eda778cba6fb38926f4dfb8274f2111a",
+        "psg:145a294e841a16386a417bb6c254ab16fdbf0c6c34cf4acafd7b629471038464",
+        "psg:130ab80022adbc80041dae3d8f83d7cc27f808ae629502b8334c8db81282c6e1"
+      ],
+      "context": [
+        "psg:6467c2d153dbf278881918882adeb69a450ce8915cc7491249c9a0254f474bea",
+        "psg:4ade40248124cf02573019b4e6f972ba05a10ee8098aafa6d60e3ae379aff4e7"
+      ],
+      "relation": "same_paper_methods_and_limitations"
+    },
+    {
+      "id": "clinical-risk-screening-context",
+      "anchors": [
+        "psg:ea89d731157edccc4cac6d9b3af2700a7a7611fbfe3821fa079337a52a700080",
+        "psg:c818a5a0a4198ad1d348d10cfbfba113f19eca0db8044bf5f6f230b74a4568af",
+        "psg:9882e2cef19fc2f231b6510a0852033e9941ed586affc73aed621d8b008f39eb",
+        "psg:16cd6520c56ba9adca8268418a77939d7563c042384fc6b5efd3d713fddd29a7",
+        "psg:d9d16b529f985abcdd456ee7e322ee8efea611d944492dca9797bb9195c53c83",
+        "psg:a6c1556fedf6a7022ab466165a7733957d6648afd44d6f8e1ee42a8d977250b1",
+        "psg:4ea93b1eefe0649f5f67213efc84a9b064bb17134901c061632c8c1269fe3d39",
+        "psg:282ee6a580f86f53ef574aaab917bc6c840a20ff50a77ed22b0117fee977d399",
+        "psg:12a4e3c263cbc2538a02acc930add9c76b39061de532c4529ba82e4178b9bb0f",
+        "psg:4f6b6be93a7c093cb984583b1fae97634e70e7dbd8e072cd6141bac78941bc75",
+        "psg:c0b227fc4b18c708d38a3a6cedd98592eddc66f6ed86d524e920efeda4ca4dfb",
+        "psg:6eabaf99bb8d0c76a257fdfdb38b0957e242cbaef327785d77eefba86d0c563b",
+        "psg:f0431529c39e2991ef6ceb417282790b4321f518f053665b75f1e05ba428d164"
+      ],
+      "context": [
+        "psg:4d481d5d834dadd7924fe31256de62b9f03137e88ba7b423d31a8fb44dac7766",
+        "psg:f0431529c39e2991ef6ceb417282790b4321f518f053665b75f1e05ba428d164"
+      ],
+      "relation": "same_paper_methods_and_limitations"
+    },
+    {
+      "id": "radiomics-performance-validation",
+      "anchors": [
+        "psg:38a7a4ea2e1a037dc71d1179996651e35f18ea22cffca5893b23d345d359fa93",
+        "psg:027d8c1efc31a0a4a4c6be5e7b3d3ed2c01d79b2e03efbf3a6c2112fb59b8f94"
+      ],
+      "context": [
+        "psg:05c9e8dc8c48208346f8111faa414bec6962d645415bcda36219c33084d2b6d4",
+        "psg:34afb7fd2fd6532adc4cad84fae311fd4e43292f79eba029d490c08098049468"
+      ],
+      "relation": "same_paper_methods_and_limitations"
+    },
+    {
+      "id": "radiomics-deep-learning-method-context",
+      "anchors": [
+        "psg:cef6f593a3a616fc671d54a5fc51e2777955a2e0824e82511b2962c15c25c837",
+        "psg:87994b1619ad6dbfa76a70503fbe21be07843244ce2b26fe53925a22df039054",
+        "psg:474b0e572aacc27fddd35e47c47f9f3c6ee62c80dfa25aa1291fd5cdb729756e",
+        "psg:bc37a5582ba9ce76979e6b49b71644b30aaf7bd9057c3d73eb5f73ddfce7c6f0",
+        "psg:397b92bce25f45eb1a478d40e48d3ea1e2fe845320ed498b34f50448c66dde15",
+        "psg:6c96be15e8844711c41fc300314302ab43d3acd03dfb0a8bf281c796c6c93451",
+        "psg:8e77be71a62dfa8e5a9d1f60eb4448d74ac7c5b2eec5cd8666bf0a79b4d28ea8",
+        "psg:738e651a061662eabe1a198812415c5f72763c48cbe98c803013b40dc37063f0"
+      ],
+      "context": [
+        "psg:cef6f593a3a616fc671d54a5fc51e2777955a2e0824e82511b2962c15c25c837",
+        "psg:87994b1619ad6dbfa76a70503fbe21be07843244ce2b26fe53925a22df039054",
+        "psg:474b0e572aacc27fddd35e47c47f9f3c6ee62c80dfa25aa1291fd5cdb729756e",
+        "psg:bc37a5582ba9ce76979e6b49b71644b30aaf7bd9057c3d73eb5f73ddfce7c6f0",
+        "psg:f8e5735c4e9286fb3a85b738d8ef1e95807f20a2949f27f2b6cf68d251f03c7b",
+        "psg:e8270b12b2fd63694f561256a5de81e7fd2095ee46942ae0385f3ba7080054fe",
+        "psg:397b92bce25f45eb1a478d40e48d3ea1e2fe845320ed498b34f50448c66dde15",
+        "psg:6c96be15e8844711c41fc300314302ab43d3acd03dfb0a8bf281c796c6c93451",
+        "psg:16c8ba68543da3892003216ff7f412a803b8077f9b661a7076dee7bb88ba16bf"
+      ],
+      "relation": "same_paper_methods_and_limitations"
+    }
+  ]
+}

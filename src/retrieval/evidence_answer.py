@@ -137,8 +137,22 @@ def tokens(text):
 
 
 class EvidenceIndex:
-    def __init__(self, bundles, records):
+    def __init__(self, bundles, records, context_links=()):
         self.records = sorted(records, key=lambda r:(r['passage']['work_id'],r['passage']['ordinal']))
+        self.by_id={r['passage']['passage_id']:r for r in self.records}
+        self.context_links=deepcopy(list(context_links))
+        if len({link['id'] for link in self.context_links})!=len(self.context_links):
+            raise ValueError('Duplicate context link identity')
+        for link in self.context_links:
+            if (set(link)!={'id','anchors','context','relation'} or not link['anchors'] or not link['context']
+                    or link['relation']!='same_paper_methods_and_limitations'
+                    or len(set(link['anchors']))!=len(link['anchors']) or len(set(link['context']))!=len(link['context'])):
+                raise ValueError('Invalid source context link')
+            if any(i not in self.by_id for i in link['anchors']+link['context']):
+                raise ValueError('Unknown canonical context passage')
+            rows=[self.by_id[i] for i in link['anchors']+link['context']]
+            if len({r['passage']['work_id'] for r in rows})!=1:
+                raise ValueError('Context link crosses papers')
         self.groups = []
         for bundle in sorted(bundles, key=lambda b:b['work']['work_id']):
             rep = bundle['representation']; groups=[]
@@ -159,12 +173,22 @@ class EvidenceIndex:
                 for part, chunk in enumerate(chunks, 1):
                     heading = group['heading'] + (f' (part {part}/{len(chunks)})' if len(chunks) > 1 else '')
                     self.groups.append(dict(id=f'S{len(self.groups)+1}',title=bundle['citation']['title'],
-                        heading=heading, records=chunk))
+                        heading=heading, section_ids=sorted(group['sections']), records=chunk))
         self.lookup = {g['id']:g for g in self.groups}
         self.counts = [Counter(tokens(g['heading']+' '+ ' '.join(r['text'] for r in g['records']))) for g in self.groups]
         df=Counter(t for c in self.counts for t in c)
         self.idf={t:math.log(1+(len(self.groups)-n+.5)/(n+.5)) for t,n in df.items()}
         self.average=sum(sum(c.values()) for c in self.counts)/len(self.counts)
+
+    def with_context(self, group):
+        rows=list(group['records']);seen={r['passage']['passage_id'] for r in rows}
+        # Only primary retrieved passages activate links: no recursive expansion.
+        anchors=set(seen)
+        for link in self.context_links:
+            if not anchors.intersection(link['anchors']):continue
+            for pid in link['context']:
+                if pid not in seen:rows.append(self.by_id[pid]);seen.add(pid)
+        return rows
 
     def rank(self, question, dense):
         query=set(tokens(question));dense_ids={h['record']['passage']['passage_id'] for h in dense}
@@ -173,13 +197,15 @@ class EvidenceIndex:
             score=sum(self.idf.get(t,0)*count[t]*2.2/(count[t]+1.2*(.25+.75*sum(count.values())/self.average)) for t in query if count[t])
             score+=4*sum(r['passage']['passage_id'] in dense_ids for r in group['records'])
             scores.append((score,group))
-        selected=[];works=set();size=0;count=0
+        selected=[];works=set();size=0;count=0;seen=set()
         for score,group in sorted(scores,key=lambda x:(-x[0],x[1]['id'])):
             work=group['records'][0]['passage']['work_id']
-            chars=sum(len(r['text']) for r in group['records'])
+            added=[r for r in self.with_context(group) if r['passage']['passage_id'] not in seen]
+            chars=sum(len(r['text']) for r in added)
             if (score<=0 or (work not in works and len(works)>=3)
-                    or count+len(group['records'])>MAX_PASSAGES or size+chars>MAX_CONTEXT):continue
-            selected.append(group['id']);works.add(work);size+=chars;count+=len(group['records'])
+                    or count+len(added)>MAX_PASSAGES or size+chars>MAX_CONTEXT):continue
+            selected.append(group['id']);works.add(work);size+=chars;count+=len(added)
+            seen.update(r['passage']['passage_id'] for r in added)
             if len(selected)==12:break
         return selected
 
@@ -209,7 +235,7 @@ class EvidenceIndex:
         selected=[];seen=set();size=0
         # Admit complete canonical passages; no synthetic concatenation is cited as a source.
         for sid in ids:
-            for record in self.lookup[sid]['records']:
+            for record in self.with_context(self.lookup[sid]):
                 pid=record['passage']['passage_id']
                 if pid in seen:continue
                 if len(selected)>=MAX_PASSAGES or size+len(record['text'])>MAX_CONTEXT:
@@ -224,7 +250,8 @@ class EvidenceIndex:
                              positions[group[-1]['passage']['passage_id']]+1):
                 if not 0<=position<len(self.records):continue
                 record=self.records[position];p=record['passage']
-                if p['work_id']!=group[0]['passage']['work_id'] or p['passage_id'] in seen:continue
+                if (p['work_id']!=group[0]['passage']['work_id'] or p['passage_id'] in seen
+                        or p['section_id'] not in self.lookup[sid]['section_ids']):continue
                 if len(selected)>=MAX_PASSAGES or size+len(record['text'])>MAX_CONTEXT:continue
                 selected.append(dict(record=record,score=1/(len(selected)+1)))
                 seen.add(p['passage_id']);size+=len(record['text'])
@@ -249,7 +276,7 @@ class EvidenceIndex:
 
 class EvidenceAnswers:
     policy=POLICY
-    def __init__(self, baseline, bundles, records, *, transport=api, model=DENSE_MODEL, selection='hybrid', thinking=False, trace=False, composition='units'):
+    def __init__(self, baseline, bundles, records, *, transport=api, model=DENSE_MODEL, selection='hybrid', thinking=False, trace=False, composition='units', context_links=()):
         self.trace=trace
         if model in (INSTRUCTION_MODEL,'qwen2.5:14b') and thinking:
             raise ValueError('Instruction model does not support thinking mode')
@@ -259,10 +286,10 @@ class EvidenceAnswers:
         if selection not in ('hybrid','model'):raise ValueError('Unknown selection policy')
         if composition not in ('units','direct'):raise ValueError('Unknown composition policy')
         self.composition=composition
-        self.baseline=baseline;self.index=EvidenceIndex(bundles,records);self.transport=transport
+        self.baseline=baseline;self.index=EvidenceIndex(bundles,records,context_links);self.transport=transport
         self.config={**baseline.config,'retriever':POLICY,'top_k':MAX_PASSAGES,
             'model_sha256':self.model_sha,'thinking':thinking,'selection':selection,'composition':composition,'api_mode':'raw_chatml' if model==INSTRUCTION_MODEL else 'chat','context_tokens':16384,'generation_token_limits':dict(selection=650,extraction=1600,composition=3600,review=1000,thinking=4096),'prompts_sha256':digest([SELECT,EXTRACT,WRITE,REVIEW,DIRECT]),
-            'context_policy':'selected-parts-adjacent-passages-abstract-conclusion-v1','max_sections':12,'max_context_characters':MAX_CONTEXT,'deadline_seconds':DEADLINE_SECONDS}
+            'context_policy':'selected-parts-same-section-adjacency-abstract-conclusion-v2','context_links_sha256':digest(list(context_links)),'max_sections':12,'max_context_characters':MAX_CONTEXT,'deadline_seconds':DEADLINE_SECONDS}
         self.lock=Lock();self.metrics=[]
 
     def call(self, system, body, schema, deadline, *, budget=1800):

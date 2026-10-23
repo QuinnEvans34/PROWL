@@ -2228,3 +2228,11 @@ User-approved thinking-model relocation recovered18.55GB internally after two ha
 Ollama identity preserved,8B remains internal. New instruction download resumed with its remaining
 original budget. Optional direct answer/review comparison adds no label lookup and passes65focused
 backend tests; live service and original evaluation remain unchanged. See EVIDENCE-LED-REPAIR report.
+
+### October22: source-context repair
+
+Verified instruction model available; direct and unit comparisons retained without promotion.
+Broad query/ranking variations rejected. Four same-paper canonical context relationships now
+bring methods and limitations with retrieved results. Exposed-set span-delivery improved69/74→74/74
+(20/20cases with all labeled concepts overlapping retrieved text), not an answer-accuracy score.
+72focused backend tests pass. Original corpus/evaluation/labels remain unchanged.
