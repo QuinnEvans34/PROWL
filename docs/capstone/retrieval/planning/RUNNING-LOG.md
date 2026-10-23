@@ -2236,3 +2236,5 @@ Broad query/ranking variations rejected. Four same-paper canonical context relat
 bring methods and limitations with retrieved results. Exposed-set span-delivery improved69/74→74/74
 (20/20cases with all labeled concepts overlapping retrieved text), not an answer-accuracy score.
 72focused backend tests pass. Original corpus/evaluation/labels remain unchanged.
+
+2026-10-22: Linked-context30-case regression completed; no supported answer met all unchanged completeness labels. Five hard boundaries explained correctly; five evidence gaps still withheld. Dedicated gap review added with contradictory-feedback rejection;78focused backend checks pass. Candidate remains unpromoted; original evaluation unchanged.

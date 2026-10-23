@@ -3,7 +3,7 @@ from copy import deepcopy
 import json
 from types import SimpleNamespace
 import pytest
-from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT, COVERAGE
+from src.retrieval.evidence_answer import EvidenceAnswers, EvidenceIndex, boundary, DENSE_MODEL, DENSE_MODEL_SHA, EXTRACT, COVERAGE, GAP_REVIEW
 from tests.retrieval.test_direct_ingestion import bundle
 from tests.retrieval.test_literature_adapter import setup
 
@@ -37,6 +37,10 @@ def engine(setup,bundle):
     def transport(path,payload=None,**kwargs):
         if path=='tags':return {'models':[dict(name=DENSE_MODEL,digest=DENSE_MODEL_SHA)]}
         calls.append(payload)
+        if payload['messages'][0]['content']==GAP_REVIEW:
+            review=responses.pop(0)
+            value=dict(answer_available=not review['completeness']['passed'],limit_supported=review['support']['passed'],readable=review['readability']['passed'],issues=[issue for v in review.values() for issue in v['issues']])
+            return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(value)))
         if payload['messages'][0]['content']==COVERAGE:
             return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(additional_facts=[],irrelevant_facts=[]))))
         if payload['messages'][0]['content']==EXTRACT:
@@ -380,3 +384,24 @@ def test_repeated_extraction_ids_are_canonicalized_without_accepting_unknown_ids
     schema['properties']['facts']['items']['enum']=[2]
     from jsonschema import ValidationError
     with pytest.raises(ValidationError):s.call(EXTRACT,{},schema,monotonic()+10)
+
+
+def test_gap_is_rejected_when_review_finds_requested_answer_in_sources(engine):
+    s,r,calls,responses,plan,_,passed=engine;s.composition='direct'
+    gap=dict(status='insufficient',limitation='That comparison is absent.',claims=[])
+    fail={**passed,'completeness':dict(passed=False,issues=['Source 2 provides the requested comparison.'])}
+    responses.extend([plan,gap,fail,gap,fail]);result=s.answer(r)
+    assert result['generation']=='unavailable' and result['answer'] is None
+    assert sum(c['messages'][0]['content']==GAP_REVIEW for c in calls)==2
+
+
+def test_gap_review_cannot_approve_contradictory_flags_and_issues(engine):
+    from time import monotonic
+    s,*_=engine
+    def inconsistent(path,payload,**kw):
+        return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content=json.dumps(dict(
+            answer_available=False,limit_supported=True,readable=True,issues=['Unsupported statement.']))))
+    s.transport=inconsistent
+    result=s.review_draft('A question.',[],dict(status='insufficient',limitation='Not reported.',claims=[]),monotonic()+10)
+    assert result['support']['passed'] is False
+    assert result['support']['issues']==['Unsupported statement.']

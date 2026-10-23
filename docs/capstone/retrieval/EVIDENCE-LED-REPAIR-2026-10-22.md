@@ -229,3 +229,18 @@ a second differently grouped duplicate text block, and is explicitly forbidden f
 values between units. Coverage audit may remove redundant facts only when their full meaning and
 qualifications remain represented.76focused backend tests pass. Live semantic qualification of
 these changes remains pending; the prior full regression continues unchanged.
+
+### Completed linked-context baseline and dedicated gap review
+
+All30 requests in regression-evidence-20-linked-units finished without transport errors. Five of20
+supported questions returned answers, but manual review found missing required qualifications in
+all five; the other15 were withheld (14support rejections, one duplicate-ID validation failure).
+All five hard boundaries returned appropriate explanations. All five missing-evidence questions
+were withheld by draft review rather than receiving adequate gap explanations. These are development
+regression results, not independent acceptance. The live UI remains unchanged.
+
+A dedicated gap review now checks whether the specific requested answer exists, whether the stated
+limit is faithful, and whether the explanation is clear. Related studies cannot substitute for the
+missing modality, comparison or number. Contradictory flags and issues cannot approve a gap. This
+retains the same evidence requirements while separating absence checking from summary completeness.
+78focused backend checks passed; live qualification of this revision remains pending.
