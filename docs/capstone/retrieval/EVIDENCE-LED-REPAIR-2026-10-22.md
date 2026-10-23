@@ -220,3 +220,12 @@ Numbers must stay as digits, and source abbreviations must remain verbatim to pr
 expansion from silently replacing them. These checks do not prove semantic equivalence.75focused
 backend tests pass, including a missing-context addition and rejection of unknown sentence IDs.
 The new flow has not yet passed live quality checks; it is not promoted.
+
+Additional bounded repair: exact duplicate integer IDs from model extraction are canonicalized
+as a set before schema validation; unknown IDs and all remaining constraints still reject. The
+removed-duplicate count is retained in call metrics. One retained failure was caused solely by a
+repeated ID during repair. The writer now receives each fact once with source titles, rather than
+a second differently grouped duplicate text block, and is explicitly forbidden from borrowing
+values between units. Coverage audit may remove redundant facts only when their full meaning and
+qualifications remain represented.76focused backend tests pass. Live semantic qualification of
+these changes remains pending; the prior full regression continues unchanged.

@@ -366,3 +366,17 @@ def test_rewrite_cannot_replace_source_abbreviation_with_an_unchecked_expansion(
     responses.extend([plan,draft,deepcopy(passed),draft,deepcopy(passed)])
     result=s.answer(r)
     assert result['generation']=='unavailable' and result['answer'] is None
+
+
+def test_repeated_extraction_ids_are_canonicalized_without_accepting_unknown_ids(engine):
+    from time import monotonic
+    s,*_=engine
+    def duplicate(path,payload,**kw):
+        return dict(model=DENSE_MODEL,done=True,done_reason='stop',message=dict(content='{"facts":[2,2,3]}'))
+    s.transport=duplicate
+    schema=dict(type='object',properties={'facts':dict(type='array',maxItems=2,uniqueItems=True,items=dict(type='integer',enum=[2,3]))},required=['facts'])
+    assert s.call(EXTRACT,{},schema,monotonic()+10)['facts']==[2,3]
+    assert s.metrics[-1]['duplicate_ids_removed']==1
+    schema['properties']['facts']['items']['enum']=[2]
+    from jsonschema import ValidationError
+    with pytest.raises(ValidationError):s.call(EXTRACT,{},schema,monotonic()+10)
