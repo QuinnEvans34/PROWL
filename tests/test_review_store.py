@@ -151,3 +151,12 @@ def test_http_roundtrip_refusals_and_restart(store):
         for name in ['manifest.json',*FILES.values()]: assert client.get(f'/review-records/packages/{h}/files/{name}').status_code==200
         assert client.get(f'/review-records/packages/{h}/files/private.json').status_code==404
         assert client.post('/review-records/targets/saved',json=body).json()['event']['revision']==1
+
+
+def test_isolated_review_port_keeps_exact_host_and_origin_checks(store):
+    with TestClient(create_app(store,port=8028),base_url='http://127.0.0.1:8028') as client:
+        assert client.get('/review-records/packages').status_code==200
+        assert client.get('/review-records/packages',headers={'Host':'127.0.0.1:8018'}).status_code==403
+        assert client.get('/review-records/packages',headers={'Origin':'http://127.0.0.1:5183'}).status_code==403
+        assert client.get('/review-records/packages',headers={'Origin':'https://example.org'}).status_code==403
+    with pytest.raises(ValueError):create_app(store,port=0)

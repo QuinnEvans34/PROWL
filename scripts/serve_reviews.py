@@ -12,12 +12,14 @@ from jsonschema import ValidationError
 from src.review.store import ReviewStore, ReviewError, FILES, digest
 
 
-def create_app(store):
+def create_app(store, *, port=8018):
+    if type(port) is not int or not 1 <= port <= 65535:
+        raise ValueError('Invalid loopback review port')
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
     @app.middleware('http')
     async def local(request, call_next):
-        if (request.headers.get('host') not in ('127.0.0.1:8018','localhost:8018','127.0.0.1:5180','localhost:5180')
+        if (request.headers.get('host') not in (f'127.0.0.1:{port}',f'localhost:{port}','127.0.0.1:5180','localhost:5180')
                 or request.headers.get('origin') not in (None,'http://127.0.0.1:5180','http://localhost:5180')
                 or request.headers.get('sec-fetch-site') == 'cross-site'):
             return JSONResponse({'error':'Local access required.'}, status_code=403)
@@ -65,6 +67,7 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--root', required=True, type=Path)
     p.add_argument('--saved-package', type=Path)
+    p.add_argument('--port', type=int, default=8018, help='Loopback port; use a separate port and root for isolated verification')
     args = p.parse_args()
     import uvicorn
-    uvicorn.run(create_app(ReviewStore(args.root, args.saved_package)), host='127.0.0.1', port=8018, access_log=False)
+    uvicorn.run(create_app(ReviewStore(args.root, args.saved_package), port=args.port), host='127.0.0.1', port=args.port, access_log=False)
