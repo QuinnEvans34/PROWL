@@ -1,0 +1,23 @@
+{
+  "title": "Pancreas-assisted lesion outlining with complete coverage and interleaved views",
+  "name": "pants_pancreas_region_24k_20261019",
+  "max_updates": 24000,
+  "validate_every": 2000,
+  "checkpoint_every": 500,
+  "max_seconds": 345600,
+  "input_policy": "provided-pancreas-region-1",
+  "assistance": "Provided pancreas masks define both training and development regions; no development lesion-guided crop selection or repair",
+  "margin_derivation": "Existing 671-positive TRAINING coverage audit maximum extra source-plane margins rounded up to [80,42,70]mm then 1mm safety: [81,43,71]mm beyond existing pancreas-only 10mm box. Exact derivation will be bound in readiness evidence. No development-derived tuning.",
+  "recipe": "Fresh original SuPreM, seed42, DiceFocal, AdamW1e-4, original500warmup/24kcosine, previous augmentation, no EMA or PANORAMA",
+  "cohort": {"train":1333,"positive_train":671,"development":70,"positive_development":36,"new_exclusions":0},
+  "selection": "Highest positive-case macro native Dice among complete70 development evaluations every2k; earliest tie",
+  "control_selected_native_dice": 0.4237607557,
+  "control_final_native_dice": 0.3937226670,
+  "control_run_id": "dbf1a562e9eb4d5a96301718a19d07a8",
+  "null_hypothesis": "Selected-checkpoint native positive-case macro Dice improvement over augmented PanTS control is <=0",
+  "acceptance": {"minimum_dice_delta":0.02,"paired_95pct_lower_bound_greater_than":0,"minimum_detection_fraction_delta":-0.03,"maximum_empty_alarm_fraction_delta":0.03,"minimum_pancreas_dice_delta":-0.02,"maximum_empty_predicted_lesion_voxel_burden_delta":0},
+  "bootstrap": {"seed":20261019,"replicates":10000},
+  "secondary": "Mandatory terminal24k versus augmented terminal24k; never replaces primary",
+  "limitations": "Exploratory reused development. Bundled region/physical detail/sampling change, not pure causal coverage effect. Provided-pancreas assisted, not autonomous detection. Control selected on tensor validation; new selection native. Stopped full-CT run is a diagnostic comparator, not primary control.",
+  "resources": {"rss_bytes":12884901888,"minimum_free_bytes":107374182400,"backup_cap_bytes":27917287424,"cache_cap_bytes":34359738368,"require_ac":true,"automatic_retry":false}
+}
