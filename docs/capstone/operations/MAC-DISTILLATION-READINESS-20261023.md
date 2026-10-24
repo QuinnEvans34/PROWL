@@ -129,3 +129,15 @@ and descendant cleanup tested synthetically;36 focused tests pass. Old315/new318
 source pins unchanged at verification. New patient-pilot-02 request SHA256
 bf2dd34856fb9f77828490daa4bdd6a5469ee737e5ed2537d44d1747abf8c4c1.
 Prepared, NOT launched. See MAC-KD-PILOT-FAILURE-20261023.md for tests/limitations.
+
+## Revision02 completed; teacher usefulness remains unaccepted
+
+User authorized continuation; revision02 dispatched exactly once. All12 cases/869tiles
+completed in2582.73s; sampled owned RSS peak3,768,172,544B; exit0/resources receipt/
+workers reaped. All318 producing pins unchanged and all native regions covered.
+Actually inspected12 representative PNGs. Post-run mask/probability audit found
+11/18 components detected,2/9 below1mL detected, seven with no positive KD support;
+negative case predicts8112 lesion voxels. Positive-case macro Dice.375/recall.471.
+These are training diagnostics, not independent acceptance. No full cache or KD
+training approved. See MAC-KD-PILOT-RESULTS-20261023.md for full table/limitations
+and recommended fixed-subset upstream-reference comparison; no further run launched.

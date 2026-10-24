@@ -1,141 +1,187 @@
 {
-  "status": "PENDING_ACTUAL_REVIEW",
+  "status": "REVISION_02_EXECUTION_PASSED_QUALITY_NOT_ACCEPTED",
   "accepted": false,
   "cases": [
     {
       "case_id": "PanTS_00002720",
       "reviewed": false,
-      "geometry": "Saved report covers full native region; three displayed planes inspected, no obvious gross alignment shift. Full spatial review remains pending.",
-      "missed_components": "One component has overlap but extensive underprediction; 120342/189621 voxels at q<=0.1 and5858 eligible positive KD voxels in quantized cache.",
-      "false_positives": "No q>=0.9 voxels in background or pancreas in this case; does not establish specificity.",
-      "outline_quality": "Three-plane figure shows small isolated teacher contours inside much larger reference outline; inadequate demonstrated extent.",
-      "probability_contradictions": "Saved training-only cache and two source masks reviewed; no CT decoding/inference.",
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "6145 predicted voxels versus 189621 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Small isolated predicted contours within a much larger annotation; major underprediction visible.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
       "evidence_hashes": {
-        "patient-pilot-01/PanTS_00002720.png": "3a67486f4f665502ed047fc0defee4022e02df25995819cb1b53cb3abd09cb44",
-        "first-case-probability-review-01.json": "62ce91c4cd91e57687b69a051719fdb91b196a64d1bd5ea4c6d8c8323c2fe972"
+        "figure": "c562b6091f6726fca80251c917b9923962c6ac7d8cc04ee8650be87d4b57b01f",
+        "probability": "491baf4ea0dd93216763641ce194b68b5fb0dcece80fe2edb6c60a34ea9bf648"
       },
-      "decision": "not accepted; partial visual and probability review only"
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00003615",
       "reviewed": false,
-      "geometry": "Pilot failed: native edge0.156393mm outside teacher boundary cell; metadata reproduction confirms rounded-grid coverage deficit.",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "engineering failure; no complete output to review"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "27801 predicted voxels versus 58501 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Predicted contours largely inside the reference, with missed peripheral extent.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "62bad0a4db9415194ade9c54fff75b4fb19f3a3e0b5ba8b9f22747fd34b081ea",
+        "probability": "1fc95b318d9e5ff2d365e12cfa81c9b250610dc291af0658768256ef76adfe9f"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00000691",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "0/0 components have any overlap; this is not complete contour support.",
+      "false_positives": "8112 predicted voxels versus 0 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Extra predicted contour visible despite no supplied lesion annotation.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "1d3b3a3a1450b538a1d30a953d41d058f6e0b7ef6d88ed3f5edae9a378958d89",
+        "probability": "785ef94ae2d23e9b2ec0439ec2b84b4d6e2c95f6a92a9a8a2e386537bb6fac29"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00003059",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "0/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "10 predicted voxels versus 12 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Tiny annotation visible; no overlapping teacher contour in the saved views or component check.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "70fe8efd8dbf9d75d191ae3fced6c1b8001cafeb5bc4d83a205c13a69cb6db9d",
+        "probability": "1a0e6b7982251eaa47d41d290f5c3b33358be5e1a99cbbf9ed57f0cf8a13b1ab"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00000246",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "33427 predicted voxels versus 264178 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Small predicted regions within a large annotated lesion; major underprediction visible.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "724e50681746432cc264f9b2d3bcf081781c96fc18545bc3c9dbbf37e79fa458",
+        "probability": "d9f16e510ef9575cf591b192eb761c369f972d3e11362f59a90a47a05127a67c"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00008658",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/7 components have any overlap; this is not complete contour support.",
+      "false_positives": "6908 predicted voxels versus 17911 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Partial overlap in representative planes; component audit finds only1/7 detected. Remaining components not individually visualized.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "a4631cd870b5bb8f2631df2691d9fd8e3594b277fcd00b16c59b415d65d06d48",
+        "probability": "00f5153503552e3179356767759e535d5e9193a919f7d0d7fe2f0ae3ebcc3a43"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00003777",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "14088 predicted voxels versus 819 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Teacher contour exceeds the small reference in displayed planes; excessive total prediction volume.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "bc817d0ccce821a16661e062b935bded4f0fc001b3564b588a6548c158f03155",
+        "probability": "401ac0e19e45a6f192d0c02489d5b824910fd4bfca239e8ea15c761b9717c73e"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00004735",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "1962 predicted voxels versus 1302 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Closer contour agreement in displayed planes; some excess extent remains.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "831671fde6ce051a73efd058dcde6c9a319ef38131c96de36bbe532fb21becdd",
+        "probability": "6cf1ab197561cae75986df271585bef972f469f4ffe39265fc793f89b2527d2b"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00002498",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "13538 predicted voxels versus 4599 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Overlap in displayed planes; three-plane view cannot explain all excess predicted volume.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "bb0578e487c4cbf57818402b1667810ff7754da549058d6231cf468104972d35",
+        "probability": "0fdc6b213fcdf099165150d2421c3ac5ed76d701faf5783d4d056656a71b85f0"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00001193",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "2/2 components have any overlap; this is not complete contour support.",
+      "false_positives": "4713 predicted voxels versus 6681 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Overlap of visible regions with missed reference edges; two components detected by audit.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "5c9ea8c298aafef0f616c9d0f439f1e61efadab98e4c85cac3cfd0c766e6d039",
+        "probability": "502697af37973bce363097a47e733903a98fb09dfa3c8f032ccca58b908ccd07"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00005832",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "4749 predicted voxels versus 1405 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Contour extends beyond reference in displayed planes; partial overlap.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "bc3e7ac88b438baf6e21de59bcd5501b9bc0c0f3055babac4b1965da2c2db536",
+        "probability": "eab3ced6114e959d28e77c4ef008ec05a63a00c04483b2acbdc93d2b152d8f2d"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     },
     {
       "case_id": "PanTS_00006222",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Actual grid matched preflight; full native reconstruction, zero out-of-field voxels.",
+      "missed_components": "1/1 components have any overlap; this is not complete contour support.",
+      "false_positives": "21135 predicted voxels versus 29747 supplied lesion voxels; counts alone do not locate false positives.",
+      "outline_quality": "Broad overlap with missed annotated margins in displayed planes.",
+      "probability_contradictions": "Stratum and component counts saved in pilot-02-probability-review.json; quantized thresholds have rounding uncertainty.",
+      "evidence_hashes": {
+        "figure": "35865cd1a43f5f87d3e254050129f7d1d48c18e68da93aa6602281009a8310bc",
+        "probability": "227b25ce3e813efd8e43e263f3ea573c4230c2d1f0a3da0e5374e5887b653b64"
+      },
+      "decision": "Full-cache/KD use not accepted; supplemental full component/extent review remains incomplete.",
+      "representative_figure_inspected": true
     }
-  ]
+  ],
+  "pilot_result_sha256": "23c9d7d00e980ad9c09c83cd38992cc8db6e44d90f26f5090f95f453b7c55bda"
 }
