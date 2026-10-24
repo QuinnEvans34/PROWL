@@ -5450,3 +5450,25 @@ CT decodes, zero model/optimizer/protected-image reads. Opt-in provider is on-de
 not fast-prefetch; existing proposed launch configurations remain unqualified and
 unchanged. No full-cohort Mac admission or optimizer recovery claim. Teacher missed
 lesions remain the consequential blocker before spending on full KD preparation.
+
+### October23 — teacher backend parity diagnostic (planned)
+
+User requests further diagnosis before concluding the teacher is unsuitable. Compare
+same EMA weights and identical preprocessed128-cube inputs on CPU versus MPS, fixed
+exposed training cases2720(failure) and6222(stronger overlap). Choose clamped window
+center from annotation centroid; explicitly diagnostic/oracle-selected, not a new
+full-volume score. Four forwards,1200s/12GiB owned RSS/12GiB post-forward MPS,
+shared lock/AC, no training or threshold tuning. Record probability differences and
+0.5 decision disagreements descriptively. No CUDA equivalence claim. Preserve all
+prior pins/results. Evidence: teacher-backend-parity-01. Official MedFormerPanTS
+model card identifies this checkpoint as segmentation-only baseline, distinct from
+report-supervised R-Super headline comparisons; do not conflate model identities.
+
+Teacher backend probe outcome: stopped before first CPU forward completed by
+12GiB owned-RSS guard. Peak13,348,388,864B,13.81s,exit-15,workers reaped. No
+probabilities or CPU/MPS comparison produced, no retries or budget expansion.
+Request/source/resources preserved at teacher-backend-parity-01. Literature/model
+card confirms installed release is segmentation-only baseline, distinct from the
+report-supervised R-Super model. Next proposed evidence: read-only laptop CUDA
+reference feasibility check, then a separately bounded run when GPU available.
+Do not interpret failed resource qualification as model performance evidence.

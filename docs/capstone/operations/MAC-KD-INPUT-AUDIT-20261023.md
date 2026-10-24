@@ -166,3 +166,36 @@ review; component counts are not automatically clinical lesion counts. If there
 is no documented mismatch to resolve, a different qualified teacher or continued
 supervised student work is more defensible than further tuning to this exposed
 case. The KD deliverable remains planned, but this teacher is not qualified.
+
+## October23 follow-up: backend parity attempt and expected model identity
+
+User requested renewed investigation of whether integration explains poor teacher
+performance. The release [model card](https://huggingface.co/AbdomenAtlas/MedFormerPanTS/blob/main/README.md)
+identifies MedFormerPanTS as the segmentation-only baseline. The
+[paper, section2.5](https://arxiv.org/html/2510.14803v1#S2.SS5) compares that approach
+with report-supervised R-Super. The latter's headline improvements should not be
+attributed to this checkpoint. Published cohort results also cannot be compared
+directly with our small exposed diagnostic cohort. Neither distinction proves the
+local inference is correct or explains the severe case2720 miss.
+
+A fixed probe selected one128-cube from each of existing training cases2720 and6222,
+centered on the annotation centroid and clamped to the teacher grid. Plan: identical
+EMA weights and float32 inputs on CPU/MPS, four forwards,1200s/12GiB owned RSS,
+shared MPS lock/AC. Annotation-centered selection is an oracle diagnostic, not a
+new full-volume accuracy evaluation. No source labels or thresholds changed.
+
+**Attempt stopped before the first forward completed:** peak sampled owned RSS
+13,348,388,864B exceeded12GiB. Supervisor terminated the worker after13.81s; exit-15,
+workers reaped. No prediction or backend comparison was produced. No retry, budget
+increase, partial success claim or scientific launch. Evidence preserved in
+`teacher-backend-parity-01/` request/resources/worker log. Producing script:
+`scripts/diagnostics/compare_teacher_backends.py`.
+
+Next useful reference is a bounded upstream CUDA run on an already exposed case,
+only after the laptop's existing training releases the GPU. First request a
+read-only feasibility report: current GPU ownership, frozen code/checkpoint identity,
+upstream runner readiness, and fixed-case source availability. Do not dispatch
+training/inference or change active pins during that check. A later reference
+should preserve exact input identity and distinguish upstream prediction behavior
+from candidate postprocessing/reconstruction. Full upstream parity remains open;
+this memory failure is not evidence of a model-quality or data-quality failure.
