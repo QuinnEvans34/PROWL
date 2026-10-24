@@ -5369,3 +5369,17 @@ case2720 recall worsened from EMA.03122 to raw.02237. Raw weights do not resolve
 41 focused tests passed. No training or full cache; teacher usefulness remains
 unaccepted. See MAC-KD-INPUT-AUDIT-20261023.md for evidence, preserved audit failure,
 annotation limits and remaining bounded reference comparison.
+
+
+### October23 — final bounded Mac teacher extent/blending comparison
+
+One EMA run on fixed case2720 compared legacy extent and candidate/upstream
+kernel/precision using shared window predictions. Recall stayed.03089–.03122;
+upstream bfloat16.03119 versus revised candidate.03122. Original legacy cached
+probabilities replay exactly after quantization.112tiles/315.23s/2.613GB peak
+owned RSS/exit0/reaped/fullcoverage;323 pins unchanged. Synthetic candidate and
+actual upstream bfloat16 accumulations match exactly. No training/fullcache.
+Stop this pipeline-tuning series; teacher usefulness remains unaccepted. Next
+review teacher/task and annotation provenance before selecting a teacher, rather
+than changing labels or tuning to the exposed case. Full report:
+MAC-KD-INPUT-AUDIT-20261023.md, final comparison section.

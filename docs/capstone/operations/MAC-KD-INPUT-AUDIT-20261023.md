@@ -110,3 +110,59 @@ not materially explain the failure, stop treating this teacher as a qualified KD
 source and review annotation provenance/teacher suitability before more target
 generation. Clinical correctness of the supplied outlines requires appropriate
 review, not agreement with this model. Full upstream/CUDA parity remains untested.
+
+
+## Final bounded extent/blending comparison — completed
+
+This supersedes the pending comparison above. User authorized continuation. One
+new EMA forward pass on case2720 used the legacy grid; identical window outputs
+fed three accumulators. The saved revised-grid result supplied the extent
+comparison. No case expansion, threshold tuning, label changes or training.
+
+Before dispatch, nonconstant synthetic predictions exactly matched the existing
+candidate accumulator and the actual pinned upstream one-pass bfloat16 function.
+Inputs with different upstream window multiplicity are explicitly rejected by
+this diagnostic. This case has identical candidate/upstream window order.
+
+| Configuration | Dice | Recall | Predicted voxels | False-positive voxels |
+| --- | ---: | ---: | ---: | ---: |
+| Saved revised grid, candidate float32 | 0.060480 | 0.031220 | 6145 | 225 |
+| Legacy grid, candidate float32 | 0.059866 | 0.030893 | 6082 | 224 |
+| Legacy grid, upstream kernel, float32 | 0.060320 | 0.031136 | 6135 | 231 |
+| Legacy grid, upstream kernel/bfloat16 | 0.060418 | 0.031189 | 6149 | 235 |
+
+All use189621 reference voxels and the same native evaluation region; no unavailable
+voxels excluded. Coverage:3135750/3135750,zero boundary extension/out-of-field.
+Against legacy candidate blending, upstream float32 changes77 threshold decisions
+(max probability difference.005869); upstream bfloat16 changes111(max.011921).
+The legacy candidate result, quantized identically, exactly replays the original
+pilot's saved probability array:zero changed voxels. That supplies an additional
+same-case reproducibility check, not a general MPS/CUDA equivalence claim.
+
+Execution112tiles/315.23seconds/2,612,576,256B peak owned RSS/exit0/reaped. Frozen
+teacher state exact;323 request pins verified afterward; recorded supervisor and
+worker absent. Bounds1200seconds,12GiB RSS,12GiB post-tile MPS allocation,128MiB
+outputs,200tiles; exclusive shared MPS lock/AC/guardian enforced. Full native
+coverage was checked with a synthetic probability field before model execution.
+
+Evidence: external `extent-blend-probe-01/` request (including synthetic checks),
+resources, result, native-probabilities.npz and final-verification.json. Script:
+`scripts/diagnostics/compare_mac_teacher_blending.py`. Baseline quantization and
+CPU-normalization/MPS-forward/native-world reconstruction limitations remain;
+this is not a complete upstream CUDA CLI reproduction.
+
+### Decision
+
+The tested extent/kernel/precision differences do not explain the large-lesion
+failure: recall remains3.09–3.12%. Together with the failed raw-weight improvement,
+this ends the planned pipeline-tuning investigation. Do not generate full teacher
+targets or start KD from this candidate. No claim that all annotations are correct,
+all possible backend differences are excluded, or the teacher fails every case.
+
+Next priority is teacher/task and annotation provenance review: confirm what the
+release was trained/evaluated to delineate and compare with our supplied lesion
+scope, using existing evidence first. Small component fragments need separate
+review; component counts are not automatically clinical lesion counts. If there
+is no documented mismatch to resolve, a different qualified teacher or continued
+supervised student work is more defensible than further tuning to this exposed
+case. The KD deliverable remains planned, but this teacher is not qualified.
