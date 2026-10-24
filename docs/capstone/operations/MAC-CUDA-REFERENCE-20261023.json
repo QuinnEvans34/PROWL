@@ -1,0 +1,512 @@
+{
+  "status": "MAC_REFERENCE_ONLY_CUDA_PENDING",
+  "model_revision": "eab1a7e9f421740bf8f3f834d1f69d17cbe3a8aa",
+  "checkpoint_sha256": "38535f10430265e431ca3ffa7fe3ff15efed5bccb65ba909b6e3ce18af11e459",
+  "variant": "ema",
+  "lesion_channel": 19,
+  "activation": "sigmoid",
+  "mac_policy": {
+    "accumulation": "lesion_only_float32_CPU",
+    "hu_clip": [
+      -991.0,
+      500.0
+    ],
+    "inference": "single_pass_no_TTA_no_gate_edge_anchored_gaussian_sigma_quarter_window",
+    "interpolation": "upstream_XY_bspline_then_XYZ_nearest",
+    "normalization": "full_CT_mean_sample_std_before_padding_float32_CPU",
+    "orientation": "RAI_permutation_flip_preserve_obliquity",
+    "padding": "symmetric_zero_correct_zyx_axes",
+    "reconstruction": "native_region_RAS_world_linear",
+    "resampling_size": "max_legacy_round_and_ceil_source_centres_plus_one",
+    "spacing_mm": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "status": "candidate_requires_real_CT_quality_and_resource_qualification",
+    "stride": 64,
+    "version": "medformer-single-pass-native-target-candidate-2",
+    "window": 128
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00002720",
+      "role": "train",
+      "source_sha256": {
+        "ct": "81bbd1bd1338682a4c43b327063aec9b1290a264342a7bda46adb9ea0a7b032a",
+        "pancreas": "6237785ce78f7b2e905d07f5769b534a0f214f00d197eec472689918ca7b37fb",
+        "lesion": "bffb3c3555c3468b2dc2849454217c446e741b9f1d725ba288a52e12bd87addd"
+      },
+      "native_geometry": {
+        "affine": [
+          [
+            0.8789060115814209,
+            0.0,
+            0.0,
+            -376.17177271842957
+          ],
+          [
+            0.0,
+            0.8789060115814209,
+            0.0,
+            -347.1678743362427
+          ],
+          [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "forward": [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "inverse": [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "shape": [
+          339,
+          185,
+          50
+        ],
+        "source_affine": [
+          [
+            0.8789060115814209,
+            0.0,
+            0.0,
+            -376.17177271842957
+          ],
+          [
+            0.0,
+            0.8789060115814209,
+            0.0,
+            -347.1678743362427
+          ],
+          [
+            0.0,
+            0.0,
+            5.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source_shape": [
+          339,
+          185,
+          50
+        ]
+      },
+      "region_low": [
+        83,
+        116,
+        0
+      ],
+      "region_high": [
+        422,
+        301,
+        50
+      ],
+      "teacher_grid": {
+        "affine": [
+          [
+            0.0,
+            0.0,
+            1.0,
+            -449.1209716796875
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -449.1209716796875
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            300.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "shape": [
+          305,
+          313,
+          451
+        ]
+      },
+      "mac_report": {
+        "cache_bytes": 674504,
+        "case_id": "PanTS_00002720",
+        "diagnostic_only": true,
+        "lesion_voxels": 189621,
+        "prediction_voxels": 15026,
+        "preprocessing": {
+          "mean": -263.3382568359375,
+          "normalization_voxels": 43054715,
+          "policy": {
+            "accumulation": "lesion_only_float32_CPU",
+            "hu_clip": [
+              -991.0,
+              500.0
+            ],
+            "inference": "single_pass_no_TTA_no_gate_edge_anchored_gaussian_sigma_quarter_window",
+            "interpolation": "upstream_XY_bspline_then_XYZ_nearest",
+            "normalization": "full_CT_mean_sample_std_before_padding_float32_CPU",
+            "orientation": "RAI_permutation_flip_preserve_obliquity",
+            "padding": "symmetric_zero_correct_zyx_axes",
+            "reconstruction": "native_region_RAS_world_linear",
+            "resampling_size": "max_legacy_round_and_ceil_source_centres_plus_one",
+            "spacing_mm": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "status": "candidate_requires_real_CT_quality_and_resource_qualification",
+            "stride": 64,
+            "version": "medformer-single-pass-native-target-candidate-2",
+            "window": 128
+          },
+          "sample_std": 416.8847351074219,
+          "source_grid": {
+            "affine": [
+              [
+                0.0,
+                0.0,
+                0.8789060115814209,
+                -449.1209716796875
+              ],
+              [
+                0.0,
+                0.8789060115814209,
+                0.0,
+                -449.1209716796875
+              ],
+              [
+                5.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "shape": [
+              61,
+              355,
+              512
+            ]
+          }
+        },
+        "quality_accepted": false,
+        "recall": 0.05943434535204434,
+        "reconstruction": {
+          "boundary_extended_voxels": 0,
+          "covered_voxels": 3135750,
+          "method": "RAS_world_linear_slabbed",
+          "native_voxels": 3135750,
+          "out_of_field_voxels": 0
+        },
+        "seconds": 317.78015049989335,
+        "teacher_dice": 0.1101408767291971,
+        "tiling": {
+          "minimum_blend_weight": 0.002721379743888974,
+          "pad_low": [
+            0,
+            0,
+            0
+          ],
+          "padded": [
+            305,
+            313,
+            451
+          ],
+          "reconstruction_gaps": 0,
+          "tiles": 112
+        }
+      },
+      "probability_sha256": "105b2933e51f9b9669da74a899f8fefebb7588fff36015873ef98f2c949bba1e"
+    },
+    {
+      "case_id": "PanTS_00006222",
+      "role": "train",
+      "source_sha256": {
+        "ct": "17f08f454618627ef47df75f873ecf26d28098611a309860f7f7bbbe36363440",
+        "pancreas": "8166588c436d01f4353ff46b3152c529e20b3ff4ebfa6d49c432fba3e944afbc",
+        "lesion": "efd3a8eb1f379832a6858a810a52c1226afd993b83e5b18235bc668c71c10386"
+      },
+      "native_geometry": {
+        "affine": [
+          [
+            0.7226560115814209,
+            0.0,
+            0.0,
+            -153.47501397132874
+          ],
+          [
+            0.0,
+            0.7226560115814209,
+            0.0,
+            -132.9687671661377
+          ],
+          [
+            0.0,
+            0.0,
+            0.800000011920929,
+            -216.98000890016556
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "forward": [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "inverse": [
+          [
+            0.0,
+            1.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            2.0,
+            1.0
+          ]
+        ],
+        "shape": [
+          365,
+          281,
+          210
+        ],
+        "source_affine": [
+          [
+            0.7226560115814209,
+            0.0,
+            0.0,
+            -153.47501397132874
+          ],
+          [
+            0.0,
+            0.7226560115814209,
+            0.0,
+            -132.9687671661377
+          ],
+          [
+            0.0,
+            0.0,
+            0.800000011920929,
+            -216.98000890016556
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "source_shape": [
+          365,
+          281,
+          210
+        ]
+      },
+      "region_low": [
+        32,
+        72,
+        0
+      ],
+      "region_high": [
+        397,
+        353,
+        210
+      ],
+      "teacher_grid": {
+        "affine": [
+          [
+            0.0,
+            0.0,
+            1.0,
+            -176.6000063419342
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            -185.0
+          ],
+          [
+            -1.0,
+            0.0,
+            0.0,
+            -49.780006408691406
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ],
+        "shape": [
+          169,
+          280,
+          371
+        ]
+      },
+      "mac_report": {
+        "cache_bytes": 655869,
+        "case_id": "PanTS_00006222",
+        "diagnostic_only": true,
+        "lesion_voxels": 29747,
+        "prediction_voxels": 24897,
+        "preprocessing": {
+          "mean": -443.6474914550781,
+          "normalization_voxels": 17555720,
+          "policy": {
+            "accumulation": "lesion_only_float32_CPU",
+            "hu_clip": [
+              -991.0,
+              500.0
+            ],
+            "inference": "single_pass_no_TTA_no_gate_edge_anchored_gaussian_sigma_quarter_window",
+            "interpolation": "upstream_XY_bspline_then_XYZ_nearest",
+            "normalization": "full_CT_mean_sample_std_before_padding_float32_CPU",
+            "orientation": "RAI_permutation_flip_preserve_obliquity",
+            "padding": "symmetric_zero_correct_zyx_axes",
+            "reconstruction": "native_region_RAS_world_linear",
+            "resampling_size": "max_legacy_round_and_ceil_source_centres_plus_one",
+            "spacing_mm": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "status": "candidate_requires_real_CT_quality_and_resource_qualification",
+            "stride": 64,
+            "version": "medformer-single-pass-native-target-candidate-2",
+            "window": 128
+          },
+          "sample_std": 490.3898010253906,
+          "source_grid": {
+            "affine": [
+              [
+                0.0,
+                0.0,
+                -0.7226560115814209,
+                192.67721557617188
+              ],
+              [
+                0.0,
+                0.7226560115814209,
+                0.0,
+                -185.0
+              ],
+              [
+                -0.800000011920929,
+                0.0,
+                0.0,
+                -49.780006408691406
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+              ]
+            ],
+            "shape": [
+              210,
+              386,
+              512
+            ]
+          }
+        },
+        "quality_accepted": false,
+        "recall": 0.7069284297576226,
+        "reconstruction": {
+          "boundary_extended_voxels": 0,
+          "covered_voxels": 21538650,
+          "method": "RAS_world_linear_slabbed",
+          "native_voxels": 21538650,
+          "out_of_field_voxels": 0
+        },
+        "seconds": 117.17610408307519,
+        "teacher_dice": 0.7696727911573091,
+        "tiling": {
+          "minimum_blend_weight": 0.002721379743888974,
+          "pad_low": [
+            0,
+            0,
+            0
+          ],
+          "padded": [
+            169,
+            280,
+            371
+          ],
+          "reconstruction_gaps": 0,
+          "tiles": 40
+        }
+      },
+      "probability_sha256": "c06a339f9cea7a35b2acdbf66b849122c370545e35e3382733e166ed6c853406"
+    }
+  ],
+  "note": "Compare source identity and native coordinates before metrics. Upstream TTA/precision differences are pipeline factors, not backend-only effects."
+}

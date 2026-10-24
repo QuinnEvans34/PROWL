@@ -5510,3 +5510,18 @@ all12 representative overlays reviewed. Candidate works operationally but is not
 qualified for unconditional KD. Full outcome: MAC-RSUPER-MERLIN-PILOT-20261023.md.
 Inherited baseline MIT metadata is explicitly corrected in additive final-review;
 candidate license unverified, no redistribution. No training/fullcache launched.
+
+### October23 — upstream CUDA reference requested (authorized)
+
+Quinton redirects the next step from immediate KD launch to resolving teacher
+inference fidelity. Requested the laptop experiment chat prepare and, if its
+current run has finished normally and exclusive GPU is available, execute the
+fixed R-SuperPanTSMerlin EMA upstream reference: exposed train2720 first,6222
+second after successful first. No interruption or competing GPU process. Existing
+30min/case,12GiB RSS,6GiB GPU,2GiB combined output limits; stop/preserve on failure.
+Isolated pinned missing upstream dependencies; no live source/venv mutation or
+merge. Exact upstream TTA/precision/preprocessing must be recorded, not silently
+called backend parity. Save native geometry/probabilities and input identities;
+Mac reference snapshot MAC-CUDA-REFERENCE-20261023.json records comparison inputs.
+Request delivered to Plan capstone experiment workflow. Dispatch/results pending;
+no scientific KD launch, automatic retry or schedule requested in this handoff.
