@@ -81,3 +81,10 @@ No scientific student run or automatic student-launch chain exists. Full target
 completion and remaining qualification are still required. Preserve all request
 pins while this worker is active. Initial target-job dispatch and progress are
 prerequisite work, not training hours or a model-quality result.
+
+Laptop follow-up: isolated batchgenerators0.25.1 import now passes, but corrected
+CPU import audit stops on upstream timm0.6.12 mutable-dataclass-default incompatibility
+with Python3.12.14.33.64s/workers reaped; both failures preserved. Current training
+reported17647/24000. An isolated compatible runtime or documented adaptation is
+still needed; no upstream inference result exists. No model-quality inference
+follows from this dependency failure.
