@@ -5493,3 +5493,20 @@ outputs, shared lock/AC. No training, case expansion, thresholds or retries. Pre
 original-label paired results and separately interpret3059 as corrected negative for
 both models. Inspect12overlays. New bundle/config layout alias documented; no old
 model replacement. Full target generation and KD launch remain outside this test.
+
+R-Super pilot completed all12 cases/869tiles, exit0/reaped,2542.38s,
+4,229,545,984B peak owned RSS. Frozen model exact. All12 representative overlays
+inspected. Paired corrected-positive macroDice .412151→.456147, recall
+.518595→.563252;8/10 improve,2 regress. Both corrected negatives still have false
+positives. Planned final saved-probability component audit: same12 annotations,
+3059 correction preserved,26-connectivity,600s/12GiB CPU; no CT/model execution.
+Report small-component overlap and high-confidence false voxels separately before
+any teacher recommendation. No training or full target cache authorized.
+
+Final saved-output audit completed9.72s/1,905,147,904B RSS,exit0/reaped. Both teachers
+hit11/17 annotation components and2/8 below1mL; six missed components in8658 persist.
+High-confidence false voxels24,035→28,026. Final394 producing/input pins match;
+all12 representative overlays reviewed. Candidate works operationally but is not
+qualified for unconditional KD. Full outcome: MAC-RSUPER-MERLIN-PILOT-20261023.md.
+Inherited baseline MIT metadata is explicitly corrected in additive final-review;
+candidate license unverified, no redistribution. No training/fullcache launched.

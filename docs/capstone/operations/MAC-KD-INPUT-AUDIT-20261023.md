@@ -240,3 +240,10 @@ The full upstream CUDA baseline reference remains complementary for diagnosis.
 Quinton authorized a message to “Plan capstone experiment workflow”; the read-only
 GPU/source/checkpoint/runner feasibility request was sent successfully. Explicitly
 no inference, training, active-run edits, installations or schedules requested.
+
+### Completed candidate test
+
+The metadata-only status above is historical. R-SuperPanTSMerlin was subsequently
+acquired, safely converted and tested on the same12 cases. See
+[completed pilot](MAC-RSUPER-MERLIN-PILOT-20261023.md): average Dice improved,
+but missed components and high-confidence false positives remain. No KD launch.
