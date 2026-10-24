@@ -170,3 +170,12 @@ Stop this pipeline-tuning series; teacher usefulness remains unaccepted. Next
 review teacher/task and annotation provenance before selecting a teacher, rather
 than changing labels or tuning to the exposed case. Full report:
 MAC-KD-INPUT-AUDIT-20261023.md, final comparison section.
+
+
+## Upstream annotation errata changes the tiny-case interpretation
+
+See MAC-KD-UPSTREAM-ERRATA-20261023.md. Maintainer-confirmed drawing artifacts
+include pilot3059 and six other frozen training cases; none intersect local70dev.
+Do not interpret3059 as a verified tiny-tumor miss. Historical scores/files retained;
+no teacher promotion or Windows run change. Versioned correction and sampling
+reconciliation required before a future launch; large-lesion failure still stands.

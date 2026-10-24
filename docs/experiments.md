@@ -5383,3 +5383,14 @@ Stop this pipeline-tuning series; teacher usefulness remains unaccepted. Next
 review teacher/task and annotation provenance before selecting a teacher, rather
 than changing labels or tuning to the exposed case. Full report:
 MAC-KD-INPUT-AUDIT-20261023.md, final comparison section.
+
+
+### October23 — upstream annotation errata confirmed
+
+Official PanTS maintainer confirmation in issue12 identifies accidental tiny masks,
+including pilot3059. Metadata-only intersection:7 frozen training cases,0 local70dev;
+recorded voxel counts match. No masks or exclusions modified, no historical rescore,
+no new inference/training. Teacher mapping matches its own26-label model card;
+Merlin demo links an inconsistently described42-label baseline, not grounds for an
+unverified switch. Full sources and proposed versioned correction in
+MAC-KD-UPSTREAM-ERRATA-20261023.md. Large-lesion teacher failure remains unresolved.
