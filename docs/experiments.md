@@ -5354,3 +5354,18 @@ Implemented additive centre-covering resampling (max legacy extent/required cent
 ### October23 — revised Mac teacher pilot completed and reviewed
 
 Exactly one user-authorized revision02 run:12 fixed training cases/869tiles,2582.73s,3,768,172,544B sampled owned RSS,exit0 and workers reaped. All318 pins unchanged; full native coverage including both prior deficit cases; frozen teacher check passed. All12 representative figures inspected and24 source-mask hashes rechecked for saved-probability component audit (no additional CT/model reads). Positive-case macro Dice.37468/recall.47145;11/18 components detected,2/9 under1mL detected,7 components without eligible positive KD support; single negative has8112 predicted voxels. Engineering execution/coverage pass; teacher usefulness NOT accepted. Full cache/training not launched. Recommendation: qualify a fixed-subset candidate-vs-upstream reference check before changing loss/targets. Detailed evidence in MAC-KD-PILOT-RESULTS-20261023.md and external pilot-02-probability-review.json.
+
+
+### October23 — Mac input audit and raw-weight diagnostic completed
+
+Subsequent user-authorized diagnosis checked five exposed cases: independent CT
+readers agree exactly, world affines agree, upstream-helper CPU preprocessing
+matches legacy preprocessing exactly, and scaled binary masks remain valid. No
+lesion touched a source-array boundary. Revised-grid normalization differs slightly;
+complete upstream inference equivalence is not established. All12 revised grids
+avoid upstream's defective padding path; repeated edge windows affect only case2498.
+One fixed-case raw-weight probe finished112tiles/306.21s/reaped with fullcoverage:
+case2720 recall worsened from EMA.03122 to raw.02237. Raw weights do not resolve it.
+41 focused tests passed. No training or full cache; teacher usefulness remains
+unaccepted. See MAC-KD-INPUT-AUDIT-20261023.md for evidence, preserved audit failure,
+annotation limits and remaining bounded reference comparison.

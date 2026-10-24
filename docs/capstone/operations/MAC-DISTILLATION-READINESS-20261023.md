@@ -141,3 +141,18 @@ negative case predicts8112 lesion voxels. Positive-case macro Dice.375/recall.47
 These are training diagnostics, not independent acceptance. No full cache or KD
 training approved. See MAC-KD-PILOT-RESULTS-20261023.md for full table/limitations
 and recommended fixed-subset upstream-reference comparison; no further run launched.
+
+
+## Input audit and raw-weight diagnostic completed
+
+Subsequent user-authorized diagnosis checked five exposed cases: independent CT
+readers agree exactly, world affines agree, upstream-helper CPU preprocessing
+matches legacy preprocessing exactly, and scaled binary masks remain valid. No
+lesion touched a source-array boundary. Revised-grid normalization differs slightly;
+complete upstream inference equivalence is not established. All12 revised grids
+avoid upstream's defective padding path; repeated edge windows affect only case2498.
+One fixed-case raw-weight probe finished112tiles/306.21s/reaped with fullcoverage:
+case2720 recall worsened from EMA.03122 to raw.02237. Raw weights do not resolve it.
+41 focused tests passed. No training or full cache; teacher usefulness remains
+unaccepted. See MAC-KD-INPUT-AUDIT-20261023.md for evidence, preserved audit failure,
+annotation limits and remaining bounded reference comparison.
