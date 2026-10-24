@@ -14,6 +14,46 @@ from src.operations.segmenter_duration_dispatch_v1 import watch
 from src.operations.full_training_platform import training_guard
 
 BASE = Path('/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023')
+INTERNAL_RESERVE_BYTES = 50_000_000_000  # User-approved decimal GB, Mac only.
+EXTERNAL_RESERVE_BYTES = 100 * 1024**3
+NEW_BACKUP_LIMIT_BYTES = 4 * 1024**3
+TOTAL_BACKUP_LIMIT_BYTES = 26 * 1024**3
+
+
+def check_storage_budget(internal_free, external_free, backup_bytes,
+                         planned_internal_bytes=0, planned_external_bytes=0,
+                         new_backup_bytes=0):
+    """Check projected space; new backups are additional internal writes."""
+    values = (internal_free, external_free, backup_bytes, planned_internal_bytes,
+              planned_external_bytes, new_backup_bytes)
+    if any(not isinstance(v, int) or isinstance(v, bool) or v < 0 for v in values):
+        raise ValueError('Storage sizes must be nonnegative integer bytes')
+    if internal_free - planned_internal_bytes - new_backup_bytes < INTERNAL_RESERVE_BYTES:
+        raise ValueError('Mac internal reserve: 50 GB required after planned writes')
+    if external_free - planned_external_bytes < EXTERNAL_RESERVE_BYTES:
+        raise ValueError('External reserve: 100 GiB required after planned writes')
+    if new_backup_bytes > NEW_BACKUP_LIMIT_BYTES:
+        raise ValueError('New backup budget: 4 GiB')
+    if backup_bytes + new_backup_bytes > TOTAL_BACKUP_LIMIT_BYTES:
+        raise ValueError('Total backup budget: 26 GiB')
+    return dict(internal_reserve_bytes=INTERNAL_RESERVE_BYTES,
+                external_reserve_bytes=EXTERNAL_RESERVE_BYTES,
+                new_backup_limit_bytes=NEW_BACKUP_LIMIT_BYTES,
+                total_backup_limit_bytes=TOTAL_BACKUP_LIMIT_BYTES,
+                internal_free_bytes=internal_free, external_free_bytes=external_free,
+                existing_backup_bytes=backup_bytes,
+                planned_internal_bytes=planned_internal_bytes,
+                planned_external_bytes=planned_external_bytes,
+                new_backup_bytes=new_backup_bytes)
+
+
+def storage_preflight():
+    import shutil
+    backup_root = Path.home()/'PROWL-Backups'
+    backup_bytes = sum(p.stat().st_size for p in backup_root.rglob('*') if p.is_file())
+    return check_storage_budget(shutil.disk_usage(Path.home()).free,
+                                shutil.disk_usage('/Volumes/PROWL-Data').free,
+                                backup_bytes)
 
 
 def write(path, value):
@@ -69,16 +109,14 @@ def worker(stage, destination):
 
 
 def launch(stage):
-    import shutil
     if sys.platform != 'darwin': raise ValueError('Mac-only supervisor')
     if not Path('/Volumes/PROWL-Data').is_mount(): raise ValueError('External drive missing')
-    if shutil.disk_usage('/Volumes/PROWL-Data').free < 100*1024**3:
-        raise ValueError('External reserve')
+    storage = storage_preflight()
     destination = BASE/(stage+'-01')
     destination.mkdir(exist_ok=False)
     paths = [Path(__file__), ROOT/'src/training/teacher_medformer_v1.py', ROOT/'src/training/teacher_checkpoint_v1.py', ROOT/'scripts/diagnostics/mac_kd_synthetic.py']
     write(destination/'request.json', dict(stage=stage, seconds=240, rss_bytes=12*1024**3,
-        mps_bytes=12*1024**3, scientific=False, inputs='synthetic only',
+        mps_bytes=12*1024**3, scientific=False, inputs='synthetic only', storage=storage,
         pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}))
     source_dir = destination/'source'
     source_dir.mkdir()

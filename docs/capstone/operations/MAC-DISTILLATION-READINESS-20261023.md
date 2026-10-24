@@ -52,16 +52,22 @@ so exact tensor reload is distinct from matching a Windows serialized-file hash.
 3. Fix and qualify any demonstrated pilot problems. Complete target availability
    and storage/runtime projection precede a full scientific recipe.
 4. Independently verify backup/restore using the approved internal storage budget.
-   Mac free~85GiB; old training100GiB reserve is not silently lowered. Proposed
-   preparation budget:50GB internal free,4GiB new backups within26GiB total cap;
-   user decision pending. Existing backup usage~19.71GiB.
+   User approved the Mac preparation reserve change on October23: **50 GB decimal
+   internal free**, at most4GiB new backups within26GiB total backup storage.
+   The Mac supervisor now checks these limits before dispatch and records them in
+   new stage requests; projected-write checks are available for backup preparation.
+   External reserve remains100GiB. Windows limits and historical receipts are unchanged.
+   Existing backup usage~19.71GiB. Independent backup/restore remains pending.
 5. Select matched Mac no-KD/control recipe with current result review. Unknown
    teacher development membership remains exploratory. No independent claim.
 6. Freeze actual runtime, configuration/cohort/source identities, selected/terminal
    native evaluation and launch receipt; return concrete scientific run for approval.
 
-Cross-chat metadata request awaits explicit user permission required by app rules.
-No message sent, no new listener, training run, cache-wide generation or paid polling.
+The user authorized the metadata handoff request, and it was sent to “Plan capstone
+experiment workflow”: frozen12-case order, current membership/exclusions, candidate
+recipe, source hashes and existing coverage/cache evidence. The laptop reports the
+metadata archive assembled and undergoing checksum verification; transfer pending.
+No new listener, training run, cache-wide generation or paid polling.
 Existing long-training .venv312 has torch2.13.0/MONAI1.6.0/MLflow3.15.0/SimpleITK2.5.6;
 it needed isolated test/jsonschema dependencies. .venv-prowl synthetic checks have
 no MLflow/SimpleITK. Do not conflate their test results with a single qualified
@@ -70,3 +76,8 @@ scientific runtime. Initial collection failures are retained in tool history.
 Final focused test result:125passed in5.07s using `.venv312` plus the isolated
 external test dependencies. Includes loss/targets/checkpoint/geometry/integration/
 tracking and five new reporting checks. No model-quality conclusion follows.
+
+Storage-change verification:15 focused tests pass, including projected writes and
+exact reserve/backup boundaries. Live preflight passes with91.1GB internal free,
+2.07TB external free and21.14GB existing backup files. No new model run or backup
+was performed for this policy change.

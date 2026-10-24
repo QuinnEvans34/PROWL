@@ -5322,3 +5322,8 @@ pass. No patient data reads, teacher-quality pilot, scientific updates, independ
 backup verification or training-ready claim. Metadata messaging and preparation
 storage decisions pending. See operations/MAC-DISTILLATION-READINESS-20261023.md
 under docs/capstone for exact scope, artifact locations and remaining prerequisites.
+
+
+### October 23 — Mac KD preparation storage approval and metadata handoff
+
+Quinton authorized the frozen case/recipe request; sent to the training chat without requesting inference or training changes. The laptop reports its metadata archive assembled, transfer pending. Mac preparation now enforces a 50,000,000,000-byte internal reserve, retaining 100 GiB external reserve, 4 GiB new-backup and 26 GiB total-backup limits. Projected writes are checked explicitly; future stage requests record the budget. Windows launch rules and existing receipts are unchanged. Live preflight passed: internal free 91,136,348,160 bytes, external free 2,065,220,280,320 bytes, existing backup files 21,140,423,080 bytes. Fifteen focused tests passed (including ten storage cases). Initial standalone preflight lacked the isolated jsonschema dependency; rerunning with the documented test dependency path passed. No model execution or backup creation in this change; independent backup/restore and real pilot remain pending.
