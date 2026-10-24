@@ -5570,3 +5570,14 @@ shared MPS lock/AC/independent guardian; stop on failures, no auto retry/resume.
 Geometry coverage and full source binding required before dispatch. Output remains
 prediction payloads until final provider-bound manifest/launch qualification.
 This long prerequisite cannot honestly be represented as overnight student training.
+
+Full source admission PASS:1403cases/4209files match transferred hashes;
+512.56s/563,789,824B peak RSS,exit0/reaped; no decoded CT reads. Dispatching bounded
+full1333 training-target preparation using approved teacher and same policy after
+source and actual-KD recovery gates passed. Scientific student launch remains
+pending complete targets/full-provider/evaluator qualification. No schedule.
+
+Full target worker active, first6311 observed25/105tiles. Ownedsession21973;
+request/process/guardian ready retained under rsuper-full-targets-01. No scientific
+student updates or automatic student-launch chain. Keep requestpins/AC/drive;
+no duplicate. Laptop safe conversion complete but no CUDA reference result.

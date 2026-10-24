@@ -65,3 +65,19 @@ bfloat16 accumulation and second-pass options differ from the Mac policy.
 No upstream CUDA result yet; the Mac pilot does not establish upstream equivalence.
 This evidence does not remove known teacher misses/false positives or unresolved
 teacher training-membership limitations. Results remain exploratory.
+
+## Launch update
+
+Full source admission completed:1403cases/4209files match,512.56s,
+563,789,824B peak owned RSS,exit0/reaped. Full training-target worker is now active
+in `rsuper-full-targets-01`; observed first case6311 at25/105 windows. Follow
+`progress.jsonl` (completed cases), `tiles.jsonl` (current inference), `worker.log`
+and eventual `resources.json`/`result.json`. Current tool session21973 owns its
+supervisor; do not duplicate or automatically retry. Caffeinate inhibits idle sleep
+while the worker runs; keep AC/drive connected. This does not guarantee lid-closed
+operation or survive a reboot.
+
+No scientific student run or automatic student-launch chain exists. Full target
+completion and remaining qualification are still required. Preserve all request
+pins while this worker is active. Initial target-job dispatch and progress are
+prerequisite work, not training hours or a model-quality result.
