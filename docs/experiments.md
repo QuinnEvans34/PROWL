@@ -5309,3 +5309,16 @@ draft paragraphs source-audited: unsupported metadata/scope and false model appr
 12new orchestration+7existing feedback tests pass. No promotion or demonstrated quality improvement.
 Baseline demo restored, candidate stopped/store preserved. No corpus/labels/protected/training/hours
 changes. Next evidence-bound metadata and evidence-located review issues/latency, not another sweep.
+
+### 2026-10-23 — Mac KD engineering preparation (not a scientific experiment)
+
+User approved autonomous preparation for parallel imaging distillation. Integrated
+Windows source through9548582; acquired and safely converted the pinned teacher.
+CPU and native MPS32³/128³ synthetic teacher checks pass; actual144³ student zero/
+positive-KD path executed. Producer's JSON reporting failed after checkpoints;
+failure preserved and serialization fixed. Fresh-process next-update restoration
+matches saved expected state within predefined rtol1.3e-6/atol1e-5.125focused tests
+pass. No patient data reads, teacher-quality pilot, scientific updates, independent
+backup verification or training-ready claim. Metadata messaging and preparation
+storage decisions pending. See operations/MAC-DISTILLATION-READINESS-20261023.md
+under docs/capstone for exact scope, artifact locations and remaining prerequisites.

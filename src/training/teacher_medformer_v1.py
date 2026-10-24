@@ -77,7 +77,7 @@ class FrozenTeacher:
     def __init__(self, identity, identity_sha256, *, device='cpu'):
         if digest(canonical(identity)) != identity_sha256 or identity['version'] != 'frozen-medformer-pants-1':
             raise ValueError('Teacher identity pin')
-        if device not in ('cpu', 'cuda'): raise ValueError('Explicit teacher device')
+        if device not in ('cpu', 'cuda', 'mps'): raise ValueError('Explicit teacher device')
         for path, pin in identity['files'].items():
             if sha(path) != pin: raise ValueError('Teacher source/config/dependency changed: ' + path)
         if sha(identity['weights']['path']) != identity['weights']['sha256']:

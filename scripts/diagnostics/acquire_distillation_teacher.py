@@ -1,4 +1,5 @@
 """Acquire one pinned public teacher and unmodified source; no model execution."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -7,6 +8,7 @@ import time
 import urllib.request
 
 BASE = Path('E:/PROWL/teachers/medformer-pants-b854c824')
+STORAGE_ROOT = Path('E:/')
 HF_REV = 'b854c8248af1e21f729dc2dfd489bd400472cf65'
 CODE_REV = '45fea075a805797e78e002e9880330f4241afb1a'
 WEIGHT = 'pants_pancreas_release/fold_0_latest.pth'
@@ -32,7 +34,7 @@ def fetch(url, path, *, maximum, sha256=None, git_blob=None):
             count += len(chunk)
             if count > maximum or time.monotonic() - start > 900:
                 raise RuntimeError('Bounded acquisition limit exceeded')
-            if shutil.disk_usage('E:/').free < 100 * 1024**3:
+            if shutil.disk_usage(STORAGE_ROOT).free < 100 * 1024**3:
                 raise RuntimeError('Free-space floor')
             stream.write(chunk); digest.update(chunk)
     if sha256 and (digest.hexdigest() != sha256 or count != maximum):
@@ -48,7 +50,7 @@ def fetch(url, path, *, maximum, sha256=None, git_blob=None):
 
 def main():
     if BASE.exists(): raise ValueError('Acquisition already started; inspect it, no rerun')
-    if shutil.disk_usage('E:/').free - SIZE < 100 * 1024**3: raise RuntimeError('Storage floor')
+    if shutil.disk_usage(STORAGE_ROOT).free - SIZE < 100 * 1024**3: raise RuntimeError('Storage floor')
     BASE.mkdir(parents=True, exist_ok=False)
     write(BASE/'request.json', dict(hf_revision=HF_REV, code_revision=CODE_REV,
         checkpoint_sha256=SHA, checkpoint_bytes=SIZE, total_download_cap_bytes=SIZE+8*1024**2,
@@ -87,4 +89,12 @@ def main():
         raise
 
 
-if __name__ == '__main__': main()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--base', type=Path, default=BASE)
+    parser.add_argument('--storage-root', type=Path, default=STORAGE_ROOT)
+    args = parser.parse_args()
+    BASE, STORAGE_ROOT = args.base, args.storage_root
+    if not STORAGE_ROOT.is_dir(): raise ValueError('Storage root must already be mounted')
+    if not BASE.resolve().is_relative_to(STORAGE_ROOT.resolve()): raise ValueError('Destination outside storage root')
+    main()
