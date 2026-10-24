@@ -199,3 +199,44 @@ training/inference or change active pins during that check. A later reference
 should preserve exact input identity and distinguish upstream prediction behavior
 from candidate postprocessing/reconstruction. Full upstream parity remains open;
 this memory failure is not evidence of a model-quality or data-quality failure.
+
+## Teacher selection review — report-supervised release identified
+
+Official [Merlin demo](https://github.com/MrGiovanni/R-Super/blob/main/rsuper_train/Merlin_demo.md)
+explicitly distinguishes the two checkpoints. We did not install an unrelated
+architecture, but selected the mask-only baseline rather than the report-supervised
+model whose improvements motivated this investigation.
+
+| Release | Supervision | Current local status |
+| --- | --- | --- |
+| AbdomenAtlas/MedFormerPanTS | PanTS masks only | Existing tested baseline; unqualified as KD teacher |
+| AbdomenAtlas/R-SuperPanTSMerlin | About0.9K PanTS lesion masks plus1.8K Merlin lesion reports | Metadata reviewed; weights not downloaded/tested |
+
+[Report-supervised model card](https://huggingface.co/AbdomenAtlas/R-SuperPanTSMerlin)
+revision `eab1a7e9f421740bf8f3f834d1f69d17cbe3a8aa` names
+`merlin_pancreas_pants_release/fold_0_latest.pth`,606,931,502bytes,
+server-advertised LFS SHA256
+`38535f10430265e431ca3ffa7fe3ff15efed5bccb65ba909b6e3ce18af11e459`.
+This is an advertised identity, not a locally verified checkpoint hash.
+The label YAML exactly matches the baseline, and all constructor fields used by
+our FrozenTeacher match. New config explicitly sets report_volume_loss_basic0.1
+versus0.0 and references the PanTS baseline as pretraining. Architecture/config
+agreement does not prove safe loading, tensor compatibility or inference quality.
+
+Metadata-only evidence saved externally in `teacher-selection-review-01/`:
+API metadata, pinned README/config/labels and review.json. No weights downloaded,
+source imports, inference, teacher replacement or training performed. New card
+metadata has no explicit license field; do not inherit the baseline's model-card
+license automatically. Protected development membership remains unresolved for
+both teachers; a comparison would remain exploratory.
+
+Recommendation: safely acquire/convert the report-supervised checkpoint into a
+separate bundle, verify strict loading/output mapping, then compare on the same
+fixed12 exposed cases and corrected-label interpretation, with unchanged inference
+settings and preserved baseline. This tests checkpoint choice; it must not be
+confused with validating backend equivalence or independent model acceptance.
+The full upstream CUDA baseline reference remains complementary for diagnosis.
+
+Quinton authorized a message to “Plan capstone experiment workflow”; the read-only
+GPU/source/checkpoint/runner feasibility request was sent successfully. Explicitly
+no inference, training, active-run edits, installations or schedules requested.

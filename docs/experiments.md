@@ -5472,3 +5472,12 @@ card confirms installed release is segmentation-only baseline, distinct from the
 report-supervised R-Super model. Next proposed evidence: read-only laptop CUDA
 reference feasibility check, then a separately bounded run when GPU available.
 Do not interpret failed resource qualification as model performance evidence.
+
+October23 teacher selection review: official demo links distinct R-SuperPanTSMerlin
+report-supervised checkpoint versus installed MedFormerPanTS mask-only baseline.
+Pinned candidate metadata revisioneab1a7e9f421740bf8f3f834d1f69d17cbe3a8aa;
+advertised606,931,502B checkpointSHA38535f10430265e431ca3ffa7fe3ff15efed5bccb65ba909b6e3ce18af11e459.
+Labels and all used model constructor config fields match; report supervision0.1
+vs0.0. Weights not acquired or executed. Recommend separately bound matched pilot,
+not silent teacher replacement. Authorized laptop feasibility message sent; no GPU
+job requested. Metadata evidence teacher-selection-review-01 and input audit doc.
