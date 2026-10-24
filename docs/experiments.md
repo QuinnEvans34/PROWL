@@ -5525,3 +5525,48 @@ called backend parity. Save native geometry/probabilities and input identities;
 Mac reference snapshot MAC-CUDA-REFERENCE-20261023.json records comparison inputs.
 Request delivered to Plan capstone experiment workflow. Dispatch/results pending;
 no scientific KD launch, automatic retry or schedule requested in this handoff.
+
+### October23 — R-Super KD launch preparation authorized
+
+User explicitly requests autonomous setup and training with the new teacher,
+incorporating the laptop reference findings. Preserve the full matched1333/70,
+24k design and known exploratory teacher errors; no silent12case substitution.
+First check metadata-only full target cost/local file availability, then source
+binding, target admission, actual-recipe updates/recovery and launch receipts.
+No optimizer or scientific tracking record yet. Initial read-only inventory command
+failed before work because isolated jsonschema path was omitted; corrected command
+uses existing external dependencies, no environment changes. Full target timing is
+an extrapolation from selected12cases, not a guaranteed ETA. No CUDA competition.
+
+All4209 required compressed source files exist (46,549,826,280bytes); internal
+88.997GB/external2.064TB free, storage floors pass. Begin bounded full1333train+
+70dev compressed-byte identity binding against transferred frozen source hashes:
+7200s/2GiB RSS, no CT decode or repeated coverage audit. Metadata and local
+observations saved separately; stop on mismatch, no retry. This is source
+admission preparation, not scientific training or teacher-target completion.
+
+Metadata projection:110248 teacher tiles;~89.60h extrapolated from fixed12, raw
+30,363,754,614B; compressed extrapolation~0.777GB (selected sample, not guarantee).
+Before full target generation, qualify actual SuPreM MPS with saved R-Super targets
+on exposed2720/6222: one supervised versus zero-KD pair, two positive-KD updates,
+one independent-backup cold continuation;1200s/12GiB per stage/shared lock/AC.
+Existing full24k LR horizon/ramp retained, but restricted two-case engineering
+control explicitly not the scientific run. No new teacher inference, threshold
+changes, or promotion of incomplete target manifest. Preserve errors and stop.
+
+Real-data KD engineering PASS: zero-KD matched supervised at unchanged
+rtol1.3e-6/atol1e-5; two R-Super positive-KD updates used weights.0001/.0002,
+2,973,398/2,159,741 eligible voxels, KD losses1.492844/.589467. Producer20.68s/
+2,087,927,808B RSS; independent-backup cold continuation10.97s/2,199,027,712B;
+both exit0/reaped. Backup56,514,619B SHA84a4e7c5ab7e5a4f1c3f1982e2ac6bc6190c500506e3c6364cefaf610185df61.
+Five total engineering updates, zero scientific updates.66 focused regressions
+pass/5.87s (two upstream deprecation warnings). Full cohort/provider/evaluator
+remain unqualified; do not claim this two-case test is the planned experiment.
+
+Next prepared target builder: all1333 TRAIN cases, reuse12 pinned predictions,
+fullCT teacher input, same single-pass policy, no new annotation-selected inference.
+96h wall/12GiB RSS/12GiB post-tile MPS/31GiB output with combined32GiB cache cap,
+shared MPS lock/AC/independent guardian; stop on failures, no auto retry/resume.
+Geometry coverage and full source binding required before dispatch. Output remains
+prediction payloads until final provider-bound manifest/launch qualification.
+This long prerequisite cannot honestly be represented as overnight student training.
