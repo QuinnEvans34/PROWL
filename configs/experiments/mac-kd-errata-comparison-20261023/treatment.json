@@ -1,0 +1,113 @@
+{
+  "status": "ERRATA_DESIGN_NOT_LOADER_QUALIFIED_NOT_LAUNCH_RECEIPT",
+  "backend": "mps",
+  "precision": "float32",
+  "student_configuration": {
+    "_experiment": {
+      "name": "mac_kd_errata_matched_20261023",
+      "run": {
+        "checkpoint_every": 500,
+        "max_updates": 24000,
+        "validate_every": 2000
+      }
+    },
+    "initialization": {
+      "checkpoint": "pretrained_weights/supervised_suprem_segresnet_2100.pth",
+      "kind": "suprem",
+      "sha256": "2db81dc05cd9ea7234ca75e921e53e32b8716dc4cba88a6710742bfc282589a3"
+    },
+    "region_policy": {
+      "base_margin_mm": 10.0,
+      "context": "uniform_region",
+      "extra_margin_mm": [
+        81.0,
+        43.0,
+        71.0
+      ],
+      "focused": "round_robin_union_pancreas_lesion_cover_bank",
+      "inference": "provided_pancreas_only",
+      "sampling": "three_focused_one_context_global_updates",
+      "spacing": "physical-detail-windows-1",
+      "stride": 72,
+      "version": "provided-pancreas-region-1",
+      "window": 144
+    },
+    "session": {
+      "learning_rate": 0.0001,
+      "loss_id": "monai_dice_focal_bg0_gamma2_v1",
+      "lr_horizon_steps": 24000,
+      "lr_schedule": "warmup_cosine",
+      "max_steps": 24000,
+      "seed": 42,
+      "tensor_shape": [
+        144,
+        144,
+        144
+      ],
+      "warmup_steps": 500,
+      "weight_decay": 1e-05
+    },
+    "throughput_policy": "equivalent-varied-target-cache-prefetch-1",
+    "training_view_policy": {
+      "context": "identical_provided_pancreas_region_v1_rng",
+      "coverage": "unchanged_union_pancreas_lesion_bank_once_per_full_schedule",
+      "coverage_slots": "floor(j*N/B),j=0..B-1",
+      "empty_focus": "26_connected_pancreas_components_round_robin",
+      "global_mix": "three_focused_one_context",
+      "inference": "unchanged_region_v1",
+      "jitter": "uniform_valid_origin_retaining_component_box_if_fits_else_anchor",
+      "positive_focus": "26_connected_lesion_components_round_robin",
+      "version": "coverage-reserved-component-jitter-1",
+      "window": 144
+    }
+  },
+  "augmentation": "pants_cached_view_augmentation_v1",
+  "membership": {
+    "train": "cf8b4ee8d06a3c667f92906e999201c7b2d9127b5235ff6588777a1a67874173",
+    "development": "6b69605f49de0dd20346bee9db7fea4842c050cea4cf8d85268775deabc301bf"
+  },
+  "train_count": 1333,
+  "development_count": 70,
+  "distillation": {
+    "policy": "lesion_bernoulli_kd_gt_agreement_stratified_v1",
+    "max_weight": 0.1,
+    "temperature": 2.0,
+    "ramp_updates": 1000
+  },
+  "evaluation": {
+    "scope": "provided_pancreas_only_native_region",
+    "steps": [
+      2000,
+      4000,
+      6000,
+      8000,
+      10000,
+      12000,
+      14000,
+      16000,
+      18000,
+      20000,
+      22000,
+      24000
+    ],
+    "selection": "max_positive_patient_macro_native_Dice_earliest_tie",
+    "terminal_required": true
+  },
+  "scientific_launch_authorized": false,
+  "label_revision": {
+    "version": "pants-issue12-local-normal-mask-1",
+    "overlay_sha256": "033f8f5cb7533031412a04f8daff62e5f95786123d0a21fc3c32c711ef5b06bc",
+    "correction_count": 7,
+    "training_positive_count": 664,
+    "originals_preserved": true,
+    "correction_applies_to_both_arms": true,
+    "old_target_cache_admission": false,
+    "required_before_launch": [
+      "explicit_overlay_loader_binding",
+      "new_target_cache_manifest",
+      "actual_input_and_cold_restore_qualification",
+      "teacher_quality_acceptance",
+      "new_launch_receipt"
+    ]
+  }
+}

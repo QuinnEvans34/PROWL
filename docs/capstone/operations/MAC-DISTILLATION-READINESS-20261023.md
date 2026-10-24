@@ -179,3 +179,17 @@ include pilot3059 and six other frozen training cases; none intersect local70dev
 Do not interpret3059 as a verified tiny-tumor miss. Historical scores/files retained;
 no teacher promotion or Windows run change. Versioned correction and sampling
 reconciliation required before a future launch; large-lesion failure still stands.
+
+
+## Versioned local errata overlay prepared
+
+Seven derived zero-lesion masks generated from confirmed upstream errata;
+all originals/hash identities and geometry preserved.1333train remains, positives
+671→664;70dev/36positive unchanged. Coverage-bank sizes unchanged, pancreas-focused
+component metadata regenerated. New paired errata designs bind the same overlay,
+old cache admission disabled, launch false. Nine policy tests pass; real preparation
+10.70s/1.882GB peak RSS/reaped. First pre-mask metadata failure preserved separately.
+Corrected-label pilot macro Dice.41215 versus original.37468 is a label change,
+not model improvement;3059 now a negative with10false-positive voxels. Teacher
+still unaccepted. Future overlay loader/cache qualification required; frozen runs
+unchanged. See MAC-KD-ERRATA-CORRECTION-20261023.md.

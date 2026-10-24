@@ -5394,3 +5394,17 @@ no new inference/training. Teacher mapping matches its own26-label model card;
 Merlin demo links an inconsistently described42-label baseline, not grounds for an
 unverified switch. Full sources and proposed versioned correction in
 MAC-KD-UPSTREAM-ERRATA-20261023.md. Large-lesion teacher failure remains unresolved.
+
+
+### October23 — versioned seven-case PanTS errata correction
+
+Seven derived zero-lesion masks generated from confirmed upstream errata;
+all originals/hash identities and geometry preserved.1333train remains, positives
+671→664;70dev/36positive unchanged. Coverage-bank sizes unchanged, pancreas-focused
+component metadata regenerated. New paired errata designs bind the same overlay,
+old cache admission disabled, launch false. Nine policy tests pass; real preparation
+10.70s/1.882GB peak RSS/reaped. First pre-mask metadata failure preserved separately.
+Corrected-label pilot macro Dice.41215 versus original.37468 is a label change,
+not model improvement;3059 now a negative with10false-positive voxels. Teacher
+still unaccepted. Future overlay loader/cache qualification required; frozen runs
+unchanged. See MAC-KD-ERRATA-CORRECTION-20261023.md.
