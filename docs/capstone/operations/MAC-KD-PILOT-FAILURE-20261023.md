@@ -78,3 +78,38 @@ must be tested separately. Keep owned-process targeting and existing resource ca
    usefulness; review the first-case underprediction separately.
 
 No automatic retry was launched. No full cache or scientific run is ready.
+
+## Revised pilot prepared (not launched)
+
+User authorized implementing the coverage correction, synthetic cleanup tests and
+preparing a revised pilot. New `segmenter_teacher_geometry_v2.py` uses the maximum
+of legacy rounded size and `ceil((n-1)*spacing/target)+1`: retains prior extent and
+covers source centres. Origin, directions and interpolation stay unchanged; extra
+samples can alter normalization, so this is a distinct preprocessing policy, not
+an upstream-equivalence claim. Original v1 remains byte-identical.
+
+`pilot_distillation_mac_v2.py --prepare` passes metadata coverage for all12 frozen
+cases, predicts869 tiles (previous837), and writes a new source snapshot/request.
+Actual preprocessed grids must match this prediction before inference. Review
+plots now respect physical pixel aspect. Existing90min/12GiB RSS/12GiB per-tile
+MPS/2GiB output limits retained. A failed stage cannot be redispatched in place.
+
+New `mac_pilot_supervision_v1.py` records process identity, installs supervisor
+signal handling and starts an independent parent-loss guardian. Normal completion,
+worker exit failure, supervisor SIGTERM and supervisor SIGKILL were exercised with
+short synthetic workers and descendants. Tests require no executing worker or
+child afterward; SIGKILL yields a separate failure record, never invented peak
+RSS/success. The guardian cannot reconstruct the dead supervisor's lost metrics;
+simultaneous loss of both supervisor and guardian is not qualified by these tests.
+A zombie awaiting OS reaping is treated as non-executing, not proof of reaping.
+
+36 focused tests passed in22.90s (geometry v1 regressions, v2 coverage/obliquity,
+preparation and cleanup). Subsequent process inventory showed no pilot/guardian
+processes. Old315 producing pins and new318 pins match. New request at external
+`patient-pilot-02/request.json`, SHA256
+`bf2dd34856fb9f77828490daa4bdd6a5469ee737e5ed2537d44d1747abf8c4c1`.
+No real CT decoding, teacher inference or student update in this revision task.
+The revised pilot was **prepared only**; no worker log or run receipt exists yet.
+First-case underprediction remains unresolved and must be reviewed independently
+of the corrected coverage. Neither this preparation nor a future pilot pass is
+scientific launch authorization.

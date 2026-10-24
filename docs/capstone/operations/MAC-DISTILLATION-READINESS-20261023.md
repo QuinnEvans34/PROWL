@@ -120,3 +120,12 @@ scientific run, MLflow run, full-cache generation or training-ready claim.
 ## Matched comparison prepared; pilot failure observed
 
 See MAC-KD-COMPARISON-20261023.md and configs/experiments/mac-kd-comparison-20261023/. Two fresh Mac/MPS24k arms selected; only KD maximum weight differs (0 vs0.1). Twelve review records remain pending. Storage/retention/tracking requirements assessed; no launch authority. Pilot case2 failed native-field coverage during reconstruction; only case1 report complete. Subsequent process check found no pilot process, but supervisor resource/reaping receipt is absent. Preserve failure and diagnose geometry/supervision before a separately versioned retry.
+
+## Coverage correction and cleanup qualification complete; revised pilot prepared
+
+Additive v2 retains old grid extent and covers source centres; all12 pilot regions
+pass preflight,869 projected tiles. Normal/failed-worker/SIGTERM/SIGKILL supervision
+and descendant cleanup tested synthetically;36 focused tests pass. Old315/new318
+source pins unchanged at verification. New patient-pilot-02 request SHA256
+bf2dd34856fb9f77828490daa4bdd6a5469ee737e5ed2537d44d1747abf8c4c1.
+Prepared, NOT launched. See MAC-KD-PILOT-FAILURE-20261023.md for tests/limitations.
