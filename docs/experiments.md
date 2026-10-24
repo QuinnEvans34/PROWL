@@ -5337,3 +5337,8 @@ Private metadata archive size/SHA256 verified before extraction; additive bind_m
 ### October23 — independent Mac restore and bounded teacher pilot
 
 Independent internal backup of56,497,531-byte synthetic checkpoint verified; fresh backup-cold stage passed next-update/full-state comparison within unchanged tolerances,7.10s and1.326GB peak sampled owned RSS, reaped.29 focused tests passed. Additive Mac real-case teacher pilot dispatched for the frozen12 training cases with90min/12GiB RSS/12GiB post-tile MPS/2GiB output bounds. First case25/112 tiles observed; completion/visual quality pending. Original Windows producing files and gates unchanged. No scientific launch.
+
+
+### October23 — matched Mac KD design and readiness assessment
+
+Completed requested comparison/checklist/launch-requirement planning: two fresh MPS24k arms, same initialization/cohort/recipe/views/evaluation, KD weight0 vs0.1 only; paired configuration equality checked. Existing12-case review protocol reused with pending records. SuPreM local hash verified; storage passes50GB internal/100GiB external reserves. Proposed checkpoint retention15 per arm,30 total, provisional64MiB/file with4GiB new/26GiB total backup caps; scientific sizing/runtime and component evaluator still unqualified. Pilot concurrently failed on case2 native-world coverage; first-case Dice.0599/recall.0309 are unreviewed diagnostics. No pilot processes observed afterward, supervisor resource receipt missing; no resource/reaping success claim or retry. Failure observation saved externally. No training launch.

@@ -1,0 +1,138 @@
+{
+  "status": "PENDING_ACTUAL_REVIEW",
+  "accepted": false,
+  "cases": [
+    {
+      "case_id": "PanTS_00002720",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00003615",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00000691",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00003059",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00000246",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00008658",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00003777",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00004735",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00002498",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00001193",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00005832",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    },
+    {
+      "case_id": "PanTS_00006222",
+      "reviewed": false,
+      "geometry": "pending",
+      "missed_components": "pending",
+      "false_positives": "pending",
+      "outline_quality": "pending",
+      "probability_contradictions": "pending",
+      "evidence_hashes": {},
+      "decision": "pending"
+    }
+  ]
+}

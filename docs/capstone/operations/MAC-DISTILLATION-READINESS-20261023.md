@@ -116,3 +116,7 @@ shared MPS lock held. This Mac scope does not alter Windows parent/CUDA gates.
 First case observed25/112 tiles. Completion and visual review PENDING. Probability
 files are diagnostic-only, not an admitted training target manifest. No student
 scientific run, MLflow run, full-cache generation or training-ready claim.
+
+## Matched comparison prepared; pilot failure observed
+
+See MAC-KD-COMPARISON-20261023.md and configs/experiments/mac-kd-comparison-20261023/. Two fresh Mac/MPS24k arms selected; only KD maximum weight differs (0 vs0.1). Twelve review records remain pending. Storage/retention/tracking requirements assessed; no launch authority. Pilot case2 failed native-field coverage during reconstruction; only case1 report complete. Subsequent process check found no pilot process, but supervisor resource/reaping receipt is absent. Preserve failure and diagnose geometry/supervision before a separately versioned retry.
