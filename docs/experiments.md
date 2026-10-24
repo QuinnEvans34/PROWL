@@ -5408,3 +5408,24 @@ Corrected-label pilot macro Dice.41215 versus original.37468 is a label change,
 not model improvement;3059 now a negative with10false-positive voxels. Teacher
 still unaccepted. Future overlay loader/cache qualification required; frozen runs
 unchanged. See MAC-KD-ERRATA-CORRECTION-20261023.md.
+
+### October23 — corrected-label target cache preparation (planned)
+
+Continue the authorized local errata correction with seven versioned target caches,
+using original pancreas masks and the verified zero-lesion overlay. Reuse existing
+region geometry and compare regenerated sampling metadata; require exact compressed
+roundtrip and identity-checked reader admission. Bounded CPU worker:600s/12GiB,
+no CT/model/optimizer/test reads. Preserve all frozen files and originals. This
+partial derivative cache is not a full input-provider or scientific launch receipt;
+unaffected cache reuse, actual batches/cold restore and teacher acceptance remain
+separate gates. Evidence: external annotation-errata-cache-01 directory.
+
+Corrected cache outcome: all seven exact target roundtrips and sampling metadata
+comparisons pass, original pancreas voxel counts retained, zero lesion labels.
+18 focused tests pass. Worker9.80s/1,506,066,432B peak owned RSS/reaped,322 pins match;
+212,250B payload. Fresh-process reader independently opens all seven artifacts.
+Manifest77811d7b62a188d5644887b3ed52f7082ab95a6f576042ef87baac485e187c63.
+Initial invocation lacked existing isolated jsonschema dependencies and failed before
+any worker/output creation; corrected environment invocation succeeded. No training
+or CT reads. Full provider/unchanged cache reuse/actual cold restore still pending;
+teacher quality remains a blocker, so this is not launch readiness.

@@ -91,3 +91,32 @@ training-only archive directory. Its source snapshot/log/resources remain in
 `annotation-errata-01/`; version02 reads development counts from the verified
 source manifest. No source dataset edits, exclusions, model runs, training,
 checkpoint changes or Windows messages occurred.
+
+## Corrected target cache — subsequent integration step
+
+`annotation-errata-cache-01/` now contains seven compressed region targets plus
+metadata and an explicitly partial manifest. Manifest SHA256:
+`77811d7b62a188d5644887b3ed52f7082ab95a6f576042ef87baac485e187c63`.
+The additive `pants_errata_cache_v1.load_target` reader checks manifest/overlay,
+role, case membership, member hashes, geometry shape, binary target values and
+pancreas voxel count. It is a derivative reader, not the complete training provider.
+
+All seven targets reopen byte-for-byte equal to their generated arrays. Their
+pancreas counts equal the full original masks, lesion counts are zero, and rebuilt
+coverage/component metadata exactly matches the preceding overlay preparation.
+Changed lesion source hashes are explicit in the new metadata; original identities
+are retained separately. No original provider or existing receipt was edited.
+
+18 focused tests pass, covering policy and reader scope, stale identities, modified
+members and rejection of a lesion-bearing target even with a refreshed file hash.
+Real CPU preparation:9.80seconds,1,506,066,432B peak owned RSS,212,250B target/metadata
+payload,322 producing pins verified before/after,exit0 and workers reaped. A separate
+fresh process successfully read all seven files (`fresh-reader.json`); this is
+artifact recovery, **not training checkpoint cold restore**. Initial command failed
+on missing jsonschema before creating an output directory or worker; the subsequent
+invocation used the existing isolated dependencies without changing the environment.
+
+The complete 1333-member corrected provider/cache manifest remains unqualified.
+Unaffected cache reuse, actual CT batches/augmentation, optimizer cold restore and
+teacher acceptance are still required. The partial manifest explicitly declares
+`complete:false`; neither comparison arm has been launched.
