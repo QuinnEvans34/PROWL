@@ -5429,3 +5429,24 @@ Initial invocation lacked existing isolated jsonschema dependencies and failed b
 any worker/output creation; corrected environment invocation succeeded. No training
 or CT reads. Full provider/unchanged cache reuse/actual cold restore still pending;
 teacher quality remains a blocker, so this is not launch readiness.
+
+### October23 — opt-in errata provider and real input replay (planned)
+
+Add a separate VariedInputs subclass: corrected train cases bind the explicit
+cache, all other training and validation cases delegate unchanged. No frozen
+provider changes; this is on-demand input, not the fast-prefetch policy. Check two
+already-bound training cases (3059 corrected,691 unchanged), three views each
+(reserved coverage/component focus/context), existing augmentation, and fresh-process
+exact replay. Each CPU stage600s/12GiB; no model/optimizer/protected-image reads.
+Full membership retained in control but only these two sources locally admitted for
+this probe; other remote paths remain unusable, not silently declared verified.
+Evidence: annotation-errata-inputs-01. Full cohort and optimizer recovery remain gates.
+
+Errata input outcome:83 related tests passed. Two real bound training cases produced
+six views across coverage/component/context paths; CT/target and augmented hashes,
+traces and input identity matched exactly in a fresh process. Producer5.94s/
+2,217,852,928B peak RSS; replay5.48s/2,218,967,040B; both exit0/reaped. Four total
+CT decodes, zero model/optimizer/protected-image reads. Opt-in provider is on-demand,
+not fast-prefetch; existing proposed launch configurations remain unqualified and
+unchanged. No full-cohort Mac admission or optimizer recovery claim. Teacher missed
+lesions remain the consequential blocker before spending on full KD preparation.

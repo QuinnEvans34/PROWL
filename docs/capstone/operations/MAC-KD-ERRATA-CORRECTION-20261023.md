@@ -120,3 +120,34 @@ The complete 1333-member corrected provider/cache manifest remains unqualified.
 Unaffected cache reuse, actual CT batches/augmentation, optimizer cold restore and
 teacher acceptance are still required. The partial manifest explicitly declares
 `complete:false`; neither comparison arm has been launched.
+
+## Opt-in input provider and real-data replay
+
+`src/data/pants_errata_inputs_v1.py` adds `ErrataInputs`, a separate VariedInputs
+subclass. It verifies all seven cache members at initialization, binds their
+manifest/overlay plus the original provider identity, and checks original source
+provenance before loading corrected cases. Unaffected training cases and validation
+use the original implementation. Existing providers and receipts stay unchanged.
+This implementation is on-demand, **not the fast-prefetch input policy** in the
+proposed experiment configuration; do not silently substitute it at launch.
+
+Bounded evidence: `annotation-errata-inputs-01/`. Cases3059 (corrected) and691
+(unchanged), already hash-bound training cases, passed actual CT normalization,
+target alignment, reserved coverage/component focus/context sampling, and the
+existing augmentation function. All six view hashes, traces and provider identity
+matched exactly in a fresh process. Each process decoded two CTs. Neither loaded a
+model nor performed an optimizer update. Full1333/70 membership is retained in the
+control for schedule accounting, but only these two source rows were locally bound
+for this probe; remaining paths retain their remote identities and are **not**
+admitted as usable Mac data. No development images were opened.
+
+Producer5.94s/2,217,852,928B peak owned RSS; fresh-process replay5.48s/
+2,218,967,040B. Both exit0/reaped.83 tests passed covering existing physical geometry,
+varied sampling, augmentation and new correction behavior. This is input replay,
+not optimizer/checkpoint cold restore or full-cohort qualification.
+
+Next decision point: teacher quality remains inadequate after correcting known
+labels. Do not generate a full teacher cache or start KD merely because this
+input check passed. Before launch, either qualify the teacher or explicitly revise
+the experiment; then bind the full local cohort, reconcile the intended throughput
+policy for both arms, and qualify actual optimizer recovery under a new receipt.
