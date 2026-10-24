@@ -56,7 +56,7 @@ def compare(a,b):
     elif isinstance(a,float):assert abs(a-b)<=1e-5+1.3e-6*abs(b)
     else:assert a==b
 
-def run(stage,destination,base):
+def run(stage,destination,base,checkpoint_path=None):
     torch.set_num_threads(1);p=Provider()
     from scripts.diagnostics.qualify_distillation_mac import write
     if stage=='student':
@@ -78,7 +78,7 @@ def run(stage,destination,base):
         updates=4
     else:
         producer=base/'student-01';targets=store(producer/'targets',p,False)
-        checkpoint=torch.load(producer/'saved.pt',weights_only=True,map_location='cpu')
+        checkpoint=torch.load(checkpoint_path or producer/'saved.pt',weights_only=True,map_location='cpu')
         identity=checkpoint['identity']
         s=DistillationSession.restore(checkpoint,identity)
         row=s.update(p,targets)

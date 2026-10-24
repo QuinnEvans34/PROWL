@@ -5332,3 +5332,8 @@ Quinton authorized the frozen case/recipe request; sent to the training chat wit
 ### October23 — Mac KD metadata and source identity binding
 
 Private metadata archive size/SHA256 verified before extraction; additive bind_mac_distillation_metadata.py verifies archive member hashes,1333/70 disjoint membership and fixed12-case training membership. All36 pilot CT/pancreas/lesion compressed source hashes match the Windows evidence. External pilot-local-bindings-01.json preserves local paths/stat identities and original source hashes. No decoded CT/annotation arrays, inference or training. Existing Windows CUDA/parent-completion gates preserved; additive Mac pilot and backup qualification remain next.
+
+
+### October23 — independent Mac restore and bounded teacher pilot
+
+Independent internal backup of56,497,531-byte synthetic checkpoint verified; fresh backup-cold stage passed next-update/full-state comparison within unchanged tolerances,7.10s and1.326GB peak sampled owned RSS, reaped.29 focused tests passed. Additive Mac real-case teacher pilot dispatched for the frozen12 training cases with90min/12GiB RSS/12GiB post-tile MPS/2GiB output bounds. First case25/112 tiles observed; completion/visual quality pending. Original Windows producing files and gates unchanged. No scientific launch.

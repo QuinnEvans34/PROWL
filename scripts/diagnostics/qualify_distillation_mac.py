@@ -80,9 +80,15 @@ def worker(stage, destination):
         os.environ['PROWL_TEACHER_CONVERT'] = '1'
         convert.worker()
         return
-    if stage in ('student', 'student-cold'):
+    if stage in ('student', 'student-cold', 'backup-cold'):
         from scripts.diagnostics.mac_kd_synthetic import run
-        run(stage, destination, BASE)
+        checkpoint = None
+        if stage == 'backup-cold':
+            receipt = json.loads((BASE/'backup-01.json').read_text())
+            checkpoint = Path(receipt['backup'])
+            if hashlib.sha256(checkpoint.read_bytes()).hexdigest() != receipt['sha256']:
+                raise ValueError('Independent backup changed')
+        run(stage, destination, BASE, checkpoint_path=checkpoint)
         return
     from src.training.teacher_medformer_v1 import bundle_identity, FrozenTeacher
     identity = bundle_identity(BASE/'teacher', BASE/'convert-01/conversion.json')
@@ -139,7 +145,7 @@ def launch(stage):
 
 
 if __name__ == '__main__':
-    p=argparse.ArgumentParser();p.add_argument('--stage',choices=['convert','cpu','mps32','mps128','student','student-cold'])
+    p=argparse.ArgumentParser();p.add_argument('--stage',choices=['convert','cpu','mps32','mps128','student','student-cold','backup-cold'])
     p.add_argument('--worker',nargs=2);args=p.parse_args()
     if args.worker: worker(args.worker[0],Path(args.worker[1]))
     elif args.stage: launch(args.stage)

@@ -97,3 +97,22 @@ remains unchanged. Next: an additive Mac pilot with explicit MPS resource limits
 the same source geometry/preprocessing and12-case order, plus independent backup
 verification. Real teacher quality, target-cache feasibility and the matched
 scientific control remain unqualified.
+
+## Independent restore passed; Mac real-case pilot active
+
+October23: copied the56,497,531-byte synthetic checkpoint to the independent
+internal PROWL-Backups drive, checked SHA256 and the approved projected storage
+budget. Fresh `backup-cold-01` restored that copy and matched the next complete
+student state at existing rtol1.3e-6/atol1e-5:7.10s,1,325,744,128B sampled owned
+RSS, exit0 and workers reaped. This adds one synthetic update, not training.
+
+Additive `pilot_distillation_mac.py --run` dispatched `patient-pilot-01` after
+29 focused tests passed. Frozen12-case order,837 metadata-estimated tiles; EMA
+teacher, native MPS, no CPU fallback, unchanged shared teacher preprocessing and
+world reconstruction. Limits:5400s,12GiB sampled owned RSS,12GiB post-tile MPS
+driver allocation,2GiB total output. Source/input pins and source snapshot saved
+before dispatch; do not edit them or duplicate/retry the active stage. Local
+shared MPS lock held. This Mac scope does not alter Windows parent/CUDA gates.
+First case observed25/112 tiles. Completion and visual review PENDING. Probability
+files are diagnostic-only, not an admitted training target manifest. No student
+scientific run, MLflow run, full-cache generation or training-ready claim.
