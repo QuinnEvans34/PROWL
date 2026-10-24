@@ -5481,3 +5481,15 @@ Labels and all used model constructor config fields match; report supervision0.1
 vs0.0. Weights not acquired or executed. Recommend separately bound matched pilot,
 not silent teacher replacement. Authorized laptop feasibility message sent; no GPU
 job requested. Metadata evidence teacher-selection-review-01 and input audit doc.
+
+### October23 — R-SuperPanTSMerlin matched pilot (authorized/planned)
+
+User explicitly requests download and autonomous testing. Separate pinned release
+revisioneab1a7e9f421740bf8f3f834d1f69d17cbe3a8aa, SHA38535f10430265e431ca3ffa7fe3ff15efed5bccb65ba909b6e3ce18af11e459.
+Reuse byte-identical model source and fixed12case pilot executor; EMA vs baselineEMA,
+same preprocessing/windows/reconstruction/threshold. Safe inert-record tensor-only
+conversion first (180s/4GiB), strict model load; pilot5400s/12GiB RSS/12GiB MPS/2GiB
+outputs, shared lock/AC. No training, case expansion, thresholds or retries. Preserve
+original-label paired results and separately interpret3059 as corrected negative for
+both models. Inspect12overlays. New bundle/config layout alias documented; no old
+model replacement. Full target generation and KD launch remain outside this test.
