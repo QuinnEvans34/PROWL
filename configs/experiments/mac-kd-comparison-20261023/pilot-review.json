@@ -5,24 +5,27 @@
     {
       "case_id": "PanTS_00002720",
       "reviewed": false,
-      "geometry": "pending",
-      "missed_components": "pending",
-      "false_positives": "pending",
-      "outline_quality": "pending",
-      "probability_contradictions": "pending",
-      "evidence_hashes": {},
-      "decision": "pending"
+      "geometry": "Saved report covers full native region; three displayed planes inspected, no obvious gross alignment shift. Full spatial review remains pending.",
+      "missed_components": "One component has overlap but extensive underprediction; 120342/189621 voxels at q<=0.1 and5858 eligible positive KD voxels in quantized cache.",
+      "false_positives": "No q>=0.9 voxels in background or pancreas in this case; does not establish specificity.",
+      "outline_quality": "Three-plane figure shows small isolated teacher contours inside much larger reference outline; inadequate demonstrated extent.",
+      "probability_contradictions": "Saved training-only cache and two source masks reviewed; no CT decoding/inference.",
+      "evidence_hashes": {
+        "patient-pilot-01/PanTS_00002720.png": "3a67486f4f665502ed047fc0defee4022e02df25995819cb1b53cb3abd09cb44",
+        "first-case-probability-review-01.json": "62ce91c4cd91e57687b69a051719fdb91b196a64d1bd5ea4c6d8c8323c2fe972"
+      },
+      "decision": "not accepted; partial visual and probability review only"
     },
     {
       "case_id": "PanTS_00003615",
       "reviewed": false,
-      "geometry": "pending",
+      "geometry": "Pilot failed: native edge0.156393mm outside teacher boundary cell; metadata reproduction confirms rounded-grid coverage deficit.",
       "missed_components": "pending",
       "false_positives": "pending",
       "outline_quality": "pending",
       "probability_contradictions": "pending",
       "evidence_hashes": {},
-      "decision": "pending"
+      "decision": "engineering failure; no complete output to review"
     },
     {
       "case_id": "PanTS_00000691",
