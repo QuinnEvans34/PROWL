@@ -5327,3 +5327,8 @@ under docs/capstone for exact scope, artifact locations and remaining prerequisi
 ### October 23 — Mac KD preparation storage approval and metadata handoff
 
 Quinton authorized the frozen case/recipe request; sent to the training chat without requesting inference or training changes. The laptop reports its metadata archive assembled, transfer pending. Mac preparation now enforces a 50,000,000,000-byte internal reserve, retaining 100 GiB external reserve, 4 GiB new-backup and 26 GiB total-backup limits. Projected writes are checked explicitly; future stage requests record the budget. Windows launch rules and existing receipts are unchanged. Live preflight passed: internal free 91,136,348,160 bytes, external free 2,065,220,280,320 bytes, existing backup files 21,140,423,080 bytes. Fifteen focused tests passed (including ten storage cases). Initial standalone preflight lacked the isolated jsonschema dependency; rerunning with the documented test dependency path passed. No model execution or backup creation in this change; independent backup/restore and real pilot remain pending.
+
+
+### October23 — Mac KD metadata and source identity binding
+
+Private metadata archive size/SHA256 verified before extraction; additive bind_mac_distillation_metadata.py verifies archive member hashes,1333/70 disjoint membership and fixed12-case training membership. All36 pilot CT/pancreas/lesion compressed source hashes match the Windows evidence. External pilot-local-bindings-01.json preserves local paths/stat identities and original source hashes. No decoded CT/annotation arrays, inference or training. Existing Windows CUDA/parent-completion gates preserved; additive Mac pilot and backup qualification remain next.

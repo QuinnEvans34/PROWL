@@ -81,3 +81,19 @@ Storage-change verification:15 focused tests pass, including projected writes an
 exact reserve/backup boundaries. Live preflight passes with91.1GB internal free,
 2.07TB external free and21.14GB existing backup files. No new model run or backup
 was performed for this policy change.
+
+## Private handoff received and pilot sources bound
+
+October23: received the4,057,125-byte archive using the user-provided private
+transfer code. SHA256 `04d5b0521407c19a5fb4d8f664cc43c3b77be2ba7346246041713f00f24761c5`
+matched before extraction. The binding diagnostic independently checks every
+manifest-listed archive member, membership separation and the fixed12 training
+cases. All36 Mac source files (CT, pancreas, lesion) match the producer hashes.
+Evidence: external `pilot-local-bindings-01.json`; original archive retained.
+No decoded voxel reads, repeated cohort audit, inference or scientific updates.
+
+The existing Windows pilot is CUDA-specific and gated on parent completion. It
+remains unchanged. Next: an additive Mac pilot with explicit MPS resource limits,
+the same source geometry/preprocessing and12-case order, plus independent backup
+verification. Real teacher quality, target-cache feasibility and the matched
+scientific control remain unqualified.
