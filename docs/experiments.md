@@ -5581,3 +5581,47 @@ Full target worker active, first6311 observed25/105tiles. Ownedsession21973;
 request/process/guardian ready retained under rsuper-full-targets-01. No scientific
 student updates or automatic student-launch chain. Keep requestpins/AC/drive;
 no duplicate. Laptop safe conversion complete but no CUDA reference result.
+
+### October25 — durable execution repair authorized
+
+Previous target attempt lost its supervisor at October23 21:46; guardian requested
+cleanup. One complete payload retained, next case partial inference only. No final
+resource receipt, so no success/peak-memory claim. Underlying supervisor-loss trigger
+is not established; chat-owned supervisor was a lifetime dependency. Test one-shot
+macOS launchd ownership with a20second synthetic supervised worker, returning from
+the initiating tool before completion. No timer/KeepAlive/login installation; no
+retry/reboot persistence. Existing parent-loss cleanup remains. Then separately
+versioned continuation reuses only verified13 payloads and preserves original attempt.
+
+Durability probe outcomes:01 external plist bootstrap failed(code5), no worker;
+02 internal plist but external launch logs/working directory exited EX_CONFIG78,
+no synthetic worker.03 internal plist+internal logs+home working directory PASSED:
+supervisor PPID1,20 worker ticks after initiating command returned,21.34s,
+15,319,040B RSS,exit0/reaped and launchd exit0. No permission/security changes.
+This establishes command-process independence, not reboot/logout persistence or
+observed future chat termination. Preserved all attempts. New one-shot target
+continuation02 uses same model/geometry/labels, only durable ownership and verified
+reuse differ. Charge600seconds for interrupted attempt against original96h;
+remaining345000seconds. No scientific training launch yet.
+
+Full-path integration CPU work while teacher owns MPS: additive ErrataKDInputs
+uses the admitted full cohort,7 corrected masks and pinned native geometry; paired
+arms explicitly on-demand/no-prefetch, not a fast-loader equivalence claim. New
+ErrataKDSession retains checked recovery with that honest throughput identity.
+Four CPU tests pass including exact positive-KD next-update restore and zero-KD
+no-target access (tiny synthetic model; not actual backend qualification).
+Run bounded600s/2GiB CPU-only full1333 sampling/native-metadata reconciliation;
+expect664positive,18kfocus/6kcontext,70dev unchanged. No CT voxel/model/GPU reads.
+
+Full-provider attempt01 failed before model/CT reads: transferred native-region
+metadata intentionally contains training members only, not70development members.
+Corrected new adapter to require exact TRAIN metadata membership; evaluation uses
+unchanged original provider and computes native geometry itself. Preserve attempt01;
+separate02 runs same bounded CPU reconciliation, no teacher access to development.
+
+New native evaluator adds complete report-bound26connected component evidence
+without teacher access to development. Seven combined synthetic tests pass
+(component-volume/empty-case/hash/restore/ownership). Actual fullprovider MPS and
+native evaluator qualification remain pending. Target continuation successfully
+reused6311 and completed new1053 at217.09s; supervisor49082 PPID1, worker49254.
+Report MAC-KD-DURABILITY-20261025.md. No scientific student updates.
