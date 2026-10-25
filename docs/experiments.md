@@ -5625,3 +5625,8 @@ without teacher access to development. Seven combined synthetic tests pass
 native evaluator qualification remain pending. Target continuation successfully
 reused6311 and completed new1053 at217.09s; supervisor49082 PPID1, worker49254.
 Report MAC-KD-DURABILITY-20261025.md. No scientific student updates.
+
+Full-provider02 PASS:1333/70separate,664positive,18kfocus/6kcontext coverage plan;
+146.07s/1,433,944,064B RSS/exit0/reaped; noCT/model reads.6provider pins and1674
+active target pins match. Inactive synthetic jobs deregistered, evidence preserved.
+Active target job processing thirdmember1012;2completed. No training launch.

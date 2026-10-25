@@ -63,3 +63,15 @@ and actual full-provider MPS recovery remain necessary before either24k arm.
 The ongoing teacher stage is still roughly a multi-day prerequisite. This repair
 does not turn partial target generation into completed training or waive quality,
 checkpoint, native-evaluation or paired-comparison requirements.
+
+## Verified full-provider outcome
+
+Attempt02 PASS:1333train,664positive,70development;18,000focused+6,000context
+updates. All coverage-bank slots fit the full24k schedule.146.07seconds,
+1,433,944,064B peak owned RSS,exit0/reaped; zero CT voxel reads or optimizer updates.
+Provider SHA256900619faa0a5905fca165bebca0c9afd56f9df635cdd7141c4f95a31204a0053.
+All6 provider request pins and1674 active target request pins matched final check.
+Target continuation has2 completed cases and is processing1012 (third member).
+Inactive synthetic launchd registrations removed; artifact evidence preserved;
+active target registration untouched. Remaining actual-MPS full-provider/executor/
+native-evaluator recovery and final paired launch cannot be claimed from CPU tests.
