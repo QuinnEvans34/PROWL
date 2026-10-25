@@ -5641,3 +5641,16 @@ the checkpoint/journal and reject completion on missing evidence or backup error
 manifest qualification remain pending. No scientific training launch or automatic
 successor dispatch was performed.
 
+# October25: teacher admission and actual executor-stack CPU recovery
+
+Six completed real targets passed provider-bound admission, and all7 corrected
+label cases retain matching teacher geometry (9.34s,1,472,888,832B RSS,reaped).
+Full admission rejects incomplete/nonreaped generation; no full manifest issued.
+The synthetic actual-executor test found NumPy float32 provenance broke JSON
+journaling after an optimizer update. Fixed reporting conversion in the additive
+executor wrapper only; exact backed-up step4-to-step8 recovery now passes.30focused
+CPU tests PASS/2.79s. First admission CLI failed import before output due missing
+dependency path; tests initially failed NumPy JSON serialization. Both documented,
+no GPU retry. All1674 running producer pins and17 admission pins match. Target
+generation continues under launchd; full student training remains pending.
+

@@ -89,3 +89,27 @@ backup failure, missing evidence, synthetic recovery and existing selection test
 This is integration test evidence, not actual MPS executor qualification.
 The launchd target job continued across chat turns:4cases complete, fifth processing
 at inspection. Scientific training remains unlaunched; target generation owns MPS.
+
+## Target admission and executor recovery rehearsal
+
+Added generated-target admission checking exact producer/provider train order,
+train/development separation, source CT identity, corrected native grid, complete
+reconstruction, payload SHA/size/type/shape, and successful reaped full generation.
+Partial qualification manifests cannot be admitted by the full training store.
+CPU rehearsal rsuper-target-admission-20261025-01 passed on6 completed targets;
+all7 corrected labels retain the same teacher CT/native geometry.9.34seconds,
+1,472,888,832B peak RSS,exit0/reaped,zeroCTvoxelreads/zeroGPUupdates. All17 rehearsal
+pins and1674 active generation pins still match. No full training manifest published.
+
+Actual executor integration with an invented CPU network exposed a real JSON
+journal failure: teacher provenance contains a NumPy float32 quantization bound.
+The additive executor wrapper now converts NumPy scalars to exact Python scalar
+values for reporting only. Model state/calculations and original producer modules
+are unchanged; arrays/unsupported objects/nonfinite values still fail serialization.
+The8-update synthetic executor run restores its backed-up step4 checkpoint through
+ErrataKDSession and reaches exactly the same final state after4more updates.
+30 focused tests PASS in2.79seconds. Earlier test failures (NumPy JSON conversion)
+and first CLI import failure (missing dependency path, before any request/output)
+are recorded here; no failed GPU stage or scientific attempt was retried.
+Generation continued to6 complete with3188 processing. Actual full-provider MPS
+executor/native inference/recovery remains unqualified; no successor auto-launch.
