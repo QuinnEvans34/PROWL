@@ -5654,3 +5654,15 @@ dependency path; tests initially failed NumPy JSON serialization. Both documente
 no GPU retry. All1674 running producer pins and17 admission pins match. Target
 generation continues under launchd; full student training remains pending.
 
+# October25: explicit teacher pause/continuation for laptop use
+
+Prepared operator pause and case-reuse continuation without touching the running
+teacher.13CPU tests pass; synthetic launchd probe03 confirms bounded worker cleanup,
+reaping, completed-output verification and preserved remaining budget. Normal
+SIGTERM did not stop probe02 within its timeout; fallback kills only the verified
+private worker group and lets the supervisor collect failure/resource evidence.
+Intentional stops remain success=false, never completed-generation claims. Probe01
+startup/timing failures and probe02 timeout preserved. Probe03 8.182s/16,236,544B RSS,
+1complete reused/1partial excluded,171seconds remaining. All1674realjob pins match.
+No real pause/resume or scheduled morning action performed; generation continues.
+

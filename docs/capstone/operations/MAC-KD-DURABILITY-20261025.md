@@ -113,3 +113,44 @@ and first CLI import failure (missing dependency path, before any request/output
 are recorded here; no failed GPU stage or scientific attempt was retried.
 Generation continued to6 complete with3188 processing. Actual full-provider MPS
 executor/native inference/recovery remains unqualified; no successor auto-launch.
+
+## Operator pause for class and explicit continuation
+
+Added pause_rsuper_targets.py and resume_rsuper_targets.py. They are operator
+commands, not schedules. The real02 job was not paused or modified during setup.
+Pause checks the launchd supervisor PID, worker start identity, parent and private
+process group, requests a normal stop, then waits. If the normal stop is not
+observed after5seconds, it records intent and kills only that verified worker
+group; the supervisor remains alive to collect elapsed time and reaping evidence.
+Only a stopped/reaped receipt with verified completed payloads permits continuation.
+Do not disconnect or close the lid until the receipt confirms the stop.
+
+Resume uses a new output directory and one-shot launchd label, preserves old
+artifacts, verifies every prior producing pin and completed payload, and invokes
+the unchanged frozen v2 worker with the new request. Completed cases are reused;
+a payload lacking a completed sidecar is ignored and that case recomputed. Paused
+wall time is not charged; actual supervised seconds (rounded up) are subtracted
+from the existing96-hour budget. Existing memory/disk/cache caps remain; a budget
+failure requires review, not automatic expansion. No scientific launch is armed.
+
+Synthetic evidence: probe01 finished before a stop was issued (initial request
+also arrived before process.json); preserved, not a pause pass. Probe02 normal
+SIGTERM/launchctl stop was not observed within20seconds; explicit cleanup of its
+owned worker group allowed supervisor reaping. Its original pause source is saved.
+Probe03 passed revised bounded cleanup:8.182s,16,236,544B RSS,worker exit-9,
+success=false intentionally,workers_reaped=true; pause receipt marks stopped,
+1completed member verified and1partial member excluded,171/180seconds remaining.
+Do not relabel the intentional stop as successful generation. All synthetic
+registrations removed after completion; files retained.13CPU tests pass/3.86s
+including continuation request/recipe/pin preservation and failure rejection.
+All1674 active real-job pins still match. Real teacher resume itself has not yet
+been exercised; the prior verified case-reuse path remains unchanged.
+
+Tomorrow: run pause_rsuper_targets.py with the current label
+com.prowl.rsuper-targets-20261025-02, directory rsuper-full-targets-02 and a NEW
+pause output directory under the existing artifact root. After class, dispatch
+resume_rsuper_targets.py via launch_mac_owned_job.py with --previous pointing to02,
+--output to a NEW continuation directory, and --pause-receipt to receipt.json.
+Use a new launchd label and dispatch directory; inspect progress after launch.
+Keep PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies.
+No morning timing has been scheduled. User will request the pause when ready.
