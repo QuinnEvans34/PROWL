@@ -5630,3 +5630,14 @@ Full-provider02 PASS:1333/70separate,664positive,18kfocus/6kcontext coverage pla
 146.07s/1,433,944,064B RSS/exit0/reaped; noCT/model reads.6provider pins and1674
 active target pins match. Inactive synthetic jobs deregistered, evidence preserved.
 Active target job processing thirdmember1012;2completed. No training launch.
+# October25: native KD evidence executor integration
+
+Continued the launchd-owned teacher target job without restart or GPU competition.
+Four cohort members completed and fifth processing at inspection. Added an executor
+wrapper requiring scheduled/selected/terminal native reports and exact-hash component
+sidecars to pass the backup hook before completion. Failure-injection tests preserve
+the checkpoint/journal and reject completion on missing evidence or backup error.
+18 focused CPU tests passed (4.21s); actual MPS executor/recovery and full target
+manifest qualification remain pending. No scientific training launch or automatic
+successor dispatch was performed.
+

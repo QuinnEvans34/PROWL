@@ -75,3 +75,17 @@ Target continuation has2 completed cases and is processing1012 (third member).
 Inactive synthetic launchd registrations removed; artifact evidence preserved;
 active target registration untouched. Remaining actual-MPS full-provider/executor/
 native-evaluator recovery and final paired launch cannot be claimed from CPU tests.
+
+## Native executor evidence integration
+
+Added segmenter_kd_evidence_executor_v1 as a wrapper around the existing region
+executor, leaving its update cadence and selection loop unchanged. Every scheduled,
+selected and terminal native report now produces a hash-bound component sidecar
+before calling the required backup hook for both artifacts. Missing component
+evidence or a backup failure prevents native/completed events and preserves the
+pre-validation checkpoint and failed journal. No automatic retry or resume.
+18 focused CPU tests passed in4.21seconds, including durable report/sidecar copies,
+backup failure, missing evidence, synthetic recovery and existing selection tests.
+This is integration test evidence, not actual MPS executor qualification.
+The launchd target job continued across chat turns:4cases complete, fifth processing
+at inspection. Scientific training remains unlaunched; target generation owns MPS.
