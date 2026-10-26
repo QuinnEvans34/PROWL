@@ -46,9 +46,12 @@ def read_record(path):
 
 
 class Executor:
-    def __init__(self, root, *, check_root, minimum_free_bytes=50_000_000_000):
+    def __init__(self, root, *, check_root, minimum_free_bytes=50_000_000_000, sensitivity='synthetic'):
         self.root=Path(root).absolute()
         self.check_root=check_root
+        if sensitivity not in ('synthetic','research-local'):
+            raise ValueError('Explicit supported sensitivity required')
+        self.sensitivity=sensitivity
         self.floor=minimum_free_bytes
         self.root_identity=None
         if self.root.exists():
@@ -145,8 +148,10 @@ class Executor:
         for row in p['stages']:
             ref=refs.get(row['derivation'])
             if ref:
-                self.store().resolve(ref['artifact_id'],receipt_sha256=ref['receipt_sha256'],
+                _,receipt=self.store().resolve(ref['artifact_id'],receipt_sha256=ref['receipt_sha256'],
                     expected_derivation=row['derivation'],validate=validators[row['id']])
+                if receipt['metadata']['sensitivity']!=self.sensitivity:
+                    raise ValueError('Artifact sensitivity differs')
             decisions.append(dict(stage=row['id'],action='reuse' if ref else 'run',
                                   reason='verified identical derivation' if ref else 'no matching completed stage'))
         return dict(plan=p,decisions=decisions)
@@ -177,8 +182,10 @@ class Executor:
                 if ref:
                     # Revalidation failure is preserved as a failed attempt; never regenerate silently.
                     try:
-                        data,_=store.resolve(ref['artifact_id'],receipt_sha256=ref['receipt_sha256'],
+                        data,receipt=store.resolve(ref['artifact_id'],receipt_sha256=ref['receipt_sha256'],
                             expected_derivation=row['derivation'],validate=validator)
+                        if receipt['metadata']['sensitivity']!=self.sensitivity:
+                            raise ValueError('Artifact sensitivity differs')
                     except Exception as exc:
                         event(sid,'running');event(sid,'failed',error=f'{type(exc).__name__}: {exc}'[:2000]);raise
                     event(sid,'reused',reference=ref);outputs[sid]=data;continue
@@ -190,7 +197,7 @@ class Executor:
                     data=handlers[sid](parents,json.loads(encoded(row['config'])))
                     metadata=dict(artifact_type='workflow-stage',schema_version='1.0.0',component=sid,
                         code_sha256=row['producer'],parents=list(row['parents'].values()),
-                        retention='retain-until-reviewed',sensitivity='synthetic',
+                        retention='retain-until-reviewed',sensitivity=self.sensitivity,
                         run_id=row['derivation'],stage_id=sid)
                     pin,_=store.publish(row['artifact_id'],derivation_sha256=row['derivation'],
                                         files=data,metadata=metadata,validate=validator)

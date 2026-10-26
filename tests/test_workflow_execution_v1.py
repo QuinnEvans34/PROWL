@@ -107,3 +107,10 @@ def test_unpublished_record_partial_is_not_an_event(tmp_path):
     e,s,h,v=setup(tmp_path);a=e.execute(s,h,v)
     (tmp_path/'runs'/a['run_id']/'.pending-invented').write_text('truncated')
     assert e.inspect(a['run_id'])==a
+
+
+def test_reuse_cannot_relabel_sensitivity(tmp_path):
+    e,s,h,v=setup(tmp_path);a=e.execute(s,h,v)
+    other=Executor(tmp_path,check_root=lambda:None,minimum_free_bytes=0,sensitivity='research-local')
+    with pytest.raises(ValueError,match='sensitivity'):other.preview(s,v,resume_of=a['run_id'])
+    with pytest.raises(ValueError,match='sensitivity'):other.execute(s,h,v,resume_of=a['run_id'])
