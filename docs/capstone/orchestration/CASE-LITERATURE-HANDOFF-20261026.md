@@ -78,3 +78,30 @@ Failures retain their attempt ID. Do not point the workflow root at a teacher/tr
 This delivers offline response linkage toward W04-01. Live UI capture/persistence, review-history
 association, production stage/schema alignment and training/resource/cancellation qualification
 remain separate. Full G3, clinical measurement reliability and independent AI acceptance stay open.
+
+## Live response export increment
+
+Research and Workbench now expose **Keep this response → Download response and citations**
+after an answer-path response passes the existing validator. The snapshot captures the actual
+submitted request ID/question and JSON response values immediately on completion, including
+unavailable/refused states and all evidence. It uses the existing `{request,response}` handoff
+format, bounded to 1 MiB UTF-8. The fixed request schema is implicit in that format; this is not
+a raw HTTP byte capture. It adds no case identifiers, mask measurements or reviewer decisions.
+
+Editing, rephrasing, cancelling, or starting another request clears the export. Source-only
+search and scan-measurement results do not offer this answer export. Download failure leaves
+the answer available and permits retry of the same serialized snapshot. The UI explicitly
+says this download is not attached to saved review history; completion of a browser download
+cannot be confirmed by the application.
+
+Validation: 76 UI tests passed (including refusal export, exact submitted identity, later object
+mutation, retry, UTF-8 size limit and temporary URL cleanup); all 16 case-literature workflow
+tests passed. A retained public response serialized with the new UI helper passed the actual
+Node offline validator with five passages and five citations; evidence is in
+`outputs/prowl/live-capture-20261026/`. This reused an existing answer and did not call a model.
+Browser download interaction is covered in jsdom; a real browser download walkthrough remains.
+
+No active teacher-request pins intersect changed files. In particular `src/review/store.py`
+is pinned and was left unchanged. Durable review-history association remains open and should
+use an additive attachment adapter or wait for the producing run to finish; do not alter the
+pinned store or claim a downloaded capture is already a saved reviewer decision.

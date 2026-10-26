@@ -1,3 +1,4 @@
+import { serializeLiteratureCapture, downloadLiteratureCapture } from '../lib/literatureCapture.js'
 import { validateGeneralExtract } from './generalExtract'
 import { useEffect, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
@@ -164,6 +165,7 @@ export default function LiteratureSearchPanel({
   onPendingChange = null,
   measurementContext = null,
   measure = loadScanMeasurements,
+  downloadCapture = downloadLiteratureCapture,
   suggestions = variant === 'panel' ? SUGGESTED_QUESTIONS : [],
 }) {
   const panel = variant === 'panel'
@@ -183,6 +185,8 @@ export default function LiteratureSearchPanel({
   const [helpError, setHelpError] = useState(false)
   const [originalQuestion, setOriginalQuestion] = useState('')
   const [result, setResult] = useState(null)
+  const [capture, setCapture] = useState(null)
+  const [captureNotice, setCaptureNotice] = useState('')
   const [phase, setPhase] = useState('idle')
   const [elapsed, setElapsed] = useState(0)
   const [sourceMode, setSourceMode] = useState(false)
@@ -199,7 +203,7 @@ export default function LiteratureSearchPanel({
     setPreview(null); setHelpError(false)
     if (active.current) {
       active.current.abort(); active.current = null
-      setPhase('idle'); setResult(null)
+      setPhase('idle'); setResult(null); setCapture(null); setCaptureNotice('')
       setContextNotice('Your pending question was cancelled because you switched studies. The question is kept; ask again if it still applies.')
     }
   }, [contextKey])
@@ -212,14 +216,14 @@ export default function LiteratureSearchPanel({
   function change(value) {
     active.current?.abort(); active.current = null
     setPreview(null); setHelpError(false); setHelpMode(false); setOriginalQuestion('')
-    setQuestion(value); setScanResult(null); setResult(null); setPhase('idle'); setContextNotice('')
+    setQuestion(value); setScanResult(null); setResult(null); setCapture(null); setCaptureNotice(''); setPhase('idle'); setContextNotice('')
   }
   async function helpWithQuestion() {
     if (!question.trim() || active.current) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 25000)
-    setHelpMode(true); setHelpError(false); setPreview(null); setResult(null); setScanResult(null); setElapsed(0); setPhase('loading')
+    setHelpMode(true); setHelpError(false); setPreview(null); setResult(null); setCapture(null); setCaptureNotice(''); setScanResult(null); setElapsed(0); setPhase('loading')
     try {
       const value = await interpret(request, control.signal)
       if (active.current === control && !control.signal.aborted) {
@@ -235,7 +239,7 @@ export default function LiteratureSearchPanel({
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 150000)
     setHelpMode(false); setHelpError(false); setPreview(null)
-    setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setContextNotice('')
+    setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setCapture(null); setCaptureNotice(''); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
     try {
       const target = measurementContext ? scanQuestion(question) : null
@@ -258,7 +262,13 @@ export default function LiteratureSearchPanel({
       const response = sourcesOnly
         ? validateSourceSearch(await findSources(request, control.signal), request)
         : validateAnswer(await search(request, control.signal), request)
-      if (active.current === control && !control.signal.aborted) { setResult(response); setPhase('done') }
+      if (active.current === control && !control.signal.aborted) {
+        setResult(response); setPhase('done')
+        if (!sourcesOnly) {
+          try { setCapture(serializeLiteratureCapture(request, response)) }
+          catch (error) { setCaptureNotice(error.message) }
+        }
+      }
       else if (active.current === control) setPhase('error')
     } catch { if (active.current === control) setPhase('error') }
     finally { clearTimeout(timeout); if (active.current === control) active.current = null }
@@ -351,6 +361,14 @@ export default function LiteratureSearchPanel({
           : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
         {sourceMode && result.record_selection?.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
+        {!sourceMode && <details><summary>Keep this response</summary>
+          <p>Download the submitted question, response, and citations for later inspection. This is general literature; the file contains no scan context and is not attached to your saved review.</p>
+          {capture && <button type="button" onClick={() => {
+            try { downloadCapture(capture); setCaptureNotice('Download requested. Check your downloads; your saved review has not changed.') }
+            catch { setCaptureNotice('Download could not start. Your response is still available here; try again.') }
+          }}>Download response and citations</button>}
+          {captureNotice && <p role="status">{captureNotice}</p>}
+        </details>}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>

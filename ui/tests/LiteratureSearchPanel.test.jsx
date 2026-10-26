@@ -375,3 +375,37 @@ it('sends with Enter, keeps Shift+Enter for new lines, and ignores composition a
   expect(search).toHaveBeenCalledTimes(1)
   await user.click(screen.getByRole('button', {name: 'Cancel'}))
 })
+
+it('exports the submitted question and response without case context, retaining refusal state', async () => {
+  const user = userEvent.setup(), downloadCapture = vi.fn()
+  let submitted, returned
+  const search = vi.fn(async request => { submitted = request; returned = response(request, 'not_searched'); return returned })
+  render(<LiteratureSearchPanel search={search} downloadCapture={downloadCapture} contextKey="private-case" contextLabel="Private case" />)
+  await user.type(screen.getByLabelText('Literature question'), 'General pancreas question')
+  await user.click(screen.getByRole('button', { name: 'Ask question' }))
+  await screen.findByText('Search needs a different question')
+  fireEvent.click(screen.getByText('Keep this response'))
+  await user.click(screen.getByRole('button', { name: 'Download response and citations' }))
+  const capture = JSON.parse(downloadCapture.mock.calls[0][0])
+  expect(capture).toEqual({ request: { request_id: submitted.request_id, question: submitted.question }, response: returned })
+  expect(downloadCapture.mock.calls[0][0]).not.toContain('private-case')
+  expect(capture.response.generation).toBe('not_called')
+  await user.type(screen.getByLabelText('Literature question'), ' changed')
+  expect(screen.queryByText('Keep this response')).toBeNull()
+})
+
+it('freezes the completed response and preserves it if download fails', async () => {
+  const user = userEvent.setup(), downloadCapture = vi.fn().mockImplementationOnce(() => { throw Error('download denied') })
+  let returned
+  render(<LiteratureSearchPanel search={async r => { returned = response(r); return returned }} downloadCapture={downloadCapture} />)
+  await user.type(screen.getByLabelText('Literature question'), 'Pancreas function')
+  await user.click(screen.getByRole('button', { name: 'Ask question' }))
+  await screen.findByText('Retrieved passages')
+  returned.question = 'mutated later'
+  fireEvent.click(screen.getByText('Keep this response'))
+  await user.click(screen.getByRole('button', { name: 'Download response and citations' }))
+  expect(screen.getByText(/Download could not start/)).toBeTruthy()
+  await user.click(screen.getByRole('button', { name: 'Download response and citations' }))
+  expect(downloadCapture.mock.calls[0][0]).toBe(downloadCapture.mock.calls[1][0])
+  expect(JSON.parse(downloadCapture.mock.calls[1][0]).response.question).toBe('Pancreas function')
+})
