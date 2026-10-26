@@ -184,3 +184,10 @@ Request generated only after prior producing hashes and payloads passed checks.
 Worker initially advanced through25 copied/verified saved targets; those are reuse,
 not new inference. Await post308 tile progress to confirm fresh inference.
 No student training, automatic retry, or duplicate worker dispatched.
+
+Continuation verification: all308 saved targets reused in190.15worker seconds.
+Fresh inference observed on PanTS_00007728 at25/120tiles; supervisor59816 parent1
+and worker61063 remain live. All2295 continuation pins match. No new failure
+observed; no completed new-case claim yet. Keep AC/drive connected. Future pause
+must target com.prowl.rsuper-targets-20261026-03 and rsuper-full-targets-03,
+not the historical02 job. Full scientific student training remains unlaunched.
