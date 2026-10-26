@@ -7,6 +7,7 @@ from contextlib import contextmanager
 import fcntl
 import json
 import os
+import stat
 from pathlib import Path
 import uuid
 
@@ -23,9 +24,13 @@ def run_id(value):
 def write_record(path, value):
     """Exclusive records; an interrupted record is rejected, never silently repaired."""
     data=encoded(dict(value, content_sha256=sha(value)))
-    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+    temporary=path.parent/('.pending-'+str(uuid.uuid4()))
+    fd=os.open(temporary,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
     with os.fdopen(fd,'wb') as f:
         f.write(data);f.flush();os.fsync(f.fileno())
+    # Atomic exclusive publication. A killed writer leaves an ignored partial, not a torn event.
+    os.link(temporary,path,follow_symlinks=False)
+    temporary.unlink()
     fd=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)
     try: os.fsync(fd)
     finally: os.close(fd)
@@ -45,9 +50,24 @@ class Executor:
         self.root=Path(root).absolute()
         self.check_root=check_root
         self.floor=minimum_free_bytes
+        self.root_identity=None
+        if self.root.exists():
+            fd=directory(self.root)
+            try:
+                st=os.fstat(fd);self.root_identity=(st.st_dev,st.st_ino)
+            finally:os.close(fd)
+
+    def verify_root(self):
+        self.check_root()
+        fd=directory(self.root)
+        try:
+            st=os.fstat(fd)
+            if self.root_identity!=(st.st_dev,st.st_ino):
+                raise OSError('Workflow root identity changed')
+        finally:os.close(fd)
 
     def admit(self):
-        self.check_root()
+        self.verify_root()
         fd=directory(self.root)
         try:
             st=os.fstatvfs(fd)
@@ -58,18 +78,22 @@ class Executor:
     @contextmanager
     def locked(self):
         self.admit()
-        fd=os.open(self.root/'.workflow.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
+        fd=os.open(self.root/'.workflow.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW|os.O_NONBLOCK,0o600)
         try:
+            st=os.fstat(fd)
+            if not stat.S_ISREG(st.st_mode) or st.st_nlink!=1:
+                raise ValueError('Unsafe workflow lock')
             fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
             yield
         finally: os.close(fd)
 
     def store(self):
-        return ArtifactStore(self.root/'artifacts',check_root=self.check_root,
+        return ArtifactStore(self.root/'artifacts',check_root=self.verify_root,
                              max_bytes=8*1024**2,minimum_free_bytes=self.floor)
 
     def inspect(self, identity):
         """Read-only, including structural event validation. Does not claim artifact validity."""
+        self.verify_root()
         folder=self.root/'runs'/run_id(identity)
         request=read_record(folder/'request.json')
         if request['run_id']!=identity: raise ValueError('Run identity mismatch')

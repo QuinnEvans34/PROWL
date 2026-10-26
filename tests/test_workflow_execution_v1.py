@@ -88,3 +88,22 @@ def test_same_id_never_overwrites(tmp_path):
     e,s,h,v=setup(tmp_path);a=e.execute(s,h,v)
     with pytest.raises(FileExistsError):e.execute(s,h,v,identity=a['run_id'])
     assert e.inspect(a['run_id'])==a
+
+
+def test_root_replacement_rejected(tmp_path):
+    root=tmp_path/'root';root.mkdir()
+    e,s,h,v=setup(root)
+    root.rename(tmp_path/'old');root.mkdir()
+    with pytest.raises(OSError,match='identity'):e.execute(s,h,v)
+    assert not list(root.iterdir())
+
+
+def test_symlink_root_rejected(tmp_path):
+    (tmp_path/'link').symlink_to(tmp_path,target_is_directory=True)
+    with pytest.raises(OSError):setup(tmp_path/'link')
+
+
+def test_unpublished_record_partial_is_not_an_event(tmp_path):
+    e,s,h,v=setup(tmp_path);a=e.execute(s,h,v)
+    (tmp_path/'runs'/a['run_id']/'.pending-invented').write_text('truncated')
+    assert e.inspect(a['run_id'])==a
