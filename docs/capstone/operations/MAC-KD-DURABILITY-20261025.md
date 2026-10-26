@@ -216,3 +216,9 @@ Remaining active budget269239s after charging2923s for03; original caps retained
 One-shot label com.prowl.rsuper-targets-20261026-04 dispatched with output
 rsuper-full-targets-04 and previous03.313saved members scheduled for verified reuse.
 No automatic retries or student training. Worker/fresh inference verification pending.
+
+Verified04 continuation: supervisor20517(parent1),worker21771 live;313saved targets
+reused in169.27s. Fresh PanTS_00004475 inference observed25/90tiles. Prior failure
+and all old outputs retained; successful startup checks verified prior pins. Future
+pause must target com.prowl.rsuper-targets-20261026-04 and rsuper-full-targets-04.
+Keep AC/drive connected. No new student training launched.
