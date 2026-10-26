@@ -113,3 +113,11 @@ criterion; rerun3.38s passed, and unrun trials remain explicitly unmeasured.
 adapter verifies source bytes and prepares exact review-target IDs; existing development-package
 execution/reuse passed, with107 regression checks. [Handoff](../orchestration/SAVED-PACKAGE-HANDOFF-20261026.md).
 Full G3, live literature-response linkage and training/resource integration remain open.
+
+### October26 literature linkage
+
+The offline case/literature handoff is delivered using the actual UI answer validator, original
+capture bytes and explicit case/capture pins.122 backend/workflow tests plus1 runtime guard and72 UI
+tests pass. The existing saved package and retained public answer completed and reused all4 stages
+under Node24; no fresh answer-quality claim. [Handoff and limits](../orchestration/CASE-LITERATURE-HANDOFF-20261026.md).
+Live UI capture/review-history association and remaining G3 gates remain open; teacher execution unchanged.
