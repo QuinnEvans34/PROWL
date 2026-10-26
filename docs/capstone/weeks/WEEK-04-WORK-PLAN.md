@@ -95,3 +95,12 @@ Complete, corrected the PANORAMA completion record, refreshed the dashboard and
 stale AI/KD/reviewer descriptions, and created W04-02 through05. Existing broad
 carryovers are queued; only the KD parent and target-generation slice represent
 active execution. This planning change does not alter or restart any running job.
+
+### October26 implementation update
+
+W04-01 is now In Progress. Its bounded CPU recovery slice is implemented: deterministic dependency
+plans, validated reuse, preserved interrupted attempts and an invented native-case/citation package
+smoke with operator commands.98 checks pass; standalone repeated execution reuses all stages and an
+evidence-setting change rebuilds only evidence/bundle. [Results](../orchestration/CPU-WORKFLOW-RECOVERY-20261026.md).
+This is partial milestone evidence, not full G3 or production training integration. Teacher execution
+was not changed. Next W04-01 decision is D-201 selection and the smallest production adapter qualification.

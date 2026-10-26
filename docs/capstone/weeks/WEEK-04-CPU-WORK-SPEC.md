@@ -79,3 +79,10 @@ Finish with one short results report: working commands, evidence paths, tests, i
 failure/resume result, preserved limitations and remaining Week4 gates. Then Quinton can
 review a small demonstration rather than a new infrastructure framework. No autonomous
 schedule or promise of a fixed number of hours is created by this specification.
+
+## Implementation handoff — October26
+
+The user explicitly authorized autonomous implementation after this specification. All four bounded
+blocks are delivered and tested; see [results and operator commands](../orchestration/CPU-WORKFLOW-RECOVERY-20261026.md).
+98 focused/existing regressions pass, including real subprocess interruption and recovery. The shipped
+CLI is synthetic-only; production adapters and D-201/G3 remain separate gates.
