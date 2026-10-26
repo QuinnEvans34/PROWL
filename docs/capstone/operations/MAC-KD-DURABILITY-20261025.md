@@ -203,3 +203,16 @@ No signals, retry or restart dispatched; keep stopped per user request. Preserve
 the failure. A future continuation needs explicit review of this AC-guard stop,
 not reuse of the previous normal-pause receipt or relabeling as an operator stop.
 Saved-output verification is recorded separately in rsuper-stopped-review-20261026-01.
+
+## October26 reviewed AC-failure continuation
+
+User explicitly requested resume again. AC is connected/charging and storage
+preflight passes. New additive resume_rsuper_after_power_loss.py admits only the
+hash-bound reviewed AC failure (exact terminal log error, reaped worker,exit1);
+it does not relabel the failure as a pause or admit arbitrary failed jobs.
+15focused tests passed/6.29s including tampered evidence/non-AC failure/unreaped
+worker/budget exhaustion rejection. Original producing files remain untouched.
+Remaining active budget269239s after charging2923s for03; original caps retained.
+One-shot label com.prowl.rsuper-targets-20261026-04 dispatched with output
+rsuper-full-targets-04 and previous03.313saved members scheduled for verified reuse.
+No automatic retries or student training. Worker/fresh inference verification pending.
