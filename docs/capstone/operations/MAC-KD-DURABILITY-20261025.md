@@ -154,3 +154,20 @@ resume_rsuper_targets.py via launch_mac_owned_job.py with --previous pointing to
 Use a new launchd label and dispatch directory; inspect progress after launch.
 Keep PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies.
 No morning timing has been scheduled. User will request the pause when ready.
+
+## October26 operator pause completed
+
+User explicitly requested pause before class. Normal SIGTERM succeeded for the
+real job; no forced worker kill was needed. Supervisor49082 and worker49254 exited;
+launchd reports not running. Resource receipt:72,837.372s,3,935,780,864B peak RSS,
+workers_reaped=true,success=false,error=InterruptedError('Supervisor signal 15'),
+worker exit-15. This is an intentional interruption, not completed generation.
+All308 completed payloads passed hash/type/shape verification and remain preserved.
+The interrupted case will be recomputed. No automatic resume or student launch.
+
+Pause receipt: external artifact root
+distillation-mac-20261023/rsuper-pause-20261026-01/receipt.json.
+Previous generation remains rsuper-full-targets-02. Remaining active budget272162s
+(75.60h), which is a limit, not an ETA. Reconnect drive/power before explicit
+continuation using that receipt and a new output/launchd label. Existing failed/
+interrupted evidence stays unchanged. No producing code was edited for this pause.
