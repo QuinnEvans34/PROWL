@@ -191,3 +191,15 @@ and worker61063 remain live. All2295 continuation pins match. No new failure
 observed; no completed new-case claim yet. Keep AC/drive connected. Future pause
 must target com.prowl.rsuper-targets-20261026-03 and rsuper-full-targets-03,
 not the historical02 job. Full scientific student training remains unlaunched.
+
+## October26 second pause request: job already stopped on AC guard
+
+User requested another pause. The03 job had already exited after313completed cases:
+worker log reports RuntimeError('AC power required') before the next case.
+Supervisor59816/worker61063 absent; launchd not running. Resources record2922.604s,
+6,224,773,120B peak RSS,workers_reaped=true,success=false,worker exit1.
+Pause CLI correctly refused to issue a successful pause receipt for this failure.
+No signals, retry or restart dispatched; keep stopped per user request. Preserve
+the failure. A future continuation needs explicit review of this AC-guard stop,
+not reuse of the previous normal-pause receipt or relabeling as an operator stop.
+Saved-output verification is recorded separately in rsuper-stopped-review-20261026-01.
