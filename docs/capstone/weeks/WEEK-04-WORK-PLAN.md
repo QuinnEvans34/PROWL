@@ -104,3 +104,12 @@ smoke with operator commands.98 checks pass; standalone repeated execution reuse
 evidence-setting change rebuilds only evidence/bundle. [Results](../orchestration/CPU-WORKFLOW-RECOVERY-20261026.md).
 This is partial milestone evidence, not full G3 or production training integration. Teacher execution
 was not changed. Next W04-01 decision is D-201 selection and the smallest production adapter qualification.
+
+### October26 continuation
+
+D-201 now selects the repository runner: isolated Prefect clean-flow8.11s failed the existing5s
+criterion; rerun3.38s passed, and unrun trials remain explicitly unmeasured.
+[Selection evidence](../orchestration/TOOL-SELECTION-RESULTS-20261026.md). The first read-only saved-package
+adapter verifies source bytes and prepares exact review-target IDs; existing development-package
+execution/reuse passed, with107 regression checks. [Handoff](../orchestration/SAVED-PACKAGE-HANDOFF-20261026.md).
+Full G3, live literature-response linkage and training/resource integration remain open.

@@ -1,5 +1,9 @@
 # Orchestration tool selection
 
+**October26 decision:** D-201 selects the repository runner after the isolated Prefect3.9.0
+clean-graph trial exceeded the unchanged five-second limit. See [results](TOOL-SELECTION-RESULTS-20261026.md).
+The candidate/spike plan below is retained as historical criteria; general G3 remains open.
+
 **October 17 literature implementation checkpoint:** Quinton authorized continued development through
 completion-spec Step 3. The [bounded research workflow and rebuild qualification](../retrieval/LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md)
 is complete using the existing sequential repository adapter. This scope retains that runner without

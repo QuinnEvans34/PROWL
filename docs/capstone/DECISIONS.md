@@ -2023,3 +2023,12 @@ cited context and human-verified feedback exports. It does not authorize clinica
 automatic self-training, protected-evaluation reuse, a training launch or full-selector restart.
 Version richer input contracts and freeze extension criteria before experiments. Preserve original
 proposal files/hashes; this is a dated user scope amendment, not institutional reapproval.
+
+## October26 — D-201 resolved: local repository runner
+
+Under Quinton's explicit autonomous-continuation authorization, the bounded Prefect3.9.0 selection
+probe completed in266.23seconds. Clean three-stage flow8.11048s fails the unchanged under5s bar;
+identical rerun3.37674s passes. Choose the already-authorized repository-runner fallback. Remaining
+Prefect trials were not run after the mandatory failure and are not reported as failed. Shared
+training/application dependencies were not changed. [Measured evidence and limitations](orchestration/TOOL-SELECTION-RESULTS-20261026.md).
+This resolves tool choice, not full G3 acceptance or permission to alter active scientific runs.
