@@ -100,3 +100,11 @@ def test_changed_capture_rejected(setup):
 
 def test_duplicate_json_rejected_without_node():
     with pytest.raises(ValueError,match='Duplicate'):validate_capture(b'{"request":1,"request":2}',node='not-used')
+
+
+def test_old_node_runtime_is_actionable(setup,monkeypatch):
+    from types import SimpleNamespace
+    import src.operations.case_literature_workflow_v1 as module
+    source,mp,capture,cp,e=setup
+    monkeypatch.setattr(module.subprocess,'run',lambda *a,**k:SimpleNamespace(stdout='v20.20.1'))
+    with pytest.raises(ValueError,match='Node24'):definition(source,mp,capture,cp,node=NODE)

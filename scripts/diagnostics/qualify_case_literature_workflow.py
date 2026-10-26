@@ -15,6 +15,7 @@ def main():
     p.add_argument('command',choices=['plan','run','resume','inspect','status'])
     for flag in ('root','source','capture'):p.add_argument('--'+flag,type=Path,required=flag=='root')
     for flag in ('manifest-sha256','capture-sha256','resume-of','run-id'):p.add_argument('--'+flag)
+    p.add_argument('--node',help='Explicit verified Node runtime; default uses PATH')
     a=p.parse_args()
     if a.command in ('inspect','status'):
         if not a.run_id:p.error('--run-id required')
@@ -27,7 +28,7 @@ def main():
         e=Executor(a.root,check_root=admit,sensitivity='research-local')
         if a.command in ('inspect','status'):r=e.inspect(a.run_id)
         else:
-            s,h,v=definition(a.source,a.manifest_sha256,a.capture,a.capture_sha256)
+            s,h,v=definition(a.source,a.manifest_sha256,a.capture,a.capture_sha256,node=a.node)
             if a.command=='plan':r=e.preview(s,v,resume_of=a.resume_of)
             else:
                 a.run_id=a.run_id or str(uuid.uuid4());r=e.execute(s,h,v,resume_of=a.resume_of,identity=a.run_id)

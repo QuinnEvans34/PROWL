@@ -51,6 +51,9 @@ def definition(source,manifest_pin,capture,capture_pin,*,node=None):
     node=node or shutil.which('node')
     if not node:raise ValueError('Node required for existing UI validation')
     node=str(Path(node).resolve(strict=True))
+    version=subprocess.run([node,'--version'],capture_output=True,text=True,timeout=5,check=True).stdout.strip()
+    if not re.fullmatch(r'v\d+\.\d+\.\d+',version) or int(version.split('.')[0][1:])<24:
+        raise ValueError('Node24 or newer required; select the verified UI runtime with --node')
     node_pin=hashlib.sha256(Path(node).read_bytes()).hexdigest()
     policy=validator_identity()
     def captured():
