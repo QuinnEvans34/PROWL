@@ -171,3 +171,16 @@ Previous generation remains rsuper-full-targets-02. Remaining active budget27216
 (75.60h), which is a limit, not an ETA. Reconnect drive/power before explicit
 continuation using that receipt and a new output/launchd label. Existing failed/
 interrupted evidence stays unchanged. No producing code was edited for this pause.
+
+## October26 explicit continuation dispatched
+
+User requested resume. Drive finished mounting during preflight; AC/storage gates
+pass and next source observation matches. New one-shot launchd label
+com.prowl.rsuper-targets-20261026-03 owns supervisor59816 (parent1),worker61063.
+Output rsuper-full-targets-03, dispatch rsuper-full-targets-03-dispatch. Prior308
+completed members verified and bound for reuse; old02 artifacts remain unchanged.
+Remaining active budget272162s; paused time excluded, original limits retained.
+Request generated only after prior producing hashes and payloads passed checks.
+Worker initially advanced through25 copied/verified saved targets; those are reuse,
+not new inference. Await post308 tile progress to confirm fresh inference.
+No student training, automatic retry, or duplicate worker dispatched.
