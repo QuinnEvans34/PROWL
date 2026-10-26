@@ -4,8 +4,9 @@ Quinton adopted a Sunday planning routine on October8,2026. Each week has one li
 `WEEK-NN-WORK-PLAN.md`. It is the daily task/specification list, not a replacement for the approved
 proposal, master schedule, experiment records or component contracts.
 
-**Current:** [Week 3 work plan and delivery benchmark](WEEK-03-WORK-PLAN.md), October 19–25.
-**Previous:** [Week 2 plan](WEEK-02-WORK-PLAN.md), October 12–18, and
+**Current:** [Week 4 work plan](WEEK-04-WORK-PLAN.md), October 26–November 1.
+**Previous:** [Week 3 plan](WEEK-03-WORK-PLAN.md), October 19–25;
+[Week 2 plan](WEEK-02-WORK-PLAN.md), October 12–18, and
 [Week 1 closeout](WEEK-01-WORK-PLAN.md), October 5–11; evidence/hour carryovers remain visible.
 **Template:** [Weekly work plan](WEEKLY-WORK-PLAN-TEMPLATE.md).
 **Human time:** [Hours log](HOURS-LOG.md).
@@ -42,6 +43,11 @@ facts, record a dated correction and preserve their evidence. Do not repeat comp
 to refresh a checklist or mark unverified product requirements complete.
 
 ## October 9 confirmed working agreement
+
+October26 clarification: the October9 training-ownership boundary below is historical.
+Quinton subsequently authorized Mac exploratory KD preparation and qualified launch;
+the Week4 plan and current experiment records describe that scope. Laptop runs remain
+owned by the other machine; this does not authorize competing jobs or changing its runs.
 
 Quinton confirmed the project scope and clarified ownership:
 
