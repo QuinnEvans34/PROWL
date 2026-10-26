@@ -362,7 +362,7 @@ export default function LiteratureSearchPanel({
         {sourceMode && result.record_selection?.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {!sourceMode && <details><summary>Keep this response</summary>
-          <p>Download the submitted question, response, and citations for later inspection. This is general literature; the file contains no scan context and is not attached to your saved review.</p>
+          <p>Download the submitted question, response, and citations for later inspection. This is general literature; no scan context is added automatically, and the file is not attached to your saved review.</p>
           {capture && <button type="button" onClick={() => {
             try { downloadCapture(capture); setCaptureNotice('Download requested. Check your downloads; your saved review has not changed.') }
             catch { setCaptureNotice('Download could not start. Your response is still available here; try again.') }
@@ -375,7 +375,7 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
-    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not written to disk.' : 'No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not written to disk.'}</small>
+    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not saved automatically. Use Keep this response to download a copy.' : 'No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not saved automatically. Use Keep this response to download a copy.'}</small>
   </section>
 }
 
