@@ -18,6 +18,10 @@ reverting to the old process sampler. Six supervision tests pass. Remaining acti
 is221215seconds; no scientific changes. Startup verifies prior pins and all503 targets before
 creating the new request. Inspect the new process/progress files before claiming fresh inference.
 
+Verified resume: supervisor13779/worker15917 are active. All503 targets reused in228.626
+worker seconds; fresh case PanTS_00001612 advanced to25/150tiles. Hourly heartbeat is ACTIVE.
+No resources failure present. Keep exactly this one continuation running.
+
 ## Historical October 26 handoff
 
 Artifact base: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023`.
