@@ -131,3 +131,46 @@ review note or change the pinned review schema/store. The existing save route ac
 fixed review fields and an8 KiB body, so adding a capture to that request is not compatible.
 A small additive route/adapter and display in reopened history remain implementation work;
 no additional scheduler, database, or labeling application is needed.
+
+## Exact-review attachment adapter
+
+`src/review/literature_attachments_v1.py` now publishes separate immutable attachments using the
+existing ArtifactStore. `scripts/attach_review_literature.py` provides explicit `attach` and
+`reopen` commands. No original review event, schema, store implementation, API route or live
+service was changed. Attachments describe general literature associated **after** review;
+they do not assert that it informed the original decision or qualify measurements.
+
+Attach requires an existing dedicated attachment root and review root, Node24+, the exact
+manifest hash, review-event ID, SHA256 of the canonical review receipt, and capture bytes/hash.
+The owning `ReviewStore.history` validator checks the saved chain and exact revision. Publication
+retains the original capture bytes and public event/receipt snapshot; no CT arrays are read.
+The existing 50,000,000,000-byte free-space reserve applies. Root replacement/symlinks, incompatible
+review identity, altered evidence, oversized capture and changed validators are rejected. Keep the
+returned artifact ID and completion receipt hash independently for reopening; the CLI does not
+provide automatic discovery. Explicit retry verifies/reuses the same artifact and preserves prior
+attempts; no automatic retry or deletion. Validator changes require an explicit future migration.
+
+Example (all uppercase arguments are operator-supplied values, not defaults):
+
+```sh
+.venv-retrieval/bin/python scripts/attach_review_literature.py attach \
+  --root ATTACHMENT_ROOT --reviews EXISTING_REVIEW_ROOT --node NODE24 \
+  --manifest-sha256 MANIFEST_HASH --review-event-id REVIEW_EVENT_ID \
+  --review-receipt-sha256 REVIEW_RECEIPT_HASH \
+  --capture CAPTURE_JSON --capture-sha256 CAPTURE_HASH
+.venv-retrieval/bin/python scripts/attach_review_literature.py reopen \
+  --root ATTACHMENT_ROOT --reviews EXISTING_REVIEW_ROOT --node NODE24 \
+  --artifact-id RETURNED_ARTIFACT_ID --receipt-sha256 RETURNED_RECEIPT_HASH
+```
+
+67 focused attachment/review/publication/capture tests pass, including15 new attachment tests.
+The actual CLI published, reused and reopened an invented case/decision/capture under
+`outputs/prowl/review-attachment-20261026/`; `summary.json` records that the original decision and
+capture remained exact. Refusal, insufficient-evidence and unavailable outcomes retain their states.
+Later review revisions do not rebind old attachments. Two pre-existing dependency warnings remain.
+Active teacher producing pins have no intersection with the added files; no model call occurred.
+
+This closes the local attachment mechanism, not the end-user integration. The application still
+needs the additive API route, explicit attach control, receipt retention/discovery and display when
+reopening history. No real reviewer record was modified and no new clinical or answer-accuracy
+claim is supported by these transport tests.
