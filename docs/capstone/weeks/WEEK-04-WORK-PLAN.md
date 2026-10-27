@@ -170,3 +170,12 @@ registered read-only handoff: actual plan/run/resume succeeded, both stages reus
 source bytes unchanged;137 regressions pass. [Results and limits](../orchestration/PREPARED-INPUTS-HANDOFF-20261027.md).
 This is not a materialized CT-cache or fresh payload audit. Complete teacher targets,
 actual full-provider executor qualification and remaining G3 contracts stay open.
+
+### October27 event and cancellation checks
+
+Registered offline CPU workflows now stop cooperatively at stage boundaries on
+SIGINT/SIGTERM, retain an immutable cancellation record and produce a cancelled
+run summary. Actual subprocess cancellation/resume and event rejection checks pass;
+152 combined regressions pass. [Evidence and remaining event-contract scope](../orchestration/EVENT-CANCELLATION-CHECKS-20261027.md).
+The teacher and its dedicated pause/cleanup mechanism were unchanged. Full Plan04
+event vocabulary and training-specific cancellation qualification remain open.

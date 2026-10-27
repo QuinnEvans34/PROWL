@@ -10,7 +10,7 @@ import uuid
 
 from jsonschema import Draft202012Validator, FormatChecker
 from .workflow_plan_v1 import encoded, sha, plan
-from .workflow_execution_v1 import write_record, read_record, run_id
+from .workflow_execution_v1 import write_record, read_record, run_id, cooperative_signals
 from .artifact_store import directory
 import os
 
@@ -100,7 +100,9 @@ def execute_registered(executor, kind, stages, handlers, validators, *, identity
     (folder/'environment.json').write_bytes(encoded(deps))
     (folder/'resolved-config.json').write_bytes(encoded(config))
     try:
-        result = executor.execute(stages, handlers, wrapped, identity=identity, resume_of=resume_of)
+        with cooperative_signals() as cancellation:
+            result = executor.execute(stages, handlers, wrapped, identity=identity,
+                                      resume_of=resume_of, cancel_requested=cancellation)
     except Exception:
         # Preserve the original failure. Summary-generation failure cannot mask it.
         try:
@@ -115,7 +117,7 @@ def execute_registered(executor, kind, stages, handlers, validators, *, identity
 def export_summary(executor, identity, validators):
     """Verify persisted outputs before describing a terminal attempt as completed."""
     snapshot = executor.inspect(identity)
-    if snapshot['state'] not in ('complete','failed'):
+    if snapshot['state'] not in ('complete','failed','cancelled'):
         raise ValueError('Incomplete attempt has no terminal run manifest')
     folder = executor.root/'contracts'/identity
     context = read_record(folder/'context.json')
@@ -156,7 +158,7 @@ def export_summary(executor, identity, validators):
     stamp=now(); prefix='contracts/'+identity+'/'
     environment=dict(context['environment'],environment_uri=prefix+'environment.json')
     manifest=dict(schema_version='1.0.0',run_id='run:'+identity,run_name=config['workflow'],
-        workflow_type='integration',status='completed' if snapshot['state']=='complete' else 'failed',
+        workflow_type='integration',status='completed' if snapshot['state']=='complete' else snapshot['state'],
         created_at=context['created_at'],updated_at=stamp,code=context['code'],environment=environment,
         resolved_config=dict(uri=prefix+'resolved-config.json',content_sha256=hashlib.sha256(config_raw).hexdigest()),
         stages=records,notes='Offline CPU handoff only. URIs are workflow-root relative. Summary time is observation time; stage durations are unmeasured. Input pins and dependency declarations are retained in the request. No training or measurement qualification.')

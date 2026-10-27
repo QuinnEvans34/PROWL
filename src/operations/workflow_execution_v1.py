@@ -4,16 +4,35 @@ Cooperating single-host POSIX writers. The registered callbacks own semantics;
 this executor owns dependency ordering and validates artifacts before every reuse.
 """
 from contextlib import contextmanager
+from datetime import datetime, timezone
 import fcntl
 import json
 import os
 import re
+import signal
 import stat
 from pathlib import Path
 import uuid
 
 from src.operations.artifact_store import ArtifactStore, directory, read_file
 from .workflow_plan_v1 import Stage, plan, encoded, sha
+
+
+@contextmanager
+def cooperative_signals():
+    """CLI-only: stop at the next stage boundary, never interrupt publication."""
+    requested = []
+    old = {s: signal.getsignal(s) for s in (signal.SIGINT, signal.SIGTERM)}
+    def request(signum, frame):
+        if not requested:
+            requested.append(signal.Signals(signum).name)
+    try:
+        for s in old:
+            signal.signal(s, request)
+        yield lambda: requested[0] if requested else None
+    finally:
+        for s, handler in old.items():
+            signal.signal(s, handler)
 
 
 def run_id(value):
@@ -165,8 +184,23 @@ class Executor:
                     len(ref['receipt_sha256'])!=64): raise ValueError('Invalid output reference')
             states[stage]=state;terminal=state=='failed';previous=sha(e);events.append(e)
         complete=all(s in ('completed','reused') for s in states.values())
-        return dict(run_id=identity,request=request,events=events,stages=states,
+        result=dict(run_id=identity,request=request,events=events,stages=states,
                     state='complete' if complete else 'failed' if terminal else 'incomplete')
+        cancellation=folder/'cancelled.json'
+        if cancellation.exists():
+            c=read_record(cancellation)
+            fields={'schema','run_id','request_sha256','after_sequence','previous','reason','observed_at'}
+            if (set(c)!=fields or c['schema']!='workflow-cancellation-v1' or
+                c['run_id']!=identity or c['request_sha256']!=sha(request) or
+                type(c['after_sequence']) is not int or c['after_sequence']!=len(events) or
+                c['previous']!=previous or c['reason'] not in ('SIGINT','SIGTERM') or
+                terminal or complete or 'running' in states.values()):
+                raise ValueError('Invalid cancellation boundary')
+            stamp=datetime.fromisoformat(c['observed_at'])
+            if stamp.utcoffset() is None:
+                raise ValueError('Cancellation timestamp requires timezone')
+            result.update(state='cancelled',cancellation=c)
+        return result
 
     def history(self, parent):
         refs={};seen=set();current=parent
@@ -196,7 +230,7 @@ class Executor:
                                   reason='verified identical derivation' if ref else 'no matching completed stage'))
         return dict(plan=p,decisions=decisions)
 
-    def execute(self, stages, handlers, validators, *, resume_of=None, identity=None):
+    def execute(self, stages, handlers, validators, *, resume_of=None, identity=None, cancel_requested=lambda:None):
         p=plan(stages);ids={r['id'] for r in p['stages']}
         if set(handlers)!=ids or set(validators)!=ids:
             raise ValueError('Exact handler and validator registries required')
@@ -218,6 +252,15 @@ class Executor:
                 write_record(folder/f'event-{sequence:04d}.json',value);previous=sha(value)
             store=self.store()
             for row in p['stages']:
+                reason=cancel_requested()
+                if reason is not None:
+                    if reason not in ('SIGINT','SIGTERM'):
+                        raise ValueError('Unsupported cancellation reason')
+                    self.admit()
+                    write_record(folder/'cancelled.json',dict(schema='workflow-cancellation-v1',
+                        run_id=identity,request_sha256=sha(request),after_sequence=sequence,
+                        previous=previous,reason=reason,observed_at=datetime.now(timezone.utc).isoformat()))
+                    return self.inspect(identity)
                 sid=row['id'];validator=validators[sid];ref=refs.get(row['derivation'])
                 if ref:
                     # Revalidation failure is preserved as a failed attempt; never regenerate silently.

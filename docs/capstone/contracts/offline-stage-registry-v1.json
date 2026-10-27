@@ -11,7 +11,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -39,7 +39,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -69,7 +69,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -97,7 +97,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -125,7 +125,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -156,7 +156,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -189,7 +189,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
@@ -219,7 +219,7 @@
           "artifact-writer"
         ],
         "retry": "explicit-resume-only",
-        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
         "checkpoint": false,
         "root_role": "dedicated-workflow-output",
         "capacity": "configured reserve + publisher output/control allowance",
