@@ -105,3 +105,39 @@ Combined admission, backup-boundary and executor-recovery regression:48passed in
 4.76s, two upstream Torch deprecation warnings. CPU-only; no CT/model execution.
 No full admission was run against teacher07, which is still producing targets.
 This command does not launch training or qualify the actual GPU executor.
+
+## GPU qualification input preparation — CPU-only
+
+`prepare_kd_executor_qualification.py` now prepares `preparation.json` from a
+completed admission. It does not execute a GPU stage. It requires the reviewed
+admission receipt hash, rechecks terminal producer records, binds teacher/common
+identity and manifest back to those records, enforces corrected on-demand inputs,
+full disjoint1333/70 membership, matching split/region/sampling identities and
+paired designs differing only in KD weight. It derives separate operational copies
+with the existing on-demand policy; historical recipe files remain unchanged.
+
+```sh
+PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies \
+  .venv312/bin/python scripts/diagnostics/prepare_kd_executor_qualification.py \
+  --admitted /absolute/completed-admission \
+  --admission-sha256 VERIFIED_ADMISSION_HASH \
+  --output /absolute/new-qualification-preparation
+```
+
+The output pins admission/design/source files and records remaining execution
+checks. It explicitly says PREPARED_NOT_GPU_QUALIFIED/scientific_ready=false;
+there is no worker or launch flag. Existing destinations and destinations inside
+the admitted target tree are rejected. No real preparation was created against
+partial teacher targets. Later execution must recheck these pins and actual
+provider identity, acquire exclusive GPU/resource supervision, enforce its bounded
+engineering budget, and preserve failures. Preparation is not permission to bypass
+any of these requirements.
+
+Ten metadata-only synthetic tests cover successful binding/source preservation,
+receipt/provider/manifest/common/producer tampering, partial qualification,
+wrong split despite matching arms, unmatched designs and destination reuse.
+Combined regression58passed in6.89s (two upstream Torch deprecation warnings).
+No CT arrays, teacher weights or GPU were read by preparation. Synthetic metadata
+success does not establish payload validity; full admission and the target store
+own those checks. Actual supervised full-provider GPU stages and their receipts
+remain the next implementation, followed by real qualification when MPS is free.
