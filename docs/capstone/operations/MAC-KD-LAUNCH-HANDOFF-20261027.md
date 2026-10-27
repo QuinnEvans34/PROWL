@@ -52,8 +52,8 @@ on-demand provider. Preserve their bytes as design evidence. In particular:
    only when qualified. Verify advancing updates, durable backups and stored metrics.
    Unknown teacher membership keeps results teacher-assisted/exploratory.
 
-The full-manifest publication command and full-provider GPU qualification/launch
-receipt wiring are still unfinished. There is no ready-to-run scientific command
+The full-manifest publication command is now implemented and synthetically tested
+(see below); full-provider GPU qualification/launch receipt wiring remains unfinished. There is no ready-to-run scientific command
 in this handoff. Do not invoke older two-case scripts as a substitute.
 
 ## Evidence checked now
@@ -66,3 +66,42 @@ active repository pins. Retained observations and eight input hashes:
 At17:39UTC the teacher had540/1333completed targets. This is progress, not admission.
 See `MAC-KD-DURABILITY-20261025.md` for provider/evaluator/recovery evidence and
 `MAC-RSUPER-TRAINING-PREPARATION-20261023.md` for actual MPS and backup-boundary checks.
+
+## Full-target admission command — implemented, not run on live targets
+
+`scripts/diagnostics/admit_rsuper_full_targets.py` constructs the existing corrected
+provider and requires exact1333train/70development membership. Supply the reviewed
+SHA256 values of the completed producer request, result and resources, plus the
+prepared provider identity. It rejects incomplete/unreaped generation before
+constructing the provider, checks existing storage admission, then invokes the
+owning full-target validator with qualification_only=false.
+
+Example syntax (replace all placeholders with verified completed evidence):
+
+```sh
+PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies \
+  .venv312/bin/python scripts/diagnostics/admit_rsuper_full_targets.py \
+  --targets /absolute/completed-generation \
+  --output /absolute/new-admission-directory \
+  --request-sha256 REQUEST_HASH --result-sha256 RESULT_HASH \
+  --resources-sha256 RESOURCES_HASH \
+  --provider-sha256 900619faa0a5905fca165bebca0c9afd56f9df635cdd7141c4f95a31204a0053
+```
+
+Output is separate from the producer: original payloads remain untouched; symlinks
+reference hash-verified NPZs without duplicating the cache. Keep the producer drive
+and files available. `manifest.json` is published last through an atomic,
+non-overwriting link after fsync; an earlier failure leaves an inspectable directory
+without that manifest. Existing output directories cannot be overwritten/retried.
+The existing TeacherTargetStore rechecks payload hashes when consuming a window.
+`admission.json`, `common-identity.json` and `provider-control.json` retain the
+bindings. Successful admission explicitly reports scientific_ready=false.
+
+Synthetic tests verify a1333-case/70-development CLI invocation, existing-store
+consumption, later payload-corruption rejection, changed record/provider hashes,
+incomplete inputs, separate destination enforcement and interrupted publication.
+An actual subprocess rejects incomplete generation before provider/preflight.
+Combined admission, backup-boundary and executor-recovery regression:48passed in
+4.76s, two upstream Torch deprecation warnings. CPU-only; no CT/model execution.
+No full admission was run against teacher07, which is still producing targets.
+This command does not launch training or qualify the actual GPU executor.
