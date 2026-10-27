@@ -44,6 +44,11 @@ def test_real_signal_stops_descendants_and_resume_reuses(tmp_path,signum):
     assert first['stages']=={'integrity':'completed','handoff':'pending'}
     manifest=json.loads((tmp_path/'contracts'/identity/'run-manifest.json').read_bytes())
     assert manifest['status']=='cancelled'
+    from src.operations.workflow_lifecycle_v1 import inspect_lifecycle
+    lifecycle=inspect_lifecycle(e,identity,snapshot=first,require_terminal=True)
+    assert [x['event_type'] for x in lifecycle['events']]==[
+        'run_planned','lock_acquired','run_started','cancel_requested','lock_released','run_cancelled']
+    assert lifecycle['events'][3]['details']['reason']==signal.Signals(signum).name
     before={p.name:p.read_bytes() for p in (tmp_path/'runs'/identity).iterdir() if p.is_file()}
     source=tmp_path/'source';s,h,v=definition(source,digest((source/'manifest.json').read_bytes()))
     later=e.execute(s,h,v,resume_of=identity)

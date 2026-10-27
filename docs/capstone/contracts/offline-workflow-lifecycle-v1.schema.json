@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Registered offline CPU invocation lifecycle",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "previous": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "\\+00:00$"
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "schema": {
+      "const": "offline-workflow-lifecycle-v1"
+    },
+    "event_type": {
+      "enum": [
+        "run_planned",
+        "lock_acquired",
+        "run_started",
+        "cancel_requested",
+        "lock_released",
+        "run_completed",
+        "run_cancelled",
+        "run_failed"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_sha256",
+        "registry_sha256",
+        "plan_sha256"
+      ],
+      "properties": {
+        "context_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "registry_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "plan_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "process": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "host",
+        "pid",
+        "adapter"
+      ],
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "adapter": {
+          "const": "offline-workflow-contracts-v1"
+        }
+      }
+    },
+    "details": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "enum": [
+            "SIGINT",
+            "SIGTERM"
+          ]
+        },
+        "error": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        }
+      }
+    }
+  },
+  "required": [
+    "event_id",
+    "run_id",
+    "sequence",
+    "previous",
+    "observed_at",
+    "content_sha256",
+    "schema",
+    "event_type",
+    "provenance",
+    "process",
+    "details"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "cancel_requested"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "details": {
+            "required": [
+              "reason"
+            ],
+            "maxProperties": 1
+          }
+        }
+      },
+      "else": {
+        "if": {
+          "properties": {
+            "event_type": {
+              "const": "run_failed"
+            }
+          }
+        },
+        "then": {
+          "properties": {
+            "details": {
+              "required": [
+                "error"
+              ],
+              "maxProperties": 1
+            }
+          }
+        },
+        "else": {
+          "properties": {
+            "details": {
+              "maxProperties": 0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

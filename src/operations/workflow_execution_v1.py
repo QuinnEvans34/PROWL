@@ -11,6 +11,7 @@ import os
 import re
 import signal
 import stat
+import sys
 from pathlib import Path
 import uuid
 
@@ -69,11 +70,17 @@ def validate_request(value):
     """Exact workflow-run-v1 envelope; plan semantics are reconstructed separately."""
     if (not isinstance(value, dict) or
         set(value) not in ({'schema', 'run_id', 'resume_of', 'plan'},
-                          {'schema', 'run_id', 'resume_of', 'plan', 'event_schema'}) or
+                          {'schema', 'run_id', 'resume_of', 'plan', 'event_schema'},
+                          {'schema', 'run_id', 'resume_of', 'plan', 'event_schema', 'provenance'}) or
         value['schema'] != 'workflow-run-v1'):
         raise ValueError('Unsupported workflow run contract')
     if 'event_schema' in value and value['event_schema'] != 'offline-workflow-event-v2':
         raise ValueError('Unsupported workflow event contract')
+    if 'provenance' in value:
+        p = value['provenance']
+        if (not isinstance(p, dict) or set(p) != {'context_sha256','registry_sha256','plan_sha256'} or
+            any(not isinstance(v,str) or not re.fullmatch('[a-f0-9]{64}',v) for v in p.values())):
+            raise ValueError('Invalid workflow provenance binding')
     run_id(value['run_id'])
     if value['resume_of'] is not None:
         run_id(value['resume_of'])
@@ -148,16 +155,26 @@ class Executor:
         finally: os.close(fd)
 
     @contextmanager
-    def locked(self):
+    def locked(self, observe=lambda event:None):
         self.admit()
         fd=os.open(self.root/'.workflow.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW|os.O_NONBLOCK,0o600)
+        acquired=False
         try:
             st=os.fstat(fd)
             if not stat.S_ISREG(st.st_mode) or st.st_nlink!=1:
                 raise ValueError('Unsafe workflow lock')
             fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            acquired=True
+            observe('lock_acquired')
             yield
-        finally: os.close(fd)
+        finally:
+            original=sys.exc_info()[1]
+            os.close(fd)
+            if acquired:
+                try: observe('lock_released')
+                except Exception as error:
+                    if original is None: raise
+                    original.add_note('Lock released but lifecycle recording failed: '+str(error))
 
     def store(self):
         return ArtifactStore(self.root/'artifacts',check_root=self.verify_root,
@@ -169,6 +186,9 @@ class Executor:
         folder=self.root/'runs'/run_id(identity)
         request=read_record(folder/'request.json')
         validate_request(request)
+        if 'provenance' in request:
+            from .workflow_lifecycle_v1 import verify_provenance
+            verify_provenance(self.root, identity, request)
         if request['run_id']!=identity: raise ValueError('Run identity mismatch')
         rows=request['plan']['stages']
         reconstructed=plan([Stage(r['id'],tuple(r['dependencies']),r['inputs'],r['config'],r['producer']) for r in rows])
@@ -218,6 +238,10 @@ class Executor:
             if stamp.utcoffset() is None:
                 raise ValueError('Cancellation timestamp requires timezone')
             result.update(state='cancelled',cancellation=c)
+        if 'provenance' in request:
+            from .workflow_lifecycle_v1 import inspect_lifecycle
+            lifecycle=inspect_lifecycle(self,identity,snapshot=result)
+            result['lifecycle']={k:lifecycle[k] for k in ('terminal','lock_release_observed')}
         return result
 
     def history(self, parent):
@@ -248,12 +272,13 @@ class Executor:
                                   reason='verified identical derivation' if ref else 'no matching completed stage'))
         return dict(plan=p,decisions=decisions)
 
-    def execute(self, stages, handlers, validators, *, resume_of=None, identity=None, cancel_requested=lambda:None):
+    def execute(self, stages, handlers, validators, *, resume_of=None, identity=None,
+                cancel_requested=lambda:None, provenance=None, observe=lambda event:None):
         p=plan(stages);ids={r['id'] for r in p['stages']}
         if set(handlers)!=ids or set(validators)!=ids:
             raise ValueError('Exact handler and validator registries required')
         identity=run_id(identity or str(uuid.uuid4()))
-        with self.locked():
+        with self.locked(observe):
             for name in ('runs','artifacts'):
                 (self.root/name).mkdir(exist_ok=True)
                 fd=directory(self.root/name);os.close(fd)
@@ -261,7 +286,10 @@ class Executor:
             folder=self.root/'runs'/identity;folder.mkdir()
             request=dict(schema='workflow-run-v1',run_id=identity,resume_of=resume_of,plan=p,
                          event_schema='offline-workflow-event-v2')
+            if provenance is not None: request['provenance']=provenance
+            validate_request(request)
             write_record(folder/'request.json',request)
+            observe('run_started')
             sequence=0;previous=None;outputs={}
             def event(stage,state,**fields):
                 nonlocal sequence,previous

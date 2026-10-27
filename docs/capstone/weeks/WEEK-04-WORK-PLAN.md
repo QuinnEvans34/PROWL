@@ -188,3 +188,12 @@ unchanged and recoverable.162 combined regressions plus the final11 event-contra
 checks pass. [Evidence and remaining scope](../orchestration/EVENT-IDENTITY-20261027.md).
 Next CPU work is lifecycle/provenance coverage and consolidated G3 evidence review;
 full training integration still awaits completed targets and executor qualification.
+
+### October27 registered lifecycle and provenance
+
+Registered CPU workflows now record run/lock/cancellation lifecycle observations and
+bind saved registry, plan and execution context to immutable requests.179 regressions
+pass; actual synthetic CLI run/resume completed/reused2/2 stages with verified lifecycle
+records. [Results, limits and teacher observation](../orchestration/LIFECYCLE-PROVENANCE-20261027.md).
+Teacher attempt06 stopped safely at529/1333 on an AC interruption; power is restored,
+workers are reaped, and a verified continuation is needed. No automatic retry occurred.

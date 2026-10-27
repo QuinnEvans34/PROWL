@@ -12,6 +12,7 @@ from jsonschema import Draft202012Validator, FormatChecker
 from .workflow_plan_v1 import encoded, sha, plan
 from .workflow_execution_v1 import write_record, read_record, run_id, cooperative_signals
 from .artifact_store import directory
+from .workflow_lifecycle_v1 import Lifecycle, inspect_lifecycle
 import os
 
 REPO = Path(__file__).resolve().parents[2]
@@ -97,14 +98,31 @@ def execute_registered(executor, kind, stages, handlers, validators, *, identity
                   minimum_free_bytes=executor.floor, sensitivity=executor.sensitivity)
     context['resolved_config_sha256'] = sha(config)
     write_record(folder/'context.json', context)
-    (folder/'environment.json').write_bytes(encoded(deps))
-    (folder/'resolved-config.json').write_bytes(encoded(config))
+    publish_summary(folder/'environment.json',encoded(deps))
+    publish_summary(folder/'resolved-config.json',encoded(config))
+    binding=dict(context_sha256=sha(context),registry_sha256=sha(registry),plan_sha256=sha(config['plan']))
+    lifecycle=Lifecycle(executor,identity,binding)
+    lifecycle.emit('run_planned')
     try:
         with cooperative_signals() as cancellation:
+            observed=[]
+            def cancel_requested():
+                reason=cancellation()
+                if reason and not observed:
+                    lifecycle.emit('cancel_requested',reason=reason)
+                    observed.append(reason)
+                return reason
             result = executor.execute(stages, handlers, wrapped, identity=identity,
-                                      resume_of=resume_of, cancel_requested=cancellation)
-    except Exception:
+                                      resume_of=resume_of, cancel_requested=cancel_requested,
+                                      provenance=binding, observe=lifecycle.emit)
+        lifecycle.emit('run_cancelled' if result['state']=='cancelled' else 'run_completed')
+        result=executor.inspect(identity)
+    except Exception as original:
         # Preserve the original failure. Summary-generation failure cannot mask it.
+        try:
+            lifecycle.emit('run_failed',error=f'{type(original).__name__}: {original}'[:2000])
+        except Exception as error:
+            original.add_note('Lifecycle failure could not be recorded: '+str(error))
         try:
             export_summary(executor, identity, wrapped)
         except Exception as error:
@@ -120,6 +138,8 @@ def export_summary(executor, identity, validators):
     if snapshot['state'] not in ('complete','failed','cancelled'):
         raise ValueError('Incomplete attempt has no terminal run manifest')
     folder = executor.root/'contracts'/identity
+    if 'provenance' in snapshot['request']:
+        inspect_lifecycle(executor,identity,snapshot=snapshot,require_terminal=True)
     context = read_record(folder/'context.json')
     config_raw = (folder/'resolved-config.json').read_bytes()
     config = json.loads(config_raw)
