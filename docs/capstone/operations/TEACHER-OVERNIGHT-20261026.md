@@ -21,8 +21,8 @@ producing pin and completed payload/type/shape, charges ceil(prior supervised el
 remaining original budget and requires AC/storage/cache/exclusive MPS gates. Never overwrite,
 repin or duplicate a generation. New targets are written to a new directory.
 
-Teacher-only `mac_teacher_watch_v2.py` samples process-tree RSS every2s rather than approximately
-20 process scans/second. Isolated5s process-list timeouts retry, with failure on the third consecutive
+Teacher-only `mac_teacher_watch_v2.py` samples process-tree RSS every2s rather than using the old50ms polling sleep
+after each system-wide query (the failed attempt recorded25,931 samples in5,826s). Isolated5s process-list timeouts retry, with failure on the third consecutive
 timeout. Wall deadline is checked before and after sampling; RSS cap is unchanged. At most roughly
 15s of missing observations is tolerated, never an unlimited monitoring gap. Resource report records
 timeout count. Parent-loss guardian and owned-group cleanup remain active through the additive
@@ -42,3 +42,12 @@ cleanup, report completion and pause the heartbeat.
 
 Keep Mac on AC with lid open/awake and external drive attached. Launchd ownership survives this
 chat ending; scheduled app checks cannot guarantee execution while the Mac is asleep or offline.
+
+Recovery qualification: six synthetic CPU tests passed. Attempt05 verified335 completed members
+and froze263412 remaining supervised seconds; supervisor57785/worker58484 started successfully.
+Fresh inference progress must still be verified before calling the operational recovery complete.
+
+Fresh inference confirmed: all335 verified targets were reused in119.072 worker seconds, then
+PanTS_00006340 advanced to tile25/60. Supervisor57785 and worker58484 were both alive; no
+resources failure was present. This is actual new prediction work, not merely launch acceptance.
+Heartbeat remains active. The original failed case's incomplete output remains in attempt04.
