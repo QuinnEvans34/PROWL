@@ -200,3 +200,26 @@ qualification; successful synthetic receipts do not satisfy these gates.
 Teacher check during this work: 548/1,333 targets completed; supervisor1351 and
 worker2683 remained live; all329 repository producing pins matched. No producing
 files or teacher recipe were changed.
+
+
+## October27 continuation authorization and readiness check
+
+User now authorizes finishing target generation, verifying admission, then running
+the real GPU qualification when the GPU is free. This supersedes the preceding
+turn's do-not-launch instruction for these bounded engineering stages only;
+it is not an instruction to bypass admission or launch scientific training.
+
+Read-only check: launchd07b remains running (supervisor1351/worker2683),548/1333
+completed, current case PanTS_00007575 advanced from25 to75/96tiles. All329 repo
+producing pins match. AC power,87GiB internal and1.9TiB external free; no terminal
+result/resources or guardian-failure receipt. Generation is incomplete, so no
+admission/preparation or GPU qualification was attempted. Existing hourly teacher
+monitor remains the mechanism for generation checks; it does not launch students.
+
+Completion order: require terminal1333-case result, successful resources/reaping
+and released MPS ownership; verify admission with exact producer hashes; prepare
+matched full-provider inputs; freeze a fresh engineering request with verified
+positive/empty development identities and independent backup; dispatch and inspect
+reference, zero, producer and cold separately. Preserve any failed stage and stop
+for diagnosis. A completed target count alone does not satisfy admission, and a
+synthetic test pass does not satisfy real GPU qualification.
