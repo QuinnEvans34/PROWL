@@ -49,3 +49,39 @@ answer quality. It does not exercise real contours, measurement qualifications,
 inference, or answer latency. Those W04-04 checks remain open and must preserve
 failures. GPU answer checks wait for an authorized resource window. Teacher
 generation continues under its existing supervision and frozen recipe.
+
+## Live saved-case slice — October 27
+
+Exercised the existing exposed validation example `PanTS_00009005` in the real
+port5180 workbench while teacher continuation07 remained active. No new inference,
+answer-model call, clinical decision, or real saved-review mutation was performed.
+The previous synthetic persistence evidence above remains separate.
+
+| Check | Observed result |
+| --- | --- |
+| Load saved case | CT planes loaded; 128 axial slices; prediction available |
+| Switch to 3D and Go to pancreas | Prepared CT and prediction surface rendered; pancreas focus worked |
+| Check status | Source search ready; teacher GPU reservation displayed |
+| How big is this pancreas? | Local saved-outline calculation:60.33mL; explicitly not verified whole-organ volume |
+| Measurement provenance |128³grid,3.375mm³voxel volume, decoded CT/prediction hashes; legacy units and missing checkpoint hash disclosed |
+| Is this pancreas big or small? | Numerical comparison with published82.6mL study mean;14-person MRI population and method/crop/model limitations preserved; no normal/small/enlarged classification |
+| What is the diameter of this lesion? | Explicitly unavailable; no equivalent-sphere diameter substituted for a measured dimension |
+
+Fixed a demonstrated readiness-message defect: GET Check status previously said it
+was starting missing services. It now says Checking local service status, while
+POST Prepare retains the service-starting message. Button and timeout wording also
+identify the actual operation. Verified the corrected pending message in the live UI.
+No endpoint, resource gate, or preparation behavior changed. Existing readiness and
+measurement tests:77passed across3files. `git diff --check` passed.
+
+Local evidence: `outputs/prowl/testing/saved-case-walkthrough-20261027/` contains
+comparison text/screenshot, dimension-boundary text, and focused3D text/screenshot.
+This qualifies interaction and disclosed limitations, not model measurement accuracy
+or clinical validity. The narrow browser viewport also showed crowded header status
+text; responsive header polish remains a follow-up, not a blocked measurement path.
+
+Teacher safety check: supervisor1351/worker2683 remained owned and live, all329
+repository producing pins matched, no resource/guardian failure report existed.
+Progress reached533/1333 with the next case at100/144tiles. No teacher files changed.
+W04-04 remains In Progress: live cited-answer quality/latency in Research and
+Workbench, and the user's final walkthrough, remain open for a suitable GPU window.
