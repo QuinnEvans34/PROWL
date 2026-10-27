@@ -106,3 +106,19 @@ def test_runtime_drift_rejects_before_dispatch(tmp_path, monkeypatch):
     with pytest.raises(ValueError,match='runtime changed'):
         run(root,pin,supervise=lambda *a,**k:pytest.fail('worker must not start'))
     assert not (root/'reference').exists()
+
+
+@pytest.mark.parametrize('failure',['output_cap','storage_loss'])
+def test_final_resource_failure_preserves_successful_worker_without_receipt(tmp_path,failure):
+    root,pin=fixture(tmp_path)
+    def final_gate(request):
+        # Inject a change after the supervised worker's last tick/exit.
+        if (root/'reference/result.json').exists():
+            raise RuntimeError(failure)
+    with pytest.raises(RuntimeError,match=failure):
+        run(root,pin,preflight=final_gate)
+    assert json.loads((root/'reference/resources.json').read_text())['workers_reaped'] is True
+    assert (root/'reference/result.json').exists()
+    assert not (root/'reference/receipt.json').exists()
+    with pytest.raises(FileExistsError):run(root,pin)
+    with pytest.raises(FileNotFoundError):run(root,pin,'zero')

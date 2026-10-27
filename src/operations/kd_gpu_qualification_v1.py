@@ -105,6 +105,9 @@ def dispatch(root, stage, request_sha256, *, guard, preflight, supervise, comman
                 or result.get('scientific_updates') != 0
                 or result.get('engineering_updates') != request['engineering_updates'][stage]):
             raise ValueError('Engineering stage result mismatch')
+        # The final checkpoint/result may be written after the last monitor tick.
+        # Recheck capacity and output caps while still holding exclusive ownership.
+        preflight(request)
         check_pins(result['evidence'])
         validate_request(root, request_sha256)
         if parents != prerequisites(root, stage, request_sha256):

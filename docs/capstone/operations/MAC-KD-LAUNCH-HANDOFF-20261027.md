@@ -248,3 +248,20 @@ under outputs/prowl/testing/kd-cross-process-20261027-01, including receipts,
 resource reports, logs, checkpoints and backups. No actual GPU qualification,
 full-provider array reads or scientific training occurred. Teacher07 remained
 live at555/1333; all329 repository producing pins matched.
+
+
+## Final resource admission before a stage receipt
+
+Code review found that the last output/result write can occur after the supervisor's
+last resource tick. Dispatch now repeats the existing preflight after successful
+worker exit/reaping and before validating/publishing its success receipt, while
+exclusive ownership is still held. No cap or resource policy is weakened.
+
+Two synthetic failure cases inject final output-cap/storage loss after worker
+completion. The completed result/resources remain available, no success receipt
+is emitted, repeating the same attempt is rejected and its successor cannot run.
+Combined qualification orchestration, numerical exercise and fresh-process recovery:
+15 passed in27.55s, two existing Torch warnings. Evidence:
+outputs/prowl/testing/kd-final-admission-20261027-01. No GPU stages launched.
+Teacher07 remains live at557/1333/current100/210tiles;329 protected repository
+hashes match. The modified qualification module is outside those producing pins.
