@@ -6,7 +6,19 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## Current handoff
+## October 27 authorized resume
+
+The user paused attempt05 at503/1333 verified targets, then explicitly authorized resume and
+reactivation of hourly checks. Pause receipt: `rsuper-operator-pause-20261027-01/receipt.json`.
+Attempt05 is stopped/reaped; preserve it. The current continuation is `rsuper-full-targets-06`,
+launchd label `com.prowl.rsuper-targets-20261027-06`, using additive
+`scripts/diagnostics/resume_rsuper_targets_v2.py`. This preserves the existing pause verification
+and unchanged prediction worker, but retains the repaired v2 guardian/watchdog rather than
+reverting to the old process sampler. Six supervision tests pass. Remaining active budget
+is221215seconds; no scientific changes. Startup verifies prior pins and all503 targets before
+creating the new request. Inspect the new process/progress files before claiming fresh inference.
+
+## Historical October 26 handoff
 
 Artifact base: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023`.
 Failed attempt: `rsuper-full-targets-04`, 335/1333 completed. `resources.json` records reaping,
