@@ -224,3 +224,14 @@ versus prepared-on-demand mismatch. Paired design, split hashes, region and samp
 match; both future operational recipes must bind the same corrected provider.
 Complete target admission and actual full-provider GPU/receipt wiring remain open.
 No recipe or running process changed; teacher observed540/1333.
+
+
+### October27 separate-process executor recovery
+
+W04-03 now has a synthetic CPU proof spanning four separate supervised workers:
+reference, zero-KD comparison, positive-KD executor/evidence/backups and cold
+restoration. The fresh cold worker reproduces the next full state, all workers
+are reaped, and source targets remain unchanged. [Evidence and limits](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
+This adds a missing process-boundary check without changing production code or
+competing for the teacher GPU. Real full-provider MPS qualification still waits
+for completed targets and admission; W04-03 remains open.

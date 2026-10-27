@@ -223,3 +223,28 @@ positive/empty development identities and independent backup; dispatch and inspe
 reference, zero, producer and cold separately. Preserve any failed stage and stop
 for diagnosis. A completed target count alone does not satisfy admission, and a
 synthetic test pass does not satisfy real GPU qualification.
+
+
+## Separate-process CPU recovery proof
+
+`tests/test_kd_cross_process_qualification.py` now runs the actual four-stage
+exercise through the qualification dispatcher and existing guardian/watchdog,
+with a new CPU process for every stage. Invented16³arrays and a tiny Conv3d replace
+real data and the model; no production resource gate or scientific recipe changed.
+The test uses isolated output, synthetic admission, and a local test backup rather
+than claiming independent-device storage qualification.
+
+Reference, zero, producer and cold each exited0 and were reaped; four distinct
+worker PIDs were verified absent afterward. Cold consumed the independent file copy
+of step3 and reproduced the producer's step4 full state under the unchanged
+rtol1.3e-6/atol1e-5 criteria. Three predecessor receipts bound the cold dispatch,
+and source target bytes were unchanged. The original same-process numerical test
+and synthetic failure tests remain useful but are not substituted for this proof.
+
+Result:1 passed in20.56s, two upstream Torch deprecation warnings. Per-stage
+supervised durations were4.063/4.065/4.066/4.064seconds; maximum sampled owned RSS
+492,175,360bytes. Each test worker was capped at60seconds/2GiB. Evidence retained
+under outputs/prowl/testing/kd-cross-process-20261027-01, including receipts,
+resource reports, logs, checkpoints and backups. No actual GPU qualification,
+full-provider array reads or scientific training occurred. Teacher07 remained
+live at555/1333; all329 repository producing pins matched.
