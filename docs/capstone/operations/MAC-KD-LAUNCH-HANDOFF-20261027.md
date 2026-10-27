@@ -139,5 +139,64 @@ wrong split despite matching arms, unmatched designs and destination reuse.
 Combined regression58passed in6.89s (two upstream Torch deprecation warnings).
 No CT arrays, teacher weights or GPU were read by preparation. Synthetic metadata
 success does not establish payload validity; full admission and the target store
-own those checks. Actual supervised full-provider GPU stages and their receipts
-remain the next implementation, followed by real qualification when MPS is free.
+own those checks. Actual supervised full-provider GPU stages are now implemented below; real
+qualification remains pending until targets are complete and MPS is free.
+
+
+## Supervised GPU stages implemented — NOT launched
+
+`qualify_full_provider_mps.py` provides four individually selected engineering
+stages: reference (4 supervised updates), zero (4 zero-KD updates compared to the
+reference), producer (4 positive-KD updates through the actual executor, two native
+development evaluations and independent backups), and cold (restore the independent
+step-3 backup in a fresh worker and compare its next update to the producer).
+The engineering horizon limits executor iterations only; the student configuration,
+checkpoint identity and learning-rate horizon retain the original 24,000-step recipe.
+These are not scientific training updates or a model-quality comparison.
+
+Preparation requires completed admission/preparation evidence, two distinct named
+development cases (positive and empty), and fresh output/backup directories. The
+request binds source hashes and installed runtime versions. Each dispatch requires
+its exact request hash, `--explicit-run`, all preceding successful receipts and
+unchanged evidence. No automatic chaining or retry is provided; failed directories
+are preserved. Runtime or source drift requires a new preparation.
+
+Illustrative commands only; none were executed against real targets:
+
+```sh
+.venv312/bin/python scripts/diagnostics/qualify_full_provider_mps.py \
+  --root /absolute/new-external-qualification --prepare \
+  --preparation /absolute/completed-preparation/preparation.json \
+  --preparation-sha256 VERIFIED_PREPARATION_HASH \
+  --backup /Users/quintonevans/PROWL-Backups/new-engineering-backup \
+  --positive-dev VERIFIED_POSITIVE_DEV --empty-dev VERIFIED_EMPTY_DEV
+
+.venv312/bin/python scripts/diagnostics/qualify_full_provider_mps.py \
+  --root /absolute/new-external-qualification --stage reference \
+  --request-sha256 VERIFIED_REQUEST_HASH --explicit-run
+```
+
+Later stages use the same command with `zero`, `producer`, then `cold`, after
+inspecting each completed stage. Each has a 1,200-second watchdog, 12-GiB owned RSS
+limit, sampled 12-GiB MPS allocation limit, 2-GiB output and 4-GiB backup caps.
+Existing AC, disk-reserve and exclusive-MPS gates remain enforced. Backups must be
+on a separate filesystem under PROWL-Backups; writes are fsynced and hash-verified.
+MPS fallback is disabled. Existing parent-loss supervision and process reaping are
+used; a receipt requires successful exit, reaped workers and unchanged evidence.
+Sampled MPS allocation is explicitly not a continuous device peak.
+
+CPU validation: combined regression 69 passed in 11.92s, with two upstream Torch
+JIT deprecation warnings. The numerical exercise uses tiny synthetic CPU models
+and the same four-stage implementation; the production CLI creates separate
+workers. Synthetic subprocess tests check success, nonzero exit and timeout/reaping.
+The follow-up orchestration suite, including runtime-drift rejection, passed
+11 tests in 6.92s (70 distinct tests across these checks). The first numerical test had
+an incorrect final assertion path in its fixture; that assertion was corrected,
+without changing the four successful stage computations or numerical tolerances.
+No real provider arrays, teacher model, GPU stage or scientific training was run.
+Actual MPS equivalence, performance, native geometry and cold recovery still need
+qualification; successful synthetic receipts do not satisfy these gates.
+
+Teacher check during this work: 548/1,333 targets completed; supervisor1351 and
+worker2683 remained live; all329 repository producing pins matched. No producing
+files or teacher recipe were changed.
