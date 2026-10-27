@@ -110,3 +110,12 @@ setup risk but does not close ongoing keeper/review/release recovery obligations
     migration, retention, restore, environment, filesystem, and compute boundaries; then complete
     `PROWL-Data` capability/root setup and a healthy backup-target choice. Old-drive recovery is
     optional under the September 18 direction; fresh source validation remains required for real-data runs.
+
+## October27 workflow recovery evidence update
+
+The [G3 review](orchestration/G3-EVIDENCE-REVIEW-20261027.md) reduces bounded CPU
+publication/reuse/cancellation/provenance risks with retained fault evidence. It does
+not close production training cleanup, full-registry integration or scientific-quality
+risks. The teacher's AC stop demonstrates that unattended progress still depends on
+power and attached storage; explicit verified continuation preserves the original
+budget and completed outputs. Do not infer full G3 from passing handoff tests.

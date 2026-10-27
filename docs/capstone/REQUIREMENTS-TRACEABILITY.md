@@ -101,3 +101,11 @@ remain intact; these rows are new commitments, not assertions about the original
 | REQ-X02 | Eligible published reference comparisons | Step 11 / AI-06 | Rights-cleared reference records and comparison provenance | Supported comparison plus mismatched/absent reference cases | Required; queued after X01 |
 | REQ-X03 | Plain-language measurement-aware explanations in viewer | Steps 11–12 / AI-06–AI-07 | Cited explanations and versioned UI/API | Claim/number/unit checks, case isolation, refusals and separate final assessment | Required; not started |
 | REQ-X04 | Human-reviewed feedback consumable by training workflow | Step 12 / AI-07 | Review ledger, eligible export and loader integration | Zero-update loader dry-run; unreviewed/protected-role rejection | Required; no training launch |
+
+## October27 workflow evidence reconciliation
+
+The approved workflow-DAG/recovery requirement now has a [criterion-by-criterion G3
+review](orchestration/G3-EVIDENCE-REVIEW-20261027.md). D-201 selection and bounded CPU
+recovery/registered handoffs are delivered. Full pipeline schema/configuration,
+imaging/training adapter and actual executor recovery obligations remain open; no
+scientific or RAG acceptance follows from transport/recovery checks.

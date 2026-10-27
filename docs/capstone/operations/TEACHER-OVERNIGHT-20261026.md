@@ -6,7 +6,30 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 27 authorized resume
+## October 27 authorized AC-loss continuation — current
+
+Attempt06 stopped at529/1333 after `RuntimeError: AC power required`; resources
+confirm exit1/reaping and6549.370012 supervised seconds. User explicitly authorized
+verification/resume once power returned. Preserve attempt06. Stop review:
+`rsuper-power-stop-review-20261027-01/review.json` binds its request/resources/log.
+
+Current generation: `rsuper-full-targets-07`; one-shot launchd label
+`com.prowl.rsuper-targets-20261027-07b`; additive entry
+`scripts/diagnostics/resume_rsuper_after_power_loss_v2.py` (commit119a541). Same frozen
+prediction worker/cohort/geometry and repaired v2 watchdog/guardian; no student launch.
+All529 completed payloads verified before new request publication. The previous
+attempt charges6550seconds, leaving214665seconds from the original cumulative budget.
+Supervisor1351/worker2683 dispatched; inspect their fresh progress before claiming
+new inference. All329 repository producing pins match; preserve these files too.
+
+The first dispatch label `com.prowl.rsuper-targets-20261027-07` stopped on missing
+`jsonschema` before request publication or inference. Its logs and dispatch directory
+remain intact. Replacement07b restores the existing PYTHONPATH dependency directory
+`/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies`;
+no dependencies were installed. Only07b is live. Launchd KeepAlive remains false.
+Hourly `keep-prowl-teacher-running` is confirmed ACTIVE; no duplicate monitor.
+
+## Historical October 27 resume after operator pause
 
 The user paused attempt05 at503/1333 verified targets, then explicitly authorized resume and
 reactivation of hourly checks. Pause receipt: `rsuper-operator-pause-20261027-01/receipt.json`.

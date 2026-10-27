@@ -45,3 +45,10 @@ temporary local machinery, but D-201 remains open until the spike. See the gover
 - stage-registry and workflow-configuration schemas/examples;
 - synthetic failure/recovery fixtures under `tests/fixtures/orchestration/`;
 - G3 evidence under the versioned capstone evidence layout selected in Plan 10.
+
+## October27 implementation checkpoint
+
+The [G3 evidence review](G3-EVIDENCE-REVIEW-20261027.md) is the current reconciliation
+of completed CPU contracts/recovery, D-201 selection and remaining production gates.
+Earlier planned/pending wording above is historical for those delivered slices.
+Full G3 is not declared complete.

@@ -197,3 +197,12 @@ pass; actual synthetic CLI run/resume completed/reused2/2 stages with verified l
 records. [Results, limits and teacher observation](../orchestration/LIFECYCLE-PROVENANCE-20261027.md).
 Teacher attempt06 stopped safely at529/1333 on an AC interruption; power is restored,
 workers are reaped, and a verified continuation is needed. No automatic retry occurred.
+
+### October27 G3 evidence review
+
+[The consolidated gate review](../orchestration/G3-EVIDENCE-REVIEW-20261027.md) maps
+all13 Plan04 completion criteria to retained evidence and explicit gaps. D-201 and
+the bounded CPU recovery slice are delivered; full G3 remains open. A new synthetic
+summary-loss check passes within17 lifecycle tests. Prior179-test evidence is reused,
+not added to this count. Next work follows component readiness: complete teacher
+outputs, provider-bound manifest, then actual executor/recovery qualification.

@@ -119,3 +119,18 @@ def test_release_log_failure_does_not_mask_stage_error_or_hold_lock(setup,monkey
     folder=e.root/'contracts'/identity
     assert (folder/'summary-unavailable.json').exists()
     assert not (folder/'run-manifest.json').exists()
+
+
+def test_lost_summary_does_not_destroy_artifact_reuse_or_rewrite_attempt(setup):
+    """The projection is disposable; authoritative request/events/receipts are not."""
+    source,pin,e=setup;s,h,v=definition(source,pin)
+    first=execute_registered(e,'saved-package',s,h,v)
+    folder=e.root/'contracts'/first['run_id']
+    (folder/'run-manifest.json').unlink()  # Fault injection only in a temporary invented run.
+    before={p:p.read_bytes() for p in folder.iterdir()}
+    assert e.inspect(first['run_id'])['lifecycle']['terminal']
+    calls=[]
+    later=execute_registered(e,'saved-package',s,{k:lambda p,c:calls.append(True) for k in h},v,resume_of=first['run_id'])
+    assert not calls and set(later['stages'].values())=={'reused'}
+    assert before=={p:p.read_bytes() for p in folder.iterdir()}
+    assert (e.root/'contracts'/later['run_id']/'run-manifest.json').exists()
