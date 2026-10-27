@@ -1,3 +1,4 @@
+import ReviewLiteratureAttachments from './ReviewLiteratureAttachments.jsx'
 import { hrefFor } from '../lib/router.js'
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -89,6 +90,7 @@ export default function ReviewDecisionPanel({ base, manifestHash, manifest, onSa
       {history.length === 0 ? <p>No recorded decisions for this prediction.</p> : <ol>{history.map(({event, receipt}) => <li key={event.review_event_id}>
         <strong>Revision {event.revision}: {labels[event.action]}</strong> — {event.reviewer.reviewer_id} · {new Date(event.recorded_at).toLocaleString()}
         <p>{event.reason_codes.map(r => reasons[r]).join('; ')}</p>{event.note && <p style={{whiteSpace:'pre-wrap'}}>{event.note}</p>}
+        <ReviewLiteratureAttachments manifestHash={manifestHash} event={event} receipt={receipt} request={reviewRequest} />
         <details><summary>Durable receipt</summary><pre style={{whiteSpace:'pre-wrap',overflowWrap:'anywhere'}}>{JSON.stringify(receipt,null,2)}</pre></details>
       </li>)}</ol>}
       <form onSubmit={e => {e.preventDefault();setNotice('');setConfirmation(true)}}>

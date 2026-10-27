@@ -379,7 +379,7 @@ export default function LiteratureSearchPanel({
   </section>
 }
 
-function LiteratureReadingView({ evidence, answer }) {
+export function LiteratureReadingView({ evidence, answer }) {
   const [view, setView] = useState(answer ? 'answer' : 'reading')
   const [selected, setSelected] = useState(null)
   const sources = useRef({})

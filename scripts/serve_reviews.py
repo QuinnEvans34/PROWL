@@ -12,7 +12,7 @@ from jsonschema import ValidationError
 from src.review.store import ReviewStore, ReviewError, FILES, digest
 
 
-def create_app(store, *, port=8018):
+def create_app(store, *, port=8018, attachments=None):
     if type(port) is not int or not 1 <= port <= 65535:
         raise ValueError('Invalid loopback review port')
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
@@ -60,6 +60,9 @@ def create_app(store, *, port=8018):
         from starlette.concurrency import run_in_threadpool
         return await run_in_threadpool(store.append, source, json.loads(raw))
 
+    if attachments is not None:
+        from src.review.literature_attachment_api import register_attachment_routes
+        register_attachment_routes(app, attachments)
     return app
 
 
@@ -68,6 +71,14 @@ if __name__ == '__main__':
     p.add_argument('--root', required=True, type=Path)
     p.add_argument('--saved-package', type=Path)
     p.add_argument('--port', type=int, default=8018, help='Loopback port; use a separate port and root for isolated verification')
+    p.add_argument('--attachments', type=Path, help='Existing dedicated literature attachment root')
+    p.add_argument('--node', type=Path, help='Node24 runtime required with --attachments')
     args = p.parse_args()
+    if args.attachments and not args.node: p.error('--node required with --attachments')
     import uvicorn
-    uvicorn.run(create_app(ReviewStore(args.root, args.saved_package), port=args.port), host='127.0.0.1', port=args.port, access_log=False)
+    store = ReviewStore(args.root, args.saved_package, floor_bytes=50_000_000_000)
+    attachments = None
+    if args.attachments:
+        from src.review.literature_attachments_v1 import LiteratureAttachments
+        attachments = LiteratureAttachments(args.attachments, store, node=args.node)
+    uvicorn.run(create_app(store, port=args.port, attachments=attachments), host='127.0.0.1', port=args.port, access_log=False)
