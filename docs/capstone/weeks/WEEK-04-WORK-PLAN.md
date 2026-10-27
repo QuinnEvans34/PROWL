@@ -206,3 +206,12 @@ the bounded CPU recovery slice are delivered; full G3 remains open. A new synthe
 summary-loss check passes within17 lifecycle tests. Prior179-test evidence is reused,
 not added to this count. Next work follows component readiness: complete teacher
 outputs, provider-bound manifest, then actual executor/recovery qualification.
+
+### October27 configuration contract closure
+
+The three ready CPU adapters now validate versioned resolved configuration before
+execution and on inspection/recovery, with exact plan/registry correspondence and
+nonmutating legacy compatibility.199 regressions pass; actual new CLI run/reuse and
+two unchanged historical runs verified. [Evidence](../orchestration/CONFIGURATION-CONTRACT-20261027.md).
+Teacher07 remains active; broader imaging/training integration awaits its owning
+component receipts and qualification rather than additional generic runner machinery.

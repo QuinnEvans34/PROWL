@@ -7,6 +7,7 @@ import uuid
 from .artifact_store import directory, read_file
 from .workflow_plan_v1 import sha
 from .workflow_execution_v1 import read_record, write_record, run_id
+from .workflow_configuration_v1 import validate_configuration
 
 
 def bounded_json(folder, name):
@@ -24,6 +25,7 @@ def verify_provenance(root, identity, request):
                  plan_sha256=sha(request['plan']))
     if sha(config)!=context['resolved_config_sha256']:
         raise ValueError('Resolved configuration changed')
+    validate_configuration(config,allow_legacy=True)
     if (binding!=request['provenance'] or config['plan']!=request['plan'] or
         sha(environment)!=context['environment']['dependencies_sha256'] or
         binding['registry_sha256']!=context['registry_sha256']):
@@ -55,6 +57,7 @@ def inspect_lifecycle(executor, identity, *, snapshot=None, require_terminal=Fal
     binding=dict(context_sha256=sha(context),registry_sha256=sha(config['registry']),plan_sha256=sha(config['plan']))
     if sha(config)!=context['resolved_config_sha256'] or binding['registry_sha256']!=context['registry_sha256']:
         raise ValueError('Lifecycle context mismatch')
+    validate_configuration(config,allow_legacy=True)
     if snapshot is not None:
         if snapshot['request'].get('provenance')!=binding:
             raise ValueError('Lifecycle request binding mismatch')

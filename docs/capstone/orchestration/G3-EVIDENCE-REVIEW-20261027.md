@@ -10,7 +10,7 @@ D-201 already selected the repository runner. No further framework trial is need
 | Approved criterion | Evidence and disposition | Work still required |
 | --- | --- | --- |
 | D-201 tool selection | **Complete:** [measured fallback selection](TOOL-SELECTION-RESULTS-20261026.md), decision record and isolated cleanup | None; do not repeat selection |
-| Versioned manifests, events, registry and configuration | **Partial:** approved run-manifest v1, strict offline registry, stage-v2/lifecycle-v1 schemas, immutable context binding all exercised | Full pipeline/configuration contract alignment; offline schemas are deliberately scoped, not the entire Plan04 vocabulary |
+| Versioned manifests, events, registry and configuration | **Partial:** approved run-manifest v1, strict offline registry, stage-v2/lifecycle-v1 schemas, [versioned configuration](CONFIGURATION-CONTRACT-20261027.md) and immutable context binding all exercised | Full pipeline alignment beyond the three qualified CPU adapters; offline schemas are deliberately scoped, not the entire Plan04 vocabulary |
 | Plan/run/resume/inspect/status | **Pass for shipped CPU adapters:** [operator commands](CPU-WORKFLOW-RECOVERY-20261026.md), registered CLIs, mutation-free planning and read-only inspection | Training-specific operator/recovery handoff |
 | Imaging and literature smoke twice | **Partial:** invented native/evidence smoke, saved-package and case/literature handoffs complete then reuse verified outputs | Full intended imaging/retrieval subgraphs, rather than only downstream handoff adapters |
 | Injected mid-write failure and recovery | **Pass for bounded publisher/executor:** killed subprocess, persisted validation failure and publication-before-event crash preserved; explicit recovery passes | Actual expensive-stage checkpoint continuation remains separate |
@@ -67,3 +67,10 @@ For W04-01, retain In Progress. The CPU slice can be demonstrated now; the remai
 critical path is connecting qualified scientific components, not extending the generic
 runner indefinitely. Measurement reliability and independent RAG acceptance remain
 separate deliverables.
+
+## Subsequent configuration closure
+
+The [October27 configuration check](CONFIGURATION-CONTRACT-20261027.md) closes the
+resolved-configuration schema/semantic validation gap for the three existing adapters.
+199 combined regressions pass; actual old/new CLI records remain valid. This does not
+change the broader G3 disposition or authorize an unqualified production adapter.

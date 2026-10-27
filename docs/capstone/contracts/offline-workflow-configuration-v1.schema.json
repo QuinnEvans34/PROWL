@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prowl.local/contracts/offline-workflow-configuration-v1.schema.json",
+  "title": "Resolved configuration for registered offline CPU workflows",
+  "description": "Structural contract. The owning validator also reconstructs the plan and checks registry/input/dependency correspondence. No commands or model dispatch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "workflow",
+    "plan",
+    "registry",
+    "minimum_free_bytes",
+    "sensitivity"
+  ],
+  "properties": {
+    "schema": {
+      "const": "offline-workflow-configuration-v1"
+    },
+    "workflow": {
+      "enum": [
+        "saved-package",
+        "case-literature",
+        "prepared-inputs"
+      ]
+    },
+    "minimum_free_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sensitivity": {
+      "enum": [
+        "synthetic",
+        "research-local"
+      ]
+    },
+    "registry": {
+      "$ref": "offline-stage-registry.schema.json"
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "stages"
+      ],
+      "properties": {
+        "schema": {
+          "const": "workflow-plan-v1"
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "dependencies",
+              "inputs",
+              "config",
+              "producer",
+              "parents",
+              "derivation",
+              "artifact_id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+              },
+              "dependencies": {
+                "type": "array",
+                "uniqueItems": true,
+                "maxItems": 31,
+                "items": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9_-]{0,63}$"
+                }
+              },
+              "inputs": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              },
+              "config": {
+                "const": {}
+              },
+              "producer": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "parents": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              },
+              "derivation": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "artifact_id": {
+                "type": "string",
+                "pattern": "^workflow-v1:[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

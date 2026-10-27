@@ -13,6 +13,7 @@ from .workflow_plan_v1 import encoded, sha, plan
 from .workflow_execution_v1 import write_record, read_record, run_id, cooperative_signals
 from .artifact_store import directory
 from .workflow_lifecycle_v1 import Lifecycle, inspect_lifecycle
+from .workflow_configuration_v1 import VERSION, validate_configuration, validate_registry_plan
 import os
 
 REPO = Path(__file__).resolve().parents[2]
@@ -26,18 +27,8 @@ def validate(value, schema):
 
 def registry_for(kind, stages):
     registry = json.loads(REGISTRY.read_bytes())
-    validate(registry, json.loads((CONTRACTS/'offline-stage-registry.schema.json').read_bytes()))
-    if kind not in registry['workflows']:
-        raise ValueError('Unregistered workflow; training dispatch is not supported')
     rows = plan(stages)['stages']
-    declared = registry['workflows'][kind]
-    if {r['id'] for r in rows} != set(declared):
-        raise ValueError('Stage registry differs from plan')
-    for row in rows:
-        spec = declared[row['id']]
-        if (row['dependencies'] != spec['dependencies'] or
-            sorted(row['inputs']) != spec['input_pins'] or row['config'] != {}):
-            raise ValueError('Stage dependencies, inputs or configuration differ from registry')
+    declared = validate_registry_plan(registry,kind,rows)
     return registry, declared
 
 
@@ -79,6 +70,9 @@ def execute_registered(executor, kind, stages, handlers, validators, *, identity
                 raise ValueError('Registered output inventory differs')
             return validators[sid](files)
         wrapped[sid] = check
+    config = dict(schema=VERSION,plan=plan(stages), registry=registry, workflow=kind,
+                  minimum_free_bytes=executor.floor, sensitivity=executor.sensitivity)
+    validate_configuration(config)
     executor.admit()
     parent = executor.root/'contracts'
     parent.mkdir(exist_ok=True)
@@ -94,8 +88,6 @@ def execute_registered(executor, kind, stages, handlers, validators, *, identity
         component_version='1.0.0'), environment=dict(python=platform.python_version(),
         platform=platform.platform(), device='cpu', dependencies_sha256=sha(deps),
         environment_uri='environment.json'), registry_sha256=sha(registry))
-    config = dict(plan=plan(stages), registry=registry, workflow=kind,
-                  minimum_free_bytes=executor.floor, sensitivity=executor.sensitivity)
     context['resolved_config_sha256'] = sha(config)
     write_record(folder/'context.json', context)
     publish_summary(folder/'environment.json',encoded(deps))
@@ -145,6 +137,7 @@ def export_summary(executor, identity, validators):
     config = json.loads(config_raw)
     if hashlib.sha256(config_raw).hexdigest() != context['resolved_config_sha256']:
         raise ValueError('Resolved configuration changed')
+    validate_configuration(config,allow_legacy=True)
     if config['plan'] != snapshot['request']['plan'] or sha(config['registry']) != context['registry_sha256']:
         raise ValueError('Run context differs from persisted request')
     if hashlib.sha256((folder/'environment.json').read_bytes()).hexdigest() != context['environment']['dependencies_sha256']:
