@@ -152,3 +152,13 @@ plan/run/resume checks completed and reused all stages with verified references.
 [Evidence and scope](../orchestration/REGISTRY-MANIFEST-ALIGNMENT-20261027.md).
 This closes alignment for saved-package and case/literature handoffs. Full production
 registry coverage, accelerator boundaries and training admission remain open.
+
+### October27 pipeline admission checks
+
+124 CPU regressions now pass, including actual isolated-process accelerator-lock
+conflict/release/termination checks and synthetic target-to-store admission tests.
+The real teacher lock remained busy and unchanged. [Coverage against the approved
+pipeline](../orchestration/PIPELINE-ADMISSION-COVERAGE-20261027.md) distinguishes the
+offline adapter subset from unqualified full-pipeline stages. Next CPU integration
+is the frozen-cohort/prepared-cache handoff; full targets and actual GPU executor
+qualification still gate training. W04-01 remains In Progress.
