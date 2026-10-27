@@ -7,6 +7,7 @@ from contextlib import contextmanager
 import fcntl
 import json
 import os
+import re
 import stat
 from pathlib import Path
 import uuid
@@ -45,8 +46,45 @@ def read_record(path):
     return value
 
 
+def validate_request(value):
+    """Exact workflow-run-v1 envelope; plan semantics are reconstructed separately."""
+    if (not isinstance(value, dict) or
+        set(value) != {'schema', 'run_id', 'resume_of', 'plan'} or
+        value['schema'] != 'workflow-run-v1'):
+        raise ValueError('Unsupported workflow run contract')
+    run_id(value['run_id'])
+    if value['resume_of'] is not None:
+        run_id(value['resume_of'])
+
+
+def validate_event(value):
+    """State-specific v1 event envelope, before checking chain and dependencies."""
+    if not isinstance(value, dict):
+        raise ValueError('Invalid workflow event')
+    state = value.get('state')
+    fields = {'sequence', 'previous', 'request_sha256', 'stage', 'state'}
+    if state in ('completed', 'reused'):
+        fields.add('reference')
+        ref = value.get('reference')
+        if (not isinstance(ref, dict) or
+            set(ref) != {'artifact_id', 'derivation', 'receipt_sha256'} or
+            any(not isinstance(ref[k], str) or not re.fullmatch('[a-f0-9]{64}', ref[k])
+                for k in ('derivation', 'receipt_sha256'))):
+            raise ValueError('Invalid workflow output reference')
+    elif state == 'failed':
+        fields.add('error')
+        if not isinstance(value.get('error'), str) or not 0 < len(value['error']) <= 2000:
+            raise ValueError('Invalid workflow failure reason')
+    elif state != 'running':
+        raise ValueError('Invalid workflow event state')
+    if set(value) != fields or type(value['sequence']) is not int or value['sequence'] < 1:
+        raise ValueError('Invalid workflow event fields')
+
+
 class Executor:
     def __init__(self, root, *, check_root, minimum_free_bytes=50_000_000_000, sensitivity='synthetic'):
+        if type(minimum_free_bytes) is not int or minimum_free_bytes < 0:
+            raise ValueError('Capacity reserve must be a nonnegative integer number of bytes')
         self.root=Path(root).absolute()
         self.check_root=check_root
         if sensitivity not in ('synthetic','research-local'):
@@ -99,6 +137,7 @@ class Executor:
         self.verify_root()
         folder=self.root/'runs'/run_id(identity)
         request=read_record(folder/'request.json')
+        validate_request(request)
         if request['run_id']!=identity: raise ValueError('Run identity mismatch')
         rows=request['plan']['stages']
         reconstructed=plan([Stage(r['id'],tuple(r['dependencies']),r['inputs'],r['config'],r['producer']) for r in rows])
@@ -109,6 +148,7 @@ class Executor:
         if len(paths)>128: raise ValueError('Event count exceeds budget')
         for index,path in enumerate(paths,1):
             e=read_record(path)
+            validate_event(e)
             if (terminal or path.name!=f'event-{index:04d}.json' or e['sequence']!=index or
                 e['previous']!=previous or e['request_sha256']!=sha(request)):
                 raise ValueError('Invalid workflow event chain')

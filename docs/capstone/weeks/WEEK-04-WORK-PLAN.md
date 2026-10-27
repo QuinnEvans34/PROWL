@@ -133,3 +133,13 @@ or live answer quality/latency checks. W04-02 teacher generation continues;
 W04-03 still requires complete targets and actual executor qualification.
 Next CPU priority is the remaining W04-01 resource/schema qualification; retain
 W04-05 closeout and the separate measurement requirements.
+
+### October27 resource and schema checks
+
+W04-01's bounded CPU record/resource checks now pass87 regressions. Unsupported
+record versions, extra/contradictory fields and invalid capacity policies are
+rejected; capacity loss, output budgets, writer conflicts and interrupted recovery
+are covered. [Results and remaining gates](../orchestration/RESOURCE-SCHEMA-CHECKS-20261027.md).
+All328 repository teacher pins matched; its workers continued unchanged. Broader
+production schema/registry integration and accelerator/training admission remain
+open, so W04-01/G3 are not marked complete.
