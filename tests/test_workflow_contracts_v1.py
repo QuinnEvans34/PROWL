@@ -32,6 +32,14 @@ def test_actual_adapter_summary_and_reuse(setup):
         validate(m,json.loads((CONTRACTS/'run-manifest.schema.json').read_bytes()))
         assert m['status']=='completed'
         assert m['run_id']=='run:'+result['run_id']
+        for stage in m['stages']:
+            events=[x for x in result['events'] if x['stage']==stage['stage_id']]
+            assert stage['completed_at']==events[-1]['observed_at']
+            if stage['status']=='reused':
+                assert 'started_at' not in stage
+            else:
+                assert stage['started_at']==events[0]['observed_at']
+            assert 'duration_seconds' not in stage
         verify_refs(e.root,m)
     assert set(b['stages'].values())=={'reused'}
     assert all(x['status']=='reused' for x in m['stages'])

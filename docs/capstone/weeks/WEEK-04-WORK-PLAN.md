@@ -179,3 +179,12 @@ run summary. Actual subprocess cancellation/resume and event rejection checks pa
 152 combined regressions pass. [Evidence and remaining event-contract scope](../orchestration/EVENT-CANCELLATION-CHECKS-20261027.md).
 The teacher and its dedicated pause/cleanup mechanism were unchanged. Full Plan04
 event vocabulary and training-specific cancellation qualification remain open.
+
+### October27 stage event identity
+
+New offline attempts bind versioned stage events with UUIDs, run identity and UTC
+observations; summaries retain actual start/completion times. Legacy attempts remain
+unchanged and recoverable.162 combined regressions plus the final11 event-contract
+checks pass. [Evidence and remaining scope](../orchestration/EVENT-IDENTITY-20261027.md).
+Next CPU work is lifecycle/provenance coverage and consolidated G3 evidence review;
+full training integration still awaits completed targets and executor qualification.

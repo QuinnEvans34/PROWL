@@ -68,9 +68,12 @@ def read_record(path):
 def validate_request(value):
     """Exact workflow-run-v1 envelope; plan semantics are reconstructed separately."""
     if (not isinstance(value, dict) or
-        set(value) != {'schema', 'run_id', 'resume_of', 'plan'} or
+        set(value) not in ({'schema', 'run_id', 'resume_of', 'plan'},
+                          {'schema', 'run_id', 'resume_of', 'plan', 'event_schema'}) or
         value['schema'] != 'workflow-run-v1'):
         raise ValueError('Unsupported workflow run contract')
+    if 'event_schema' in value and value['event_schema'] != 'offline-workflow-event-v2':
+        raise ValueError('Unsupported workflow event contract')
     run_id(value['run_id'])
     if value['resume_of'] is not None:
         run_id(value['resume_of'])
@@ -82,6 +85,15 @@ def validate_event(value):
         raise ValueError('Invalid workflow event')
     state = value.get('state')
     fields = {'sequence', 'previous', 'request_sha256', 'stage', 'state'}
+    if 'schema' in value:
+        fields.update({'schema', 'event_id', 'run_id', 'attempt', 'observed_at'})
+        if value['schema'] != 'offline-workflow-event-v2' or type(value.get('attempt')) is not int or value['attempt'] != 1:
+            raise ValueError('Invalid event version or attempt')
+        run_id(value.get('event_id')); run_id(value.get('run_id'))
+        stamp = value.get('observed_at')
+        if not isinstance(stamp, str) or not stamp.endswith('+00:00'):
+            raise ValueError('Event timestamp requires UTC')
+        datetime.fromisoformat(stamp)
     if state in ('completed', 'reused'):
         fields.add('reference')
         ref = value.get('reference')
@@ -162,12 +174,18 @@ class Executor:
         reconstructed=plan([Stage(r['id'],tuple(r['dependencies']),r['inputs'],r['config'],r['producer']) for r in rows])
         if reconstructed!=request['plan']: raise ValueError('Invalid persisted plan')
         known={r['id']:r for r in rows}
-        states={k:'pending' for k in known};events=[];previous=None;terminal=False
+        states={k:'pending' for k in known};events=[];previous=None;terminal=False;event_ids=set()
         paths=sorted(folder.glob('event-*.json'))
         if len(paths)>128: raise ValueError('Event count exceeds budget')
         for index,path in enumerate(paths,1):
             e=read_record(path)
             validate_event(e)
+            if e.get('schema') != request.get('event_schema'):
+                raise ValueError('Event version differs from request')
+            if 'schema' in e:
+                if e['run_id'] != identity or e['event_id'] in event_ids:
+                    raise ValueError('Invalid event identity')
+                event_ids.add(e['event_id'])
             if (terminal or path.name!=f'event-{index:04d}.json' or e['sequence']!=index or
                 e['previous']!=previous or e['request_sha256']!=sha(request)):
                 raise ValueError('Invalid workflow event chain')
@@ -241,14 +259,17 @@ class Executor:
                 fd=directory(self.root/name);os.close(fd)
             refs=self.history(resume_of) if resume_of else {}
             folder=self.root/'runs'/identity;folder.mkdir()
-            request=dict(schema='workflow-run-v1',run_id=identity,resume_of=resume_of,plan=p)
+            request=dict(schema='workflow-run-v1',run_id=identity,resume_of=resume_of,plan=p,
+                         event_schema='offline-workflow-event-v2')
             write_record(folder/'request.json',request)
             sequence=0;previous=None;outputs={}
             def event(stage,state,**fields):
                 nonlocal sequence,previous
                 self.admit();sequence+=1
                 value=dict(sequence=sequence,previous=previous,request_sha256=sha(request),
-                           stage=stage,state=state,**fields)
+                           stage=stage,state=state,schema='offline-workflow-event-v2',
+                           event_id=str(uuid.uuid4()),run_id=identity,attempt=1,
+                           observed_at=datetime.now(timezone.utc).isoformat(),**fields)
                 write_record(folder/f'event-{sequence:04d}.json',value);previous=sha(value)
             store=self.store()
             for row in p['stages']:

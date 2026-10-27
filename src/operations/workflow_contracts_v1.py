@@ -154,6 +154,11 @@ def export_summary(executor, identity, validators):
             outputs=[refs[sid]] if sid in refs else [])
         if event.get('state')=='failed':
             record['error']=dict(error_type='StageFailure',message=event['error'],retryable=False)
+        started = next((e for e in snapshot['events'] if e['stage']==sid and e['state']=='running'), {})
+        if 'observed_at' in started:
+            record['started_at'] = started['observed_at']
+        if event.get('state') in ('completed','reused') and 'observed_at' in event:
+            record['completed_at'] = event['observed_at']
         records.append(record)
     stamp=now(); prefix='contracts/'+identity+'/'
     environment=dict(context['environment'],environment_uri=prefix+'environment.json')
