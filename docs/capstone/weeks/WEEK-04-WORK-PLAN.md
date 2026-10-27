@@ -245,3 +245,12 @@ Origin headers. Valid save/retry/reopen and rejected foreign-origin writes pass;
 21 proxy/store/literature API tests pass under Node24. [Evidence and limits](../orchestration/REVIEWER-WALKTHROUGH-20261027.md).
 No real review records or GPU calls were made; live answer quality/latency and the
 user walkthrough remain open.
+
+
+### October27 citation attachment integration
+
+The production-proxy integration now covers cited-answer attachment, duplicate-free
+retry, invalid-receipt/origin refusal and preservation of the original revision
+binding after a newer decision.36 related CPU tests pass. [Evidence](../orchestration/REVIEWER-WALKTHROUGH-20261027.md).
+This closes the attachment transport slice; the remaining W04-04 work requires
+live answer/latency checks in an available GPU window and the human walkthrough.

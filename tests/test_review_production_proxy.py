@@ -7,6 +7,7 @@ import shutil
 import socket
 import subprocess
 import threading
+import uuid
 import urllib.error
 import urllib.request
 
@@ -24,7 +25,10 @@ def test_production_proxy_preserves_save_and_origin_policy(store, tmp_path):
         pytest.skip('Node24 and installed UI dependencies required')
     sock = socket.socket(); sock.bind(('127.0.0.1', 0))
     api_port = sock.getsockname()[1]
-    server = uvicorn.Server(uvicorn.Config(create_app(store, port=api_port), log_level='error'))
+    from src.review.literature_attachments_v1 import LiteratureAttachments
+    attachment_root = tmp_path/'attachments'; attachment_root.mkdir()
+    attachments = LiteratureAttachments(attachment_root, store, node=node, minimum_free_bytes=0)
+    server = uvicorn.Server(uvicorn.Config(create_app(store, port=api_port, attachments=attachments), log_level='error'))
     thread = threading.Thread(target=server.run, kwargs={'sockets':[sock]}, daemon=True)
     thread.start()
     process = None
@@ -62,6 +66,36 @@ def test_production_proxy_preserves_save_and_origin_policy(store, tmp_path):
             identity = body['manifest_sha256']
             assert call('targets/archive/'+identity)[1]['history'] == [saved]
             assert len(store.target('saved')['history']) == 1
+            from test_case_literature_workflow_v1 import capture_fixture
+            from src.review.store import encode, digest
+            capture = encode(capture_fixture()).decode()
+            event = saved['event']['review_event_id']
+            route = f'literature/{identity}/{event}'
+            attachment_body = dict(capture_text=capture, review_receipt=saved['receipt'])
+            assert call(route, attachment_body, origin='https://foreign.invalid')[0] == 403
+            assert call(route)[1] == {'attachments':[]}
+            wrong_receipt = dict(saved['receipt'], content_sha256='0'*64)
+            assert call(route, dict(attachment_body, review_receipt=wrong_receipt))[0] == 400
+            assert call(route)[1] == {'attachments':[]}
+            code, attached = call(route, attachment_body)
+            assert code == 200 and attached['state'] == 'published'
+            code, retried = call(route, attachment_body)
+            assert code == 200 and retried['receipt_sha256'] == attached['receipt_sha256']
+            assert len(call(route)[1]['attachments']) == 1
+            newer_body = dict(body, request_id=str(uuid.uuid4()), expected_latest_id=event,
+                              action='reject', reason_codes=['missed_lesion'])
+            code, newer = call('targets/archive/'+identity, newer_body)
+            assert code == 200 and newer['event']['revision'] == 2
+            newer_route = f"literature/{identity}/{newer['event']['review_event_id']}"
+            assert call(newer_route)[1] == {'attachments':[]}
+            artifact = attached['artifact_id'].split(':')[1]
+            reopen_route = f"literature-capture/{artifact}/{attached['receipt_sha256']}"
+            code, opened = call(reopen_route)
+            assert code == 200 and opened['review'] == saved
+            assert opened['capture'] == json.loads(capture)
+            assert opened['binding']['capture_sha256'] == digest(capture.encode())
+            assert call('targets/archive/'+identity)[1]['history'] == [saved, newer]
+            assert len(list(attachment_root.glob('ref-*.json'))) == 1
     finally:
         if process is not None:
             process.terminate()

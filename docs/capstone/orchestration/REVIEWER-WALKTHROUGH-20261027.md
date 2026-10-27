@@ -136,3 +136,24 @@ outputs/prowl/testing/review-production-proxy-20261027-01 through03.
 Teacher remained live at556/1333 with the next case50/72tiles; all329 producing
 repository pins matched. No production code or teacher files were changed.
 W04-04 still requires the live answer-quality/latency window and user walkthrough.
+
+
+## Citation attachment through production proxy
+
+Extended the real proxy test to include the actual literature attachment service
+and Node24 capture validator. After saving revision1, the test uploads an invented
+cited answer through the unchanged production proxy options, retries it and checks
+there is exactly one catalog reference. A foreign-origin upload and a mismatched
+review receipt are rejected before publication. Saving revision2 does not move the
+attachment: revision2's list stays empty, while reopening the original artifact
+returns revision1 and the original parsed capture with its exact byte hash.
+Both review revisions remain in history.
+
+The proxy/store/attachment API/attachment storage suites pass36 tests in11.50s;
+two existing Starlette deprecation warnings remain. Retained isolated artifacts:
+outputs/prowl/testing/review-proxy-citations-20261027-01. The test API and Vite
+process are cleaned up; no live records or production code changed. This is a
+transport/integrity proof using invented evidence, not factual citation review,
+model quality, measurement qualification or the final human walkthrough.
+Teacher07 remained live at557/1333, next case50/210tiles; all329 producing pins
+matched. Remaining GPU-dependent W04-04 work is unchanged.
