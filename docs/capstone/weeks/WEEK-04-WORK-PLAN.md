@@ -121,3 +121,15 @@ capture bytes and explicit case/capture pins.122 backend/workflow tests plus1 ru
 tests pass. The existing saved package and retained public answer completed and reused all4 stages
 under Node24; no fresh answer-quality claim. [Handoff and limits](../orchestration/CASE-LITERATURE-HANDOFF-20261026.md).
 Live UI capture/review-history association and remaining G3 gates remain open; teacher execution unchanged.
+
+### October27 reviewer verification
+
+W04-04 moved to In Progress. An isolated browser walkthrough using the production
+review panel and API passed lost-save-acknowledgement recovery, duplicate-free
+retry, literature attachment/citation reopening, append-only revision and API
+restart persistence. [Evidence and limits](../orchestration/REVIEWER-WALKTHROUGH-20261027.md).
+This closes the synthetic persistence slice, not the full real-case walkthrough
+or live answer quality/latency checks. W04-02 teacher generation continues;
+W04-03 still requires complete targets and actual executor qualification.
+Next CPU priority is the remaining W04-01 resource/schema qualification; retain
+W04-05 closeout and the separate measurement requirements.
