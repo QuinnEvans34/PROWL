@@ -1,5 +1,10 @@
 # Mac matched KD comparison and launch checklist
 
+> Historical design record. For the current R-Super teacher, corrected on-demand
+> provider, existing conditional launch authorization and remaining gates, use
+> [October27 launch handoff](MAC-KD-LAUNCH-HANDOFF-20261027.md).
+> The original recipes below are not current operational launch inputs.
+
 October 23, 2026. The user authorized completing the comparison design, review
 checklist and launch-requirement assessment while the teacher pilot runs.
 **Design fixed; operational bindings and launch qualification pending. No launch authority.**

@@ -215,3 +215,12 @@ nonmutating legacy compatibility.199 regressions pass; actual new CLI run/reuse 
 two unchanged historical runs verified. [Evidence](../orchestration/CONFIGURATION-CONTRACT-20261027.md).
 Teacher07 remains active; broader imaging/training integration awaits its owning
 component receipts and qualification rather than additional generic runner machinery.
+
+### October27 training handoff reconciliation
+
+[Current W04-03 handoff](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md) resolves
+stale teacher/authorization/source-admission wording and the historical-prefetch
+versus prepared-on-demand mismatch. Paired design, split hashes, region and sampling
+match; both future operational recipes must bind the same corrected provider.
+Complete target admission and actual full-provider GPU/receipt wiring remain open.
+No recipe or running process changed; teacher observed540/1333.
