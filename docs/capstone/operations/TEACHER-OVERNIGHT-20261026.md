@@ -90,3 +90,14 @@ Fresh inference confirmed: all335 verified targets were reused in119.072 worker 
 PanTS_00006340 advanced to tile25/60. Supervisor57785 and worker58484 were both alive; no
 resources failure was present. This is actual new prediction work, not merely launch acceptance.
 Heartbeat remains active. The original failed case's incomplete output remains in attempt04.
+
+## Attempt07 fresh inference verification
+
+October27: all529 previous targets rechecked/reused in182.803 worker seconds;
+new case PanTS_00002930 reached25/84tiles. Supervisor1351/worker2683 active, no
+resources/guardian failure present. New request SHA256
+`b2577febe031d21d15fb56f7f46fff406004e270706bdf07e38ece7f3723218b`.
+All4615 prior pin values retained; same teacher/train/preprocessing/geometry and
+non-time resource limits. Local verification evidence:
+`outputs/prowl/teacher-ac-resume-20261027/{continuation,fresh-progress}.json`.
+Twenty continuation/watchdog tests passed. Hourly heartbeat remains ACTIVE.
