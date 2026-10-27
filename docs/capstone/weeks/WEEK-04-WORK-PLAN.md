@@ -162,3 +162,11 @@ pipeline](../orchestration/PIPELINE-ADMISSION-COVERAGE-20261027.md) distinguishe
 offline adapter subset from unqualified full-pipeline stages. Next CPU integration
 is the frozen-cohort/prepared-cache handoff; full targets and actual GPU executor
 qualification still gate training. W04-01 remains In Progress.
+
+### October27 frozen input handoff
+
+The current Mac frozen cohort and saved on-demand preparation evidence now pass a
+registered read-only handoff: actual plan/run/resume succeeded, both stages reused,
+source bytes unchanged;137 regressions pass. [Results and limits](../orchestration/PREPARED-INPUTS-HANDOFF-20261027.md).
+This is not a materialized CT-cache or fresh payload audit. Complete teacher targets,
+actual full-provider executor qualification and remaining G3 contracts stay open.

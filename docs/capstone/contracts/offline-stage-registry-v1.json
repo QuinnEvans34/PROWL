@@ -178,6 +178,69 @@
         "validator": "case_literature_workflow_v1.definition validators[linked]",
         "timeout": "Node validator 20s per call"
       }
+    },
+    "prepared-inputs": {
+      "cohort": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; metadata only",
+        "dependencies": [],
+        "input_pins": [
+          "control",
+          "development",
+          "train"
+        ],
+        "output_members": [
+          "cohort.json"
+        ],
+        "adapter": "prepared_inputs_workflow_v1",
+        "validator": "prepared_inputs_workflow_v1.definition validators[cohort]",
+        "timeout": "bounded metadata sizes; no hard CPU deadline"
+      },
+      "prepared": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; metadata only",
+        "dependencies": [
+          "cohort"
+        ],
+        "input_pins": [
+          "resources",
+          "result"
+        ],
+        "output_members": [
+          "prepared.json"
+        ],
+        "adapter": "prepared_inputs_workflow_v1",
+        "validator": "prepared_inputs_workflow_v1.definition validators[prepared]",
+        "timeout": "bounded metadata sizes; no hard CPU deadline"
+      }
     }
   }
 }

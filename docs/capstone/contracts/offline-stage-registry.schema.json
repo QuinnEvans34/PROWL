@@ -16,7 +16,8 @@
       "additionalProperties": false,
       "required": [
         "saved-package",
-        "case-literature"
+        "case-literature",
+        "prepared-inputs"
       ],
       "properties": {
         "saved-package": {
@@ -55,6 +56,22 @@
               "$ref": "#/$defs/stage"
             },
             "linked": {
+              "$ref": "#/$defs/stage"
+            }
+          }
+        },
+        "prepared-inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cohort",
+            "prepared"
+          ],
+          "properties": {
+            "cohort": {
+              "$ref": "#/$defs/stage"
+            },
+            "prepared": {
               "$ref": "#/$defs/stage"
             }
           }
