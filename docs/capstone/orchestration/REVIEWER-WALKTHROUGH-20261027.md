@@ -104,3 +104,35 @@ warning remains. No new tests added for this CSS-only repair.
 Teacher progressed to535/1333 while checking the layout. The stylesheet is outside
 its producing pins. No model calls, scientific changes or service restarts occurred.
 This closes the header-polish follow-up; remaining W04-04 acceptance is unchanged.
+
+
+## Production proxy transport follow-up
+
+Closed the Origin-header transport gap noted in the original fixture walkthrough.
+`tests/test_review_production_proxy.py` starts an isolated actual FastAPI review
+service and Vite proxy on ephemeral loopback ports. The Node harness imports the
+production Vite configuration's review proxy options, changing only its target to
+the isolated service. It does not remove Origin or rewrite Host. Browser-equivalent
+5180 Host/Origin headers are supplied over HTTP; this is a transport integration
+check, not a new browser walkthrough or hosted-deployment qualification.
+
+Observed: foreign Origin, foreign Host and cross-site POSTs each return403 without
+creating a review. A valid local save succeeds, identical retry returns the same
+receipt, and saved/archive reopening returns exactly one revision. Both supported
+loopback hostnames work. The fixture contains invented transport bytes and uses
+only a temporary record store; no production record is created. The isolated Vite
+process is waited/reaped and API thread stopped in cleanup. Other application
+plugins/endpoints are intentionally not invoked; no model or service preparation
+is triggered.
+
+With Node24 on PATH,21 tests passed in4.02s across the proxy, store and literature
+API suites (two existing Starlette deprecation warnings). Initial proxy test failure
+was a helper incorrectly parsing Vite's plain-text403 as JSON; response parsing was
+corrected without changing production policy. A second run passed17 checks but had
+four attachment fixture setup errors because PATH selected Node20; Node24 fixed
+the test environment. Attempts are retained separately under
+outputs/prowl/testing/review-production-proxy-20261027-01 through03.
+
+Teacher remained live at556/1333 with the next case50/72tiles; all329 producing
+repository pins matched. No production code or teacher files were changed.
+W04-04 still requires the live answer-quality/latency window and user walkthrough.

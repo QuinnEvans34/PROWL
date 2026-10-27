@@ -235,3 +235,13 @@ are reaped, and source targets remain unchanged. [Evidence and limits](../operat
 This adds a missing process-boundary check without changing production code or
 competing for the teacher GPU. Real full-provider MPS qualification still waits
 for completed targets and admission; W04-03 remains open.
+
+
+### October27 reviewer proxy transport
+
+W04-04's remaining fixture-proxy uncertainty is now covered by an isolated real
+Vite-to-FastAPI test using production review proxy settings without stripping
+Origin headers. Valid save/retry/reopen and rejected foreign-origin writes pass;
+21 proxy/store/literature API tests pass under Node24. [Evidence and limits](../orchestration/REVIEWER-WALKTHROUGH-20261027.md).
+No real review records or GPU calls were made; live answer quality/latency and the
+user walkthrough remain open.
