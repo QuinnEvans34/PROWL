@@ -174,3 +174,34 @@ This closes the local attachment mechanism, not the end-user integration. The ap
 needs the additive API route, explicit attach control, receipt retention/discovery and display when
 reopening history. No real reviewer record was modified and no new clinical or answer-accuracy
 claim is supported by these transport tests.
+
+## Saved-history UI and optional API integration
+
+Commit5e88772 connects the adapter through optional review-service routes and a per-revision
+**Literature attached to revision N** control. Users choose a downloaded capture, review its question
+and target revision, and confirm attachment. Reopened responses reuse the existing answer/source
+viewer, including refusal and unavailable states. Failed or uncertain acknowledgment retains the
+selected capture for retry. Attachments never rewrite the original review event.
+
+`literature_attachment_api.py` keeps bounded, separately published completion references for
+history discovery. It uses local-origin protection from the existing review service, serialized
+catalog writes, size/capacity limits, exact revision receipts and artifact validation on reopening.
+A failed reference publication can be recovered by retrying the same capture without creating a
+second artifact. Limits are20 attachments per revision and1,000 catalog references. This is local
+integrity checking, not protection against an actor able to rewrite all local records and pins.
+
+71 backend tests and84 UI tests pass. Tests cover save/list/reopen/retry, interrupted reference
+publication, tampered references, origin/body limits, explicit confirmation, wrong revision
+acknowledgments and reopening refusals. Two existing Python dependency warnings remain.
+
+The existing local review service was restarted with `--attachments` and `--node`; its process is
+recorded in `outputs/prowl/review-attachment-ui-20261026/activation.json`. The saved-package listing
+was unchanged and empty; zero existing review events were present. No placeholder decision was
+created in the live store. The launcher now passes the previously user-approved50GB reserve to
+ReviewStore without changing that pinned module. The optional attachment root is
+`outputs/prowl/review-literature-attachments`. All changed paths were checked against active teacher
+pins and had no conflicts. Teacher execution, model calls and scan arrays were untouched.
+
+The integrated workflow is ready for a human save/attach/reopen walkthrough. That full browser
+walkthrough is still pending; the earlier actual browser download check and these automated
+integration tests are distinct evidence. G3 and independent answer/measurement acceptance remain open.
