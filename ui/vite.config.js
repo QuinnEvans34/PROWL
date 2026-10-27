@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { localExpertPlugin } from './localExpertPlugin.js'
 import { fileURLToPath } from 'node:url'
 import { savedPredictionPlugin } from './savedPredictionPlugin.js'
 
@@ -17,7 +18,7 @@ const evidenceContracts = [
 
 // Static-first viewer, with an optional local fixture writer during development.
 export default defineConfig({
-  plugins: [savedPredictionPlugin(), react()],
+  plugins: [localExpertPlugin(), savedPredictionPlugin(), react()],
   server: {
     host: '127.0.0.1', port: 5180, strictPort: true, open: true,
     fs: { allow: [fileURLToPath(new URL('.', import.meta.url)), ...evidenceContracts] },
