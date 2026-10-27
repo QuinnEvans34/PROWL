@@ -6,7 +6,23 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 27 authorized AC-loss continuation — current
+## October 27 professor-demo pause — current
+
+User scheduled a pause around14:00MDT. Attempt07 was stopped through the existing
+identity-checked pause command; normal SIGTERM cleanup succeeded, no forced kill.
+Supervisor1351 and worker2683 are absent; resources confirm workers_reaped=true,
+exit-15 and11323.165962 supervised seconds. All579 completed targets verified;
+remaining cumulative active budget203341seconds. The unfinished case is preserved
+but must be recomputed on a later explicit continuation. Receipt:
+`rsuper-demo-pause-20261027-01/receipt.json` under the existing artifact base.
+
+Both keep-prowl-teacher-running and pause-prowl-teacher-for-professor-demo are
+PAUSED, confirmed by app. Local expert GPU check reports gpu_busy=false. Do not
+resume or launch qualification/training during the demo; await explicit user
+resume authorization. No model calls were made by this pause. The ACTIVE wording
+in the historical entries below no longer describes current state.
+
+## October 27 authorized AC-loss continuation — historical
 
 Attempt06 stopped at529/1333 after `RuntimeError: AC power required`; resources
 confirm exit1/reaping and6549.370012 supervised seconds. User explicitly authorized
