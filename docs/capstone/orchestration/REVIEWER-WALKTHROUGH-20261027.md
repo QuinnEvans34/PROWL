@@ -85,3 +85,22 @@ repository producing pins matched, no resource/guardian failure report existed.
 Progress reached533/1333 with the next case at100/144tiles. No teacher files changed.
 W04-04 remains In Progress: live cited-answer quality/latency in Research and
 Workbench, and the user's final walkthrough, remain open for a suitable GPU window.
+
+## Responsive header follow-up
+
+Resolved the crowded header observed above. Navigation no longer shrinks underneath
+service status; link labels remain on one line. At760px and below, navigation moves
+to a separate48px row, preserving all five destinations. Status text truncates within
+its own space rather than overlapping links, and the About button stays in bounds.
+
+Browser geometry checks at390,760,761,784and1280px confirmed no header overflow or
+navigation/status overlap. All five links fit at390px; clicking Research reached the
+correct route with its active indicator. Inspected desktop and phone screenshots;
+viewport override reset afterward. Evidence in
+`outputs/prowl/testing/header-responsive-20261027/`: `bounds.json`,
+`desktop-784.png`, `phone-390.png`. Vite production build passed; existing large-chunk
+warning remains. No new tests added for this CSS-only repair.
+
+Teacher progressed to535/1333 while checking the layout. The stylesheet is outside
+its producing pins. No model calls, scientific changes or service restarts occurred.
+This closes the header-polish follow-up; remaining W04-04 acceptance is unchanged.

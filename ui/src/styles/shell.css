@@ -59,10 +59,11 @@ body {
 .pw-wordmark__descriptor {
   font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pw-text-faint);
 }
-.pw-nav { display: flex; align-items: stretch; gap: 4px; min-width: 0; }
+.pw-nav { display: flex; align-items: stretch; gap: 4px; flex: none; min-width: 0; }
 .pw-nav a {
   position: relative; display: flex; align-items: center;
   padding: 0 10px; color: var(--pw-text-muted); text-decoration: none; font-size: 14px;
+  white-space: nowrap;
   transition: color var(--pw-fast) var(--pw-ease);
 }
 .pw-nav a:hover { color: var(--pw-text); }
@@ -78,6 +79,7 @@ body {
   color: var(--pw-text-muted); font-size: 12px; white-space: nowrap;
 }
 .pw-service span { overflow: hidden; text-overflow: ellipsis; }
+.pw-header__end > .pw-icon-btn { flex: none; }
 .pw-service i { width: 7px; height: 7px; border-radius: 50%; background: var(--pw-text-faint); flex: none; }
 .pw-service--online i { background: var(--pw-success); }
 .pw-service--offline i { background: var(--pw-warning); }
@@ -249,17 +251,21 @@ body {
   .pw-header { gap: 16px; }
 }
 @media (max-width: 760px) {
-  .pw-service span { display: none; }
+  .pw-app { --pw-header-h: 96px; }
+  .pw-header { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 48px 48px; }
+  .pw-header__end { grid-column: 2; grid-row: 1; margin-left: 0; width: 100%; }
+  .pw-nav { grid-column: 1 / -1; grid-row: 2; overflow-x: auto; gap: 0; }
+  .pw-nav a { flex: 1 0 auto; justify-content: center; }
   .pw-welcome { flex-direction: column-reverse; align-items: flex-start; }
   .pw-panther--hero { width: 132px; height: 96px; }
-  .pw-header { padding: 0 12px; gap: 8px; }
+  .pw-header { padding: 0 12px; gap: 0 8px; }
   .pw-nav a { padding: 0 8px; }
   .pw-footer__model { display: none; }
 }
 @media (max-width: 480px) {
   .pw-wordmark__name { letter-spacing: 0.18em; font-size: 16px; }
-  .pw-service { display: none; }
-  .pw-nav a { padding: 0 6px; font-size: 13.5px; }
+
+  .pw-nav a { padding: 0 5px; font-size: 13px; }
 }
 
 /* ---------- Route containers ---------- */
