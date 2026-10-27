@@ -180,6 +180,7 @@ export default function LiteratureSearchPanel({
     setScanResult(null)
   }, [measurementKey])
   const [question, setQuestion] = useState('')
+  const [submittedQuestion, setSubmittedQuestion] = useState('')
   const [readiness, setReadiness] = useState(null)
   const [preview, setPreview] = useState(null)
   const [previewText, setPreviewText] = useState('')
@@ -216,15 +217,24 @@ export default function LiteratureSearchPanel({
     return () => clearInterval(timer)
   }, [phase])
   function change(value) {
+    if (active.current && !helpMode) { setQuestion(value); return }
     active.current?.abort(); active.current = null
     setPreview(null); setHelpError(false); setHelpMode(false); setOriginalQuestion('')
     setQuestion(value); setScanResult(null); setResult(null); setCapture(null); setCaptureNotice(''); setPhase('idle'); setContextNotice('')
+  }
+  function cancelQuestion() {
+    const previous = active.current
+    active.current = null // Invalidate before abort: old callbacks cannot own the UI.
+    previous?.abort()
+    change(question)
+    setContextNotice('Cancelled. Your draft is kept; you can ask a new question. The local service may still be finishing the previous request, but its response will not appear here.')
   }
   async function helpWithQuestion() {
     if (!question.trim() || active.current) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 25000)
+    setSubmittedQuestion(request.question)
     setHelpMode(true); setHelpError(false); setPreview(null); setResult(null); setCapture(null); setCaptureNotice(''); setScanResult(null); setElapsed(0); setPhase('loading')
     try {
       const value = await interpret(request, control.signal)
@@ -240,6 +250,7 @@ export default function LiteratureSearchPanel({
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 150000)
+    setSubmittedQuestion(request.question)
     setHelpMode(false); setHelpError(false); setPreview(null)
     setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setCapture(null); setCaptureNotice(''); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
@@ -299,10 +310,10 @@ export default function LiteratureSearchPanel({
           if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
         }}
         onChange={e => change(e.target.value)} />
-      <small id="literature-question-shortcut">Enter to send · Shift+Enter for a new line</small>
+      <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
       <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading' || (readiness?.gpu_busy && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(question) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
-        {phase === 'loading' && <button type="button" onClick={() => change(question)}>Cancel</button>}
+        <button type="submit" disabled={!question.trim() || phase === 'loading' || (readiness?.gpu_busy && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+        {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
       {panel ? phase !== 'loading' && <details className="literature-search__tools"><summary>Search tools</summary><div className="literature-search__actions">
@@ -330,7 +341,7 @@ export default function LiteratureSearchPanel({
       <button type="button" onClick={() => setPreview(null)}>Keep my question</button>
     </section>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {panel && (phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>You asked</small>{question}</p>}
+      {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}</p>}
       {scanResult?.key === measurementKey && scanResult && <article aria-label="Current scan measurement">
         <h3>{scanResult.measurement && scanResult.target === 'pancreas_comparison' ? 'Outline compared with a published study' : scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
         <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
@@ -348,9 +359,9 @@ export default function LiteratureSearchPanel({
       </article>}
       {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
       {phase === 'loading' && <div className="literature-search__activity" role="status">
-        <div className="literature-search__activity-head"><span className="literature-search__pulse" aria-hidden="true" /><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(question) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
-        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(question) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'I’m waiting for the local research service to return a checked answer and supporting sources.'}</p>
-        <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(question) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
+        <div className="literature-search__activity-head"><span className="literature-search__pulse" aria-hidden="true" /><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
+        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'I’m waiting for the local research service to return a checked answer and supporting sources.'}</p>
+        <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” above. If the teacher is running, use “Find sources” until it is paused.</p>}
       {result && <article aria-label="Literature search results">

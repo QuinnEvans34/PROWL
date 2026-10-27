@@ -157,3 +157,30 @@ transport/integrity proof using invented evidence, not factual citation review,
 model quality, measurement qualification or the final human walkthrough.
 Teacher07 remained live at557/1333, next case50/210tiles; all329 producing pins
 matched. Remaining GPU-dependent W04-04 work is unchanged.
+
+
+## Explicit question cancellation and draft isolation
+
+User reported that changing a question appeared to leave the old request in control.
+Inspection found every edit implicitly aborted/reset the UI, hiding loading while
+backend work could continue. Research and Workbench now keep separate draft and
+submitted question text. Editing during an answer/source request keeps loading and
+its elapsed indicator visible, with submit/Enter blocked until completion or Cancel.
+The operation label uses the submitted question even when the draft changes.
+
+Cancel invalidates active ownership before abort, keeps the draft and immediately
+allows a fresh request with a new request ID. Existing controller identity checks
+prevent old success, failure and finally callbacks from affecting the replacement.
+The cancellation notice explicitly distinguishes stopping UI waiting from backend
+inference termination: the previous local model call may still finish. No backend
+termination protocol or instantaneous GPU release is claimed. Question-rephrasing
+edits retain their existing stale-suggestion cancellation behavior.
+
+Regression cases cover both UI variants, editing while loading, Enter blocking,
+cancel/resubmit, old success arriving during a replacement, and old success/failure
+after the new answer completes.90 tests passed,2 skipped across6 related UI suites;
+Vite production build passed with the existing large-chunk warning. An initial
+failure expected the old pending label; it was updated to Processing question.
+No live inference was needed for these controlled delayed-response tests. Teacher
+remains paused for the demo. Backend latency and live answer correctness are separate
+from this interaction repair.
