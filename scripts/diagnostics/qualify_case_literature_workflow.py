@@ -8,6 +8,7 @@ import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from src.operations.case_literature_workflow_v1 import definition
 from src.operations.workflow_execution_v1 import Executor
+from src.operations.workflow_contracts_v1 import execute_registered, registry_for
 
 
 def main():
@@ -29,9 +30,11 @@ def main():
         if a.command in ('inspect','status'):r=e.inspect(a.run_id)
         else:
             s,h,v=definition(a.source,a.manifest_sha256,a.capture,a.capture_sha256,node=a.node)
-            if a.command=='plan':r=e.preview(s,v,resume_of=a.resume_of)
+            if a.command=='plan':
+                registry_for('case-literature',s)
+                r=e.preview(s,v,resume_of=a.resume_of)
             else:
-                a.run_id=a.run_id or str(uuid.uuid4());r=e.execute(s,h,v,resume_of=a.resume_of,identity=a.run_id)
+                a.run_id=a.run_id or str(uuid.uuid4());r=execute_registered(e,'case-literature',s,h,v,resume_of=a.resume_of,identity=a.run_id)
         print(json.dumps(r,sort_keys=True));return 0
     except Exception as error:
         print(json.dumps({'error':str(error),'run_id':a.run_id,'automatic_retry':False}),file=sys.stderr);return 1

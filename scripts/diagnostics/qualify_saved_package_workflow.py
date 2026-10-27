@@ -8,6 +8,7 @@ import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
 from src.operations.saved_package_workflow_v1 import definition
 from src.operations.workflow_execution_v1 import Executor
+from src.operations.workflow_contracts_v1 import execute_registered, registry_for
 
 
 def main():
@@ -30,10 +31,12 @@ def main():
         if a.command in ('inspect','status'):result=e.inspect(a.run_id)
         else:
             s,h,v=definition(a.source,a.manifest_sha256)
-            if a.command=='plan':result=e.preview(s,v,resume_of=a.resume_of)
+            if a.command=='plan':
+                registry_for('saved-package',s)
+                result=e.preview(s,v,resume_of=a.resume_of)
             else:
                 a.run_id=a.run_id or str(uuid.uuid4())
-                result=e.execute(s,h,v,resume_of=a.resume_of,identity=a.run_id)
+                result=execute_registered(e,'saved-package',s,h,v,resume_of=a.resume_of,identity=a.run_id)
         print(json.dumps(result,sort_keys=True));return 0
     except Exception as exc:
         print(json.dumps({'error':str(exc),'type':type(exc).__name__,'run_id':a.run_id,

@@ -143,3 +143,12 @@ are covered. [Results and remaining gates](../orchestration/RESOURCE-SCHEMA-CHEC
 All328 repository teacher pins matched; its workers continued unchanged. Broader
 production schema/registry integration and accelerator/training admission remain
 open, so W04-01/G3 are not marked complete.
+
+### October27 registry and manifest alignment
+
+The two offline production adapters now enforce a versioned stage registry and emit
+the unchanged approved run-manifest v1 schema.100 regressions pass; actual CLI
+plan/run/resume checks completed and reused all stages with verified references.
+[Evidence and scope](../orchestration/REGISTRY-MANIFEST-ALIGNMENT-20261027.md).
+This closes alignment for saved-package and case/literature handoffs. Full production
+registry coverage, accelerator boundaries and training admission remain open.

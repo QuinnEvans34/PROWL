@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Registered offline CPU handoff stages v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workflows"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "workflows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "saved-package",
+        "case-literature"
+      ],
+      "properties": {
+        "saved-package": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "integrity",
+            "handoff"
+          ],
+          "properties": {
+            "integrity": {
+              "$ref": "#/$defs/stage"
+            },
+            "handoff": {
+              "$ref": "#/$defs/stage"
+            }
+          }
+        },
+        "case-literature": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "integrity",
+            "handoff",
+            "literature",
+            "linked"
+          ],
+          "properties": {
+            "integrity": {
+              "$ref": "#/$defs/stage"
+            },
+            "handoff": {
+              "$ref": "#/$defs/stage"
+            },
+            "literature": {
+              "$ref": "#/$defs/stage"
+            },
+            "linked": {
+              "$ref": "#/$defs/stage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "component_version",
+        "owning_plan",
+        "resource_class",
+        "retry",
+        "cancellation",
+        "root_role",
+        "capacity",
+        "configuration",
+        "determinism",
+        "completion",
+        "environment",
+        "checkpoint",
+        "locks",
+        "dependencies",
+        "input_pins",
+        "output_members",
+        "adapter",
+        "validator",
+        "timeout"
+      ],
+      "properties": {
+        "component_version": {
+          "const": "1.0.0"
+        },
+        "owning_plan": {
+          "type": "string",
+          "minLength": 1
+        },
+        "resource_class": {
+          "const": "cpu-offline"
+        },
+        "retry": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cancellation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root_role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "capacity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "configuration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "determinism": {
+          "type": "string",
+          "minLength": 1
+        },
+        "completion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "environment": {
+          "type": "string",
+          "minLength": 1
+        },
+        "checkpoint": {
+          "const": false
+        },
+        "locks": {
+          "const": [
+            "workflow-root",
+            "artifact-writer"
+          ]
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "input_pins": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "output_members": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "adapter": {
+          "type": "string",
+          "minLength": 1
+        },
+        "validator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "timeout": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

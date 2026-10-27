@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0.0",
+  "workflows": {
+    "saved-package": {
+      "integrity": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [],
+        "input_pins": [
+          "saved_manifest"
+        ],
+        "output_members": [
+          "integrity.json"
+        ],
+        "adapter": "saved_package_workflow_v1",
+        "validator": "saved_package_workflow_v1.definition validators[integrity]",
+        "timeout": "bounded file sizes; no hard CPU deadline"
+      },
+      "handoff": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [
+          "integrity"
+        ],
+        "input_pins": [],
+        "output_members": [
+          "handoff.json"
+        ],
+        "adapter": "saved_package_workflow_v1",
+        "validator": "saved_package_workflow_v1.definition validators[handoff]",
+        "timeout": "bounded file sizes; no hard CPU deadline"
+      }
+    },
+    "case-literature": {
+      "integrity": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [],
+        "input_pins": [
+          "saved_manifest"
+        ],
+        "output_members": [
+          "integrity.json"
+        ],
+        "adapter": "saved_package_workflow_v1",
+        "validator": "saved_package_workflow_v1.definition validators[integrity]",
+        "timeout": "bounded file sizes; no hard CPU deadline"
+      },
+      "handoff": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [
+          "integrity"
+        ],
+        "input_pins": [],
+        "output_members": [
+          "handoff.json"
+        ],
+        "adapter": "saved_package_workflow_v1",
+        "validator": "saved_package_workflow_v1.definition validators[handoff]",
+        "timeout": "bounded file sizes; no hard CPU deadline"
+      },
+      "literature": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [],
+        "input_pins": [
+          "capture",
+          "node",
+          "validator"
+        ],
+        "output_members": [
+          "capture.json",
+          "literature-validation.json"
+        ],
+        "adapter": "case_literature_workflow_v1",
+        "validator": "case_literature_workflow_v1.definition validators[literature]",
+        "timeout": "Node validator 20s per call"
+      },
+      "linked": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "process interruption leaves incomplete attempt; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; Node24+ for literature",
+        "dependencies": [
+          "handoff",
+          "literature"
+        ],
+        "input_pins": [],
+        "output_members": [
+          "capture.json",
+          "literature-validation.json",
+          "linked-handoff.json"
+        ],
+        "adapter": "case_literature_workflow_v1",
+        "validator": "case_literature_workflow_v1.definition validators[linked]",
+        "timeout": "Node validator 20s per call"
+      }
+    }
+  }
+}
