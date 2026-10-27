@@ -88,3 +88,31 @@ with Python3.12.14.33.64s/workers reaped; both failures preserved. Current train
 reported17647/24000. An isolated compatible runtime or documented adaptation is
 still needed; no upstream inference result exists. No model-quality inference
 follows from this dependency failure.
+
+## October27 CPU backup-failure qualification (W04-03)
+
+Added `tests/test_kd_backup_boundaries.py`: twenty injected failures cover disk-full
+(ENOSPC) and I/O errors (EIO) at initial, latest, scheduled and best checkpoints,
+and scheduled/selected/terminal native reports and their component sidecars.
+Each case runs the existing KD evidence executor with an invented two-update
+session and tiny arrays. No production executor or scientific recipe changed.
+
+All cases stop at the exact failed backup, propagate the original error, retain
+source artifacts and earlier byte-identical copies, append a failed journal event,
+and omit training completion/current native completion. No backup retry occurs;
+reusing the failed output directory is rejected without altering its journal.
+The existing actual checkpoint-stack CPU restore and positive evidence-copy tests
+also pass:25tests total in4.04s, two upstream Torch deprecation warnings.
+
+First collection in `.venv-retrieval` failed because that environment lacks MLflow;
+no tests executed there. Reused the existing `.venv312` and external test dependencies
+without installation. Reproduce with CUDA_VISIBLE_DEVICES=-1,OMP_NUM_THREADS=1,
+PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies,
+`.venv312/bin/python -m pytest -q tests/test_kd_backup_boundaries.py
+ tests/test_kd_evidence_executor_v1.py tests/test_kd_executor_recovery_v1.py`.
+
+These are injected exception checks, not real drive-disconnection or process-kill
+qualification, and do not prove full-provider MPS/native-evaluator readiness.
+The teacher remains active and all329repository producing pins match. Full targets,
+actual executor qualification and matched frozen launch receipts remain required;
+no student training was launched. W04-03 remains gated, with this CPU slice complete.
