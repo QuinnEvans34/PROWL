@@ -6,7 +6,17 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 AC interruption — current state
+## October 28 power and drive unavailable — latest check
+
+17:45 UTC: macOS still reports battery power (78%, discharging), and PROWL-Data
+is no longer mounted. `diskutil list external physical` lists no external disk.
+No teacher supervisor/worker is active; launchd09 remains exited. No restart or
+mount/repair attempted. The prior708-target hash verification remains historical;
+outputs cannot be rechecked until the drive is connected. Reconnect both AC and
+PROWL-Data before verifying inputs and preparing a qualified continuation.
+Hourly monitoring remains enabled; preserve the171727-second remaining allowance.
+
+## October 28 AC interruption — prior check
 
 At the 16:48 UTC hourly check, attempt09 had stopped at708/1333 after the
 Mac switched to battery. worker.log ends with `RuntimeError: AC power required`.
