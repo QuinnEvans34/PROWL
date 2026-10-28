@@ -84,3 +84,19 @@ checks succeed. Neither old nor new database should be deleted for rollback.
    target manifest, GPU qualification or scientific launch while teacher runs.
 3. At the authorized GPU window, compare real single-call answers for support,
    completeness, citation quality, refusal and latency, then perform human review.
+
+## Follow-up: honest readiness failures
+
+The UI previously retained its successful readiness message after a later status
+failure. It now hides that stale message during checks and after errors, and shows
+it again only after recovery. Read-only status requests have a 15-second browser
+timeout; explicit preparation retains its longer startup allowance. The last known
+GPU-busy restriction remains conservative if a later check fails.
+
+Preparation now diagnoses an existing service on port8016 whose storage identity
+differs from the active configuration. It fails with an actionable message rather
+than waiting for the generic readiness timeout; it never kills an unknown process.
+Synthetic mismatch and UI failure/recovery tests pass:17 Python and4 UI/plugin
+tests. Live read-only status confirms storage/database/search/model service ready,
+answer model unloaded and GPU busy. Teacher10 continues at725/1333 with advancing
+tiles;341 protected repository hashes match. No GPU or teacher changes.

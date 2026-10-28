@@ -9,7 +9,7 @@ export default function LocalExpertReadiness({ onStatus }) {
     try {
       const response = await fetch(`/local-expert/${prepare ? 'prepare' : 'status'}`, {
         method: prepare ? 'POST' : 'GET', headers: { 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(245000),
+        signal: AbortSignal.timeout(prepare ? 245000 : 15000),
       })
       const value = await response.json()
       if (!response.ok || value.error) throw new Error(value.error || 'Readiness check unavailable.')
@@ -25,7 +25,7 @@ export default function LocalExpertReadiness({ onStatus }) {
     </div>
     <div aria-live="polite">
       {busy && <p>{busy === 'prepare' ? 'Checking local storage and starting missing services. This can take a few minutes.' : 'Checking local service status.'}</p>}
-      {state && <>
+      {state && !error && !busy && <>
         <p>{state.search ? 'Source search is ready.' : 'Source search needs preparation.'} {state.gpu_busy ? 'The teacher is using the GPU. Pause it before testing AI answers; source search can run alongside it.' : state.model && state.search ? 'The local model is loaded and ready for questions.' : 'Prepare the AI expert to load the local model.'}</p>
         <details><summary>Service status</summary><ul>
           {Object.entries({ drive: 'Literature storage', database: 'Literature database', search: 'Search service', ollama: 'Model service', model: 'Answer model loaded' }).map(([key, label]) => <li key={key}>{label}: {state[key] ? 'Ready' : 'Not ready'}</li>)}

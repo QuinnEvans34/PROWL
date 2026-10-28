@@ -118,6 +118,13 @@ def prepare():
     if not listening(8016):
         start_process([str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_literature_search.py'),
                        '--config', str(CONFIG), '--study-answers', '--general-extracts'], 'literature')
+    else:
+        try:
+            health = http(8016, 'literature-search/health')
+        except Exception:
+            health = None
+        if isinstance(health, dict) and health.get('storage_identity') != digest(c):
+            raise RuntimeError('Port 8016 is serving a different or older search configuration. Stop the verified old literature service, then prepare again. No process was stopped automatically.')
     wait_for(lambda: backend_ready(digest(c)), 35)
     if gpu_busy(): return status()
     # Hold the same exclusive lock as training during model preparation.

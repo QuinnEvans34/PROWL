@@ -18,3 +18,21 @@ it('shows the actionable mount failure',async()=>{
   fireEvent.click(screen.getByText('Prepare AI expert'))
   expect(await screen.findByRole('alert')).toHaveProperty('textContent','Restart Docker Desktop to refresh its mount.')
 })
+
+it('hides stale readiness after a failed check and allows recovery',async()=>{
+  const ready={drive:true,database:true,search:true,ollama:true,model:true,gpu_busy:false}
+  const fetch=vi.fn()
+    .mockResolvedValueOnce({ok:true,json:async()=>ready})
+    .mockRejectedValueOnce(new Error('Service disconnected.'))
+    .mockResolvedValueOnce({ok:true,json:async()=>ready})
+  vi.stubGlobal('fetch',fetch)
+  render(<LocalExpertReadiness />)
+  fireEvent.click(screen.getByText('Check status'))
+  expect(await screen.findByText(/Source search is ready/)).toBeTruthy()
+  fireEvent.click(screen.getByText('Check status'))
+  expect(await screen.findByRole('alert')).toHaveProperty('textContent','Service disconnected.')
+  expect(screen.queryByText(/Source search is ready/)).toBeNull()
+  fireEvent.click(screen.getByText('Check status'))
+  expect(await screen.findByText(/Source search is ready/)).toBeTruthy()
+  expect(screen.queryByRole('alert')).toBeNull()
+})

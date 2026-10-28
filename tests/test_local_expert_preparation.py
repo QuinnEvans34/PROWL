@@ -36,7 +36,7 @@ def setup(monkeypatch, tmp_path, *, busy=True, bad_mount=False, stale=False):
         return b'OK'
     monkeypatch.setattr(expert, 'command', command)
     monkeypatch.setattr(expert, 'start_process', lambda *a: pytest.fail('must not start model during teacher'))
-    monkeypatch.setattr(expert, 'http', lambda *a, **kw: pytest.fail('must not load model during teacher'))
+    monkeypatch.setattr(expert, 'http', lambda port, *a, **kw: {'storage_identity': expert.digest(expert.read_config(expert.CONFIG))} if port == 8016 else pytest.fail('must not load model during teacher'))
     return calls
 
 
@@ -65,6 +65,7 @@ def test_model_warmup_uses_pinned_model_and_exclusive_lock(monkeypatch,tmp_path)
     calls=[]
     def http(port,path,payload=None,**kw):
         calls.append((port,path,payload))
+        if port==8016: return {'storage_identity':expert.digest(expert.read_config(expert.CONFIG))}
         if path=='api/tags': return {'models':[{'name':expert.MODEL,'digest':expert.MODEL_SHA}]}
         assert path=='api/generate'
         import fcntl
@@ -79,7 +80,7 @@ def test_model_warmup_uses_pinned_model_and_exclusive_lock(monkeypatch,tmp_path)
 def test_missing_model_never_downloaded(monkeypatch,tmp_path):
     calls=setup(monkeypatch,tmp_path,busy=False)
     monkeypatch.setattr(expert,'LOCK',tmp_path/'gpu.lock')
-    monkeypatch.setattr(expert,'http',lambda *a,**k:{'models':[]})
+    monkeypatch.setattr(expert,'http',lambda port,*a,**k:{'storage_identity':expert.digest(expert.read_config(expert.CONFIG))} if port==8016 else {'models':[]})
     with pytest.raises(RuntimeError,match='No model was downloaded'):expert.prepare()
     assert not any('pull' in a for a in calls)
 
@@ -93,3 +94,11 @@ def test_internal_preparation_never_mounts_external_drive(monkeypatch,tmp_path):
     expert.prepare()
     assert not any(a[0]=='diskutil' for a in calls)
     assert any(a[-1]=='prowl-literature-internal-db-1' and 'start' in a for a in calls)
+
+
+def test_existing_wrong_search_configuration_fails_without_stopping_process(monkeypatch,tmp_path):
+    calls=setup(monkeypatch,tmp_path)
+    monkeypatch.setattr(expert,'http',lambda *a,**k:{'backend':'checked','storage_identity':'old'})
+    with pytest.raises(RuntimeError,match='different or older search configuration'):
+        expert.prepare()
+    assert not any('stop' in a or 'restart' in a or 'kill' in a for a in calls)
