@@ -266,3 +266,34 @@ or loading the model while teacher owns GPU. External data copy retained.
 This closes the external-mount dependency for literature search, not live answer
 quality or latency. Next CPU work is bounded candidate UI coverage and latest
 teacher-to-training handoff review; full targets/GPU qualification still pending.
+
+### October28 readiness checkpoint after CPU preparation
+
+Reconciled with current Trello cards on October28. The candidate UI coverage,
+current affine producer handoff, internal database recovery and readable five-question
+comparison preparation are now delivered. These close the preceding CPU work order;
+they do not close W04-01, W04-03 or W04-04.
+
+| Card | Ready evidence | Next observable completion / dependency |
+| --- | --- | --- |
+| W04-01 | Scoped DAG contracts, reuse, failure recovery and configuration checks | Integrate qualified real components and prove actual executor recovery; full G3 remains open |
+| W04-02 | Teacher10 continues; latest observed729/1333 | All1333 targets plus successful result, integrity checks and worker cleanup |
+| W04-03 | Corrected-provider handoff, whole-request affine provenance and synthetic recovery checks | Admit completed targets, then qualify real MPS executor/backup/cold restore before matched launch |
+| W04-04 | Internal source search/restart recovery; reviewer transport; candidate boundary/cancellation UI and GPU ownership wiring | Bounded real summary comparison, separate support/completeness/citation/refusal/latency review, then Research/Workbench and human walkthrough |
+| W04-05 | Evidence links and remaining gates reconciled here | Sunday closeout with actual outcomes and Quinton-confirmed human hours; no unattended runtime counted |
+
+Keep the teacher running under the user's current direction. Do not interrupt it
+for the summary comparison or start student training during generation. At teacher
+completion, verify final output/admission first; use a free GPU for the prepared
+bounded summary check and real executor qualification as separate stages. Preserve
+failed stages and stop for diagnosis rather than forcing an overall pass.
+
+There is no further demonstrated CPU implementation gap in this bounded work order.
+Avoid adding another scheduler, evaluation application or generic adapter merely
+to keep coding while waiting. Continue existing operational monitoring; reopen CPU
+work when a concrete failure, ready component or user feedback warrants it.
+
+Evidence: [internal service](../retrieval/INTERNAL-LITERATURE-SERVICE-2026-10-28.md),
+[summary candidate and test window](../retrieval/SINGLE-PASS-SUMMARY-2026-10-28.md),
+[training handoff](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md),
+[G3 scope](../orchestration/G3-EVIDENCE-REVIEW-20261027.md).
