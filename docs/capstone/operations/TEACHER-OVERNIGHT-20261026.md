@@ -6,7 +6,39 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 diagnosed geometry blockers — current
+## October 28 qualified affine continuation — current
+
+User approved qualifying the geometry-aware path, retaining all cases, then resume.
+New one-shot launchd label com.prowl.rsuper-targets-20261028-09 runs additive
+resume_rsuper_affine_checked_v1.py from attempt08 into rsuper-full-targets-09.
+Startup must verify all prior pins and699 completed outputs before dispatch.
+Inspect request/process/tiles before claiming fresh inference. Never redispatch09.
+
+Qualified source loader preserves the entire source affine for the two explicit
+exceptions03067/04348, resampling onto an enclosing orthogonal grid using the polar
+basis, source column-norm spacing, linear interpolation and outsideHU-1024.
+This is an explicitly approved two-case preprocessing extension, recorded in the
+request and each new output's source_loading. Ordinary cases retain SimpleITK
+loading and frozen v2 preprocessing/prediction/reconstruction; old producing files
+are unchanged. No cohort exclusion, tolerance relaxation or source file alteration.
+
+Evidence: teacher-affine-qualification-20261028-01 under the artifact root.
+Both exceptional real scans pass preprocessing/grid/native-coverage/finite/tile
+checks. Two ordinary real scans02331/07555 produce exactly equal arrays, grids
+and normalization metadata versus the old path. CPU qualification13.895seconds,
+2,683,944,960bytes peak RSS, no inference. Synthetic world-coordinate ramp tests
+cover shear and reflection;36focused tests pass9.05s, final2worker tests5.11s.
+Reviewed central source planes show no gross displacement/reflection/truncation;
+interior roundtrip mean absolute HU differences0.387/0.367. This limited visual
+check is NOT segmentation accuracy evidence or a complete clinical image review.
+
+Original remaining teacher budget173968seconds retained;30GiB perattempt output,
+32GiB combined cache,12GiB RSS/MPS,AC/storage/exclusive-GPU gates retained.
+Prior attempts and699 outputs preserved. Full1333 geometry accounting is1331
+unchanged-header passes plus2qualified exceptions. Hourly keeper remains ACTIVE.
+No student training. Code commit00eba2a. Await fresh worker verification below.
+
+## October 28 diagnosed geometry blockers — historical
 
 User requested diagnosis, fix and restart. AC/drive restored. No restart performed:
 full training-header audit02 checked1333,1331passed,2failed. The original case
