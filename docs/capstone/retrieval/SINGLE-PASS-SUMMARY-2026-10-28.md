@@ -98,3 +98,25 @@ development search and readiness. Synthetic checks cover real file-lock exclusio
 teacher-owned startup rejection and cleanup after a server exception. Live helper
 still reports gpu_busy=true for the running teacher. No candidate was launched,
 no real model answer was generated, and no quality/promotion claim follows.
+
+## Readable bounded comparison packet
+
+The existing comparison runner now snapshots all five question/evidence packets
+and source-file SHA256 values into inputs.json before generation. It validates
+every packet before creating output or calling the model, refuses an existing
+output directory, and updates review.md after each result. The readable review
+contains answer prose, supporting quotations, full retrieved passages, limitations,
+timing and preserved failures. Every manual decision stays Pending; no automatic
+acceptance or independent-evaluation claim is made. Timing is saved-evidence
+generation time, not end-to-end retrieval/UI latency.
+
+CPU-only preparation command:
+`PYTHONPATH=. .venv-retrieval/bin/python scripts/retrieval/check_single_summary_candidate.py --prepare-only --output NEW_DIRECTORY`
+
+Prepared actual exposed inputs at
+outputs/prowl/single-summary-review-preparation-20261028/review.md. All five fit
+the unchanged evidence budget. Twelve runner/generation tests pass, including
+invalid-last-input rejection, no model use during preparation, output preservation
+and synthetic failed-answer review. The later live run must use a fresh directory
+under the existing exclusive-GPU/AC guard. Teacher10 reached729/1333 during this
+CPU work; all341 producing repository pins remain intact.
