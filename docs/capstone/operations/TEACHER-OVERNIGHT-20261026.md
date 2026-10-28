@@ -6,7 +6,34 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 geometry stop — current
+## October 28 diagnosed geometry blockers — current
+
+User requested diagnosis, fix and restart. AC/drive restored. No restart performed:
+full training-header audit02 checked1333,1331passed,2failed. The original case
+PanTS_00002331 uses NIfTI spacing1.5 but affine norm1.49999998, causing332 vs331
+rounded slices. Additive header validator checks frozen source shape/world corners
+(atol1e-4mm) and native-region coverage, then predicts the unchanged ITK geometry.
+Actual failed-case CPU preprocessing matches332x237x285/max affine difference
+3.55e-15. Synthetic/continuation/watchdog tests:27pass9.27s. Commitab2303a preserves
+all old producing files. Worker comparison test confirms only validation changes.
+
+Audit also found rounding differences forPanTS_00001772 andPanTS_00007638.
+Two independent blockers remain: PanTS_00003067 has direction orthogonality error
+7.004908e-5 (existing preprocessing limit1e-5); PanTS_00004348 is rejected by ITK
+at header read with no orthonormal definition found. Do not exclude cases, loosen
+thresholds, or start the prepared continuation against a failed audit. User decision
+requested for a separately qualified geometry-aware loading path. Frozen recipe,
+original173968second remaining budget and all699 targets remain unchanged.
+
+Evidence under artifact root: teacher-header-audit-20261028-02/result.json and
+cases.jsonl; teacher-header-real-check-20261028-01.json. Audit01 partial evidence
+preserved: header-reader error escaped its loop before summary. Additive auditv2
+reused the completed prefix and captured remaining reader errors; no inference.
+Prepared resume_rsuper_header_checked_v1 requires a complete passing audit and
+real-case proof; NOT dispatched. Hourly keeper remains active but must not restart
+while these geometry blockers remain. No new teacher or student process launched.
+
+## October 28 geometry stop — historical
 
 Attempt08 stopped after699/1333 at the preprocessing geometry assertion in
 `build_rsuper_full_targets_v2.py:42`, before prediction for the next ordered case,
