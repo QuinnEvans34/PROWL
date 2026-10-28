@@ -6,7 +6,20 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 qualified affine continuation — current
+## October 28 AC interruption — current state
+
+At the 16:48 UTC hourly check, attempt09 had stopped at708/1333 after the
+Mac switched to battery. worker.log ends with `RuntimeError: AC power required`.
+resources.json records2240.634101s,2162606080B peak owned RSS,exit1 and
+workers_reaped=true. Supervisor19823/worker21772 are absent; launchd09 has no
+live PID and the exclusive GPU lock is released. All340 repository producing
+pins and request7184607c... still match. No restart on battery, no student run.
+Charge2241seconds, leaving171727seconds of the previous173968-second allowance
+for a later qualified continuation. Preserve attempt09 and all previous attempts.
+Hourly monitoring remains enabled; AC restoration is required before continuation.
+Verification receipt: outputs/prowl/teacher-ac-stop-20261028/verified.json.
+
+## October 28 qualified affine continuation — historical launch
 
 User approved qualifying the geometry-aware path, retaining all cases, then resume.
 New one-shot launchd label com.prowl.rsuper-targets-20261028-09 runs additive
