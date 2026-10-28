@@ -36,7 +36,16 @@ Original remaining teacher budget173968seconds retained;30GiB perattempt output,
 32GiB combined cache,12GiB RSS/MPS,AC/storage/exclusive-GPU gates retained.
 Prior attempts and699 outputs preserved. Full1333 geometry accounting is1331
 unchanged-header passes plus2qualified exceptions. Hourly keeper remains ACTIVE.
-No student training. Code commit00eba2a. Await fresh worker verification below.
+No student training. Code commit00eba2a.
+
+Admission verified: supervisor19823/worker21772, launchd09. Request SHA256
+7184607c129217650f1043c4893d489d9a5ba8296a2696a05c5af9a3071dd956;
+all340 repository pins match,699 verified reusable members,173968seconds budget.
+Fresh inference verified: all699 saved members reused in234.411worker seconds,
+then the original failing casePanTS_00002331 reached25/60tiles. Supervisor19823
+and worker21772 remain live under launchd09; no resources/guardian failure.
+This confirms resumed prediction rather than merely startup/reuse. Hourly keeper
+is ACTIVE. Do not duplicate this run or edit its340repository producing pins.
 
 ## October 28 diagnosed geometry blockers — historical
 
