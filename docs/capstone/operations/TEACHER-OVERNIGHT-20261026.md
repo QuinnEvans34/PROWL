@@ -6,7 +6,28 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 power and drive unavailable — latest check
+## October 28 power restored — attempt10 active
+
+User explicitly requested verification and resume after reconnecting AC and drive.
+Both are available. Additive resume_rsuper_affine_after_power_loss_v1.py retains
+attempt09's qualified affine worker; old power launcher would use the older
+worker and is not appropriate here. Sixteen focused power/continuation tests pass.
+All old pins remain intact; no scientific/geometry changes. launchd label
+com.prowl.rsuper-targets-20261028-10 owns supervisor44494; output
+rsuper-full-targets-10, previous09. Startup verifies old pins and completed targets
+before worker dispatch. Do not duplicate or redispatch. Remaining171727seconds;
+original RSS/MPS/output/cache/storage/AC/exclusive-GPU gates remain in force.
+Hourly keeper confirmed ACTIVE. Inspect actual worker/reuse/new tiles before
+claiming fresh inference. Code64dddd0; review in10-dispatch/power-stop-review.json.
+
+Admission passed: all708 completed members verified, request SHA256
+76ccc535646c2ac318a53ce7ccd5a9c8bf34bd10c53648c706caaa9dc316afcc,
+341repository producing pins. Supervisor44494/worker48740 are launchd-owned;
+worker start Wed Oct28 13:55:54 2026. Worker frozen-input verification passed. All708 saved targets restored in255.156s;
+fresh inference confirmed on PanTS_00000147 at25/168tiles. Both processes live,
+no resources failure. Preserve all new pins; hourly keeper remains ACTIVE.
+
+## October 28 power and drive unavailable — historical check
 
 17:45 UTC: macOS still reports battery power (78%, discharging), and PROWL-Data
 is no longer mounted. `diskutil list external physical` lists no external disk.
