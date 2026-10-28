@@ -82,3 +82,14 @@ def test_missing_model_never_downloaded(monkeypatch,tmp_path):
     monkeypatch.setattr(expert,'http',lambda *a,**k:{'models':[]})
     with pytest.raises(RuntimeError,match='No model was downloaded'):expert.prepare()
     assert not any('pull' in a for a in calls)
+
+
+def test_internal_preparation_never_mounts_external_drive(monkeypatch,tmp_path):
+    calls=setup(monkeypatch,tmp_path)
+    c={'storage':'internal','project':'prowl-literature-internal','mount':'/System/Volumes/Data','data':'/expected'}
+    expert.CONFIG.write_text(json.dumps(c))
+    monkeypatch.setattr(expert,'read_config',lambda _:c)
+    monkeypatch.setattr(Path,'is_mount',lambda _:pytest.fail('internal mode must not mount external disk'))
+    expert.prepare()
+    assert not any(a[0]=='diskutil' for a in calls)
+    assert any(a[-1]=='prowl-literature-internal-db-1' and 'start' in a for a in calls)

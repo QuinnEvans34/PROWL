@@ -24,11 +24,20 @@ def read_config(path):
         if not p.is_absolute() or p.resolve()!=p:
             raise ValueError('Absolute nonsymlink paths required')
     mount=Path(c['mount'])
-    if not mount.is_mount() or not Path(c['data']).is_relative_to(mount):
+    storage=c.get('storage','external')
+    if storage not in ('external','internal'):raise ValueError('Unknown storage profile')
+    if storage=='internal':
+        if mount!=Path('/System/Volumes/Data') or not Path(c['data']).is_relative_to(ROOT/'outputs/prowl/literature-internal'):
+            raise ValueError('Dedicated internal data directory required')
+        if not Path(c['data']).is_dir() or Path(c['data']).stat().st_dev!=mount.stat().st_dev:
+            raise ValueError('Internal data volume required')
+        if c.get('project')!='prowl-literature-internal' or c['port']!=55435:
+            raise ValueError('Dedicated internal database identity required')
+    elif not mount.is_mount() or not Path(c['data']).is_relative_to(mount):
         raise ValueError('External data mount required')
     volume=plistlib.loads(subprocess.check_output(['diskutil','info','-plist',str(mount)],timeout=15))
     if volume.get('VolumeUUID')!=c['volume_uuid']:
-        raise ValueError('Wrong external volume')
+        raise ValueError('Wrong data volume')
     if Path(c['password_file']).stat().st_mode & 0o077:
         raise ValueError('Password file must be private')
     return c
@@ -41,7 +50,7 @@ class ComposeFailure(RuntimeError):
 def compose(c,*args):
     env=dict(os.environ,PROWL_DB_PORT=str(c['port']),PROWL_DB_DATA=c['data'],PROWL_DB_PASSWORD_FILE=c['password_file'])
     try:
-        return subprocess.run(['docker','--context','desktop-linux','compose','-p','prowl-literature','-f',str(ROOT/'infra/retrieval/compose.literature.yaml'),*args],env=env,check=True,capture_output=True,timeout=90)
+        return subprocess.run(['docker','--context','desktop-linux','compose','-p',c.get('project','prowl-literature'),'-f',str(ROOT/'infra/retrieval/compose.literature.yaml'),*args],env=env,check=True,capture_output=True,timeout=90)
     except subprocess.CalledProcessError as error:
         detail=error.stderr or b'No Docker diagnostic was returned.'
         if isinstance(detail,bytes):detail=detail.decode('utf-8',errors='replace')
@@ -64,7 +73,7 @@ INTERNAL_FREE_RESERVE_BYTES = 50_000_000_000
 def limits(c):
     if shutil.disk_usage('/System/Volumes/Data').free < INTERNAL_FREE_RESERVE_BYTES:
         raise OSError('Internal storage reserve reached (50 GB required)')
-    if shutil.disk_usage(c['mount']).free < 408*1024**3:
+    if c.get('storage','external')=='external' and shutil.disk_usage(c['mount']).free < 408*1024**3:
         raise OSError('External storage floor/reservation reached (408 GiB required)')
     # Data-size checks use Docker's database size during ingestion; no recursive walk of huge stores.
 

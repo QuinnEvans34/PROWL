@@ -254,3 +254,15 @@ retry, invalid-receipt/origin refusal and preservation of the original revision
 binding after a newer decision.36 related CPU tests pass. [Evidence](../orchestration/REVIEWER-WALKTHROUGH-20261027.md).
 This closes the attachment transport slice; the remaining W04-04 work requires
 live answer/latency checks in an available GPU window and the human walkthrough.
+
+### October28 internal literature availability
+
+W04-04 now uses a separate verified internal working database through the existing
+Prepare button and search service. Full inventory and eight public top-five
+comparisons match before/after restart; real UI Find sources returns five passages.
+A stopped DB reports unavailable, and Prepare restores it without restarting Docker
+or loading the model while teacher owns GPU. External data copy retained.
+[Spec, evidence and rollback](../retrieval/INTERNAL-LITERATURE-SERVICE-2026-10-28.md).
+This closes the external-mount dependency for literature search, not live answer
+quality or latency. Next CPU work is bounded candidate UI coverage and latest
+teacher-to-training handoff review; full targets/GPU qualification still pending.

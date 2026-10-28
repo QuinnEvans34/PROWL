@@ -24,11 +24,11 @@ export default function LocalExpertReadiness({ onStatus }) {
       <button type="button" disabled={Boolean(busy)} onClick={() => check(false)}>{busy === 'status' ? 'Checking status…' : 'Check status'}</button>
     </div>
     <div aria-live="polite">
-      {busy && <p>{busy === 'prepare' ? 'Checking the drive and starting missing services. This can take a few minutes.' : 'Checking local service status.'}</p>}
+      {busy && <p>{busy === 'prepare' ? 'Checking local storage and starting missing services. This can take a few minutes.' : 'Checking local service status.'}</p>}
       {state && <>
         <p>{state.search ? 'Source search is ready.' : 'Source search needs preparation.'} {state.gpu_busy ? 'The teacher is using the GPU. Pause it before testing AI answers; source search can run alongside it.' : state.model && state.search ? 'The local model is loaded and ready for questions.' : 'Prepare the AI expert to load the local model.'}</p>
         <details><summary>Service status</summary><ul>
-          {Object.entries({ drive: 'Data drive and storage', database: 'Literature database', search: 'Search service', ollama: 'Model service', model: 'Answer model loaded' }).map(([key, label]) => <li key={key}>{label}: {state[key] ? 'Ready' : 'Not ready'}</li>)}
+          {Object.entries({ drive: 'Literature storage', database: 'Literature database', search: 'Search service', ollama: 'Model service', model: 'Answer model loaded' }).map(([key, label]) => <li key={key}>{label}: {state[key] ? 'Ready' : 'Not ready'}</li>)}
         </ul></details>
       </>}
       {error && <p role="alert">{error}</p>}
