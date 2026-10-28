@@ -141,3 +141,16 @@ All4615 prior pin values retained; same teacher/train/preprocessing/geometry and
 non-time resource limits. Local verification evidence:
 `outputs/prowl/teacher-ac-resume-20261027/{continuation,fresh-progress}.json`.
 Twenty continuation/watchdog tests passed. Hourly heartbeat remains ACTIVE.
+
+
+## Attempt08 verified worker handoff
+
+Replacement08b passed startup checks; supervisor76252/worker77956 are launchd-owned.
+Request SHA25618bcbff04db5ad1689fa479975e1a2d938a4d36e677b4cd6843329acbb4f1b5a;
+all330 repository producing pins match. All579 saved targets were reverified/reused
+in212.097 worker seconds. Budget203341seconds, output30GiB/RSS12GiB/MPS12GiB;
+combined cache32GiB unchanged. Reuse count is not new inference. Inspect tile journal
+for fresh prediction progress. Both older attempts and failed08 dispatch retained.
+
+Fresh inference confirmed: PanTS_00007555 reached25/175tiles after reuse.
+Hourly keeper is ACTIVE; demo-pause automation remains PAUSED. No student training.
