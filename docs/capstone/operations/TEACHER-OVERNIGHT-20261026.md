@@ -6,7 +6,31 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 27 professor-demo pause — current
+## October 27 post-demo resume — current
+
+User explicitly authorized resume and hourly overnight checks. New one-shot launchd
+job `com.prowl.rsuper-targets-20261027-08b` invokes the additive
+`scripts/diagnostics/resume_rsuper_targets_v3.py`, previous attempt07 and verified
+`rsuper-demo-pause-20261027-01/receipt.json`, output `rsuper-full-targets-08`.
+Startup verifies all previous pins and579 completed targets before worker dispatch;
+inspect process/progress evidence before claiming fresh inference. Same frozen
+teacher/cohort/geometry; original cumulative budget203341seconds remains.
+
+Hourly keep-prowl-teacher-running is ACTIVE again. The one-time professor-demo
+pause automation stays PAUSED. No Ollama models were loaded at resume, AC attached.
+Do not duplicate this job or alter producing pins. Prior pause instructions below
+are historical; this new explicit resume supersedes them for teacher generation.
+
+The first08 dispatch stopped before publishing a request or running inference:
+retained NPZs1.047903GiB plus original31GiB output reservation exceed the32GiB
+combined ceiling. Logs preserved in the original08 launchd registration/dispatch.
+The additive v3 continuation tightens only per-attempt output to at most30GiB;
+combined32GiB, RSS, AC, storage, frozen worker and scientific pins are unchanged.
+Smaller existing output limits remain smaller. Eleven CPU continuation tests pass
+in5.63s; original files remain intact. Replacement08b repeats all admission checks;
+never blindly retry a failed stage or change the same producing script in place.
+
+## October 27 professor-demo pause — historical
 
 User scheduled a pause around14:00MDT. Attempt07 was stopped through the existing
 identity-checked pause command; normal SIGTERM cleanup succeeded, no forced kill.
