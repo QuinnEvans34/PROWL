@@ -6,7 +6,29 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 27 post-demo resume — current
+## October 28 geometry stop — current
+
+Attempt08 stopped after699/1333 at the preprocessing geometry assertion in
+`build_rsuper_full_targets_v2.py:42`, before prediction for the next ordered case,
+`PanTS_00002331`. Actual preprocessed shape/affine did not satisfy the comparison
+with `metadata_grid(parent_geometry)`; the traceback does not identify which part
+mismatched. Root cause remains unqualified. Do not bypass the assertion, exclude
+the case, change geometry or blindly continue this attempt.
+
+Resources report exit1, workers_reaped=true,29372.424736 supervised seconds and
+3749167104bytes peak owned RSS. Supervisor76252/worker77956/guardian are absent;
+launchd08b is stopped. All330 repository producing pins match. Original cumulative
+budget remaining is173968seconds after charging ceil(elapsed). AC and both drives
+are available; this is not an AC/storage stop. Preserve all outputs and failure
+logs. Hourly checks remain active but must not retry this unresolved geometry failure.
+All699 completed records/payloads passed SHA256, size, uint16 dtype and native-shape
+verification using the existing completed_members checker. The initial checker
+invocation lacked the existing jsonschema dependency path and read no payloads;
+the corrected environment completed successfully without installing anything.
+Next: bounded comparison of the failing scan header, frozen metadata and geometry
+calculation before proposing any separately qualified correction. No student launch.
+
+## October 27 post-demo resume — historical
 
 User explicitly authorized resume and hourly overnight checks. New one-shot launchd
 job `com.prowl.rsuper-targets-20261027-08b` invokes the additive
