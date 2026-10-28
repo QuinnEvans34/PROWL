@@ -6,7 +6,7 @@ import { savedPredictionPlugin } from './savedPredictionPlugin.js'
 
 // These public contracts are imported by the UI from outside its Vite root.
 const evidenceContracts = [
-  'guided-fixture-v1.json', 'guided-fixture-v2.json', 'evidence-wording-v1.json',
+  'single-summary-candidate-v1.json', 'guided-fixture-v1.json', 'guided-fixture-v2.json', 'evidence-wording-v1.json',
   'research-questions-v1.json', 'development-search-v1.json',
   'development-search-v3-records.json', 'source-facts-disease-v1.json',
   'development-volume-search-v1.json', 'source-facts-volume-v1.json',

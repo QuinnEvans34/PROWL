@@ -1,5 +1,6 @@
 import LocalExpertReadiness from './LocalExpertReadiness.jsx'
 import { serializeLiteratureCapture, downloadLiteratureCapture } from '../lib/literatureCapture.js'
+import { validateSingleSummary } from './singleSummary'
 import { validateGeneralExtract } from './generalExtract'
 import { useEffect, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
@@ -105,6 +106,7 @@ export async function previewQuestion(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  if (result?.schema_version === 'prowl-single-summary-response-v1') return validateSingleSummary(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-general-extract-response-v1') return validateGeneralExtract(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-evidence-answer-response-v1') return validateEvidenceAnswer(result, request, validateSearch)
   if (result?.schema_version === 'prowl-study-answer-response-v1') return validateStudyAnswer(result, request, validateSourceSearch)
@@ -369,6 +371,7 @@ export default function LiteratureSearchPanel({
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
         <p>{result.message || (result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
+          : result.answer?.provenance === 'model_synthesized_passages' ? 'AI summary · Preview · Check the linked sources for details.'
           : result.answer?.provenance === 'model_selected_source_sentences' ? 'Source-based answer · The local AI selected these quotations; wording is copied from the research.'
           : result.answer?.provenance === 'local_model_composition' ? 'Local AI summary · Select a citation to inspect its evidence.'
           : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
@@ -384,7 +387,7 @@ export default function LiteratureSearchPanel({
           {captureNotice && <p role="status">{captureNotice}</p>}
         </details>}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
-          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
+          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer_policy === 'single-pass-summary-v1' ? 'Single-call summary · Citation links checked; factual support requires review' : result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
         </details>}
       </article>}

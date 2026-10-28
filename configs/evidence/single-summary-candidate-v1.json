@@ -1,0 +1,6 @@
+{
+  "policy": "single-pass-summary-v1",
+  "prompt_sha256": "4a42bb415293e67ebff35b739138f66fad68b34b8ba3d5867587d489c313a860",
+  "model": "qwen3:8b",
+  "model_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+}
