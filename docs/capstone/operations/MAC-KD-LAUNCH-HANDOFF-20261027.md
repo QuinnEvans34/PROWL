@@ -265,3 +265,26 @@ Combined qualification orchestration, numerical exercise and fresh-process recov
 outputs/prowl/testing/kd-final-admission-20261027-01. No GPU stages launched.
 Teacher07 remains live at557/1333/current100/210tiles;329 protected repository
 hashes match. The modified qualification module is outside those producing pins.
+
+## October 28: current continuation provenance review
+
+Current producer is rsuper-full-targets-10, launchd label
+com.prowl.rsuper-targets-20261028-10. Its request SHA256 is
+76ccc535646c2ac318a53ce7ccd5a9c8bf34bd10c53648c706caaa9dc316afcc.
+Earlier producer references above are historical; use the completed producer's
+actual request/result/resources for admission, never substitute an older request.
+
+Read-only review confirms publication binds the entire producer request, including
+the qualified preprocessing_extension and continuation budget, into both the
+manifest and admission receipt. The shared preprocessing_sha256 describes the
+baseline preprocessing_policy only; it must not be presented alone as identifying
+the affine extension. Full producer-request binding preserves that distinction,
+and executor preparation rechecks the producer records and manifest bindings.
+
+A synthetic extension/continuation test proves the request binding survives
+publication and a changed extension is rejected before a new output is created.
+Combined with existing publication tests: 14 passed in 5.19 seconds (two upstream
+Torch deprecation warnings). No actual target admission, CT/mask reads or GPU
+qualification occurred. Admission still requires a complete, successful, reaped
+producer; real executor qualification still requires an available GPU. Teacher
+progress reached 725/1333 during this work, with all 341 repository pins intact.

@@ -39,3 +39,35 @@ it.each(['quote','rank','provenance','coverage'])('rejects invalid summary %s',k
  if(kind==='coverage')r.answer.coverage='none'
  expect(()=>validateAnswer(r,request)).toThrow()
 })
+
+it.each(['page','panel'])('shows partial and missing-evidence limits in %s',async variant=>{
+ const user=userEvent.setup();let gap=false
+ render(<LiteratureSearchPanel variant={variant} search={async r=>{
+   const result=summary(r)
+   result.answer.coverage=gap?'none':'partial'
+   result.answer.limitation=gap?'The retrieved sources do not provide that range.':'The retrieved sources do not establish a normal range.'
+   if(gap){result.answer.status='insufficient';result.answer.claims=[]}
+   return result
+ }}/>)
+ const input=screen.getByLabelText('Literature question')
+ await user.type(input,'What does the pancreas do and what is the normal range?')
+ await user.click(screen.getByRole('button',{name:'Ask question',exact:true}))
+ expect(await screen.findByText('The retrieved sources do not establish a normal range.')).toBeTruthy()
+ gap=true;await user.clear(input);await user.type(input,'What is the pancreatic stiffness range?')
+ await user.click(screen.getByRole('button',{name:'Ask question',exact:true}))
+ expect(await screen.findByText('The retrieved sources do not provide that range.')).toBeTruthy()
+ expect(screen.queryByText('It releases enzymes to help digest food.')).toBeNull()
+ await user.click(screen.getByRole('button',{name:'Read passages',exact:true}))
+ expect(screen.getByText(quote)).toBeTruthy()
+})
+
+it.each(['page','panel'])('preserves source access after candidate failure in %s',async variant=>{
+ const user=userEvent.setup();render(<LiteratureSearchPanel variant={variant} search={async r=>{
+   const result=summary(r);result.answer=null;result.generation='unavailable';result.message='The summary could not be completed. You can still inspect the retrieved passages.';return result
+ }}/>)
+ await user.type(screen.getByLabelText('Literature question'),'What does the pancreas do?')
+ await user.click(screen.getByRole('button',{name:'Ask question',exact:true}))
+ expect(await screen.findByText(/summary could not be completed/)).toBeTruthy()
+ expect(screen.getByText(quote)).toBeTruthy()
+ expect(screen.queryByRole('button',{name:'Answer',exact:true})).toBeNull()
+})

@@ -62,3 +62,17 @@ After an authorized teacher pause, verified cleanup and GPU release:
 If the single call changes qualifications or produces unsupported synthesis,
 retain that failure. Do not treat a valid citation ID or exact quote as a pass for
 its associated paraphrase, and do not add unbounded retries to conceal it.
+
+## Additional CPU interface checks, October 28
+
+Research and Workbench variants now have explicit synthetic tests for partial
+answers, evidence gaps and failed summaries. Limitations remain visible, an old
+answer does not survive a replacement gap response, and retrieved passages remain
+accessible after failure. Loading copy says “an answer” rather than promising a
+“checked answer” before review. Candidate, cancellation/stale-response and scan
+answer suites: 75 passed in 2.67 seconds. These are interface checks, not model
+quality or latency results; the candidate remains unpromoted while the teacher runs.
+
+The internal literature service is now qualified separately; see
+INTERNAL-LITERATURE-SERVICE-2026-10-28.md. This resolves step 3's storage dependency,
+but does not authorize a competing GPU call.
