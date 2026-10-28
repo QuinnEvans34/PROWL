@@ -183,6 +183,7 @@ def handler_for(service, source_search=None, record_answers=None):
             self.reply(200, {'mode':'local_development_excerpts','backend':'checked',
                 'generation_checked':False,'collection':service.config['collection'],
                 'storage_identity':getattr(service,'storage_identity',None),
+                'answer_gpu_reserved':getattr(service,'answer_gpu_reserved',False) is True,
                 'answer_policy':getattr(record_answers, 'policy', 'source-record-answer-v1') if record_answers else POLICY,
                 'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
                 'answer_retrieval_policy':(source_search if record_answers else service).config.get('retriever', 'dense-exact-cosine-v1')})

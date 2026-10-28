@@ -40,7 +40,7 @@ def gpu_busy():
 
 def status():
     result = dict(drive=False, database=False, search=False, ollama=False,
-                  model=False, gpu_busy=gpu_busy())
+                  model=False, gpu_busy=answer_gpu_busy())
     expected = None
     try:
         c = read_config(CONFIG); limits(c); result['drive'] = True
@@ -55,6 +55,21 @@ def status():
         result['model'] = any(m.get('name') == MODEL and m.get('digest') == MODEL_SHA for m in models)
     except Exception: pass
     return result
+
+
+def answer_gpu_busy():
+    """Candidate owns the exclusive lock while serving; other owners block answers."""
+    if not gpu_busy(): return False
+    try:
+        c = read_config(CONFIG)
+        health = http(8016, 'literature-search/health')
+        reserved = (health.get('backend') == 'checked'
+                    and health.get('storage_identity') == digest(c)
+                    and health.get('answer_policy') == 'single-pass-summary-v1'
+                    and health.get('answer_gpu_reserved') is True)
+        return not reserved
+    except Exception:
+        return True
 
 
 def backend_ready(identity):
@@ -144,7 +159,7 @@ if __name__ == '__main__':
     try:
         action = sys.argv[1]
         if action not in ('status', 'prepare', 'gpu'): raise ValueError('Unknown action')
-        value = {'gpu_busy': gpu_busy()} if action == 'gpu' else prepare() if action == 'prepare' else status()
+        value = {'gpu_busy': answer_gpu_busy()} if action == 'gpu' else prepare() if action == 'prepare' else status()
         print(json.dumps(value))
     except Exception as e:
         print(json.dumps({'error': str(e) if isinstance(e, RuntimeError) else 'Preparation could not finish. Check the drive and local service logs.'}))

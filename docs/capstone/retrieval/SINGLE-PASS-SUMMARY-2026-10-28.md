@@ -76,3 +76,25 @@ quality or latency results; the candidate remains unpromoted while the teacher r
 The internal literature service is now qualified separately; see
 INTERNAL-LITERATURE-SERVICE-2026-10-28.md. This resolves step 3's storage dependency,
 but does not authorize a competing GPU call.
+
+## Candidate GPU ownership and UI admission
+
+CPU review found that the candidate's lifetime exclusive GPU lock would be
+misidentified by the UI proxy as teacher activity, blocking all candidate answers.
+The candidate now advertises its answer reservation in health only inside the
+exclusive-lock lifetime. Its server closes before that reservation is cleared and
+the lock is released. Ordinary services advertise no reservation.
+
+The UI admission helper allows a busy lock only when the loopback8016 backend is
+healthy, matches the active storage identity, has the single-pass candidate policy
+and explicitly reports its answer reservation. Any missing/mismatched/failed
+health response blocks answers. The raw GPU-lock check remains unchanged for
+preparation, so Prepare cannot load another model during that reservation.
+On test port8021 the candidate can be called directly; UI admission applies only
+after the separately authorized8016 test-window switch.
+
+69 CPU tests pass across candidate ownership, summary generation contracts,
+development search and readiness. Synthetic checks cover real file-lock exclusion,
+teacher-owned startup rejection and cleanup after a server exception. Live helper
+still reports gpu_busy=true for the running teacher. No candidate was launched,
+no real model answer was generated, and no quality/promotion claim follows.
