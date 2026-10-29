@@ -6,7 +6,18 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 authorized resume — attempt11 admission underway
+## October 29 AC interruption — current state
+
+Attempt11 stopped during restoration when power changed from AC to battery.
+worker.log explicitly ends RuntimeError('AC power required'); resources show
+100.404903seconds, exit1, workers_reaped=true. Supervisor99986/worker5379 absent.
+203 targets were restored before stopping; original942 verified targets remain
+in attempt10. This is not a loss of completed predictions. Preserve attempt11.
+Charge101seconds, leaving108964seconds of the original allowance for any later
+qualified continuation. Reconnect AC before resuming; no bypass or automatic retry.
+Hourly monitoring remains ACTIVE; no student training or fresh inference occurred.
+
+## October 29 authorized resume — attempt11 historical launch
 
 User requested resume after class pause. AC and drive are available; no old
 teacher workers or loaded Ollama models were found. New one-shot launchd label
@@ -19,6 +30,12 @@ targets before publishing a request/starting its worker. Do not redispatch.
 Remaining allowance109065seconds; all other resource/geometry gates retained.
 Hourly keeper is ACTIVE. Inspect request/process/progress for actual dispatch and
 fresh tiles before claiming inference. No student training or recipe change.
+
+Admission passed: all942 saved targets verified. Request SHA256
+c0467dbd7d32dc8ce25723123a828945d912874320a4a84e6bae66e9c1317e9f;
+342 repository producing pins match. Supervisor99986/worker5379 are launchd-owned,
+worker start Thu Oct29 08:19:43 2026. Worker is restoring the verified targets;
+watch progress/tiles for fresh inference rather than counting reuse as new work.
 
 ## October 29 class pause — historical
 
