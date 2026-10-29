@@ -223,3 +223,29 @@
 .pw-app .literature-search__history > p { color: var(--pw-text-faint); font-size: 12px; }
 .pw-app .literature-search__history summary { overflow-wrap: anywhere; line-height: 1.6; }
 .pw-app .literature-search__history-body { display: grid; gap: 12px; padding: 12px 0; }
+
+/* ---------- Ask panel: conversation layout ----------
+   Earlier responses, then the current one, then the composer pinned to the bottom of
+   the panel. DOM order is unchanged (composer first) so keyboard and screen-reader
+   users still reach the question box immediately. */
+.pw-app .literature-search--panel { display: flex; flex-direction: column; min-height: 100%; }
+.pw-app .literature-search--panel > .literature-search__history { order: 1; }
+.pw-app .literature-search--panel > [aria-live] { order: 2; }
+.pw-app .literature-search--panel > .literature-search__interpretation,
+.pw-app .literature-search--panel > [role='status'] { order: 3; }
+.pw-app .literature-search--panel > form {
+  order: 4; position: sticky; bottom: -20px; z-index: 1; margin-top: auto;
+  padding: 12px 0 14px; background: linear-gradient(to bottom, rgba(13, 15, 18, 0), var(--pw-bg) 14px);
+}
+.pw-app .literature-search--panel > .literature-search__question-ideas { order: 5; }
+.pw-app .literature-search--panel > small { order: 6; }
+.pw-app .literature-search--panel textarea { min-height: 72px; }
+.pw-app .literature-search--panel .literature-search__tools .local-expert-readiness,
+.pw-app .literature-search--panel .literature-search__tools > :not(summary):not(.literature-search__actions) { margin-top: 10px; }
+.pw-app .literature-search--panel .literature-search__history { display: grid; gap: 10px; }
+.pw-app .literature-search--panel .literature-search__history > p { margin: 0; color: var(--pw-text-faint); font-size: 12px; }
+.pw-app .literature-search--panel .literature-search__question {
+  justify-self: end; max-width: 92%; margin: 0; padding: 8px 11px; border-radius: 12px 12px 4px 12px;
+  background: var(--pw-accent-soft); border: 1px solid var(--pw-accent-line); color: var(--pw-text); font-size: 13px;
+}
+.pw-app .literature-search--panel .literature-search__question small { display: block; color: var(--pw-text-faint); font-size: 11px; }

@@ -170,6 +170,8 @@ export default function LiteratureSearchPanel({
   measure = loadScanMeasurements,
   downloadCapture = downloadLiteratureCapture,
   suggestions = variant === 'panel' ? SUGGESTED_QUESTIONS : [],
+  // { text, token } from the workbench: fills the question box (never sends it).
+  draftRequest = null,
 }) {
   const panel = variant === 'panel'
   const measurementKey = measurementContext?.key ?? null
@@ -296,6 +298,12 @@ export default function LiteratureSearchPanel({
     } catch { if (active.current === control) setPhase('error') }
     finally { clearTimeout(timeout); if (active.current === control) active.current = null }
   }
+  useEffect(() => {
+    if (!draftRequest?.text) return
+    change(draftRequest.text)
+    const frame = window.requestAnimationFrame?.(() => questionInput.current?.focus())
+    return () => { if (frame) window.cancelAnimationFrame?.(frame) }
+  }, [draftRequest?.token]) // eslint-disable-line react-hooks/exhaustive-deps
   const staleContext = result && askedFor && askedFor.key !== contextKey
   return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
     {panel ? <>
@@ -308,7 +316,7 @@ export default function LiteratureSearchPanel({
     </>}
     {(!panel || (phase !== 'loading' && !result && !scanResult)) && <p className="literature-search__notice">{panel ? 'Development preview · Do not enter patient information.' : measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>}
     {!panel && <p className="literature-search__scope">General literature · No scan attached</p>}
-    <LocalExpertReadiness onStatus={setReadiness} />
+    {!panel && <LocalExpertReadiness onStatus={setReadiness} />}
     <form className="guided-evidence__body" onSubmit={submit}>
       <label htmlFor="literature-question">Literature question</label>
       <textarea ref={questionInput} id="literature-question" rows={3} maxLength={500} value={question}
@@ -326,10 +334,13 @@ export default function LiteratureSearchPanel({
         {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
-      {panel ? phase !== 'loading' && <details className="literature-search__tools"><summary>Search tools</summary><div className="literature-search__actions">
+      {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
-      </div></details> : <div className="literature-search__actions">
+      </div>
+        {/* Service controls stay mounted (readiness feeds the send button) but out of the way. */}
+        <LocalExpertReadiness onStatus={setReadiness} />
+      </details> : <div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>}
@@ -373,7 +384,7 @@ export default function LiteratureSearchPanel({
         <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'I’m waiting for the local research service to return an answer and supporting sources.'}</p>
         <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
-      {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” above. If the teacher is running, use “Find sources” until it is paused.</p>}
+      {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
       {result && <article className="literature-search__answer-card" aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>

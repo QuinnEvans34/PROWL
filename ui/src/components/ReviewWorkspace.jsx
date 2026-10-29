@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { cloneElement, isValidElement, lazy, Suspense, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import {
   Activity,
   Box,
@@ -14,6 +14,8 @@ import {
   Focus,
   LoaderCircle,
   Maximize,
+  Maximize2,
+  Minimize2,
   Move,
   PanelLeftClose,
   PanelLeftOpen,
@@ -29,6 +31,7 @@ import {
 import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
 import { REVIEW_COLORS, objectLabel, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
 import FindingsPanel from './FindingsPanel.jsx'
+import StructurePopover from './StructurePopover.jsx'
 import ReviewSummary from './ReviewSummary.jsx'
 import { draftKey, hasHumanContent, predictionIdentity } from '../lib/summaryDraft.js'
 import { PantherBadge } from '../shell/Brand.jsx'
@@ -156,6 +159,11 @@ export default function ReviewWorkspace({
   const [panelOpen, setPanelOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1024))
   const [panelTab, setPanelTab] = useState('findings')
   const [snapOpen, setSnapOpen] = useState(false)
+  const [panelWide, setPanelWide] = useState(false)
+  const [askDraft, setAskDraft] = useState(null)
+  const [popAnchor, setPopAnchor] = useState(null)
+  const viewerRef = useRef(null)
+  const lastPointerRef = useRef(null)
   const [navigation, setNavigation] = useState({
     indices: { axial: 0, coronal: 0, sagittal: 0 },
     totals: { axial: 1, coronal: 1, sagittal: 1 },
@@ -412,6 +420,30 @@ export default function ReviewWorkspace({
     setPanelOpen(true)
   }
 
+  // Fill the Ask box with a general literature question; the reviewer decides whether to send.
+  function askAbout(text) {
+    setAskDraft({ text, token: Date.now() })
+    openPanel('ask')
+  }
+
+  const selectionKey = state.selectedObject
+    ? `${state.selectedObject.source}:${state.selectedObject.anatomy}:${state.selectedObject.region || ''}`
+    : ''
+  // Anchor the structure card near the click that selected it (if it was a click).
+  useEffect(() => {
+    if (!selectionKey) { setPopAnchor(null); return }
+    const viewer = viewerRef.current
+    const pointer = lastPointerRef.current
+    if (!viewer || !pointer || Date.now() - pointer.t > 1500) { setPopAnchor(null); return }
+    const width = viewer.clientWidth
+    const height = viewer.clientHeight
+    const cardWidth = 292
+    const cardHeight = 340
+    const left = pointer.x + 16 + cardWidth > width ? Math.max(8, pointer.x - 16 - cardWidth) : pointer.x + 16
+    const top = Math.max(8, Math.min(height - cardHeight - 8, pointer.y - 24))
+    setPopAnchor({ left: Math.round(left), top: Math.round(top) })
+  }, [selectionKey])
+
   // 3D camera presets live behind one small "Views" button instead of a grid that
   // permanently covered the corner of the render.
   const snapPad = state.settingsOpen ? null : (
@@ -459,6 +491,7 @@ export default function ReviewWorkspace({
     'pw-wb',
     studyListOpen ? '' : 'pw-wb--list-closed',
     panelOpen ? '' : 'pw-wb--panel-closed',
+    panelOpen && panelWide ? 'pw-wb--panel-wide' : '',
   ].filter(Boolean).join(' ')
 
   return (
@@ -611,7 +644,14 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-        <div className="pw-viewer">
+        <div
+          className="pw-viewer"
+          ref={viewerRef}
+          onPointerDownCapture={(event) => {
+            const rect = viewerRef.current?.getBoundingClientRect()
+            if (rect) lastPointerRef.current = { x: event.clientX - rect.left, y: event.clientY - rect.top, t: Date.now() }
+          }}
+        >
           <ViewerSuspense>
             {state.viewMode === 'split' ? (
               <div className="pw-split">
@@ -638,24 +678,24 @@ export default function ReviewWorkspace({
           {state.viewMode === '3d' && snapPad}
 
           {state.selectedObject && (
-            <div className="viewer-selection-card pw-selection" role="status">
-              <i style={{
-                '--selection-color': state.selectedObject.source === 'difference'
-                  ? REVIEW_COLORS.difference[state.selectedObject.region]
-                  : REVIEW_COLORS[state.selectedObject.source][state.selectedObject.anatomy],
-              }} />
-              <div>
-                <small>Focused structure</small>
-                <strong>{selectedLabel}</strong>
-              </div>
-              <Segmented
-                label="Focus treatment"
-                value={state.focusTreatment}
-                onChange={(value) => dispatch({ type: 'SET_FOCUS_TREATMENT', value })}
-                options={[['context', 'Context'], ['isolate', 'Isolate']]}
-              />
-              <button type="button" className="pw-icon-btn" onClick={() => dispatch({ type: 'CLEAR_SELECTION' })} aria-label="Clear structure focus"><X size={14} /></button>
-            </div>
+            <StructurePopover
+              object={state.selectedObject}
+              anchor={popAnchor}
+              finding={finding}
+              overlap={overlap}
+              comparing={comparing}
+              gtHasLesion={Boolean(caseData.gt_has_lesion)}
+              onAsk={askAbout}
+              onClose={() => dispatch({ type: 'CLEAR_SELECTION' })}
+              focusControl={(
+                <Segmented
+                  label="Focus treatment"
+                  value={state.focusTreatment}
+                  onChange={(value) => dispatch({ type: 'SET_FOCUS_TREATMENT', value })}
+                  options={[['context', 'Show context'], ['isolate', 'Isolate']]}
+                />
+              )}
+            />
           )}
 
 
@@ -878,6 +918,21 @@ export default function ReviewWorkspace({
             <h2>PROWL Assistant</h2>
             <p>Evidence alongside your expertise.</p>
           </div>
+          <button
+            type="button"
+            className="pw-icon-btn pw-panel__widen"
+            onClick={() => {
+              // A wide assistant needs the room: tuck the study list away and re-dock any open card.
+              if (!panelWide) setStudyListOpen(false)
+              setPopAnchor(null)
+              setPanelWide((wide) => !wide)
+            }}
+            aria-pressed={panelWide}
+            aria-label={panelWide ? 'Narrow assistant panel' : 'Widen assistant panel'}
+            title={panelWide ? 'Narrow the assistant' : 'Widen the assistant for reading answers'}
+          >
+            {panelWide ? <Minimize2 size={15} aria-hidden="true" /> : <Maximize2 size={15} aria-hidden="true" />}
+          </button>
           <button type="button" className="pw-icon-btn pw-panel__close" onClick={() => setPanelOpen(false)} aria-label="Close assistant panel" title="Close assistant panel">
             <X size={16} aria-hidden="true" />
           </button>
@@ -925,6 +980,7 @@ export default function ReviewWorkspace({
             ranges={navigation.ranges}
             analysisFailed={analysisFailed}
             onShowInViewer={focusStructure}
+            onAsk={askAbout}
             onCompare={compareWithReference}
             reviewStatus={reviewStatus}
             onSetReviewStatus={onSetReviewStatus}
@@ -933,7 +989,7 @@ export default function ReviewWorkspace({
           />
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-ask" aria-labelledby="pw-tab-ask" hidden={panelTab !== 'ask'}>
-          {askPanel}
+          {isValidElement(askPanel) ? cloneElement(askPanel, { draftRequest: askDraft }) : askPanel}
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-summary" aria-labelledby="pw-tab-summary" hidden={panelTab !== 'summary'}>
           {summaryStore ? (
