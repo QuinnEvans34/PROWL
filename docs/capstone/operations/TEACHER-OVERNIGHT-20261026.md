@@ -6,7 +6,21 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 AC interruption — current state
+## October 29 AC restored — attempt12 admission underway
+
+User confirmed charger reconnected; AC verified, no teacher or Ollama model live.
+One-shot launchd com.prowl.rsuper-targets-20261029-12 invokes additive
+resume_rsuper_affine_restore_v1.py, previous11, output rsuper-full-targets-12,
+reuse-source10. Preserves the verified942 ancestor targets, checking ancestor
+request binding, exact recipe and partial-output identity before reuse. Failure11
+and all prior pins remain intact;101seconds charged,108964seconds remaining.
+Six focused restoration/power tests pass. Perattempt output ceiling tightened to
+29GiB to retain the32GiB combined limit alongside preserved attempts. Other limits,
+qualified affine worker and scientific recipe unchanged. Do not duplicate dispatch.
+Hourly keeper remains ACTIVE. Inspect request/process/reuse/tiles to verify launch;
+admission is not fresh prediction work. No student training.
+
+## October 29 AC interruption — historical
 
 Attempt11 stopped during restoration when power changed from AC to battery.
 worker.log explicitly ends RuntimeError('AC power required'); resources show
