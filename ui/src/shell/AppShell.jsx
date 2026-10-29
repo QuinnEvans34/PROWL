@@ -6,7 +6,7 @@ const NAV = [
   ['studies', 'Studies'],
   ['workbench', 'Workbench'],
   ['predict', 'Analyze'],
-  ['saved', 'Saved reviews'],
+  ['saved', 'Saved reviews', 'Saved'],
   ['research', 'Research'],
 ]
 
@@ -22,7 +22,7 @@ function ServiceStatus({ status, view }) {
   const labels = STATUS_LABELS[view] || STATUS_LABELS.workbench
   const label = labels[status] || labels.checking
   return (
-    <span className={`pw-service pw-service--${status}`} role="status" aria-live="polite">
+    <span className={`pw-service pw-service--${status}`} role="status" aria-live="polite" title={label}>
       <i aria-hidden="true" />
       <span>{label}</span>
     </span>
@@ -42,7 +42,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
       <header className="pw-header">
         <Wordmark onClick={(event) => go(event, 'studies')} />
         <nav className="pw-nav" aria-label="Primary">
-          {NAV.map(([view, label]) => (
+          {NAV.map(([view, label, short]) => (
             <a
               key={view}
               href={hrefFor(view === 'workbench' ? { view, study: activeStudy } : { view })}
@@ -50,7 +50,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
               aria-current={current === view ? 'page' : undefined}
               onClick={(event) => go(event, view)}
             >
-              {label}
+              {short ? <><span className="pw-nav__full">{label}</span><span className="pw-nav__short" aria-hidden="true">{short}</span></> : label}
             </a>
           ))}
         </nav>

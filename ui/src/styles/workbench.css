@@ -409,7 +409,9 @@
 }
 @media (max-width: 640px) {
   .pw-toolbar, .pw-layerbar { gap: 6px; padding: 6px 8px; }
-  .pw-studybar { gap: 8px; padding: 6px 8px; }
+  .pw-studybar { gap: 8px; padding: 6px 8px; flex-wrap: wrap; }
+  .pw-studybar__actions { margin-left: auto; }
+  .pw-toolbar { flex-wrap: wrap; }
   .pw-studybar__actions .pw-btn--ghost, .pw-studybar__id .pw-tag { display: none; }
   .pw-studybar__id h1 { font-size: 14px; }
   .pw-slicebar__legend, .pw-viewer__hint, .pw-layerbar__goto > span { display: none; }

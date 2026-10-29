@@ -16,7 +16,7 @@ import { PantherBadge } from '../shell/Brand.jsx'
 const STATUS = {
   analyzing: ['running', 'Analysis running'],
   ready: ['ready', 'Prediction ready'],
-  saved: ['image', 'Image ready · saved prediction'],
+  saved: ['image', 'CT first · prediction saved'],
   image: ['image', 'Image ready'],
 }
 
@@ -41,6 +41,9 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
   }, [studies, query, reference, kind])
 
   const filtered = rows.length !== studies.length
+  // Shared series facts are stated once in the header instead of on every row.
+  const spacings = [...new Set(studies.map((study) => study.spacingLabel))]
+  const sharedSpacing = spacings.length === 1 ? spacings[0] : null
 
   return (
     <main className="pw-page pw-studies" aria-labelledby="studies-title">
@@ -50,7 +53,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
           <h1 className="pw-display">A clearer view. A considered review.</h1>
           <p className="pw-lede">Bring your study, explore the pancreas, and keep the evidence close.</p>
           <div className="pw-welcome__actions">
-            <button type="button" className="pw-btn pw-btn--primary" onClick={onImport}>
+            <button type="button" className={`pw-btn ${importAvailable ? 'pw-btn--primary' : 'pw-btn--secondary'}`} onClick={onImport}>
               <Plus size={16} aria-hidden="true" /> Import CT study
             </button>
             {!importAvailable && <span className="pw-hint">DICOM import is not connected yet · prepared studies below are ready to review</span>}
@@ -65,7 +68,9 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
         <div className="pw-section__head">
           <div>
             <h2 id="studies-title">Studies</h2>
-            <p className="pw-muted">{studies.length} prepared CT {studies.length === 1 ? 'study' : 'studies'} available on this workstation.</p>
+            <p className="pw-muted">
+              {studies.length} prepared abdominal CT {studies.length === 1 ? 'study' : 'studies'} on this workstation{sharedSpacing ? ` · ${sharedSpacing}` : ''}.
+            </p>
           </div>
           <div className="pw-filters" role="search">
             <label className="pw-search">
@@ -98,8 +103,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
             <thead>
               <tr>
                 <th scope="col">Study</th>
-                <th scope="col">Series</th>
-                <th scope="col">Reference</th>
+                <th scope="col" title="Reference annotations stay hidden until you choose to compare">Reference</th>
                 <th scope="col">Status</th>
                 <th scope="col"><span className="pw-sr-only">Open</span></th>
               </tr>
@@ -117,18 +121,14 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
                           <strong className="pw-mono-id">{study.displayId}</strong>
                           <small>
                             {study.kind === 'validation' ? 'Validation example' : 'Prepared study'}
+                            {!sharedSpacing && ` · ${study.spacingLabel}`}
                             {active && ' · Open in workbench'}
                           </small>
                         </span>
                       </div>
                     </td>
                     <td>
-                      <span className="pw-cell-main">Abdomen CT</span>
-                      <small>{study.spacingLabel}</small>
-                    </td>
-                    <td>
                       <span className="pw-cell-main">{study.referenceAvailable ? 'Available' : 'Not provided'}</span>
-                      <small>{study.referenceAvailable ? 'Optional · hidden until compared' : 'Review without reference'}</small>
                     </td>
                     <td>
                       <span className={`pw-status pw-status--${tone}`}><i aria-hidden="true" />{label}</span>
@@ -153,12 +153,16 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
               })}
               {!rows.length && (
                 <tr className="pw-table__empty">
-                  <td colSpan={5}>No studies match these filters.</td>
+                  <td colSpan={4}>No studies match these filters.</td>
                 </tr>
               )}
             </tbody>
           </table>
         </div>
+        <p className="pw-fineprint">
+          Validation examples open with their saved prediction; prepared studies open on the CT alone until you show the saved prediction.
+          Reference annotations, when available, stay hidden until you choose to compare.
+        </p>
         <p className="pw-fineprint">
           Study IDs come from the prepared PanTS research set. No patient names or demographics are shown or stored.
           “Marked reviewed” labels are local browser notes, not durable review records.

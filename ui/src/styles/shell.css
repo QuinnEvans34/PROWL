@@ -142,7 +142,7 @@ body {
 }
 .pw-panther--sm { width: 40px; height: 40px; }
 .pw-panther--sm .pw-panther__mark { transform: scale(1.15); }
-.pw-panther--hero { width: 200px; height: 140px; }
+.pw-panther--hero { width: 240px; height: 150px; }
 .pw-panther--hero .pw-panther__mark { transform: scale(1.12); }
 .pw-panther--empty { width: 220px; height: 160px; --pw-panther-ink: var(--pw-text-faint); }
 .pw-panther--pulse .pw-panther__mark { animation: pw-prowl 1.6s var(--pw-ease) infinite; }
@@ -276,11 +276,26 @@ body {
 /* Studies table reflows instead of scrolling sideways at narrow widths / high zoom */
 @media (max-width: 860px) {
   .pw-table { min-width: 0; }
-  .pw-table th:nth-child(2), .pw-table td:nth-child(2) { display: none; }
+  .pw-studies .pw-table th:nth-child(2), .pw-studies .pw-table td:nth-child(2) { display: none; }
   .pw-search input { width: 130px; }
 }
 @media (max-width: 600px) {
-  .pw-table th:nth-child(3), .pw-table td:nth-child(3) { display: none; }
   .pw-table td { padding: 10px 6px; }
   .pw-thumb { display: none; }
+  .pw-filters { width: 100%; }
+}
+
+/* Primary nav: short labels and a dot-only service status on narrow screens, so every
+   destination stays visible without sideways scrolling. */
+.pw-nav__short { display: none; }
+@media (max-width: 760px) {
+  .pw-nav { overflow: visible; }
+  .pw-nav a { flex: 1 1 0; min-width: 0; padding: 0 4px; font-size: 13px; white-space: nowrap; }
+  .pw-service > span { display: none; }
+  .pw-header__end { justify-content: flex-end; }
+}
+@media (max-width: 560px) {
+  /* Visually hidden but still the link's accessible name. */
+  .pw-nav__full { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .pw-nav__short { display: inline; }
 }
