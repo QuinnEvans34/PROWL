@@ -62,3 +62,26 @@ Teacher repository pins all matched and its supervisor/worker remained active.
 Claude's frame-time measurement was not independently benchmarked in this review.
 Git-ignored generated demo assets remain local and require regeneration on a fresh
 checkout as described above; they are not added to Git by this review.
+
+## Follow-up: 3D scene, peel and navigation (same day)
+
+Quinton asked for the full scan to be the default, a simpler set of view settings, and easier rotation, zooming and peeling. He chose to keep the cut fixed front to back, and to keep the Rotate/Move buttons for trackpad users. This was done in eight small commits:
+
+| Commit | Change |
+|---|---|
+| `33bfa3f` | 3D scene selector (Abdomen / Region / Surfaces). Abdomen is the default and opens at a fixed 1.45× zoom; the peel starts at 0% |
+| `436996a` | View settings reduced to Mask strength, CT visibility in 3D, the 2D-only Full abdominal CT option, and Restore default display |
+| `7c58cf5` | "Peel (front → back)" bar: a clickable pancreas marker computed from the 3D scene, a percentage, Peel to pancreas / Restore CT, and `[` `]` keys |
+| `d9366b2` | Keyboard shortcuts: 1–6 and 0 for camera views, + and − to zoom, F to fit |
+| `282f26c` | Double-click a surface to orbit around it, by wrapping `setPivot3D` on the viewer's own instance |
+| `8e02d7f` | NiiVue orientation cube in the 3D view |
+| `e826c38` | "?" button that opens a viewer controls card for 2D and 3D |
+| `e4cea06` | Half-resolution rendering during 3D drag or zoom on high-DPI screens when the CT is visible |
+
+Points to review:
+
+- **Wrapped NiiVue methods.** Two NiiVue methods are now overridden on the viewer's own instance: `drawImage3D` (skipped while the CT is hidden) and `setPivot3D` (custom orbit centre). Check both after any NiiVue upgrade.
+- **Pancreas marker.** `peelRevealPercent` treats the lowest y of the scene as the front face at clip depth −0.5, which matches the ray test at azimuth 0.
+- **Resolution switch.** The lower resolution is applied on `pointerdown` so that NiiVue's `mousedown` records the drag start at that resolution. Full resolution is restored after `pointerup`.
+
+Verification: Vitest 316 passed, 6 skipped, 0 failed, and `vite build` succeeds. Both ran on a Linux copy. Each feature was checked by hand in the browser pane.
