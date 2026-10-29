@@ -37,3 +37,28 @@ The steps above are mostly CSS and layout. These five changes alter behaviour, s
 - The measurement maths.
 - The review-decision storage and the private evaluation code.
 - The Research page keeps its full-page Ask layout.
+
+## Codex review on the Mac — October 29
+
+Reviewed all nine commits through `1a96cce`. Keep the visual direction: the larger
+2D planes, unobstructed 3D view, compact structure rows, question-prefill shortcuts,
+and consistent Saved/Analyze styling improve the review flow.
+
+Three review fixes: show the equivalent-diameter caveat inside the structure
+popup; disclose that smoothed 3D difference surfaces can omit thin discrepancies
+and direct reviewers to exact 2D overlays; constrain Saved/Analyze grid minimums
+so long controls do not clip content at 375px. Original masks/measurements are not
+modified. Updated the pre-existing NativeMeasurementPanel assertion to verify the
+current numerical-comparison limitations (not a normal-range or diagnostic claim),
+rather than expecting the older unsupported-question wording.
+
+Mac verification: full Vitest suite 316 passed, 6 skipped; production build passed
+with the existing large-chunk warning. Headless Chromium with software rendering
+checked Studies, Analyze and Saved at 1440px/375px and Workbench 2D/3D/Difference;
+screenshots inspected. Saved's inner page initially overflowed despite the document
+width appearing normal; after the fix both page and content widths fit. Structure
+question prefill worked without submission. No answer model or inference launched.
+Teacher repository pins all matched and its supervisor/worker remained active.
+Claude's frame-time measurement was not independently benchmarked in this review.
+Git-ignored generated demo assets remain local and require regeneration on a fresh
+checkout as described above; they are not added to Git by this review.

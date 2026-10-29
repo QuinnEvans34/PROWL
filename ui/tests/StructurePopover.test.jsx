@@ -15,6 +15,7 @@ it('shows published facts for a predicted lesion and offers general literature q
     finding={finding} overlap={{}} comparing={false} gtHasLesion onAsk={onAsk} onClose={() => {}} />)
   expect(screen.getByText('15.63 cm³')).toBeTruthy()
   expect(screen.getByText('31 mm')).toBeTruthy()
+  expect(screen.getByText(/not a measured lesion width or length/)).toBeTruthy()
   expect(screen.getByText(/not from this scan/)).toBeTruthy()
   const [first] = structureQuestions({ source: 'pred', anatomy: 'lesion' })
   await user.click(screen.getByRole('button', { name: first }))

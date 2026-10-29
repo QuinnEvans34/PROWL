@@ -37,7 +37,7 @@
 }
 .pw-saved__viewer > .niivue-frame { position: absolute; inset: 0; min-height: 0; background: #050608; }
 
-.pw-saved__panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start; }
+.pw-saved__panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 16px; align-items: start; }
 .pw-saved__card h2 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
 .pw-saved__card h3 { margin: 14px 0 6px; font-size: 13.5px; font-weight: 600; }
 .pw-saved__card p, .pw-saved__card li { color: var(--pw-text-muted); font-size: 13px; line-height: 1.55; }
@@ -79,3 +79,9 @@
    shrink them to their content, so stretch them to the shared page width instead. */
 .pw-page.pw-analyze > *, .pw-page > .pw-saved, .pw-saved > * { width: 100%; box-sizing: border-box; }
 .pw-analyze__run { width: auto; }
+
+/* Grid's automatic minimum must not widen the page around long controls. */
+.pw-saved, .pw-analyze { grid-template-columns: minmax(0, 1fr); }
+.pw-saved > *, .pw-analyze > *, .pw-saved__card { min-width: 0; }
+.pw-saved__controls .pw-select { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+.pw-saved__controls select { min-width: 0; max-width: 100%; }

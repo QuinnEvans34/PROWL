@@ -22,7 +22,9 @@ it('does not turn a measurement into a disease interpretation', async () => {
   const user=userEvent.setup(); render(<NativeMeasurementPanel measurement={m} />)
   await user.type(screen.getByLabelText('Measurement question'),'Is this pancreas normal?')
   await user.click(screen.getByRole('button',{name:'Calculate volume'}))
-  expect(screen.getByText(/Individual dimensions/)).toBeTruthy(); expect(screen.queryByText(/about 44/)).toBeNull()
+  expect(screen.getByText(/not a finding that your pancreas is enlarged, small, or normal/)).toBeTruthy()
+  expect(screen.getByText(/not an individual normal range/)).toBeTruthy()
+  expect(screen.getByText(/Whole-organ coverage and model accuracy are unverified/)).toBeTruthy()
 })
 it('explains boundary counts and preserves provenance without releasing the lesion total', async () => {
   const user = userEvent.setup()

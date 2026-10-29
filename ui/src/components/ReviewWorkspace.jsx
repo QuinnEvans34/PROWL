@@ -718,6 +718,7 @@ export default function ReviewWorkspace({
             </div>
           )}
 
+          {comparing && state.sourceFocus === 'difference' && state.viewMode !== '2d' && <p className="pw-difference-note" role="note">Smoothed 3D surfaces may hide thin differences. Check the exact overlays in 2D.</p>}
           <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={(state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split'}>
             {state.viewMode === 'split'
               ? '2D: scroll slices, drag the crosshair · 3D: drag to orbit'

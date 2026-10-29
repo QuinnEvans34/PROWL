@@ -61,6 +61,7 @@ export default function StructurePopover({
           <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
         ))}
       </dl>
+      {object.source === 'pred' && object.anatomy === 'lesion' && finding.diameterMm && <small>Equivalent diameter describes a sphere with this volume, not a measured lesion width or length.</small>}
       {focusControl}
       {questions.length > 0 && (
         <div className="pw-structure-pop__ask">
