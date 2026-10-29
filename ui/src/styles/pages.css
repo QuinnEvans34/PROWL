@@ -1,0 +1,81 @@
+/* Saved reviews and Analyze: same tokens and controls as the rest of PROWL.
+   The measurement and review-decision panels keep their markup; these scoped rules
+   give their plain buttons, fields and headings the shared control language. */
+
+.pw-saved, .pw-analyze { display: grid; gap: 16px; align-content: start; }
+.pw-saved--live { gap: 14px; padding-top: 18px; border-top: 1px solid var(--pw-border-subtle); }
+.pw-saved__head, .pw-analyze__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pw-analyze__head { display: block; }
+.pw-saved__head .pw-lede, .pw-analyze__head .pw-lede { margin-top: 8px; }
+.pw-saved__title--live { margin: 0; font-size: 19px; font-weight: 600; }
+
+.pw-saved__picker, .pw-analyze__run, .pw-saved__card, .pw-analyze__empty {
+  padding: 16px 18px; border: 1px solid var(--pw-border-subtle); border-radius: var(--pw-radius-lg); background: var(--pw-surface);
+}
+.pw-saved__picker h2 { margin: 0; font-size: 15px; font-weight: 600; }
+.pw-saved__picker .pw-muted { margin: 4px 0 12px; font-size: 13px; }
+.pw-saved__controls, .pw-analyze__run { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pw-saved__controls select { max-width: min(560px, 70vw); }
+.pw-analyze__status { margin: 0; color: var(--pw-text-muted); font-size: 13px; }
+.pw-saved__loading { margin: 0; color: var(--pw-text-muted); font-size: 13px; }
+
+.pw-saved__case { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.pw-saved__case h2 { margin: 0; font-size: 17px; }
+.pw-saved__layers { display: flex; gap: 6px; flex-wrap: wrap; }
+.pw-check {
+  display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 11px; cursor: pointer;
+  border: 1px solid var(--pw-border); border-radius: var(--pw-radius); color: var(--pw-text-muted); font-size: 13px;
+}
+.pw-check input { accent-color: var(--pw-accent); margin: 0; }
+.pw-check:has(input:checked) { color: var(--pw-text); background: var(--pw-raised); }
+.pw-saved__notes p { margin: 0; }
+.pw-saved__notes p + p { margin-top: 6px; }
+
+.pw-saved__viewer {
+  position: relative; height: 62vh; min-height: 420px; overflow: hidden;
+  border: 1px solid var(--pw-border-subtle); border-radius: var(--pw-radius-lg); background: #050608;
+}
+.pw-saved__viewer > .niivue-frame { position: absolute; inset: 0; min-height: 0; background: #050608; }
+
+.pw-saved__panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; align-items: start; }
+.pw-saved__card h2 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.pw-saved__card h3 { margin: 14px 0 6px; font-size: 13.5px; font-weight: 600; }
+.pw-saved__card p, .pw-saved__card li { color: var(--pw-text-muted); font-size: 13px; line-height: 1.55; }
+.pw-saved__card button {
+  min-height: 32px; padding: 0 12px; border: 1px solid var(--pw-border); border-radius: var(--pw-radius);
+  background: var(--pw-raised); color: var(--pw-text); font: inherit; font-size: 13px; font-weight: 550; cursor: pointer;
+}
+.pw-saved__card button:hover:not(:disabled) { background: var(--pw-hover); border-color: var(--pw-border-control); }
+.pw-saved__card button:disabled { opacity: 0.5; cursor: not-allowed; }
+.pw-saved__card button[type='submit'] { background: var(--pw-accent); border-color: var(--pw-accent); color: var(--pw-accent-ink); }
+.pw-saved__card input:not([type='checkbox']):not([type='radio']), .pw-saved__card textarea {
+  box-sizing: border-box; min-height: 34px; padding: 6px 10px; border: 1px solid var(--pw-border-control); border-radius: var(--pw-radius);
+  background: var(--pw-bg); color: var(--pw-text); font: inherit; font-size: 13.5px;
+}
+.pw-saved__card input:focus, .pw-saved__card textarea:focus { outline: 2px solid var(--pw-focus); outline-offset: 1px; border-color: var(--pw-accent); }
+.pw-saved__card input[type='checkbox'], .pw-saved__card input[type='radio'] { accent-color: var(--pw-accent); }
+.pw-saved__card fieldset { margin: 10px 0; padding: 10px 12px; border: 1px solid var(--pw-border-subtle); border-radius: var(--pw-radius); }
+.pw-saved__card legend { padding: 0 6px; color: var(--pw-text-muted); font-size: 12.5px; }
+.pw-saved__card label { color: var(--pw-text-muted); font-size: 13px; }
+.pw-saved__card details { margin-top: 10px; border-top: 1px solid var(--pw-border-subtle); padding-top: 8px; }
+.pw-saved__card summary { color: var(--pw-text-muted); font-size: 12.5px; cursor: pointer; }
+.pw-saved__card small { color: var(--pw-text-faint); overflow-wrap: anywhere; }
+.pw-saved__provenance {
+  margin: 0; padding: 12px; border-radius: var(--pw-radius); background: var(--pw-sunken); color: var(--pw-text-muted);
+  font-family: var(--pw-mono); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.pw-saved > .pw-disclosure { padding-top: 12px; }
+
+.pw-analyze__empty ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: pw-step; }
+.pw-analyze__empty li { display: grid; gap: 4px; padding-left: 36px; position: relative; counter-increment: pw-step; }
+.pw-analyze__empty li::before {
+  content: counter(pw-step); position: absolute; left: 0; top: 0; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--pw-accent-soft); color: var(--pw-accent); font-size: 12px; font-weight: 600;
+}
+.pw-analyze__empty strong { font-size: 13.5px; }
+.pw-analyze__empty span { color: var(--pw-text-muted); font-size: 13px; }
+.pw-analyze > .pw-saved { margin-top: 4px; }
+/* .pw-page centres its children with auto margins; in these grid pages that would
+   shrink them to their content, so stretch them to the shared page width instead. */
+.pw-page.pw-analyze > *, .pw-page > .pw-saved, .pw-saved > * { width: 100%; box-sizing: border-box; }
+.pw-analyze__run { width: auto; }

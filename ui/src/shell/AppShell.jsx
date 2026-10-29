@@ -10,13 +10,17 @@ const NAV = [
   ['research', 'Research'],
 ]
 
-function ServiceStatus({ status }) {
+// Analyze talks to the on-demand model worker; the Workbench talks to live analysis of
+// prepared studies. They are separate services, so name the one being reported.
+const STATUS_LABELS = {
+  predict: { online: 'Model worker connected', offline: 'Model worker not connected', checking: 'Checking model worker…' },
+  workbench: { online: 'Live analysis connected', offline: 'Live analysis offline · saved results available', checking: 'Checking live analysis…' },
+}
+
+function ServiceStatus({ status, view }) {
   if (status === null) return <span className="pw-hint">Local research workspace</span>
-  const label = status === 'online'
-    ? 'Live analysis connected'
-    : status === 'offline'
-      ? 'Live analysis offline · saved results available'
-      : 'Checking live analysis…'
+  const labels = STATUS_LABELS[view] || STATUS_LABELS.workbench
+  const label = labels[status] || labels.checking
   return (
     <span className={`pw-service pw-service--${status}`} role="status" aria-live="polite">
       <i aria-hidden="true" />
@@ -51,7 +55,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
           ))}
         </nav>
         <div className="pw-header__end">
-          <ServiceStatus status={endpointStatus} />
+          <ServiceStatus status={endpointStatus} view={route.view} />
           <button type="button" className="pw-icon-btn" onClick={onAbout} aria-label="About PROWL" title="About PROWL">
             <Info size={17} aria-hidden="true" />
           </button>

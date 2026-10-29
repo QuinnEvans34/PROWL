@@ -5,7 +5,7 @@ import { scanQuestion, measurementText } from '../lib/scanMeasurements.js'
 export default function NativeMeasurementPanel({ measurement, live = false }) {
   const [question, setQuestion] = useState('')
   const [target, setTarget] = useState(null)
-  return <section aria-label="Native scan measurements" style={{ maxWidth: 760, marginTop: 24 }}>
+  return <section aria-label="Native scan measurements" className="pw-native-measure">
     <h2>Ask about this {live ? 'prediction' : 'saved prediction'}</h2>
     <p>Calculate outline volumes from the verified native-grid mask. Whole-pancreas coverage and disease interpretation remain unverified.</p>
     {measurement?.status === 'unavailable' && <p role="note">Measurements are withheld: {measurement.reason || 'No verified measurement is available.'}</p>}

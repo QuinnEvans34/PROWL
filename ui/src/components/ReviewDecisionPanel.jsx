@@ -77,7 +77,7 @@ export default function ReviewDecisionPanel({ base, manifestHash, manifest, onSa
   }
   if (!source) return null
   const valid = history !== null && reviewer.trim() && action && selected.length && (selected.includes('other') ? note.trim() : true)
-  return <section aria-labelledby="review-decision-title" style={{ marginTop: 32, padding: 20, border: '1px solid #657184', borderRadius: 8 }}>
+  return <section aria-labelledby="review-decision-title" className="pw-review-decision">
     <h2 id="review-decision-title">Record your review</h2>
     <p>Accept means usable for research annotation. Needs correction means editing is required outside this viewer. Reject means unusable. These decisions do not confirm a diagnosis.</p>
     {notice && <p role="status">{notice}</p>}
