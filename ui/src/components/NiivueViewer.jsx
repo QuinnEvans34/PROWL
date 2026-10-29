@@ -1253,7 +1253,7 @@ export default function NiivueViewer({
         Math.max(-90, Math.min(90, Number(nv.scene.renderElevation) + Number(command.deltaElevation || 0))),
       )
     } else if (command.type === 'zoom') {
-      const scale = Math.max(0.45, Math.min(2.5, Number(nv.scene.volScaleMultiplier) * command.factor))
+      const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
       nv.setScale(scale)
     } else if (command.type === 'fit') {
       focusOnWorldPoint(nv, volumeCenterMM(nv.volumes[0]), mode)

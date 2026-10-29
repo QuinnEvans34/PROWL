@@ -47,6 +47,13 @@ const CT_WINDOW_OPTIONS = [
   ['wide', 'Wide', 'Shows the broadest CT intensity range'],
 ]
 
+// Keyboard camera views (azimuth, elevation), matching the Views menu order.
+const CAMERA_VIEWS = [['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]]
+const CAMERA_SHORTCUTS = {
+  ...Object.fromEntries(CAMERA_VIEWS.map(([, azimuth, elevation], index) => [String(index + 1), [azimuth, elevation]])),
+  0: [120, 15],
+}
+
 const FRONT_CUT_DEPTH_MIN = -0.5
 const FRONT_CUT_DEPTH_MAX = 0.5
 
@@ -249,6 +256,14 @@ export default function ReviewWorkspace({
         setSlice(navigatorIndex + 1)
       }
       if (event.key.toLowerCase() === 'r') dispatch({ type: 'RESET_VIEW' })
+      if (event.key.toLowerCase() === 'f') issueViewerCommand({ type: 'fit' })
+      if (state.viewMode !== '2d') {
+        // Camera shortcuts for 3D (and the 3D pane in Split): 1–6 anatomical views, 0 home.
+        const view = CAMERA_SHORTCUTS[event.key]
+        if (view) issueViewerCommand({ type: 'camera', azimuth: view[0], elevation: view[1] })
+        if (event.key === '+' || event.key === '=') issueViewerCommand({ type: 'zoom', factor: 1.16 })
+        if (event.key === '-' || event.key === '_') issueViewerCommand({ type: 'zoom', factor: 0.86 })
+      }
       if (state.viewMode !== '2d' && (event.key === '[' || event.key === ']')) {
         event.preventDefault()
         setClipProgress(state.clipProgress + (event.key === ']' ? 5 : -5))
@@ -449,10 +464,10 @@ export default function ReviewWorkspace({
       </button>
       {snapOpen && (
         <div className="pw-snap" role="group" aria-label="Snap 3D camera to an anatomical view">
-          {[['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]].map(([label, azimuth, elevation]) => (
-            <button type="button" key={label} onClick={() => { issueViewerCommand({ type: 'camera', azimuth, elevation }); setSnapOpen(false) }}>{label}</button>
+          {CAMERA_VIEWS.map(([label, azimuth, elevation], index) => (
+            <button type="button" key={label} title={`${label} view (${index + 1})`} onClick={() => { issueViewerCommand({ type: 'camera', azimuth, elevation }); setSnapOpen(false) }}>{label}</button>
           ))}
-          <button type="button" onClick={() => { issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 }); setSnapOpen(false) }}>Home</button>
+          <button type="button" title="Home view (0)" onClick={() => { issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 }); setSnapOpen(false) }}>Home</button>
         </div>
       )}
     </div>
@@ -604,11 +619,11 @@ export default function ReviewWorkspace({
           <span className="pw-toolbar__spacer" />
           {is3dLike && (
             <div className="pw-toolbar__group" role="group" aria-label="3D zoom">
-              <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 0.86 })} aria-label="Zoom out" title="Zoom out">−</button>
-              <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 1.16 })} aria-label="Zoom in" title="Zoom in">+</button>
+              <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 0.86 })} aria-label="Zoom out" title="Zoom out (−)">−</button>
+              <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 1.16 })} aria-label="Zoom in" title="Zoom in (+)">+</button>
             </div>
           )}
-          <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'fit' })} aria-label="Fit" title="Fit the complete CT in the viewer">
+          <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'fit' })} aria-label="Fit" title="Fit the complete CT in the viewer (F)">
             <Maximize size={15} aria-hidden="true" />
           </button>
           <button type="button" className="pw-icon-btn" onClick={() => dispatch({ type: 'RESET_VIEW' })} aria-label="Reset viewer" title="Reset viewer (R)">
