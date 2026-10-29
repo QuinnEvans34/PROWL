@@ -1,3 +1,4 @@
+import { batchViewerUpdate } from '../lib/viewerUpdates.js'
 import { useEffect, useRef, useState } from 'react'
 import { DRAG_MODE, Niivue } from '@niivue/niivue'
 import { LoaderCircle, TriangleAlert } from 'lucide-react'
@@ -730,6 +731,8 @@ export default function NiivueViewer({
     // scenes are cheap and keep full resolution.
     let lowResActive = false
     let wheelTimer = null
+    let restoreTimer = null
+    let pointerHeld = false
     function setLowResolution(active) {
       const native = window.devicePixelRatio || 1
       if (active === lowResActive) return
@@ -741,14 +744,18 @@ export default function NiivueViewer({
     function handleWheel() {
       setLowResolution(true)
       window.clearTimeout(wheelTimer)
-      wheelTimer = window.setTimeout(() => setLowResolution(false), 220)
+      wheelTimer = window.setTimeout(() => { if (!pointerHeld) setLowResolution(false) }, 220)
     }
     function endGesture() {
       // After NiiVue has processed its own mouseup at the gesture's resolution.
-      window.setTimeout(() => setLowResolution(false), 0)
+      pointerHeld = false
+      window.clearTimeout(restoreTimer)
+      restoreTimer = window.setTimeout(() => setLowResolution(false), 0)
     }
 
     function handlePointerDown(event) {
+      pointerHeld = true
+      window.clearTimeout(restoreTimer)
       pointerStartRef.current = { x: event.clientX, y: event.clientY }
       setLowResolution(true)
     }
@@ -821,6 +828,7 @@ export default function NiivueViewer({
     canvas.addEventListener('wheel', handleWheel, { passive: true })
     window.addEventListener('pointerup', endGesture)
     window.addEventListener('pointercancel', endGesture)
+    window.addEventListener('blur', endGesture)
 
     return () => {
       if (clipFrameRef.current !== null) {
@@ -838,7 +846,10 @@ export default function NiivueViewer({
       canvas.removeEventListener('wheel', handleWheel)
       window.removeEventListener('pointerup', endGesture)
       window.removeEventListener('pointercancel', endGesture)
+      window.removeEventListener('blur', endGesture)
+      window.clearTimeout(restoreTimer)
       window.clearTimeout(wheelTimer)
+      nv.cleanup()
       nvRef.current = null
     }
   }, [compact])
@@ -989,7 +1000,7 @@ export default function NiivueViewer({
           if (layers.length) await nv.loadMeshes(layers)
           if (cancelled) return
 
-          layerSemantics.forEach((semantic, index) => {
+          batchViewerUpdate(nv, () => layerSemantics.forEach((semantic, index) => {
             const mesh = nv.meshes[index]
             if (!mesh) return
             const semanticKey = semantic.region
@@ -1000,7 +1011,7 @@ export default function NiivueViewer({
               { ...semantic, mesh },
             )
             nv.setMeshShader(mesh.id, 'Hemispheric')
-          })
+          }))
 
           nv.setSliceType(nv.sliceTypeRender)
           // Small labelled orientation cube in the corner so L/R, A/P and S/I stay readable while orbiting.
@@ -1080,96 +1091,98 @@ export default function NiivueViewer({
     }
 
     try {
-      const ctVolume = nv.volumes[0]
-      const windowRange = ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
-      ctVolume.cal_min = windowRange.cal_min
-      ctVolume.cal_max = windowRange.cal_max
+      batchViewerUpdate(nv, () => {
+        const ctVolume = nv.volumes[0]
+        const windowRange = ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
+        ctVolume.cal_min = windowRange.cal_min
+        ctVolume.cal_max = windowRange.cal_max
 
-      if (mode === '2d') {
-        setVolumeRendering(nv, true)
-        registryRef.current.volumeIndexes.forEach((volumeIndex, source) => {
-          const volume = nv.volumes[volumeIndex]
-          if (!volume) return
-          volume.setColormapLabel(labelColormap(source, presentation))
-          nv.setOpacity(volumeIndex, !differenceMode && renderedSources.includes(source) ? overlayOpacity : 0)
+        if (mode === '2d') {
+          setVolumeRendering(nv, true)
+          registryRef.current.volumeIndexes.forEach((volumeIndex, source) => {
+            const volume = nv.volumes[volumeIndex]
+            if (!volume) return
+            volume.setColormapLabel(labelColormap(source, presentation))
+            nv.setOpacity(volumeIndex, !differenceMode && renderedSources.includes(source) ? overlayOpacity : 0)
+          })
+          registryRef.current.differenceVolumeIndexes.forEach((volumeIndex, anatomy) => {
+            const volume = nv.volumes[volumeIndex]
+            if (!volume) return
+            volume.setColormapLabel(differenceColormap({ selectedObject, anatomy }))
+            const anatomyVisible = anatomyFocus === 'all' || anatomyFocus === anatomy
+            const layerVisible = anatomy === 'pancreas' ? showPancreas : showLesion
+            nv.setOpacity(
+              volumeIndex,
+              differenceMode && anatomyVisible && layerVisible ? overlayOpacity : 0,
+            )
+          })
+          nv.setOpacity(0, 1)
+          nv.updateGLVolume()
+          nv.drawScene()
+          return
+        }
+
+        const renderedCtOpacity = effectiveCtOpacity(ctOpacity, clip)
+        const shownCtOpacity = selectedObject
+          ? Math.min(renderedCtOpacity, 0.045)
+          : renderedCtOpacity
+        nv.setOpacity(0, shownCtOpacity)
+        setVolumeRendering(nv, shownCtOpacity > 0.001)
+        registryRef.current.meshes.forEach((entry) => {
+          const structureVisible = entry.anatomy === 'pancreas' ? showPancreas : showLesion
+          const sourceVisible = entry.source === 'difference'
+            ? differenceMode
+            : renderedSources.includes(entry.source)
+          const opacity = meshOpacity({
+            anatomy: entry.anatomy,
+            source: entry.source,
+            visible: structureVisible && sourceVisible,
+            anatomyFocus,
+            focusTreatment,
+            selectedObject,
+            overlayOpacity,
+            sourceFocus,
+          })
+          const differenceSelected = selectedObject?.source === 'difference'
+            && selectedObject.anatomy === entry.anatomy
+            && selectedObject.region === entry.region
+          const differenceVisible = differenceMode
+            && entry.source === 'difference'
+            && (anatomyFocus === 'all' || anatomyFocus === entry.anatomy)
+          const regularVisible = !differenceMode && entry.source !== 'difference'
+          const regionContextOpacity = selectedObject?.source === 'difference' && !differenceSelected
+            ? (focusTreatment === 'isolate' ? 0 : 0.12)
+            : 1
+          // Difference pieces tile one surface; drawing the pancreas pieces opaque
+          // avoids stacked translucent shells. Lesion pieces show through via X-ray.
+          const differenceOpacity = entry.anatomy === 'pancreas' && !selectedObject && opacity > 0
+            ? 1
+            : opacity
+          const finalOpacity = entry.source === 'difference'
+            ? (differenceVisible ? differenceOpacity * regionContextOpacity : 0)
+            : (regularVisible ? opacity : 0)
+          const color = entry.source === 'difference'
+            ? DIFFERENCE_COLORS[entry.region]
+            : SOURCE_COLORS[entry.source][entry.anatomy]
+          entry.mesh.visible = finalOpacity > 0.01
+          nv.setMeshProperty(entry.mesh.id, 'rgba255', new Uint8Array([
+            color[0],
+            color[1],
+            color[2],
+            clamp255(finalOpacity * 255),
+          ]))
+          nv.setMeshProperty(entry.mesh.id, 'opacity', finalOpacity)
+          const isSelected = selectedObject
+            && selectedObject.source === entry.source
+            && selectedObject.anatomy === entry.anatomy
+            && (entry.source !== 'difference' || selectedObject.region === entry.region)
+          nv.setMeshShader(entry.mesh.id, meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }))
         })
-        registryRef.current.differenceVolumeIndexes.forEach((volumeIndex, anatomy) => {
-          const volume = nv.volumes[volumeIndex]
-          if (!volume) return
-          volume.setColormapLabel(differenceColormap({ selectedObject, anatomy }))
-          const anatomyVisible = anatomyFocus === 'all' || anatomyFocus === anatomy
-          const layerVisible = anatomy === 'pancreas' ? showPancreas : showLesion
-          nv.setOpacity(
-            volumeIndex,
-            differenceMode && anatomyVisible && layerVisible ? overlayOpacity : 0,
-          )
-        })
-        nv.setOpacity(0, 1)
+        nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
+
         nv.updateGLVolume()
         nv.drawScene()
-        return
-      }
-
-      const renderedCtOpacity = effectiveCtOpacity(ctOpacity, clip)
-      const shownCtOpacity = selectedObject
-        ? Math.min(renderedCtOpacity, 0.045)
-        : renderedCtOpacity
-      nv.setOpacity(0, shownCtOpacity)
-      setVolumeRendering(nv, shownCtOpacity > 0.001)
-      registryRef.current.meshes.forEach((entry) => {
-        const structureVisible = entry.anatomy === 'pancreas' ? showPancreas : showLesion
-        const sourceVisible = entry.source === 'difference'
-          ? differenceMode
-          : renderedSources.includes(entry.source)
-        const opacity = meshOpacity({
-          anatomy: entry.anatomy,
-          source: entry.source,
-          visible: structureVisible && sourceVisible,
-          anatomyFocus,
-          focusTreatment,
-          selectedObject,
-          overlayOpacity,
-          sourceFocus,
-        })
-        const differenceSelected = selectedObject?.source === 'difference'
-          && selectedObject.anatomy === entry.anatomy
-          && selectedObject.region === entry.region
-        const differenceVisible = differenceMode
-          && entry.source === 'difference'
-          && (anatomyFocus === 'all' || anatomyFocus === entry.anatomy)
-        const regularVisible = !differenceMode && entry.source !== 'difference'
-        const regionContextOpacity = selectedObject?.source === 'difference' && !differenceSelected
-          ? (focusTreatment === 'isolate' ? 0 : 0.12)
-          : 1
-        // Difference pieces tile one surface; drawing the pancreas pieces opaque
-        // avoids stacked translucent shells. Lesion pieces show through via X-ray.
-        const differenceOpacity = entry.anatomy === 'pancreas' && !selectedObject && opacity > 0
-          ? 1
-          : opacity
-        const finalOpacity = entry.source === 'difference'
-          ? (differenceVisible ? differenceOpacity * regionContextOpacity : 0)
-          : (regularVisible ? opacity : 0)
-        const color = entry.source === 'difference'
-          ? DIFFERENCE_COLORS[entry.region]
-          : SOURCE_COLORS[entry.source][entry.anatomy]
-        entry.mesh.visible = finalOpacity > 0.01
-        nv.setMeshProperty(entry.mesh.id, 'rgba255', new Uint8Array([
-          color[0],
-          color[1],
-          color[2],
-          clamp255(finalOpacity * 255),
-        ]))
-        nv.setMeshProperty(entry.mesh.id, 'opacity', finalOpacity)
-        const isSelected = selectedObject
-          && selectedObject.source === entry.source
-          && selectedObject.anatomy === entry.anatomy
-          && (entry.source !== 'difference' || selectedObject.region === entry.region)
-        nv.setMeshShader(entry.mesh.id, meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }))
       })
-      nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
-
-      nv.updateGLVolume()
-      nv.drawScene()
     } catch (error) {
       setState({
         status: 'error',
