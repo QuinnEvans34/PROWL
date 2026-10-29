@@ -11,7 +11,6 @@ import {
   Database,
   Eye,
   EyeOff,
-  Focus,
   LoaderCircle,
   Maximize,
   Maximize2,
@@ -38,11 +37,9 @@ import { PantherBadge } from '../shell/Brand.jsx'
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
 
-const DISPLAY_PRESETS = {
-  anatomy: { label: 'CT detail', description: 'Makes the CT anatomy easiest to read', overlayOpacity: 0.62, ctOpacity: 0.44 },
-  balanced: { label: 'Balanced', description: 'Keeps both the CT and model contours clear', overlayOpacity: 0.62, ctOpacity: 0.18 },
-  masks: { label: 'Masks', description: 'Emphasizes the pancreas and lesion overlays', overlayOpacity: 0.84, ctOpacity: 0.07 },
-}
+// Display defaults; the 3D scene selector replaced the older emphasis presets.
+const DEFAULT_OVERLAY_OPACITY = 0.62
+const DEFAULT_CT_OPACITY = 0.44
 
 const CT_WINDOW_OPTIONS = [
   ['soft', 'Soft tissue', 'Best general view of the pancreas and nearby organs'],
@@ -309,10 +306,6 @@ export default function ReviewWorkspace({
     dispatch({ type: 'CASE_CHANGED', hasPrediction: false })
   }
 
-  function setDisplayPreset(value) {
-    const preset = DISPLAY_PRESETS[value]
-    dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: value, overlayOpacity: preset.overlayOpacity, ctOpacity: preset.ctOpacity } })
-  }
 
   function focusStructure(anatomy) {
     const source = visibleSources.includes('pred') ? 'pred' : visibleSources.includes('gt') ? 'gt' : availableSources[0]
@@ -373,10 +366,6 @@ export default function ReviewWorkspace({
     if (snapFront) issueViewerCommand({ type: 'camera', azimuth: 0, elevation: 0 })
   }
 
-  function setClipEnabled(enabled) {
-    dispatch({ type: 'PATCH_SETTINGS', value: { clipEnabled: enabled } })
-    if (enabled) issueViewerCommand({ type: 'camera', azimuth: 0, elevation: 0 })
-  }
 
   function setViewMode(viewMode) {
     if (viewMode === 'split' && !SPLIT_SUPPORTED) return
@@ -756,45 +745,32 @@ export default function ReviewWorkspace({
                 <div><Settings2 size={15} /><strong>View settings</strong></div>
                 <button type="button" onClick={() => dispatch({ type: 'TOGGLE_SETTINGS' })} aria-label="Close view settings"><X size={14} /></button>
               </div>
-              <div className="review-settings-group">
-                <span>Display emphasis</span>
-                <Segmented
-                  label="Display emphasis"
-                  value={state.displayPreset}
-                  onChange={setDisplayPreset}
-                  options={Object.entries(DISPLAY_PRESETS).map(([value, preset]) => [value, preset.label, { title: preset.description }])}
-                />
-                <small className="ct-window-help">
-                  {state.displayPreset === 'custom' ? 'Custom visibility settings are active.' : DISPLAY_PRESETS[state.displayPreset]?.description}
-                </small>
-              </div>
               <label className="review-range">
-                <span>Mask visibility <strong>{Math.round(state.overlayOpacity * 100)}%</strong></span>
+                <span>Mask strength <strong>{Math.round(state.overlayOpacity * 100)}%</strong></span>
                 <input type="range" min="0.2" max="1" step="0.05" value={state.overlayOpacity}
                   onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: 'custom', overlayOpacity: Number(event.target.value) } })} />
               </label>
-              <label className="review-layer-check">
-                <span><ScanLine size={13} /> Full abdominal CT</span>
-                <input type="checkbox" checked={state.showFull} disabled={!caseData.files?.ct_full}
-                  onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { showFull: event.target.checked } })} />
-              </label>
-              {is3dLike && (
-                <>
-                  <label className="review-range">
-                    <span>CT background <strong>{Math.round(state.ctOpacity * 100)}%</strong></span>
-                    <input type="range" min="0" max="0.45" step="0.02" value={state.ctOpacity}
-                      onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: 'custom', ctOpacity: Number(event.target.value) } })} />
-                  </label>
-                  <label className="review-layer-check">
-                    <span><Focus size={13} /> Front-to-back CT cut</span>
-                    <input type="checkbox" checked={state.clipEnabled} onChange={(event) => setClipEnabled(event.target.checked)} />
-                  </label>
-                </>
+              {is3dLike && scene3d !== 'surfaces' && (
+                <label className="review-range">
+                  <span>CT visibility in 3D <strong>{Math.round((state.ctOpacity / 0.45) * 100)}%</strong></span>
+                  <input type="range" min="0.04" max="0.45" step="0.01" value={state.ctOpacity}
+                    onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: 'custom', ctOpacity: Number(event.target.value) } })} />
+                </label>
               )}
-              <p className="display-mesh-provenance">
-                Display surface · {caseData.display_mesh_version === 'v3-difference-main-smoothing' ? 'v3, matched smoothing' : caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}
-                <span>Metrics remain derived from the original NIfTI masks.</span>
-              </p>
+              {is2dLike && (
+                <label className="review-layer-check">
+                  <span><ScanLine size={13} /> Full abdominal CT in 2D</span>
+                  <input type="checkbox" checked={state.showFull} disabled={!caseData.files?.ct_full}
+                    onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { showFull: event.target.checked } })} />
+                </label>
+              )}
+              <button
+                type="button"
+                className="pw-btn pw-btn--link review-settings-reset"
+                onClick={() => dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: 'anatomy', overlayOpacity: DEFAULT_OVERLAY_OPACITY, ctOpacity: DEFAULT_CT_OPACITY } })}
+              >
+                Restore default display
+              </button>
             </aside>
           )}
         </div>
