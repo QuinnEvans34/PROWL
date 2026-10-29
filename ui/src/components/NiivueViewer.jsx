@@ -366,6 +366,28 @@ function semanticFromLocation(location, visibleSources, differenceMode) {
   return null
 }
 
+// Reference surfaces drawn over a visible prediction use NiiVue's Outline shader:
+// a glassy rim instead of a second solid surface that z-fights with the first.
+function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
+  if (isSelected) return 'Toon'
+  if (entry.source === 'gt' && renderedSources.includes('pred') && sourceFocus !== 'gt') return 'Outline'
+  return 'Hemispheric'
+}
+
+// Initial 3D zoom so the visible surfaces fill most of the viewer instead of
+// sitting small inside the whole CT bounding box. "Fit" still shows the full scene.
+function surfaceFitScale(nv) {
+  const visible = (nv.meshes || []).filter((mesh) => mesh.visible && mesh.extentsMin && mesh.extentsMax)
+  if (!visible.length || typeof nv.sceneExtentsMinMax !== 'function') return null
+  const scene = nv.sceneExtentsMinMax()
+  const sceneRange = Math.max(...[0, 1, 2].map((axis) => Number(scene?.[2]?.[axis]) || 0))
+  const lo = [0, 1, 2].map((axis) => Math.min(...visible.map((mesh) => mesh.extentsMin[axis])))
+  const hi = [0, 1, 2].map((axis) => Math.max(...visible.map((mesh) => mesh.extentsMax[axis])))
+  const meshRange = Math.max(...[0, 1, 2].map((axis) => hi[axis] - lo[axis]))
+  if (!Number.isFinite(sceneRange) || !Number.isFinite(meshRange) || meshRange <= 0) return null
+  return Math.max(1, Math.min(3.2, (1.3 * sceneRange) / meshRange))
+}
+
 function meshOpacity({
   anatomy,
   source,
@@ -802,7 +824,10 @@ export default function NiivueViewer({
             ? labelCentroidMM(primaryVolume, 1)
             : volumeCenterMM(nv.volumes[0])
           focusOnWorldPoint(nv, target, mode)
-          if (mode === '3d' && compact) nv.setScale(1.55)
+          if (mode === '3d') {
+            const fit = compact ? 1.55 : surfaceFitScale(nv)
+            if (fit) nv.setScale(fit)
+          }
         }
 
         nv.updateGLVolume()
@@ -908,8 +933,13 @@ export default function NiivueViewer({
         const regionContextOpacity = selectedObject?.source === 'difference' && !differenceSelected
           ? (focusTreatment === 'isolate' ? 0 : 0.12)
           : 1
+        // Difference pieces tile one surface; drawing the pancreas pieces opaque
+        // avoids stacked translucent shells. Lesion pieces show through via X-ray.
+        const differenceOpacity = entry.anatomy === 'pancreas' && !selectedObject && opacity > 0
+          ? 1
+          : opacity
         const finalOpacity = entry.source === 'difference'
-          ? (differenceVisible ? opacity * regionContextOpacity : 0)
+          ? (differenceVisible ? differenceOpacity * regionContextOpacity : 0)
           : (regularVisible ? opacity : 0)
         const color = entry.source === 'difference'
           ? DIFFERENCE_COLORS[entry.region]
@@ -926,8 +956,9 @@ export default function NiivueViewer({
           && selectedObject.source === entry.source
           && selectedObject.anatomy === entry.anatomy
           && (entry.source !== 'difference' || selectedObject.region === entry.region)
-        nv.setMeshShader(entry.mesh.id, isSelected ? 'Toon' : 'Hemispheric')
+        nv.setMeshShader(entry.mesh.id, meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }))
       })
+      nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
 
       nv.updateGLVolume()
       nv.drawScene()

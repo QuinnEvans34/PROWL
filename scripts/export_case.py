@@ -142,8 +142,14 @@ def surface(field, affine, iso=0.5, presmooth=0.7, taubin=12):
     return world, faces
 
 
-def export_difference_assets(pred, gt, affine, out, cid, files, presmooth=0.35, taubin=6):
-    """Create presentation-only agreement/discrepancy assets from authoritative masks."""
+def export_difference_assets(pred, gt, affine, out, cid, files, presmooth=0.7, taubin=12):
+    """Create presentation-only agreement/discrepancy assets from authoritative masks.
+
+    Meshes use the same smoothing as the main prediction/reference surfaces
+    (Gaussian 0.7 + 12 Taubin passes). Lighter smoothing left one-voxel slivers
+    whose faces coincided with neighbouring regions and rendered as speckle.
+    Consequence: discrepancies thinner than about one voxel may produce no 3D
+    surface; they remain exact in the 2D difference volume written here."""
     files.setdefault("difference", {})
     files.setdefault("mesh", {})
 
@@ -176,15 +182,18 @@ def export_difference_assets(pred, gt, affine, out, cid, files, presmooth=0.35, 
                 presmooth=presmooth,
                 taubin=taubin,
             )
-            if mesh is None:
-                continue
             name = f"{anatomy}_{region}"
+            if mesh is None:
+                stale = files["mesh"].pop(name, None)
+                if stale and (out / stale).exists():
+                    (out / stale).unlink()
+                continue
             rel = f"{cid}/mesh/{name}.obj"
             write_obj(mesh[0], mesh[1], out / rel)
             files["mesh"][name] = rel
 
 
-def derive_existing_demo_assets(out, presmooth=0.35, taubin=6):
+def derive_existing_demo_assets(out, presmooth=0.7, taubin=12):
     """Retrofit discrepancy volumes/meshes and explicit normals into a prepared demo folder."""
     import nibabel as nib
 
@@ -222,7 +231,7 @@ def derive_existing_demo_assets(out, presmooth=0.35, taubin=6):
             if prepared_mesh.exists():
                 rewrite_obj_with_normals(prepared_mesh)
         item["files"] = files
-        item["display_mesh_version"] = "v2-explicit-normals-difference"
+        item["display_mesh_version"] = "v3-difference-main-smoothing"
         print(f"  + {cid}: discrepancy volumes and meshes")
 
     results_path.write_text(json.dumps(results, indent=2) + "\n")
@@ -290,8 +299,8 @@ def main():
     if args.derive_existing:
         derive_existing_demo_assets(
             Path(args.out),
-            presmooth=min(args.smooth_sigma, 0.5),
-            taubin=min(args.taubin, 8),
+            presmooth=args.smooth_sigma,
+            taubin=args.taubin,
         )
         return
     if not args.ckpt:
