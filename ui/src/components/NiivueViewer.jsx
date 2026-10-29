@@ -910,6 +910,7 @@ export default function NiivueViewer({
         }
 
         if (mode === '2d') {
+          nv.opts.isOrientCube = false
           setPlaneLayout(nv, activePlane)
           nv.setCrosshairColor([0.46, 0.57, 0.69, 0.78])
           nv.setAtlasOutline(0.32)
@@ -970,6 +971,8 @@ export default function NiivueViewer({
           })
 
           nv.setSliceType(nv.sliceTypeRender)
+          // Small labelled orientation cube in the corner so L/R, A/P and S/I stay readable while orbiting.
+          nv.opts.isOrientCube = !compact
           nv.setRenderAzimuthElevation(
             clip?.enabled ? 0 : 120,
             clip?.enabled ? 0 : 15,
