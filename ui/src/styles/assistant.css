@@ -207,3 +207,15 @@
 @media (prefers-reduced-motion: reduce) {
   .pw-app .literature-search__pulse { animation: none; }
 }
+
+/* Answers lead; evidence and implementation details stay available on demand. */
+.pw-app .literature-search__answer-card {
+  padding: 18px; border: 1px solid var(--pw-border-subtle);
+  border-radius: var(--pw-radius-lg); background: var(--pw-surface);
+}
+.pw-app .literature-search__answer-card > .literature-search__provenance { order: 2; }
+.pw-app .literature-search__reading-view { display: grid; gap: 14px; min-width: 0; }
+.pw-app .literature-search__view-switch { justify-self: start; flex-wrap: wrap; }
+.pw-app .literature-search--panel .literature-search__answer-card { padding: 12px; }
+.pw-app .literature-search--panel .literature-search__prose { font-size: 14px; }
+.pw-app .literature-search__provenance p { margin-top: 8px; color: var(--pw-text-muted); font-size: 12px; }

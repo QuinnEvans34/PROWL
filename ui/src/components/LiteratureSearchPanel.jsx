@@ -292,7 +292,7 @@ export default function LiteratureSearchPanel({
   return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
     {panel ? <>
       <p className="literature-search__scope"><span aria-hidden="true" />{measurementContext ? `Saved case: ${contextLabel || 'current study'} · ${measurementContext.available ? 'Outline measurements available for checking' : 'Show a saved prediction to enable measurements'}` : 'General literature · No scan attached'}</p>
-      <h2 id="literature-search-title">{phase === 'loading' ? 'On it.' : result || scanResult ? 'Let’s review the evidence' : 'How can I help?'}</h2>
+      <h2 id="literature-search-title">{phase === 'loading' ? 'On it.' : result || scanResult ? 'Here’s what I found' : 'How can I help?'}</h2>
       {phase !== 'loading' && !result && !scanResult && <p>{measurementContext ? 'Ask me about the saved outline or explore the research behind your question.' : 'Use your own words. For help turning a question into search terms, choose Help phrase my question.'}</p>}
     </> : <>
       <h2 id="literature-search-title">Ask about pancreatic research</h2>
@@ -344,14 +344,14 @@ export default function LiteratureSearchPanel({
     </section>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
       {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}</p>}
-      {scanResult?.key === measurementKey && scanResult && <article aria-label="Current scan measurement">
-        <h3>{scanResult.measurement && scanResult.target === 'pancreas_comparison' ? 'Outline compared with a published study' : scanResult.measurement ? 'Saved outline volume' : 'Measurement unavailable'}</h3>
+      {scanResult?.key === measurementKey && scanResult && <article className="literature-search__answer-card" aria-label="Current scan measurement">
+        <h3>{scanResult.measurement && scanResult.target === 'pancreas_comparison' ? 'Outline compared with a published study' : scanResult.measurement ? 'Volume of this outline' : 'Measurement unavailable'}</h3>
         <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
         {scanResult.measurement && scanResult.target === 'pancreas_comparison' && <p><a href={pancreasReferenceUrl} target="_blank" rel="noreferrer">Study source: MRI pancreas volume (PMID 25950180)</a></p>}
         {scanResult.measurement && <>
-          <p>Calculated locally from the saved prediction mask, not estimated by the AI. The model outline needs human review.</p>
+          <p>The model outline needs human review before using this measurement.</p>
           <details><summary>Measurement source and limitations</summary>
-            <p>{scanResult.measurement.unitsBasis}. {scanResult.measurement.coverage}. {scanResult.measurement.modelLineage}.</p>
+            <p>Calculated locally from the saved prediction mask. {scanResult.measurement.unitsBasis}. {scanResult.measurement.coverage}. {scanResult.measurement.modelLineage}.</p>
             <p>Method: label count × absolute affine determinant. Pancreas includes labels 1 and 2; suspected-lesion total includes label 2 only. No reference annotation is used.</p>
             <p>Grid: {scanResult.measurement.shape.join(' × ')}; voxel volume: {scanResult.measurement.voxelMm3} mm³.</p>
             <p>{scanResult.measurement.hashBasis}.</p>
@@ -366,16 +366,13 @@ export default function LiteratureSearchPanel({
         <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” above. If the teacher is running, use “Find sources” until it is paused.</p>}
-      {result && <article aria-label="Literature search results">
+      {result && <article className="literature-search__answer-card" aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
-        <p>{result.message || (result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
-          ? 'No matching passages were returned. Try a broader pancreatic topic.'
-          : result.answer?.provenance === 'model_synthesized_passages' ? 'AI summary · Preview · Check the linked sources for details.'
-          : result.answer?.provenance === 'model_selected_source_sentences' ? 'Source-based answer · The local AI selected these quotations; wording is copied from the research.'
-          : result.answer?.provenance === 'local_model_composition' ? 'Local AI summary · Select a citation to inspect its evidence.'
-          : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
-          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
+        {result.answer ? <details className="literature-search__provenance"><summary>About this response</summary>
+        <ResponseExplanation result={result} sourceMode={sourceMode} />
+        </details> : <ResponseExplanation result={result} sourceMode={sourceMode} />}
+
         {sourceMode && result.record_selection?.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
         {!sourceMode && <details><summary>Keep this response</summary>
@@ -392,7 +389,7 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
-    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not saved automatically. Use Keep this response to download a copy.' : 'No scan is attached. Checked literature answers may be reused locally for 10 minutes; they are not saved automatically. Use Keep this response to download a copy.'}</small>
+    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.' : 'No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.'}</small>
   </section>
 }
 
@@ -404,11 +401,6 @@ export function LiteratureReadingView({ evidence, answer }) {
     if (view === 'sources' && selected !== null) sources.current[selected]?.focus()
   }, [view, selected])
   return <div className="literature-search__reading-view">
-    <div className="literature-search__view-switch" role="group" aria-label="Result view">
-      {answer && <button type="button" aria-pressed={view === 'answer'} onClick={() => setView('answer')}>Answer</button>}
-      <button type="button" aria-pressed={view === 'reading'} onClick={() => setView('reading')}>Read passages</button>
-      <button type="button" aria-pressed={view === 'sources'} onClick={() => { setSelected(null); setView('sources') }}>Sources ({evidence.length})</button>
-    </div>
     {view === 'answer' ? <div className="literature-search__prose" aria-label="AI answer">
       {answer.status === 'insufficient' && !answer.limitation && <p>I couldn’t find enough directly relevant evidence in the passages returned by this search to answer your question. You can inspect them in Sources or try a more specific question.</p>}
       {answer.claims.map((c, i) => <div className="literature-search__passage" key={i}>
@@ -438,5 +430,20 @@ export function LiteratureReadingView({ evidence, answer }) {
         </details>
       </section>)}
     </section>}
+    <div className="literature-search__view-switch" role="group" aria-label="Result view">
+      {answer && <button type="button" aria-pressed={view === 'answer'} onClick={() => setView('answer')}>Answer</button>}
+      <button type="button" aria-pressed={view === 'reading'} onClick={() => setView('reading')}>Read passages</button>
+      <button type="button" aria-pressed={view === 'sources'} onClick={() => { setSelected(null); setView('sources') }}>Sources ({evidence.length})</button>
+    </div>
   </div>
+}
+
+function ResponseExplanation({ result, sourceMode }) {
+  return <p>{result.message || (result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
+          ? 'No matching passages were returned. Try a broader pancreatic topic.'
+          : result.answer?.provenance === 'model_synthesized_passages' ? 'AI summary · Preview · Check the linked sources for details.'
+          : result.answer?.provenance === 'model_selected_source_sentences' ? 'Source-based answer · The local AI selected these quotations; wording is copied from the research.'
+          : result.answer?.provenance === 'local_model_composition' ? 'Local AI summary · Select a citation to inspect its evidence.'
+          : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
+          : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
 }
