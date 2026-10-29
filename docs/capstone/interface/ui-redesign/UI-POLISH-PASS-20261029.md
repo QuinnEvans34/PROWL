@@ -85,3 +85,23 @@ Points to review:
 - **Resolution switch.** The lower resolution is applied on `pointerdown` so that NiiVue's `mousedown` records the drag start at that resolution. Full resolution is restored after `pointerup`.
 
 Verification: Vitest 316 passed, 6 skipped, 0 failed, and `vite build` succeeds. Both ran on a Linux copy. Each feature was checked by hand in the browser pane.
+
+### Codex follow-up review on the Mac
+
+Reviewed the nine follow-up commits through `6c92307`. Keep the scene selector,
+help card, orientation cue and navigation shortcuts. Fixed one concrete issue:
+“Peel to pancreas” used a guessed 50% before geometry was available; it now stays
+disabled until a pancreas marker is available (manual peel and Restore CT remain).
+Added a component regression covering missing geometry, Surfaces/Region controls,
+help, keyboard peel and restoring CT. The new test passes.
+
+The initial full Mac suite passed 316 tests with six skips. A high-DPI real-viewer
+check in CPU software Chromium timed out on the full-abdomen render; a diagnostic
+attempt saturated that renderer and was stopped, with only its verified test
+processes terminated and their cleanup confirmed. This is not evidence that the
+hardware-rendered viewer fails, nor a verified performance result. Resolution
+restoration and double-click orbit still need an independent hardware-browser
+walkthrough; Claude's manual observations above remain attributed to Claude.
+Teacher pins matched and its worker continued; no answer or training model launched.
+Final verification after the fix: 317 tests passed, six skipped; production build
+passed with the existing large-chunk warning.

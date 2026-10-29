@@ -952,7 +952,7 @@ export default function ReviewWorkspace({
                 onChange={(event) => setClipProgress(Number(event.target.value), { live: true })} aria-label="Front-to-back CT removal" />
             </div>
             <span className="pw-slicebar__value pw-num">{Math.round(state.clipProgress)}%</span>
-            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => setClipProgress(state.clipProgress > 0 ? 0 : (pancreasRevealProgress ?? 50))}>
+            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" disabled={state.clipProgress === 0 && pancreasRevealProgress === null} onClick={() => setClipProgress(state.clipProgress > 0 ? 0 : pancreasRevealProgress)}>
               {state.clipProgress > 0 ? 'Restore CT' : 'Peel to pancreas'}
             </button>
           </div>
