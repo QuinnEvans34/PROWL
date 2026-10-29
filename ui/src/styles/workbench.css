@@ -239,7 +239,12 @@
 .pw-range { position: absolute; z-index: 1; height: 4px; top: 50%; margin-top: 5px; border-radius: 2px; opacity: 0.9; pointer-events: auto; }
 .pw-range--pancreas { background: var(--pw-layer-pred-pancreas); }
 .pw-range--lesion { background: var(--pw-layer-pred-lesion); margin-top: 10px; }
-.pw-cut-marker { position: absolute; z-index: 1; top: 50%; width: 2px; height: 14px; margin-top: -7px; background: var(--pw-layer-pred-pancreas); }
+.pw-cut-marker {
+  position: absolute; z-index: 2; top: 50%; width: 4px; height: 16px; margin: -8px 0 0 -2px; padding: 0;
+  border: 0; border-radius: 2px; background: var(--pw-layer-pred-pancreas); cursor: pointer;
+}
+.pw-cut-marker:hover, .pw-cut-marker:focus-visible { box-shadow: 0 0 0 3px rgba(38, 197, 166, 0.3); }
+.pw-slicebar__value { flex: none; min-width: 38px; color: var(--pw-text-muted); font-size: 12px; text-align: right; }
 .pw-slicebar__legend { display: flex; gap: 10px; flex: none; color: var(--pw-text-faint); font-size: 11.5px; }
 .pw-slicebar__legend span { display: inline-flex; align-items: center; gap: 5px; }
 .pw-range-key { width: 10px; height: 3px; border-radius: 2px; }

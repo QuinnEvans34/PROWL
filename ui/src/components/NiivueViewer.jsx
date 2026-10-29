@@ -492,6 +492,19 @@ function setVolumeRendering(nv, enabled) {
   else nv.drawImage3D = skipImage3D
 }
 
+// Where the fixed front-to-back peel (0-100%) has cut past the front of the pancreas,
+// from the pancreas surface and the scene bounds along the view axis. NiiVue's clip
+// depth spans the scene from the front face (-0.5) to the back face (+0.5).
+function peelRevealPercent(nv, meshes) {
+  const pancreas = meshes.find((entry) => entry.anatomy === 'pancreas' && entry.source !== 'difference' && entry.mesh.extentsMin)
+  if (!pancreas || typeof nv.sceneExtentsMinMax !== 'function') return null
+  const [lo, , range] = nv.sceneExtentsMinMax()
+  const span = Number(range?.[1])
+  if (!Number.isFinite(span) || span <= 0) return null
+  const fraction = (pancreas.mesh.extentsMin[1] - lo[1]) / span + 0.03
+  return Math.max(1, Math.min(99, Math.round(fraction * 100)))
+}
+
 function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
   if (isSelected) return 'Toon'
   if (entry.source === 'gt' && renderedSources.includes('pred') && sourceFocus !== 'gt') return 'Outline'
@@ -570,6 +583,7 @@ export default function NiivueViewer({
   interactionMode = 'navigate',
   navigationCommand = null,
   onNavigationChange = null,
+  onPeelReveal = null,
   clip = null,
   resetToken = 0,
   compact = false,
@@ -937,6 +951,7 @@ export default function NiivueViewer({
           nv.setClipPlane(clip?.enabled
             ? [clip.depth, 0, 0]
             : [2, 0, 0])
+          onPeelReveal?.(peelRevealPercent(nv, Array.from(registryRef.current.meshes.values())))
         }
 
         const currentCaseId = caseData.case_id || caseData.files.ct

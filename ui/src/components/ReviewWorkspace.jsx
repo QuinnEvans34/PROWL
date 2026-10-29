@@ -159,6 +159,8 @@ export default function ReviewWorkspace({
   const [panelWide, setPanelWide] = useState(false)
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
+  const [peelReveal3d, setPeelReveal3d] = useState(null)
+  useEffect(() => { setPeelReveal3d(null) }, [caseId])
   const viewerRef = useRef(null)
   const lastPointerRef = useRef(null)
   const [navigation, setNavigation] = useState({
@@ -247,10 +249,14 @@ export default function ReviewWorkspace({
         setSlice(navigatorIndex + 1)
       }
       if (event.key.toLowerCase() === 'r') dispatch({ type: 'RESET_VIEW' })
+      if (state.viewMode !== '2d' && (event.key === '[' || event.key === ']')) {
+        event.preventDefault()
+        setClipProgress(state.clipProgress + (event.key === ']' ? 5 : -5))
+      }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.viewMode, navigatorIndex, navigatorPlane, navigatorTotal])
+  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal])
 
   const availableSources = useMemo(() => {
     const next = []
@@ -329,19 +335,11 @@ export default function ReviewWorkspace({
   const sliceProgress = navigatorTotal > 1 ? (navigatorIndex / (navigatorTotal - 1)) * 100 : 0
   const coronalPancreasRange = navigation.ranges.pancreas?.coronal
   const coronalTotal = navigation.totals.coronal || 1
-  const pancreasRevealProgress = coronalPancreasRange && coronalTotal > 1
+  // Prefer the 3D scene's own geometry (correct for the full abdomen); fall back to the
+  // 2D coronal estimate before the 3D view has loaded.
+  const pancreasRevealProgress = peelReveal3d ?? (coronalPancreasRange && coronalTotal > 1
     ? Math.max(1, Math.min(99, Math.round(Math.min(1, (coronalPancreasRange[1] + Math.max(8, Math.round(coronalTotal * 0.08))) / (coronalTotal - 1)) * 100)))
-    : null
-  const cutStatus = !state.clipEnabled
-    ? 'Cut off'
-    : state.clipProgress <= 0
-      ? 'Full CT'
-      : state.clipProgress >= 100
-        ? 'Mask only'
-        : pancreasRevealProgress !== null && Math.abs(state.clipProgress - pancreasRevealProgress) <= 1
-          ? 'Pancreas revealed'
-          : `${Math.round(state.clipProgress)}% removed`
-
+    : null)
   function setClipProgress(value, { snapFront = false, live = false } = {}) {
     const nextProgress = Math.max(0, Math.min(100, Number(value)))
     const commit = (progress) => dispatch({ type: 'PATCH_SETTINGS', value: { clipEnabled: true, clipProgress: progress } })
@@ -410,6 +408,7 @@ export default function ReviewWorkspace({
   const viewer3dProps = {
     showFull: scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
+    onPeelReveal: setPeelReveal3d,
   }
 
   function openPanel(tab) {
@@ -878,14 +877,28 @@ export default function ReviewWorkspace({
           </div>
         )}
         {is3dLike && scene3d !== 'surfaces' && (
-          <div className="pw-slicebar pw-slicebar--cut" aria-label="3D CT cutaway">
-            <span className="pw-slicebar__readout"><strong>Cutaway</strong> <span className="pw-muted">front → back</span></span>
+          <div className="pw-slicebar pw-slicebar--cut" aria-label="Front-to-back peel">
+            <span className="pw-slicebar__readout" title="Removes the CT from the front of the body towards the back. [ and ] step the peel.">
+              <strong>Peel</strong> <span className="pw-muted">front → back</span>
+            </span>
             <div className="pw-slicebar__track" style={{ '--slice-progress': `${state.clipProgress}%` }}>
-              {pancreasRevealProgress !== null && <i className="pw-cut-marker" style={{ left: `${pancreasRevealProgress}%` }} title={`Pancreas is revealed near ${pancreasRevealProgress}% removal`} />}
+              {pancreasRevealProgress !== null && (
+                <button
+                  type="button"
+                  className="pw-cut-marker"
+                  style={{ left: `${pancreasRevealProgress}%` }}
+                  onClick={() => setClipProgress(pancreasRevealProgress)}
+                  aria-label={`Peel to the pancreas (${pancreasRevealProgress}%)`}
+                  title="Peel to the front of the pancreas"
+                />
+              )}
               <input type="range" min="0" max="100" step="1" value={state.clipProgress}
                 onChange={(event) => setClipProgress(Number(event.target.value), { live: true })} aria-label="Front-to-back CT removal" />
             </div>
-            <code className="pw-slicebar__status">{cutStatus}</code>
+            <span className="pw-slicebar__value pw-num">{Math.round(state.clipProgress)}%</span>
+            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => setClipProgress(state.clipProgress > 0 ? 0 : (pancreasRevealProgress ?? 50))}>
+              {state.clipProgress > 0 ? 'Restore CT' : 'Peel to pancreas'}
+            </button>
           </div>
         )}
       </section>
