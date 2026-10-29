@@ -724,8 +724,33 @@ export default function NiivueViewer({
     }
     nvRef.current = nv
 
+    // While the 3D view is being dragged or zoomed with the CT visible, render at
+    // half the device pixel ratio (a quarter of the pixels) and restore full
+    // resolution when the gesture ends. Only on high-DPI screens; meshes-only
+    // scenes are cheap and keep full resolution.
+    let lowResActive = false
+    let wheelTimer = null
+    function setLowResolution(active) {
+      const native = window.devicePixelRatio || 1
+      if (active === lowResActive) return
+      if (active && (interactiveRef.current.mode !== '3d' || native <= 1 || Object.prototype.hasOwnProperty.call(nv, 'drawImage3D'))) return
+      lowResActive = active
+      nv.opts.forceDevicePixelRatio = active ? Math.max(1, native / 2) : 0
+      nv.resizeListener()
+    }
+    function handleWheel() {
+      setLowResolution(true)
+      window.clearTimeout(wheelTimer)
+      wheelTimer = window.setTimeout(() => setLowResolution(false), 220)
+    }
+    function endGesture() {
+      // After NiiVue has processed its own mouseup at the gesture's resolution.
+      window.setTimeout(() => setLowResolution(false), 0)
+    }
+
     function handlePointerDown(event) {
       pointerStartRef.current = { x: event.clientX, y: event.clientY }
+      setLowResolution(true)
     }
 
     function handlePointerUp(event) {
@@ -793,6 +818,9 @@ export default function NiivueViewer({
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
     canvas.addEventListener('dblclick', handleDoubleClick)
+    canvas.addEventListener('wheel', handleWheel, { passive: true })
+    window.addEventListener('pointerup', endGesture)
+    window.addEventListener('pointercancel', endGesture)
 
     return () => {
       if (clipFrameRef.current !== null) {
@@ -807,6 +835,10 @@ export default function NiivueViewer({
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
       canvas.removeEventListener('dblclick', handleDoubleClick)
+      canvas.removeEventListener('wheel', handleWheel)
+      window.removeEventListener('pointerup', endGesture)
+      window.removeEventListener('pointercancel', endGesture)
+      window.clearTimeout(wheelTimer)
       nvRef.current = null
     }
   }, [compact])
