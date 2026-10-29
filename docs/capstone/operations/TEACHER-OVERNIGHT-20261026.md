@@ -6,7 +6,21 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 28 power restored — attempt10 active
+## October 29 class pause — current state
+
+Explicit user pause completed with the identity-checked pause_rsuper_targets.py.
+Hourly keep-prowl-teacher-running is PAUSED; do not resume without user direction.
+Attempt10 stopped normally with SIGTERM, exit-15, workers_reaped=true and
+62661.638014 supervised seconds. Supervisor44494, worker48740 and caffeinate48742
+are absent; exclusive GPU lock is released. No forced kill was needed.
+All942 completed targets passed payload hash, size, uint16 type and native-shape
+verification. All341 repository producing pins remain unchanged.391 cases remain;
+the unfinished case must be recomputed on an authorized continuation.
+Charge62662seconds, retaining109065seconds of the original cumulative budget.
+Receipt: rsuper-class-pause-20261029-01/receipt.json under the artifact base.
+Preserve all attempts and the qualified affine worker; no student training started.
+
+## October 28 power restored — attempt10 historical launch
 
 User explicitly requested verification and resume after reconnecting AC and drive.
 Both are available. Additive resume_rsuper_affine_after_power_loss_v1.py retains
