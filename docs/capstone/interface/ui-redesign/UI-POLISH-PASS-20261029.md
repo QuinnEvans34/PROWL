@@ -105,3 +105,32 @@ walkthrough; Claude's manual observations above remain attributed to Claude.
 Teacher pins matched and its worker continued; no answer or training model launched.
 Final verification after the fix: 317 tests passed, six skipped; production build
 passed with the existing large-chunk warning.
+
+## Codex responsiveness follow-up
+
+Installed NiiVue setters (`setMeshProperty`, `setMeshShader`, `setOpacity`) each call
+`updateGLVolume`, which rebuilds volume textures and draws. Batch synchronous
+presentation changes and initial mesh styling into one refresh. A synthetic test
+reduces 30 setter refresh requests to one, preserving final state and restoring
+methods after exceptions/nested batches. This is a work-count improvement, not an
+FPS claim. Dispose NiiVue observers/listeners and delayed resolution timers on
+unmount; prevent wheel restoration during a held drag and restore on window blur.
+
+The real small-window walkthrough also found the help card could extend above the
+viewer and put its close button underneath the toolbar. Constrain its height/width
+and scroll its contents. A browser regression exercises opening/closing it at
+800x600 with the overlay panels closed.
+
+Verification: 320 UI tests passed, six skipped; production build passed with the
+existing bundle-size warning. Software Chromium loaded the real saved case at
+800x600, exercised drag, Abdomen/Surfaces/Region switching, peel shortcut, camera
+and Fit, and help dismissal without JavaScript errors. At 2x DPR, the canvas went
+1600x592 -> 800x296 while dragging -> 1600x592 after release. Initial help check
+failed before the CSS correction; the synthetic test initially left overlay panels
+open, which correctly intercepted viewer clicks, and was corrected to close them.
+Backend localhost:8000 remains unavailable while saved assets work; no service
+restart or answer-model call was performed. Existing reviewer save/reopen and
+citation attachment regression tests passed, but this is not a new live end-to-end
+clinical or answer-quality acceptance. Double-click surface orbit still needs a
+human hardware-browser check; no speed percentage is claimed. Teacher attempt13
+remained active and advanced to tile75/120 of its next case after 1007 completions.
