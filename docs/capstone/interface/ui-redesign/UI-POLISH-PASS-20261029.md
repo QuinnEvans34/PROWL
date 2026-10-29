@@ -10,6 +10,7 @@ Claude implemented this pass on `main` after a live audit, following Quinton's s
 | 4 Assistant | `659c12e` | Compact structure rows; click pop-up with general literature questions; ray-cast 3D picking; conversation-style Ask; widen control |
 | 5 Pages | `808b226` | Saved prediction review and Analyze restyled (`styles/pages.css`); header status names its service |
 | 6 Studies / narrow | `47d11a8` | Studies table de-duplicated; narrow-width navigation and wrapping |
+| Follow-up | `00dd3b1` | Performance fix: skip NiiVue's invisible CT ray-cast in 3D "Masks only" (about 7 ms to under 1 ms per frame) |
 
 ## Review focus
 
@@ -19,6 +20,7 @@ The steps above are mostly CSS and layout. These five changes alter behaviour, s
 - **Default 3D view.** `clipProgress` now defaults to 100 (Masks only) in `reviewState.js`, both in the initial state and on reset.
 - **Hero 2D layout.** `setPlaneLayout` uses NiiVue `setCustomLayout` for "All 3". It falls back to `clearCustomLayout` and the row layout for single planes or very wide viewers. Plane labels are positioned from `nv.screenSlices`.
 - **Scoped questions.** Questions offered next to a structure come from `lib/structureQuestions.js`. They are general literature questions and never about the scan. Choosing one only fills the Ask box through `draftRequest`; nothing is sent. Please check that these questions stay within RF1–RF9.
+- **Skipped CT rendering.** `setVolumeRendering` replaces `drawImage3D` on this viewer's NiiVue instance with a no-op while the CT is fully hidden in 3D, and restores it when the CT is shown again or the view returns to 2D.
 - **Mesh export.** `scripts/export_case.py` now gives the difference meshes the main smoothing (Gaussian 0.7, 12 Taubin passes). Discrepancies thinner than about one voxel can drop out of 3D, but they stay exact in the 2D difference NIfTI. When a region no longer produces a surface, its mesh is removed.
 
 ## Verification
