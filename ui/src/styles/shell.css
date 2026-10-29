@@ -131,24 +131,26 @@ body {
 .pw-fineprint { margin: 14px 0 0; color: var(--pw-text-faint); font-size: 12px; max-width: 80ch; }
 .pw-mono-id { font-family: var(--pw-mono); font-weight: 500; font-size: 13px; letter-spacing: 0.01em; }
 
-/* Panther */
-.pw-panther {
-  display: inline-grid; place-items: center; overflow: hidden; flex: none;
-  background: var(--pw-silver);
+/* Panther — the logo's own alpha shape, shown as a light silhouette (no tile). */
+.pw-panther { display: inline-grid; place-items: center; flex: none; --pw-panther-ink: var(--pw-silver); }
+.pw-panther__mark {
+  display: block; width: 100%; height: 100%;
+  background-color: var(--pw-panther-ink);
+  -webkit-mask: url('/brand/prowl-panther.png') center / contain no-repeat;
+  mask: url('/brand/prowl-panther.png') center / contain no-repeat;
+  transition: background-color 240ms var(--pw-ease);
 }
-.pw-panther img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
-.pw-panther--sm { width: 40px; height: 40px; border-radius: 10px; }
-.pw-panther--sm img { object-fit: contain; transform: scale(1.08); }
-.pw-panther--hero { width: 180px; height: 140px; border-radius: 14px; }
-.pw-panther--hero img { object-fit: contain; transform: scale(1.12); }
-.pw-panther--empty { width: 220px; height: 160px; border-radius: 16px; }
-.pw-panther--empty img { object-fit: contain; transform: scale(1.1); }
-.pw-panther--pulse { box-shadow: 0 0 0 0 var(--pw-accent-line); animation: pw-halo 1.6s var(--pw-ease) infinite; }
-@keyframes pw-halo {
-  0% { box-shadow: 0 0 0 0 var(--pw-accent-line); }
-  70% { box-shadow: 0 0 0 7px rgba(183, 164, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(183, 164, 255, 0); }
+.pw-panther--sm { width: 40px; height: 40px; }
+.pw-panther--sm .pw-panther__mark { transform: scale(1.15); }
+.pw-panther--hero { width: 200px; height: 140px; }
+.pw-panther--hero .pw-panther__mark { transform: scale(1.12); }
+.pw-panther--empty { width: 220px; height: 160px; --pw-panther-ink: var(--pw-text-faint); }
+.pw-panther--pulse .pw-panther__mark { animation: pw-prowl 1.6s var(--pw-ease) infinite; }
+@keyframes pw-prowl {
+  0%, 100% { background-color: var(--pw-silver); }
+  50% { background-color: var(--pw-accent); }
 }
+@media (prefers-reduced-motion: reduce) { .pw-panther--pulse .pw-panther__mark { animation: none; background-color: var(--pw-accent); } }
 
 /* ---------- Pages ---------- */
 .pw-page { height: 100%; overflow: auto; padding: 36px clamp(20px, 3vw, 48px) 48px; }

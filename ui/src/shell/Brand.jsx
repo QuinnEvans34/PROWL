@@ -1,12 +1,13 @@
 // The original PROWL panther (repository-root PROWL_LOGO.png, copied unchanged to
-// public/brand). The file is a padded square; framing is done with CSS only —
-// the artwork itself is never cropped, recolored, or regenerated.
+// public/brand). The file is never edited; the UI uses its transparent shape as a
+// CSS mask so the panther shows as a light silhouette on the dark interface
+// (approved by Quinton, 2026-10-29). Colour comes from --pw-panther-ink.
 export const PANTHER_SRC = '/brand/prowl-panther.png'
 
 export function PantherBadge({ size = 'sm', pulse = false, className = '' }) {
   return (
     <span className={`pw-panther pw-panther--${size}${pulse ? ' pw-panther--pulse' : ''} ${className}`} aria-hidden="true">
-      <img src={PANTHER_SRC} alt="" draggable="false" />
+      <span className="pw-panther__mark" />
     </span>
   )
 }
