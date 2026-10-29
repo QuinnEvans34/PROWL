@@ -3,6 +3,7 @@ import {
   Activity,
   Box,
   ChevronDown,
+  CircleHelp,
   ChevronLeft,
   ChevronRight,
   Columns2,
@@ -52,6 +53,27 @@ const CAMERA_VIEWS = [['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Righ
 const CAMERA_SHORTCUTS = {
   ...Object.fromEntries(CAMERA_VIEWS.map(([, azimuth, elevation], index) => [String(index + 1), [azimuth, elevation]])),
   0: [120, 15],
+}
+
+// Viewer controls, written for both mouse and trackpad users.
+const CONTROL_HELP = {
+  '3d': [
+    ['Rotate', 'Drag with the Rotate tool (one finger on a trackpad)'],
+    ['Pan', 'Shift-drag, right-drag, or drag with the Move tool'],
+    ['Zoom', 'Scroll, pinch, or + / −'],
+    ['Select', 'Click a surface for its details'],
+    ['Orbit a structure', 'Double-click a surface'],
+    ['Views', '1–6 anatomical views · 0 home · F fit · R reset'],
+    ['Peel', '[ and ] step the front-to-back peel'],
+  ],
+  '2d': [
+    ['Crosshair', 'Click or drag with the Navigate tool'],
+    ['Slices', 'Scroll, or ← and →'],
+    ['Pan', 'Shift-drag, or the Pan tool'],
+    ['Zoom', 'Scroll with the Pan tool'],
+    ['Brightness', 'Right-drag, or the Window tool'],
+    ['View', 'F fit · R reset'],
+  ],
 }
 
 const FRONT_CUT_DEPTH_MIN = -0.5
@@ -163,6 +185,7 @@ export default function ReviewWorkspace({
   const [panelOpen, setPanelOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1024))
   const [panelTab, setPanelTab] = useState('findings')
   const [snapOpen, setSnapOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const [panelWide, setPanelWide] = useState(false)
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
@@ -743,6 +766,24 @@ export default function ReviewWorkspace({
           )}
 
           {comparing && state.sourceFocus === 'difference' && state.viewMode !== '2d' && <p className="pw-difference-note" role="note">Smoothed 3D surfaces may hide thin differences. Check the exact overlays in 2D.</p>}
+          <div className="pw-viewer-help">
+            <button type="button" className="pw-viewer-help__toggle" aria-expanded={helpOpen} aria-label="Viewer controls" title="Viewer controls" onClick={() => setHelpOpen((open) => !open)}>
+              <CircleHelp size={16} aria-hidden="true" />
+            </button>
+            {helpOpen && (
+              <section className="pw-viewer-help__card" aria-label="Viewer controls">
+                <header><strong>{state.viewMode === '2d' ? '2D controls' : '3D controls'}</strong>
+                  <button type="button" className="pw-icon-btn" onClick={() => setHelpOpen(false)} aria-label="Close viewer controls"><X size={13} /></button>
+                </header>
+                <dl>
+                  {CONTROL_HELP[state.viewMode === '2d' ? '2d' : '3d'].map(([term, detail]) => (
+                    <div key={term}><dt>{term}</dt><dd>{detail}</dd></div>
+                  ))}
+                </dl>
+              </section>
+            )}
+          </div>
+
           <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={(state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split'}>
             {state.viewMode === 'split'
               ? '2D: scroll slices, drag the crosshair · 3D: drag to orbit'
