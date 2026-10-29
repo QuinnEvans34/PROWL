@@ -6,7 +6,18 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 AC restored — attempt12 admission underway
+## October 29 explicit pause — current state
+
+User requested pause; hourly keeper is PAUSED. Attempt12 had already stopped on
+AC loss before the pause command reached its identity checks. The command refused
+to signal an already-stopped job; no pause receipt was fabricated. worker.log ends
+RuntimeError('AC power required'); resources report exit1, workers_reaped=true,
+360.761005seconds. Supervisor9285/worker11990 are absent, no teacher worker remains,
+and GPU lock is released.359 targets restored before stop; original942 verified
+targets remain preserved in attempt10. No fresh predictions occurred. Charge361s,
+remaining108603seconds. Preserve all attempts; do not resume without user direction.
+
+## October 29 AC restored — attempt12 historical launch
 
 User confirmed charger reconnected; AC verified, no teacher or Ollama model live.
 One-shot launchd com.prowl.rsuper-targets-20261029-12 invokes additive
