@@ -2,7 +2,7 @@ import LocalExpertReadiness from './LocalExpertReadiness.jsx'
 import { serializeLiteratureCapture, downloadLiteratureCapture } from '../lib/literatureCapture.js'
 import { validateSingleSummary } from './singleSummary'
 import { validateGeneralExtract } from './generalExtract'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import config from '../../../configs/evidence/development-search-v1.json'
 import recordConfig from '../../../configs/evidence/development-search-v3-records.json'
 import diseaseCatalog from '../../../configs/evidence/source-facts-disease-v1.json'
@@ -173,10 +173,13 @@ export default function LiteratureSearchPanel({
 }) {
   const panel = variant === 'panel'
   const measurementKey = measurementContext?.key ?? null
+  const [history, setHistory] = useState([])
+  const remember = entry => setHistory(items => [...items, entry].slice(-6))
   const [scanResult, setScanResult] = useState(null)
   const measurementRef = useRef(measurementKey)
   useEffect(() => {
     if (measurementRef.current === measurementKey) return
+    setHistory([])
     measurementRef.current = measurementKey
     if (active.current) { active.current.abort(); active.current = null; setPhase('idle') }
     setScanResult(null)
@@ -204,6 +207,7 @@ export default function LiteratureSearchPanel({
   useEffect(() => { onPendingChange?.(phase === 'loading') }, [phase, onPendingChange])
   useEffect(() => {
     if (contextRef.current === contextKey) return
+    setHistory([])
     contextRef.current = contextKey
     setPreview(null); setHelpError(false)
     if (active.current) {
@@ -270,7 +274,10 @@ export default function LiteratureSearchPanel({
           } catch (error) { value = { message: error.message || 'The saved mask could not be measured.' } }
         }
         if (active.current === control && !control.signal.aborted) {
-          setScanResult({ ...value, key: measurementKey }); setPhase('done')
+          setScanResult({ ...value, key: measurementKey, requestId: request.request_id }); setPhase('done')
+          remember({ id: request.request_id, question: request.question, label: contextLabel || 'Current study',
+            text: value.measurement ? measurementText(value.measurement, value.target) : value.message,
+            comparison: value.target === 'pancreas_comparison', measured: Boolean(value.measurement) })
         } else if (active.current === control) setPhase('error')
         return
       }
@@ -279,6 +286,7 @@ export default function LiteratureSearchPanel({
         : validateAnswer(await search(request, control.signal), request)
       if (active.current === control && !control.signal.aborted) {
         setResult(response); setPhase('done')
+        remember({ id: request.request_id, question: request.question, label: 'General literature', response, sourceMode: sourcesOnly })
         if (!sourcesOnly) {
           try { setCapture(serializeLiteratureCapture(request, response)) }
           catch (error) { setCaptureNotice(error.message) }
@@ -389,11 +397,18 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
+    {history.some(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId) && <section className="literature-search__history" aria-label="Recent responses">
+      <h3>Recent responses</h3>
+      <p>Last six responses in this session. Each question is answered independently.</p>
+      {history.filter(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId).map(entry => <RecentResponse key={entry.id} entry={entry} />)}
+      <button type="button" onClick={() => setHistory([])}>Clear recent responses</button>
+    </section>}
     <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.' : 'No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.'}</small>
   </section>
 }
 
 export function LiteratureReadingView({ evidence, answer }) {
+  const sourceId = useId()
   const [view, setView] = useState(answer ? 'answer' : 'reading')
   const [selected, setSelected] = useState(null)
   const sources = useRef({})
@@ -417,8 +432,8 @@ export function LiteratureReadingView({ evidence, answer }) {
       </div>)}
     </div> : <section className="literature-search__sources" aria-label="Sources">
       {evidence.map(({ rank, record: r }) => <section className="literature-search__result" key={r.passage.passage_id}
-        aria-labelledby={`literature-source-${rank}`}>
-        <h4 id={`literature-source-${rank}`} tabIndex={-1} ref={node => { sources.current[rank] = node }}>
+        aria-labelledby={`${sourceId}-source-${rank}`}>
+        <h4 id={`${sourceId}-source-${rank}`} tabIndex={-1} ref={node => { sources.current[rank] = node }}>
           [{rank}] {r.citation.title} ({r.citation.year})
         </h4>
         <p>{r.citation.authors.join('; ')}</p>
@@ -446,4 +461,24 @@ function ResponseExplanation({ result, sourceMode }) {
           : result.answer?.provenance === 'local_model_composition' ? 'Local AI summary · Select a citation to inspect its evidence.'
           : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
           : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
+}
+
+function RecentResponse({ entry }) {
+  const [open, setOpen] = useState(false)
+  return <details onToggle={event => setOpen(event.currentTarget.open)}>
+    <summary>{entry.question}</summary>
+    {open && <div className="literature-search__history-body">
+      <small>{entry.label}</small>
+      {entry.response ? <>
+        {entry.response.answer ? <LiteratureReadingView evidence={entry.response.evidence} answer={entry.response.answer} /> : <>
+          <ResponseExplanation result={entry.response} sourceMode={entry.sourceMode} />
+          {entry.response.evidence.length > 0 && <LiteratureReadingView evidence={entry.response.evidence} />}
+        </>}
+      </> : <>
+        <p>{entry.text}</p>
+        {entry.measured && <p>Calculated from the saved prediction outline; human review is required.</p>}
+        {entry.comparison && entry.measured && <a href={pancreasReferenceUrl} target="_blank" rel="noreferrer">Study source: MRI pancreas volume (PMID 25950180)</a>}
+      </>}
+    </div>}
+  </details>
 }

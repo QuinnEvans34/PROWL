@@ -219,3 +219,7 @@
 .pw-app .literature-search--panel .literature-search__answer-card { padding: 12px; }
 .pw-app .literature-search--panel .literature-search__prose { font-size: 14px; }
 .pw-app .literature-search__provenance p { margin-top: 8px; color: var(--pw-text-muted); font-size: 12px; }
+.pw-app .literature-search__history { display: grid; gap: 12px; margin-top: 20px; }
+.pw-app .literature-search__history > p { color: var(--pw-text-faint); font-size: 12px; }
+.pw-app .literature-search__history summary { overflow-wrap: anywhere; line-height: 1.6; }
+.pw-app .literature-search__history-body { display: grid; gap: 12px; padding: 12px 0; }
