@@ -6,7 +6,7 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 resume authorized — attempt13 admission underway
+## October 29 resume verified — attempt13 active
 
 User requested restart; AC/drive/storage available, no teacher or Ollama model
 running, exclusive GPU lock initially free. One-shot launchd label
@@ -18,6 +18,13 @@ Original remaining allowance108603seconds;29GiB output/32GiB combined and all
 other gates unchanged. Hourly keeper ACTIVE. Do not duplicate this dispatch;
 inspect request/process/progress/tiles before claiming fresh inference. No student
 training or scientific changes. Prior user pause superseded by this resume.
+
+Fresh inference verified at16:36UTC:954/1333 completed (12 new beyond the942
+preserved targets), next case PanTS_00004537 at75/180tiles. Supervisor18462 and
+worker22907 (start Thu Oct29 09:39:25 2026) are launchd-owned; exactly one teacher
+worker, GPU lock held, AC available, no finalized failure. All343 repository pins
+match. Internal84.0GiB/external1919.6GiB free. This confirms recovery completed;
+continue hourly monitoring without duplicating or altering this run.
 
 ## October 29 explicit pause — historical
 
