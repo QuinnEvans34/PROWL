@@ -297,3 +297,27 @@ Evidence: [internal service](../retrieval/INTERNAL-LITERATURE-SERVICE-2026-10-28
 [summary candidate and test window](../retrieval/SINGLE-PASS-SUMMARY-2026-10-28.md),
 [training handoff](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md),
 [G3 scope](../orchestration/G3-EVIDENCE-REVIEW-20261027.md).
+
+## October 29 — answer-first assistant UX
+
+User feedback reopened a concrete W04-04 UI task while the teacher continues.
+Implemented in small commits: response cards lead with answer text and inline
+citations; source navigation follows the answer; composition provenance is under
+closed “About this response” details. Measurement review warnings and all returned
+scope/limitations stay visible. No answer validation or backend policy changed.
+
+Recent responses retain at most six completed requests in component memory, with
+reopenable evidence and independent citation focus IDs. Cancelled/late responses
+are excluded; study or prediction changes clear history, as does unmount/reload.
+History is explicitly not conversational model memory or a saved reviewer decision.
+The user can clear it without clearing the current answer. No local storage added.
+
+Verification: 106 focused component tests passed, one existing skip; 11 summary
+and capture tests passed. Added assertions cover answer-first DOM order, collapsed
+provenance, history limits/clearing, study isolation and cancelled-response exclusion.
+Production build passed (existing large-chunk warning). Headless Chromium synthetic
+answer checks on the running Research UI passed at 1280px and 390px: citation
+navigation, closed provenance and no horizontal overflow. Screenshots were inspected.
+No real answer model was called or new summary candidate promoted. Teacher13
+supervisor/worker remained present during this work. Real generated-answer review
+still needs the separate free-GPU window and human walkthrough above.

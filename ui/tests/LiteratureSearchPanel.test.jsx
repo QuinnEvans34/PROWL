@@ -74,6 +74,7 @@ it.each(['page', 'panel'])('keeps the submitted question loading while drafting,
   await act(async () => calls[1].resolve(response(calls[1].request, 'no_results')))
   expect(screen.getByText('No passages found')).toBeTruthy()
   expect(screen.queryByText('Old question')).toBeNull()
+  expect(screen.queryByRole('region', {name:'Recent responses'})).toBeNull()
 })
 it.each(['resolve', 'reject'])('ignores an old %s after the replacement answer completes', async outcome => {
   const calls = []
