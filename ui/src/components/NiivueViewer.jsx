@@ -368,6 +368,52 @@ function semanticFromLocation(location, visibleSources, differenceMode) {
 
 // Reference surfaces drawn over a visible prediction use NiiVue's Outline shader:
 // a glassy rim instead of a second solid surface that z-fights with the first.
+const SLICE_TYPE_KEYS = { 0: 'axial', 1: 'coronal', 2: 'sagittal' }
+
+// "All 3" uses a hero layout: axial large, coronal and sagittal stacked beside it
+// (or below it in a tall viewer). A single row of three left most of a normal
+// workstation viewer empty. Very wide viewers keep the original row.
+function setPlaneLayout(nv, activePlane) {
+  const sliceType = {
+    axial: nv.sliceTypeAxial,
+    coronal: nv.sliceTypeCoronal,
+    sagittal: nv.sliceTypeSagittal,
+    multiplanar: nv.sliceTypeMultiplanar,
+  }[activePlane] ?? nv.sliceTypeMultiplanar
+  const width = nv.canvas?.clientWidth || 0
+  const height = nv.canvas?.clientHeight || 0
+  const aspect = height > 0 ? width / height : 0
+  if (activePlane !== 'multiplanar' || !aspect || aspect > 2.4 || typeof nv.setCustomLayout !== 'function') {
+    if (typeof nv.clearCustomLayout === 'function') nv.clearCustomLayout()
+    nv.setSliceType(sliceType)
+    return
+  }
+  nv.setSliceType(sliceType)
+  nv.setCustomLayout(aspect >= 1.25
+    ? [
+        { sliceType: nv.sliceTypeAxial, position: [0, 0, 0.6, 1] },
+        { sliceType: nv.sliceTypeCoronal, position: [0.6, 0, 0.4, 0.5] },
+        { sliceType: nv.sliceTypeSagittal, position: [0.6, 0.5, 0.4, 0.5] },
+      ]
+    : [
+        { sliceType: nv.sliceTypeAxial, position: [0, 0, 1, 0.6] },
+        { sliceType: nv.sliceTypeCoronal, position: [0, 0.6, 0.5, 0.4] },
+        { sliceType: nv.sliceTypeSagittal, position: [0.5, 0.6, 0.5, 0.4] },
+      ])
+}
+
+// Where NiiVue actually drew each 2D tile, in CSS pixels, so the plane labels
+// sit on their own image whatever the layout.
+function planeTilesFrom(nv) {
+  const ratio = nv.uiData?.dpr || window.devicePixelRatio || 1
+  return (nv.screenSlices || [])
+    .filter((slice) => SLICE_TYPE_KEYS[slice.axCorSag] && Array.isArray(slice.leftTopWidthHeight))
+    .map((slice) => {
+      const [left, top, width] = slice.leftTopWidthHeight
+      return { plane: SLICE_TYPE_KEYS[slice.axCorSag], left: left / ratio, top: top / ratio, width: width / ratio }
+    })
+}
+
 function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
   if (isSelected) return 'Toon'
   if (entry.source === 'gt' && renderedSources.includes('pred') && sourceFocus !== 'gt') return 'Outline'
@@ -479,6 +525,7 @@ export default function NiivueViewer({
   const lastFocusedObjectRef = useRef('')
   const [state, setState] = useState({ status: 'loading', message: 'Preparing viewer' })
   const [sceneVersion, setSceneVersion] = useState(0)
+  const [planeTiles, setPlaneTiles] = useState([])
 
   const renderedSources = visibleSources || sources
   const sceneKey = [
@@ -733,13 +780,7 @@ export default function NiivueViewer({
         }
 
         if (mode === '2d') {
-          const sliceType = {
-            axial: nv.sliceTypeAxial,
-            coronal: nv.sliceTypeCoronal,
-            sagittal: nv.sliceTypeSagittal,
-            multiplanar: nv.sliceTypeMultiplanar,
-          }[activePlane] ?? nv.sliceTypeMultiplanar
-          nv.setSliceType(sliceType)
+          setPlaneLayout(nv, activePlane)
           nv.setCrosshairColor([0.46, 0.57, 0.69, 0.78])
           nv.setAtlasOutline(0.32)
         } else {
@@ -998,16 +1039,34 @@ export default function NiivueViewer({
       || state.status !== 'ready'
       || loadedSceneKeyRef.current !== sceneKey
     ) return
-    const sliceType = {
-      axial: nv.sliceTypeAxial,
-      coronal: nv.sliceTypeCoronal,
-      sagittal: nv.sliceTypeSagittal,
-      multiplanar: nv.sliceTypeMultiplanar,
-    }[activePlane] ?? nv.sliceTypeMultiplanar
-    nv.setSliceType(sliceType)
+    setPlaneLayout(nv, activePlane)
     nv.drawScene()
+    setPlaneTiles(planeTilesFrom(nv))
     publishNavigation(nv)
   }, [activePlane, mode, sceneVersion, state.status, sceneKey])
+
+  // Re-run the layout when the viewer changes size (panels opening, window resize).
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas || mode !== '2d' || typeof ResizeObserver === 'undefined') return undefined
+    let frame = null
+    const observer = new ResizeObserver(() => {
+      if (frame !== null) window.cancelAnimationFrame(frame)
+      frame = window.requestAnimationFrame(() => {
+        frame = null
+        const nv = nvRef.current
+        if (!nv || state.status !== 'ready' || !nv.volumes?.[0]) return
+        setPlaneLayout(nv, activePlane)
+        nv.drawScene()
+        setPlaneTiles(planeTilesFrom(nv))
+      })
+    })
+    observer.observe(canvas)
+    return () => {
+      observer.disconnect()
+      if (frame !== null) window.cancelAnimationFrame(frame)
+    }
+  }, [activePlane, mode, state.status, sceneKey])
 
   useEffect(() => {
     const nv = nvRef.current
@@ -1173,14 +1232,9 @@ export default function NiivueViewer({
         clip?.enabled ? 0 : 120,
         clip?.enabled ? 0 : 15,
       )
-      nv.setScale(1)
+      nv.setScale(compact ? 1 : (surfaceFitScale(nv) || 1))
     } else {
-      nv.setSliceType({
-        axial: nv.sliceTypeAxial,
-        coronal: nv.sliceTypeCoronal,
-        sagittal: nv.sliceTypeSagittal,
-        multiplanar: nv.sliceTypeMultiplanar,
-      }[activePlane] ?? nv.sliceTypeMultiplanar)
+      setPlaneLayout(nv, activePlane)
       nv.setPan2Dxyzmm([0, 0, 0, 1])
     }
     const primaryVolume = registryRef.current.volumes.get(sources[0])
@@ -1196,14 +1250,18 @@ export default function NiivueViewer({
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
       <canvas ref={canvasRef} aria-label={label} style={nativeGeometry && state.status !== 'ready' ? { visibility: 'hidden' } : undefined} />
       {mode === '2d' && (
-        <div className={`viewer-plane-labels viewer-plane-labels--${activePlane}`} aria-label="CT anatomical planes">
+        <div
+          className={`viewer-plane-labels viewer-plane-labels--${activePlane}${planeTiles.length ? ' viewer-plane-labels--placed' : ''}`}
+          aria-label="CT anatomical planes"
+        >
           {(activePlane === 'multiplanar'
             ? ['axial', 'coronal', 'sagittal']
             : [activePlane]
           ).map((planeKey) => {
             const [plane, explanation] = PLANE_META[planeKey]
+            const tile = planeTiles.find((item) => item.plane === planeKey)
             return (
-            <span key={plane}>
+            <span key={plane} style={tile ? { left: `${Math.round(tile.left + 10)}px`, top: `${Math.round(tile.top + 10)}px` } : undefined}>
               <strong>{plane}</strong>
               <small>{explanation}</small>
             </span>

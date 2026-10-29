@@ -110,15 +110,33 @@
 }
 .pw-viewer .viewer-plane-labels strong { color: var(--pw-text); }
 .pw-viewer .viewer-plane-labels small { color: var(--pw-text-faint); }
+/* Labels placed on the tile NiiVue actually drew (hero layout or single plane). */
+.viewer-plane-labels.viewer-plane-labels--placed { display: block; inset: 0; top: 0; }
+.pw-viewer .niivue-frame--guided .viewer-plane-labels--placed,
+.pw-compare__view .viewer-plane-labels--placed { top: 0; }
+.viewer-plane-labels--placed > span { position: absolute; justify-self: auto; }
 .pw-app .viewer-ready { display: none; }
 .pw-viewer .viewer-state { left: 12px; top: auto; bottom: 12px; border-color: var(--pw-border); background: rgba(13, 15, 18, 0.9); color: var(--pw-text-muted); font-size: 12px; }
 .pw-viewer .viewer-state--error { color: var(--pw-danger); }
 .pw-viewer .viewer-module-loading { color: var(--pw-text-muted); background: #050608; font-size: 13px; }
 
+.pw-viewer-legend {
+  position: absolute; left: 12px; bottom: 10px; z-index: 3; display: flex; flex-wrap: wrap; gap: 4px 12px;
+  max-width: calc(100% - 24px); padding: 5px 10px; border-radius: 6px; background: rgba(8, 9, 12, 0.78);
+  color: var(--pw-text-muted); font-size: 11.5px; pointer-events: none;
+}
+.pw-viewer-legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.pw-viewer-legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--key); }
+.pw-viewer-legend i.pw-viewer-legend__ref { background: transparent; box-shadow: inset 0 0 0 2px var(--key); }
 .pw-viewer__hint {
   position: absolute; right: 12px; bottom: 10px; margin: 0; pointer-events: none;
-  color: var(--pw-text-faint); font-size: 11.5px; text-shadow: 0 1px 2px #000;
+  padding: 3px 8px; border-radius: 5px; background: rgba(8, 9, 12, 0.72);
+  color: var(--pw-text-faint); font-size: 11.5px;
+  animation: pw-hint-fade 600ms var(--pw-ease) 8s forwards;
 }
+/* The interaction hint fades after a few seconds so it stops covering the image. */
+@keyframes pw-hint-fade { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .pw-viewer__hint { animation: none; } }
 
 .pw-wb__center > * { flex-shrink: 0; }
 .pw-wb__center > .pw-viewer { flex: 1 0 260px; }
@@ -141,9 +159,16 @@
 .pw-selection strong { font-size: 13px; }
 .pw-selection .pw-segmented button { height: 22px; font-size: 12px; padding: 0 8px; }
 
+.pw-snap-wrap { position: absolute; right: 12px; top: 12px; z-index: 4; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.pw-snap__toggle {
+  display: inline-flex; align-items: center; gap: 4px; height: 26px; padding: 0 9px;
+  border: 1px solid var(--pw-border); border-radius: var(--pw-radius); background: rgba(13, 15, 18, 0.88);
+  color: var(--pw-text-muted); font: inherit; font-size: 12px; cursor: pointer;
+}
+.pw-snap__toggle:hover, .pw-snap__toggle[aria-expanded='true'] { color: var(--pw-text); border-color: var(--pw-border-control); }
 .pw-snap {
-  position: absolute; right: 12px; top: 12px; z-index: 4; display: grid; grid-template-columns: repeat(3, auto); gap: 2px;
-  padding: 3px; border: 1px solid var(--pw-border); border-radius: var(--pw-radius); background: rgba(13, 15, 18, 0.88);
+  display: grid; grid-template-columns: repeat(3, auto); gap: 2px;
+  padding: 3px; border: 1px solid var(--pw-border); border-radius: var(--pw-radius); background: rgba(13, 15, 18, 0.94);
 }
 .pw-snap button {
   height: 24px; padding: 0 8px; border: 0; border-radius: 5px; background: transparent;
@@ -164,7 +189,7 @@
 .pw-split__pane { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #050608; }
 .pw-split__pane > .niivue-frame { position: absolute; inset: 0; min-height: 0; }
 .pw-split__label {
-  position: absolute; left: 10px; bottom: 10px; z-index: 3; padding: 3px 8px; border-radius: 5px;
+  position: absolute; left: 10px; top: 10px; z-index: 3; padding: 3px 8px; border-radius: 5px;
   background: rgba(8, 9, 12, 0.72); color: var(--pw-text); font-size: 12px; pointer-events: none;
 }
 .pw-split__label small { margin-left: 6px; color: var(--pw-text-faint); }
@@ -349,14 +374,11 @@
   .pw-viewer { min-height: 240px; }
 }
 
-/* Plane selection collapses without hiding any viewing mode. */
-.pw-toolbar__plane { display: none; }
+/* Plane selection is one compact select. */
+.pw-toolbar__plane select { height: 32px; font-size: 13px; }
 .pw-library-count { color: var(--pw-text-muted); font-variant-numeric: tabular-nums; }
 @media (max-width: 1399px) {
-  .pw-toolbar .pw-segmented[aria-label='Plane'] { display: none; }
-  .pw-toolbar__plane { display: block; }
-  .pw-toolbar__plane > span { display: none; }
-  .pw-toolbar__plane select { height: 32px; font-size: 12px; }
+  .pw-toolbar__plane select { font-size: 12px; }
   .pw-toolbar { gap: 6px; }
   .pw-studybar { gap: 8px; padding-inline: 10px; }
   .pw-studybar__id .pw-tag { display: none; }

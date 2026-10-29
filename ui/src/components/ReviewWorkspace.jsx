@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useMemo, useReducer, useRef, useState } from
 import {
   Activity,
   Box,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Columns2,
@@ -154,6 +155,7 @@ export default function ReviewWorkspace({
   const [studyListOpen, setStudyListOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1360))
   const [panelOpen, setPanelOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1024))
   const [panelTab, setPanelTab] = useState('findings')
+  const [snapOpen, setSnapOpen] = useState(false)
   const [navigation, setNavigation] = useState({
     indices: { axial: 0, coronal: 0, sagittal: 0 },
     totals: { axial: 1, coronal: 1, sagittal: 1 },
@@ -410,13 +412,22 @@ export default function ReviewWorkspace({
     setPanelOpen(true)
   }
 
+  // 3D camera presets live behind one small "Views" button instead of a grid that
+  // permanently covered the corner of the render.
   const snapPad = state.settingsOpen ? null : (
-    <div className="pw-snap" role="group" aria-label="Snap 3D camera to an anatomical view">
-                {[['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]].map(([label, azimuth, elevation]) => (
-                  <button type="button" key={label} onClick={() => issueViewerCommand({ type: 'camera', azimuth, elevation })}>{label}</button>
-                ))}
-                <button type="button" onClick={() => issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 })}>Home</button>
-              </div>
+    <div className="pw-snap-wrap">
+      <button type="button" className="pw-snap__toggle" aria-expanded={snapOpen} onClick={() => setSnapOpen((open) => !open)} title="Snap the 3D camera to an anatomical view">
+        Views <ChevronDown size={13} aria-hidden="true" />
+      </button>
+      {snapOpen && (
+        <div className="pw-snap" role="group" aria-label="Snap 3D camera to an anatomical view">
+          {[['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]].map(([label, azimuth, elevation]) => (
+            <button type="button" key={label} onClick={() => { issueViewerCommand({ type: 'camera', azimuth, elevation }); setSnapOpen(false) }}>{label}</button>
+          ))}
+          <button type="button" onClick={() => { issueViewerCommand({ type: 'camera', azimuth: 120, elevation: 15 }); setSnapOpen(false) }}>Home</button>
+        </div>
+      )}
+    </div>
   )
 
   const prediction = useMemo(
@@ -530,15 +541,7 @@ export default function ReviewWorkspace({
               }],
             ]}
           />
-          {is2dLike && <label className="pw-toolbar__plane"><span className="sr-only">Plane</span><select aria-label="Plane" value={state.activePlane} onChange={e => dispatch({ type: 'SET_ACTIVE_PLANE', value: e.target.value })}><option value="multiplanar">All 3 planes</option><option value="axial">Axial</option><option value="coronal">Coronal</option><option value="sagittal">Sagittal</option></select></label>}
-          {is2dLike && (
-            <Segmented
-              label="Plane"
-              value={state.activePlane}
-              onChange={(value) => dispatch({ type: 'SET_ACTIVE_PLANE', value })}
-              options={[['multiplanar', 'All 3'], ['axial', 'Axial'], ['coronal', 'Coronal'], ['sagittal', 'Sagittal']]}
-            />
-          )}
+          {is2dLike && <label className="pw-select pw-toolbar__plane"><span className="sr-only">Plane</span><select aria-label="Plane" value={state.activePlane} onChange={e => dispatch({ type: 'SET_ACTIVE_PLANE', value: e.target.value })}><option value="multiplanar">All 3 planes</option><option value="axial">Axial</option><option value="coronal">Coronal</option><option value="sagittal">Sagittal</option></select></label>}
           <Segmented
             label="Mouse tool"
             value={state.interactionMode}
@@ -613,11 +616,10 @@ export default function ReviewWorkspace({
             {state.viewMode === 'split' ? (
               <div className="pw-split">
                 <section className="pw-split__pane" aria-label="2D planes">
-                  <span className="pw-split__label">2D planes</span>
                   <NiivueViewer {...viewerProps} mode="2d" interactionMode={state.interactionMode} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
                 </section>
                 <section className="pw-split__pane" aria-label="3D surfaces">
-                  <span className="pw-split__label">3D surfaces <small>camera independent</small></span>
+                  <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">3D surfaces</span>
                   <NiivueViewer {...viewerProps} mode="3d" interactionMode="rotate" label={`${viewerLabel} · 3D surfaces`} />
                   {snapPad}
                 </section>
@@ -657,7 +659,26 @@ export default function ReviewWorkspace({
           )}
 
 
-          <p className="pw-viewer__hint" aria-hidden="true" hidden={state.evidenceMode === 'ct' && !hasPrediction}>
+          {comparing && (state.sourceFocus === 'difference' || state.sourceFocus === 'both') && (
+            <div className="pw-viewer-legend" aria-label="Colour key">
+              {state.sourceFocus === 'difference' ? (
+                <>
+                  <span><i style={{ '--key': REVIEW_COLORS.difference.agreement }} />Agreement</span>
+                  <span><i style={{ '--key': REVIEW_COLORS.difference.predOnly }} />Prediction only</span>
+                  <span><i style={{ '--key': REVIEW_COLORS.difference.gtOnly }} />Reference only</span>
+                </>
+              ) : (
+                <>
+                  <span><i style={{ '--key': REVIEW_COLORS.pred.pancreas }} />Prediction pancreas</span>
+                  <span><i style={{ '--key': REVIEW_COLORS.pred.lesion }} />Prediction lesion</span>
+                  <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.pancreas }} />Reference pancreas</span>
+                  <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.lesion }} />Reference lesion</span>
+                </>
+              )}
+            </div>
+          )}
+
+          <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={(state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split'}>
             {state.viewMode === 'split'
               ? '2D: scroll slices, drag the crosshair · 3D: drag to orbit'
               : state.viewMode === '3d'
@@ -709,7 +730,7 @@ export default function ReviewWorkspace({
                 </>
               )}
               <p className="display-mesh-provenance">
-                Display surface · {caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}
+                Display surface · {caseData.display_mesh_version === 'v3-difference-main-smoothing' ? 'v3, matched smoothing' : caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}
                 <span>Metrics remain derived from the original NIfTI masks.</span>
               </p>
             </aside>
@@ -739,14 +760,14 @@ export default function ReviewWorkspace({
             <LayerToggle
               checked={state.layerVisibility.pancreas}
               label="Pancreas"
-              color={referenceShown && !predictionShown ? REVIEW_COLORS.gt.pancreas : REVIEW_COLORS.pred.pancreas}
+              color={comparing && ['both', 'difference'].includes(state.sourceFocus) ? 'var(--pw-text-faint)' : referenceShown && !predictionShown ? REVIEW_COLORS.gt.pancreas : REVIEW_COLORS.pred.pancreas}
               disabled={state.evidenceMode === 'ct'}
               onClick={() => dispatch({ type: 'TOGGLE_LAYER', layer: 'pancreas' })}
             />
             <LayerToggle
               checked={state.layerVisibility.lesion}
               label="Lesion"
-              color={referenceShown && !predictionShown ? REVIEW_COLORS.gt.lesion : REVIEW_COLORS.pred.lesion}
+              color={comparing && ['both', 'difference'].includes(state.sourceFocus) ? 'var(--pw-text-faint)' : referenceShown && !predictionShown ? REVIEW_COLORS.gt.lesion : REVIEW_COLORS.pred.lesion}
               disabled={state.evidenceMode === 'ct'}
               onClick={() => dispatch({ type: 'TOGGLE_LAYER', layer: 'lesion' })}
             />
