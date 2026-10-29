@@ -385,6 +385,8 @@ export default function ReviewWorkspace({
 
   const is2dLike = state.viewMode !== '3d'
   const is3dLike = state.viewMode !== '2d'
+  // Full abdomen needs the exported whole-abdomen CT; fall back to the region if absent.
+  const scene3d = state.scene3d === 'full' && !caseData.files?.ct_full ? 'region' : state.scene3d
   const viewerProps = {
     caseData,
     sources: availableSources,
@@ -413,6 +415,12 @@ export default function ReviewWorkspace({
     },
     resetToken: state.resetToken,
     guided: true,
+  }
+
+  // 3D scene choice: which CT (if any) surrounds the surfaces.
+  const viewer3dProps = {
+    showFull: scene3d === 'full',
+    ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
   }
 
   function openPanel(tab) {
@@ -574,6 +582,18 @@ export default function ReviewWorkspace({
               }],
             ]}
           />
+          {is3dLike && (
+            <Segmented
+              label="3D scene"
+              value={scene3d}
+              onChange={(value) => dispatch({ type: 'PATCH_SETTINGS', value: { scene3d: value } })}
+              options={[
+                ['full', 'Abdomen', { disabled: !caseData.files?.ct_full, title: 'Full abdomen: the whole abdominal CT around the surfaces' }],
+                ['region', 'Region', { title: 'Pancreas region: only the cropped CT around the pancreas' }],
+                ['surfaces', 'Surfaces', { title: 'Surfaces only: just the pancreas and lesion' }],
+              ]}
+            />
+          )}
           {is2dLike && <label className="pw-select pw-toolbar__plane"><span className="sr-only">Plane</span><select aria-label="Plane" value={state.activePlane} onChange={e => dispatch({ type: 'SET_ACTIVE_PLANE', value: e.target.value })}><option value="multiplanar">All 3 planes</option><option value="axial">Axial</option><option value="coronal">Coronal</option><option value="sagittal">Sagittal</option></select></label>}
           <Segmented
             label="Mouse tool"
@@ -600,8 +620,8 @@ export default function ReviewWorkspace({
               <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 1.16 })} aria-label="Zoom in" title="Zoom in">+</button>
             </div>
           )}
-          <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => issueViewerCommand({ type: 'fit' })} title="Fit the complete CT in the viewer">
-            <Maximize size={14} aria-hidden="true" /> Fit
+          <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'fit' })} aria-label="Fit" title="Fit the complete CT in the viewer">
+            <Maximize size={15} aria-hidden="true" />
           </button>
           <button type="button" className="pw-icon-btn" onClick={() => dispatch({ type: 'RESET_VIEW' })} aria-label="Reset viewer" title="Reset viewer (R)">
             <RotateCcw size={15} aria-hidden="true" />
@@ -660,13 +680,14 @@ export default function ReviewWorkspace({
                 </section>
                 <section className="pw-split__pane" aria-label="3D surfaces">
                   <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">3D surfaces</span>
-                  <NiivueViewer {...viewerProps} mode="3d" interactionMode="rotate" label={`${viewerLabel} · 3D surfaces`} />
+                  <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode="rotate" label={`${viewerLabel} · 3D surfaces`} />
                   {snapPad}
                 </section>
               </div>
             ) : (
               <NiivueViewer
                 {...viewerProps}
+                {...(state.viewMode === '3d' ? viewer3dProps : null)}
                 mode={state.viewMode}
                 interactionMode={state.interactionMode}
                 onNavigationChange={setNavigation}
@@ -880,17 +901,9 @@ export default function ReviewWorkspace({
             )}
           </div>
         )}
-        {is3dLike && (
+        {is3dLike && scene3d !== 'surfaces' && (
           <div className="pw-slicebar pw-slicebar--cut" aria-label="3D CT cutaway">
             <span className="pw-slicebar__readout"><strong>Cutaway</strong> <span className="pw-muted">front → back</span></span>
-            <Segmented
-              label="Front-to-back CT removal presets"
-              value={state.clipEnabled && state.clipProgress === 0 ? 'full'
-                : state.clipEnabled && state.clipProgress === 100 ? 'masks'
-                  : state.clipEnabled && pancreasRevealProgress !== null && Math.abs(state.clipProgress - pancreasRevealProgress) <= 1 ? 'pancreas' : null}
-              onChange={(value) => setClipProgress(value === 'full' ? 0 : value === 'masks' ? 100 : pancreasRevealProgress, { snapFront: true })}
-              options={[['full', 'Full scan'], ['pancreas', 'Pancreas', { disabled: pancreasRevealProgress === null }], ['masks', 'Masks only']]}
-            />
             <div className="pw-slicebar__track" style={{ '--slice-progress': `${state.clipProgress}%` }}>
               {pancreasRevealProgress !== null && <i className="pw-cut-marker" style={{ left: `${pancreasRevealProgress}%` }} title={`Pancreas is revealed near ${pancreasRevealProgress}% removal`} />}
               <input type="range" min="0" max="100" step="1" value={state.clipProgress}

@@ -498,6 +498,10 @@ function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
   return 'Hemispheric'
 }
 
+// The full abdomen is framed as a whole (NiiVue orbits the scene centre, not the
+// pancreas), so it gets a gentle fixed zoom; the cropped scenes fit the surfaces.
+const FULL_SCAN_SCALE = 1.45
+
 // Initial 3D zoom so the visible surfaces fill most of the viewer instead of
 // sitting small inside the whole CT bounding box. "Fit" still shows the full scene.
 function surfaceFitScale(nv) {
@@ -953,7 +957,7 @@ export default function NiivueViewer({
         }
         // First visit to 3D for this case (no saved camera): frame the surfaces.
         if (mode === '3d' && !savedView) {
-          const fit = compact ? 1.55 : surfaceFitScale(nv)
+          const fit = compact ? 1.55 : showFull ? FULL_SCAN_SCALE : surfaceFitScale(nv)
           if (fit) nv.setScale(fit)
         }
 
@@ -1318,7 +1322,7 @@ export default function NiivueViewer({
         clip?.enabled ? 0 : 120,
         clip?.enabled ? 0 : 15,
       )
-      nv.setScale(compact ? 1 : (surfaceFitScale(nv) || 1))
+      nv.setScale(compact ? 1 : showFull ? FULL_SCAN_SCALE : (surfaceFitScale(nv) || 1))
     } else {
       setPlaneLayout(nv, activePlane)
       nv.setPan2Dxyzmm([0, 0, 0, 1])
