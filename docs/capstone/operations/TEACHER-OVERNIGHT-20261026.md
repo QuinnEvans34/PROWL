@@ -6,7 +6,21 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 class pause — current state
+## October 29 authorized resume — attempt11 admission underway
+
+User requested resume after class pause. AC and drive are available; no old
+teacher workers or loaded Ollama models were found. New one-shot launchd label
+com.prowl.rsuper-targets-20261029-11 owns supervisor99986. Output is
+rsuper-full-targets-11, previous10, pause receipt rsuper-class-pause-20261029-01.
+Entry resume_rsuper_affine_after_pause_v1.py preserves the qualified affine worker
+and original operator-pause admission/supervision gates;12 focused tests pass.
+Prior producing pins are unchanged. It verifies all prior pins and942 completed
+targets before publishing a request/starting its worker. Do not redispatch.
+Remaining allowance109065seconds; all other resource/geometry gates retained.
+Hourly keeper is ACTIVE. Inspect request/process/progress for actual dispatch and
+fresh tiles before claiming inference. No student training or recipe change.
+
+## October 29 class pause — historical
 
 Explicit user pause completed with the identity-checked pause_rsuper_targets.py.
 Hourly keep-prowl-teacher-running is PAUSED; do not resume without user direction.
