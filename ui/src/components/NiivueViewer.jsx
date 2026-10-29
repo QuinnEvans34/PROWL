@@ -476,11 +476,11 @@ function pickSurfaceAtClick(nv, event, entries, toleranceMm = 3) {
       if (perp > toleranceMm) continue
       const lesion = entry.anatomy === 'lesion'
       if (!best || (lesion && !best.lesion) || (lesion === best.lesion && along < best.along)) {
-        best = { entry, along, lesion }
+        best = { entry, along, lesion, point: [points[i], points[i + 1], points[i + 2]] }
       }
     }
   })
-  return best?.entry || null
+  return best ? { ...best.entry, point: best.point } : null
 }
 
 // NiiVue ray-casts every loaded volume in 3D even at zero opacity. In "Masks only"
@@ -503,6 +503,18 @@ function peelRevealPercent(nv, meshes) {
   if (!Number.isFinite(span) || span <= 0) return null
   const fraction = (pancreas.mesh.extentsMin[1] - lo[1]) / span + 0.03
   return Math.max(1, Math.min(99, Math.round(fraction * 100)))
+}
+
+// NiiVue recomputes its 3D pivot from the scene bounds on every frame, so rotation is
+// always about the scan centre. Wrapping setPivot3D on this instance lets a chosen
+// point (double-clicked surface) become the orbit centre until Fit or Reset.
+function installOrbitCentre(nv, centreRef) {
+  const base = Object.getPrototypeOf(nv).setPivot3D
+  if (typeof base !== 'function') return
+  nv.setPivot3D = function setPivot3DWithCentre() {
+    base.call(this)
+    if (centreRef.current) this.pivot3D = [...centreRef.current]
+  }
 }
 
 function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
@@ -622,6 +634,7 @@ export default function NiivueViewer({
   const [state, setState] = useState({ status: 'loading', message: 'Preparing viewer' })
   const [sceneVersion, setSceneVersion] = useState(0)
   const [planeTiles, setPlaneTiles] = useState([])
+  const orbitCentreRef = useRef(null)
 
   const renderedSources = visibleSources || sources
   const sceneKey = [
@@ -703,6 +716,7 @@ export default function NiivueViewer({
     })
 
     nv.attachToCanvas(canvas)
+    installOrbitCentre(nv, orbitCentreRef)
     nv.overlayOutlineWidth = 1.15
     nv.onLocationChange = (location) => {
       locationRef.current = location
@@ -766,8 +780,19 @@ export default function NiivueViewer({
       }, 0)
     }
 
+    // Double-click a surface in 3D: orbit around that point and zoom in a step.
+    function handleDoubleClick(event) {
+      if (interactiveRef.current.mode !== '3d') return
+      const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
+      if (!picked?.point) return
+      orbitCentreRef.current = picked.point
+      nv.setScale(Math.min(4, Number(nv.scene.volScaleMultiplier) * 1.35))
+      nv.drawScene()
+    }
+
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
+    canvas.addEventListener('dblclick', handleDoubleClick)
 
     return () => {
       if (clipFrameRef.current !== null) {
@@ -781,6 +806,7 @@ export default function NiivueViewer({
       pendingNavigationRef.current = null
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
+      canvas.removeEventListener('dblclick', handleDoubleClick)
       nvRef.current = null
     }
   }, [compact])
@@ -823,6 +849,7 @@ export default function NiivueViewer({
         const renderedCtOpacity = effectiveCtOpacity(ctOpacity, clip)
 
         clearMeshes(nv)
+        orbitCentreRef.current = null
         const volumes = [{
           url: assetUrls?.ct || `${BASE}/${ctPath}`,
           name: 'ct.nii.gz',
@@ -1256,6 +1283,7 @@ export default function NiivueViewer({
       const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
       nv.setScale(scale)
     } else if (command.type === 'fit') {
+      orbitCentreRef.current = null
       focusOnWorldPoint(nv, volumeCenterMM(nv.volumes[0]), mode)
       if (mode === '3d') nv.setScale(1)
       else nv.setPan2Dxyzmm([0, 0, 0, 1])
@@ -1331,6 +1359,7 @@ export default function NiivueViewer({
       || !nv.volumes?.[0]
     ) return
     handledResetTokenRef.current = resetToken
+    orbitCentreRef.current = null
     lastFocusedObjectRef.current = ''
     if (mode === '3d') {
       nv.setRenderAzimuthElevation(
