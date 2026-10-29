@@ -6,7 +6,20 @@ Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quie
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
 
-## October 29 explicit pause — current state
+## October 29 resume authorized — attempt13 admission underway
+
+User requested restart; AC/drive/storage available, no teacher or Ollama model
+running, exclusive GPU lock initially free. One-shot launchd label
+com.prowl.rsuper-targets-20261029-13 invokes unchanged qualified
+resume_rsuper_affine_restore_v1.py, previous12, output rsuper-full-targets-13,
+reuse-source10. Stop review is13-dispatch/power-stop-review.json. Original942
+targets retained; admission rechecks prior pins and ancestor/partial identity.
+Original remaining allowance108603seconds;29GiB output/32GiB combined and all
+other gates unchanged. Hourly keeper ACTIVE. Do not duplicate this dispatch;
+inspect request/process/progress/tiles before claiming fresh inference. No student
+training or scientific changes. Prior user pause superseded by this resume.
+
+## October 29 explicit pause — historical
 
 User requested pause; hourly keeper is PAUSED. Attempt12 had already stopped on
 AC loss before the pause command reached its identity checks. The command refused
