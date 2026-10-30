@@ -134,3 +134,24 @@ citation attachment regression tests passed, but this is not a new live end-to-e
 clinical or answer-quality acceptance. Double-click surface orbit still needs a
 human hardware-browser check; no speed percentage is claimed. Teacher attempt13
 remained active and advanced to tile75/120 of its next case after 1007 completions.
+
+## Evening zoom and redundant mesh-work correction
+
+User reported remaining lag and excessive magnification. Full-abdomen initial/reset
+scale is now1.0 (was1.45); cropped surface framing uses0.85 times the scene/mesh
+ratio capped at1.8 (was1.15 capped at3.2); compact initial scale1.1 (was1.55).
+Double-click zoom increases15% instead of35%. Existing session camera choices remain
+preserved; Reset viewer applies the new defaults without reloading the page.
+
+NiiVue NVMesh.setProperty calls updateMesh even for equal values. Compare scalar
+opacity and RGBA contents before calling its public setters, and retain the last
+applied shader per mesh entry. Real changes still use the public API. This avoids
+redundant geometry/buffer work; it does not claim a measured FPS increase.
+
+321 UI tests passed, six skipped; build passed with the existing bundle warning.
+Real saved-case software Chromium walkthrough passed drag, scene switching, help,
+peel, camera and Fit with no page errors. Saved-case availability is separate from
+the unavailable localhost:8000 live analysis service. Teacher attempt13 remained
+running,1123/1333 at the check; no answer model, inference or training was launched.
+Morning review: judge default framing and perceived drag/zoom responsiveness on the
+hardware browser. Live assistant latency remains a separate GPU-free comparison.
