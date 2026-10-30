@@ -2,9 +2,33 @@
 
 The user explicitly authorizes hourly checks, operational repairs and continuation of this teacher
 through the night. This supersedes the historical no-schedules instruction for this run only.
-Heartbeat `keep-prowl-teacher-running` is ACTIVE, hourly in this chat. Stay quiet on healthy
+Heartbeat `keep-prowl-teacher-running` is PAUSED after verified completion on October30. Stay quiet on healthy
 progress; report recovery, completion, safety failures and needed user action. Respect any later
 operator pause. This is teacher target generation, not student scientific training.
+
+## October 30 completion verified — no restart required
+
+Attempt13 completed all1333 frozen training cases. Result success/complete=true;
+resources exit0, workers_reaped=true,91074.885315 supervised seconds, peak owned
+RSS5814026240bytes and zero process-sampling timeouts. Supervisor18462, worker22907,
+caffeinate22909 and guardian22910 are absent; launchd exited0 and the exclusive GPU
+lock can be acquired/released. No restart or student training performed.
+
+Read-only completed_members verification passed all1333 payload SHA256/byte counts,
+uint16 probability arrays/native shapes, exact frozen cohort membership and exact
+per-case/result agreement. All343 repository pins match. Result SHA256:
+13228cc617ded7b11e6e1d0951e2875d02f5733233a2630b5e85fc87a6d03990.
+Receipt: outputs/prowl/teacher-completion-20261030/verified.json.
+Initial verification invocation lacked the existing jsonschema dependency path and
+failed before data validation; rerun with the established test-dependencies path
+passed, without installing dependencies or altering producer files.
+
+Payload bytes567959013; retained attempt NPZ bytes2854071849 (below32GiB combined).
+Chargeceil91075seconds, leaving17528seconds of the original generation allowance.
+All earlier attempts preserved. Hourly keeper PAUSED as requested on completion.
+Final provider-bound training manifest is NOT admitted yet; W04-02 closeout still
+needs that binding, then W04-03 real GPU executor/backup/cold-restore qualification.
+Generation completion is not segmentation-quality acceptance or student training.
 
 ## October 29 resume verified — attempt13 active
 
