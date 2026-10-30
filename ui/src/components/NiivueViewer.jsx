@@ -1,4 +1,4 @@
-import { batchViewerUpdate } from '../lib/viewerUpdates.js'
+import { batchViewerUpdate, setMeshPropertyIfChanged } from '../lib/viewerUpdates.js'
 import { useEffect, useRef, useState } from 'react'
 import { DRAG_MODE, Niivue } from '@niivue/niivue'
 import { LoaderCircle, TriangleAlert } from 'lucide-react'
@@ -526,10 +526,10 @@ function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
 
 // The full abdomen is framed as a whole (NiiVue orbits the scene centre, not the
 // pancreas), so it gets a gentle fixed zoom; the cropped scenes fit the surfaces.
-const FULL_SCAN_SCALE = 1.45
+const FULL_SCAN_SCALE = 1.0
 
-// Initial 3D zoom so the visible surfaces fill most of the viewer instead of
-// sitting small inside the whole CT bounding box. "Fit" still shows the full scene.
+// Leave space around cropped surfaces and cap automatic magnification.
+// Users can still zoom in explicitly; Fit shows the full scene.
 function surfaceFitScale(nv) {
   const visible = (nv.meshes || []).filter((mesh) => mesh.visible && mesh.extentsMin && mesh.extentsMax)
   if (!visible.length || typeof nv.sceneExtentsMinMax !== 'function') return null
@@ -539,7 +539,7 @@ function surfaceFitScale(nv) {
   const hi = [0, 1, 2].map((axis) => Math.max(...visible.map((mesh) => mesh.extentsMax[axis])))
   const meshRange = Math.max(...[0, 1, 2].map((axis) => hi[axis] - lo[axis]))
   if (!Number.isFinite(sceneRange) || !Number.isFinite(meshRange) || meshRange <= 0) return null
-  return Math.max(1, Math.min(3.2, (1.15 * sceneRange) / meshRange))
+  return Math.max(1, Math.min(1.8, (0.85 * sceneRange) / meshRange))
 }
 
 function meshOpacity({
@@ -818,7 +818,7 @@ export default function NiivueViewer({
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (!picked?.point) return
       orbitCentreRef.current = picked.point
-      nv.setScale(Math.min(4, Number(nv.scene.volScaleMultiplier) * 1.35))
+      nv.setScale(Math.min(4, Number(nv.scene.volScaleMultiplier) * 1.15))
       nv.drawScene()
     }
 
@@ -1045,7 +1045,7 @@ export default function NiivueViewer({
         }
         // First visit to 3D for this case (no saved camera): frame the surfaces.
         if (mode === '3d' && !savedView) {
-          const fit = compact ? 1.55 : showFull ? FULL_SCAN_SCALE : surfaceFitScale(nv)
+          const fit = compact ? 1.1 : showFull ? FULL_SCAN_SCALE : surfaceFitScale(nv)
           if (fit) nv.setScale(fit)
         }
 
@@ -1165,18 +1165,22 @@ export default function NiivueViewer({
             ? DIFFERENCE_COLORS[entry.region]
             : SOURCE_COLORS[entry.source][entry.anatomy]
           entry.mesh.visible = finalOpacity > 0.01
-          nv.setMeshProperty(entry.mesh.id, 'rgba255', new Uint8Array([
+          setMeshPropertyIfChanged(nv, entry.mesh, 'rgba255', new Uint8Array([
             color[0],
             color[1],
             color[2],
             clamp255(finalOpacity * 255),
           ]))
-          nv.setMeshProperty(entry.mesh.id, 'opacity', finalOpacity)
+          setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', finalOpacity)
           const isSelected = selectedObject
             && selectedObject.source === entry.source
             && selectedObject.anatomy === entry.anatomy
             && (entry.source !== 'difference' || selectedObject.region === entry.region)
-          nv.setMeshShader(entry.mesh.id, meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }))
+          const shader = meshShaderFor(entry, { isSelected, renderedSources, sourceFocus })
+          if (entry.appliedShader !== shader) {
+            nv.setMeshShader(entry.mesh.id, shader)
+            entry.appliedShader = shader
+          }
         })
         nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
 

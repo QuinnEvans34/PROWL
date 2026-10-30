@@ -26,3 +26,14 @@ export function batchViewerUpdate(nv, change) {
     else if (succeeded && sceneDirty) draw.call(nv)
   }
 }
+
+// NiiVue rebuilds vertex buffers even when a property is assigned its old value.
+export function setMeshPropertyIfChanged(nv, mesh, key, value) {
+  const previous = mesh[key]
+  const equal = ArrayBuffer.isView(value) || Array.isArray(value)
+    ? previous?.length === value.length && value.every((v, i) => v === previous[i])
+    : Object.is(previous, value)
+  if (equal) return false
+  nv.setMeshProperty(mesh.id, key, value)
+  return true
+}
