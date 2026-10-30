@@ -346,3 +346,25 @@ survive the initiating chat; no automatic retries or recurring task is created.
 
 Launcher/backup/failure-order and existing executor/recovery regressions:30 passed
 in2.55s, two upstream Torch deprecation warnings.
+
+
+### Scientific comparison dispatched October30
+
+Frozen pair `mac-kd-comparison-20261030-01/ready.json` SHA256
+`6d4ef0eda0acf2f62903327f50ad3302cb6bc3d255e1633f8c25f0d9dedc7086`.
+One-shot launchd owner `com.prowl.mac-kd-comparison-20261030-01`, supervisor99276,
+worker99515, holds the exclusive MPS lock. Do not duplicate dispatch or edit
+receipt-bound files while either arm is pending/running. No auto-retry is enabled.
+The prior teacher heartbeat remains paused because teacher generation is finished.
+
+Control scientific updates1 and2 observed with MLflow run
+`30016b3403bd422e8b1f00309aff290f` RUNNING; stored step1 loss1.313292384147644
+verified directly from the new Mac-local tracking database. Initial checkpoint
+and independent internal backup hashes match. KD scientific arm has NOT started:
+it is the second arm, conditional on successful24k control completion, complete
+backup verification and healthy tracking. Current training is a fresh matched
+control, not resumed teacher generation. Keep AC and the external drive connected.
+
+User authorization covers this pair. Any failed runtime/resource/integrity gate
+stops the supervisor before the next arm and preserves evidence; no scientific
+recipe/tolerance change, automatic retry or unreviewed continuation is allowed.
