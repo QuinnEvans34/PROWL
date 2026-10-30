@@ -288,3 +288,26 @@ Torch deprecation warnings). No actual target admission, CT/mask reads or GPU
 qualification occurred. Admission still requires a complete, successful, reaped
 producer; real executor qualification still requires an available GPU. Teacher
 progress reached 725/1333 during this work, with all 341 repository pins intact.
+
+
+## October 30: complete target admission and real qualification
+
+User authorized finishing implementation, analysis and the matched scientific
+launch after the existing gates pass. Full target publication succeeded in
+`rsuper-full-admission-20261030-01` under the external distillation artifact root:
+1,333 exact training members, corrected provider
+`900619faa0a5905fca165bebca0c9afd56f9df635cdd7141c4f95a31204a0053`,
+manifest `b754702539df7ae9aafaabed4c2186550719d24c9fd3e82f21faf0df7d5c68a6`.
+Producer attempt13 and all earlier attempts remain unchanged; publication uses
+verified payload references rather than duplicate files. W04-02 admission is complete.
+
+Paired operational recipes were prepared in `kd-executor-preparation-20261030-01`.
+Real engineering request in `kd-executor-qualification-20261030-01` has SHA256
+`014658767c7f4ac52f0e89a9144929279c591ff4594c6b46a3e25adcf35744a4`.
+Development roles selected from the admitted source manifest: positive
+PanTS_00007636 and reference-empty PanTS_00005046. Actual native evaluation will
+check those roles against label voxels. Independent backups are under
+`~/PROWL-Backups/kd-executor-qualification-20261030-01`.
+Reference stage dispatched; subsequent stages require its successful receipt.
+No scientific training has started. Publication/preparation/dispatch regressions:
+36 passed in10.97s, two upstream Torch deprecation warnings.
