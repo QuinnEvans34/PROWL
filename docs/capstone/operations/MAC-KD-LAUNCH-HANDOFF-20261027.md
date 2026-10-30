@@ -311,3 +311,38 @@ check those roles against label voxels. Independent backups are under
 Reference stage dispatched; subsequent stages require its successful receipt.
 No scientific training has started. Publication/preparation/dispatch regressions:
 36 passed in10.97s, two upstream Torch deprecation warnings.
+
+
+### Real executor qualification passed
+
+All four independently dispatched stages succeeded and reaped their workers:
+reference23.27s, zero-KD25.38s, positive-KD72.01s, cold10.60s. Maximum sampled
+owned RSS3,850,567,680bytes. Zero-KD matched the reference input traces/full state;
+positive KD used eligible teacher supervision on all four updates. Both native
+development evaluations and their report-bound component sidecars passed, and
+independent step3 backup restored in a fresh process to reproduce step4 under
+unchanged rtol1.3e-6/atol1e-5. No scientific quality claim follows from four updates.
+
+Largest checkpoint56,781,091bytes; conservative34 physical checkpoint slots plus
+256MiB reports/journals projects2,198,992,550bytes of new scientific backups, within
+4GiB. Existing qualification/earlier backups remain preserved and the total-store
+26GiB plus50GB internal/100GiB external reserves remain enforced. Initial state,
+all12 native checkpoints, selected state, latest and previous recovery state are
+retained; best is a physical alias of a scheduled state.
+
+Four updates including early saves took21.51s; two native cases took36.24s. A naive
+linear projection is roughly40h per arm, below the96h ceiling, but these few cases
+do not represent cohort runtime variability. No shortened horizon or budget
+expansion is implied. First full70-case validation will give a better estimate.
+
+New `scripts/train_mac_kd_comparison.py` freezes both operational recipes before
+either scientific arm, binds real qualification evidence/runtime/code, checks
+projected storage, and runs control then treatment once each under the existing
+exclusive MPS supervisor and guardian. It preserves failed attempts and will not
+start treatment after control failure or degraded tracking. Each arm has separate
+local MLflow identity, durable journal and independently verified backups. No
+Windows tracking store is opened. Use the existing one-shot launchd owner to
+survive the initiating chat; no automatic retries or recurring task is created.
+
+Launcher/backup/failure-order and existing executor/recovery regressions:30 passed
+in2.55s, two upstream Torch deprecation warnings.
