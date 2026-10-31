@@ -1,5 +1,6 @@
 import json
 import pytest
+from jsonschema import ValidationError
 from src.retrieval.single_pass_summary import generate,SinglePassAnswers,MODEL,MODEL_SHA
 E=[dict(rank=1,record=dict(text='The invented gland releases digestive enzymes.',citation=dict(title='Synthetic source')))]
 A=dict(coverage='supported',limitation='',claims=[dict(text='It releases enzymes that help digestion.',sentence_ids=['P1S1'])])
@@ -11,8 +12,9 @@ def run(answer=A):
         return dict(done=True,done_reason='stop',model=MODEL,message=dict(content=json.dumps(answer)))
     return generate('What does it do?',E,call),calls
 
-def test_one_call_question_evidence_and_no_thinking():
-    answer,calls=run();assert len(calls)==1 and calls[0]['think'] is False
+def test_one_call_question_evidence_and_bounded_thinking():
+    answer,calls=run();assert len(calls)==1 and calls[0]['think'] is True
+    assert calls[0]['options']['num_predict']==1536
     body=json.loads(calls[0]['messages'][1]['content'])
     assert body['question']=='What does it do?' and body['passages'][0]['sentences'][0]['text']==E[0]['record']['text']
     assert answer['validation']=='citation_binding_only'
@@ -69,4 +71,4 @@ def test_resolves_exact_contiguous_span_including_qualification():
 
 def test_supported_answer_cannot_include_spurious_limitation():
     a=json.loads(json.dumps(A));a['limitation']='The wording differs.'
-    with pytest.raises(ValueError,match='limitation'):run(a)
+    with pytest.raises(ValidationError):run(a)

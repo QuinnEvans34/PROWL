@@ -34,7 +34,7 @@ claims=[] and one short complete limitation naming what is missing. Never put an
 in claims or cite an unrelated passage to support it. Do not demand exhaustive evidence for an
 ordinary general question. Return only JSON; do not describe your reasoning.'''
 
-FINGERPRINT = digest([POLICY, PROMPT, 'nonthinking-focused-sentence-summary-v3'])
+FINGERPRINT = digest([POLICY, PROMPT, 'bounded-thinking-focused-sentence-summary-v5'])
 
 
 def source_sentences(evidence):
@@ -60,19 +60,27 @@ def generate(question, evidence, call=None):
         raise ValueError('Evidence budget')
     texts = {e['rank']: e['record']['text'] for e in evidence}
     sources, lookup = source_sentences(evidence)
-    schema = dict(type='object', additionalProperties=False, required=['claims','coverage','limitation'], properties={
-        'claims': dict(type='array', maxItems=1, items=dict(type='object', additionalProperties=False,
-            required=['text','sentence_ids'], properties={
-                'text': dict(type='string', minLength=10, maxLength=1100),
-                'sentence_ids': dict(type='array', minItems=1, maxItems=6, uniqueItems=True,
-                    items=dict(type='string', enum=list(lookup)))})),
-        'coverage': dict(type='string', enum=['supported','partial','none']),
-        'limitation': dict(type='string', maxLength=200)})
+    claim_schema = dict(type='object', additionalProperties=False,
+        required=['text','sentence_ids'], properties={
+            'text': dict(type='string', minLength=10, maxLength=1100),
+            'sentence_ids': dict(type='array', minItems=1, maxItems=6, uniqueItems=True,
+                items=dict(type='string', enum=list(lookup)))})
+    # Express the same closed coverage contract in the generation grammar as in
+    # validation. Do not repair a model's "none" string or discard failed claims.
+    schema = dict(oneOf=[dict(type='object', additionalProperties=False,
+        required=['coverage','claims','limitation'], properties={
+            'coverage': dict(type='string', const=coverage),
+            'claims': dict(type='array', minItems=0 if coverage=='none' else 1,
+                maxItems=0 if coverage=='none' else 1, items=claim_schema),
+            'limitation': dict(type='string', const='') if coverage=='supported'
+                else dict(type='string', minLength=1, maxLength=200)})
+        for coverage in ('supported','partial','none')])
     deadline = monotonic()+60
     timings=[]
     def bounded(path, payload=None):
         if monotonic() >= deadline: raise TimeoutError('Summary deadline')
-        if path == 'chat': payload = dict(payload, keep_alive='10m')
+        if path == 'chat':
+            payload = dict(payload, keep_alive='10m', options=dict(payload['options'], num_predict=1536))
         response = api(path,payload,deadline=deadline) if call is None else call(path,payload)
         if monotonic() >= deadline: raise TimeoutError('Summary deadline')
         if path == 'chat': timings.append({k:response.get(k) for k in
@@ -81,7 +89,7 @@ def generate(question, evidence, call=None):
     if not any(m['name']==MODEL and m['digest']==MODEL_SHA for m in bounded('tags')['models']):
         raise OSError('Pinned model unavailable')
     answer = chat(bounded, PROMPT, dict(question=question, passages=sources),
-        schema, think=False, context_tokens=8192, model=MODEL)
+        schema, think=True, context_tokens=8192, model=MODEL)
     validate(answer,schema)
     if (answer['coverage']=='none') != (not answer['claims']): raise ValueError('Coverage mismatch')
     if answer['coverage'] != 'supported' and not answer['limitation'].strip(): raise ValueError('Missing limitation')
