@@ -207,7 +207,11 @@ export default function LiteratureSearchPanel({
   const thread = useRef(null)
   const [editing, setEditing] = useState(false)
   useEffect(() => {
-    if (thread.current) thread.current.scrollTop = thread.current.scrollHeight
+    const viewport = thread.current
+    const current = viewport?.querySelector('[aria-live]')
+    // Show the new question and the beginning of its answer, not the metadata
+    // underneath a long answer. Earlier turns remain reachable by scrolling up.
+    if (current) viewport.scrollTop += current.getBoundingClientRect().top - viewport.getBoundingClientRect().top
   }, [submittedQuestion, phase])
   const contextRef = useRef(contextKey)
   useEffect(() => () => active.current?.abort(), [])
