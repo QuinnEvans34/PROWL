@@ -105,3 +105,12 @@ def test_original_completion_uses_legacy_journal_not_new_result_field(tmp_path):
     assert rules.completed(root,backup,'control')
     put(root/'control/execution/history.jsonl',dict(event='paused',step=24000))
     with pytest.raises(ValueError,match='journal'):rules.completed(root,backup,'control')
+
+
+def test_completed_parent_storage_still_counts_for_fresh_treatment(tmp_path,monkeypatch):
+    monkeypatch.setattr(m.original,'safety',lambda *a:None)
+    monkeypatch.setattr(m.original,'usage',lambda path:11 if str(path)=='completed-parent' else 0)
+    monkeypatch.setitem(m.original.LIMITS,'output_bytes',10)
+    r=dict(scientific=dict(output='original',backup='original-backup'),output='next',backup='next-backup',
+           parent='completed-parent',parent_backup='completed-backup',segments={'control':[],'treatment':[]})
+    with pytest.raises(ValueError,match='output cap'):m.safety(r)

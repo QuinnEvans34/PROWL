@@ -37,6 +37,9 @@ def safety(r, additional_backup_bytes=0):
     original.safety(r['scientific'])
     # Count the entire retained lineage, not a fresh allowance for each continuation.
     roots={r['scientific']['output'],r['output']};backups={r['scientific']['backup'],r['backup']}
+    if r.get('parent'):
+        roots.add(r['parent'])
+        backups.add(r['parent_backup'])
     for rows in r['segments'].values():
         roots.update(x['root'] for x in rows);backups.update(x['backup'] for x in rows)
     if sum(original.usage(p) for p in roots)>original.LIMITS['output_bytes']:
@@ -61,7 +64,7 @@ def prepare(source,source_pin,parent,parent_pin,arm,checkpoint,out,backup):
                ROOT/'scripts/diagnostics/pause_mac_kd_comparison.py',ROOT/'scripts/diagnostics/qualify_mac_kd_continuation.py']
         r=dict(version='mac-kd-continuation-launch-1',original=str(Path(source).resolve()),original_sha256=source_pin,
                parent=str(Path(parent).resolve()),parent_sha256=parent_pin,output=str(out),backup=str(backup),runtime=runtime(),
-               scientific=p['scientific'],segments=p['segments'],context=p['context'],order=p['order'],budget=p['budget'],
+               scientific=p['scientific'],segments=p['segments'],context=p['context'],order=p['order'],budget=p['budget'],parent_backup=p['parent_backup'],
                pins={**p['inherited_pins'],**{str(f):sha(f) for f in files}},
                scientific_ready=False,requires_gpu_continuation_qualification=True,automatic_retry=False)
         safety(r);out.mkdir();write(out/'ready.json',r)
