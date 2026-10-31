@@ -32,9 +32,21 @@ limitation when the requested explanation is available. Use partial only when an
 requested part is missing. If the requested fact or numerical range is absent, use none with
 claims=[] and one short complete limitation naming what is missing. Never put an absence statement
 in claims or cite an unrelated passage to support it. Do not demand exhaustive evidence for an
-ordinary general question. Return only JSON; do not describe your reasoning.'''
+ordinary general question.
 
-FINGERPRINT = digest([POLICY, PROMPT, 'bounded-thinking-focused-sentence-summary-v5'])
+Style examples using invented, unrelated evidence (never facts for the real answer):
+- Question: How do papers measure tree height? Evidence: One field study used a pole and
+  measured its shadow. Answer: In one field study, researchers used a pole and its shadow
+  to estimate tree height. NOT: Papers measure tree height using poles.
+- Question: Why are old doors hard to close? Evidence: Hinges wear; wood can swell; another
+  sentence discusses fire inspections. Answer: Worn hinges and swollen wood can make old
+  doors difficult to close. Leave out the unrelated fire inspection claim.
+- If a requested numerical range is missing, limitation should read: The retrieved sources
+  do not provide that numerical range. Do not return just the name of the missing quantity.
+
+Return only JSON; do not describe your reasoning.'''
+
+FINGERPRINT = digest([POLICY, PROMPT, 'bounded-thinking-focused-sentence-summary-v6'])
 
 
 def source_sentences(evidence):
