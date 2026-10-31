@@ -171,6 +171,32 @@ do not treat exact citation binding, valid JSON, or a faster answer as semantic
 verification. No further download or repeated prompt sweep is justified by these
 results alone.
 
+## October 31 user-authorized fast preview
+
+The user explicitly requested speed-first testing despite the remaining quality
+failures. Version v7 uses the installed 8B model, one non-thinking call and a
+512-token output cap. Exact citation binding, source-only grounding instructions,
+coverage validation and existing scan/refusal boundaries remain in place. This is
+an experimental preview, NOT a quality-qualified promotion or acceptance result.
+The UI visibly labels it Fast AI preview. Prior failed candidates remain preserved.
+
+The live service on 8016 was switched from the verified old PID99960 to candidate
+PID82044. Preparation starts this preview when the accelerator is free; when
+training owns it, preparation retains the source-search service instead. Training
+remains paused. Stop the verified preview service and unload its model before any
+later authorized training resume. Model retention remains bounded at ten minutes.
+
+Actual HTTP retrieval-plus-answer checks took 3.39s for the boundary question,
+2.59s for pancreatic function and 2.10s for the missing stiffness range; the last
+correctly returned no claimed range. These are warm-model measurements, not a
+cold-start guarantee. Evidence is outputs/prowl/fast-preview-20261031-01. The first
+attempt on 8021 failed to bind and was retained; the live 8016 checks succeeded.
+Research UI rendered both boundary and function responses with citation controls;
+the new preview label was verified after refresh. The boundary answer still adds
+an unrequested diagnosis statement, and the function answer remains terse. These
+are known review items, not silently reclassified passes. Thirty-three focused
+Python checks and 73 UI checks pass (including the preparation selection checks).
+
 ## Readable bounded comparison packet
 
 The existing comparison runner now snapshots all five question/evidence packets

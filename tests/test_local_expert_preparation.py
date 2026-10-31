@@ -102,3 +102,17 @@ def test_existing_wrong_search_configuration_fails_without_stopping_process(monk
     with pytest.raises(RuntimeError,match='different or older search configuration'):
         expert.prepare()
     assert not any('stop' in a or 'restart' in a or 'kill' in a for a in calls)
+
+
+@pytest.mark.parametrize('training_busy', [False, True])
+def test_new_backend_selects_fast_preview_only_when_gpu_free(monkeypatch,tmp_path,training_busy):
+    setup(monkeypatch,tmp_path)
+    monkeypatch.setattr(expert,'listening',lambda port:False)
+    states=iter([training_busy,True])
+    monkeypatch.setattr(expert,'gpu_busy',lambda:next(states))
+    starts=[]
+    monkeypatch.setattr(expert,'start_process',lambda argv,name:starts.append(argv))
+    expert.prepare()
+    assert len(starts)==1
+    expected='serve_literature_search.py' if training_busy else 'serve_single_summary_candidate.py'
+    assert Path(starts[0][1]).name==expected

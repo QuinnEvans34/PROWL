@@ -388,6 +388,7 @@ export default function LiteratureSearchPanel({
       {result && <article className="literature-search__answer-card" aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
+        {result.answer_policy === 'single-pass-summary-v1' && result.answer && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
         {result.answer ? <details className="literature-search__provenance"><summary>About this response</summary>
         <ResponseExplanation result={result} sourceMode={sourceMode} />
         </details> : <ResponseExplanation result={result} sourceMode={sourceMode} />}

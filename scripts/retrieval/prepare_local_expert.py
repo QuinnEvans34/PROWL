@@ -131,8 +131,13 @@ def prepare():
         with connect(c) as db: return db.execute('SELECT 1').fetchone()[0] == 1
     wait_for(database_ready, 20)
     if not listening(8016):
-        start_process([str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_literature_search.py'),
-                       '--config', str(CONFIG), '--study-answers', '--general-extracts'], 'literature')
+        # Source search must remain available when training owns the accelerator.
+        if gpu_busy():
+            start_process([str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_literature_search.py'),
+                           '--config', str(CONFIG), '--study-answers', '--general-extracts'], 'literature')
+        else:
+            start_process([str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_single_summary_candidate.py'),
+                           '--config', str(CONFIG), '--port', '8016'], 'literature')
     else:
         try:
             health = http(8016, 'literature-search/health')
