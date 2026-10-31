@@ -2,7 +2,8 @@
 
 ## Status
 
-Prepared, not promoted or evaluated with a live model. User explicitly chose to
+October31: live-tested, still unpromoted pending the revision below. Original
+October28 preparation: not promoted or evaluated with a live model. User chose to
 keep the teacher running on October 28; no GPU/model calls or teacher pause were
 performed. This replaces the proposed selection-speed experiment as the next
 candidate to evaluate, without erasing its measurements or earlier failures.
@@ -98,6 +99,39 @@ development search and readiness. Synthetic checks cover real file-lock exclusio
 teacher-owned startup rejection and cleanup after a server exception. Live helper
 still reports gpu_busy=true for the running teacher. No candidate was launched,
 no real model answer was generated, and no quality/promotion claim follows.
+
+## October31 composition revision
+
+User supplied the exact failing question: “Why can pancreas boundaries be hard to
+outline on CT?” Live retrieval returned relevant anatomy, manual outlining and
+model-limitations passages. The old extracted response also included unrelated
+diagnosis claims. This is primarily a relevance/composition defect, not broken UI
+paragraph rendering. The five existing exposed packets plus this question are the
+fixed six-case revision set; they are not independent evaluation.
+
+f4c9dca replaces model-copied quotations with request-local sentence IDs. Code
+resolves selected sentences to exact contiguous source spans, retaining intervening
+qualifications and the existing browser citation contract. Full passage content is
+retained; unknown IDs, duplicate IDs and over-budget citations fail closed. Citation
+binding still does not prove semantic support. Prior prompt/config/source and raw
+failures remain under outputs/prowl/summary-revision-20261031-01 and the live runs.
+
+The v2 prompt/8B model (4833c674…a97029) returned faster, well-bound citations, but
+manual review rejected overgeneralized MRI methods, unrelated AIP MRI content in
+the CT-fat answer, an unsupported citation for a density claim, and a false partial
+answer to the absent stiffness range. Evidence: paired-summary-live-20261031-02.
+864d3a7 narrows v3 to one focused paragraph and explicit study/coverage scope.
+The six-call v3/8B pilot still failed all six response contracts: five emitted
+"none" as a nonempty limitation on supported answers; the gap answer emitted a
+claim despite none coverage. Its raw answers also omitted relevant details and
+retained the unrelated diagnosis claim. Evidence: summary-focused-live-20261031-01.
+Neither failure was hidden or promoted; no automatic output repair was applied.
+
+29 focused Python and73 UI tests passed. An initial npm test invocation had no
+configured script; the existing test:run command passed without dependency changes.
+The user's conditional next step is one official Qwen3 4B Instruct comparison with
+the same v3 prompt and evidence, before considering any app switch. Training remains
+paused, its verified checkpoint and continuation qualification unchanged.
 
 ## Readable bounded comparison packet
 
