@@ -190,3 +190,43 @@ External evidence under distillation-mac-20261023:
 Training remains paused during the bounded AI comparison. Do not restart it while
 the answer model or candidate service owns the GPU. Actual resumed scientific
 progress and pending-validation replay remain to be verified after this window.
+
+## Live answer comparison: candidate rejected
+
+Evidence: outputs/prowl/paired-summary-live-20261031-01, including frozen inputs,
+raw model calls, results, paired-review.md and verified model-cleanup.json.
+All20 planned logical observations recorded; three candidate warm generations
+were intentionally not attempted after their cold requests failed. No retries.
+Thus17 generation requests ran, not20 successful answers. No request timed out.
+
+| Packet | Current cold/warm seconds | Candidate cold/warm seconds | Manual candidate finding |
+| --- | --- | --- | --- |
+| Function |28.70/25.78 |8.27/not attempted | Rejected: quotation changes “epigastric region” to “epigastr”; endocrine claim's cited excerpt alone omits hormone secretion. Unnecessary partial-coverage limitation. |
+| Function paraphrase |42.52/53.63 |8.01/not attempted | Rejected: quotation removes source reference markers and changes punctuation. Limitation wrongly treats everyday wording as an evidence gap, ends mid-sentence, and prose refers to passage numbers. |
+| MRI methods |33.53/25.92 |10.92/not attempted | Rejected: model inserts an ellipsis into an exact quotation. Core method is supported, but limitation repeats the answer and ends mid-sentence. |
+| Focal fat on CT |56.39/47.88 |10.79/8.28 | Citations and CT/MRI distinction supported; core CT criteria complete. Readability fails: limitation says differentiating fat from tumor does not answer how they look different and ends unfinished. MRI addition is secondary to requested CT. |
+| Missing stiffness range |16.82/13.77 |3.39/1.32 | Correct refusal in both runs: no invented kPa range; clear explanation of missing evidence. |
+
+Manual review covered every returned answer against its full supplied passages.
+The current path's claims/citations are supported and contain the available core
+answers; its function responses include distracting anatomy/cell detail and its
+MRI response includes excessive acquisition settings. These are readability issues,
+not evidence of broader independent acceptance. MRI answer is one study's method,
+not a universal protocol. Both paths correctly refuse the unsupported numeric range.
+
+Baseline median warm time25.92s. Only two complete warm pairs exist, so the required
+five-pair latency acceptance cannot be established. Short rejected candidate times
+are not successful-answer speedups. The candidate fails citation binding and manual
+readability/coverage review; do not promote or switch8016. UI candidate walkthrough
+is deferred because its answer-quality gate failed, not recorded as passed.
+
+Next targeted revision should let the model cite existing sentence identifiers and
+have the application copy exact source text, preserving full passages and semantic
+review. Separately correct coverage instructions so ordinary paraphrases do not
+trigger spurious limitations. Preserve this failed version and compare a newly
+identified candidate; never loosen quote matching or silently repair model prose.
+
+The existing general-source-extract backend remains active. After benchmark cleanup,
+the normal Prepare AI expert action is used to warm the pinned model for user testing.
+Training stays paused; unload the answer model and verify GPU cleanup before any
+later explicit training resume.
