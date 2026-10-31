@@ -414,3 +414,31 @@ then run a bounded real-MPS continuation check when the GPU is free. Do not edit
 or hot-patch the existing launcher/receipt to activate it. A future user-requested
 pause must first stop/verify the original owner and preserve all attempts; never
 just detach the drive or kill an unverified PID. No such pause happened here.
+
+### October30 continuation controller prepared (not activated)
+
+Commit647aa43 adds a separate continuation launcher and cooperative pause request
+command. No frozen producer was edited or replaced. The controller retains parent
+MLflow run IDs, charges measured/reaped segments against the original96h arm
+budget, counts retained lineage against the existing storage caps, and requires
+completed control evidence before treatment. A pause ends its tracking segment
+as KILLED with an operator_paused tag; a failed segment remains FAILED. Neither
+starts treatment. Original legacy completion journals are accepted explicitly;
+the new result schema is not retroactively required of the frozen producer.
+
+23 CPU tests passed in12.08s, including the prior fresh-worker recovery test,
+receipt-bound/idempotent pause requests, live/unknown owner rejection, parent
+budget charging, unreaped-parent rejection, legacy completion evidence, and
+mocked paused/failed/completed MLflow and control-to-treatment transitions.
+No actual GPU continuation, scientific restart, or live tracking write occurred.
+The existing supervisor99276/worker99515 remained present; its journal advanced
+past3419 updates during this work. All seven direct scientific receipt pins
+matched. This is not a claim that every transitive artifact was rehashed here.
+
+Remaining: qualify the actual MPS continuation and its bound qualification
+receipt, plus verify the original owner's stop/cleanup at a user-requested pause.
+The new cooperative command intentionally rejects the original launcher: writing
+a pause request cannot make frozen code recognize it. It only reports requested,
+never cleanup verified. Continuation preparation requires exclusive GPU ownership
+and a stopped predecessor, and launch requires separate GPU qualification.
+No continuation receipt was prepared or launched while the current run was live.
