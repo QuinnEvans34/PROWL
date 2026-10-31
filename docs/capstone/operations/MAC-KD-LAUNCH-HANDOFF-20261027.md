@@ -368,3 +368,49 @@ control, not resumed teacher generation. Keep AC and the external drive connecte
 User authorization covers this pair. Any failed runtime/resource/integrity gate
 stops the supervisor before the next arm and preserves evidence; no scientific
 recipe/tolerance change, automatic retry or unreviewed continuation is allowed.
+
+
+## October30 pause/resume review — prepared, not activated
+
+The live launcher remains unchanged. It does not consume a pause request and
+its fresh-only executor rejects nonzero restored steps. Earlier MPS qualification
+proved next-update restore, not complete interrupted-run continuation. Do not
+claim that a stopped scientific arm automatically resumes.
+
+Read-only audit of the actual independent last.pt verified recovery at2500,
+selected step2000, best native Dice0.10818631321126682, no pending validation.
+Recovery is from the last verified checkpoint, not necessarily the latest update:
+current500-update cadence can lose up to499 updates on an abrupt stop, and a
+pre-validation checkpoint can require replaying validation. Old suffix work and
+its runtime charge must remain recorded even when replay is necessary.
+
+Additive code (outside all live producing pins):
+- `kd_continuation_v1.inspect_checkpoint` binds independent checkpoint bytes,
+  exact journal prefix/update sequence, identity, selected report/component
+  evidence and selected checkpoint. It distinguishes unfinished validation.
+- `remaining_budget` charges all measured parent attempts against the original
+  arm limit, including failed/replayed work; paused wall-clock time is not active
+  training. Unknown cleanup/time and exhausted budgets fail closed.
+- `segmenter_kd_continuation_executor_v1` restores execution at the given step,
+  inherits selection with earliest-tie behavior, completes pending validation
+  before another optimizer update and durably backs up a pause checkpoint before
+  reporting paused. Cooperative pauses wait for a complete update/validation
+  boundary; they are not immediate during full70-case validation.
+- `inspect_mac_kd_recovery.py` is an explicit read-only audit command, not a stop
+  or launch command. All audit output retains scientific_ready=false.
+
+Tests:13 CPU cases passed3.70s, including zero and positive KD paused before/at/
+after validation, exact final model/optimizer/RNG/sampler state against the old
+uninterrupted executor, inherited selection, pending validation and failed pause
+backup. Separate two-worker supervised test passed8.64s: first worker pauses at5
+and exits; fresh worker restores and reaches8 with exact full state and selection.
+Both workers reaped; no GPU/model competition. First fixture attempt had duplicate
+newlines, corrected in the invented test only; production parsing was not relaxed.
+
+Remaining before operational pause/resume can be called ready: connect an owned
+stop receipt and continuation launcher, including explicit predecessor cleanup,
+cumulative resource budget, MLflow segment lineage and the control-to-KD handoff;
+then run a bounded real-MPS continuation check when the GPU is free. Do not edit
+or hot-patch the existing launcher/receipt to activate it. A future user-requested
+pause must first stop/verify the original owner and preserve all attempts; never
+just detach the drive or kill an unverified PID. No such pause happened here.
