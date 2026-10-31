@@ -167,3 +167,26 @@ validation. last.pt and independent backup passed the audit at step10000; that
 checkpoint precedes validation, so a restore would replay the pending validation.
 Do not promise an immediate pause or a no-replay restart. Prefer a completed
 non-validation checkpoint for the planned window when convenient.
+
+## Authorized live window: recovery passed
+
+The user subsequently authorized pausing training for AI testing. The verified
+original launchd owner was stopped through stop_original_mac_kd.py; cleanup,
+GPU release and independent checkpoint identity passed. Recoverable step10000;
+pending native validation must replay. Original measured budget charged86548s,
+remaining259052s of345600s. No scientific settings or original evidence changed.
+
+External evidence under distillation-mac-20261023:
+- mac-kd-demo-pause-20261031-01: stop request and verified cleanup.
+- mac-kd-continuation-20261031-01: prepared continuation, NOT launched;
+  receipt SHA256 c27121c457b6ca8d84260c66c376877cfd2aa77b08ffd1799693fcc97978b558.
+- mac-kd-continuation-check-20261031-01: actual MPS producer19.660s,
+  cold8.744s, both exit0/reaped; peak owned RSS2586476544/2427731968bytes.
+  Independent restore and next input/state equivalence passed unchanged tolerance.
+  Three engineering updates, zero scientific updates, no native validation replay
+  in this check. Qualified receipt SHA256
+  e7d72f89a8053be04c643d2c229c9ad9d4f3eacad38af586ec0e3c26c7e59195.
+
+Training remains paused during the bounded AI comparison. Do not restart it while
+the answer model or candidate service owns the GPU. Actual resumed scientific
+progress and pending-validation replay remain to be verified after this window.
