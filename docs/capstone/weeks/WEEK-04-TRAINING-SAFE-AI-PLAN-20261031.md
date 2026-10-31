@@ -230,3 +230,36 @@ The existing general-source-extract backend remains active. After benchmark clea
 the normal Prepare AI expert action is used to warm the pinned model for user testing.
 Training stays paused; unload the answer model and verify GPU cleanup before any
 later explicit training resume.
+
+## October 31 conversation UI and verified scientific resume
+
+User requested a message thread, edit/resend, cleared composer and loading feedback,
+then return to training. Implemented session-only chronological turns in Research
+and Workbench; existing answers remain visible while drafting. Edit copies wording
+into the composer and sends a fresh independent request, preserving the original.
+Citations remain bound to each turn; history clears with study changes and is not
+persisted across refreshes. Loading uses animated dots (reduced-motion supported),
+elapsed time and Cancel; late callbacks cannot replace a newer answer. Workbench
+keeps its composer visible while the conversation scrolls. New turns scroll to the
+question/answer start rather than metadata. 75 focused UI tests pass; build passed
+before the final scroll adjustment. Live Research and Workbench responses rendered,
+and Research edit/resend preserved the original turn. Commits40823b9/ba55377/b7e91c9.
+
+Stopped verified preview PID82044, unloaded8B, verified empty Ollama models and free
+GPU lock. CPU source service PID2105 remains available. AI generation is unavailable
+while scientific training owns the accelerator; no concurrent answer-model test.
+Original slower backend is source-service fallback only during training. Restore
+fast-preview service after the next explicit training pause; do not mistake this
+fallback for an intentional reversal of the accepted fast-preview preference.
+
+Verified continuation receipt c27121c457b6ca8d84260c66c376877cfd2aa77b08ffd1799693fcc97978b558
+and qualification e7d72f89a8053be04c643d2c229c9ad9d4f3eacad38af586ec0e3c26c7e59195.
+Launched ONCE via com.prowl.mac-kd-continuation-20261031-01, supervisor2277/worker2581.
+Root: /Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-continuation-20261031-01.
+MLflow7d9b079674454cfcb44ef367704a53f7 RUNNING, linked to original30016b3403bd422e8b1f00309aff290f.
+Restoredstep10000; native validation replay began and firstcase completed after55s,
+with24/24tiles observed. No new optimizer update claimed before pending validation
+finishes. initial.pt and step-010000.pt match independent backup SHA256
+5b37c9d3d0fb037093d0e3efc135a2e4480efc70bf965644244db3f3653379b1. Original
+remaining budget259052s retained, no scientific recipe change or duplicate worker.
+Use existing cooperative pause controller for this continuation. Preserve its pins.
