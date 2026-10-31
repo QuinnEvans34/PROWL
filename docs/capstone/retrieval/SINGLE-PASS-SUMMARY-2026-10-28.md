@@ -133,6 +133,44 @@ The user's conditional next step is one official Qwen3 4B Instruct comparison wi
 the same v3 prompt and evidence, before considering any app switch. Training remains
 paused, its verified checkpoint and continuation qualification unchanged.
 
+## October 31 bounded model comparison: not qualified
+
+The closed coverage grammar removed the invalid supported/limitation combinations.
+It did not establish factual support or completeness. The v4 non-thinking 8B and
+4B comparisons still generalized a single MRI study; 4B also introduced an
+unsupported tumor comparison. The v5/v6 bounded-thinking 8B candidates improved
+the boundary explanation but retained study-scope errors and inconsistent function
+completeness. All raw outputs remain in outputs/prowl/summary-*-20261031-*.
+
+The final v6 prompt has SHA256
+c18f71db4abb2b08b5915beb00fccf947420e6d42f9cc5d2f03f3ee0f0044864.
+Fourteen focused generation/review-runner tests pass after this prompt revision;
+earlier broader checks passed 29 Python and 73 UI tests. These are engineering
+checks, not evidence of answer accuracy.
+
+The installed qwen3:30b model was tested with the same six exposed packets and
+v6 prompt, using an experimental runtime override only. Initial cold requests
+timed out; a separate preload mistakenly used Ollama's default context and was
+stopped before evaluation. Both attempts were retained. The corrected preload
+explicitly used 8,192 context tokens and completed in 159.49 seconds within its
+separate 240-second startup budget. Each answer retained the 60-second deadline
+and 1,536-token generation cap. Six preloaded answers took 5.97–10.52 seconds;
+these are generation timings, not cold or end-to-end UI latency.
+
+Evidence: outputs/prowl/summary-30b-preloaded-20261031-02, including raw calls,
+preload.json, manual-review.json and verified model-cleanup.json. The model was
+unloaded and the bounded process exited. The exact boundary question produced a
+direct explanation, but the set is NOT qualified: MRI study scope was lost,
+PDAC-specific evidence was broadened to tumors, and the function wording blurred
+digestive and endocrine roles. No candidate was promoted; the live backend and
+scientific-training pause remain unchanged. Downloaded 4B is retained but inactive.
+
+Next useful change is to test explicit claim-to-source scope preservation before
+another model comparison. Keep the same failed cases and manual acceptance checks;
+do not treat exact citation binding, valid JSON, or a faster answer as semantic
+verification. No further download or repeated prompt sweep is justified by these
+results alone.
+
 ## Readable bounded comparison packet
 
 The existing comparison runner now snapshots all five question/evidence packets
