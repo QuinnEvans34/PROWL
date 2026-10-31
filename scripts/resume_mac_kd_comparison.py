@@ -58,7 +58,7 @@ def prepare(source,source_pin,parent,parent_pin,arm,checkpoint,out,backup):
         original.check(source,source_pin)
         files=[Path(__file__).resolve(),ROOT/'src/operations/mac_kd_resume_controller_v1.py',
                ROOT/'src/operations/kd_continuation_v1.py',ROOT/'src/training/segmenter_kd_continuation_executor_v1.py',
-               ROOT/'scripts/diagnostics/pause_mac_kd_comparison.py']
+               ROOT/'scripts/diagnostics/pause_mac_kd_comparison.py',ROOT/'scripts/diagnostics/qualify_mac_kd_continuation.py']
         r=dict(version='mac-kd-continuation-launch-1',original=str(Path(source).resolve()),original_sha256=source_pin,
                parent=str(Path(parent).resolve()),parent_sha256=parent_pin,output=str(out),backup=str(backup),runtime=runtime(),
                scientific=p['scientific'],segments=p['segments'],context=p['context'],order=p['order'],budget=p['budget'],
@@ -138,11 +138,8 @@ def launch(root,pin,qualification,qualification_pin):
     from src.operations.full_training_platform import training_guard
     from src.operations.mac_teacher_supervision_v2 import run
     r=check(root,pin)
-    q=read_bound(qualification,qualification_pin)
-    if (q.get('version')!='mac-kd-continuation-gpu-1' or q.get('success') is not True
-            or q.get('continuation_sha256')!=pin or q.get('workers_reaped') is not True):
-        raise ValueError('Bound real GPU continuation qualification required')
-    check_pins(q['evidence'])
+    from scripts.diagnostics.qualify_mac_kd_continuation import validate_qualification
+    validate_qualification(qualification,qualification_pin,pin)
     with training_guard(ROOT/'outputs/prowl/.mps-profile.lock'):
         stopped(r['parent']);write(root/'launch.json',dict(receipt_sha256=pin,qualification_sha256=qualification_pin))
         uri='sqlite:///'+str(root/'mlflow.db');client=MlflowClient(tracking_uri=uri)

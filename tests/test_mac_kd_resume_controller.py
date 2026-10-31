@@ -55,6 +55,8 @@ def test_lineage_charges_parent_and_rejects_unreaped(tmp_path,monkeypatch):
 @pytest.mark.parametrize('outcome',['failed','paused','completed'])
 def test_launch_successor_and_tracking_rules(tmp_path,monkeypatch,outcome):
     import mlflow
+    from scripts.diagnostics import qualify_mac_kd_continuation as qualification
+    monkeypatch.setattr(qualification,'validate_qualification',lambda *a:None)
     from src.operations import full_training_platform,mac_teacher_supervision_v2
     calls=[]
     class Client:
