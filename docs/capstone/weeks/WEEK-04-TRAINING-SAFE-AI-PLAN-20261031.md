@@ -77,3 +77,93 @@ one next change. No benchmark-specific retries or hidden failure exclusions.
 Expected commits follow actual fixes: recovery handoff, paired timing/reporting,
 shared UI defects, and final test evidence. Do not create code churn to meet a
 commit count. Actual live qualification and quality results remain Pending.
+
+## October31 implementation handoff
+
+CPU preparation is complete; actual GPU recovery, real answer quality/latency and
+promotion remain Pending. Training was not stopped and no model was loaded.
+
+- ae358ba: original-owner stop command with read-only default, verified launchd/PID
+  ownership, explicit stop request and separate cleanup verification. No force-kill
+  fallback. Added two-worker MPS cold-restore qualification command, not executed.
+  Its engine was tested on invented CPU state; prior fresh-worker actual CPU session
+  recovery remains covered. The live-launch gate now requires stage/device/resource
+  evidence, not merely a JSON success flag.
+- e3d5577: fixed cumulative storage accounting for a completed continuation parent
+  when the next arm starts in another directory. Old attempts retain their budget.
+- 014a962: paired baseline/candidate runner reuses the five exposed packets, alternates
+  arm order by packet, verifies unloaded/resident state, retains raw calls and missing
+  timing fields, preserves errors, blocks rerunning an attempted output and checks
+  model unloading at cleanup. No answer or timing acceptance is automatic.
+- c87753e: isolated browser checks for both page and panel variants, cancelled A/new B,
+  citation opening and answer return. Synthetic viewer, disabled GPU, intercepted
+  answer transport; no actual model, scan or shared service involved. Fixture now
+  includes the assistant and current scoped styles.
+
+Verification:39 Python tests passed12.43s;102 focused UI tests passed5.90s with
+installed Node24.21.0;2 browser tests passed2.2s, screenshots inspected. Initial
+Node20 run failed before tests (unsupported runtime); no dependencies were changed.
+Initial browser fixtures lacked the Ask panel, then used an exact text locator that
+included an inline citation. These fixture issues were corrected; first failures
+remain in outputs/prowl/testing/summary-browser and summary-browser-02. Final scoped
+screenshots are in summary-browser-05. No production UI defect was demonstrated.
+Save/reopen/revision, failed acknowledgement/draft retention and source attachment
+behavior passed existing component tests; earlier actual transport evidence is in
+../orchestration/REVIEWER-WALKTHROUGH-20261027.md. No new real reviewer record was made.
+
+Prepared review: outputs/prowl/paired-summary-preparation-20261031-02/paired-review.md.
+All five packets contain five passages, with total text lengths2321/1734/2714/2503/
+2490characters. Both paths fit their existing budgets. Do not truncate source text.
+
+| Code inspection | Current general fallback | Candidate |
+| --- | --- | --- |
+| Local model | pinned Qwen3:8b | same pinned Qwen3:8b |
+| Calls per answer | select + audit,2 | summarize,1 |
+| Thinking | enabled both calls | disabled |
+| Context allowance |8192tokens/call |8192tokens |
+| Output allowance |4096tokens/call |1536tokens |
+| Request deadline |90seconds |60seconds |
+| Answer form | exact selected sentences | model prose + exact supporting quotes |
+
+This identifies avoidable generation work, not measured speed. The benchmark
+compares the general fallback generators on identical saved evidence; it excludes
+reviewed-answer routing/cache hits, retrieval and UI time. Those require the later
+end-to-end walkthrough. No prompt/model tuning was needed before this comparison.
+
+### Commands for the later authorized window
+
+Run from the repository with .venv312/bin/python and
+PYTHONPATH=.:/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/test-dependencies
+for recovery tools. All destination directories below must be fresh. Resolve the
+current receipt hash, active arm and live owner again at execution time.
+
+1. `scripts/diagnostics/stop_original_mac_kd.py --root ORIGINAL --receipt-sha256 HASH --arm control --checkpoint last.pt`
+   is read-only. Add `--stop --output STOP_RECEIPT` only after the pause decision.
+   Then `--verify --output STOP_RECEIPT` verifies owner/worker absence, resource
+   reaping, backup identity, remaining time and released GPU lock. An unsuccessful
+   verification does not authorize disconnecting the drive or starting another job.
+2. `scripts/resume_mac_kd_comparison.py --prepare --root CONTINUATION --original ORIGINAL --original-sha256 HASH --parent ORIGINAL --parent-sha256 HASH --arm control --checkpoint last.pt --backup NEW_BACKUP`
+   prints the continuation receipt hash. This can run only after cleanup.
+3. `scripts/diagnostics/qualify_mac_kd_continuation.py --prepare --root QUALIFICATION --continuation CONTINUATION --continuation-sha256 CONTINUATION_HASH --backup QUALIFICATION_BACKUP`
+   prints a request hash. Run `--root QUALIFICATION --stage producer --request-sha256 REQUEST_HASH`,
+   inspect its receipt, then run the cold stage with the same hash. Each stage is
+   bounded1200seconds/12GiBRSS; three engineering updates total, no horizon change
+   or scientific update. This checks actual restore/next-update equivalence; it
+   does not repeat native validation. Do not retry a failed directory.
+4. AI comparison: `PYTHONPATH=. .venv-retrieval/bin/python scripts/retrieval/compare_single_summary_candidate.py --output FRESH_COMPARISON`.
+   Its default path requires the exclusive GPU lock. Add `--prepare-only` for
+   model-free preparation. Inspect paired-review.md, raw results and cleanup;
+   then follow the existing single-pass candidate service-switch/UI/rollback steps.
+5. After answer-model cleanup, use the existing owned launchd wrapper to dispatch
+   `scripts/resume_mac_kd_comparison.py --launch --root CONTINUATION --receipt-sha256 CONTINUATION_HASH --qualification QUALIFICATION/qualified.json --qualification-sha256 QUALIFIED_HASH`.
+   Use a fresh scoped launchd label, absolute script/runtime paths and the same
+   environment. Verify updates, independent backups and MLflow segment lineage.
+   New continuations accept `pause_mac_kd_comparison.py --root CONTINUATION --receipt-sha256 CONTINUATION_HASH`;
+   a request alone is not cleanup confirmation.
+
+Final read-only inspection found the original supervisor99276/worker99515 still
+owned by gui/501/com.prowl.mac-kd-comparison-20261030-01, at10000updates and native
+validation. last.pt and independent backup passed the audit at step10000; that
+checkpoint precedes validation, so a restore would replay the pending validation.
+Do not promise an immediate pause or a no-replay restart. Prefer a completed
+non-validation checkpoint for the planned window when convenient.
