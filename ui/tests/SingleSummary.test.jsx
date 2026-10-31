@@ -56,8 +56,8 @@ it.each(['page','panel'])('shows partial and missing-evidence limits in %s',asyn
  gap=true;await user.clear(input);await user.type(input,'What is the pancreatic stiffness range?')
  await user.click(screen.getByRole('button',{name:'Ask question',exact:true}))
  expect(await screen.findByText('The retrieved sources do not provide that range.')).toBeTruthy()
- expect(screen.queryByText('It releases enzymes to help digest food.')).toBeNull()
- await user.click(screen.getByRole('button',{name:'Read passages',exact:true}))
+ expect(screen.queryByText('It releases enzymes to help digest food.')).toBeTruthy()
+ await user.click(screen.getAllByRole('button',{name:'Read passages',exact:true}).at(-1))
  expect(screen.getByText(quote)).toBeTruthy()
 })
 

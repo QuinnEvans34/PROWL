@@ -38,7 +38,7 @@ it('submits typed text and opens evidence with a source link', async () => {
   await user.click(screen.getByRole('button', { name: 'Sources (1)' }))
   expect(screen.getByRole('region', { name: 'Sources' })).toBeTruthy()
   await user.type(screen.getByLabelText('Literature question'), ' findings')
-  expect(screen.queryByRole('article')).toBeNull()
+  expect(screen.queryByRole('article')).toBeTruthy()
 })
 it('retries after service failure', async () => {
   const user = userEvent.setup(), search = vi.fn().mockRejectedValueOnce(new Error('offline')).mockImplementation(async r => response(r, 'no_results'))
@@ -353,14 +353,14 @@ it('clarifies without replacing the question or searching', async () => {
 })
 
 
-it('keeps the panel composer ahead of optional suggestions and reports unavailable measurements honestly', async () => {
+it('keeps the panel composer after the conversation and optional suggestions and reports unavailable measurements honestly', async () => {
   const user = userEvent.setup()
   render(<LiteratureSearchPanel variant="panel" measurementContext={{key: 'ct-only', available: false}} />)
   expect(screen.getByText(/Show a saved prediction to enable measurements/)).toBeTruthy()
   expect(screen.getByText('Explore suggested questions').closest('details').open).toBe(false)
   const input = screen.getByLabelText('Literature question')
   const disclosure = screen.getByText('Explore suggested questions')
-  expect(input.compareDocumentPosition(disclosure) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  expect(input.compareDocumentPosition(disclosure) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
   await user.click(disclosure)
   await user.click(screen.getByRole('button', {name: 'How big is this pancreas?'}))
   expect(input.value).toBe('How big is this pancreas?')
@@ -421,7 +421,7 @@ it('exports the submitted question and response without case context, retaining 
   expect(downloadCapture.mock.calls[0][0]).not.toContain('private-case')
   expect(capture.response.generation).toBe('not_called')
   await user.type(screen.getByLabelText('Literature question'), ' changed')
-  expect(screen.queryByText('Keep this response')).toBeNull()
+  expect(screen.queryByText('Keep this response')).toBeTruthy()
 })
 
 it('freezes the completed response and preserves it if download fails', async () => {
@@ -456,7 +456,7 @@ it('reopens prior evidence without another request and clears it when the study 
   expect(screen.queryByRole('region', {name:'Recent responses'})).toBeNull()
 })
 
-it('bounds session history and lets the user clear it', async () => {
+it('retains session history beyond six answers and lets the user clear it', async () => {
   const search = vi.fn(async r => response(r, 'no_results'))
   render(<LiteratureSearchPanel search={search} />)
   for (let i = 0; i < 8; i++) {
@@ -464,10 +464,31 @@ it('bounds session history and lets the user clear it', async () => {
     fireEvent.click(screen.getByRole('button', {name:'Ask question'}))
     await screen.findByText('No passages found')
   }
-  expect(screen.queryByText('Question 0')).toBeNull()
-  expect(screen.queryByText('Question 1')).toBeNull()
+  expect(screen.queryByText('Question 0')).toBeTruthy()
+  expect(screen.queryByText('Question 1')).toBeTruthy()
   expect(screen.getByText('Question 2')).toBeTruthy()
   fireEvent.click(screen.getByRole('button', {name:'Clear recent responses'}))
   expect(screen.queryByRole('region', {name:'Recent responses'})).toBeNull()
   expect(screen.getByText('No passages found')).toBeTruthy()
+})
+
+it.each(['page','panel'])('clears sent drafts and edits an earlier turn into a fresh request (%s)', async variant => {
+  const search=vi.fn(async request=>response(request,'no_results'))
+  render(<LiteratureSearchPanel variant={variant} search={search} />)
+  const input=screen.getByLabelText('Literature question')
+  fireEvent.change(input,{target:{value:'Original question'}})
+  fireEvent.click(screen.getByRole('button',{name:'Ask question'}))
+  await screen.findByText('No passages found')
+  expect(input.value).toBe('')
+  fireEvent.click(screen.getByRole('button',{name:'Edit question'}))
+  expect(input.value).toBe('Original question')
+  fireEvent.change(input,{target:{value:'Revised question'}})
+  fireEvent.click(screen.getByRole('button',{name:'Ask question'}))
+  await screen.findByText('No passages found')
+  expect(input.value).toBe('')
+  expect(screen.getByText('Original question')).toBeTruthy()
+  expect(screen.getByText('Revised question')).toBeTruthy()
+  expect(search.mock.calls[1][0].question).toBe('Revised question')
+  expect(search.mock.calls[1][0].request_id).not.toBe(search.mock.calls[0][0].request_id)
+  expect(screen.getByRole('region',{name:'Conversation'}).compareDocumentPosition(input) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
 })

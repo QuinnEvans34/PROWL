@@ -176,7 +176,7 @@ export default function LiteratureSearchPanel({
   const panel = variant === 'panel'
   const measurementKey = measurementContext?.key ?? null
   const [history, setHistory] = useState([])
-  const remember = entry => setHistory(items => [...items, entry].slice(-6))
+  const remember = entry => setHistory(items => [...items, entry])
   const [scanResult, setScanResult] = useState(null)
   const measurementRef = useRef(measurementKey)
   useEffect(() => {
@@ -204,6 +204,11 @@ export default function LiteratureSearchPanel({
   const [contextNotice, setContextNotice] = useState('')
   const active = useRef(null)
   const questionInput = useRef(null)
+  const thread = useRef(null)
+  const [editing, setEditing] = useState(false)
+  useEffect(() => {
+    if (thread.current) thread.current.scrollTop = thread.current.scrollHeight
+  }, [submittedQuestion, phase])
   const contextRef = useRef(contextKey)
   useEffect(() => () => active.current?.abort(), [])
   useEffect(() => { onPendingChange?.(phase === 'loading') }, [phase, onPendingChange])
@@ -228,14 +233,20 @@ export default function LiteratureSearchPanel({
     if (active.current && !helpMode) { setQuestion(value); return }
     active.current?.abort(); active.current = null
     setPreview(null); setHelpError(false); setHelpMode(false); setOriginalQuestion('')
-    setQuestion(value); setScanResult(null); setResult(null); setCapture(null); setCaptureNotice(''); setPhase('idle'); setContextNotice('')
+    setQuestion(value); setPhase('idle'); setContextNotice('')
   }
   function cancelQuestion() {
     const previous = active.current
     active.current = null // Invalidate before abort: old callbacks cannot own the UI.
     previous?.abort()
-    change(question)
+    change(question || submittedQuestion)
+    setResult(null); setScanResult(null)
     setContextNotice('Cancelled. Your draft is kept; you can ask a new question. The local service may still be finishing the previous request, but its response will not appear here.')
+  }
+  function editQuestion(text) {
+    if (active.current) cancelQuestion()
+    change(text); setEditing(true)
+    questionInput.current?.focus()
   }
   async function helpWithQuestion() {
     if (!question.trim() || active.current) return
@@ -259,6 +270,7 @@ export default function LiteratureSearchPanel({
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 150000)
     setSubmittedQuestion(request.question)
+    setQuestion(''); setEditing(false)
     setHelpMode(false); setHelpError(false); setPreview(null)
     setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setCapture(null); setCaptureNotice(''); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
@@ -295,7 +307,7 @@ export default function LiteratureSearchPanel({
         }
       }
       else if (active.current === control) setPhase('error')
-    } catch { if (active.current === control) setPhase('error') }
+    } catch { if (active.current === control) { setPhase('error'); setQuestion(draft => draft || request.question) } }
     finally { clearTimeout(timeout); if (active.current === control) active.current = null }
   }
   useEffect(() => {
@@ -317,34 +329,6 @@ export default function LiteratureSearchPanel({
     {(!panel || (phase !== 'loading' && !result && !scanResult)) && <p className="literature-search__notice">{panel ? 'Development preview · Do not enter patient information.' : measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>}
     {!panel && <p className="literature-search__scope">General literature · No scan attached</p>}
     {!panel && <LocalExpertReadiness onStatus={setReadiness} />}
-    <form className="guided-evidence__body" onSubmit={submit}>
-      <label htmlFor="literature-question">Literature question</label>
-      <textarea ref={questionInput} id="literature-question" rows={3} maxLength={500} value={question}
-        placeholder={panel ? "Ask PROWL a question…" : "What imaging findings help distinguish pancreatitis from pancreatic cancer?"}
-        aria-describedby="literature-question-shortcut"
-        onKeyDown={e => {
-          if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
-          e.preventDefault()
-          if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
-        }}
-        onChange={e => change(e.target.value)} />
-      <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
-      <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading' || (readiness?.gpu_busy && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
-        {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
-        <span>{question.length}/500</span>
-      </div>
-      {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
-        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
-        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
-      </div>
-        {/* Service controls stay mounted (readiness feeds the send button) but out of the way. */}
-        <LocalExpertReadiness onStatus={setReadiness} />
-      </details> : <div className="literature-search__actions">
-        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
-        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
-      </div>}
-    </form>
     {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <details className="literature-search__question-ideas"><summary>Explore suggested questions</summary><div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
       {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
     </div></details>}
@@ -361,8 +345,13 @@ export default function LiteratureSearchPanel({
       </>}
       <button type="button" onClick={() => setPreview(null)}>Keep my question</button>
     </section>}
+    <div className="literature-search__thread" ref={thread} role="region" aria-label="Conversation">
+      {history.some(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId) && <section className="literature-search__history" aria-label="Recent responses">
+        {history.filter(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId).map(entry => <RecentResponse key={entry.id} entry={entry} onEdit={editQuestion} />)}
+        <button type="button" onClick={() => setHistory([])}>Clear recent responses</button>
+      </section>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
-      {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}</p>}
+      {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}<button type="button" className="literature-search__edit" onClick={() => editQuestion(submittedQuestion)}>Edit question</button></p>}
       {scanResult?.key === measurementKey && scanResult && <article className="literature-search__answer-card" aria-label="Current scan measurement">
         <h3>{scanResult.measurement && scanResult.target === 'pancreas_comparison' ? 'Outline compared with a published study' : scanResult.measurement ? 'Volume of this outline' : 'Measurement unavailable'}</h3>
         <p>{scanResult.measurement ? measurementText(scanResult.measurement, scanResult.target) : scanResult.message}</p>
@@ -380,8 +369,8 @@ export default function LiteratureSearchPanel({
       </article>}
       {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
       {phase === 'loading' && <div className="literature-search__activity" role="status">
-        <div className="literature-search__activity-head"><span className="literature-search__pulse" aria-hidden="true" /><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
-        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'I’m waiting for the local research service to return an answer and supporting sources.'}</p>
+        <div className="literature-search__activity-head"><span className="literature-search__typing" aria-hidden="true"><i /><i /><i /></span><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
+        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Writing a response from the research…'}</p>
         <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
       {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
@@ -409,13 +398,37 @@ export default function LiteratureSearchPanel({
         </details>}
       </article>}
     </div>
-    {history.some(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId) && <section className="literature-search__history" aria-label="Recent responses">
-      <h3>Recent responses</h3>
-      <p>Last six responses in this session. Each question is answered independently.</p>
-      {history.filter(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId).map(entry => <RecentResponse key={entry.id} entry={entry} />)}
-      <button type="button" onClick={() => setHistory([])}>Clear recent responses</button>
-    </section>}
-    <small>{panel ? measurementContext ? 'Each question is independent. Saved-mask measurements stay local; scan data is not sent to literature search. Results are not saved to your review.' : 'Each question is answered independently. No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.' : 'No scan is attached. Responses are not saved automatically. Use Keep this response to download a copy.'}</small>
+    </div>
+    <form className="guided-evidence__body literature-search__composer" onSubmit={submit}>
+      {editing && <p role="status">Editing a previous question. Send to get a new answer; the original stays in this thread.</p>}
+      <label htmlFor="literature-question">Literature question</label>
+      <textarea ref={questionInput} id="literature-question" rows={2} maxLength={500} value={question}
+        placeholder={panel ? "Ask PROWL a question…" : "What imaging findings help distinguish pancreatitis from pancreatic cancer?"}
+        aria-describedby="literature-question-shortcut"
+        onKeyDown={e => {
+          if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
+          e.preventDefault()
+          if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
+        }}
+        onChange={e => change(e.target.value)} />
+      <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
+      <div className="literature-search__actions">
+        <button type="submit" disabled={!question.trim() || phase === 'loading' || (readiness?.gpu_busy && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+        {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
+        <span>{question.length}/500</span>
+      </div>
+      {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
+        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
+      </div>
+        {/* Service controls stay mounted (readiness feeds the send button) but out of the way. */}
+        <LocalExpertReadiness onStatus={setReadiness} />
+      </details> : <div className="literature-search__actions">
+        <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
+      </div>}
+    </form>
+    <small>Session history only · Each question is answered independently. Not saved to your review.</small>
   </section>
 }
 
@@ -475,11 +488,10 @@ function ResponseExplanation({ result, sourceMode }) {
           : result.generation === 'completed' ? (result.answer?.status === 'insufficient' ? 'The search returned passages, but they did not support a checked answer.' : 'Written by the local AI using the sources below. Check the citations; this is a development preview.') : sourceMode ? (result.record_selection.status === 'matched' ? (result.retrieval_policy === 'source-linked-study-search-v1' ? 'The selected study passages and their limitations are shown below. These describe published research, not findings from your scan.' : result.retrieval_policy === 'source-linked-measurement-search-v1' ? 'The CT study’s measurement methods and limitations are shown below.' : result.retrieval_policy === 'source-linked-volume-search-v1' ? 'The selected MRI study groups and their supporting passages are shown below. These are study examples, not a normal range.' : 'Relevant comparison sources and their qualifications are shown below. These are literature examples, not an exhaustive list of diseases or a diagnosis.') : 'No reviewed source record matched this wording. Showing general literature search results.') : result.answer_policy ? 'This wording is outside the reviewed summary coverage. No answer model was called; the search passages are available to inspect.' : generationFailures[result.generation_failure] || 'The local AI could not produce a checked answer. You can still read the retrieved passages.')}</p>
 }
 
-function RecentResponse({ entry }) {
-  const [open, setOpen] = useState(false)
-  return <details onToggle={event => setOpen(event.currentTarget.open)}>
-    <summary>{entry.question}</summary>
-    {open && <div className="literature-search__history-body">
+function RecentResponse({ entry, onEdit }) {
+  return <article className="literature-search__turn">
+    <p className="literature-search__question"><small>You</small>{entry.question}<button type="button" className="literature-search__edit" onClick={() => onEdit(entry.question)}>Edit question</button></p>
+    <div className="literature-search__answer-card literature-search__history-body">
       <small>{entry.label}</small>
       {entry.response ? <>
         {entry.response.answer ? <LiteratureReadingView evidence={entry.response.evidence} answer={entry.response.answer} /> : <>
@@ -491,6 +503,6 @@ function RecentResponse({ entry }) {
         {entry.measured && <p>Calculated from the saved prediction outline; human review is required.</p>}
         {entry.comparison && entry.measured && <a href={pancreasReferenceUrl} target="_blank" rel="noreferrer">Study source: MRI pancreas volume (PMID 25950180)</a>}
       </>}
-    </div>}
-  </details>
+    </div>
+  </article>
 }
