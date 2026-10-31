@@ -46,7 +46,7 @@ Style examples using invented, unrelated evidence (never facts for the real answ
 
 Return only JSON; do not describe your reasoning.'''
 
-FINGERPRINT = digest([POLICY, PROMPT, 'bounded-thinking-focused-sentence-summary-v6'])
+FINGERPRINT = digest([POLICY, PROMPT, 'fast-preview-no-thinking-512-v7'])
 
 
 def source_sentences(evidence):
@@ -92,7 +92,7 @@ def generate(question, evidence, call=None):
     def bounded(path, payload=None):
         if monotonic() >= deadline: raise TimeoutError('Summary deadline')
         if path == 'chat':
-            payload = dict(payload, keep_alive='10m', options=dict(payload['options'], num_predict=1536))
+            payload = dict(payload, keep_alive='10m', options=dict(payload['options'], num_predict=512))
         response = api(path,payload,deadline=deadline) if call is None else call(path,payload)
         if monotonic() >= deadline: raise TimeoutError('Summary deadline')
         if path == 'chat': timings.append({k:response.get(k) for k in
@@ -101,7 +101,7 @@ def generate(question, evidence, call=None):
     if not any(m['name']==MODEL and m['digest']==MODEL_SHA for m in bounded('tags')['models']):
         raise OSError('Pinned model unavailable')
     answer = chat(bounded, PROMPT, dict(question=question, passages=sources),
-        schema, think=True, context_tokens=8192, model=MODEL)
+        schema, think=False, context_tokens=8192, model=MODEL)
     validate(answer,schema)
     if (answer['coverage']=='none') != (not answer['claims']): raise ValueError('Coverage mismatch')
     if answer['coverage'] != 'supported' and not answer['limitation'].strip(): raise ValueError('Missing limitation')
