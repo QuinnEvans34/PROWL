@@ -506,6 +506,7 @@ function RecentResponse({ entry, onEdit }) {
     <div className="literature-search__answer-card literature-search__history-body">
       <small>{entry.label}</small>
       {entry.response ? <>
+        {entry.response.answer_policy === 'single-pass-summary-v1' && entry.response.answer && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
         {entry.response.answer ? <LiteratureReadingView evidence={entry.response.evidence} answer={entry.response.answer} /> : <>
           <ResponseExplanation result={entry.response} sourceMode={entry.sourceMode} />
           {entry.response.evidence.length > 0 && <LiteratureReadingView evidence={entry.response.evidence} />}
