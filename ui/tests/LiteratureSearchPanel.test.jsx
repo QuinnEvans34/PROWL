@@ -492,3 +492,35 @@ it.each(['page','panel'])('clears sent drafts and edits an earlier turn into a f
   expect(search.mock.calls[1][0].request_id).not.toBe(search.mock.calls[0][0].request_id)
   expect(screen.getByRole('region',{name:'Conversation'}).compareDocumentPosition(input) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
 })
+
+it.each(['study', 'prediction'])('keeps a cancelled question on %s change and rejects its late answer', async kind => {
+  const calls = []
+  const search = vi.fn((request, signal) => new Promise(resolve => calls.push({request, signal, resolve})))
+  const props = kind === 'study' ? {contextKey: 'one'} : {measurementContext: {key: 'one'}}
+  const {rerender} = render(<LiteratureSearchPanel search={search} {...props} />)
+  const input = screen.getByLabelText('Literature question')
+  fireEvent.change(input, {target: {value: 'What does the pancreas do?'}})
+  fireEvent.click(screen.getByRole('button', {name: 'Ask question'}))
+  expect(input.value).toBe('')
+  rerender(<LiteratureSearchPanel search={search} {...(kind === 'study' ? {contextKey: 'two'} : {measurementContext: {key: 'two'}})} />)
+  expect(calls[0].signal.aborted).toBe(true)
+  expect(input.value).toBe('What does the pancreas do?')
+  expect(screen.getByText(/pending question was cancelled/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('button', {name: 'Ask question'}))
+  await act(async () => calls[0].resolve(response(calls[0].request)))
+  expect(screen.queryByText('Retrieved passages')).toBeNull()
+  await act(async () => calls[1].resolve(response(calls[1].request, 'no_results')))
+  expect(screen.getByText('No passages found')).toBeTruthy()
+  expect(calls[1].request.request_id).not.toBe(calls[0].request.request_id)
+})
+
+it('preserves a newer draft when the active study changes', () => {
+  const search = vi.fn(() => new Promise(() => {}))
+  const {rerender} = render(<LiteratureSearchPanel search={search} contextKey="one" />)
+  const input = screen.getByLabelText('Literature question')
+  fireEvent.change(input, {target: {value: 'Submitted question'}})
+  fireEvent.click(screen.getByRole('button', {name: 'Ask question'}))
+  fireEvent.change(input, {target: {value: 'My next question'}})
+  rerender(<LiteratureSearchPanel search={search} contextKey="two" />)
+  expect(input.value).toBe('My next question')
+})

@@ -183,7 +183,7 @@ export default function LiteratureSearchPanel({
     if (measurementRef.current === measurementKey) return
     setHistory([])
     measurementRef.current = measurementKey
-    if (active.current) { active.current.abort(); active.current = null; setPhase('idle') }
+    if (active.current) cancelForContextChange('the saved prediction changed')
     setScanResult(null)
   }, [measurementKey])
   const [question, setQuestion] = useState('')
@@ -222,9 +222,7 @@ export default function LiteratureSearchPanel({
     contextRef.current = contextKey
     setPreview(null); setHelpError(false)
     if (active.current) {
-      active.current.abort(); active.current = null
-      setPhase('idle'); setResult(null); setCapture(null); setCaptureNotice('')
-      setContextNotice('Your pending question was cancelled because you switched studies. The question is kept; ask again if it still applies.')
+      cancelForContextChange('you switched studies')
     }
   }, [contextKey])
   useEffect(() => {
@@ -238,6 +236,16 @@ export default function LiteratureSearchPanel({
     active.current?.abort(); active.current = null
     setPreview(null); setHelpError(false); setHelpMode(false); setOriginalQuestion('')
     setQuestion(value); setPhase('idle'); setContextNotice('')
+  }
+  function cancelForContextChange(reason) {
+    const previous = active.current
+    active.current = null
+    previous?.abort()
+    setQuestion(draft => draft || submittedQuestion)
+    setPhase('idle'); setResult(null); setScanResult(null)
+    setCapture(null); setCaptureNotice(''); setHelpMode(false)
+    setPreview(null); setHelpError(false)
+    setContextNotice(`Your pending question was cancelled because ${reason}. Your draft is kept; ask again if it still applies.`)
   }
   function cancelQuestion() {
     const previous = active.current
