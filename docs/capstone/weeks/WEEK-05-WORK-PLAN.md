@@ -105,3 +105,52 @@ Created [W05-03 stakeholder confirmation](https://trello.com/c/WD6xJcnB) and
 remain open in Backlog; unattended runtime is never personal time. Corrected the
 misplaced completed W03-02 card and AI-03's unchecked completion flag to match its
 existing completed set-preparation scope; independent assistant acceptance stays open.
+
+
+## November 2 follow-up: reuse the existing localizer and split machine work
+
+The early localizer exists: CAP-EXP-012 child step300 (absolute600), a binary
+SegResNet trained with113 training/40 development cases. The existing whole-CT
+cascade and CLI were already connected to real weights on October9. Reuse these
+components; the next task is compatibility and quality qualification, not rebuilding
+localization. See [the complete connection and evaluation report](../imaging/AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md)
+and [012 results](../operations/CAP-EXP-012-RESULTS-2026-10-01.md).
+
+Today the retained inference-only localizer.pt exists and its SHA256 matches the
+original request: 46417801f3d3c37e618d06823027e84f0ce84343f469f24124537167d40198d5.
+No checkpoint was loaded into a model and no GPU work was performed for this review.
+Its40-case localizer evaluation had mean recall0.962519 but mean Dice0.129078,
+median prediction/reference volume14.2596x and only15/40 joint ROI screens passing.
+It is an available candidate, not an accepted precise localizer.
+
+The later68-case CT-only cascade comparison retained33 positive cases and35
+reference-empty cases, with seven unresolved-unit inputs still visible in the
+original75-case accounting. Largest-component selection retained native lesion-box
+coverage in33/33 positives, but mean lesion Dice was0.246612 and mean predicted
+lesion volume on empty references13.989806mL. The broad crops remained a limitation.
+These old segmenter/development results are not current-control/KD metrics or fresh
+held-out acceptance. Reconcile present geometry, cohort exposure and source lineage
+before reusing the path with the current segmenter.
+
+Recommended division: Mac retains the frozen KD treatment; Mac CPU work prepares
+integration, manifests and scoring. Windows CUDA laptop handles a bounded autonomous
+baseline evaluation after its current work is verified complete and its GPU free.
+The latest read-only chat record in “Plan capstone experiment workflow” reports the
+November2 verifier launch (10,560 updates planned), followed by an exit-0 launcher
+result. This is not a fresh completion, backup or GPU-idleness check. No message,
+remote launch, data transfer or interruption was made for this planning review.
+
+Portable handoff contents: pinned code, localizer and eligible segmenter weights,
+preprocessing/ROI settings, case manifest with source hashes and role/exposure audit,
+native units/geometry, resource limits, qualification command, separate reference
+scoring and per-case result/failure schema. Reuse matching laptop data rather than
+transfer the entire dataset. Verify a small cross-device case first; freeze the
+bounded evaluation before cohort inference. Return metrics, failures, timing and
+integrity evidence. Do not start another long model experiment to solve scheduling.
+
+Board follow-up: W05-05 model/localizer handoff continues W02-02; W05-06 lifecycle
+and provenance continues W04-01; W05-07 reviewer/assistant acceptance continues
+W04-04; W05-08 continues KD-MAC; new W05-09 owns the portable CUDA evaluation packet.
+Original card histories are preserved. Week4 Complete contains only delivered work:
+teacher targets, fast preview/conversation UI and completed control training.
+Unfinished acceptance stays in Week5; historical hours closeout stays open in Backlog.
