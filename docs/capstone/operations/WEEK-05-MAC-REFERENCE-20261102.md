@@ -39,3 +39,17 @@ internal logs and home working directory started the same frozen request. This
 was a pre-execution dispatch repair, not another inference attempt. Supervisor6410
 and worker6522 observed live. Do not duplicate or edit producing sources. Completion,
 cleanup, exact backups and return transfer must still be checked.
+
+## Completed Mac reference
+
+One inference completed successfully:60physical windows,65.568924seconds inner,
+76.563865supervised,1,580,040,192B peak owned RSS and1,726,922,752B sampled MPS
+allocation. Worker exited0, reaped, no survivors/cleanup error; GPU lock released.
+All12 backup pairs rehashed exactly against the independent internal copies.
+Native shape426x301x157/mm; bounds[0,44,0]:[425,301,157], matching Windows.
+Prediction SHA6567fe103be9f88ee3f3efd5cd6f8c1643704ad774840de509b0a99a9a265d15
+and localizer SHA471a38046762bcf1d58315b6e22228257e6db0e053bf96a2467690aa44854703
+are identical to the laptop diagnostic exports. Probability array SHA
+37590dc566e466bfb3996bfea5ec3af33d2cc4b56f38cb76cf9bf1bc9bf0f096 differs as expected
+for potential floating-point differences; numerical comparison still pending.
+No Dice or model-quality acceptance claimed. KD stays paused720 during handoff.
