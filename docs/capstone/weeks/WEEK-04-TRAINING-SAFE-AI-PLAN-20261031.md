@@ -263,3 +263,22 @@ finishes. initial.pt and step-010000.pt match independent backup SHA256
 5b37c9d3d0fb037093d0e3efc135a2e4480efc70bf965644244db3f3653379b1. Original
 remaining budget259052s retained, no scientific recipe change or duplicate worker.
 Use existing cooperative pause controller for this continuation. Preserve its pins.
+
+## November 2 operator pause and overnight outcome
+
+User requested all training paused for school. Inspection found the continuation
+already stopped: control completed24000updates and final70-case validation at
+2026-11-02 00:46:27 America/Denver. Selected20k lesion-positive macro Dice0.383592868;
+terminal24k0.381964037. The worker exited0, but supervisor cleanup reported
+`Owned worker descendant was not reaped`, set workers_reaped=false and failed the
+handoff. Treatment was NOT launched; there is no treatment directory. Preserve the
+failure receipt; completed optimization is not successful orchestration closeout.
+
+Current verification: launchd not running/exit1; supervisor2277 and worker2581 absent;
+no matching trainer/teacher/caffeinate worker found; exclusive GPU lock available.
+last.pt, step-024000.pt, best.pt, native-024000.json and native-selected.json all
+match independent backup bytes. Wrote the receipt-bound cooperative pause request
+so no continuation handoff is authorized while the user is away. Both existing
+teacher automations already PAUSED. No restart, inference, recipe change or failed
+receipt rewrite performed. Diagnose cleanup separately and qualify the handoff
+before any later explicitly authorized treatment launch. Do not repeat control.
