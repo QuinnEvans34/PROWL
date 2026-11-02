@@ -575,3 +575,30 @@ Initial checkpoint independent hash9b0dde2e15dd7bb026ccff90a3a5157fc548b14a0a00c
 and ready.json backup match. Use scripts/diagnostics/pause_mac_kd_resume_v3.py
 with this new root/receipt for a cooperative pause; verify stopped/backup evidence.
 Teacher-specific automations remain paused; no concurrent teacher or second student.
+
+## November 2 second accidental AC disconnect
+
+User reported another unplug. The first v3 continuation stopped at275 updates,
+resources2198.101841seconds, workers_reaped=true, no survivors/cleanup errors,
+AC-required failure. Only initial.pt exists; independent initial checkpoint and
+journal prefix pass inspection. Power is restored. User continuation authority
+applied to a fresh v3 continuation, with no producing code or scientific changes.
+
+New root mac-kd-treatment-resume-20261102-02, ready SHA
+ d5c250ea758f5b16c63e3a2b7d9f1d160d01ea0a9d92f986a3688c777db21f5d.
+Cumulative interrupted treatment charge5755seconds;339845remaining from345600.
+Both prior attempt journals remain intact; neither472nor275updates are durable
+scientific progress. Recovery repeats from the verified initial state. Qualification
+root mac-kd-resume-check-20261102-02, request SHA
+374fbd16089d9cb33946d41d42fa05eb2233614290feaf45add4bc268a44fa05.
+
+Actual-MPS producer/cold passed and reaped. Qualified SHA
+18410ec8de6a5eda91de1a9ac0be1125d43d7901f480fd25527fa36dabd634cf.
+Registered the identical plist internally on first attempt, launchd label
+com.prowl.mac-kd-treatment-resume-20261102-02, supervisor30588/worker30779.
+Scientific updates1->2 verified, teacher_accessed=true, MLflow
+ ee3b6badb72640c19a20a92217d11d94 RUNNING with stored loss/KD metrics and both
+parent run IDs. Initial independent checkpoint SHA
+87a8f421a3953c950f6752a0b835ef5ed147606975ae88c02088152644f61b62
+and ready backup match; no tracking warning. Same v3 pause command with this
+new root/receipt. No recurring restart, teacher launch or scientific recipe change.
