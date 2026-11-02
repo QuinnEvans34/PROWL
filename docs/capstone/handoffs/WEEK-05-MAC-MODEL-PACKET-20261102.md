@@ -69,3 +69,21 @@ eligible frozen cohort/policy/budget review, and retained cross-device reference
 No current-checkpoint cross-device inference reference was generated while KD owns
 the Mac GPU. A suitable existing reference must be verified or a bounded reference
 run scheduled before that gate can pass. No new training or GPU evaluation dispatched.
+
+## Private delivery verified — November 2, 21:00 UTC
+
+Magic Wormhole transferred the archive through its encrypted transit relay; the
+Mac sender received confirmation and exited successfully. The laptop checked the
+34,975,283-byte archive against the SHA256 above before extraction, rejected unsafe
+archive paths/types and verified all 16 manifest payloads both before and after
+extraction (17 files including the manifest). Its retained receipt records VERIFIED
+at 2026-11-02T21:00:52.145333+00:00:
+`E:/PROWL/transfer/week05-cuda-baseline-20261102-a01/receipt.json`.
+Payload destination: the same directory's `extracted/week05-models-provenance`.
+These are laptop command results inspected from its chat, not Mac filesystem reads.
+
+Private delivery is complete. The laptop is continuing CPU strict model loading,
+cohort reconciliation and Windows physical-executor preparation. The unresolved
+cross-device reference and admission gates remain; delivery does not establish
+scientific readiness or authorize a new evaluation/training launch. Mac KD was not
+interrupted, and no model forward was run on the Mac for this transfer.
