@@ -52,3 +52,12 @@ def test_new_pause_protocol_preserves_old_request(tmp_path):
     put(tmp_path/'ready.json',dict(version='mac-kd-reviewed-treatment-launch-2'))
     pin=sha(tmp_path/'ready.json');request(tmp_path,pin);request(tmp_path,pin)
     assert json.loads((tmp_path/'pause-request.json').read_text())['receipt_sha256']==pin
+
+
+def test_cleanup_failure_time_is_charged_without_rewriting():
+    from src.operations.mac_kd_control_closeout_v1 import charge_control
+    rows=[dict(resources=dict(workers_reaped=True,seconds=10.2)),
+          dict(resources=dict(workers_reaped=False,seconds=20.1))]
+    assert charge_control(100,rows)['charged_seconds']==32
+    assert rows[-1]['resources']['workers_reaped'] is False
+    with pytest.raises(ValueError,match='exhausted'):charge_control(32,rows)

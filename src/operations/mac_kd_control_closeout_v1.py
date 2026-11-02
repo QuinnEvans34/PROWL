@@ -44,3 +44,16 @@ def inspect(root, backup, validation):
         path=arm/name;pins[str(path)]=sha(path)
     return dict(version='reviewed-control-closeout-1',optimization_complete=True,
                 historical_supervision_success=False,resources=resources,result=result,pins=pins)
+
+
+def charge_control(limit, segments):
+    """Charge all historical time, including the failed cleanup, without rewriting it."""
+    import math
+    from src.operations.kd_continuation_v1 import remaining_budget
+    prior=remaining_budget(limit,[row['resources'] for row in segments[:-1]])
+    seconds=segments[-1]['resources']['seconds']
+    if isinstance(seconds,bool) or not isinstance(seconds,(float,int)) or not math.isfinite(seconds) or seconds<0:
+        raise ValueError('Measured completed-control duration required')
+    charged=prior['charged_seconds']+math.ceil(seconds)
+    if charged>=limit:raise ValueError('Original control runtime budget exhausted')
+    return dict(charged_seconds=charged,remaining_seconds=limit-charged,original_seconds=limit)

@@ -80,8 +80,8 @@ def prepare(source,source_pin,parent,parent_pin,arm,checkpoint,out,backup):
         dispatch=json.loads((Path(parent)/'control/dispatch.json').read_text())
         segments['control'].append(dict(root=str(Path(parent).resolve()),backup=prior['backup'],
             run_id=dispatch['run_id'],resources=closeout['resources'],pins=closeout['pins'],checkpoint_step=24000))
-        from src.operations.kd_continuation_v1 import remaining_budget
-        remaining_budget(scientific['limits']['seconds_per_arm'],[row['resources'] for row in segments['control']])
+        from src.operations.mac_kd_control_closeout_v1 import charge_control
+        closeout['budget']=charge_control(scientific['limits']['seconds_per_arm'],segments['control'])
         p=dict(scientific=scientific,segments=segments,context=None,order=['treatment'],
             budget=dict(remaining_seconds=scientific['limits']['seconds_per_arm'],charged_seconds=0,
                         original_seconds=scientific['limits']['seconds_per_arm']),parent_backup=prior['backup'],
