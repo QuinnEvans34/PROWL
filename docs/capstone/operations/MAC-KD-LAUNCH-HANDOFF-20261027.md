@@ -534,3 +534,44 @@ Initial checkpoint and ready.json match independent backup; initial SHA
 The run is actually advancing, not merely registered. First scientific native
 Dice awaits2000updates and complete70-case validation. Launchd owns the process
 independently of this chat; the teacher-specific automations stay paused.
+
+## November 2 accidental AC disconnect and explicit recovery
+
+User explicitly requested restart after accidental unplug. The treatment stopped
+at472 journal updates when the AC gate fired; resources record3555.833331seconds,
+workers_reaped=true, no survivors/cleanup error. Only initial.pt was durable: the
+first scheduled500 checkpoint had not been reached. Independent initial backup
+and journal prefix verified. Preserve the472-update attempt; its updates must be
+recomputed from step0 and its3556 rounded seconds remain charged to the original
+345600-second treatment cap (342044remaining). No teacher regeneration/control rerun.
+
+Additive scripts/resume_mac_kd_treatment_v3.py admits the verified treatment parent,
+restores a bound checkpoint, preserves control closeout and all segment charges,
+and retains v3 identity-aware supervision. It also accepts later v3 parents without
+resetting budgets. Original producers/receipts remain untouched. Matching pause
+and actual-MPS qualifier scripts are additive; NumPy journal normalization is retained.
+16 focused CPU tests passed, including synthetic independent cold restore, bound
+pause, existing executor/recovery and supervision checks. Commit7bfbdc1.
+
+Prepared root mac-kd-treatment-resume-20261102-01, ready SHA
+0275962ad7036c2587c239d8b12b3a071054d3294fd422a139b8c84bef3c3b41.
+Qualification mac-kd-resume-check-20261102-01, request SHA
+fa33625f65f8e7f9e3b94cc12eb83247802ebe74f0b717308a0f669e473d50e8.
+Producer two engineering updates passed21.957683s/3556179968BpeakRSS/reaped;
+cold qualification and scientific restart verification follow below.
+
+Cold qualification passed11.431948s/2950381568BpeakRSS/reaped, using unchanged
+state/next-update comparison. Qualified SHA95baf4aa5768e52610ec30e709707cd48f02eeb2d2a9806d30e18f77c3fa5765.
+External-volume launchd plist registration failed with error5 before a service or
+scientific worker existed. Failure receipt retained; copying the identical plist
+to the internal owned-jobs directory resolved registration. No stage was duplicated.
+
+Restart is launchd-owned: com.prowl.mac-kd-treatment-resume-20261102-01,
+supervisor96332/worker96553. Actual updates1->2 verified with teacher_accessed=true,
+KDweight0.0001/0.0002 and loss1.313372374/1.204129457. MLflow
+ffa0eafcfdc74f73a3b691fcd3db58d3 RUNNING stores total/supervised/KD losses;
+parent run23c6d3a74aba4d18bfde4e4b9b91a33d linked, no tracking warning.
+Initial checkpoint independent hash9b0dde2e15dd7bb026ccff90a3a5157fc548b14a0a00cd10081b0067265bc3d3
+and ready.json backup match. Use scripts/diagnostics/pause_mac_kd_resume_v3.py
+with this new root/receipt for a cooperative pause; verify stopped/backup evidence.
+Teacher-specific automations remain paused; no concurrent teacher or second student.
