@@ -53,3 +53,41 @@ The four fixed cases remain blocked on numerical-reference/admission qualificati
 the current launcher cannot expand to them. See WEEK-05-MAC-REFERENCE-REQUEST-20261102.md
 for exact minimal input/output dependency and the pre-result numerical proposal.
 No Mac KD interruption, training launch, dashboard-hour increment or schedule.
+
+## One real CUDA diagnostic completed
+
+The single authorized attempt finished normally. Request SHA256
+`dc37f20affd1e071c46208ebbd8b34052aa09a704718df235de4385a48a726b3`
+at E:/PROWL/readiness/week05-physical-qualification-20261102-a01/request.json.
+Owned28799 supervisor39792/worker18172 exited0; workers_reaped=true and process
+identities absent after completion. No remaining CUDA compute applications.
+Preserve all request pins and evidence; do not repeat this diagnostic.
+
+Exact CT restoration took274.547supervised seconds/44,638,208B peakRSS/reaped;
+the native header explicitly uses mm and agrees with the expected426x301x157grid.
+Real CUDA execution took89.406supervised seconds including startup; inner
+inference/export73.984s,60physical windows,2,167,230,464B peak ownedRSS and
+1,021,313,024B maximum reservedGPU. No limit was increased.
+
+Localizer selected1,692,423 native voxels. The expanded closest-RAS ROI bounds
+are[0,44,0] to[425,301,157], about85.2% of the original CT voxel count. This is
+a large region, not evidence of accurate pancreas localization. There are zero
+reconstruction gaps WITHIN that region; no annotation-coverage claim was tested.
+No reference masks were accessed and no Dice, lesion recall or hypothesis verdict
+was calculated. Empty/incorrect scientific outputs would not be hidden by the
+engineering success status.
+
+Native prediction and localizer masks round-tripped exactly; all three float32
+probability channels round-tripped exactly in the205,780,028byte ROI array.
+Nine independent E/C backup pairs were rehashed after worker completion and match.
+Evidence status is LOCAL_DIAGNOSTIC_COMPLETE_REFERENCE_PENDING, not qualified.
+
+Retained outputs in output/ under the request directory:
+- prediction.nii.gz SHA6567fe103be9f88ee3f3efd5cd6f8c1643704ad774840de509b0a99a9a265d15
+- localizer.nii.gz SHA471a38046762bcf1d58315b6e22228257e6db0e053bf96a2467690aa44854703
+- region-probabilities.npy SHA58999e3423af1ae5d31819a5b13cbc95bd77bf5d4ec96d8f4535bbce8282bba3
+
+The remaining admission dependency is the exact reference described in
+WEEK-05-MAC-REFERENCE-REQUEST-20261102.md plus review of the predeclared numerical
+proposal. No four-case batch was dispatched. Continue from the preserved output,
+not a repeated inference, when the reference becomes available.
