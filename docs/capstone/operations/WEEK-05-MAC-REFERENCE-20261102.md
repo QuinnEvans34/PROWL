@@ -53,3 +53,21 @@ are identical to the laptop diagnostic exports. Probability array SHA
 37590dc566e466bfb3996bfea5ec3af33d2cc4b56f38cb76cf9bf1bc9bf0f096 differs as expected
 for potential floating-point differences; numerical comparison still pending.
 No Dice or model-quality acceptance claimed. KD stays paused720 during handoff.
+
+## Transfer and comparison outcome
+
+Private archive145,928,223bytes/SHA
+c306cc9b810aaf4c725d55fbc4421f0f641b488f6471763d889715154fce06fd
+transferred successfully; laptop compared preserved outputs. Result
+FAIL_ENGINEERING_COMPARISON:169/51,444,975 probability values outside the unchanged
+atol1e-5/rtol1e-4 rule; max absolute difference4.851818084716797e-05. Exact final
+codes/localizer masks (zero disagreements); geometry/ROI matches.167 failing values
+in pancreas channel,2lesion,0background. Failure fraction3.2850633e-6; max allowed-
+tolerance ratio2.11161. This is neither a mask failure nor a numerical gate pass.
+
+Laptop retained comparison.json SHA
+fd7be15a0745e5acdec22fdf738c9b6d4a95be35dbaaf555fd56906ad083c974 and
+probability-failures.json under E:/PROWL/readiness/week05-cross-device-comparison-20261102-a01.
+Windows Torch2.11.0/MONAI1.6.1/NumPy2.5.2/SciPy1.18.1 differ from Mac
+Torch2.13.0/MONAI1.6.0/NumPy2.5.1/SciPy1.18.0; cause is not isolated to backend.
+Four-case launch stopped as specified. No tolerance relaxation or inference retry.

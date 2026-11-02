@@ -621,3 +621,23 @@ Cumulative charged treatment budget:5755prior +5500this segment =11255seconds,
 334345remaining from345600. Preserve this attempt; resume requires a fresh bound
 continuation with the existing qualification process. Explicit user pause remains
 in force; no automatic restart or nightly resume was scheduled by this action.
+
+## November 2 evening reference complete / KD continuation
+
+After the user-authorized one-case reference completed and released the GPU, resume
+prepared from the verified pause.pt at720 in fresh root
+mac-kd-treatment-resume-20261102-03. Original recipe/data/teacher/control unchanged.
+Ready SHA bbdec51e0865ebe86c82392613ba292b9e6dd2e89f7f93f0161f4ea6feb9d97f;
+cumulative11255seconds charged,334345remaining. MPS producer/cold qualification
+both passed/reaped under mac-kd-resume-check-20261102-03; requestSHA
+23e221a1ac48f248a96e657052482ef9a1459438a441f145a7e93f55279154b0;
+qualifiedSHA b1caf2a08b1eb8e7035dc959ede150536a297f7fe2b0bd684a849f19c5136bf5.
+Launchd label com.prowl.mac-kd-treatment-resume-20261102-03; no automatic restart.
+Actual scientific721 update observed,teacher_accessed=true,KDweight.0721,
+loss.7396168113; MLflowRUNNING. Initial independent checkpoint hash
+4defa61e79412080f602705ec24581fdf718e9752f53f59e68450c34221fcae1 matches;
+ready backup matches and no tracking warning. Earlier first verification preceded
+creation of the dispatch file; checked the same live job rather than redispatching.
+Use existing v3 pause command with this new root and readySHA for later class pauses.
+The laptop's probability comparison failed its predeclared gate; Windows batch
+remains blocked independently of the unchanged KD treatment.
