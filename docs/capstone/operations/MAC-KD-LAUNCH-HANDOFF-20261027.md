@@ -602,3 +602,22 @@ parent run IDs. Initial independent checkpoint SHA
 87a8f421a3953c950f6752a0b835ef5ed147606975ae88c02088152644f61b62
 and ready backup match; no tracking warning. Same v3 pause command with this
 new root/receipt. No recurring restart, teacher launch or scientific recipe change.
+
+## November 2 class pause — step720 preserved
+
+User explicitly requested a class pause. The existing v3 cooperative command
+requested a safe-boundary stop of mac-kd-treatment-resume-20261102-02. Initial
+invocation lacked the existing isolated jsonschema dependency; no request was
+written until rerun with the established test-dependencies PYTHONPATH. No source
+or environment changes were made. paused.json/result.json confirm step720.
+Resources:5499.486953seconds, exit0, workers_reaped=true, no survivors or cleanup
+errors. Supervisor30588/worker30779 absent; launchd not running; MPS lock acquired
+and released nonblocking to verify availability. No reference inference started.
+
+pause.pt SHA339b08f118d78ba85e8515a7c0335fe73b32ecafb17e2b82704f7c9f7ff822be
+matches the independent internal backup. initial.pt and last.pt also match; final
+history.jsonl backup is byte-identical. All720 updates are recoverable from pause.pt.
+Cumulative charged treatment budget:5755prior +5500this segment =11255seconds,
+334345remaining from345600. Preserve this attempt; resume requires a fresh bound
+continuation with the existing qualification process. Explicit user pause remains
+in force; no automatic restart or nightly resume was scheduled by this action.
