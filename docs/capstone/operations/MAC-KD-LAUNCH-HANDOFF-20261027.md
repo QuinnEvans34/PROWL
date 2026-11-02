@@ -506,3 +506,31 @@ checks the same evidence contract, including v3 code pins; no producing source o
 ready receipt was edited. Corrected qualification directory
 `mac-kd-treatment-check-20261102-02`, request SHA
 `6da6dcc1ec6d630acc75da918c9a9a15aa048bd22e4148430cab2d2d0081a3fb`.
+
+## November 2 actual-MPS qualification passed and treatment dispatched
+
+Corrected producer: two updates in21.945382worker seconds, peakRSS3553902592B,
+workers_reaped=true/no survivors/exit0. Cold: one update in11.032678seconds,
+peakRSS2892185600B, workers_reaped=true/no survivors/exit0. Independent backup
+and restored state/next-update comparison passed existing rtol1.3e-6/atol1e-5.
+KD weights0.0001/0.0002, teacher_accessed=true. First two batch hashes, case IDs,
+steps and learning rates match the original control; its teacher_accessed=false.
+These three successful engineering updates are excluded from scientific progress.
+Qualification SHA:5b5182d97e424d559042749caa08ddde90515bc01f8d4b3c20863727df3f7b72.
+
+Dispatched once through launchd label com.prowl.mac-kd-treatment-20261102-01;
+supervisor51372/worker51732, no automatic restart. MLflow treatment run
+23c6d3a74aba4d18bfde4e4b9b91a33d is RUNNING, linked by tags to control continuation
+7d9b079674454cfcb44ef367704a53f7 and original30016b3403bd422e8b1f00309aff290f.
+Scientific receipt879349950468b903aacb0296cfe48dbc8bdcf0d3475d68a8797c377a9661cf25
+and qualification remain frozen. Preserve producing code, one owned GPU job, and
+original control failure evidence. Actual advancing-step verification follows.
+
+Scientific progress verified2->5 updates, step5 loss1.272994995/KDweight0.0005,
+teacher_accessed=true,41.299460seconds. MLflow stores step1 supervised loss,
+KDloss0.799641728/KDweight0.0001 and total loss1.313372374; no tracking warning.
+Initial checkpoint and ready.json match independent backup; initial SHA
+ ec2feb433c6bb63a9ad4cff2f366c745ad8cf2fd682cecf7f51f89e3681eb397.
+The run is actually advancing, not merely registered. First scientific native
+Dice awaits2000updates and complete70-case validation. Launchd owns the process
+independently of this chat; the teacher-specific automations stay paused.
