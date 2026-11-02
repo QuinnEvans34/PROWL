@@ -56,7 +56,7 @@ def cleanup(process, known):
             # A group signal is safe only when every member is currently owned.
             if group and all(key(row) in known for row in group):
                 os.killpg(process.pid, sig)
-            elif owned:
+            elif owned or (group and process.pid not in rows):
                 raise ValueError('Unverified process-group membership; refusing signal')
             try:
                 process.wait(timeout=2 if sig == signal.SIGTERM else 5)

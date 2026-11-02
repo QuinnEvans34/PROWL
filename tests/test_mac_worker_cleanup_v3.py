@@ -146,3 +146,11 @@ def test_parent_loss_guardian_stops_worker(tmp_path):
         if worker_pid:
             try:os.killpg(worker_pid,signal.SIGKILL)
             except ProcessLookupError:pass
+
+
+def test_unobserved_orphan_group_blocks_success(monkeypatch):
+    monkeypatch.setattr(cleanup,'snapshot',lambda:{11:row(11,'unseen',group=10)})
+    monkeypatch.setattr(cleanup.os,'killpg',lambda *args:pytest.fail('unverified signal'))
+    result=cleanup.cleanup(Process(),{(10,'original')})
+    assert not result['workers_reaped']
+    assert 'Unverified process-group membership' in result['cleanup_error']
