@@ -282,3 +282,36 @@ so no continuation handoff is authorized while the user is away. Both existing
 teacher automations already PAUSED. No restart, inference, recipe change or failed
 receipt rewrite performed. Diagnose cleanup separately and qualify the handoff
 before any later explicitly authorized treatment launch. Do not repeat control.
+
+## November 2 offline cleanup diagnosis and candidate
+
+The external drive is unavailable and the operator pause remains active. No
+scientific launch, external artifact read, old receipt rewrite, or producing-pin
+edit was performed. The v2 watchdog accumulates bare process IDs throughout the
+run and checks those IDs with kill(pid,0) at cleanup. A recycled ID can therefore
+produce a false surviving-worker failure. Historical resources lack survivor
+identities, so PID reuse is a demonstrated code defect, not a proven reconstruction
+of this particular failure; a zombie or genuine descendant is also possible.
+
+Added mac_worker_cleanup_v3, mac_teacher_watch_v3 and mac_teacher_supervision_v3
+as an unconnected candidate. Track PID plus ps start time, preserve descendant
+ownership after reparenting, and refuse group signals containing unknown members.
+Cleanup records survivor birth/group/state and sampling errors. Zombies and
+unavailable telemetry still block success; resource ceilings, three-sample timeout
+limit and parent-loss guardian remain. ps start times have second resolution; this
+is not a kernel process handle. No automated retry or scientific recipe change.
+
+Validation on internal storage: 21 focused tests passed in 13.79s, including
+recycled IDs, reparented descendants, genuine survivors, zombies, telemetry loss,
+resource bounds, normal/nonzero worker exits, supervisor lifecycle and abrupt
+supervisor-loss guardian cleanup. CPU synthetic only; no GPU qualification claim.
+
+Reconnect handoff remains required: reverify frozen receipts, all terminal/control
+reports and independent backups, and verify no owned workers/GPU lease remain.
+Create additive reviewed closeout evidence for the completed control while keeping
+its failed resources.json unchanged. The existing completed() admission requires a
+successful old receipt, so do not forge complete.json or reuse that admission
+unchanged. Bind a new handoff/launcher to reviewed closeout and the new supervisor,
+qualify its actual executor and pause/recovery, then launch treatment only after
+explicit resume authorization. Preserve cumulative budgets, matched initialization,
+data, sampling and training recipe. Do not repeat the completed control.
