@@ -442,3 +442,67 @@ a pause request cannot make frozen code recognize it. It only reports requested,
 never cleanup verified. Continuation preparation requires exclusive GPU ownership
 and a stopped predecessor, and launch requires separate GPU qualification.
 No continuation receipt was prepared or launched while the current run was live.
+
+## November 2 reviewed control closeout and treatment-only preparation
+
+User reconnected the drive and requested getting training running as soon as
+possible. AC power, storage floors, unloaded Ollama, process absence and exclusive
+GPU ownership passed. Original/continuation producing receipts verified; all35
+control execution files and result.json match independent backups. Control ended
+at24000 with selected20k Dice0.383592868 and terminal24k0.381964037, on all70
+provided-pancreas-region development cases. These are control results, not KD gains.
+
+New additive treatment handoff uses `scripts/resume_mac_kd_treatment_v2.py` and
+identity-aware v3 supervision. Existing failed cleanup resources remain unchanged.
+A reviewed closeout binds completed journal, full native reports, checkpoints,
+independent copies, dispatch and failure evidence. Current parent process groups
+must be absent. No control rerun or inheritance of its learned weights: treatment
+starts from the same original SuPreM initialization, same1333cases/sampling/24k
+schedule and max KDweight0.1/ramp1000/temperature2.0. Control charged216412seconds
+of345600; treatment retains its original345600-second cap. Storage allowances
+remain cumulative across retained attempts.
+
+An initial preparation stopped before writing ready.json because the legacy
+remaining_budget helper requires historical workers_reaped=true. The additive
+closeout now charges that failed-cleanup duration explicitly without falsifying
+its resources. All prior elapsed time remains charged. No GPU stage or scientific
+update happened in that preparation attempt.
+
+Code commits912e231/5250fcb/3d62a40. CPU evidence:22 watchdog tests,32 closeout and
+continuation regressions,9 final closeout tests, and1 real two-worker CPU
+pause/restore test through v3 passed. These suites overlap; counts are not unique.
+
+Prepared treatment directory under distillation-mac-20261023:
+`mac-kd-treatment-20261102-01`, ready SHA
+`879349950468b903aacb0296cfe48dbc8bdcf0d3475d68a8797c377a9661cf25`.
+Independent backup: ~/PROWL-Backups/mac-kd-treatment-20261102-01.
+Qualification `mac-kd-treatment-check-20261102-01`, request SHA
+`3a446a9e9b52c2891c6ca50ba82d8af86bc67b0b0b07c2c12d846733cfcae83c`.
+All producing pins frozen. Two fresh engineering updates then one independent
+cold-restored update must pass unchanged state tolerances, backups, MPS and
+cleanup before launch. These are not scientific updates. Old70-case native
+qualification is reused, not rerun. No automatic retries.
+
+For this new receipt, request a cooperative pause using
+`scripts/diagnostics/pause_mac_kd_treatment_v2.py --root <treatment-directory>
+--receipt-sha256 879349950468b903aacb0296cfe48dbc8bdcf0d3475d68a8797c377a9661cf25`.
+A written request does not itself prove stopped workers; verify paused/result,
+resources, checkpoint backups and GPU release. Old pause request stays preserved.
+The old teacher-only automations remain paused; they must not restart a teacher
+while the student is training.
+
+First MPS producer attempt completed its two updates but failed serializing
+NumPy float32 augmentation metadata to updates.json. It exited1; v3 supervision
+verified workers_reaped=true, no survivors, cleanup_error=null, peakRSS3.31GiB,
+46.077953seconds. Original logs, states and independent saved.pt are retained.
+This is a reporting failure, not a state-equivalence result. No scientific launch.
+
+Corrected additive qualifier `qualify_mac_kd_treatment_v3.py` uses the existing
+exact NumPy-to-Python journal conversion. A synthetic producer+cold regression
+passed. It binds the failed request/resources/log and charges47seconds against
+its original1200-second producer allowance; corrected producer gets1153seconds.
+Both attempts count toward output/backup caps. The unchanged v2 launch validator
+checks the same evidence contract, including v3 code pins; no producing source or
+ready receipt was edited. Corrected qualification directory
+`mac-kd-treatment-check-20261102-02`, request SHA
+`6da6dcc1ec6d630acc75da918c9a9a15aa048bd22e4148430cab2d2d0081a3fb`.
