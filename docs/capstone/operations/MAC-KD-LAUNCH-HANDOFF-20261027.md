@@ -641,3 +641,16 @@ creation of the dispatch file; checked the same live job rather than redispatchi
 Use existing v3 pause command with this new root and readySHA for later class pauses.
 The laptop's probability comparison failed its predeclared gate; Windows batch
 remains blocked independently of the unchanged KD treatment.
+
+## November 3 class pause — step7154 preserved
+
+Explicit user pause of continuation03 completed through the existing v3 protocol.
+paused.json and result confirm7154updates. Resources61185.952186seconds,
+peak owned RSS5077630976B, exit0, success/reaped true, no survivors or cleanup error.
+Supervisor9468 and worker9993 absent; GPU lock acquired/released to verify freedom.
+pause.pt SHA839fb1f0bd037ee3e0db3414c93a4d6af8f8522476dee679fc02151eee6472f6
+matches independent backup; last/initial checkpoints and final journal also match.
+MLflow terminated KILLED with operator_paused=true (intentional pause, not failure).
+Cumulative charged budget11255+61186=72441seconds;273159remain from345600.
+Hourly monitor and pending one-time class-pause automation both PAUSED.
+Do not resume until user authorization; preserve all attempts and producing pins.
