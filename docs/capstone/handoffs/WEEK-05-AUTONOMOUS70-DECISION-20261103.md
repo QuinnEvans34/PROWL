@@ -47,3 +47,21 @@ CT restoration and GPU launch await the concrete larger scope/storage decision.
 After approval: bounded restore of required files, exact identity/native-header
 admission, freeze new receipt, one supervised run. Mac KD remains the sole Mac GPU
 owner. No control/KD/teacher weights or scientific training recipe are changed.
+
+## Explicit approval and qualified failure-accounting successor
+
+Quinton approved via the scope question: "Approve the bounded 70-case evaluation
+and 64 GiB backup allowance." This includes the fixed cohort/exploratory numerical
+exception, five reused/up to64new/5592resource failure, bounded restoration and the
+resource ceilings above. It does not approve training, tuning, protected-test reads,
+changed models/preprocessing or any relaxed safety floor.
+
+Before this approval, the laptop finished additive CPU qualification: eight tests
+passed, including full70denominator, preflight-case inference/scoring rejection and
+no fabricated Dice. New prepared request at
+E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a02/request.json:
+7db98398be4da35bf775976ef81ec73e848e0258e56e760307817a4e5ec48364
+(commit75346b1). Original proposal/request retained. Laptop now instructed to record
+approval, verify pins/resources/ownership, restore→admit→freeze→evaluate once under
+durable bounded supervision. Actual advancement still requires process/journal proof;
+this approval entry is not a claim that GPU inference has started.
