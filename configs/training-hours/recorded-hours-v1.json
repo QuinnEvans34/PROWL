@@ -1,0 +1,1429 @@
+{
+  "schema": "prowl-combined-training-hours-v1",
+  "generated_at": "2026-11-03T21:48:37.017112+00:00",
+  "policy": "Recorded training-session time includes in-run validation, checkpoint and I/O work. It is not GPU-busy time or personal working hours.",
+  "complete_project_history": false,
+  "entries": [
+    {
+      "execution_id": "mlflow:1f3c1242be074a139de35d41c12a2570",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 4194.379,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:1f3c1242be074a139de35d41c12a2570"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 1200,
+      "as_of_utc": "2026-07-03T22:58:52.637000+00:00",
+      "start_utc": "2026-07-03T21:48:58.258000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:f42bc20093ca49038dbb7faa8dbffaff",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 2823.479,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:f42bc20093ca49038dbb7faa8dbffaff"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 800,
+      "as_of_utc": "2026-07-03T23:54:02.766000+00:00",
+      "start_utc": "2026-07-03T23:06:59.287000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:d3198004b57c4bb1aeeaa81a1cbd98d3",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 2799.011,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:d3198004b57c4bb1aeeaa81a1cbd98d3"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 800,
+      "as_of_utc": "2026-07-04T00:57:05.913000+00:00",
+      "start_utc": "2026-07-04T00:10:26.902000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:45e621898b68444bae60ac5281d7c2ad",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 20300.121,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:45e621898b68444bae60ac5281d7c2ad"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-04T06:46:02.647000+00:00",
+      "start_utc": "2026-07-04T01:07:42.526000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:e72cfdc847d0461aa9feed7366a150f2",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 20694.207,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:e72cfdc847d0461aa9feed7366a150f2"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-05T00:24:48.064000+00:00",
+      "start_utc": "2026-07-04T18:39:53.857000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:4979a5b7a94149af88010af0a2518539",
+      "machine": "Mac",
+      "title": "capable-auk-759",
+      "seconds": 20395.548,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:4979a5b7a94149af88010af0a2518539"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-07T08:22:29.514000+00:00",
+      "start_utc": "2026-07-07T02:42:33.966000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:a63c93f9d95041db8f4dfd1470332a57",
+      "machine": "Mac",
+      "title": "transfer_dice_focal_bg1_p96_posneg_6000i",
+      "seconds": 16864.627,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:a63c93f9d95041db8f4dfd1470332a57"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "RUNNING",
+      "last_step": 5000,
+      "as_of_utc": "2026-07-08T07:15:21.043000+00:00",
+      "start_utc": "2026-07-08T02:34:16.416000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:4bddc3e6c08f4eeea50ed1e7881cdae2",
+      "machine": "Mac",
+      "title": "transfer_p128_ctx_bg0",
+      "seconds": 2601.127,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:4bddc3e6c08f4eeea50ed1e7881cdae2"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 525,
+      "as_of_utc": "2026-07-08T17:26:26.403000+00:00",
+      "start_utc": "2026-07-08T16:43:05.276000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:c9800c14fa914d168035b39f0f32063c",
+      "machine": "Mac",
+      "title": "transfer_p128_ctx_bg0",
+      "seconds": 17726.72,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:c9800c14fa914d168035b39f0f32063c"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 2650,
+      "as_of_utc": "2026-07-08T23:53:16.409000+00:00",
+      "start_utc": "2026-07-08T18:57:49.689000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:515eba0751594a1988018c407f3e5d6d",
+      "machine": "Mac",
+      "title": "transfer_p128_ctx_bg0",
+      "seconds": 16726.997,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:515eba0751594a1988018c407f3e5d6d"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-09T06:43:40.300000+00:00",
+      "start_utc": "2026-07-09T02:04:53.303000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:ad198f8e571149e4bbf2570fc9114cba",
+      "machine": "Mac",
+      "title": "scratch_dice_focal_bg0_p96",
+      "seconds": 2438.686,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:ad198f8e571149e4bbf2570fc9114cba"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 700,
+      "as_of_utc": "2026-07-09T21:29:00.619000+00:00",
+      "start_utc": "2026-07-09T20:48:21.933000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:06baed2834d34bc19de1471bff1c1ed8",
+      "machine": "Mac",
+      "title": "transfer_roi_pancreas_1mm",
+      "seconds": 6144.505,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:06baed2834d34bc19de1471bff1c1ed8"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-09T23:59:29.294000+00:00",
+      "start_utc": "2026-07-09T22:17:04.789000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:180a66385a484f4ca096b0d3f853ec1c",
+      "machine": "Mac",
+      "title": "transfer_cropnative_0p7",
+      "seconds": 6520.34,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:180a66385a484f4ca096b0d3f853ec1c"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-10T02:59:03.483000+00:00",
+      "start_utc": "2026-07-10T01:10:23.143000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:40cafb8b01ff4484b311eaa8753527b5",
+      "machine": "Mac",
+      "title": "nc20_wholebox",
+      "seconds": 7599.606,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:40cafb8b01ff4484b311eaa8753527b5"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 4000,
+      "as_of_utc": "2026-07-12T10:35:25.058000+00:00",
+      "start_utc": "2026-07-12T08:28:45.452000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:d5a2a64c018f454bb79441af3cbaf597",
+      "machine": "Mac",
+      "title": "pv20_wholebox",
+      "seconds": 7618.102,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:d5a2a64c018f454bb79441af3cbaf597"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 4000,
+      "as_of_utc": "2026-07-12T12:44:58.142000+00:00",
+      "start_utc": "2026-07-12T10:38:00.040000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:c3b25beadbf7418192ae8d805d7ff80f",
+      "machine": "Mac",
+      "title": "transfer_wholebox_p128_1p5",
+      "seconds": 11708.343,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:c3b25beadbf7418192ae8d805d7ff80f"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-13T06:49:20.925000+00:00",
+      "start_utc": "2026-07-13T03:34:12.582000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:620c75b5d0694ef29dc69a71aacd47ba",
+      "machine": "Mac",
+      "title": "scratch_wholebox_p128_1p5",
+      "seconds": 11695.486,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:620c75b5d0694ef29dc69a71aacd47ba"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 4250,
+      "as_of_utc": "2026-07-13T23:55:39.898000+00:00",
+      "start_utc": "2026-07-13T20:40:44.412000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:08769db1d65b46c98c5836c91f1e36b7",
+      "machine": "Mac",
+      "title": "transfer_wholebox_p128_1p5",
+      "seconds": 3729.633,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:08769db1d65b46c98c5836c91f1e36b7"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-14T03:34:58.724000+00:00",
+      "start_utc": "2026-07-14T02:32:49.091000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:46a6ab3b4422458fabdc45b76173aec7",
+      "machine": "Mac",
+      "title": "transfer_wholebox_p128_1p5",
+      "seconds": 11743.888,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:46a6ab3b4422458fabdc45b76173aec7"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-14T07:27:03.914000+00:00",
+      "start_utc": "2026-07-14T04:11:20.026000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:9e6aba3c6cf94db6b55afd7df9fbea3e",
+      "machine": "Mac",
+      "title": "scratch_wholebox_p128_1p5",
+      "seconds": 12389.606,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:9e6aba3c6cf94db6b55afd7df9fbea3e"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-14T10:55:10.371000+00:00",
+      "start_utc": "2026-07-14T07:28:40.765000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:0b3e0c6788c94cc29209f4172bb62511",
+      "machine": "Mac",
+      "title": "transfer_wholebox_p160_1p2",
+      "seconds": 23062.542,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:0b3e0c6788c94cc29209f4172bb62511"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 6000,
+      "as_of_utc": "2026-07-15T11:55:07.462000+00:00",
+      "start_utc": "2026-07-15T05:30:44.920000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:4523d4d9fb6e4eb4a20cf234457c313e",
+      "machine": "Mac",
+      "title": "transfer_wholebox_scaledmax",
+      "seconds": 49898.779,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:4523d4d9fb6e4eb4a20cf234457c313e"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-17T12:46:18.830000+00:00",
+      "start_utc": "2026-07-16T22:54:40.051000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:29388ec913704206afa0b907f7fcff29",
+      "machine": "Mac",
+      "title": "localizer_fullscan_scaledmax",
+      "seconds": 29157.75,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:29388ec913704206afa0b907f7fcff29"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 16000,
+      "as_of_utc": "2026-07-18T14:04:31.792000+00:00",
+      "start_utc": "2026-07-18T05:58:34.042000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:f12537498d564ab7bf2507a70c33b76e",
+      "machine": "Mac",
+      "title": "transfer_wholebox_scaledmax_CLEAN",
+      "seconds": 50220.811,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:f12537498d564ab7bf2507a70c33b76e"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-19T21:18:05.434000+00:00",
+      "start_utc": "2026-07-19T07:21:04.623000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:f8c3b9e03ff445bd872c6189b0560e5e",
+      "machine": "Mac",
+      "title": "transfer_wholebox_scaledmax_CLEAN_tversky",
+      "seconds": 26388.844,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:f8c3b9e03ff445bd872c6189b0560e5e"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 12675,
+      "as_of_utc": "2026-07-20T05:14:24.939000+00:00",
+      "start_utc": "2026-07-19T21:54:36.095000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:27c2202da98647a7a5740c2116b5576a",
+      "machine": "Mac",
+      "title": "transfer_wholebox_clean_tverskyfocal",
+      "seconds": 49139.229,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:27c2202da98647a7a5740c2116b5576a"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-20T19:08:17.905000+00:00",
+      "start_utc": "2026-07-20T05:29:18.676000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:484b23aa14b34890b79fee6b5c323814",
+      "machine": "Mac",
+      "title": "transfer_anatomy_aware_bg0_p128_wholebox_lam0.3_posneg_50i",
+      "seconds": 142.816,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:484b23aa14b34890b79fee6b5c323814"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 50,
+      "as_of_utc": "2026-07-21T02:08:59.114000+00:00",
+      "start_utc": "2026-07-21T02:06:36.298000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:7200a25cd95a4de7acb17cc000e50494",
+      "machine": "Mac",
+      "title": "exp26B_lam03",
+      "seconds": 16398.791,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:7200a25cd95a4de7acb17cc000e50494"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 7200,
+      "as_of_utc": "2026-07-21T14:59:11.459000+00:00",
+      "start_utc": "2026-07-21T10:25:52.668000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:e5239e62e57d4a7cb5593c5430eeaba6",
+      "machine": "Mac",
+      "title": "exp26B_lam03",
+      "seconds": 8399.73,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:e5239e62e57d4a7cb5593c5430eeaba6"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 11150,
+      "as_of_utc": "2026-07-21T17:19:52.348000+00:00",
+      "start_utc": "2026-07-21T14:59:52.618000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:e4c5f00b6c78480ab88d2306915bd855",
+      "machine": "Mac",
+      "title": "exp26B_lam03",
+      "seconds": 1783.424,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:e4c5f00b6c78480ab88d2306915bd855"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 12000,
+      "as_of_utc": "2026-07-21T18:27:38.201000+00:00",
+      "start_utc": "2026-07-21T17:57:54.777000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:a5e6b2a66698487c88b395175c274acd",
+      "machine": "Mac",
+      "title": "exp26A_lam0",
+      "seconds": 10295.122,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:a5e6b2a66698487c88b395175c274acd"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "RUNNING",
+      "last_step": 16575,
+      "as_of_utc": "2026-07-21T23:23:08.840000+00:00",
+      "start_utc": "2026-07-21T20:31:33.718000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:2e9ee5f28231465aaad3ff617f2e74a6",
+      "machine": "Mac",
+      "title": "exp26A_lam0",
+      "seconds": 770.229,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:2e9ee5f28231465aaad3ff617f2e74a6"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 16800,
+      "as_of_utc": "2026-07-21T23:43:14.311000+00:00",
+      "start_utc": "2026-07-21T23:30:24.082000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:433dd9a12a0e4d56a25830e738df3599",
+      "machine": "Mac",
+      "title": "exp26A_lam0",
+      "seconds": 15794.073,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:433dd9a12a0e4d56a25830e738df3599"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-22T04:44:21.057000+00:00",
+      "start_utc": "2026-07-22T00:21:06.984000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:f3232c2546cc40c29fceffe632c3c727",
+      "machine": "Mac",
+      "title": "exp26B_lam03",
+      "seconds": 25840.796,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:f3232c2546cc40c29fceffe632c3c727"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-22T11:55:18.591000+00:00",
+      "start_utc": "2026-07-22T04:44:37.795000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:5a04572c92154abfbe6dde5de6086bcf",
+      "machine": "Mac",
+      "title": "optuna_trial_0",
+      "seconds": 3173.391,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:5a04572c92154abfbe6dde5de6086bcf"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T00:57:09.466000+00:00",
+      "start_utc": "2026-07-23T00:04:16.075000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:81eea66fee064a769ecad3ca2072d5bc",
+      "machine": "Mac",
+      "title": "optuna_trial_1",
+      "seconds": 3142.299,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:81eea66fee064a769ecad3ca2072d5bc"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T01:49:31.860000+00:00",
+      "start_utc": "2026-07-23T00:57:09.561000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:725e21720ad14c0bb94dc31ed3226dd7",
+      "machine": "Mac",
+      "title": "optuna_trial_2",
+      "seconds": 3162.272,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:725e21720ad14c0bb94dc31ed3226dd7"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T02:42:14.207000+00:00",
+      "start_utc": "2026-07-23T01:49:31.935000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:d3f0eb50b0a544138731f4dab1c77c27",
+      "machine": "Mac",
+      "title": "optuna_trial_3",
+      "seconds": 1610.163,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:d3f0eb50b0a544138731f4dab1c77c27"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T03:09:04.451000+00:00",
+      "start_utc": "2026-07-23T02:42:14.288000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:c0ca5704c363494c971c8d9b3677485a",
+      "machine": "Mac",
+      "title": "optuna_trial_4",
+      "seconds": 1535.444,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:c0ca5704c363494c971c8d9b3677485a"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T03:34:39.971000+00:00",
+      "start_utc": "2026-07-23T03:09:04.527000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:364824b952de4fdf909e5f17512b0bee",
+      "machine": "Mac",
+      "title": "optuna_trial_5",
+      "seconds": 1541.831,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:364824b952de4fdf909e5f17512b0bee"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T04:00:21.876000+00:00",
+      "start_utc": "2026-07-23T03:34:40.045000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:80019a0eba32491b9a5df40362ba3417",
+      "machine": "Mac",
+      "title": "optuna_trial_6",
+      "seconds": 1539.633,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:80019a0eba32491b9a5df40362ba3417"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T04:26:01.690000+00:00",
+      "start_utc": "2026-07-23T04:00:22.057000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:a903169196e14da281b05ceac8a7acc3",
+      "machine": "Mac",
+      "title": "optuna_trial_7",
+      "seconds": 1540.16,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:a903169196e14da281b05ceac8a7acc3"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T04:51:41.926000+00:00",
+      "start_utc": "2026-07-23T04:26:01.766000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:a13b9cd64b83418395cd96b954cb82c9",
+      "machine": "Mac",
+      "title": "optuna_trial_8",
+      "seconds": 1542.376,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:a13b9cd64b83418395cd96b954cb82c9"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T05:17:24.385000+00:00",
+      "start_utc": "2026-07-23T04:51:42.009000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:c5853e31a06e4b60ab7633b08ddfd1d8",
+      "machine": "Mac",
+      "title": "optuna_trial_9",
+      "seconds": 1542.365,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:c5853e31a06e4b60ab7633b08ddfd1d8"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T05:43:06.838000+00:00",
+      "start_utc": "2026-07-23T05:17:24.473000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:187ef36b16c84b1bb083d5f014ff9a3e",
+      "machine": "Mac",
+      "title": "optuna_trial_10",
+      "seconds": 1542.201,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:187ef36b16c84b1bb083d5f014ff9a3e"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T06:08:49.120000+00:00",
+      "start_utc": "2026-07-23T05:43:06.919000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:98cf4ffb23154e42a588fa1d0496715d",
+      "machine": "Mac",
+      "title": "optuna_trial_11",
+      "seconds": 1542.654,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:98cf4ffb23154e42a588fa1d0496715d"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T06:34:31.863000+00:00",
+      "start_utc": "2026-07-23T06:08:49.209000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:ebda1006d5a94b6d925ad4680cde8c5a",
+      "machine": "Mac",
+      "title": "optuna_trial_12",
+      "seconds": 3084.72,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:ebda1006d5a94b6d925ad4680cde8c5a"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T07:25:56.673000+00:00",
+      "start_utc": "2026-07-23T06:34:31.953000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:159e201763894e80938dfae24e76b031",
+      "machine": "Mac",
+      "title": "optuna_trial_13",
+      "seconds": 1542.516,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:159e201763894e80938dfae24e76b031"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T07:51:39.283000+00:00",
+      "start_utc": "2026-07-23T07:25:56.767000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:41d646be15ec4be29ab3078eadfb0c74",
+      "machine": "Mac",
+      "title": "optuna_trial_14",
+      "seconds": 1542.287,
+      "category": "legacy_estimate",
+      "basis": "MLflow trial start/end; estimated tuning-session span",
+      "aliases": [
+        "mlflow:41d646be15ec4be29ab3078eadfb0c74"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": null,
+      "as_of_utc": "2026-07-23T08:17:21.661000+00:00",
+      "start_utc": "2026-07-23T07:51:39.374000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:aac63621814a4be0bfa949a6955159c2",
+      "machine": "Mac",
+      "title": "transfer_wholebox_fullhealthy",
+      "seconds": 55020.407,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:aac63621814a4be0bfa949a6955159c2"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 24000,
+      "as_of_utc": "2026-07-25T10:55:11.067000+00:00",
+      "start_utc": "2026-07-24T19:38:10.660000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mlflow:5cd61c49d92a45e7b024008f65929536",
+      "machine": "Mac",
+      "title": "transfer_wholebox_scaled1to3",
+      "seconds": 38751.106,
+      "category": "legacy_estimate",
+      "basis": "MLflow run start to last train/loss timestamp; estimated session span",
+      "aliases": [
+        "mlflow:5cd61c49d92a45e7b024008f65929536"
+      ],
+      "status": "historical",
+      "period": "Early MLflow",
+      "source_status": "FINISHED",
+      "last_step": 18000,
+      "as_of_utc": "2026-07-27T15:31:14.737000+00:00",
+      "start_utc": "2026-07-27T04:45:23.631000+00:00",
+      "evidence_sha256": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8"
+    },
+    {
+      "execution_id": "mac-journal:full_segmenter_suprem_mac_01",
+      "machine": "Mac",
+      "title": "full_segmenter_suprem_mac_01",
+      "seconds": 38683.385387792005,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; unrecorded tail excluded",
+      "aliases": [
+        "mac-journal:full_segmenter_suprem_mac_01"
+      ],
+      "period": "Full-cohort Mac",
+      "status": "historical",
+      "evidence_sha256": "aab76c47b38445d91dd84c7ce6a3c03295080c956367dd72dd286227a6bec82d"
+    },
+    {
+      "execution_id": "mac-journal:full_segmenter_suprem_mac_01_resume01",
+      "machine": "Mac",
+      "title": "full_segmenter_suprem_mac_01_resume01",
+      "seconds": 22176.610844042007,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; unrecorded tail excluded",
+      "aliases": [
+        "mac-journal:full_segmenter_suprem_mac_01_resume01"
+      ],
+      "period": "Full-cohort Mac",
+      "status": "historical",
+      "evidence_sha256": "72f0eb5f2dd75e1e2be26c45282dec3c1e5306190e61dd47017f93f22ff32b4f"
+    },
+    {
+      "execution_id": "mac-journal:full_segmenter_suprem_mac_01_resume02",
+      "machine": "Mac",
+      "title": "full_segmenter_suprem_mac_01_resume02",
+      "seconds": 9537.55837391701,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; unrecorded tail excluded",
+      "aliases": [
+        "mac-journal:full_segmenter_suprem_mac_01_resume02"
+      ],
+      "period": "Full-cohort Mac",
+      "status": "historical",
+      "evidence_sha256": "bb9033e002f8b1724529479210232a7b47eca06d58a3fcd75e9c0fc5545a4560"
+    },
+    {
+      "execution_id": "mlflow:30016b3403bd422e8b1f00309aff290f",
+      "machine": "Mac",
+      "title": "KD control \u00b7 mac-kd-comparison-20261030-01",
+      "seconds": 86525.98308883398,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:30016b3403bd422e8b1f00309aff290f"
+      ],
+      "period": "KD comparison",
+      "arm": "control",
+      "status": "closed",
+      "evidence_sha256": "a9fdd3690b63da3d63c59ae086d10949507e2cac0727b7bb2007a1fa88b1ce65"
+    },
+    {
+      "execution_id": "mlflow:7d9b079674454cfcb44ef367704a53f7",
+      "machine": "Mac",
+      "title": "KD control \u00b7 mac-kd-continuation-20261031-01",
+      "seconds": 129834.7557035,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:7d9b079674454cfcb44ef367704a53f7"
+      ],
+      "period": "KD comparison",
+      "arm": "control",
+      "status": "closed",
+      "evidence_sha256": "820840d3cc9937c37c207a9523ee1480c4a1610eef1910c17fc8c48e95a03717"
+    },
+    {
+      "execution_id": "mlflow:23c6d3a74aba4d18bfde4e4b9b91a33d",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 mac-kd-treatment-20261102-01",
+      "seconds": 3537.5165788750164,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:23c6d3a74aba4d18bfde4e4b9b91a33d"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "closed",
+      "evidence_sha256": "5b25503a5d2a424cf9d7faa3ddf183b5ed9c4e905206c1c0194c0b11fc610ccd"
+    },
+    {
+      "execution_id": "mlflow:ffa0eafcfdc74f73a3b691fcd3db58d3",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 mac-kd-treatment-resume-20261102-01",
+      "seconds": 2176.3309946670197,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:ffa0eafcfdc74f73a3b691fcd3db58d3"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "closed",
+      "evidence_sha256": "2235b45ddda58bf51a7733224742c95fb0a0cf52fc6c67d63492a1a1cdc9f340"
+    },
+    {
+      "execution_id": "mlflow:ee3b6badb72640c19a20a92217d11d94",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 mac-kd-treatment-resume-20261102-02",
+      "seconds": 5477.063134291908,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:ee3b6badb72640c19a20a92217d11d94"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "closed",
+      "evidence_sha256": "93e86446f11097e8b1e03f8245bf38def89f2e8a5179503e27734cab2666f89e"
+    },
+    {
+      "execution_id": "mlflow:460be483579f4301834f1f0009eb717f",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 mac-kd-treatment-resume-20261102-03",
+      "seconds": 61167.57226249995,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
+      "aliases": [
+        "mlflow:460be483579f4301834f1f0009eb717f"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "closed",
+      "evidence_sha256": "6827b3d951b377b749ef8c9910d38336536d105bc806254959203b1c4aee6506"
+    },
+    {
+      "execution_id": "mlflow:436bb317362b44d8861edfa5c5dd5b8a",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 current attempt",
+      "seconds": 8891.616159083787,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
+      "aliases": [
+        "mlflow:436bb317362b44d8861edfa5c5dd5b8a"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "last_recorded",
+      "last_step": 8000,
+      "as_of_utc": "2026-11-03T21:48:31.248000+00:00",
+      "evidence_sha256": "82f9e8e05bc5bbf00ee1bb861dfc922bf43fa626313b5f33baa6011254995950"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-02",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-02",
+      "seconds": 72837.37245491613,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-02"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "b8068fa7af995f33d7cfb4d98810007b1abece34dd8e97e070ccc325e23b00a3"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-03",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-03",
+      "seconds": 2922.6038931659423,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-03"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "d7e96c4fe37ad86c219fd0b26866123c1e0e0051f0c1dd197909ae1911c907b1"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-04",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-04",
+      "seconds": 5826.079302249942,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-04"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "60e46c8603d253ef5588e781b3f3fd4aedba0f2da5c4eb716f2c723a979cc333"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-05",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-05",
+      "seconds": 42196.42422691709,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-05"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "2b00a86712dac289d2dacfcb33b3ea061d6db767dda007d01f8fc01af94242aa"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-06",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-06",
+      "seconds": 6549.370012084022,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-06"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "17b7959551cf09fd57a6aa1584b137886a6ea12f0cf2e9567c2a604a88c6f359"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-07",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-07",
+      "seconds": 11323.165961999912,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-07"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "8bb2273f53bba396972aacb0090c396e1d955cdaddedfbe82c03fdcebdcb855e"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-08",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-08",
+      "seconds": 29372.4247364169,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-08"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "c1f0dd69f54236db3581008673ab1afc258ee2eb1819d2173b32911e49de4e72"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-09",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-09",
+      "seconds": 2240.6341006250586,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-09"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "90950613fd75c0af1410a3a77a3b293eed1293a6a6368b7eb627c1fdb996e2ae"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-10",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-10",
+      "seconds": 62661.63801391609,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-10"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "49080063d9ec614895e3c738aec036b7bcdf11d43f617decfd395beb146d4d90"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-11",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-11",
+      "seconds": 100.40490250010043,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-11"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "b62a549cf3d904c0e9b310c100b20966e21a6a50ce3eea7ed4f3df052038fb72"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-12",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-12",
+      "seconds": 360.7610045829788,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-12"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "221de371fdba2f4c50959b4f4f7b4c2e45da914538d306feb9692ebb54dabc77"
+    },
+    {
+      "execution_id": "teacher:rsuper-full-targets-13",
+      "machine": "Mac",
+      "title": "Teacher targets \u00b7 rsuper-full-targets-13",
+      "seconds": 91074.8853146669,
+      "category": "teacher_targets",
+      "basis": "Supervised worker elapsed counter; target-generation only",
+      "aliases": [
+        "teacher:rsuper-full-targets-13"
+      ],
+      "period": "Teacher targets",
+      "status": "closed",
+      "evidence_sha256": "88dcbb6442797eba1ef07b5c16c9c434c01de9ea13071b4dd697b7db5adb6b8b"
+    },
+    {
+      "execution_id": "lenovo:pants_reserved_verifier_generator_24k_20261025",
+      "machine": "Lenovo",
+      "title": "Candidate generator with reserved verifier patients",
+      "seconds": 80018.0,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:0acb9a8f7e8a463194dd599a01b78507"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "8ebf529d883d64c4cc4713ca78ff692cfe58085716568fce12bd32d9e55dcaa0",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_varied_focus_24k_20261022",
+      "machine": "Lenovo",
+      "title": "Varied lesion-focused views without losing coverage",
+      "seconds": 126111.21899999992,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:a84c0a6ae0cb424ca182350425adc7aa"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "8ee7a63fbc4cae9ba93a6cbb304a3240bfea36bad9f852078d69a1567405c8c6",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_pancreas_region_24k_20261019",
+      "machine": "Lenovo",
+      "title": "Pancreas-assisted outlining with complete coverage",
+      "seconds": 259622.67200000002,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:1edf56ad4b7b48a5a5baa0e729e46a5c"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "5dc520f5b31fe8b21498db71f6aacc707d7c02075f7dee884f5c54d57b5c6f01",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_full_coverage_physical_24k_20261018",
+      "machine": "Lenovo",
+      "title": "Preserve full lesion coverage and detail",
+      "seconds": 78830.90599999999,
+      "category": "training",
+      "basis": "last_update.elapsed_seconds",
+      "aliases": [
+        "mlflow:ecb6e402f0f84bc8a9df5e11239e5972"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "stopped",
+      "evidence_sha256": "47c36f8f1b901ba3a863f68d5c31e02c925406375afacc3b47498942229b0869",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_only_augmented_views_24k_win_20261017",
+      "machine": "Lenovo",
+      "title": "PanTS with varied training views",
+      "seconds": 75647.87499999999,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:dbf1a562e9eb4d5a96301718a19d07a8"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "95116a33472d27a0d41aef6294ccc7974b0bb587dd5543a406ed70317982a9f5",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_only_ema_72k_20261013",
+      "machine": "Lenovo",
+      "title": "Longer PanTS training + EMA",
+      "seconds": 204494.01499999998,
+      "category": "training",
+      "basis": "completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:38cdd18be83449da87275f5ef8b12898"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "ac1bac3efc83665d355cb839ce2fc09f550dcf31e973e1a090f4895a3a4bac28",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_plus_expert_panorama_dicefocal_24k_20261012",
+      "machine": "Lenovo",
+      "title": "Add expert PANORAMA lesions",
+      "seconds": 67675.813,
+      "category": "training",
+      "basis": "last_update.elapsed_seconds",
+      "aliases": [
+        "mlflow:c038332411df4f38bf52d650810c77c0"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "4abe5ee0104ce9615d564c7913e330510fb016cf64d50c35745877918f9e601c",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_course_reference_dicefocal_24k_20261011",
+      "machine": "Lenovo",
+      "title": "PanTS-only baseline",
+      "seconds": 65335.797000000006,
+      "category": "training",
+      "basis": "last_update.elapsed_seconds",
+      "aliases": [
+        "mlflow:67d11609cc78406b86145f13e24ec61b"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "1781e033fda4c4cfcf59a5e5031e02967ca9b2266399c9123ab511840f64e953",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_candidate_verifier_20261031",
+      "machine": "Lenovo",
+      "title": "Reject false lesion candidates while preserving real lesions",
+      "seconds": 6773.530999999959,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:4475886fbdbf41c8a02d4f814a9733ac"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "d980bee239b80711570cc3753e8f7ed57d80faec4d01b9ce5aff6ae1bccd6bf5",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+    }
+  ],
+  "totals": {
+    "training_seconds": 1332518.2205275025,
+    "legacy_estimated_seconds": 637363.1719999999,
+    "recorded_training_seconds": 1969881.3925275025,
+    "teacher_seconds": 327465.76392404106,
+    "recorded_model_work_seconds": 2297347.156451544,
+    "machines": {
+      "Mac": {
+        "training_seconds": 368008.39252750267,
+        "legacy_estimated_seconds": 637363.1719999999,
+        "teacher_seconds": 327465.76392404106
+      },
+      "Lenovo": {
+        "training_seconds": 964509.8279999999,
+        "legacy_estimated_seconds": 0,
+        "teacher_seconds": 0
+      }
+    }
+  },
+  "sources": [
+    {
+      "name": "Historical Mac MLflow",
+      "as_of_utc": "2026-07-27T15:31:14.737000+00:00",
+      "fingerprint": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8",
+      "records": 51,
+      "excluded_nontraining_runs": 4
+    },
+    {
+      "name": "Mac KD lineage",
+      "as_of_utc": "2026-11-03T21:48:31.248000+00:00",
+      "fingerprint": "67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b",
+      "records": 7
+    },
+    {
+      "name": "Lenovo verified export",
+      "as_of_utc": "2026-11-03T21:44:33.729601+00:00",
+      "fingerprint": "c28c3b75cb3582ebd592b657169db5095cc045d37ac610a19a0efd38a30efae6",
+      "records": 9
+    }
+  ],
+  "issues": [
+    "Historical MLflow durations are timestamp estimates, not measured accelerator-active time. Two old RUNNING labels are not live jobs.",
+    "Teacher attempt01 has no measured resource duration. Its 600-second safety-budget charge is excluded rather than presented as measured time. Teacher pilots/qualification are outside this counter."
+  ],
+  "excluded": [
+    "Standalone evaluation",
+    "CT restoration and data preparation",
+    "Engineering and qualification tests",
+    "Unknown or missing durations",
+    "Human working hours"
+  ]
+}
