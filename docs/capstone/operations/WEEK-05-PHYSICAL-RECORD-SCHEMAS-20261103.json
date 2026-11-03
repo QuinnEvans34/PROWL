@@ -1,0 +1,3644 @@
+{
+  "version": "observed-physical-executor-schema-1",
+  "schemas": {
+    "autonomous-result": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "request_sha256": {
+              "type": "string"
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "source_shape": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "source_affine": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "units": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "type": "object",
+                  "properties": {
+                    "source_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "source_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "forward": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "inverse": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "source_shape",
+                    "source_affine",
+                    "shape",
+                    "forward",
+                    "inverse",
+                    "affine"
+                  ],
+                  "additionalProperties": false
+                },
+                "parent_geometry": {
+                  "type": "object",
+                  "properties": {
+                    "source_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "source_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "forward": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "inverse": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "source_shape",
+                    "source_affine",
+                    "shape",
+                    "forward",
+                    "inverse",
+                    "affine"
+                  ],
+                  "additionalProperties": false
+                },
+                "region_low": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "region_high": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "base_margin_mm": {
+                  "type": "number"
+                },
+                "extra_margin_mm": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "predicted_voxels": {
+                  "type": "number"
+                },
+                "reference_inputs_used": {
+                  "type": "boolean"
+                },
+                "component": {
+                  "type": "string"
+                },
+                "localizer_transform": {
+                  "type": "object",
+                  "properties": {
+                    "schema_version": {
+                      "type": "string"
+                    },
+                    "recipe": {
+                      "type": "object",
+                      "properties": {
+                        "augmentation": {
+                          "type": "string"
+                        },
+                        "cache": {
+                          "type": "string"
+                        },
+                        "component": {
+                          "type": "string"
+                        },
+                        "crop": {
+                          "type": "string"
+                        },
+                        "hu_window": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "image_interpolation": {
+                          "type": "string"
+                        },
+                        "max_output_voxels": {
+                          "type": "number"
+                        },
+                        "max_source_voxels": {
+                          "type": "number"
+                        },
+                        "minimum_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "orientation": {
+                          "type": "string"
+                        },
+                        "padding_mode": {
+                          "type": "string"
+                        },
+                        "schema_version": {
+                          "type": "string"
+                        },
+                        "spacing_mm": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "target_interpolation": {
+                          "type": "string"
+                        },
+                        "workers": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "augmentation",
+                        "cache",
+                        "component",
+                        "crop",
+                        "hu_window",
+                        "image_interpolation",
+                        "max_output_voxels",
+                        "max_source_voxels",
+                        "minimum_shape",
+                        "orientation",
+                        "padding_mode",
+                        "schema_version",
+                        "spacing_mm",
+                        "target_interpolation",
+                        "workers"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "recipe_sha256": {
+                      "type": "string"
+                    },
+                    "projection": {
+                      "type": "object",
+                      "properties": {
+                        "source_voxels": {
+                          "type": "number"
+                        },
+                        "projected_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "conservative_padded_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "conservative_output_voxels": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "source_voxels",
+                        "projected_shape",
+                        "conservative_padded_shape",
+                        "conservative_output_voxels"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "source_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "source_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "processed_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "processed_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "operations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "image_interpolation": {
+                      "type": "string"
+                    },
+                    "target_interpolation": {
+                      "type": "string"
+                    },
+                    "align_corners": {
+                      "type": "boolean"
+                    },
+                    "label_influences_image": {
+                      "type": "boolean"
+                    },
+                    "crop": {
+                      "type": "string"
+                    },
+                    "record_sha256": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "schema_version",
+                    "recipe",
+                    "recipe_sha256",
+                    "projection",
+                    "source_shape",
+                    "source_affine",
+                    "processed_shape",
+                    "processed_affine",
+                    "operations",
+                    "image_interpolation",
+                    "target_interpolation",
+                    "align_corners",
+                    "label_influences_image",
+                    "crop",
+                    "record_sha256"
+                  ],
+                  "additionalProperties": false
+                },
+                "reconstruction": {
+                  "type": "object",
+                  "properties": {
+                    "tiles": {
+                      "type": "number"
+                    },
+                    "gap_voxels": {
+                      "type": "number"
+                    },
+                    "minimum_blend_weight": {
+                      "type": "number"
+                    },
+                    "physical_grid": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string"
+                        },
+                        "native": {
+                          "type": "object",
+                          "properties": {
+                            "source_shape": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "source_affine": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "shape": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "forward": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "inverse": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "affine": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "source_shape",
+                            "source_affine",
+                            "shape",
+                            "forward",
+                            "inverse",
+                            "affine"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "factors": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "native_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "spacing_mm": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "required": [
+                        "version",
+                        "native",
+                        "factors",
+                        "native_shape",
+                        "shape",
+                        "affine",
+                        "spacing_mm"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "output_decision": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "tiles",
+                    "gap_voxels",
+                    "minimum_blend_weight",
+                    "physical_grid",
+                    "output_decision"
+                  ],
+                  "additionalProperties": false
+                },
+                "localizer_policy": {
+                  "type": "string"
+                },
+                "probability_representation": {
+                  "type": "string"
+                },
+                "probability_outside_region": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "geometry",
+                "parent_geometry",
+                "region_low",
+                "region_high",
+                "base_margin_mm",
+                "extra_margin_mm",
+                "predicted_voxels",
+                "reference_inputs_used",
+                "component",
+                "localizer_transform",
+                "reconstruction",
+                "localizer_policy",
+                "probability_representation",
+                "probability_outside_region"
+              ],
+              "additionalProperties": false
+            },
+            "reference_inputs_used": {
+              "type": "boolean"
+            },
+            "seconds": {
+              "type": "number"
+            },
+            "peak_gpu_reserved": {
+              "type": "number"
+            },
+            "artifacts": {
+              "type": "object",
+              "properties": {
+                "progress.jsonl": {
+                  "type": "string"
+                },
+                "prediction.nii.gz": {
+                  "type": "string"
+                },
+                "localizer.nii.gz": {
+                  "type": "string"
+                },
+                "region-probabilities.npy": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "progress.jsonl",
+                "prediction.nii.gz",
+                "localizer.nii.gz",
+                "region-probabilities.npy"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "status",
+            "case_id",
+            "arm",
+            "request_sha256",
+            "optimizer_updates",
+            "source_shape",
+            "source_affine",
+            "units",
+            "evidence",
+            "reference_inputs_used",
+            "seconds",
+            "peak_gpu_reserved",
+            "artifacts"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "autonomous-evidence": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "type": "object",
+              "properties": {
+                "source_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "source_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "forward": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "inverse": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "source_shape",
+                "source_affine",
+                "shape",
+                "forward",
+                "inverse",
+                "affine"
+              ],
+              "additionalProperties": false
+            },
+            "parent_geometry": {
+              "type": "object",
+              "properties": {
+                "source_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "source_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "forward": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "inverse": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "source_shape",
+                "source_affine",
+                "shape",
+                "forward",
+                "inverse",
+                "affine"
+              ],
+              "additionalProperties": false
+            },
+            "region_low": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "region_high": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "base_margin_mm": {
+              "type": "number"
+            },
+            "extra_margin_mm": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "predicted_voxels": {
+              "type": "number"
+            },
+            "reference_inputs_used": {
+              "type": "boolean"
+            },
+            "component": {
+              "type": "string"
+            },
+            "localizer_transform": {
+              "type": "object",
+              "properties": {
+                "schema_version": {
+                  "type": "string"
+                },
+                "recipe": {
+                  "type": "object",
+                  "properties": {
+                    "augmentation": {
+                      "type": "string"
+                    },
+                    "cache": {
+                      "type": "string"
+                    },
+                    "component": {
+                      "type": "string"
+                    },
+                    "crop": {
+                      "type": "string"
+                    },
+                    "hu_window": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "image_interpolation": {
+                      "type": "string"
+                    },
+                    "max_output_voxels": {
+                      "type": "number"
+                    },
+                    "max_source_voxels": {
+                      "type": "number"
+                    },
+                    "minimum_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "orientation": {
+                      "type": "string"
+                    },
+                    "padding_mode": {
+                      "type": "string"
+                    },
+                    "schema_version": {
+                      "type": "string"
+                    },
+                    "spacing_mm": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "target_interpolation": {
+                      "type": "string"
+                    },
+                    "workers": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "augmentation",
+                    "cache",
+                    "component",
+                    "crop",
+                    "hu_window",
+                    "image_interpolation",
+                    "max_output_voxels",
+                    "max_source_voxels",
+                    "minimum_shape",
+                    "orientation",
+                    "padding_mode",
+                    "schema_version",
+                    "spacing_mm",
+                    "target_interpolation",
+                    "workers"
+                  ],
+                  "additionalProperties": false
+                },
+                "recipe_sha256": {
+                  "type": "string"
+                },
+                "projection": {
+                  "type": "object",
+                  "properties": {
+                    "source_voxels": {
+                      "type": "number"
+                    },
+                    "projected_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "conservative_padded_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "conservative_output_voxels": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "source_voxels",
+                    "projected_shape",
+                    "conservative_padded_shape",
+                    "conservative_output_voxels"
+                  ],
+                  "additionalProperties": false
+                },
+                "source_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "source_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "processed_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "processed_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "operations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "image_interpolation": {
+                  "type": "string"
+                },
+                "target_interpolation": {
+                  "type": "string"
+                },
+                "align_corners": {
+                  "type": "boolean"
+                },
+                "label_influences_image": {
+                  "type": "boolean"
+                },
+                "crop": {
+                  "type": "string"
+                },
+                "record_sha256": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "schema_version",
+                "recipe",
+                "recipe_sha256",
+                "projection",
+                "source_shape",
+                "source_affine",
+                "processed_shape",
+                "processed_affine",
+                "operations",
+                "image_interpolation",
+                "target_interpolation",
+                "align_corners",
+                "label_influences_image",
+                "crop",
+                "record_sha256"
+              ],
+              "additionalProperties": false
+            },
+            "reconstruction": {
+              "type": "object",
+              "properties": {
+                "tiles": {
+                  "type": "number"
+                },
+                "gap_voxels": {
+                  "type": "number"
+                },
+                "minimum_blend_weight": {
+                  "type": "number"
+                },
+                "physical_grid": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    },
+                    "native": {
+                      "type": "object",
+                      "properties": {
+                        "source_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "source_affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "forward": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "inverse": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "source_shape",
+                        "source_affine",
+                        "shape",
+                        "forward",
+                        "inverse",
+                        "affine"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "factors": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "native_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "spacing_mm": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "required": [
+                    "version",
+                    "native",
+                    "factors",
+                    "native_shape",
+                    "shape",
+                    "affine",
+                    "spacing_mm"
+                  ],
+                  "additionalProperties": false
+                },
+                "output_decision": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "tiles",
+                "gap_voxels",
+                "minimum_blend_weight",
+                "physical_grid",
+                "output_decision"
+              ],
+              "additionalProperties": false
+            },
+            "localizer_policy": {
+              "type": "string"
+            },
+            "probability_representation": {
+              "type": "string"
+            },
+            "probability_outside_region": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "geometry",
+            "parent_geometry",
+            "region_low",
+            "region_high",
+            "base_margin_mm",
+            "extra_margin_mm",
+            "predicted_voxels",
+            "reference_inputs_used",
+            "component",
+            "localizer_transform",
+            "reconstruction",
+            "localizer_policy",
+            "probability_representation",
+            "probability_outside_region"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "autonomous-score": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "file_sha256": {
+              "type": "object",
+              "properties": {
+                "prediction": {
+                  "type": "string"
+                },
+                "pancreas": {
+                  "type": "string"
+                },
+                "lesion": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "prediction",
+                "pancreas",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "metrics": {
+              "type": "object",
+              "properties": {
+                "pancreas_parenchyma": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "pancreas_lesion_union": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "lesion": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "pancreas_parenchyma",
+                "pancreas_lesion_union",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_reference_state": {
+              "type": "string"
+            },
+            "empty_reference_policy": {
+              "type": "string"
+            },
+            "reference_units": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unknown_reference_units_assumed_mm": {
+              "type": "boolean"
+            },
+            "prediction_modified": {
+              "type": "boolean"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "model_quality_acceptance": {
+              "type": "boolean"
+            },
+            "lesion_components": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "predicted": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "connectivity": {
+                  "type": "number"
+                },
+                "detection_definition": {
+                  "type": "string"
+                },
+                "reference_count": {
+                  "type": "number"
+                },
+                "reference_hit_count": {
+                  "type": "number"
+                },
+                "false_positive_components": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "reference",
+                "predicted",
+                "connectivity",
+                "detection_definition",
+                "reference_count",
+                "reference_hit_count",
+                "false_positive_components"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "pancreas_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "localization": {
+              "type": "object",
+              "properties": {
+                "predicted_mask_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_lesion_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "scan_fraction": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "predicted_mask_pancreas_coverage",
+                "expanded_region_pancreas_coverage",
+                "expanded_region_lesion_coverage",
+                "scan_fraction"
+              ],
+              "additionalProperties": false
+            },
+            "measurements": {
+              "type": "object",
+              "properties": {
+                "voxel_volume_ml": {
+                  "type": "number"
+                },
+                "clinical_diameter": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "voxel_volume_ml",
+                "clinical_diameter"
+              ],
+              "additionalProperties": false
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "model_forwards": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "component",
+            "file_sha256",
+            "metrics",
+            "lesion_reference_state",
+            "empty_reference_policy",
+            "reference_units",
+            "unknown_reference_units_assumed_mm",
+            "prediction_modified",
+            "case_id",
+            "arm",
+            "role",
+            "model_quality_acceptance",
+            "lesion_components",
+            "lesion_contour",
+            "pancreas_contour",
+            "localization",
+            "measurements",
+            "optimizer_updates",
+            "model_forwards"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "file_sha256": {
+              "type": "object",
+              "properties": {
+                "prediction": {
+                  "type": "string"
+                },
+                "pancreas": {
+                  "type": "string"
+                },
+                "lesion": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "prediction",
+                "pancreas",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "metrics": {
+              "type": "object",
+              "properties": {
+                "pancreas_parenchyma": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "pancreas_lesion_union": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "lesion": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "null"
+                    },
+                    "recall": {
+                      "type": "null"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "pancreas_parenchyma",
+                "pancreas_lesion_union",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_reference_state": {
+              "type": "string"
+            },
+            "empty_reference_policy": {
+              "type": "string"
+            },
+            "reference_units": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unknown_reference_units_assumed_mm": {
+              "type": "boolean"
+            },
+            "prediction_modified": {
+              "type": "boolean"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "model_quality_acceptance": {
+              "type": "boolean"
+            },
+            "lesion_components": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "type": "array",
+                  "items": {}
+                },
+                "predicted": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "connectivity": {
+                  "type": "number"
+                },
+                "detection_definition": {
+                  "type": "string"
+                },
+                "reference_count": {
+                  "type": "number"
+                },
+                "reference_hit_count": {
+                  "type": "number"
+                },
+                "false_positive_components": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "reference",
+                "predicted",
+                "connectivity",
+                "detection_definition",
+                "reference_count",
+                "reference_hit_count",
+                "false_positive_components"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "additionalProperties": false
+            },
+            "pancreas_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "localization": {
+              "type": "object",
+              "properties": {
+                "predicted_mask_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_lesion_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "null"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "scan_fraction": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "predicted_mask_pancreas_coverage",
+                "expanded_region_pancreas_coverage",
+                "expanded_region_lesion_coverage",
+                "scan_fraction"
+              ],
+              "additionalProperties": false
+            },
+            "measurements": {
+              "type": "object",
+              "properties": {
+                "voxel_volume_ml": {
+                  "type": "number"
+                },
+                "clinical_diameter": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "voxel_volume_ml",
+                "clinical_diameter"
+              ],
+              "additionalProperties": false
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "model_forwards": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "component",
+            "file_sha256",
+            "metrics",
+            "lesion_reference_state",
+            "empty_reference_policy",
+            "reference_units",
+            "unknown_reference_units_assumed_mm",
+            "prediction_modified",
+            "case_id",
+            "arm",
+            "role",
+            "model_quality_acceptance",
+            "lesion_components",
+            "lesion_contour",
+            "pancreas_contour",
+            "localization",
+            "measurements",
+            "optimizer_updates",
+            "model_forwards"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "provided_region-result": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "request_sha256": {
+              "type": "string"
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "source_shape": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "source_affine": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "units": {
+              "type": "string"
+            },
+            "evidence": {
+              "type": "object",
+              "properties": {
+                "geometry": {
+                  "type": "object",
+                  "properties": {
+                    "source_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "source_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "forward": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "inverse": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "source_shape",
+                    "source_affine",
+                    "shape",
+                    "forward",
+                    "inverse",
+                    "affine"
+                  ],
+                  "additionalProperties": false
+                },
+                "parent_geometry": {
+                  "type": "object",
+                  "properties": {
+                    "source_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "source_affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "forward": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "inverse": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "source_shape",
+                    "source_affine",
+                    "shape",
+                    "forward",
+                    "inverse",
+                    "affine"
+                  ],
+                  "additionalProperties": false
+                },
+                "region_low": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "region_high": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "base_margin_mm": {
+                  "type": "number"
+                },
+                "extra_margin_mm": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "predicted_voxels": {
+                  "type": "number"
+                },
+                "reference_inputs_used": {
+                  "type": "boolean"
+                },
+                "component": {
+                  "type": "string"
+                },
+                "region_origin": {
+                  "type": "string"
+                },
+                "reconstruction": {
+                  "type": "object",
+                  "properties": {
+                    "tiles": {
+                      "type": "number"
+                    },
+                    "gap_voxels": {
+                      "type": "number"
+                    },
+                    "minimum_blend_weight": {
+                      "type": "number"
+                    },
+                    "physical_grid": {
+                      "type": "object",
+                      "properties": {
+                        "version": {
+                          "type": "string"
+                        },
+                        "native": {
+                          "type": "object",
+                          "properties": {
+                            "source_shape": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "source_affine": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "shape": {
+                              "type": "array",
+                              "items": {
+                                "type": "number"
+                              }
+                            },
+                            "forward": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "inverse": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            },
+                            "affine": {
+                              "type": "array",
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          },
+                          "required": [
+                            "source_shape",
+                            "source_affine",
+                            "shape",
+                            "forward",
+                            "inverse",
+                            "affine"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "factors": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "native_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "spacing_mm": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "required": [
+                        "version",
+                        "native",
+                        "factors",
+                        "native_shape",
+                        "shape",
+                        "affine",
+                        "spacing_mm"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "output_decision": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "tiles",
+                    "gap_voxels",
+                    "minimum_blend_weight",
+                    "physical_grid",
+                    "output_decision"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "geometry",
+                "parent_geometry",
+                "region_low",
+                "region_high",
+                "base_margin_mm",
+                "extra_margin_mm",
+                "predicted_voxels",
+                "reference_inputs_used",
+                "component",
+                "region_origin",
+                "reconstruction"
+              ],
+              "additionalProperties": false
+            },
+            "reference_inputs_used": {
+              "type": "boolean"
+            },
+            "seconds": {
+              "type": "number"
+            },
+            "peak_gpu_reserved": {
+              "type": "number"
+            },
+            "artifacts": {
+              "type": "object",
+              "properties": {
+                "progress.jsonl": {
+                  "type": "string"
+                },
+                "prediction.nii.gz": {
+                  "type": "string"
+                },
+                "localizer.nii.gz": {
+                  "type": "string"
+                },
+                "region-probabilities.npy": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "progress.jsonl",
+                "prediction.nii.gz",
+                "localizer.nii.gz",
+                "region-probabilities.npy"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "status",
+            "case_id",
+            "arm",
+            "request_sha256",
+            "optimizer_updates",
+            "source_shape",
+            "source_affine",
+            "units",
+            "evidence",
+            "reference_inputs_used",
+            "seconds",
+            "peak_gpu_reserved",
+            "artifacts"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "provided_region-evidence": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "geometry": {
+              "type": "object",
+              "properties": {
+                "source_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "source_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "forward": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "inverse": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "source_shape",
+                "source_affine",
+                "shape",
+                "forward",
+                "inverse",
+                "affine"
+              ],
+              "additionalProperties": false
+            },
+            "parent_geometry": {
+              "type": "object",
+              "properties": {
+                "source_shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "source_affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "shape": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "forward": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "inverse": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "affine": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                }
+              },
+              "required": [
+                "source_shape",
+                "source_affine",
+                "shape",
+                "forward",
+                "inverse",
+                "affine"
+              ],
+              "additionalProperties": false
+            },
+            "region_low": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "region_high": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "base_margin_mm": {
+              "type": "number"
+            },
+            "extra_margin_mm": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "predicted_voxels": {
+              "type": "number"
+            },
+            "reference_inputs_used": {
+              "type": "boolean"
+            },
+            "component": {
+              "type": "string"
+            },
+            "region_origin": {
+              "type": "string"
+            },
+            "reconstruction": {
+              "type": "object",
+              "properties": {
+                "tiles": {
+                  "type": "number"
+                },
+                "gap_voxels": {
+                  "type": "number"
+                },
+                "minimum_blend_weight": {
+                  "type": "number"
+                },
+                "physical_grid": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    },
+                    "native": {
+                      "type": "object",
+                      "properties": {
+                        "source_shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "source_affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "shape": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "forward": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "inverse": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "affine": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "source_shape",
+                        "source_affine",
+                        "shape",
+                        "forward",
+                        "inverse",
+                        "affine"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "factors": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "native_shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "shape": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "affine": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "spacing_mm": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "required": [
+                    "version",
+                    "native",
+                    "factors",
+                    "native_shape",
+                    "shape",
+                    "affine",
+                    "spacing_mm"
+                  ],
+                  "additionalProperties": false
+                },
+                "output_decision": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "tiles",
+                "gap_voxels",
+                "minimum_blend_weight",
+                "physical_grid",
+                "output_decision"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "geometry",
+            "parent_geometry",
+            "region_low",
+            "region_high",
+            "base_margin_mm",
+            "extra_margin_mm",
+            "predicted_voxels",
+            "reference_inputs_used",
+            "component",
+            "region_origin",
+            "reconstruction"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "provided_region-score": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "file_sha256": {
+              "type": "object",
+              "properties": {
+                "prediction": {
+                  "type": "string"
+                },
+                "pancreas": {
+                  "type": "string"
+                },
+                "lesion": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "prediction",
+                "pancreas",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "metrics": {
+              "type": "object",
+              "properties": {
+                "pancreas_parenchyma": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "pancreas_lesion_union": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "lesion": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "pancreas_parenchyma",
+                "pancreas_lesion_union",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_reference_state": {
+              "type": "string"
+            },
+            "empty_reference_policy": {
+              "type": "string"
+            },
+            "reference_units": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unknown_reference_units_assumed_mm": {
+              "type": "boolean"
+            },
+            "prediction_modified": {
+              "type": "boolean"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "model_quality_acceptance": {
+              "type": "boolean"
+            },
+            "lesion_components": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "predicted": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "connectivity": {
+                  "type": "number"
+                },
+                "detection_definition": {
+                  "type": "string"
+                },
+                "reference_count": {
+                  "type": "number"
+                },
+                "reference_hit_count": {
+                  "type": "number"
+                },
+                "false_positive_components": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "reference",
+                "predicted",
+                "connectivity",
+                "detection_definition",
+                "reference_count",
+                "reference_hit_count",
+                "false_positive_components"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "pancreas_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "localization": {
+              "type": "object",
+              "properties": {
+                "predicted_mask_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_lesion_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "scan_fraction": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "predicted_mask_pancreas_coverage",
+                "expanded_region_pancreas_coverage",
+                "expanded_region_lesion_coverage",
+                "scan_fraction"
+              ],
+              "additionalProperties": false
+            },
+            "measurements": {
+              "type": "object",
+              "properties": {
+                "voxel_volume_ml": {
+                  "type": "number"
+                },
+                "clinical_diameter": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "voxel_volume_ml",
+                "clinical_diameter"
+              ],
+              "additionalProperties": false
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "model_forwards": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "component",
+            "file_sha256",
+            "metrics",
+            "lesion_reference_state",
+            "empty_reference_policy",
+            "reference_units",
+            "unknown_reference_units_assumed_mm",
+            "prediction_modified",
+            "case_id",
+            "arm",
+            "role",
+            "model_quality_acceptance",
+            "lesion_components",
+            "lesion_contour",
+            "pancreas_contour",
+            "localization",
+            "measurements",
+            "optimizer_updates",
+            "model_forwards"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "component": {
+              "type": "string"
+            },
+            "file_sha256": {
+              "type": "object",
+              "properties": {
+                "prediction": {
+                  "type": "string"
+                },
+                "pancreas": {
+                  "type": "string"
+                },
+                "lesion": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "prediction",
+                "pancreas",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "metrics": {
+              "type": "object",
+              "properties": {
+                "pancreas_parenchyma": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "pancreas_lesion_union": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "number"
+                    },
+                    "recall": {
+                      "type": "number"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                },
+                "lesion": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "predicted_voxels": {
+                      "type": "number"
+                    },
+                    "true_positive": {
+                      "type": "number"
+                    },
+                    "dice": {
+                      "type": "null"
+                    },
+                    "recall": {
+                      "type": "null"
+                    },
+                    "false_positive_ml": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "predicted_voxels",
+                    "true_positive",
+                    "dice",
+                    "recall",
+                    "false_positive_ml"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "pancreas_parenchyma",
+                "pancreas_lesion_union",
+                "lesion"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_reference_state": {
+              "type": "string"
+            },
+            "empty_reference_policy": {
+              "type": "string"
+            },
+            "reference_units": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "unknown_reference_units_assumed_mm": {
+              "type": "boolean"
+            },
+            "prediction_modified": {
+              "type": "boolean"
+            },
+            "case_id": {
+              "type": "string"
+            },
+            "arm": {
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            },
+            "model_quality_acceptance": {
+              "type": "boolean"
+            },
+            "lesion_components": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "type": "array",
+                  "items": {}
+                },
+                "predicted": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "component_id": {
+                        "type": "number"
+                      },
+                      "voxels": {
+                        "type": "number"
+                      },
+                      "volume_ml": {
+                        "type": "number"
+                      },
+                      "overlap_voxels": {
+                        "type": "number"
+                      },
+                      "any_overlap": {
+                        "type": "boolean"
+                      },
+                      "overlap_fraction": {
+                        "type": "number"
+                      },
+                      "bounds_xyz_half_open": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      },
+                      "acquired_boundary_contact": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "component_id",
+                      "voxels",
+                      "volume_ml",
+                      "overlap_voxels",
+                      "any_overlap",
+                      "overlap_fraction",
+                      "bounds_xyz_half_open",
+                      "acquired_boundary_contact"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "connectivity": {
+                  "type": "number"
+                },
+                "detection_definition": {
+                  "type": "string"
+                },
+                "reference_count": {
+                  "type": "number"
+                },
+                "reference_hit_count": {
+                  "type": "number"
+                },
+                "false_positive_components": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "reference",
+                "predicted",
+                "connectivity",
+                "detection_definition",
+                "reference_count",
+                "reference_hit_count",
+                "false_positive_components"
+              ],
+              "additionalProperties": false
+            },
+            "lesion_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "additionalProperties": false
+            },
+            "pancreas_contour": {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string"
+                },
+                "definition": {
+                  "type": "string"
+                },
+                "hausdorff95_mm": {
+                  "type": "number"
+                },
+                "mean_symmetric_surface_distance_mm": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "state",
+                "definition",
+                "hausdorff95_mm",
+                "mean_symmetric_surface_distance_mm"
+              ],
+              "additionalProperties": false
+            },
+            "localization": {
+              "type": "object",
+              "properties": {
+                "predicted_mask_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_pancreas_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "expanded_region_lesion_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "reference_voxels": {
+                      "type": "number"
+                    },
+                    "inside_voxels": {
+                      "type": "number"
+                    },
+                    "outside_voxels": {
+                      "type": "number"
+                    },
+                    "fraction": {
+                      "type": "null"
+                    }
+                  },
+                  "required": [
+                    "reference_voxels",
+                    "inside_voxels",
+                    "outside_voxels",
+                    "fraction"
+                  ],
+                  "additionalProperties": false
+                },
+                "scan_fraction": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "predicted_mask_pancreas_coverage",
+                "expanded_region_pancreas_coverage",
+                "expanded_region_lesion_coverage",
+                "scan_fraction"
+              ],
+              "additionalProperties": false
+            },
+            "measurements": {
+              "type": "object",
+              "properties": {
+                "voxel_volume_ml": {
+                  "type": "number"
+                },
+                "clinical_diameter": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "voxel_volume_ml",
+                "clinical_diameter"
+              ],
+              "additionalProperties": false
+            },
+            "optimizer_updates": {
+              "type": "number"
+            },
+            "model_forwards": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "component",
+            "file_sha256",
+            "metrics",
+            "lesion_reference_state",
+            "empty_reference_policy",
+            "reference_units",
+            "unknown_reference_units_assumed_mm",
+            "prediction_modified",
+            "case_id",
+            "arm",
+            "role",
+            "model_quality_acceptance",
+            "lesion_components",
+            "lesion_contour",
+            "pancreas_contour",
+            "localization",
+            "measurements",
+            "optimizer_updates",
+            "model_forwards"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "note": "Exact observed keys/types, not a new producer schema; nullable and empty component variants retained"
+}
