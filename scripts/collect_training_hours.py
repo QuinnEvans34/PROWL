@@ -30,7 +30,7 @@ def journal(path):
     values=[v['elapsed_seconds'] for v in timed]
     if any(not math.isfinite(v) or v<0 for v in values) or any(b<a for a,b in zip(values,values[1:])):
         raise ValueError('Counter reset requires separate attempt records')
-    return max(values),hashlib.sha256(raw).hexdigest(),rows
+    return max(values),hashlib.sha256(raw).hexdigest(),rows,len(raw)
 
 
 def entry(identity,machine,title,seconds,category,basis,**extra):
@@ -86,7 +86,8 @@ def collect(config):
         else:excluded+=1;continue
         if not artifact.startswith('/Users/quintonevans/'):
             raise ValueError('Historical machine attribution needs review')
-        e=entry('mlflow:'+rid,'Mac',title,max(0,(stop-start)/1000),'legacy_estimate',basis,
+        if stop<start:raise ValueError('Historical timestamps are reversed')
+        e=entry('mlflow:'+rid,'Mac',title,(stop-start)/1000,'legacy_estimate',basis,
             aliases=['mlflow:'+rid],status='historical',period='Early MLflow',
             source_status=status,last_step=points[-1][1] if points else None,
             as_of_utc=datetime.fromtimestamp(stop/1000,timezone.utc).isoformat(),
@@ -98,29 +99,29 @@ def collect(config):
     for e in legacy:e['evidence_sha256']=legacy_sha
     entries+=legacy
     sources.append(dict(name='Historical Mac MLflow',as_of_utc=max(e['as_of_utc'] for e in legacy),
-        fingerprint=legacy_sha,records=len(legacy),excluded_nontraining_runs=excluded))
+        fingerprint=legacy_sha,records=len(legacy),excluded_without_training_duration=excluded))
     issues.append('Historical MLflow durations are timestamp estimates, not measured accelerator-active time. Two old RUNNING labels are not live jobs.')
     for path in config['older_mac_journals']:
-        seconds,pin,rows=journal(path)
+        seconds,pin,rows,byte_count=journal(path)
         key=Path(path).parents[1].name
         entries.append(entry('mac-journal:'+key,'Mac',key,seconds,'training','Last recorded monotonic journal counter; unrecorded tail excluded',
-            aliases=['mac-journal:'+key],period='Full-cohort Mac',status='historical',evidence_sha256=pin))
+            aliases=['mac-journal:'+key],period='Full-cohort Mac',status='historical',evidence_sha256=pin,evidence_prefix_bytes=byte_count))
     current=Path(config['current_kd_root']);ready,ready_sha=read_json(current/'ready.json')
     for arm,segments in ready['segments'].items():
         for segment in segments:
-            root=Path(segment['root']);seconds,pin,rows=journal(root/arm/'execution/history.jsonl')
+            root=Path(segment['root']);seconds,pin,rows,byte_count=journal(root/arm/'execution/history.jsonl')
             entries.append(entry('mlflow:'+segment['run_id'],'Mac','KD '+arm+' · '+root.name,seconds,'training',
                 'Last recorded monotonic journal counter for this attempt; pause gaps excluded',aliases=['mlflow:'+segment['run_id']],
-                period='KD comparison',arm=arm,status='closed',evidence_sha256=pin))
+                period='KD comparison',arm=arm,status='closed',evidence_sha256=pin,evidence_prefix_bytes=byte_count))
     dispatch,_=read_json(current/'treatment/dispatch.json')
-    seconds,pin,rows=journal(current/'treatment/execution/history.jsonl')
+    seconds,pin,rows,byte_count=journal(current/'treatment/execution/history.jsonl')
     updates=[r for r in rows if r.get('event')=='update']
     terminal=any(r.get('event') in ('completed','paused') for r in rows)
     as_of=next((r['utc_ms'] for r in reversed(rows) if 'utc_ms' in r),None)
     entries.append(entry('mlflow:'+dispatch['run_id'],'Mac','KD treatment · current attempt',seconds,'training',
         'Last recorded monotonic journal counter; no wall-clock extrapolation',aliases=['mlflow:'+dispatch['run_id']],
         period='KD comparison',arm='treatment',status='closed' if terminal else 'last_recorded',last_step=updates[-1]['step'] if updates else None,
-        as_of_utc=datetime.fromtimestamp(as_of/1000,timezone.utc).isoformat() if as_of else None,evidence_sha256=pin))
+        as_of_utc=datetime.fromtimestamp(as_of/1000,timezone.utc).isoformat() if as_of else None,evidence_sha256=pin,evidence_prefix_bytes=byte_count))
     sources.append(dict(name='Mac KD lineage',as_of_utc=entries[-1]['as_of_utc'],fingerprint=ready_sha,
         records=sum(len(v) for v in ready['segments'].values())+1))
     for path in config['teacher_resources']:

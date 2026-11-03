@@ -30,7 +30,7 @@ def test_estimates_and_teacher_are_separate_from_elapsed_counters():
 
 def test_live_journal_excludes_partial_tail_and_rejects_hidden_reset(tmp_path):
     p=tmp_path/'history.jsonl';p.write_bytes(b'{"elapsed_seconds":2}\n{"elapsed_seconds":5}\n{"elap')
-    seconds,_,rows=journal(p);assert seconds==5 and len(rows)==2
+    seconds,_,rows,size=journal(p);assert seconds==5 and len(rows)==2 and size==44
     p.write_text('{"elapsed_seconds":5}\n{"elapsed_seconds":2}\n')
     with pytest.raises(ValueError,match='reset'):journal(p)
 
@@ -51,5 +51,5 @@ def test_stale_running_mlflow_stops_at_last_metric_and_registration_is_excluded(
     d=collect(dict(legacy_db=str(p),older_mac_journals=[],current_kd_root=str(root),teacher_resources=[],lenovo_snapshot=str(w)))
     assert d['totals']['legacy_estimated_seconds']==2
     assert d['totals']['training_seconds']==4
-    assert d['sources'][0]['excluded_nontraining_runs']==1
+    assert d['sources'][0]['excluded_without_training_duration']==1
     assert not any('registration' in e['execution_id'] for e in d['entries'])

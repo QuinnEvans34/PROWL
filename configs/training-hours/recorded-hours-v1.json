@@ -1,6 +1,6 @@
 {
   "schema": "prowl-combined-training-hours-v1",
-  "generated_at": "2026-11-03T21:48:37.017112+00:00",
+  "generated_at": "2026-11-03T21:55:52.240978+00:00",
   "policy": "Recorded training-session time includes in-run validation, checkpoint and I/O work. It is not GPU-busy time or personal working hours.",
   "complete_project_history": false,
   "entries": [
@@ -934,7 +934,8 @@
       ],
       "period": "Full-cohort Mac",
       "status": "historical",
-      "evidence_sha256": "aab76c47b38445d91dd84c7ce6a3c03295080c956367dd72dd286227a6bec82d"
+      "evidence_sha256": "aab76c47b38445d91dd84c7ce6a3c03295080c956367dd72dd286227a6bec82d",
+      "evidence_prefix_bytes": 5228258
     },
     {
       "execution_id": "mac-journal:full_segmenter_suprem_mac_01_resume01",
@@ -948,7 +949,8 @@
       ],
       "period": "Full-cohort Mac",
       "status": "historical",
-      "evidence_sha256": "72f0eb5f2dd75e1e2be26c45282dec3c1e5306190e61dd47017f93f22ff32b4f"
+      "evidence_sha256": "72f0eb5f2dd75e1e2be26c45282dec3c1e5306190e61dd47017f93f22ff32b4f",
+      "evidence_prefix_bytes": 3113404
     },
     {
       "execution_id": "mac-journal:full_segmenter_suprem_mac_01_resume02",
@@ -962,7 +964,8 @@
       ],
       "period": "Full-cohort Mac",
       "status": "historical",
-      "evidence_sha256": "bb9033e002f8b1724529479210232a7b47eca06d58a3fcd75e9c0fc5545a4560"
+      "evidence_sha256": "bb9033e002f8b1724529479210232a7b47eca06d58a3fcd75e9c0fc5545a4560",
+      "evidence_prefix_bytes": 1432831
     },
     {
       "execution_id": "mlflow:30016b3403bd422e8b1f00309aff290f",
@@ -977,7 +980,8 @@
       "period": "KD comparison",
       "arm": "control",
       "status": "closed",
-      "evidence_sha256": "a9fdd3690b63da3d63c59ae086d10949507e2cac0727b7bb2007a1fa88b1ce65"
+      "evidence_sha256": "a9fdd3690b63da3d63c59ae086d10949507e2cac0727b7bb2007a1fa88b1ce65",
+      "evidence_prefix_bytes": 12206202
     },
     {
       "execution_id": "mlflow:7d9b079674454cfcb44ef367704a53f7",
@@ -992,7 +996,8 @@
       "period": "KD comparison",
       "arm": "control",
       "status": "closed",
-      "evidence_sha256": "820840d3cc9937c37c207a9523ee1480c4a1610eef1910c17fc8c48e95a03717"
+      "evidence_sha256": "820840d3cc9937c37c207a9523ee1480c4a1610eef1910c17fc8c48e95a03717",
+      "evidence_prefix_bytes": 17607821
     },
     {
       "execution_id": "mlflow:23c6d3a74aba4d18bfde4e4b9b91a33d",
@@ -1007,7 +1012,8 @@
       "period": "KD comparison",
       "arm": "treatment",
       "status": "closed",
-      "evidence_sha256": "5b25503a5d2a424cf9d7faa3ddf183b5ed9c4e905206c1c0194c0b11fc610ccd"
+      "evidence_sha256": "5b25503a5d2a424cf9d7faa3ddf183b5ed9c4e905206c1c0194c0b11fc610ccd",
+      "evidence_prefix_bytes": 929675
     },
     {
       "execution_id": "mlflow:ffa0eafcfdc74f73a3b691fcd3db58d3",
@@ -1022,7 +1028,8 @@
       "period": "KD comparison",
       "arm": "treatment",
       "status": "closed",
-      "evidence_sha256": "2235b45ddda58bf51a7733224742c95fb0a0cf52fc6c67d63492a1a1cdc9f340"
+      "evidence_sha256": "2235b45ddda58bf51a7733224742c95fb0a0cf52fc6c67d63492a1a1cdc9f340",
+      "evidence_prefix_bytes": 791410
     },
     {
       "execution_id": "mlflow:ee3b6badb72640c19a20a92217d11d94",
@@ -1037,7 +1044,8 @@
       "period": "KD comparison",
       "arm": "treatment",
       "status": "closed",
-      "evidence_sha256": "93e86446f11097e8b1e03f8245bf38def89f2e8a5179503e27734cab2666f89e"
+      "evidence_sha256": "93e86446f11097e8b1e03f8245bf38def89f2e8a5179503e27734cab2666f89e",
+      "evidence_prefix_bytes": 1504052
     },
     {
       "execution_id": "mlflow:460be483579f4301834f1f0009eb717f",
@@ -1052,13 +1060,14 @@
       "period": "KD comparison",
       "arm": "treatment",
       "status": "closed",
-      "evidence_sha256": "6827b3d951b377b749ef8c9910d38336536d105bc806254959203b1c4aee6506"
+      "evidence_sha256": "6827b3d951b377b749ef8c9910d38336536d105bc806254959203b1c4aee6506",
+      "evidence_prefix_bytes": 11267209
     },
     {
       "execution_id": "mlflow:436bb317362b44d8861edfa5c5dd5b8a",
       "machine": "Mac",
       "title": "KD treatment \u00b7 current attempt",
-      "seconds": 8891.616159083787,
+      "seconds": 9310.970125208842,
       "category": "training",
       "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
       "aliases": [
@@ -1068,8 +1077,9 @@
       "arm": "treatment",
       "status": "last_recorded",
       "last_step": 8000,
-      "as_of_utc": "2026-11-03T21:48:31.248000+00:00",
-      "evidence_sha256": "82f9e8e05bc5bbf00ee1bb861dfc922bf43fa626313b5f33baa6011254995950"
+      "as_of_utc": "2026-11-03T21:55:30.607000+00:00",
+      "evidence_sha256": "5608ac0683b35202ec9c7ca3fb49e79e87af409788b3f344bafadefa2c8ef95c",
+      "evidence_prefix_bytes": 1935060
     },
     {
       "execution_id": "teacher:rsuper-full-targets-02",
@@ -1376,14 +1386,14 @@
     }
   ],
   "totals": {
-    "training_seconds": 1332518.2205275025,
+    "training_seconds": 1332937.5744936275,
     "legacy_estimated_seconds": 637363.1719999999,
-    "recorded_training_seconds": 1969881.3925275025,
+    "recorded_training_seconds": 1970300.7464936273,
     "teacher_seconds": 327465.76392404106,
-    "recorded_model_work_seconds": 2297347.156451544,
+    "recorded_model_work_seconds": 2297766.510417668,
     "machines": {
       "Mac": {
-        "training_seconds": 368008.39252750267,
+        "training_seconds": 368427.7464936277,
         "legacy_estimated_seconds": 637363.1719999999,
         "teacher_seconds": 327465.76392404106
       },
@@ -1400,11 +1410,11 @@
       "as_of_utc": "2026-07-27T15:31:14.737000+00:00",
       "fingerprint": "09452c4ca9de41e620b490e032b05c0f6331661ce615f2aeea9aedd888f4c8d8",
       "records": 51,
-      "excluded_nontraining_runs": 4
+      "excluded_without_training_duration": 4
     },
     {
       "name": "Mac KD lineage",
-      "as_of_utc": "2026-11-03T21:48:31.248000+00:00",
+      "as_of_utc": "2026-11-03T21:55:30.607000+00:00",
       "fingerprint": "67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b",
       "records": 7
     },

@@ -11,6 +11,7 @@ import { hasHumanContent } from './lib/summaryDraft.js'
 import ImportStudyDialog from './components/ImportStudyDialog.jsx'
 
 const ValidationComparison = lazy(() => import('./components/ValidationComparison.jsx'))
+const TrainingPage = lazy(() => import('./pages/TrainingPage.jsx'))
 const ResearchPage = lazy(() => import('./pages/ResearchPage.jsx'))
 const OnDemandPredictionView = lazy(() => import('./components/OnDemandPredictionView.jsx'))
 const SavedPredictionView = lazy(() => import('./components/SavedPredictionView.jsx'))
@@ -476,6 +477,7 @@ export default function App() {
           />
         </ViewerSuspense>
       )}
+      {route.view === 'training' && <ViewerSuspense label="Loading training time…"><TrainingPage /></ViewerSuspense>}
       {route.view === 'predict' && <ViewerSuspense label="Loading prediction workspace…"><OnDemandPredictionView onServiceStatus={setPredictionEndpointStatus} onReviewDirty={setNativeReviewDirty} /></ViewerSuspense>}
       {route.view === 'saved' && (
         <ViewerSuspense label="Loading saved viewer…">

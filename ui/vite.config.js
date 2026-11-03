@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { trainingHoursPlugin } from './trainingHoursPlugin.js'
 import react from '@vitejs/plugin-react'
 import { localExpertPlugin } from './localExpertPlugin.js'
 import { fileURLToPath } from 'node:url'
@@ -18,10 +19,10 @@ const evidenceContracts = [
 
 // Static-first viewer, with an optional local fixture writer during development.
 export default defineConfig({
-  plugins: [localExpertPlugin(), savedPredictionPlugin(), react()],
+  plugins: [localExpertPlugin(), savedPredictionPlugin(), trainingHoursPlugin(), react()],
   server: {
     host: '127.0.0.1', port: 5180, strictPort: true, open: true,
-    fs: { allow: [fileURLToPath(new URL('.', import.meta.url)), ...evidenceContracts] },
+    fs: { allow: [fileURLToPath(new URL('.', import.meta.url)), ...evidenceContracts, fileURLToPath(new URL('../configs/training-hours/recorded-hours-v1.json', import.meta.url))] },
     proxy: { '/review-records': 'http://127.0.0.1:8018', '/scan-inference': 'http://127.0.0.1:8017', '/literature-search': 'http://127.0.0.1:8016', '/research-workflow': 'http://127.0.0.1:8015', '/research-answers': 'http://127.0.0.1:8014', '/research-evidence': 'http://127.0.0.1:8013', '/evidence-fixture': 'http://127.0.0.1:8011' },
   },
   build: {

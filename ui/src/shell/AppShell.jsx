@@ -8,6 +8,7 @@ const NAV = [
   ['predict', 'Analyze'],
   ['saved', 'Saved reviews', 'Saved'],
   ['research', 'Research'],
+  ['training', 'Training'],
 ]
 
 // Analyze talks to the on-demand model worker; the Workbench talks to live analysis of
@@ -18,6 +19,7 @@ const STATUS_LABELS = {
 }
 
 function ServiceStatus({ status, view }) {
+  if (view === 'training') return <span className="pw-hint">Recorded experiment time</span>
   if (status === null) return <span className="pw-hint">Local research workspace</span>
   const labels = STATUS_LABELS[view] || STATUS_LABELS.workbench
   const label = labels[status] || labels.checking
