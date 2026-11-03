@@ -37,3 +37,19 @@ region result cannot be admitted as autonomous. Existing measurement bounds stay
 32Mvoxels/64MiB compressed members/128MiB decoded. Case4681 exceeds that limit;
 case2028 is the initial native package. Larger cases use separately retained review
 images until a bounded viewer path is qualified; no silent cropping/downsampling.
+
+## Actual saved-package handoff exercised
+
+The transferred2028 package has now passed the CPU browser loader/native volume
+calculation, independent NIfTI voxel-count comparison and isolated HTTP persistence
+roundtrip. The application retains the original package with no review decision.
+The six static overlay sheets have been inspected separately; no live GPU viewer
+or model answer was run. See WEEK-05-PARALLEL-WORK-20261103.md for precise scope.
+
+Ran the existing registered saved-package CLI against manifest
+b671bd4453db6c91d842d948c95eeac351df76902480d54b5389a2a174efd2f5:
+run bfddd3b1-8d1e-471f-9f96-e593d3c297a2 completed integrity+handoff; explicit resume
+2a2f3eb6-f27e-400f-bc97-4a265fef5660 reused both stages. Actual records retained in
+outputs/prowl/week05-native-handoff-20261103-01. This closes the actual-byte
+saved-package handoff/reuse check for this case. It does not prove autonomous
+inference recovery, multi-case production execution, measurement accuracy or fullG3.

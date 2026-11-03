@@ -89,3 +89,10 @@ KD remained advancing through7639 with teacher access, stored MLflow metrics and
 matching initial backup. All12 live repository source pins checked unchanged.
 Stakeholder fallback selected: Quinton's aunt, industry-experienced, tentatively
 SaturdayNovember7; exact time/role and actual feedback pending in Plan11.
+
+The existing registered saved-package workflow was also run on the actual manifest:
+first run bfddd3b1-8d1e-471f-9f96-e593d3c297a2 completed integrity and handoff;
+explicit resume2a2f3eb6-f27e-400f-bc97-4a265fef5660 reused both. This is an actual
+retained-package check with no inference or manual-review acceptance implied.
+Both private senders completed their transfers. All six gallery sheets inspected
+on the Mac; observations are in WEEK-05-REVIEW-FOLLOWUP-20261103.md.
