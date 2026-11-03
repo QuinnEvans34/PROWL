@@ -1,0 +1,441 @@
+{
+  "schema": "prowl-training-time-reconciliation-v1",
+  "as_of_utc": "2026-11-03T21:44:33.729601+00:00",
+  "machine": {
+    "hostname": "QUINNS-LAPTOP",
+    "manufacturer": "LENOVO",
+    "model": "21FWS0DU00",
+    "identity_source": "Win32_ComputerSystem read-only query"
+  },
+  "total_dashboard_session_seconds": 964509.8279999999,
+  "total_dashboard_session_hours": 267.9193966666666,
+  "first_six_seconds": 751607.078,
+  "first_six_hours": 208.77974388888887,
+  "runs": [
+    {
+      "run_key": "pants_reserved_verifier_generator_24k_20261025",
+      "title": "Candidate generator with reserved verifier patients",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 80018.0,
+      "source_counter": "training_completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 79999.60899999994,
+      "completed_elapsed_seconds": 80018.01599999995,
+      "training_completed_elapsed_seconds": 80018.0,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_reserved_verifier_generator_24k_20261025\\execution\\history.jsonl",
+        "sha256": "8ebf529d883d64c4cc4713ca78ff692cfe58085716568fce12bd32d9e55dcaa0"
+      },
+      "mlflow_run_id": "0acb9a8f7e8a463194dd599a01b78507",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        79999.60899999994,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": false,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": false
+    },
+    {
+      "run_key": "pants_varied_focus_24k_20261022",
+      "title": "Varied lesion-focused views without losing coverage",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 126111.21899999992,
+      "source_counter": "training_completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 122129.15599999996,
+      "completed_elapsed_seconds": 126111.21899999992,
+      "training_completed_elapsed_seconds": 126111.21899999992,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_varied_focus_24k_20261022\\execution\\history.jsonl",
+        "sha256": "8ee7a63fbc4cae9ba93a6cbb304a3240bfea36bad9f852078d69a1567405c8c6"
+      },
+      "mlflow_run_id": "a84c0a6ae0cb424ca182350425adc7aa",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        122129.15599999996,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": 48588.888000000035,
+      "timed_native_validation_pairs": 12,
+      "native_validation_included": true,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": false
+    },
+    {
+      "run_key": "pants_pancreas_region_24k_20261019",
+      "title": "Pancreas-assisted outlining with complete coverage",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 259622.67200000002,
+      "source_counter": "training_completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 255790.218,
+      "completed_elapsed_seconds": 259622.67200000002,
+      "training_completed_elapsed_seconds": 259622.67200000002,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_pancreas_region_24k_20261019\\execution\\history.jsonl",
+        "sha256": "5dc520f5b31fe8b21498db71f6aacc707d7c02075f7dee884f5c54d57b5c6f01"
+      },
+      "mlflow_run_id": "1edf56ad4b7b48a5a5baa0e729e46a5c",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        255790.218,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": 45743.87599999999,
+      "timed_native_validation_pairs": 12,
+      "native_validation_included": true,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": false
+    },
+    {
+      "run_key": "pants_full_coverage_physical_24k_20261018",
+      "title": "Preserve full lesion coverage and detail",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "stopped",
+      "optimizer_updates": 6270,
+      "dashboard_seconds": 78830.90599999999,
+      "source_counter": "last_update.elapsed_seconds",
+      "last_update_elapsed_seconds": 78830.90599999999,
+      "completed_elapsed_seconds": null,
+      "training_completed_elapsed_seconds": null,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_full_coverage_physical_24k_20261018\\execution\\history.jsonl",
+        "sha256": "47c36f8f1b901ba3a863f68d5c31e02c925406375afacc3b47498942229b0869"
+      },
+      "mlflow_run_id": "ecb6e402f0f84bc8a9df5e11239e5972",
+      "mlflow_status": "KILLED",
+      "mlflow_latest_train_elapsed": [
+        78665.35899999997,
+        6250
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": 29698.891000000003,
+      "timed_native_validation_pairs": 3,
+      "native_validation_included": true,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": true,
+      "stop_evidence": {
+        "path": "E:\\PROWL\\artifacts\\pants_full_coverage_physical_24k_20261018\\operator-stop.json",
+        "sha256": "44e116df2295d78e39f83ed80e0df444b73ca6dc37c006bb556490d681ca38a1"
+      }
+    },
+    {
+      "run_key": "pants_only_augmented_views_24k_win_20261017",
+      "title": "PanTS with varied training views",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 75647.87499999999,
+      "source_counter": "training_completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 75573.656,
+      "completed_elapsed_seconds": 76611.74999999999,
+      "training_completed_elapsed_seconds": 75647.87499999999,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_only_augmented_views_24k_win_20261017\\execution\\history.jsonl",
+        "sha256": "95116a33472d27a0d41aef6294ccc7974b0bb587dd5543a406ed70317982a9f5"
+      },
+      "mlflow_run_id": "dbf1a562e9eb4d5a96301718a19d07a8",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        75573.656,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": false,
+      "final_native_validation_excluded": true,
+      "final_untimed_tail_missing": false
+    },
+    {
+      "run_key": "pants_only_ema_72k_20261013",
+      "title": "Longer PanTS training + EMA",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 72000,
+      "dashboard_seconds": 204494.01499999998,
+      "source_counter": "completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 203556.23399999997,
+      "completed_elapsed_seconds": 204494.01499999998,
+      "training_completed_elapsed_seconds": null,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_only_ema_72k_20261013\\execution\\history.jsonl",
+        "sha256": "ac1bac3efc83665d355cb839ce2fc09f550dcf31e973e1a090f4895a3a4bac28"
+      },
+      "mlflow_run_id": "38cdd18be83449da87275f5ef8b12898",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        203556.23399999997,
+        72000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": true,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": false
+    },
+    {
+      "run_key": "pants_plus_expert_panorama_dicefocal_24k_20261012",
+      "title": "Add expert PANORAMA lesions",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 67675.813,
+      "source_counter": "last_update.elapsed_seconds",
+      "last_update_elapsed_seconds": 67675.813,
+      "completed_elapsed_seconds": null,
+      "training_completed_elapsed_seconds": null,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_plus_expert_panorama_dicefocal_24k_20261012\\execution\\history.jsonl",
+        "sha256": "4abe5ee0104ce9615d564c7913e330510fb016cf64d50c35745877918f9e601c"
+      },
+      "mlflow_run_id": "c038332411df4f38bf52d650810c77c0",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        67675.813,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": false,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": true,
+      "mlflow_backfill_source_hash_matches": true
+    },
+    {
+      "run_key": "pants_course_reference_dicefocal_24k_20261011",
+      "title": "PanTS-only baseline",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 24000,
+      "dashboard_seconds": 65335.797000000006,
+      "source_counter": "last_update.elapsed_seconds",
+      "last_update_elapsed_seconds": 65335.797000000006,
+      "completed_elapsed_seconds": null,
+      "training_completed_elapsed_seconds": null,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_course_reference_dicefocal_24k_20261011\\execution\\history.jsonl",
+        "sha256": "1781e033fda4c4cfcf59a5e5031e02967ca9b2266399c9123ab511840f64e953"
+      },
+      "mlflow_run_id": "67d11609cc78406b86145f13e24ec61b",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": [
+        65335.797000000006,
+        24000
+      ],
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": false,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": true,
+      "mlflow_backfill_source_hash_matches": true
+    },
+    {
+      "run_key": "pants_candidate_verifier_20261031",
+      "title": "Reject false lesion candidates while preserving real lesions",
+      "machine": "QUINNS-LAPTOP",
+      "attempts": [
+        {
+          "event": "started",
+          "step": 0
+        }
+      ],
+      "status": "FINISHED",
+      "optimizer_updates": 10560,
+      "dashboard_seconds": 6773.530999999959,
+      "source_counter": "training_completed.elapsed_seconds",
+      "last_update_elapsed_seconds": 6761.405999999959,
+      "completed_elapsed_seconds": 6773.889999999956,
+      "training_completed_elapsed_seconds": 6773.530999999959,
+      "journal": {
+        "path": "E:\\PROWL\\artifacts\\pants_candidate_verifier_20261031\\execution\\history.jsonl",
+        "sha256": "d980bee239b80711570cc3753e8f7ed57d80faec4d01b9ce5aff6ae1bccd6bf5"
+      },
+      "mlflow_run_id": "4475886fbdbf41c8a02d4f814a9733ac",
+      "mlflow_status": "FINISHED",
+      "mlflow_latest_train_elapsed": null,
+      "mlflow_is_same_work_not_additional": true,
+      "exact_optimizer_only_seconds": null,
+      "attempt_resets_detected": [],
+      "scope": "scientific training session including in-loop validation/checkpoint/I/O overhead",
+      "timed_native_validation_seconds": null,
+      "timed_native_validation_pairs": 0,
+      "native_validation_included": false,
+      "final_native_validation_excluded": false,
+      "final_untimed_tail_missing": false
+    }
+  ],
+  "excluded_mlflow_runs": [
+    {
+      "mlflow_run_id": "6f97bb194dd74d2797edf246de4c057e",
+      "title": "SETUP \u2014 training-fit diagnostic before EMA / longer training",
+      "status": "FINISHED",
+      "reason": "setup_only",
+      "seconds_added": 0
+    },
+    {
+      "mlflow_run_id": "450eff5d1050468395a58f2541841ef5",
+      "title": "Training-fit diagnostic \u2014 PanTS-only selected model",
+      "status": "FINISHED",
+      "reason": "native_training_evaluation",
+      "seconds_added": 0
+    },
+    {
+      "mlflow_run_id": "57752768ba61495088120ef7824ae78e",
+      "title": "Training-fit diagnostic \u2014 PANORAMA-added selected model",
+      "status": "FINISHED",
+      "reason": "native_training_evaluation",
+      "seconds_added": 0
+    },
+    {
+      "mlflow_run_id": "293346f5cd3c4e7fba06208cea291183",
+      "title": "Native selected PanTS checkpoint: raw at 28,000 steps",
+      "status": "FINISHED",
+      "reason": "standalone native evaluation",
+      "seconds_added": 0
+    },
+    {
+      "mlflow_run_id": "cd079e24e08c431385f0d3eece182b29",
+      "title": "Native selected PanTS checkpoint: ema at 8,000 steps",
+      "status": "FINISHED",
+      "reason": "standalone native evaluation",
+      "seconds_added": 0
+    },
+    {
+      "mlflow_run_id": "2a7376bd21fc45d5aa679946a8af1cd2",
+      "title": "Preserve every annotated lesion voxel \u2014 input qualification",
+      "status": "FINISHED",
+      "reason": "engineering_qualification",
+      "seconds_added": 0
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Users\\quinn\\PROWL-Monitor\\experiments.json",
+      "sha256": "e9280d0295f1a95c44d744741fa3612a76c55728669e97c4b42d16abb9ef1ff4"
+    },
+    {
+      "path": "C:\\Users\\quinn\\PROWL-Monitor\\experiments.py",
+      "sha256": "7b5ee7444a4ae0b98bc1fca1f7440f930e51725dcee027731ebc47860ead5664"
+    },
+    {
+      "path": "C:\\Users\\quinn\\PROWL-Tracking\\mlflow.db",
+      "sha256": "3a9a3f3af06cca3bfce05f43fa7c394e2a62389078e475d65c72b0885d0a5cd2"
+    }
+  ],
+  "exclusions": [
+    "standalone inference/native evaluation",
+    "candidate prediction exports and failed export attempts",
+    "teacher-target generation",
+    "CT restoration/downloads",
+    "CPU/GPU engineering pilots and cold replay",
+    "Mac scientific runs",
+    "human active working time"
+  ],
+  "reconciliation_keys": [
+    "machine+run_key+attempt start step",
+    "journal SHA256",
+    "MLflow run ID; never add MLflow as a second duration"
+  ],
+  "limitations": [
+    "This is a journal-derived session counter, not exact optimizer or GPU-busy time.",
+    "In-loop validation/checkpoint/I/O are included; baseline/PANORAMA final untimed tails and stopped-run unjournaled tail are unavailable.",
+    "No elapsed journal resets/resumed events in these nine histories; no start/end calendar subtraction used. OS sleep/suspension time cannot be separated from monotonic elapsed counters using these records alone.",
+    "Historical first-five-weeks training database is not present at configured outputs/mlflow.db or root mlflow.db on this checkout. Local mlruns/3 contains verifier artifacts only, not historical runtime records.",
+    "No complete cross-machine total can be certified until Mac and historical attempt records are reconciled. Imported copies may overlap; match IDs and hashes before addition.",
+    "Human active work time is not measured; concurrent machine-hours are additive compute effort, not calendar elapsed time."
+  ],
+  "historical_mlflow_coverage": {
+    "local_sqlite_runs": 15,
+    "scientific_session_matches": 9,
+    "engineering_or_evaluation_excluded": 6,
+    "legacy_configured_db_present": false
+  },
+  "teacher_target_generation_seconds_included": 0,
+  "human_active_seconds": null,
+  "optimizer_only_total_seconds": null
+}
