@@ -96,4 +96,25 @@ describe('durable decisions',()=>{
     await waitFor(()=>expect(fetch).toHaveBeenCalledTimes(2))
     expect(JSON.parse(fetch.mock.calls[1][1].body).expected_latest_id).toBe(record.event.review_event_id)
   })
+  it('appends a revised decision and reopens both revisions on the same prediction',async()=>{
+    const id='review:22345678-1234-4234-8234-123456789abc'
+    const revised={event:{...record.event,review_event_id:id,revision:2,action:'accept',reason_codes:['contour_acceptable'],note:''},
+      receipt:{...record.receipt,review_event_id:id,revision:2,sequence:2,location:`${hash}/event-000002.json`}}
+    const fetch=vi.fn().mockImplementationOnce(()=>ok({...target,history:[record]})).mockImplementationOnce(()=>ok(revised))
+    vi.stubGlobal('fetch',fetch)
+    const view=renderPanel();await screen.findByText('Revision 1: Needs correction')
+    fireEvent.change(screen.getByLabelText('Your name'),{target:{value:'Invented operator'}})
+    fireEvent.change(screen.getByLabelText('Decision'),{target:{value:'accept'}})
+    fireEvent.click(screen.getByText('Review before saving'));fireEvent.click(screen.getByText('Confirm and save locally'))
+    await screen.findByText(/Saved locally — revision 2/)
+    expect(screen.getByText('Revision 1: Needs correction')).toBeTruthy()
+    expect(screen.getByText('Revision 2: Accept')).toBeTruthy()
+    const sent=JSON.parse(fetch.mock.calls[1][1].body)
+    expect(sent.expected_latest_id).toBe(record.event.review_event_id)
+    expect(sent.manifest_sha256).toBe(hash)
+    view.unmount();fetch.mockImplementation(()=>ok({...target,history:[record,revised]}));renderPanel()
+    await screen.findByText('Revision 2: Accept')
+    expect(screen.getByText('Revision 1: Needs correction')).toBeTruthy()
+    expect(screen.getByRole('link',{name:'Reopen this saved prediction'}).getAttribute('href')).toBe(`/saved?review=${hash}`)
+  })
 })
