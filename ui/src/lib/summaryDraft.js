@@ -7,7 +7,7 @@
 
 export function predictionIdentity({ hasPrediction, liveResult, modelLabel }) {
   if (!hasPrediction) return { key: 'none', label: 'No prediction displayed' }
-  if (liveResult?.source === 'live') return { key: `live:${liveResult.scoredAt}`, label: `Live analysis · ${liveResult.scoredAt}` }
+  if (liveResult?.source === 'live') return { key: `live:${liveResult.resultId || liveResult.scoredAt}`, label: `Live analysis · ${liveResult.scoredAt}` }
   return { key: `saved:${modelLabel}`, label: `Saved prediction · ${modelLabel}` }
 }
 

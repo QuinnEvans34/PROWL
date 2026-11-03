@@ -320,7 +320,9 @@ export default function App() {
         || !Number.isFinite(result.global_peak_lesion_confidence)
         || !Number.isFinite(result.inference_seconds)
       ) throw new Error('Invalid prediction response')
-      setLiveResults((previous) => ({ ...previous, [requestedCaseId]: { result, scoredAt: formatScoreTime(), source: 'live' } }))
+      // A display time is not an identity: multiple results can arrive in one minute.
+      const resultId = crypto.randomUUID()
+      setLiveResults((previous) => ({ ...previous, [requestedCaseId]: { result, resultId, scoredAt: formatScoreTime(), source: 'live' } }))
       setEndpointStatus('online')
       setInferenceState({ status: 'complete', caseId: requestedCaseId })
       return { source: 'live', result }
@@ -418,7 +420,7 @@ export default function App() {
                 contextLabel={formatStudyId(caseId)}
                 onPendingChange={setAskPending}
                 measurementContext={{
-                  key: `${caseId}:${isValidation || hasLiveResult}:${currentLive?.source || 'saved'}:${currentLive?.scoredAt || 'saved'}:${isAnalyzing}:${currentCase.files?.pred}`,
+                  key: `${caseId}:${isValidation || hasLiveResult}:${currentLive?.source || 'saved'}:${currentLive?.resultId || currentLive?.scoredAt || 'saved'}:${isAnalyzing}:${currentCase.files?.pred}`,
                   caseId, files: currentCase.files, spacingMm: currentCase.spacing_mm,
                   available: (isValidation || hasLiveResult) && !isAnalyzing,
                   source: currentLive?.source || 'saved',

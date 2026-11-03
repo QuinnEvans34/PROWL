@@ -8,6 +8,13 @@ import { generateObservations, predictionIdentity } from '../src/lib/summaryDraf
 const saved = predictionIdentity({ hasPrediction: true, liveResult: null, modelLabel: 'Model v1' })
 const facts = { hasPrediction: true, lesionFlagged: true, volumeMm3: 15629.6, diameterMm: 31, comparison: null }
 
+it('separates live results returned in the same displayed minute', () => {
+  const first = predictionIdentity({hasPrediction:true,liveResult:{source:'live',scoredAt:'10:00',resultId:'first'}})
+  const second = predictionIdentity({hasPrediction:true,liveResult:{source:'live',scoredAt:'10:00',resultId:'second'}})
+  expect(first.key).not.toBe(second.key)
+  expect(first.label).toBe(second.label)
+})
+
 function Harness({ initialStudy = 'S1', prediction = saved, initialFacts = facts }) {
   const [drafts, setDrafts] = useState({})
   const [study, setStudy] = useState(initialStudy)
