@@ -54,3 +54,34 @@ readable time label. This does not substitute for durable manifest provenance.
 The same-minute regression failed before the fix and passes afterward;25focused
 tests pass, production build passes with existing chunk warnings. Commit9b5c674.
 No live inference was launched for UI validation.
+
+## Afternoon actual native overlay review
+
+Received and verified the separate5,048,320B image/score gallery archive SHA
+3ebf4af3d2667bc9abe9eec3e11f9328df83d88f720ddcf62927bfdd4af0e0dd.
+All28members verified before import. Visually inspected all six retained sheets on
+the Mac: two missed-reference targets plus largest false-positive targets for each
+arm of909/2028. Three planes, orientation/world coordinates and a common window
+are shown; paired rows use the same slices within each sheet. Component-based
+slice selection is representative rather than an exhaustive scan review.
+
+-4681: the circled0.20555mL reference component is visibly separate from predicted
+lesion regions in both rows. Complete region containment did not yield overlap.
+-6755: the circled0.68154mL reference component is missed in both rows, while
+predictions elsewhere are visible. The other reference component has partial
+coverage; any-overlap detection alone overstates delineation quality.
+-909: the largest autonomous false-positive target is separated from the reference
+pancreas outline on the selected coronal/sagittal views and absent there in the
+provided-region row. A different false-positive target near the pancreas remains
+in the provided-region arm. Empty lesion reference is not a clinical diagnosis.
+-2028: false-positive predicted regions away from the reference pancreas outline
+appear in both arms and are larger in the provided-region row on the selected
+slices, consistent with retained false-positive volumes. A smaller region alone
+is not an established remedy.
+
+These are observations of mask/annotation relationships, not medical interpretation
+or proof of the failure mechanism. No prediction regenerated, threshold changed,
+case excluded or new model trained. Preserve the fixed larger-baseline recipe;
+report component misses and false-positive behavior separately from aggregateDice.
+Private image manifest, per-image hashes and Mac inspection receipt retained under
+outputs/prowl/week05-review-gallery-20261103-01. No CT/mask/image payload in Git.
