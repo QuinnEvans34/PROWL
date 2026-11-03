@@ -65,16 +65,16 @@ arm of909/2028. Three planes, orientation/world coordinates and a common window
 are shown; paired rows use the same slices within each sheet. Component-based
 slice selection is representative rather than an exhaustive scan review.
 
--4681: the circled0.20555mL reference component is visibly separate from predicted
+- 4681: the circled0.20555mL reference component is visibly separate from predicted
 lesion regions in both rows. Complete region containment did not yield overlap.
--6755: the circled0.68154mL reference component is missed in both rows, while
+- 6755: the circled0.68154mL reference component is missed in both rows, while
 predictions elsewhere are visible. The other reference component has partial
 coverage; any-overlap detection alone overstates delineation quality.
--909: the largest autonomous false-positive target is separated from the reference
+- 909: the largest autonomous false-positive target is separated from the reference
 pancreas outline on the selected coronal/sagittal views and absent there in the
 provided-region row. A different false-positive target near the pancreas remains
 in the provided-region arm. Empty lesion reference is not a clinical diagnosis.
--2028: false-positive predicted regions away from the reference pancreas outline
+- 2028: false-positive predicted regions away from the reference pancreas outline
 appear in both arms and are larger in the provided-region row on the selected
 slices, consistent with retained false-positive volumes. A smaller region alone
 is not an established remedy.
