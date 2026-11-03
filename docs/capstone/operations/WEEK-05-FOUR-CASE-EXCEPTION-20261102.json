@@ -1,0 +1,20 @@
+{
+  "version": "week05-four-case-admission-exception-1",
+  "authorization": "Quinton explicitly approved this scope exception via the Mac chat on November 2, 2026",
+  "cases": ["PanTS_00002028", "PanTS_00000909", "PanTS_00004681", "PanTS_00006755"],
+  "scope": "One exposed-development exploratory evaluation, autonomous and separately labeled provided-region arm; no training or general acceptance",
+  "original_comparison_status": "FAIL_ENGINEERING_COMPARISON",
+  "cross_device_probability_equivalence": "UNQUALIFIED",
+  "matched_comparison_sha256": "a37a953820a55637530d30f883394fe4717d444fdebfbfd043cd8f54f5e93ab5",
+  "outside_tolerance": 169,
+  "probability_values": 51444975,
+  "max_absolute_difference": 0.00004851818084716797,
+  "basis": ["Exact final segmentation and localization masks on ONE diagnostic case", "Matching regions, geometry and model identities", "45 CPU tests passed", "Clean bounded execution and backups", "Differences confined to confidently background voxels in retained investigation"],
+  "not_claimed": ["Universal backend equivalence", "Independent generalization", "Clinical acceptance", "Probability equivalence"],
+  "tolerances_changed": false,
+  "automatic_retry": false,
+  "expand_cohort": false,
+  "interrupt_mac_kd": false,
+  "inference_limits": {"seconds_per_case_per_arm": 600, "total_seconds": 4800, "rss_bytes": 12884901888, "gpu_bytes": 6442450944, "output_bytes": 8589934592, "backup_bytes": 8589934592, "combined_backup_bytes": 42949672960, "minimum_free_bytes": 107374182400},
+  "preparation": "Exact four-CT restoration only; separate CPU stage capped at4800s,2GiB RSS,256MiB restored bytes; no masks/test extraction"
+}
