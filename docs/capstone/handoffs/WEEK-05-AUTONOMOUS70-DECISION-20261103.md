@@ -65,3 +65,16 @@ E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a02/request.json:
 approval, verify pins/resources/ownership, restore→admit→freeze→evaluate once under
 durable bounded supervision. Actual advancement still requires process/journal proof;
 this approval entry is not a claim that GPU inference has started.
+
+## Verified dispatch
+
+Laptop reports durable restore→admit→evaluate supervisor started successfully;
+2/64required CTs completed and verified, with archive read activity increasing.
+Approval/request/handoff receipts match independent backups. Operational code pushed
+as e3f17b4 on codex/week05-cuda-readiness; W05-09 updated. Restoration source root
+E:/PROWL/sources/pants/week05-autonomous70-20261103-a02. GPU evaluation has not yet
+started; it follows successful/reaped restore and exact source/native admission.
+The owned handoff continues after the laptop chat turn ends and stops on a failed
+gate without retrying. Do not redispatch an existing stage or alter frozen pins.
+Mac KD independently advanced to7802 with teacher targets and stored MLflow metrics;
+initial checkpoint backup still matches. Mac source/UI work is committed separately.

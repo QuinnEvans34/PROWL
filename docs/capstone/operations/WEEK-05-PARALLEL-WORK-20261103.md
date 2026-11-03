@@ -96,3 +96,13 @@ explicit resume2a2f3eb6-f27e-400f-bc97-4a265fef5660 reused both. This is an actu
 retained-package check with no inference or manual-review acceptance implied.
 Both private senders completed their transfers. All six gallery sheets inspected
 on the Mac; observations are in WEEK-05-REVIEW-FOLLOWUP-20261103.md.
+
+## Closeout of this setup turn
+
+User approved the larger70-case exploratory evaluation and64GiBcombined-backup
+allowance. Laptop additive failure-accounting controller/request qualified, then
+its durable one-shot handoff started; restoration2/64verified, GPU pending admission.
+See WEEK-05-AUTONOMOUS70-DECISION-20261103.md for exact request, limits and approval.
+MacKD advanced7802, MLflow metrics and initial independent backup verified. Native
+reviewer package remains unreviewed in production; engineering roundtrip stays isolated.
+All Mac changes pushed to main; laptop code pushed to its readiness branch.
