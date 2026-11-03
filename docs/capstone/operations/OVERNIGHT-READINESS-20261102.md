@@ -1,0 +1,31 @@
+# November 2 overnight readiness
+
+Verified around 18:39 MST. Mac treatment continuation03 is running under launchd
+com.prowl.mac-kd-treatment-resume-20261102-03, supervisor9468/worker9993.
+Journal advanced1796→1800; teacher_accessed=true, KDweight0.1. MLflow
+460be483579f4301834f1f0009eb717f is RUNNING with recorded losses and no tracking
+warning. Initial and ready backups match; last.pt matches its independent backup,
+SHA256 5cc6ed99f6a8e7a75ba54e011dd22f2b955e23e601bc4bb438ed4e98a20aeeac.
+These are execution checks, not a treatment-quality verdict.
+
+AC connected/battery100%; internal76GiB and external1.9TiB free. One owned worker
+and its caffeinate idle-sleep assertion verified. Leave Mac awake with lid open,
+charger/drive connected and Codex open for hourly checks. Existing safety limits,
+scientific pins and cumulative treatment budget remain unchanged.
+
+Existing heartbeat keep-prowl-teacher-running has been renamed Monitor PROWL KD
+overnight and is ACTIVE hourly. Teacher generation is complete: it must not be
+restarted. Monitor updates/native-validation progress, tracking, resources and
+backup integrity; remain quiet while healthy. Notify on failure or completion;
+no automatic retries, resume, new GPU work or scientific changes. Respect user
+pauses. Pause the monitor after verified completion. See
+MAC-KD-LAUNCH-HANDOFF-20261027.md for current receipt and cooperative pause command.
+
+Windows four-case evaluation completed; remote branch codex/week05-cuda-readiness
+is pushed through07f7efb. All workers cleaned up, pins/backups verified per laptop
+report. CT-only vs supplied-pancreas-region mean lesion Dice on3positive cases:
+0.180 vs0.139; annotated components overlapped2/4 in both; false-positive
+components35 vs13. Both regions retained100% annotated pancreas/lesion coverage.
+Exploratory four-case results only; no full-benchmark acceptance. Original
+cross-device probability failure remains preserved under the user-approved
+bounded exception. No further Windows job is needed tonight; review errors next.
