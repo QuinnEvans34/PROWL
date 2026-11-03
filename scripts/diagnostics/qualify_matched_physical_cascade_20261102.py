@@ -124,7 +124,9 @@ def prepare(ct):
     files += list(BUNDLE.glob('*.json')) + [Path(m['path']) for m in models.values()]
     files += list((ROOT/'tests').glob('test_week05*.py'))
     setup = Path('E:/PROWL/readiness/week05-matched-runtime-setup-20261102-a01')
-    files += [setup/'package-install-report.json',setup/'environment-verification.json']
+    files += [setup/'package-install-report.json',setup/'environment-verification.json',
+              setup/'pillow-install-report.json',setup/'corrected-readiness.json',
+              setup/'matched-runtime-tests-corrected.xml']
     site = Path(sys.prefix)/'Lib/site-packages'
     for pattern in ('torch/lib/torch_cpu.dll','torch/lib/torch_cuda.dll','torch/lib/c10*.dll',
                     'torch/_C*.pyd','scipy/ndimage/_nd_image*.pyd','scipy/ndimage/_interpolation.py',

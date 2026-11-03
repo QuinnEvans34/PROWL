@@ -98,3 +98,47 @@ authorize an additive isolated Pillow dependency installation with recorded vers
 and wheel provenance, then one corrected CPU qualification attempt. Preserve this
 failed XML and environment report; new evidence must use new filenames. The original
 numerical tolerances, 600-second inference cap and all other gates remain unchanged.
+
+## Authorized dependency correction and diagnostic dispatch
+
+The follow-up clarified that the no-retry rule concerns scientific/GPU attempts,
+and explicitly approved the missing Pillow repair and one corrected CPU suite.
+Installed Pillow 12.3.0 (same version as the established Windows environment),
+without dependencies, into the isolated venv only. Wheel provenance is retained
+in pillow-install-report.json. Pip check passed; corrected suite **45 passed in
+8.91 seconds**. Prior failed XML and environment report remain unchanged.
+corrected-readiness.json binds both attempts and the installation receipt.
+Isolated runtime occupies 3,449,473,772 bytes, below the 12-GiB ceiling.
+
+One diagnostic dispatched under request SHA256
+641b6db57245c91f682e060c55ca9678f320ca0c1394e0e4d0a2f98c40568a12.
+Owned session 58294; follow this owner, never duplicate. All producing files now
+frozen. Later conditional authorization permits the fixed four-case evaluation
+only if the unchanged comparison and all gates pass. Mac KD remains independent.
+
+## Final outcome: execution PASS, unchanged comparison FAIL
+
+Owned diagnostic 58294 exited0. Inner runtime78.282s; supervisor86.532s,
+peak owned RSS1,641,881,600 bytes; GPU reserved1,021,313,024 bytes. All60 windows
+completed, two selected input/logit traces saved at indices0/39, zero extra
+forwards. All305 producing pins and15 independent backup pairs match. Workers
+were reaped; process inspection found no diagnostic workers or GPU compute owner.
+
+The CPU comparison completed and reports **FAIL_ENGINEERING_COMPARISON**:
+169 of51,444,975 probability values exceed the unchanged atol1e-5/rtol1e-4 rule;
+maximum absolute difference4.851818084716797e-5. Native hard predictions and
+localizer masks have ZERO disagreements across20,131,482 voxels. Geometry,
+identity, reconstruction and normalization checks passed.
+
+New Windows probabilities are byte-for-byte identical to the original Windows
+probability file. Thus matching Python/scientific-library versions did not resolve
+the discrepancy; it does not isolate its backend or operation-level cause.
+The two new traces provide evidence for a separately scoped matched Mac trace
+comparison if later authorized. No new Mac inference was requested or performed.
+
+Comparison SHA256 a37a953820a55637530d30f883394fe4717d444fdebfbfd043cd8f54f5e93ab5,
+under E:/PROWL/readiness/week05-matched-comparison-20261102-a01, independently
+backed up on C:. closeout.json records exact pin/backup/trace and output identity
+checks. Original failed CPU tests and original failed comparison are preserved.
+No GPU retry, tolerance change, four-case batch, training or new Dice result.
+Conditional batch authorization remains blocked by this scientific comparison gate.
