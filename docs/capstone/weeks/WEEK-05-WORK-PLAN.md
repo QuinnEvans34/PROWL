@@ -154,3 +154,12 @@ W04-04; W05-08 continues KD-MAC; new W05-09 owns the portable CUDA evaluation pa
 Original card histories are preserved. Week4 Complete contains only delivered work:
 teacher targets, fast preview/conversation UI and completed control training.
 Unfinished acceptance stays in Week5; historical hours closeout stays open in Backlog.
+
+
+## November3 stakeholder update
+
+Quinton selected his aunt (industry-experienced, existing fallback) for a tentative
+SaturdayNovember7 walkthrough; exact time and specific role remain unconfirmed.
+Preparation is active in the existing Plan11 living record. The session has not
+occurred and does not constitute clinical validation. Main Week7 acceptance stays
+open pending actual feedback and role-appropriate task evidence.

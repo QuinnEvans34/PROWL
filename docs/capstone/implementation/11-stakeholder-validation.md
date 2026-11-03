@@ -1,10 +1,10 @@
 # Stakeholder validation
 
-**Status:** Approved design; radiologist contacted, reply pending; detailed session preparation deferred  
+**Status:** Fallback selected; preliminary walkthrough tentatively November7; session not yet conducted  
 **Owner:** Quinton Evans (outreach, scheduling, participant confirmation, and change approval)  
 **Target weeks:** 1 and 7  
 **Depends on:** Plan 08 wireflow and representative fixtures for the session, not for outreach  
-**Last reviewed:** 2026-09-20; Quinton deferred detailed preparation until a participant is found
+**Last reviewed:** 2026-11-03; Quinton selected his industry-experienced aunt as the existing fallback
 
 ## Outcome
 
@@ -200,3 +200,32 @@ The first two items let planning move to Plan 12. They are not evidence for the 
 
 Plan 08 implements only the approved Week 7 list. Plan 12 cites the session accurately and records
 unresolved limitations.
+
+
+## November 3 fallback selection and tentative weekend walkthrough
+
+Quinton selected his aunt, an industry-experienced contact and previously identified
+fallback. Participant code SV-P01; specific job title/clinical credentials have not
+been recorded. Tentative timing is Saturday, November7,2026 ("Saturday or something"),
+not a confirmed appointment/time. Quinton owns scheduling. This activates preparation
+for the fallback and supersedes the September20 preparation deferral; the original
+outreach history stays above. No contact or invitation sent by the agent.
+
+Plan a30–45minute preliminary usability/workflow walkthrough using the existing
+six tasks. Unless relevant clinical qualifications are established at the session,
+ask about comprehension, navigation, trust, source inspection and decision-saving;
+do not ask her to certify contour accuracy or interpret a diagnosis. An early
+Week5 session can inform the Week7 plan but is not automatically its completed gate.
+
+Before Saturday: select the verified2028 development package plus retained static
+miss/false-positive review images; distinguish the interactive package from images.
+Freeze code/package/source identities after import checks. The assistant requires
+a separately coordinated GPU window; prepare saved answers and clearly label them
+if live generation is unavailable. Explain fast-preview answer limitations.
+
+Record participation/note-taking permission, actual role, tasks attempted and
+unaided/assisted/failed/not-tried outcomes in the existing living-session template.
+Ask which step was hardest to understand, whether mask measurements and limitations
+were clear, whether she could inspect a citation and recover a saved decision, and
+what one change would improve the workflow most. Preserve feedback as observations;
+Quinton chooses any resulting code changes. No session results or acceptance claimed.
