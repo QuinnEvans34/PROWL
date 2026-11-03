@@ -654,3 +654,24 @@ MLflow terminated KILLED with operator_paused=true (intentional pause, not failu
 Cumulative charged budget11255+61186=72441seconds;273159remain from345600.
 Hourly monitor and pending one-time class-pause automation both PAUSED.
 Do not resume until user authorization; preserve all attempts and producing pins.
+
+## November 3 afternoon — authorized KD resumed from7154
+
+User returned home and explicitly authorized resumption. New continuation root
+mac-kd-treatment-resume-20261103-01; launchd label
+com.prowl.mac-kd-treatment-resume-20261103-01. Ready SHA
+67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b.
+Original scientific recipe, teacher targets and cumulative345600second cap retained:
+72441seconds charged at preparation,273159remaining. Prior attempts preserved.
+MPS producer/cold recovery qualification passed and reaped under
+mac-kd-resume-check-20261103-01; qualified SHA
+22643f8d9950f974ebdcebd004c07b5227678a1568ad3e41e8330935db709897.
+One supervisor15400/worker15806 observed; scientific updates7162→7164 verified,
+teacher_accessed=true and KDweight0.1. MLflow436bb317362b44d8861edfa5c5dd5b8a
+RUNNING; first scheduled metric write pending at this observation. Initial checkpoint
+SHA c3ddb422bc67856fb9bdb0369133ad3f8d7cd6b2a5f266dbfd794067140a862b
+and ready.json match independent internal backups. No tracking warning.
+Initial verification preceded journal creation; followed the same job, no redispatch.
+AC connected, internal74GiB/external1.9TiB free at admission. Hourly monitor ACTIVE
+with this root/ready hash; class-pause automation remains PAUSED. No automatic retry
+or successor. Use existing v3 cooperative pause protocol for later user pauses.

@@ -44,3 +44,13 @@ One-time class pause scheduled around09:32MST using the existing cooperative v3
 pause protocol. A scheduled request is not proof of cleanup: verify checkpoint,
 independent backup and worker exit before disconnecting. The hourly monitor and
 one-time pause task must be paused after the safe stop.
+
+## Afternoon: distinguish repeated live analyses
+
+Found another identity collision: App's display time contains only hour/minute,
+but summary drafts and literature context used that display time to identify a
+live result. Added a per-response session UUID to both identities, retaining the
+readable time label. This does not substitute for durable manifest provenance.
+The same-minute regression failed before the fix and passes afterward;25focused
+tests pass, production build passes with existing chunk warnings. Commit9b5c674.
+No live inference was launched for UI validation.

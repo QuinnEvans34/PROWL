@@ -29,3 +29,13 @@ components35 vs13. Both regions retained100% annotated pancreas/lesion coverage.
 Exploratory four-case results only; no full-benchmark acceptance. Original
 cross-device probability failure remains preserved under the user-approved
 bounded exception. No further Windows job is needed tonight; review errors next.
+
+## November 3 afternoon continuation
+
+Following the verified class pause at7154 and explicit user resume, the active root
+is now mac-kd-treatment-resume-20261103-01, with matching launchd label
+com.prowl.mac-kd-treatment-resume-20261103-01. Ready SHA
+67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b.
+See the November3 afternoon entry in MAC-KD-LAUNCH-HANDOFF-20261027.md for recovery,
+backup and progress evidence. Hourly monitoring is ACTIVE for the new continuation;
+all earlier roots remain preserved historical attempts. Do not restart automatically.
