@@ -160,3 +160,17 @@ def test_isolated_review_port_keeps_exact_host_and_origin_checks(store):
         assert client.get('/review-records/packages',headers={'Origin':'http://127.0.0.1:5183'}).status_code==403
         assert client.get('/review-records/packages',headers={'Origin':'https://example.org'}).status_code==403
     with pytest.raises(ValueError):create_app(store,port=0)
+
+
+def test_physical_manifest_keeps_exposed_scope_and_unqualified_status(store,package):
+    m=json.loads((package/'manifest.json').read_bytes())
+    pin='f1d74994d3085831bc21a7693d88ca24723ad79096ca7afc7eca17fac080cefd'
+    # Invented transport bytes test store behavior; geometry/producer checks live in adapter tests.
+    m.update(schema_version='physical-prediction-view-v1',request_identity=pin,
+        evaluation_scope='four-case-exploratory-20261102',case_role='exposed_development',probability_equivalence='UNQUALIFIED')
+    # manifest identity validation requires a fixed request hash; no source model is executed.
+    m['inference_evidence_sha256']=pin;m['files']['evidence']['content_sha256']=pin
+    (package/'manifest.json').write_bytes(encode(m))
+    assert store.target('saved')['case_id']=='invented_case'
+    m['probability_equivalence']='QUALIFIED';(package/'manifest.json').write_bytes(encode(m))
+    with pytest.raises(ReviewError,match='physical evaluation'):store.target('saved')

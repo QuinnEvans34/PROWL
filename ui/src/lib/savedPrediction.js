@@ -1,9 +1,11 @@
+import { validatePhysicalEvidence } from './physicalPredictionEvidence.js'
 import { boundedStream, sha } from './scanMeasurements.js'
 import { validateNativeEvidence, validateAssistedEvidence, measureNativePackage } from './nativeMeasurements.js'
 const HASH = /^[a-f0-9]{64}$/
 export function validateSavedPrediction(data) {
+  const physical = data?.schema_version === 'physical-prediction-view-v1'
   const assisted = data?.schema_version === 'assisted-prediction-view-v1'
-  if (!['saved-prediction-view-v1', 'saved-prediction-view-v2', 'assisted-prediction-view-v1'].includes(data?.schema_version) || !/^[A-Za-z0-9_-]+$/.test(data.case_id || '')) throw new Error('Unsupported saved prediction package.')
+  if (!['saved-prediction-view-v1', 'saved-prediction-view-v2', 'assisted-prediction-view-v1', 'physical-prediction-view-v1'].includes(data?.schema_version) || !/^[A-Za-z0-9_-]+$/.test(data.case_id || '')) throw new Error('Unsupported saved prediction package.')
   if (!['completed', 'completed_with_warnings'].includes(data.status)) throw new Error('Prediction failed or is incomplete.')
   if (assisted) {
     if (data.prediction_mode !== 'pancreas_assisted' || data.reference_inputs_used !== true
@@ -18,7 +20,7 @@ export function validateSavedPrediction(data) {
   const g = data.geometry
   if (g?.units !== 'mm' || g.shape?.length !== 3 || !g.shape.every(n => Number.isSafeInteger(n) && n > 0) || g.affine?.length !== 4 || !g.affine.every(r => r.length === 4 && r.every(Number.isFinite))) throw new Error('Invalid native geometry.')
   if (JSON.stringify(data.ct_window) !== '[-100,300]' || !Array.isArray(data.warnings) || !data.warnings.every(s => typeof s === 'string')) throw new Error('Invalid display settings.')
-  if (data.schema_version === 'saved-prediction-view-v2' || assisted) {
+  if (data.schema_version === 'saved-prediction-view-v2' || assisted || physical) {
     if (data.files.ct.uri !== 'ct.nii.gz' || data.files.pred.uri !== 'prediction.nii.gz' || g.shape.reduce((a, b) => a*b, 1) > 32000000 || ['ct', 'pred'].some(k => data.files[k].bytes > 64*1024*1024)
       || JSON.stringify(data.labels) !== JSON.stringify({ '0': 'background', '1': 'pancreas', '2': 'lesion' })) throw new Error('Unsupported native measurement package.')
     for (const [key, expected] of [['result', data.result_sha256], ['evidence', data.inference_evidence_sha256]]) {
@@ -26,6 +28,7 @@ export function validateSavedPrediction(data) {
       if (f?.uri !== `${key}.json` || f.content_sha256 !== expected || !Number.isSafeInteger(f.bytes) || f.bytes <= 0 || f.bytes > 1024*1024) throw new Error('Invalid provenance file identity.')
     }
   }
+  if (physical && (data.request_identity !== data.inference_evidence_sha256 || data.evaluation_scope !== 'four-case-exploratory-20261102' || data.case_role !== 'exposed_development' || data.probability_equivalence !== 'UNQUALIFIED')) throw new Error('Invalid physical evaluation identity.')
   return data
 }
 
@@ -53,7 +56,7 @@ export async function loadSavedPrediction(base, signal, expected = null) {
     let measurement = null
     if (native) {
       const parse = bytes => JSON.parse(new TextDecoder().decode(bytes))
-      const roi = (manifest.schema_version === 'assisted-prediction-view-v1' ? validateAssistedEvidence : validateNativeEvidence)(manifest, parse(buffers.result), parse(buffers.evidence))
+      const roi = (manifest.schema_version === 'physical-prediction-view-v1' ? validatePhysicalEvidence : manifest.schema_version === 'assisted-prediction-view-v1' ? validateAssistedEvidence : validateNativeEvidence)(manifest, parse(buffers.result), parse(buffers.evidence))
       measurement = await measureNativePackage(manifest, buffers, roi, signal)
     }
     signal?.throwIfAborted()

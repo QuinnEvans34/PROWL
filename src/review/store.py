@@ -99,10 +99,17 @@ class ReviewStore:
     def manifest(self, source):
         raw = self.reader(source)('manifest.json', 1024**2)
         m = json.loads(raw)
-        if (m.get('schema_version') not in ('saved-prediction-view-v2', 'assisted-prediction-view-v1')
+        if (m.get('schema_version') not in ('saved-prediction-view-v2', 'assisted-prediction-view-v1', 'physical-prediction-view-v1')
                 or m.get('status') not in ('completed', 'completed_with_warnings')
                 or not re.fullmatch(r'[A-Za-z0-9_-]{1,80}', m.get('case_id', ''))):
             raise ReviewError('Only completed native prediction packages can be reviewed.')
+        if m['schema_version'] == 'physical-prediction-view-v1' and (
+                m.get('request_identity') != 'f1d74994d3085831bc21a7693d88ca24723ad79096ca7afc7eca17fac080cefd'
+                or m.get('inference_evidence_sha256') != m['request_identity']
+                or m.get('evaluation_scope') != 'four-case-exploratory-20261102'
+                or m.get('case_role') != 'exposed_development'
+                or m.get('probability_equivalence') != 'UNQUALIFIED'):
+            raise ReviewError('Invalid physical evaluation identity.')
         assisted = m['schema_version'] == 'assisted-prediction-view-v1'
         if (m.get('prediction_mode') != ('pancreas_assisted' if assisted else 'autonomous')
                 or m.get('reference_inputs_used') is not assisted
