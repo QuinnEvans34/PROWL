@@ -33,7 +33,12 @@ function validRecord(record, hash) {
     && r.case_package_id === e.case_package_id && r.prediction_id === e.prediction_id && /^[a-f0-9]{64}$/.test(r.content_sha256)
     && r.location === `${hash}/event-${String(e.revision).padStart(6, '0')}.json`
 }
-export default function ReviewDecisionPanel({ base, manifestHash, manifest, onSaved, onDraftChange }) {
+export default function ReviewDecisionPanel(props) {
+  // Keep drafts and in-flight acknowledgments scoped to one exact prediction,
+  // including when callers reuse this panel without an explicit React key.
+  return <PredictionReviewDecision key={`${props.base}:${props.manifestHash}`} {...props} />
+}
+function PredictionReviewDecision({ base, manifestHash, manifest, onSaved, onDraftChange }) {
   const source = reviewSource(base)
   const [history, setHistory] = useState(null), [error, setError] = useState(''), [notice, setNotice] = useState('')
   const [reviewer, setReviewer] = useState(''), [action, setAction] = useState(''), [selected, setSelected] = useState([]), [note, setNote] = useState('')

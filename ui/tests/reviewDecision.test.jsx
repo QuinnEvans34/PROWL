@@ -22,6 +22,30 @@ async function fill() {
 }
 afterEach(()=>{cleanup();vi.unstubAllGlobals()})
 describe('durable decisions',()=>{
+  it('clears the previous prediction draft and confirmation when the target changes',async()=>{
+    const nextTarget={...target,manifest_sha256:otherHash,case_package_id:`case-package:${otherHash}`,prediction_id:`prediction:${otherHash}`}
+    vi.stubGlobal('fetch',vi.fn().mockImplementationOnce(()=>ok(target)).mockImplementationOnce(()=>ok(nextTarget)))
+    const view=renderPanel();await fill()
+    view.rerender(<ReviewDecisionPanel base="/saved-prediction" manifestHash={otherHash} manifest={{...manifest,case_id:'second_case'}} />)
+    await screen.findByText('No recorded decisions for this prediction.')
+    expect(screen.queryByLabelText('Confirm review')).toBeNull()
+    expect(screen.getByLabelText('Decision').value).toBe('')
+    expect(screen.getByLabelText(/Review note/).value).toBe('')
+  })
+  it('ignores a late save receipt after switching predictions',async()=>{
+    let resolveSave
+    const nextTarget={...target,manifest_sha256:otherHash,case_package_id:`case-package:${otherHash}`,prediction_id:`prediction:${otherHash}`}
+    const onSaved=vi.fn()
+    vi.stubGlobal('fetch',vi.fn().mockImplementationOnce(()=>ok(target)).mockImplementationOnce(()=>new Promise(r=>resolveSave=r)).mockImplementationOnce(()=>ok(nextTarget)))
+    const view=renderPanel({onSaved});await fill();fireEvent.click(screen.getByText('Confirm and save locally'))
+    view.rerender(<ReviewDecisionPanel base="/saved-prediction" manifestHash={otherHash} manifest={manifest} onSaved={onSaved} />)
+    await screen.findByText('No recorded decisions for this prediction.')
+    resolveSave(new Response(JSON.stringify(record)))
+    await waitFor(()=>expect(screen.queryByText(/Saving…/)).toBeNull())
+    expect(screen.queryByText(/Saved locally/)).toBeNull()
+    expect(screen.queryByText('Revision 1: Needs correction')).toBeNull()
+    expect(onSaved).not.toHaveBeenCalled()
+  })
   it('confirms exact identities and waits for a durable receipt, then reloads history',async()=>{
     let resolve
     const fetch=vi.fn().mockImplementationOnce(()=>ok(target)).mockImplementationOnce(()=>new Promise(r=>resolve=r))
