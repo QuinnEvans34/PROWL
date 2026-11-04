@@ -78,3 +78,28 @@ The owned handoff continues after the laptop chat turn ends and stops on a faile
 gate without retrying. Do not redispatch an existing stage or alter frozen pins.
 Mac KD independently advanced to7802 with teacher targets and stored MLflow metrics;
 initial checkpoint backup still matches. Mac source/UI work is committed separately.
+
+## Evening: source-unit failure accounting approved
+
+Restoration completed64/64, but source admission stopped before GPU evaluation:
+six CTs retain unresolved spatial units. The first failure was6011; the affected
+set is6011,5780,1823,2935,6901,6115. Original admission failure and restored source
+bytes remain preserved. A fresh read-only laptop check at5:55p.m.MST confirmed
+no training/restoration/evaluation worker and idle GPU; only dashboard servers remained.
+
+After being told the recommendation to evaluate valid cases and keep failures
+visible, Quinton explicitly instructed: "Great, lets get the other laptop working
+then." This authorizes one fresh bounded continuation with all70 dispositions:
+six source-unit admission failures, the existing5592resource failure, and up to63
+predictions (five verified reused/up to58new). No fabricated Dice, silent exclusion,
+unit inference or source-header changes. Report coverage over70 separately from
+quality metrics on successfully evaluated cases, with explicit metric denominators.
+
+The laptop chat accepted preparation/dispatch of this revised request. Preserve
+the original failed request, frozen producing files, exact model/settings,
+exposed-development label and bounded numerical exception. Keep the original
+aggregate time/storage accounting and64GiBcombined-backup allowance; do not reset
+budgets or weaken AC/storage/memory/exclusive-GPU checks. Reuse restored sources
+after hash/header verification. A fresh receipt and actual advancing inference
+evidence are required before claiming the new evaluation is running. No training,
+automatic retry or MacKD interruption is authorized by this continuation.
