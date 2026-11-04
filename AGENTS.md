@@ -1,5 +1,586 @@
 # AGENTS.md — Agent Context
 
+> **November2 fixed-four exception evaluation COMPLETE:** Owned48699 exit0;
+> all8inference+8CPUscore workers successful/reaped,supervisor43452absent/GPUidle.
+> 330pins match,95output/receiptbackup pairs plus summary/closeout match. SummarySHA
+> 99ac2b4009e342daab4cd791dd4e16fb6f4fe6588bf040875539038f84d58ad2.
+> 832.062s controller; longestworker78.297s; peakRSS3231510528B/GPU1021313024B.
+> All4 retained:3positive+1emptyreference. MeanpositiveDice auto.179978556 vs
+> provided.139355084;both2/4lesioncomponentshit;FPcomponents35vs13. Allannotated
+> pancreas/lesionfields100%insidebothregions; clippingdoesnotexplainthese misses.
+> See WEEK-05-FOUR-CASE-EXPLORATORY-20261102.md. OriginalprobabilityFAIL/UNQUALIFIED
+> unchanged; noH0/modelacceptance/newtraining/retry/expansion. MacKDuntouched.
+
+> **November2 fixed-four exploratory evaluation LAUNCHED:** Owned48699/supervisor
+> 43452 runs evaluate_four_case_exception_20261102.py, requestSHA
+> f1d74994d3085831bc21a7693d88ca24723ad79096ca7afc7eca17fac080cefd.
+> 330pins frozen; preserveall. Restore93637 PASS1146.375s/52846592B/reaped;
+> allfourCTexact/mm, matchingreferencegrids, maximumtiles80/140/70/126.
+> First2028autonomous observed1/60windows; follow sameowner, no retry/duplicate.
+> Eightarm workers thenseparateCPUscoring; finalbackup/cleanup/results pending.
+> Human-approved exception ONLY; originalcomparisonFAIL/UNQUALIFIED unchanged.
+> No training/MacKDinterference/schedules. Existing600s/4800s/12GiB/6GiB gates.
+
+> **November2 FOUR-CASE exception explicitly APPROVED / preparation ACTIVE:**
+> OriginalprobabilityFAIL/UNQUALIFIED retained, no tolerancechange. Human-approved
+> exception admits fixed2028/909/4681/6755 exploratoryautonomous+providedregiononly.
+> Read WEEK-05-FOUR-CASE-EXPLORATORY-20261102.md and exceptionJSON. Restore93637
+> owns exactfourCT scan fromverifiedarchives; followowner/no duplicate. New52CPU
+> testsPASS11.61s. No batchrequest/GPU yet; freeze afterrestoration/headergates.
+> Autonomousworker neverreadsreferencebytes includinghashing; scoringseparate.
+> MacKDuntouched; no training/retry/schedules/expansion. Preservehistoricalpins.
+
+> **November2 matched diagnostic COMPLETE; comparison FAIL, batch BLOCKED:**
+> Authorized Pillow12.3.0 repair isolatedonly; corrected45CPUtestsPASS8.91s.
+> Request641b6db5... owned58294 exit0/reaped86.532s; inner78.282s/RSS1641881600B/
+> GPU1021313024B. All305pins/15independentbackups verified;60forwards,two traces0/39.
+> Same169probabilityfailures,max4.851818e-5; bothhardmaps exact. New Windows
+> probabilityfile byteidenticaloriginal despite matchedversions. Cause notisolated.
+> ComparisonSHAa37a953820a55637530d30f883394fe4717d444fdebfbfd043cd8f54f5e93ab5.
+> GPUidle/no workers. No retry/tolerancechange/batch/training. MacKDuntouched.
+> See WEEK-05-MATCHED-RUNTIME-QUALIFICATION-20261102.md; preserveallrequestpins.
+
+> **November2 matched-runtime CPU qualification BLOCKED before GPU:** Exact versions,
+> strict CPU model loads and272originalrepopins PASS; isolatedroot3.433GB/pipcheckPASS.
+> Focused tests43PASS/2FAIL38.70s: missingPIL in originalcontrol equivalenceimports.
+> Preserve matched-runtime-tests.xml/environment-verification.json; no automaticretry.
+> No ready/request/GPUattempt/traces/newcomparison/batch. BothCPUprocessesexited;
+> GPUidle. Need authorized isolatedPillow fix and correctedCPUqualification.
+> Latest conditionalfourcaseapproval requiresALLgatesPASS, therefore notactivated.
+> Read WEEK-05-MATCHED-RUNTIME-QUALIFICATION-20261102.md. MacKDuntouched.
+
+> **November2 one matched-runtime diagnostic AUTHORIZED / isolated setup ongoing:**
+> User authorizes ONE Windows1070diagnostic,600s,unchangedtolerances,two traces;
+> no four-case batch/newtraining/retry. MacKD continues,neverinterrupt.
+> New runtime C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01; managed
+> Python3.12.13 installed, pip owned79684 installs exactMacbase versions incl
+> Torch2.13.0+cu130. Originalvenv/pins/failure untouched. Read matched-runtime doc.
+> No new GPUattempt/request yet. Follow same installer; no duplicate installation.
+> Newadditive trace/launcher/comparator prepared;5newadapter testsPASSoldruntime.
+> Need newruntimechecks/fullfocusedCPUtests/strictload/pins/freeze before inference.
+
+
+> **November2 saved probability investigation COMPLETE; no new inference:**
+> Read WEEK-05-SAVED-NUMERICAL-INVESTIGATION-20261102.md, pushed d974f7e.
+> All169failures are169confidentlyBACKGROUND voxels;minwinningmargin0.502727,
+> bothhardmasksidentical. Float64/reversedreference still169: originalFAILunchanged.
+> 19clusters;notalltileedges. No causalbackend claim:libraryversions differ and
+> no saved per-tile inputs/logits. CPU48000 PASS9.094s/1327501312B/reaped;169native
+> coordinate/class readbacks PASS;independent evidence backups. No CT/labels/models.
+> Proposed one NEW isolated matched-runtime Windows1070qualification,600s/12GiB/
+> 6GiB,originalstrictcriteria,two tracewindows;NOTapproved/installed/dispatched.
+> Four-case AUTONOMOUS evaluation remainsblocked; running MacKD is separate,
+> NOTblocked/interrupted. TrelloW05-09/W05-01 updated+readbackverified. Preservepins.
+
+
+> **November2 cross-device probability gate FAILED; four-case batch BLOCKED:**
+> Mac reference Wormhole54585 received/archiveSHA c306cc9b... verified13files,
+> 12backup-boundfiles/4artifacts match; request2a0c7bfb... bound,Macsuccess/reaped.
+> Same preserved Windows diagnostic; no rerun. Comparison28275 exited0 but report
+> FAIL_ENGINEERING_COMPARISON (exit0 is not sciencepass),SHAfd7be15a0745e5acdec22fdf7
+> 38c9b6d4a95be35dbaaf555fd56906ad083c974.169/51444975probabilities fail accepted
+> atol1e-5/rtol1e-4;maxabs4.851818084716797e-5;167pancreas/2lesion;mask/codesexact.
+> Bounds/geometry/source/model identities match. Torch/MONAI/NumPy/SciPy versions
+> differ; cause NOTisolated. No tolerance relaxation/retry/environmentchange/batch.
+> Read WEEK-05-CROSS-DEVICE-RESULT-20261102.md; all169differences in external
+> week05-cross-device-comparison-20261102-a01/probability-failures.json.10CPUtestsPASS.
+> Next requires separately scoped numerical investigation/decision; keep fixed4IDs.
+
+
+> **November2 Week5 one-case CUDA diagnostic COMPLETE / reference pending:**
+> Same28799 finished0; supervisor39792/worker18172 absent,workersreaped,GPUidle.
+> RequestSHA dc37f20affd1e071c46208ebbd8b34052aa09a704718df235de4385a48a726b3
+> unchanged; preserveallpins.60tiles/zeroROI gaps,73.984sinner/89.406ssupervised,
+> 2167230464BpeakRSS/1021313024BGPUreserved.9E/Cbackuppairs rehashedmatch.
+> Native CT426x301x157/mm; selectedROI[0,44,0]:[425,301,157]~85.2%CT.
+> No truthmask/scoring/Dice/training. LOCAL_DIAGNOSTIC_COMPLETE_REFERENCE_PENDING.
+> Read WEEK-05-PHYSICAL-EXECUTOR-20261102.md + MAC-REFERENCE-REQUEST doc.
+> Reference absent and numericalproposal not yet reviewed: FOURCASE BATCH BLOCKED.
+> No retry/recompute/autoqueue; use preservedoutputs for later parity. MacKDuntouched.
+
+
+> **November2 Week5 single-case CUDA diagnostic DISPATCHED; follow same owner:**
+> User follow-on via execution spec168185a authorizes one bounded1070 diagnostic.
+> Owned28799 supervisor39792/worker18172(wrappers44172/5620); no retry/duplicate.
+> Request E:/PROWL/readiness/week05-physical-qualification-20261102-a01/request.json
+> SHA dc37f20affd1e071c46208ebbd8b34052aa09a704718df235de4385a48a726b3.
+> PRESERVE producing pins.600s/12GiBRSS/6GiBGPU/2GiBoutput+backup,AC/CUDAownership.
+> CT restoration41574 PASS274.547s/44.6MB/reaped; exact originalSHA,mm header.
+> CPU30testsPASS;270priorverifier repository pins match. Code f104ad6 + docs293698e
+> pushed codex/week05-cuda-readiness. Follow worker.log/output/progress.jsonl,
+> result,resources and independentCbackups. NO training/Dice/MLflowRUNNING.
+> Cross-device reference absent; comparison rule proposed not yet reviewed.
+> Four-case batch BLOCKED pending reference/admission. MacKD must remain untouched.
+> Read WEEK-05-PHYSICAL-EXECUTOR-20261102.md and MAC-REFERENCE-REQUEST doc.
+
+
+> **November2 Week5 private packet RECEIVED / CPU checks PASS:**
+> Wormhole29759 exited0; E:/PROWL/transfer/week05-cuda-baseline-20261102-a01.
+> Archive34975283B SHA90b1f308de6be6e3abe38992d463a393798111798bdec74d5506bde0a887fec2;
+> exacthash before safe extraction,16payload manifest checks before/after PASS.
+> Both models strict weights_only CPUload PASS/exited0; no forward/CUDA/optimizer.
+> All70membership and proposed5 CT/metadata identity hashes match local receipts.
+> Exposure2514/5194/7687 retained; all70control-selection exposed. No CT/mask reads.
+> Read WEEK-05-PACKET-RECEIVED-20261102.md. Missing cross-device reference remains
+> admission STOP; physical Windows worker/supervisor not yet integrated/qualified.
+> No GPUdispatch/newtraining/ready receipt/merge/pin edits/MacKD interruption.
+
+
+> **November2 verifier FIT COMPLETE / Week5 CPU handoff blocked on private artifacts:**
+> Verified10560contiguousupdates/80tunes; MLflow4475886fbdbf41c8a02d4f814a9733ac
+> FINISHED,allstoredmetrics exact;17execution E/Cbackup pairs match. Selected
+> epoch47/6204 tuningBCE0.2773905406758086;terminal0.28156344968730823;
+> 6773.531trainingseconds. Supervisor0/reaped,onlymonitorPython,noGPUcomputeapps,
+> AC/freefloors/CUDAlock pass. Calibration/dev remainpending;H0NOTTESTED.
+> Read WEEK-05-CUDA-READINESS-20261102.md. Remotehandoffd03e904 readisolated,
+> fetchonly/no merge/pull;MacKDuntouched.270verifierrepositorypins unchanged.
+> NewCPUbridge/accessguard commit8a0dfb3 oncodex/week05-cuda-readiness.32existing
+> testsPASS/1Unixskip;10newsyntheticPASS includingreal subprocessreference denial.
+> No realCT/reference/model/GPU evaluation. Missing localizer18,830,236B SHA
+> 46417801f3d3c37e618d06823027e84f0ce84343f469f24124537167d40198d5 plusreview/request;
+> actualMaccontrolselected20k export+hash/recipe/ancestry andsame-recipe reference.
+> E:/PROWL/readiness/week05-cuda-baseline-20261102-a01 containscloseout,inventory,
+> transfer-request,cohort/evaluationPROPOSALS andtests. NOready/launchauthority.
+> Currentcontrol physical144/72windows differsoldsingle144resize; bridgepreserves
+> source-indexmarginceil semantics butnotwiredintoGPUworker. Needreceiptbinding,
+> Windowswatchdog/CTguard/evidenceintegration andeligiblecohortbeforedispatch.
+> No newtraining/thresholdsearch/testreads/automaticretry/board/crosschatmessage.
+
+
+> **November2 verifier scientific launch VERIFIED:** User approved training/UI.
+> Owned68400 supervisor18400/worker25708 (wrappers41960/42420), frozenreadySHA
+> 0ae6d1eae68c1a6cc23ffe575138286ea1de13d81d69b3fcf0c757c3d669e77a.
+> Preservepins; NO duplicate/retry/resume. Journal/API advanced122->168->200
+> of10560updates. MLflow4475886fbdbf41c8a02d4f814a9733ac RUNNING;167storedlosses
+> verified;firsttune132BCE0.37431773265418505/67patients. InitialE/CcheckpointSHA
+> 249306eae913629d5a1c10215cdd38e6aeb153caa872f055afce550fe06aab60 matches.
+> Monitor17148/PID38312(wrapper37224),localhost8765,existingprivateTailscale
+> route unchanged;local/privateAPI200,ninecardsincl8history,actualjournalhours.
+> Savedbeforehashchecks/backups;3CP1252 separators corrected only liveHTML,
+> frozenstagedHTMLunchanged. Evidence launch-verification-20261102.json and
+> dashboard-applied-20261102.json under verifier-training-20261031-a01.
+> No calibration/dev outcomes/newDice/schedules/automaticnext. Inspect SAMEowner.
+
+
+> **October31 verifier READY; explicit scientific launch pending:** Read
+> PANTS-VERIFIER-TRAINING-20261031.md. Frozen ready.json at
+> E:/PROWL/readiness/verifier-training-20261031-a01 SHA
+> 0ae6d1eae68c1a6cc23ffe575138286ea1de13d81d69b3fcf0c757c3d669e77a.
+> All333 patients exact266fit/67tune,1306candidates=1053/253; no exclusions.
+> Pilot12PNGs reviewed,full globalcoverage,precision/alignment/backups PASS.
+> Build2598.688s/2629173248B/reaped. ActualGPU5 PASS32.750s/1512415232B;
+> full253candidate tune pass8.437s leavesstateunchanged;GPUreserved316669952B.
+> Cold independentCstep4 replay PASS11.937s/1509027840B,exactinput/loss/model/
+> optimizer/RNG. Step4SHA0f70332f522979ab418c64a1ea4e3472b9ecedda34899f3614ddd740eec19b4b.
+> Freeze owned11394 completed0; allproducing/cache/backup gatesmatch. PRESERVEPINS.
+> readiness-review.json and independentCverifier-readiness-20261031-a01 copies
+> verified. Extra cachedpadding review:22global/59detail views<50%validregion;
+> cases802/1617 reviewedorthogonally,fullcandidatesretained;contextlimitation
+> documented,NO representationchangeaftertune,NOexclusion. No scientificdatafail.
+> Proposed freshverifier80epochs/10560updates,8h/12GiBRSS/6GiBGPU; estimate1.5–2.5h.
+> Scientificoutput/dispatch absent; H0NOTTESTED. No MLflowRUNNING or UIchanges.
+> Dashboard files staged at readiness/dashboard with beforehash handoff. After
+> explicit launch: inspectnoowners,exactreadyhash --explicit-user-launch,apply
+> stagedUI/config withbackups/historypreserved;verifyupdates/MLflow/initialE-C/API.
+> Calibration200/development70 remainprotected; no automaticnext/schedule/retry.
+
+
+> **October31 verifier complete intake PASS; GPU receipt preparing:** Owned61782
+> exited0/reaped2598.688s/2629173248BpeakRSS. All333patients exact266fit/67tune,
+> 1306candidates=1053fit/253tune; positives140/34;8zero-candidate patients retained.
+> All global candidates fully covered;22supplementarydetail partial bydesign.
+> Cache1755972137B plus independentbackup1758471764B, within caps.
+> Owned85737 prepares qualification request; do NOT duplicate. ActualGPU5/cold1
+> NOT yet dispatched. Preserve all pilot/build pins; no science/MLflowRUNNING.
+
+
+> **October31 verifier333-input build LIVE:** Restoration14507 completed0,
+> 333exact CTs/232new/101reused,3039.922s. Owned61782 build stage now runs;
+> supervisor18888/worker2252. Do NOT duplicate or modify pilot/build producing
+> pins. Evidence verifier-training-20261031-a01/build;17patients observed.
+> Fit-coverage-reuse.json corroborates all266 full annotation voxel counts against
+> exact inherited region metadata/geometry without new source voxel reads.
+> Pilot12/70 PASS;37finalCPU tests plus8tune/launch tests PASS. GPU qualification
+> remains pending full333build. Scientific approval not given; no MLflowRUNNING.
+
+
+> **October31 verifier12-case real pilot PASS/reviewed:** Owned5136 exited0,
+> 109.969s/1681715200BpeakRSS/reaped. All12PNGs actually reviewed;70candidates,
+> globalcoverage100%,onepartialdetailview,storageerror<=0.000244140625.
+> visual-review.json binds manifest in verifier-training-20261031-a01/pilot.
+> No exclusions or design changes after pilot. Preserve all source pins.
+> Full333build pending same14507source restoration completion; then actualGPU
+> producer5/cold1. No scientific launch/MLflowRUNNING/dashboard switch.
+
+
+> **October31 verifier real pilot LIVE; design frozen before tune access:**
+> Fit-only266 review PASS923.171s/2534268928B/reaped:1053 candidates,
+> 140overlap/913false,8zero-candidate patients; no tune/calibration/dev labels.
+> Prospective design-v3 SHA acd8c39562a44bfa2ac99c6cc8f59b0fba6b9b9626ea01e0dda4f24ea9bd7cc7
+> fixes thick-slice support occupancy before real pilot; old designs preserved.
+> Three occupancy tests PASS. Owned5136 runs build_verifier_views_20261031.py
+> pilot; supervisor28016/worker33068. Preserve all pilot request pins; no duplicate.
+> Evidence verifier-training-20261031-a01/pilot. Twelve CTs exact old hashes.
+> Source restoration same14507 continues333fit/tune only;313/333 observed.
+> Full input build, actualGPU5+cold1 and readiness remain; no scientific launch.
+
+
+> **October31 verifier SETUP authorized; not scientific launch:** User requests
+> autonomous work until next training readiness. Fit-only design review owned11371
+> runs review_verifier_fit_20261031.py; evidence verifier-fit-design-20261031-a01,
+> 234/266observed, no tune/calibration/dev labels. Source restoration owned14507
+> runs restore_verifier_fit_tune_20261031.py, only232missing fit/tuneCTs7.297GB,
+> reuses101,3h/8GiBnewsource/100GiBfloor. Inspect same processes; no duplicate.
+> New two-view64cubed candidate encoder/session/executor/calibration and launch
+> code additive, CPU tests passing; no real pilot/CUDA/build/ready receipt yet.
+> Design pending full fit-review, source restoration. Read
+> PANTS-VERIFIER-TRAINING-20261031.md for planned gates and budgets. Original
+> candidate archive/pins unchanged. No MLflowRUNNING/UI switch/schedule/science.
+
+> **October31 candidate recovery COMPLETE /533verified; monitor removed:**
+> Same88958 handoff finished; no Python workers remain. Continuation178/178 plus
+> preserved355=533 unique patients, exact roles266fit/67tune/200calibration.
+> Handoff completed all533 prediction/sidecar independent backup comparisons;
+> final manifest/journal/request/sourcechecks/resources/handoff backups rechecked
+> matching. ManifestSHA b5c989a158598e2aa3e3c6ecdaed5f0bf4b91803d0574b3250c5def473827aed
+> at E:/PROWL/artifacts/verifier-candidates-20261030-a01/manifest.json.
+> Supervisor exit0/reaped10645.204s/3088224256BpeakRSS;GPUreserved1042284544B.
+> Both export attempts total30548.689s within16h. Allrecords gaps0/labelsnone/
+> optimizer0. Existing4995pin request d4884782... unchanged. No rerun needed.
+> Hourly recovery automation deleted on verified completion per heartbeat rules;
+> historical varied-focus remains paused. No scientific verifier training launched.
+> Next: fit-only representation/label preparation, verifier design/qualification,
+> explicit scientific launch review. Preserve original failed and recovery evidence.
+
+> **October30 21:23MDT recovered candidate export LAUNCH VERIFIED:** Same owned
+> handoff88958/supervisor29668 owns worker37152(wrapper8188); do NOT redispatch.
+> All178 restored CTs exactly match originals; restoration2034.907s completed.
+> CPU preparation PASS395.938s/1423847424B/reaped,178source/header checks and
+> full failed5914CT read PASS. Frozen4995pin requestSHA
+> d4884782233a639a2fa51b0f05e79f2ff9cd3914b9681d1281e447bf780b33a4.
+> Continuation journal advanced51->52/178 during heartbeat;407/533 total including
+> preserved355. Independently checked firstnew5914 and observedlatest6930 E/C
+> prediction+sidecar hashes, requestbackup match; gaps0/labelsnone/updates0.
+> No failure/resource-completion file; live processes healthy. Preserve producing
+> pins. Continue hourly checks through merged533manifest/backups/reaped completion;
+> no new scientifictraining, MLflowRUNNING or traininghours. No repair needed.
+
+> **October30 hourly recovery monitor explicitly AUTHORIZED and ACTIVE:** User
+> requests hourly autonomous diagnosis/repair until exports run, then monitoring.
+> Heartbeat monitor-and-recover-the-remaining-pants-prediction-exports created,
+> every1h in this chat. Earlier no-AI-schedule preference superseded for this task.
+> Recoverable engineering failures may receive tested separately versioned fixes
+> and qualified continuation; preserve failed evidence/pins and never duplicate a
+> live owner or blindly retry. Identity/quality/resource gates remain mandatory;
+> no new scientific training authorized. Keep quiet during healthy progress;
+> verify advancement/backups after launch, monitor through533 completion, then
+> pause. Pause/report user-dependent blockers rather than repeatedly spending.
+> Historical varied-focus heartbeat remains PAUSED. Restoration171/178 observed
+> at02:18UTC; existing local handoff still waiting, not redispatched.
+
+> **October30 one-shot recovery handoff LIVE; do NOT dispatch manually:** Owned88958
+> (worker29668/wrapper24244) runs handoff_candidate_recovery_20261030.py against
+> owned restorationPID37484/session40307. Local deterministic one-shot, no AI
+> schedules. State at verifier-candidate-continuation-20261030-a01/handoff.jsonl
+> is waiting_for_owned_restoration.48CPUtests PASS15.22s; source backup audit
+> owned78254 FINISHED0,all355E/Cprediction+sidecar pairs verified,3389oldpins match,
+> audit372.515s. Failed5914CT restored EXACTSHA; restoration8/178 at01:56UTC.
+> Handoff waits for restoration exit/completion, then bounded1800s/12GiBCPU
+> --prepare, verifies readiness, exacthash one-shot continuation, final533backup
+> verification. Stop on ANYfailure, no retry. Preserve ALL new producing files
+> now; no duplicate restore/preparation/launch/manual resume. Later request.json
+> will freeze new+inheritedpins. Source/backup qualification must complete before
+> GPU launch. No scientifictraining/MLflowRUNNING/phonehours or additionalrun.
+> NewpredictOUT verifier-candidates-20261030-a01; original failedOUT untouched.
+> Follow SAME88958 and40307. This supersedes earlier code-only readiness status.
+
+> **October30 recovery ACTIVE; training NOT restarted:** Full archive download
+> finished October30 19:52UTC,361265775573bytes. User requests checks/resume.
+> Owned40307 runs restore_remaining_cts_20261030.py: only178unfinished CTs,
+> 6128299671bytes,4trainingarchives,exact old size/SHA required,2h/7GiB cap;
+> E:/PROWL/sources/pants/restored-candidate-ct-20261030/progress.jsonl. No test
+> or lesion reads, no full extraction; E masks retained. DO NOT rerun restoration.
+> Owned78254 runs recover_candidate_export_20261030.py: original3389pins plus
+> 355prediction/sidecar independentE/C backup audit; evidence at
+> E:/PROWL/readiness/verifier-export-recovery-20261030-a01. Inspect same process.
+> Additive relocated provider and continue_candidate_export_20261030.py PREPARED
+> IN CODE ONLY: no request/dispatch/GPU yet. Preparation requires both restoration
+> and audit PASS,tests,178header/identity checks and full failed5914CT read.
+> Continuation must preserve original failed stage, reuse355, export178 only,
+> original remaining wall budget/12GiBRSS/6GiBGPU/storage floors; no retry.
+> Test process3764 active at entry. Existing7relocation tests pass. No schedules,
+> MLflowRUNNING/dashboard traininghours/scientific verifiertraining authorized here.
+
+> **October30 PanTS download resumed by user / continuation02 LIVE:** Owned5644
+> runs resume_pants_windows_20261030.py, continuation-02.jsonl. Both oldlogs and
+> scripts preserved. Five completed files reused via size+previousSHAreceipts,
+> not freshrehash; fourthCT resumes1,825,491,642bytes. Same tested range-transfer,
+>8networkretries,volume/AC/100GiBfloor; no extraction/sourceactivation/training.
+> Receiptmerge/noncompletion/conflict checks PASS after initial shellquoting typo.
+> Follow sameprocess; do not duplicate. Earlier userpause now superseded.
+
+> **October29 PanTS download PAUSED by user:** User explicitly asked to pause.
+> Sent Ctrl-C to owned37527; session exited1. Preserve completed archives and
+> fourthtrainingarchive .part; do not auto-restart. Continuation01 log remains
+> historical; later resume requires new continuation accounting for both logs.
+
+> **October29 download continuation01 LIVE:** User explicitly requests resume.
+> Original57372 failed shorttransfer at4,529,327,397bytes ofsecondCTarchive; original
+> log/source preserved. New additive resume_pants_windows_20261029.py owned37527
+> writes continuation-01.jsonl in existingacquisitiondirectory. Reuses3priorverified
+> files byexactsize+storedhashreceipt (NOTfreshrehash),50GBnotredownloaded. HTTP206/
+> exactContentRange enforced beforeappend; finalfullSHArequired.8boundednetwork
+> retries/file,neverchecksum/storage/identityretry.100GiBfloor/volume/AC retained.
+> Synthetic exactresume+ignoredRange rejection PASS. No extraction/GPU/sourceactivation.
+> Inspectsameprocess/log;neverlaunchduplicate. Original scientificpinsunchanged.
+
+> **October29 fresh PanTS archive download LIVE:** User approves full PanTS
+> reacquisition to other external drive and cancels FsRover plan. No FsRover/
+> LinuxReader process remained at dispatch; old data/partial copies untouched.
+> Ownedexec57372 runs additive download_pants_windows_20261029.py. Destination
+> E:/PROWL/sources/pants/acquisition-20261029; events.jsonl authoritative.
+> Pinned September19 inventory/HF3b1cd611 reused; label size/ETag stillmatch.
+> Queue361265775573bytes, archive-only/noextraction; new100GiBfreefloor explicitly
+> disclosed vs historicalMac512GiB. Evolume424d39a3... verified/exFAT/AC; initial
+> free755.74GB leaves394.48GB afterqueue. MetadataSHAverified; labels transferring.
+> Synthetic transfer/duplicate refusal/checksum-failure preservation PASS. No
+> auto retry/resume; inspect sameprocess/log before acting. All old training pins
+> unchanged; no source activation/GPU. Publisher-test archive opaque only.
+> Extraction peakspace and byteidentity reconciliation required before source use;
+> 355completedcandidate outputs preserved,178remaining, no originalredispatch.
+
+> **October28 candidate export recovery BLOCKED on source drive:** User requests
+> diagnosis/restart. Original export failed after355/533,19903.485s,exit1,reaped;
+> ImageFileError reading PanTS_00005914/ct.nii.gz. Read-only checks find D: absent,
+> physical500GB Kosbees disk1 online with APFS partition but no access path;
+> ParagonAPFSMounter running. Windows System disk event7 at October27 12:31:14
+> reports bad block on Harddisk1/DR5, adjacent to failure12:31:06. This does NOT
+> establish whether media, USB connection or filesystem/driver caused it. E:/C:
+> available; no export workers. No remount/repair/retry performed; original pins,
+> failed journal/resources and completed archives preserved. Need source-drive
+> recovery decision/access before bounded failed-case identity/read check and
+> separately versioned continuation validating355archive/sidecar backups;178remain.
+> Do not rerun original one-shot dispatcher or silently exclude failed patient.
+
+> **October27 full533 export START VERIFIED:** Sameowned60178 remainsrunning.
+> Journal observed7/533complete:6pilotarchives reused withoutinference plusnew
+> calibrationpatient00000023(29.5s),next00000026started. Independently rehashed
+> all7Eprediction/sidecar vsCbackups andrequestbackup: exact. Records label_access
+> none/zerooptimizer/gaps0;reusedlabels stripped. Receipt3389pinsSHAedd8824e...
+> unchanged. Do NOTredispatch/retry/resume/editpins. Read sameprogress/workerlog;
+> finalmanifest/resources/backups requiredbeforeclaimingfullcompletion. Approved
+> 16h/12GiBRSS/6GiBGPU/64GiBE/40GiBC/100GiBfloors applyonlythisexport. No next
+> verifiertraining, AIpolling orphonehourinflation. Userapprovalbudget documented.
+
+> **October27 full533 export DISPATCHED; initial verification pending:** Owned60178
+> runs export_verifier_candidates_20261027.py --run-sha256
+> edd8824e401aad8e5d8aefbf228f876931f3e792caaa457a7b28b32ca38b6a31.
+> Frozenrequest at E:/PROWL/readiness/verifier-candidate-export-20261027-a01,
+> 3389pins;preserveall. Supervisor33052/worker12088(wrappers66924/16836).
+> One533patientstage,6reused/527new;no duplicate/retry/resume. Follow sameprocess,
+> progress at E:/PROWL/artifacts/verifier-candidates-20261027-a01/progress.jsonl.
+> IndependentCbackup verifier-candidates-20261027-a01; completion needsfullmanifest,
+> backupmatches andresources success/reaped. Initialreuse/newpatient verification
+> pending at this entry. No newtraining/MLflowRUNNING/dashboard/schedules.
+
+> **October27 full533 candidate export APPROVED; freeze PREPARING:** User explicitly
+> approves16h/12GiBRSS/6GiBGPU/64GiBcombinedEcache+predictions/40GiBCbackups,
+> existing100GiBfreefloors. One inference archive, NOTverifiertraining. Additive
+> export_verifier_candidates_20261027.py andverifier_candidate_archive_v1;48CPUtests
+> pass48.57s. Owned91055 executing --prepare at verifier-candidate-export-20261027-a01;
+> inspectrequest/processbeforecontinuing,neverduplicate. Preserveproducingfiles.
+> Read PANTS-VERIFIER-CANDIDATE-EXPORT-20261027.md. Afterfreezeexacthash one-shot
+> --run-sha256;verify6reuses+newpatient+Cbackups. No labels/dev/test/optimizer/
+> MLflowRUNNING or dashboardtraininghours. Existingpilot/originalpins untouched.
+
+> **October26 candidate pilot PASS; full533 BUDGET APPROVAL required:** Owned77725
+> finished0/reaped395.328s/2349985792BpeakRSS/1042284544BGPUreserved. All6fitcases
+> exactoldhardprediction/archive-roundtrip,zero gaps/annotation-outside-region;
+> all6PNGsactuallyreviewed,visual-review binds resultSHA4d8cdc3767760e647cb19ffb7074fcf83efdba67a8e30f0b4776b2664e121a80.
+> Preserve pilot requestpins; no rerun. Original3351pins recheckedmatch. 23candidates
+> (5overlap/18false),4/5GTcomponentshit;H0NOTTESTED,notmodelqualitypass.
+> Read PANTS-VERIFIER-CANDIDATE-PILOT-20261026.md. Full533=19887tiles/raw29.84GB,
+> compressedprojection21.5GB exceeds32GiBcombinedcache withexisting22.96GB.
+> Proposed16h/12GiBRSS/6GiBGPU/64GiBcombinedEcache+predictions/40GiBCbackup,
+> 100GiBfloors requires USERAPPROVAL; not raised or dispatched. No newtraining.
+> Reusesixpilotarchives;fullstage supervisor/receipt,remaining527exports,fit-only
+> design/verifierqualification remain. No dev/test/calibrationlabelreads/schedules.
+
+> **October26 candidate export pilot LIVE, preparation only:** User authorizes
+> autonomous work until next training readiness; one bounded6fitcase pilot dispatched
+> ownedexec77725 via pilot_verifier_candidates_20261026.py. RequestSHA
+> 6c3100911bc1d6a021a2260011d2ddc662fcd7d9a590f9acc5c832ba086e1436 at
+> E:/PROWL/readiness/verifier-candidate-pilot-20261026-a01/request.json. PRESERVEPINS;
+> no duplicate/retry or source changes. New inference-only provider readsCT/pancreas,
+> labels separately fit-only; exporter exactoldbaseline andthree-role provenance.
+> 36CPUtests pass12.77s (earlier23pass44.39s). Cases2720/28/802/7933/50/7516,
+> 202tiles twice for equivalence;3600s/12GiBRSS/6GiBGPU/2GiBoutputs. No optimizer,
+> dev/test reads or newMLflowRUNNING. AfterPASS/reaped actuallyreview6PNGs and save
+> factualboundvisual-review. Full533 inference stillneedsmeasuredbudgetapproval;
+> metadata9970fit+2712tune+7205calibrationtiles,raw29,837,607,220B. No fullstage
+> dispatch or verifiertraining authorized by this pilot receipt. Existingpinsintact.
+
+> **October26 restricted generator CLOSEOUT PASS; candidate stage PLAN only:**
+> Review evidence verifier-generator-review-20261026-a01/results.json; all3351pins,
+> 11independentbackups,24kcontiguousfiniteupdates,800patients/30visitseach verified.
+> MLflow0acb9a8f7e8a463194dd599a01b78507 FINISHED/961losses exact/no warnings;
+> exit0/reaped/no generatorprocesses. TerminalSHA0da3ac2b31eceeab82f040af6c95bded6bf3b500fe6cac00449584e2404f49b8.
+> 80018.016trainingseconds;last500meanloss.519148;noDice/H0verdict (NOT TESTED).
+> Read PANTS-VERIFIER-CANDIDATE-PREPARATION-20261026.md for next-stage gaps/order.
+> Need separate reserved-role inference provider, probability exporter exactbaseline
+> equivalence and three-role provenance (oldcandidateprimitive lacks tune). Preserve
+> originals;no looseningoptimizerprovider. Fit266/tune67/calibration200,70dev/test
+> protected. Proposed6case/60min/12GiBRSS/6GiBGPU/2GiBpilot NOTfrozen/started;
+> full533budgetrequiresmeasurements/approval. No candidateGPU/sciencerun/schedule.
+
+> **October25 restricted generator SCIENTIFIC LAUNCH VERIFIED:** User explicitly
+> approved launch and dashboard switch. Owned exec40739, one fresh800/24k run
+> pants_reserved_verifier_generator_24k_20261025, readySHA b3e49f3d... unchanged.
+> Actual journal/API advanced2->17->22->28; MLflow0acb9a8f7e8a463194dd599a01b78507
+> RUNNING with storedloss steps1/25 (25=1.1628055572509766), no trackingwarning.
+> Initial E/C checkpointSHA efc5070e690bfe0072cec29cb8d305bf3793a73519e862eb3043da1b14fbfdaf matches.
+> Monitor restarted ONLY old28440; wrapper69944. Prepared configs applied after
+> exact beforehash checks/backups; private existing browser shows truthful livecard
+> and seven historical experiments. Actual total877794.141s equals summedjournals,
+> 75.844s new at28updates. No devDice/selection; no fake2kvalidation on visiblecard.
+> Legacy /api/status still reports hardcoded next_validation2000; phone uses correct
+> /api/experiments null. No source/pin edit to fix legacy endpoint during live run.
+> Preserve3351pins; no duplicate/retry/resume/merge/schedules or additional run.
+> Candidate inference/verifier fitting separate, not automatically authorized.
+
+> **October25 restricted verifier generator READY; explicit science launch pending:**
+> Read PANTS-VERIFIER-GENERATOR-READY-20261025.md. Originalproducer5CUDA PASS
+>106.047s/1750888448B/reaped; independentCstep4SHA b5325a08... cold1PASS24.062s/
+>1667858432B/reaped,exactrestore/input,nextmaxdiff3.725290298461914e-9/no mismatches.
+> No tolerancechange/rerun/auditrepeat. Final65CPUtests pass19.19s inclactualexecutor
+> withmockMLflow/backup+supervisorlifecycle+phoneparser/regressions. Additivelauncher
+> train_restricted_generator_20261025.py prepared/frozen,3351pins+environmentmatch.
+> Ready E:/PROWL/readiness/verifier-generator-launch-20261025-a01/ready.json SHA
+>b3e49f3d96e1694252fc29b9776d7969ba139a29b245b23bbc4b27bcb5f46d89. PRESERVEALLPINS.
+> StatusREADY_REQUIRES_EXPLICIT_USER_LAUNCH, freshSuPreM800/24k/fixedterminal/no
+> developmentselection;533reserved+70devprotected. No scientificoutput/dispatch/
+> newMLflowRUNNING. LatestapprovalworkuntilCANstart;finalscienceapprovalpending.
+> Phoneexperiments.py/index.html updated+backedup fortruthful noDice generatorcard;
+> active-run/experimentsJSONunchanged,hand offprepared. Afterlaunch needreloadONLY
+> monitorbeforeconfigswitch,verifyactualupdates/MLflowloss/independentbackup/API/
+> totalhours/mobilelayout. No networkchange/schedule. Keepallhistory. GPUidle.
+
+> **October25 varied-focus24k COMPLETE / retrospective ACCEPT; no successor launch:**
+> Read PANTS-VARIED-FOCUS-RESULTS-20261025.md.24k+12complete70native,selectedterminal
+>24kDice.396139;all3275pins andindependentcheckpoint/report/journal/resultbackups
+> match,workersreaped/IDsabsent/GPUidle/MLflowFINISHED961losses. Primaryvsparent
+> selected22k.356714:delta+.039425CI[.009929,.069369],seed20261022/10kbootstrap;
+> rejectH0/practicalACCEPT,all5guardsinclrecallpass. Secondarydelta+.041814,
+>CI[.012158,.071216]sameverdict. Detection34/36,negativealarms33/34,components38/45;
+> noPR(.423761historical),stillfalsepositiveproblem.35.0309hvs72.1174h;
+> validation13.4969h,outside21.534h. All7839positivejitterupdateslesionvisible.
+> Evidencevaried-focus-review-20261025-a01/results.json SHAb54d99dd37db0793c06e7fef
+>547112a3f0f3139b68ec6fec3cd4d9ca80108213.4reviewtests pass. Firstreportpathbug
+> preservedattempt01-failure.json; correctedunfrozenreviewhelperonly. NoCT/test/GPU.
+> ExistingMLflowrun retrospective18metrics/6tagsreadbackverified/report+JSONlogged,
+> statusFINISHED preserved. PhoneAPIcompleted. No dashboardconfigurationchange.
+> NextWindows restricted800generator setup remains:cpu/pilotPASS,frozenrequestonly;
+> producer5/cold1 NOTstarted. NormalparentdependencyNOWsatisfied;nextqualification
+> thenadditivescientificsupervisor/MLflow/receipt/explicitlaunchreview. No rerunaudit,
+> noautolaunch/retry/schedule. Teacherreference timm/Pythonblocker isSEPARATE and
+> doesnotblockSuPreMgenerator. Latestrequestreview/log/planning,notnewscience launch.
+
+> **October23 Merlin corrected CPU import audit FAILED distinctly; stop/report:**
+> User authorized isolatedbatchgenerators repair plusONEcorrected audit. Installed
+> batchgenerators0.25.1 --no-deps in separatebatchgenerators-dependencies-01 only.
+> import-audit-02 undermerlin-upstream-reference-20261023-a01 failedafter33.640s,
+>855552000BpeakRSS/exit1/reaped. Missingdependencyresolved; nowtimm0.6.12 maxxvit
+> mutableMaxxVitConvCfg dataclassdefault rejected by currentPython. No sourcepatch,
+> timmreplacement/thirdattempt/model/CT/GPU. Preservebothaudits andnewrequestpins.
+> Read WINDOWS-MERLIN-UPSTREAM-REFERENCE-20261023.md. Requiresnewdecision for
+> upstream-compatible isolatedruntime ORexplicitversioneddependencyadaptation.
+> Current17647/24k stillownsGPU;493active+495KD+502generator repopinsmatch.
+> No CUDA/reference/science/MLflow/dashboard/schedule; existinggates unchanged.
+
+> **October23 Mac-requested Merlin CUDA reference PREPARED PARTIALLY / BLOCKED:**
+> Read WINDOWS-MERLIN-UPSTREAM-REFERENCE-20261023.md. User-authorized bounded
+> reference2720then6222 only, no GPU competition/science/retry/schedule. Current
+> variedfocus17550/24k;60980/51832 live. Separate rsuper-merlin-eab1a7e9-reference
+> bundle acquired97files, exactsource45fea075a/modeleab1a7e9, checkpointSHA38535f10...
+> verified606931502B. Missingdatasetutils resolved; source unmodified/livevenv intact.
+> Safe inert-recordCPUconversion PASS15.485s/1001537536B/reaped,26channels/lesion19;
+> EMAexport4640e105... differsMacserialization, tensorparitynotyetchecked.
+> Evidence merlin-upstream-reference-20261023-a01. Import-audit-01 FAILED missing
+> batchgenerators via eagernnformer import;76.765s/839204864B/reaped. DO NOT retry
+> withoutapproval; no model/CT/GPU/referenceprediction. Isolatedtimm0.6.12+HFhub0.25.2
+> present. Maccomparison5ef62a8 retrievedreadonly; two-case recordedsourcehashesmatch.
+> Upstreambf16/twopass/roundedextent differsMacfp32/singlepass/extentpreserving;
+> notbackend-only. Caps30min/case/12GiBRSS/6GiBGPU/2GiBoutputs, noautomaticdispatch.
+>493active+495KD+502generator repositorypins unchanged. No ready/reference result.
+
+> **October23 generator real-input pilot PASS; CUDA procedure PREPARED, NOT started:**
+> Evidence verifier-generator-20261023-a01/cpu-pilot-01:12generator training CTs,
+> exact cached lesion counts/window roundtrips, coverage/jitter/context and augmentation
+> checks pass. All12PNGs actually reviewed; visual-review.json binds resultSHA
+>96dbb4e5e25563b7448eea0dbe721e482985c821648541bdd534163146498c9a.
+> Single-window previews can touch edges; bank coverage is separate. No exclusions.
+>132.375supervised seconds/1303130112BpeakownedRSS/reaped; zerooptimizer/GPU.
+> Newfixed-terminal executor has NO evaluation callback.58CPUtests pass27.84s,
+> including bounded config and failclosed parent/duplicate/cold/visual-review gates.
+> qualify_restricted_generator.py --prepare DONE; cuda-qualification-01/request.json
+>SHA1a9d71af651d8436d2cc8a66ccf1c41752f963b9d1c8297d9f48b818689d4dce.
+> PRESERVE request pins. Producer5/cold1 pending; nonpromotable5step/1warmup/5cosine,
+>1200s/12GiB each, actualCUDA, originalrestore tolerance, independentCbackup.
+> Current normal24k/fullnative/backups/reaped/MLflowFINISHED required before stages;
+> no retry/automatic dispatch. Only request.json exists, NO qualification/ready/launch.
+> Current reached16knativevalidation; GPU still owned.493active+495KD+255pilot
+> repository pins match. No liveMLflow/dashboard/schedule/trainer changes. After
+> actualGPU gates: scientific integration/receipt and explicitlaunch review remain.
+
+> **October23 inherited verifier geometry APPROVED; restricted CPU setup PASS:**
+> User chooses existing81/43/71mm margins with design-informed/exploratory scope.
+> Earlier smaller-margin failure preserved; do NOT refit/rerun/exclude/reassign.
+> New GeneratorInputs verifies parent completecache then restricts800 optimizer
+> roles;533reserved+70dev load/cache/lookahead rejected.36CPUtests pass3.95s.
+> restricted-inputs-01/setup.json under verifier-generator-20261023-a01:24k,
+>30visits each,18kfocus/6kcontext,1502bank slots;controlSHA
+>7c16e1cd7427a3a6f6457a698775d868a5cb0ca22b2037888778dac6d1a3e001.
+> Metadata-only,noCT/mask/GPU/newMLflow/dashboard/cache changes. No scientific
+> launcher/ready receipt. Actual sampling/pilot/restore/executor and separate frozen
+> candidate-eval path pending. DevIDs retained in Session identity but evaluation
+> denied by optimizer provider; never use old general executor to select ondev.
+> Active training and KD pins preserved. Do not rerun exclusive setup stages.
+
+> **October23 generator geometry COVERAGE GATE FAILED; user decision required:**
+> geometry-01 under verifier-generator-20261023-a01 preserves generator800-only
+> margin56/39/51mm, frozen BEFORE reserved checks. One verifierfit patient
+> PanTS_00002720 clipped;800generator/200calibration/67tune pass box containment.
+>27CPUtests pass2.45s,metadataonly,noCT/mask/dev/test/GPU. Do NOT rerun/refit/drop/
+> reassign patient to force pass. Loader integration not performed. Choose explicit
+> exploratory inherited81/43/71mm design exposure OR new lesion-independent fullCT
+> extent/resource qualification. No choice approved, no scientific launch. See
+> PANTS-VERIFIER-GENERATOR-20261023.md. Existing current/KD pins remain protected.
+
+> **October23 restricted verifier generator PLAN approved/partitioned, NOT launched:**
+> Read PANTS-VERIFIER-GENERATOR-20261023.md. New metadata-only preparation at
+> E:/PROWL/readiness/verifier-generator-20261023-a01; partitionSHA
+> e70e110078d59d35b4171a9711bd2e0ea1ffa9f25aaf405e0d010f31e030fd35.
+>800generator/266verifierfit/67tune/200calibration;70dev protected; all1333accounted.
+>20CPUtests pass2.36s. Proposed freshSuPreM24k fixedterminal/noheldoutselection.
+> No GPU/CT/mask/cache/model/MLflow/dashboard/launch. Existing margin policy used
+> all1333annotations; must derive train-dependent geometry from800only or explicit
+> exploratory-scope decision before claiming held-out preprocessing. Additive
+> restricted provider/cache/schedule/pilot/restore/receipt remain required. Preserve
+> active and KD pins; do not rerun exclusive partition exporter or start competing GPU.
+
+> **October23 parallel verifier preparation; generator decision REQUIRED:**
+> User approves Windows verifier preparation alongside Mac KD, not scientific
+> launch or GPU competition. Read PANTS-VERIFIER-PARALLEL-PREPARATION-20261023.md.
+> All1333train patients were seen by existing broad segmenters; splitting now
+> cannot produce held-out generator predictions. Do NOT fit/calibrate on70dev.
+> Proposed one restricted-training generator plus disjoint verifier-fit/calibration
+> patients needs explicit additional-run/budget decision; OOF alternative costs
+> multiple generators. No split/model/receipt frozen. Additive candidate_verifier_v1
+> and14synthetic tests pass2.06s; components/identity gate/role and indirect leakage.
+> No CT/mask/GPU/cache/MLflow/dashboard changes; active producing files untouched.
+> Existing verifier H0/guards retained. Candidate whole-component gate proposed,
+> not accepted soft-reweighting equivalent. No launch-ready claim or autoqueue.
+
 > **October23 CPU error review/comparison/checklist COMPLETE; no training change:**
 > User approved report-only error analysis, future KD comparison tooling and
 > teacher-pilot checklist. Read PANTS-DISTILLATION-ERROR-REVIEW-20261023.md and
@@ -2881,3 +3462,21 @@ Never commit raw data · split by patient not slice · full-volume sliding-windo
 Week 3 experiments DONE (EXP-09/12/15/16/17). Headline: **EXP-17 broke the ceiling — lesion 0.327, data is the proven lever.** Report updated (new candidate = scaled300). Ready to run (Quinn): re-log EXP-12/13/14/17 to MLflow in `.venv312` + grab run-comparison screenshots for M3A1; export the 3 UI cases (`export_case.py`) + `cp` into `ui/public/cases/`. THIS WEEK: M3P1 presentation prep (tomorrow, Quinn has time); finish standup Wed/Thu/Fri + retrospective; audience-notes-week3.md (Friday, live); commit+merge+submit. WEEK 4 (now clearly justified): build the disk cache → scale past 300 (500-1000 cases) = EXP-17b; add patient-level detection-sensitivity metric; full-volume eval. CODE TODO (AI owns): harden `--resume`; loud external-drive preflight; mesh-smoothing pass in export_case.py (offered). Ownership contract in implementation-plan.md.
 
 ## Imported Claude Cowork project instructions
+
+> **November3 native review complete; autonomous70 proposal awaiting decision:** Six retained-output CT overlay sheets reviewed; private2028/gallery transfers completed. Prepared request SHA853faa584b3abc87e5b16b25c186af9cdbd5e1bbe69b08de208d5ecabe083cbc, independent backup exact. Pins verified. Read WEEK-05-AUTONOMOUS70-PROPOSAL-20261103.md (e1a1a72). Keep5592 in70denominator as recommended preflight resource failure; existing16Mcap retained, needs20,108,950. Original metadata failure preserved. Current executor rejects unresolved failure; separately versioned accounting policy after approval. Proposed32GiB outputs/32GiB backups/64GiB aggregate,12GiBRSS/6GiBGPU,100GiBfloors,42,000s evaluation+7,200s restoration; estimated2.6–5.1h plus checks. No admission/source restoration/GPU/training launch. No training workers present. MacKD untouched.
+
+
+> **November3 autonomous70 CPU-qualified failure-accounting successor PREPARED:** Commit75346b1; read WEEK-05-AUTONOMOUS70-FAILURE-ACCOUNTING-20261103.md. Newa02 requestSHA7db98398be4da35bf775976ef81ec73e848e0258e56e760307817a4e5ec48364; old853faa58 request/pins preserved.8CPUtestsPASS6.45s; mockedcontroller5reuse/64inference/69scores/1declared5592failure, denominator70.16Mcap retained, failureDice null/noCT/model/scoring, independentfailurebackup. Newrequest/template Cbackup exact/allpins verified. No admission.json/restore/ready/GPU; scope numerical exception and32/32/64GiB budgets still require human approval. Stop at prepared request; no optional tooling.
+
+
+> **November3 approved autonomous70 durable handoff LIVE:** User approval relayed explicitly from Mac; request7db98398...8364 admitted with exact32/32/64GiB budgets and7200srestore/42000seval limits. Newhandoff receiptSHA c292729308f4b810fc1cf1ce0395576a49426bed017575a073dd0eabec8fa1c7; preservepins. Started hidden wrapper17764/supervisor42216,restore44972/worker42716 (wrappers41332/33432). Journal restoration_start20:41:33UTC; CTjournal advanced2/64,readbytes1.03->1.76GB; no errors. SevenCPUtestsPASS6.36s; commit e3f17b4. Sameone-shot continues restore->exactsource/headeradmission->freshreadyhash->ONEevaluation, stopsno retryonfailure. Do NOT redispatch. Evidence week05-full-baseline-preparation-20261103-a02; CTs week05-autonomous70-20261103-a02.5reuse/64new/5592resourcefailurein70denominator; no traininghours/MLflowtraining/schedule. MacKDuntouched.
+
+
+> **November3 baseline stopped at source-admission units gate; accounting complete:** Existinghandoff restored64CTs successfully/reaped3278.140s, then source-admission raised Unresolved CT/reference units; outeradmission24.547s/exit1/reaped, handofffailed21:36:44UTC. No ownedworkers/GPUevaluation/retry. Preservea02evidence/pins. Separate readonlyLenovoaccounting commit3a64d03: nine scientificsessions964509.828s=267.9193967h, including oldsix751607.078s; MLflowIDs duplicates not additive. Report/JSON WINDOWS-TRAINING-HOURS-20261103; JSONSHA25f7df6452d726a8cef06d0580b6a4a203e4b7363c9333a0c64c13bbb98bd0d7. Includes in-loopvalidation/I/O, not optimizer-only; historicalcourseDBabsent/Mactotalunreconciled. No dashboardchange.
+
+
+> **November3 autonomous70 continuation GPU LIVE:** Explicit userapproval validcases; a03 requestSHAed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e, handoffSHA11c951d375f4f6645731317f30532abfd6b8813d31706ef347d8818f27d95cd9. Preserve allpins/oldfailure.13CPUtestsPASS6.58s; commit5e82fafpushed. Samehiddenhandoff supervisor32040(wrapper26476),evaluationsupervisor13660(wrapper29748),firstworker41844(wrapper47140). SourceadmissionPASS36.765s/624693248B/reaped; readySHA19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845. First7636segmentertiles5->7/144 verified. Allinitialrequest/admission/ready/resource/handoffCbackups match.5reuse/58new/sevenexplicitfailures full70denominator;6unknownunitCTs neverinferred,5592capretained. No extraction; reuse64restoredCTs. Remainingeval41975.453s minus prior24.547admission; originallimitsunchanged. No retry/duplicate/traininghours/schedule. Read a03 journals; do NOTredispatch. Firstpredictionbackup verification pending.
+
+
+> **November3 a03 launch VERIFIED:** Same32040/13660 durableowners; first7636GPUworker41844 exited0/reaped194.610s/2221322240BpeakRSS; result178.047s/1021313024BGPU. Tiles7->144, aggregatecompleted1/70afterCPUscore. Allfive E/Cprediction/localizer/probability/result/access hashesmatch; predictionSHA c99fd4181c632dd187b365610cfdb013aaaa53a7e71d4c13a496b9293de75301. No referenceinputs/optimizerupdates; nofailure atcheck. Continue samejob, no redispatch. Requested63outputs/sevenfailures, notfinalcompletion.
+

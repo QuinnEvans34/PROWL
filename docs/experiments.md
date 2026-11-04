@@ -1,5 +1,487 @@
 # PROWL living experiment notebook
 
+## November 2 — Fixed four-case CT-only versus provided-region evaluation complete
+
+The human-approved narrow exception was exercised once; original cross-device
+probability equivalence remains UNQUALIFIED, with unchanged failed comparison.
+All four exposed-development cases and both arms completed (8 inference workers,
+8 separate CPU scorers), with matching330pins/independent backups and clean shutdown.
+Mean lesion Dice across the same3 positive-reference cases: CT-only0.179978556,
+provided-region0.139355084. The fourth empty-reference case remains in FP reporting.
+Both arms overlap2/4 lesion components; zero-overlap predicted components35 versus13.
+All annotated pancreas/lesion fields have100% crop coverage in both arms. These
+misses therefore persist despite full crop coverage; no consistent provided-region
+Dice benefit is established. Four exploratory cases cannot replace the full dev
+benchmark or establish an H0/model-quality verdict. No new training or training
+hours, no retry/expansion, Mac KD untouched. Detailed paired metrics, contour and
+resource evidence: `capstone/operations/WEEK-05-FOUR-CASE-EXPLORATORY-20261102.md`.
+
+## November 2 — Matched-runtime diagnostic completed; numerical gate still fails
+
+Authorized isolated Pillow correction passed all45 CPU tests. One diagnostic
+completed60 windows in78.282s (86.532s supervised), with two selected input/logit
+traces and verified independent backups. Matched scientific-library versions
+produced byte-identical Windows probabilities to the previous attempt. The same169
+of51,444,975 values exceed unchanged tolerance; both final masks remain identical
+to Mac. This does not identify the numerical cause. No new training or Dice result;
+four-case evaluation remains blocked. Mac KD untouched. Full evidence and resource
+closeout: `capstone/operations/WEEK-05-MATCHED-RUNTIME-QUALIFICATION-20261102.md`.
+
+## November 2 — Matched Windows runtime: CPU gate blocked before inference
+
+Exact Mac scientific-library base versions and Python 3.12.13 installed separately;
+safe strict loading of both models and 272 original repository pins passed.
+Focused CPU qualification: 43 passed, 2 failed (38.70 seconds), both missing Pillow
+(`PIL`) in original-control equivalence imports. No GPU diagnostic or training ran;
+no new Dice, hypothesis verdict or cross-device comparison exists. Failure evidence
+is preserved; no automatic retry or tolerance change. Conditional four-case approval
+remains gated on readiness and comparison success. See
+`capstone/operations/WEEK-05-MATCHED-RUNTIME-QUALIFICATION-20261102.md`.
+
+## November 2 — Verifier fit completed; autonomous-baseline CPU handoff prepared
+
+The verifier completed 80 epochs / 10,560 updates in 1.88154 training hours.
+Selected epoch 47 has tuning BCE 0.277391; terminal BCE is 0.281563. All losses
+and tuning records match FINISHED MLflow, seventeen saved execution artifacts
+match independent backups, and training workers were reaped. Calibration and
+matched development evaluation have not run: no new Dice or H0 verdict yet.
+
+The Week 5 handoff was read from d03e904 without merging over this checkout.
+Existing cascade regression tests passed (32 plus one Unix-only skip). Additive
+CPU region/access-guard tests passed (10). The old single resized144-cube path
+cannot silently consume current physical-window weights. Private localizer and
+current-control20k provenance/export, recipe and cross-device reference remain
+missing. No real GPU evaluation was dispatched, and Mac KD was untouched.
+[Readiness report and minimal transfer request](capstone/operations/WEEK-05-CUDA-READINESS-20261102.md).
+
+
+## November 2 — False-positive verifier training launched
+
+User approved **Reject false lesion candidates while preserving real lesions**.
+The frozen fresh 80-epoch / 10,560-update run is advancing: journal and phone API
+were observed at 122, 168 and 200 updates. MLflow run
+`4475886fbdbf41c8a02d4f814a9733ac` is RUNNING with stored training losses and the
+first tuning result: patient-balanced BCE 0.374318 at update 132 on 67 patients.
+This is classification loss, not Dice or evidence of reduced false positives.
+H0 remains not tested until the frozen calibration and outcome comparison.
+
+The initial checkpoint has an independently matching C: backup. The phone server
+was restarted, the prepared verifier card applied after before-hash checks and
+backups, and all eight historical experiments retained. Existing private Tailscale
+access and both APIs respond successfully. Total time comes from actual journals;
+preparation and diagnostics are excluded. No producing code or recipe changed.
+No recurring automation or automatic successor was created.
+
+
+## October 31 — False-positive verifier ready for training
+
+**Reject false lesion candidates while preserving real lesions** is fully prepared
+and qualified. All 333 patients are accounted for: 266 fit / 67 tune, with 1,053 /
+253 candidate inputs. The 12-case pilot was visually reviewed. Full candidate
+coverage, cached-array precision, source alignment and independent backups passed.
+Five actual GPU updates and an independent-backup cold replay passed exactly;
+the full tuning path also ran without changing model/optimizer/RNG state.
+
+The frozen run is fresh initialization, 80 epochs and 10,560 updates, with the
+earliest minimum tuning patient-balanced BCE selecting the checkpoint. Measured
+runtime suggests approximately 1.5–2.5 hours, subject to logging and machine
+variability. Preparation itself took longer because it restored and constructed
+the inputs once; these are now cached for training.
+
+Some region-edge candidates have heavily padded context. The two worst examples
+were reviewed in orthogonal cached views: components remain intact, validity is
+explicit, and the limitation is documented. No case was removed and the frozen
+representation was not changed after accessing tuning data. This verifier can
+reject existing predictions; it cannot recover lesions the generator never found.
+
+Ready receipt SHA: `0ae6d1eae68c1a6cc23ffe575138286ea1de13d81d69b3fcf0c757c3d669e77a`.
+[Full evidence and launch handoff](capstone/operations/PANTS-VERIFIER-TRAINING-20261031.md).
+MLflow integration and the phone dashboard are prepared; the dashboard remains
+unchanged until scientific launch. Diagnostic work adds no training hours.
+**Scientific training has not started; H0 remains not tested.** Explicit launch
+approval is the next action. No recurring automation or automatic retry is armed.
+
+
+## October31 — Verifier input pilot passed; complete build underway
+
+The fitting-only review is complete: 266 patients produced 1,053 candidate
+components, with 140 overlapping annotated lesions and 913 without overlap.
+Eight patients have no candidate and remain in outcome accounting. These counts
+motivate the false-positive verifier; they do not demonstrate verifier efficacy.
+
+All 333 fit/tuning CTs now match their original identities. The 12-case input pilot
+passed and every PNG was reviewed. All 70 pilot candidates retain complete global
+coverage; one supplementary detail view is partial. The frozen design combines
+nearest-neighbor support occupancy with conservative splatting, preserving both
+thick-slice structures and tiny components. Earlier prospective designs remain
+preserved. Full-source annotation counts also match inherited region counts for
+all 266 fitting cases, using pinned metadata instead of a new voxel audit.
+
+The complete 333-case cache and independent backups are being built under owned
+session 61782. Five actual GPU diagnostic updates, a full tuning-path check,
+independent-backup cold replay and final readiness freeze remain. Scientific
+training has not started; H0 remains **not tested**. Calibration and development
+labels remain protected.
+
+## October31 — Preparing the candidate verifier for training
+
+User authorized autonomous setup and qualification through launch readiness.
+Scientific launch remains a separate instruction. The533 prediction archive is
+complete and reused. The fit-only component review is underway on266patients;
+no tune/calibration/development outcomes inform this design.232 additional
+fit/tune CTs are being restored by exact original identity, reusing101 recovered
+files. This is source preparation, not a duplicate cohort audit.
+
+The proposed two-view classifier, patient-balanced fitting, tune-only checkpoint
+selection, conservative calibration policy and readiness gates are described in
+[the verifier training plan](capstone/operations/PANTS-VERIFIER-TRAINING-20261031.md).
+H0 and sensitivity/Dice guards are unchanged. Synthetic tests pass for candidate
+coverage, role restrictions, checkpoint replay, threshold safeguards and dashboard
+classification metrics. Real pilot review, full input qualification and actual
+GPU/cold replay are still pending; no readiness or scientific efficacy claim yet.
+
+## October31 — Candidate prediction recovery completed and verified
+
+All533 reserved patients now have prediction archives:355 preserved exports plus
+178 recovered exports. Membership and roles match the frozen partition exactly:
+266 verifier-fit,67 tune,200 calibration. No patient exclusions or repeat inference
+of the355 completed cases were required. Every record reports zero reconstruction
+gaps, no lesion-label access and zero optimizer updates.
+
+The local handoff completed its full533 independent prediction/sidecar backup
+comparisons. Final manifest, journal, request, source-check, resource and handoff
+backups were checked again at closeout and match. Manifest SHA-256:
+`b5c989a158598e2aa3e3c6ecdaed5f0bf4b91803d0574b3250c5def473827aed`, stored at
+`E:/PROWL/artifacts/verifier-candidates-20261030-a01/manifest.json`.
+
+Continuation supervisor exited0 with workers reaped in10,645.204s (2.96h),
+peak ownedRSS3,088,224,256bytes; GPU reserved peak1,042,284,544bytes. Combined
+with the original failed attempt, supervised export time was30,548.689s (8.49h),
+within the16h budget. No Python workers remain. The recovery required no further
+repair after launch; all old failures and frozen receipts remain preserved.
+
+The hourly recovery monitor was removed after verified completion. This is
+successful inference preparation, not verifier efficacy: no new Dice measurement,
+null-hypothesis verdict, MLflow training run or training hours. Verifier-specific
+representation preparation, design and qualification remain before scientific
+training can launch.
+
+## October30 evening — Recovered prediction export is advancing
+
+The one-shot recovery handoff passed its source gates and launched the remaining
+178-case export. All178 restored CTs matched original identities. CPU preparation
+completed successfully in395.938s, peak ownedRSS1,423,847,424bytes, workers reaped;
+all178 source/header checks and the full read of the formerly failing5914CT passed.
+The separate4995-pin receipt SHA is
+`d4884782233a639a2fa51b0f05e79f2ff9cd3914b9681d1281e447bf780b33a4`.
+
+At the03:22UTC hourly check, new completed cases advanced51 to52:407/533 total
+including the355 preserved predictions. The first recovered case5914 and case6930
+had exact independentE/C prediction and sidecar backups; requestbackup also
+matched. Checked records have zero reconstruction gaps, no lesion-label access
+and zero optimizer updates. Same owned handoff/worker continue; no repair needed.
+This is inference preparation, not scientific training or a Dice/H0 result.
+Hourly monitoring continues until final manifest/backups and clean exit verify.
+
+## October30 — Recover identical CT inputs and finish the interrupted export
+
+The October27 candidate export stopped after355/533 patients when its CT source
+onD: became unreadable. Its failed journal/resources remain preserved. The fresh
+PanTS download finished October30; all CT archives passed publisher SHA checks.
+This is recovery of the same inference preparation, not a new training experiment.
+No null hypothesis or Dice claim is evaluated here.
+
+Only the178 missing CT inputs are being restored toE: (6.13GB), requiring exact
+size and SHA equality with the original cached source identities. ExistingE:
+pancreas masks and the original model, patient roles and preprocessing are kept.
+The original producing-pin check passed; independent355-archive/sidecar backup
+verification and targeted restoration are in progress.44 recovery/export CPU
+tests pass (36.56s). No GPU continuation has started at this entry.
+
+The separate continuation must pass all source/alignment gates, including a full
+CPU read of the previously failing CT, then freeze its own receipt. It reuses355
+completed predictions and computes only178. Original failures are not overwritten;
+no test or lesion-label access, new optimizer updates, artificial training hours,
+MLflow training run or schedule is introduced. Scientific verifier training still
+requires its later preparation and qualification.
+
+Detailed gates and evidence: [recovery plan](capstone/operations/PANTS-CANDIDATE-RECOVERY-20261030.md).
+
+Recovery update: all355 completed prediction/sidecar pairs independently verified
+againstC: backups; audit passed in372.515s.48CPU tests now pass in15.22s, including
+local handoff failure/duplicate gates. The previously failing5914CT has exactly
+the original SHA. A one-shot local handoff is running, waiting for restoration;
+it will perform bounded CPU preparation and dispatch only the178-case inference
+continuation after all gates pass. It stops on failure without retry. No AI
+polling schedule was enabled. At01:56UTC restoration was8/178; GPU export not yet
+started. Follow handoff.jsonl in the new continuation readiness directory.
+
+## October27 — Approved reserved-patient prediction export started
+
+User explicitly approved the full-stage resource limits. New additive supervisor
+and archive/backup helper qualified by48CPUtests (48.57s). FrozenrequestSHA
+edd8824e401aad8e5d8aefbf228f876931f3e792caaa457a7b28b32ca38b6a31,
+3389pins, at E:/PROWL/readiness/verifier-candidate-export-20261027-a01.
+One stage:533reserved patients,6verifiedpilotarchives reused and527newinferences,
+no labels/development/test/optimizer or threshold/modelselection. No training
+hours added. Prior generator and pilot receipts remain unchanged.
+
+Launch verification:7/533complete (sixreused plusfirstnewpatient), eighthstarted.
+All7predictionarchives andsanitizedsidecars independently rehashed againstCbackups;
+requestbackup also matches. Firstnewpatient29.5s; not a fullcohort ETA. Sameowned
+exec60178 continuesunder16h/12GiBRSS/6GiBGPU/64GiBcombinedE/40GiBcombinedC caps,
+100GiBfreefloors,AC/exclusiveGPU/noautoretry. Fullmanifest/closeoutpending.
+No newscientifictraining, MLflowRUNNING, schedule or dashboardtrainingcard.
+See PANTS-VERIFIER-CANDIDATE-EXPORT-20261027.md for continuation and closeout gates.
+
+
+## October26 — Six-case candidate export pilot passed; storage decision next
+
+New inference-only provider/exporter/three-role provenance implemented additively;
+36CPUtests pass. Real six-fit-case pilot passed in395.328s,zerooptimizerupdates.
+Exact original hardpredictions and lossless probability archive roundtrip,zero
+reconstruction gaps and zero annotation voxels outside inference regions on all6.
+All6overlays reviewed; generator quality problems remain, not export differences.
+23candidates,5annotation-overlapping and18false;4/5annotated components detected.
+H0 remains NOT TESTED. No development/test or tune/calibration label access.
+
+Full533archive projects21.5GB compressed/29.84GBraw; withexistingcache this exceeds
+current32GiBlimit. No limits changed. Proposed16h bounded inference stage,
+64GiBcombinedEcache+predictions/40GiBcombinedCbackups,12GiBRSS/6GiBGPU andexisting
+100GiBfreefloors awaits explicit approval. This is not a new training run.
+See PANTS-VERIFIER-CANDIDATE-PILOT-20261026.md and pilot budget-review.json.
+Preserve verified six outputs; no repeat pilot or audit needed. Verifier training
+still requires fullstage completion, fit-only representation design and qualification.
+
+## October26 — Candidate generator completed; verifier hypothesis not yet tested
+
+Closeout PASS for **Candidate generator with reserved verifier patients**.
+24,000 contiguous finite-loss updates,800unique generator patients,exactly30visits
+each; no development evaluation or checkpoint selection. Fixed terminal checkpoint
+SHA256 0da3ac2b31eceeab82f040af6c95bded6bf3b500fe6cac00449584e2404f49b8.
+Training22.227227h (80,018.016s); supervisor80,057.281s,peakownedRSS2,839,244,800B,
+exit0/reaped; no remaining generator processes observed. All3351producingpins match.
+All11independent backupfiles match, including terminal,last,result and fulljournal.
+MLflow0acb9a8f7e8a463194dd599a01b78507 FINISHED;961storedloss points exactly match
+thejournal and no trackingwarning. Sampling1502coverage/16498jitter/6000context.
+Meanlossfirst500 .965313;last500 .519148;terminalbatch .645141. Loss is not Dice.
+
+**Scientific verdict: H0 NOT TESTED.** This run creates the generator prerequisite;
+it does not establish that a verifier reduces false alarms or improves Dice.
+No new Dice score, no PR claim and no clinical/generalization claim. Inherited
+annotation-informed geometry and unknownSuPreMpretrainingmembership remain disclosed.
+
+Evidence: E:/PROWL/readiness/verifier-generator-review-20261026-a01/results.json.
+Next-stage plan: PANTS-VERIFIER-CANDIDATE-PREPARATION-20261026.md. Existing optimizer
+loader stays restricted; separate inference-only533patient provider/exporter and
+three-role provenance contract required. Fit266/tune67/calibration200 unchanged;
+70dev/test untouched. Bounded pilot must precede full533resource approval. No new
+training, GPU inference, candidate archive, schedule or automatic successor started.
+
+## October25 — Candidate generator with reserved verifier patients launched
+
+Explicit user approval received; one fresh800patient/24000update scientific run
+started from frozen readiness receipt b3e49f3d96e1694252fc29b9776d7969ba139a29b245b23bbc4b27bcb5f46d89.
+Actual updates advanced2 to28 during verification. MLflow run
+0acb9a8f7e8a463194dd599a01b78507 is RUNNING; stored loss at steps1 and25 verified
+(step25:1.1628055572509766), without tracking warning. Independent initial
+E:/C: checkpoint hashes match efc5070e690bfe0072cec29cb8d305bf3793a73519e862eb3043da1b14fbfdaf.
+
+Phone monitor restarted separately from training; prepared configuration applied,
+seven historical experiments retained. Private dashboard visibly shows live steps,
+loss and elapsed time, explicitly no development Dice selection. At28updates,
+75.844new seconds +877718.297historical seconds =877794.141total seconds,
+verified against the API sum. Diagnostic updates excluded. Legacy status endpoint
+has an unused hardcoded next-validation field; experiment-card API correctly null.
+No model-quality conclusion or H0 verdict at launch. This is the restricted
+generator prerequisite, not the trained verifier itself. No automatic next run.
+
+## October25 — Restricted verifier generator qualified and ready for launch review
+
+Five realCUDA diagnostic updates passed; independentstep4backup coldrestored and
+replayedstep5 with exactstate/input andmaxnextstatedifference3.725290298461914e-9,
+zero toleranceviolations. Bothworkersreaped. These are nonpromotable engineering
+updates, not scientifictraininghours or model-quality evidence. NoH0verdict here.
+
+Scientific launchsupervision/MLflowintegration/fixedterminal24000selection prepared.
+Final65tests pass19.19s, includingjournal-derivedphonehours,protectedroles,
+backupfailure andmockMLflowsuccess/failure. ExistingphoneUI now supports a truthful
+generator-only card; live sourceconfiguration stillpoints tocompletedvariedfocus.
+No newscientificrun orschedule. Full handoff:
+[Generator readiness](capstone/operations/PANTS-VERIFIER-GENERATOR-READY-20261025.md).
+
+Readyreceipt3351pins verified at verifier-generator-launch-20261025-a01/ready.json,
+SHA b3e49f3d96e1694252fc29b9776d7969ba139a29b245b23bbc4b27bcb5f46d89.
+Awaitexplicitlaunchapproval; thenonefresh800patient24krun,actualMLflowloss/backup/
+updatesverified,existingprivatephonedashboardswitch withhistoryretained. No repeat
+cohortaudit orpilot. Teacherreference environmentissue isnot a blocker forthisrun.
+
+## October25 — Varied lesion-focused views: completed, hypothesis supported
+
+Full report: [Varied-view results and next-run gates](capstone/operations/PANTS-VARIED-FOCUS-RESULTS-20261025.md).
+
+Completed24000updates and all12native70case validations; selected checkpoint24k
+Dice0.396139. Versus preregistered parent selected22k0.356714: gain+0.039425,
+paired95%CI[+0.009929,+0.069369]. **Reject H0; accept the sampling intervention**
+under the prospective practical rule; allfiveguards pass, including voxel recall.
+Terminal-to-terminal secondary also passes (+0.041814,CI[.012158,.071216]).
+Exploratory repeated-development/selected-checkpoint evidence, not independent
+test/clinical generalization. Historical matchednativePR remains0.423761.
+
+Detection32/36→34/36,negativealarms34/34→33/34,negativepredictedvolume118.944→65.450mL,
+positivemacrorecall.435074→.533401. Componentdetection38/45unchanged. Smallpatient
+Dice.163917→.215314,large.356305→.447520. False alarms and missed components remain.
+All7839positive component-jitter updates retained lesionvoxels afteraugmentation.
+
+Runtime35.031h versus72.117h; nativevalidation13.497h versus12.707h. Most savings
+outsidevalidation, consistentwithqualifiedcache/prefetch. Do not changevalidation
+cadence or extendtraining retrospectively. No new scientific run launched.
+
+All3275producerpins,independentbackups,workerreaping,MLflowFINISHED verified;
+961storedloss points. Retrospective18metrics/6tags verified in existingMLflowrun;
+resultsJSON and report uploaded. PhoneAPIreportscompleted. Fourreviewtests pass;
+first helper's staleparent-bindingpath failure preserved, then correctreceipt used.
+NoCT/mask/testreads/inference/optimizerupdates duringreview.
+
+Next Windows planned training remains the restricted800patient candidate generator
+for a laterfalse-positive verifier, keepingvariedviews. Existingpilot/audits reused.
+NowGPUisfree: pending5CUDAengineeringupdates+1independentcoldreplay,scientific
+integration/readinessreceipt,thenexplicitlaunchreview. Teacherreference runtime
+repair is separate and doesnotblock thisSuPreM run. No schedules orautomaticlaunch.
+
+## October23 — Corrected Merlin import audit: dependency resolved, runtime incompatibility exposed
+
+One explicitly authorized corrected CPU-only attempt installed batchgenerators0.25.1
+into a new isolated dependency directory. It got past the former missing import,
+then failed in upstream-pinned timm0.6.12: mutable MaxxVitConvCfg dataclass default
+is rejected by the current Python runtime. Evidence import-audit-02 under
+merlin-upstream-reference-20261023-a01:33.640s/855552000BpeakRSS/exit1/reaped.
+Original failure preserved. No third attempt, patched dependency, model forward,
+CT read, CUDA job or new scientific result. No hypothesis verdict. Current training
+17647/24k remains untouched; checked producer repository pins match. Next requires
+an explicit environment-compatibility decision, not a silent dependency substitution.
+
+## October23 — Merlin upstream CUDA reference preparation; no inference yet
+
+User authorized bounded diagnostic comparison on exposed training cases2720then6222
+to investigate teacher limitations versus inference-pipeline differences. This is
+not scientific training, independent generalization, or a backend-only experiment.
+Read [Windows reference preparation](capstone/operations/WINDOWS-MERLIN-UPSTREAM-REFERENCE-20261023.md).
+
+Separate pinned Merlin release acquired, checkpointSHA38535f10... verified; safe
+CPU raw/EMA conversion passed,26channels/lesion19. Full upstream source copied
+unmodified at45fea075a; missingdatasetutils resolved, live environment unchanged.
+CPU import audit FAILED because upstream eagerly imports nnformer, which needs
+missing batchgenerators. Failure preserved/reaped; no automatic retry. Current
+scientific run17550/24k still owns GPU. No reference inference, metrics, H0 verdict,
+MLflow run, dashboard switch or schedule. Existing producer repository pins match.
+Mac two-case snapshot5ef62a8 retained; recordedsourcehashes match localmetadata.
+Upstream precision, extent, normalization and second-pass differences must be
+reported separately from hardware effects. Remaining dependency retry needs
+approval; inference also waits for normal scientific completion and final gates.
+
+## October23 — Restricted generator: real input pilot reviewed; GPU qualification prepared
+
+The next Windows prerequisite for **Reject false alarms without losing small lesions**
+now has a tested fixed-terminal executor and a reviewed real-input pilot. This is
+engineering evidence, not a scientific result or acceptance/rejection of H0.
+
+Twelve generator-training cases passed actual cached-target counts, exact window
+roundtrips, coverage/jitter/context sampling and augmentation checks. All twelve
+three-plane PNGs were opened and reviewed. Small lesions remain visible; coarse
+acquired detail remains coarse. Several single windows touch organ/lesion boundaries;
+these previews do not show the entire bank and are not themselves whole-field proofs.
+No gross overlay displacement was apparent; no clinical relabeling was performed.
+Full coverage continues to rely on the numerical checks and inherited cohort evidence.
+
+Pilot:132.375supervised seconds,1303130112bytes peak ownedRSS, workers reaped,
+zero optimizer updates/GPU use. Evidence: E:/PROWL/readiness/verifier-generator-
+20261023-a01/cpu-pilot-01, including separately bound visual-review.json.
+Final58CPUtests pass27.84s. Earlier57-test result retained; an added configuration
+test verifies the bounded diagnostic schedule fits existing Session constraints.
+
+The fixed-terminal executor cannot evaluate development patients or select a best
+development checkpoint. The new guarded qualification procedure is prepared at
+cuda-qualification-01/request.json (SHA256
+1a9d71af651d8436d2cc8a66ccf1c41752f963b9d1c8297d9f48b818689d4dce).
+It is NOT ready.json. After the current run finishes normally: five nonpromotable
+CUDA updates, independently backed-up step4, then one cold-replayed step5. Each
+stage has1200s/12GiB limits and no retry. Diagnostic warmup1/horizon5 differs from
+the proposed scientific warmup500/horizon24000; diagnostic weights cannot promote.
+Original numerical tolerance is unchanged. Parent final validation, backups,
+worker reaping and MLflowFINISHED are mandatory admission checks.
+
+Current run reached16000/24000 and started native validation during preparation.
+No new scientific launch, GPU contention, MLflow record, phone configuration,
+AI schedule or automatic successor handoff. Remaining: actual CUDA/cold gates,
+scientific integration/frozen receipt and launch review; later reserved-patient
+candidate generation has its own still-unmeasured resource budget.
+
+## October23 — Exploratory inherited geometry approved; restricted input preparation passed
+
+User chooses existing81/43/71mm coverage-verified margins, explicitly accepting
+design-informed preprocessing. Prior smaller-margin failure remains preserved.
+No excluded/moved patients or claims of fully independent held-out preprocessing.
+New GeneratorInputs validates original cache admission then binds800-only optimizer
+roles; reserved533 anddev70 cannot load/prefetch through it. No shared cache edits.
+36CPUtests pass3.95s. Actual metadata-only preparation at verifier-generator-
+20261023-a01/restricted-inputs-01/setup.json gives24000visits,30eachpatient,
+18000focused/6000context,1502coveragebank reservations fit the schedule. New control
+SHA7c16e1cd7427a3a6f6457a698775d868a5cb0ca22b2037888778dac6d1a3e001.
+No CT/mask reads, no CUDA updates or launch. Session compatibility retains devIDs
+in identity but provider rejects evaluation; fixed-terminal selection must be
+enforced by future separate generator executor. Actual sampling/pilot/restore,
+candidate-evaluation path, scientific executor/receipt and launch remain pending.
+
+## October23 — Restricted generator geometry gate failed on one reserved patient
+
+Generator800-only fit yields extra margins56/39/51mm, frozen before reserved
+assessment. Existing boxes show all800generator/200calibration/67tune covered;
+one of266verifierfit, PanTS_00002720, clipped. No difficult-case deletion, role
+reassignment or margin refit. Existing81/43/71mm policy retains its historical
+coverage evidence but used all1333labels for design.27CPUtests pass2.45s;metadata
+only, no CT/mask/dev/test reads or GPU. Evidence verifier-generator-20261023-a01/
+geometry-01. Loader integration paused at failed full-coverage gate. User decision:
+retain old geometry with explicit exploratory design-exposure limitation, or
+qualify lesion-independent fullCT extent with additional compute. Neither launched.
+
+## October23 — Restricted candidate-generator planning approved; partitions frozen
+
+User approves the additional restricted-cohort generator planning. Metadata-only
+preparation assigns800generator/266verifierfit/67verifiertune/200calibration, with
+70development unchanged. Calibration100positive/100negative. Exact roles/hashes
+and budget in [generator plan](capstone/operations/PANTS-VERIFIER-GENERATOR-20261023.md).
+20CPU tests pass2.36s;1333metadata hashes checked, no CT/mask/GPU/model/launch.
+Partition SHA e70e110078d59d35b4171a9711bd2e0ea1ffa9f25aaf405e0d010f31e030fd35.
+Proposed24k fixed-terminal freshSuPreM generator, no held-out checkpoint selection;
+no expectation this800patient generator beats the existing broad model. Verifier
+H0 remains alarm reduction with sensitivity/Dice guards, same generator in both arms.
+Important unresolved gate: inherited81/43/71mm margins used all1333annotations;
+derive train-dependent geometry from800only or explicitly disclose/approve
+exploratory design exposure. No inference GTcrop, no new duplicate audit.
+Restricted provider/cache index and actual pilot/restore still required. Current
+run untouched; no automatic successor, no ready.json or scientific launch.
+
+## October23 — Parallel false-positive verifier preparation; generator decision required
+
+User approves preparing "Reject false alarms without losing small lesions" on
+Windows while Mac prepares KD. This supersedes the earlier KD-first dependency
+for preparation only, not scientific launch. See
+[parallel preparation](capstone/operations/PANTS-VERIFIER-PARALLEL-PREPARATION-20261023.md).
+Current broad PanTS segmenters saw all1333 training patients; a new verifier split
+cannot undo generator exposure. The70 development patients remain protected.
+Recommended decision: one fresh restricted-training candidate generator with
+separate unseen verifier-fit/calibration patients, instead of several costly OOF
+fits. This additional training/budget is NOT launched or implicitly approved.
+No patient partition or generator checkpoint has been frozen.
+
+Additive candidate/provenance primitives and14 synthetic CPU tests pass (2.06s).
+Checks cover26-connected tiny candidates, GT-only training labels, identity
+retention, missing/nonfinite scores, direct and indirect calibration leakage.
+No CT/mask reads, GPU work, model training, cache, MLflow or dashboard changes.
+Existing H0/guards retained; whole-component retention is a proposed simplification
+from soft reweighting, not an adopted inference change. No claim launch-ready.
+
 ## October23 — Error patterns and distillation review tools prepared
 
 This is **CPU-only analysis, not another training experiment**. User approved
@@ -5204,3 +5686,38 @@ Cohort, cadence, numeric recipe and storage/memory limits remain unchanged. Sepa
 backup directories use the segment name; configuration, engineering checks and launch receipt are
 under `outputs/prowl/full-segmenter-resume-mac-20261008/`. See the full training guide for resume
 validation, retained native comparison failure and scope limitations.
+
+
+### November 2 — Week 5 private model packet received (preparation only)
+
+Archive and all16 payload hashes verified; both inference bundles strictly loaded on CPU. All70 development IDs and five proposed case identity receipts match. No inference, new Dice or hypothesis test occurred. Cross-device reference remains missing; scientific admission stopped, Windows supervisor integration still pending. See `capstone/operations/WEEK-05-PACKET-RECEIVED-20261102.md`.
+
+
+### November 2 — Autonomous physical-window CUDA diagnostic completed
+
+Single approved PanTS_00001070 inference completed with60windows/zero reconstruction gaps within the selected ROI. Inner73.984s; supervised89.406s; peakRSS2,167,230,464B/GPUreserved1,021,313,024B. Native exports and9independentbackup pairs match; workers reaped. ROI~85.2%CT is descriptive, not localization quality. No reference masks, Dice, hypothesis test or training hours. Request dc37f20affd1e071c46208ebbd8b34052aa09a704718df235de4385a48a726b3 is preserved. Four-case evaluation waits for a same-recipe cross-device reference and numerical-rule review. See `capstone/operations/WEEK-05-PHYSICAL-EXECUTOR-20261102.md`.
+
+
+### November 2 — Cross-device engineering probability comparison failed
+
+Preserved CUDA/MPS diagnostic predictions and localizer masks are exactly equal, but169of51,444,975 probability values exceed the accepted atol1e-5/rtol1e-4 rule; maxabsolute difference4.851818084716797e-5. Rule unchanged; no batch launch, new inference, model-quality verdict or training. Library versions differ, so backend alone is not isolated. Exact169failure values are retained. See `capstone/operations/WEEK-05-CROSS-DEVICE-RESULT-20261102.md`.
+
+
+### November 2 — Saved numerical failure investigation, no inference
+
+All169failing values belong to distinct confidently background voxels; min top-two margin0.502727. Original strict failure remains169underfloat64 and reversing the relative-reference term. No hard predictions changed. Backend/library cause remains unisolated; two trace windows and one isolated matched-runtime Windows qualification are proposed only. Four-case autonomous evaluation blocked; ongoing Mac KD is separate and untouched. Report/code pushed d974f7e; TrelloW05-09/W05-01 updated. See `capstone/operations/WEEK-05-SAVED-NUMERICAL-INVESTIGATION-20261102.md`.
+
+> **November3 native review complete; autonomous70 proposal awaiting decision:** Six retained-output CT overlay sheets reviewed; private2028/gallery transfers completed. Prepared request SHA853faa584b3abc87e5b16b25c186af9cdbd5e1bbe69b08de208d5ecabe083cbc, independent backup exact. Pins verified. Read WEEK-05-AUTONOMOUS70-PROPOSAL-20261103.md (e1a1a72). Keep5592 in70denominator as recommended preflight resource failure; existing16Mcap retained, needs20,108,950. Original metadata failure preserved. Current executor rejects unresolved failure; separately versioned accounting policy after approval. Proposed32GiB outputs/32GiB backups/64GiB aggregate,12GiBRSS/6GiBGPU,100GiBfloors,42,000s evaluation+7,200s restoration; estimated2.6–5.1h plus checks. No admission/source restoration/GPU/training launch. No training workers present. MacKD untouched.
+
+
+> **November3 autonomous70 CPU-qualified failure-accounting successor PREPARED:** Commit75346b1; read WEEK-05-AUTONOMOUS70-FAILURE-ACCOUNTING-20261103.md. Newa02 requestSHA7db98398be4da35bf775976ef81ec73e848e0258e56e760307817a4e5ec48364; old853faa58 request/pins preserved.8CPUtestsPASS6.45s; mockedcontroller5reuse/64inference/69scores/1declared5592failure, denominator70.16Mcap retained, failureDice null/noCT/model/scoring, independentfailurebackup. Newrequest/template Cbackup exact/allpins verified. No admission.json/restore/ready/GPU; scope numerical exception and32/32/64GiB budgets still require human approval. Stop at prepared request; no optional tooling.
+
+
+> **November3 approved autonomous70 durable handoff LIVE:** User approval relayed explicitly from Mac; request7db98398...8364 admitted with exact32/32/64GiB budgets and7200srestore/42000seval limits. Newhandoff receiptSHA c292729308f4b810fc1cf1ce0395576a49426bed017575a073dd0eabec8fa1c7; preservepins. Started hidden wrapper17764/supervisor42216,restore44972/worker42716 (wrappers41332/33432). Journal restoration_start20:41:33UTC; CTjournal advanced2/64,readbytes1.03->1.76GB; no errors. SevenCPUtestsPASS6.36s; commit e3f17b4. Sameone-shot continues restore->exactsource/headeradmission->freshreadyhash->ONEevaluation, stopsno retryonfailure. Do NOT redispatch. Evidence week05-full-baseline-preparation-20261103-a02; CTs week05-autonomous70-20261103-a02.5reuse/64new/5592resourcefailurein70denominator; no traininghours/MLflowtraining/schedule. MacKDuntouched.
+
+
+> **November3 autonomous70 continuation GPU LIVE:** Explicit userapproval validcases; a03 requestSHAed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e, handoffSHA11c951d375f4f6645731317f30532abfd6b8813d31706ef347d8818f27d95cd9. Preserve allpins/oldfailure.13CPUtestsPASS6.58s; commit5e82fafpushed. Samehiddenhandoff supervisor32040(wrapper26476),evaluationsupervisor13660(wrapper29748),firstworker41844(wrapper47140). SourceadmissionPASS36.765s/624693248B/reaped; readySHA19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845. First7636segmentertiles5->7/144 verified. Allinitialrequest/admission/ready/resource/handoffCbackups match.5reuse/58new/sevenexplicitfailures full70denominator;6unknownunitCTs neverinferred,5592capretained. No extraction; reuse64restoredCTs. Remainingeval41975.453s minus prior24.547admission; originallimitsunchanged. No retry/duplicate/traininghours/schedule. Read a03 journals; do NOTredispatch. Firstpredictionbackup verification pending.
+
+
+> **November3 a03 launch VERIFIED:** Same32040/13660 durableowners; first7636GPUworker41844 exited0/reaped194.610s/2221322240BpeakRSS; result178.047s/1021313024BGPU. Tiles7->144, aggregatecompleted1/70afterCPUscore. Allfive E/Cprediction/localizer/probability/result/access hashesmatch; predictionSHA c99fd4181c632dd187b365610cfdb013aaaa53a7e71d4c13a496b9293de75301. No referenceinputs/optimizerupdates; nofailure atcheck. Continue samejob, no redispatch. Requested63outputs/sevenfailures, notfinalcompletion.
+
