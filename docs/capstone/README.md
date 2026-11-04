@@ -1,5 +1,9 @@
 # PROWL capstone documentation hub
 
+**Cross-machine coordination:** [shared handoff guide](coordination/README.md)
+links the Mac and Lenovo status files on their owning GitHub branches. Read the
+peer's published revision at session start; fetch does not merge active code.
+
 **Weekly execution:** [Week1 living work plan](weeks/WEEK-01-WORK-PLAN.md) is the October8
 task/specification and closeout overlay. Follow the [Sunday planning routine](weeks/README.md)
 and [weekly template](weeks/WEEKLY-WORK-PLAN-TEMPLATE.md) for subsequent weeks. Older status
