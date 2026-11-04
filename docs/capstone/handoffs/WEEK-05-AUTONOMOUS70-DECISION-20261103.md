@@ -103,3 +103,32 @@ budgets or weaken AC/storage/memory/exclusive-GPU checks. Reuse restored sources
 after hash/header verification. A fresh receipt and actual advancing inference
 evidence are required before claiming the new evaluation is running. No training,
 automatic retry or MacKD interruption is authorized by this continuation.
+
+### Revised continuation dispatched and inference verified
+
+Laptop code/tests/report are pushed as5e82faf on codex/week05-cuda-readiness.
+Thirteen CPU tests passed; source admission completed successfully in36.765seconds,
+peak owned RSS624,693,248bytes, exit0/workers reaped. The durable supervisor32040
+advanced from source admission to evaluation. First actual segmenter progress
+was7/144tiles, verifying inference rather than only a registered job. Request,
+approval, ready receipt and admission-resource records match independent backups.
+
+- Preparation: E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a03.
+- Request SHA256:
+  ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e.
+- Handoff receipt SHA256:
+  11c951d375f4f6645731317f30532abfd6b8813d31706ef347d8818f27d95cd9.
+- Evaluation: E:/PROWL/artifacts/week05-autonomous70-20261103-a03.
+- New evaluation allowance41,975.453seconds after charging24.547seconds for the
+  failed admission. Completed restoration3278.140seconds remains in lineage.
+
+This is an active exploratory evaluation, not a completed baseline or training
+run. Do not add evaluation duration to training-hour counters. MacKD independently
+advanced to9403, MLflowRUNNING/teacher_accessed=true and initial backup verified.
+
+First new case7636 completed inference in194.610supervised seconds,
+peak owned RSS2,221,322,240bytes, exit0/workers reaped. The laptop verified five
+output/provenance files against independent backups; inference access evidence
+records neither reference mask loaded. The supervisor then recorded the first
+completed/scored case. This confirms the new continuation is executing; full63-case
+prediction/scoring and70-case failure-accounted closeout remain pending.
