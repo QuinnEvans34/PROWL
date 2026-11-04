@@ -1,0 +1,41 @@
+{
+  "schema": "prowl.autonomous70.visual-review-amendment.v1",
+  "original_plan_sha256": "10d9674f0476d6d854a478bd9406c30a2ea154a854976d66378fb4701224dd8e",
+  "export_sha256": "3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6",
+  "reason": "Original zero-overlap-component queue omits extra voxels attached to an overlapping predicted component.",
+  "case_id": "PanTS_00008711",
+  "source_report_sha256": {
+    "score": "436e009f365bab49f698a365fe56914c0a8c02a8a038542931e7016582f9fbcd",
+    "result": "2f2cd85e3c69736ad50e829bd32d0de76c6cae443218db4011dd8bc9256083e5",
+    "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+  },
+  "target_kind": "partially_overlapping_predicted_component_spillover",
+  "component": {
+    "component_id": 4,
+    "voxels": 20503,
+    "volume_ml": 47.33126752401936,
+    "overlap_voxels": 3378,
+    "any_overlap": true,
+    "overlap_fraction": 0.16475637711554406,
+    "bounds_xyz_half_open": [
+      [
+        223,
+        269
+      ],
+      [
+        187,
+        238
+      ],
+      [
+        27,
+        55
+      ]
+    ],
+    "acquired_boundary_contact": false
+  },
+  "reference_overlap_voxels": 3378,
+  "extra_prediction_voxels": 17125,
+  "instruction": "Inspect native CT and reference/predicted relationships for component4. Replace the third1-voxel zero-overlap target if not yet rendered; otherwise add one sheet. Preserve all rendered evidence. No scoring/inference changes.",
+  "max_contact_sheets": 27,
+  "budget_expansion": false
+}

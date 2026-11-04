@@ -51,3 +51,16 @@ No source checkout merge or public imaging upload is needed.
 The Mac will verify returned publication/transport, inspect images available here
 and reconcile findings into the Week5 error analysis. This is visual review, not
 production reviewer acceptance, a new annotation, or an automatic training change.
+
+## Target correction before completion
+
+Case8711 has20,743false-positive lesion voxels, but only3,618are in entirely
+zero-overlap predicted components. Predicted component4contains20,503voxels,
+3,378overlapping annotation and17,125extra voxels. The original isolated-component
+queue would miss this dominant spillover. The
+[additive amendment](WEEK-05-VISUAL-ERROR-REVIEW-AMENDMENT-20261104.json) binds that
+exact target and preserves the initial plan. Inspect it instead of the trivial
+third1-voxel isolated target if not rendered; otherwise retain all images and add
+one sheet (maximum27), within the same time/output/resource budget. No model,
+threshold, source or score changed. This selection correction is descriptive and
+does not establish the spatial cause of the extra prediction before inspection.
