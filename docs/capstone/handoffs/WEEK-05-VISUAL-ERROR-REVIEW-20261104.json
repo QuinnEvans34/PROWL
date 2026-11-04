@@ -1,0 +1,755 @@
+{
+  "schema": "prowl.autonomous70.visual-review-plan.v1",
+  "source_commit": "d290d43cdcbc2a9dc541ac722977d98e3985ecc8",
+  "export_sha256": "3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6",
+  "identities": {
+    "request_sha256": "ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e",
+    "ready_sha256": "19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845",
+    "completion_sha256": "1fa0794771efe461541c1d7cc200be7fb60e240cbce9aabffc36856eea2c5d9e"
+  },
+  "scope": {
+    "role": "exposed_development",
+    "probability_equivalence": "UNQUALIFIED",
+    "numerical_exception": "Human-approved scoped exception; original probability comparison failure retained",
+    "training": false,
+    "model_quality_acceptance": false,
+    "hypothesis_verdict": "NOT_TESTED",
+    "failed_cases_not_imputed": true
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00004681",
+      "source_report_sha256": {
+        "score": "31fb38345749db23be210943a3996d509cad2e5ff79fd0bc45930114cd25a218",
+        "result": "53bc5b6c5153e8b1386b6dc19b0c2ac72888c8c5dbef00eda6c0ab43679cdd7f",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "selection": "missed_reference_component",
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [
+        {
+          "component_id": 1,
+          "voxels": 492,
+          "volume_ml": 0.20555040454196785,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              221,
+              231
+            ],
+            [
+              194,
+              201
+            ],
+            [
+              109,
+              124
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ],
+      "top_false_positive_components": [
+        {
+          "component_id": 9,
+          "voxels": 6580,
+          "volume_ml": 2.749027768061277,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              306,
+              333
+            ],
+            [
+              55,
+              89
+            ],
+            [
+              116,
+              145
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 12,
+          "voxels": 1546,
+          "volume_ml": 0.6458961898818746,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              310,
+              328
+            ],
+            [
+              86,
+              100
+            ],
+            [
+              162,
+              177
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 3,
+          "voxels": 1494,
+          "volume_ml": 0.624171350377439,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              184,
+              200
+            ],
+            [
+              67,
+              80
+            ],
+            [
+              151,
+              192
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00008769",
+      "source_report_sha256": {
+        "score": "fd2d1b7ef6704226fcabd4e48af6e59b31a191963c4702a24cbdd5a6dbe97ee4",
+        "result": "c664f02c41103d3e38d4667e43b5dfe43870c413daadfc771d37de1e17f4f148",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "selection": "missed_reference_component",
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [
+        {
+          "component_id": 1,
+          "voxels": 2655,
+          "volume_ml": 2.0256042782307304,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              228,
+              247
+            ],
+            [
+              135,
+              154
+            ],
+            [
+              67,
+              86
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ],
+      "top_false_positive_components": [
+        {
+          "component_id": 2,
+          "voxels": 16250,
+          "volume_ml": 12.397766298022361,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              225,
+              272
+            ],
+            [
+              141,
+              182
+            ],
+            [
+              210,
+              239
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 1,
+          "voxels": 2890,
+          "volume_ml": 2.204895052386746,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              197,
+              224
+            ],
+            [
+              152,
+              167
+            ],
+            [
+              28,
+              46
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 3,
+          "voxels": 1443,
+          "volume_ml": 1.1009216472643857,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              233,
+              262
+            ],
+            [
+              141,
+              155
+            ],
+            [
+              241,
+              260
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00006755",
+      "source_report_sha256": {
+        "score": "6645af370e59f568e598372526cea1645a39d1e90f76a92a1c8ab775039da6e2",
+        "result": "a70ffc5e3369bfc4c3ce2db753fb54ccdd9e3ba7ee5dbb98e2273b269ebb1be4",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "selection": "missed_reference_component",
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [
+        {
+          "component_id": 1,
+          "voxels": 1563,
+          "volume_ml": 0.6815415987736934,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              243,
+              255
+            ],
+            [
+              257,
+              276
+            ],
+            [
+              29,
+              44
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ],
+      "top_false_positive_components": [
+        {
+          "component_id": 5,
+          "voxels": 3037,
+          "volume_ml": 1.3242750067023077,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              241,
+              279
+            ],
+            [
+              218,
+              234
+            ],
+            [
+              208,
+              231
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 4,
+          "voxels": 1690,
+          "volume_ml": 0.7369195789683569,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              169,
+              188
+            ],
+            [
+              233,
+              245
+            ],
+            [
+              84,
+              99
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 9,
+          "voxels": 276,
+          "volume_ml": 0.12034899632856007,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              278,
+              289
+            ],
+            [
+              103,
+              114
+            ],
+            [
+              76,
+              86
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00002889",
+      "source_report_sha256": {
+        "score": "7771c29e3d878169e74f8f2c0984956fc597400325df255579ff00fc29ed6465",
+        "result": "01c9ba292101e1686e9a3836941f714f9c45c2a5ff496776ec5b8a8185acf3e3",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "selection": "missed_reference_component",
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [
+        {
+          "component_id": 2,
+          "voxels": 1602,
+          "volume_ml": 0.6985474352114247,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              257,
+              269
+            ],
+            [
+              257,
+              276
+            ],
+            [
+              206,
+              221
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ],
+      "top_false_positive_components": [
+        {
+          "component_id": 9,
+          "voxels": 3004,
+          "volume_ml": 1.309885452793458,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              233,
+              271
+            ],
+            [
+              218,
+              234
+            ],
+            [
+              19,
+              42
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 11,
+          "voxels": 1701,
+          "volume_ml": 0.7417160969379735,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              324,
+              343
+            ],
+            [
+              233,
+              245
+            ],
+            [
+              151,
+              166
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 6,
+          "voxels": 271,
+          "volume_ml": 0.11816876088782528,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              223,
+              234
+            ],
+            [
+              103,
+              114
+            ],
+            [
+              164,
+              174
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00002235",
+      "source_report_sha256": {
+        "score": "939fbac477f74585fd35f3d8c5b02b7962ee5400692abcd039a00c68b11a874a",
+        "result": "d1518a8a00b2f3fd2a8c68b8ebb73a27bf95ffa62d31448f3e09aa32788a3ae1",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "selection": "missed_reference_component",
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [
+        {
+          "component_id": 2,
+          "voxels": 833,
+          "volume_ml": 2.330626982597227,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              230,
+              268
+            ],
+            [
+              223,
+              259
+            ],
+            [
+              26,
+              29
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ],
+      "top_false_positive_components": [
+        {
+          "component_id": 1,
+          "voxels": 306,
+          "volume_ml": 0.8561486874846956,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              83,
+              105
+            ],
+            [
+              120,
+              135
+            ],
+            [
+              30,
+              32
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 2,
+          "voxels": 14,
+          "volume_ml": 0.039170201388188684,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              115,
+              121
+            ],
+            [
+              199,
+              202
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "acquired_boundary_contact": true
+        },
+        {
+          "component_id": 3,
+          "voxels": 8,
+          "volume_ml": 0.022382972221822107,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              133,
+              137
+            ],
+            [
+              209,
+              212
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "acquired_boundary_contact": true
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00008711",
+      "source_report_sha256": {
+        "score": "436e009f365bab49f698a365fe56914c0a8c02a8a038542931e7016582f9fbcd",
+        "result": "2f2cd85e3c69736ad50e829bd32d0de76c6cae443218db4011dd8bc9256083e5",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "selection": "high_false_positive_positive_reference",
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [],
+      "top_false_positive_components": [
+        {
+          "component_id": 2,
+          "voxels": 1886,
+          "volume_ml": 4.353839464971005,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              170,
+              193
+            ],
+            [
+              170,
+              198
+            ],
+            [
+              53,
+              62
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 3,
+          "voxels": 1731,
+          "volume_ml": 3.996021269281447,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              179,
+              203
+            ],
+            [
+              201,
+              232
+            ],
+            [
+              50,
+              58
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 1,
+          "voxels": 1,
+          "volume_ml": 0.002308504488319727,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              81,
+              82
+            ],
+            [
+              164,
+              165
+            ],
+            [
+              7,
+              8
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00006880",
+      "source_report_sha256": {
+        "score": "4775913352e825eadd016f8a740c32ce39710213fccf3fc5029669544f34009c",
+        "result": "666099e47303a4c68fa82c584c1c021bd0e98644541fcb44e27bae7cd7b20656",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "selection": "high_false_positive_reference_empty",
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "missed_reference_components": [],
+      "top_false_positive_components": [
+        {
+          "component_id": 2,
+          "voxels": 12539,
+          "volume_ml": 3.8696101528765277,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              186,
+              240
+            ],
+            [
+              274,
+              303
+            ],
+            [
+              133,
+              176
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 7,
+          "voxels": 457,
+          "volume_ml": 0.14103292446483556,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              256,
+              265
+            ],
+            [
+              269,
+              281
+            ],
+            [
+              100,
+              108
+            ]
+          ],
+          "acquired_boundary_contact": false
+        },
+        {
+          "component_id": 3,
+          "voxels": 303,
+          "volume_ml": 0.09350760637384065,
+          "overlap_voxels": 0,
+          "any_overlap": false,
+          "overlap_fraction": 0.0,
+          "bounds_xyz_half_open": [
+            [
+              214,
+              224
+            ],
+            [
+              323,
+              331
+            ],
+            [
+              134,
+              144
+            ]
+          ],
+          "acquired_boundary_contact": false
+        }
+      ]
+    }
+  ],
+  "selection_policy": "All five missed reference components plus highest remaining raw FP count positive case8711 and highest reference-empty case6880; top3 zero-overlap predicted components per case by voxel count, ID breaks ties.",
+  "limits": {
+    "cpu_only": true,
+    "threads": 1,
+    "rss_bytes": 12884901888,
+    "output_bytes": 2147483648,
+    "seconds": 1200,
+    "free_space_bytes": 107374182400
+  },
+  "image_review_performed": false,
+  "inference_calls_authorized": 0,
+  "model_or_threshold_changes_authorized": false
+}
