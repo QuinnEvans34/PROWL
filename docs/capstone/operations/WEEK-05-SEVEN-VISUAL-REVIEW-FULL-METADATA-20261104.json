@@ -1,0 +1,4555 @@
+{
+  "schema": "prowl.seven-native-error-review.full-metadata.v1",
+  "created_utc": "2026-11-04T21:39:18.227259+00:00",
+  "status": "VISUAL_REVIEW_COMPLETED_FROM_SAVED_PNGS_WITH_PRESERVED_RENDER_MANIFEST_FAILURE",
+  "plan_sha256": "10d9674f0476d6d854a478bd9406c30a2ea154a854976d66378fb4701224dd8e",
+  "amendment_sha256": "1463a206dfbf549804d4877cb82e996549ab0ba56990f6e7d7a946749349d979",
+  "scope": {
+    "role": "exposed_development",
+    "probability_equivalence": "UNQUALIFIED",
+    "numerical_exception": "Human-approved scoped exception; original probability comparison failure retained",
+    "training": false,
+    "model_quality_acceptance": false,
+    "hypothesis_verdict": "NOT_TESTED",
+    "failed_cases_not_imputed": true
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00004681",
+      "source_sha256": {
+        "ct": "8249c821684154b49e5670b1bc76efd4a179ea79a79121fc5e44e07dbfb33090",
+        "pancreas": "34ecdc4184bd64c0d304d2df9e6776e4d58ed7d3f61cf2a9e4e7abd947f9b5b0",
+        "lesion": "307529b2ce78b32cc1cc6c88b4462520e4a55afb6167e2593c2c1861f5d973eb",
+        "prediction": "a4748aaad3157295ff9e9b8a933ba651db996f93cbbebf17cbcfc1f364a73c9b"
+      },
+      "source_report_sha256": {
+        "score": "31fb38345749db23be210943a3996d509cad2e5ff79fd0bc45930114cd25a218",
+        "result": "53bc5b6c5153e8b1386b6dc19b0c2ac72888c8c5dbef00eda6c0ab43679cdd7f",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "native_shape": [
+        512,
+        406,
+        194
+      ],
+      "native_affine": [
+        [
+          -0.7226560115814209,
+          -0.0,
+          -0.0,
+          178.8000030517578
+        ],
+        [
+          -0.0,
+          0.7226560115814209,
+          0.0,
+          -184.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -42.589988708496094
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7226560115814209,
+          0.0,
+          0.0,
+          -190.47721886634827
+        ],
+        [
+          0.0,
+          0.7226560115814209,
+          0.0,
+          -184.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -196.98999100923538
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        33,
+        0
+      ],
+      "region_high": [
+        464,
+        400,
+        194
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 123256,
+          "inside_voxels": 113541,
+          "outside_voxels": 9715,
+          "fraction": 0.9211803076523658
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 123256,
+          "inside_voxels": 123256,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 492,
+          "inside_voxels": 492,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.8191964285714286
+      }
+    },
+    {
+      "case_id": "PanTS_00008769",
+      "source_sha256": {
+        "ct": "d6b25292dc425c7e2e92b19f3c8820ee41b88fb3e05bfc1aa087309d519edc35",
+        "pancreas": "9b239d4f00acd2b58c42e9306f467dcd8c3320e2c1541f2bf5b4fb0f0dc6a699",
+        "lesion": "ed364a80b2ce668924a0b785ea7504ec24eaac3c4b40c1cfc1ce2f758bdea169",
+        "prediction": "3b259d5b177e6280e9c61fd3c60e369996af0c60796d2dca5c27bf9bf8bcc62a"
+      },
+      "source_report_sha256": {
+        "score": "fd2d1b7ef6704226fcabd4e48af6e59b31a191963c4702a24cbdd5a6dbe97ee4",
+        "result": "c664f02c41103d3e38d4667e43b5dfe43870c413daadfc771d37de1e17f4f148",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        473,
+        350,
+        266
+      ],
+      "native_affine": [
+        [
+          -0.9765625,
+          0.0,
+          0.0,
+          249.51171875
+        ],
+        [
+          0.0,
+          -0.9765625,
+          0.0,
+          414.51171875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -646.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.9765625,
+          0.0,
+          0.0,
+          -211.42578125
+        ],
+        [
+          0.0,
+          0.9765625,
+          0.0,
+          73.69140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -646.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        18,
+        38,
+        0
+      ],
+      "region_high": [
+        438,
+        305,
+        266
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 112481,
+          "inside_voxels": 107065,
+          "outside_voxels": 5416,
+          "fraction": 0.9518496457179435
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 112481,
+          "inside_voxels": 112481,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 2655,
+          "inside_voxels": 2655,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6773784355179704
+      }
+    },
+    {
+      "case_id": "PanTS_00006755",
+      "source_sha256": {
+        "ct": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+        "pancreas": "4c8ed3726772bdf48c135d3c4b41e86b19d7536d6c82d8612afdb0adadd30b19",
+        "lesion": "3e45b4461a3649b3f4be7935eb51bbaa1e73616f3f2783f38d7c759337873b02",
+        "prediction": "3fbd4717a5e1a9fc6f146f0ada7a450d2984999340abde2113216834a0149062"
+      },
+      "source_report_sha256": {
+        "score": "6645af370e59f568e598372526cea1645a39d1e90f76a92a1c8ab775039da6e2",
+        "result": "a70ffc5e3369bfc4c3ce2db753fb54ccdd9e3ba7ee5dbb98e2273b269ebb1be4",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "native_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          -0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          -0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        97,
+        0
+      ],
+      "region_high": [
+        470,
+        416,
+        250
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 28204,
+          "inside_voxels": 28204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 28204,
+          "inside_voxels": 28204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 3515,
+          "inside_voxels": 3515,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6716330991972477
+      }
+    },
+    {
+      "case_id": "PanTS_00002889",
+      "source_sha256": {
+        "ct": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+        "pancreas": "7d66348f621cc46d731e9dc21c95567985bdfdce901d2c6b5bf8d3b689a3f750",
+        "lesion": "d2edb1ec8969428176cbf65e87185bb35eb177dd5e9e67166d186b3ad740f180",
+        "prediction": "a475dbeb2388b42511081a437bededea07e7286ebee914366d3c88806cffe3c1"
+      },
+      "source_report_sha256": {
+        "score": "7771c29e3d878169e74f8f2c0984956fc597400325df255579ff00fc29ed6465",
+        "result": "01c9ba292101e1686e9a3836941f714f9c45c2a5ff496776ec5b8a8185acf3e3",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "native_affine": [
+        [
+          -0.7382810115814209,
+          -0.0,
+          -0.0,
+          192.4615936279297
+        ],
+        [
+          -0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          70.9100112915039
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          0.0,
+          -184.8000032901764
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -128.2899916768074
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        97,
+        0
+      ],
+      "region_high": [
+        470,
+        416,
+        250
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 166354,
+          "inside_voxels": 166354,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 166354,
+          "inside_voxels": 166354,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 3599,
+          "inside_voxels": 3599,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6716330991972477
+      }
+    },
+    {
+      "case_id": "PanTS_00002235",
+      "source_sha256": {
+        "ct": "c8af89d3c810258fac1cd271c2c466c5f6aab793111f2b060ce538bbd80e622b",
+        "pancreas": "7bbc21c91cd1dedc449260bc759335460d2126d1cba80fb8c7d6e84e11c175b6",
+        "lesion": "f90a093fb6ea54f6af6b2cb474f1f23842c9a7800381a3cff64dd233bd41de98",
+        "prediction": "bbf268526ea224eab11bac6cf356eec670b41b9c165b22903340a1d9ce9c4190"
+      },
+      "source_report_sha256": {
+        "score": "939fbac477f74585fd35f3d8c5b02b7962ee5400692abcd039a00c68b11a874a",
+        "result": "d1518a8a00b2f3fd2a8c68b8ebb73a27bf95ffa62d31448f3e09aa32788a3ae1",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        445,
+        332,
+        58
+      ],
+      "native_affine": [
+        [
+          0.7480469942092896,
+          0.0,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.7480469942092896,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7480469942092896,
+          0.0,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.7480469942092896,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        45,
+        0
+      ],
+      "region_high": [
+        445,
+        332,
+        58
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 22204,
+          "inside_voxels": 20901,
+          "outside_voxels": 1303,
+          "fraction": 0.9413168798414701
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 22204,
+          "inside_voxels": 22204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 1771,
+          "inside_voxels": 1771,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.8644578313253012
+      }
+    },
+    {
+      "case_id": "PanTS_00008711",
+      "source_sha256": {
+        "ct": "00396cb2f658d9c012d84148d1ee1d250d94f5f8527039c4fc6dacc4ef9dd477",
+        "pancreas": "c98171a48a7236f83a25a39e804d6d987a0d1d460d5f9265a625630d9cdc9730",
+        "lesion": "554bf5214296bc56db9db843941e2f0e7eb25201860f421e53a31d061abbdfcd",
+        "prediction": "f50267f333946b733facb6973669bda2734ecadfdfd8f45d0d688d76fefc3e17"
+      },
+      "source_report_sha256": {
+        "score": "436e009f365bab49f698a365fe56914c0a8c02a8a038542931e7016582f9fbcd",
+        "result": "2f2cd85e3c69736ad50e829bd32d0de76c6cae443218db4011dd8bc9256083e5",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        481,
+        337,
+        104
+      ],
+      "native_affine": [
+        [
+          0.9609379768371582,
+          0.0,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.9609379768371582,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.9609379768371582,
+          0.0,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.9609379768371582,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        22,
+        66,
+        0
+      ],
+      "region_high": [
+        433,
+        311,
+        104
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 57268,
+          "inside_voxels": 56851,
+          "outside_voxels": 417,
+          "fraction": 0.9927184466019418
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 57268,
+          "inside_voxels": 57268,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 4812,
+          "inside_voxels": 4812,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6212021197184402
+      }
+    },
+    {
+      "case_id": "PanTS_00006880",
+      "source_sha256": {
+        "ct": "4b987c93b1fce54229c6858c0d07336f631e4f4c6810620ee83255297e85d20e",
+        "pancreas": "a7c79f532f349d55323a4cff316eead7bafa0ebcb3a2584be04262eebc1c8b4c",
+        "lesion": "3f5586df4405e54ea16380c89afe332eac82d5bc630923b2bbd0e98d0685a220",
+        "prediction": "71d5ee854d3f296b172699efefc9efc37d021d5523d177a8b077a0093b9dcb98"
+      },
+      "source_report_sha256": {
+        "score": "4775913352e825eadd016f8a740c32ce39710213fccf3fc5029669544f34009c",
+        "result": "666099e47303a4c68fa82c584c1c021bd0e98644541fcb44e27bae7cd7b20656",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        512,
+        431,
+        222
+      ],
+      "native_affine": [
+        [
+          -0.62109375,
+          -0.0,
+          -0.0,
+          131.689453125
+        ],
+        [
+          -0.0,
+          0.62109375,
+          0.0,
+          -346.689453125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          14.000006675720215
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.62109375,
+          0.0,
+          0.0,
+          -185.689453125
+        ],
+        [
+          0.0,
+          0.62109375,
+          0.0,
+          -346.689453125
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -162.79999595880508
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        105,
+        0
+      ],
+      "region_high": [
+        512,
+        431,
+        222
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 206311,
+          "inside_voxels": 205848,
+          "outside_voxels": 463,
+          "fraction": 0.9977558152497928
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 206311,
+          "inside_voxels": 206311,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 0,
+          "inside_voxels": 0,
+          "outside_voxels": 0,
+          "fraction": null
+        },
+        "scan_fraction": 0.7563805104408353
+      }
+    }
+  ],
+  "images": [
+    {
+      "file": "PanTS_00004681-miss-01.png",
+      "sha256": "9e8158c4b43933757f57e21c9d1b474bf4bc6df7fd466323ccd85d1553dc49b4",
+      "bytes": 582378,
+      "case_id": "PanTS_00004681",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 492,
+        "volume_ml": 0.20555040454196785,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            221,
+            231
+          ],
+          [
+            194,
+            201
+          ],
+          [
+            109,
+            124
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small yellow reference at edge of blue pancreas outline lies within/adjacent cyan predicted-pancreas contour in all three selected planes; no green overlap. Magenta predictions appear elsewhere. CT target is small and low-contrast/grainy at this display; cannot establish lesion identity from these views. Supports lesion-class miss despite region/pancreas localization.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 74,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            16.165680120146362,
+            -41.78620066439231,
+            -137.78999012708664
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            285.9491869918699,
+            197.1768292682927,
+            74.89837398373983
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            253,
+            177,
+            319,
+            240
+          ],
+          "original_native_voxel_at_target": [
+            225.05081300813015,
+            197.17682926829266,
+            119.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 197,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            16.165680120146362,
+            -41.91398739814758,
+            -137.07129092938533
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            285.9491869918699,
+            197.1768292682927,
+            74.89837398373983
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            253,
+            88,
+            319,
+            149
+          ],
+          "original_native_voxel_at_target": [
+            225.05081300813015,
+            196.99999999999997,
+            118.10162601626017
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 286,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            16.20240044593811,
+            -41.78620066439231,
+            -137.07129092938533
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            285.9491869918699,
+            197.1768292682927,
+            74.89837398373983
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            166,
+            84,
+            229,
+            149
+          ],
+          "original_native_voxel_at_target": [
+            225.00000000000006,
+            197.17682926829266,
+            118.10162601626017
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00004681-fp-09.png",
+      "sha256": "cbcafa9d53e63e5aecb604f62304a302cd42f9e16391fa4f17e0f1ef99ed67b4",
+      "bytes": 581960,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 6580,
+        "volume_ml": 2.749027768061277,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            306,
+            333
+          ],
+          [
+            55,
+            89
+          ],
+          [
+            116,
+            145
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large magenta island in posterior soft tissue next to spine, far from blue reference pancreas in context views. Cyan predicted-pancreas contour accompanies the island. This is spatially remote extra pancreas/lesion labeling, not merely a narrow lesion-boundary expansion.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 65,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -50.53235622234982,
+            -135.56460536587926,
+            -144.989990234375
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            193.65349544072947,
+            67.40775075987843,
+            63.0758358662614
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            152,
+            289,
+            234,
+            379
+          ],
+          "original_native_voxel_at_target": [
+            317.34650455927056,
+            67.40775075987841,
+            128.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 64,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -50.53235622234982,
+            -138.02723693847656,
+            -146.5293215643037
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            193.65349544072947,
+            67.40775075987843,
+            63.0758358662614
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            152,
+            96,
+            233,
+            170
+          ],
+          "original_native_voxel_at_target": [
+            317.34650455927056,
+            63.99999999999999,
+            129.9241641337386
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 197,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -48.11398458480835,
+            -135.56460536587926,
+            -146.5293215643037
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            193.65349544072947,
+            67.40775075987843,
+            63.0758358662614
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            29,
+            91,
+            116,
+            168
+          ],
+          "original_native_voxel_at_target": [
+            314.0,
+            67.40775075987841,
+            129.9241641337386
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00004681-fp-12.png",
+      "sha256": "6d5324f5ef5d42296c271d77949d2d2f6e8952767e274d83eac2f0f0941495e2",
+      "bytes": 544660,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 12,
+        "voxels": 1546,
+        "volume_ml": 0.6458961898818746,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            310,
+            328
+          ],
+          [
+            86,
+            100
+          ],
+          [
+            162,
+            177
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second posterior soft-tissue magenta island alongside spine, surrounded partly by cyan predicted-pancreas contour; no blue reference pancreas near target. Coronal/sagittal views show it as separate from anterior pancreatic reference region.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 23,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -50.812025010971325,
+            -117.0575918313911,
+            -178.58999073505402
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            193.26649417852522,
+            93.01746442432083,
+            23.534928848641655
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            157,
+            278,
+            230,
+            347
+          ],
+          "original_native_voxel_at_target": [
+            317.7335058214748,
+            93.01746442432082,
+            170.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 94,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -50.812025010971325,
+            -116.34755659103394,
+            -178.16204764976385
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            193.26649417852522,
+            93.01746442432083,
+            23.534928848641655
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            156,
+            138,
+            230,
+            194
+          ],
+          "original_native_voxel_at_target": [
+            317.7335058214748,
+            93.99999999999999,
+            169.46507115135836
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 193,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -51.00460863113403,
+            -117.0575918313911,
+            -178.16204764976385
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            193.26649417852522,
+            93.01746442432083,
+            23.534928848641655
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            59,
+            138,
+            128,
+            194
+          ],
+          "original_native_voxel_at_target": [
+            318.0,
+            93.01746442432082,
+            169.46507115135836
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00004681-fp-03.png",
+      "sha256": "67e3f4dcd7598d382e5df6010f9a92971a3d623720c57d59c233773365625586",
+      "bytes": 540443,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1494,
+        "volume_ml": 0.624171350377439,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            184,
+            200
+          ],
+          [
+            67,
+            80
+          ],
+          [
+            151,
+            192
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Elongated posterior soft-tissue magenta prediction on opposite side of spine from other targets, adjacent to cyan extra pancreatic labeling. No reference lesion at target; inferior extent approaches bottom displayed region. Not just expansion of the annotated pancreatic lesion.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 24,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            40.95215957886086,
+            -131.3859604732738,
+            -177.7899907231331
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            320.2483266398929,
+            73.190093708166,
+            23.20548862115127
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            285,
+            298,
+            355,
+            366
+          ],
+          "original_native_voxel_at_target": [
+            190.75167336010713,
+            73.19009370816599,
+            169.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 75,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            40.95215957886086,
+            -130.07802081108093,
+            -178.42559983568339
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            320.2483266398929,
+            73.190093708166,
+            23.20548862115127
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            285,
+            140,
+            356,
+            194
+          ],
+          "original_native_voxel_at_target": [
+            190.75167336010713,
+            74.99999999999999,
+            169.79451137884874
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 321,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            41.49536085128784,
+            -131.3859604732738,
+            -178.42559983568339
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            320.2483266398929,
+            73.190093708166,
+            23.20548862115127
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            39,
+            135,
+            107,
+            194
+          ],
+          "original_native_voxel_at_target": [
+            190.00000000000006,
+            73.19009370816599,
+            169.79451137884874
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008769-miss-01.png",
+      "sha256": "bb4a0c63d058801c96b1f175b17f14ead6986605fd5d6127d3312d82f29b93fb",
+      "bytes": 689917,
+      "case_id": "PanTS_00008769",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 2655,
+        "volume_ml": 2.0256042782307304,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            228,
+            247
+          ],
+          [
+            135,
+            154
+          ],
+          [
+            67,
+            86
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow reference component at pancreatic contour edge is visible in all three planes, with cyan predicted-pancreas contour nearby/enclosing it but no magenta/green at the target. The CT patch is subtle against surrounding soft tissue; no evidence here of ROI clipping.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 75,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            17.626493349811682,
+            273.5799567443503,
+            -586.9000235199928
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            234.54952919020715,
+            204.6858757062147,
+            75.97966101694915
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            205,
+            115,
+            266,
+            175
+          ],
+          "original_native_voxel_at_target": [
+            237.45047080979285,
+            144.3141242937853,
+            75.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 204,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            17.626493349811682,
+            272.91015625,
+            -586.1162946947551
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            234.54952919020715,
+            204.6858757062147,
+            75.97966101694915
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            205,
+            155,
+            266,
+            220
+          ],
+          "original_native_voxel_at_target": [
+            237.45047080979285,
+            145.0,
+            75.97966101694915
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 232,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            15.13671875,
+            273.5799567443503,
+            -586.1162946947551
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            234.54952919020715,
+            204.6858757062147,
+            75.97966101694915
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            176,
+            155,
+            236,
+            224
+          ],
+          "original_native_voxel_at_target": [
+            240.0,
+            144.3141242937853,
+            75.97966101694915
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008769-fp-02.png",
+      "sha256": "4d2251aec237093f50a8e51b65d0a088e1add9ddc600d2aefb83942deab83794",
+      "bytes": 723136,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 16250,
+        "volume_ml": 12.397766298022361,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            225,
+            272
+          ],
+          [
+            141,
+            182
+          ],
+          [
+            210,
+            239
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large magenta/cyan island lies far superior to pancreatic reference, in thoracic soft tissue adjacent to the cardiac silhouette on context views. This remote extra labeling is qualitatively different from pancreatic lesion boundary spillover; no anatomical/clinical adjudication made.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 228,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            8.476742788461536,
+            253.52758413461538,
+            -464.5000216960907
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            225.1801846153846,
+            184.15224615384616,
+            225.72055384615385
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            180,
+            122,
+            268,
+            203
+          ],
+          "original_native_voxel_at_target": [
+            246.8198153846154,
+            164.84775384615384,
+            228.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 179,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            8.476742788461536,
+            248.49609375,
+            -466.3235786463407
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            225.1801846153846,
+            184.15224615384616,
+            225.72055384615385
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            181,
+            5,
+            267,
+            79
+          ],
+          "original_native_voxel_at_target": [
+            246.8198153846154,
+            170.0,
+            225.72055384615385
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 226,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            9.27734375,
+            253.52758413461538,
+            -466.3235786463407
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            225.1801846153846,
+            184.15224615384616,
+            225.72055384615385
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            147,
+            5,
+            230,
+            81
+          ],
+          "original_native_voxel_at_target": [
+            246.0,
+            164.84775384615384,
+            225.72055384615385
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008769-fp-01.png",
+      "sha256": "451db449a0f57b16b88c34a01380c6b656d6ae076dbcb5b7d1d3c38c309ca437",
+      "bytes": 682469,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 1,
+        "voxels": 2890,
+        "volume_ml": 2.204895052386746,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            197,
+            224
+          ],
+          [
+            152,
+            167
+          ],
+          [
+            28,
+            46
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta island lies within/at blue and cyan pancreatic contours at a more inferior level than the missed yellow reference. CT-only views show soft-tissue texture without an unmistakable target distinction at this window; appears to be a within-pancreas false lesion label, not solely remote-organ confusion.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 37,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            45.34764273356399,
+            260.1732807093425,
+            -617.3000239729881
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            262.93598615916954,
+            190.95743944636678,
+            36.69723183391003
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            229,
+            131,
+            296,
+            187
+          ],
+          "original_native_voxel_at_target": [
+            209.06401384083046,
+            158.04256055363322,
+            37.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 193,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            45.34764273356399,
+            262.16796875,
+            -617.5422385094694
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            262.93598615916954,
+            190.95743944636678,
+            36.69723183391003
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            229,
+            197,
+            297,
+            262
+          ],
+          "original_native_voxel_at_target": [
+            209.06401384083046,
+            156.0,
+            36.69723183391003
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 263,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            45.41015625,
+            260.1732807093425,
+            -617.5422385094694
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            262.93598615916954,
+            190.95743944636678,
+            36.69723183391003
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            162,
+            195,
+            219,
+            261
+          ],
+          "original_native_voxel_at_target": [
+            209.0,
+            158.04256055363322,
+            36.69723183391003
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008769-fp-03.png",
+      "sha256": "093b157d94a34c8b633e3db38ab330de37d96942289662b5d020b4f28c598f2f",
+      "bytes": 645054,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1443,
+        "volume_ml": 1.1009216472643857,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            233,
+            262
+          ],
+          [
+            141,
+            155
+          ],
+          [
+            241,
+            260
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Smaller magenta band superior to the large thoracic FP island; nearby cyan extra-pancreas contour, far above reference pancreas. Target approaches upper orange ROI line in coronal/sagittal views but is not evidence of clipped reference anatomy.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 248,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            8.478768732674979,
+            272.0073604253292,
+            -448.5000214576721
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            225.18225918225917,
+            203.07553707553708,
+            248.8981288981289
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            190,
+            120,
+            257,
+            176
+          ],
+          "original_native_voxel_at_target": [
+            246.81774081774083,
+            145.92446292446292,
+            248.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 204,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            8.478768732674979,
+            272.91015625,
+            -447.7815183284624
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            225.18225918225917,
+            203.07553707553708,
+            248.8981288981289
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            195,
+            0,
+            260,
+            47
+          ],
+          "original_native_voxel_at_target": [
+            246.81774081774083,
+            145.0,
+            248.8981288981289
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 230,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            13.18359375,
+            272.0073604253292,
+            -447.7815183284624
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            225.18225918225917,
+            203.07553707553708,
+            248.8981288981289
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            181,
+            0,
+            230,
+            50
+          ],
+          "original_native_voxel_at_target": [
+            242.0,
+            145.92446292446292,
+            248.8981288981289
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006755-miss-01.png",
+      "sha256": "1221ed96b77db9d5350f02920f949f2ecb58bb1a38857d6d1b0c8ab952a3fc3e",
+      "bytes": 788763,
+      "case_id": "PanTS_00006755",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 1563,
+        "volume_ml": 0.6815415987736934,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            243,
+            255
+          ],
+          [
+            257,
+            276
+          ],
+          [
+            29,
+            44
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow missed component lies at the edge of the reference pancreas and inside/near cyan predicted-pancreas contour. Coronal zoom also shows a separate superior reference lesion with green overlap and magenta spillover, while target remains yellow. CT is grainy with conspicuous streaking in broader context; display alone cannot assign causation to image quality.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 36,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -1.2065672593778913,
+            7.978853134794747,
+            -400.2899959087372
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            248.6769033909149,
+            266.80742162508,
+            36.504158669225845
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            132,
+            282,
+            206
+          ],
+          "original_native_voxel_at_target": [
+            248.6769033909149,
+            266.80742162508,
+            36.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 270,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -1.2065672593778913,
+            10.335873126983643,
+            -399.88666896734645
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            248.6769033909149,
+            266.80742162508,
+            36.504158669225845
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            181,
+            283,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            248.6769033909149,
+            270.0,
+            36.504158669225845
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 249,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -0.9680311679840088,
+            7.978853134794747,
+            -399.88666896734645
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            248.6769033909149,
+            266.80742162508,
+            36.504158669225845
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            230,
+            181,
+            304,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            249.0,
+            266.80742162508,
+            36.504158669225845
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006755-fp-05.png",
+      "sha256": "cd4e1e05d4366f44e46e3609af5fdbd2c523eb169c903dd07ab30816d445bc04",
+      "bytes": 792663,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 5,
+        "voxels": 3037,
+        "volume_ml": 1.3242750067023077,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            241,
+            279
+          ],
+          [
+            218,
+            234
+          ],
+          [
+            208,
+            231
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta island lies high above pancreatic reference in thoracic soft tissue, with nearby cyan extra-pancreas contour; not contiguous with pancreatic lesion in context. Strong streak/grain patterns limit tissue interpretation.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 214,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            5.501712276937951,
+            -22.436802637039307,
+            -257.88999378681183
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            257.763253210405,
+            225.6094830424761,
+            218.01580507079353
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            213,
+            175,
+            292,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            257.763253210405,
+            225.6094830424761,
+            214.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 226,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            5.501712276937951,
+            -22.148491382598877,
+            -254.67734968230488
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            257.763253210405,
+            225.6094830424761,
+            218.01580507079353
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            0,
+            299,
+            66
+          ],
+          "original_native_voxel_at_target": [
+            257.763253210405,
+            226.0,
+            218.01580507079353
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 260,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            7.153059959411621,
+            -22.436802637039307,
+            -254.67734968230488
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            257.763253210405,
+            225.6094830424761,
+            218.01580507079353
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            191,
+            0,
+            262,
+            63
+          ],
+          "original_native_voxel_at_target": [
+            260.0,
+            225.6094830424761,
+            218.01580507079353
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006755-fp-04.png",
+      "sha256": "10cabe6ebc1ac10a6b78bb3eadf6daab9395487f233f4a7260567e491245d33e",
+      "bytes": 784054,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 4,
+        "voxels": 1690,
+        "volume_ml": 0.7369195789683569,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            169,
+            188
+          ],
+          [
+            233,
+            245
+          ],
+          [
+            84,
+            99
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta island at an end of the pancreatic contours, with cyan and blue outlines close around it. This is a pancreas-adjacent/within-contour extra lesion prediction, unlike the remote thoracic target. CT-only target is not clearly separable at the fixed window; annotation correctness cannot be adjudicated here.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 91,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -53.67037407815809,
+            -12.989875164963081,
+            -356.2899952530861
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            177.6147928994083,
+            238.40532544378698,
+            90.95798816568048
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            141,
+            163,
+            215,
+            231
+          ],
+          "original_native_voxel_at_target": [
+            177.6147928994083,
+            238.40532544378698,
+            91.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 238,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -53.67037407815809,
+            -13.289119243621826,
+            -356.32360472104256
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            177.6147928994083,
+            238.40532544378698,
+            90.95798816568048
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            142,
+            126,
+            215,
+            191
+          ],
+          "original_native_voxel_at_target": [
+            177.6147928994083,
+            238.0,
+            90.95798816568048
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 177,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -54.12426400184631,
+            -12.989875164963081,
+            -356.32360472104256
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            177.6147928994083,
+            238.40532544378698,
+            90.95798816568048
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            205,
+            126,
+            273,
+            191
+          ],
+          "original_native_voxel_at_target": [
+            177.0,
+            238.40532544378698,
+            90.95798816568048
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006755-fp-09.png",
+      "sha256": "add980c6c05379aab041036040129866f306f332ba3a8c94793a612757192e64",
+      "bytes": 743069,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 276,
+        "volume_ml": 0.12034899632856007,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            278,
+            289
+          ],
+          [
+            103,
+            114
+          ],
+          [
+            76,
+            86
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small posterior paraspinal soft-tissue magenta island, remote from pancreatic reference and close to posterior orange ROI boundary. No visible cyan pancreas support immediately around target; isolated extra prediction rather than pancreatic lesion expansion.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 80,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            24.499988800373615,
+            -109.18540281316508,
+            -365.0899953842163
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            283.4963768115942,
+            108.1086956521739,
+            80.26086956521739
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            250,
+            295,
+            316,
+            361
+          ],
+          "original_native_voxel_at_target": [
+            283.4963768115942,
+            108.1086956521739,
+            80.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 109,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            24.499988800373615,
+            -108.52736973762512,
+            -364.8812997289326
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            283.4963768115942,
+            108.1086956521739,
+            80.26086956521739
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            254,
+            139,
+            316,
+            198
+          ],
+          "original_native_voxel_at_target": [
+            283.4963768115942,
+            109.0,
+            80.26086956521739
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 284,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            24.871804237365723,
+            -109.18540281316508,
+            -364.8812997289326
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            283.4963768115942,
+            108.1086956521739,
+            80.26086956521739
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            75,
+            139,
+            142,
+            198
+          ],
+          "original_native_voxel_at_target": [
+            284.0,
+            108.1086956521739,
+            80.26086956521739
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002889-miss-02.png",
+      "sha256": "edd3b75e532ceb93e4f796c26eb1dec4ece8de50dcf9c85b4724a7b35620551e",
+      "bytes": 783461,
+      "case_id": "PanTS_00002889",
+      "kind": "miss",
+      "component": {
+        "component_id": 2,
+        "voxels": 1602,
+        "volume_ml": 0.6985474352114247,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            257,
+            269
+          ],
+          [
+            257,
+            276
+          ],
+          [
+            206,
+            221
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow target at pancreatic-contour edge remains unoverlapped while another superior lesion has green overlap/magenta spillover. Appearance, streak pattern and anatomy are strikingly similar to6755 despite distinct recorded case/native geometry; visual similarity is not proof of shared patient/source identity. Keep both original dispositions; no duplicate audit/exclusion performed.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 36,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -1.1809439078699029,
+            8.04130311658173,
+            -99.48999124765396
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            248.71161048689137,
+            266.8920099875156,
+            36.56429463171036
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            132,
+            282,
+            206
+          ],
+          "original_native_voxel_at_target": [
+            262.28838951310865,
+            266.8920099875156,
+            213.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 270,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -1.1809439078699029,
+            10.335873126983643,
+            -99.03855553555876
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            248.71161048689137,
+            266.8920099875156,
+            36.56429463171036
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            181,
+            283,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            262.28838951310865,
+            270.0,
+            212.43570536828963
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 249,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -0.9680314064025879,
+            8.04130311658173,
+            -99.03855553555876
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            248.71161048689137,
+            266.8920099875156,
+            36.56429463171036
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            230,
+            181,
+            304,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            262.0,
+            266.8920099875156,
+            212.43570536828963
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002889-fp-09.png",
+      "sha256": "80c7372ce11f0a54454dea9151833cf208cb1486faa5c33717ecc0a999b442ef",
+      "bytes": 789469,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 3004,
+        "volume_ml": 1.309885452793458,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            233,
+            271
+          ],
+          [
+            218,
+            234
+          ],
+          [
+            19,
+            42
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta focus in thoracic soft tissue well superior to pancreatic reference, accompanied by cyan extra-pancreas contour. Similar location/appearance to6755fp5; this is another case record, not demonstrated independent anatomy.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 214,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            5.473249230261018,
+            -22.42841883672378,
+            42.91001087427139
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            257.7247003994674,
+            225.62083888149135,
+            217.97436750998668
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            213,
+            175,
+            292,
+            246
+          ],
+          "original_native_voxel_at_target": [
+            253.2752996005326,
+            225.62083888149135,
+            35.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 226,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            5.473249230261018,
+            -22.148491382598877,
+            46.08950492963888
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            257.7247003994674,
+            225.62083888149135,
+            217.97436750998668
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            215,
+            0,
+            299,
+            66
+          ],
+          "original_native_voxel_at_target": [
+            253.2752996005326,
+            226.0,
+            31.025632490013322
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 260,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            7.153059720993042,
+            -22.42841883672378,
+            46.08950492963888
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            257.7247003994674,
+            225.62083888149135,
+            217.97436750998668
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            191,
+            0,
+            262,
+            63
+          ],
+          "original_native_voxel_at_target": [
+            251.0,
+            225.62083888149135,
+            31.025632490013322
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002889-fp-11.png",
+      "sha256": "3937c3274cc8ab3bf6ae9f4c16ac61163e663a2e2c6a646717939b830ad44b20",
+      "bytes": 780682,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 11,
+        "voxels": 1701,
+        "volume_ml": 0.7417160969379735,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            324,
+            343
+          ],
+          [
+            233,
+            245
+          ],
+          [
+            151,
+            166
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta target at an end of blue/cyan pancreatic contours; similar to6755fp4. No yellow reference at target; illustrates within/adjacent-pancreas false lesion labeling. CT-only patch remains ambiguous at fixed window.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 92,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -53.67461160769679,
+            -12.984865869654413,
+            -54.68999058008194
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            177.6090534979424,
+            238.41211052322163,
+            90.97354497354497
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            141,
+            163,
+            216,
+            231
+          ],
+          "original_native_voxel_at_target": [
+            333.3909465020576,
+            238.41211052322163,
+            157.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 238,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -53.67461160769679,
+            -13.289119243621826,
+            -55.51115461348226
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            177.6090534979424,
+            238.41211052322163,
+            90.97354497354497
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            142,
+            126,
+            215,
+            191
+          ],
+          "original_native_voxel_at_target": [
+            333.3909465020576,
+            238.0,
+            158.02645502645504
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 177,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -54.12426424026489,
+            -12.984865869654413,
+            -55.51115461348226
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            177.6090534979424,
+            238.41211052322163,
+            90.97354497354497
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            205,
+            126,
+            273,
+            191
+          ],
+          "original_native_voxel_at_target": [
+            334.0,
+            238.41211052322163,
+            158.02645502645504
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002889-fp-06.png",
+      "sha256": "07f3b3a4e2de4318ba2475b1407127eefee27dc7bfb76aaa60c247c0296e570a",
+      "bytes": 738986,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 6,
+        "voxels": 271,
+        "volume_ml": 0.11816876088782528,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            223,
+            234
+          ],
+          [
+            103,
+            114
+          ],
+          [
+            164,
+            174
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small posterior paraspinal magenta island close to posterior ROI border and remote from pancreatic reference; visual pattern closely resembles6755fp9. No local blue pancreas reference at target.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 80,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            24.49040421436635,
+            -109.22751077074847,
+            -64.28999072313309
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            283.48339483394835,
+            108.05166051660517,
+            80.19926199261992
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            250,
+            295,
+            316,
+            361
+          ],
+          "original_native_voxel_at_target": [
+            227.51660516605165,
+            108.05166051660517,
+            169.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 110,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            24.49040421436635,
+            -107.7890887260437,
+            -64.13058112666177
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            283.48339483394835,
+            108.05166051660517,
+            80.19926199261992
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            255,
+            139,
+            317,
+            198
+          ],
+          "original_native_voxel_at_target": [
+            227.51660516605165,
+            110.0,
+            168.80073800738006
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 284,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            24.871803998947144,
+            -109.22751077074847,
+            -64.13058112666177
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            283.48339483394835,
+            108.05166051660517,
+            80.19926199261992
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            75,
+            139,
+            142,
+            198
+          ],
+          "original_native_voxel_at_target": [
+            227.0,
+            108.05166051660517,
+            168.80073800738006
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002235-miss-02.png",
+      "sha256": "f85bd0bc50767993a857d3b89fe96e2a1a3f759b988a6342df503d2517df60c6",
+      "bytes": 292115,
+      "case_id": "PanTS_00002235",
+      "kind": "miss",
+      "component": {
+        "component_id": 2,
+        "voxels": 833,
+        "volume_ml": 2.330626982597227,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            230,
+            268
+          ],
+          [
+            223,
+            259
+          ],
+          [
+            26,
+            29
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow missed annotation lies visibly anterior to the blue/cyan pancreas-parenchyma contours on selected axial/sagittal views, within a broader soft-tissue region. No predicted lesion or pancreas at target. Coronal/sagittal CT is strongly stair-stepped from coarse native through-plane sampling. This cautions against assuming all lesion annotation must lie inside the provided parenchyma mask; does not adjudicate annotation or tissue identity.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 28,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -195.4530953048658,
+            -203.5639721976609,
+            140.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            249.7154861944778,
+            238.87274909963986,
+            27.594237695078032
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            212,
+            46,
+            295,
+            136
+          ],
+          "original_native_voxel_at_target": [
+            249.7154861944778,
+            238.87274909963986,
+            28.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 236,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -195.4530953048658,
+            -205.71292352676392,
+            137.97118847539016
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            249.7154861944778,
+            238.87274909963986,
+            27.594237695078032
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            204,
+            25,
+            284,
+            36
+          ],
+          "original_native_voxel_at_target": [
+            249.7154861944778,
+            236.0,
+            27.594237695078032
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 250,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -195.24026560783386,
+            -203.5639721976609,
+            137.97118847539016
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            249.7154861944778,
+            238.87274909963986,
+            27.594237695078032
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            197,
+            25,
+            279,
+            36
+          ],
+          "original_native_voxel_at_target": [
+            250.0,
+            238.87274909963986,
+            27.594237695078032
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002235-fp-01.png",
+      "sha256": "10de1fb37f0f3223b57ae93dcd235b15bbdfde5a2f4e74cfe02fe981a9116b3a",
+      "bytes": 281672,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 1,
+        "voxels": 306,
+        "volume_ml": 0.8561486874846956,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            83,
+            105
+          ],
+          [
+            120,
+            135
+          ],
+          [
+            30,
+            32
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta focus occupies an end of the long blue/cyan pancreatic contour. It is not a remote posterior/thoracic island; appears within/at pancreatic parenchyma region. Coarse through-plane sampling limits boundary interpretation in coronal/sagittal views.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 30,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -311.4344541103232,
+            -287.31605004212435,
+            150.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            94.66993464052288,
+            126.91176470588235,
+            30.30718954248366
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            56,
+            170,
+            131,
+            239
+          ],
+          "original_native_voxel_at_target": [
+            94.66993464052288,
+            126.91176470588235,
+            30.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 127,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -311.4344541103232,
+            -287.2500458955765,
+            151.5359477124183
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            94.66993464052288,
+            126.91176470588235,
+            30.30718954248366
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            56,
+            22,
+            130,
+            32
+          ],
+          "original_native_voxel_at_target": [
+            94.66993464052288,
+            127.0,
+            30.30718954248366
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 97,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -309.69145572185516,
+            -287.31605004212435,
+            151.5359477124183
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            94.66993464052288,
+            126.91176470588235,
+            30.30718954248366
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            94,
+            22,
+            162,
+            32
+          ],
+          "original_native_voxel_at_target": [
+            97.0,
+            126.91176470588235,
+            30.30718954248366
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002235-fp-02.png",
+      "sha256": "81b4921af181decea2d22f94f15da1059cc564f5fe1c6ccd168783a15815230c",
+      "bytes": 233518,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 14,
+        "volume_ml": 0.039170201388188684,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            115,
+            121
+          ],
+          [
+            199,
+            202
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "acquired_boundary_contact": true
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Tiny magenta target visible on axial first acquired slice, in anterior abdominal soft tissue remote from pancreatic contour. At native z0, orange ROI border obscures target in coronal/sagittal overlay rows; those views establish boundary location but cannot independently resolve target. CT-only views remain available.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 0,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -294.46335619688034,
+            -232.74947917461395,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            117.35714285714286,
+            199.85714285714286,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            88,
+            103,
+            148,
+            160
+          ],
+          "original_native_voxel_at_target": [
+            117.35714285714286,
+            199.85714285714286,
+            0.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 200,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -294.46335619688034,
+            -232.64261531829834,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            117.35714285714286,
+            199.85714285714286,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            88,
+            53,
+            148,
+            58
+          ],
+          "original_native_voxel_at_target": [
+            117.35714285714286,
+            200.0,
+            0.0
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 116,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -295.47856283187866,
+            -232.74947917461395,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            117.35714285714286,
+            199.85714285714286,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            172,
+            53,
+            229,
+            58
+          ],
+          "original_native_voxel_at_target": [
+            116.0,
+            199.85714285714286,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00002235-fp-03.png",
+      "sha256": "e4cf8ab677dd1db4b84eee9907e240af17916826f99e3727cc949084a6047fe1",
+      "bytes": 232395,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 8,
+        "volume_ml": 0.022382972221822107,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            133,
+            137
+          ],
+          [
+            209,
+            212
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "acquired_boundary_contact": true
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second tiny axial first-slice magenta island near the previous target, remote from pancreatic contour. Same display limitation: coronal/sagittal target coincides with thick orange ROI edge; axial view shows it. Boundary-associated speckle pattern, not a diagnosis or proven padding cause.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 0,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -281.8267051875591,
+            -225.06863950192928,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            134.25,
+            210.125,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            106,
+            93,
+            164,
+            150
+          ],
+          "original_native_voxel_at_target": [
+            134.25,
+            210.125,
+            0.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 210,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -281.8267051875591,
+            -225.16214537620544,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            134.25,
+            210.125,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            106,
+            53,
+            163,
+            58
+          ],
+          "original_native_voxel_at_target": [
+            134.25,
+            210.0,
+            0.0
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 134,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -282.01371693611145,
+            -225.06863950192928,
+            0.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            134.25,
+            210.125,
+            0.0
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            182,
+            53,
+            239,
+            58
+          ],
+          "original_native_voxel_at_target": [
+            134.0,
+            210.125,
+            0.0
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008711-fp-02.png",
+      "sha256": "56bf7ea51c78a7fbe0a3bcbd69e6eeb75940cdf20046342c0f69375b5b3e1c87",
+      "bytes": 420188,
+      "case_id": "PanTS_00008711",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 1886,
+        "volume_ml": 4.353839464971005,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            170,
+            193
+          ],
+          [
+            170,
+            198
+          ],
+          [
+            53,
+            62
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta focus inside blue/cyan pancreatic contours, with no annotated lesion on these slices; another nearby magenta focus visible sagittally. Target remains within pancreatic region, so remote-region filtering alone would not address it.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 57,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -317.1166659888129,
+            -315.0857546549461,
+            142.5
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            180.99257688229056,
+            183.10604453870624,
+            57.00477200424178
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            151,
+            123,
+            214,
+            186
+          ],
+          "original_native_voxel_at_target": [
+            180.99257688229056,
+            183.10604453870624,
+            57.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 182,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -317.1166659888129,
+            -316.1485948562622,
+            142.51193001060446
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            180.99257688229056,
+            183.10604453870624,
+            57.00477200424178
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            152,
+            34,
+            213,
+            58
+          ],
+          "original_native_voxel_at_target": [
+            180.99257688229056,
+            182.0,
+            57.00477200424178
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 180,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -318.0704708099365,
+            -315.0857546549461,
+            142.51193001060446
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            180.99257688229056,
+            183.10604453870624,
+            57.00477200424178
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            151,
+            34,
+            219,
+            59
+          ],
+          "original_native_voxel_at_target": [
+            180.0,
+            183.10604453870624,
+            57.00477200424178
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008711-fp-03.png",
+      "sha256": "0a468868db14800e1b85468fb14c593f3da97fbc556d7ea67ead443c33fd9fce",
+      "bytes": 430146,
+      "case_id": "PanTS_00008711",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1731,
+        "volume_ml": 3.996021269281447,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            179,
+            203
+          ],
+          [
+            201,
+            232
+          ],
+          [
+            50,
+            58
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second oval magenta focus within blue/cyan pancreatic contours, separated from the large partially overlapping component. CT-only patch has heterogeneous soft tissue but visual review cannot establish lesion truth; confirms within-pancreas false-positive label relative to saved annotation.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 53,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -308.230710186344,
+            -284.2738769163223,
+            132.5
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            190.23974581166956,
+            215.17042172154825,
+            53.39110340843443
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            158,
+            88,
+            221,
+            157
+          ],
+          "original_native_voxel_at_target": [
+            190.23974581166956,
+            215.17042172154825,
+            53.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 210,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -308.230710186344,
+            -289.2423315048218,
+            133.4777585210861
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            190.23974581166956,
+            215.17042172154825,
+            53.39110340843443
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            158,
+            40,
+            218,
+            62
+          ],
+          "original_native_voxel_at_target": [
+            190.23974581166956,
+            210.0,
+            53.39110340843443
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 190,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -308.46109104156494,
+            -284.2738769163223,
+            133.4777585210861
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            190.23974581166956,
+            215.17042172154825,
+            53.39110340843443
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            182,
+            39,
+            248,
+            62
+          ],
+          "original_native_voxel_at_target": [
+            190.0,
+            215.17042172154825,
+            53.39110340843443
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00008711-spillover-04.png",
+      "sha256": "3ab674b39228c90341e5ba934c7d4305572f79df40488f34d00447d020908736",
+      "bytes": 467301,
+      "case_id": "PanTS_00008711",
+      "kind": "spillover",
+      "component": {
+        "component_id": 4,
+        "voxels": 20503,
+        "volume_ml": 47.33126752401936,
+        "overlap_voxels": 3378,
+        "any_overlap": true,
+        "overlap_fraction": 0.16475637711554406,
+        "bounds_xyz_half_open": [
+          [
+            223,
+            269
+          ],
+          [
+            187,
+            238
+          ],
+          [
+            27,
+            55
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large predicted lesion component occupies much of blue/cyan pancreatic region. Green overlap is concentrated at its inferior end, with substantial magenta extension superiorly and some yellow reference remaining beyond prediction. This is extensive within-pancreas overlabeling plus incomplete outline, not just isolated FP islands or a small contour offset. Saved component has3378overlap/20503predictedvoxels; no new scoring.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 36,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -253.9318094989157,
+            -286.46797050697387,
+            90.0
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            246.74589084524217,
+            212.88713846754135,
+            37.05482124567136
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            202,
+            84,
+            290,
+            171
+          ],
+          "original_native_voxel_at_target": [
+            246.74589084524217,
+            212.88713846754135,
+            36.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 221,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -253.9318094989157,
+            -278.67201375961304,
+            92.6370531141784
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            246.74589084524217,
+            212.88713846754135,
+            37.05482124567136
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            205,
+            41,
+            290,
+            85
+          ],
+          "original_native_voxel_at_target": [
+            246.74589084524217,
+            221.0,
+            37.05482124567136
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 244,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -256.5704402923584,
+            -286.46797050697387,
+            92.6370531141784
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            246.74589084524217,
+            212.88713846754135,
+            37.05482124567136
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            167,
+            42,
+            259,
+            85
+          ],
+          "original_native_voxel_at_target": [
+            244.0,
+            212.88713846754135,
+            37.05482124567136
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006880-fp-02.png",
+      "sha256": "7bf9da80be5d9aac69957d55ee9cc9d90a6c606e180a0f4bf6d4572b95506c28",
+      "bytes": 567494,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 12539,
+        "volume_ml": 3.8696101528765277,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            186,
+            240
+          ],
+          [
+            274,
+            303
+          ],
+          [
+            133,
+            176
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Broad crescent/patch of magenta hugs the posterior/inferior portion of blue/cyan pancreatic contours. No yellow reference exists in this reference-empty case. The extra lesion label is largely pancreatic-region tissue, not a remote island; visual appearance cannot establish verified health.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 73,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            1.8078973290832607,
+            -169.55959827214093,
+            -104.39999508857727
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            301.8825265172661,
+            285.1902065555467,
+            67.12170029507935
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            240,
+            96,
+            359,
+            190
+          ],
+          "original_native_voxel_at_target": [
+            209.11747348273389,
+            285.1902065555467,
+            148.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 285,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            1.8078973290832607,
+            -169.677734375,
+            -109.10263492258858
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            301.8825265172661,
+            285.1902065555467,
+            67.12170029507935
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            251,
+            108,
+            358,
+            198
+          ],
+          "original_native_voxel_at_target": [
+            209.11747348273389,
+            285.0,
+            153.87829970492066
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 299,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            0.017578125,
+            -169.55959827214093,
+            -109.10263492258858
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            301.8825265172661,
+            285.1902065555467,
+            67.12170029507935
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            241,
+            112,
+            332,
+            201
+          ],
+          "original_native_voxel_at_target": [
+            212.0,
+            285.1902065555467,
+            153.87829970492066
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006880-fp-07.png",
+      "sha256": "98b6fcb9018457a2ece9fae58796ee689af4e2259abb8a7bc631de942824dabe",
+      "bytes": 521891,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 7,
+        "voxels": 457,
+        "volume_ml": 0.14103292446483556,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            256,
+            265
+          ],
+          [
+            269,
+            281
+          ],
+          [
+            100,
+            108
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small magenta patch within/at blue and cyan pancreatic contours at a more superior level. No reference lesion. CT-only patch is low-contrast; cannot adjudicate lesion truth from selected views.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 118,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -29.508158677516406,
+            -175.88187653856676,
+            -68.39999455213547
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            251.4617067833698,
+            275.0109409190372,
+            117.66083150984683
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            214,
+            117,
+            289,
+            194
+          ],
+          "original_native_voxel_at_target": [
+            259.5382932166302,
+            275.0109409190372,
+            103.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 275,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -29.508158677516406,
+            -175.888671875,
+            -68.67132934830121
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            251.4617067833698,
+            275.0109409190372,
+            117.66083150984683
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            214,
+            75,
+            289,
+            133
+          ],
+          "original_native_voxel_at_target": [
+            259.5382932166302,
+            275.0,
+            103.33916849015317
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 251,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -29.794921875,
+            -175.88187653856676,
+            -68.67132934830121
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            251.4617067833698,
+            275.0109409190372,
+            117.66083150984683
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            236,
+            75,
+            314,
+            133
+          ],
+          "original_native_voxel_at_target": [
+            260.0,
+            275.0109409190372,
+            103.33916849015317
+          ]
+        }
+      ]
+    },
+    {
+      "file": "PanTS_00006880-fp-03.png",
+      "sha256": "41016f008e8be44c3186a49f3bd6c08da90d9885e2afb983bfa62409d49fe532",
+      "bytes": 521443,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 303,
+        "volume_ml": 0.09350760637384065,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            214,
+            224
+          ],
+          [
+            323,
+            331
+          ],
+          [
+            134,
+            144
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small magenta patch at the anterior pancreatic contour; another larger magenta region is visible posteriorly in context. No reference lesion; repeated within-pancreas extra labeling rather than a purely localization-driven error.",
+      "planes": [
+        {
+          "plane": "Axial",
+          "axis": 2,
+          "index": 81,
+          "x_axis": 0,
+          "y_axis": 1,
+          "world_ras_mm": [
+            -3.885268409653463,
+            -144.0407062190594,
+            -97.99999499320984
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "A",
+            "P"
+          ],
+          "centroid_ras_voxel": [
+            292.7161716171617,
+            326.2772277227723,
+            82.12871287128714
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            255,
+            67,
+            330,
+            141
+          ],
+          "original_native_voxel_at_target": [
+            218.2838283828383,
+            326.2772277227723,
+            140.0
+          ]
+        },
+        {
+          "plane": "Coronal",
+          "axis": 1,
+          "index": 326,
+          "x_axis": 0,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -3.885268409653463,
+            -144.212890625,
+            -97.09702468272482
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "L",
+            "R",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            292.7161716171617,
+            326.2772277227723,
+            82.12871287128714
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            257,
+            110,
+            331,
+            169
+          ],
+          "original_native_voxel_at_target": [
+            218.2838283828383,
+            326.0,
+            138.87128712871288
+          ]
+        },
+        {
+          "plane": "Sagittal",
+          "axis": 0,
+          "index": 292,
+          "x_axis": 1,
+          "y_axis": 2,
+          "world_ras_mm": [
+            -4.330078125,
+            -144.0407062190594,
+            -97.09702468272482
+          ],
+          "selection": "maximum selected-component voxel area; smallest slice index breaks ties",
+          "edges": [
+            "P",
+            "A",
+            "S",
+            "I"
+          ],
+          "centroid_ras_voxel": [
+            292.7161716171617,
+            326.2772277227723,
+            82.12871287128714
+          ],
+          "zoom_pixel_box_xy_half_open": [
+            290,
+            110,
+            363,
+            169
+          ],
+          "original_native_voxel_at_target": [
+            219.0,
+            326.2772277227723,
+            138.87128712871288
+          ]
+        }
+      ]
+    }
+  ],
+  "render_resources": {
+    "seconds": 296.40600000007544,
+    "peak_owned_rss_bytes": 1183797248,
+    "samples": 2363,
+    "workers_reaped": true,
+    "success": false,
+    "exit_code": 1
+  },
+  "original_backup_pairs_verified": 33,
+  "all_code_pins_match": true,
+  "render_retried": false,
+  "images_regenerated": false,
+  "source_arrays_reread_for_recovery": true,
+  "model_forwards": 0,
+  "scoring_calls": 0,
+  "limitations": [
+    "Original renderer exited1 only during JSON serialization after26images; original failure/partial manifest preserved.",
+    "Two2235first-slice tiny FP targets are visible axially; orange ROI border obscures their orthogonal overlay pixels. No rerender performed.",
+    "Reference unit assumptions preserved; no annotation or clinical adjudication; representative views only.",
+    "6755 and2889 show striking visual similarity; shared identity not established, no duplicate audit or exclusion.",
+    "Full-precision plane metadata recovered separately from bound masks; original partial manifest and failed worker unchanged."
+  ],
+  "display": {
+    "window_hu": [
+      -100,
+      250
+    ],
+    "zoom_margin_mm": 20,
+    "orientation": "axis-aligned lossless RAS; obliquity rejected",
+    "rows": [
+      "context overlay",
+      "zoom CT only",
+      "zoom overlay"
+    ]
+  },
+  "evidence_sha256": {
+    "request.json": "1ae4953b7c74ced90128289fb4716f32db0591e3b2a328f8febc1d147f770484",
+    "manifest.json": "91e7f9f359678642c5facdb0d87ae21bde44213d151ebacfddcee0b6335eb829",
+    "resources.json": "1b1d5b5df3e6729d49176ea845bdef675291cf663447387ecd4dfbfcbfb10127",
+    "worker.log": "37e2c507991b11d8890e5c874bb11d587f37a8d239f49320116e9c8439482c8d",
+    "selection-amendment.json": "d331f5d749227a2824f299303e53ade5af5f8449d1578f58f40591850532c694",
+    "observations.json": "c49feaba5d7246459cd41ffab309522563f02990935d9be97f0e98f1fa13453c"
+  },
+  "metadata_recovery": {
+    "parent_sha256": "8f42842e38816d5f732140145fa9fb39953c9833531a4d56fe47af2b398553e8",
+    "seconds": 46.26599999994505,
+    "ct_voxel_reads": 0,
+    "mask_geometry_reads_only": true,
+    "images_regenerated": false,
+    "method": "same frozen selection/orientation/crop functions, exact source mask hashes and component checks; additive native scalar serialization",
+    "prior_worker_seconds": 296.406,
+    "first_metadata_recovery_conservative_charge_seconds": 30,
+    "supervisor_resources": {
+      "seconds": 47.59299999999348,
+      "peak_owned_rss_bytes": 657227776,
+      "samples": 377,
+      "workers_reaped": true,
+      "success": true,
+      "exit_code": 0
+    },
+    "cumulative_charged_seconds": 373.9990000000689
+  },
+  "verification_closeout": {
+    "all78_displayed_slice_indices_independently_read_from_opened_images_match_recovery": true,
+    "backup_pairs": {
+      "week05-seven-visual-review-20261104-a01": 35,
+      "week05-seven-visual-metadata-20261104-a01": 4
+    },
+    "full_manifest_sha256": "4297172e463b499b06ee9654385c23313e3a2cfc47ab9a0f1687bf30ad95d13b",
+    "recovery_resources_sha256": "6d68957b5ac099517b652757ff5d7e1c5ecbf023cb9a79ebdffd1b05ecd164a6"
+  },
+  "first_metadata_salvage_source_arrays_reread": false,
+  "recovery_scope_note": "First prefix salvage read no arrays; subsequent full plane reconstruction reread exact bound masks only, with zero CT voxel reads and no rerender.",
+  "supersedes_reporting_only_sha256": "75a33a2cc8c3b416142241d301ed3fd33e7f28ba6601fc361d9c1b76c2abf041"
+}

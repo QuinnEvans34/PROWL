@@ -1,28 +1,19 @@
 # Lenovo work status
 
-- Observed at: 2026-11-04T21:07:02.408893+00:00.
-- Owner / branch: Lenovo chat, `codex/week05-cuda-readiness`.
-- Prior delivered revision: `edae4c385fb6fb38a94cdef51d52d3c3874f08d1`; the enclosing commit publishes this closeout.
-- Peer read: fetched `25c94c4661a7bc84eb1fa6b15f3d4f20e9b8d587` on origin/main and read MAC.md / latest KD runbook. Published peer status records clean pause at14029; subsequent Mac delegation says the user authorized qualified continuation preparation. No local claim that Mac has resumed. No merge occurred.
+- Observed at: 2026-11-04T21:40:42.256223+00:00.
+- Branch: `codex/week05-cuda-readiness`; bounded renderer/tests published57a29d5. Enclosing commit publishes the visual review.
+- Peer read: main61eb806 exact visual-target amendment, original1b81693plan and79b63a8metadata review; no merge. Mac KD continues under Mac ownership; no competing GPU job here.
 
-## Completed evaluation
+## Latest completed work
 
-The existing autonomous70 a03 handoff finished normally at2026-11-04T03:36:37Z:63 native predictions/scores, seven declared admission failures, no exclusions. Five reused and58new. No surviving evaluation/GPU workers;121 worker records and supervisor report success/exit0/reaped. All710 output/independent-backup pairs match;294 repository pins match; preparation backups match.
+Actually inspected all26new native contact sheets across seven cases. [Visual report](../operations/WEEK-05-SEVEN-VISUAL-REVIEW-20261104.md) and [sanitized metadata](../operations/WEEK-05-SEVEN-VISUAL-REVIEW-FULL-METADATA-20261104.json) preserve observations, target/source/image hashes, geometry, unknown-reference-unit flags and limitations. Final JSON SHA6769a04712874b737f79922c11b3de1fdfc5ea79fdcda92b0695eb09473ab0c0.
 
-[Closeout report](../operations/WEEK-05-AUTONOMOUS70-CLOSEOUT-20261104.md) and [sanitized metadata JSON](../operations/WEEK-05-AUTONOMOUS70-CLOSEOUT-20261104.json) retain ordered70 dispositions, per-case metrics/coverage/components/contours and source hashes. JSON SHA256 `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6` (UTF-8/LF).
+Patterns: remote posterior/thoracic extra labeling; within-pancreas FP foci; misses near localized pancreas;8711extensive partially-overlapping spillover.2235miss is outside parenchyma contours; strict pancreas masking is not justified.6755/2889visually strikingly similar; shared identity not established and no audit/exclusion performed. Originalexposed/UNQUALIFIED scopes unchanged.
 
-Mean lesion Dice0.3712019132 on32positive completed cases;30/32any-overlap;31/31reference-empty alarms;35/40reference components hit;394false-positive components. Full expanded-region pancreas coverage63/63 and lesion coverage32/32. Seven failures are six unresolved unit admissions and one capacity limit, not zero-Dice results or exclusions.
+Worker produced26sheets then FAILED final JSON serialization (NumPyint64),296.406s/1183797248Bpeak/reaped. All originals/failure retained; no rerender. Separate metadata-only recovery completed from saved partialcasefield/log/PNGs,33originalbackups/codepins checked, all26actualobservations bound.7displaytests+3metadata tests pass (including actual render/JSON roundtrip). Separately authorized full-plane recovery from bound masks/headers PASS47.593s/657227776B/reaped, noCTvoxelread/rerender.78captionindices match; cumulative373.999s<1200s. Finalprovenance distinguishes firstno-arraysalvage from latermaskreconstruction.2235two tiny boundary targets obscured by ROIline orthogonally but visible axially. See report for exact limits; do not call original worker successful.
 
-## Scope and evidence
+Private evidence E:/PROWL/readiness/week05-seven-visual-review-20261104-a01 and matching C:/Users/quinn/PROWL-Backups directory.26PNGs15.16MB; no medical pixels committed. Private packet seven-native-review-v2.tar prepared15370240bytes/SHAa2fcfb586d881e0b0373ff69b6d3ac3c50ceec920f1f895e3b7a980731cbc444;32regularmembers, strictreadbackPASS. Bounded600s/1GiB Wormhole sender93340 started, codeonlyprivatechat/log; deliverypending. Finalmetadata6769a047... is authoritative; earlierpacket/finalsidecars retainedsuperseded. No model/scoring/training, source changes, MLflow writes or traininghours. No new timer.
 
-Exposed development, numerical probability equivalence UNQUALIFIED under the approved exception. H0 NOT TESTED; no independent model-quality acceptance. No new scientific training, MLflow training record or training hours. Whole handoff9304.906seconds; internal evaluation8323.297seconds; these are evaluation scopes.
+## Baseline and next action
 
-RequestSHA `ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e`.
-ReadySHA `19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845`.
-Output E:/PROWL/artifacts/week05-autonomous70-20261103-a03; same named independent C:/Users/quinn/PROWL-Backups directory. Preparation E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a03.
-
-Report-only exporter failures from two legacy metadata forms are preserved; version3 succeeds without scientific reruns or saved-record edits. Source CT/mask admission evidence reused, not re-audited. Original archive reconciliation remains documented separately.
-
-## Next action
-
-Mac may fetch the metadata JSON for CPU-only report admission and error review. No new training, inference, threshold tuning or automatic retry is authorized by this report. Windows GPU idle; no timer added. Mac owns KD continuation and UI integration. No additional Lenovo job launched.
+Prior autonomous70closeout atd290d43 remains63completed+7declaredfailures; meanpositiveDice.3712019132/32; all31emptyreferences alarmed. [Closeout](../operations/WEEK-05-AUTONOMOUS70-CLOSEOUT-20261104.md). No original outputs changed. Mac may inspect private gallery and determine later review priorities. This handoff authorizes no new scientific experiment or retry. Crosschat send tool still cannot reach durableMac host; GitHub provides shared metadata.

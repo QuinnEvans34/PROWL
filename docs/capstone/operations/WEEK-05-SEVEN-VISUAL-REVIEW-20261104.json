@@ -1,0 +1,1742 @@
+{
+  "schema": "prowl.seven-native-error-review.recovered.v1",
+  "created_utc": "2026-11-04T21:39:18.227259+00:00",
+  "status": "VISUAL_REVIEW_COMPLETED_FROM_SAVED_PNGS_WITH_PRESERVED_RENDER_MANIFEST_FAILURE",
+  "plan_sha256": "10d9674f0476d6d854a478bd9406c30a2ea154a854976d66378fb4701224dd8e",
+  "amendment_sha256": "1463a206dfbf549804d4877cb82e996549ab0ba56990f6e7d7a946749349d979",
+  "scope": {
+    "role": "exposed_development",
+    "probability_equivalence": "UNQUALIFIED",
+    "numerical_exception": "Human-approved scoped exception; original probability comparison failure retained",
+    "training": false,
+    "model_quality_acceptance": false,
+    "hypothesis_verdict": "NOT_TESTED",
+    "failed_cases_not_imputed": true
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00004681",
+      "source_sha256": {
+        "ct": "8249c821684154b49e5670b1bc76efd4a179ea79a79121fc5e44e07dbfb33090",
+        "pancreas": "34ecdc4184bd64c0d304d2df9e6776e4d58ed7d3f61cf2a9e4e7abd947f9b5b0",
+        "lesion": "307529b2ce78b32cc1cc6c88b4462520e4a55afb6167e2593c2c1861f5d973eb",
+        "prediction": "a4748aaad3157295ff9e9b8a933ba651db996f93cbbebf17cbcfc1f364a73c9b"
+      },
+      "source_report_sha256": {
+        "score": "31fb38345749db23be210943a3996d509cad2e5ff79fd0bc45930114cd25a218",
+        "result": "53bc5b6c5153e8b1386b6dc19b0c2ac72888c8c5dbef00eda6c0ab43679cdd7f",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "native_shape": [
+        512,
+        406,
+        194
+      ],
+      "native_affine": [
+        [
+          -0.7226560115814209,
+          -0.0,
+          -0.0,
+          178.8000030517578
+        ],
+        [
+          -0.0,
+          0.7226560115814209,
+          0.0,
+          -184.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -42.589988708496094
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7226560115814209,
+          0.0,
+          0.0,
+          -190.47721886634827
+        ],
+        [
+          0.0,
+          0.7226560115814209,
+          0.0,
+          -184.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -196.98999100923538
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        33,
+        0
+      ],
+      "region_high": [
+        464,
+        400,
+        194
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 123256,
+          "inside_voxels": 113541,
+          "outside_voxels": 9715,
+          "fraction": 0.9211803076523658
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 123256,
+          "inside_voxels": 123256,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 492,
+          "inside_voxels": 492,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.8191964285714286
+      }
+    },
+    {
+      "case_id": "PanTS_00008769",
+      "source_sha256": {
+        "ct": "d6b25292dc425c7e2e92b19f3c8820ee41b88fb3e05bfc1aa087309d519edc35",
+        "pancreas": "9b239d4f00acd2b58c42e9306f467dcd8c3320e2c1541f2bf5b4fb0f0dc6a699",
+        "lesion": "ed364a80b2ce668924a0b785ea7504ec24eaac3c4b40c1cfc1ce2f758bdea169",
+        "prediction": "3b259d5b177e6280e9c61fd3c60e369996af0c60796d2dca5c27bf9bf8bcc62a"
+      },
+      "source_report_sha256": {
+        "score": "fd2d1b7ef6704226fcabd4e48af6e59b31a191963c4702a24cbdd5a6dbe97ee4",
+        "result": "c664f02c41103d3e38d4667e43b5dfe43870c413daadfc771d37de1e17f4f148",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        473,
+        350,
+        266
+      ],
+      "native_affine": [
+        [
+          -0.9765625,
+          0.0,
+          0.0,
+          249.51171875
+        ],
+        [
+          0.0,
+          -0.9765625,
+          0.0,
+          414.51171875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -646.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.9765625,
+          0.0,
+          0.0,
+          -211.42578125
+        ],
+        [
+          0.0,
+          0.9765625,
+          0.0,
+          73.69140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -646.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          -1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        18,
+        38,
+        0
+      ],
+      "region_high": [
+        438,
+        305,
+        266
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 112481,
+          "inside_voxels": 107065,
+          "outside_voxels": 5416,
+          "fraction": 0.9518496457179435
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 112481,
+          "inside_voxels": 112481,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 2655,
+          "inside_voxels": 2655,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6773784355179704
+      }
+    },
+    {
+      "case_id": "PanTS_00006755",
+      "source_sha256": {
+        "ct": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+        "pancreas": "4c8ed3726772bdf48c135d3c4b41e86b19d7536d6c82d8612afdb0adadd30b19",
+        "lesion": "3e45b4461a3649b3f4be7935eb51bbaa1e73616f3f2783f38d7c759337873b02",
+        "prediction": "3fbd4717a5e1a9fc6f146f0ada7a450d2984999340abde2113216834a0149062"
+      },
+      "source_report_sha256": {
+        "score": "6645af370e59f568e598372526cea1645a39d1e90f76a92a1c8ab775039da6e2",
+        "result": "a70ffc5e3369bfc4c3ce2db753fb54ccdd9e3ba7ee5dbb98e2273b269ebb1be4",
+        "input-access": "eeae0ed0fc31bb0591d1ea000f3a3811a0f0fa5b17c5e9f8b76c8d9b84cd7b92"
+      },
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "native_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          -0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          -0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        97,
+        0
+      ],
+      "region_high": [
+        470,
+        416,
+        250
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 28204,
+          "inside_voxels": 28204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 28204,
+          "inside_voxels": 28204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 3515,
+          "inside_voxels": 3515,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6716330991972477
+      }
+    },
+    {
+      "case_id": "PanTS_00002889",
+      "source_sha256": {
+        "ct": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+        "pancreas": "7d66348f621cc46d731e9dc21c95567985bdfdce901d2c6b5bf8d3b689a3f750",
+        "lesion": "d2edb1ec8969428176cbf65e87185bb35eb177dd5e9e67166d186b3ad740f180",
+        "prediction": "a475dbeb2388b42511081a437bededea07e7286ebee914366d3c88806cffe3c1"
+      },
+      "source_report_sha256": {
+        "score": "7771c29e3d878169e74f8f2c0984956fc597400325df255579ff00fc29ed6465",
+        "result": "01c9ba292101e1686e9a3836941f714f9c45c2a5ff496776ec5b8a8185acf3e3",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "native_affine": [
+        [
+          -0.7382810115814209,
+          -0.0,
+          -0.0,
+          192.4615936279297
+        ],
+        [
+          -0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          70.9100112915039
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          0.0,
+          -184.8000032901764
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -128.2899916768074
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        97,
+        0
+      ],
+      "region_high": [
+        470,
+        416,
+        250
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 166354,
+          "inside_voxels": 166354,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 166354,
+          "inside_voxels": 166354,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 3599,
+          "inside_voxels": 3599,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6716330991972477
+      }
+    },
+    {
+      "case_id": "PanTS_00002235",
+      "source_sha256": {
+        "ct": "c8af89d3c810258fac1cd271c2c466c5f6aab793111f2b060ce538bbd80e622b",
+        "pancreas": "7bbc21c91cd1dedc449260bc759335460d2126d1cba80fb8c7d6e84e11c175b6",
+        "lesion": "f90a093fb6ea54f6af6b2cb474f1f23842c9a7800381a3cff64dd233bd41de98",
+        "prediction": "bbf268526ea224eab11bac6cf356eec670b41b9c165b22903340a1d9ce9c4190"
+      },
+      "source_report_sha256": {
+        "score": "939fbac477f74585fd35f3d8c5b02b7962ee5400692abcd039a00c68b11a874a",
+        "result": "d1518a8a00b2f3fd2a8c68b8ebb73a27bf95ffa62d31448f3e09aa32788a3ae1",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        445,
+        332,
+        58
+      ],
+      "native_affine": [
+        [
+          0.7480469942092896,
+          0.0,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.7480469942092896,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.7480469942092896,
+          0.0,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.7480469942092896,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "unknown"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        45,
+        0
+      ],
+      "region_high": [
+        445,
+        332,
+        58
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 22204,
+          "inside_voxels": 20901,
+          "outside_voxels": 1303,
+          "fraction": 0.9413168798414701
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 22204,
+          "inside_voxels": 22204,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 1771,
+          "inside_voxels": 1771,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.8644578313253012
+      }
+    },
+    {
+      "case_id": "PanTS_00008711",
+      "source_sha256": {
+        "ct": "00396cb2f658d9c012d84148d1ee1d250d94f5f8527039c4fc6dacc4ef9dd477",
+        "pancreas": "c98171a48a7236f83a25a39e804d6d987a0d1d460d5f9265a625630d9cdc9730",
+        "lesion": "554bf5214296bc56db9db843941e2f0e7eb25201860f421e53a31d061abbdfcd",
+        "prediction": "f50267f333946b733facb6973669bda2734ecadfdfd8f45d0d688d76fefc3e17"
+      },
+      "source_report_sha256": {
+        "score": "436e009f365bab49f698a365fe56914c0a8c02a8a038542931e7016582f9fbcd",
+        "result": "2f2cd85e3c69736ad50e829bd32d0de76c6cae443218db4011dd8bc9256083e5",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        481,
+        337,
+        104
+      ],
+      "native_affine": [
+        [
+          0.9609379768371582,
+          0.0,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.9609379768371582,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.9609379768371582,
+          0.0,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.9609379768371582,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        22,
+        66,
+        0
+      ],
+      "region_high": [
+        433,
+        311,
+        104
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 57268,
+          "inside_voxels": 56851,
+          "outside_voxels": 417,
+          "fraction": 0.9927184466019418
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 57268,
+          "inside_voxels": 57268,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 4812,
+          "inside_voxels": 4812,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "scan_fraction": 0.6212021197184402
+      }
+    },
+    {
+      "case_id": "PanTS_00006880",
+      "source_sha256": {
+        "ct": "4b987c93b1fce54229c6858c0d07336f631e4f4c6810620ee83255297e85d20e",
+        "pancreas": "a7c79f532f349d55323a4cff316eead7bafa0ebcb3a2584be04262eebc1c8b4c",
+        "lesion": "3f5586df4405e54ea16380c89afe332eac82d5bc630923b2bbd0e98d0685a220",
+        "prediction": "71d5ee854d3f296b172699efefc9efc37d021d5523d177a8b077a0093b9dcb98"
+      },
+      "source_report_sha256": {
+        "score": "4775913352e825eadd016f8a740c32ce39710213fccf3fc5029669544f34009c",
+        "result": "666099e47303a4c68fa82c584c1c021bd0e98644541fcb44e27bae7cd7b20656",
+        "input-access": "bd647b4c7cf6d8a152fe4e05c79bc5a2db7e3ee5037f445fbcc6a80687864fd2"
+      },
+      "native_shape": [
+        512,
+        431,
+        222
+      ],
+      "native_affine": [
+        [
+          -0.62109375,
+          -0.0,
+          -0.0,
+          131.689453125
+        ],
+        [
+          -0.0,
+          0.62109375,
+          0.0,
+          -346.689453125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          14.000006675720215
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "ras_affine": [
+        [
+          0.62109375,
+          0.0,
+          0.0,
+          -185.689453125
+        ],
+        [
+          0.0,
+          0.62109375,
+          0.0,
+          -346.689453125
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -162.79999595880508
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "orientation_transform": [
+        [
+          0.0,
+          -1.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "reference_units": [
+        "unknown",
+        "mm"
+      ],
+      "unknown_reference_units_assumed_mm": true,
+      "region_low": [
+        0,
+        105,
+        0
+      ],
+      "region_high": [
+        512,
+        431,
+        222
+      ],
+      "coverage": {
+        "predicted_mask_pancreas_coverage": {
+          "reference_voxels": 206311,
+          "inside_voxels": 205848,
+          "outside_voxels": 463,
+          "fraction": 0.9977558152497928
+        },
+        "expanded_region_pancreas_coverage": {
+          "reference_voxels": 206311,
+          "inside_voxels": 206311,
+          "outside_voxels": 0,
+          "fraction": 1.0
+        },
+        "expanded_region_lesion_coverage": {
+          "reference_voxels": 0,
+          "inside_voxels": 0,
+          "outside_voxels": 0,
+          "fraction": null
+        },
+        "scan_fraction": 0.7563805104408353
+      }
+    }
+  ],
+  "images": [
+    {
+      "file": "PanTS_00004681-miss-01.png",
+      "sha256": "9e8158c4b43933757f57e21c9d1b474bf4bc6df7fd466323ccd85d1553dc49b4",
+      "bytes": 582378,
+      "case_id": "PanTS_00004681",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 492,
+        "volume_ml": 0.20555040454196785,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            221,
+            231
+          ],
+          [
+            194,
+            201
+          ],
+          [
+            109,
+            124
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small yellow reference at edge of blue pancreas outline lies within/adjacent cyan predicted-pancreas contour in all three selected planes; no green overlap. Magenta predictions appear elsewhere. CT target is small and low-contrast/grainy at this display; cannot establish lesion identity from these views. Supports lesion-class miss despite region/pancreas localization."
+    },
+    {
+      "file": "PanTS_00004681-fp-09.png",
+      "sha256": "cbcafa9d53e63e5aecb604f62304a302cd42f9e16391fa4f17e0f1ef99ed67b4",
+      "bytes": 581960,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 6580,
+        "volume_ml": 2.749027768061277,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            306,
+            333
+          ],
+          [
+            55,
+            89
+          ],
+          [
+            116,
+            145
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large magenta island in posterior soft tissue next to spine, far from blue reference pancreas in context views. Cyan predicted-pancreas contour accompanies the island. This is spatially remote extra pancreas/lesion labeling, not merely a narrow lesion-boundary expansion."
+    },
+    {
+      "file": "PanTS_00004681-fp-12.png",
+      "sha256": "6d5324f5ef5d42296c271d77949d2d2f6e8952767e274d83eac2f0f0941495e2",
+      "bytes": 544660,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 12,
+        "voxels": 1546,
+        "volume_ml": 0.6458961898818746,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            310,
+            328
+          ],
+          [
+            86,
+            100
+          ],
+          [
+            162,
+            177
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second posterior soft-tissue magenta island alongside spine, surrounded partly by cyan predicted-pancreas contour; no blue reference pancreas near target. Coronal/sagittal views show it as separate from anterior pancreatic reference region."
+    },
+    {
+      "file": "PanTS_00004681-fp-03.png",
+      "sha256": "67e3f4dcd7598d382e5df6010f9a92971a3d623720c57d59c233773365625586",
+      "bytes": 540443,
+      "case_id": "PanTS_00004681",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1494,
+        "volume_ml": 0.624171350377439,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            184,
+            200
+          ],
+          [
+            67,
+            80
+          ],
+          [
+            151,
+            192
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Elongated posterior soft-tissue magenta prediction on opposite side of spine from other targets, adjacent to cyan extra pancreatic labeling. No reference lesion at target; inferior extent approaches bottom displayed region. Not just expansion of the annotated pancreatic lesion."
+    },
+    {
+      "file": "PanTS_00008769-miss-01.png",
+      "sha256": "bb4a0c63d058801c96b1f175b17f14ead6986605fd5d6127d3312d82f29b93fb",
+      "bytes": 689917,
+      "case_id": "PanTS_00008769",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 2655,
+        "volume_ml": 2.0256042782307304,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            228,
+            247
+          ],
+          [
+            135,
+            154
+          ],
+          [
+            67,
+            86
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow reference component at pancreatic contour edge is visible in all three planes, with cyan predicted-pancreas contour nearby/enclosing it but no magenta/green at the target. The CT patch is subtle against surrounding soft tissue; no evidence here of ROI clipping."
+    },
+    {
+      "file": "PanTS_00008769-fp-02.png",
+      "sha256": "4d2251aec237093f50a8e51b65d0a088e1add9ddc600d2aefb83942deab83794",
+      "bytes": 723136,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 16250,
+        "volume_ml": 12.397766298022361,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            225,
+            272
+          ],
+          [
+            141,
+            182
+          ],
+          [
+            210,
+            239
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large magenta/cyan island lies far superior to pancreatic reference, in thoracic soft tissue adjacent to the cardiac silhouette on context views. This remote extra labeling is qualitatively different from pancreatic lesion boundary spillover; no anatomical/clinical adjudication made."
+    },
+    {
+      "file": "PanTS_00008769-fp-01.png",
+      "sha256": "451db449a0f57b16b88c34a01380c6b656d6ae076dbcb5b7d1d3c38c309ca437",
+      "bytes": 682469,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 1,
+        "voxels": 2890,
+        "volume_ml": 2.204895052386746,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            197,
+            224
+          ],
+          [
+            152,
+            167
+          ],
+          [
+            28,
+            46
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta island lies within/at blue and cyan pancreatic contours at a more inferior level than the missed yellow reference. CT-only views show soft-tissue texture without an unmistakable target distinction at this window; appears to be a within-pancreas false lesion label, not solely remote-organ confusion."
+    },
+    {
+      "file": "PanTS_00008769-fp-03.png",
+      "sha256": "093b157d94a34c8b633e3db38ab330de37d96942289662b5d020b4f28c598f2f",
+      "bytes": 645054,
+      "case_id": "PanTS_00008769",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1443,
+        "volume_ml": 1.1009216472643857,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            233,
+            262
+          ],
+          [
+            141,
+            155
+          ],
+          [
+            241,
+            260
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Smaller magenta band superior to the large thoracic FP island; nearby cyan extra-pancreas contour, far above reference pancreas. Target approaches upper orange ROI line in coronal/sagittal views but is not evidence of clipped reference anatomy."
+    },
+    {
+      "file": "PanTS_00006755-miss-01.png",
+      "sha256": "1221ed96b77db9d5350f02920f949f2ecb58bb1a38857d6d1b0c8ab952a3fc3e",
+      "bytes": 788763,
+      "case_id": "PanTS_00006755",
+      "kind": "miss",
+      "component": {
+        "component_id": 1,
+        "voxels": 1563,
+        "volume_ml": 0.6815415987736934,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            243,
+            255
+          ],
+          [
+            257,
+            276
+          ],
+          [
+            29,
+            44
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow missed component lies at the edge of the reference pancreas and inside/near cyan predicted-pancreas contour. Coronal zoom also shows a separate superior reference lesion with green overlap and magenta spillover, while target remains yellow. CT is grainy with conspicuous streaking in broader context; display alone cannot assign causation to image quality."
+    },
+    {
+      "file": "PanTS_00006755-fp-05.png",
+      "sha256": "cd4e1e05d4366f44e46e3609af5fdbd2c523eb169c903dd07ab30816d445bc04",
+      "bytes": 792663,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 5,
+        "voxels": 3037,
+        "volume_ml": 1.3242750067023077,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            241,
+            279
+          ],
+          [
+            218,
+            234
+          ],
+          [
+            208,
+            231
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta island lies high above pancreatic reference in thoracic soft tissue, with nearby cyan extra-pancreas contour; not contiguous with pancreatic lesion in context. Strong streak/grain patterns limit tissue interpretation."
+    },
+    {
+      "file": "PanTS_00006755-fp-04.png",
+      "sha256": "10cabe6ebc1ac10a6b78bb3eadf6daab9395487f233f4a7260567e491245d33e",
+      "bytes": 784054,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 4,
+        "voxels": 1690,
+        "volume_ml": 0.7369195789683569,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            169,
+            188
+          ],
+          [
+            233,
+            245
+          ],
+          [
+            84,
+            99
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta island at an end of the pancreatic contours, with cyan and blue outlines close around it. This is a pancreas-adjacent/within-contour extra lesion prediction, unlike the remote thoracic target. CT-only target is not clearly separable at the fixed window; annotation correctness cannot be adjudicated here."
+    },
+    {
+      "file": "PanTS_00006755-fp-09.png",
+      "sha256": "add980c6c05379aab041036040129866f306f332ba3a8c94793a612757192e64",
+      "bytes": 743069,
+      "case_id": "PanTS_00006755",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 276,
+        "volume_ml": 0.12034899632856007,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            278,
+            289
+          ],
+          [
+            103,
+            114
+          ],
+          [
+            76,
+            86
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small posterior paraspinal soft-tissue magenta island, remote from pancreatic reference and close to posterior orange ROI boundary. No visible cyan pancreas support immediately around target; isolated extra prediction rather than pancreatic lesion expansion."
+    },
+    {
+      "file": "PanTS_00002889-miss-02.png",
+      "sha256": "edd3b75e532ceb93e4f796c26eb1dec4ece8de50dcf9c85b4724a7b35620551e",
+      "bytes": 783461,
+      "case_id": "PanTS_00002889",
+      "kind": "miss",
+      "component": {
+        "component_id": 2,
+        "voxels": 1602,
+        "volume_ml": 0.6985474352114247,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            257,
+            269
+          ],
+          [
+            257,
+            276
+          ],
+          [
+            206,
+            221
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow target at pancreatic-contour edge remains unoverlapped while another superior lesion has green overlap/magenta spillover. Appearance, streak pattern and anatomy are strikingly similar to6755 despite distinct recorded case/native geometry; visual similarity is not proof of shared patient/source identity. Keep both original dispositions; no duplicate audit/exclusion performed."
+    },
+    {
+      "file": "PanTS_00002889-fp-09.png",
+      "sha256": "80c7372ce11f0a54454dea9151833cf208cb1486faa5c33717ecc0a999b442ef",
+      "bytes": 789469,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 9,
+        "voxels": 3004,
+        "volume_ml": 1.309885452793458,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            233,
+            271
+          ],
+          [
+            218,
+            234
+          ],
+          [
+            19,
+            42
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta focus in thoracic soft tissue well superior to pancreatic reference, accompanied by cyan extra-pancreas contour. Similar location/appearance to6755fp5; this is another case record, not demonstrated independent anatomy."
+    },
+    {
+      "file": "PanTS_00002889-fp-11.png",
+      "sha256": "3937c3274cc8ab3bf6ae9f4c16ac61163e663a2e2c6a646717939b830ad44b20",
+      "bytes": 780682,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 11,
+        "voxels": 1701,
+        "volume_ml": 0.7417160969379735,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            324,
+            343
+          ],
+          [
+            233,
+            245
+          ],
+          [
+            151,
+            166
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta target at an end of blue/cyan pancreatic contours; similar to6755fp4. No yellow reference at target; illustrates within/adjacent-pancreas false lesion labeling. CT-only patch remains ambiguous at fixed window."
+    },
+    {
+      "file": "PanTS_00002889-fp-06.png",
+      "sha256": "07f3b3a4e2de4318ba2475b1407127eefee27dc7bfb76aaa60c247c0296e570a",
+      "bytes": 738986,
+      "case_id": "PanTS_00002889",
+      "kind": "fp",
+      "component": {
+        "component_id": 6,
+        "voxels": 271,
+        "volume_ml": 0.11816876088782528,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            223,
+            234
+          ],
+          [
+            103,
+            114
+          ],
+          [
+            164,
+            174
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small posterior paraspinal magenta island close to posterior ROI border and remote from pancreatic reference; visual pattern closely resembles6755fp9. No local blue pancreas reference at target."
+    },
+    {
+      "file": "PanTS_00002235-miss-02.png",
+      "sha256": "f85bd0bc50767993a857d3b89fe96e2a1a3f759b988a6342df503d2517df60c6",
+      "bytes": 292115,
+      "case_id": "PanTS_00002235",
+      "kind": "miss",
+      "component": {
+        "component_id": 2,
+        "voxels": 833,
+        "volume_ml": 2.330626982597227,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            230,
+            268
+          ],
+          [
+            223,
+            259
+          ],
+          [
+            26,
+            29
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Yellow missed annotation lies visibly anterior to the blue/cyan pancreas-parenchyma contours on selected axial/sagittal views, within a broader soft-tissue region. No predicted lesion or pancreas at target. Coronal/sagittal CT is strongly stair-stepped from coarse native through-plane sampling. This cautions against assuming all lesion annotation must lie inside the provided parenchyma mask; does not adjudicate annotation or tissue identity."
+    },
+    {
+      "file": "PanTS_00002235-fp-01.png",
+      "sha256": "10de1fb37f0f3223b57ae93dcd235b15bbdfde5a2f4e74cfe02fe981a9116b3a",
+      "bytes": 281672,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 1,
+        "voxels": 306,
+        "volume_ml": 0.8561486874846956,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            83,
+            105
+          ],
+          [
+            120,
+            135
+          ],
+          [
+            30,
+            32
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Magenta focus occupies an end of the long blue/cyan pancreatic contour. It is not a remote posterior/thoracic island; appears within/at pancreatic parenchyma region. Coarse through-plane sampling limits boundary interpretation in coronal/sagittal views."
+    },
+    {
+      "file": "PanTS_00002235-fp-02.png",
+      "sha256": "81b4921af181decea2d22f94f15da1059cc564f5fe1c6ccd168783a15815230c",
+      "bytes": 233518,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 14,
+        "volume_ml": 0.039170201388188684,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            115,
+            121
+          ],
+          [
+            199,
+            202
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "acquired_boundary_contact": true
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Tiny magenta target visible on axial first acquired slice, in anterior abdominal soft tissue remote from pancreatic contour. At native z0, orange ROI border obscures target in coronal/sagittal overlay rows; those views establish boundary location but cannot independently resolve target. CT-only views remain available."
+    },
+    {
+      "file": "PanTS_00002235-fp-03.png",
+      "sha256": "e4cf8ab677dd1db4b84eee9907e240af17916826f99e3727cc949084a6047fe1",
+      "bytes": 232395,
+      "case_id": "PanTS_00002235",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 8,
+        "volume_ml": 0.022382972221822107,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            133,
+            137
+          ],
+          [
+            209,
+            212
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "acquired_boundary_contact": true
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second tiny axial first-slice magenta island near the previous target, remote from pancreatic contour. Same display limitation: coronal/sagittal target coincides with thick orange ROI edge; axial view shows it. Boundary-associated speckle pattern, not a diagnosis or proven padding cause."
+    },
+    {
+      "file": "PanTS_00008711-fp-02.png",
+      "sha256": "56bf7ea51c78a7fbe0a3bcbd69e6eeb75940cdf20046342c0f69375b5b3e1c87",
+      "bytes": 420188,
+      "case_id": "PanTS_00008711",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 1886,
+        "volume_ml": 4.353839464971005,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            170,
+            193
+          ],
+          [
+            170,
+            198
+          ],
+          [
+            53,
+            62
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Rounded magenta focus inside blue/cyan pancreatic contours, with no annotated lesion on these slices; another nearby magenta focus visible sagittally. Target remains within pancreatic region, so remote-region filtering alone would not address it."
+    },
+    {
+      "file": "PanTS_00008711-fp-03.png",
+      "sha256": "0a468868db14800e1b85468fb14c593f3da97fbc556d7ea67ead443c33fd9fce",
+      "bytes": 430146,
+      "case_id": "PanTS_00008711",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 1731,
+        "volume_ml": 3.996021269281447,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            179,
+            203
+          ],
+          [
+            201,
+            232
+          ],
+          [
+            50,
+            58
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Second oval magenta focus within blue/cyan pancreatic contours, separated from the large partially overlapping component. CT-only patch has heterogeneous soft tissue but visual review cannot establish lesion truth; confirms within-pancreas false-positive label relative to saved annotation."
+    },
+    {
+      "file": "PanTS_00008711-spillover-04.png",
+      "sha256": "3ab674b39228c90341e5ba934c7d4305572f79df40488f34d00447d020908736",
+      "bytes": 467301,
+      "case_id": "PanTS_00008711",
+      "kind": "spillover",
+      "component": {
+        "component_id": 4,
+        "voxels": 20503,
+        "volume_ml": 47.33126752401936,
+        "overlap_voxels": 3378,
+        "any_overlap": true,
+        "overlap_fraction": 0.16475637711554406,
+        "bounds_xyz_half_open": [
+          [
+            223,
+            269
+          ],
+          [
+            187,
+            238
+          ],
+          [
+            27,
+            55
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Large predicted lesion component occupies much of blue/cyan pancreatic region. Green overlap is concentrated at its inferior end, with substantial magenta extension superiorly and some yellow reference remaining beyond prediction. This is extensive within-pancreas overlabeling plus incomplete outline, not just isolated FP islands or a small contour offset. Saved component has3378overlap/20503predictedvoxels; no new scoring."
+    },
+    {
+      "file": "PanTS_00006880-fp-02.png",
+      "sha256": "7bf9da80be5d9aac69957d55ee9cc9d90a6c606e180a0f4bf6d4572b95506c28",
+      "bytes": 567494,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 2,
+        "voxels": 12539,
+        "volume_ml": 3.8696101528765277,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            186,
+            240
+          ],
+          [
+            274,
+            303
+          ],
+          [
+            133,
+            176
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Broad crescent/patch of magenta hugs the posterior/inferior portion of blue/cyan pancreatic contours. No yellow reference exists in this reference-empty case. The extra lesion label is largely pancreatic-region tissue, not a remote island; visual appearance cannot establish verified health."
+    },
+    {
+      "file": "PanTS_00006880-fp-07.png",
+      "sha256": "98b6fcb9018457a2ece9fae58796ee689af4e2259abb8a7bc631de942824dabe",
+      "bytes": 521891,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 7,
+        "voxels": 457,
+        "volume_ml": 0.14103292446483556,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            256,
+            265
+          ],
+          [
+            269,
+            281
+          ],
+          [
+            100,
+            108
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small magenta patch within/at blue and cyan pancreatic contours at a more superior level. No reference lesion. CT-only patch is low-contrast; cannot adjudicate lesion truth from selected views."
+    },
+    {
+      "file": "PanTS_00006880-fp-03.png",
+      "sha256": "41016f008e8be44c3186a49f3bd6c08da90d9885e2afb983bfa62409d49fe532",
+      "bytes": 521443,
+      "case_id": "PanTS_00006880",
+      "kind": "fp",
+      "component": {
+        "component_id": 3,
+        "voxels": 303,
+        "volume_ml": 0.09350760637384065,
+        "overlap_voxels": 0,
+        "any_overlap": false,
+        "overlap_fraction": 0.0,
+        "bounds_xyz_half_open": [
+          [
+            214,
+            224
+          ],
+          [
+            323,
+            331
+          ],
+          [
+            134,
+            144
+          ]
+        ],
+        "acquired_boundary_contact": false
+      },
+      "actually_opened_with_image_tool": true,
+      "observation": "Small magenta patch at the anterior pancreatic contour; another larger magenta region is visible posteriorly in context. No reference lesion; repeated within-pancreas extra labeling rather than a purely localization-driven error."
+    }
+  ],
+  "render_resources": {
+    "seconds": 296.40600000007544,
+    "peak_owned_rss_bytes": 1183797248,
+    "samples": 2363,
+    "workers_reaped": true,
+    "success": false,
+    "exit_code": 1
+  },
+  "original_backup_pairs_verified": 33,
+  "all_code_pins_match": true,
+  "render_retried": false,
+  "images_regenerated": false,
+  "source_arrays_reread_for_recovery": false,
+  "model_forwards": 0,
+  "scoring_calls": 0,
+  "limitations": [
+    "Original renderer exited1 only during JSON serialization after26images; original failure/partial manifest preserved.",
+    "Complete cases/source hashes/native geometry recovered from fully serialized cases field. Per-image full-precision plane records were not completed; actual zero-based indices, native target coordinates and RASmm are displayed in each PNG caption.",
+    "Two2235first-slice tiny FP targets are visible axially; orange ROI border obscures their orthogonal overlay pixels. No rerender performed.",
+    "Reference unit assumptions preserved; no annotation or clinical adjudication; representative views only.",
+    "6755 and2889 show striking visual similarity; shared identity not established, no duplicate audit or exclusion."
+  ],
+  "display": {
+    "window_hu": [
+      -100,
+      250
+    ],
+    "zoom_margin_mm": 20,
+    "orientation": "axis-aligned lossless RAS; obliquity rejected",
+    "rows": [
+      "context overlay",
+      "zoom CT only",
+      "zoom overlay"
+    ]
+  },
+  "evidence_sha256": {
+    "request.json": "1ae4953b7c74ced90128289fb4716f32db0591e3b2a328f8febc1d147f770484",
+    "manifest.json": "91e7f9f359678642c5facdb0d87ae21bde44213d151ebacfddcee0b6335eb829",
+    "resources.json": "1b1d5b5df3e6729d49176ea845bdef675291cf663447387ecd4dfbfcbfb10127",
+    "worker.log": "37e2c507991b11d8890e5c874bb11d587f37a8d239f49320116e9c8439482c8d",
+    "selection-amendment.json": "d331f5d749227a2824f299303e53ade5af5f8449d1578f58f40591850532c694",
+    "observations.json": "c49feaba5d7246459cd41ffab309522563f02990935d9be97f0e98f1fa13453c"
+  }
+}
