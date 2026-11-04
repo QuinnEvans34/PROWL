@@ -1,12 +1,13 @@
 # Mac work status
 
-- Observed at: 2026-11-04 01:30 UTC (November 3, 6:30 p.m. Mountain).
+- Observed at: 2026-11-04 01:39 UTC (November 3, 6:39 p.m. Mountain).
 - Owner / branch: Mac chat, `main`.
 - Delivered code/report revision before this status publication:
-  `0ea343c8bec5d8b44064506fff580477a078acbb`, matched `origin/main`.
+  `e252c692d34375bef23d75a13048789a064f3766`, matched `origin/main`.
 - Peer read: fetched Lenovo revision
-  `31031aeca65f4d1264754814c446c17e771c1ba0`; inspected its continuation report
-  and commit inventory. Fresh Lenovo chat audit confirmed the same GitHub tip.
+  `edae4c385fb6fb38a94cdef51d52d3c3874f08d1`; read its LENOVO.md, archival
+  reconciliation report and commit groups. Lenovo explicitly records reading Mac
+  `e252c69`, including accounting/training-page, reviewer and approval work.
   Lenovo source is visible but has not been merged into the active Mac checkout.
 
 ## Delivered
@@ -40,7 +41,8 @@ acceptance. The official stakeholder walkthrough remains pending.
 - Ready SHA256: `67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b`.
 - launchd: `com.prowl.mac-kd-treatment-resume-20261103-01`.
 - Last verified owners: supervisor15400, worker15806, guardian15809. At01:30UTC
-  journal advanced9601→9602, teacher_accessed=true, KDweight0.1.
+  journal advanced9601→9602; at01:39UTC it advanced9669→9670, with
+  teacher_accessed=true and KDweight0.1.
 - MLflow436bb317362b44d8861edfa5c5dd5b8a RUNNING with stored metrics; initial and
   ready independent backups match; no tracking warning. The01:07UTC hourly check
   also verified126pins, last/best/8k backups, exclusive lock, AC/storage/cumulative
@@ -54,23 +56,35 @@ acceptance. The official stakeholder walkthrough remains pending.
 
 Lenovo's published continuation at`31031ae` passed13CPU tests, completed source
 admission, and verified the first new prediction plus independent backups. Latest
-peer audit at01:30UTC reported15predictions completed/scored, current81/252tiles,
+published peer status at01:36UTC reported16predictions completed/scored,
 two of seven declared failures recorded so far, no unexpected failure. Owner
-supervisors32040/13660; worker12184 at that observation. Read the Lenovo-owned
+supervisors32040/13660; worker identities change between cases. Read the Lenovo-owned
 status for subsequent progress; do not treat these counts as final.
 
 Peer code for inspection:
 [continuation](https://github.com/QuinnEvans34/PROWL/commit/5e82faf),
 [first result verification](https://github.com/QuinnEvans34/PROWL/commit/31031ae),
 [Lenovo accounting](https://github.com/QuinnEvans34/PROWL/commit/3a64d03).
-The peer audit found two modified tracked files and78untracked historical files;
-selective reconciliation is pending. Mac working tree was clean before creating
-this coordination guide/status. No active checkout integration has occurred.
+The peer's two modified tracked logs and78untracked historical files are now
+published in six reviewed groups, plus status/reconciliation documentation. Read
+[the immutable reconciliation report](https://github.com/QuinnEvans34/PROWL/blob/edae4c385fb6fb38a94cdef51d52d3c3874f08d1/docs/capstone/operations/LENOVO-ARCHIVAL-RECONCILIATION-20261103.md).
+It records identical working bytes for all80files,294active repository pins
+matching before/after,68Python files parsed/compiled and53focusedCPU tests passed.
+No data/weights/databases/transfer codes staged. Historical top-level one-shot
+scripts remain archived provenance, not reusable launch instructions; old log
+line-ending warnings are preserved and documented. This publication does not
+requalify historical science or certify all old launchers on current dependencies.
+
+GitHub fetch/read succeeded at01:39UTC even though the final remote-chat status
+request was unavailable. Last Lenovo job observation remains01:36UTC; do not infer
+that failed chat connectivity stopped its durable job. Mac has read the peer's
+publication; no active checkout integration has occurred.
 
 ## Next action
 
-Lenovo owns continuing the bounded autonomous evaluation and publishing its status,
-reviewing its pending source/docs safely, and returning the failure-accounted report.
+Lenovo owns continuing the bounded autonomous evaluation, publishing meaningful
+status changes and returning the failure-accounted report. Its historical source
+publication is complete; later integration still needs review when safe.
 Mac owns KD monitoring and reviewer/UI integration. Both read the other's published
 status at the next session/milestone; fetch and inspect only while jobs are active.
 Review peer code separately before any later safe integration. Keep Trello linked

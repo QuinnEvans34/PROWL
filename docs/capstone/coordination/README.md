@@ -10,8 +10,8 @@ file is a timestamped handoff, not a live process monitor or launch authorizatio
 | Mac chat | [MAC.md](https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/coordination/MAC.md) | `main` |
 | Lenovo chat | [LENOVO.md](https://github.com/QuinnEvans34/PROWL/blob/codex/week05-cuda-readiness/docs/capstone/coordination/LENOVO.md) | `codex/week05-cuda-readiness` |
 
-The Lenovo link resolves after its first status publication. Its file lives on
-its branch; absence from `main` does not mean there is no update. Each owner edits
+The Lenovo file lives on its branch; absence from `main` does not mean there is
+no update. Each owner edits
 only its own status. The Mac owns this guide/template. Record any future branch
 change here and notify the peer before relying on a different ref.
 
