@@ -712,3 +712,34 @@ KD lesion delta+0.038387 is an interim descriptive difference, not a completed
 24k matched-comparison decision or independent-generalization result. Better
 lesion overlap accompanies worse false-alarm behavior at this checkpoint.
 No threshold, sampling, selection or training recipe changed from these observations.
+
+## November 4 authorized continuation from14029
+
+User explicitly requested KD resumption and continued Week5 work. AC/drive/storage,
+parent cleanup, source pins and independent pause checkpoint passed existing gates.
+Fresh root mac-kd-treatment-resume-20261104-01; ready SHA
+7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7.
+The new receipt binds pause.pt at14029 and selected14k state, retaining140969charged
+seconds and204631remaining from the original345600second treatment cap. Earlier
+attempts and all producing files remain unchanged.
+
+Actual-MPS continuation qualification mac-kd-resume-check-20261104-01:
+requestSHA550480944538ad979b18f434c15b35e614b334436888d07bede2a7532a4ad4de;
+producer2engineering updates41.660075s/2,497,216,512BpeakRSS; fresh cold1update
+48.405062s/2,649,571,328BpeakRSS. Both exit0/reaped/no survivors or cleanup errors;
+unchanged state/input/next-update comparison and independent backup passed.
+Qualified SHA9a33491d0ffac17baba7702bd933f0398319ea5c151d3974a79b0f09ed0cabec.
+These three engineering updates are not scientific progress or training hours.
+
+Dispatched once through launchd com.prowl.mac-kd-treatment-resume-20261104-01,
+supervisor46745/worker47349, no automatic restart. Scientific journal advanced
+14030→14036 with teacher_accessed=true/KDweight0.1. MLflow
+a23104d649a24c7fb0b19e0e1b9ca09b RUNNING, linked to all five prior treatment IDs.
+Further verification reached14054; scheduled step14050 loss0.559609890,
+supervised0.553253055/KD0.063568488/KDweight0.1 are stored in MLflow, with no
+tracking warning. Initial checkpoint
+SHAc1bb0914ff9120e65800a4e15ae430e5db34ef0a3dcb380f50688e68f127190b
+and ready.json match independent backups. No tracking warning.
+An early read preceded initial.pt publication; the same owned job was followed,
+not relaunched. Hourly monitor ACTIVE with this root/ready SHA; no teacher restart.
+The training-hours page's private source binding now follows this continuation.

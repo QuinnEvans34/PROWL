@@ -1,6 +1,6 @@
 {
   "schema": "prowl-combined-training-hours-v1",
-  "generated_at": "2026-11-03T21:55:52.240978+00:00",
+  "generated_at": "2026-11-04T21:03:50.119707+00:00",
   "policy": "Recorded training-session time includes in-run validation, checkpoint and I/O work. It is not GPU-busy time or personal working hours.",
   "complete_project_history": false,
   "entries": [
@@ -1066,20 +1066,36 @@
     {
       "execution_id": "mlflow:436bb317362b44d8861edfa5c5dd5b8a",
       "machine": "Mac",
-      "title": "KD treatment \u00b7 current attempt",
-      "seconds": 9310.970125208842,
+      "title": "KD treatment \u00b7 mac-kd-treatment-resume-20261103-01",
+      "seconds": 68494.53622770892,
       "category": "training",
-      "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
       "aliases": [
         "mlflow:436bb317362b44d8861edfa5c5dd5b8a"
       ],
       "period": "KD comparison",
       "arm": "treatment",
+      "status": "closed",
+      "evidence_sha256": "e49c72613b5652b515eff09e0344257f3b1aae62cd9869ade3ceda81105ff4f6",
+      "evidence_prefix_bytes": 12203055
+    },
+    {
+      "execution_id": "mlflow:a23104d649a24c7fb0b19e0e1b9ca09b",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 current attempt",
+      "seconds": 94.36863804189488,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
+      "aliases": [
+        "mlflow:a23104d649a24c7fb0b19e0e1b9ca09b"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
       "status": "last_recorded",
-      "last_step": 8000,
-      "as_of_utc": "2026-11-03T21:55:30.607000+00:00",
-      "evidence_sha256": "5608ac0683b35202ec9c7ca3fb49e79e87af409788b3f344bafadefa2c8ef95c",
-      "evidence_prefix_bytes": 1935060
+      "last_step": 14037,
+      "as_of_utc": "2026-11-04T21:03:42.319000+00:00",
+      "evidence_sha256": "f5cd7c2cbe60595acafc516787008dd3c3eca2f67756a5bcf01196a55dcfee3c",
+      "evidence_prefix_bytes": 448809
     },
     {
       "execution_id": "teacher:rsuper-full-targets-02",
@@ -1386,14 +1402,14 @@
     }
   ],
   "totals": {
-    "training_seconds": 1332937.5744936275,
+    "training_seconds": 1392215.5092341695,
     "legacy_estimated_seconds": 637363.1719999999,
-    "recorded_training_seconds": 1970300.7464936273,
+    "recorded_training_seconds": 2029578.6812341693,
     "teacher_seconds": 327465.76392404106,
-    "recorded_model_work_seconds": 2297766.510417668,
+    "recorded_model_work_seconds": 2357044.4451582106,
     "machines": {
       "Mac": {
-        "training_seconds": 368427.7464936277,
+        "training_seconds": 427705.6812341697,
         "legacy_estimated_seconds": 637363.1719999999,
         "teacher_seconds": 327465.76392404106
       },
@@ -1414,9 +1430,9 @@
     },
     {
       "name": "Mac KD lineage",
-      "as_of_utc": "2026-11-03T21:55:30.607000+00:00",
-      "fingerprint": "67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b",
-      "records": 7
+      "as_of_utc": "2026-11-04T21:03:42.319000+00:00",
+      "fingerprint": "7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7",
+      "records": 8
     },
     {
       "name": "Lenovo verified export",

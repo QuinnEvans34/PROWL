@@ -1,102 +1,61 @@
 # Mac work status
 
-**Latest operational update — November4:** User-requested KD pause completed at
-14029updates. All owned workers exited, independent checkpoint/backups match,
-GPU lock released, MLflow intentionally KILLED/operator_paused=true, hourly
-monitor PAUSED. No resume until later user authorization. The earlier running
-snapshot below is historical; see the latest pause entry in the
-[KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
-
-Latest completed14k lesion Dice0.332939 versus same-step control0.294552;
-pancreas Dice0.713754;33/36positive cases overlapped and34/34reference-empty
-cases alarmed. Interim descriptive results only; false positives remain unresolved.
-
-- Observed at: 2026-11-04 01:39 UTC (November 3, 6:39 p.m. Mountain).
+- Observed at: 2026-11-04 21:09 UTC.
 - Owner / branch: Mac chat, `main`.
-- Delivered code/report revision before this status publication:
-  `e252c692d34375bef23d75a13048789a064f3766`, matched `origin/main`.
-- Peer read: fetched Lenovo revision
-  `edae4c385fb6fb38a94cdef51d52d3c3874f08d1`; read its LENOVO.md, archival
-  reconciliation report and commit groups. Lenovo explicitly records reading Mac
-  `e252c69`, including accounting/training-page, reviewer and approval work.
-  Lenovo source is visible but has not been merged into the active Mac checkout.
+- Prior delivered revision: `25c94c4661a7bc84eb1fa6b15f3d4f20e9b8d587`;
+  the enclosing commit publishes this authorized recovery.
+- Peer read: fetched Lenovo `d290d43cdcbc2a9dc541ac722977d98e3985ecc8`, read
+  LENOVO.md and its completed baseline metadata. Export SHA256
+  `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6`
+  matches the published identity. No peer source merge occurred.
 
 ## Delivered
 
-- Training accounting collector and `/training` UI: commits `a56d1bd` / `6670612`.
-  The reconciled snapshot records547.306 training-session hours across both machines,
-  including177.045 historical MLflow estimates, with90.963 teacher-target hours
-  separate. This is not human time or GPU-utilization time. See
-  [accounting report](../operations/COMBINED-TRAINING-HOURS-20261103.md).
-- Native saved-result verification, reviewer identity/save isolation, actual overlay
-  review and stakeholder fallback recorded in the
-  [Week5 parallel work report](../operations/WEEK-05-PARALLEL-WORK-20261103.md) and
+- Qualified and resumed the Mac KD treatment from the verified independent
+  step14029 pause checkpoint. Two producer plus one cold MPS engineering updates
+  passed existing restore/input/state gates; they do not count as scientific
+  updates or training hours. All prior attempts and original cumulative budget
+  remain preserved. See the [KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
+- Training-hours collector now follows the new continuation; eight accounting
+  CPU tests passed. Existing `/training` UI and history remain available. Hours
+  are training-session durations, not human effort or GPU-utilization hours.
+- Previous reviewer, retrieval, approved baseline scope and stakeholder work:
+  [Week5 parallel work](../operations/WEEK-05-PARALLEL-WORK-20261103.md) and
   [review follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md).
-- Approved and verified the Lenovo70-case evaluation continuation, commits
-  `c8e2dee` / `0ea343c`. Five reused/up to58new predictions and seven explicit
-  admission failures remain in the full70dispositions. See
-  [scope and dispatch evidence](../handoffs/WEEK-05-AUTONOMOUS70-DECISION-20261103.md).
 
-## Validation and limits
+## Active Mac KD treatment
 
-Accounting: eight CPU tests, five UI/service tests, production build and component
-visual review passed. No model/CT inference was launched for those UI changes.
-Actual native reviewer measurements and isolated save/reopen roundtrip were tested;
-the retained production review remains unreviewed. Neither synthetic tests nor
-exposed-development model results establish independent clinical/generalization
-acceptance. The official stakeholder walkthrough remains pending.
+- Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261104-01`.
+- Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
+- launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`.
+- Verified owners: supervisor46745, worker47349; exclusive MPS lock held.
+- Scientific journal advanced14030→14078; teacher_accessed=true, KDweight0.1.
+- MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored loss, supervised
+  loss and KD loss; no tracking warning. Initial checkpoint and ready independent
+  backups match. Initial checkpointSHA
+  `c1bb0914ff9120e65800a4e15ae430e5db34ef0a3dcb380f50688e68f127190b`.
+- At dispatch140969seconds cumulatively charged,204631seconds remaining from
+  original345600seconds. AC connected; storage and admission gates passed.
+- Hourly monitor ACTIVE and bound to this root/ready hash. No automatic retry,
+  competing GPU job, scientific change or successor is authorized by this status.
 
-## Most recent job — Mac KD treatment (now paused)
+Latest completed14k lesion Dice0.332939 versus same-step control0.294552;
+KD pancreas Dice0.713754,33/36positive cases overlapped and34/34reference-empty
+cases alarmed. Interim descriptive results only; false positives remain unresolved.
+Teacher exposure is uncertain; supplied-region KD is not the autonomous baseline.
 
-- Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261103-01`.
-- Ready SHA256: `67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b`.
-- launchd: `com.prowl.mac-kd-treatment-resume-20261103-01`.
-- Last verified owners: supervisor15400, worker15806, guardian15809. At01:30UTC
-  journal advanced9601→9602; at01:39UTC it advanced9669→9670, with
-  teacher_accessed=true and KDweight0.1.
-- MLflow436bb317362b44d8861edfa5c5dd5b8a RUNNING with stored metrics; initial and
-  ready independent backups match; no tracking warning. The01:07UTC hourly check
-  also verified126pins, last/best/8k backups, exclusive lock, AC/storage/cumulative
-  caps and caffeinate. These are timestamped observations, not a live guarantee.
-- No teacher restart, competing GPU job, automatic retry or successor authorized
-  by this handoff. Follow the
-  [current KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md), preserving
-  original recipe, receipts, cumulative budgets and explicit user pauses.
+## Peer result and next action
 
-## Peer work and pending integration
+Lenovo a03 completed63scores plus seven declared admission failures, five reused
+and58new predictions. Its closeout verifies710output backup pairs,12preparation
+backup pairs,294repository pins and worker cleanup. Its GPU is idle. Numerical
+probability equivalence remains UNQUALIFIED under the approved bounded exception;
+all70cases are exposed development, not a held-out acceptance set.
 
-Lenovo's published continuation at`31031ae` passed13CPU tests, completed source
-admission, and verified the first new prediction plus independent backups. Latest
-published peer status at01:36UTC reported16predictions completed/scored,
-two of seven declared failures recorded so far, no unexpected failure. Owner
-supervisors32040/13660; worker identities change between cases. Read the Lenovo-owned
-status for subsequent progress; do not treat these counts as final.
+Mac is admitting the sanitized saved metadata and preparing a CPU-only error
+review queue, preserving failed cases and undefined empty-reference Dice. This
+will not read CT/masks, rerun inference, tune thresholds or establish G3/model
+acceptance. The official aunt stakeholder walkthrough remains pending.
 
-Peer code for inspection:
-[continuation](https://github.com/QuinnEvans34/PROWL/commit/5e82faf),
-[first result verification](https://github.com/QuinnEvans34/PROWL/commit/31031ae),
-[Lenovo accounting](https://github.com/QuinnEvans34/PROWL/commit/3a64d03).
-The peer's two modified tracked logs and78untracked historical files are now
-published in six reviewed groups, plus status/reconciliation documentation. Read
-[the immutable reconciliation report](https://github.com/QuinnEvans34/PROWL/blob/edae4c385fb6fb38a94cdef51d52d3c3874f08d1/docs/capstone/operations/LENOVO-ARCHIVAL-RECONCILIATION-20261103.md).
-It records identical working bytes for all80files,294active repository pins
-matching before/after,68Python files parsed/compiled and53focusedCPU tests passed.
-No data/weights/databases/transfer codes staged. Historical top-level one-shot
-scripts remain archived provenance, not reusable launch instructions; old log
-line-ending warnings are preserved and documented. This publication does not
-requalify historical science or certify all old launchers on current dependencies.
-
-GitHub fetch/read succeeded at01:39UTC even though the final remote-chat status
-request was unavailable. Last Lenovo job observation remains01:36UTC; do not infer
-that failed chat connectivity stopped its durable job. Mac has read the peer's
-publication; no active checkout integration has occurred.
-
-## Next action
-
-Lenovo owns continuing the bounded autonomous evaluation, publishing meaningful
-status changes and returning the failure-accounted report. Its historical source
-publication is complete; later integration still needs review when safe.
-Mac owns the explicit KD pause/recovery handoff and reviewer/UI integration. Both read the other's published
-status at the next session/milestone; fetch and inspect only while jobs are active.
-Review peer code separately before any later safe integration. Keep Trello linked
-to the corresponding Git evidence rather than inferring completion from commit counts.
+Each owner publishes meaningful changes to its own status; fetch/read peer work
+without merging beneath active jobs. Keep Trello linked to Git evidence.
