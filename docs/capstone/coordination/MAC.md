@@ -1,5 +1,16 @@
 # Mac work status
 
+**Latest operational update — November4:** User-requested KD pause completed at
+14029updates. All owned workers exited, independent checkpoint/backups match,
+GPU lock released, MLflow intentionally KILLED/operator_paused=true, hourly
+monitor PAUSED. No resume until later user authorization. The earlier running
+snapshot below is historical; see the latest pause entry in the
+[KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
+
+Latest completed14k lesion Dice0.332939 versus same-step control0.294552;
+pancreas Dice0.713754;33/36positive cases overlapped and34/34reference-empty
+cases alarmed. Interim descriptive results only; false positives remain unresolved.
+
 - Observed at: 2026-11-04 01:39 UTC (November 3, 6:39 p.m. Mountain).
 - Owner / branch: Mac chat, `main`.
 - Delivered code/report revision before this status publication:
@@ -35,7 +46,7 @@ the retained production review remains unreviewed. Neither synthetic tests nor
 exposed-development model results establish independent clinical/generalization
 acceptance. The official stakeholder walkthrough remains pending.
 
-## Active job — Mac KD treatment
+## Most recent job — Mac KD treatment (now paused)
 
 - Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261103-01`.
 - Ready SHA256: `67d10dcfc7f3d1ce14d0a1b736a73da1d4c5fbbf495714455831fe58f4bdd11b`.
@@ -85,7 +96,7 @@ publication; no active checkout integration has occurred.
 Lenovo owns continuing the bounded autonomous evaluation, publishing meaningful
 status changes and returning the failure-accounted report. Its historical source
 publication is complete; later integration still needs review when safe.
-Mac owns KD monitoring and reviewer/UI integration. Both read the other's published
+Mac owns the explicit KD pause/recovery handoff and reviewer/UI integration. Both read the other's published
 status at the next session/milestone; fetch and inspect only while jobs are active.
 Review peer code separately before any later safe integration. Keep Trello linked
 to the corresponding Git evidence rather than inferring completion from commit counts.

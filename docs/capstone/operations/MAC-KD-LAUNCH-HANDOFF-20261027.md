@@ -675,3 +675,40 @@ Initial verification preceded journal creation; followed the same job, no redisp
 AC connected, internal74GiB/external1.9TiB free at admission. Hourly monitor ACTIVE
 with this root/ready hash; class-pause automation remains PAUSED. No automatic retry
 or successor. Use existing v3 cooperative pause protocol for later user pauses.
+
+## November 4 operator pause — step14029 preserved
+
+Quinton explicitly requested pause and a Dice update. Paused the hourly monitor
+first, then used the existing receipt-bound v3 cooperative request on continuation
+mac-kd-treatment-resume-20261103-01. No process signals or source changes required.
+Root paused.json and treatment/result.json confirm14029updates; selected checkpoint
+is14000, best positive-patient native lesion Dice0.33293894991932094.
+
+Resources:68527.508682seconds, peak owned RSS3,229,335,552bytes, success/exit0,
+workers_reaped=true, no surviving workers, cleanup_error or supervisor cleanup error.
+Supervisor15400/worker15806/guardian15809/caffeinate15808 absent. launchd reports
+not running/last exit0; exclusive MPS lock acquired/released nonblocking to verify
+availability. MLflow436bb317362b44d8861edfa5c5dd5b8a is KILLED with
+operator_paused=true, an intentional pause rather than training failure.
+
+pause.pt SHA256 bcf8f14356ffba7c7c41dd01725588a78cc2933385c61db176fd5a6b395e3b40
+matches the independent internal backup. last.pt, best.pt, initial.pt, complete
+history.jsonl and result.json also match their independent copies. All14029updates
+are recoverable from pause.pt. Treatment cumulative charge72441+68528=140969seconds;
+204631remain from the original345600second cap. Preserve all attempts, producing
+pins and scientific settings; a later authorized resume requires a fresh bound
+continuation and existing qualification gates. No automatic restart/successor.
+
+Descriptive saved-report comparison on the same70provided-pancreas-region
+development cases, unchanged raw operating point:
+
+| Update | No-KD lesion Dice | KD lesion Dice | KD pancreas Dice | KD detected positive cases | KD reference-empty alarms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 12000 | 0.275628 | 0.313411 | 0.734038 | 33/36 | 31/34 |
+| 14000 | 0.294552 | 0.332939 | 0.713754 | 33/36 | 34/34 |
+
+At14000, control pancreas Dice0.726788, detected32/36 and empty alarms31/34.
+KD lesion delta+0.038387 is an interim descriptive difference, not a completed
+24k matched-comparison decision or independent-generalization result. Better
+lesion overlap accompanies worse false-alarm behavior at this checkpoint.
+No threshold, sampling, selection or training recipe changed from these observations.

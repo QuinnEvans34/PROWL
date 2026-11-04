@@ -1,5 +1,11 @@
 # November 2 overnight readiness
 
+**Current status, November4:** Mac KD is explicitly operator-paused at14029.
+Hourly monitoring is PAUSED. Workers are reaped, checkpoint/backups verified and
+GPU ownership released. Do not resume without later user authorization. The
+observations below describe earlier running states; see the November4 pause entry
+in MAC-KD-LAUNCH-HANDOFF-20261027.md for the latest durable recovery evidence.
+
 Verified around 18:39 MST. Mac treatment continuation03 is running under launchd
 com.prowl.mac-kd-treatment-resume-20261102-03, supervisor9468/worker9993.
 Journal advanced1796→1800; teacher_accessed=true, KDweight0.1. MLflow
