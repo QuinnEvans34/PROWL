@@ -1,9 +1,9 @@
 # Mac work status
 
-- Observed at: 2026-11-04 21:09 UTC.
+- Observed at: 2026-11-04 21:16 UTC.
 - Owner / branch: Mac chat, `main`.
-- Prior delivered revision: `25c94c4661a7bc84eb1fa6b15f3d4f20e9b8d587`;
-  the enclosing commit publishes this authorized recovery.
+- Delivered code: KD recovery `af0e442`, baseline metadata reader `41ff9c7`;
+  the enclosing commit publishes the baseline review evidence.
 - Peer read: fetched Lenovo `d290d43cdcbc2a9dc541ac722977d98e3985ecc8`, read
   LENOVO.md and its completed baseline metadata. Export SHA256
   `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6`
@@ -22,6 +22,11 @@
 - Previous reviewer, retrieval, approved baseline scope and stakeholder work:
   [Week5 parallel work](../operations/WEEK-05-PARALLEL-WORK-20261103.md) and
   [review follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md).
+- Completed hash-bound autonomous baseline metadata admission and error queues:
+  [report](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.md),
+  [case-level evidence](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.json).
+  Twenty CPU tests passed; actual exported counts, metrics, components and coverage
+  reconciled. No inference or image review was performed.
 
 ## Active Mac KD treatment
 
@@ -29,7 +34,7 @@
 - Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
 - launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`.
 - Verified owners: supervisor46745, worker47349; exclusive MPS lock held.
-- Scientific journal advanced14030→14078; teacher_accessed=true, KDweight0.1.
+- Scientific journal advanced14030→14123; teacher_accessed=true, KDweight0.1.
 - MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored loss, supervised
   loss and KD loss; no tracking warning. Initial checkpoint and ready independent
   backups match. Initial checkpointSHA
@@ -52,10 +57,17 @@ backup pairs,294repository pins and worker cleanup. Its GPU is idle. Numerical
 probability equivalence remains UNQUALIFIED under the approved bounded exception;
 all70cases are exposed development, not a held-out acceptance set.
 
-Mac is admitting the sanitized saved metadata and preparing a CPU-only error
-review queue, preserving failed cases and undefined empty-reference Dice. This
-will not read CT/masks, rerun inference, tune thresholds or establish G3/model
-acceptance. The official aunt stakeholder walkthrough remains pending.
+Mac admitted the saved metadata: positive-case lesion Dice0.371202,30/32positive
+overlap,31/31reference-empty alarms,35/40components hit and394FPcomponents.
+Regions retained all annotations; five missed components remain for visual review.
+Six unit-admission and one resource-limit failure remain in the70-case denominator.
+The review preserves58reference-unit assumption flags, undefined empty-reference
+Dice and exposed-development/UNQUALIFIED scope. No G3/model acceptance is claimed.
+Lenovo acknowledged reading Mac recovery `af0e442` and remains idle.
+
+Next: inspect saved native images for missed-component cases4681,8769,6755,2889
+and2235, then high-FP cases, without another inference run. Reviewer integration
+and the official aunt stakeholder walkthrough remain pending.
 
 Each owner publishes meaningful changes to its own status; fetch/read peer work
 without merging beneath active jobs. Keep Trello linked to Git evidence.

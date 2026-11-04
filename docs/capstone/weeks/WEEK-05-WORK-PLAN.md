@@ -163,3 +163,22 @@ SaturdayNovember7 walkthrough; exact time and specific role remain unconfirmed.
 Preparation is active in the existing Plan11 living record. The session has not
 occurred and does not constitute clinical validation. Main Week7 acceptance stays
 open pending actual feedback and role-appropriate task evidence.
+
+## November 4 baseline and KD milestone
+
+The bounded Lenovo autonomous evaluation finished: 63 completed cases and seven
+declared admission failures, all retained in the original 70-case accounting.
+The Mac verified the transferred metadata and independently reconciled metrics,
+components and region coverage with a tested CPU-only reader. The
+[error review and case queue](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.md)
+prioritize five missed components and large false-positive predictions for saved
+image inspection. All annotation remained inside the expanded evaluation regions.
+The 58 saved reference-unit assumptions and original numerical-equivalence failure
+remain explicit. This is exposed-development baseline evidence under the approved
+exception, not completion of the proposal's independent held-out acceptance.
+
+KD resumed from the verified 14,029 checkpoint through qualified MPS recovery and
+advanced beyond 14,100; MLflow, independent backups and hourly monitoring are
+verified. No recipe or cumulative budget changed. Next useful parallel work is
+the saved-image error review and reviewer handoff, rather than another GPU run.
+Full G3 integration, independent acceptance and stakeholder feedback remain open.
