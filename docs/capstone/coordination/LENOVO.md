@@ -1,37 +1,28 @@
 # Lenovo work status
 
-- Observed at: 2026-11-04 01:36 UTC.
+- Observed at: 2026-11-04T21:07:02.408893+00:00.
 - Owner / branch: Lenovo chat, `codex/week05-cuda-readiness`.
-- Delivered code/archive revision before this publication: `8222d142a24a9019e781a50057ad02b790adab0d`. Initial status was published as `f212e41`; final remote push is verified in the handback.
-- Peer read: fetched and read `e252c692d34375bef23d75a13048789a064f3766` on `origin/main`: coordination guide/template/MAC.md, combined training accounting report and autonomous70 approval/dispatch record. Mac has delivered the training page/accounting, reviewer workflow and approval work; reported KD active at9602 at01:30UTC. These are peer observations, not locally verified Mac processes. No merge or source integration occurred.
+- Prior delivered revision: `edae4c385fb6fb38a94cdef51d52d3c3874f08d1`; the enclosing commit publishes this closeout.
+- Peer read: fetched `25c94c4661a7bc84eb1fa6b15f3d4f20e9b8d587` on origin/main and read MAC.md / latest KD runbook. Published peer status records clean pause at14029; subsequent Mac delegation says the user authorized qualified continuation preparation. No local claim that Mac has resumed. No merge occurred.
 
-## Delivered since the previous handoff
+## Completed evaluation
 
-- `5e82faf`: CPU-qualified continuation preserving70 dispositions with six unit failures, one capacity failure, five reused/up to58new predictions. `31031ae`: actual first prediction/scoring and independent backups verified. [Continuation report](../operations/WEEK-05-AUTONOMOUS70-UNIT-CONTINUATION-20261103.md).
-- `3a64d03`: Lenovo nine-run journal accounting,964509.828seconds/267.9193967hours; previous208.78hours is a subset, MLflow aliases are not additional work. [Accounting report](../operations/WINDOWS-TRAINING-HOURS-20261103.md).
-- Earlier retained native review/schema and private evidence transfers completed. No independent model-quality acceptance claimed.
-- Completed selective78-file archive and two tracked-log reconciliation in six coherent commits; see [inventory, commit groups and caveats](../operations/LENOVO-ARCHIVAL-RECONCILIATION-20261103.md). Working bytes of all80 reviewed files unchanged;294 active repository pins matched before/after.53focusedCPU tests pass; all68Python files parse/compile. No historical launch was rerun.
+The existing autonomous70 a03 handoff finished normally at2026-11-04T03:36:37Z:63 native predictions/scores, seven declared admission failures, no exclusions. Five reused and58new. No surviving evaluation/GPU workers;121 worker records and supervisor report success/exit0/reaped. All710 output/independent-backup pairs match;294 repository pins match; preparation backups match.
 
-## Validation and limits
+[Closeout report](../operations/WEEK-05-AUTONOMOUS70-CLOSEOUT-20261104.md) and [sanitized metadata JSON](../operations/WEEK-05-AUTONOMOUS70-CLOSEOUT-20261104.json) retain ordered70 dispositions, per-case metrics/coverage/components/contours and source hashes. JSON SHA256 `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6` (UTF-8/LF).
 
-13CPU continuation tests passed6.58s; actual source admission passed36.765s/624693248B/reaped. First new inference exited0/reaped194.610s, with five output/provenance backup hashes matching. No reference masks in inference; optimizer0. Fixed70 exposed-development evaluation is not independent generalization or scientific training. Original probability-comparison failure and scoped numerical exception remain recorded. Initial backup verification is a timestamped observation, not a claim all later outputs have been independently audited by this chat.
+Mean lesion Dice0.3712019132 on32positive completed cases;30/32any-overlap;31/31reference-empty alarms;35/40reference components hit;394false-positive components. Full expanded-region pancreas coverage63/63 and lesion coverage32/32. Seven failures are six unresolved unit admissions and one capacity limit, not zero-Dice results or exclusions.
 
-## Active jobs and ownership
+## Scope and evidence
 
-- State at01:36UTC: journal advanced to16predictions completed/scored; two of seven declared failures recorded so far. Last verified handoff32040 (wrapper26476), evaluation13660 (wrapper29748). Worker12184 completed the next prediction; worker identities change between inference and scoring. No unexpected failure record at this check. Use live process checks for the next worker rather than reusing a historical PID.
-- Output: `E:/PROWL/artifacts/week05-autonomous70-20261103-a03`.
-- Request SHA256: `ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e`.
-- Ready SHA256: `19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845`.
-- Handoff SHA256: `11c951d375f4f6645731317f30532abfd6b8813d31706ef347d8818f27d95cd9`; readiness root `E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a03`.
-- Independent backups: matching preparation/output directory names under `C:/Users/quinn/PROWL-Backups`. Initial request/admission/ready/resources/handoff and first native prediction/localizer/probabilities/result/access hashes verified. Supervisor checks each output backup and final cohort accounting.
-- No MLflow training run or training-hour increment for this evaluation. No new timer. Follow the same durable process; no retry/duplicate. Mac KD must remain untouched.
+Exposed development, numerical probability equivalence UNQUALIFIED under the approved exception. H0 NOT TESTED; no independent model-quality acceptance. No new scientific training, MLflow training record or training hours. Whole handoff9304.906seconds; internal evaluation8323.297seconds; these are evaluation scopes.
 
-## Git and integration
+RequestSHA `ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e`.
+ReadySHA `19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845`.
+Output E:/PROWL/artifacts/week05-autonomous70-20261103-a03; same named independent C:/Users/quinn/PROWL-Backups directory. Preparation E:/PROWL/readiness/week05-full-baseline-preparation-20261103-a03.
 
-The78historical source/test/report files and two accumulated tracked logs are now committed in explicit groups. No unresolved/unattributed item from that inventory remains. The logs retain CRLF/trailing-blank-line warnings to preserve working bytes; historical one-shot scripts and blocked-reference reports are archived with explicit limitations. No CTs, masks, weights, databases or transfer secrets were staged. Final status/report publication and push complete this reconciliation; working-tree/remote-tip readback is reported by the chat.
+Report-only exporter failures from two legacy metadata forms are preserved; version3 succeeds without scientific reruns or saved-record edits. Source CT/mask admission evidence reused, not re-audited. Original archive reconciliation remains documented separately.
 
-Only this Lenovo status file is owned here. Mac guide/template/status were read via `git show`, not copied into the branch. Peer code is visible/read but not merged or fully reviewed for integration.
+## Next action
 
-## Blockers and next action
-
-No new evaluation blocker at the observation above. Keep the existing bounded job running; final63predictions/sevenfailures, scoring, backups and worker cleanup remain pending. Mac can fetch/read this status and the archive commits before a later safe integration; no active checkout merge is implied. Mac owns reviewer/UI and KD work. The chat-send notification failed because the desktop tool could not reach the durable Mac host; this Git status is the available handoff. This status creates no new launch authority.
+Mac may fetch the metadata JSON for CPU-only report admission and error review. No new training, inference, threshold tuning or automatic retry is authorized by this report. Windows GPU idle; no timer added. Mac owns KD continuation and UI integration. No additional Lenovo job launched.
