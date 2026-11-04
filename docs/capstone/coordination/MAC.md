@@ -1,9 +1,10 @@
 # Mac work status
 
-- Observed at: 2026-11-04 21:16 UTC.
+- Observed at: 2026-11-04 21:50 UTC.
 - Owner / branch: Mac chat, `main`.
 - Delivered code: KD recovery `af0e442`, baseline metadata reader `41ff9c7`;
-  the enclosing commit publishes the baseline review evidence.
+  baseline report `79b63a8`, visual plan/amendment `1b81693` / `61eb806`.
+  The enclosing commit publishes the completed Mac visual inspection evidence.
 - Peer read: fetched Lenovo `d290d43cdcbc2a9dc541ac722977d98e3985ecc8`, read
   LENOVO.md and its completed baseline metadata. Export SHA256
   `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6`
@@ -27,6 +28,12 @@
   [case-level evidence](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.json).
   Twenty CPU tests passed; actual exported counts, metrics, components and coverage
   reconciled. No inference or image review was performed.
+- Completed [seven-case visual review](../operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md):
+  Lenovo opened all26sheets; Mac verified private transport, all26image hashes,
+  seven case/report bindings and78plane/world transforms, then inspected nine
+  key sheets across all seven cases. Renderer serialization failure is preserved;
+  separate metadata recovery completed without CT voxel reads or rerendering.
+  Peer code/reports `57a29d5`, `255241f`, `f251ab0`, closeout `96d2f78` read without merge.
 
 ## Active Mac KD treatment
 
@@ -34,7 +41,7 @@
 - Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
 - launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`.
 - Verified owners: supervisor46745, worker47349; exclusive MPS lock held.
-- Scientific journal advanced14030→14123; teacher_accessed=true, KDweight0.1.
+- Scientific journal advanced14030→14384; teacher_accessed=true, KDweight0.1.
 - MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored loss, supervised
   loss and KD loss; no tracking warning. Initial checkpoint and ready independent
   backups match. Initial checkpointSHA
@@ -65,9 +72,16 @@ The review preserves58reference-unit assumption flags, undefined empty-reference
 Dice and exposed-development/UNQUALIFIED scope. No G3/model acceptance is claimed.
 Lenovo acknowledged reading Mac recovery `af0e442` and remains idle.
 
-Next: inspect saved native images for missed-component cases4681,8769,6755,2889
-and2235, then high-FP cases, without another inference run. Reviewer integration
-and the official aunt stakeholder walkthrough remain pending.
+Actual visual review now separates remote false predictions, within/adjacent-
+pancreas extra lesion labels, missed labels despite localization, and8711spillover.
+2235annotation extends beyond parenchyma contours, so strict masking is not assumed
+lossless.6755/2889look strikingly similar; shared identity is unconfirmed, no audit
+or exclusion performed. Two tiny2235targets have a documented overlay occlusion.
+Lenovo is idle after review/backup/cleanup and private gallery delivery.
+
+Next: preserve these error categories for the eventual matched completed-KD review.
+No new model/threshold experiment was launched. Full reviewer/G3 integration and
+the official aunt stakeholder walkthrough remain pending.
 
 Each owner publishes meaningful changes to its own status; fetch/read peer work
 without merging beneath active jobs. Keep Trello linked to Git evidence.

@@ -182,3 +182,11 @@ advanced beyond 14,100; MLflow, independent backups and hourly monitoring are
 verified. No recipe or cumulative budget changed. Next useful parallel work is
 the saved-image error review and reviewer handoff, rather than another GPU run.
 Full G3 integration, independent acceptance and stakeholder feedback remain open.
+
+The [seven-case visual review](../operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md)
+is now complete: Lenovo inspected26contact sheets and Mac verified/imported the
+private gallery and inspected nine key sheets. Findings distinguish remote false
+predictions, pancreatic-region extra lesion labels, component misses and large
+partly overlapping spillover. Preserve the reference-unit, possible related-case
+and display limitations. No new scientific recipe or acceptance verdict follows.
+KD continued beyond14,380updates while this CPU work ran; Lenovo is now idle.

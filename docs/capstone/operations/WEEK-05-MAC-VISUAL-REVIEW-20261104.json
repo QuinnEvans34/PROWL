@@ -1,0 +1,109 @@
+{
+  "schema": "prowl.autonomous70.mac-visual-review.v1",
+  "peer_commit": "f251ab0",
+  "archive_sha256": "a2fcfb586d881e0b0373ff69b6d3ac3c50ceec920f1f895e3b7a980731cbc444",
+  "review_sha256": "6769a04712874b737f79922c11b3de1fdfc5ea79fdcda92b0695eb09473ab0c0",
+  "source_export_sha256": "3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6",
+  "transport_regular_members": 32,
+  "hashed_payload_members": 31,
+  "all26_image_hashes_verified": true,
+  "all7_case_report_bindings_verified": true,
+  "all78_plane_world_transforms_consistent": true,
+  "scope": {
+    "role": "exposed_development",
+    "probability_equivalence": "UNQUALIFIED",
+    "numerical_exception": "Human-approved scoped exception; original probability comparison failure retained",
+    "training": false,
+    "model_quality_acceptance": false,
+    "hypothesis_verdict": "NOT_TESTED",
+    "failed_cases_not_imputed": true
+  },
+  "mac_new_contact_sheets_inspected": 9,
+  "lenovo_new_contact_sheets_inspected": 26,
+  "mac_images": [
+    {
+      "file": "PanTS_00004681-miss-01.png",
+      "sha256": "9e8158c4b43933757f57e21c9d1b474bf4bc6df7fd466323ccd85d1553dc49b4",
+      "case_id": "PanTS_00004681",
+      "observation": "Selected yellow component is separate from predicted lesion in all displayed planes, near/within pancreatic contours; magenta prediction is visible elsewhere."
+    },
+    {
+      "file": "PanTS_00008769-miss-01.png",
+      "sha256": "bb4a0c63d058801c96b1f175b17f14ead6986605fd5d6127d3312d82f29b93fb",
+      "case_id": "PanTS_00008769",
+      "observation": "Yellow target near pancreatic contours has no green or magenta overlap; remote superior magenta/cyan prediction is also visible in context."
+    },
+    {
+      "file": "PanTS_00006755-miss-01.png",
+      "sha256": "1221ed96b77db9d5350f02920f949f2ecb58bb1a38857d6d1b0c8ab952a3fc3e",
+      "case_id": "PanTS_00006755",
+      "observation": "Selected yellow component remains missed; a separate superior reference component has green overlap with extra magenta prediction."
+    },
+    {
+      "file": "PanTS_00002889-miss-02.png",
+      "sha256": "edd3b75e532ceb93e4f796c26eb1dec4ece8de50dcf9c85b4724a7b35620551e",
+      "case_id": "PanTS_00002889",
+      "observation": "Same selected-component miss pattern. Anatomy and streak/grain pattern closely resemble6755; this is a visual resemblance, not a patient-identity determination."
+    },
+    {
+      "file": "PanTS_00002235-miss-02.png",
+      "sha256": "f85bd0bc50767993a857d3b89fe96e2a1a3f759b988a6342df503d2517df60c6",
+      "case_id": "PanTS_00002235",
+      "observation": "Selected yellow reference is anterior and spatially separated from blue/cyan pancreas contours. Coarse through-plane sampling is visible. No clinical or annotation adjudication."
+    },
+    {
+      "file": "PanTS_00008711-spillover-04.png",
+      "sha256": "3ab674b39228c90341e5ba934c7d4305572f79df40488f34d00447d020908736",
+      "case_id": "PanTS_00008711",
+      "observation": "Large magenta predicted component follows much of the pancreatic region, with green overlap at its inferior extent and residual yellow reference outside prediction. Extra labeling is not only disconnected islands."
+    },
+    {
+      "file": "PanTS_00006880-fp-02.png",
+      "sha256": "7bf9da80be5d9aac69957d55ee9cc9d90a6c606e180a0f4bf6d4572b95506c28",
+      "case_id": "PanTS_00006880",
+      "observation": "Large magenta crescent lies within/adjacent to pancreatic outlines. No reference lesion exists in this case; that absence is not proof of clinical health."
+    },
+    {
+      "file": "PanTS_00004681-fp-09.png",
+      "sha256": "cbcafa9d53e63e5aecb604f62304a302cd42f9e16391fa4f17e0f1ef99ed67b4",
+      "case_id": "PanTS_00004681",
+      "observation": "Magenta and extra cyan predicted-pancreas contours lie posteriorly near spine and far from reference pancreas in context."
+    },
+    {
+      "file": "PanTS_00008769-fp-02.png",
+      "sha256": "4d2251aec237093f50a8e51b65d0a088e1add9ddc600d2aefb83942deab83794",
+      "case_id": "PanTS_00008769",
+      "observation": "Magenta/cyan predicted region lies substantially superior to reference pancreas, separated in coronal and sagittal context."
+    }
+  ],
+  "renderer_original_status": "failed_after_all26images_during_manifest_serialization; preserved exit1/reaped",
+  "metadata_recovery": {
+    "parent_sha256": "8f42842e38816d5f732140145fa9fb39953c9833531a4d56fe47af2b398553e8",
+    "seconds": 46.26599999994505,
+    "ct_voxel_reads": 0,
+    "mask_geometry_reads_only": true,
+    "images_regenerated": false,
+    "method": "same frozen selection/orientation/crop functions, exact source mask hashes and component checks; additive native scalar serialization",
+    "prior_worker_seconds": 296.406,
+    "first_metadata_recovery_conservative_charge_seconds": 30,
+    "supervisor_resources": {
+      "seconds": 47.59299999999348,
+      "peak_owned_rss_bytes": 657227776,
+      "samples": 377,
+      "workers_reaped": true,
+      "success": true,
+      "exit_code": 0
+    },
+    "cumulative_charged_seconds": 373.9990000000689
+  },
+  "model_forwards": 0,
+  "scoring_calls": 0,
+  "threshold_changes": 0,
+  "clinical_diagnosis": false,
+  "limitations": [
+    "Representative selected slices, not exhaustive clinical review or annotation adjudication.",
+    "Two tiny2235boundary targets have orthogonal overlay occlusion; axial visibility and limitation recorded by Lenovo.",
+    "6755/2889visually similar but no shared identity established or exclusion/audit performed.",
+    "Unknown reference-unit assumptions and exposed-development/UNQUALIFIED exception remain."
+  ]
+}
