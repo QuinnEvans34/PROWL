@@ -241,6 +241,94 @@
         "validator": "prepared_inputs_workflow_v1.definition validators[prepared]",
         "timeout": "bounded metadata sizes; no hard CPU deadline"
       }
+    },
+    "autonomous-baseline": {
+      "admission": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; metadata only",
+        "dependencies": [],
+        "input_pins": [
+          "export",
+          "ready",
+          "request"
+        ],
+        "output_members": [
+          "admission.json"
+        ],
+        "adapter": "autonomous_baseline_workflow_v1",
+        "validator": "autonomous_baseline_workflow_v1.definition validators[admission]",
+        "timeout": "bounded metadata sizes; no hard CPU deadline"
+      },
+      "analysis": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; metadata only",
+        "dependencies": [
+          "admission"
+        ],
+        "input_pins": [],
+        "output_members": [
+          "analysis.json"
+        ],
+        "adapter": "autonomous_baseline_workflow_v1",
+        "validator": "autonomous_baseline_workflow_v1.definition validators[analysis]",
+        "timeout": "bounded metadata sizes; no hard CPU deadline"
+      },
+      "handoff": {
+        "component_version": "1.0.0",
+        "owning_plan": "04",
+        "resource_class": "cpu-offline",
+        "locks": [
+          "workflow-root",
+          "artifact-writer"
+        ],
+        "retry": "explicit-resume-only",
+        "cancellation": "SIGINT/SIGTERM finish current bounded CPU stage then cancel before next; forced interruption remains incomplete; explicit resume revalidates",
+        "checkpoint": false,
+        "root_role": "dedicated-workflow-output",
+        "capacity": "configured reserve + publisher output/control allowance",
+        "configuration": "empty; exact source and producer pins govern derivation",
+        "determinism": "same verified input bytes and validators",
+        "completion": "validated artifact receipt plus workflow event",
+        "environment": "Python retrieval environment; metadata only",
+        "dependencies": [
+          "analysis"
+        ],
+        "input_pins": [],
+        "output_members": [
+          "handoff.json"
+        ],
+        "adapter": "autonomous_baseline_workflow_v1",
+        "validator": "autonomous_baseline_workflow_v1.definition validators[handoff]",
+        "timeout": "bounded metadata sizes; no hard CPU deadline"
+      }
     }
   }
 }

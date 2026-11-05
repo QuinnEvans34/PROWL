@@ -75,6 +75,26 @@
               "$ref": "#/$defs/stage"
             }
           }
+        },
+        "autonomous-baseline": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "admission",
+            "analysis",
+            "handoff"
+          ],
+          "properties": {
+            "admission": {
+              "$ref": "#/$defs/stage"
+            },
+            "analysis": {
+              "$ref": "#/$defs/stage"
+            },
+            "handoff": {
+              "$ref": "#/$defs/stage"
+            }
+          }
         }
       }
     }

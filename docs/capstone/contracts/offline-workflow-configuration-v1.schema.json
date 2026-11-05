@@ -21,7 +21,8 @@
       "enum": [
         "saved-package",
         "case-literature",
-        "prepared-inputs"
+        "prepared-inputs",
+        "autonomous-baseline"
       ]
     },
     "minimum_free_bytes": {
