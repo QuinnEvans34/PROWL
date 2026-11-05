@@ -1,6 +1,6 @@
 # Mac work status
 
-- Observed at: 2026-11-05 01:24 UTC.
+- Observed at: 2026-11-05 16:09 UTC.
 - Owner / branch: Mac chat, `main`.
 - Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
   error-review packet and this status. Previous recovery: `af0e442`.
@@ -28,18 +28,22 @@
   [reviewer follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md) and
   [training accounting](../operations/COMBINED-TRAINING-HOURS-20261103.md).
 
-## Active Mac KD treatment
+## Mac KD treatment — PAUSED for class November5
 
 - Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261104-01`.
 - Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
-- launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`;
-  supervisor46745/worker47349/guardian47354, exclusive MPS ownership.
-- Latest verified scientific update15927, teacher_accessed=true/KDweight0.1.
-  MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored metrics and matching
-  initial independent backup; no tracking warning. Hourly monitor ACTIVE.
-- Original cumulative345600second cap retained:140969charged at dispatch and
- 204631remaining for this segment. No recipe, pins, GPU owner or safety gate changed.
-  No automatic retry or new scientific job authorized by this status.
+- Explicit user pause at20989/24000updates; v3 cooperative stop exited0/reaped.
+  Supervisor46745/worker47349/guardian47354/caffeinate47353 absent, GPU lock free.
+- pause.pt independent SHA256`6e3fc7f591b1a683b2e375c3eaed67829db22f1d488c46384f4c70223f2a3094`.
+  All retained checkpoint/native/component/final journal/result backups match;
+  checkpoint journal/selection inspected; all139producing pins match.
+- MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` KILLED/operator_paused=true intentionally.
+  Hourly monitor PAUSED. No automatic restart or new GPU job.
+- Original345600second cumulative cap retained:209780charged,135820remaining.
+- Latest completed20k provided-region lesion Dice0.389084, pancreas0.772516;
+  positive cases detected33/36, reference-empty alarms33/34. Interim only.
+- Resume requires explicit user authority, fresh bound continuation and existing
+  actual-MPS recovery qualification. Preserve all attempts and producing pins.
 
 At matched14k, lesion Dice.294552→.332939 and recall.368768→.533653, but precision
 .337540→.301739, empty-case alarms31/34→34/34 and empty lesion voxels103008→239211.
@@ -57,7 +61,7 @@ independence remains unresolved. No scan/mask/new-header reads or duplicate audi
 Peer report SHA996be9c75ecc8c0dd0574d211cda8f2cd9ce0216774a95d5eba74b0f56b6bb15.
 Do not call case-level bootstrap intervals verified independent-patient uncertainty.
 
-Keep KD running unchanged. After full24k/12native validations, verify selected and
+Keep KD paused until explicit user resume. After full24k/12native validations, verify selected and
 terminal endpoints, backups, actual cleanup/tracking and justified resampling unit
 before a final comparison. Aggregate counts do not locate remote/near-pancreas FP
 or attached spillover; those require separately bound same-scope visual evidence.

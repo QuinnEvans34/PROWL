@@ -743,3 +743,27 @@ and ready.json match independent backups. No tracking warning.
 An early read preceded initial.pt publication; the same owned job was followed,
 not relaunched. Hourly monitor ACTIVE with this root/ready SHA; no teacher restart.
 The training-hours page's private source binding now follows this continuation.
+
+
+## November 5 class pause — step20989 preserved
+
+User explicitly requested a class pause. Hourly monitor keep-prowl-teacher-running
+was PAUSED before the receipt-bound v3 cooperative request on continuation
+mac-kd-treatment-resume-20261104-01. paused.json/result.json confirm20989updates;
+selected checkpoint20000, best completed70-case native lesion Dice0.3890839387910948.
+No scientific recipe, producing pin or threshold changed. This is interim evidence,
+not the final24k matched selected/terminal comparison or independent acceptance.
+
+Resources68810.91209354205seconds, peak owned RSS3453960192bytes, success/exit0,
+workers_reaped=true, no survivors or cleanup errors. Supervisor46745, worker47349,
+guardian47354 and caffeinate47353 are absent; launchd not running/last exit0.
+Exclusive MPS lock acquired/released nonblocking to verify GPU availability.
+MLflowa23104d649a24c7fb0b19e0e1b9ca09b is KILLED/operator_paused=true intentionally.
+
+pause.pt SHA2566e3fc7f591b1a683b2e375c3eaed67829db22f1d488c46384f4c70223f2a3094
+matches independent backup. All retained checkpoint/native-report/component pairs,
+final journal and result backups match; checkpoint journal/selection inspected.
+All139producing pins match. All20989updates are recoverable from pause.pt.
+Cumulative charge140969+68811=209780seconds;135820remain from original345600.
+Preserve all attempts and pins. No automatic resume; later explicit authorization
+requires a fresh bound continuation and the existing actual-MPS recovery gates.

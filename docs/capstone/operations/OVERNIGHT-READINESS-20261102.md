@@ -1,12 +1,12 @@
 # November 2 overnight readiness
 
-**Current status, November4 afternoon:** KD resumed with explicit user authority
-from14029 in mac-kd-treatment-resume-20261104-01, ready SHA
-7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7.
-Actual-MPS restore qualification passed; scientific updates/teacher access and
-initial independent backup verified. Hourly monitor ACTIVE for the new root.
-No automatic retry or successor. See the latest November4 continuation entry in
-MAC-KD-LAUNCH-HANDOFF-20261027.md; older pause/running observations remain historical.
+**Current status, November5 class pause:** KD is safely PAUSED at20989updates
+in mac-kd-treatment-resume-20261104-01. Independent pause checkpoint, retained
+reports/checkpoints and final journal/result backups verified; all139pins match.
+Workers exited cleanly, launchd not running and exclusive GPU ownership released.
+Hourly monitor PAUSED. No automatic resume; wait for explicit user authorization.
+Selected20k lesion Dice0.389084 remains interim. See the November5 pause entry in
+MAC-KD-LAUNCH-HANDOFF-20261027.md; older running observations below are historical.
 
 Verified around 18:39 MST. Mac treatment continuation03 is running under launchd
 com.prowl.mac-kd-treatment-resume-20261102-03, supervisor9468/worker9993.
