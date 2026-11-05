@@ -767,3 +767,38 @@ All139producing pins match. All20989updates are recoverable from pause.pt.
 Cumulative charge140969+68811=209780seconds;135820remain from original345600.
 Preserve all attempts and pins. No automatic resume; later explicit authorization
 requires a fresh bound continuation and the existing actual-MPS recovery gates.
+
+
+## November 5 authorized continuation from20989
+
+User returned and explicitly authorized KD resumption. AC/drive/storage/memory,
+parent cleanup, checkpoint identity and independent backup passed existing gates.
+Fresh root mac-kd-treatment-resume-20261105-01; ready SHA
+38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049.
+Same recipe/teacher/cohort and original345600second cumulative cap:209780charged,
+135820remaining. Restore uses independent pause.pt at20989, preserving selected20k.
+All earlier attempts and152producing pins are retained unchanged.
+
+Actual-MPS qualification mac-kd-resume-check-20261105-01:
+requestSHAfc45b9c21dbd0ebfc0517d02caafef3f738ee0ff94c12428b107ba4075c3c955;
+producer2engineering updates27.277021s/2328969216BpeakRSS; cold1update
+11.423889s/2020245504BpeakRSS. Both exit0/reaped/no survivors or cleanup errors;
+independent backup, full restore state, next input/counters and next-update
+comparison passed. Qualified SHA
+ec2783f8cf6535dd7f0651f53a6814ded3f1b3467e56631ac4415ea1888a9294.
+Three engineering updates are excluded from scientific progress/training hours.
+
+One-shot launchd com.prowl.mac-kd-treatment-resume-20261105-01 owns supervisor92279,
+worker92391, guardian92394 and caffeinate92393. Scientific20990→21002 observed,
+teacher_accessed=true/KDweight0.1. MLflow1e356a71e4f74d5192a091fc40d3f6b8 RUNNING;
+stored step21000 loss0.549666405, supervised0.547090113 and KD0.025762973
+verified with no tracking warning.
+Initial checkpoint and ready independent backups match; initial SHA256
+a3d013740827610698026e46d122da474810ab24b286b633017d1b78fb5ba10d.
+All152pins and cumulative safety gates pass. Hourly monitor ACTIVE for this root,
+label and readySHA; private training-hours source follows the same continuation.
+No teacher restart, concurrent model job, automatic retry or successor.
+
+Latest completed native evaluation remains20k: lesionDice0.389084, pancreas0.772516,
+positive cases33/36, empty alarms33/34. Full24k selected/terminal comparison and
+final cleanup/tracking verification remain pending. No interim acceptance claim.

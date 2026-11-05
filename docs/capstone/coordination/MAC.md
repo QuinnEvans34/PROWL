@@ -1,6 +1,6 @@
 # Mac work status
 
-- Observed at: 2026-11-05 16:09 UTC.
+- Observed at: 2026-11-05 18:31 UTC.
 - Owner / branch: Mac chat, `main`.
 - Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
   error-review packet and this status. Previous recovery: `af0e442`.
@@ -28,22 +28,23 @@
   [reviewer follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md) and
   [training accounting](../operations/COMBINED-TRAINING-HOURS-20261103.md).
 
-## Mac KD treatment — PAUSED for class November5
+## Active Mac KD treatment — resumed November5
 
-- Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261104-01`.
-- Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
-- Explicit user pause at20989/24000updates; v3 cooperative stop exited0/reaped.
-  Supervisor46745/worker47349/guardian47354/caffeinate47353 absent, GPU lock free.
-- pause.pt independent SHA256`6e3fc7f591b1a683b2e375c3eaed67829db22f1d488c46384f4c70223f2a3094`.
-  All retained checkpoint/native/component/final journal/result backups match;
-  checkpoint journal/selection inspected; all139producing pins match.
-- MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` KILLED/operator_paused=true intentionally.
-  Hourly monitor PAUSED. No automatic restart or new GPU job.
-- Original345600second cumulative cap retained:209780charged,135820remaining.
-- Latest completed20k provided-region lesion Dice0.389084, pancreas0.772516;
-  positive cases detected33/36, reference-empty alarms33/34. Interim only.
-- Resume requires explicit user authority, fresh bound continuation and existing
-  actual-MPS recovery qualification. Preserve all attempts and producing pins.
+- Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261105-01`.
+- Ready SHA256: `38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049`.
+- Explicit user resume from independent pause.pt at20989; actual-MPS producer/cold
+  qualification passed/reaped. Scientific20990→21002, teacher accessed/KDweight0.1.
+- launchd `com.prowl.mac-kd-treatment-resume-20261105-01`, supervisor92279/worker92391,
+  guardian92394/caffeinate92393; one exclusive MPS owner.
+- MLflow `1e356a71e4f74d5192a091fc40d3f6b8` RUNNING; step21000 loss0.549666405,
+  supervised0.547090113/KD0.025762973 stored, no tracking warning. Initial/ready
+  independent backups match;152producing pins match.
+- Initial checkpoint SHA256`a3d013740827610698026e46d122da474810ab24b286b633017d1b78fb5ba10d`.
+- Hourly monitor ACTIVE with new root/receipt; private training-hours source follows.
+  Same recipe/teacher/cohort and345600second cumulative cap:209780charged,
+  135820remaining. Preserve all attempts; no automatic retry/successor.
+- Latest completed20k lesionDice0.389084, pancreas0.772516, positivecases33/36,
+  reference-empty alarms33/34. Interim only; final full24k comparison pending.
 
 At matched14k, lesion Dice.294552→.332939 and recall.368768→.533653, but precision
 .337540→.301739, empty-case alarms31/34→34/34 and empty lesion voxels103008→239211.
@@ -61,7 +62,7 @@ independence remains unresolved. No scan/mask/new-header reads or duplicate audi
 Peer report SHA996be9c75ecc8c0dd0574d211cda8f2cd9ce0216774a95d5eba74b0f56b6bb15.
 Do not call case-level bootstrap intervals verified independent-patient uncertainty.
 
-Keep KD paused until explicit user resume. After full24k/12native validations, verify selected and
+Keep KD running unchanged. After full24k/12native validations, verify selected and
 terminal endpoints, backups, actual cleanup/tracking and justified resampling unit
 before a final comparison. Aggregate counts do not locate remote/near-pancreas FP
 or attached spillover; those require separately bound same-scope visual evidence.
