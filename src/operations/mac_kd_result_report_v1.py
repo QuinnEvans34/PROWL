@@ -197,6 +197,17 @@ def report(root, ready_sha256, output):
                   model_calls=0, optimizer_updates=0)
     final_receipts = ['complete.json', 'treatment/complete.json', 'treatment/result.json', 'treatment/resources.json']
     result['pending_terminal_receipts'] = [name for name in final_receipts if not (root / name).exists()]
+    if (root / 'treatment/resources.json').exists():
+        resources, _ = guard.read(root / 'treatment/resources.json')
+        result['observed_supervision'] = resources
+        if resources.get('success') is not True or resources.get('workers_reaped') is not True:
+            result['status'] = 'FAILED_EXECUTION_REVIEW_REQUIRED'
+        elif (root / 'treatment/result.json').exists():
+            terminal_result, _ = guard.read(root / 'treatment/result.json')
+            if terminal_result.get('status') == 'paused':
+                result['status'] = 'PAUSED_OPERATOR'
+            elif terminal_result.get('completed') is True:
+                result['status'] = 'PENDING_CLOSEOUT'
     if not any(preparation['missing_native_steps'].values()) and not result['pending_terminal_receipts']:
         reader = MetadataReader()
         receipt, _ = reader.read(root / 'ready.json', ready_sha256)
@@ -219,5 +230,6 @@ def report(root, ready_sha256, output):
     result['remaining_limits'] = ['No independent-patient uncertainty or scientific acceptance verdict.',
                                  'Aggregate errors do not locate false-positive regions or boundary errors.',
                                  'Checkpoint hashes are not a new numerical restore qualification.']
+    guard.verify()
     (output / 'report.json').write_text(json.dumps(result, indent=2, allow_nan=False) + '\n')
     return result

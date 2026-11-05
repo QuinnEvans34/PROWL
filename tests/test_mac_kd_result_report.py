@@ -79,6 +79,22 @@ def test_full_series_waits_for_terminal_receipts_not_just_last_dice(tmp_path):
     assert result['status']=='PENDING_TREATMENT_COMPLETION' and result['pending_terminal_receipts']
 
 
+@pytest.mark.parametrize('paused', [False, True])
+def test_stopped_attempt_is_never_described_as_live_pending_training(tmp_path, paused):
+    root,pin=make_review_fixture(tmp_path)
+    write(root/'treatment/resources.json', dict(success=paused,workers_reaped=True))
+    if paused:write(root/'treatment/result.json', dict(status='paused',completed=False))
+    result=module.report(root,pin,tmp_path/'stopped')
+    assert result['status']==('PAUSED_OPERATOR' if paused else 'FAILED_EXECUTION_REVIEW_REQUIRED')
+    assert not result['execution_closeout_verified']
+
+
+def test_report_cannot_write_into_producing_attempt(tmp_path):
+    root,pin=make_review_fixture(tmp_path)
+    with pytest.raises(ValueError,match='outside producing'):module.report(root,pin,root/'new-report')
+    assert not (root/'new-report').exists()
+
+
 def test_complete_report_preserves_control_failure_and_withholds_unjustified_verdict(completed,tmp_path):
     root,pin=completed
     before=(root/'mlflow.db').read_bytes()
