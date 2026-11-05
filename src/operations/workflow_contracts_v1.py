@@ -15,6 +15,7 @@ from .artifact_store import directory
 from .workflow_lifecycle_v1 import Lifecycle, inspect_lifecycle
 from .workflow_configuration_v1 import VERSION, validate_configuration, validate_registry_plan
 import os
+import re
 
 REPO = Path(__file__).resolve().parents[2]
 CONTRACTS = REPO/'docs/capstone/contracts'
@@ -22,7 +23,18 @@ REGISTRY = CONTRACTS/'offline-stage-registry-v1.json'
 
 
 def validate(value, schema):
-    Draft202012Validator(schema, format_checker=FormatChecker()).validate(value)
+    checker = FormatChecker()
+    # jsonschema silently skips date-time without an optional format dependency.
+    # Run identities must remain strict in the qualified isolated environment too.
+    @checker.checks('date-time', raises=(ValueError, TypeError))
+    def timestamp(value):
+        if not isinstance(value, str):
+            return True  # The schema's type validator owns non-string rejection.
+        if not re.fullmatch(r'\d{4}-\d{2}-\d{2}[Tt]\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:[Zz]|[+-]\d{2}:\d{2})', value):
+            return False
+        stamp = datetime.fromisoformat(value.upper().replace('Z', '+00:00'))
+        return stamp.utcoffset() is not None
+    Draft202012Validator(schema, format_checker=checker).validate(value)
 
 
 def registry_for(kind, stages):

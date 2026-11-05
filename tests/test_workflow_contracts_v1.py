@@ -11,6 +11,17 @@ from src.operations.workflow_plan_v1 import Stage
 from test_saved_package_workflow_v1 import setup
 
 
+@pytest.mark.parametrize('stamp', ['yesterday', '2026-02-30T12:00:00Z', '2026-11-05T12:00:00'])
+def test_run_timestamps_are_strict_without_optional_format_packages(stamp):
+    with pytest.raises(ValidationError):
+        validate(stamp, dict(type='string', format='date-time'))
+
+
+def test_run_timestamp_accepts_utc_and_explicit_offsets():
+    for stamp in ['2026-11-05T12:00:00Z', '2026-11-05T05:00:00.123-07:00']:
+        validate(stamp, dict(type='string', format='date-time'))
+
+
 def verify_refs(root, manifest):
     refs=[manifest['resolved_config']]
     for stage in manifest['stages']:refs += stage['inputs']+stage['outputs']
