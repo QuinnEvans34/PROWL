@@ -1,87 +1,66 @@
 # Mac work status
 
-- Observed at: 2026-11-04 21:50 UTC.
+- Observed at: 2026-11-05 01:24 UTC.
 - Owner / branch: Mac chat, `main`.
-- Delivered code: KD recovery `af0e442`, baseline metadata reader `41ff9c7`;
-  baseline report `79b63a8`, visual plan/amendment `1b81693` / `61eb806`.
-  The enclosing commit publishes the completed Mac visual inspection evidence.
-- Peer read: fetched Lenovo `d290d43cdcbc2a9dc541ac722977d98e3985ecc8`, read
-  LENOVO.md and its completed baseline metadata. Export SHA256
-  `3944ea76135d9f756a22abea7931af43423a7050a928d79db79a8b10fbe78cc6`
-  matches the published identity. No peer source merge occurred.
+- Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
+  error-review packet and this status. Previous recovery: `af0e442`.
+- Peer read: fetched Lenovo `467e19124d1a749bbe5f60e20d6e4e16224b950e` and read
+  its two-case provenance report/JSON and LENOVO.md. JSON hash and both cases'
+  source/native geometry agree with the imported visual packet. No source merge.
 
-## Delivered
+## Delivered Week 5 work
 
-- Qualified and resumed the Mac KD treatment from the verified independent
-  step14029 pause checkpoint. Two producer plus one cold MPS engineering updates
-  passed existing restore/input/state gates; they do not count as scientific
-  updates or training hours. All prior attempts and original cumulative budget
-  remain preserved. See the [KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
-- Training-hours collector now follows the new continuation; eight accounting
-  CPU tests passed. Existing `/training` UI and history remain available. Hours
-  are training-session durations, not human effort or GPU-utilization hours.
-- Previous reviewer, retrieval, approved baseline scope and stakeholder work:
-  [Week5 parallel work](../operations/WEEK-05-PARALLEL-WORK-20261103.md) and
-  [review follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md).
-- Completed hash-bound autonomous baseline metadata admission and error queues:
-  [report](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.md),
-  [case-level evidence](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.json).
-  Twenty CPU tests passed; actual exported counts, metrics, components and coverage
-  reconciled. No inference or image review was performed.
-- Completed [seven-case visual review](../operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md):
-  Lenovo opened all26sheets; Mac verified private transport, all26image hashes,
-  seven case/report bindings and78plane/world transforms, then inspected nine
-  key sheets across all seven cases. Renderer serialization failure is preserved;
-  separate metadata recovery completed without CT voxel reads or rerendering.
-  Peer code/reports `57a29d5`, `255241f`, `f251ab0`, closeout `96d2f78` read without merge.
+- [Matched KD error-review preparation](../operations/KD-MATCHED-ERROR-PREPARATION-20261104.md):
+  metadata-only adapter reconciles all12control and seven KD native validations
+  through14k across eight journal segments/82metadata files, with report/component
+  backup equality, recipe/cohort/reference checks and stable append-only prefixes.
+ 49CPU tests pass, including actual synthetic70-case CLI/partial-horizon handling.
+  Original control cleanup-only failure remains explicit. No final verdict/CI.
+- [Seven-case visual review](../operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md):
+  Lenovo opened26sheets; Mac verified transport,26image hashes, seven case bindings
+  and78plane/world transforms, then inspected nine key sheets across all seven
+  cases. Original renderer export failure and separate metadata recovery preserved.
+- [Baseline metadata admission](../operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.md):
+ 63completed/seven declared failures retained; exposed development and original
+  numerical-equivalence UNQUALIFIED exception preserved. No independent acceptance.
+- Training-hours collector/UI, native reviewer identity/save/reopen checks and
+  retrieval prototype remain delivered. See [parallel work](../operations/WEEK-05-PARALLEL-WORK-20261103.md),
+  [reviewer follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md) and
+  [training accounting](../operations/COMBINED-TRAINING-HOURS-20261103.md).
 
 ## Active Mac KD treatment
 
 - Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261104-01`.
 - Ready SHA256: `7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7`.
-- launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`.
-- Verified owners: supervisor46745, worker47349; exclusive MPS lock held.
-- Scientific journal advanced14030→14384; teacher_accessed=true, KDweight0.1.
-- MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored loss, supervised
-  loss and KD loss; no tracking warning. Initial checkpoint and ready independent
-  backups match. Initial checkpointSHA
-  `c1bb0914ff9120e65800a4e15ae430e5db34ef0a3dcb380f50688e68f127190b`.
-- At dispatch140969seconds cumulatively charged,204631seconds remaining from
-  original345600seconds. AC connected; storage and admission gates passed.
-- Hourly monitor ACTIVE and bound to this root/ready hash. No automatic retry,
-  competing GPU job, scientific change or successor is authorized by this status.
+- launchd: `com.prowl.mac-kd-treatment-resume-20261104-01`;
+  supervisor46745/worker47349/guardian47354, exclusive MPS ownership.
+- Latest verified scientific update15927, teacher_accessed=true/KDweight0.1.
+  MLflow `a23104d649a24c7fb0b19e0e1b9ca09b` RUNNING with stored metrics and matching
+  initial independent backup; no tracking warning. Hourly monitor ACTIVE.
+- Original cumulative345600second cap retained:140969charged at dispatch and
+ 204631remaining for this segment. No recipe, pins, GPU owner or safety gate changed.
+  No automatic retry or new scientific job authorized by this status.
 
-Latest completed14k lesion Dice0.332939 versus same-step control0.294552;
-KD pancreas Dice0.713754,33/36positive cases overlapped and34/34reference-empty
-cases alarmed. Interim descriptive results only; false positives remain unresolved.
-Teacher exposure is uncertain; supplied-region KD is not the autonomous baseline.
+At matched14k, lesion Dice.294552→.332939 and recall.368768→.533653, but precision
+.337540→.301739, empty-case alarms31/34→34/34 and empty lesion voxels103008→239211.
+Missed reference components remain8/45in both arms. These are same-update descriptive
+point estimates, not completed24k acceptance. Supplied-region KD and autonomous
+baseline scopes remain separate. See the [KD runbook](../operations/MAC-KD-LAUNCH-HANDOFF-20261027.md).
 
-## Peer result and next action
+## Provenance and next action
 
-Lenovo a03 completed63scores plus seven declared admission failures, five reused
-and58new predictions. Its closeout verifies710output backup pairs,12preparation
-backup pairs,294repository pins and worker cleanup. Its GPU is idle. Numerical
-probability equivalence remains UNQUALIFIED under the approved bounded exception;
-all70cases are exposed development, not a held-out acceptance set.
+Lenovo reviewed17existing records for visually similar6755/2889: serialized source
+hashes/lengths differ, native dimensions/spacing agree, coordinates differ by flips
+and a derived z-origin shift. Verified patient/study/series relationship mapping was
+not found in those records. Both cases and70denominator unchanged; patient
+independence remains unresolved. No scan/mask/new-header reads or duplicate audit.
+Peer report SHA996be9c75ecc8c0dd0574d211cda8f2cd9ce0216774a95d5eba74b0f56b6bb15.
+Do not call case-level bootstrap intervals verified independent-patient uncertainty.
 
-Mac admitted the saved metadata: positive-case lesion Dice0.371202,30/32positive
-overlap,31/31reference-empty alarms,35/40components hit and394FPcomponents.
-Regions retained all annotations; five missed components remain for visual review.
-Six unit-admission and one resource-limit failure remain in the70-case denominator.
-The review preserves58reference-unit assumption flags, undefined empty-reference
-Dice and exposed-development/UNQUALIFIED scope. No G3/model acceptance is claimed.
-Lenovo acknowledged reading Mac recovery `af0e442` and remains idle.
-
-Actual visual review now separates remote false predictions, within/adjacent-
-pancreas extra lesion labels, missed labels despite localization, and8711spillover.
-2235annotation extends beyond parenchyma contours, so strict masking is not assumed
-lossless.6755/2889look strikingly similar; shared identity is unconfirmed, no audit
-or exclusion performed. Two tiny2235targets have a documented overlay occlusion.
-Lenovo is idle after review/backup/cleanup and private gallery delivery.
-
-Next: preserve these error categories for the eventual matched completed-KD review.
-No new model/threshold experiment was launched. Full reviewer/G3 integration and
-the official aunt stakeholder walkthrough remain pending.
-
-Each owner publishes meaningful changes to its own status; fetch/read peer work
-without merging beneath active jobs. Keep Trello linked to Git evidence.
+Keep KD running unchanged. After full24k/12native validations, verify selected and
+terminal endpoints, backups, actual cleanup/tracking and justified resampling unit
+before a final comparison. Aggregate counts do not locate remote/near-pancreas FP
+or attached spillover; those require separately bound same-scope visual evidence.
+No filter/verifier/crop/threshold experiment was started. Lenovo is idle after its
+provenance publication. Full G3/reviewer acceptance and aunt stakeholder feedback
+remain open; the walkthrough is tentatively SaturdayNovember7.

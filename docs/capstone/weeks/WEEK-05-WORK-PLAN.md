@@ -190,3 +190,13 @@ predictions, pancreatic-region extra lesion labels, component misses and large
 partly overlapping spillover. Preserve the reference-unit, possible related-case
 and display limitations. No new scientific recipe or acceptance verdict follows.
 KD continued beyond14,380updates while this CPU work ran; Lenovo is now idle.
+
+Matched KD follow-up is prepared in
+[the error-comparison packet](../operations/KD-MATCHED-ERROR-PREPARATION-20261104.md):
+the Mac adapter reconciles continuation journals, native reports and component
+sidecars while preserving the control's reviewed cleanup failure.49CPU checks
+pass. Same-update14k results show improved recall/Dice alongside greater false-
+positive burden; no final verdict is issued before the full horizon and closeout.
+The17-record6755/2889provenance review found different serialized files but no
+verified patient relationship. Both cases remain included; patient-bootstrap
+interpretation stays pending a justified resampling unit. KD remains unchanged.
