@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November4 retained two-case provenance follow-up complete
+
+Published [6755/2889 provenance review](../operations/WEEK-05-TWO-CASE-PROVENANCE-20261104.md) and adjacent JSON with 17 input hashes. JSON SHA996be9c75ecc8c0dd0574d211cda8f2cd9ce0216774a95d5eba74b0f56b6bb15. Different CT hashes/lengths, identical saved dimensions/spacing, x/z flips and derived +300.800005 mm z-origin shift. No actual patient/study/series linkage found in reviewed records; retained study_id is only the case alias. Patient relationship and independence remain unresolved. Both cases and 70-case denominator unchanged. No scan/mask/header/array reads, evaluation, rendering, GPU work or producing-pin changes. Mac same-update descriptive comparisons may proceed without independent-patient bootstrap or final verdict. Peer b2dad58 read without merge. Publication assertions passed; no reusable code introduced. Earlier interactive review wall time was not measured; no cumulative 10-minute timing claim.
+
 - Observed at: 2026-11-04T21:40:42.256223+00:00.
 - Branch: `codex/week05-cuda-readiness`; bounded renderer/tests published57a29d5. Enclosing commit publishes the visual review.
 - Peer read: main61eb806 exact visual-target amendment, original1b81693plan and79b63a8metadata review; no merge. Mac KD continues under Mac ownership; no competing GPU job here.

@@ -1,0 +1,264 @@
+{
+  "version": "two-case-retained-provenance-v1",
+  "created_utc": "2026-11-05T01:19:38.089864+00:00",
+  "status": "PATIENT_RELATIONSHIP_UNRESOLVED",
+  "scope": {
+    "distinct_known_metadata_records": 17,
+    "record_limit": 30,
+    "new_scan_or_mask_reads": 0,
+    "new_header_reads": 0,
+    "array_reads": 0,
+    "inference_or_scoring": false,
+    "gpu": false,
+    "single_thread_standard_library_only": true,
+    "publication_seconds": 3.577999999979511,
+    "timing_note": "Publication timing only; earlier interactive review elapsed time was not instrumented. No claim of measured total review duration."
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00006755",
+      "ct_bytes": 68653910,
+      "source_sha256": {
+        "ct": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+        "lesion": "3e45b4461a3649b3f4be7935eb51bbaa1e73616f3f2783f38d7c759337873b02",
+        "pancreas": "4c8ed3726772bdf48c135d3c4b41e86b19d7536d6c82d8612afdb0adadd30b19"
+      },
+      "retained_native_shape": [
+        512,
+        436,
+        250
+      ],
+      "retained_native_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          -0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          -0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "spacing_magnitudes": [
+        0.7382810115814209,
+        0.7382810115814209,
+        0.800000011920929
+      ],
+      "derived_positive_axis_origin_mm": [
+        -184.8000030517578,
+        -189.0,
+        -429.0899963378906
+      ],
+      "exposure": {
+        "role": "exposed_development",
+        "segmenter_optimizer_overlap": false,
+        "segmenter_checkpoint_selection_overlap": true,
+        "localizer_optimizer_overlap": false,
+        "localizer_selection_overlap": false,
+        "teacher_patient_membership": "unknown",
+        "suprem_pretraining_membership": "unknown",
+        "biological_patient_independence": "unverified",
+        "control_kd_max_weight": 0.0
+      },
+      "retained_study_id_semantics": "PanTS case alias; not an independently verified patient or DICOM study identifier",
+      "native_component_voxel_counts": [
+        1563,
+        1952
+      ]
+    },
+    {
+      "case_id": "PanTS_00002889",
+      "ct_bytes": 66786913,
+      "source_sha256": {
+        "ct": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+        "lesion": "d2edb1ec8969428176cbf65e87185bb35eb177dd5e9e67166d186b3ad740f180",
+        "pancreas": "7d66348f621cc46d731e9dc21c95567985bdfdce901d2c6b5bf8d3b689a3f750"
+      },
+      "retained_native_shape": [
+        512,
+        436,
+        250
+      ],
+      "retained_native_affine": [
+        [
+          -0.7382810115814209,
+          -0.0,
+          -0.0,
+          192.4615936279297
+        ],
+        [
+          -0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          70.9100112915039
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "spacing_magnitudes": [
+        0.7382810115814209,
+        0.7382810115814209,
+        0.800000011920929
+      ],
+      "derived_positive_axis_origin_mm": [
+        -184.8000032901764,
+        -189.0,
+        -128.2899916768074
+      ],
+      "exposure": {
+        "role": "exposed_development",
+        "segmenter_optimizer_overlap": false,
+        "segmenter_checkpoint_selection_overlap": true,
+        "localizer_optimizer_overlap": false,
+        "localizer_selection_overlap": false,
+        "teacher_patient_membership": "unknown",
+        "suprem_pretraining_membership": "unknown",
+        "biological_patient_independence": "unverified",
+        "control_kd_max_weight": 0.0
+      },
+      "retained_study_id_semantics": "PanTS case alias; not an independently verified patient or DICOM study identifier",
+      "native_component_voxel_counts": [
+        1997,
+        1602
+      ]
+    }
+  ],
+  "derived_origin_shift_case2889_minus6755_mm": [
+    -2.384185791015625e-07,
+    0.0,
+    300.8000046610832
+  ],
+  "findings": {
+    "exact_serialized_ct_duplicate": false,
+    "same_saved_shape_and_spacing": true,
+    "native_axis_flips": [
+      "x",
+      "z"
+    ],
+    "voxel_content_identity": "not established; no canonical voxel comparison authorized",
+    "shared_patient_or_acquisition_identity": "unresolved",
+    "independent_patients": "not established",
+    "actual_patient_study_series_linkage_found_in_reviewed_records": false,
+    "private_relationship_identifiers_published": false,
+    "retained_study_id_is_case_alias": true
+  },
+  "archive_provenance": {
+    "PanTS_00006755": "Retained November2 progress places ct_verified after archive_started PanTSMini_ImageTr_00006001_00007000.tar.gz; source paths identify ImageTr/PanTS_00006755/ct.nii.gz. This is a sequence-based archive attribution, not a patient linkage.",
+    "PanTS_00002889": "Retained November3 restoration verifies case and expected bytes/hash; source path identifies ImageTr/PanTS_00002889/ct.nii.gz. Exact archive-member ledger not established in reviewed records; no guessed archive assertion."
+  },
+  "interpretation": "Distinct compressed file hashes and lengths establish byte-distinct serialized files in retained snapshots. They do not establish different underlying anatomy, acquisition or patients. Flips and a world shift can coexist with repeated anatomy. No retained actual patient/DICOM relationship mapping was found in reviewed records; absence here is not absence in the publisher dataset. Historical duplicate-scope authorization is not an adjudication result.",
+  "disposition": "Both cases retained unchanged; 70-case denominator and all prior scores/failures unchanged; no exclusion or relabeling.",
+  "comparison_policy": "Same-update matched-case descriptive deltas may proceed with exposure limitations. No independent-patient bootstrap or final hypothesis verdict is justified by these records alone. Verified patient linkage would be needed for patient-cluster inference; any conservative pair-grouped sensitivity analysis must be explicitly prespecified and cannot prove identity. No bootstrap computed here.",
+  "input_hashes": [
+    {
+      "record": "artifacts/week05-autonomous70-20261103-a03/request.json",
+      "bytes": 243947,
+      "sha256": "ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e"
+    },
+    {
+      "record": "cache/pants-setup-20261010/cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4/PanTS_00006755.json",
+      "bytes": 2766,
+      "sha256": "494505794fb57b8c7782eb6140014d941d6a36c68002d4fdd55ea1cdd4997fdd"
+    },
+    {
+      "record": "cache/pants-setup-20261010/cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4/PanTS_00002889.json",
+      "bytes": 2783,
+      "sha256": "142f74695bff01f7e0914b493d5192d08a8bd9110434c44d442df939c8f65d10"
+    },
+    {
+      "record": "sources/pants/week05-batch-20261102-a01/restoration.json",
+      "bytes": 1043,
+      "sha256": "53aebc77182056f5ca7965182589985d8969b6589edddb28df873db6d585b69f"
+    },
+    {
+      "record": "sources/pants/week05-autonomous70-20261103-a02/restoration.json",
+      "bytes": 6008,
+      "sha256": "06dac01ee536f094725a6949f169d0f3fa302696b9dfeb9e56bd6b518831b5ba"
+    },
+    {
+      "record": "readiness/week05-full-baseline-preparation-20261103-a03/admission.json",
+      "bytes": 1140,
+      "sha256": "c986b29bf9170fb0eeb088cb49dc9fada0051bbaa67aab61177116f9c4152d96"
+    },
+    {
+      "record": "readiness/data-setup-20261010-a01/pants-manifest.csv",
+      "bytes": 383479,
+      "sha256": "46b436edeba2995c942d53b9c2849760a4802cbbf04c95ba9664182874fb31bc"
+    },
+    {
+      "record": "artifacts/week05-autonomous70-20261103-a03/ready.json",
+      "bytes": 177300,
+      "sha256": "19e6f8b1e981145281c35bfcbb7293dbe9ea99b5d07c2e1cea7447e65d1d2845"
+    },
+    {
+      "record": "sources/pants/week05-batch-20261102-a01/progress.jsonl",
+      "bytes": 16851,
+      "sha256": "849ee0b3eec6d199cc0981947882ce32291c5e1859e22f831415ce42dd5b68b5"
+    },
+    {
+      "record": "sources/pants/week05-autonomous70-20261103-a02/progress.jsonl",
+      "bytes": 5641,
+      "sha256": "94a2920a8844bb3359773ff955d9f7fca9e53f1c34be0d0636590c54223757f3"
+    },
+    {
+      "record": "src/data/pants_metadata.py",
+      "bytes": 6445,
+      "sha256": "5ab9a807ee37459a00bb56d0ce3c568f2ddba538a52b46bb4c3129369ac7a519"
+    },
+    {
+      "record": "readiness/data-setup-20261010-a01/pants-source-observations.json",
+      "bytes": 1643145,
+      "sha256": "d145dc992ff1ef1802bccbe528c37c2bd6e13ead87d7d2a09d8d034768436092"
+    },
+    {
+      "record": "readiness/data-setup-20261010-a01/pants-preflight.json",
+      "bytes": 1107,
+      "sha256": "dab2d2135e14f20ed5f5a338fbf1bcbb2b4b0ac3de085badb4a7e597c3a6c138"
+    },
+    {
+      "record": "readiness/data-setup-20261010-a01/paths.json",
+      "bytes": 890,
+      "sha256": "f2abc17011c199e13d294093efd1914130daeaf52e409873af00ddac437d3936"
+    },
+    {
+      "record": "readiness/data-setup-20261010-a01/duplicate-scope-authority.json",
+      "bytes": 767,
+      "sha256": "00715ff9b04ddee5966c1f018f3025382396250d72ea41aa49261475b5761bf7"
+    },
+    {
+      "record": "git:b2dad58:docs/capstone/coordination/MAC.md",
+      "bytes": 5554,
+      "sha256": "2e9c34ea2e4765761f5bf637afdadc104dfc4c7a2d4bf9741a4a0ea7c2ac30c8"
+    },
+    {
+      "record": "git:b2dad58:docs/capstone/operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md",
+      "bytes": 6814,
+      "sha256": "9a592053a5e5bdc74ff739cc98603096ae8cc1e1acf05fdd4f00c113078bebd3"
+    }
+  ]
+}
