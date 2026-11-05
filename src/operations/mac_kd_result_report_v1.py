@@ -200,7 +200,9 @@ def report(root, ready_sha256, output):
     if (root / 'treatment/resources.json').exists():
         resources, _ = guard.read(root / 'treatment/resources.json')
         result['observed_supervision'] = resources
-        if resources.get('success') is not True or resources.get('workers_reaped') is not True:
+        if (resources.get('success') is not True or resources.get('workers_reaped') is not True
+                or resources.get('exit_code') != 0 or resources.get('surviving_workers')
+                or resources.get('cleanup_error') or resources.get('supervisor_cleanup_error')):
             result['status'] = 'FAILED_EXECUTION_REVIEW_REQUIRED'
         elif (root / 'treatment/result.json').exists():
             terminal_result, _ = guard.read(root / 'treatment/result.json')

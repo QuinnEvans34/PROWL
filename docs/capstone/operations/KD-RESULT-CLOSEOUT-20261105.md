@@ -54,3 +54,14 @@ identity. Test process/filesystem/lock observations are isolated from the real G
 owner. An initial synthetic closeout correctly refused the held production lock;
 the fixture was corrected to use an isolated observation. No device work occurred.
 The actual run remains active; real final closeout is still pending completion.
+
+Follow-up:66KD/native-reader CPU tests pass including operator-pause and failed-
+execution reporting, so a stopped run is not mislabeled as active pending work.
+Reports cannot be written inside producing/backup directories. The actual saved
+control passed checkpoint/report/journal backup, selected/terminal, process-absence
+and read-only MLflow checks; its FAILED status remains explicit. This separate
+control check does not close the still-running treatment or acquire its GPU lock.
+
+The read-only series-tracking check also matched all12control and ten currently
+completed treatment native metrics to their owning local SQLite records. That
+observation is retained as series-tracking.json beside the pending live report.

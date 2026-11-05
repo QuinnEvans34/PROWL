@@ -82,7 +82,7 @@ def test_full_series_waits_for_terminal_receipts_not_just_last_dice(tmp_path):
 @pytest.mark.parametrize('paused', [False, True])
 def test_stopped_attempt_is_never_described_as_live_pending_training(tmp_path, paused):
     root,pin=make_review_fixture(tmp_path)
-    write(root/'treatment/resources.json', dict(success=paused,workers_reaped=True))
+    write(root/'treatment/resources.json', dict(success=paused,workers_reaped=True,exit_code=0))
     if paused:write(root/'treatment/result.json', dict(status='paused',completed=False))
     result=module.report(root,pin,tmp_path/'stopped')
     assert result['status']==('PAUSED_OPERATOR' if paused else 'FAILED_EXECUTION_REVIEW_REQUIRED')

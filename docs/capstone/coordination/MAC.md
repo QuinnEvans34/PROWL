@@ -1,6 +1,6 @@
 # Mac work status
 
-- Observed at: 2026-11-05 18:31 UTC.
+- Observed at: 2026-11-05 19:00 UTC.
 - Owner / branch: Mac chat, `main`.
 - Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
   error-review packet and this status. Previous recovery: `af0e442`.
@@ -9,6 +9,22 @@
   source/native geometry agree with the imported visual packet. No source merge.
 
 ## Delivered Week 5 work
+
+
+- November5 CPU follow-up: [KD closeout reporting](../operations/KD-RESULT-CLOSEOUT-20261105.md)
+  atfd34932/6aec2c3,66KD/native-reader tests pass. Actual control closeout and all
+  12control/10treatment stored native metrics checked read-only. Live treatment
+  remains pending22k/24k/final cleanup; no verdict/CI or new tensor restore.
+- [Saved autonomous result workflow](../orchestration/BASELINE-REVIEW-WORKFLOW-20261105.md)
+  at7bef5e5, timestamp contract fixfc5ce5f: actual63+7metadata completed3/3,
+  reused3/3, and reused3/3 again after explicit identical-source relocation.
+  80combinedCPU tests pass, including corrupt/stale-input refusal and preserved
+  failure recovery. This does not qualify expensive inference recovery/fullG3.
+- [Saturday script/fixture readiness](../implementation/11-stakeholder-validation.md):
+  124focusedUI tests and actual2028CPU package loader pass. Fresh engineering-only
+  ASGI save/idempotent retry/reopen/revision2/stale-write refusal pass; original
+  five files unchanged, no production decision. Exact participant time/role and
+  live GPU walkthrough remain pending; no feedback invented.
 
 - [Matched KD error-review preparation](../operations/KD-MATCHED-ERROR-PREPARATION-20261104.md):
   metadata-only adapter reconciles all12control and seven KD native validations
@@ -33,10 +49,10 @@
 - Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261105-01`.
 - Ready SHA256: `38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049`.
 - Explicit user resume from independent pause.pt at20989; actual-MPS producer/cold
-  qualification passed/reaped. Scientific20990→21002, teacher accessed/KDweight0.1.
+  qualification passed/reaped. Scientific20990→21229, teacher accessed/KDweight0.1.
 - launchd `com.prowl.mac-kd-treatment-resume-20261105-01`, supervisor92279/worker92391,
   guardian92394/caffeinate92393; one exclusive MPS owner.
-- MLflow `1e356a71e4f74d5192a091fc40d3f6b8` RUNNING; step21000 loss0.549666405,
+- MLflow `1e356a71e4f74d5192a091fc40d3f6b8` RUNNING; stored metrics through21225; initial step21000 loss0.549666405,
   supervised0.547090113/KD0.025762973 stored, no tracking warning. Initial/ready
   independent backups match;152producing pins match.
 - Initial checkpoint SHA256`a3d013740827610698026e46d122da474810ab24b286b633017d1b78fb5ba10d`.

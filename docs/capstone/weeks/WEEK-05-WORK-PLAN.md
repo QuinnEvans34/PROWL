@@ -200,3 +200,21 @@ positive burden; no final verdict is issued before the full horizon and closeout
 The17-record6755/2889provenance review found different serialized files but no
 verified patient relationship. Both cases remain included; patient-bootstrap
 interpretation stays pending a justified resampling unit. KD remains unchanged.
+
+## November 5 CPU delivery while KD trains
+
+The [KD result closeout command](../operations/KD-RESULT-CLOSEOUT-20261105.md) now
+checks final selected/terminal evidence, independent backups, cleanup and read-only
+tracking, with66synthetic/reader regressions passing. Actual treatment has ten
+completed validations through20k;22k/24k and final execution closeout remain pending.
+No interim acceptance/CI is emitted and the control's historical failure is preserved.
+
+The [saved-baseline workflow connection](../orchestration/BASELINE-REVIEW-WORKFLOW-20261105.md)
+adds registered admission/analysis/reviewer handoff, validated reuse and explicit
+failure recovery. Actual export completed3/3 and reused3/3.79combinedCPU regressions
+pass. Full GPU inference recovery/unified production G3 remains open.
+
+The existing [stakeholder living plan](../implementation/11-stakeholder-validation.md)
+now has the Saturday task sequence and frozen fixtures.124focusedUI checks and a
+fresh actual-package CPU/isolated-HTTP save/reopen/revise check pass. No production
+decision, participant feedback, live GPU rendering or answer generation was made.

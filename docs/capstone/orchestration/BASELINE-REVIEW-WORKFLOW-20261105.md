@@ -26,6 +26,9 @@ passed a mutation-free plan, three-stage run and three-stage reuse. Records:
 `outputs/prowl/autonomous-baseline-workflow-20261105-02`.
 Run8462f6d9-b579-4da5-aed7-93c6aa46ee91 completed3/3;
 resume9c6c7004-a532-45d5-a781-e538d0752716 reused3/3 with the same source bytes.
+The exact metadata was also retained outside /tmp at
+`outputs/prowl/autonomous-baseline-source-20261105.json`; explicit relocation
+resume5ab97dac-3493-42e2-9352-d8e8414e4493 again reused3/3 with the unchanged pin.
 The first read-only CLI attempt lacked the isolated jsonschema dependency and
 dispatched no stage; its failure is retained separately under the01directory.
 

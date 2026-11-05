@@ -229,3 +229,72 @@ Ask which step was hardest to understand, whether mask measurements and limitati
 were clear, whether she could inspect a citation and recover a saved decision, and
 what one change would improve the workflow most. Preserve feedback as observations;
 Quinton chooses any resulting code changes. No session results or acceptance claimed.
+
+## November 5 Saturday preparation and engineering checks
+
+Prepared for the tentative SaturdayNovember7 preliminary session with SV-P01.
+Exact time, actual job role and participation/note-taking permission remain for
+Quinton to confirm. No invitation, recording or participant feedback was created.
+This is a ready task script with bounded engineering evidence, not a completed
+live walkthrough or G7 acceptance.
+
+Use the existing application and living findings template above. Start by saying:
+"I would like feedback on whether the workflow and explanations make sense.
+These are research model outputs, not a diagnosis. Some answers may be replayed
+from saved evidence; I will say when that is the case."
+
+| Task / approximate time | What to show or ask | Record without coaching |
+| --- | --- | --- |
+| Orient,3minutes | Ask what she thinks the scan, colored predictions and reference/source labels mean. State the limitations and confirm her role. | Interpretation, unclear labels, assistance provided. |
+| Saved scan,5minutes | Open `/saved?review=b671bd4453db6c91d842d948c95eeac351df76902480d54b5389a2a174efd2f5`. This is exposed-development case2028 with a CT-only prediction, not a new inference. Ask her to find provenance and measurement limitations. | Whether prediction vs annotation and mask volume vs validated anatomical measurement are distinguishable. |
+| Failure examples,5minutes | Use the private seven-case gallery, especially a missed component and8711spillover/6880false-positive example. Label static images and explain representative-slice limits. | Can she recognize why the output needs review? Do not ask a proxy to certify medical correctness. |
+| Conversation,7minutes | Use the boundary/function questions and the evidence-gap stiffness question from the saved packet. Inspect a citation, edit a prior question, cancel one and send a replacement. Explicitly identify saved playback/fixtures; live generation waits for the GPU to be free. | Does the answer address the question? Is the evidence link understandable? Does the cancelled answer stay out of the replacement conversation? |
+| Save and reopen,5minutes | On an explicitly designated session review, save a decision with its reason, reopen the exact prediction/revision, then revise it. Keep engineering records separate from participant records. | Whether the saved version, current draft and previous decision are clear; actual task outcome. |
+| Debrief,5minutes | Ask which step was most confusing, what appeared too certain, and the single change that would help most. | Quote only with permission; prioritize actual observed problems in the existing SVF template. |
+
+### Frozen fixtures and current check evidence
+
+- Saved native manifest SHA256
+  `b671bd4453db6c91d842d948c95eeac351df76902480d54b5389a2a174efd2f5`;
+  local package `outputs/prowl/week05-review-transfer-20261103-01/native-view`.
+  November5 CPU browser loader verified file hashes/native geometry and released
+  its arrays without rendering. Predicted-mask volumes76.360628mL pancreas-including-
+  lesion and15.170559mL lesion match the retained check. These are model mask volumes;
+  anatomical completeness and measurement accuracy remain unverified.
+- Conversation comparison packet remains
+  `outputs/prowl/assistant-review-20261102-01/inputs.json`, SHA256
+  `fea15059496f2341703134f905c178f03e5492665aab4efabf6cbe6af0411280`, with the same five
+  questions and saved evidence. Current baseline snapshots are the three retained
+  October31 fast-preview responses. Do not imply that the two older-model failures
+  are current answers, or that saved response timings are a new live benchmark.
+  Known relevance/jargon/completeness defects remain in the
+  [saved-answer review](../retrieval/ASSISTANT-OFFLINE-REVIEW-2026-11-02.md).
+- Node24.21.0:124tests across nine focused suites passed November5, including the
+  explicit private-package opt-in test. Coverage includes both conversation variants,
+  citation links, edit/resend identities, cancellation/late-answer isolation,
+  review revisions, incorrect prediction/revision bindings and history reopening.
+  Synthetic answers and mocked transport are engineering checks, not model accuracy.
+- Fresh actual-package ASGI HTTP exercise retained under
+  `outputs/prowl/testing/week05-walkthrough-20261105-01/readiness.json`.
+  Engineering-only revision1/idempotent retry/restart/reopen/revision2 passed;
+  stale write rejected409; all five retained file hashes equal the originals.
+  No network listener, model call, live GPU viewer or production review write.
+  The real application package still has no engineering decision added to it.
+
+Repeat the bounded UI check from `ui/` with the verified runtime and explicit
+`PROWL_PHYSICAL_PACKAGE` pointing to that private package:
+
+```sh
+/Users/quintonevans/.nvm/versions/node/v24.21.0/bin/node node_modules/vitest/vitest.mjs run \
+  tests/LiteratureSearchPanel.test.jsx tests/GeneralExtract.test.jsx \
+  tests/reviewDecision.test.jsx tests/reviewLiteratureAttachments.test.jsx \
+  tests/reviewNavigation.test.jsx tests/savedPrediction.test.jsx \
+  tests/savedReviewList.test.jsx tests/reviewState.test.js tests/physicalPackageLocal.test.js
+```
+
+The opt-in scan check skips when its environment variable is absent. Normal CI
+does not discover private scans. Before a live session, separately confirm GPU
+availability, actual viewer presentation, services and live answer behavior if used.
+Do not stop KD or start a model automatically for this preparation. During the
+session record unaided/assisted/failed/not-tried, actual role and limitations in
+SV-001; all feedback/outcome fields remain empty until the participant acts.

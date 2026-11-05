@@ -88,3 +88,11 @@ def test_corrupt_published_analysis_refuses_reuse_without_regeneration(setup):
     def forbidden(*args):pytest.fail('corrupt artifact must not be silently regenerated')
     with pytest.raises(ValueError):
         execute_registered(e,'autonomous-baseline',s,{key:forbidden for key in h},v,resume_of=first['run_id'])
+
+
+def test_explicit_relocation_of_identical_pinned_export_reuses_outputs(setup,tmp_path):
+    source,pin,e=setup;s,h,v=stages(setup);first=execute_registered(e,'autonomous-baseline',s,h,v)
+    retained=tmp_path/'retained-export.json';source.rename(retained)
+    s,h,v=definition(retained,pin,REQUEST,READY)
+    result=execute_registered(e,'autonomous-baseline',s,h,v,resume_of=first['run_id'])
+    assert set(result['stages'].values())=={'reused'}

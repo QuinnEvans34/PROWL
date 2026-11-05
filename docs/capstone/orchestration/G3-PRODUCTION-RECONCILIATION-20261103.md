@@ -53,3 +53,26 @@ run bfddd3b1-8d1e-471f-9f96-e593d3c297a2 completed integrity+handoff; explicit r
 outputs/prowl/week05-native-handoff-20261103-01. This closes the actual-byte
 saved-package handoff/reuse check for this case. It does not prove autonomous
 inference recovery, multi-case production execution, measurement accuracy or fullG3.
+
+## November 5 saved-baseline result connection
+
+The completed63-score/seven-failure autonomous70 metadata export now runs through
+the registered admission→analysis→review-handoff workflow. Actual retained bytes
+completed3/3stages and explicit resume reused3/3; synthetic failure recovery reuses
+valid admission while preserving the original failed analysis attempt. Changed
+source/output bytes refuse reuse; new explicit source identities invalidate the
+affected descendants. See [the adapter and operator evidence](BASELINE-REVIEW-WORKFLOW-20261105.md).
+
+This closes the saved-baseline result-to-review CPU connection. It does not claim
+that inference/scoring has been migrated into the unified runner, qualify recovery
+of an expensive inference stage, repair unknown units/provenance, or complete G3.
+The qualified KD restore remains separate. Its new
+[result closeout command](../operations/KD-RESULT-CLOSEOUT-20261105.md) is prepared,
+but actual treatment22k/24k/final cleanup are still pending. Existing control
+closeout passed the new saved-evidence checker with its original FAILED tracking
+and cleanup-only supervision failure preserved.
+
+The [Saturday script and fixture checks](../implementation/11-stakeholder-validation.md)
+are prepared:124focusedUI checks, actual saved-package CPU loading, and fresh
+isolated HTTP save/reopen/revise. Live GPU rendering/generation and participant
+feedback have not occurred; independent held-out acceptance remains open.
