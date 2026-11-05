@@ -153,7 +153,7 @@ def test_reader_refuses_images_checkpoints_and_changed_json(tmp_path):
     with pytest.raises(ValueError, match='Input metadata changed'): reader.verify()
 
 
-def test_actual_cli_contract_partial_horizon_and_full_cohort(tmp_path):
+def make_review_fixture(tmp_path, terminal=14000):
     """Synthetic producer records exercise the real recipe/lineage/backup reader."""
     from src.operations.kd_error_review_preparation_v1 import sha_bytes
     original, current, control_root = tmp_path/'original', tmp_path/'current', tmp_path/'control-run'
@@ -167,7 +167,7 @@ def test_actual_cli_contract_partial_horizon_and_full_cohort(tmp_path):
     kd = deepcopy(design);kd['distillation']['max_weight'] = .1
     scientific = dict(designs=[design, kd], preparation=dict(admitted_targets=str(pp.parent), pins={str(pp):provider_pin}))
     write(original/'ready.json', scientific)
-    for arm, root, backup, terminal in [('control', control_root, control_backup, 24000), ('treatment', current, treatment_backup, 14000)]:
+    for arm, root, backup, terminal in [('control', control_root, control_backup, 24000), ('treatment', current, treatment_backup, terminal)]:
         ex = root/arm/'execution';ex.mkdir(parents=True)
         with (ex/'history.jsonl').open('w') as stream:
             stream.write(json.dumps(dict(event='started', step=0, identity=dict(model='fixed')))+'\n')
@@ -196,6 +196,11 @@ def test_actual_cli_contract_partial_horizon_and_full_cohort(tmp_path):
         segments=dict(control=[dict(root=str(control_root), backup=str(control_backup), checkpoint_step=24000)], treatment=[]),
         control_closeout=dict(version='reviewed-control-closeout-1', optimization_complete=True, result=result, resources=resources))
     write(current/'ready.json', receipt);pin=sha_bytes((current/'ready.json').read_bytes())
+    return current, pin
+
+
+def test_actual_cli_contract_partial_horizon_and_full_cohort(tmp_path):
+    current, pin = make_review_fixture(tmp_path)
     out = tmp_path/'review'
     report = prepare(current, pin, out)
     assert report['completed_native_steps']['control'] == STEPS
