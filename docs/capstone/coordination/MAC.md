@@ -9,8 +9,10 @@
   [full analysis](../operations/KD-DESCRIPTIVE-ANALYSIS-20261106.md).
 - [Universal provenance and next-study draft](../operations/UNIVERSAL-SWIN-PROVENANCE-AND-NEXT-STUDY-20261106.md):
   public-source dataset overlap confirmed; exact four-case/checkpoint patient
-  membership unresolved. Lenovo requested metadata-only crosswalk review, no
-  GPU/data/duplicate-audit expansion. No successor launched. Inference fit does
+  membership unresolved. Lenovo completed metadata-only crosswalk review1e6760f:
+  eight named case files and70existing request records do not establish original
+  source/patient links; allfour remain unknown. Peer report/JSON copied exactly,
+  no GPU/data/duplicate-audit expansion. No successor launched. Inference fit does
   not qualify training fit; unit admission remains unresolved for training and
   negative cases. Larger-model score stays a four-positive exploratory result.
 - [Retrospective experiment index](../operations/EXPERIMENT-REVIEW-INDEX-20261106.md)

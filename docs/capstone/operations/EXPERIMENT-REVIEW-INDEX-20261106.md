@@ -20,3 +20,8 @@ All historical statuses, failures, checkpoints and source pins remain preserved.
 No extra MLflow RUNNING record, duplicate training-hours entry or model-registry
 promotion is created by this index. Future execution requires its own prospective
 record under the existing experiment protocol.
+
+Lenovo follow-up `1e6760f`: the [retained patient-crosswalk review](UNIVERSAL-SWIN-RETAINED-CROSSWALK-20261106.md)
+and companion JSON are retained byte-for-byte on Mac. All four screen cases remain
+unknown; zero verified unseen is not proof of zero actual overlap. This review
+uses retained metadata only and does not change the completed screen results.

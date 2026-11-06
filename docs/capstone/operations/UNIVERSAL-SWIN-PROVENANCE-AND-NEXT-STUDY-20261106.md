@@ -75,13 +75,28 @@ generalization. Reannotation of a previously seen CT does not create an unseen
 patient. Model selection/validation exposure matters as well as training exposure;
 unlabeled pretraining exposure must also be disclosed.
 
+Overlap between pretraining and our own **training-role** cases is not by itself
+evaluation leakage. The critical separation is from the cases used to evaluate or
+select the downstream system. Map the roles precisely rather than demanding that
+every fine-tuning case must be new to the pretrained model. Keep train/evaluation
+patients and related scans grouped even when their case identifiers differ.
+
 Resolve this using retained metadata first. Record original source collection,
 original case/series and patient-group identifiers, evidence reference/hash, and
 pretraining and checkpoint-selection membership for each intended evaluation case.
 Use `confirmed_seen`, `verified_unseen`, or `unknown`, with reasons; never treat
 missing metadata as unseen. Reuse existing duplicate evidence rather than silently
-running another bulk image audit. Lenovo has been asked for a bounded retained
-metadata review; patient-level clearance remains pending that evidence.
+running another bulk image audit. Lenovo completed the
+[bounded retained-metadata review](UNIVERSAL-SWIN-RETAINED-CROSSWALK-20261106.md)
+in peer commit `1e6760f`. Eight named case-metadata files, 70 existing request
+identity/exposure records and supporting receipts were reviewed, with twelve
+hashed evidence files/documents. No original source/patient/series crosswalk was
+present in those records: all four cases remain unknown, with zero verified
+unseen cases. Six upstream train/validation list excerpts confirm public pancreas
+source filenames, but no ledger binds those lists to the exact released weights.
+The peer MD/JSON are copied byte-for-byte here; this is evidence review, not an
+exhaustive original-cohort or workbook audit. Zero established patient matches
+does not mean zero actual overlap.
 
 If the crosswalk cannot be established, retain these results for exposed-development
 engineering only. A clean claim needs a separately admitted source/patient-disjoint
