@@ -2,6 +2,15 @@
 
 ## November 6 review handoff
 
+- [Alternative transfer candidates and audit scope](../operations/TRANSFER-CANDIDATES-AND-LEAKAGE-AUDIT-20261106.md):
+  prioritize TotalSegmentator-pretrained STU-Net-B58.26M for provenance inspection,
+  not GPU launch or a leak-free claim. Original5,050CT and newer~50kCT/MR MONAI
+  SSL releases distinguished; both still need image-exposure checks. Two-file
+  membership reconciliation verifies1,333same train/75registrydev/70KDsubset;
+  preserve922/5105/5370/7299/7523outsideKD. This is not a completed1,408patient
+  crosswalk/duplicate audit. Official901IDtest is distinct from authors' external
+  OOD evaluation service; neither automatically clears Universal exposure.
+
 - [Scientific-use research](../operations/UNIVERSAL-SWIN-SCIENTIFIC-USE-RESEARCH-20261106.md):
   the screen used an already task-trained publisher model; no PROWL fine-tuning.
   City University of Hong Kong/JHU/NVIDIA authorship verified. Journal methods

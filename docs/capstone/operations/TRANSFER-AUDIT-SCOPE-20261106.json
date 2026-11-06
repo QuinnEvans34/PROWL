@@ -1,0 +1,32 @@
+{
+  "schema": "prowl.transfer-audit-scope.20261106.v1",
+  "status": "MEMBERSHIP_SCOPE_ONLY_NOT_EXPOSURE_CLEARANCE",
+  "inputs": [
+    {
+      "path": "outputs/prowl/portable-cohort-20261012/cohort.json",
+      "sha256": "0e63126be7df03072b0064e9740c9fe6ca7efec766f2324e79a49ddde278d8e2"
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/rsuper-training-sources-01/manifest.csv",
+      "sha256": "51585c816a4711812954a9d6b4619268b0a6a8c5c1ac7ce53ba95074d5b65df4"
+    }
+  ],
+  "train": 1333,
+  "development_registry": 75,
+  "kd_development_subset": 70,
+  "train_membership_equal": true,
+  "kd_development_subset_verified": true,
+  "outside_kd_subset": [
+    "PanTS_00000922",
+    "PanTS_00005105",
+    "PanTS_00005370",
+    "PanTS_00007299",
+    "PanTS_00007523"
+  ],
+  "original_patient_crosswalk": "not_established",
+  "duplicate_audit_performed": false,
+  "new_image_mask_model_test_reads": 0,
+  "identity_assurance_counts": {
+    "unverified_unique": 1408
+  }
+}
