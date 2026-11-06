@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November5 private transfer stopped; prediction packet preserved
+
+Sender80719 ended after an explicit operator stop because receiving-chat coordination was unavailable; no delivery confirmation. Senderfailure/resource evidence retained, all owned workers reaped, no retry. The prior one-time code is inactive and is not recorded here. Exact573440B/19member packetSHA3a8b4ae517e5ea42a9af2b61684207b34a696c445d7c2d8e46d28d0bd119dc6b remains verified and private for a later authorized delivery. Updated transferJSON records the stopped attempt. Inference/scoring/MLflow/fullbackup closeout remains successful; no new GPU work. Earlier sender-active entry below is historical.
+
 ## November5 private prediction-review delivery prepared / one sender active
 
 Completed-trial predictions only:8nativeNIfTIs,4inferenceJSON,4scoreJSON,summary/completionJSON plus stricttransfermanifest. NoCT/reference/weight/database files. Fresh privatepacket573440B/19regularmembers/551589Bexpanded; archiveSHA3a8b4ae517e5ea42a9af2b61684207b34a696c445d7c2d8e46d28d0bd119dc6b. Strict main93899ef importer readbackPASS; all sourceartifact hashes unchanged before/after copying. [Sanitized transfer proof](../operations/UNIVERSAL-SWIN-TRANSFER-20261105.json). One bounded≤600s sender owned80719; no duplicate sender. Privatecode is in chattooloutput only, nevercommitted. Receiver confirmation/cleanup pending. Completedmodelattempt remains unchanged/GPUidle.

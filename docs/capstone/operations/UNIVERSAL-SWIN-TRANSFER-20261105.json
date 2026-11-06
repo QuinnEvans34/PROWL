@@ -97,5 +97,21 @@
     }
   ],
   "manifest_sha256": "ec156416ec20bb14620f8a2e0e336a430498073858c67eedafe35b5e4725adff",
-  "importer_sha256": "8195154ff620b2b47f2af8804724f1d9274e94e4d4a5f85d36342d0476d1e811"
+  "importer_sha256": "8195154ff620b2b47f2af8804724f1d9274e94e4d4a5f85d36342d0476d1e811",
+  "delivery_status": "NOT_DELIVERED_SENDER_STOPPED_COORDINATION_UNAVAILABLE",
+  "sender_resources": {
+    "error": "Training worker failed with exit 15",
+    "exit_code": 15,
+    "resources": {
+      "seconds": 248.46900000004098,
+      "peak_owned_rss_bytes": 72658944,
+      "samples": 2036,
+      "workers_reaped": true
+    }
+  },
+  "operator_stop": {
+    "reason": "Receiver coordination unavailable; no recipient confirmation. Stop waiting sender within authorized ten-minute bound, preserve verified packet; no retry.",
+    "root_pid": 52352,
+    "elapsed_seconds": 247.10167813301086
+  }
 }
