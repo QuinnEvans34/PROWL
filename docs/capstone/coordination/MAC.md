@@ -1,6 +1,6 @@
 # Mac work status
 
-- Observed at: 2026-11-05 19:00 UTC.
+- Observed at: 2026-11-06 02:49 UTC (November5 evening locally).
 - Owner / branch: Mac chat, `main`.
 - Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
   error-review packet and this status. Previous recovery: `af0e442`.
@@ -10,6 +10,15 @@
 
 ## Delivered Week 5 work
 
+- User authorized one larger-model overnight experiment after KD. Official
+  [Universal Swin screen](../operations/UNIVERSAL-SWIN-OVERNIGHT-20261105.md):
+  downloaded758,907,945B/exactpublisherSHA; strict CPU load170state entries,
+  62,595,315parameters, zero forwards/updates. Audit111608eb4d5efa46ca1c3227dd6c3a770a49b0e74e9f7cec4766ab469189a553.
+  Code388524d;34CPU audit/permit/KD-closeout tests pass. One-shot permit requires
+  verified completeKD, not merely24kupdates. Lenovo preparing four strictly admitted
+  positive cases; missing-unit empty/train cases are NOT_ADMITTED, so no training
+  or empty-alarm claim. Source/weights remain external/private. TrelloKhp8LCoP.
+  No new GPU stage launched; currentKD final validation52/70at24k, MLflowRUNNING.
 
 - November5 CPU follow-up: [KD closeout reporting](../operations/KD-RESULT-CLOSEOUT-20261105.md)
   atfd34932/6aec2c3,66KD/native-reader tests pass. Actual control closeout and all
