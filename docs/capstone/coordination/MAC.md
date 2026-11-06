@@ -2,6 +2,14 @@
 
 ## November 6 review handoff
 
+- [Scientific-use research](../operations/UNIVERSAL-SWIN-SCIENTIFIC-USE-RESEARCH-20261106.md):
+  the screen used an already task-trained publisher model; no PROWL fine-tuning.
+  City University of Hong Kong/JHU/NVIDIA authorship verified. Journal methods
+  clarify3,410developmentCTs=2,100train+1,310validation; checkpoint membership still
+  unknown. Loaded code has shared controller, unlike later journal independent
+  MLP extension. Retain attributed baseline scope and conditional adaptation,
+  not a new PROWL-trained or independently validated model. No GPU job launched.
+
 - Full KD curve/endpoint/error review committed in6947827. Selected gain is
   +.005491 Dice, terminal+.001475; 16positive cases improve/18worsen/2unchanged
   at both endpoints and component coverage declines39/45to37/45. No promotion,

@@ -46,8 +46,11 @@ claim the publisher's benchmark numerics.
 
 ## Leakage finding: source overlap is confirmed; patient membership is unresolved
 
-The Universal paper describes 3,410 training CTs assembled from fourteen public
-datasets, including MSD pancreas and Pancreas-CT. Its
+The original Universal abstract describes 3,410 training CTs assembled from fourteen public
+datasets, including MSD pancreas and Pancreas-CT. **November 6 research clarification:**
+the journal paper's detailed section 4.1.1 instead divides the 3,410 development
+CTs into 2,100 training and 1,310 validation. Use those explicit roles when
+describing that study; neither wording establishes this binary's exact membership. Its
 [dataset table](https://arxiv.org/html/2301.00785v3#Sx2) distinguishes training
 sources from external evaluations. The pinned repository also lists these sources;
 the paper and current repository describe different release details, so aggregate
@@ -183,3 +186,11 @@ license is inferred from a model-card tag.
 **Decision:** Universal Swin is the leading candidate for the next investigation,
 not an accepted leak-free replacement. Establish provenance, inspect saved outputs,
 and freeze a balanced screen before budgeting adaptation.
+
+Follow-up: [scientific-use research](UNIVERSAL-SWIN-SCIENTIFIC-USE-RESEARCH-20261106.md)
+clarifies CityU authorship, task-specific pretraining, the training/validation
+count distinction, published-version versus loaded-code differences, label
+outputs, attribution, capstone lineage and artifact-specific licensing. The
+completed run was pretrained inference, not PROWL transfer training. Verify
+annotation/target semantics as well as geometry before adapting its tumor head
+to PanTS lesion references.
