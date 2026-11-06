@@ -1,0 +1,711 @@
+{
+  "schema": "prowl.universal-four-positive-screen.v1",
+  "status": "CPU_READY_REQUIRES_MAC_COMPLETION_PERMIT_AND_CUDA_PILOT",
+  "cases": [
+    "PanTS_00002028",
+    "PanTS_00001347",
+    "PanTS_00002514",
+    "PanTS_00008743"
+  ],
+  "training_admission": "NOT_ADMITTED",
+  "optimizer_updates": 0,
+  "training_rejections": [
+    {
+      "case_id": "PanTS_00004029",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00001477",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00002585",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00001197",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00004497",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00007093",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00003142",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "ct: spatial units not mm",
+        "pancreas: spatial units not mm",
+        "lesion: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00001362",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00007256",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00006264",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00000147",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm"
+      ]
+    },
+    {
+      "case_id": "PanTS_00008795",
+      "role": "train",
+      "narrow_prior_role": "verifier_fit",
+      "failures": [
+        "pancreas: spatial units not mm"
+      ]
+    }
+  ],
+  "specification_sha256": "259d2e77d8ed1c83a75997b67ce8f02278b97a48f5fd509f5417bb090cd44900",
+  "source_revision": "43c12399cc98a40f447342a8dc2cecae5edae84c",
+  "weights_revision": "76f0304ff9387c1baccbbc1d9eac78c5c5ccfeed",
+  "weight_sha256": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+  "case_seconds": 3600,
+  "charged_preparation_seconds": 3600,
+  "preparation_accounting": "Conservative one-hour charge covers acquisition, CPU audit/header/tests and setup compute; no cap reset.",
+  "limits": {
+    "total_seconds_including_preparation": 21600,
+    "pilot_total_seconds": 600,
+    "owned_rss_bytes": 12884901888,
+    "cuda_allocated_and_reserved_bytes": 6442450944,
+    "minimum_free_each_volume": 107374182400,
+    "new_output_bytes": 8589934592,
+    "new_backup_bytes": 8589934592,
+    "aggregate_backup_bytes": 68719476736
+  },
+  "representation": {
+    "orientation": "RAS",
+    "spacing_mm": [
+      1.5,
+      1.5,
+      1.5
+    ],
+    "hu_window": [
+      -175,
+      250
+    ],
+    "scaled_range": [
+      0,
+      1
+    ],
+    "foreground": "CT scaled intensity > 0; no reference inputs",
+    "window": [
+      96,
+      96,
+      96
+    ],
+    "overlap": 0.5,
+    "blending": "Gaussian logits; two selected channels accumulated on CPU",
+    "channel_indices": [
+      10,
+      27
+    ],
+    "native_restoration": "sigmoid followed by world-affine linear probability interpolation, grid-constant zero outside crop",
+    "decision": "strict >0.5; lesion precedence in combined codes; raw pancreas saved separately",
+    "implementation": "current MONAI1.6 preprocessing; not claimed identical to upstream MONAI0.9 hard-mask inverse",
+    "TTA": false,
+    "postprocessing": false
+  },
+  "claims": {
+    "external_exposure": "unknown",
+    "scope": "four exposed-development positive cases; descriptive only",
+    "independent_generalization": false,
+    "empty_alarm_rate": "NOT_MEASURED",
+    "hypothesis_verdict": "NOT_TESTED"
+  },
+  "operator_closeout_required": [
+    "full producing-byte recheck",
+    "different filesystem IDs rechecked",
+    "all output/backup hashes",
+    "process absence and GPU release",
+    "MLflow FINISHED and metric readback"
+  ],
+  "integrity_policy": "Full byte verification before dispatch; subsequent unchanged dependency size/mtime guards; code hashes each stage; input hashes in separate admission/CT-inference/reference-scoring stages.",
+  "request_sha256": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+  "frozen_pin_count": 5442,
+  "environment_dependency_count": 4846,
+  "inputs": [
+    {
+      "case_id": "PanTS_00002028",
+      "role": "development",
+      "target_state": "positive",
+      "source_sha256": {
+        "ct": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+        "lesion": "523736974b7ebd80f666900da05db39c2d3189e99a3995a447b3a2d9baa34862",
+        "pancreas": "3f15b75f467523d531e06fd6d22f3343e1079d4ce8f4c45086f0ef64089413d3"
+      },
+      "headers": {
+        "ct": {
+          "shape": [
+            407,
+            311,
+            101
+          ],
+          "affine": [
+            [
+              0.9765620231628418,
+              0.0,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.9765620231628418,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 14838645,
+          "mtime_ns": 1793668330000000000
+        },
+        "pancreas": {
+          "shape": [
+            407,
+            311,
+            101
+          ],
+          "affine": [
+            [
+              0.9765620231628418,
+              0.0,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.9765620231628418,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 62725,
+          "mtime_ns": 1791513586000000000
+        },
+        "lesion": {
+          "shape": [
+            407,
+            311,
+            101
+          ],
+          "affine": [
+            [
+              0.9765620231628418,
+              0.0,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.9765620231628418,
+              0.0,
+              -499.023193359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 56712,
+          "mtime_ns": 1791513586000000000
+        }
+      },
+      "admitted": true,
+      "failures": []
+    },
+    {
+      "case_id": "PanTS_00001347",
+      "role": "development",
+      "target_state": "positive",
+      "source_sha256": {
+        "ct": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+        "lesion": "b7a25e62854024305ad32429817b302db479f30d730c5c1f2afb5a292f48d492",
+        "pancreas": "e2317f69aad902d4acf62e7612ea77e8ddcd7287a15a6e960c23267e90ca8c33"
+      },
+      "headers": {
+        "ct": {
+          "shape": [
+            442,
+            365,
+            99
+          ],
+          "affine": [
+            [
+              0.8203120231628418,
+              0.0,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.8203120231628418,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 19195825,
+          "mtime_ns": 1793738922000000000
+        },
+        "pancreas": {
+          "shape": [
+            442,
+            365,
+            99
+          ],
+          "affine": [
+            [
+              0.8203120231628418,
+              0.0,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.8203120231628418,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 81401,
+          "mtime_ns": 1791513586000000000
+        },
+        "lesion": {
+          "shape": [
+            442,
+            365,
+            99
+          ],
+          "affine": [
+            [
+              0.8203120231628418,
+              0.0,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.8203120231628418,
+              0.0,
+              -419.179443359375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 70619,
+          "mtime_ns": 1791513586000000000
+        }
+      },
+      "admitted": true,
+      "failures": []
+    },
+    {
+      "case_id": "PanTS_00002514",
+      "role": "development",
+      "target_state": "positive",
+      "source_sha256": {
+        "ct": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+        "lesion": "983c3730cff63c5f8f2250e8cde3865abc7da8618bbfbe0d4f3d7b4a02d05d81",
+        "pancreas": "b996011ed113f1c47737b73ce91fd33636e27a326ea28e1af4670229ceacaebf"
+      },
+      "headers": {
+        "ct": {
+          "shape": [
+            394,
+            268,
+            89
+          ],
+          "affine": [
+            [
+              0.9238280057907104,
+              0.0,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.9238280057907104,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 11021295,
+          "mtime_ns": 1793739258000000000
+        },
+        "pancreas": {
+          "shape": [
+            394,
+            268,
+            89
+          ],
+          "affine": [
+            [
+              0.9238280057907104,
+              0.0,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.9238280057907104,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 49934,
+          "mtime_ns": 1791513586000000000
+        },
+        "lesion": {
+          "shape": [
+            394,
+            268,
+            89
+          ],
+          "affine": [
+            [
+              0.9238280057907104,
+              0.0,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.9238280057907104,
+              0.0,
+              -472.07611083984375
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 41753,
+          "mtime_ns": 1791513586000000000
+        }
+      },
+      "admitted": true,
+      "failures": []
+    },
+    {
+      "case_id": "PanTS_00008743",
+      "role": "development",
+      "target_state": "positive",
+      "source_sha256": {
+        "ct": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+        "lesion": "563d80bcd57cceab1cccd4e629c1889cb29f52cf65e2932e9bd94fa6dffbfd82",
+        "pancreas": "38e6f82611cd2ec764385bd582d32f13cf15e75ec7d77ebb49561de0f56bbe35"
+      },
+      "headers": {
+        "ct": {
+          "shape": [
+            424,
+            294,
+            89
+          ],
+          "affine": [
+            [
+              0.7734379768371582,
+              0.0,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.7734379768371582,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 13212081,
+          "mtime_ns": 1793741780000000000
+        },
+        "pancreas": {
+          "shape": [
+            424,
+            294,
+            89
+          ],
+          "affine": [
+            [
+              0.7734379768371582,
+              0.0,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.7734379768371582,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 57140,
+          "mtime_ns": 1791513586000000000
+        },
+        "lesion": {
+          "shape": [
+            424,
+            294,
+            89
+          ],
+          "affine": [
+            [
+              0.7734379768371582,
+              0.0,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.7734379768371582,
+              0.0,
+              -395.226806640625
+            ],
+            [
+              0.0,
+              0.0,
+              2.5,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          "units": "mm",
+          "bytes": 49729,
+          "mtime_ns": 1791513586000000000
+        }
+      },
+      "admitted": true,
+      "failures": []
+    }
+  ],
+  "cpu_tests": {
+    "passed": 18,
+    "test_log_sha256": "9d7afa424971482b9d7be68710d8110a12d11c5b0ee8512ee63e53c7fa182e2b"
+  },
+  "actual_cpu_model": {
+    "state_tensors": 170,
+    "loaded_state_sha256": "23f0c1b107cb20c71be4323634095c4e305cb9c228df3dbec7bb27f92160c97a",
+    "parameters": 62595315,
+    "state_elements": 63552891,
+    "checkpoint_sha256": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+    "source_revision": "43c12399cc98a40f447342a8dc2cecae5edae84c",
+    "forward_calls": 0,
+    "gpu_used": false
+  },
+  "independent_filesystems": [
+    {
+      "DriveLetter": "E",
+      "UniqueId": "\\\\?\\Volume{424d39a3-ac76-4f41-aa1c-8b9f5ce0b829}\\",
+      "FileSystem": "exFAT",
+      "Size": 999960870912,
+      "SizeRemaining": 346330365952
+    },
+    {
+      "DriveLetter": "C",
+      "UniqueId": "\\\\?\\Volume{9ed7859f-4768-4f11-9788-792a793f0ee4}\\",
+      "FileSystem": "NTFS",
+      "Size": 1021821579264,
+      "SizeRemaining": 159541096448
+    }
+  ],
+  "independent_physical_disks": {
+    "C": 0,
+    "E": 1
+  },
+  "launch_command": ".venv-prowl-windows/Scripts/python.exe scripts/diagnostics/run_universal_screen_20261105.py --request-sha256 4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5 --permit E:/PROWL/readiness/universal-swin-20261105-a01/permit.json --permit-sha256 <MAC_ISSUED_EXACT_PERMIT_SHA256>"
+}

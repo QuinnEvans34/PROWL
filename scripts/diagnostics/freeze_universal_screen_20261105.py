@@ -30,7 +30,7 @@ def main():
     for path in (MODEL/'source').rglob('*'):
         if path.is_file() and '__pycache__' not in str(path):pins[str(path.resolve())]=digest(path)
     for name in ('source-receipt.json','acquisition.json'):pins[str((MODEL/name).resolve())]=digest(MODEL/name)
-    for name in ('specification.md','input-plan.json','input-admission.json','worker-environment.json','supervisor-environment.json','tests-final-v2.log'):
+    for name in ('specification.md','input-plan.json','input-admission.json','worker-environment.json','supervisor-environment.json','tests-final-v2.log','volume-identity.json'):
         pins[str((PREP/name).resolve())]=digest(PREP/name)
     inputs=[r for r in admitted['cases'] if r['role']=='development']
     observations={p:[Path(p).stat().st_size,Path(p).stat().st_mtime_ns] for p in pins}
@@ -53,6 +53,7 @@ def main():
                          'TTA':False,'postprocessing':False},
        'claims':{'external_exposure':'unknown','scope':'four exposed-development positive cases; descriptive only',
                  'independent_generalization':False,'empty_alarm_rate':'NOT_MEASURED','hypothesis_verdict':'NOT_TESTED'},
+       'operator_closeout_required':['full producing-byte recheck','different filesystem IDs rechecked','all output/backup hashes','process absence and GPU release','MLflow FINISHED and metric readback'],
        'pins':pins,'pin_observations':observations,'environment_dependency_paths':sorted(dependencies),
        'integrity_policy':'Full byte verification before dispatch; subsequent unchanged dependency size/mtime guards; code hashes each stage; input hashes in separate admission/CT-inference/reference-scoring stages.'}
     write(PREP/'request.json',r)
