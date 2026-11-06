@@ -6,7 +6,8 @@ from src.operations.universal_swin_candidate_v1 import digest
 
 
 def inputs(tmp_path):
-    ready, spec = tmp_path/'ready.json', tmp_path/'spec.md'
+    (tmp_path/'run').mkdir()
+    ready, spec = tmp_path/'run/ready.json', tmp_path/'spec.md'
     ready.write_text('{}'); spec.write_text('frozen trial')
     steps = list(range(2000, 24001, 2000))
     body = dict(schema='prowl.mac-kd.result-report.v1', status='CLOSED_DESCRIPTIVE_ONLY',
@@ -55,3 +56,10 @@ def test_changed_report_hash_and_malformed_request_are_rejected(tmp_path):
         issue(report, 'b'*64, ready, digest(ready), 'a'*64, spec, digest(spec), tmp_path/'bad')
     with pytest.raises(ValueError, match='SHA256'):
         issue(report, digest(report), ready, digest(ready), 'unbound', spec, digest(spec), tmp_path/'bad2')
+
+
+def test_permit_never_writes_inside_a_producing_attempt(tmp_path):
+    report, ready, spec, _ = inputs(tmp_path)
+    out = ready.parent/'permit.json'
+    with pytest.raises(ValueError, match='outside producing'): call(report, ready, spec, out)
+    assert not out.exists()

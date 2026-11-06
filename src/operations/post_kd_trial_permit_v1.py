@@ -19,6 +19,17 @@ def issue(report_path, report_sha256, ready_path, ready_sha256,
     for path, pin in zip(paths, (report_sha256, ready_sha256, specification_sha256)):
         if digest(path) != pin:
             raise ValueError('Bound permit input changed')
+    ready = json.loads(paths[1].read_text())
+    output = Path(output).resolve()
+    producing = [paths[1].parent]
+    for key in ('output', 'backup', 'parent', 'parent_backup'):
+        if ready.get(key):
+            producing.append(Path(ready[key]).resolve())
+    for rows in ready.get('segments', {}).values():
+        for row in rows:
+            producing.extend(Path(row[k]).resolve() for k in ('root', 'backup'))
+    if any(output == p or p in output.parents for p in producing):
+        raise ValueError('Permit must be outside producing and backup directories')
     report = json.loads(paths[0].read_text())
     if (report.get('schema') != 'prowl.mac-kd.result-report.v1'
             or report.get('status') != 'CLOSED_DESCRIPTIVE_ONLY'
@@ -45,7 +56,6 @@ def issue(report_path, report_sha256, ready_path, ready_sha256,
                   authorizes_additional_experiments=False, maximum_dispatches=1,
                   executor_still_requires=['fresh_dispatch_marker', 'AC', 'storage',
                                            'memory', 'geometry', 'integrity', 'exclusive_GPU'])
-    output = Path(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open('x') as stream:
         stream.write(json.dumps(result, indent=2) + '\n')
