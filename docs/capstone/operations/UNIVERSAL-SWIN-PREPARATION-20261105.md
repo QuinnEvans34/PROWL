@@ -1,0 +1,31 @@
+# Universal Swin UNETR: Lenovo preparation
+
+Status: CPU preparation only; no GPU inference or scientific training. Mac owns the explicit KD-completion permit and final cohort/scope freeze. No old producer is changed or rerun.
+
+## Hardware and runtime observed November5
+
+RTX4060 Laptop:8188MiB VRAM total,7956MiB free,0% utilization, no CUDA compute processes. Only dashboard Python workers were present. AC battery status2,100%. RAM33,202,632KiB total and11,082,340KiB available. E free347,096,481,792bytes; C free159,553,310,720bytes. Free RAM is less than the12GiB experiment ceiling; that ceiling is not a reservation or proof of fit. Both disks exceed the100GiB floor.
+
+Matched isolated runtime Python3.12.13,torch2.13.0+cu130,MONAI1.6.0,nibabel5.4.2. No timm/einops/safetensors installed in that runtime; retained external MedFormer dependency directory contains einops0.8.1 that can be placed on the new worker's import path without modifying old environments. Unmodified Universal_model imports successfully with current MONAI, whose MLPBlock still supports dropout_mode. No actual model forward or strict real checkpoint load has yet passed on Lenovo.
+
+## Chosen candidate and source contract
+
+Official [CLIP-Driven Universal Model](https://github.com/ljwztc/CLIP-Driven-Universal-Model), source43c12399cc98a40f447342a8dc2cecae5edae84c; [HF checkpoint](https://huggingface.co/ljwztc/CLIP-Driven-Universal-Model), revision76f0304ff9387c1baccbbc1d9eac78c5c5ccfeed. Swin model advertised62.19M parameters; actual trainable count remains to verify. File758,907,945bytes, LFS SHA256cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07. Download owned41809 to a new private external directory; no duplicate download. Source files and hashes retained separately, unmodified. HF cardMIT differs from upstreamCC-BY-NC-ND4; do not redistribute source/weights/derivatives with our wrapper.
+
+Verified code contract: independent32sigmoid channels; pancreas11 and pancreatic tumor28 one-based (10/27 zero-based).96cube,1.5mmRAS,HU[-175,250] to[0,1],gaussian overlap0.5. Actual pred_pseudo.py calls threshold_organ(pred_sigmoid) without CLI threshold arguments, so dictionary0.5 applies despite unused CLI0.6. Proposed experiment explicitly omits upstream organ_post_process and TTA, reports raw strict>0.5. The model forward itself has no hardcoded CUDA call on the Swin/word-embedding route; unused encoding_task does, and upstream inference/threshold utilities do. Our runner must not invoke those whole-volume GPU utilities.
+
+Additive strict CPU loader preserves upstream source and requires all renamed checkpoint keys/shapes/dtypes to match exactly. No initialized-model fill for missing keys, no unsafe pickle fallback. Six CPU unit tests pass for mapping/coverage/shape/dtype/channel guards. Full real CPU loading and CUDA pilot remain pending.
+
+Other researched candidates: [SuPreM Swin UNETR](https://github.com/MrGiovanni/SuPreM)62.19M is a larger transfer backbone but needs a verified lesion head; [Pixel2Cancer](https://github.com/MrGiovanni/Pixel2Cancer) offers pancreas-specific SwinUNETRv2 checkpoints; [official PanTS](https://github.com/MrGiovanni/PanTS) links nnUNet-PanTS-regions with custom ResEncUNetM plans/trainer. Universal is preferred here because both target heads already exist. None of these publication scores is a matched comparison to our cohort.
+
+## Cohort questions before freezing
+
+Strict explicit-mm reference eligibility cannot supply4empty cases: saved63completed-case metadata has only5positive cases with both reference masks declaring mm (2028,1347,2514,8743,29), and zero empty cases. If the previous explicit unknown-reference-unit interpretation is carried forward, first4positive in frozen order are7636,2028,1070,927; first4reference-empty are5046,5761,5363,4732. All have previously admitted CT geometry; unknown reference units must stay visible. No new source/header reads occurred for this check. Do not silently weaken the new eligibility rule.
+
+Old resized image caches use HU[-100,250] and provided-pancreas cropping; they cannot reproduce upstream intensity or whole-foreground context. The varied-target cache holds labels only and still requires raw CT. Existing restored fit/tune CTs can supply training-manifest cases without extraction, but their narrower verifier roles must remain explicit. Proposed first6positive and6empty restricted to verifier_fit, in historical training manifest order:4029,1477,2585,1197,4497,7093;3142,1362,7256,6264,147,8795. None is tune/calibration/dev; using them to adapt this separate model must never later present them as held-out evaluation for this model. This selection is PROPOSED, not frozen. New input conversion would read12rawCTs and masks under a new receipt, not reuse incorrectly preprocessed image tensors. Alternative original-generator cases need separately scoped exact restoration from retained archives. Mac must resolve selection/units before request freeze.
+
+## Proposed bounded sequence
+
+Within6h including qualification/setup compute: source/weights/CPU preparation; explicit Mac completion permit; ≤600s96cube GPU forward plus2nonpromotable head updates, finite gradients/shape/head checks and independent checkpoint CPU restore; original-weight eight-case baseline;200fixed head updates on12frozen training cases; sameeight native evaluations; independent backups/MLflow/worker cleanup. Only precls_conv/GAP/controller/text_to_vision train; backbone and organ_embedding remain frozen. AdamW1e-4,decay1e-5,seed42,BCE+softDice equal two targets. Batch1;32patch outputs but only2CPU full-volume accumulators. No model quality or convergence claim follows from this short adaptation.
+
+12GiB ownedRSS,6GiB CUDAallocated AND reserved caps;100GiB C/E floors;AC/exclusive GPU;8GiB outputs/8GiB new independent backups/64GiB aggregate backups. Runtime and tile costs still unmeasured. Existing autonomous cascade enforces three-class logits and different preprocessing; reuse its separate score/supervision/geometry principles, not its one-shot executors or output locations. No launch command/requestSHA exists until the gates and exact scope are resolved. No GPU work before the explicit Mac permit.
