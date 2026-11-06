@@ -1,6 +1,6 @@
 # Mac work status
 
-- Observed at: 2026-11-06 02:49 UTC (November5 evening locally).
+- Observed at: 2026-11-06 03:05 UTC (November5 evening locally).
 - Owner / branch: Mac chat, `main`.
 - Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
   error-review packet and this status. Previous recovery: `af0e442`.
@@ -10,6 +10,15 @@
 
 ## Delivered Week 5 work
 
+- **KD COMPLETE:** [closeout](../operations/MAC-KD-COMPLETION-20261105.md), all24k/
+  12native70-case validations, selected20k0.389084/terminal24k0.383439. Final
+  backups/152pins/all24stored native metrics/processabsence/GPUrelease verified;
+  treatment FINISHED. Hourly KD heartbeat PAUSED. Full report2679c09ebefc2361cb81122ead80530c48fcbeb99b333d2e526d1723a2e0033b.
+  Descriptive only; selected control0.383593, terminal0.381964; no CI/verdict.
+  Lenovo5ebc49freadiness/runner/tests/nativegeometry reviewed without merge;
+  one-shot permitb6b76fc7e1667a7b5c3c13e93796e6460105d0f3e8f0023b30e12f8a499f8aba
+  binds request4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5.
+  This permits bounded qualification/evaluation, not observed GPU success.
 - User authorized one larger-model overnight experiment after KD. Official
   [Universal Swin screen](../operations/UNIVERSAL-SWIN-OVERNIGHT-20261105.md):
   downloaded758,907,945B/exactpublisherSHA; strict CPU load170state entries,

@@ -1,5 +1,12 @@
 # November 2 overnight readiness
 
+**Latest, November5 evening: KD COMPLETE and hourly KD monitor PAUSED.**
+All24k updates/12native70-case validations finished; selected20kDice0.389084,
+terminal24kDice0.383439. Final backups/152pins/tracking/cleanup/GPU release pass.
+See [completion evidence](MAC-KD-COMPLETION-20261105.md). User separately authorized
+one larger Universal Swin screen on Lenovo, bound to a fresh completion permit;
+older no-successor instructions remain in force for all other jobs.
+
 **Current status, November5 resumed:** User-authorized KD continuation is running
 from20989 in mac-kd-treatment-resume-20261105-01, readySHA
 38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049.

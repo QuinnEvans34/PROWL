@@ -1,0 +1,21 @@
+{
+  "schema": "prowl.post-kd-trial-permit.v1",
+  "action": "one_fresh_exploratory_universal_swin_trial",
+  "trial_request_sha256": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+  "specification_sha256": "259d2e77d8ed1c83a75997b67ce8f02278b97a48f5fd509f5417bb090cd44900",
+  "kd_ready_sha256": "38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049",
+  "kd_report_sha256": "2679c09ebefc2361cb81122ead80530c48fcbeb99b333d2e526d1723a2e0033b",
+  "kd_execution_closeout_verified": true,
+  "automatic_retry": false,
+  "authorizes_additional_experiments": false,
+  "maximum_dispatches": 1,
+  "executor_still_requires": [
+    "fresh_dispatch_marker",
+    "AC",
+    "storage",
+    "memory",
+    "geometry",
+    "integrity",
+    "exclusive_GPU"
+  ]
+}

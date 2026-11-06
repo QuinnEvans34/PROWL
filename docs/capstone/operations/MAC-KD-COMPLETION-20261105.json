@@ -1,0 +1,173 @@
+{
+  "schema": "prowl.mac-kd.completed-summary.v1",
+  "observed_utc": "2026-11-06T03:06:10.813482+00:00",
+  "status": "CLOSED_DESCRIPTIVE_ONLY",
+  "execution_closeout_verified": true,
+  "ready_sha256": "38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049",
+  "report_sha256": "2679c09ebefc2361cb81122ead80530c48fcbeb99b333d2e526d1723a2e0033b",
+  "report_local": "outputs/prowl/kd-results-20261105-final-01/report.json",
+  "completed_native_steps": {
+    "control": [
+      2000,
+      4000,
+      6000,
+      8000,
+      10000,
+      12000,
+      14000,
+      16000,
+      18000,
+      20000,
+      22000,
+      24000
+    ],
+    "treatment": [
+      2000,
+      4000,
+      6000,
+      8000,
+      10000,
+      12000,
+      14000,
+      16000,
+      18000,
+      20000,
+      22000,
+      24000
+    ]
+  },
+  "endpoints": {
+    "selected": {
+      "control": {
+        "cases": 70,
+        "positive_cases": 36,
+        "negative_cases": 34,
+        "positive_macro_dice": 0.38359286803608716,
+        "positive_macro_recall": 0.5258174533568535,
+        "positive_macro_precision": 0.3940434336479232,
+        "detected": 34,
+        "complete_misses": 2,
+        "negative_alarms": 33,
+        "negative_predicted_mL": 54.76993559508731,
+        "total_false_negative_voxels": 88418,
+        "total_false_positive_voxels": 218512,
+        "pancreas_macro_dice": 0.7785677649591097,
+        "step": 20000,
+        "reference_components": 45,
+        "detected_components": 39
+      },
+      "treatment": {
+        "cases": 70,
+        "positive_cases": 36,
+        "negative_cases": 34,
+        "positive_macro_dice": 0.38908393879109476,
+        "positive_macro_recall": 0.5038007422504824,
+        "positive_macro_precision": 0.3909776837577965,
+        "detected": 33,
+        "complete_misses": 3,
+        "negative_alarms": 33,
+        "negative_predicted_mL": 57.57668698595751,
+        "total_false_negative_voxels": 92041,
+        "total_false_positive_voxels": 237880,
+        "pancreas_macro_dice": 0.7725157941684349,
+        "step": 20000,
+        "reference_components": 45,
+        "detected_components": 37
+      },
+      "lesion_dice_delta": 0.005491070755007599
+    },
+    "terminal": {
+      "control": {
+        "cases": 70,
+        "positive_cases": 36,
+        "negative_cases": 34,
+        "positive_macro_dice": 0.38196403663654416,
+        "positive_macro_recall": 0.5416924577939622,
+        "positive_macro_precision": 0.38160684281346013,
+        "detected": 34,
+        "complete_misses": 2,
+        "negative_alarms": 32,
+        "negative_predicted_mL": 61.44741041232488,
+        "total_false_negative_voxels": 85348,
+        "total_false_positive_voxels": 247141,
+        "pancreas_macro_dice": 0.7810244396412548,
+        "step": 24000,
+        "reference_components": 45,
+        "detected_components": 39
+      },
+      "treatment": {
+        "cases": 70,
+        "positive_cases": 36,
+        "negative_cases": 34,
+        "positive_macro_dice": 0.38343894306759496,
+        "positive_macro_recall": 0.5195397488192064,
+        "positive_macro_precision": 0.3742382127393395,
+        "detected": 34,
+        "complete_misses": 2,
+        "negative_alarms": 29,
+        "negative_predicted_mL": 60.60142842761508,
+        "total_false_negative_voxels": 88627,
+        "total_false_positive_voxels": 256479,
+        "pancreas_macro_dice": 0.779950508415413,
+        "step": 24000,
+        "reference_components": 45,
+        "detected_components": 37
+      },
+      "lesion_dice_delta": 0.0014749064310508042
+    }
+  },
+  "resources": {
+    "seconds": 30852.169588583987,
+    "peak_owned_rss_bytes": 6584041472,
+    "samples": 12138,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 111,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "checkpoint_sha256": {
+    "control": {
+      "best.pt": "07f010a01a938d759e8221bfbdfa957933f3b6a4e41a569365a0be92652269f8",
+      "step-020000.pt": "919ebd4c18e72aece8b47299b3a1ccc8a1f392be53e229d0921a04f74e6651ad",
+      "last.pt": "3d3f1ffd0b1454b54efa1646fe6aa0125feed71453ae8dd905d019435045d62f",
+      "step-024000.pt": "3d3f1ffd0b1454b54efa1646fe6aa0125feed71453ae8dd905d019435045d62f"
+    },
+    "treatment": {
+      "best.pt": "0ed609dbe991b80f5426a880ba99cac43f3e17bd8092edc852407bb821c4d839",
+      "step-020000.pt": "0ed609dbe991b80f5426a880ba99cac43f3e17bd8092edc852407bb821c4d839",
+      "last.pt": "04c673ea837ede50ada86aa2a7a9ce46031a939de5d0108caf04e9d831febdf0",
+      "step-024000.pt": "04c673ea837ede50ada86aa2a7a9ce46031a939de5d0108caf04e9d831febdf0"
+    }
+  },
+  "tracking": {
+    "control": {
+      "run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "status": "FAILED",
+      "terminal_loss": 0.9783065319061279,
+      "read_only": true
+    },
+    "treatment": {
+      "run_id": "1e356a71e4f74d5192a091fc40d3f6b8",
+      "status": "FINISHED",
+      "terminal_loss": 1.0617947578430176,
+      "read_only": true
+    }
+  },
+  "source_pins_verified": 152,
+  "historical_control_supervision_success": false,
+  "patient_independence": "unresolved",
+  "confidence_intervals": null,
+  "hypothesis_decision": null,
+  "practical_decision": null,
+  "cumulative_budget_charged_seconds": 240633,
+  "cumulative_budget_remaining_seconds": 104967,
+  "retained_treatment_attempt_supervised_seconds": 240629.96467391727,
+  "hourly_monitor": "PAUSED_AFTER_VERIFIED_COMPLETION",
+  "successor_trial_request_sha256": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+  "successor_permit_sha256": "b6b76fc7e1667a7b5c3c13e93796e6460105d0f3e8f0023b30e12f8a499f8aba"
+}

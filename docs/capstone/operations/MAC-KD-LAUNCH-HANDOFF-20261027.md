@@ -802,3 +802,18 @@ No teacher restart, concurrent model job, automatic retry or successor.
 Latest completed native evaluation remains20k: lesionDice0.389084, pancreas0.772516,
 positive cases33/36, empty alarms33/34. Full24k selected/terminal comparison and
 final cleanup/tracking verification remain pending. No interim acceptance claim.
+
+## November5 evening — KD complete and closed descriptively
+
+All24kupdates and12complete70-case native validations finished. Selected20klesion
+Dice0.3890839387910948; terminal24k0.38343894306759496. Complete report/backup/
+152producing-pin/series-tracking/process-absence/exclusive-MPS-release checks pass.
+Treatment MLflow1e356a71e4f74d5192a091fc40d3f6b8 FINISHED; supervised resources
+30852.169589seconds/6584041472BpeakRSS, exit0/reaped/no survivors or cleanup errors.
+Current supervisor/worker/guardian/caffeinate absent. Original cumulative charge
+240633seconds/345600;104967unused. Hourly KD monitor PAUSED.
+See MAC-KD-COMPLETION-20261105.md and adjacent JSON for exact evidence and limits.
+Control's historical FAILED cleanup status remains explicit; no practical/H0/CI
+or independent-patient acceptance. User separately authorized one larger-model
+Lenovo screen; exact one-shot request/permit in the completion report. No newMac
+training, teacher restart, retry or further successor.
