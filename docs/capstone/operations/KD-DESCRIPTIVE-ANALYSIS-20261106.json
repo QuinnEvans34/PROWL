@@ -1,0 +1,454 @@
+{
+  "schema": "prowl.kd.descriptive-review.20261106.v1",
+  "input_report_sha256": "2679c09ebefc2361cb81122ead80530c48fcbeb99b333d2e526d1723a2e0033b",
+  "scope": "teacher_assisted_exploratory_provided_pancreas_region",
+  "independent_patient_inference": "withheld; patient linkage unresolved",
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "mlflow_writes": 0,
+  "series": [
+    {
+      "step": 2000,
+      "control": 0.10818631321126683,
+      "treatment": 0.11875907841043522,
+      "delta": 0.010572765199168388,
+      "control_run_id": "30016b3403bd422e8b1f00309aff290f",
+      "treatment_run_id": "460be483579f4301834f1f0009eb717f"
+    },
+    {
+      "step": 4000,
+      "control": 0.24771328880359647,
+      "treatment": 0.25332777476494595,
+      "delta": 0.005614485961349475,
+      "control_run_id": "30016b3403bd422e8b1f00309aff290f",
+      "treatment_run_id": "460be483579f4301834f1f0009eb717f"
+    },
+    {
+      "step": 6000,
+      "control": 0.14600904743688337,
+      "treatment": 0.2593956750326352,
+      "delta": 0.11338662759575185,
+      "control_run_id": "30016b3403bd422e8b1f00309aff290f",
+      "treatment_run_id": "460be483579f4301834f1f0009eb717f"
+    },
+    {
+      "step": 8000,
+      "control": 0.22186023390875317,
+      "treatment": 0.2539030005998507,
+      "delta": 0.03204276669109754,
+      "control_run_id": "30016b3403bd422e8b1f00309aff290f",
+      "treatment_run_id": "436bb317362b44d8861edfa5c5dd5b8a"
+    },
+    {
+      "step": 10000,
+      "control": 0.2982896777813708,
+      "treatment": 0.23700062144658235,
+      "delta": -0.06128905633478843,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "436bb317362b44d8861edfa5c5dd5b8a"
+    },
+    {
+      "step": 12000,
+      "control": 0.2756280660007872,
+      "treatment": 0.3134113080336199,
+      "delta": 0.037783242032832676,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "436bb317362b44d8861edfa5c5dd5b8a"
+    },
+    {
+      "step": 14000,
+      "control": 0.2945519614304841,
+      "treatment": 0.3329389499193208,
+      "delta": 0.038386988488836704,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "436bb317362b44d8861edfa5c5dd5b8a"
+    },
+    {
+      "step": 16000,
+      "control": 0.3269729235556248,
+      "treatment": 0.29161877684979365,
+      "delta": -0.035354146705831146,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "a23104d649a24c7fb0b19e0e1b9ca09b"
+    },
+    {
+      "step": 18000,
+      "control": 0.3326517943019664,
+      "treatment": 0.35274917746041823,
+      "delta": 0.02009738315845183,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "a23104d649a24c7fb0b19e0e1b9ca09b"
+    },
+    {
+      "step": 20000,
+      "control": 0.38359286803608716,
+      "treatment": 0.3890839387910948,
+      "delta": 0.005491070755007654,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "a23104d649a24c7fb0b19e0e1b9ca09b"
+    },
+    {
+      "step": 22000,
+      "control": 0.36964011867879076,
+      "treatment": 0.36571865025772765,
+      "delta": -0.003921468421063112,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "1e356a71e4f74d5192a091fc40d3f6b8"
+    },
+    {
+      "step": 24000,
+      "control": 0.3819640366365441,
+      "treatment": 0.38343894306759496,
+      "delta": 0.0014749064310508597,
+      "control_run_id": "7d9b079674454cfcb44ef367704a53f7",
+      "treatment_run_id": "1e356a71e4f74d5192a091fc40d3f6b8"
+    }
+  ],
+  "endpoints": {
+    "selected": {
+      "summaries": {
+        "control": {
+          "cases": 70,
+          "positive_cases": 36,
+          "negative_cases": 34,
+          "positive_macro_dice": 0.38359286803608716,
+          "positive_macro_recall": 0.5258174533568535,
+          "positive_macro_precision": 0.3940434336479232,
+          "precision_defined_positive_cases": 36,
+          "detected": 34,
+          "complete_misses": 2,
+          "negative_alarms": 33,
+          "negative_predicted_voxels": 69182,
+          "negative_predicted_mL": 54.76993559508731,
+          "total_false_negative_voxels": 88418,
+          "total_false_positive_voxels": 218512,
+          "step": 20000,
+          "scope": "native_provided_pancreas_region_development",
+          "pancreas_macro_dice": 0.7785677649591097,
+          "pancreas_defined_cases": 70,
+          "negative_alerts_50mm3": 28,
+          "components_detected": 39,
+          "reference_components": 45,
+          "complete_miss_ids": [
+            "PanTS_00004681",
+            "PanTS_00008769"
+          ],
+          "cases_missing_more_than_half_annotation": 16,
+          "size_bands": {
+            "small": {
+              "cases": 5,
+              "positive_macro_dice": 0.16373341546790848,
+              "positive_macro_recall": 0.5020514477606028
+            },
+            "medium": {
+              "cases": 24,
+              "positive_macro_dice": 0.41810566149519657,
+              "positive_macro_recall": 0.5629520987385884
+            },
+            "large": {
+              "cases": 7,
+              "positive_macro_dice": 0.42230575658212566,
+              "positive_macro_recall": 0.4154743874739415
+            },
+            "empty": {
+              "cases": 34,
+              "positive_macro_dice": null,
+              "positive_macro_recall": null
+            }
+          }
+        },
+        "treatment": {
+          "cases": 70,
+          "positive_cases": 36,
+          "negative_cases": 34,
+          "positive_macro_dice": 0.38908393879109476,
+          "positive_macro_recall": 0.5038007422504824,
+          "positive_macro_precision": 0.3909776837577965,
+          "precision_defined_positive_cases": 36,
+          "detected": 33,
+          "complete_misses": 3,
+          "negative_alarms": 33,
+          "negative_predicted_voxels": 79984,
+          "negative_predicted_mL": 57.57668698595751,
+          "total_false_negative_voxels": 92041,
+          "total_false_positive_voxels": 237880,
+          "step": 20000,
+          "scope": "native_provided_pancreas_region_development",
+          "pancreas_macro_dice": 0.7725157941684349,
+          "pancreas_defined_cases": 70,
+          "negative_alerts_50mm3": 25,
+          "components_detected": 37,
+          "reference_components": 45,
+          "complete_miss_ids": [
+            "PanTS_00002935",
+            "PanTS_00004681",
+            "PanTS_00008769"
+          ],
+          "cases_missing_more_than_half_annotation": 19,
+          "size_bands": {
+            "small": {
+              "cases": 5,
+              "positive_macro_dice": 0.1887114921426833,
+              "positive_macro_recall": 0.4178889480267124
+            },
+            "medium": {
+              "cases": 24,
+              "positive_macro_dice": 0.42353153151984974,
+              "positive_macro_recall": 0.5455839441930448
+            },
+            "large": {
+              "cases": 7,
+              "positive_macro_dice": 0.41410108275565777,
+              "positive_macro_recall": 0.4219096171786756
+            },
+            "empty": {
+              "cases": 34,
+              "positive_macro_dice": null,
+              "positive_macro_recall": null
+            }
+          }
+        }
+      },
+      "positive_macro_dice_delta": 0.0054910707550076985,
+      "better": 16,
+      "worse": 18,
+      "unchanged": 2,
+      "largest_gains": [
+        {
+          "case_id": "PanTS_00005780",
+          "control": 0.22588271181270494,
+          "treatment": 0.5883217040029379,
+          "dice_delta": 0.362438992190233
+        },
+        {
+          "case_id": "PanTS_00001823",
+          "control": 0.3020833333333333,
+          "treatment": 0.5855670103092784,
+          "dice_delta": 0.28348367697594506
+        },
+        {
+          "case_id": "PanTS_00003130",
+          "control": 0.31137197358767427,
+          "treatment": 0.5038437303087586,
+          "dice_delta": 0.19247175672108435
+        },
+        {
+          "case_id": "PanTS_00002028",
+          "control": 0.30925382602489887,
+          "treatment": 0.48713885163964404,
+          "dice_delta": 0.17788502561474517
+        },
+        {
+          "case_id": "PanTS_00002495",
+          "control": 0.5132549877015578,
+          "treatment": 0.6441929133858267,
+          "dice_delta": 0.13093792568426899
+        }
+      ],
+      "largest_declines": [
+        {
+          "case_id": "PanTS_00006903",
+          "control": 0.4882808466701084,
+          "treatment": 0.1055072463768116,
+          "dice_delta": -0.3827736002932968
+        },
+        {
+          "case_id": "PanTS_00006011",
+          "control": 0.4058988764044944,
+          "treatment": 0.23529411764705882,
+          "dice_delta": -0.17060475875743558
+        },
+        {
+          "case_id": "PanTS_00002935",
+          "control": 0.14706713115525846,
+          "treatment": 0.0,
+          "dice_delta": -0.14706713115525846
+        },
+        {
+          "case_id": "PanTS_00002435",
+          "control": 0.26209150326797387,
+          "treatment": 0.14815232404092793,
+          "dice_delta": -0.11393917922704594
+        },
+        {
+          "case_id": "PanTS_00007636",
+          "control": 0.7337557094445263,
+          "treatment": 0.6296470588235294,
+          "dice_delta": -0.10410865062099683
+        }
+      ]
+    },
+    "terminal": {
+      "summaries": {
+        "control": {
+          "cases": 70,
+          "positive_cases": 36,
+          "negative_cases": 34,
+          "positive_macro_dice": 0.38196403663654416,
+          "positive_macro_recall": 0.5416924577939622,
+          "positive_macro_precision": 0.38160684281346013,
+          "precision_defined_positive_cases": 36,
+          "detected": 34,
+          "complete_misses": 2,
+          "negative_alarms": 32,
+          "negative_predicted_voxels": 77572,
+          "negative_predicted_mL": 61.44741041232488,
+          "total_false_negative_voxels": 85348,
+          "total_false_positive_voxels": 247141,
+          "step": 24000,
+          "scope": "native_provided_pancreas_region_development",
+          "pancreas_macro_dice": 0.7810244396412548,
+          "pancreas_defined_cases": 70,
+          "negative_alerts_50mm3": 27,
+          "components_detected": 39,
+          "reference_components": 45,
+          "complete_miss_ids": [
+            "PanTS_00004681",
+            "PanTS_00008769"
+          ],
+          "cases_missing_more_than_half_annotation": 14,
+          "size_bands": {
+            "small": {
+              "cases": 5,
+              "positive_macro_dice": 0.13947154965863884,
+              "positive_macro_recall": 0.5423824166667423
+            },
+            "medium": {
+              "cases": 24,
+              "positive_macro_dice": 0.41335828223190196,
+              "positive_macro_recall": 0.563083871839703
+            },
+            "large": {
+              "cases": 7,
+              "positive_macro_dice": 0.4475355424366779,
+              "positive_macro_recall": 0.4678576390137222
+            },
+            "empty": {
+              "cases": 34,
+              "positive_macro_dice": null,
+              "positive_macro_recall": null
+            }
+          }
+        },
+        "treatment": {
+          "cases": 70,
+          "positive_cases": 36,
+          "negative_cases": 34,
+          "positive_macro_dice": 0.38343894306759496,
+          "positive_macro_recall": 0.5195397488192064,
+          "positive_macro_precision": 0.3742382127393395,
+          "precision_defined_positive_cases": 36,
+          "detected": 34,
+          "complete_misses": 2,
+          "negative_alarms": 29,
+          "negative_predicted_voxels": 82970,
+          "negative_predicted_mL": 60.60142842761508,
+          "total_false_negative_voxels": 88627,
+          "total_false_positive_voxels": 256479,
+          "step": 24000,
+          "scope": "native_provided_pancreas_region_development",
+          "pancreas_macro_dice": 0.779950508415413,
+          "pancreas_defined_cases": 70,
+          "negative_alerts_50mm3": 25,
+          "components_detected": 37,
+          "reference_components": 45,
+          "complete_miss_ids": [
+            "PanTS_00004681",
+            "PanTS_00008769"
+          ],
+          "cases_missing_more_than_half_annotation": 17,
+          "size_bands": {
+            "small": {
+              "cases": 5,
+              "positive_macro_dice": 0.1625601222744873,
+              "positive_macro_recall": 0.44766730324219867
+            },
+            "medium": {
+              "cases": 24,
+              "positive_macro_dice": 0.408269832533672,
+              "positive_macro_recall": 0.5439131992389206
+            },
+            "large": {
+              "cases": 7,
+              "positive_macro_dice": 0.45607505117897945,
+              "positive_macro_recall": 0.48731109422090657
+            },
+            "empty": {
+              "cases": 34,
+              "positive_macro_dice": null,
+              "positive_macro_recall": null
+            }
+          }
+        }
+      },
+      "positive_macro_dice_delta": 0.0014749064310508927,
+      "better": 16,
+      "worse": 18,
+      "unchanged": 2,
+      "largest_gains": [
+        {
+          "case_id": "PanTS_00001823",
+          "control": 0.14737883283877348,
+          "treatment": 0.4778481012658228,
+          "dice_delta": 0.33046926842704927
+        },
+        {
+          "case_id": "PanTS_00005780",
+          "control": 0.18168121037102142,
+          "treatment": 0.4383176255450837,
+          "dice_delta": 0.25663641517406227
+        },
+        {
+          "case_id": "PanTS_00003130",
+          "control": 0.3879867797097284,
+          "treatment": 0.5612733365246529,
+          "dice_delta": 0.17328655681492455
+        },
+        {
+          "case_id": "PanTS_00002495",
+          "control": 0.5664,
+          "treatment": 0.7368883037085802,
+          "dice_delta": 0.17048830370858015
+        },
+        {
+          "case_id": "PanTS_00008434",
+          "control": 0.48746081504702193,
+          "treatment": 0.5557476231633535,
+          "dice_delta": 0.06828680811633153
+        }
+      ],
+      "largest_declines": [
+        {
+          "case_id": "PanTS_00006903",
+          "control": 0.3641156602685559,
+          "treatment": 0.06498750240338397,
+          "dice_delta": -0.29912815786517194
+        },
+        {
+          "case_id": "PanTS_00007868",
+          "control": 0.2879286049788633,
+          "treatment": 0.10220214568040654,
+          "dice_delta": -0.18572645929845677
+        },
+        {
+          "case_id": "PanTS_00006011",
+          "control": 0.23647604327666152,
+          "treatment": 0.08617234468937876,
+          "dice_delta": -0.15030369858728276
+        },
+        {
+          "case_id": "PanTS_00002269",
+          "control": 0.7125862068965517,
+          "treatment": 0.6106513228764352,
+          "dice_delta": -0.10193488402011652
+        },
+        {
+          "case_id": "PanTS_00007636",
+          "control": 0.7143973737689542,
+          "treatment": 0.6245353159851301,
+          "dice_delta": -0.08986205778382406
+        }
+      ]
+    }
+  }
+}
