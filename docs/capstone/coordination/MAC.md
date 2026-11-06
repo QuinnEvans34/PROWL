@@ -1,15 +1,22 @@
 # Mac work status
 
-- Observed at: 2026-11-06 03:05 UTC (November5 evening locally).
+- Observed at: 2026-11-06 03:23 UTC (November5 evening locally).
 - Owner / branch: Mac chat, `main`.
-- Delivered adapter/tests: `2af98f7`; the enclosing commit publishes the matched
-  error-review packet and this status. Previous recovery: `af0e442`.
-- Peer read: fetched Lenovo `467e19124d1a749bbe5f60e20d6e4e16224b950e` and read
-  its two-case provenance report/JSON and LENOVO.md. JSON hash and both cases'
-  source/native geometry agree with the imported visual packet. No source merge.
+- Delivered latest engineering: `388524d`/`716d2f8`; KD evidence/permit `93899ef`.
+  The enclosing commit publishes the larger-model result review.
+- Peer read: Lenovo `f7ece22e948563e7b737d54f5d7985d5f6e89008`, result/closeout,
+  readiness/launch records and producing code through5ebc49f. No source merge.
 
 ## Delivered Week 5 work
 
+- **Larger-model screen COMPLETE:** [Mac review](../operations/UNIVERSAL-SWIN-MAC-REVIEW-20261105.md),
+  four positive cases mean lesionDice0.710754 vs prior autonomous same-four0.459987;
+  three improved/one worsened. No fine-tuning, negative specificity, independent
+  acceptance or causal architecture claim. Pretraining overlap remains unknown.
+  Lenovo checked5442pins/45backup pairs/tenreapedstages/FINISHEDtracking/GPUrelease.
+  Mac checked12local source hashes, prior scores, reference counts and arithmetic.
+  Private prediction copy pending reconnection after remote became unavailable;
+  originals/independent backups and quantitative Git report are preserved.
 - **KD COMPLETE:** [closeout](../operations/MAC-KD-COMPLETION-20261105.md), all24k/
   12native70-case validations, selected20k0.389084/terminal24k0.383439. Final
   backups/152pins/all24stored native metrics/processabsence/GPUrelease verified;
@@ -62,7 +69,10 @@
   [reviewer follow-up](../operations/WEEK-05-REVIEW-FOLLOWUP-20261103.md) and
   [training accounting](../operations/COMBINED-TRAINING-HOURS-20261103.md).
 
-## Active Mac KD treatment — resumed November5
+## Completed Mac KD treatment — retained November5 launch snapshot
+
+The following launch observations are historical; the completed closeout above
+supersedes their running/pending wording.
 
 - Root: `/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/mac-kd-treatment-resume-20261105-01`.
 - Ready SHA256: `38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049`.
@@ -96,10 +106,9 @@ independence remains unresolved. No scan/mask/new-header reads or duplicate audi
 Peer report SHA996be9c75ecc8c0dd0574d211cda8f2cd9ce0216774a95d5eba74b0f56b6bb15.
 Do not call case-level bootstrap intervals verified independent-patient uncertainty.
 
-Keep KD running unchanged. After full24k/12native validations, verify selected and
-terminal endpoints, backups, actual cleanup/tracking and justified resampling unit
-before a final comparison. Aggregate counts do not locate remote/near-pancreas FP
-or attached spillover; those require separately bound same-scope visual evidence.
-No filter/verifier/crop/threshold experiment was started. Lenovo is idle after its
-provenance publication. Full G3/reviewer acceptance and aunt stakeholder feedback
-remain open; the walkthrough is tentatively SaturdayNovember7.
+KD is complete; do not restart it. Review its full selected/terminal evidence and
+the four-case larger-model screen tomorrow. Patient independence remains unresolved,
+and aggregate counts do not establish spatial false-positive causes. No further
+filter/verifier/crop/threshold or training experiment was started. Both model runs
+are closed; private prediction delivery awaits reconnection. Full G3/reviewer
+acceptance and aunt feedback remain open; walkthrough tentatively SaturdayNovember7.

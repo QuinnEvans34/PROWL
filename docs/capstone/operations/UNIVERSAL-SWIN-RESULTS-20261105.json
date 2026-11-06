@@ -1,0 +1,597 @@
+{
+  "status": "CLOSED_DESCRIPTIVE_ONLY",
+  "request_sha256": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+  "completion_sha256": "5518ef891775577ba1f57129d6072de456e8a9255b19d1bd725fa76684806977",
+  "summary_sha256": "b032e01c082e2beeba0f3eb5988bbc881c2f1408b7feb0bf50b9a5be5e476dd6",
+  "positive_lesion_macro_dice": 0.7107542107832341,
+  "cases": [
+    {
+      "case_id": "PanTS_00002028",
+      "source_sha256": {
+        "ct": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+        "lesion": "523736974b7ebd80f666900da05db39c2d3189e99a3995a447b3a2d9baa34862",
+        "pancreas": "3f15b75f467523d531e06fd6d22f3343e1079d4ce8f4c45086f0ef64089413d3"
+      },
+      "metrics": {
+        "pancreas_parenchyma": {
+          "reference_voxels": 26351,
+          "predicted_voxels": 26850,
+          "true_positive": 23697,
+          "dice": 0.890847916392549,
+          "recall": 0.8992827596675648,
+          "false_positive_ml": 7.517330457923864,
+          "precision": 0.8825698324022346
+        },
+        "pancreas_lesion_union": {
+          "reference_voxels": 28563,
+          "predicted_voxels": 28993,
+          "true_positive": 26253,
+          "dice": 0.9122593647925499,
+          "recall": 0.9191261422119525,
+          "false_positive_ml": 6.532662687824734,
+          "precision": 0.9054944296899251
+        },
+        "lesion": {
+          "reference_voxels": 2212,
+          "predicted_voxels": 2143,
+          "true_positive": 1799,
+          "dice": 0.8261768082663605,
+          "recall": 0.8132911392405063,
+          "false_positive_ml": 0.8201591111721565,
+          "precision": 0.8394773681754549
+        }
+      },
+      "components": {
+        "reference": [
+          {
+            "component_id": 1,
+            "voxels": 2212,
+            "volume_ml": 5.2738138195139825,
+            "overlap_voxels": 1799,
+            "any_overlap": true,
+            "overlap_fraction": 0.8132911392405063,
+            "bounds_xyz_half_open": [
+              [
+                141,
+                165
+              ],
+              [
+                136,
+                159
+              ],
+              [
+                49,
+                58
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "predicted": [
+          {
+            "component_id": 1,
+            "voxels": 2143,
+            "volume_ml": 5.1093051605870095,
+            "overlap_voxels": 1799,
+            "any_overlap": true,
+            "overlap_fraction": 0.8394773681754549,
+            "bounds_xyz_half_open": [
+              [
+                139,
+                164
+              ],
+              [
+                138,
+                156
+              ],
+              [
+                49,
+                58
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "connectivity": 26,
+        "detection_definition": "any shared voxel, descriptive; not IoU threshold or clinical detection",
+        "reference_count": 1,
+        "reference_hit_count": 1,
+        "false_positive_components": 0
+      },
+      "prior_autonomous_lesion_dice": 0.4648396501457726,
+      "prior_comparison_scope": "same case/source references, different model/pretraining/preprocessing/assistance; not architecture-only or independent acceptance"
+    },
+    {
+      "case_id": "PanTS_00001347",
+      "source_sha256": {
+        "ct": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+        "lesion": "b7a25e62854024305ad32429817b302db479f30d730c5c1f2afb5a292f48d492",
+        "pancreas": "e2317f69aad902d4acf62e7612ea77e8ddcd7287a15a6e960c23267e90ca8c33"
+      },
+      "metrics": {
+        "pancreas_parenchyma": {
+          "reference_voxels": 54975,
+          "predicted_voxels": 46347,
+          "true_positive": 40397,
+          "dice": 0.7973983932413493,
+          "recall": 0.734824920418372,
+          "false_positive_ml": 10.009563253264531,
+          "precision": 0.8716206011176559
+        },
+        "pancreas_lesion_union": {
+          "reference_voxels": 57708,
+          "predicted_voxels": 49179,
+          "true_positive": 44846,
+          "dice": 0.8391291738003687,
+          "recall": 0.7771192902197269,
+          "false_positive_ml": 7.289317239730288,
+          "precision": 0.9118932877854369
+        },
+        "lesion": {
+          "reference_voxels": 2733,
+          "predicted_voxels": 2832,
+          "true_positive": 1081,
+          "dice": 0.3884995507637017,
+          "recall": 0.3955360409806074,
+          "false_positive_ml": 2.9456714716749905,
+          "precision": 0.3817090395480226
+        }
+      },
+      "components": {
+        "reference": [
+          {
+            "component_id": 1,
+            "voxels": 2733,
+            "volume_ml": 4.597669978348229,
+            "overlap_voxels": 1081,
+            "any_overlap": true,
+            "overlap_fraction": 0.3955360409806074,
+            "bounds_xyz_half_open": [
+              [
+                211,
+                258
+              ],
+              [
+                213,
+                232
+              ],
+              [
+                35,
+                44
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "predicted": [
+          {
+            "component_id": 1,
+            "voxels": 1374,
+            "volume_ml": 2.311452085711843,
+            "overlap_voxels": 0,
+            "any_overlap": false,
+            "overlap_fraction": 0.0,
+            "bounds_xyz_half_open": [
+              [
+                131,
+                157
+              ],
+              [
+                172,
+                195
+              ],
+              [
+                45,
+                50
+              ]
+            ],
+            "acquired_boundary_contact": false
+          },
+          {
+            "component_id": 2,
+            "voxels": 5,
+            "volume_ml": 0.008411397691818933,
+            "overlap_voxels": 0,
+            "any_overlap": false,
+            "overlap_fraction": 0.0,
+            "bounds_xyz_half_open": [
+              [
+                154,
+                156
+              ],
+              [
+                212,
+                215
+              ],
+              [
+                47,
+                48
+              ]
+            ],
+            "acquired_boundary_contact": false
+          },
+          {
+            "component_id": 3,
+            "voxels": 1316,
+            "volume_ml": 2.2138798724867432,
+            "overlap_voxels": 1012,
+            "any_overlap": true,
+            "overlap_fraction": 0.7689969604863222,
+            "bounds_xyz_half_open": [
+              [
+                210,
+                239
+              ],
+              [
+                210,
+                233
+              ],
+              [
+                35,
+                40
+              ]
+            ],
+            "acquired_boundary_contact": false
+          },
+          {
+            "component_id": 4,
+            "voxels": 68,
+            "volume_ml": 0.1143950086087375,
+            "overlap_voxels": 0,
+            "any_overlap": false,
+            "overlap_fraction": 0.0,
+            "bounds_xyz_half_open": [
+              [
+                241,
+                256
+              ],
+              [
+                219,
+                225
+              ],
+              [
+                33,
+                34
+              ]
+            ],
+            "acquired_boundary_contact": false
+          },
+          {
+            "component_id": 5,
+            "voxels": 69,
+            "volume_ml": 0.11607728814710129,
+            "overlap_voxels": 69,
+            "any_overlap": true,
+            "overlap_fraction": 1.0,
+            "bounds_xyz_half_open": [
+              [
+                246,
+                255
+              ],
+              [
+                219,
+                227
+              ],
+              [
+                39,
+                42
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "connectivity": 26,
+        "detection_definition": "any shared voxel, descriptive; not IoU threshold or clinical detection",
+        "reference_count": 1,
+        "reference_hit_count": 1,
+        "false_positive_components": 3
+      },
+      "prior_autonomous_lesion_dice": 0.4761450381679389,
+      "prior_comparison_scope": "same case/source references, different model/pretraining/preprocessing/assistance; not architecture-only or independent acceptance"
+    },
+    {
+      "case_id": "PanTS_00002514",
+      "source_sha256": {
+        "ct": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+        "lesion": "983c3730cff63c5f8f2250e8cde3865abc7da8618bbfbe0d4f3d7b4a02d05d81",
+        "pancreas": "b996011ed113f1c47737b73ce91fd33636e27a326ea28e1af4670229ceacaebf"
+      },
+      "metrics": {
+        "pancreas_parenchyma": {
+          "reference_voxels": 43993,
+          "predicted_voxels": 39326,
+          "true_positive": 37022,
+          "dice": 0.8886808531067344,
+          "recall": 0.841542972745664,
+          "false_positive_ml": 4.915919141471468,
+          "precision": 0.9414128057773483
+        },
+        "pancreas_lesion_union": {
+          "reference_voxels": 45873,
+          "predicted_voxels": 41794,
+          "true_positive": 39706,
+          "dice": 0.9058368599358938,
+          "recall": 0.8655636213022911,
+          "false_positive_ml": 4.455051721958518,
+          "precision": 0.9500406756950759
+        },
+        "lesion": {
+          "reference_voxels": 1880,
+          "predicted_voxels": 2468,
+          "true_positive": 1663,
+          "dice": 0.764949402023919,
+          "recall": 0.8845744680851064,
+          "false_positive_ml": 1.7175845958700224,
+          "precision": 0.6738249594813615
+        }
+      },
+      "components": {
+        "reference": [
+          {
+            "component_id": 1,
+            "voxels": 1880,
+            "volume_ml": 4.011253466131232,
+            "overlap_voxels": 1663,
+            "any_overlap": true,
+            "overlap_fraction": 0.8845744680851064,
+            "bounds_xyz_half_open": [
+              [
+                205,
+                230
+              ],
+              [
+                166,
+                193
+              ],
+              [
+                31,
+                36
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "predicted": [
+          {
+            "component_id": 1,
+            "voxels": 144,
+            "volume_ml": 0.30724494634196675,
+            "overlap_voxels": 0,
+            "any_overlap": false,
+            "overlap_fraction": 0.0,
+            "bounds_xyz_half_open": [
+              [
+                176,
+                188
+              ],
+              [
+                189,
+                197
+              ],
+              [
+                37,
+                40
+              ]
+            ],
+            "acquired_boundary_contact": false
+          },
+          {
+            "component_id": 2,
+            "voxels": 2324,
+            "volume_ml": 4.958592050685629,
+            "overlap_voxels": 1663,
+            "any_overlap": true,
+            "overlap_fraction": 0.7155765920826161,
+            "bounds_xyz_half_open": [
+              [
+                201,
+                233
+              ],
+              [
+                164,
+                191
+              ],
+              [
+                31,
+                38
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "connectivity": 26,
+        "detection_definition": "any shared voxel, descriptive; not IoU threshold or clinical detection",
+        "reference_count": 1,
+        "reference_hit_count": 1,
+        "false_positive_components": 1
+      },
+      "prior_autonomous_lesion_dice": 0.08350485151426051,
+      "prior_comparison_scope": "same case/source references, different model/pretraining/preprocessing/assistance; not architecture-only or independent acceptance"
+    },
+    {
+      "case_id": "PanTS_00008743",
+      "source_sha256": {
+        "ct": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+        "lesion": "563d80bcd57cceab1cccd4e629c1889cb29f52cf65e2932e9bd94fa6dffbfd82",
+        "pancreas": "38e6f82611cd2ec764385bd582d32f13cf15e75ec7d77ebb49561de0f56bbe35"
+      },
+      "metrics": {
+        "pancreas_parenchyma": {
+          "reference_voxels": 34905,
+          "predicted_voxels": 35508,
+          "true_positive": 32207,
+          "dice": 0.9148026642807436,
+          "recall": 0.9227044835983383,
+          "false_positive_ml": 4.936697523875176,
+          "precision": 0.9070350343584545
+        },
+        "pancreas_lesion_union": {
+          "reference_voxels": 38489,
+          "predicted_voxels": 38966,
+          "true_positive": 36055,
+          "dice": 0.9309921890129753,
+          "recall": 0.9367611525370885,
+          "false_positive_ml": 4.353446377461568,
+          "precision": 0.9252938459169533
+        },
+        "lesion": {
+          "reference_voxels": 3584,
+          "predicted_voxels": 3458,
+          "true_positive": 3040,
+          "dice": 0.8633910820789549,
+          "recall": 0.8482142857142857,
+          "false_positive_ml": 0.6251255876945845,
+          "precision": 0.8791208791208791
+        }
+      },
+      "components": {
+        "reference": [
+          {
+            "component_id": 1,
+            "voxels": 3584,
+            "volume_ml": 5.359928483965049,
+            "overlap_voxels": 3040,
+            "any_overlap": true,
+            "overlap_fraction": 0.8482142857142857,
+            "bounds_xyz_half_open": [
+              [
+                168,
+                194
+              ],
+              [
+                157,
+                191
+              ],
+              [
+                37,
+                45
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "predicted": [
+          {
+            "component_id": 1,
+            "voxels": 3458,
+            "volume_ml": 5.171493498200654,
+            "overlap_voxels": 3040,
+            "any_overlap": true,
+            "overlap_fraction": 0.8791208791208791,
+            "bounds_xyz_half_open": [
+              [
+                166,
+                198
+              ],
+              [
+                158,
+                189
+              ],
+              [
+                36,
+                45
+              ]
+            ],
+            "acquired_boundary_contact": false
+          }
+        ],
+        "connectivity": 26,
+        "detection_definition": "any shared voxel, descriptive; not IoU threshold or clinical detection",
+        "reference_count": 1,
+        "reference_hit_count": 1,
+        "false_positive_components": 0
+      },
+      "prior_autonomous_lesion_dice": 0.8154583582983823,
+      "prior_comparison_scope": "same case/source references, different model/pretraining/preprocessing/assistance; not architecture-only or independent acceptance"
+    }
+  ],
+  "elapsed_evaluation_seconds": 365.0320000000065,
+  "charged_preparation_seconds": 3600,
+  "optimizer_updates": 0,
+  "training_admission": "NOT_ADMITTED",
+  "empty_alarm_rate": "NOT_MEASURED",
+  "hypothesis_verdict": "NOT_TESTED",
+  "limitations": [
+    "four exposed-development positive cases only",
+    "external pretraining membership unknown",
+    "no independent-patient inference",
+    "native preprocessing differs from upstream original implementation",
+    "not comparable to full70 or published benchmarks"
+  ],
+  "checks": {
+    "full_producing_pins": 5442,
+    "matching_independent_files": 45,
+    "matching_independent_bytes": 762045416,
+    "all_stage_workers_exit0_reaped": 10,
+    "supervisor_exit_code": 0,
+    "owned_processes": [],
+    "gpu_compute_owners": [],
+    "volume_identities": [
+      {
+        "DriveLetter": "E",
+        "UniqueId": "\\\\?\\Volume{424d39a3-ac76-4f41-aa1c-8b9f5ce0b829}\\",
+        "FileSystem": "exFAT",
+        "SizeRemaining": 345558614016
+      },
+      {
+        "DriveLetter": "C",
+        "UniqueId": "\\\\?\\Volume{9ed7859f-4768-4f11-9788-792a793f0ee4}\\",
+        "FileSystem": "NTFS",
+        "SizeRemaining": 158774919168
+      }
+    ],
+    "mlflow_run_id": "051c194b2e54428aba6b9420129e18b6",
+    "mlflow_status": "FINISHED",
+    "stored_four_case_dice_verified": true,
+    "stored_mean_dice_verified": true
+  },
+  "peak_worker_rss_bytes": 2006016000,
+  "input_backup_hashes": {
+    "request.json": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+    "permit.json": "b6b76fc7e1667a7b5c3c13e93796e6460105d0f3e8f0023b30e12f8a499f8aba",
+    "mlflow.json": "c418e95bba11fed9c536b0f2bc96fcf8f1de005950456c14c6a9097e0c23b260",
+    "initial.pth": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+    "journal.jsonl": "71dcef32cc12ce6693c3487f4defb22856b62cccd6fa49a29323c96538b755d3",
+    "summary.json": "b032e01c082e2beeba0f3eb5988bbc881c2f1408b7feb0bf50b9a5be5e476dd6",
+    "completion.json": "5518ef891775577ba1f57129d6072de456e8a9255b19d1bd725fa76684806977",
+    "pilot\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pilot\\result.json": "7262aed7d5e6891477ed53d1d444ab02cb6b2c9aa91b40615d8bd63c7862fa93",
+    "pilot\\resources.json": "6ea25a902c6acc91633009bf45ff6afd44132c1a0825bc828514fcd13c868515",
+    "restore\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "restore\\result.json": "462b0960507f3f1d8666ecc59e93cdd8d22d84c56db08d1cfd5999b7a1f68a1a",
+    "restore\\resources.json": "af525829fba47f082116da582c22bef68dbf19d86a6f79437d4fb2d42b5065e4",
+    "infer-PanTS_00002028\\worker.log": "e8150e297adce17728623bdf0e833ec5c2f9193fe793e2bea1bbcbace05e5d9a",
+    "infer-PanTS_00002028\\result.json": "22193a62e7787a85036d73369a754817856d9b7db14199f069e9dc319e48b6b2",
+    "infer-PanTS_00002028\\resources.json": "49b047d1f122ea5cc8b357e2d2e073458d115a960d0ac8ed248f9b867a9190fd",
+    "score-PanTS_00002028\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "score-PanTS_00002028\\result.json": "a4578be94c7ee0a430ce9f3fc2cf9c0eb917d45c9fb054aa908d5a1d99ed0ce9",
+    "score-PanTS_00002028\\resources.json": "c1ab5367a7a0d960f5d69a7b71d8573a63dc7276e68ed7bbdbfa5f2808b9eed5",
+    "infer-PanTS_00001347\\worker.log": "e8150e297adce17728623bdf0e833ec5c2f9193fe793e2bea1bbcbace05e5d9a",
+    "infer-PanTS_00001347\\result.json": "1c6d6b055515f2919c00f467176092102c7b90659ce6967ff4f0c3ed8386ee7d",
+    "infer-PanTS_00001347\\resources.json": "9baf648e504df10f32ea4dc39771b21a41735293ebbdf4ee5bd9af91c4b8cc22",
+    "score-PanTS_00001347\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "score-PanTS_00001347\\result.json": "96fcded41941b3635b4c42c83d223176f56442f242db8dc14b90d9f486c1f1a4",
+    "score-PanTS_00001347\\resources.json": "5d748674c74c982899b5d3576fa319d5352d5ed6f86036c244a9aed8eda18b02",
+    "infer-PanTS_00002514\\worker.log": "e8150e297adce17728623bdf0e833ec5c2f9193fe793e2bea1bbcbace05e5d9a",
+    "infer-PanTS_00002514\\result.json": "8ca6361db23f595e55ccd128142efaad3d5aaab61e9545fb8000e739350b8245",
+    "infer-PanTS_00002514\\resources.json": "252523cf9f893e717d445e12a9428aff47b6fbd76a48148b042bdf81feeee39c",
+    "score-PanTS_00002514\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "score-PanTS_00002514\\result.json": "a1826effe9155ef51772023422acc5ba004aa2381cc0a1ab0cdebd84cadbaa42",
+    "score-PanTS_00002514\\resources.json": "f760c3098a1693c58e66036b516ca230fbe8dab82687b9b2028e3793faf9a4e0",
+    "infer-PanTS_00008743\\worker.log": "e8150e297adce17728623bdf0e833ec5c2f9193fe793e2bea1bbcbace05e5d9a",
+    "infer-PanTS_00008743\\result.json": "483d75ec74a83e9bf2ce0031b3d371943229f6275767fc305719a5fb9d5b877c",
+    "infer-PanTS_00008743\\resources.json": "701cd91abde25fb28755a9611bfb386b51d8bb72e666035d0408045e48fbd550",
+    "score-PanTS_00008743\\worker.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "score-PanTS_00008743\\result.json": "991020330222d657794b5323af4f9197d948e568993d62d61e3304c6163b2a29",
+    "score-PanTS_00008743\\resources.json": "c6b2fbbf206cce0dd405664ba163b55517c814a608787278d3b06a1c8fcbb1d0",
+    "infer-PanTS_00002028\\prediction\\prediction.nii.gz": "31552c8f67aa6a0b3ff0f167325d2ef9604b4ca8709ca28cac07fe8b0e4469c3",
+    "infer-PanTS_00002028\\prediction\\raw_pancreas.nii.gz": "85a72abb196b54a4a2b275f484e5c7687b744ca5f5397cd7d04777864a752e8a",
+    "infer-PanTS_00001347\\prediction\\prediction.nii.gz": "2920ba8a5672cbdd1886e3a13caf14fdd9e1a629460fd5ce07f23e4f865fde1c",
+    "infer-PanTS_00001347\\prediction\\raw_pancreas.nii.gz": "72dff05e576dab5bd588630ed7131dd7bbd85a486c0e0cb455e329d5d6f5bede",
+    "infer-PanTS_00002514\\prediction\\prediction.nii.gz": "3b99f743dc9fe9f007775a138a6dd6a776d0cdf0312d7955e3b4dfa3fe1c9b77",
+    "infer-PanTS_00002514\\prediction\\raw_pancreas.nii.gz": "e5eea88deaed5e59f6a837f17293a3032dfad31c3500eb16e9c58081e6ef0831",
+    "infer-PanTS_00008743\\prediction\\prediction.nii.gz": "1ffe2a9873c068261197761bcda412af8d09a3a1fb3013042684583edaa6b1f0",
+    "infer-PanTS_00008743\\prediction\\raw_pancreas.nii.gz": "74ef1a405d9ca7d094bd4cc532e7c9dd2f7a8afe28bb12df78cbdaae253676d7"
+  },
+  "operator_verification_seconds": 24.81299999996554
+}

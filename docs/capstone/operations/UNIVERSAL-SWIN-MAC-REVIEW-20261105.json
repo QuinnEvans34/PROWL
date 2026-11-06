@@ -1,0 +1,73 @@
+{
+  "schema": "prowl.universal-swin.mac-metadata-review.v1",
+  "observed_utc": "2026-11-06T03:23:22.799072+00:00",
+  "peer_revision": "f7ece22e948563e7b737d54f5d7985d5f6e89008",
+  "peer_result_sha256": "c88f1adeb0bad1d8103d4838f6ff2c5b24886b9649f28ca27810cc909cb2b253",
+  "local_source_hashes_verified": 12,
+  "local_metric_arithmetic_verified": true,
+  "local_prior_autonomous_scores_verified": true,
+  "local_kd_reference_voxel_counts_verified": true,
+  "cases": [
+    {
+      "case_id": "PanTS_00002028",
+      "universal_dice": 0.8261768082663605,
+      "prior_autonomous_dice": 0.4648396501457726,
+      "selected_kd_supplied_region_dice": 0.48713885163964404,
+      "reference_voxels": 2212
+    },
+    {
+      "case_id": "PanTS_00001347",
+      "universal_dice": 0.3884995507637017,
+      "prior_autonomous_dice": 0.4761450381679389,
+      "selected_kd_supplied_region_dice": 0.43729903536977494,
+      "reference_voxels": 2733
+    },
+    {
+      "case_id": "PanTS_00002514",
+      "universal_dice": 0.764949402023919,
+      "prior_autonomous_dice": 0.08350485151426051,
+      "selected_kd_supplied_region_dice": 0.03040103492884864,
+      "reference_voxels": 1880
+    },
+    {
+      "case_id": "PanTS_00008743",
+      "universal_dice": 0.8633910820789549,
+      "prior_autonomous_dice": 0.8154583582983823,
+      "selected_kd_supplied_region_dice": 0.8181695281871029,
+      "reference_voxels": 3584
+    }
+  ],
+  "remote_closeout": {
+    "full_producing_pins": 5442,
+    "matching_independent_files": 45,
+    "matching_independent_bytes": 762045416,
+    "all_stage_workers_exit0_reaped": 10,
+    "supervisor_exit_code": 0,
+    "owned_processes": [],
+    "gpu_compute_owners": [],
+    "volume_identities": [
+      {
+        "DriveLetter": "E",
+        "UniqueId": "\\\\?\\Volume{424d39a3-ac76-4f41-aa1c-8b9f5ce0b829}\\",
+        "FileSystem": "exFAT",
+        "SizeRemaining": 345558614016
+      },
+      {
+        "DriveLetter": "C",
+        "UniqueId": "\\\\?\\Volume{9ed7859f-4768-4f11-9788-792a793f0ee4}\\",
+        "FileSystem": "NTFS",
+        "SizeRemaining": 158774919168
+      }
+    ],
+    "mlflow_run_id": "051c194b2e54428aba6b9420129e18b6",
+    "mlflow_status": "FINISHED",
+    "stored_four_case_dice_verified": true,
+    "stored_mean_dice_verified": true
+  },
+  "remote_closeout_observation_scope": "Published Lenovo command/receipt evidence reviewed; not Mac filesystem observation",
+  "private_prediction_transport": "PENDING_REMOTE_CONNECTION",
+  "mac_prediction_voxel_reads": 0,
+  "mac_ct_voxel_reads": 0,
+  "model_calls": 0,
+  "scope": "four exposed positive development cases; unknown external pretraining exposure; no causal architecture/independent-generalization claim"
+}
