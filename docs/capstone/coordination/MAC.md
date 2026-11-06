@@ -1,5 +1,26 @@
 # Mac work status
 
+## November 6 review handoff
+
+- Full KD curve/endpoint/error review committed in6947827. Selected gain is
+  +.005491 Dice, terminal+.001475; 16positive cases improve/18worsen/2unchanged
+  at both endpoints and component coverage declines39/45to37/45. No promotion,
+  independent-patient interval or practical acceptance. See
+  [full analysis](../operations/KD-DESCRIPTIVE-ANALYSIS-20261106.md).
+- [Universal provenance and next-study draft](../operations/UNIVERSAL-SWIN-PROVENANCE-AND-NEXT-STUDY-20261106.md):
+  public-source dataset overlap confirmed; exact four-case/checkpoint patient
+  membership unresolved. Lenovo requested metadata-only crosswalk review, no
+  GPU/data/duplicate-audit expansion. No successor launched. Inference fit does
+  not qualify training fit; unit admission remains unresolved for training and
+  negative cases. Larger-model score stays a four-positive exploratory result.
+- [Retrospective experiment index](../operations/EXPERIMENT-REVIEW-INDEX-20261106.md)
+  links original requests and MLflow identities; no statuses rewritten, duplicate
+  training run/hours or retrospective preregistration created. New KD reader
+  reproduces source summaries and refuses changed input/overwrite. All existing
+  producing pins and evidence remain untouched.
+
+The earlier entries below retain their original observation dates and scopes.
+
 - Observed at: 2026-11-06 03:23 UTC (November5 evening locally).
 - Owner / branch: Mac chat, `main`.
 - Delivered latest engineering: `388524d`/`716d2f8`; KD evidence/permit `93899ef`.
