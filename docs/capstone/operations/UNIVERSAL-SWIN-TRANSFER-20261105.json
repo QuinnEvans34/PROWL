@@ -1,0 +1,101 @@
+{
+  "archive_sha256": "3a8b4ae517e5ea42a9af2b61684207b34a696c445d7c2d8e46d28d0bd119dc6b",
+  "archive_bytes": 573440,
+  "expanded_bytes": 551589,
+  "regular_members": 19,
+  "strict_import_readback_pass": true,
+  "source_before_after": [
+    {
+      "source_relative": "infer-PanTS_00002028\\prediction\\prediction.nii.gz",
+      "packet_member": "PanTS_00002028-prediction.nii.gz",
+      "sha256_before_after": "31552c8f67aa6a0b3ff0f167325d2ef9604b4ca8709ca28cac07fe8b0e4469c3"
+    },
+    {
+      "source_relative": "infer-PanTS_00002028\\prediction\\raw_pancreas.nii.gz",
+      "packet_member": "PanTS_00002028-raw_pancreas.nii.gz",
+      "sha256_before_after": "85a72abb196b54a4a2b275f484e5c7687b744ca5f5397cd7d04777864a752e8a"
+    },
+    {
+      "source_relative": "infer-PanTS_00002028\\result.json",
+      "packet_member": "PanTS_00002028-inference.json",
+      "sha256_before_after": "22193a62e7787a85036d73369a754817856d9b7db14199f069e9dc319e48b6b2"
+    },
+    {
+      "source_relative": "score-PanTS_00002028\\result.json",
+      "packet_member": "PanTS_00002028-score.json",
+      "sha256_before_after": "a4578be94c7ee0a430ce9f3fc2cf9c0eb917d45c9fb054aa908d5a1d99ed0ce9"
+    },
+    {
+      "source_relative": "infer-PanTS_00001347\\prediction\\prediction.nii.gz",
+      "packet_member": "PanTS_00001347-prediction.nii.gz",
+      "sha256_before_after": "2920ba8a5672cbdd1886e3a13caf14fdd9e1a629460fd5ce07f23e4f865fde1c"
+    },
+    {
+      "source_relative": "infer-PanTS_00001347\\prediction\\raw_pancreas.nii.gz",
+      "packet_member": "PanTS_00001347-raw_pancreas.nii.gz",
+      "sha256_before_after": "72dff05e576dab5bd588630ed7131dd7bbd85a486c0e0cb455e329d5d6f5bede"
+    },
+    {
+      "source_relative": "infer-PanTS_00001347\\result.json",
+      "packet_member": "PanTS_00001347-inference.json",
+      "sha256_before_after": "1c6d6b055515f2919c00f467176092102c7b90659ce6967ff4f0c3ed8386ee7d"
+    },
+    {
+      "source_relative": "score-PanTS_00001347\\result.json",
+      "packet_member": "PanTS_00001347-score.json",
+      "sha256_before_after": "96fcded41941b3635b4c42c83d223176f56442f242db8dc14b90d9f486c1f1a4"
+    },
+    {
+      "source_relative": "infer-PanTS_00002514\\prediction\\prediction.nii.gz",
+      "packet_member": "PanTS_00002514-prediction.nii.gz",
+      "sha256_before_after": "3b99f743dc9fe9f007775a138a6dd6a776d0cdf0312d7955e3b4dfa3fe1c9b77"
+    },
+    {
+      "source_relative": "infer-PanTS_00002514\\prediction\\raw_pancreas.nii.gz",
+      "packet_member": "PanTS_00002514-raw_pancreas.nii.gz",
+      "sha256_before_after": "e5eea88deaed5e59f6a837f17293a3032dfad31c3500eb16e9c58081e6ef0831"
+    },
+    {
+      "source_relative": "infer-PanTS_00002514\\result.json",
+      "packet_member": "PanTS_00002514-inference.json",
+      "sha256_before_after": "8ca6361db23f595e55ccd128142efaad3d5aaab61e9545fb8000e739350b8245"
+    },
+    {
+      "source_relative": "score-PanTS_00002514\\result.json",
+      "packet_member": "PanTS_00002514-score.json",
+      "sha256_before_after": "a1826effe9155ef51772023422acc5ba004aa2381cc0a1ab0cdebd84cadbaa42"
+    },
+    {
+      "source_relative": "infer-PanTS_00008743\\prediction\\prediction.nii.gz",
+      "packet_member": "PanTS_00008743-prediction.nii.gz",
+      "sha256_before_after": "1ffe2a9873c068261197761bcda412af8d09a3a1fb3013042684583edaa6b1f0"
+    },
+    {
+      "source_relative": "infer-PanTS_00008743\\prediction\\raw_pancreas.nii.gz",
+      "packet_member": "PanTS_00008743-raw_pancreas.nii.gz",
+      "sha256_before_after": "74ef1a405d9ca7d094bd4cc532e7c9dd2f7a8afe28bb12df78cbdaae253676d7"
+    },
+    {
+      "source_relative": "infer-PanTS_00008743\\result.json",
+      "packet_member": "PanTS_00008743-inference.json",
+      "sha256_before_after": "483d75ec74a83e9bf2ce0031b3d371943229f6275767fc305719a5fb9d5b877c"
+    },
+    {
+      "source_relative": "score-PanTS_00008743\\result.json",
+      "packet_member": "PanTS_00008743-score.json",
+      "sha256_before_after": "991020330222d657794b5323af4f9197d948e568993d62d61e3304c6163b2a29"
+    },
+    {
+      "source_relative": "summary.json",
+      "packet_member": "summary.json",
+      "sha256_before_after": "b032e01c082e2beeba0f3eb5988bbc881c2f1408b7feb0bf50b9a5be5e476dd6"
+    },
+    {
+      "source_relative": "completion.json",
+      "packet_member": "completion.json",
+      "sha256_before_after": "5518ef891775577ba1f57129d6072de456e8a9255b19d1bd725fa76684806977"
+    }
+  ],
+  "manifest_sha256": "ec156416ec20bb14620f8a2e0e336a430498073858c67eedafe35b5e4725adff",
+  "importer_sha256": "8195154ff620b2b47f2af8804724f1d9274e94e4d4a5f85d36342d0476d1e811"
+}

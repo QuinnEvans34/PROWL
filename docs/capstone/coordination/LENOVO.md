@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November5 private prediction-review delivery prepared / one sender active
+
+Completed-trial predictions only:8nativeNIfTIs,4inferenceJSON,4scoreJSON,summary/completionJSON plus stricttransfermanifest. NoCT/reference/weight/database files. Fresh privatepacket573440B/19regularmembers/551589Bexpanded; archiveSHA3a8b4ae517e5ea42a9af2b61684207b34a696c445d7c2d8e46d28d0bd119dc6b. Strict main93899ef importer readbackPASS; all sourceartifact hashes unchanged before/after copying. [Sanitized transfer proof](../operations/UNIVERSAL-SWIN-TRANSFER-20261105.json). One bounded≤600s sender owned80719; no duplicate sender. Privatecode is in chattooloutput only, nevercommitted. Receiver confirmation/cleanup pending. Completedmodelattempt remains unchanged/GPUidle.
+
 ## November5 Universal screen COMPLETE / independently verified
 
 One permitted pretrained inference screen completed; owned18866 exited0, supervisor26696absent, all10stageworkers exit0/reaped, GPUfree. [Results](../operations/UNIVERSAL-SWIN-RESULTS-20261105.md) and adjacentJSON: fourcase lesionDice2028=.826177,1347=.388500,2514=.764949,8743=.863391; macro.710754. Samefourpriorautonomousmean.459987, descriptive only/differentmodel+pretraining+preprocessing; no independentacceptance or publishedbenchmarkclaim.4/4referencecomponents overlap,4FPcomponents; no negatives measured. TrainingNOT_ADMITTED/zerooptimizer/zerohours.365.032s evaluation plus unchanged3600sconservativepreparationcharge. All5442pins fullbyteverified,45E/Cfilepairs762045416bytes match, distinctfilesystemIDs rechecked. PeakworkerRSS2006016000B/CUDAreserved4915724288B. MLflow051c194b2e54428aba6b9420129e18b6 FINISHED,all4Dice+mean readbackverified. Original request4654d46b... andpermitb6b76fc7... preserved. No retry/successor scheduled or launched. Earlierlaunch/ready statuses below are historical. Lenovo idle and available.
