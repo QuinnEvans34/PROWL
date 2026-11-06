@@ -44,6 +44,7 @@ def read_request(pin, *, full=False):
     if digest(p)!=pin:raise ValueError('Wrong request hash')
     r=json.loads(p.read_text())
     for path,sha in r['pins'].items():
+        if path.endswith(('.nii','.nii.gz')):raise ValueError('Data pins belong to input admission, not generic worker pin reads')
         stat=Path(path).stat()
         if [stat.st_size,stat.st_mtime_ns]!=r['pin_observations'][path]:raise ValueError('Producing file observation changed: '+path)
         # All bytes are verified before dispatch. Large unchanged dependency files
@@ -143,6 +144,10 @@ def launch(pin,permit_path,permit_sha):
     permit=json.loads(Path(permit_path).read_text());validate_permit(permit,pin,r['specification_sha256'])
     if OUT.exists() or BACKUP.exists() or (PREP/'dispatch.json').exists():raise FileExistsError('One-shot already started')
     gate()
+    # Supervisor admission is separate from CT-only inference workers.
+    for case in r['inputs']:
+        for kind,path in case['files'].items():
+            if digest(path)!=case['source_sha256'][kind]:raise ValueError('Input source identity changed')
     processes=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader'],text=True).strip()
     if processes:raise RuntimeError('GPU already owned')
     with training_guard(ROOT/'outputs/prowl/.cuda-training.lock'):
@@ -150,15 +155,16 @@ def launch(pin,permit_path,permit_sha):
         write(PREP/'dispatch.json',{'request_sha256':pin,'permit_sha256':permit_sha,'pid':os.getpid(),'started_utc':time.time()})
         shutil.copyfile(PREP/'request.json',OUT/'request.json');backup_file(OUT/'request.json')
         shutil.copyfile(permit_path,OUT/'permit.json');backup_file(OUT/'permit.json')
-        from mlflow.tracking import MlflowClient
-        from scripts.diagnostics.backfill_full_runs_mlflow import URI
-        client=MlflowClient(tracking_uri=URI);name='PROWL exploratory pretrained inference'
-        exp=client.get_experiment_by_name(name);eid=exp.experiment_id if exp else client.create_experiment(name)
-        run=client.create_run(eid,tags={'mlflow.runName':'Larger Universal Swin: four positive native cases',
-            'scope':'EXPLORATORY_EXTERNAL_EXPOSURE_UNKNOWN','kind':'inference_only','training_admission':'NOT_ADMITTED',
-            'request_sha256':pin,'training_hours':'0','empty_alarm_rate':'NOT_MEASURED'})
-        runid=run.info.run_id;write(OUT/'mlflow.json',{'run_id':runid,'tracking_uri':URI});backup_file(OUT/'mlflow.json')
+        client=None;runid=None
         try:
+            from mlflow.tracking import MlflowClient
+            from scripts.diagnostics.backfill_full_runs_mlflow import URI
+            client=MlflowClient(tracking_uri=URI);name='PROWL exploratory pretrained inference'
+            exp=client.get_experiment_by_name(name);eid=exp.experiment_id if exp else client.create_experiment(name)
+            run=client.create_run(eid,tags={'mlflow.runName':'Larger Universal Swin: four positive native cases',
+                'scope':'EXPLORATORY_EXTERNAL_EXPOSURE_UNKNOWN','kind':'inference_only','training_admission':'NOT_ADMITTED',
+                'request_sha256':pin,'training_hours':'0','empty_alarm_rate':'NOT_MEASURED'})
+            runid=run.info.run_id;write(OUT/'mlflow.json',{'run_id':runid,'tracking_uri':URI});backup_file(OUT/'mlflow.json')
             pilot_started=time.monotonic()
             shutil.copyfile(MODEL/'checkpoint.pth',OUT/'initial.pth');backup_file(OUT/'initial.pth')
             stages=[('pilot',None),('restore',None)]
@@ -202,12 +208,27 @@ def launch(pin,permit_path,permit_sha):
             write(OUT/'summary.json',summary);backup_file(OUT/'summary.json')
             client.log_metric(runid,'positive_lesion_macro_dice',summary['positive_lesion_macro_dice'])
             client.log_artifact(runid,str(OUT/'summary.json'))
+            read_request(pin);gate()
             client.set_terminated(runid,'FINISHED')
-            if client.get_run(runid).info.status!='FINISHED':raise RuntimeError('Tracking closeout')
+            tracked=client.get_run(runid)
+            if tracked.info.status!='FINISHED' or tracked.data.metrics.get('positive_lesion_macro_dice')!=summary['positive_lesion_macro_dice']:
+                raise RuntimeError('Tracking closeout')
             journal('completed',run_id=runid);backup_file(OUT/'journal.jsonl')
+            verified={}
+            for path in OUT.rglob('*'):
+                if path.is_file():
+                    sha=digest(path)
+                    if sha!=digest(BACKUP/path.relative_to(OUT)):raise ValueError('Final backup mismatch')
+                    verified[str(path.relative_to(OUT))]=sha
+            write(OUT/'completion.json',{'status':'COMPLETED_DESCRIPTIVE_ONLY','run_id':runid,
+                'mlflow_status':'FINISHED','all_stage_workers_reaped':True,'files':verified,
+                'request_sha256':pin,'scientific_training_hours':0})
+            backup_file(OUT/'completion.json');gate()
         except BaseException as exc:
             write(OUT/'failure.json',{'type':type(exc).__name__,'message':str(exc),'seconds':time.monotonic()-start})
-            client.set_terminated(runid,'FAILED')
+            if client is not None and runid is not None:
+                try:client.set_terminated(runid,'FAILED')
+                except Exception as tracking_error:write(OUT/'tracking-failure.json',{'message':str(tracking_error)})
             for path in OUT.rglob('*'):
                 if path.is_file() and not (BACKUP/path.relative_to(OUT)).exists():backup_file(path)
             raise
