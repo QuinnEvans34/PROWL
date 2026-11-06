@@ -1,0 +1,74 @@
+{
+  "status": "LAUNCH_VERIFIED",
+  "owned_exec_session": 18866,
+  "supervisor_pid": 26696,
+  "request_sha256": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+  "pilot": {
+    "loaded": {
+      "state_tensors": 170,
+      "loaded_state_sha256": "23f0c1b107cb20c71be4323634095c4e305cb9c228df3dbec7bb27f92160c97a",
+      "parameters": 62595315,
+      "state_elements": 63552891,
+      "checkpoint_sha256": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+      "source_revision": "43c12399cc98a40f447342a8dc2cecae5edae84c",
+      "forward_calls": 0,
+      "gpu_used": false
+    },
+    "shape": [
+      1,
+      32,
+      96,
+      96,
+      96
+    ],
+    "finite": true,
+    "head_mapping_verified": true,
+    "peak_cuda_allocated": 3184069120,
+    "peak_cuda_reserved": 4915724288,
+    "optimizer_updates": 0,
+    "input": "deterministic synthetic96cube; actual upstream CUDA forward"
+  },
+  "pilot_resources": {
+    "seconds": 15.922000000020489,
+    "peak_owned_rss_bytes": 1796247552,
+    "samples": 134,
+    "workers_reaped": true,
+    "exit_code": 0
+  },
+  "restore_resources": {
+    "seconds": 12.64000000001397,
+    "peak_owned_rss_bytes": 1775656960,
+    "samples": 106,
+    "workers_reaped": true,
+    "exit_code": 0
+  },
+  "first_patch": {
+    "event": "inference_patch",
+    "utc": 1793934625.3465605,
+    "case_id": "PanTS_00002028",
+    "patch": 1,
+    "seconds": 1.062999999965541
+  },
+  "latest_patch": {
+    "event": "inference_patch",
+    "utc": 1793934673.9655437,
+    "case_id": "PanTS_00002028",
+    "patch": 53,
+    "seconds": 49.67200000002049
+  },
+  "independent_backup_hashes": {
+    "initial.pth": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+    "request.json": "4654d46b730abe8c144b1cc57af607d579154b1c96ff707c37861fbce55fadc5",
+    "permit.json": "b6b76fc7e1667a7b5c3c13e93796e6460105d0f3e8f0023b30e12f8a499f8aba",
+    "pilot/result.json": "7262aed7d5e6891477ed53d1d444ab02cb6b2c9aa91b40615d8bd63c7862fa93",
+    "restore/result.json": "462b0960507f3f1d8666ecc59e93cdd8d22d84c56db08d1cfd5999b7a1f68a1a"
+  },
+  "mlflow_run_id": "051c194b2e54428aba6b9420129e18b6",
+  "mlflow_status": "RUNNING",
+  "stored_metrics": {
+    "stage_seconds": 12.64000000001397
+  },
+  "inference_only": true,
+  "training_hours": 0,
+  "no_retry": true
+}
