@@ -1,0 +1,292 @@
+{
+  "version": "universal-retained-crosswalk-review-v1",
+  "created_utc": "2026-11-06T14:48:25.079764+00:00",
+  "status": "EXACT_PATIENT_LINKAGE_UNKNOWN",
+  "scope": {
+    "case_metadata_files": 8,
+    "unique_screen_cases": 4,
+    "cohort_request_case_records": 70,
+    "supporting_json_files": 2,
+    "peer_report": 1,
+    "hashed_evidence_records": 12,
+    "upstream_list_documents_excerpt_reviewed": 6,
+    "upstream_lists_exhaustively_joined": false,
+    "new_ct_mask_model_test_reads": 0,
+    "new_data_downloads": 0,
+    "gpu_jobs": 0,
+    "workbook_read": false
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00002028",
+      "role": "exposed_development",
+      "retained_records": [
+        {
+          "source_identity": {
+            "ct_sha256": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+            "study_id": "PanTS_00002028"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        },
+        {
+          "source_identity": {
+            "ct_sha256": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+            "study_id": "PanTS_00002028"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        }
+      ],
+      "original_collection": "unknown",
+      "original_patient_or_series": "unknown",
+      "checkpoint_training_membership": "unknown",
+      "checkpoint_selection_membership": "unknown"
+    },
+    {
+      "case_id": "PanTS_00001347",
+      "role": "exposed_development",
+      "retained_records": [
+        {
+          "source_identity": {
+            "ct_sha256": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+            "study_id": "PanTS_00001347"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        },
+        {
+          "source_identity": {
+            "ct_sha256": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+            "study_id": "PanTS_00001347"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        }
+      ],
+      "original_collection": "unknown",
+      "original_patient_or_series": "unknown",
+      "checkpoint_training_membership": "unknown",
+      "checkpoint_selection_membership": "unknown"
+    },
+    {
+      "case_id": "PanTS_00002514",
+      "role": "exposed_development",
+      "retained_records": [
+        {
+          "source_identity": {
+            "ct_sha256": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+            "study_id": "PanTS_00002514"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        },
+        {
+          "source_identity": {
+            "ct_sha256": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+            "study_id": "PanTS_00002514"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        }
+      ],
+      "original_collection": "unknown",
+      "original_patient_or_series": "unknown",
+      "checkpoint_training_membership": "unknown",
+      "checkpoint_selection_membership": "unknown"
+    },
+    {
+      "case_id": "PanTS_00008743",
+      "role": "exposed_development",
+      "retained_records": [
+        {
+          "source_identity": {
+            "ct_sha256": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+            "study_id": "PanTS_00008743"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        },
+        {
+          "source_identity": {
+            "ct_sha256": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+            "study_id": "PanTS_00008743"
+          },
+          "top_level_fields": [
+            "cache_sha256",
+            "case_id",
+            "control_sha256",
+            "fidelity",
+            "source_sha256",
+            "transform",
+            "transform_sha256"
+          ]
+        }
+      ],
+      "original_collection": "unknown",
+      "original_patient_or_series": "unknown",
+      "checkpoint_training_membership": "unknown",
+      "checkpoint_selection_membership": "unknown"
+    }
+  ],
+  "development": {
+    "count": 70,
+    "biological_independence_unverified": 70,
+    "teacher_membership_unknown": 70,
+    "note": "Request identity/exposure records inspected, not all original publisher rows. No per-patient source crosswalk in these records."
+  },
+  "findings": {
+    "dataset_overlap": "Confirmed at source-family level by Mac publication review at 209e0cb; pinned Universal lists independently contain TCIA Pancreas-CT and MSD Task07_Pancreas. Not a four-case source assignment.",
+    "verified_screen_original_source_matches": 0,
+    "verified_screen_patient_matches": 0,
+    "verified_screen_unseen": 0,
+    "screen_membership_unknown": 4,
+    "zero_matches_interpretation": "No matches established; not evidence of zero true overlap.",
+    "checkpoint_binding": "Acquisition receipt binds exact checkpoint bytes/revision, not training or selection membership. Published trainer defaults are not a released-checkpoint run ledger."
+  },
+  "upstream": {
+    "source_revision": "43c12399cc98a40f447342a8dc2cecae5edae84c",
+    "checkpoint": {
+      "url": "https://huggingface.co/ljwztc/CLIP-Driven-Universal-Model/resolve/76f0304ff9387c1baccbbc1d9eac78c5c5ccfeed/clip_driven_universal_swin_unetr.pth",
+      "revision": "76f0304ff9387c1baccbbc1d9eac78c5c5ccfeed",
+      "bytes": 758907945,
+      "sha256": "cde35d9ca344a744c849ebe0cd086cb64984e79f605376c56bd04531c767ed07",
+      "seconds": 467.030999999959
+    },
+    "default_list_bases": [
+      "PAOT_123457891213",
+      "PAOT_10_inner"
+    ],
+    "train_source": "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/train.py",
+    "lists": [
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_train.txt",
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_val.txt",
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_123457891213_train.txt",
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_123457891213_val.txt",
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_10_inner_train.txt",
+      "https://raw.githubusercontent.com/ljwztc/CLIP-Driven-Universal-Model/43c12399cc98a40f447342a8dc2cecae5edae84c/dataset/dataset_list/PAOT_10_inner_val.txt"
+    ],
+    "list_review": "Web-rendered excerpts only; no downloaded dataset/list snapshot or exhaustive row count claimed. No test list opened."
+  },
+  "minimum_missing": [
+    "PanTS alias to original collection/release, original case/series and stable patient-group crosswalk for intended evaluation cases, with authoritative provenance.",
+    "Exact checkpoint-bound optimizer, pretraining and model-selection membership including inherited initialization; or publisher attestation supporting disjointness."
+  ],
+  "limitations": [
+    "Bounded retained-record review, not proof that publisher lacks a crosswalk.",
+    "Original metadata.xlsx not opened: mixed-partition workbook is outside this named-record review.",
+    "Hashes, dates, units, geometry and renamed IDs are not evidence of patient independence.",
+    "Historical source-use approval is not a leakage adjudication."
+  ],
+  "input_hashes": [
+    {
+      "path": "E:\\PROWL\\artifacts\\week05-autonomous70-20261103-a03\\request.json",
+      "bytes": 243947,
+      "sha256": "ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e"
+    },
+    {
+      "path": "E:\\PROWL\\cache\\pants-setup-20261010\\cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4\\PanTS_00002028.json",
+      "bytes": 2629,
+      "sha256": "de782caa0cb6d668b7c90a54bc0b5baa90c9af8eede6749ac777499617761fa7"
+    },
+    {
+      "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\evidence\\prepared-metadata\\PanTS_00002028.json",
+      "bytes": 2629,
+      "sha256": "a9f34492281a9aef838e3d081219edd9695307268e7364cb1ab6c5ca952a9404"
+    },
+    {
+      "path": "E:\\PROWL\\cache\\pants-setup-20261010\\cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4\\PanTS_00001347.json",
+      "bytes": 2626,
+      "sha256": "d0286242a66ae22c8c8569808e76377a110336e87ff142e3c7205d284a181507"
+    },
+    {
+      "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\evidence\\prepared-metadata\\PanTS_00001347.json",
+      "bytes": 2626,
+      "sha256": "f84af48d53e7741e14e293405d2df685312763a1e48dafc885fa3f31d5fa380f"
+    },
+    {
+      "path": "E:\\PROWL\\cache\\pants-setup-20261010\\cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4\\PanTS_00002514.json",
+      "bytes": 2465,
+      "sha256": "851dca74d531fda3fd440dc85cb5904839db457f6b8c27eff56785a54f7ec0a1"
+    },
+    {
+      "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\evidence\\prepared-metadata\\PanTS_00002514.json",
+      "bytes": 2465,
+      "sha256": "be773cabc0df0b6dad48d7d403242343689e6615db062d1204271e42385a5ef3"
+    },
+    {
+      "path": "E:\\PROWL\\cache\\pants-setup-20261010\\cfab5906fce0fe759599990ec3b1a5955eddb77d1b7b60eeb93e171e7b990bf4\\PanTS_00008743.json",
+      "bytes": 2626,
+      "sha256": "58048c043601a49165a77b0aea3b904485f4491c554d24b14b4ffdcb5fbd40f5"
+    },
+    {
+      "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\evidence\\prepared-metadata\\PanTS_00008743.json",
+      "bytes": 2626,
+      "sha256": "5453a8490d67f770b842c70f01aab879fc6ddcb2a4304adef91da4f037a9a565"
+    },
+    {
+      "path": "E:\\PROWL\\teachers\\clip-universal-76f0304-20261105\\acquisition.json",
+      "bytes": 355,
+      "sha256": "69155b609b1403709b14ba2aab09d5fe6bcadc82315b767e4c2aebd765db0a1c"
+    },
+    {
+      "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\metadata\\suprem-development-source-review.json",
+      "bytes": 1500,
+      "sha256": "3dce7b132a154bb98bbb0e19459dcd809c674457f1accb7a82d784d9684089dc"
+    },
+    {
+      "path": "git:209e0cb:docs/capstone/operations/UNIVERSAL-SWIN-PROVENANCE-AND-NEXT-STUDY-20261106.md",
+      "bytes": 11600,
+      "sha256": "db1cfb21c24d6b496cb0abec323ff159e23dd3f83032463ea490ef14c31afb53"
+    }
+  ]
+}

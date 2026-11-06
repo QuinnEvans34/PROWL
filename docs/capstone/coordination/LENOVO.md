@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November6 retained Universal provenance review COMPLETE / exposure unresolved
+
+[Additive crosswalk review](../operations/UNIVERSAL-SWIN-RETAINED-CROSSWALK-20261106.md) and adjacent JSON record eight named metadata files for four screen cases, 70 existing request identity/exposure records, two supporting JSONs and Mac209e0cb review (12 hashed evidence documents). All four original collection/patient/series links and checkpoint train/selection membership remain unknown; zero established matches does not mean zero overlap. Pinned default Universal lists include TCIA Pancreas-CT and MSD pancreas; source-family overlap agrees with Mac publication review. Exact checkpoint-bound ledger and authoritative PanTS-to-original-patient crosswalk are missing. Six public train/val list excerpts reviewed, no exhaustive join/test lists. No scans/masks/model/workbook/test reads, GPU, new data download or producing-pin changes. No successor launched. JSON SHA ccec929f1e02dbe858be336db91e40a5429ae86637d8af38aad559e23f9d9eee. Mac may integrate this finding; no leak-free claim justified.
+
 ## November5 private transfer stopped; prediction packet preserved
 
 Sender80719 ended after an explicit operator stop because receiving-chat coordination was unavailable; no delivery confirmation. Senderfailure/resource evidence retained, all owned workers reaped, no retry. The prior one-time code is inactive and is not recorded here. Exact573440B/19member packetSHA3a8b4ae517e5ea42a9af2b61684207b34a696c445d7c2d8e46d28d0bd119dc6b remains verified and private for a later authorized delivery. Updated transferJSON records the stopped attempt. Inference/scoring/MLflow/fullbackup closeout remains successful; no new GPU work. Earlier sender-active entry below is historical.
