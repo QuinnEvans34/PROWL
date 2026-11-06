@@ -65,7 +65,13 @@ def load_cpu(source_root, checkpoint, source_receipt):
     mapped = map_state(raw['net'], model.state_dict())
     model.load_state_dict(mapped, strict=True)
     model.eval()
+    state_hash = hashlib.sha256()
+    for name, value in sorted(model.state_dict().items()):
+        state_hash.update(name.encode())
+        state_hash.update(str((tuple(value.shape), value.dtype)).encode())
+        state_hash.update(value.contiguous().numpy().tobytes())
     return model, {'state_tensors': len(mapped),
+                   'loaded_state_sha256': state_hash.hexdigest(),
                    'parameters': sum(p.numel() for p in model.parameters()),
                    'state_elements': sum(p.numel() for p in mapped.values()),
                    'checkpoint_sha256': WEIGHT_SHA256,
