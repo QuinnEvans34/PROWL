@@ -1,0 +1,44 @@
+{
+  "created_utc": "2026-11-06T21:25:18.099141+00:00",
+  "status": "BLOCKED_SOURCE_AVAILABILITY_BEFORE_CUDA",
+  "model": "STU-Net-B pretrained exploratory fine-tuning",
+  "training_launch_authorized_conditionally": true,
+  "leakage_clearance_required": false,
+  "data": {
+    "training_required": 1333,
+    "original_D_paths_available": 0,
+    "training_available_at_retained_restoration_paths": 410,
+    "training_without_available_bound_path": 923,
+    "missing_training_compressed_bytes": 30264489348,
+    "development_required": 70,
+    "development_request_paths_available": 69,
+    "development_missing_request_path": [
+      "PanTS_00005592"
+    ],
+    "development_note": "Request-path availability only; alternate-copy reconciliation not yet performed.",
+    "publisher_training_archives_present": 9,
+    "restoration_performed": false
+  },
+  "resources": {
+    "gpu": "RTX 4060 Laptop 8188 MiB",
+    "gpu_initial_used_MiB": 0,
+    "ac_connected": true,
+    "C_free_bytes": 155586592768,
+    "E_free_bytes": 345551273984,
+    "floor_bytes": 107374182400
+  },
+  "next_required": "A separately versioned bounded exact-byte restoration/relocation receipt for missing training CTs and reconciliation of the one development path, followed by actual loader/CUDA/restore/resource qualification. Keep all1333+70, no substitution with410 subset. Archives are local; no re-download needed.",
+  "scientific_updates": 0,
+  "mlflow_run_created": false,
+  "checkpoint_downloaded": false,
+  "frozen_sources_edited": false,
+  "input_hashes": {
+    "E:\\PROWL\\artifacts\\week05-autonomous70-20261103-a03\\request.json": "ed67a10ab6cd59a0cbf91ff42bb4cb8152882d06eafdaa879fbbb9e8a91a7d2e",
+    "E:\\PROWL\\readiness\\data-setup-20261010-a01\\pants-source-observations.json": "d145dc992ff1ef1802bccbe528c37c2bd6e13ead87d7d2a09d8d034768436092",
+    "E:\\PROWL\\readiness\\data-setup-20261010-a01\\pants-manifest.csv": "46b436edeba2995c942d53b9c2849760a4802cbbf04c95ba9664182874fb31bc",
+    "E:\\PROWL\\sources\\pants\\restored-candidate-ct-20261030\\restoration.json": "0cfe72fc267be0a8a8a48779319b211e49eb61b67bf2abb7a26dd6d74188f92b",
+    "E:\\PROWL\\sources\\pants\\verifier-fit-tune-ct-20261031\\restoration.json": "65afa1db4eb3a95ca311f02666a12c603acd15df2fbd91321b211521848a19f2"
+  },
+  "evidence_path": "E:\\PROWL\\readiness\\stunet-transfer-preflight-20261106-a01\\preflight.json",
+  "evidence_sha256": "a3f5d12ccb1893a71ba93fbc08427b89f41cf41c930323403f46ebb49c42f49e"
+}
