@@ -1,0 +1,137 @@
+{
+  "status": "PORTABLE_CPU_PRIMITIVES_ONLY_NOT_READY",
+  "evidence_root": "E:\\PROWL\\readiness\\stunet-portable-cpu-20261106-a01",
+  "tests": {
+    "seconds": 11.469000000040978,
+    "peak_owned_rss_bytes": 562282496,
+    "samples": 97,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "architecture_resources": {
+    "seconds": 4.062999999965541,
+    "peak_owned_rss_bytes": 832770048,
+    "samples": 35,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "architecture": {
+    "status": "PASS",
+    "proof": {
+      "qualification": "RANDOM_ARCHITECTURE_ONLY",
+      "pretrained_loaded": false
+    },
+    "parameters": 58160975,
+    "output_shapes": [
+      [
+        1,
+        3,
+        32,
+        32,
+        32
+      ],
+      [
+        1,
+        3,
+        16,
+        16,
+        16
+      ],
+      [
+        1,
+        3,
+        8,
+        8,
+        8
+      ],
+      [
+        1,
+        3,
+        4,
+        4,
+        4
+      ],
+      [
+        1,
+        3,
+        2,
+        2,
+        2
+      ]
+    ],
+    "pools": [
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        2,
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ]
+    ],
+    "input_shape": [
+      1,
+      1,
+      32,
+      32,
+      32
+    ],
+    "source_sha256": "53da5fa6ea87c0b63177af6a93b5b148bda96b6e4be22290a8e5d49a4ef261bc",
+    "seconds": 3.375,
+    "actual_training_qualification": false,
+    "clinical_input_reads": 0,
+    "optimizer_updates": 0,
+    "gpu": false
+  },
+  "restoration_estimate": {
+    "historical_cts": 178,
+    "historical_output_bytes": 6128299671,
+    "historical_archive_count": 4,
+    "historical_compressed_archive_bytes": 140186437662,
+    "historical_seconds": 2034.9070000000065,
+    "required_training_cts": 923,
+    "required_output_bytes": 30264489348,
+    "available_training_archive_bytes": 317707829738,
+    "linear_archive_traversal_seconds": 4611.757724006373,
+    "interpretation": "Planning estimate only; gzip traversal and output writes both matter. Allow roughly1-2hours; proposed3hour hard ceiling,35GiB newCT output ceiling,4GiB workerRSS and100GiB free floors. Not approved/dispatched as a restoration receipt; no guaranteed ETA."
+  },
+  "limitations": [
+    "No original checkpoint load on Lenovo yet; optional loader path unqualified until actual audit.",
+    "32cube random CPU forward is not128cube CUDA training proof.",
+    "No input/normalization/coverage/whole-native validation/cold optimizer replay qualification.",
+    "Loss is proposed nearest-label deep supervision; coarse lesion preservation still needs audit.",
+    "Scientific launch awaits explicit host handoff."
+  ],
+  "files": {
+    "src/training/stunet_transfer_20261106.py": "7654a9d01bc4873b7e44cf43c6b4858dc1c6f09c8b2d9a8a06f92d8d0657d30c",
+    "scripts/diagnostics/inspect_stunet_cpu_20261106.py": "7c087ecc7c1b47561550230237fc4475a62e65a411764dfcbbf0db007a5636b7",
+    "tests/test_stunet_transfer_20261106.py": "47bda87d200808955dcceac504b5808d454e2ee02f43f2de649134481c7bfa26"
+  },
+  "final_tests": {
+    "seconds": 4.202999999979511,
+    "peak_owned_rss_bytes": 562397184,
+    "samples": 37,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  }
+}

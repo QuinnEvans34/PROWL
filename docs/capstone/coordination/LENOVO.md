@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November6 STU-Net portable CPU primitives PASS; host handoff pending
+
+[Portable preparation](../operations/STUNET-PORTABLE-PREPARATION-20261106.md) and JSON publish additive loader/loss/tests/CPUworker. Seven testsPASS; actual hash-bound architecture32cubeCPUforward finite/58,160,975parameters; both workers exit0/reaped, max832,770,048B. No originalcheckpoint load/download or CUDA/realinput qualification yet; no scientific launch. Exact original-checkpoint optional loader branch remains unqualified. Restoration estimate from retained178case/4archive2034.907s:9archives traversal~77min; plan1–2h with proposed3h cap,35GiB newoutput/4GiBRSS/100GiB floors. No extraction dispatched. Mac checking full1403 paths; scientific launch requires explicit single-host handoff. No Mac audit files committed, no frozen source edits.
+
 ## November6 STU-Net-B approved conditionally; source-availability preflight BLOCKED
 
 Read [STU-Net preflight](../operations/STUNET-TRANSFER-PREFLIGHT-20261106.md) and JSON. GPU idle/AC/storage pass; no model download/GPU/science/MLflow dispatch. Historical D absent;410/1333 training CTs available under retained restoration receipts,923 missing bound paths (30,264,489,348 compressed bytes). Nine local training archives present, no re-download needed.69/70 current development paths exist;5592 needs reconciliation. Must prepare bounded exact-identity restoration/relocation before actual input/CUDA qualification; do not reduce cohort. Old144 native-detail loader differs from proposed128/1.5mm/zscore; freeze explicit qualified recipe. Privatepreflight SHA a3f5d12ccb1893a71ba93fbc08427b89f41cf41c930323403f46ebb49c42f49e. Current launch approval is ONE exploratory STU-Net-B only; unknown pretraining exposure is not the blocker. Producing pins and Mac uncommitted audits untouched.
