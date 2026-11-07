@@ -27,6 +27,14 @@ Before November14, finish the saved scan/reviewer and conversation regression
 checks, verify the presentation against the current build, and record any actual
 limitations. Quinton still owns scheduling and participant permissions.
 
+The [November7 engineering check](../testing/REVIEWER-FLOW-20261107.md) now verifies
+actual isolated browser save/reopen/revise across a backend restart, exact receipt
+content/identity and unchanged original package bytes.164UI and38backend tests
+pass. Repaired acknowledgment/history validation and the direct Node loader;
+no participant feedback, new model generation or live contour assessment occurred.
+Before the session, current viewer presentation and any live answer behavior still
+need a role-appropriate check; this engineering result does not close G7.
+
 ## Approved operating approach
 
 **September 20 update:** Quinton has contacted a radiologist and has not received a reply.

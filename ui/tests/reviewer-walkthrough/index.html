@@ -1,1 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>PROWL isolated reviewer walkthrough</title></head><body><div id="root"></div><script type="module" src="/main.jsx"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>PROWL isolated reviewer walkthrough</title></head><body><div id="root">Loading isolated review fixture…</div><script>
+function fixtureError(message) { document.getElementById('root').textContent = 'Fixture startup failed: ' + message }
+window.addEventListener('error', event => fixtureError(event.message || 'A required module could not load'), true)
+window.addEventListener('unhandledrejection', event => fixtureError(event.reason?.message || String(event.reason)))
+</script><script type="module" src="/main.jsx"></script></body></html>

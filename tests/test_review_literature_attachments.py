@@ -1,4 +1,5 @@
 import json
+import os
 import shutil
 
 import pytest
@@ -7,7 +8,7 @@ from test_case_literature_workflow_v1 import capture_fixture
 from src.review.store import digest, encode
 from src.review.literature_attachments_v1 import LiteratureAttachments
 
-NODE = shutil.which('node')
+NODE = os.environ.get('PROWL_TEST_NODE') or shutil.which('node')
 pytestmark = pytest.mark.skipif(not NODE, reason='Node24 required')
 
 

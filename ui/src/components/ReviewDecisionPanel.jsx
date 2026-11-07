@@ -28,10 +28,26 @@ function validRecord(record, hash) {
   return e?.case_package_id === `case-package:${hash}` && e.prediction_id === `prediction:${hash}`
     && Object.hasOwn(labels, e.action) && Number.isSafeInteger(e.revision) && e.revision > 0
     && /^review:[a-f0-9-]{36}$/.test(e.review_event_id) && Array.isArray(e.reason_codes) && e.reason_codes.every(k => Object.hasOwn(reasons,k))
-    && typeof e.reviewer?.reviewer_id === 'string' && typeof e.recorded_at === 'string'
+    && typeof e.reviewer?.reviewer_id === 'string' && typeof e.recorded_at === 'string' && Number.isFinite(Date.parse(e.recorded_at))
     && r?.review_event_id === e.review_event_id && r.revision === e.revision && r.sequence === e.revision
     && r.case_package_id === e.case_package_id && r.prediction_id === e.prediction_id && /^[a-f0-9]{64}$/.test(r.content_sha256)
     && r.location === `${hash}/event-${String(e.revision).padStart(6, '0')}.json`
+}
+function validHistory(history, hash) {
+  const ids = new Set()
+  return Array.isArray(history) && history.length <= 1000 && history.every((record, index) => {
+    const event = record?.event
+    if (!validRecord(record, hash) || event.revision !== index + 1 || ids.has(event.review_event_id)
+      || (event.supersedes_review_event_id ?? null) !== (history[index - 1]?.event.review_event_id ?? null)) return false
+    ids.add(event.review_event_id)
+    return true
+  })
+}
+function matchesRequest(event, request) {
+  return event.action === request.action && event.note === request.note
+    && event.reviewer.reviewer_id === request.reviewer.reviewer_id && event.reviewer.role === request.reviewer.role
+    && event.reason_codes.length === request.reason_codes.length && event.reason_codes.every((reason, i) => reason === request.reason_codes[i])
+    && (event.supersedes_review_event_id ?? null) === request.expected_latest_id
 }
 export default function ReviewDecisionPanel(props) {
   // Keep drafts and in-flight acknowledgments scoped to one exact prediction,
@@ -48,7 +64,7 @@ function PredictionReviewDecision({ base, manifestHash, manifest, onSaved, onDra
   async function reload(signal) {
     const data = await reviewRequest(endpoint, { signal })
     if (data.manifest_sha256 !== manifestHash || data.case_package_id !== `case-package:${manifestHash}`
-      || data.prediction_id !== `prediction:${manifestHash}` || !Array.isArray(data.history) || !data.history.every(r => validRecord(r, manifestHash))) throw new Error('Review target changed. Reload the prediction before saving.')
+      || data.prediction_id !== `prediction:${manifestHash}` || !validHistory(data.history, manifestHash)) throw new Error('Review history or target failed verification. Reload the prediction before saving.')
     if (alive.current) { setHistory(data.history); pending.current = null; setConfirmation(false); setError('') }
   }
   useEffect(() => {
@@ -69,7 +85,7 @@ function PredictionReviewDecision({ base, manifestHash, manifest, onSaved, onDra
       expected_latest_id: history.at(-1)?.event.review_event_id || null, reviewer: { reviewer_id: reviewer.trim(), role: 'research_operator' }, action, reason_codes: selected, note }
     try {
       const record = await reviewRequest(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(pending.current) })
-      if (!validRecord(record, manifestHash) || record.event.revision !== history.length+1) throw new Error('Save acknowledgment could not be verified. Retry or reload history.')
+      if (!validRecord(record, manifestHash) || record.event.revision !== history.length+1 || !matchesRequest(record.event, pending.current)) throw new Error('Save acknowledgment did not match the submitted review. Retry the same save to recover its receipt.')
       if (!alive.current) return
       setHistory([...history, record]); pending.current = null; setConfirmation(false); setAction(''); setSelected([]); setNote('')
       setNotice(`Saved locally — revision ${record.event.revision}. The exact prediction can be reopened from Saved prediction review.`)

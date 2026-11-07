@@ -1,5 +1,5 @@
 import { readHeader } from 'nifti-reader-js'
-import volumeFacts from '../../../configs/evidence/source-facts-volume-v1.json'
+import volumeFacts from '../../../configs/evidence/source-facts-volume-v1.json' with { type: 'json' }
 
 export const MEASUREMENT_POLICY = 'prepared-mask-volume-v1'
 const LIMIT = 64 * 1024 * 1024

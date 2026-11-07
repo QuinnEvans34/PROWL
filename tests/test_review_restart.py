@@ -20,7 +20,7 @@ def test_native_package_review_survives_server_restart_and_session_cleanup(tmp_p
     with socket.socket() as probe:
         probe.bind(('127.0.0.1',0)); port=probe.getsockname()[1]
     base=f'http://127.0.0.1:{port}'
-    node=shutil.which('node')
+    node=os.environ.get('PROWL_TEST_NODE') or shutil.which('node')
     if not node:pytest.skip('Node required for actual native viewer loader')
     repo=Path(__file__).resolve().parents[1]
     jobs=PredictionJobs(tmp_path/'jobs',config)
