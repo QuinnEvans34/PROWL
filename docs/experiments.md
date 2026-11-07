@@ -5666,3 +5666,34 @@ startup/timing failures and probe02 timeout preserved. Probe03 8.182s/16,236,544
 1complete reused/1partial excluded,171seconds remaining. All1674realjob pins match.
 No real pause/resume or scheduled morning action performed; generation continues.
 
+
+## November 7, 2026 — STU-Net interim review and CAP-EXP-020 proposed
+
+Quinton authorized autonomous saved-result analysis and preparation of one useful
+follow-up while the existing Lenovo STU-Net transfer run continues unchanged.
+[Interim review](capstone/operations/STUNET-INTERIM-ERROR-ANALYSIS-20261107.md):
+peer0da40f1 export SHA9528af9e5817f74d3a813c096b261d1e80b4ac688773697c272cd4e1f0e971a9,
+all70cases at2k/4k/6k. Derived6k macro lesion Dice.347182, recall.452044,
+precision.380762 on35definedpositivecases; six cases have zero overlap and9/45
+referencecomponents are missed. Five cases with total lesionvolume<1mL average
+Dice.047820; this is not an individual-component size analysis. Counts do not
+establish spatial causes or independent patients. No cross-model delta or promotion.
+
+[CAP-EXP-020 proposed design](capstone/operations/CAP-EXP-020-PROPOSED-20261107.md)
+and adjacent JSON register a **PROPOSED, non-executable exploratory inference-policy
+screen**, not another training run or formalG5 comparison. After current12kcloseout,
+bind its selectedcheckpoint and use one common reconstruction for raw versus
+lesionconfidence thresholds.40/.50/.60. Proposed4h total/12GiBRSS/6GiBCUDA and
+existing AC/storage/cache/backup gates; no launch authority or automatic queue.
+Require+.02positive-caseDice with no lost raw-hit cases/components, no small-case
+recall drop and explicit overallrecall/pancreas/false-alarm guards. The policy only
+suppresses lesion winners and cannot recover current raw misses. If utilityfails,
+retainraw and reportnull. A later size-balanced training question is deferred.
+
+Nineteen metadata tests and15synthetic policy tests pass; actual saved-metadata CLI
+replays byte-identically. The inspected producer storesmetrics, not needed per-case
+probability volumes, so the screen still requires a separate qualified inference
+runner, complete parent/result/reference bindings and launch decision. No scans,
+masks, checkpoints or probability arrays opened, modelcall/GPU/optimizer execution,
+MLflowwrite or newtraininghours. Existing failedattempts/pins and uncommitted audit
+drafts retained. Sole Lenovo worker and hourly monitor unchanged.

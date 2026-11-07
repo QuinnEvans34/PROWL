@@ -1,0 +1,121 @@
+{
+  "schema": "prowl.proposed-experiment.v1",
+  "experiment_id": "CAP-EXP-020",
+  "version": "20261107-v1",
+  "title": "STU-Net lesion-confidence policy screen",
+  "status": "PROPOSED_NOT_AUTHORIZED_TO_EXECUTE",
+  "run_class": "exploratory_development_inference_policy_screen",
+  "run_enabled": false,
+  "automatic_launch": false,
+  "automatic_retry": false,
+  "new_optimizer_updates": 0,
+  "mlflow_run_id": null,
+  "ready_sha256": null,
+  "execution_started_at": null,
+  "motivation_report": "STUNET-INTERIM-ERROR-ANALYSIS-20261107.json",
+  "motivation_export_sha256": "9528af9e5817f74d3a813c096b261d1e80b4ac688773697c272cd4e1f0e971a9",
+  "parent": {
+    "artifact": "pants_stunet_base_transfer_12k_20261106_launch02",
+    "receipt_sha256": "59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68",
+    "selection": "highest positive macro lesion Dice over all six full 70-case validations; earlier checkpoint on ties",
+    "checkpoint_sha256": null,
+    "selected_report_sha256": null,
+    "requires_verified_completion_and_closeout": true
+  },
+  "cohort": {
+    "role": "exposed_development",
+    "cases": 70,
+    "positive": 36,
+    "empty": 34,
+    "case_identity_records_sha256": "68a9149da5d5e5c221832bbb296bba645609979511d7e8913e3d6ec0dd1a8953",
+    "patient_independence": "unresolved",
+    "pretraining_exposure": "unresolved",
+    "protected_test_access": false,
+    "external_clinical_cohort_access": false,
+    "exclude_failures": false
+  },
+  "changed_factor": "lesion class-decision confidence threshold only; same common probability reconstruction for every arm",
+  "policies": {
+    "raw": {
+      "threshold": 0.0,
+      "rule": "unchanged three-channel argmax"
+    },
+    "candidate_thresholds": [
+      0.4,
+      0.5,
+      0.6
+    ],
+    "rule": "raw lesion winners survive iff p_lesion>=threshold; suppressed winners take nonlesion argmax",
+    "adds_lesion_voxels": false,
+    "can_recover_raw_miss": false,
+    "component_filter": null
+  },
+  "fixed_factors": [
+    "completed selected checkpoint",
+    "FP32 and qualified inference environment",
+    "provided-pancreas-region input policy",
+    "128-cube/64-stride native-detail reconstruction",
+    "normalization/interpolation/orientation order",
+    "70 case/reference/native-geometry identities",
+    "raw-first component-preserving output",
+    "metric definitions and complete failure accounting"
+  ],
+  "primary_endpoint": "macro lesion Dice over all 36 reference-positive cases, including complete misses",
+  "utility_signal": {
+    "minimum_dice_gain": 0.02,
+    "new_missed_cases_allowed": 0,
+    "new_missed_reference_components_allowed": 0,
+    "small_case_macro_recall_decrease_allowed": 0.0,
+    "positive_macro_recall_decrease_allowed": 0.01,
+    "pancreas_macro_dice_decrease_allowed": 0.01,
+    "empty_alarm_increase_allowed": 0,
+    "false_positive_volume_increase_allowed": 0.0,
+    "all_guards_required": true,
+    "no_independent_patient_or_formal_promotion_verdict": true
+  },
+  "candidate_selection": "retain raw unless all guards pass; among eligible candidates use maximum Dice, lower threshold on ties; publish all policies",
+  "proposed_execution_host": "Lenovo after current STU-Net completion and exclusive GPU release",
+  "mac_work": "metadata analysis and synthetic-only preparation; no GPU run",
+  "proposed_limits": {
+    "total_wall_seconds": 14400,
+    "includes": [
+      "qualification",
+      "inference",
+      "scoring",
+      "backups",
+      "cleanup"
+    ],
+    "combined_owned_rss_bytes": 12884901888,
+    "cuda_bytes": 6442450944,
+    "minimum_free_bytes_each_existing_volume": 107374182400,
+    "combined_cache_bytes": 34359738368,
+    "combined_backup_bytes": 68719476736,
+    "ac_required": true,
+    "all_existing_safety_gates_retained": true
+  },
+  "storage_estimate": {
+    "native_voxels_all70": 2128136535,
+    "four_uint8_masks_primary_and_independent_copy_bytes": 17025092280,
+    "includes_headers_and_existing_artifacts": false,
+    "admitted": false
+  },
+  "remaining_gates": [
+    "current full run/validation/closeout review",
+    "final checkpoint and reference bindings",
+    "additive real native runner not yet implemented",
+    "runtime and combined-storage projections within proposed ceilings",
+    "real-device/native/backup recovery qualification",
+    "exact prospective protocol/metric/environment freeze",
+    "exclusive GPU and existing safety preflight",
+    "separate launch decision"
+  ],
+  "scope_limits": [
+    "no automatic new training or longer horizon",
+    "no live producer/pin edits",
+    "no independent-patient generalization claim",
+    "not formal G4/G5 acceptance",
+    "no clinical probability interpretation",
+    "individual-component size records not available in motivation export"
+  ],
+  "estimated_start_window": "Week 6 November 9\u201315; not a scheduled start"
+}
