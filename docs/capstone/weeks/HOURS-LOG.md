@@ -204,6 +204,16 @@ as the initial subtotal; Quinton may correct both allocation and total.
 Weekly handback: confirmed human total, remaining estimates, separate class/meeting time,
 completed tasks, principal blocker and the next bounded packet.
 
+## Week 5 — November 2–8: technical evidence ready, personal hours pending
+
+The [Saturday evidence closeout](WEEK-05-EVIDENCE-CLOSEOUT-20261107.md) records
+completed work, remaining acceptance gaps and the November14 walkthrough plan.
+Quinton has not supplied daily/net active Week5 hours in this record. They remain
+unknown, not zero. November8 is still future at this Saturday review. No training,
+download, scheduled monitor, test or autonomous-agent duration is converted to
+personal hours. Earlier unresolved weekly totals stay unchanged; no course
+submission or clock-in/clock-out is inferred from this update.
+
 
 ## October 12 review — outstanding confirmation
 

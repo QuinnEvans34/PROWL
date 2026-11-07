@@ -1,0 +1,93 @@
+{
+  "schema": "prowl.week05.evidence-closeout.v1",
+  "as_of_date": "2026-11-07",
+  "week_dates": [
+    "2026-11-02",
+    "2026-11-08"
+  ],
+  "scope": "technical evidence inventory; broader acceptance and personal hours remain open",
+  "kd_analysis_reproduced": true,
+  "completed_kd_source_sha256": "2679c09ebefc2361cb81122ead80530c48fcbeb99b333d2e526d1723a2e0033b",
+  "evidence": [
+    {
+      "path": "docs/capstone/implementation/11-stakeholder-validation.md",
+      "bytes": 20710,
+      "sha256": "fcc25db9a155ac02c260d1b5c377136a7455b264f836fde1d0284536ef7a7416"
+    },
+    {
+      "path": "docs/capstone/operations/WEEK-05-AUTONOMOUS70-METADATA-REVIEW-20261104.md",
+      "bytes": 5821,
+      "sha256": "86c5befa785d7b04aebde383365fcc6204ba3e9ec603a9e402313deef17cd16b"
+    },
+    {
+      "path": "docs/capstone/orchestration/BASELINE-REVIEW-WORKFLOW-20261105.md",
+      "bytes": 3788,
+      "sha256": "de4800e9590a84c70b53365f39ac6d596823ff27e31002dc7c2ad7b0044dcbbc"
+    },
+    {
+      "path": "docs/capstone/operations/WEEK-05-MAC-VISUAL-REVIEW-20261104.md",
+      "bytes": 6814,
+      "sha256": "9a592053a5e5bdc74ff739cc98603096ae8cc1e1acf05fdd4f00c113078bebd3"
+    },
+    {
+      "path": "docs/capstone/operations/MAC-KD-COMPLETION-20261105.md",
+      "bytes": 3315,
+      "sha256": "0eb292f751fdfabcbac1531a1d76560de96358331dbc7b94d71d312b3b35c74f"
+    },
+    {
+      "path": "docs/capstone/operations/KD-DESCRIPTIVE-ANALYSIS-20261106.md",
+      "bytes": 5948,
+      "sha256": "c0577d111b7fa198d88511f7674aa61b6f3a0e5772625d2659d6476043bf5307"
+    },
+    {
+      "path": "docs/capstone/retrieval/LIVE-DEVELOPMENT-SEARCH-2026-10-17.md",
+      "bytes": 7385,
+      "sha256": "0e146057dc6f1d93134627b2cd0a59846afb36cf3f99dba2c40259ae707161fb"
+    },
+    {
+      "path": "docs/capstone/retrieval/ASSISTANT-OFFLINE-REVIEW-2026-11-02.md",
+      "bytes": 4929,
+      "sha256": "635907e9f4c87a779fa48b448e25b3365f3a16b913eb582f0282e5a6729854cd"
+    },
+    {
+      "path": "docs/capstone/testing/REVIEWER-FLOW-20261107.md",
+      "bytes": 5337,
+      "sha256": "46a9558bb2c882b55a57effc6cd5eadbfd19872af12b3067cc1f6f5086c87eb2"
+    },
+    {
+      "path": "docs/capstone/operations/TRAINING-PROGRESS-UI-20261107.md",
+      "bytes": 5624,
+      "sha256": "e9d7cb7fba49d741f5868fc489a214dedf0434bab74fbe29e9244e2aa60b64d2"
+    },
+    {
+      "path": "docs/capstone/coordination/MAC.md",
+      "bytes": 13368,
+      "sha256": "82300aef330a8e17a83269545ce95a4bf6cbdf41c731609cab69d4f4be5fb776"
+    },
+    {
+      "path": "docs/capstone/weeks/HOURS-LOG.md",
+      "bytes": 17769,
+      "sha256": "53cedeafe5ef5a489be1f15c98830c61d7ebb2d9aef7779213b9c341d581bfdb"
+    },
+    {
+      "path": "docs/capstone/operations/KD-DESCRIPTIVE-ANALYSIS-20261106.json",
+      "bytes": 15161,
+      "sha256": "bb83cd3fe63cab73ad7c0d29016a4ea1e393f876f8e2d816199f70a69fd7a422"
+    },
+    {
+      "path": "configs/training-progress/lenovo-stunet-20261106.json",
+      "bytes": 1515,
+      "sha256": "664535b2116b22bdf49ea85bc92457152dd830305145c398490eced023184163"
+    }
+  ],
+  "open_gates": [
+    "G3 full production graph",
+    "G4 eligible independent autonomous baseline",
+    "G6 retrieval and answer acceptance",
+    "G7 actual participant and complete live presentation"
+  ],
+  "personal_hours": "awaiting Quinton; never derived from compute",
+  "walkthrough_planning_date": "2026-11-14",
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0
+}
