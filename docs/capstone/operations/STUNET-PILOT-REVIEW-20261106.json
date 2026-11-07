@@ -1,0 +1,94 @@
+{
+  "status": "QUALIFICATION_PASS_LAUNCH_FAILED_BEFORE_UPDATES",
+  "restoration_cases": 1403,
+  "new_verified": 924,
+  "reused": 479,
+  "roles": {
+    "train": 1333,
+    "development": 70
+  },
+  "restoration_resources": {
+    "seconds": 5357.4839999999385,
+    "peak_owned_rss_bytes": 51044352,
+    "samples": 44019,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "pilot_resources": {
+    "seconds": 328.9070000000065,
+    "peak_owned_rss_bytes": 3065462784,
+    "samples": 2674,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "diagnostic_updates": 6,
+  "scientific_updates": 0,
+  "native_cases": [
+    {
+      "case_id": "PanTS_00006837",
+      "tiles": 144,
+      "gaps": 0,
+      "seconds": 188.75
+    },
+    {
+      "case_id": "PanTS_00000909",
+      "tiles": 30,
+      "gaps": 0,
+      "seconds": 57.73499999998603
+    }
+  ],
+  "projected_seconds": 174337.14150035218,
+  "approved_seconds": 216000,
+  "within48h": false,
+  "cuda_allocated": 6102968832,
+  "cuda_reserved": 6266290176,
+  "full_binding_owner_session": 12922,
+  "tests": "17 CPU tests PASS, 2.217 seconds",
+  "evidence": {
+    "E:\\PROWL\\sources\\pants\\stunet-restored-20261106-a01\\restoration.json": "9fb179e94de565dbc8ed9fe1a33c7ffa02b3e6c8206392804d1623e43dd8e0de",
+    "E:\\PROWL\\sources\\pants\\stunet-restored-20261106-a01\\resources.json": "00bada5642a003c4a2d001f107ad91dffc46cafadac5a496005333225688e836",
+    "E:\\PROWL\\readiness\\stunet-real-pilot-20261106-a01\\worker\\result.json": "bbc91837c23aa7f81cbe5b13178605710284fec7b87b39cfccd2501f94c0e680",
+    "E:\\PROWL\\readiness\\stunet-real-pilot-20261106-a01\\resources.json": "d22da1aa58e75884190526600db3aa49d62cd8f59d53209a7ca51b54cce608d2",
+    "E:\\PROWL\\readiness\\stunet-real-pilot-20261106-a01\\visual-review.json": "010a7cbb501c5c05b7ebdc7081b21b41ae7e8e54daa0aab0d5c8e45442a49d68"
+  },
+  "approval": "Approve a 60-hour cap",
+  "full_binding_resources": {
+    "seconds": 344.5779999999795,
+    "peak_owned_rss_bytes": 1836380160,
+    "samples": 2936,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "producer_resources": {
+    "seconds": 68.79699999990407,
+    "peak_owned_rss_bytes": 2181193728,
+    "samples": 462,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_resources": {
+    "seconds": 29.219000000040978,
+    "peak_owned_rss_bytes": 3041202176,
+    "samples": 190,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_state_max_difference": 0,
+  "failed_launch_resources": {
+    "seconds": 4.51500000001397,
+    "peak_owned_rss_bytes": 15593472,
+    "samples": 1,
+    "workers_reaped": true,
+    "success": false,
+    "error": "KeyError('E:/PROWL/readiness/stunet-full-input-binding-20261106-a01/worker/inputs.json')"
+  },
+  "failed_mlflow": "2159a2c44093427ea75748f3feecbc04",
+  "failed_mlflow_status": "FAILED",
+  "corrected_tracking_tests": "2 PASS,0.029seconds; actual failing receipt exercised",
+  "retry_authorized": false
+}

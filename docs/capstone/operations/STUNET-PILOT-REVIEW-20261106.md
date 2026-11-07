@@ -1,0 +1,21 @@
+# STU-Net restoration and real-input pilot review — November 6
+
+All 1,403 bound CTs are accounted for: 924 restored with exact identities and 479 reused; 1,333 training and 70 development cases. Restoration completed successfully in 5,357.484 seconds with workers reaped. This establishes byte restoration; full source/header binding is a separate stage, currently owned session 12922 at `stunet-full-input-binding-20261106-a01`. Do not dispatch it again.
+
+The real-input pilot completed six finite-gradient updates and two native reconstructions (144 and 30 windows), both with zero gaps. Worker resources: 328.907 seconds, 3,065,462,784 bytes peak owned RSS; CUDA peak allocated 6,102,968,832 and reserved 6,266,290,176 bytes. All workers reaped. Six PNGs actually reviewed, with observations bound to the result hash in private visual-review.json. Individual windows clip anatomy at edges; coverage is established separately across the 2,978-window bank. Only two selected views contain lesion voxels; no small-lesion learning conclusion is justified. Fresh three-class heads have not been scientifically trained; pilot Dice is not an experiment outcome.
+
+**Launch gate is NOT satisfied:** the unchanged conservative projection is 174,337.142 seconds (48h25m37s), exceeding the authorized 172,800 seconds. The result's top-level PASS describes execution only; `within48h: false` prevents launch. Asked the user whether to increase only the wall-time cap to 50 hours or retain 48 hours and investigate speed. No limit changed, no repeat pilot, no scientific launch, no MLflow RUNNING record or dashboard training-hours change.
+
+Remaining: complete full input binding, resource decision, full-state producer/independent-backup cold replay, scientific supervision/MLflow integration, immutable readiness receipt and launch verification. Seventeen focused CPU tests passed (2.217 seconds). No Mac run is armed; Lenovo remains sole authorized scientific host. Preserve all existing producer pins and original acquisition reconciliation evidence.
+
+Coordination amendment: the Mac coordinating chat has superseded the local 50-hour proposal with a single 60-hour wall-cap question. No human approval received here yet; 48 hours remains binding. All other limits and the scientific recipe remain unchanged.
+
+Approval amendment received from coordinating chat: exact human answer **Approve a 60-hour cap**. The sole changed limit is total scientific wall time 216,000 seconds, including all six validations; original 48-hour evidence remains intact. Private `stunet-launch-qualification-20261106-a01/wall-time-amendment.json` records the question and scope. Full input binding PASS: all1403 available, 3963 native windows/70 cases/36positive;344.578seconds/1,836,380,160B/reaped. Four additional launch tests PASS2.007s. Actual producer qualification now owned70542;225pins frozen, no redispatch.
+
+## Launch attempt and separately prepared correction
+
+Producer5 PASS68.797s/2,181,193,728B/reaped; independentCstep4 SHA6c9ea395cf6f01a3367c3a2a8ef909c426dabeb0c4f29395996e1ac3e59d028b. Cold1 PASS29.219s/3,041,202,176B/reaped:522state tensors exact at restore and after next update (maxdifference0). Ready232pins SHA0978d0c6912c3f26fd67e76d13e3a693c78831000b2244526610b5a024ed209d. Independent projected backups67,767,136,907B below68,719,476,736Bcap.
+
+First science launch owned85716 FAILED during MLflow initialization: direct pin-dictionary indexing used slash-form input path while frozen keys used Windows backslashes. Supervisor4.515s/exit1/reaped; execution directory never created, ZERO scientific updates, no checkpoint/history. Only monitor processes remain. MLflow2159a2c44093427ea75748f3feecbc04 was explicitly closed FAILED after checking no train/loss metrics. Dashboard unchanged; no training-hours increment.
+
+Original pinned supervisor/request/failed attempt preserved. Additive supervise_stunet_transfer_20261106_v2.py canonicalizes the pin lookup before creating MLflow records and closes a newly created record on parameter-init failure. Two tests PASS0.029s, including the actual failed receipt with mixed slashes and injected MLflow failure. Worker and qualification sources unchanged. User asked to approve ONE corrected launch attempt; no corrected dispatch until that answer.

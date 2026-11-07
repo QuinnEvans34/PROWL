@@ -1,5 +1,13 @@
 # Lenovo work status
 
+## November6 STU-Net qualification PASS; first launch failed before updates
+
+All1403 sources/header binding PASS; six real pilot updates/two native reconstructions PASS; actual producer5/cold1 PASS/reaped,522state tensors exact before/after replay. Human60h wall amendment approved, other limits unchanged. Scientific attempt85716 failed MLflow pin lookup (slash/backslash mismatch),4.515s/reaped; execution directory absent/ZEROupdates. MLflow2159a2c44093427ea75748f3feecbc04 closedFAILED/no losses; dashboard unchanged. Original232pins/ready0978d0c... preserved. Additivev2 supervisor prepared, two regression testsPASS including actual failed receipt. Awaiting user's ONEcorrected-attempt approval; no automatic retry. No GPU workers remain. [Evidence](../operations/STUNET-PILOT-REVIEW-20261106.md).
+
+## November6 restoration/input binding PASS; 60h amendment approved, recovery qualification live
+
+All1403CTs accounted for (924new/479reused); restoration and realpilot exit0/reaped. Six diagnostic updates finite; two native reconstructions gaps0; six PNGs actually reviewed. Conservative runtime174337.142s exceeds approved172800s; no scientific launch or cap change. Human approved ONLY60h wall cap via coordinator; original48h failed projection retained. Full source/header binding12922 PASS1403/70/reaped344.578s. GPUproducer owned70542 LIVE;225pins frozen, no duplicate. [Review](../operations/STUNET-PILOT-REVIEW-20261106.md) and JSON record exact evidence. Seventeen focusedCPUtests PASS. Earlier source-missing/host-handoff entries below superseded. Lenovo sole scientific dispatcher, Mac idle.
+
 ## November6 STU-Net portable CPU primitives PASS; host handoff pending
 
 [Portable preparation](../operations/STUNET-PORTABLE-PREPARATION-20261106.md) and JSON publish additive loader/loss/tests/CPUworker. Seven testsPASS; actual hash-bound architecture32cubeCPUforward finite/58,160,975parameters; both workers exit0/reaped, max832,770,048B. No originalcheckpoint load/download or CUDA/realinput qualification yet; no scientific launch. Exact original-checkpoint optional loader branch remains unqualified. Restoration estimate from retained178case/4archive2034.907s:9archives traversal~77min; plan1–2h with proposed3h cap,35GiB newoutput/4GiBRSS/100GiB floors. No extraction dispatched. Mac checking full1403 paths; scientific launch requires explicit single-host handoff. No Mac audit files committed, no frozen source edits.
