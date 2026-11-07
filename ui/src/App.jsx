@@ -253,6 +253,7 @@ export default function App() {
       studies: 'Studies',
       research: 'Research',
       saved: 'Saved prediction',
+      training: 'Training',
       predict: 'Analyze scan',
       workbench: currentCase ? `${formatStudyId(caseId)} · Workbench` : 'Workbench',
     }
@@ -477,7 +478,7 @@ export default function App() {
           />
         </ViewerSuspense>
       )}
-      {route.view === 'training' && <ViewerSuspense label="Loading training time…"><TrainingPage /></ViewerSuspense>}
+      {route.view === 'training' && <ViewerSuspense label="Loading training results…"><TrainingPage /></ViewerSuspense>}
       {route.view === 'predict' && <ViewerSuspense label="Loading prediction workspace…"><OnDemandPredictionView onServiceStatus={setPredictionEndpointStatus} onReviewDirty={setNativeReviewDirty} /></ViewerSuspense>}
       {route.view === 'saved' && (
         <ViewerSuspense label="Loading saved viewer…">

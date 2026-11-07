@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import snapshot from '../../../configs/training-hours/recorded-hours-v1.json'
+import TrainingProgressPanel from '../components/TrainingProgressPanel.jsx'
 import './TrainingPage.css'
 const hours=n=>Number(n/3600).toLocaleString(undefined,{minimumFractionDigits:1,maximumFractionDigits:1})
 const stamp=value=>value?new Date(value).toLocaleString(): 'Not recorded'
@@ -27,8 +28,9 @@ export default function TrainingPage(){
  const kdTreatment=kd.filter(e=>e.arm==='treatment').reduce((a,e)=>a+e.seconds,0)
  const t=data.totals
  return <main className="pw-page pw-hours">
-  <header><p className="pw-eyebrow">Experiment accounting</p><h1 className="pw-display">Training time</h1>
-   <p className="pw-lede">Recorded sessions across the Mac and Lenovo, including the earlier MLflow history.</p></header>
+  <header><p className="pw-eyebrow">Experiments and accounting</p><h1 className="pw-display">Training</h1>
+   <p className="pw-lede">Experiment results and recorded sessions across the Mac and Lenovo.</p></header>
+  <TrainingProgressPanel />
   <section className="pw-hours__total" aria-label="Recorded training sessions"><span>Recorded training sessions</span>
    <strong>{hours(t.recorded_training_seconds)} <small>hours</small></strong>
    <p>Includes {hours(t.legacy_estimated_seconds)} hours estimated from historical MLflow timestamps.</p>

@@ -1,0 +1,34 @@
+.pw-progress { margin-top: 24px; padding: 24px; border: 1px solid var(--pw-border); border-radius: 12px; background: var(--pw-surface); }
+.pw-progress__header, .pw-progress__updates { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.pw-progress__header h2 { margin-bottom: 4px; font-size: 22px; }
+.pw-progress__header button { padding: 8px 12px; border: 1px solid var(--pw-border); border-radius: 8px; background: var(--pw-bg); color: var(--pw-text); cursor: pointer; }
+.pw-progress__header button:disabled { opacity: .65; cursor: wait; }
+.pw-progress__freshness { padding: 12px 14px; margin: 16px 0; border-left: 3px solid var(--pw-accent, #b4a2ff); background: var(--pw-bg); }
+.pw-progress__freshness[data-freshness="older"], .pw-progress__freshness[data-freshness="clock_ahead"] { border-left-color: #cda65a; }
+.pw-progress__freshness strong, .pw-progress__freshness span { display: block; }
+.pw-progress__freshness span, .pw-progress__freshness p, .pw-progress__scope, .pw-progress__definitions { color: var(--pw-text-muted); font-size: 13px; }
+.pw-progress progress { display: block; width: 100%; height: 8px; margin: 12px 0 16px; accent-color: var(--pw-accent, #b4a2ff); }
+.pw-progress__updates { font-variant-numeric: tabular-nums; }
+.pw-progress__updates span { font-size: 13px; color: var(--pw-text-muted); }
+.pw-progress__pending { padding: 12px 14px; border: 1px solid var(--pw-border); border-radius: 8px; }
+.pw-progress__metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 20px 0 8px; }
+.pw-progress__metrics > div { padding: 14px; border: 1px solid var(--pw-border); border-radius: 8px; }
+.pw-progress__metrics span, .pw-progress__metrics small, .pw-progress td, .pw-progress th { font-size: 13px; }
+.pw-progress__metrics strong, .pw-progress__metrics small { display: block; }
+.pw-progress__metrics strong { font-size: 30px; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.pw-progress__chart { margin: 14px 0; }
+.pw-progress__chart svg { display: block; width: 100%; max-height: 230px; }
+.pw-progress__chart text { fill: var(--pw-text-muted); font-size: 11px; }
+.pw-progress__grid { stroke: var(--pw-border); }
+.pw-progress__lesion_dice { stroke: #b4a2ff; fill: #b4a2ff; }
+.pw-progress__pancreas_dice { stroke: #63cbb4; fill: #63cbb4; }
+.pw-progress__chart figcaption { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--pw-text-muted); }
+.pw-progress__legend-lesion::before, .pw-progress__legend-pancreas::before { content: ''; display: inline-block; width: 16px; height: 3px; margin-right: 6px; vertical-align: middle; background: #b4a2ff; }
+.pw-progress__legend-pancreas::before { background: #63cbb4; }
+.pw-progress__table { overflow-x: auto; margin: 16px 0; }
+.pw-progress__table caption { text-align: left; font-size: 14px; margin-bottom: 8px; font-weight: 600; }
+.pw-progress__table th small { display: block; font-size: 11px; font-weight: 400; }
+.pw-progress__definitions summary { cursor: pointer; margin-top: 12px; }
+.pw-progress__definitions dt { font-weight: 600; margin-top: 8px; }
+.pw-progress__definitions dd { margin: 2px 0; overflow-wrap: anywhere; }
+@media (max-width: 620px) { .pw-progress { padding: 16px; } .pw-progress__metrics { grid-template-columns: 1fr; gap: 8px; } .pw-progress__metrics strong { font-size: 26px; } }
