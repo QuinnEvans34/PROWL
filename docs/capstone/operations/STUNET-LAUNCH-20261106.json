@@ -1,0 +1,47 @@
+{
+  "status": "LAUNCH_VERIFIED",
+  "ready_sha256": "59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68",
+  "pins_verified": 237,
+  "artifact": "E:/PROWL/artifacts/pants_stunet_base_transfer_12k_20261106_launch02",
+  "owned_session": 80176,
+  "owner": {
+    "worker": 42604,
+    "supervisor": 48492,
+    "command": [
+      "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+      "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_transfer_20261106.py",
+      "--request",
+      "E:\\PROWL\\readiness\\stunet-scientific-launch-20261106-a02\\ready.json",
+      "--mode",
+      "science",
+      "--output",
+      "E:\\PROWL\\artifacts\\pants_stunet_base_transfer_12k_20261106_launch02\\execution"
+    ]
+  },
+  "mlflow_run_id": "243ccf3f71c34417be60362af35187d1",
+  "observed_steps": [
+    14,
+    18,
+    30
+  ],
+  "latest_loss": 4.057824611663818,
+  "elapsed_seconds": 124.70299999997951,
+  "initial_checkpoint": {
+    "event": "checkpoint",
+    "elapsed_seconds": 12.202999999979511,
+    "utc_ms": 1794019820906,
+    "step": 0,
+    "path": "E:\\PROWL\\artifacts\\pants_stunet_base_transfer_12k_20261106_launch02\\execution\\checkpoint-00000.pt",
+    "backup": "C:\\Users\\quinn\\PROWL-Backups\\pants_stunet_base_transfer_12k_20261106_launch02\\checkpoint-00000.pt",
+    "sha256": "bb1d20247f04747080307de2d8e7717a33558ab4905b4eb5f1b809a4ce311ec1",
+    "bytes": 232741431
+  },
+  "automation": {
+    "id": "monitor-stu-net-training-and-morning-dice",
+    "status": "ACTIVE",
+    "frequency": "hourly",
+    "target_thread_id": "01a12c40-1490-7cf2-8e20-6498c71bf685"
+  },
+  "failed_attempt_preserved": true,
+  "first_validation_step": 2000
+}
