@@ -1,5 +1,8 @@
 # AGENTS.md — Agent Context
 
+> **November6 STU-Net corrected launch VERIFIED:** Actualupdates advancing, owned80176/supervisor48492/workerwrapper42604. Read docs/capstone/operations/STUNET-LAUNCH-20261106.md. Preserve237pins/ready59e8188d...; no duplicate/retry. MLflow243ccf3f71c34417be60362af35187d1 RUNNING, independent initialbackup exact, phoneAPI live. Hourly heartbeat monitor-stu-net-training-and-morning-dice ACTIVE in thischat; do not duplicate.60h/12k approved; firstfullnativevalidation2k, morning available-results snapshot after10h. Priorfaileda01 zero updates preserved.
+
+
 > **November2 fixed-four exception evaluation COMPLETE:** Owned48699 exit0;
 > all8inference+8CPUscore workers successful/reaped,supervisor43452absent/GPUidle.
 > 330pins match,95output/receiptbackup pairs plus summary/closeout match. SummarySHA

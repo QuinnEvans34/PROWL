@@ -1,5 +1,9 @@
 # Lenovo work status
 
+## November6 corrected STU-Net LAUNCH VERIFIED; hourly monitor ACTIVE
+
+Owned80176/supervisor48492/workerwrapper42604; artifact pants_stunet_base_transfer_12k_20261106_launch02. ReadySHA59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68,237pins unchanged. Updates14 then18 and beyond; MLflow243ccf3f71c34417be60362af35187d1 RUNNING/storedloss18 verified. InitialE/CcheckpointSHA bb1d20247f04747080307de2d8e7717a33558ab4905b4eb5f1b809a4ce311ec1 exact. PhoneAPI live/history retained. **Hourly heartbeat monitor-stu-net-training-and-morning-dice successfully created ACTIVE on Lenovochat; savedconfig verified. Initialmissingdestination call failed, correctedcreate succeeded. NO Macfallback/duplicate needed.** Firstcheck>=10h records availablecompleteDicecurve. [Launch](../operations/STUNET-LAUNCH-20261106.md) andJSON contain exact identities. Originalfaileda01 zero updates preserved.60h andONEcorrectedattempt approved; no furtherretry/successor. Preserveallpins.
+
 ## November6 STU-Net qualification PASS; first launch failed before updates
 
 All1403 sources/header binding PASS; six real pilot updates/two native reconstructions PASS; actual producer5/cold1 PASS/reaped,522state tensors exact before/after replay. Human60h wall amendment approved, other limits unchanged. Scientific attempt85716 failed MLflow pin lookup (slash/backslash mismatch),4.515s/reaped; execution directory absent/ZEROupdates. MLflow2159a2c44093427ea75748f3feecbc04 closedFAILED/no losses; dashboard unchanged. Original232pins/ready0978d0c... preserved. Additivev2 supervisor prepared, two regression testsPASS including actual failed receipt. Awaiting user's ONEcorrected-attempt approval; no automatic retry. No GPU workers remain. [Evidence](../operations/STUNET-PILOT-REVIEW-20261106.md).
