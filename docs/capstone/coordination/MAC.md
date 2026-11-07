@@ -1,5 +1,38 @@
 # Mac work status
 
+## November 7 STU-Net early errors and proposed follow-up
+
+- Imported peer `0da40f1`'s native metadata/report byte-for-byte. Export SHA256
+  `9528af9e5817f74d3a813c096b261d1e80b4ac688773697c272cd4e1f0e971a9`;
+  all 70 cases at 2k/4k/6k. Source inspection reconciles six producer pins: four
+  exact Git bytes, two exact LF-to-CRLF serialization. Native metrics/input code
+  match exact bytes. These are Git/export checks, not live-pin requalification.
+- `e4d8f2f`: [interim analysis](../operations/STUNET-INTERIM-ERROR-ANALYSIS-20261107.md),
+  19 metadata tests, actual CLI byte-identical replay and unchanged input hashes.
+  Derived 6k recall .452044, precision .380762 on 35 defined positives, six complete
+  case misses and nine missed reference components. Small-total-lesion five-case
+  DICE .047820, versus medium .383014/large .438158. All 70 retained; no new scoring
+  from arrays, model calls or independent-patient inference. KD final-arm reference
+  mapping still unverified; no cross-model deltas or promotion.
+- `a6e7653`: [CAP-EXP-020 proposal](../operations/CAP-EXP-020-PROPOSED-20261107.md)
+  and registry, plus a pure NumPy policy/15 synthetic tests. Proposed one shared
+  probability reconstruction for raw versus .40/.50/.60, after current training
+  closeout. Requires +.02 DICE and case/component/small-recall/overall-recall/
+  pancreas/false-alarm guards. A suppression-only policy cannot recover raw misses.
+  Proposed four-hour cap and existing safety limits; no executable launch receipt,
+  actual native runner, GPU qualification, timer, MLflow RUNNING record or training.
+- Inspected producer returns metrics rather than retaining per-case probability
+  volumes, so saved-count threshold screening is unavailable. A separate qualified
+  inference pass would be required; do not edit the active producer to add saves.
+  Estimated four uint8 masks plus independent copies: 15.86 GiB before other data;
+  admission/runtime/current combined storage remain pending. Mac stays on CPU work.
+- [Trello proposal](https://trello.com/c/36PNBVVj) is in Backlog, not running;
+  W06-01 and the STU-Net/provenance card link the new evidence and limitations.
+  Current Lenovo launch02 and its hourly monitor remain untouched. Later training
+  ideas are deferred until final evidence, not a second queue of long runs.
+  Existing audit drafts remain uncommitted. Earlier Week 5 evidence inventory is
+  the retained snapshot at `45bb8ea`, not a live checksum of evolving status files.
+
 ## November 7 reviewer verification and weekly evidence handoff
 
 - Reviewer repair `92bf1f5`: returned save decisions must match submitted intent;

@@ -30,6 +30,16 @@ unconfirmed. Main Week 7/G7 acceptance remains visible. No feedback is invented.
 
 ## First model-review task
 
+November 7 follow-up: [STU-Net interim error analysis](../operations/STUNET-INTERIM-ERROR-ANALYSIS-20261107.md)
+uses all 70 saved cases at 2k/4k/6k. Small-total-lesion cases remain particularly
+weak; metadata does not establish spatial causes or final performance.
+[CAP-EXP-020](../operations/CAP-EXP-020-PROPOSED-20261107.md) is registered as a
+proposed bounded confidence-policy screen with synthetic code and explicit
+lesion-preservation guards. It is exploratory, not a preselected substitute for
+the formal G4-dependent comparison. No actual inference runner, launch receipt,
+automatic successor or extra training run is issued. Review the full current
+training result before deciding whether to admit that screen.
+
 Use the new [read-only preparation tool and packet](../operations/WEEK-06-COMPARISON-PREPARATION-20261107.md).
 Completed KD selected lesion DICE is .383593 control / .389084 treatment; terminal
 is .381964 / .383439. Component overlap declines 39/45 to 37/45. These results
