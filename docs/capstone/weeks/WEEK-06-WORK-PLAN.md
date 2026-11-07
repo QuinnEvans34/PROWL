@@ -1,0 +1,105 @@
+# Week 6 work plan — November 9–15, 2026
+
+Prepare a defensible model decision and measure retrieval/answer quality while
+finishing the open baseline and reviewer requirements. This is the November 7
+preparation requested by Quinton; Week 5 and its outstanding hours/submission
+remain open through November 8. No new GPU run is queued by this plan.
+
+## Proposal commitment
+
+The approved master schedule names **Model experiment and retrieval evaluation**:
+complete one controlled model comparison, evaluate the false-alarm tradeoff, and
+measure retrieval quality. Expected evidence is a documented model decision and
+operating curve, retrieval metrics and grounded-response checks. The formal model
+comparison depends on G4; completed exploratory KD or supplied-region transfer
+cannot retrospectively satisfy that dependency.
+
+## Work order
+
+| Priority and owner | Work and inputs | Done condition |
+| --- | --- | --- |
+| 1. Mac + Lenovo: finish the available model evidence | Use completed KD selected/terminal results and all scheduled STU-Net results after its existing run finishes | Source-bound series, per-case errors, selection rules, failed attempts, tracking, checkpoints/backups and cleanup reviewed; incomplete evidence remains explicitly pending |
+| 2. Mac + Quinton: reconcile G4 and select the formal comparison | Start from the exposed autonomous 63-score/seven-failure record and seven-case visual review; retain spatial-unit/provenance and cross-device qualification gaps | An admitted autonomous baseline and an evidence-selected, prospective comparison contract; if not achievable, document the precise shortfall and agree a scoped fallback without declaring G4 passed |
+| 3. Mac: retrieval and grounded-answer evaluation | Existing pinned 14-source/1,179-passage corpus, eligible questions and source-linked expected support | Frozen question roles, protocol and failure rules; report retrieval relevance/recall and answer support, completeness, citations, refusal and cold/warm latency separately from exposed UI regressions |
+| 4. Mac + Quinton: reviewer walkthrough | Existing saved scan/conversation fixtures, November 7 engineering checks and Plan 11 script | Current production viewer/service/presentation check, then actual role-appropriate participant session with observations and prioritized follow-up; scheduling alone is not acceptance |
+| 5. Quinton + Mac: weekly evidence | Week 5 closeout and this week's immutable reports/commits | User-confirmed active hours, correct carryovers and course submission status; unattended compute remains separately accounted |
+
+The preliminary aunt/fallback session is planned for **Saturday, November 14**.
+Exact time, actual industry role and participation/note-taking permission are still
+unconfirmed. Main Week 7/G7 acceptance remains visible. No feedback is invented.
+
+## First model-review task
+
+Use the new [read-only preparation tool and packet](../operations/WEEK-06-COMPARISON-PREPARATION-20261107.md).
+Completed KD selected lesion DICE is .383593 control / .389084 treatment; terminal
+is .381964 / .383439. Component overlap declines 39/45 to 37/45. These results
+support a limited descriptive assessment, not automatic promotion. The original
+control cleanup failure and all attempts remain recorded.
+
+STU-Net is still running at this plan's preparation. Lenovo owns the authorized
+12k/60h experiment, receipt, producing files, GPU and hourly monitor. Review all
+six full 70-case validations, selected and terminal checkpoints, per-case misses
+and false alarms, backup equality, MLflow closure and cleanup when available.
+An aggregate dashboard cannot establish final closeout. Do not extend the horizon,
+retry, change pins or launch a scratch arm merely to fill a comparison table.
+
+Verify case/reference identities, units, metric definitions, raw output policy,
+geometry and provided-region versus autonomous inputs before matching results.
+The same 70 count is insufficient. Differences in architecture, pretraining,
+input windows and 12k versus 24k horizons prevent an isolated causal attribution.
+Unresolved patient/pretraining linkage restricts claims; it is not proof of
+independence. The four-positive Universal screen remains publisher-model inference.
+
+Review KD-specific aligned saved errors for the recorded gain/decline/miss cases
+before proposing a mechanism. The existing autonomous gallery shows that cropping
+alone does not explain all misses, near/far false positives or spillover. These are
+different comparisons; reuse of a gallery is not KD spatial verification.
+
+## Contract before any new comparison
+
+After G4, select the smallest intervention justified by error frequency, severity,
+an isolatable mechanism and available compute. Freeze the question/hypothesis,
+control and changed factor(s), model/recipe/input identities, cohort/reference
+roles, horizon, selection and terminal endpoints, metrics/empty/failure rules,
+guardrails, uncertainty unit, resources and stop conditions before execution.
+Report pancreas and lesion overlap, multi-lesion coverage, missed lesions,
+false-positive burden, empty-case alarms and complete failure denominators.
+
+An operating-curve or policy comparison may be cheaper than another training run,
+but requires permitted raw outputs, development-only selection and its own frozen
+contract. No threshold, largest-component filter, verifier or tighter crop is
+selected from these aggregate observations. Preserve raw results and all failures;
+never discard seven failed cases to present a full 70-case score.
+
+If patient linkage remains unresolved, report descriptive study/case results and
+the exact limitation; do not label bootstrap samples independent patients. If G4
+cannot close, retain the formal milestone gap and discuss an honest fallback with
+Quinton. Do not retroactively preregister the completed KD or transfer study.
+
+## Capacity and review checkpoints
+
+Monday: review the latest completed training evidence and confirm the baseline
+admission gaps. Tuesday/Wednesday: freeze the eligible formal model/operating
+comparison and retrieval protocol, then execute only admitted work. Thursday:
+review failures and remaining evidence; avoid repeated tuning on protected cases.
+Friday: finish the production walkthrough check and prepare the participant
+packet. Saturday: preliminary session if confirmed. Sunday: record findings,
+confirmed hours, remaining gates and Week 7 handoff.
+
+One primary Mac coding task may run alongside the single Lenovo GPU job. Existing
+metadata, CPU tests and saved-result UI checks need no training pause. No answer
+model, new inference or second training job is authorized by this schedule.
+Week 9's buffer and Week 10 delivery remain protected.
+
+## Evidence and board
+
+- [Week 5 technical closeout](WEEK-05-EVIDENCE-CLOSEOUT-20261107.md) retains G3/G4/G6/G7 gaps.
+- [Plan 06](../implementation/06-evaluation-and-model-experimentation.md) governs
+  formal comparison; [master plan](../MASTER-PLAN.md) remains the approved schedule.
+- [Reviewer checks](../testing/REVIEWER-FLOW-20261107.md) and
+  [Plan 11](../implementation/11-stakeholder-validation.md) distinguish engineering
+  evidence from actual participant acceptance.
+- Trello W06-01 and W06-02 retain their existing deadlines and dependencies;
+  preparation does not mark them completed or roll the board early. W05-04 still
+  needs Quinton's hours/submission confirmation. W05-08 retains KD spatial/patient
+  follow-up even though compute and quantitative review are complete.

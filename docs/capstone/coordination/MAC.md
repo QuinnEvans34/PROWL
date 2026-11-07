@@ -1,5 +1,39 @@
 # Mac work status
 
+## November 7 reviewer verification and weekly evidence handoff
+
+- Reviewer repair `92bf1f5`: returned save decisions must match submitted intent;
+  duplicate/broken history is refused and conflict recovery retains the draft.
+  Fixed the demonstrated Node JSON import/restart defect. Verification: 164 UI
+  tests, 38 backend tests, production/Sites builds and actual isolated browser
+  save/reopen/revise across API restart. Both receipt chains and all five original
+  package files checked; dedicated test services and browser tab cleaned up.
+  [Report](../testing/REVIEWER-FLOW-20261107.md). These are engineering records,
+  not production decisions, participant feedback or new contour adjudication.
+- Technical Week 5 reconciliation `6ac2e70`:
+  [closeout](../weeks/WEEK-05-EVIDENCE-CLOSEOUT-20261107.md) with exact report hashes.
+  G3/G4/G6/G7, KD-specific spatial explanations, personal active hours and course
+  submission remain explicitly open. Week 5 still ends November 8. The preliminary
+  aunt/fallback session is November 14; exact time/role/permission unconfirmed.
+- Comparison preparation `37dfa9a`:
+  [tool and packet](../operations/WEEK-06-COMPARISON-PREPARATION-20261107.md), 15 new
+  metadata tests, actual CLI byte-identical reproduction and unchanged source
+  hashes. Original completed KD analysis also reproduces exactly. Full KD curve
+  and selected/terminal errors are separate from STU-Net's dated aggregate export.
+  No ranking/promotion, patient-independent inference or new GPU work. Equal cohort
+  counts do not establish exact case/reference alignment. Even a completed dashboard
+  does not establish full closeout. Historical failures remain preserved.
+- [Week 6 plan](../weeks/WEEK-06-WORK-PLAN.md) is prepared for November 9–15:
+  finish available results/closeout, resolve admitted autonomous baseline and freeze
+  the formal comparison, measure retrieval/grounded answers, then actual walkthrough.
+  This is planning, not a receipt or automatic queue. W05-07/04/08 and W06-01 have
+  evidence updates; broad acceptance cards remain open instead of erasing gaps.
+- Lenovo remains sole owner of corrected STU-Net launch02 and its existing hourly
+  monitor. No live producer/pin changes, merges, new model calls, tracking writes,
+  teacher/KD restart or additional monitor. Existing uncommitted audit work remains
+  separate and unpublished. Peer can read these commits with `git show`; do not
+  merge or pull under its active frozen worker.
+
 ## November 7 results UI and walkthrough reschedule
 
 - Quinton postponed the preliminary aunt/fallback showcase to **Saturday,

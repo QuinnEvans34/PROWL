@@ -35,6 +35,8 @@ from this closeout.
 
 KD and teacher generation are complete. The historical Mac KD monitor stays
 paused. Do not restart either to create activity or fill a results table.
+The original control cleanup failure retains its FAILED status; completed model
+updates and later evidence review do not rewrite that execution outcome.
 
 ## Remaining gaps and next owner
 

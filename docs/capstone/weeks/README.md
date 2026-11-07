@@ -6,6 +6,8 @@ proposal, master schedule, experiment records or component contracts.
 
 **Current:** [Week 5 work plan](WEEK-05-WORK-PLAN.md), November 2–8;
 [Saturday evidence closeout](WEEK-05-EVIDENCE-CLOSEOUT-20261107.md).
+**Next, prepared:** [Week 6 work plan](WEEK-06-WORK-PLAN.md), November 9–15;
+model comparison and retrieval evaluation, with explicit remaining prerequisites.
 **Previous:** [Week 4 plan](WEEK-04-WORK-PLAN.md), October 26–November 1;
 [Week 3 plan](WEEK-03-WORK-PLAN.md), October 19–25;
 [Week 2 plan](WEEK-02-WORK-PLAN.md), October 12–18, and
