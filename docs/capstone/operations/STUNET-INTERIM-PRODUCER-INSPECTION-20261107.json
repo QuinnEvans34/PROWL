@@ -1,0 +1,60 @@
+{
+  "schema": "prowl.stunet.interim-producer-inspection.v1",
+  "git_commit": "0da40f1ae66e59e7e6fa8a7debdfea4b4c277c2c",
+  "export_sha256": "9528af9e5817f74d3a813c096b261d1e80b4ac688773697c272cd4e1f0e971a9",
+  "producer_pin_git_checks": [
+    {
+      "path": "src/data/stunet_inputs_20261106.py",
+      "recorded_sha256": "24683909187231afd2983d19681ac5de74559cd6d716c92b302517a20ec4011e",
+      "git_blob_sha256": "24683909187231afd2983d19681ac5de74559cd6d716c92b302517a20ec4011e",
+      "match": "exact Git bytes"
+    },
+    {
+      "path": "src/training/metrics.py",
+      "recorded_sha256": "798339ed1acceb8650fb139cff203485bcd53f25a169700c38d5ecb71ef6a320",
+      "git_blob_sha256": "9ea7a74bded886399d3d50b89aa33815075f1e90de0e9b737c2c0b4f4ba2e5cc",
+      "match": "exact LF-to-CRLF serialization only; no other transform"
+    },
+    {
+      "path": "src/training/native_localizer_metrics.py",
+      "recorded_sha256": "dfa1b6a8b9853bcbf6602625ef7f1aeff437b5d4ebc0903d5dd290600e3eb621",
+      "git_blob_sha256": "966b1d9bd270a62541e25d5e05d4e6860a8172d4e8b0f0aba3d8913ee4f4afcf",
+      "match": "exact LF-to-CRLF serialization only; no other transform"
+    },
+    {
+      "path": "src/training/pants_native_evaluation.py",
+      "recorded_sha256": "6e02fa0da2db3af02bb76b2caff2e498e5ec9b104bc057b7863907e9ed1eb85a",
+      "git_blob_sha256": "6e02fa0da2db3af02bb76b2caff2e498e5ec9b104bc057b7863907e9ed1eb85a",
+      "match": "exact Git bytes"
+    },
+    {
+      "path": "src/training/stunet_session_20261106.py",
+      "recorded_sha256": "c361b231ebb1b74a35825288638e8682bc9c98594a06ba5800dea652dfa1df6d",
+      "git_blob_sha256": "c361b231ebb1b74a35825288638e8682bc9c98594a06ba5800dea652dfa1df6d",
+      "match": "exact Git bytes"
+    },
+    {
+      "path": "src/training/stunet_transfer_20261106.py",
+      "recorded_sha256": "7654a9d01bc4873b7e44cf43c6b4858dc1c6f09c8b2d9a8a06f92d8d0657d30c",
+      "git_blob_sha256": "7654a9d01bc4873b7e44cf43c6b4858dc1c6f09c8b2d9a8a06f92d8d0657d30c",
+      "match": "exact Git bytes"
+    }
+  ],
+  "probability_retention_inspection": {
+    "source_files": [
+      {
+        "path": "scripts/training/train_stunet_transfer_20261106.py",
+        "git_blob_sha256": "0bbeeacab3b37a70ed1149324e8fb91e9777a7241fe271a7aaa9cfb491fe5e83"
+      },
+      {
+        "path": "src/data/stunet_inputs_20261106.py",
+        "git_blob_sha256": "24683909187231afd2983d19681ac5de74559cd6d716c92b302517a20ec4011e"
+      }
+    ],
+    "finding": "predict reconstructs probabilities then argmax labels and returns native metrics only; worker writes native JSON metrics and checkpoints, not per-case probability volumes",
+    "boundary": "Git source inspection; no live filesystem probability inventory or worker/checkpoint/scan read; no claim that unrelated artifacts contain no probabilities"
+  },
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "live_producer_files_modified": false
+}
