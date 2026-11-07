@@ -74,3 +74,20 @@ path/method refusal and late response isolation. Existing accounting tests remai
 in the verification command. Build and browser inspection are recorded after
 completion in the Mac handoff; fixtures are engineering evidence, not new model
 evaluation or participant feedback.
+
+November7 verification: **156 tests passed across 13 suites** (2.81 seconds),
+covering the five progress/accounting suites plus existing literature,
+conversation, citation, review identity, saved review/navigation and state
+regressions. Node24.21.0, Vite production build and Sites build preparation passed.
+The existing large NiiVue/codec chunk advisory remains; no dependency changed.
+
+Actual browser inspection at `http://127.0.0.1:5180/training` verified the three
+completed rows, the 0.3472/0.7441 latest scores, 30/36 detections, 26/34 empty-case
+alarms, provided-region warning and source age. Explicit refresh retained the
+original observation timestamp. The tab title is now `Training · PROWL` rather
+than `undefined · PROWL`. The chart/table and existing accounting were inspected
+in the normal desktop viewport. Browser proof remains local at
+`outputs/prowl/testing/training-progress-20261107/training-results.png`.
+Mobile browser presentation and a participant walkthrough were not performed.
+The saved export is not an automatic live feed and needs a newly delivered
+metadata export to advance its step count.

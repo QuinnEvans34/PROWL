@@ -1,5 +1,38 @@
 # Mac work status
 
+## November 7 results UI and walkthrough reschedule
+
+- Quinton postponed the preliminary aunt/fallback showcase to **Saturday,
+  November14**, exact time and role still unconfirmed. Plan11 and W05-03 updated;
+  W07-02 retains its broader acceptance requirement. No session/feedback invented.
+  Planning commit `4dfd1af` records the current work order.
+- W05-10 delivered a read-only Training results panel: all completed lesion and
+  pancreas DICE points, best/latest scores, validation progress, detection and
+  false-alarm denominators, source time/age and explicit exploratory scope.
+  Contract/reader `c2a4295`; UI `8876812`. Invalid or unavailable data retains the
+  last admitted results; partial validation is never a score and refresh cannot
+  make a saved observation look live. See
+  [contract and checks](../operations/TRAINING-PROGRESS-UI-20261107.md).
+- Peer read: Lenovo `1753ae4` sanitized aggregate export, copied byte-for-byte
+  with SHA256 `664535b2116b22bdf49ea85bc92457152dd830305145c398490eced023184163`.
+  At its observation time 2026-11-07T18:51:06.339094Z, STU-Net was training at
+  6,814/12,000 updates. Completed positive-case lesion DICE2k/4k/6k:
+  .144179/.222087/.347182; latest pancreas.744134, detection30/36, empty alarms26/34.
+  These are saved development observations with unresolved pretraining exposure,
+  not a current worker check, autonomous acceptance or an independent comparison.
+- The one corrected Lenovo run and hourly monitor remain under Lenovo ownership;
+  receipt `59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68`,
+  MLflow `243ccf3f71c34417be60362af35187d1`, 12k/60h unchanged. No trainer/pin
+  edits, GPU work, source merge, inference rerun or extra monitor from this task.
+- Verification:156tests/13suites pass, production/Sites build pass, actual browser
+  chart/table/freshness and manual refresh inspected. No participant feedback or
+  mobile browser acceptance claimed. Browser proof remains local. The dev UI is
+  served at5180; the result export is not a live remote feed.
+- Next: existing reviewer-flow acceptance checklist for November14, Week5 evidence
+  and Quinton-confirmed hours closeout, then Week6 model/answer-quality review.
+  Previous uncommitted STU-Net audit/helper work remains separate and uncommitted;
+  this publication does not claim that audit drafts were reviewed/published.
+
 ## November 6 review handoff
 
 - [Alternative transfer candidates and audit scope](../operations/TRANSFER-CANDIDATES-AND-LEAKAGE-AUDIT-20261106.md):
