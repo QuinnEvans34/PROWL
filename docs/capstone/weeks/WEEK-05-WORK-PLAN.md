@@ -5,6 +5,35 @@ Preserve the working literature prototype and fast assistant; focus remaining wo
 on integration and measurable answer quality. This plan does not change the approved
 proposal, frozen training recipe, evaluation roles or acceptance criteria.
 
+## November 7 work and walkthrough update
+
+Quinton moved the preliminary aunt/fallback showcase from November7 to
+**Saturday, November14**; exact time and specific role remain unconfirmed.
+The [living stakeholder record](../implementation/11-stakeholder-validation.md)
+retains the script and engineering checks. No feedback or completed session is
+claimed, and the Week7 acceptance requirement stays open. Trello W05-03 records
+the revised planning date; W07-02 retains the broader session requirement.
+
+The Mac KD treatment and bounded autonomous evaluation are complete; their
+limitations remain in the detailed reports below. Lenovo is now running the
+separately authorized exploratory STU-Net-B transfer experiment. Do not restart
+KD, change the live producer or equate supplied-region results with an autonomous
+or independent benchmark.
+
+Today's primary coding task is W05-10: add the active experiment's completed
+DICE series, validation progress and source age to the existing Training page.
+Use bounded saved aggregate metadata, reject inconsistent/partial validation
+points, and retain the last valid data when a read fails. A saved export must
+never imply a current connection or live worker. Verify partial validation,
+staleness, malformed data and recovery with fixtures, then check the UI/build.
+This is experiment visibility, not a new scoring policy or model comparison.
+
+Next: finish the existing reviewer/conversation regression checklist before
+November14, reconcile Week5 completed evidence and remaining acceptance gaps,
+and prepare Week6's controlled model/answer-quality review. Personal hours still
+require Quinton's confirmation. No participant software, new GPU experiment or
+cosmetic commit padding is needed for this work.
+
 ## Proposal commitments and current position
 
 Approved proposal v3.8, section6, Week5: **Autonomous baseline and retrieval

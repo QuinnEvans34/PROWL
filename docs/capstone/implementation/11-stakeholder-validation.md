@@ -1,10 +1,10 @@
 # Stakeholder validation
 
-**Status:** Fallback selected; preliminary walkthrough tentatively November7; session not yet conducted  
+**Status:** Fallback selected; preliminary walkthrough moved to November14; session not yet conducted
 **Owner:** Quinton Evans (outreach, scheduling, participant confirmation, and change approval)  
 **Target weeks:** 1 and 7  
 **Depends on:** Plan 08 wireflow and representative fixtures for the session, not for outreach  
-**Last reviewed:** 2026-11-03; Quinton selected his industry-experienced aunt as the existing fallback
+**Last reviewed:** 2026-11-07; Quinton deferred this weekend's showcase to Saturday, November14
 
 ## Outcome
 
@@ -12,6 +12,20 @@ A structured stakeholder session will test whether PROWL's review workflow, meas
 warnings, and accept/edit/reject states make sense to the intended role. Findings will be captured as
 evidence, prioritized against the approved scope and remaining schedule, and translated into bounded
 changes rather than informal feature requests.
+
+## November 7 schedule change
+
+Quinton cannot showcase the application this week and moved the preliminary
+walkthrough to **Saturday, November 14, 2026 (America/Denver)**. SV-P01 remains
+his industry-experienced aunt/fallback. Exact time and specific role are still
+unconfirmed. This supersedes the tentative November7 date in the historical
+preparation entries below; the existing script and fixtures remain useful.
+No session, participant feedback, outreach message or clinical validation has
+occurred. The main Week7 acceptance requirement stays open.
+
+Before November14, finish the saved scan/reviewer and conversation regression
+checks, verify the presentation against the current build, and record any actual
+limitations. Quinton still owns scheduling and participant permissions.
 
 ## Approved operating approach
 
