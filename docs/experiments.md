@@ -5743,3 +5743,14 @@ Run elapsed time including validation: 105,530.188 seconds (29.31 hours); superv
 All 34 execution files, including 25 checkpoints, six native reports, journal, result and selection receipt, match independent C backups by fresh SHA256. The adjacent JSON records exact hashes. Supervisor exited successfully, workers reaped and verified absent; GPU idle. Peak owned RSS 3,539,070,976 bytes. Phone API reports completed. Initial failed a01 remains preserved and contributes no training updates.
 
 The completed hourly monitor was deleted after verification to avoid further credit use. No automatic successor was launched. CAP-EXP-020 remains proposed and requires separate readiness and authorization.
+
+
+## November 8 - Correct seven normal-case targets, then continue STU-Net for 12k updates
+
+Status: scientific continuation LAUNCHED/VERIFIED, H0 NOT TESTED. Exact scope, qualification and one-shot handoff: [launch report](capstone/operations/STUNET-CORRECTED-LAUNCH-20261108.md), [prospective specification](capstone/operations/STUNET-CORRECTED-CONTINUATION-PREFLIGHT-20261108.md).
+
+H0: the composite corrected-label, LR-restart and additional-exposure phase does not improve native positive-case mean lesion Dice over parent0.37163303848917034. Alternative: improvement with detection/component/small-case/empty-alarm tradeoffs explicitly assessed. This is exploratory development, not isolated correction/duration causality or independent generalization.
+
+All1333train retained,664positive/669empty after seven exact errata corrections;70dev unchanged. Start parent12k full model/heads/AdamW/RNG/exposure;12000additionalglobal12001-24000,500warmup2e-5 then cosinezero;newdeterministic3:1coverage/jitter/context views. Sixnative70validations and500step independentbackups. Qualifiedreal7targets/9loaderchecks plusGPU5/cold1;522state tensors exact.
+
+First scientific a01 stopped before updates because supervisor interpreter lacked MLflow; no tracking run, workersreaped, evidence preserved. One authorized operational correction uses existingMLflow supervisor and unchangedCUDAworker, charges60s against40h. Corrected a02owned99079 verified advancing12001->12027; MLflow13c709ae157949988de1d7f8821a03b7RUNNING/25storedlossesexact. Parent independentE/C checkpoint reference reused. Phone11cards/all10history, newphasehours/steps counted once. HourlymonitorACTIVE for thisrunonly, no successor/retry. No new Dice available until firstfull70validation atglobal14000.

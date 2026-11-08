@@ -1,8 +1,11 @@
 # AGENTS.md — Agent Context
 
+> **November8 corrected continuation LAUNCH VERIFIED:** NEW12k/global12001-24000,owned99079/supervisor48348/worker52992(actual32244). Ready d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8/500pins. MLflow13c709ae157949988de1d7f8821a03b7RUNNING,updates12001->12027/stored25exact;parentE/Cinitialreferenceverified. Phonephaseprogress/hourslive/allhistory. ONEhourly monitor-corrected-stu-net-continuation ACTIVE. Read docs/capstone/operations/STUNET-CORRECTED-LAUNCH-20261108.md.143940sremaining/88GiBCbackups/100GiBfree/12GiBRSS/6GiBCUDA. Preservefaileda01zero-updates/allpins; no retry/resume/successor.
+
 > **November8 continuation scientific a01 failed before updates; operational correction authorized:** Wrong supervisor interpreter lackedMLflow; noexecution/noMLflowrecord/zero updates.95228reaped, GPUidle. Preservea01. v2supervisor uses existingMLflowenv, unchangedqualifiedCUDAworker. ONE correctedlaunch authorized viaMac underhumanfix-and-launch; charge60s against40h,143940s remain. Bounded preflight40420active; no duplicate. Read STUNET-CONTINUATION-QUALIFICATION-20261108.md.
 
 > **November8 corrected STU-Net continuation READY:** NEW additional12k authorized. Human88GiBCbackup allowance approved;100GiBfree/all othergates unchanged. Real7corrections+9providerchecks PASS;33CPUtests and Macreview PASS. GPUproducer70540/cold72315 success/reaped;522state tensors exact. ReadySHAfaf44afc54fa594e2aeac44a801def728701390995203ed78016277fad6d9465,494pins; preserve all. One science launch pending. Read docs/capstone/operations/STUNET-CONTINUATION-QUALIFICATION-20261108.md. No duplicate/retry/successor.
+
 
 > **November8 STU-Net COMPLETE/verified:** 12k updates, six full70 native validations; selected=terminal12k Dice.371633,35/36detected,41/45components,27/34emptyalarms. 237pins and34independent execution backups match;12kMLflow losses exact/FINISHED;workers successful/reaped/absent.29.31h inclvalidation. Monitor deleted after completion; no successor. Read docs/capstone/operations/STUNET-COMPLETION-20261108.md.
 

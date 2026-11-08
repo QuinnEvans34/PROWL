@@ -1,0 +1,192 @@
+{
+  "status": "LAUNCH_VERIFIED",
+  "observed_utc_seconds": 1794160999.5326076,
+  "ready_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+  "pins": 500,
+  "owned_session": 99079,
+  "owner": {
+    "worker": 52992,
+    "supervisor": 48348,
+    "command": [
+      "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+      "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_continuation_20261108.py",
+      "--request",
+      "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+      "--mode",
+      "science",
+      "--output",
+      "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution"
+    ]
+  },
+  "processes": [
+    {
+      "pid": 48348,
+      "parent": 58540,
+      "created": 1794160831.2190504,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "scripts/training/supervise_stunet_continuation_20261108_v2.py",
+        "--request",
+        "E:/PROWL/readiness/stunet-corrected-scientific-launch-20261108-a02/ready.json",
+        "--sha256",
+        "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+        "--mode",
+        "science"
+      ]
+    },
+    {
+      "pid": 52992,
+      "parent": 48348,
+      "created": 1794160867.8891013,
+      "command": [
+        "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_continuation_20261108.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution"
+      ]
+    },
+    {
+      "pid": 55016,
+      "parent": 52992,
+      "created": 1794160867.908614,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ]
+    },
+    {
+      "pid": 32244,
+      "parent": 52992,
+      "created": 1794160867.935151,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\prowl-week05-matched-20261102-a01\\python\\cpython-3.12.13-windows-x86_64-none\\python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_continuation_20261108.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution"
+      ]
+    }
+  ],
+  "observed_first_step": 12001,
+  "latest_step": 12027,
+  "new_updates": 27,
+  "mlflow": "13c709ae157949988de1d7f8821a03b7",
+  "mlflow_status": "RUNNING",
+  "stored_losses": 25,
+  "stored_latest": [
+    12025,
+    0.5335714817047119
+  ],
+  "mlflow_parameters": {
+    "steps": "12000",
+    "global_start": "12000",
+    "global_end": "24000",
+    "parent_mlflow": "243ccf3f71c34417be60362af35187d1",
+    "parent_checkpoint_sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55",
+    "annotation_policy": "pants-issue12-local-normal-mask-1",
+    "peak_learning_rate": "2e-05",
+    "seed": "42",
+    "window": "128",
+    "batch_size": "1",
+    "precision": "fp32",
+    "wall_seconds": "144000",
+    "input_sha256": "52d2fe17a9963db45feaa88b50c0b813ecc29ac143b732daa450c87a9f6225f5",
+    "remaining_wall_seconds": "143940",
+    "failed_attempt_charge_seconds": "60"
+  },
+  "parent_reference": {
+    "event": "parent_checkpoint_reference",
+    "elapsed_seconds": 9.312000000034459,
+    "utc_ms": 1794160882769,
+    "step": 12000,
+    "path": "E:\\PROWL\\artifacts\\pants_stunet_base_transfer_12k_20261106_launch02\\execution\\checkpoint-12000.pt",
+    "backup": "C:\\Users\\quinn\\PROWL-Backups\\pants_stunet_base_transfer_12k_20261106_launch02\\checkpoint-12000.pt",
+    "sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55"
+  },
+  "parent_import": {
+    "event": "parent_import",
+    "elapsed_seconds": 9.312000000034459,
+    "utc_ms": 1794160882759,
+    "step": 12000,
+    "proof": {
+      "model": {
+        "tensors": 130,
+        "max_abs_difference": 0.0,
+        "atol": 0,
+        "rtol": 0
+      },
+      "optimizer": {
+        "tensors": 390,
+        "max_abs_difference": 0.0,
+        "atol": 0,
+        "rtol": 0
+      },
+      "rng": {
+        "tensors": 2,
+        "max_abs_difference": 0.0,
+        "atol": 0,
+        "rtol": 0
+      },
+      "exposure": {
+        "tensors": 0,
+        "max_abs_difference": 0.0,
+        "atol": 0,
+        "rtol": 0
+      }
+    },
+    "checkpoint_sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55"
+  },
+  "phone_api_proof": "E:/PROWL/readiness/stunet-continuation-dashboard-20261108-a01/phone-api.json",
+  "first_new_checkpoint_due": 12500,
+  "initial_checkpoint": "Existing independent E/C parent hashes reused; no duplicated initial checkpoint",
+  "failed_a01_updates": 0,
+  "failed_attempt_charge_seconds": 60,
+  "remaining_wall_seconds": 143940,
+  "first_five_scientific_inputs_losses_match_qualified_producer": true,
+  "automation_id": "monitor-corrected-stu-net-continuation",
+  "automation_status": "ACTIVE",
+  "final_verification": {
+    "observed_utc": 1794161128.066108,
+    "latest_step": 12051,
+    "new_updates": 51,
+    "stored_losses": 50,
+    "stored_latest": [
+      12050,
+      0.6167464256286621
+    ],
+    "ac": true,
+    "combined_owned_rss": 3103313920,
+    "c_free": 137343881216,
+    "e_free": 294380240896,
+    "c_backups": 69155035711,
+    "e_cache": 24713390976,
+    "gpu": "6019 MiB, 0 %",
+    "process_ids": [
+      48348,
+      52992,
+      55016,
+      32244
+    ],
+    "monitor_configuration": {
+      "version": 1,
+      "id": "monitor-corrected-stu-net-continuation",
+      "kind": "heartbeat",
+      "name": "Monitor corrected STU-Net continuation",
+      "prompt": "Monitor only the approved corrected-label STU-Net continuation in C:/Users/quinn/Desktop/PROWL. Read AGENTS.md and docs/capstone/operations/STUNET-CORRECTED-LAUNCH-20261108.md. Run pants_stunet_corrected_continuation_12k_20261108, artifact E:/PROWL/artifacts/pants_stunet_corrected_continuation_12k_20261108_launch02. Ready E:/PROWL/readiness/stunet-corrected-scientific-launch-20261108-a02/ready.json SHA256 d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8; preserve all500pins. Owned99079/supervisor48348/workerwrapper52992, actualworker32244; verify identities and descendants. MLflow13c709ae157949988de1d7f8821a03b7. Inspect compact journal/native reports, worker log/resources, process CPU/GPU/I/O, stored MLflow losses and private phone API. This phase has12000 NEW updates at global12001\u201324000, six full70native validations14k\u201324k, checkpoints every500. Parent12k checkpoint is reused by verified independent E/C reference; first new backup12500. Limits143940s remaining after60s failed-attempt charge against original40h;12GiB combinedRSS,6GiB CUDA,88GiB combined retained C backups,32GiB E cache,100GiB C/E free floors. Preserve faileda01 zero-update evidence, original completed run and all caches. No source edits, merge, GPU competition, test reads, retry/resume, extra launch or successor. Do not infer stalls from missing updates during advancing validation/checkpoint I/O. Keep checks bounded and stay quiet during healthy progress; notify only meaningful failure, confirmed stall, safety/integrity issue, required action or completion. On failure requiring a decision report and pause this monitor; never restart. On completion verify12000new updates/global24000, six full70validations, selected/terminal, independent checkpoints/reports/journal backups, successful reaped workers, MLflowFINISHED and12000stored losses; report and pause. Phone totals must count phase-local updates and only actual journal hours, without duplicating parent hours. Respect later user pauses.",
+      "status": "ACTIVE",
+      "rrule": "FREQ=HOURLY;INTERVAL=1",
+      "target_thread_id": "01a12c40-1490-7cf2-8e20-6498c71bf685",
+      "created_at": 1794161014890,
+      "updated_at": 1794161014890
+    },
+    "monitor_config_sha256": "a37c8e0d8c98e590c62324fe72112ba3b0b23cc5c38f65a5aad32ac0c4ce263c"
+  },
+  "independent_mac_review": "48ea7c5:41 CPU tests pass4.85s, no blocking issue"
+}
