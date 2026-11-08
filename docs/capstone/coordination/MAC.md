@@ -1,5 +1,29 @@
 # Mac work status
 
+## November 8 completed STU-Net review and annotation-policy finding
+
+- Completed 12k and all six 70-case validations; best/terminal lesion Dice
+  .371633, overlap35/36, empty alarms27/34, component overlap41/45. Peer completion
+  attests FINISHED, all12k stored losses,237pins,34independent backups and reaped
+  workers. Its consumed hourly monitor was removed; no successor is running.
+- Main `2e21f54` imports peer completion/full native/log metadata and adds a
+  completion-binding reader: **33 focused tests pass**, actual saved-JSON CLI
+  succeeds. Mac checks metadata consistency, not remote checkpoint bytes anew.
+  [Full review and proposal](../operations/STUNET-RESULTS-AND-NEXT-STEP-20261108.md).
+- Peer `3ceda41` confirms STU-Net used seven original erroneous lesion targets;
+  local metadata crosscheck matches original hashes/counts to the already adopted
+  Mac errata overlay.62updates/46lesion-containing patches; none in development.
+  Input positivity671/662 rather than corrected664/669. This is an annotation-policy
+  integration omission; no measured causal explanation for aggregate Dice.
+- Recommend correction-first preparation then a separately specified additional
+  12k phase from the selected checkpoint, retaining body and heads. Original LR
+  reaches zero and sampler stops at12k; need new LR/sampling identities and strict
+  ancestry-aware cold-restore qualification. About29.3h/35.2hwithmargin plus setup;
+  fresh24k about58.6h/70.3hwithmargin. These are proposals, not approved budgets.
+- No data arrays, GPU work, MLflow writes, cache repair, launch, retry or schedule
+  was performed. All historical attempts, source caches and existing audit drafts
+  stay preserved; annotation correction does not resolve pretraining exposure.
+
 ## November 7 STU-Net early errors and proposed follow-up
 
 - Imported peer `0da40f1`'s native metadata/report byte-for-byte. Export SHA256

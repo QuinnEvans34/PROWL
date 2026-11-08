@@ -1,0 +1,18 @@
+{
+  "schema": "prowl.stunet.mac-errata-metadata-crosscheck.v1",
+  "status": "MATCHED_SEVEN_ORIGINAL_INCORRECT_TARGETS",
+  "peer_export_sha256": "8f8a54a6743cb2accf1c4ffac417e2cb6c456a3d9e36f2cf6f5b1b4b63a6225c",
+  "mac_corrected_overlay_sha256": "033f8f5cb7533031412a04f8daff62e5f95786123d0a21fc3c32c711ef5b06bc",
+  "completed_journal_sha256": "88618d845944b9de2804c9de5ed0fce55e5d82434d51d858e887280785f59906",
+  "original_lesion_hashes_and_counts_match": true,
+  "same_case_sampling_totals_match_completed_log": true,
+  "cases": 7,
+  "original_annotation_voxels": 177,
+  "training_updates_involving_cases": 62,
+  "patches_containing_erroneous_lesion_voxels": 46,
+  "development_cases_affected": 0,
+  "arrays_read": 0,
+  "new_model_calls": 0,
+  "causal_effect_on_dice": "not measured",
+  "original_run_preserved": true
+}

@@ -1,0 +1,598 @@
+{
+  "schema": "prowl-stunet-seven-case-errata-metadata-review-v1",
+  "observed_at": "2026-11-08T17:22:08.788906+00:00",
+  "run_id": "pants_stunet_base_transfer_12k_20261106",
+  "artifact_id": "pants_stunet_base_transfer_12k_20261106_launch02",
+  "finding": "CONFIRMED_ORIGINAL_SEVEN_POSITIVE_TARGET_POLICY_USED",
+  "basis": "Frozen input binds original varied-targets cache; seven metadata positive flags/counts match documented whitelist. Saved actual updates contain lesion voxels. No errata overlay binding in input/plan/cache.",
+  "source_hashes": {
+    "ready": "59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68",
+    "inputs": "679ca952d2524afffd7b4c623dcad2986e820e5a35c4659d115871ce7d62b91b",
+    "plan": "3cdad6a82efbbcecadc27049bd701dde45558b88158e30202d9f83bb7dcf80fe",
+    "cache_manifest": "773d371cd9fb55c8831dfaaae0337cd9fd0d2837d6e7aecd939169b582cad305",
+    "journal": "88618d845944b9de2804c9de5ed0fce55e5d82434d51d858e887280785f59906",
+    "result": "76bec66e40235282195f53c83bb51bcdc4d0c0c50f03c669c046abacfc37768d"
+  },
+  "reference_git_commit": "6f973686e37f1a3a3a59059eab5958d1eb189010",
+  "reference_git_blob_sha256": {
+    "src/data/pants_errata_v1.py": "6f693e3a594a0f6bd23ded1ce7f58959d04f5a76e86582b9ecbbf8c33162a6b0",
+    "docs/capstone/operations/MAC-KD-UPSTREAM-ERRATA-20261023.md": "6e523ad9a8b70f9ac8b2fcf6c71fe50387ce505f92532e3a13a9a86e28bf969f",
+    "docs/capstone/operations/MAC-KD-ERRATA-CORRECTION-20261023.md": "bcda69cc6086c42f48957c5a5f470e18aa26f008d2af18ba1ac78b1e5f20f6d6"
+  },
+  "binding_marker_scan": {
+    "ready": [
+      "/pins/tests\\test_stunet_tracking_correction_20261106.py"
+    ],
+    "inputs": [],
+    "plan": [],
+    "cache_manifest": []
+  },
+  "marker_interpretation": "Only ready hit is the MLflow tracking-correction test path, not an annotation overlay. A broad first-pass assertion flagged this unrelated key; inspection resolved it without data/code changes.",
+  "training_counts": {
+    "actual_positive": 671,
+    "actual_empty": 662,
+    "expected_corrected_positive": 664,
+    "expected_corrected_empty": 669,
+    "membership_unchanged": 1333
+  },
+  "cases": [
+    {
+      "case_id": "PanTS_00000044",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "864d92f2b268ceddc5c4943b24bd7f86ec47d7af3e6457ac4744ecd6861ff767",
+      "recorded_cached_lesion_voxels": 16,
+      "whitelist_expected_original_voxels": 16,
+      "plan_lesion_voxels": 16,
+      "cached_metadata_sha256": "3f868f282cf4d8c406d5cf6631e0b0f2c292545384dcfcc2fde4f9867feeb48d",
+      "cached_target_sha256_from_plan": "ad0047484a0b5bf03c22559ea9c49080381bac1b0abcb9203c44e425e764b23b",
+      "cached_target_bytes_from_plan": 40657,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 8,
+      "view_counts": {
+        "context": 2,
+        "coverage": 2,
+        "component_jitter": 4
+      },
+      "lesion_containing_patches": 6,
+      "saved_traces": [
+        {
+          "step": 484,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "2ad23f5fcf49790f1fd0ec993e5efb075494e4da0113d09b2b98a2f143540b79"
+        },
+        {
+          "step": 1389,
+          "kind": "coverage",
+          "lesion_voxels": 16,
+          "target_sha256": "e506d1be5969a7b8f56b7476e2429c8ebe0b2228fa0402438615138d084610a7"
+        },
+        {
+          "step": 2031,
+          "kind": "coverage",
+          "lesion_voxels": 16,
+          "target_sha256": "fc2f41764846e95377ce883b698a42f98858c5233ffde6d40e41ab8ed8befe5b"
+        },
+        {
+          "step": 5019,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "7bd7a28082d6de4b554fd62a13b79911edda21563b24b1e44a38fa4637cefa27"
+        },
+        {
+          "step": 6365,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "a553f4fb1c6f0411ecf55151adf5326522391018d3db041ba316f0c1e363e386"
+        },
+        {
+          "step": 6760,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "f9a14b56642a842740b3f4a71c41239167a3e56eb241ebbfe745bdff55331494"
+        },
+        {
+          "step": 8338,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "9209750128bba564aef7aa71c550be90d3246df420d0755ecf2a5c48b95efbc6"
+        },
+        {
+          "step": 9963,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "728e15e77f4beba72b8ba6725d935d9286f68adbcc0929c458cb64173198e90c"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00001819",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "876409ec79049b42af7242e2363ffd9965aa09c5f7f138b00cd7f17f88b0ecfe",
+      "recorded_cached_lesion_voxels": 45,
+      "whitelist_expected_original_voxels": 45,
+      "plan_lesion_voxels": 45,
+      "cached_metadata_sha256": "01aa5f21a715ec68312554460334be00a6de675c26f139a4497b5734523a7496",
+      "cached_target_sha256_from_plan": "e51355e08cb83d66cb58b7dc3d80c975002d9d6f7cf3b304257690014f49b2c5",
+      "cached_target_bytes_from_plan": 28410,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 8,
+      "view_counts": {
+        "context": 2,
+        "coverage": 2,
+        "component_jitter": 4
+      },
+      "lesion_containing_patches": 7,
+      "saved_traces": [
+        {
+          "step": 304,
+          "kind": "context",
+          "lesion_voxels": 45,
+          "target_sha256": "5297a10963e552be12ee0a058d7f5dd8dcffab157b7339d9bc74a3de056809ab"
+        },
+        {
+          "step": 357,
+          "kind": "coverage",
+          "lesion_voxels": 0,
+          "target_sha256": "0c4673d20d18324520bab2737bc17a7502309511665d8354ff29fd30915aa3db"
+        },
+        {
+          "step": 2383,
+          "kind": "coverage",
+          "lesion_voxels": 45,
+          "target_sha256": "c5d7701b1c11d917d1fc09257bf41c9882eb73230f86af03870abfcaa7c065b8"
+        },
+        {
+          "step": 5610,
+          "kind": "component_jitter",
+          "lesion_voxels": 45,
+          "target_sha256": "b8a982a2a271a8d6a0d90382c34dcb3ebe3c65736f312512c3765b709d56e2dc"
+        },
+        {
+          "step": 6203,
+          "kind": "component_jitter",
+          "lesion_voxels": 45,
+          "target_sha256": "5c51ab2585b5fca2f3f3b7409e8d72e89cf724081a2c9e950aba2f4ab09b2a9a"
+        },
+        {
+          "step": 8787,
+          "kind": "component_jitter",
+          "lesion_voxels": 45,
+          "target_sha256": "0690639310c2108b7f3f39c2a07f4d887df1b9686c855e085bbb06c8830e42f4"
+        },
+        {
+          "step": 10019,
+          "kind": "component_jitter",
+          "lesion_voxels": 45,
+          "target_sha256": "219e2bb5f1f8781764a80a81de3d383d01bac07e00310aeb904c2095134b6f80"
+        },
+        {
+          "step": 10552,
+          "kind": "context",
+          "lesion_voxels": 45,
+          "target_sha256": "bc6df4368c21f83997c6d25db7e7b4d7b1ff8b45968f625cc3c6b24513076411"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00003059",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "62601f3f027309af4fe82ec1f7bfacde58230442aa07c209b37d94cc535b5107",
+      "recorded_cached_lesion_voxels": 12,
+      "whitelist_expected_original_voxels": 12,
+      "plan_lesion_voxels": 12,
+      "cached_metadata_sha256": "9fc236acfaf1de91e3856f93182c8e47d01dd911650452e31f3aa3623ee856d2",
+      "cached_target_sha256_from_plan": "a4a241a04c13690a2d5705f09f73b3d84e883f9dac7183d4f225ff627e72edb6",
+      "cached_target_bytes_from_plan": 31130,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 9,
+      "view_counts": {
+        "coverage": 2,
+        "context": 2,
+        "component_jitter": 5
+      },
+      "lesion_containing_patches": 6,
+      "saved_traces": [
+        {
+          "step": 697,
+          "kind": "coverage",
+          "lesion_voxels": 0,
+          "target_sha256": "3134419dbbfe4c6c8af378b153885d20e782b0d10f53ab5710c1216a20e3a52a"
+        },
+        {
+          "step": 2355,
+          "kind": "coverage",
+          "lesion_voxels": 12,
+          "target_sha256": "46b91256d2558f1738d7d19e505958a344a3b007612538d308f7c923b3ff91a1"
+        },
+        {
+          "step": 2708,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "d8f7651cdaff770bc8ee69f76b9e30bb4525af2140ee26a02089765cf7eef2d2"
+        },
+        {
+          "step": 4829,
+          "kind": "component_jitter",
+          "lesion_voxels": 12,
+          "target_sha256": "7b68e937f180ceec521e00bbeed81cef211d363d1633058b67a1a42021a7b624"
+        },
+        {
+          "step": 5779,
+          "kind": "component_jitter",
+          "lesion_voxels": 12,
+          "target_sha256": "1a184624640bfe80bb93b0f49ba4fafbd15a4c58d2411fb0e3c92c22217ed166"
+        },
+        {
+          "step": 8834,
+          "kind": "component_jitter",
+          "lesion_voxels": 12,
+          "target_sha256": "43c5cb5483c32bc6371db2595743ab1d76b37adaa74c4836752d104ceb262b78"
+        },
+        {
+          "step": 10336,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "8b0445c075b572266f1769112baa96488e15d92d48be9c51b63fdf78eea7b0cd"
+        },
+        {
+          "step": 10582,
+          "kind": "component_jitter",
+          "lesion_voxels": 12,
+          "target_sha256": "6ec58cdb62fc2814d71b617c84050432d94bc39f0e5574bba76944d96864ac55"
+        },
+        {
+          "step": 11562,
+          "kind": "component_jitter",
+          "lesion_voxels": 12,
+          "target_sha256": "e6e50f9a259b04fdb9e48f8e60005f3dc3c616315bc05ff9a087d702f9017565"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00003548",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "25cdb9c2bab35a283dab87f8c1d02801c7dce77929f5d02e851f858bdf94d306",
+      "recorded_cached_lesion_voxels": 36,
+      "whitelist_expected_original_voxels": 36,
+      "plan_lesion_voxels": 36,
+      "cached_metadata_sha256": "ce9d81c3e3517dcc2d2eb5a66f950ab83757a83047c3265fba95ca07b574b4f6",
+      "cached_target_sha256_from_plan": "743e66e311b51d64dc747cd60a5327a4264ed5e9b9ad03d1909096a7c88e2ba5",
+      "cached_target_bytes_from_plan": 9584,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 9,
+      "view_counts": {
+        "coverage": 1,
+        "component_jitter": 5,
+        "context": 3
+      },
+      "lesion_containing_patches": 6,
+      "saved_traces": [
+        {
+          "step": 1531,
+          "kind": "coverage",
+          "lesion_voxels": 108,
+          "target_sha256": "259cc1f97f8f7669bcf40bb5523dd08e216e3a2513cac1ec945af8df07d96fed"
+        },
+        {
+          "step": 4105,
+          "kind": "component_jitter",
+          "lesion_voxels": 108,
+          "target_sha256": "d7fef1a312fa9e3a2b11f39a3a656c887e2526d918df797594cc0f6ff634f659"
+        },
+        {
+          "step": 5100,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "eedbde104760c69278992a65858adaedcea59e1cc4eebd4aa72ecf8058821bad"
+        },
+        {
+          "step": 6742,
+          "kind": "component_jitter",
+          "lesion_voxels": 108,
+          "target_sha256": "a2d40d41fc6485004133b9df6ef6ed9eaef86fdf7e57ece5b3b512886b3e313b"
+        },
+        {
+          "step": 8142,
+          "kind": "component_jitter",
+          "lesion_voxels": 108,
+          "target_sha256": "c672318cc46f1b9c947d25390988ed32f6afe3505cc8ad9be3b8e462b8f1f50b"
+        },
+        {
+          "step": 9300,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "7605bb381aeb22b6857725f427c00757dd7085b0b7033a3109987a33d6aa6c0c"
+        },
+        {
+          "step": 10672,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "8d932db89b59d051f9e464f09521f6c4edad6cb07301c7eaff40f2b6ab17c535"
+        },
+        {
+          "step": 10818,
+          "kind": "component_jitter",
+          "lesion_voxels": 108,
+          "target_sha256": "eb59cc0e7b0855d21d9916f33df76e79fca5ac58208106a31f680f908aed3f8f"
+        },
+        {
+          "step": 11973,
+          "kind": "component_jitter",
+          "lesion_voxels": 108,
+          "target_sha256": "8cbfaa3b12bf9c94c2ec335676a348e456a31ac7180914865d6a0cd40c52c39b"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00005693",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "30a4f23140398ca2cca54335961fa0232e3cb869bbaf613caf43ae3025fb1648",
+      "recorded_cached_lesion_voxels": 20,
+      "whitelist_expected_original_voxels": 20,
+      "plan_lesion_voxels": 20,
+      "cached_metadata_sha256": "2f4060ec3bb7f31337b2f41159af8895815b8f286a043d4e74ff4f29dfc0cf10",
+      "cached_target_sha256_from_plan": "d8e253e4d27453e61eba90e2c9c49130318a527a9f8c54ebacf8f44cac639cdb",
+      "cached_target_bytes_from_plan": 40048,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 11,
+      "view_counts": {
+        "coverage": 4,
+        "context": 2,
+        "component_jitter": 5
+      },
+      "lesion_containing_patches": 9,
+      "saved_traces": [
+        {
+          "step": 346,
+          "kind": "coverage",
+          "lesion_voxels": 20,
+          "target_sha256": "61a9a10550716787c7f1b31a9d2056d84802f52b8c33671892888277d28685f9"
+        },
+        {
+          "step": 2682,
+          "kind": "coverage",
+          "lesion_voxels": 20,
+          "target_sha256": "2682689b63a702fc988d842fea497559cc435521e4667ca1a660c0ec6a55fc05"
+        },
+        {
+          "step": 3354,
+          "kind": "coverage",
+          "lesion_voxels": 20,
+          "target_sha256": "7cc64253f3e2366ef7f88896df1eaef04c0fbaa314faf2e811bd3321194b4771"
+        },
+        {
+          "step": 3806,
+          "kind": "coverage",
+          "lesion_voxels": 20,
+          "target_sha256": "94bbc98e7399159d3d549a8876db93c898b4885cb21c4e41e0946f28657739b7"
+        },
+        {
+          "step": 4276,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "f120ea4cfcabcd4b0049d007f0dc064c35f5c5e22b878d85db71a9be34991f76"
+        },
+        {
+          "step": 4970,
+          "kind": "component_jitter",
+          "lesion_voxels": 20,
+          "target_sha256": "a1e74cc9f545ff7521ee867ad68b285c7ca4c783f58275f0325176660a48fb3b"
+        },
+        {
+          "step": 6858,
+          "kind": "component_jitter",
+          "lesion_voxels": 20,
+          "target_sha256": "8c47acd876b276b2502b7d5f938b500289672cc9792f78422b797901f361976f"
+        },
+        {
+          "step": 8283,
+          "kind": "component_jitter",
+          "lesion_voxels": 20,
+          "target_sha256": "be1df27e598de1a04974fdce8309e744e3673ce39121c26cb0fbba6788b396ae"
+        },
+        {
+          "step": 9821,
+          "kind": "component_jitter",
+          "lesion_voxels": 20,
+          "target_sha256": "84792d65c4faa36dd8cd960744f4735d3836b4331ab0673e821721de9dd34742"
+        },
+        {
+          "step": 9884,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "f6d3cf762ee851466a0d70fec69a5c036e4f0cbd88cd2f1d06bb11d2232461d2"
+        },
+        {
+          "step": 11713,
+          "kind": "component_jitter",
+          "lesion_voxels": 20,
+          "target_sha256": "2819e695b0782a6488f98974e578d6339ac50a12cabcbb07439e4903ea5f0539"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00007933",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "6f84c81a34e4fe9e9faf4abb320b1d0a78ddb16609297a4976f1bd184cd9f830",
+      "recorded_cached_lesion_voxels": 16,
+      "whitelist_expected_original_voxels": 16,
+      "plan_lesion_voxels": 16,
+      "cached_metadata_sha256": "912f117dc42bacbe08274c1dd4a1989a7250c4dd195b2944826e26ccf27ec8b2",
+      "cached_target_sha256_from_plan": "1bbee1a7f9212da0bb09c00813eb67f1a66696bd984660d56b4fdbc4eb336c98",
+      "cached_target_bytes_from_plan": 31129,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 8,
+      "view_counts": {
+        "coverage": 2,
+        "context": 2,
+        "component_jitter": 4
+      },
+      "lesion_containing_patches": 6,
+      "saved_traces": [
+        {
+          "step": 5,
+          "kind": "coverage",
+          "lesion_voxels": 0,
+          "target_sha256": "a5adc36816ae0ca38e690642c19e96ec657cb806aa47a9123d88643c446b9c46"
+        },
+        {
+          "step": 2947,
+          "kind": "coverage",
+          "lesion_voxels": 16,
+          "target_sha256": "e535dd04ff3dd931037af92e0b4689c3e80a35cf201a6450e9660bd4dc8d0f69"
+        },
+        {
+          "step": 3836,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "3b0154fc800ad179d42c60e37284fe7f348d10b3fa2269add26a48672fd3a601"
+        },
+        {
+          "step": 4758,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "973cfa72077472f75d57ae6ee663fb5d9fa1e2739e298e35243ca3fe04523224"
+        },
+        {
+          "step": 5821,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "97f4ca9973b018dc3d00b635e4981336f627d2ebca17b4df17abc41026efb7a4"
+        },
+        {
+          "step": 7508,
+          "kind": "context",
+          "lesion_voxels": 16,
+          "target_sha256": "090e13d0a91049f182f742d3c1932d0b3b751c574fc6785b8083734d4d3adf6e"
+        },
+        {
+          "step": 8785,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "e445d7d4c6883c49cc7caeafd152e3a5a06f980b603d808b7b78882a854a1dfa"
+        },
+        {
+          "step": 10631,
+          "kind": "component_jitter",
+          "lesion_voxels": 16,
+          "target_sha256": "4a1a19c28d5f73c55be6371173631a6bd35a41a0f6fdec0e1caa3e3ccbb5bd39"
+        }
+      ]
+    },
+    {
+      "case_id": "PanTS_00007947",
+      "training_member": true,
+      "development_member": false,
+      "cached_positive": true,
+      "plan_positive": true,
+      "recorded_original_lesion_sha256": "bd0902047a074176c445c40d80b74f40be0e37ab069aee187b69b32341644b99",
+      "recorded_cached_lesion_voxels": 32,
+      "whitelist_expected_original_voxels": 32,
+      "plan_lesion_voxels": 32,
+      "cached_metadata_sha256": "3148e30a368fd370bd8a0d9c560aa54d981e10c460a42138ce8cb8021d558191",
+      "cached_target_sha256_from_plan": "6852b9e0b1dd85f66a1a8efb1b10e2a47bc61ec5e06428928f7bee302797b25a",
+      "cached_target_bytes_from_plan": 28872,
+      "cached_target_array_not_read": true,
+      "errata_overlay_bound": false,
+      "visits": 9,
+      "view_counts": {
+        "coverage": 1,
+        "context": 3,
+        "component_jitter": 5
+      },
+      "lesion_containing_patches": 6,
+      "saved_traces": [
+        {
+          "step": 1221,
+          "kind": "coverage",
+          "lesion_voxels": 32,
+          "target_sha256": "678564f1393b66b06e9af2c77e751bf30c792fce47bdffa45282920e910e5c5e"
+        },
+        {
+          "step": 2392,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "b6b47ad01bb69caa9833c6237a21f1baf6e87e750fb5121992d41fbca89549a9"
+        },
+        {
+          "step": 4119,
+          "kind": "component_jitter",
+          "lesion_voxels": 32,
+          "target_sha256": "9c9b67a3cffad7924b5e0207924b83ce22c157141a0ba641856260aa02c2702a"
+        },
+        {
+          "step": 5919,
+          "kind": "component_jitter",
+          "lesion_voxels": 32,
+          "target_sha256": "70fcb0e1ea85b399b9aa980ca23a34b53722717a586f3b1f90d7a10ddfee41c8"
+        },
+        {
+          "step": 7994,
+          "kind": "component_jitter",
+          "lesion_voxels": 32,
+          "target_sha256": "5a9f7d74d4df4a354da3eb5ee43103eff300e38a76e11ed3d967a005285e2ced"
+        },
+        {
+          "step": 9076,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "03562e03335a934766bc2f35b9898849430388798a329e1d5f3144e3650aae9c"
+        },
+        {
+          "step": 9462,
+          "kind": "component_jitter",
+          "lesion_voxels": 32,
+          "target_sha256": "060dec869d57e1c44046e07064acfd10f71cb3a3f243df73787ce5df4b5eb5b5"
+        },
+        {
+          "step": 11555,
+          "kind": "component_jitter",
+          "lesion_voxels": 32,
+          "target_sha256": "ae0aefdc35d54306ba6fa7bae45370975fd25f69dd5789c18757bba436f3623c"
+        },
+        {
+          "step": 11652,
+          "kind": "context",
+          "lesion_voxels": 0,
+          "target_sha256": "81bdfe7444942f2b42661d6070b5ec2c07f8c590c5c16cffad147e7c293fca8c"
+        }
+      ]
+    }
+  ],
+  "total_affected_visits": 62,
+  "total_affected_lesion_containing_patches": 46,
+  "limitations": [
+    "Source lesion hashes/counts are retained metadata, not newly measured mask contents.",
+    "CT/mask/NPZ/checkpoint arrays were neither opened nor rehashed.",
+    "Augmented patch counts may differ from original source counts due to geometry, crop and augmentation.",
+    "None of these seven cases is in development; preserve original metrics.",
+    "Confirmed label-policy integration omission is not proof of aggregate Dice impact or cause of false positives.",
+    "Final KD arm/reference equivalence remains unverified."
+  ],
+  "next_decision": "Correction-first preparation should precede longer-run launch. Preserve original run; separately qualify the seven-case overlay, regenerated targets/sampling and input binding. A warm restart retains prior incorrect-label exposure; fresh corrected training provides a cleaner label-policy baseline. Neither authorized here."
+}
