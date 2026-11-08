@@ -28,7 +28,7 @@ The current traces store hashes/class counts, not CT intensity histograms or sat
 
 ## Evidence anchors
 
-- [Normalization](../../../src/data/segmenter_fast_varied_v1.py):88–93.
+- [Normalization](../../../src/data/segmenter_fast_varied_v1.py):83–88.
 - [Continuation loader](../../../src/data/stunet_continuation_inputs_20261108.py):19–28 correction/delegation;39–59 cache/geometry/sampling/augmentation.
 - [Development and reconstruction](../../../src/data/stunet_inputs_20261106.py):92–121; same normalization at108.
 - [Physical grid](../../../src/data/segmenter_physical_windows_v1.py):20–48.
@@ -37,3 +37,5 @@ The current traces store hashes/class counts, not CT intensity histograms or sat
 - [Schedule](../../../src/data/stunet_errata_20261108.py):44–69.
 
 Adjacent [JSON](STUNET-SAVED-INPUT-REVIEW-20261108.json) contains exact source anchors/hashes checked against ready pins, saved metadata/qualification hashes, raw diagnostic summaries, correction visit addresses and process identities. JSON SHA256 **86378997607f46669af57b85254da546540c02584e6607df29f73468b8b3ce26**. No new counterfactual scoring was duplicated here; Mac is computing that separately from saved counts.
+
+Peer follow-up: Mac separately reports a preserved upstream plan/author sidecar selecting nonCT/no-mask normalization with GenericPreprocessor, whose pinned v1 preprocessing.py lines275–284 use per-case mean/std. Those artifacts were not opened in this Lenovo review. This provides a concrete compatibility hypothesis against our fixed HU scaling; it still does not establish the exact preprocessing executed for this checkpoint or prove an implementation bug or Dice causality. The active experiment remains unchanged.
