@@ -73,8 +73,12 @@ at each admission. The actual inventory is in the byte-preserved peer
 [preflight](STUNET-CORRECTED-CONTINUATION-PREFLIGHT-20261108.json) and companion MD.
 
 Mac requested explicit human approval for an88GiB C-backup allowance. **Approval
-is pending** at this publication; no larger cap is applied and no scientific launch
-is admitted. CPU preparation can proceed within the original limits. Parent reuse
+was subsequently granted**, verbatim: "Approve 88 GiB backup allowance."
+Apply88GiB only to this new continuation's prospective requests/receipts; the
+historical64GiB requests remain unchanged. The100GiBfree floor, memory/GPU limits,
+recipe and retained attempts are unchanged. Fresh actual inventory and growth
+admission are still required; this approval is not evidence of a running worker.
+CPU preparation and bounded qualification may proceed within admitted limits. Parent reuse
 avoids redundant files but is not sufficient to clear the full-directory gate.
 
 The completed parent's34saved files total17,000,744,503B per copy. Each mature
