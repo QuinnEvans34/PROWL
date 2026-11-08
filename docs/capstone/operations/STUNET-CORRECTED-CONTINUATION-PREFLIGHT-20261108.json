@@ -81,7 +81,17 @@
     "current_c_free_bytes": 138986459136,
     "projected_c_free_bytes": 118673271393,
     "physical_free_floor_projection_pass": true,
-    "possible_user_decision": "Approve88GiB combined Cbackup cap only, with100GiB free floor unchanged and exact projection rechecked; alternatively approve a separately reviewed retention/storage plan. Neither done."
+    "possible_user_decision": "Approve88GiB combined Cbackup cap only, with100GiB free floor unchanged and exact projection rechecked; alternatively approve a separately reviewed retention/storage plan. Neither done.",
+    "parent_reference_reuse_alternative": {
+      "existing_parent_checkpoint_copied_again": false,
+      "new_scientific_checkpoint_count": 24,
+      "new_scientific_checkpoint_bytes": 16755375624,
+      "projected_combined_before_qualification_or_logs": 84507028272,
+      "projected_combined_gib_before_qualification_or_logs": 78.70330314338207,
+      "projected_combined_with_qualification_and_logs": 87366699740,
+      "still_exceeds_64gib": true,
+      "scope": "Combined cap is total C:/Users/quinn/PROWL-Backups across retained experiments; E primary artifacts are not counted again in this C backup number."
+    }
   },
   "gate_order": [
     "Resolve combined backup budget; no deletion/relocation implied",
