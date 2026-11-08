@@ -1,0 +1,212 @@
+{
+  "schema": "prowl.confidence-mac-hold.20261108.v1",
+  "status": "MEMORY_HOLD_AWAITING_EXPLICIT_SCOPE_DECISION",
+  "completed_native_cases": 0,
+  "threshold_results": null,
+  "mlflow_run_created": false,
+  "lenovo_training": "unchanged",
+  "stages": {
+    "inference-capacity-01": {
+      "request.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-01/request.json",
+        "sha256": "6636f4ae00b7c89e9d93348419dbea74ae9bfb3e53531030439570595e6395f9"
+      },
+      "preflight-failure.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-01/preflight-failure.json",
+        "sha256": "baa664d7ce00d4a053f83882ae328235b00e2f0f7522be9b8e826740e85c5c64",
+        "value": {
+          "status": "FAILED_BEFORE_WORKER",
+          "reason": "jsonschema missing from supervisor import path; existing isolated dependencies used in additive v2",
+          "gpu_calls": 0,
+          "clinical_reads": 0,
+          "workers_started": 0,
+          "charged_seconds": 120
+        }
+      }
+    },
+    "inference-capacity-02": {
+      "request.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-02/request.json",
+        "sha256": "3db182da37c4189fa1b4a3b5aa317eb4e68788ca8c004afe7ffdc243192e6631"
+      },
+      "result.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-02/result.json",
+        "sha256": "593e0b1e08fda8aab0b8021c293e6471a99398623b85821e3fbf5737f278e0ae",
+        "value": {
+          "status": "SYNTHETIC_INFERENCE_ONLY_PASS",
+          "seconds": 1.9480485836975276,
+          "inference_seconds": 1.0660650418139994,
+          "driver_bytes": 5927763968,
+          "live_tensor_bytes": 291367680,
+          "source_load": {
+            "checkpoint_sha256": "7232a6296d320da1d60debe873a1d3fcad74e9404272db8f7440e30d62c5997a",
+            "source_sha256": "53da5fa6ea87c0b63177af6a93b5b148bda96b6e4be22290a8e5d49a4ef261bc",
+            "body_parameters": 58157984,
+            "fresh_head_parameters": 2991,
+            "seed": 42,
+            "pools": [
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                1,
+                1,
+                2
+              ]
+            ],
+            "strict_body_equality": true,
+            "fresh_heads_equal": true,
+            "scientific_updates": 0,
+            "qualification": "CPU_LOAD_ONLY"
+          },
+          "clinical_reads": 0,
+          "optimizer_updates": 0,
+          "trained_checkpoint_used": false,
+          "qualification": "capacity only; no native-data or full-screen readiness claim"
+        }
+      },
+      "resources.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-02/resources.json",
+        "sha256": "318885acb9bcaf7f88520b0321afaa92ef6a7801cf4bf57317c13b22f36d74e9",
+        "value": {
+          "seconds": 4.178633708972484,
+          "peak_owned_rss_bytes": 1207320576,
+          "samples": 2,
+          "process_sample_timeouts": 0,
+          "workers_reaped": true,
+          "cleanup_error": null,
+          "surviving_workers": [],
+          "tracked_worker_identities": 2,
+          "success": true,
+          "error": null,
+          "supervisor_cleanup_error": null,
+          "exit_code": 0
+        }
+      },
+      "process.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-02/process.json",
+        "sha256": "fedd02dd6ee24294491e2fd6a4d32e8babc1f78dc07e134b1a77e295bd5c906c"
+      },
+      "guardian-ready.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/inference-capacity-02/guardian-ready.json",
+        "sha256": "37c6cfe1bb87abc92c62341767d4bba57a9eb9f738b2c962c0693cd7c822e5e7"
+      }
+    },
+    "screen-01": {
+      "request.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-01/request.json",
+        "sha256": "b32311b3834142da5c68ff2f0f8de80573459a6765a8b4a4964ce04412a29f3d"
+      },
+      "resources.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-01/resources.json",
+        "sha256": "bfbd9aedf4253a25c421b5403606a4700ec73a800f39c73a4209412ebbadf990",
+        "value": {
+          "seconds": 125.1899783750996,
+          "peak_owned_rss_bytes": 1947992064,
+          "samples": 50,
+          "process_sample_timeouts": 0,
+          "workers_reaped": true,
+          "cleanup_error": null,
+          "surviving_workers": [],
+          "tracked_worker_identities": 2,
+          "success": false,
+          "error": "ValueError('Duration worker failed')",
+          "supervisor_cleanup_error": null,
+          "exit_code": 1
+        }
+      },
+      "process.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-01/process.json",
+        "sha256": "4f1f35e140d82fb205f1b0ebbcc3b2561c60abe992607621d6a48df51a17dc37"
+      },
+      "guardian-ready.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-01/guardian-ready.json",
+        "sha256": "a6e4d32f1fad312f1ad6b78e95c7497ac73064bb029456dd7a6de3963b3aa61e"
+      }
+    },
+    "cache-release-qualification-01": {
+      "request.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/cache-release-qualification-01/request.json",
+        "sha256": "930120ddefa26d95c0bfbee0340557c10e4b6afdf4ab3d982c76eb73e91e0ace"
+      },
+      "resources.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/cache-release-qualification-01/resources.json",
+        "sha256": "4939bdc92bb4fa9a8dd90e284187958030e6a695e23dd843d4ab51de73c3de9b",
+        "value": {
+          "seconds": 4.321105540730059,
+          "peak_owned_rss_bytes": 1177714688,
+          "samples": 2,
+          "process_sample_timeouts": 0,
+          "workers_reaped": true,
+          "cleanup_error": null,
+          "surviving_workers": [],
+          "tracked_worker_identities": 2,
+          "success": false,
+          "error": "ValueError('Duration worker failed')",
+          "supervisor_cleanup_error": null,
+          "exit_code": 1
+        }
+      },
+      "process.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/cache-release-qualification-01/process.json",
+        "sha256": "9ce1dc9c01094143c15d7f1a92468fedfdebb00c3a77bdce12ae91078630c072"
+      },
+      "guardian-ready.json": {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/cache-release-qualification-01/guardian-ready.json",
+        "sha256": "6cb8f6b182754da8a3156780f1512cb3ac0b16fbe5ccc0a03cf2c4b88beca53e"
+      }
+    }
+  },
+  "transfer": {
+    "archive_sha256": "cc0b084d1588937d988e707e7394cabb0c39c5b53dbc1f87522d2c6e7445231c",
+    "members": [
+      {
+        "path": "checkpoint-12000.pt",
+        "bytes": 698140651,
+        "sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55"
+      },
+      {
+        "path": "native-12000.json",
+        "bytes": 65215,
+        "sha256": "7f3e4f0e793176a29b9f96daee7b80ea534975a95b157bdf06a3baff115b43b4"
+      },
+      {
+        "path": "selected.json",
+        "bytes": 620,
+        "sha256": "f0014eb5d26cb9b888a6741a0f12bf08350838d644946f67f267fea426ad1225"
+      },
+      {
+        "path": "model-config.json",
+        "bytes": 3056,
+        "sha256": "23d1670f19ad053fc51c354406192aa109a40dd321f988e2f4b92ebe82f9f8d9"
+      },
+      {
+        "path": "development-bindings.json",
+        "bytes": 134509,
+        "sha256": "f158e87f809978d503e04c0432ff0b2ce1509aff2eca10fedeb539c13101ccfd"
+      },
+      {
+        "path": "transfer-manifest.json",
+        "bytes": 833,
+        "sha256": "41019d1875a2cb72ae20fdbe22635dfd2029386ee781140514ba11054abe17e7"
+      }
+    ]
+  }
+}
