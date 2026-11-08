@@ -1,0 +1,197 @@
+{
+  "schema": "prowl.confidence-mac-8g.20261108.v1",
+  "status": "OWNED_NATIVE_QUALIFICATION_LIVE",
+  "observed_at": "2026-11-08T19:25:34.172757+00:00",
+  "approval": {
+    "approved": true,
+    "mps_bytes": 8589934592,
+    "quote": "Approve 8 GiB inference qualification",
+    "question_item": "call_c88404ff9fda4591a4ea74c0854a49bc:0",
+    "scope": "CAP-EXP-020 Mac inference qualification and the same bounded fixed-threshold screen if qualified",
+    "rss_bytes": 12884901888,
+    "cumulative_budget_seconds": 14400,
+    "recorded_unix": 1794165748.884703,
+    "no_training_change": true,
+    "no_lenovo_interruption": true
+  },
+  "allocation_qualification": {
+    "status": "PASS_EXACT_OUTPUTS_CACHE_RELEASE",
+    "case_id": "PanTS_00006837",
+    "source_sha256": {
+      "ct": "d28a8407da32457bc1aad2946c4670e4676aaaf378683bb3f8df5c7cfb99975a",
+      "pancreas": "b2a6c50f3707bf61f36e9787bd64325edc554bd5422913a2130672c7ce1de0b8",
+      "lesion": "9ad02430090a2f563f17abdc3c2e644fc3ee90ff1d1108bbcf199a4c1710998a"
+    },
+    "checkpoint_sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55",
+    "repeats_exact": 8,
+    "other_windows": 8,
+    "samples": [
+      {
+        "index": 0,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 1,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 2,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 3,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 4,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 5,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 6,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 7,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 8,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 9,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 10,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 11,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 12,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 13,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 14,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 15,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      },
+      {
+        "index": 16,
+        "driver_during_output": 6463586304,
+        "driver_before_release": 6463586304,
+        "driver_after_release": 1384841216,
+        "live_after_release": 232647424
+      }
+    ],
+    "seconds": 12.46285945782438,
+    "optimizer_updates": 0,
+    "scientific_native_results": 0,
+    "interpretation": "Unused allocation release only; no precision/model/geometry/policy change"
+  },
+  "qualification_resources": {
+    "seconds": 14.915610583033413,
+    "peak_owned_rss_bytes": 2085847040,
+    "samples": 7,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 2,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "launchd_label": "com.prowl.stunet-confidence-mac-20261108-03",
+  "process": {
+    "supervisor": 57444,
+    "worker": 57469,
+    "worker_start": "Sun Nov  8 12:23:45 2026"
+  },
+  "root": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-03",
+  "request_sha256": "57fb08fed8f05d89021a889fb15355f764ed87a51b8cc4baf87cd6b504cb0ebc",
+  "producing_pin_count": 374,
+  "remaining_seconds_at_dispatch": 12220,
+  "original_deadline_unix": 1794178165.1474593,
+  "limits": {
+    "rss_bytes": 12884901888,
+    "mps_bytes": 8589934592,
+    "total_backup_bytes": 27917287424,
+    "internal_reserve_bytes": 50000000000,
+    "external_reserve_bytes": 107374182400
+  },
+  "parent_reference": {
+    "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-01/checkpoint-12000.pt",
+    "backup": "/Users/quintonevans/PROWL-Backups/stunet-confidence-mac-20261108-01/checkpoint-12000.pt",
+    "sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55"
+  },
+  "full_native_qualification_complete": false,
+  "threshold_results": null,
+  "mlflow_run_created": false,
+  "new_optimizer_updates": 0,
+  "old_attempts": "retained unchanged",
+  "lenovo_training": "unchanged"
+}
