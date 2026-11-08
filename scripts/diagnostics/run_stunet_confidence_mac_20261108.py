@@ -35,7 +35,7 @@ MANIFEST = Path('/Volumes/PROWL-Data/PROWL/artifacts/distillation-mac-20261023/r
 PORTABLE = ROOT/'outputs/prowl/testing/stunet-continuation-review-20261108-02/src/training/stunet_transfer_20261106.py'
 ARCH = Path('/Volumes/PROWL-Data/PROWL/teachers/stunet-audit-20261106-source/nnUNet-2.2/nnunetv2/training/nnUNetTrainer/STUNetTrainer.py')
 THRESHOLDS = (0., .4, .5, .6)
-SECONDS = 13980  # 4h less conservative120s failed preflight +300s capacity allowance.
+SECONDS = 13980  # Upper bound, further reduced by actual preparation/transfer elapsed time.
 
 
 def sha(path):
@@ -124,11 +124,16 @@ def prepare():
     files += [ROOT/'scripts/diagnostics'/n for n in
               ('probe_stunet_mps_inference_20261108_v2.py','qualify_distillation_mac.py',
                'summarize_stunet_confidence_20261108.py')]
+    origin=(BASE/'inference-capacity-01/request.json').stat().st_mtime
+    remaining=min(SECONDS,int(14400-(time.time()-origin)-120))
+    if remaining<=0:
+        raise ValueError('Original cumulative four-hour experiment budget exhausted')
     request = dict(schema='prowl.stunet.mac-confidence-screen.v1',
         user_authorization='2026-11-08 explicit Mac12k confidence experiment',
         scope='exposed provided-pancreas development; descriptive, no independent-patient claim',
         checkpoint=dict(path=str(CHECKPOINT),sha256=CHECKPOINT_SHA,bytes=CHECKPOINT_BYTES),
-        cases=cases, pilot=pilot, thresholds=THRESHOLDS, seconds=SECONDS,
+        cases=cases, pilot=pilot, thresholds=THRESHOLDS, seconds=remaining,
+        cumulative_budget_origin_unix=origin,cumulative_budget_seconds=14400,cleanup_reserve_seconds=120,
         rss_bytes=12*1024**3, mps_bytes=6*1024**3, total_backup_bytes=26*1024**3,
         internal_reserve_bytes=50_000_000_000, external_reserve_bytes=100*1024**3,
         worst_case_new_backup_bytes=worst, existing_backup_bytes=existing,
@@ -218,6 +223,7 @@ def worker():
     by_id = {r['case_id']:r for r in request['cases']}
     order = request['pilot']+[r['case_id'] for r in request['cases'] if r['case_id'] not in request['pilot']]
     rows = []; started = time.monotonic(); tiles_done = 0; peak_driver = 0
+    client=None;run_id=None
     for case_index, name in enumerate(order):
         before = time.monotonic(); row = by_id[name]; case = load_case(row)
         record = physical_geometry(case['geometry']); windows = tiles(record['shape'],window=128,stride=64)
@@ -283,15 +289,35 @@ def worker():
             projected=(time.monotonic()-started)/tiles_done*sum(r['profile']['tiles'] for r in request['cases'])*1.5
             write(OUT/'qualification.json',dict(status='TWO_NATIVE_CASES_PASS',cases=request['pilot'],
                 peak_observed_driver_bytes=peak_driver,projected_total_seconds=projected,
-                limit_seconds=SECONDS,spatial_equivalence_to_original_cuda='not established; fresh same-device control'))
+                limit_seconds=request['seconds'],spatial_equivalence_to_original_cuda='not established; fresh same-device control'))
             backup(OUT/'qualification.json')
-            if projected>SECONDS-(time.monotonic()-started):
+            if projected>request['seconds']-(time.monotonic()-started):
                 raise ValueError('Conservative full-cohort projection exceeds remaining total cap')
+            from mlflow import MlflowClient
+            uri='sqlite:///'+str(BASE/'mlflow.db')
+            client=MlflowClient(tracking_uri=uri)
+            experiment=client.create_experiment('PROWL STU-Net confidence screen20261108',
+                                               artifact_location=(BASE/'mlflow-artifacts').as_uri())
+            run_id=client.create_run(experiment,tags={'mlflow.runName':'CAP-EXP-020 Mac12k fixed thresholds',
+                'prowl.kind':'inference_policy','prowl.training_hours':'excluded',
+                'prowl.scope':'exposed-development exploratory','parent_checkpoint_sha256':CHECKPOINT_SHA}).info.run_id
+            for key,value in dict(thresholds='raw,.40,.50,.60',window=128,stride=64,cases=70,
+                                  optimizer_updates=0,checkpoint_sha256=CHECKPOINT_SHA).items():
+                client.log_param(run_id,key,str(value))
+            write(OUT/'tracking.json',dict(tracking_uri=uri,run_id=run_id,experiment_id=experiment))
+            backup(OUT/'tracking.json')
     result=summarize(rows)
     result.update(status='COMPLETE_DESCRIPTIVE_ONLY',request_sha256=sha(OUT/'request.json'),
                   checkpoint_sha256=CHECKPOINT_SHA,seconds=time.monotonic()-started,
                   peak_observed_driver_bytes=peak_driver,optimizer_updates=0)
     write(OUT/'result.json',result);backup(OUT/'result.json')
+    for key,metrics in result['policies'].items():
+        for name,value in metrics.items():
+            if value is not None:
+                client.log_metric(run_id,'policy_'+key.replace('.','')+'/'+name,float(value))
+    client.log_artifact(run_id,str(OUT/'result.json'))
+    client.log_artifact(run_id,str(OUT/'request.json'))
+    client.set_terminated(run_id,status='FINISHED')
     print(json.dumps({k:v for k,v in result.items() if k!='cases'}),flush=True)
 
 
@@ -306,8 +332,17 @@ def main():
     with training_guard(ROOT/'outputs/prowl/.mps-profile.lock'):
         env=dict(os.environ,PYTORCH_ENABLE_MPS_FALLBACK='0',OMP_NUM_THREADS='2',PYTHONPATH=str(ROOT)+':'+DEPENDENCIES)
         ok=run(['caffeinate','-i',sys.executable,str(Path(__file__).resolve()),'--worker'],OUT,
-               seconds=SECONDS,rss_bytes=12*1024**3,tick=safety,env=env)
+               seconds=request['seconds'],rss_bytes=12*1024**3,tick=safety,env=env)
     backup(OUT/'resources.json')
+    if (OUT/'tracking.json').exists():
+        from mlflow import MlflowClient
+        tracking=json.loads((OUT/'tracking.json').read_text())
+        if not ok:
+            MlflowClient(tracking_uri=tracking['tracking_uri']).set_terminated(tracking['run_id'],status='FAILED')
+        import sqlite3
+        with sqlite3.connect(BASE/'mlflow.db') as source,sqlite3.connect(OUT/'mlflow-snapshot.db') as target:
+            source.backup(target)
+        backup(OUT/'mlflow-snapshot.db')
     if not ok:
         raise SystemExit('Screen stopped; preserve evidence, no automatic retry')
 
