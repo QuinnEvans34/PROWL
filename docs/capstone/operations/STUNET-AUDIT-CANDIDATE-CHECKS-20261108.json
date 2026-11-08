@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "schema": "prowl.audit-candidate-qualification.20261108.v1",
+      "status": "CPU_PASS_NOT_CUDA_OR_LAUNCH_READY",
+      "native_filter_cases": [
+        {
+          "case_id": "PanTS_00000029",
+          "mask_sha256": "85916ee906c75cb660e073fe2c850a1efeff4a3f38e8c96ccb9fa8217c6957d6",
+          "removed_components": [],
+          "exact": true
+        },
+        {
+          "case_id": "PanTS_00000909",
+          "mask_sha256": "6451bdab64389f4272cb975a5c8a88b6dba9dfdb2f56f598b2737b9619b502dd",
+          "removed_components": [],
+          "exact": true
+        },
+        {
+          "case_id": "PanTS_00007868",
+          "mask_sha256": "019beffe3bad5dc319c9552e9f0660b07eed9019b779e793dc2c77e5001eaf67",
+          "removed_components": [],
+          "exact": true
+        }
+      ],
+      "baseline_loss_and_all_five_gradients_exact": true,
+      "bound_parent_source_sha256": "7654a9d01bc4873b7e44cf43c6b4858dc1c6f09c8b2d9a8a06f92d8d0657d30c",
+      "seconds": 1.5753144170157611,
+      "optimizer_updates": 0,
+      "model_forwards": 0,
+      "clinical_ct_reads": 0,
+      "candidate_policy_deployed": false
+    },
+    {
+      "status": "CPU_NATIVE_NONTRIVIAL_FILTER_PARITY_PASS",
+      "selection": "First sorted positive and first sorted empty case with any >10mm component in completed audit; engineering parity, not new effectiveness selection",
+      "cases": [
+        {
+          "case_id": "PanTS_00001070",
+          "positive": true,
+          "removed_components": [
+            1
+          ],
+          "mask_sha256": "6bae282ba30b44948c0df411ce4274d1aa496bd59815695b4661bc387a259141",
+          "exact": true
+        },
+        {
+          "case_id": "PanTS_00000698",
+          "positive": false,
+          "removed_components": [
+            6
+          ],
+          "mask_sha256": "931ea869392db39d5cf6d24c3c7c8e88eb97b5e9af9b9f3ab0acbfec38aab63f",
+          "exact": true
+        }
+      ],
+      "seconds": 0.811313624959439,
+      "paired_exploratory_dice": {
+        "delta": 0.022254280525744508,
+        "bootstrap_case_ci95": [
+          0.00697434765847277,
+          0.04657062401843006
+        ],
+        "better": 16,
+        "worse": 0,
+        "same": 20,
+        "independent_patient_inference": false
+      }
+    }
+  ],
+  "synthetic_cpu_tests_passed": 12,
+  "no_scientific_launch_or_deployment": true
+}
