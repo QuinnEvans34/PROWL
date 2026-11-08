@@ -96,6 +96,9 @@ def prepare():
     cache=json.loads((BASE/'cache-release-qualification-02/result.json').read_text())
     if cache['status']!='PASS_EXACT_OUTPUTS_CACHE_RELEASE':
         raise ValueError('Exact allocation-lifecycle qualification required')
+    resources=json.loads((BASE/'cache-release-qualification-02/resources.json').read_text())
+    if resources.get('success') is not True or resources.get('workers_reaped') is not True or resources.get('exit_code')!=0:
+        raise ValueError('Successful reaped allocation qualification required')
     if CHECKPOINT.stat().st_size != CHECKPOINT_BYTES or sha(CHECKPOINT) != CHECKPOINT_SHA:
         raise ValueError('Completed12k checkpoint identity')
     if sha(EXPORT) != EXPORT_SHA:
@@ -131,7 +134,8 @@ def prepare():
               ('probe_stunet_mps_inference_20261108_v2.py','qualify_distillation_mac.py',
                'summarize_stunet_confidence_20261108.py',
                'qualify_stunet_mps_cache_20261108_v2.py')]
-    files += [BASE/'cache-release-qualification-02/result.json',BASE/'user-mps8-approval.json']
+    files += [BASE/'cache-release-qualification-02/result.json',
+              BASE/'cache-release-qualification-02/resources.json',BASE/'user-mps8-approval.json']
     origin=(BASE/'inference-capacity-01/request.json').stat().st_mtime
     remaining=min(SECONDS,int(14400-(time.time()-origin)-120))
     if remaining<=0:

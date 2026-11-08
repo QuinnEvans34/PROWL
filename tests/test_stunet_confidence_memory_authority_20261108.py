@@ -32,5 +32,19 @@ class AuthorityTests(unittest.TestCase):
             with self.assertRaises(FileNotFoundError):screen.prepare()
             hash_file.assert_not_called()
 
+    def test_result_cannot_hide_failed_or_unreaped_qualification(self):
+        for resources in ({'success':False,'workers_reaped':True,'exit_code':1},
+                          {'success':True,'workers_reaped':False,'exit_code':0}):
+            with self.subTest(resources=resources),tempfile.TemporaryDirectory() as temp, \
+                    patch.object(screen,'BASE',Path(temp)),patch.object(screen,'safety'), \
+                    patch.object(screen,'sha') as hash_file:
+                base=Path(temp)
+                (base/'user-mps8-approval.json').write_text(json.dumps({'approved':True,'mps_bytes':8*1024**3}))
+                q=base/'cache-release-qualification-02';q.mkdir()
+                (q/'result.json').write_text(json.dumps({'status':'PASS_EXACT_OUTPUTS_CACHE_RELEASE'}))
+                (q/'resources.json').write_text(json.dumps(resources))
+                with self.assertRaisesRegex(ValueError,'reaped'):screen.prepare()
+                hash_file.assert_not_called()
+
 
 if __name__=='__main__':unittest.main()
