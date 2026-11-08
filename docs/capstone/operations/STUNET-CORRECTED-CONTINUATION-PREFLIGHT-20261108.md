@@ -19,3 +19,12 @@ Once resolved, use additive versioned code and preserve all original pins/caches
 ## Parent-reference reuse follow-up
 
 Reusing the existing immutable parent E/C checkpoint avoids an extra initial checkpoint copy and is preferable. It does not resolve this gate: all retained C backups already total63.10GiB. Adding only24 new scientific checkpoints projects **78.7GiB**, before qualification outputs or logs. The64GiB gate covers the entire C:/Users/quinn/PROWL-Backups directory, including other historical experiments; E primary artifacts are not double-counted here. No deletion, compression, relocation or cap increase was performed. The concrete budget blocker remains.
+
+
+## November8 approved backup amendment and first implementation milestone
+
+Human quote relayed by Mac: **Approve 88 GiB backup allowance** (main7110dd1). This raises only combined retained C backups;100GiB C/E free floors and all other limits remain. Earlier blocked status is historical. New additive loader/session/worker/supervisor prepared; scientific dispatch remains gated on qualification.
+
+Bounded real CPU correction owned96013 completed successfully/reaped in45.156s,998051840B peak worker RSS. All seven exact source masks were reconstructed from original pancreas, original source hashes unchanged, full pancreas field retained and128-window coverage checked. All1326 ordinary target bindings remain exactly inherited; no ordinary array rehash was repeated. Corrected plan has664 positive/669 empty and unchanged1333/70 roles. Independent corrected output backups match. Evidence E:/PROWL/readiness/stunet-corrected-cpu-20261108-a01; requestSHA43088aaa50e9a3a520ebd2ba3f5cb65059d51117c19e1ca3e4957ad921ec6e3b. Preserve producing pins.
+
+26 CPU tests pass, including full synthetic parent model/heads/AdamW/RNG/exposure equality, cold next-update equality, strict wrong ancestry rejection, unchanged original restore and observational loss diagnostics. Real parent import/CUDA update/native positive+empty/cold replay remain pending. No new scientific training, MLflow run or monitor launched. Active objective remains the approved additional12k corrected continuation.
