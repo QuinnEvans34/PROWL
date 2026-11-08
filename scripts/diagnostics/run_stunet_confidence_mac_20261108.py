@@ -317,6 +317,14 @@ def worker():
                 client.log_metric(run_id,'policy_'+key.replace('.','')+'/'+name,float(value))
     client.log_artifact(run_id,str(OUT/'result.json'))
     client.log_artifact(run_id,str(OUT/'request.json'))
+    stored=client.get_run(run_id).data.metrics
+    for key,metrics in result['policies'].items():
+        for name,value in metrics.items():
+            if value is not None and stored.get('policy_'+key.replace('.','')+'/'+name)!=float(value):
+                raise ValueError('Stored MLflow metric mismatch')
+    for path, expected_hash in request['pins'].items():
+        if sha(path)!=expected_hash:
+            raise ValueError('Producing pin changed before closeout')
     client.set_terminated(run_id,status='FINISHED')
     print(json.dumps({k:v for k,v in result.items() if k!='cases'}),flush=True)
 
