@@ -1,5 +1,5 @@
 {
-  "state": "CPU_PASS_GPU_PRODUCER_DISPATCHED",
+  "state": "QUALIFIED_READY",
   "approval": "Approve 88 GiB backup allowance",
   "unchanged_limits": "100GiB free C/E,12GiB RSS,6GiB CUDA,32GiB E cache,40h science",
   "cpu_correction": {
@@ -752,5 +752,89 @@
   },
   "independent_review": "Mac reviewed8c9dfbc,26 tests pass,no blocker; existing20 errata tests pass",
   "gpu_owner_session": 70540,
-  "scientific_launch": false
+  "scientific_launch": false,
+  "producer_resources": {
+    "seconds": 100.42200000002049,
+    "peak_owned_rss_bytes": 3105595392,
+    "samples": 658,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_resources": {
+    "seconds": 23.84299999999348,
+    "peak_owned_rss_bytes": 3148091392,
+    "samples": 151,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_comparison": {
+    "exact_restored_state": {
+      "tensors": 522,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "next_update_state": {
+      "tensors": 522,
+      "max_abs_difference": 0.0,
+      "atol": 1e-07,
+      "rtol": 1e-06
+    },
+    "allocated_peak": 6137299456,
+    "reserved_peak": 6199181312
+  },
+  "ready_sha256": "faf44afc54fa594e2aeac44a801def728701390995203ed78016277fad6d9465",
+  "readiness_review": {
+    "status": "PASS_READY_FOR_ONE_APPROVED_LAUNCH",
+    "parent_referenced_not_duplicated": true,
+    "additional_updates": 12000,
+    "global_start": 12000,
+    "global_end": 24000,
+    "corrected_positive": 664,
+    "corrected_empty": 669,
+    "ordinary_exact_bindings": 1326,
+    "development": 70,
+    "proof": {
+      "producer": {
+        "resources": {
+          "seconds": 100.42200000002049,
+          "peak_owned_rss_bytes": 3105595392,
+          "samples": 658,
+          "workers_reaped": true,
+          "success": true,
+          "exit_code": 0
+        },
+        "result_sha256": "ae6ae4f9ff7b1c4d96778cdf53ba812e054b36342e7942c2f44bd3faf9deea48",
+        "request_sha256": "2e90d960948bab5b2fc6d243f916eb1d74fde1115f7e5c1604faea67cce8170c",
+        "seconds": 93.25,
+        "cuda_peak": 6203375616
+      },
+      "cold": {
+        "resources": {
+          "seconds": 23.84299999999348,
+          "peak_owned_rss_bytes": 3148091392,
+          "samples": 151,
+          "workers_reaped": true,
+          "success": true,
+          "exit_code": 0
+        },
+        "result_sha256": "6dceec128b3e62bbde41432f2b3afa5cc844170eea22dfdc85b40156b2a89bef",
+        "request_sha256": "462d3784dd8fed1fb6ac04ac08a37f84191306a4501d329afd35ec3921febe2e",
+        "seconds": 16.70299999997951,
+        "cuda_peak": 6199181312
+      }
+    },
+    "cold_exact_tensors": 522,
+    "backup_allowance_bytes": 94489280512,
+    "existing_backup_bytes": 69154680461,
+    "new_backup_reserve": 16822484488,
+    "projected_backup_bytes": 85977164949,
+    "c_free": 137331527680,
+    "e_free": 294384041984,
+    "projected_c_free": 120509043192,
+    "science_seconds": 144000,
+    "scope": "Exploratory correction + LR restart + additional exposure; not isolated causal correction/duration"
+  }
 }
