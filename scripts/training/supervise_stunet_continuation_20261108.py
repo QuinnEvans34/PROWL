@@ -55,7 +55,7 @@ class Tracking:
         run=client.create_run(exp.experiment_id,tags={'mlflow.runName':request['title'],'scope':'exploratory_pretrained_provided_pancreas','training_run_id':request['run_id']})
         self.id=run.info.run_id;self.offset=0;self.losses=0
         try:
-            for key,value in dict(steps=12000,seed=42,window=128,batch_size=1,precision='fp32',wall_seconds=144000,input_sha256=digest).items():
+            for key,value in dict(steps=12000,global_start=12000,global_end=24000,parent_mlflow='243ccf3f71c34417be60362af35187d1',parent_checkpoint_sha256=request['parent_checkpoint_sha256'],annotation_policy='pants-issue12-local-normal-mask-1',peak_learning_rate=2e-5,seed=42,window=128,batch_size=1,precision='fp32',wall_seconds=144000,input_sha256=digest).items():
                 client.log_param(self.id,key,value)
         except BaseException:
             client.set_terminated(self.id,status='FAILED');raise
