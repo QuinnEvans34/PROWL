@@ -1,0 +1,182 @@
+{
+  "schema": "prowl.confidence-closeout.20261108.v1",
+  "status": "PASS",
+  "observed_at": "2026-11-08T21:08:47.340859+00:00",
+  "root": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-confidence-mac-20261108/screen-03",
+  "result_sha256": "820086bddb6b499be887425cb2c81028651d83306c69b79c5327e8a4f8e10b37",
+  "request_sha256": "57fb08fed8f05d89021a889fb15355f764ed87a51b8cc4baf87cd6b504cb0ebc",
+  "producing_pins_verified": 374,
+  "cases": 70,
+  "tiles": 3963,
+  "independent_backup_files_verified": 147,
+  "reopened_policy_mask_hashes_verified": 280,
+  "summary_reproduced_exactly": true,
+  "mlflow_run": "89ddde292d9c47a9862a2f7f68332eea",
+  "mlflow_status": "FINISHED",
+  "sqlite_integrity_checks": 3,
+  "metric_readbacks": 144,
+  "workers_reaped": true,
+  "exclusive_lock_released": true,
+  "resources": {
+    "seconds": 6131.491737917066,
+    "peak_owned_rss_bytes": 3757654016,
+    "samples": 2454,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 7,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "peak_observed_driver_bytes": 6463586304,
+  "max_raw_dice_difference_from_cuda": 0.0,
+  "undefined_cuda_dice_comparisons": 7,
+  "selected_policy": "0.0",
+  "policies": {
+    "0.0": {
+      "positive_macro_dice": 0.3716330384891703,
+      "positive_macro_recall": 0.541016298022665,
+      "small_case_macro_recall": 0.4644887372737479,
+      "positive_macro_precision_defined": 0.37001002200168903,
+      "precision_defined_cases": 36,
+      "pancreas_macro_dice": 0.7897395853227666,
+      "detected_cases": 35,
+      "detected_components": 41,
+      "empty_alarm_cases": 27,
+      "false_positive_voxels": 284862,
+      "false_positive_mL": 382.5145598052371,
+      "false_negative_voxels": 84240
+    },
+    "0.4": {
+      "positive_macro_dice": 0.371252062571719,
+      "positive_macro_recall": 0.5395511163192163,
+      "small_case_macro_recall": 0.4641603300487889,
+      "positive_macro_precision_defined": 0.3708609244048833,
+      "precision_defined_cases": 36,
+      "pancreas_macro_dice": 0.7897208991031304,
+      "detected_cases": 35,
+      "detected_components": 41,
+      "empty_alarm_cases": 27,
+      "false_positive_voxels": 282945,
+      "false_positive_mL": 380.56628958666494,
+      "false_negative_voxels": 84469
+    },
+    "0.5": {
+      "positive_macro_dice": 0.3693345725060029,
+      "positive_macro_recall": 0.5271505562292005,
+      "small_case_macro_recall": 0.4447557172529324,
+      "positive_macro_precision_defined": 0.37791045845983334,
+      "precision_defined_cases": 36,
+      "pancreas_macro_dice": 0.7898181366431981,
+      "detected_cases": 35,
+      "detected_components": 41,
+      "empty_alarm_cases": 27,
+      "false_positive_voxels": 265834,
+      "false_positive_mL": 361.4389323915649,
+      "false_negative_voxels": 86637
+    },
+    "0.6": {
+      "positive_macro_dice": 0.37140931629400076,
+      "positive_macro_recall": 0.4876312668330253,
+      "small_case_macro_recall": 0.4013348045394316,
+      "positive_macro_precision_defined": 0.4059220419665496,
+      "precision_defined_cases": 35,
+      "pancreas_macro_dice": 0.7911433371376068,
+      "detected_cases": 34,
+      "detected_components": 39,
+      "empty_alarm_cases": 26,
+      "false_positive_voxels": 197180,
+      "false_positive_mL": 268.7959668390597,
+      "false_negative_voxels": 94277
+    }
+  },
+  "guards": {
+    "0.4": {
+      "passes": false,
+      "checks": {
+        "dice_gain_at_least_02": false,
+        "no_lost_cases": true,
+        "no_lost_components": true,
+        "small_recall_unchanged": false,
+        "overall_recall_within_01": true,
+        "pancreas_dice_within_01": true,
+        "empty_alarms_nonincrease": true,
+        "fp_volume_nonincrease": true
+      },
+      "lost_cases": [],
+      "lost_components": [],
+      "dice_gain": -0.0003809759174512872,
+      "true_positive_voxels_removed": 229,
+      "false_positive_voxels_removed": 1917
+    },
+    "0.5": {
+      "passes": false,
+      "checks": {
+        "dice_gain_at_least_02": false,
+        "no_lost_cases": true,
+        "no_lost_components": true,
+        "small_recall_unchanged": false,
+        "overall_recall_within_01": false,
+        "pancreas_dice_within_01": true,
+        "empty_alarms_nonincrease": true,
+        "fp_volume_nonincrease": true
+      },
+      "lost_cases": [],
+      "lost_components": [],
+      "dice_gain": -0.002298465983167408,
+      "true_positive_voxels_removed": 2397,
+      "false_positive_voxels_removed": 19028
+    },
+    "0.6": {
+      "passes": false,
+      "checks": {
+        "dice_gain_at_least_02": false,
+        "no_lost_cases": false,
+        "no_lost_components": false,
+        "small_recall_unchanged": false,
+        "overall_recall_within_01": false,
+        "pancreas_dice_within_01": true,
+        "empty_alarms_nonincrease": true,
+        "fp_volume_nonincrease": true
+      },
+      "lost_cases": [
+        "PanTS_00007868"
+      ],
+      "lost_components": [
+        {
+          "case_id": "PanTS_00007636",
+          "component_id": 2
+        },
+        {
+          "case_id": "PanTS_00007868",
+          "component_id": 1
+        }
+      ],
+      "dice_gain": -0.00022372219516952896,
+      "true_positive_voxels_removed": 10037,
+      "false_positive_voxels_removed": 87682
+    }
+  },
+  "confidence_ranking_auc": 0.7212365794514727,
+  "verification_seconds": 9.836048999801278,
+  "verification_peak_rss_bytes": 1401733120,
+  "scope": "Exposed-development inference-policy screen; zero optimizer updates; no automatic deployment",
+  "launchd_registration_removed": true,
+  "launchd_configuration_and_logs_preserved": true,
+  "monitor_action": "Pause confidence heartbeat on verified completion; Lenovo monitor unchanged",
+  "cumulative_elapsed_seconds_at_closeout": 8419.528043746948,
+  "verification_script_sha256": "be9374594a7cbc10305059bb8d9c550dbcc565c22dca5f0ddc1a3f874be6f445",
+  "preserved_report_format_failure": {
+    "status": "REPORT_FORMAT_FAILURE",
+    "script_sha256": "a1c737b1055f8f78cfbda5e300bc566e357adeebef1b10bc1dc906da665a3372",
+    "error": "TypeError computing max raw Dice difference across float and None: empty-reference cases have undefined original lesion Dice",
+    "stage": "after all source/backup/mask/SQLite/metric/cleanup assertions, before report formatting",
+    "inference_repeated": false,
+    "production_artifacts_changed": false
+  },
+  "no_policy_deployed": true,
+  "lenovo_training_changed": false
+}
