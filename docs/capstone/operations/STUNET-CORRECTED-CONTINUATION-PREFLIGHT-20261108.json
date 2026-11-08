@@ -1,6 +1,6 @@
 {
   "schema": "prowl-stunet-corrected-continuation-proposal-v1",
-  "state": "BLOCKED_STORAGE_BUDGET_BEFORE_IMPLEMENTATION",
+  "state": "SCIENTIFIC_LAUNCH02_VERIFIED_RUNNING",
   "observed_at": "2026-11-08T17:32:43.348623+00:00",
   "title": "Correct seven confirmed normal-case targets, then continue STU-Net for 12k updates",
   "run_id": "pants_stunet_corrected_continuation_12k_20261108",
@@ -60,7 +60,7 @@
     "science_seconds": 144000,
     "owned_rss_bytes": 12884901888,
     "cuda_bytes": 6442450944,
-    "combined_backup_cap_bytes": 68719476736,
+    "combined_backup_cap_bytes": 94489280512,
     "cache_cap_bytes": 34359738368,
     "free_floor_bytes": 107374182400,
     "setup_and_qualification": "Separate bounded receipts pending storage resolution; no stages dispatched"
@@ -102,5 +102,11 @@
     "One launch with private dashboard/history,MLflow loss readback,initialbackup,ownedworker andadvancingupdates",
     "Restore one quiet hourly monitor for newrun only after verified launch"
   ],
-  "implementation_status": "No new scientific source code, cache, GPU, MLflow or monitor changes. Original completed outputs remain intact."
+  "implementation_status": "Corrected real input/GPU/cold gates PASS; launch02 RUNNING, first attempt zero updates preserved; see STUNET-CORRECTED-LAUNCH-20261108.md",
+  "backup_amendment": {
+    "human_quote": "Approve 88 GiB backup allowance",
+    "relayed_by": "Mac chat 01a14176-ad79-7470-aad5-951d0dea22fc",
+    "scope": "Retained C backups only; 100GiB free floor and all other gates unchanged"
+  },
+  "current_ready_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8"
 }

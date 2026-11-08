@@ -1,0 +1,840 @@
+{
+  "state": "QUALIFIED_READY",
+  "approval": "Approve 88 GiB backup allowance",
+  "unchanged_limits": "100GiB free C/E,12GiB RSS,6GiB CUDA,32GiB E cache,40h science",
+  "cpu_correction": {
+    "seconds": 45.15599999995902,
+    "peak_owned_rss_bytes": 998051840,
+    "samples": 302,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0,
+    "backups": [
+      {
+        "name": "overlay.json",
+        "sha256": "9c8fd19d2b62d291e497315551dabfa0cbab81bc1af814137da176bc56742c8e",
+        "bytes": 5856
+      },
+      {
+        "name": "PanTS_00000044.json",
+        "sha256": "3d7e2322139b80f0482515b7f37649970da24b6aa66fcf85c83fb0de23d98a4b",
+        "bytes": 5861
+      },
+      {
+        "name": "PanTS_00000044.npz",
+        "sha256": "2744e586cc456c73366fba341403a74fe4891142d44689cef3be0d2c7d9be951",
+        "bytes": 38402
+      },
+      {
+        "name": "PanTS_00001819.json",
+        "sha256": "4d81e2edf5d647b443e34cda965185bf191d92033bbb2ee5ccfd7e3a89f4b77f",
+        "bytes": 5990
+      },
+      {
+        "name": "PanTS_00001819.npz",
+        "sha256": "8cbb8228df93a92904a5c9269b3eb9c17c1f20fabd102afb89c9a64448ee694a",
+        "bytes": 26242
+      },
+      {
+        "name": "PanTS_00003059.json",
+        "sha256": "133bc48e4aa6cdd2ce7fa860966ca69ccf338f03078ab7919891879e0c67cfa2",
+        "bytes": 6084
+      },
+      {
+        "name": "PanTS_00003059.npz",
+        "sha256": "b6e19f58d4c694cf11598110b20c45171c0223e499b705d47e90150c7a6f9ee5",
+        "bytes": 28659
+      },
+      {
+        "name": "PanTS_00003548.json",
+        "sha256": "796c23cd1250cd68ded8a1b3cabafdb52943e6c0f9d826408f9b0052143e2b96",
+        "bytes": 5974
+      },
+      {
+        "name": "PanTS_00003548.npz",
+        "sha256": "1c29e3991d75c269df8ccfefa2313c037c0f215dabf2b4f9c89543397eed8d1c",
+        "bytes": 7167
+      },
+      {
+        "name": "PanTS_00005693.json",
+        "sha256": "b7423764f699e696a08d0ff7a8328d15e1522c6102c656c58e2797920d9216a1",
+        "bytes": 5958
+      },
+      {
+        "name": "PanTS_00005693.npz",
+        "sha256": "542a332b0b73414f7e2bcc5597ad53132922176aa8bf947fc7577ee46d3d11b8",
+        "bytes": 37791
+      },
+      {
+        "name": "PanTS_00007933.json",
+        "sha256": "804468aa8f9d0812916710ad10db610261ce08e7d315b38609951b71488d7e63",
+        "bytes": 6084
+      },
+      {
+        "name": "PanTS_00007933.npz",
+        "sha256": "303dc58019a6f23f29cc23989929199e9576b01c4e7a9da74a7fcf24b506ad50",
+        "bytes": 28659
+      },
+      {
+        "name": "PanTS_00007947.json",
+        "sha256": "61bdcc9fca662665a2ab26f08f993b555fa6dc789f77ea96a1f44d48e6879900",
+        "bytes": 5838
+      },
+      {
+        "name": "PanTS_00007947.npz",
+        "sha256": "23048705021af6ac1260328e7bb90f3a932f1bcb435f1f099bda81bbfb7412d0",
+        "bytes": 26586
+      },
+      {
+        "name": "plan-proposal.json",
+        "sha256": "03e3cd102ed9c1ff7a49d90ee61f8ca31fa21628569a8a38bf53b457c2b33b61",
+        "bytes": 6201623
+      }
+    ]
+  },
+  "correction": {
+    "version": "pants-issue12-local-normal-mask-1",
+    "complete": false,
+    "corrected_cases": {
+      "PanTS_00000044": {
+        "original_source_sha256": {
+          "ct": "ed5c51a68cd274849eb2a7a36c990d12d6dc0b6ed09fab3d99ae864b085feaee",
+          "lesion": "864d92f2b268ceddc5c4943b24bd7f86ec47d7af3e6457ac4744ecd6861ff767",
+          "pancreas": "c72b556962ce47a06122bfb17d9a19c1798dcb1a1b697fb1cdf4c0f987f2c4c9"
+        },
+        "original_lesion_voxels": 16,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 268782,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 38402,
+          "metadata_sha256": "3d7e2322139b80f0482515b7f37649970da24b6aa66fcf85c83fb0de23d98a4b",
+          "target_sha256": "2744e586cc456c73366fba341403a74fe4891142d44689cef3be0d2c7d9be951"
+        },
+        "coverage_windows": 2,
+        "components": 1
+      },
+      "PanTS_00001819": {
+        "original_source_sha256": {
+          "ct": "e38dbe096c7697c1ceb47b9fd8192ac68a24b4173087390ec122ba06675a1817",
+          "lesion": "876409ec79049b42af7242e2363ffd9965aa09c5f7f138b00cd7f17f88b0ecfe",
+          "pancreas": "b1d0aaa08667c3f0b5958634a0e33f7677abf98d420352a3eea5909fcd59af12"
+        },
+        "original_lesion_voxels": 45,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 137916,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 26242,
+          "metadata_sha256": "4d81e2edf5d647b443e34cda965185bf191d92033bbb2ee5ccfd7e3a89f4b77f",
+          "target_sha256": "8cbb8228df93a92904a5c9269b3eb9c17c1f20fabd102afb89c9a64448ee694a"
+        },
+        "coverage_windows": 2,
+        "components": 2
+      },
+      "PanTS_00003059": {
+        "original_source_sha256": {
+          "ct": "30328256757966e07b316f0b22bb878627d865dd0905d50dc50368d1cbddf574",
+          "lesion": "62601f3f027309af4fe82ec1f7bfacde58230442aa07c209b37d94cc535b5107",
+          "pancreas": "e80a1e845f32e1599c073b6d95a677916a756bd27a57998d796e5a725acc99e7"
+        },
+        "original_lesion_voxels": 12,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 176670,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 28659,
+          "metadata_sha256": "133bc48e4aa6cdd2ce7fa860966ca69ccf338f03078ab7919891879e0c67cfa2",
+          "target_sha256": "b6e19f58d4c694cf11598110b20c45171c0223e499b705d47e90150c7a6f9ee5"
+        },
+        "coverage_windows": 2,
+        "components": 1
+      },
+      "PanTS_00003548": {
+        "original_source_sha256": {
+          "ct": "dce767e9fe4c992d3965e5530f17de0dc6696427cf1f6a96be64f6162654ea17",
+          "lesion": "25cdb9c2bab35a283dab87f8c1d02801c7dce77929f5d02e851f858bdf94d306",
+          "pancreas": "6edb42fce45022ed3349d539ad08f6ad9e19fbe6d640426355a4022455c63bf0"
+        },
+        "original_lesion_voxels": 36,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 38607,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 7167,
+          "metadata_sha256": "796c23cd1250cd68ded8a1b3cabafdb52943e6c0f9d826408f9b0052143e2b96",
+          "target_sha256": "1c29e3991d75c269df8ccfefa2313c037c0f215dabf2b4f9c89543397eed8d1c"
+        },
+        "coverage_windows": 1,
+        "components": 1
+      },
+      "PanTS_00005693": {
+        "original_source_sha256": {
+          "ct": "97b4fa73b0587a461a05f28eaccb07953c221b95f82ce9e3ff93757c28f31f96",
+          "lesion": "30a4f23140398ca2cca54335961fa0232e3cb869bbaf613caf43ae3025fb1648",
+          "pancreas": "5b88b8e99a0485661bd98c2358763162ae7a6f64de83b5b61c6211811b8d6ea5"
+        },
+        "original_lesion_voxels": 20,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 135928,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 37791,
+          "metadata_sha256": "b7423764f699e696a08d0ff7a8328d15e1522c6102c656c58e2797920d9216a1",
+          "target_sha256": "542a332b0b73414f7e2bcc5597ad53132922176aa8bf947fc7577ee46d3d11b8"
+        },
+        "coverage_windows": 4,
+        "components": 1
+      },
+      "PanTS_00007933": {
+        "original_source_sha256": {
+          "ct": "8bd82a8145e80884919b75f3d21626c69a50da7e51ea427ef76e42ea9073e6ef",
+          "lesion": "6f84c81a34e4fe9e9faf4abb320b1d0a78ddb16609297a4976f1bd184cd9f830",
+          "pancreas": "c8d9d57d7da4c7410f5b66bda7031bcf010cae2e239e4a4047e8494565a12206"
+        },
+        "original_lesion_voxels": 16,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 176670,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 28659,
+          "metadata_sha256": "804468aa8f9d0812916710ad10db610261ce08e7d315b38609951b71488d7e63",
+          "target_sha256": "303dc58019a6f23f29cc23989929199e9576b01c4e7a9da74a7fcf24b506ad50"
+        },
+        "coverage_windows": 2,
+        "components": 1
+      },
+      "PanTS_00007947": {
+        "original_source_sha256": {
+          "ct": "70f3ff5f62b85286b2dd689a2391d1407e818863f751a2bcbc208fc303baf472",
+          "lesion": "bd0902047a074176c445c40d80b74f40be0e37ab069aee187b69b32341644b99",
+          "pancreas": "424c5595fbbc7286de8df99a6b3c3ccfa004b0114b32983ccf28e7a853b7e0e9"
+        },
+        "original_lesion_voxels": 32,
+        "corrected_lesion_voxels": 0,
+        "pancreas_voxels": 90882,
+        "full_pancreas_retained": true,
+        "cache": {
+          "bytes": 26586,
+          "metadata_sha256": "61bdcc9fca662665a2ab26f08f993b555fa6dc789f77ea96a1f44d48e6879900",
+          "target_sha256": "23048705021af6ac1260328e7bb90f3a932f1bcb435f1f099bda81bbfb7412d0"
+        },
+        "coverage_windows": 1,
+        "components": 1
+      }
+    },
+    "parent_plan_sha256": "3cdad6a82efbbcecadc27049bd701dde45558b88158e30202d9f83bb7dcf80fe",
+    "ordinary_binding_count": 1326,
+    "ordinary_bindings_exact": true,
+    "ordinary_array_rehash_performed": false,
+    "original_source_files_unchanged": true,
+    "status": "CPU_CORRECTION_ONLY_NOT_TRAINING_READY"
+  },
+  "real_provider": {
+    "status": "PASS",
+    "cases": [
+      {
+        "case_id": "PanTS_00000044",
+        "trace": {
+          "case_id": "PanTS_00000044",
+          "step": 12641,
+          "origin": [
+            124,
+            59,
+            4
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 297236516775286649,
+            "one_based_update": 12642,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1844263,
+              252889,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "4f21a9bc6214c92cc4efb03f516332b7354ed49753a4665ba0364567e3cfab1d",
+          "image_sha256": "694044f03949067b77fb5e9182bfcf92e18f5e9402ba772bb567c860674b1ed6"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00001819",
+        "trace": {
+          "case_id": "PanTS_00001819",
+          "step": 12752,
+          "origin": [
+            98,
+            28,
+            0
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 13086431212866972515,
+            "one_based_update": 12753,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              2001254,
+              95898,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "c09e34e1f2c56a6418602a3db3d8004b4aff6f4c69e3bfbc77463661f8885aa7",
+          "image_sha256": "101db93037d11c85e6c6902f6a8985ab61f7dcf8f6c5efe4c6d6e0c409dc2929"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00003059",
+        "trace": {
+          "case_id": "PanTS_00003059",
+          "step": 12372,
+          "origin": [
+            121,
+            40,
+            14
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 14099361081016702828,
+            "one_based_update": 12373,
+            "flips": [
+              false,
+              true,
+              true
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": -0.07672253886233012,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1978355,
+              118797,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "70bdfbca928fee6ab0b2f088dd8efc82b4bf7b7fcc0149d5aef517e2aad4d53a",
+          "image_sha256": "a73cd36432f93c63194049fbb1cf32165e8545d1a686b4eb9a32baf2853fb34a"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00003548",
+        "trace": {
+          "case_id": "PanTS_00003548",
+          "step": 12442,
+          "origin": [
+            0,
+            30,
+            72
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 13361017766624237194,
+            "one_based_update": 12443,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": true,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1981331,
+              115821,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "4c57a5290afc194cea9acdaae3512216cbe74a374ae1644563e11766953b7935",
+          "image_sha256": "796369b3ab75366ab73268595ee078fc411b371f9ff9c05a993b729a81a951d1"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00005693",
+        "trace": {
+          "case_id": "PanTS_00005693",
+          "step": 13678,
+          "origin": [
+            131,
+            77,
+            45
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 12762072343697597370,
+            "one_based_update": 13679,
+            "flips": [
+              false,
+              false,
+              true
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1984494,
+              112658,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "898456af4a7c62f9e63e5454985dd46da9cb422ebc45834469f6e06f6e7a5188",
+          "image_sha256": "56d3079d55c7bcec21a400ba9c6b11113b830027beefff696a388fca7fc87c40"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00007933",
+        "trace": {
+          "case_id": "PanTS_00007933",
+          "step": 13504,
+          "origin": [
+            121,
+            40,
+            14
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 4860324686476068763,
+            "one_based_update": 13505,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1978375,
+              118777,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "e3492818ad00415f75a12efd844154af76669956ed79d98b35c6a99bd7833092",
+          "image_sha256": "da891796ba18f8af8c25307fdc40b7e32f10947ca1abad1ea0ed8292343473e5"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00007947",
+        "trace": {
+          "case_id": "PanTS_00007947",
+          "step": 13546,
+          "origin": [
+            127,
+            54,
+            59
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 10068898316023291454,
+            "one_based_update": 13547,
+            "flips": [
+              false,
+              true,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": -0.04723517575246677,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              2006270,
+              90882,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "dfd8d5cd458b74c0cb23d3db4ec1aca5c10b5e2955cfa555df3510bd66223f2e",
+          "image_sha256": "f479f704413dca1f1cf9e8b662bea9643187ef60bd8448b464903d679ac9000a"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00004330",
+        "trace": {
+          "case_id": "PanTS_00004330",
+          "step": 13350,
+          "origin": [
+            131,
+            60,
+            26
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 13943491765501347370,
+            "one_based_update": 13351,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": null,
+            "intensity_shift": null,
+            "gaussian_noise": false,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              1972897,
+              124255,
+              0
+            ]
+          },
+          "lesion_voxels": 0,
+          "target_sha256": "989ee8b7066b0f73638590e3ba908d1597708cc52722b8f033160b25f3d9ea40",
+          "image_sha256": "e48a3d2765de654886448bdbd8d290e546ad8e32b60a535d18095ffd5a6abf80"
+        },
+        "labels": [
+          0,
+          1
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      },
+      {
+        "case_id": "PanTS_00006311",
+        "trace": {
+          "case_id": "PanTS_00006311",
+          "step": 12816,
+          "origin": [
+            108,
+            52,
+            58
+          ],
+          "view": {
+            "kind": "coverage"
+          },
+          "augmentation": {
+            "policy": "pants_cached_view_augmentation_v1",
+            "seed": 2289332303267606757,
+            "one_based_update": 12817,
+            "flips": [
+              false,
+              false,
+              false
+            ],
+            "rotation_k": 0,
+            "rotation_axes": [
+              0,
+              1
+            ],
+            "intensity_scale": 1.0061370883280647,
+            "intensity_shift": null,
+            "gaussian_noise": true,
+            "noise_standard_deviation": 0.01,
+            "valid_voxels": 2097152,
+            "support_sha256": "947bfe0fa809a803331cbe910ae3ab18e6cf6f54fe489dc22435b8739fd49a6d",
+            "class_counts": [
+              2002887,
+              93755,
+              510
+            ]
+          },
+          "lesion_voxels": 510,
+          "target_sha256": "f86a5635e1dbb3cb13de22a40e55ef2e4fbdeffcea00bb892d76e1c42c864e83",
+          "image_sha256": "272064fc00a78c4998bb7bc570d5602040c98fe6e482e886258061bc8bd5dcc5"
+        },
+        "labels": [
+          0,
+          1,
+          2
+        ],
+        "shape": [
+          1,
+          128,
+          128,
+          128
+        ]
+      }
+    ],
+    "source_stats_checked": 1403,
+    "train": 1333,
+    "dev": 70,
+    "scientific_updates": 0
+  },
+  "provider_resources": {
+    "seconds": 27.32799999997951,
+    "peak_owned_rss_bytes": 1211224064,
+    "samples": 177,
+    "workers_reaped": true,
+    "success": true,
+    "backup": {
+      "path": "E:\\PROWL\\readiness\\stunet-corrected-input-check-20261108-a01\\result.json",
+      "backup": "C:\\Users\\quinn\\PROWL-Backups\\stunet-corrected-input-check-20261108-a01\\result.json",
+      "sha256": "c7bf5eeff7af0a0e8ec3faa2187b58a1b0667687abd7b3f9ad46d7e4bf5e063c",
+      "bytes": 12663
+    }
+  },
+  "requests": {
+    "E:\\PROWL\\readiness\\stunet-corrected-cpu-20261108-a01\\request.json": "43088aaa50e9a3a520ebd2ba3f5cb65059d51117c19e1ca3e4957ad921ec6e3b",
+    "E:\\PROWL\\readiness\\stunet-corrected-input-check-20261108-a01\\request.json": "24c7423726e318308774e3a27b58abc22b61f43be23a2321c2281355e84dad29",
+    "E:\\PROWL\\readiness\\stunet-corrected-qualification-20261108-a01\\producer-request.json": "2e90d960948bab5b2fc6d243f916eb1d74fde1115f7e5c1604faea67cce8170c"
+  },
+  "tests": {
+    "count": 33,
+    "training_runtime_seconds": 31.05,
+    "post_launch_guard_revision_tests": 7,
+    "post_launch_guard_seconds": 6.18
+  },
+  "independent_review": "Mac reviewed8c9dfbc,26 tests pass,no blocker; existing20 errata tests pass",
+  "gpu_owner_session": 70540,
+  "scientific_launch": false,
+  "producer_resources": {
+    "seconds": 100.42200000002049,
+    "peak_owned_rss_bytes": 3105595392,
+    "samples": 658,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_resources": {
+    "seconds": 23.84299999999348,
+    "peak_owned_rss_bytes": 3148091392,
+    "samples": 151,
+    "workers_reaped": true,
+    "success": true,
+    "exit_code": 0
+  },
+  "cold_comparison": {
+    "exact_restored_state": {
+      "tensors": 522,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "next_update_state": {
+      "tensors": 522,
+      "max_abs_difference": 0.0,
+      "atol": 1e-07,
+      "rtol": 1e-06
+    },
+    "allocated_peak": 6137299456,
+    "reserved_peak": 6199181312
+  },
+  "ready_sha256": "faf44afc54fa594e2aeac44a801def728701390995203ed78016277fad6d9465",
+  "readiness_review": {
+    "status": "PASS_READY_FOR_ONE_APPROVED_LAUNCH",
+    "parent_referenced_not_duplicated": true,
+    "additional_updates": 12000,
+    "global_start": 12000,
+    "global_end": 24000,
+    "corrected_positive": 664,
+    "corrected_empty": 669,
+    "ordinary_exact_bindings": 1326,
+    "development": 70,
+    "proof": {
+      "producer": {
+        "resources": {
+          "seconds": 100.42200000002049,
+          "peak_owned_rss_bytes": 3105595392,
+          "samples": 658,
+          "workers_reaped": true,
+          "success": true,
+          "exit_code": 0
+        },
+        "result_sha256": "ae6ae4f9ff7b1c4d96778cdf53ba812e054b36342e7942c2f44bd3faf9deea48",
+        "request_sha256": "2e90d960948bab5b2fc6d243f916eb1d74fde1115f7e5c1604faea67cce8170c",
+        "seconds": 93.25,
+        "cuda_peak": 6203375616
+      },
+      "cold": {
+        "resources": {
+          "seconds": 23.84299999999348,
+          "peak_owned_rss_bytes": 3148091392,
+          "samples": 151,
+          "workers_reaped": true,
+          "success": true,
+          "exit_code": 0
+        },
+        "result_sha256": "6dceec128b3e62bbde41432f2b3afa5cc844170eea22dfdc85b40156b2a89bef",
+        "request_sha256": "462d3784dd8fed1fb6ac04ac08a37f84191306a4501d329afd35ec3921febe2e",
+        "seconds": 16.70299999997951,
+        "cuda_peak": 6199181312
+      }
+    },
+    "cold_exact_tensors": 522,
+    "backup_allowance_bytes": 94489280512,
+    "existing_backup_bytes": 69154680461,
+    "new_backup_reserve": 16822484488,
+    "projected_backup_bytes": 85977164949,
+    "c_free": 137331527680,
+    "e_free": 294384041984,
+    "projected_c_free": 120509043192,
+    "science_seconds": 144000,
+    "scope": "Exploratory correction + LR restart + additional exposure; not isolated causal correction/duration"
+  }
+}

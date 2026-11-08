@@ -1,0 +1,21 @@
+{
+  "schema": "prowl.stunet.mac-published-source-reconciliation.v1",
+  "status": "PASS_225_REPOSITORY_SOURCE_IDENTITIES_RECONCILED",
+  "ready_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+  "source_commit": "48ea7c5f2561010c7aa589f97fe682eb4cfddc40",
+  "peer_launch_commit": "6d484c2",
+  "peer_snapshot_commit": "f467a43",
+  "snapshot_json_sha256": "750bc3db8a76d9e7f69cd3028eb1892515feab1bc2ea4a0ba0f2b2b612e77d2b",
+  "repository_source_pins": 225,
+  "serialization_counts": {
+    "exact_git_bytes": 63,
+    "uniform_CRLF": 156,
+    "mixed_EOL_snapshot": 6
+  },
+  "initial_uniform_EOL_assumption": "Six files rejected by the initial exact/uniform-CRLF comparison; resolved only after receiving exact byte snapshots and confirming AST/normalized-byte equality. No original bytes or pins changed.",
+  "runtime_current_byte_check": "Lenovo attestation; Mac verified exported snapshots and all Git source identities, not the remote filesystem directly.",
+  "new_model_calls": 0,
+  "new_optimizer_updates": 0,
+  "private_data_or_checkpoint_bytes_read": 0,
+  "training_stopped_or_modified": false
+}

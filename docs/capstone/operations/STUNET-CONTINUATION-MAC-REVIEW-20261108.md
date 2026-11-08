@@ -76,3 +76,62 @@ After successful launch, verify one worker, advancing global updates, stored MLf
 metrics, the independent parent reference and one quiet hourly monitor. Capture
 parent MLflow/checkpoint lineage and distinguish12000newupdates from24000ancestry;
 do not duplicate parent runtime in training-hour totals.
+
+## Qualification, operational recovery and verified launch
+
+Peer`1b301bf`/`ac8db59` published the real provider and CUDA evidence, imported
+byte-for-byte here from the final peer revision. Correction45.156s/998,051,840B
+ownedRSS and provider27.328s/1,211,224,064B both succeeded/reaped. Actual CUDA
+producer100.422s and cold23.843s succeeded/reaped;522state tensors match exactly
+on restored state and the next update, maxabs0. Both diagnostic checkpoints have
+independent matching backups. Positive/empty native reconstructions are gap-free.
+
+The initial scientific dispatch used the isolated model interpreter for supervision,
+which lacks MLflow. It failed before any updates or tracking creation; the failure
+and reaping evidence remain intact. Under the already authorized operational fix,
+peer`48ea7c5` adds a pre-dispatch supervisor-environment check and separate existing
+MLflow supervisor/model worker interpreters. No package installation or qualified
+worker change. A new receipt/output root deducts a conservative60s from the original
+40h allowance:143,940s remain. Actual tracking-read/import preflight passed without
+creating a run. Mac independently reran the expanded **41CPU tests, all pass4.85s**,
+including runtime/failed-budget guards and phase-relative dashboard mapping.
+
+Peer`6d484c2` verifies ONE running continuation:
+
+- Artifact`pants_stunet_corrected_continuation_12k_20261108_launch02`;
+  ready SHA`d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8`.
+- MLflow`13c709ae157949988de1d7f8821a03b7` RUNNING. Saved startup observations
+  advanced12001→12018→12027→12051;50stored losses exactly match the journal prefix.
+  Firstfive scientific inputs/losses/LRs match the qualified producer. No new phase
+  Dice exists yet; first complete validation is global14000.
+- Owned99079, supervisor48348/wrapper58540, workerwrapper52992/actual32244.
+  Peer records creation times and command lines; PID alone is not ownership proof.
+- Full parent model/optimizer/RNG/exposure imported exactly and independent E/C
+  parent hashes verified. First new500step checkpoint is due at12500; it is not
+  falsely claimed as already written at this startup observation.
+- AC pass; startup ownedRSS3,103,313,920B, Cfree137,343,881,216B,
+  Efree294,380,240,896B, Cbackups69,155,035,711B, Ecache24,713,390,976B.
+  Reported GPU6019MiB remains under6GiB; qualification reservedpeak6,203,375,616B.
+  Physical100GiBfloors and approved88GiBbackup/32GiBcache limits pass.
+- Existing private phone route shows phase-local progress and retains ten historical
+  runs. Runtime totals retain actual journal elapsed time; no duplicated parent hours.
+- ONE hourly heartbeat`monitor-corrected-stu-net-continuation` ACTIVE, saved prompt
+  reread with this exact root/ready/owner and no automatic retry/resume/successor.
+  It remains quiet during healthy progress and pauses/reports failure or completion.
+
+Mac imported the published launch, qualification and pin records unchanged and
+checked their identity, global/phase arithmetic, parent equality, budget accounting,
+resource thresholds and saved monitor target/prompt consistency. This is independent
+saved-evidence review, not another live GPU/filesystem/MLflow check from Mac.
+
+All225repository source identities in the peer500pin inventory reconcile to Git:
+63exact Git bytes,156uniform CRLF, and six mixed LF/CRLF files. An initial stricter
+uniform-EOL assumption rejected those six; peer`f467a43` supplied exact base64 byte
+snapshots and line maps. Mac decoded and hashed them, matched each frozen runtime
+pin, compared normalized bytes and ASTs to the exact committed sources, and found
+no code difference. No producing file was normalized or repinned. See
+`STUNET-CONTINUATION-MAC-SOURCE-CHECK-20261108.json` and
+`source-snapshots-20261108/`. Actual remote current-byte equality is peer-attested.
+
+Execution card: https://trello.com/c/uQpn9fze . Training is ongoing, not accepted
+or complete. Pretraining exposure and formal-comparison limitations remain open.

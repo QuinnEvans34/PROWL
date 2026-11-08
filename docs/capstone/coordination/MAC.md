@@ -1,5 +1,35 @@
 # Mac work status
 
+## November 8 corrected STU-Net continuation RUNNING
+
+- Human authorized correction/qualification/one launch, then explicitly approved
+  **88GiB Cbackup allowance**. All other memory/GPU/AC/free-space/cache gates retained.
+  [Authorization](../operations/STUNET-CORRECTED-CONTINUATION-AUTHORIZATION-20261108.md).
+- Lenovo source`8c9dfbc`/`5295867` fixes seven targets and preserves1326ordinary
+  bindings;664positive/669empty. Real seven-plus-two-control loader and actual CUDA
+  parent import/five updates/positive+empty native/cold-next-update all PASS.
+  Cold comparison522tensors/maxabs0; no model/head reset. Parent12k preserved.
+- Failed scientifica01 had zero updates/no new tracking: wrong supervisor Python
+  lackedMLflow. Additive`48ea7c5` uses existing tracking environment with unchanged
+  qualified model worker and new receipt/root;60s charged,143940s science remain.
+  Mac independently passes41CPU tests and reviews the actual source/metadata.
+- Peer`6d484c2` launch: artifact`pants_stunet_corrected_continuation_12k_20261108_launch02`,
+  ready`d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8`,
+  MLflow`13c709ae157949988de1d7f8821a03b7` RUNNING. Verified startup51new/global12051,
+  50storedlosses exact; firstfive inputs/losses/LRs match qualification. No new Dice
+  before full70case global14000 validation; firstnewbackup due12500.
+- Owned99079/supervisor48348/workerwrapper52992/actual32244; use peer commandline/
+  creation-time evidence, not PID alone. Exactlyone ownedrun. Phone dashboard shows
+  truthful phase-local progress, preserves history/hours. ONE quiet hourly heartbeat
+  `monitor-corrected-stu-net-continuation` ACTIVE; no retry/resume/successor.
+- [Independent review](../operations/STUNET-CONTINUATION-MAC-REVIEW-20261108.md) and
+  byte-preserved [launch](../operations/STUNET-CORRECTED-LAUNCH-20261108.md) capture
+  proof/limits. All225repository source identities reconciled to Git, including
+  six mixed-EOL snapshots from`f467a43`; no live source/normalization/repin changes.
+- [Execution card](https://trello.com/c/uQpn9fze) InProgress; provenance/formal
+  comparison cards remain open. All old failures, parent/cache/source and local
+  uncommitted audit drafts preserved. No extra Mac GPU/model/data-array work.
+
 ## November 8 completed STU-Net review and annotation-policy finding
 
 - Completed 12k and all six 70-case validations; best/terminal lesion Dice
