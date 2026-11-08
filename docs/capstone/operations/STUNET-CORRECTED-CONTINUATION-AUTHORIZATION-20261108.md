@@ -62,6 +62,21 @@ notify on failure/completion/action required, never automatically restart it.
 
 ## Storage review from the existing inventory
 
+**Full-directory admission supersedes the parent-only illustration below.**
+Lenovo preflight`a7ff419` establishes that the64GiB gate measures every retained
+independent backup under `C:/Users/quinn/PROWL-Backups`; E production artifacts
+are not counted again. Current use is67,751,652,648B (63.10GiB). With24newcheckpoint
+copies, four conservative qualification copies and64MiB receipts/logs, the projected
+total is87,366,699,740B (81.37GiB). This **fails64GiB** even with parent reuse.
+Projected physical C free space remains above the unchanged100GiB floor; recheck
+at each admission. The actual inventory is in the byte-preserved peer
+[preflight](STUNET-CORRECTED-CONTINUATION-PREFLIGHT-20261108.json) and companion MD.
+
+Mac requested explicit human approval for an88GiB C-backup allowance. **Approval
+is pending** at this publication; no larger cap is applied and no scientific launch
+is admitted. CPU preparation can proceed within the original limits. Parent reuse
+avoids redundant files but is not sufficient to clear the full-directory gate.
+
 The completed parent's34saved files total17,000,744,503B per copy. Each mature
 checkpoint is698,140,651B. Retaining both parent copies plus24newcheckpoint pairs
 projects67,512,240,254B, leaving1,207,236,482B under64GiB **before new journals,

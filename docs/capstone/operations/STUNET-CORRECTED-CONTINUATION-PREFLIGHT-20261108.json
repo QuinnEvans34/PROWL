@@ -1,0 +1,106 @@
+{
+  "schema": "prowl-stunet-corrected-continuation-proposal-v1",
+  "state": "BLOCKED_STORAGE_BUDGET_BEFORE_IMPLEMENTATION",
+  "observed_at": "2026-11-08T17:32:43.348623+00:00",
+  "title": "Correct seven confirmed normal-case targets, then continue STU-Net for 12k updates",
+  "run_id": "pants_stunet_corrected_continuation_12k_20261108",
+  "authority": "Human authorization relayed by Mac chat01a14176-ad79-7470-aad5-951d0dea22fc: Great, I agree, lets make these fixes, then get it training again. One launch conditional on all gates; no waiver of64GiB combined backup cap.",
+  "parent": {
+    "artifact": "pants_stunet_base_transfer_12k_20261106_launch02",
+    "step": 12000,
+    "checkpoint_sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55",
+    "ready_sha256": "59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68"
+  },
+  "hypothesis": {
+    "null": "The composite corrected-label, LR-restart and additional-exposure phase does not improve positive-case mean native lesion Dice over preserved parent0.37163303848917034.",
+    "alternative": "The composite phase improves native lesion outlining; assess paired changes and detection/component/small-case/empty-alarm tradeoffs without claiming isolated duration or correction causality.",
+    "scope": "Exploratory development; unknown pretraining exposure; no independent-patient significance or generalization claim."
+  },
+  "proposed_recipe": {
+    "additional_updates": 12000,
+    "global_updates": [
+      12001,
+      24000
+    ],
+    "warmup_updates": 500,
+    "peak_lr": 2e-05,
+    "lr_formula": "For phase-local zero-based s in0..11999: 2e-5*(s+1)/500 if s<500 else 2e-5*0.5*(1+cos(pi*(s+1-500)/11500)); finalLR0.",
+    "optimizer": "Retain parent AdamW moments, weight_decay1e-5; explicitly set new LR each update",
+    "state": "Retain full body, all learned heads, optimizer, RNG and cumulative exposure via exact ancestry-aware import; explicitly bind only approved input/schedule identity changes",
+    "train_cases": 1333,
+    "positive": 664,
+    "empty": 669,
+    "development_cases": 70,
+    "development_positive": 36,
+    "development_empty": 34,
+    "sampling": "New deterministic schedule and augmentation global addresses12001..24000,3focus:1context; coverage-first then component jitter; corrected seven focus banks use pancreas; complete coverage accounting",
+    "architecture_loss_inference": "Unchanged STU-Net-B, combined deep supervision loss,FP32,batch1,128window/64stride,provided-pancreas regions,normalization and original native metrics",
+    "validation_global_steps": [
+      14000,
+      16000,
+      18000,
+      20000,
+      22000,
+      24000
+    ],
+    "checkpoint_every": 500,
+    "selection": "Highest36-positive native macroDice in this phase,earliest tie; parent separately reported/fallback; selected and terminal retained",
+    "errata_cases": {
+      "PanTS_00000044": 16,
+      "PanTS_00001819": 45,
+      "PanTS_00003059": 12,
+      "PanTS_00003548": 36,
+      "PanTS_00005693": 20,
+      "PanTS_00007933": 16,
+      "PanTS_00007947": 32
+    },
+    "errata_policy": "Bind exact original hash whitelist; preserve original pancreas/CT; reconstruct corrected targets from original pancreas plus empty lesion; never blanketclass2-to-background; reject stale cache; prove all ordinary targets unchanged"
+  },
+  "budgets": {
+    "science_seconds": 144000,
+    "owned_rss_bytes": 12884901888,
+    "cuda_bytes": 6442450944,
+    "combined_backup_cap_bytes": 68719476736,
+    "cache_cap_bytes": 34359738368,
+    "free_floor_bytes": 107374182400,
+    "setup_and_qualification": "Separate bounded receipts pending storage resolution; no stages dispatched"
+  },
+  "storage_preflight": {
+    "existing_backup_bytes": 67751652648,
+    "existing_cache_bytes": 24713390976,
+    "checkpoint_bytes_observed": 698140651,
+    "new_scientific_checkpoint_count": 25,
+    "new_scientific_checkpoint_bytes": 17453516275,
+    "qualification_checkpoint_allowance_count": 4,
+    "qualification_checkpoint_allowance_bytes": 2792562604,
+    "logs_receipts_allowance_bytes": 67108864,
+    "combined_projected_bytes": 88064840391,
+    "combined_projected_gib": 82.0167738860473,
+    "approved_cap_bytes": 68719476736,
+    "cap_exceeded": true,
+    "current_c_free_bytes": 138986459136,
+    "projected_c_free_bytes": 118673271393,
+    "physical_free_floor_projection_pass": true,
+    "possible_user_decision": "Approve88GiB combined Cbackup cap only, with100GiB free floor unchanged and exact projection rechecked; alternatively approve a separately reviewed retention/storage plan. Neither done.",
+    "parent_reference_reuse_alternative": {
+      "existing_parent_checkpoint_copied_again": false,
+      "new_scientific_checkpoint_count": 24,
+      "new_scientific_checkpoint_bytes": 16755375624,
+      "projected_combined_before_qualification_or_logs": 84507028272,
+      "projected_combined_gib_before_qualification_or_logs": 78.70330314338207,
+      "projected_combined_with_qualification_and_logs": 87366699740,
+      "still_exceeds_64gib": true,
+      "scope": "Combined cap is total C:/Users/quinn/PROWL-Backups across retained experiments; E primary artifacts are not counted again in this C backup number."
+    }
+  },
+  "gate_order": [
+    "Resolve combined backup budget; no deletion/relocation implied",
+    "Publish additive spec/code; synthetic tests and parent/ordinary identity proofs",
+    "Seven corrected caches+sampling/input bindings with exact whitelist and geometry/coverage proofs",
+    "Freeze bounded nonpromotable request; GPUparentrestore/newupdates,positive+empty native checks,independentbackup/coldnextupdate equivalence; fail closed",
+    "Readiness review and exact frozen science receipt",
+    "One launch with private dashboard/history,MLflow loss readback,initialbackup,ownedworker andadvancingupdates",
+    "Restore one quiet hourly monitor for newrun only after verified launch"
+  ],
+  "implementation_status": "No new scientific source code, cache, GPU, MLflow or monitor changes. Original completed outputs remain intact."
+}
