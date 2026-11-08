@@ -1,5 +1,7 @@
 # AGENTS.md — Agent Context
 
+> **November8 STU-Net COMPLETE/verified:** 12k updates, six full70 native validations; selected=terminal12k Dice.371633,35/36detected,41/45components,27/34emptyalarms. 237pins and34independent execution backups match;12kMLflow losses exact/FINISHED;workers successful/reaped/absent.29.31h inclvalidation. Monitor deleted after completion; no successor. Read docs/capstone/operations/STUNET-COMPLETION-20261108.md.
+
 > **November6 STU-Net corrected launch VERIFIED:** Actualupdates advancing, owned80176/supervisor48492/workerwrapper42604. Read docs/capstone/operations/STUNET-LAUNCH-20261106.md. Preserve237pins/ready59e8188d...; no duplicate/retry. MLflow243ccf3f71c34417be60362af35187d1 RUNNING, independent initialbackup exact, phoneAPI live. Hourly heartbeat monitor-stu-net-training-and-morning-dice ACTIVE in thischat; do not duplicate.60h/12k approved; firstfullnativevalidation2k, morning available-results snapshot after10h. Priorfaileda01 zero updates preserved.
 
 
