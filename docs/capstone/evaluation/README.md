@@ -13,6 +13,11 @@ claims while keeping every run reproducible and visible.
 
 ## Package map
 
+**Standing future-model requirement (November8):** integrate and qualify the
+[fixed5mm predicted-pancreas postprocessing policy](SEGMENTATION-POSTPROCESSING-POLICY-V1.md),
+retain raw predictions and publish matched raw/filtered evaluation for every new
+pancreas/lesion segmentation model. Do not alter currently frozen experiments.
+
 | Document | Question answered |
 |---|---|
 | [`METRIC-SPECIFICATION.md`](METRIC-SPECIFICATION.md) | Exactly what is measured, on which cases, and how are empty/failure/multi-lesion states handled? |

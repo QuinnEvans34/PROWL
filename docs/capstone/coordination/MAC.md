@@ -1,5 +1,39 @@
 # Mac work status
 
+## November 8 standing future-model postprocessing rule and CPU findings
+
+- User directs the fixed5mm predicted-pancreas component filter to become the
+  default planned postprocessing for future pancreas/lesion models. Root agent
+  instructions and shared evaluation/coordination indices now point to
+  [the standing policy](../evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md)
+  and versioned configuration. Preserve raw outputs/paired scores and qualify
+  geometry, class mapping and detection/recall guards per model. Missing
+  predicted pancreas keeps raw with an explicit not-applied record.
+- Shared future-model entry point:
+  `src.inference.standard_segmentation_postprocess_v1.postprocess`;3focused
+  tests pass, including the5mm default, raw retention and missing-context path.
+  This does not retrofit an active evaluator, training targets or checkpoint
+  selection, and is not an automatic scientific/GPU launch.
+- Delivered CPU studies/code: `7b011af`, `26bb9d6`, `169428b`, `d715238`,
+  `3930284`, `44a0f66`. [Full nine-policy result](../operations/STUNET-POSTPROCESS-RESULTS-20261108.md):
+  original12k rawDice.371633→5mm.394938; recall.541016 and35case/41component
+  hits unchanged on exposed development; FPvolume−32.55%. All630mask hashes,
+  79final backup pairs and108MLflow analysis metrics verified; run
+  `e787e84db21d44308385e14f776047fe`FINISHED/excluded from training hours.
+  Mac confidence monitor was deleted at user request; no replacement schedule.
+- Peer commits`35b9530`/`76c6ebf` imported byte-for-byte. Six exact training-input
+  replays expose lesion disappearance at the8³ target in3/4selected positives,
+  not full-resolution crop loss. Coarsest-supervision candidate CPU-prepared;
+  no scientific training qualification/launch. Normalization did not broadly
+  clip annotated lesion tissue in these sampled examples.
+- Fresh peer read at2026-11-08 21:53UTC: corrected global14000 validation
+  21/70cases,1221/3963tiles, same worker. No full corrected report/newDice yet.
+  Current Lenovo worker, frozen pins and hourly monitoring stay unchanged.
+- Existing unrelated local drafts under`docs/stunet_audit/`,
+  `scripts/stunet_audit/`, `tests/stunet_audit/`, `scripts/audit_stunet_overlap.py`
+  and`src/training/stunet_activation_checkpointing_v1.py` remain untouched and
+  uncommitted; no claim that those drafts were published.
+
 ## November 8 corrected STU-Net continuation RUNNING
 
 - Human authorized correction/qualification/one launch, then explicitly approved

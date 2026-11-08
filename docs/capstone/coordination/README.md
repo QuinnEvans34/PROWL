@@ -5,6 +5,13 @@ its own short status file after meaningful work; Git history keeps older entries
 Detailed experiment reports and frozen receipts remain authoritative. A status
 file is a timestamped handoff, not a live process monitor or launch authorization.
 
+**Standing future-model rule:** both machines must read the
+[fixed5mm segmentation policy](../evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md)
+before freezing a new segmentation evaluation/inference integration. Bind its
+shared configuration, retain raw outputs and report paired raw/filtered results.
+Qualify applicability and detection/recall guards per model; do not retrofit
+this rule into a currently frozen run or alter teacher/training targets.
+
 | Owner | Published status | Branch |
 | --- | --- | --- |
 | Mac chat | [MAC.md](https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/coordination/MAC.md) | `main` |

@@ -1,5 +1,18 @@
 # AGENTS.md — Agent Context
 
+> **November8 standing rule for future segmentation models:** User requires
+> `predicted-pancreas-proximity-5mm-v1` for all future pancreas/lesion model
+> evaluation/inference integrations. Read
+> `docs/capstone/evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md` and bind
+> `configs/inference/segmentation-postprocessing-v1.json`. Use same-scan predicted
+> pancreas/native full-affine distances, preserve raw predictions and report
+> paired raw/5mm Dice, recall, small-case/component hits and FP burden. Qualify
+> geometry/class mapping and per-model guards before presenting filtered output;
+> missing predicted pancreas keeps raw with an explicit not-applied record.
+> No retrospective score rewrite, active-run/pin/selection edit, training-target
+> filtering or automatic successor launch. Historical entries below remain
+> evidence for their own runs, not current authority to bypass this policy.
+
 > **October23 CPU error review/comparison/checklist COMPLETE; no training change:**
 > User approved report-only error analysis, future KD comparison tooling and
 > teacher-pilot checklist. Read PANTS-DISTILLATION-ERROR-REVIEW-20261023.md and

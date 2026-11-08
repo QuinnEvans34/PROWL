@@ -1,0 +1,18 @@
+{
+  "policy_id": "predicted-pancreas-proximity-5mm-v1",
+  "scope": "Future pancreas/lesion segmentation evaluation and inference",
+  "future_default": true,
+  "maximum_distance_mm": 5.0,
+  "component_connectivity": 26,
+  "distance": "Minimum voxel-center distance in native world coordinates using the full affine",
+  "pancreas_source": "Same-scan predicted pancreas only; never a reference mask",
+  "canonical_classes": {"background": 0, "pancreas": 1, "lesion": 2},
+  "removed_component_fallback": "background",
+  "missing_predicted_pancreas": "Keep raw prediction and record not applied",
+  "retain_raw_outputs": true,
+  "paired_raw_filtered_evaluation_required": true,
+  "per_model_geometry_and_detection_qualification_required": true,
+  "apply_to_existing_frozen_runs": false,
+  "apply_to_training_or_teacher_probability_targets": false,
+  "policy_document": "docs/capstone/evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md"
+}
