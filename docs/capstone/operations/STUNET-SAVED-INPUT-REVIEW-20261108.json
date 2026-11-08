@@ -1,0 +1,668 @@
+{
+  "schema": "prowl-stunet-saved-input-review-v1",
+  "observed_utc": "2026-11-08T18:33:38.006721+00:00",
+  "scope": "Read-only saved source/JSON/journal review; no source modules imported, CT/mask/model arrays opened, GPU calls, new inference, audits or producing edits.",
+  "ready_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+  "status": {
+    "latest_step": 12334,
+    "new_updates": 334,
+    "elapsed_seconds": 1936.5620000000345,
+    "last_event": "update",
+    "mlflow_id": "13c709ae157949988de1d7f8821a03b7",
+    "mlflow_status": "RUNNING",
+    "processes": [
+      {
+        "pid": 48348,
+        "parent": 58540,
+        "command": [
+          "C:\\Users\\quinn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+          "scripts/training/supervise_stunet_continuation_20261108_v2.py",
+          "--request",
+          "E:/PROWL/readiness/stunet-corrected-scientific-launch-20261108-a02/ready.json",
+          "--sha256",
+          "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+          "--mode",
+          "science"
+        ],
+        "created": 1794160831.2190504
+      },
+      {
+        "pid": 52992,
+        "parent": 48348,
+        "command": [
+          "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+          "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_continuation_20261108.py",
+          "--request",
+          "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+          "--mode",
+          "science",
+          "--output",
+          "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution"
+        ],
+        "created": 1794160867.8891013
+      },
+      {
+        "pid": 55016,
+        "parent": 52992,
+        "command": [
+          "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+          "0x4"
+        ],
+        "created": 1794160867.908614
+      },
+      {
+        "pid": 32244,
+        "parent": 52992,
+        "command": [
+          "C:\\Users\\quinn\\.cache\\prowl-week05-matched-20261102-a01\\python\\cpython-3.12.13-windows-x86_64-none\\python.exe",
+          "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_continuation_20261108.py",
+          "--request",
+          "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+          "--mode",
+          "science",
+          "--output",
+          "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution"
+        ],
+        "created": 1794160867.935151
+      }
+    ]
+  },
+  "journal_prefix": {
+    "path": "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution\\history.jsonl",
+    "captured_bytes": 321907,
+    "sha256": "c9ee812163b66579e58da8d298e05d9141bfa6ae11abaebe7ef4cfc7fbea6759",
+    "complete_rows": 337,
+    "note": "Hash of fixed complete-line prefix, not subsequently growing whole journal."
+  },
+  "class_presence": {
+    "positive_case_updates": 157,
+    "empty_case_updates": 177,
+    "lesion_present_updates": 122,
+    "positive_case_without_lesion_patch": 35,
+    "class_voxel_sums": [
+      668939542,
+      29579933,
+      1929293
+    ],
+    "class_fractions": [
+      0.9550156593322754,
+      0.04222997362742167,
+      0.002754367040302939
+    ],
+    "view_kinds": {
+      "coverage": 251,
+      "context": 83
+    },
+    "all_trace_counts_addresses_finite_losses_consistent": true
+  },
+  "corrected": {
+    "training_positive": 664,
+    "training_empty": 669,
+    "ordinary_bindings_exact": true,
+    "observed_visits": [],
+    "first_planned_update": {
+      "PanTS_00000044": 12642,
+      "PanTS_00001819": 12753,
+      "PanTS_00003059": 12373,
+      "PanTS_00003548": 12443,
+      "PanTS_00005693": 13679,
+      "PanTS_00007933": 12568,
+      "PanTS_00007947": 13547
+    },
+    "coverage_focus_windows": 2978,
+    "first_component_jitter_update": 15971
+  },
+  "saved_scientific_diagnostics": [
+    {
+      "step": 12001,
+      "case_id": "PanTS_00004336",
+      "diagnostics": {
+        "scales": [
+          {
+            "shape": [
+              128,
+              128,
+              128
+            ],
+            "classes": [
+              {
+                "class_id": 0,
+                "target_voxels": 1966454,
+                "ce_mean": 0.011324761435389519,
+                "soft_dice": 0.994838535785675
+              },
+              {
+                "class_id": 1,
+                "target_voxels": 130698,
+                "ce_mean": 0.1883755773305893,
+                "soft_dice": 0.9205353856086731
+              },
+              {
+                "class_id": 2,
+                "target_voxels": 0,
+                "ce_mean": null,
+                "soft_dice": 1.6785371315108932e-08
+              }
+            ]
+          },
+          {
+            "shape": [
+              64,
+              64,
+              64
+            ],
+            "classes": [
+              {
+                "class_id": 0,
+                "target_voxels": 245780,
+                "ce_mean": 0.011374467983841896,
+                "soft_dice": 0.994677722454071
+              },
+              {
+                "class_id": 1,
+                "target_voxels": 16364,
+                "ce_mean": 0.21117816865444183,
+                "soft_dice": 0.9172782897949219
+              },
+              {
+                "class_id": 2,
+                "target_voxels": 0,
+                "ce_mean": null,
+                "soft_dice": 9.165243852748972e-08
+              }
+            ]
+          },
+          {
+            "shape": [
+              32,
+              32,
+              32
+            ],
+            "classes": [
+              {
+                "class_id": 0,
+                "target_voxels": 30745,
+                "ce_mean": 0.013396205380558968,
+                "soft_dice": 0.9944102168083191
+              },
+              {
+                "class_id": 1,
+                "target_voxels": 2023,
+                "ce_mean": 0.20030154287815094,
+                "soft_dice": 0.9111676216125488
+              },
+              {
+                "class_id": 2,
+                "target_voxels": 0,
+                "ce_mean": null,
+                "soft_dice": 4.3065324462077115e-07
+              }
+            ]
+          },
+          {
+            "shape": [
+              16,
+              16,
+              16
+            ],
+            "classes": [
+              {
+                "class_id": 0,
+                "target_voxels": 3853,
+                "ce_mean": 0.015047309920191765,
+                "soft_dice": 0.9933478236198425
+              },
+              {
+                "class_id": 1,
+                "target_voxels": 243,
+                "ce_mean": 0.1789551079273224,
+                "soft_dice": 0.8966401219367981
+              },
+              {
+                "class_id": 2,
+                "target_voxels": 0,
+                "ce_mean": null,
+                "soft_dice": 4.804831405635923e-06
+              }
+            ]
+          },
+          {
+            "shape": [
+              8,
+              8,
+              8
+            ],
+            "classes": [
+              {
+                "class_id": 0,
+                "target_voxels": 483,
+                "ce_mean": 0.026601416990160942,
+                "soft_dice": 0.9881553649902344
+              },
+              {
+                "class_id": 1,
+                "target_voxels": 29,
+                "ce_mean": 0.30530527234077454,
+                "soft_dice": 0.807786226272583
+              },
+              {
+                "class_id": 2,
+                "target_voxels": 0,
+                "ce_mean": null,
+                "soft_dice": 4.647063633456128e-06
+              }
+            ]
+          }
+        ],
+        "gradient_l2": {
+          "body": 0.23755588794456248,
+          "heads": 0.042171559659284236
+        }
+      }
+    }
+  ],
+  "qualification_lesion_scale_counts": [
+    {
+      "step": 12001,
+      "case_id": "PanTS_00004336",
+      "nonpromotable": true,
+      "lesion_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 12002,
+      "case_id": "PanTS_00000234",
+      "nonpromotable": true,
+      "lesion_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 12003,
+      "case_id": "PanTS_00001996",
+      "nonpromotable": true,
+      "lesion_counts": [
+        4821,
+        597,
+        74,
+        9,
+        1
+      ]
+    },
+    {
+      "step": 12004,
+      "case_id": "PanTS_00001209",
+      "nonpromotable": true,
+      "lesion_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 12005,
+      "case_id": "PanTS_00000103",
+      "nonpromotable": true,
+      "lesion_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/data/segmenter_fast_varied_v1.py",
+      "sha256": "d86727613ae08b994ac3e4c371efdae3cad4953c4c5581f9462c521c5506cb80",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 83,
+          "text": "def normalize_region(full_image,parent,low,high):"
+        },
+        {
+          "line": 87,
+          "text": "np.clip(image,-100,250,out=image);image+=100;image/=350"
+        }
+      ]
+    },
+    {
+      "path": "src/data/stunet_continuation_inputs_20261108.py",
+      "sha256": "d501270fc6b486b18effbf2fd0685c704e28c223a52e508c7ab6428faf4cf45f",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 11,
+          "text": "parent=ParentInputs(c['parent_inputs'])"
+        },
+        {
+          "line": 26,
+          "text": "if {k:v for k,v in entry.items() if k not in allowed}!={k:v for k,v in original.items() if k not in allowed}:raise ValueError('Unauthorized target geometry/source change')"
+        },
+        {
+          "line": 40,
+          "text": "expected=self.plan['members'][name];cache=self.corrected if name in EXPECTED else self.cache"
+        },
+        {
+          "line": 48,
+          "text": "if name in EXPECTED and (m.get('annotation_policy')!=POLICY or m['positive'] or (target==2).any()):raise ValueError('Stale corrected target')"
+        },
+        {
+          "line": 52,
+          "text": "image=normalize_region(ct.get_fdata(dtype=np.float32,caching='unchanged'),parent,m['region_low'],m['region_high'])"
+        },
+        {
+          "line": 59,
+          "text": "x,y,augmentation=augment(x[None],y,transform,seed=42,update=step+1,case_id=name)"
+        }
+      ]
+    },
+    {
+      "path": "src/data/stunet_inputs_20261106.py",
+      "sha256": "24683909187231afd2983d19681ac5de74559cd6d716c92b302517a20ec4011e",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 92,
+          "text": "def development(self,name):"
+        },
+        {
+          "line": 105,
+          "text": "case=crop_case(dict(name=name,target=target,geometry=parent,positive=bool(masks['lesion'].any()),original_pancreas=masks['pancreas']))"
+        },
+        {
+          "line": 108,
+          "text": "case['image']=normalize_region(ct.get_fdata(dtype=np.float32,caching='unchanged'),parent,case['region_low'],case['region_high'])"
+        },
+        {
+          "line": 113,
+          "text": "def predict(model,case,*,progress=lambda **kw:None):"
+        },
+        {
+          "line": 115,
+          "text": "record=physical_geometry(case['geometry']);windows=tiles(record['shape'],window=128,stride=64)"
+        }
+      ]
+    },
+    {
+      "path": "src/data/segmenter_physical_windows_v1.py",
+      "sha256": "7a923af2811a72694ea5cf94d9aa3e416eec5b1000c9cd638d5d6e2f5b81736e",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 20,
+          "text": "def physical_geometry(native):"
+        },
+        {
+          "line": 23,
+          "text": "factors=np.maximum(1,np.ceil(spacing-POLICY['spacing_tolerance_mm'])).astype(np.int64)"
+        },
+        {
+          "line": 38,
+          "text": "def sample_window(array, record, origin, *, order, window=144):"
+        },
+        {
+          "line": 45,
+          "text": "values=ndimage.map_coordinates(array,coords,order=order,mode='nearest',prefilter=False)"
+        },
+        {
+          "line": 96,
+          "text": "weight=ndimage.map_coordinates(self.kernel,coords,order=1,mode='nearest',prefilter=False)"
+        },
+        {
+          "line": 98,
+          "text": "values=ndimage.map_coordinates(probabilities[k],coords,order=1,mode='nearest',prefilter=False)"
+        }
+      ]
+    },
+    {
+      "path": "src/data/segmenter_pancreas_region_v1.py",
+      "sha256": "6e0ccebb7d60d7711f9e028c6c8b94ea9607d6eb916ef074f8ed866a6f3b665e",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 14,
+          "text": "POLICY = dict(version='provided-pancreas-region-1', extra_margin_mm=[81.,43.,71.],"
+        },
+        {
+          "line": 23,
+          "text": "pad=np.ceil(np.asarray(POLICY['extra_margin_mm'])/plane).astype(int)"
+        },
+        {
+          "line": 37,
+          "text": "def crop_case(case):"
+        }
+      ]
+    },
+    {
+      "path": "src/training/segmenter_augmentation_v1.py",
+      "sha256": "1ee82a271ba5dacd19155e5ed11ae57f359d2f5c0ce50028c908b496f6a3a550",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 44,
+          "text": "and np.isfinite(image).all() and image.min() >= 0 and image.max() <= 1,"
+        },
+        {
+          "line": 70,
+          "text": "x[support] = np.clip(values, 0., 1.)"
+        },
+        {
+          "line": 76,
+          "text": "class_counts=np.bincount(y.reshape(-1), minlength=3).tolist())"
+        }
+      ]
+    },
+    {
+      "path": "src/training/stunet_transfer_20261106.py",
+      "sha256": "7654a9d01bc4873b7e44cf43c6b4858dc1c6f09c8b2d9a8a06f92d8d0657d30c",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 26,
+          "text": "def architecture(source):"
+        },
+        {
+          "line": 32,
+          "text": "selected = [n for n in tree.body if isinstance(n, ast.ClassDef) and n.name in CLASSES]"
+        },
+        {
+          "line": 107,
+          "text": "def deep_supervision_loss(outputs, target):"
+        },
+        {
+          "line": 130,
+          "text": "small=F.interpolate(target[:,None].float(),size=out.shape[2:],mode='nearest')[:,0].long()"
+        },
+        {
+          "line": 134,
+          "text": "losses.append(F.cross_entropy(out.float(),small,reduction='mean') + 1-dice.mean())"
+        },
+        {
+          "line": 135,
+          "text": "return sum(w*l for w,l in zip((16/31,8/31,4/31,2/31,1/31),losses))"
+        }
+      ]
+    },
+    {
+      "path": "src/data/stunet_errata_20261108.py",
+      "sha256": "a543e98888f16efe1fe14441c29b9f7d2c9616b5b1c5bdab9b4f5c0bfa3301e2",
+      "matches_ready": true,
+      "anchors": [
+        {
+          "line": 55,
+          "text": "for cycle in range(max(len(m['cover']) for m in members.values())):"
+        },
+        {
+          "line": 60,
+          "text": "for kind, target, entries in [('component_jitter', 9000, focus), ('context', 3000, context := [])]:"
+        }
+      ]
+    }
+  ],
+  "metadata_bindings": [
+    {
+      "path": "E:\\PROWL\\readiness\\stunet-corrected-cpu-20261108-a01\\inputs.json",
+      "sha256": "52d2fe17a9963db45feaa88b50c0b813ecc29ac143b732daa450c87a9f6225f5"
+    },
+    {
+      "path": "E:\\PROWL\\readiness\\stunet-corrected-cpu-20261108-a01\\corrected\\plan-proposal.json",
+      "sha256": "03e3cd102ed9c1ff7a49d90ee61f8ca31fa21628569a8a38bf53b457c2b33b61"
+    },
+    {
+      "path": "E:\\PROWL\\readiness\\stunet-corrected-cpu-20261108-a01\\corrected\\overlay.json",
+      "sha256": "9c8fd19d2b62d291e497315551dabfa0cbab81bc1af814137da176bc56742c8e"
+    },
+    {
+      "path": "E:\\PROWL\\readiness\\stunet-pretrained-cpu-20261106-a01\\result.json",
+      "sha256": "048d6ff5e8a3c1ef0b90541744ee00d6740719c3cfdbc176aa0fd7c70734893d"
+    },
+    {
+      "path": "E:\\PROWL\\readiness\\stunet-corrected-qualification-20261108-a01\\producer\\worker\\result.json",
+      "sha256": "ae6ae4f9ff7b1c4d96778cdf53ba812e054b36342e7942c2f44bd3faf9deea48"
+    }
+  ],
+  "upstream_source": {
+    "path": "E:\\PROWL\\teachers\\stunet-base-0652eaf5-20261106\\STUNetTrainer.py",
+    "sha256": "53da5fa6ea87c0b63177af6a93b5b148bda96b6e4be22290a8e5d49a4ef261bc",
+    "lines": [
+      {
+        "line": 1,
+        "text": "from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer"
+      },
+      {
+        "line": 2,
+        "text": "import torch"
+      },
+      {
+        "line": 3,
+        "text": "from torch import nn"
+      },
+      {
+        "line": 4,
+        "text": ""
+      },
+      {
+        "line": 5,
+        "text": "class STUNetTrainer(nnUNetTrainer):"
+      },
+      {
+        "line": 6,
+        "text": "    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, unpack_dataset: bool = True,"
+      },
+      {
+        "line": 7,
+        "text": "                 device: torch.device = torch.device('cuda')):"
+      },
+      {
+        "line": 8,
+        "text": "        super().__init__(plans, configuration, fold, dataset_json, unpack_dataset, device)"
+      },
+      {
+        "line": 9,
+        "text": "        self.num_epochs = 1000"
+      },
+      {
+        "line": 10,
+        "text": "        self.initial_lr = 1e-2"
+      },
+      {
+        "line": 11,
+        "text": ""
+      },
+      {
+        "line": 12,
+        "text": "    @staticmethod"
+      },
+      {
+        "line": 13,
+        "text": "    def build_network_architecture(plans_manager,"
+      },
+      {
+        "line": 14,
+        "text": "                                   dataset_json,"
+      },
+      {
+        "line": 15,
+        "text": "                                   configuration_manager,"
+      },
+      {
+        "line": 16,
+        "text": "                                   num_input_channels,"
+      },
+      {
+        "line": 17,
+        "text": "                                   enable_deep_supervision: bool = True) -> nn.Module: "
+      },
+      {
+        "line": 18,
+        "text": "        label_manager = plans_manager.get_label_manager(dataset_json)"
+      },
+      {
+        "line": 19,
+        "text": "        num_classes=label_manager.num_segmentation_heads"
+      },
+      {
+        "line": 20,
+        "text": "        kernel_sizes = [[3,3,3]] * 6"
+      },
+      {
+        "line": 21,
+        "text": "        strides=configuration_manager.pool_op_kernel_sizes[1:]"
+      },
+      {
+        "line": 22,
+        "text": "        if len(strides)>5:"
+      },
+      {
+        "line": 23,
+        "text": "            strides = strides[:5]"
+      },
+      {
+        "line": 24,
+        "text": "        while len(strides)<5:"
+      },
+      {
+        "line": 25,
+        "text": "            strides.append([1,1,1])"
+      },
+      {
+        "line": 26,
+        "text": "        return STUNet(num_input_channels, num_classes, depth=[1]*6, dims= [32 * x for x in [1, 2, 4, 8, 16, 16]], "
+      },
+      {
+        "line": 27,
+        "text": "                      pool_op_kernel_sizes=strides, conv_kernel_sizes=kernel_sizes, enable_deep_supervision=enable_deep_supervision)"
+      }
+    ]
+  },
+  "pretraining_comparison": {
+    "actual": "Clip HU[-100,250], then (HU+100)/350; same helper in train/development; train-only bounded augmentation.",
+    "not_applied": "No pretrained plan normalizer or exact published dataset intensity mean/std/percentiles loaded by architecture-only adapter. No uniform1.5mm resampling; physical grid subdivides coarse axes to<=1mm and retains finer axes.",
+    "known_limit": "Reviewed checkpoint-load JSON records tensor equality, not checkpoint-bound original preprocessing plans. Exact original normalization statistics are unresolved in reviewed saved evidence; prior proposed1.5mm/z-score is not proof of actual checkpoint pretraining metadata.",
+    "not_measured": "Actual CT/intensity histograms, saturation fraction, calibration errors, and causal effect on Dice cannot be recovered from saved traces."
+  },
+  "hypotheses": [
+    "Different preprocessing from checkpoint pretraining may limit transfer; requires authoritative exact plans then a separately frozen experiment.",
+    "Coverage-first early phase contains many lesion-empty windows even for positive cases; intended full annotation coverage, not proof of bad labels.",
+    "Nearest-neighbor coarse deep-supervision labels may undersample tiny lesions; one saved positive diagnostic retains1lesionvoxel atcoarsestscale, not a demonstrated lost component.",
+    "Large provided-pancreas margins and variable physical field of view may alter anatomical context; no causal performance conclusion from metadata."
+  ],
+  "confirmed_findings": [
+    "Original seven annotation errata omitted in parent; corrected overlay already qualified and active.",
+    "No new input-integrity failure found in examined saved traces/source; not a fresh all-data quality audit."
+  ]
+}
