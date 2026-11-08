@@ -1,0 +1,6826 @@
+{
+  "aggregates": {
+    "all": {
+      "case_hits": 32,
+      "cases": 70,
+      "components_hit": 37,
+      "empty": 34,
+      "empty_alarms": 30,
+      "empty_predicted_components": 121,
+      "fp_mm3": 491703.2706089416,
+      "fp_voxels": 340861,
+      "macro_positive_dice": 0.35348832630924676,
+      "macro_positive_recall": 0.5052439149781,
+      "pooled_voxel_recall": 0.5133361747947418,
+      "positive": 36,
+      "predicted_components": 277,
+      "reference_components": 45
+    },
+    "size_bands": {
+      "empty": {
+        "case_hits": 0,
+        "cases": 34,
+        "components_hit": 0,
+        "empty": 34,
+        "empty_alarms": 30,
+        "empty_predicted_components": 121,
+        "fp_mm3": 178793.42070946962,
+        "fp_voxels": 133285,
+        "macro_positive_dice": null,
+        "macro_positive_recall": null,
+        "pooled_voxel_recall": null,
+        "positive": 0,
+        "predicted_components": 121,
+        "reference_components": 0
+      },
+      "large": {
+        "case_hits": 7,
+        "cases": 7,
+        "components_hit": 9,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 74988.84374484207,
+        "fp_voxels": 52749,
+        "macro_positive_dice": 0.41321382536698353,
+        "macro_positive_recall": 0.42701395651017954,
+        "pooled_voxel_recall": 0.4597355199544981,
+        "positive": 7,
+        "predicted_components": 57,
+        "reference_components": 10
+      },
+      "medium": {
+        "case_hits": 22,
+        "cases": 24,
+        "components_hit": 24,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 216154.26093434624,
+        "fp_voxels": 119279,
+        "macro_positive_dice": 0.39830990706663894,
+        "macro_positive_recall": 0.5638921431557004,
+        "pooled_voxel_recall": 0.5694187502077079,
+        "positive": 24,
+        "predicted_components": 90,
+        "reference_components": 29
+      },
+      "small": {
+        "case_hits": 3,
+        "cases": 5,
+        "components_hit": 4,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 21766.74522028366,
+        "fp_voxels": 35548,
+        "macro_positive_dice": 0.05472903999293277,
+        "macro_positive_recall": 0.3332543615807058,
+        "pooled_voxel_recall": 0.3655796108522883,
+        "positive": 5,
+        "predicted_components": 9,
+        "reference_components": 6
+      }
+    }
+  },
+  "completion_event": {
+    "alarms": 30,
+    "detected": 32,
+    "elapsed_seconds": 17632.92200000002,
+    "empty": 34,
+    "event": "native_completed",
+    "lesion_dice": 0.35348832630924676,
+    "positive": 36,
+    "step": 14000,
+    "utc_ms": 1794178506553,
+    "variant": "raw"
+  },
+  "definitions": {
+    "comparison": "Parent12k versus14k is descriptive interim comparison, not final H0 verdict or isolated causal correction test.",
+    "fp": "Predicted lesion minus TP; volume uses each case native affine determinant.",
+    "hits": "Any voxel overlap;26-connected reference components. Predicted component count is NOT unmatched FP component count on positive cases.",
+    "recall": "Macro-positive recall averages TP/GT per positive case; pooled recall sums TP/GT across voxels. These differ.",
+    "small": "Total native annotated lesion volume per case under1000mm3; not individual lesion size."
+  },
+  "full70_reference_identities_verified_against_parent": true,
+  "future_policy": "Future evaluation binds predicted-pancreas-proximity-5mm-v1 with raw retention and paired qualified raw/filtered results; not retrofitted to this frozen evaluator.",
+  "global_step": 14000,
+  "independent_backup": {
+    "bytes": 65221,
+    "path": "C:\\Users\\quinn\\PROWL-Backups\\pants_stunet_corrected_continuation_12k_20261108_launch02\\native-14000.json",
+    "sha256": "044dcd30400f8896a144b18921b3d40d4df135986f6635c7ca2a4c98b76aa3ee"
+  },
+  "inputs": {
+    "bytes": 385,
+    "path": "E:\\PROWL\\readiness\\stunet-corrected-cpu-20261108-a01\\inputs.json",
+    "sha256": "52d2fe17a9963db45feaa88b50c0b813ecc29ac143b732daa450c87a9f6225f5"
+  },
+  "journal_prefix": {
+    "bytes": 2149176,
+    "sha256": "1d75195bf197e9324aef1e86ab766cc0f4a613dc14056c1184ad2acdb7b9ecfd"
+  },
+  "new_updates": 2000,
+  "observed_at_utc": "2026-11-08T23:04:20.021615+00:00",
+  "parent_aggregates": {
+    "all": {
+      "case_hits": 35,
+      "cases": 70,
+      "components_hit": 41,
+      "empty": 34,
+      "empty_alarms": 27,
+      "empty_predicted_components": 94,
+      "fp_mm3": 382514.5598052371,
+      "fp_voxels": 284862,
+      "macro_positive_dice": 0.37163303848917034,
+      "macro_positive_recall": 0.5410162980226649,
+      "pooled_voxel_recall": 0.5275696531921575,
+      "positive": 36,
+      "predicted_components": 237,
+      "reference_components": 45
+    },
+    "size_bands": {
+      "empty": {
+        "case_hits": 0,
+        "cases": 34,
+        "components_hit": 0,
+        "empty": 34,
+        "empty_alarms": 27,
+        "empty_predicted_components": 94,
+        "fp_mm3": 111499.73884316532,
+        "fp_voxels": 113259,
+        "macro_positive_dice": null,
+        "macro_positive_recall": null,
+        "pooled_voxel_recall": null,
+        "positive": 0,
+        "predicted_components": 94,
+        "reference_components": 0
+      },
+      "large": {
+        "case_hits": 7,
+        "cases": 7,
+        "components_hit": 9,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 85796.65854336231,
+        "fp_voxels": 43230,
+        "macro_positive_dice": 0.4858239661571086,
+        "macro_positive_recall": 0.5261377525922236,
+        "pooled_voxel_recall": 0.5060076784529339,
+        "positive": 7,
+        "predicted_components": 40,
+        "reference_components": 10
+      },
+      "medium": {
+        "case_hits": 24,
+        "cases": 24,
+        "components_hit": 27,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 164817.0725205498,
+        "fp_voxels": 96691,
+        "macro_positive_dice": 0.39966427311931807,
+        "macro_positive_recall": 0.5612991155959014,
+        "pooled_voxel_recall": 0.550198845697954,
+        "positive": 24,
+        "predicted_components": 91,
+        "reference_components": 29
+      },
+      "small": {
+        "case_hits": 4,
+        "cases": 5,
+        "components_hit": 5,
+        "empty": 0,
+        "empty_alarms": 0,
+        "empty_predicted_components": 0,
+        "fp_mm3": 20401.089898159706,
+        "fp_voxels": 31682,
+        "macro_positive_dice": 0.07721581352934723,
+        "macro_positive_recall": 0.4644887372737479,
+        "pooled_voxel_recall": 0.46642915867360923,
+        "positive": 5,
+        "predicted_components": 12,
+        "reference_components": 6
+      }
+    }
+  },
+  "parent_inputs": {
+    "bytes": 751582,
+    "path": "E:\\PROWL\\readiness\\stunet-full-input-binding-20261106-a01\\worker\\inputs.json",
+    "sha256": "679ca952d2524afffd7b4c623dcad2986e820e5a35c4659d115871ce7d62b91b"
+  },
+  "parent_report": {
+    "bytes": 65215,
+    "path": "E:\\PROWL\\artifacts\\pants_stunet_base_transfer_12k_20261106_launch02\\execution\\native-12000.json",
+    "sha256": "7f3e4f0e793176a29b9f96daee7b80ea534975a95b157bdf06a3baff115b43b4"
+  },
+  "ready": {
+    "bytes": 106208,
+    "path": "E:\\PROWL\\readiness\\stunet-corrected-scientific-launch-20261108-a02\\ready.json",
+    "sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8"
+  },
+  "reference_bindings": {
+    "PanTS_00000029": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000029.nii.gz",
+        "sha256": "dfafa585d7ad71f09303960d8aa7f325f5848d39db35ec76e6f8e1b860b95c12",
+        "stat": {
+          "bytes": 18733837,
+          "device": 1791601135,
+          "inode": 662147825664,
+          "modified_ns": 1793738514000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000029\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "f7bd672ee6c0528bdfa8f7c9597c43c076f541d1725ed5d5a47c13e234f71ead",
+        "stat": {
+          "bytes": 68437,
+          "device": 1791601135,
+          "inode": 199134412896,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.8496090173721313,
+          0.0,
+          0.0,
+          -434.15020751953125
+        ],
+        [
+          0.0,
+          0.8496090173721313,
+          0.0,
+          -434.15020751953125
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        419,
+        340,
+        109
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000029\\segmentations\\pancreas.nii.gz",
+        "sha256": "1a556c01eb7d3a0b5e8a451ff4c906dae28b98223941030cb719c7c004f6add0",
+        "stat": {
+          "bytes": 76330,
+          "device": 1791601135,
+          "inode": 199134412800,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000084": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000084.nii.gz",
+        "sha256": "68a615c8c8dc5fdd324e209a39a2e496dca9bcf8ce3bcadfa707b942d1836ec3",
+        "stat": {
+          "bytes": 15256280,
+          "device": 1791601135,
+          "inode": 662147826272,
+          "modified_ns": 1793738700000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000084\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "2dc75d0b50f8abf0c8a042f92cdc36c0dd3457f32d72663bb106ca7525cb50ff",
+        "stat": {
+          "bytes": 54816,
+          "device": 1791601135,
+          "inode": 199116980320,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.78125,
+          0.0,
+          0.0,
+          -399.21875
+        ],
+        [
+          0.0,
+          0.78125,
+          0.0,
+          -399.21875
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        453,
+        355,
+        77
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000084\\segmentations\\pancreas.nii.gz",
+        "sha256": "c758d261c9bd9e9dafae68d6637cb066e222546333fa53b5e8b2167f6fc49803",
+        "stat": {
+          "bytes": 67723,
+          "device": 1791601135,
+          "inode": 199116980224,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000139": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000139.nii.gz",
+        "sha256": "cb2f541103504271955083cddfbb754bdf304dddc8529aa5b4035aa8d8aaf110",
+        "stat": {
+          "bytes": 46659548,
+          "device": 1791601135,
+          "inode": 662147826144,
+          "modified_ns": 1793738674000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000139\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "8f1baf9d42f662ab0802e93160afd6e8705a2a10cdd297d80257a5075a0a1fb4",
+        "stat": {
+          "bytes": 184918,
+          "device": 1791601135,
+          "inode": 199164690528,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7773439884185791,
+          0.0,
+          0.0,
+          -164.2227783203125
+        ],
+        [
+          0.0,
+          0.7773439884185791,
+          0.0,
+          -304.2227783203125
+        ],
+        [
+          0.0,
+          0.0,
+          2.0,
+          405.1000061035156
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        487,
+        378,
+        230
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000139\\segmentations\\pancreas.nii.gz",
+        "sha256": "2e14004bda04d161248acb7616a20b17cba635bcd8898860c7b15840ac6cee31",
+        "stat": {
+          "bytes": 204481,
+          "device": 1791601135,
+          "inode": 199164690432,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000514": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000514.nii.gz",
+        "sha256": "2b85d2fd1ec35ff7b30d089245451c61988e52c267382d2a06e23ffc955f7b39",
+        "stat": {
+          "bytes": 9133384,
+          "device": 1791601135,
+          "inode": 662147825888,
+          "modified_ns": 1793738516000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000514\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "62327a7523f27314a4b4f6a759a923cd82a475c36ed30d56d287c9ed8e8e4ab2",
+        "stat": {
+          "bytes": 34820,
+          "device": 1791601135,
+          "inode": 199155253344,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.9765620231628418,
+          0.0,
+          0.0,
+          -499.023193359375
+        ],
+        [
+          0.0,
+          0.9765620231628418,
+          0.0,
+          -499.023193359375
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        431,
+        348,
+        53
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000514\\segmentations\\pancreas.nii.gz",
+        "sha256": "8909cb1d5b4d7208b2c09996943c5e63b78ffd4103766a435a7f6a9561801ce6",
+        "stat": {
+          "bytes": 37967,
+          "device": 1791601135,
+          "inode": 199155253248,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000698": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000698.nii.gz",
+        "sha256": "3d4f40cbd0c0992ad8ee7115eb3a036f201e00c9aee43ef7e7f32d8d33193ee7",
+        "stat": {
+          "bytes": 25059865,
+          "device": 1791601135,
+          "inode": 662147826400,
+          "modified_ns": 1793738818000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000698\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "03a0e7c7c0e07deb6b94111ea6de215066190ac6e9625ef1e5fbb46c5eb88a6b",
+        "stat": {
+          "bytes": 88575,
+          "device": 1791601135,
+          "inode": 199142539360,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.703125,
+          0.0,
+          0.0,
+          168.8484344482422
+        ],
+        [
+          0.0,
+          -0.703125,
+          0.0,
+          179.6484375
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -949.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        479,
+        344,
+        123
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000698\\segmentations\\pancreas.nii.gz",
+        "sha256": "fe8483384cf63d9620806ee8bbcb43e151a878ae720c2d096363306bdc875fb5",
+        "stat": {
+          "bytes": 106761,
+          "device": 1791601135,
+          "inode": 199142539264,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000909": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-batch-20261102-a01\\PanTS_00000909.nii.gz",
+        "sha256": "1c3bb63e4a7eefb8cf14f19b66d9b2dce0600d3b4615b9a521f9835a6e656e20",
+        "stat": {
+          "bytes": 65072219,
+          "device": 1791601135,
+          "inode": 636349972672,
+          "modified_ns": 1793667966000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000909\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "0fa8be3e0821a737ec9661fbccb606e21e94c0a417f9586fe76e4875decb1987",
+        "stat": {
+          "bytes": 255696,
+          "device": 1791601135,
+          "inode": 199166656608,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -1.0,
+          -0.0,
+          -0.0,
+          511.0
+        ],
+        [
+          -0.0,
+          1.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          904.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        316,
+        362
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000909\\segmentations\\pancreas.nii.gz",
+        "sha256": "ffa4d3f58e87e8c0898a2f05a7da364848fdb2fa60e939cdc3ffb02c2ac2dc4b",
+        "stat": {
+          "bytes": 296935,
+          "device": 1791601135,
+          "inode": 199166656512,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00000927": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00000927.nii.gz",
+        "sha256": "969ae02c1afee1ad0c50af09ef779e3a944fcd127d33b0fbd2cf36fed2f7234c",
+        "stat": {
+          "bytes": 38232253,
+          "device": 1791601135,
+          "inode": 662147826016,
+          "modified_ns": 1793738568000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000927\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "39e4832e472cb799a45ba671a59851247d4782f12e6b3f2d3cf2421355199edc",
+        "stat": {
+          "bytes": 142669,
+          "device": 1791601135,
+          "inode": 199109378144,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8203125,
+          0.0,
+          0.0,
+          202.0
+        ],
+        [
+          0.0,
+          -0.8203125,
+          0.0,
+          70.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -944.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        338,
+        184
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00000927\\segmentations\\pancreas.nii.gz",
+        "sha256": "a5a0a8b78a6f45b2eba4be3664839d9045daa666d56dd10717a2b42f007a58b3",
+        "stat": {
+          "bytes": 160435,
+          "device": 1791601135,
+          "inode": 199109378048,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001070": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-diagnostic-20261102-a01\\PanTS_00001070.nii.gz",
+        "sha256": "90bf329d4a959144dfc453c5f1adce83ac18b1d5493984cb8aaa3911a1f1000f",
+        "stat": {
+          "bytes": 24789800,
+          "device": 1791601135,
+          "inode": 634161856512,
+          "modified_ns": 1793654022000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001070\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "c338646e5921695d1935eeada8fecb3050245f1484c4a1b15011ba488219f086",
+        "stat": {
+          "bytes": 90356,
+          "device": 1791601135,
+          "inode": 199108067424,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.6660159826278687,
+          0.0,
+          0.0,
+          158.39999389648438
+        ],
+        [
+          0.0,
+          -0.6660159826278687,
+          0.0,
+          170.5
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -106.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        426,
+        301,
+        157
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001070\\segmentations\\pancreas.nii.gz",
+        "sha256": "a69bd9f962a11d6626356eb350f35059128dd5e7bc42184eefe36efb22257530",
+        "stat": {
+          "bytes": 114493,
+          "device": 1791601135,
+          "inode": 199108067328,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001347": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00001347.nii.gz",
+        "sha256": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+        "stat": {
+          "bytes": 19195825,
+          "device": 1791601135,
+          "inode": 662147826528,
+          "modified_ns": 1793738922000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001347\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "b7a25e62854024305ad32429817b302db479f30d730c5c1f2afb5a292f48d492",
+        "stat": {
+          "bytes": 70619,
+          "device": 1791601135,
+          "inode": 199113834592,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.8203120231628418,
+          0.0,
+          0.0,
+          -419.179443359375
+        ],
+        [
+          0.0,
+          0.8203120231628418,
+          0.0,
+          -419.179443359375
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        442,
+        365,
+        99
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001347\\segmentations\\pancreas.nii.gz",
+        "sha256": "e2317f69aad902d4acf62e7612ea77e8ddcd7287a15a6e960c23267e90ca8c33",
+        "stat": {
+          "bytes": 81401,
+          "device": 1791601135,
+          "inode": 199113834496,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001389": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00001389.nii.gz",
+        "sha256": "9d0a2b40a53f09a671efbd2e972e95e12555202c0daf16ae430ab62fb1967d73",
+        "stat": {
+          "bytes": 1772132,
+          "device": 1791601135,
+          "inode": 662147827040,
+          "modified_ns": 1793739146000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001389\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "1fedd2e03bb74da3bfb89343ad78c07c42e55e614c407bbda87bccf750e975d5",
+        "stat": {
+          "bytes": 7151,
+          "device": 1791601135,
+          "inode": 199159578720,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -1.4952726364135742,
+          0.052137505263090134,
+          -0.10696417093276978,
+          93.03201293945312
+        ],
+        [
+          0.05812285840511322,
+          1.4965715408325195,
+          -0.08303728699684143,
+          101.71116638183594
+        ],
+        [
+          0.10383345186710358,
+          -0.08692030608654022,
+          -1.49387526512146,
+          1404.5362548828125
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        110,
+        125,
+        116
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001389\\segmentations\\pancreas.nii.gz",
+        "sha256": "f0a937410c8885261127151d4eb5ca597d6ccc60a4b31477eb2c0630208d53e0",
+        "stat": {
+          "bytes": 7212,
+          "device": 1791601135,
+          "inode": 199159578624,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001406": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00001406.nii.gz",
+        "sha256": "204275adf01f9b8ece3efdbc5c3a576322441160d17a519633b7fedfe39bf63d",
+        "stat": {
+          "bytes": 56893207,
+          "device": 1791601135,
+          "inode": 662147826912,
+          "modified_ns": 1793739004000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001406\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "33f7d5da65704d0b47afb03cbc8b6a3b087066c01c3c1b921569ef2f57141270",
+        "stat": {
+          "bytes": 198766,
+          "device": 1791601135,
+          "inode": 199144112224,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.625,
+          0.0,
+          0.0,
+          142.6875
+        ],
+        [
+          0.0,
+          -0.625,
+          0.0,
+          329.6875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -615.7999877929688
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        449,
+        198
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001406\\segmentations\\pancreas.nii.gz",
+        "sha256": "fa266491d4b1eebae76a1740f19a636bc005bb95d64ea5ad7d38875b1247ca7d",
+        "stat": {
+          "bytes": 231159,
+          "device": 1791601135,
+          "inode": 199144112128,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001583": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00001583.nii.gz",
+        "sha256": "0527d81494201090292e6d6fcc14e332d0d62d55e4807d11f97392f1406125d6",
+        "stat": {
+          "bytes": 34685840,
+          "device": 1791601135,
+          "inode": 662147826656,
+          "modified_ns": 1793738954000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001583\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "0ba5d09082f2d3a8333c36aaae96c3188f6c5657d85ba59c8f656a66a111b7ac",
+        "stat": {
+          "bytes": 143116,
+          "device": 1791601135,
+          "inode": 199116062816,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7851560115814209,
+          0.0,
+          0.0,
+          201.0
+        ],
+        [
+          0.0,
+          -0.7851560115814209,
+          0.0,
+          201.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -428.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        503,
+        435,
+        144
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001583\\segmentations\\pancreas.nii.gz",
+        "sha256": "fc7956f06def88d43557cb225b43a1f57b38c8d8043dd333e6453fa5cc26c7e5",
+        "stat": {
+          "bytes": 156822,
+          "device": 1791601135,
+          "inode": 199116062720,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00001823": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00001823.nii.gz",
+        "sha256": "4d77813b70e49812231a9ddb2ee29980f250fad7b8acb877add80caba00797cc",
+        "stat": {
+          "bytes": 7343251,
+          "device": 1791601135,
+          "inode": 662147826784,
+          "modified_ns": 1793738980000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001823\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "67d85f105b6e1c0606f1857b125b7a8766c291741d03cf86d41756f727c1b183",
+        "stat": {
+          "bytes": 29291,
+          "device": 1791601135,
+          "inode": 199123402848,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          1.5,
+          0.0,
+          0.0,
+          -203.615234375
+        ],
+        [
+          0.0,
+          1.5,
+          0.0,
+          -54.615234375
+        ],
+        [
+          0.0,
+          0.0,
+          1.5,
+          29.899999618530273
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        245,
+        155,
+        175
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00001823\\segmentations\\pancreas.nii.gz",
+        "sha256": "d3f67063037d10b59c1f2c3a4d0c0e0f48fe87550c773616ebdfb7f0de0abefa",
+        "stat": {
+          "bytes": 35276,
+          "device": 1791601135,
+          "inode": 199123402752,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002028": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-batch-20261102-a01\\PanTS_00002028.nii.gz",
+        "sha256": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+        "stat": {
+          "bytes": 14838645,
+          "device": 1791601135,
+          "inode": 636349972800,
+          "modified_ns": 1793668330000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002028\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "523736974b7ebd80f666900da05db39c2d3189e99a3995a447b3a2d9baa34862",
+        "stat": {
+          "bytes": 56712,
+          "device": 1791601135,
+          "inode": 199107412064,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.9765620231628418,
+          0.0,
+          0.0,
+          -499.023193359375
+        ],
+        [
+          0.0,
+          0.9765620231628418,
+          0.0,
+          -499.023193359375
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        407,
+        311,
+        101
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002028\\segmentations\\pancreas.nii.gz",
+        "sha256": "3f15b75f467523d531e06fd6d22f3343e1079d4ce8f4c45086f0ef64089413d3",
+        "stat": {
+          "bytes": 62725,
+          "device": 1791601135,
+          "inode": 199107411968,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002235": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002235.nii.gz",
+        "sha256": "c8af89d3c810258fac1cd271c2c466c5f6aab793111f2b060ce538bbd80e622b",
+        "stat": {
+          "bytes": 9904247,
+          "device": 1791601135,
+          "inode": 662147828192,
+          "modified_ns": 1793739500000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002235\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "f90a093fb6ea54f6af6b2cb474f1f23842c9a7800381a3cff64dd233bd41de98",
+        "stat": {
+          "bytes": 38171,
+          "device": 1791601135,
+          "inode": 199115407456,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7480469942092896,
+          0.0,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.7480469942092896,
+          0.0,
+          -382.25201416015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        445,
+        332,
+        58
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002235\\segmentations\\pancreas.nii.gz",
+        "sha256": "7bbc21c91cd1dedc449260bc759335460d2126d1cba80fb8c7d6e84e11c175b6",
+        "stat": {
+          "bytes": 41674,
+          "device": 1791601135,
+          "inode": 199115407360,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002269": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002269.nii.gz",
+        "sha256": "a92627dc28c4cf5ce0a303960c9c52c18ccc9c15e4298fa545bbdce00760d756",
+        "stat": {
+          "bytes": 25803373,
+          "device": 1791601135,
+          "inode": 662147828320,
+          "modified_ns": 1793739510000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002269\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "97a563bcf2a86dec0dd6d5bf2affba7ae3869931321ca0e130ab914b43fcbac1",
+        "stat": {
+          "bytes": 89970,
+          "device": 1791601135,
+          "inode": 199122747488,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7773439884185791,
+          0.0,
+          0.0,
+          166.1999969482422
+        ],
+        [
+          0.0,
+          -0.7773439884185791,
+          0.0,
+          199.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -210.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        422,
+        302,
+        153
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002269\\segmentations\\pancreas.nii.gz",
+        "sha256": "ab79133907f4b14d8051833feb14eb79a47dcfddfab427788c4d318fb0ebdec9",
+        "stat": {
+          "bytes": 97662,
+          "device": 1791601135,
+          "inode": 199122747392,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002435": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002435.nii.gz",
+        "sha256": "2de3adf883b24e22c506d5d426c9cc41eef54e5f0c78d9818451b6d4d479592f",
+        "stat": {
+          "bytes": 27155540,
+          "device": 1791601135,
+          "inode": 662147827552,
+          "modified_ns": 1793739302000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002435\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "88525fd587d545655c43beb3f9d493da7355d82152085d18d26ecee86047837b",
+        "stat": {
+          "bytes": 99753,
+          "device": 1791601135,
+          "inode": 199127335008,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7421879768371582,
+          0.0,
+          0.0,
+          178.89999389648438
+        ],
+        [
+          0.0,
+          -0.7421879768371582,
+          0.0,
+          190.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -220.75
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        415,
+        296,
+        177
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002435\\segmentations\\pancreas.nii.gz",
+        "sha256": "33be3cdf2631056962c9f3b1388018984edb739fa40fe0bd661300be71682c5e",
+        "stat": {
+          "bytes": 122567,
+          "device": 1791601135,
+          "inode": 199127334912,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002495": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002495.nii.gz",
+        "sha256": "b635efce2c9caf31e1d329d8325974725a6ccbf20ff24e7dab9b9510817dfb8c",
+        "stat": {
+          "bytes": 22233525,
+          "device": 1791601135,
+          "inode": 662147828064,
+          "modified_ns": 1793739462000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002495\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "cf34a218583a133c9a750bc75f4b40fb48ae07cbe968ea25b6ae84c7c4a11ed6",
+        "stat": {
+          "bytes": 93951,
+          "device": 1791601135,
+          "inode": 199124058208,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7820000052452087,
+          -0.0,
+          0.0,
+          204.68710327148438
+        ],
+        [
+          0.0,
+          0.7820000052452087,
+          0.0,
+          -199.7976837158203
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          1113.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        499,
+        345,
+        124
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002495\\segmentations\\pancreas.nii.gz",
+        "sha256": "4eb27b5c8fbcfb38094d6b488e5dc0052ce16edd6b492b87a754976264743d32",
+        "stat": {
+          "bytes": 98171,
+          "device": 1791601135,
+          "inode": 199124058112,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002514": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002514.nii.gz",
+        "sha256": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+        "stat": {
+          "bytes": 11021295,
+          "device": 1791601135,
+          "inode": 662147827424,
+          "modified_ns": 1793739258000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002514\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "983c3730cff63c5f8f2250e8cde3865abc7da8618bbfbe0d4f3d7b4a02d05d81",
+        "stat": {
+          "bytes": 41753,
+          "device": 1791601135,
+          "inode": 199120519264,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.9238280057907104,
+          0.0,
+          0.0,
+          -472.07611083984375
+        ],
+        [
+          0.0,
+          0.9238280057907104,
+          0.0,
+          -472.07611083984375
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        394,
+        268,
+        89
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002514\\segmentations\\pancreas.nii.gz",
+        "sha256": "b996011ed113f1c47737b73ce91fd33636e27a326ea28e1af4670229ceacaebf",
+        "stat": {
+          "bytes": 49934,
+          "device": 1791601135,
+          "inode": 199120519168,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002770": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002770.nii.gz",
+        "sha256": "54d8ad59a55834b63ecd8355e9ee919f8e4a352214f973dd62bba51332136f34",
+        "stat": {
+          "bytes": 29154890,
+          "device": 1791601135,
+          "inode": 662147827296,
+          "modified_ns": 1793739194000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002770\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "0197b0b0b6ad62dd5ad5238690af5696b966129a79c455344af4bfe091cec737",
+        "stat": {
+          "bytes": 115500,
+          "device": 1791601135,
+          "inode": 199153025120,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8203120231628418,
+          -0.0,
+          -0.0,
+          210.0
+        ],
+        [
+          -0.0,
+          0.8203120231628418,
+          0.0,
+          -200.87942504882812
+        ],
+        [
+          0.0,
+          0.0,
+          -2.5,
+          -40.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        511,
+        401,
+        129
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002770\\segmentations\\pancreas.nii.gz",
+        "sha256": "0cf41c1c69d554031c51b8413a6cca7711c0d7781d1cc8a32a13c793085ccb52",
+        "stat": {
+          "bytes": 126027,
+          "device": 1791601135,
+          "inode": 199153025024,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002889": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002889.nii.gz",
+        "sha256": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+        "stat": {
+          "bytes": 66786913,
+          "device": 1791601135,
+          "inode": 662147827680,
+          "modified_ns": 1793739386000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002889\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "d2edb1ec8969428176cbf65e87185bb35eb177dd5e9e67166d186b3ad740f180",
+        "stat": {
+          "bytes": 246026,
+          "device": 1791601135,
+          "inode": 199124713568,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7382810115814209,
+          -0.0,
+          -0.0,
+          192.4615936279297
+        ],
+        [
+          -0.0,
+          0.7382810115814209,
+          0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          70.9100112915039
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002889\\segmentations\\pancreas.nii.gz",
+        "sha256": "7d66348f621cc46d731e9dc21c95567985bdfdce901d2c6b5bf8d3b689a3f750",
+        "stat": {
+          "bytes": 276789,
+          "device": 1791601135,
+          "inode": 199124713472,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002893": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002893.nii.gz",
+        "sha256": "524f6b0cff7c448ee173ff042981393e82dfbd347d5f9c3d45153ec31e94a2ca",
+        "stat": {
+          "bytes": 37208560,
+          "device": 1791601135,
+          "inode": 662147827936,
+          "modified_ns": 1793739452000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002893\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "de682a62bc80897f23ff36e38d66d01807b889c9054ef03205012e394ff1cfe4",
+        "stat": {
+          "bytes": 152116,
+          "device": 1791601135,
+          "inode": 199127990368,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.82421875,
+          0.0,
+          0.0,
+          201.587890625
+        ],
+        [
+          -0.0,
+          0.82421875,
+          0.0,
+          -27.587890625
+        ],
+        [
+          0.0,
+          -0.0,
+          2.5,
+          -1563.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        503,
+        429,
+        160
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002893\\segmentations\\pancreas.nii.gz",
+        "sha256": "234eab6325c78890931af2648242341e054029ed0bc89b174d11d03d28a15318",
+        "stat": {
+          "bytes": 159239,
+          "device": 1791601135,
+          "inode": 199127990272,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002935": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002935.nii.gz",
+        "sha256": "e3b1eba68a07ace89e87b0ff31f730f42dfabbfab0e885dc6c7d1ea20803e497",
+        "stat": {
+          "bytes": 4793739,
+          "device": 1791601135,
+          "inode": 662147827808,
+          "modified_ns": 1793739438000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002935\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "e8dea4114bf83ababa2fafa843485d34b8208a76692fc87f894095da0167dbdb",
+        "stat": {
+          "bytes": 19385,
+          "device": 1791601135,
+          "inode": 199133757536,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          1.5,
+          0.0,
+          0.0,
+          -159.697265625
+        ],
+        [
+          0.0,
+          1.5,
+          0.0,
+          -29.697265625
+        ],
+        [
+          0.0,
+          0.0,
+          1.5,
+          230.8000030517578
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        193,
+        150,
+        140
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002935\\segmentations\\pancreas.nii.gz",
+        "sha256": "f1da33efcb4e5e64bdfb82d163095cc7b0b8ddfe3a803e34982d28ed99cbd653",
+        "stat": {
+          "bytes": 24129,
+          "device": 1791601135,
+          "inode": 199133757440,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00002954": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00002954.nii.gz",
+        "sha256": "700ab27c28b2d4d703850a259ca367630ba00e260177720329cd0b5685814d2a",
+        "stat": {
+          "bytes": 43698408,
+          "device": 1791601135,
+          "inode": 662147827168,
+          "modified_ns": 1793739188000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002954\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "dc04dbb6267997f204b473d551007b071d1463d5e6d92cda926f4cb109d100ac",
+        "stat": {
+          "bytes": 143912,
+          "device": 1791601135,
+          "inode": 199143194720,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.5429689884185791,
+          -0.0,
+          -0.0,
+          212.3000030517578
+        ],
+        [
+          -0.0,
+          0.5429689884185791,
+          0.0,
+          -73.2572021484375
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -1301.0699462890625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        655,
+        503,
+        100
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00002954\\segmentations\\pancreas.nii.gz",
+        "sha256": "822da1ff089d50cab2b52adb2181878b5a46cca321c867d686501015b40623f4",
+        "stat": {
+          "bytes": 144373,
+          "device": 1791601135,
+          "inode": 199143194624,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00003130": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00003130.nii.gz",
+        "sha256": "ce6474fe61cf4050765bc1d4809cd1004de916f3b24d1ea827fab2f5520ecd2e",
+        "stat": {
+          "bytes": 16660689,
+          "device": 1791601135,
+          "inode": 662147828448,
+          "modified_ns": 1793739596000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003130\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "3aceee929538201f54b6fa73a32e68600605a162ccffce99d82675a84488895a",
+        "stat": {
+          "bytes": 67136,
+          "device": 1791601135,
+          "inode": 199130480736,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.78125,
+          0.0,
+          0.0,
+          -197.60975646972656
+        ],
+        [
+          0.0,
+          0.78125,
+          0.0,
+          -52.6097412109375
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          -524.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        505,
+        320,
+        93
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003130\\segmentations\\pancreas.nii.gz",
+        "sha256": "ac6489304b55c6cffe05dbe2e351ca4fc38496bf0287163a9c37480a8e56ba4e",
+        "stat": {
+          "bytes": 70845,
+          "device": 1791601135,
+          "inode": 199130480640,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00003457": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00003457.nii.gz",
+        "sha256": "de6da3d1054c1f239b0b5192cbe20404dd972769eb49f941dec7855c2b270429",
+        "stat": {
+          "bytes": 7176933,
+          "device": 1791601135,
+          "inode": 662147828704,
+          "modified_ns": 1793739750000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003457\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "dbd88b935cc5bfd9ecb1de4e59ec625d04f04eedb7cd13818264a07dd0900606",
+        "stat": {
+          "bytes": 28326,
+          "device": 1791601135,
+          "inode": 199133102176,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.6992189884185791,
+          0.0,
+          0.0,
+          -357.3009033203125
+        ],
+        [
+          0.0,
+          0.6992189884185791,
+          0.0,
+          -357.3009033203125
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        476,
+        383,
+        35
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003457\\segmentations\\pancreas.nii.gz",
+        "sha256": "d246cc8d7b80b5c72754ae48c3567e4f5c13180b8d24016f8c0122df805359a2",
+        "stat": {
+          "bytes": 35284,
+          "device": 1791601135,
+          "inode": 199133102080,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00003583": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00003583.nii.gz",
+        "sha256": "64d80794c8099e18bd790eda3d679a6c0f3ac83601d0c220a38a237a2f0cee4b",
+        "stat": {
+          "bytes": 39412648,
+          "device": 1791601135,
+          "inode": 662147828576,
+          "modified_ns": 1793739664000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003583\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "2d2a58ea3de07adbba8ecb83c72be7a2081ebc4fbdfebded050cac721d5944fc",
+        "stat": {
+          "bytes": 161002,
+          "device": 1791601135,
+          "inode": 199140966496,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.84375,
+          0.0,
+          0.0,
+          215.578125
+        ],
+        [
+          -0.0,
+          0.84375,
+          0.0,
+          21.421875
+        ],
+        [
+          0.0,
+          -0.0,
+          2.5,
+          -1104.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        500,
+        144
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003583\\segmentations\\pancreas.nii.gz",
+        "sha256": "06f8ec22be4a46dc70e9961ee48801595052df620a203f5f4dffeebb6daf65a1",
+        "stat": {
+          "bytes": 171160,
+          "device": 1791601135,
+          "inode": 199140966400,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00003817": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00003817.nii.gz",
+        "sha256": "353f1b8cacf0444a88660ee0847e50681abe2c06362b9f3a2928540936294d61",
+        "stat": {
+          "bytes": 19587252,
+          "device": 1791601135,
+          "inode": 662147828832,
+          "modified_ns": 1793739870000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003817\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "c99fbe8c2b01fc6ea12e8f2e491b2abd00d030e4655cd931e5d5c3a09ae6df1c",
+        "stat": {
+          "bytes": 84109,
+          "device": 1791601135,
+          "inode": 199150534752,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.6445310115814209,
+          0.0,
+          0.0,
+          -329.3553466796875
+        ],
+        [
+          0.0,
+          0.6445310115814209,
+          0.0,
+          -329.3553466796875
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        432,
+        87
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00003817\\segmentations\\pancreas.nii.gz",
+        "sha256": "8c23b6aeeb45afa6508a5229263635b4e0c7e390c2cdcab3dcc6ec6c5d046439",
+        "stat": {
+          "bytes": 96710,
+          "device": 1791601135,
+          "inode": 199150534656,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004023": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004023.nii.gz",
+        "sha256": "e0d17ff7a0174c367e80a92e2cd56ebd8289fc69637a5086432c80458b0c24f5",
+        "stat": {
+          "bytes": 65900946,
+          "device": 1791601135,
+          "inode": 662147829344,
+          "modified_ns": 1793740158000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004023\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "70510b1236f891c6afdbb4888c11636aea6a0af29a4adb2b1d7adbb52109805b",
+        "stat": {
+          "bytes": 229414,
+          "device": 1791601135,
+          "inode": 199165608032,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.78125,
+          -0.0,
+          -0.0,
+          221.609375
+        ],
+        [
+          -0.0,
+          0.78125,
+          0.0,
+          -20.609375
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -185.50001525878906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        500,
+        422,
+        249
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004023\\segmentations\\pancreas.nii.gz",
+        "sha256": "7d5698a29697c6333dcf8ca25885ef59ca7b24334019069b0414fea4de1ce2c1",
+        "stat": {
+          "bytes": 271416,
+          "device": 1791601135,
+          "inode": 199165607936,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004267": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004267.nii.gz",
+        "sha256": "c08a988214490bac07103e22598c0794fa8d1f82765b0527b9943c415451e7cd",
+        "stat": {
+          "bytes": 58059502,
+          "device": 1791601135,
+          "inode": 662147829216,
+          "modified_ns": 1793740058000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004267\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "be1034c77dce4c0312f3582ff9c05f0c85eba7105f0b0d881d79085c943f5a49",
+        "stat": {
+          "bytes": 203900,
+          "device": 1791601135,
+          "inode": 199131267168,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8984375,
+          -0.0,
+          -0.0,
+          223.55078125
+        ],
+        [
+          -0.0,
+          0.8984375,
+          0.0,
+          -421.55078125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -50.99998092651367
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        474,
+        377,
+        260
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004267\\segmentations\\pancreas.nii.gz",
+        "sha256": "c791434d030c86646ea463aaea9d777e73d3d68bfba4b494060dc6a7456bea19",
+        "stat": {
+          "bytes": 242637,
+          "device": 1791601135,
+          "inode": 199131267072,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004681": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-batch-20261102-a01\\PanTS_00004681.nii.gz",
+        "sha256": "8249c821684154b49e5670b1bc76efd4a179ea79a79121fc5e44e07dbfb33090",
+        "stat": {
+          "bytes": 45548729,
+          "device": 1791601135,
+          "inode": 636349972928,
+          "modified_ns": 1793668522000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004681\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "307529b2ce78b32cc1cc6c88b4462520e4a55afb6167e2593c2c1861f5d973eb",
+        "stat": {
+          "bytes": 176561,
+          "device": 1791601135,
+          "inode": 199114489952,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7226560115814209,
+          -0.0,
+          -0.0,
+          178.8000030517578
+        ],
+        [
+          -0.0,
+          0.7226560115814209,
+          0.0,
+          -184.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -42.589988708496094
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        406,
+        194
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004681\\segmentations\\pancreas.nii.gz",
+        "sha256": "34ecdc4184bd64c0d304d2df9e6776e4d58ed7d3f61cf2a9e4e7abd947f9b5b0",
+        "stat": {
+          "bytes": 202217,
+          "device": 1791601135,
+          "inode": 199114489856,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004719": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004719.nii.gz",
+        "sha256": "bc1cf6068e3e191650c37d173e2ff491aa7b7116b21c3431d99562492503299d",
+        "stat": {
+          "bytes": 20861099,
+          "device": 1791601135,
+          "inode": 662147829600,
+          "modified_ns": 1793740260000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004719\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "6d0a228a4bc76d0ef177f3c76e1191e6674178be33ae5fac02b60f719a730c14",
+        "stat": {
+          "bytes": 89951,
+          "device": 1791601135,
+          "inode": 199158005856,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.703125,
+          0.0,
+          0.0,
+          -359.296875
+        ],
+        [
+          0.0,
+          0.703125,
+          0.0,
+          -359.296875
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        437,
+        92
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004719\\segmentations\\pancreas.nii.gz",
+        "sha256": "0865410f7ba83e0d9a25e3aa3993875a86e8935ba70f7b39220fcef25e48670e",
+        "stat": {
+          "bytes": 102713,
+          "device": 1791601135,
+          "inode": 199158005760,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004724": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004724.nii.gz",
+        "sha256": "9d32f81f15289af0755d252f838bd34ee302899317c186477c3862a71ed8b292",
+        "stat": {
+          "bytes": 45516031,
+          "device": 1791601135,
+          "inode": 662147829088,
+          "modified_ns": 1793739962000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004724\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "b9ff5c2e4a20a93f5f28a8893e4c48e27acefe201d2c7605f74a20a9d2a05e5e",
+        "stat": {
+          "bytes": 172116,
+          "device": 1791601135,
+          "inode": 199112917088,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.9765625,
+          -0.0,
+          -0.0,
+          249.51171875
+        ],
+        [
+          -0.0,
+          0.9765625,
+          0.0,
+          -422.51171875
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -36.99998092651367
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        493,
+        334,
+        238
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004724\\segmentations\\pancreas.nii.gz",
+        "sha256": "618d60fd138b0a5aad056a1ac8fa4f86175e5d3d781ec311b801537e96d1f511",
+        "stat": {
+          "bytes": 195800,
+          "device": 1791601135,
+          "inode": 199112916992,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004732": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004732.nii.gz",
+        "sha256": "9f28a890b12edc37e80f7492d15f5ac7fe434f2e8bc13803ee102f307d6d0c27",
+        "stat": {
+          "bytes": 58500777,
+          "device": 1791601135,
+          "inode": 662147829472,
+          "modified_ns": 1793740246000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004732\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "e90f9ff896e443269a2544909c5bbd4fa30d89b4d3b9aa23bba261680f7bfff7",
+        "stat": {
+          "bytes": 208937,
+          "device": 1791601135,
+          "inode": 199139393632,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.78125,
+          -0.0,
+          -0.0,
+          190.71875
+        ],
+        [
+          -0.0,
+          0.78125,
+          0.0,
+          -163.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.6250000596046448,
+          -96.21498107910156
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        460,
+        355,
+        293
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004732\\segmentations\\pancreas.nii.gz",
+        "sha256": "a878ac306ec6a2e83370da825b787f1fa7fc98e557bc6d134a907982fd952f85",
+        "stat": {
+          "bytes": 246465,
+          "device": 1791601135,
+          "inode": 199139393536,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00004814": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00004814.nii.gz",
+        "sha256": "98c02da21a9d6471ab7fb81929481f975a225c54b4ff6e1edfa88ba7b6e11d33",
+        "stat": {
+          "bytes": 62374888,
+          "device": 1791601135,
+          "inode": 662147828960,
+          "modified_ns": 1793739924000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004814\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "8d5569a9da402af164280d495f71a9d1787d7660ec23bb30ee2783126e401898",
+        "stat": {
+          "bytes": 233015,
+          "device": 1791601135,
+          "inode": 199160234080,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8984379768371582,
+          -0.0,
+          -0.0,
+          229.10182189941406
+        ],
+        [
+          -0.0,
+          0.8984379768371582,
+          0.0,
+          -218.7018280029297
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -31.7500057220459
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        428,
+        511,
+        244
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00004814\\segmentations\\pancreas.nii.gz",
+        "sha256": "2340c5f97160a87a6d451aa01f803eb43c6daca3f36a31b0add07c023165024e",
+        "stat": {
+          "bytes": 268623,
+          "device": 1791601135,
+          "inode": 199160233984,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005024": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005024.nii.gz",
+        "sha256": "501d69b8741c89204b0e7c114f357aa20638a0e7cb7e57ab3675bda876b7e7a1",
+        "stat": {
+          "bytes": 41962701,
+          "device": 1791601135,
+          "inode": 662147829728,
+          "modified_ns": 1793740302000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005024\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "7dfccb540339f187c1369ec97e9023869b55714be2cdbbe46b283a184054f8b2",
+        "stat": {
+          "bytes": 163683,
+          "device": 1791601135,
+          "inode": 199147126880,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.78125,
+          -0.0,
+          -0.0,
+          199.609375
+        ],
+        [
+          -0.0,
+          0.78125,
+          0.0,
+          -45.609375
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -673.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        510,
+        345,
+        213
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005024\\segmentations\\pancreas.nii.gz",
+        "sha256": "4e616fff2b45cb8e5f9090f9069edb5d85c6e93763ecf2adbae9a6347c9c269d",
+        "stat": {
+          "bytes": 194769,
+          "device": 1791601135,
+          "inode": 199147126784,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005046": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005046.nii.gz",
+        "sha256": "39de221d019c5045baeb92d204c88f55fb5dc018f57b2238ba9445a79b981c28",
+        "stat": {
+          "bytes": 36191625,
+          "device": 1791601135,
+          "inode": 662147829984,
+          "modified_ns": 1793740468000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005046\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "66130aabcdb2c73408659b5816cd34759a127ac6ed5ceda818c6aee95d8f7b78",
+        "stat": {
+          "bytes": 156931,
+          "device": 1791601135,
+          "inode": 199135723616,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.6620000004768372,
+          -0.0,
+          -0.0,
+          186.71949768066406
+        ],
+        [
+          -0.0,
+          0.6620000004768372,
+          0.0,
+          -169.5312042236328
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800001859664917,
+          1798.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        331,
+        212
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005046\\segmentations\\pancreas.nii.gz",
+        "sha256": "75ac83e4a18f7a9e57f84899255a21ea368d98a16a71748643522ae44b3825fc",
+        "stat": {
+          "bytes": 186661,
+          "device": 1791601135,
+          "inode": 199135723520,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005194": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005194.nii.gz",
+        "sha256": "db24835b8967cc35f9b5a03b8e5bafe89175544373cabce580224577bd28cb71",
+        "stat": {
+          "bytes": 66970601,
+          "device": 1791601135,
+          "inode": 662147830496,
+          "modified_ns": 1793740578000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005194\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "a16222a59cb0bf0663078375949aa72f795081b376587a848c0dba4176f20d77",
+        "stat": {
+          "bytes": 223460,
+          "device": 1791601135,
+          "inode": 199161938016,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.703125,
+          0.0,
+          -0.0,
+          -163.6484375
+        ],
+        [
+          0.0,
+          0.703125,
+          -0.0,
+          -358.6484375
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -479.8999938964844
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        502,
+        423,
+        241
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005194\\segmentations\\pancreas.nii.gz",
+        "sha256": "806280857e4ced04cedea10bae63d66e7f82619f520e1816bda155552c4323cc",
+        "stat": {
+          "bytes": 254124,
+          "device": 1791601135,
+          "inode": 199161937920,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005363": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005363.nii.gz",
+        "sha256": "d7bb830a4a414c07146f0f8327a5770a6fa658e079060876daafa8d24f42982c",
+        "stat": {
+          "bytes": 43039503,
+          "device": 1791601135,
+          "inode": 662147830240,
+          "modified_ns": 1793740516000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005363\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "a82c2c1bf6d7c7d71d0295cf65db5a88098fa1c4395ddc4aa11ee30af4d5f8f8",
+        "stat": {
+          "bytes": 168200,
+          "device": 1791601135,
+          "inode": 199137689696,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.71484375,
+          -0.0,
+          -0.0,
+          181.642578125
+        ],
+        [
+          -0.0,
+          0.71484375,
+          0.0,
+          -320.642578125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          100.40001678466797
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        503,
+        348,
+        220
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005363\\segmentations\\pancreas.nii.gz",
+        "sha256": "b635acdfcab11a544f5a14419655e63d71dca57b8879ac4cbd901dc5bd8bf3fa",
+        "stat": {
+          "bytes": 201874,
+          "device": 1791601135,
+          "inode": 199137689600,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005437": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005437.nii.gz",
+        "sha256": "8afce9da8b9036e95146d49a64a39b009eb94abfb3acc0dff52ebb57231b24f9",
+        "stat": {
+          "bytes": 9913847,
+          "device": 1791601135,
+          "inode": 662147830624,
+          "modified_ns": 1793740642000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005437\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "6b99c0efc44f8675e4bffe96040a384e2b561b0753a250d663da8ace0aa60301",
+        "stat": {
+          "bytes": 41508,
+          "device": 1791601135,
+          "inode": 199117635680,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.781000018119812,
+          -0.0,
+          0.0,
+          199.6092987060547
+        ],
+        [
+          0.0,
+          0.781000018119812,
+          0.0,
+          -199.48170471191406
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          1345.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        434,
+        261,
+        82
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005437\\segmentations\\pancreas.nii.gz",
+        "sha256": "187d21d868b488c313c8fb1aa25ea3a03b1420fa895588aea9f0f01b44a64d76",
+        "stat": {
+          "bytes": 44728,
+          "device": 1791601135,
+          "inode": 199117635584,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005592": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\stunet-restored-20261106-a01\\PanTS_00005592.nii.gz",
+        "sha256": "40c7f8166c736969cad5cb9ffaba357ad6cdbf541e97b3de9f8f62a5c771c5eb",
+        "stat": {
+          "bytes": 72432400,
+          "device": 1791601135,
+          "inode": 964228889056,
+          "modified_ns": 1794004494000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005592\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "0a80c873b523c73e6d90f4e65500251cd439e0b6d3a80d413389b0ef78f692ee",
+        "stat": {
+          "bytes": 315535,
+          "device": 1791601135,
+          "inode": 199156826208,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.931640625,
+          0.0,
+          0.0,
+          249.0341796875
+        ],
+        [
+          -0.0,
+          0.931640625,
+          0.0,
+          -42.5341796875
+        ],
+        [
+          0.0,
+          -0.0,
+          2.5,
+          -449.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        500,
+        456,
+        317
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005592\\segmentations\\pancreas.nii.gz",
+        "sha256": "efc08e45dfdb667073fc1f9749edbf33d07df4e4446d496fdd7dec86d65574c9",
+        "stat": {
+          "bytes": 326069,
+          "device": 1791601135,
+          "inode": 199156826112,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005761": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005761.nii.gz",
+        "sha256": "823fbbe42b01d0fcc09d681bd8390381846c0c30cb4223903ae922762fa66a48",
+        "stat": {
+          "bytes": 61390328,
+          "device": 1791601135,
+          "inode": 662147830368,
+          "modified_ns": 1793740532000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005761\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "b28306f3fc601a5c07ac14482395f6b4b38dfa392ce67fff5938ba2a952a3084",
+        "stat": {
+          "bytes": 219345,
+          "device": 1791601135,
+          "inode": 199136641120,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.75,
+          -0.0,
+          -0.0,
+          168.625
+        ],
+        [
+          -0.0,
+          0.75,
+          0.0,
+          -363.625
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -75.00000762939453
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        489,
+        439,
+        234
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005761\\segmentations\\pancreas.nii.gz",
+        "sha256": "8ba862200c314df805fc859685ff441ce782824cc07b91744a1232bfa1bf4690",
+        "stat": {
+          "bytes": 262670,
+          "device": 1791601135,
+          "inode": 199136641024,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005780": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005780.nii.gz",
+        "sha256": "6ae8eb5ebc8c1cb45b343cc78bec5fa1b58182635459eec3e87f83c740bcb0ce",
+        "stat": {
+          "bytes": 36259100,
+          "device": 1791601135,
+          "inode": 662147829856,
+          "modified_ns": 1793740418000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005780\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "2ac6d86822d9ba4158b8c63e635bbde818df0bd1a66b691b9dba97bfad8644cb",
+        "stat": {
+          "bytes": 138924,
+          "device": 1791601135,
+          "inode": 199111999584,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.83984375,
+          0.0,
+          0.0,
+          -429.16015625
+        ],
+        [
+          0.0,
+          0.83984375,
+          0.0,
+          -429.16015625
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          -725.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        423,
+        146
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005780\\segmentations\\pancreas.nii.gz",
+        "sha256": "211fe4b521e23df626566e77ba579aab3da20f984ecf832e0626b57b64c259a1",
+        "stat": {
+          "bytes": 143827,
+          "device": 1791601135,
+          "inode": 199111999488,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00005848": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00005848.nii.gz",
+        "sha256": "aa0f920f0d311ead92ab77f6cb574ee0d36cdcb5b845d68531b00ed05e11aafe",
+        "stat": {
+          "bytes": 61190840,
+          "device": 1791601135,
+          "inode": 662147830112,
+          "modified_ns": 1793740492000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005848\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "de6115ad3bd62f6336da8b64752f5fdcf4e2861891231968f2849cdb23daf1ca",
+        "stat": {
+          "bytes": 233254,
+          "device": 1791601135,
+          "inode": 199151190112,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -1.0,
+          -0.0,
+          -0.0,
+          511.0
+        ],
+        [
+          -0.0,
+          1.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          852.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        306,
+        341
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00005848\\segmentations\\pancreas.nii.gz",
+        "sha256": "18cf91a9dd2ab77df1f2c517288e0b04409b651dd3ea4ab5372ea376c7ae00d7",
+        "stat": {
+          "bytes": 262860,
+          "device": 1791601135,
+          "inode": 199151190016,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006011": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006011.nii.gz",
+        "sha256": "a8bf4f1deb3ea7c959674d10312e6873e9493d4630233d23e0f63b6ef454b28e",
+        "stat": {
+          "bytes": 8526075,
+          "device": 1791601135,
+          "inode": 662147831392,
+          "modified_ns": 1793740908000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006011\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "7d4be842ec0742f54b8658f7ec5611a1ea427d5c59b0e0b7036d2e5aa758f2e0",
+        "stat": {
+          "bytes": 33340,
+          "device": 1791601135,
+          "inode": 199108722784,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          1.5,
+          0.0,
+          0.0,
+          -169.73699951171875
+        ],
+        [
+          0.0,
+          1.5,
+          0.0,
+          -123.41979217529297
+        ],
+        [
+          0.0,
+          0.0,
+          1.5,
+          -29.3544921875
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        220,
+        204,
+        167
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006011\\segmentations\\pancreas.nii.gz",
+        "sha256": "62b20cd148d99f53f9e6b4c1b50cd03ef743657ab67562b00ec7b9c602c261b5",
+        "stat": {
+          "bytes": 40904,
+          "device": 1791601135,
+          "inode": 199108722688,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006112": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006112.nii.gz",
+        "sha256": "18e80f6549b9f0fdeec9b9b59b85abc4445b0b992a0f85b2ab3aa7646680595e",
+        "stat": {
+          "bytes": 44693201,
+          "device": 1791601135,
+          "inode": 662147831648,
+          "modified_ns": 1793740976000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006112\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "af2964822362d403034a5719fbee6f8bad4ce4d97578b5f2768b8a4cae2695df",
+        "stat": {
+          "bytes": 162311,
+          "device": 1791601135,
+          "inode": 199153680480,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7421875,
+          0.0,
+          -0.0,
+          -191.62890625
+        ],
+        [
+          0.0,
+          0.7421875,
+          -0.0,
+          -388.62890625
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -529.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        427,
+        170
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006112\\segmentations\\pancreas.nii.gz",
+        "sha256": "3edf0895697bf7a8ab2581226c4f56352fd727a88bdb08e9575014a402968f1b",
+        "stat": {
+          "bytes": 175538,
+          "device": 1791601135,
+          "inode": 199153680384,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006115": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006115.nii.gz",
+        "sha256": "ce83f10fe20c6dcad94da3a986d9dde52b5fe939c8d2a603a9ec1b953ab975f6",
+        "stat": {
+          "bytes": 5786818,
+          "device": 1791601135,
+          "inode": 662147831904,
+          "modified_ns": 1793741018000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006115\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "6e1c131d403f90f870f90d69c7af8c479dda7223192df19d2d72acf007f93811",
+        "stat": {
+          "bytes": 21663,
+          "device": 1791601135,
+          "inode": 199148044384,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          1.5,
+          0.0,
+          0.0,
+          -202.630859375
+        ],
+        [
+          0.0,
+          1.5,
+          0.0,
+          -58.630859375
+        ],
+        [
+          0.0,
+          0.0,
+          1.5,
+          1.600000023841858
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        221,
+        144,
+        155
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006115\\segmentations\\pancreas.nii.gz",
+        "sha256": "545e02c233aaad27ccd47c6514575c351161638c1675852e9470ff2479227a3e",
+        "stat": {
+          "bytes": 27394,
+          "device": 1791601135,
+          "inode": 199148044288,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006394": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006394.nii.gz",
+        "sha256": "898014bd90076fb4ffd45aaeda38ae09b7b662675cb1a3be5f43bb8b1ba14a94",
+        "stat": {
+          "bytes": 43555020,
+          "device": 1791601135,
+          "inode": 662147830880,
+          "modified_ns": 1793740722000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006394\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "c0971790774378563dc01cab725ce98ae66782d7879790a5bde2eb12bb8ded81",
+        "stat": {
+          "bytes": 177395,
+          "device": 1791601135,
+          "inode": 199111082080,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7460939884185791,
+          -0.0,
+          -0.0,
+          180.7540283203125
+        ],
+        [
+          -0.0,
+          0.7460939884185791,
+          0.0,
+          -182.60000610351562
+        ],
+        [
+          0.0,
+          0.0,
+          -0.7999999523162842,
+          -55.635009765625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        377,
+        209
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006394\\segmentations\\pancreas.nii.gz",
+        "sha256": "904a87e770d23e5f055f5c04a6d258f3ff96587d95ff133894f2a4a5386108dc",
+        "stat": {
+          "bytes": 214960,
+          "device": 1791601135,
+          "inode": 199111081984,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006454": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006454.nii.gz",
+        "sha256": "df353b7b0fe00d4b4a6c04fd363641e4b1f8cd43dee01ebfe44c51ce017ce2fc",
+        "stat": {
+          "bytes": 41552720,
+          "device": 1791601135,
+          "inode": 662147831136,
+          "modified_ns": 1793740794000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006454\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "7721708e9e08e9b4b4287da4c9f71b4abababf7a164cecadda3f353dfb9ee5f1",
+        "stat": {
+          "bytes": 163116,
+          "device": 1791601135,
+          "inode": 199148699744,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.693359375,
+          -0.0,
+          -0.0,
+          233.1533203125
+        ],
+        [
+          -0.0,
+          0.693359375,
+          0.0,
+          -20.1533203125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          42.000003814697266
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        388,
+        188
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006454\\segmentations\\pancreas.nii.gz",
+        "sha256": "a25718dd05cc2d9cae65a4c9d4a4b2ef9c111cf51ead5a753049201a9f5881c9",
+        "stat": {
+          "bytes": 202312,
+          "device": 1791601135,
+          "inode": 199148699648,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006543": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006543.nii.gz",
+        "sha256": "3c8fb6663a530222a383200f2bcd4386e7d96251c18e496033665067372d2e54",
+        "stat": {
+          "bytes": 56021919,
+          "device": 1791601135,
+          "inode": 662147830752,
+          "modified_ns": 1793740658000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006543\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "8282ba00ed416492b64c3c3c09df16882ea8410aa1a725fc18b0e137d8e3850f",
+        "stat": {
+          "bytes": 211286,
+          "device": 1791601135,
+          "inode": 199162855520,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7020000219345093,
+          0.0,
+          -0.0,
+          -179.6875
+        ],
+        [
+          0.0,
+          0.7020000219345093,
+          -0.0,
+          -179.6875
+        ],
+        [
+          0.0,
+          0.0,
+          0.8000017404556274,
+          1120.198974609375
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        505,
+        413,
+        232
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006543\\segmentations\\pancreas.nii.gz",
+        "sha256": "c098cb6a5695be9bcd742966b0db5165019e38b49b04e04afb2d7ebd1f432fd3",
+        "stat": {
+          "bytes": 230891,
+          "device": 1791601135,
+          "inode": 199162855424,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006755": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-batch-20261102-a01\\PanTS_00006755.nii.gz",
+        "sha256": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+        "stat": {
+          "bytes": 68653910,
+          "device": 1791601135,
+          "inode": 636349973056,
+          "modified_ns": 1793668780000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006755\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "3e45b4461a3649b3f4be7935eb51bbaa1e73616f3f2783f38d7c759337873b02",
+        "stat": {
+          "bytes": 245982,
+          "device": 1791601135,
+          "inode": 199118291040,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7382810115814209,
+          0.0,
+          -0.0,
+          -184.8000030517578
+        ],
+        [
+          0.0,
+          0.7382810115814209,
+          -0.0,
+          -189.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -429.0899963378906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        436,
+        250
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006755\\segmentations\\pancreas.nii.gz",
+        "sha256": "4c8ed3726772bdf48c135d3c4b41e86b19d7536d6c82d8612afdb0adadd30b19",
+        "stat": {
+          "bytes": 252521,
+          "device": 1791601135,
+          "inode": 199118290944,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006837": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006837.nii.gz",
+        "sha256": "d28a8407da32457bc1aad2946c4670e4676aaaf378683bb3f8df5c7cfb99975a",
+        "stat": {
+          "bytes": 35902315,
+          "device": 1791601135,
+          "inode": 662147831776,
+          "modified_ns": 1793741004000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006837\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "9ad02430090a2f563f17abdc3c2e644fc3ee90ff1d1108bbcf199a4c1710998a",
+        "stat": {
+          "bytes": 134524,
+          "device": 1791601135,
+          "inode": 199132184672,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7421879768371582,
+          0.0,
+          0.0,
+          201.6999969482422
+        ],
+        [
+          0.0,
+          -0.7421879768371582,
+          0.0,
+          190.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -249.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        450,
+        313,
+        209
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006837\\segmentations\\pancreas.nii.gz",
+        "sha256": "b2a6c50f3707bf61f36e9787bd64325edc554bd5422913a2130672c7ce1de0b8",
+        "stat": {
+          "bytes": 156775,
+          "device": 1791601135,
+          "inode": 199132184576,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006880": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006880.nii.gz",
+        "sha256": "4b987c93b1fce54229c6858c0d07336f631e4f4c6810620ee83255297e85d20e",
+        "stat": {
+          "bytes": 57613714,
+          "device": 1791601135,
+          "inode": 662147831008,
+          "modified_ns": 1793740734000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006880\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "3f5586df4405e54ea16380c89afe332eac82d5bc630923b2bbd0e98d0685a220",
+        "stat": {
+          "bytes": 213919,
+          "device": 1791601135,
+          "inode": 199163773024,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.62109375,
+          -0.0,
+          -0.0,
+          131.689453125
+        ],
+        [
+          -0.0,
+          0.62109375,
+          0.0,
+          -346.689453125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          14.000006675720215
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        431,
+        222
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006880\\segmentations\\pancreas.nii.gz",
+        "sha256": "a7c79f532f349d55323a4cff316eead7bafa0ebcb3a2584be04262eebc1c8b4c",
+        "stat": {
+          "bytes": 246600,
+          "device": 1791601135,
+          "inode": 199163772928,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006901": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006901.nii.gz",
+        "sha256": "96b31d22d6ebf15e5dfd1c460f9dd271bb862e9380759669ea6d48531381b55d",
+        "stat": {
+          "bytes": 5036588,
+          "device": 1791601135,
+          "inode": 662147831520,
+          "modified_ns": 1793740912000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006901\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "a41d2e064613f76ecac70b2fd0972939a6568d5a960e6b338a2738f1a2303623",
+        "stat": {
+          "bytes": 17471,
+          "device": 1791601135,
+          "inode": 199140311136,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.0,
+          0.0,
+          -0.75,
+          0.0
+        ],
+        [
+          0.0,
+          -0.75,
+          0.0,
+          0.0
+        ],
+        [
+          -5.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        54,
+        361,
+        204
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006901\\segmentations\\pancreas.nii.gz",
+        "sha256": "68ea2e22c116e0f2cb171341bbf470e948d17f4e3fca17eb5d0d0eae9814d2a4",
+        "stat": {
+          "bytes": 24980,
+          "device": 1791601135,
+          "inode": 199140311040,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00006903": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00006903.nii.gz",
+        "sha256": "373e18c00422db551a25c7c7e49a7f4b872ce9092dfebe978ded1a6fc6cfbb0b",
+        "stat": {
+          "bytes": 54564249,
+          "device": 1791601135,
+          "inode": 662147831264,
+          "modified_ns": 1793740796000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006903\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "522856461e3c7258381300a1da86f3011367177ac60c0b5f9154623164b7f050",
+        "stat": {
+          "bytes": 179804,
+          "device": 1791601135,
+          "inode": 199121174624,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -1.0,
+          -0.0,
+          -0.0,
+          512.0
+        ],
+        [
+          -0.0,
+          1.0,
+          0.0,
+          1.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          813.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        466,
+        268,
+        325
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00006903\\segmentations\\pancreas.nii.gz",
+        "sha256": "a5620b09129d2fea9630d9c775a0115e24cd479166c0760a885215e100cc4a6b",
+        "stat": {
+          "bytes": 218200,
+          "device": 1791601135,
+          "inode": 199121174528,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007023": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007023.nii.gz",
+        "sha256": "6dca21dc2487cba3c3fb36ab9d5fd8ea634c15a0bafe8309d07bbc0de03d1d03",
+        "stat": {
+          "bytes": 11849566,
+          "device": 1791601135,
+          "inode": 662147832544,
+          "modified_ns": 1793741152000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007023\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "03b66405b12af5d195ae6c583ee0c9ce565696d0b76f0b3db10f51a211d1e596",
+        "stat": {
+          "bytes": 46179,
+          "device": 1791601135,
+          "inode": 199154597984,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.701171875,
+          -0.0,
+          -0.0,
+          179.1494140625
+        ],
+        [
+          -0.0,
+          3.0,
+          0.0,
+          23.0
+        ],
+        [
+          0.0,
+          0.0,
+          -0.701171875,
+          -194.6005859375
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        101,
+        204
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007023\\segmentations\\pancreas.nii.gz",
+        "sha256": "2db4cf602bf348195754f4d4c330d6b954a704ab909fc03bb867ee7fb660c85b",
+        "stat": {
+          "bytes": 53516,
+          "device": 1791601135,
+          "inode": 199154597888,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007226": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007226.nii.gz",
+        "sha256": "f1b275025293af403f240d0374dc574946478aa2235ca0c69b44e3289ff2a904",
+        "stat": {
+          "bytes": 57649030,
+          "device": 1791601135,
+          "inode": 662147832800,
+          "modified_ns": 1793741374000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007226\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "3ea7e1f0cf78e81a4058d14e893e865c886067cb27e45c3808f1ec66818f5e5b",
+        "stat": {
+          "bytes": 235385,
+          "device": 1791601135,
+          "inode": 199158661216,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -1.0,
+          -0.0,
+          -0.0,
+          511.0
+        ],
+        [
+          -0.0,
+          1.0,
+          0.0,
+          -0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          864.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        490,
+        318,
+        346
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007226\\segmentations\\pancreas.nii.gz",
+        "sha256": "ba4d07a4e07797ff9120aba48ee7e90a6355de1ad707500a697362948fcfbb8a",
+        "stat": {
+          "bytes": 261653,
+          "device": 1791601135,
+          "inode": 199158661120,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007529": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007529.nii.gz",
+        "sha256": "a583d6fdc12ac7e4f84fc6a5a56e4181c889a21b458fa913db4c9c0a076ee62d",
+        "stat": {
+          "bytes": 58082054,
+          "device": 1791601135,
+          "inode": 662147832672,
+          "modified_ns": 1793741252000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007529\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "798a5b04374c7179c03bfde0b617d4c8e439d91aa266f435f986432391e4488e",
+        "stat": {
+          "bytes": 209192,
+          "device": 1791601135,
+          "inode": 199146209376,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8007810115814209,
+          -0.0,
+          -0.0,
+          208.6990966796875
+        ],
+        [
+          -0.0,
+          0.8007810115814209,
+          0.0,
+          -192.5
+        ],
+        [
+          0.0,
+          0.0,
+          -0.7999999523162842,
+          -36.00001525878906
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        506,
+        388,
+        244
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007529\\segmentations\\pancreas.nii.gz",
+        "sha256": "5f85df879a9e8347dcb66894c0c5297f834056a75cadd2b5adc4a3cad7581a55",
+        "stat": {
+          "bytes": 244926,
+          "device": 1791601135,
+          "inode": 199146209280,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007636": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007636.nii.gz",
+        "sha256": "f959ab99927d403e2e32fc6e29fc042cc94f669b12af1339c194da74006caacf",
+        "stat": {
+          "bytes": 36718443,
+          "device": 1791601135,
+          "inode": 662147832288,
+          "modified_ns": 1793741132000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007636\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "3500884264c85ac3fb24ee6d4eadda4b0e5d00d9741fd81dc352cf4eb77f00a6",
+        "stat": {
+          "bytes": 155165,
+          "device": 1791601135,
+          "inode": 199106494560,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.888671875,
+          0.0,
+          0.0,
+          232.0556640625
+        ],
+        [
+          -0.0,
+          0.888671875,
+          0.0,
+          -9.0556640625
+        ],
+        [
+          0.0,
+          -0.0,
+          2.5,
+          -1307.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        478,
+        472,
+        156
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007636\\segmentations\\pancreas.nii.gz",
+        "sha256": "7dfef4d7b2d4e7619c859c8eb865a4f7a89a7434f7517a96f0387c960cbbae10",
+        "stat": {
+          "bytes": 163877,
+          "device": 1791601135,
+          "inode": 199106494464,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007687": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007687.nii.gz",
+        "sha256": "62c2d9a84942eebd154def4d642415d62dfa7207c880577a4077d443ed1b0f5b",
+        "stat": {
+          "bytes": 39919043,
+          "device": 1791601135,
+          "inode": 662147832032,
+          "modified_ns": 1793741054000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007687\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "7518a455451e39988c8c564d037d40bd2893decb373088910ba1a3d74783bacd",
+        "stat": {
+          "bytes": 159421,
+          "device": 1791601135,
+          "inode": 199155908704,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.845703125,
+          0.0,
+          0.0,
+          223.0771484375
+        ],
+        [
+          -0.0,
+          0.845703125,
+          0.0,
+          21.4228515625
+        ],
+        [
+          0.0,
+          -0.0,
+          2.5,
+          -420.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        457,
+        156
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007687\\segmentations\\pancreas.nii.gz",
+        "sha256": "af31342c966e1bcaea2ce67282ebc5ecd7f3a8406ab6025c3113c507652691f6",
+        "stat": {
+          "bytes": 167823,
+          "device": 1791601135,
+          "inode": 199155908608,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007826": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007826.nii.gz",
+        "sha256": "93e3f6267d3e96a433dc758740be35f5d3deb98cf55ace142c34396c1c203cec",
+        "stat": {
+          "bytes": 51075849,
+          "device": 1791601135,
+          "inode": 662147832928,
+          "modified_ns": 1793741410000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007826\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "eb8b43cf894fbdcac0aa6f41732fbde854d5e0c4700b4540723fab34226acdce",
+        "stat": {
+          "bytes": 187181,
+          "device": 1791601135,
+          "inode": 199149617248,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7207030057907104,
+          -0.0,
+          -0.0,
+          161.67922973632812
+        ],
+        [
+          -0.0,
+          0.7207030057907104,
+          0.0,
+          -158.1999969482422
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -20.734983444213867
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        508,
+        353,
+        239
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007826\\segmentations\\pancreas.nii.gz",
+        "sha256": "21a8b2eed837190b41f471b249b409aff57468052f46a7efe470965c02c875d8",
+        "stat": {
+          "bytes": 202234,
+          "device": 1791601135,
+          "inode": 199149617152,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007868": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007868.nii.gz",
+        "sha256": "ee2c7eb5fcd43868d294fd385024031e8231e778fc1aeab540d2643c6c38e4c5",
+        "stat": {
+          "bytes": 31824367,
+          "device": 1791601135,
+          "inode": 662147832416,
+          "modified_ns": 1793741140000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007868\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "886924d4687817c287d6a21f0631489ad80d7da8e05b395d3af0945c79658a5c",
+        "stat": {
+          "bytes": 123652,
+          "device": 1791601135,
+          "inode": 199110295648,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8984375,
+          -0.0,
+          -0.0,
+          234.55078125
+        ],
+        [
+          -0.0,
+          0.8984375,
+          0.0,
+          -84.55078125
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -118.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        485,
+        299,
+        193
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007868\\segmentations\\pancreas.nii.gz",
+        "sha256": "b0e7d41c602a601c6be945451b03ee9f7c1bb8a96d98e68dd4a0b1f0a6015e50",
+        "stat": {
+          "bytes": 147696,
+          "device": 1791601135,
+          "inode": 199110295552,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00007905": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00007905.nii.gz",
+        "sha256": "66d50a34caea204a1cc5181a8daee446df3111f2542393e2150e4eae6cfb147c",
+        "stat": {
+          "bytes": 12534864,
+          "device": 1791601135,
+          "inode": 662147832160,
+          "modified_ns": 1793741072000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007905\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "17818f4f9307f104425fccab65b5abd7578b27d6bd46cac6119cd19cff71fb00",
+        "stat": {
+          "bytes": 51565,
+          "device": 1791601135,
+          "inode": 199119208544,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7226560115814209,
+          0.0,
+          0.0,
+          -369.2772216796875
+        ],
+        [
+          0.0,
+          0.7226560115814209,
+          0.0,
+          -369.2772216796875
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        512,
+        376,
+        60
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00007905\\segmentations\\pancreas.nii.gz",
+        "sha256": "695e831841d9a01823fb4f6b19ad665aa5a5da722e0011308f174b3ea0743d7e",
+        "stat": {
+          "bytes": 60312,
+          "device": 1791601135,
+          "inode": 199119208448,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008158": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008158.nii.gz",
+        "sha256": "d00db05ab5fab507cadc42ecb35eda2d3acfb4f10f0214e8b86d79ea59e77052",
+        "stat": {
+          "bytes": 27733192,
+          "device": 1791601135,
+          "inode": 662147833440,
+          "modified_ns": 1793741626000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008158\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "cce93a3860a8bb1e1fa7ba6dbcc62c2d14cd390bf3e5e71337677d75a18ed39d",
+        "stat": {
+          "bytes": 89152,
+          "device": 1791601135,
+          "inode": 199161282656,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.8867189884185791,
+          -0.0,
+          -0.0,
+          240.89999389648438
+        ],
+        [
+          -0.0,
+          0.8867189884185791,
+          0.0,
+          -226.1134033203125
+        ],
+        [
+          0.0,
+          0.0,
+          -2.5,
+          54.25
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        454,
+        384,
+        117
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008158\\segmentations\\pancreas.nii.gz",
+        "sha256": "27d8d0f35af33beb54f1136db2ba304213c924493896e126d9fa56add687ae0e",
+        "stat": {
+          "bytes": 100012,
+          "device": 1791601135,
+          "inode": 199161282560,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008203": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008203.nii.gz",
+        "sha256": "ed46d45440e20b6b26b8b367304cd22e1f71abc164b1e99742e2d58c4400252c",
+        "stat": {
+          "bytes": 35856298,
+          "device": 1791601135,
+          "inode": 662147833696,
+          "modified_ns": 1793741776000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008203\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "811d4d929634c5864378ab2abfdb453f9c29a9d6384f66e7414fcb7532ce6cd3",
+        "stat": {
+          "bytes": 129141,
+          "device": 1791601135,
+          "inode": 199152238688,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.7421879768371582,
+          0.0,
+          0.0,
+          171.05999755859375
+        ],
+        [
+          0.0,
+          -0.7421879768371582,
+          0.0,
+          190.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.25,
+          -279.0409851074219
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        454,
+        352,
+        185
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008203\\segmentations\\pancreas.nii.gz",
+        "sha256": "1c62f597e5ba36c068477466708de76e07d816d3013e458367d160e8f90ee699",
+        "stat": {
+          "bytes": 149763,
+          "device": 1791601135,
+          "inode": 199152238592,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008339": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008339.nii.gz",
+        "sha256": "b48180688af1cdd290c8b9de36ae887b2c3946840beca8cb9d015b94207c3f24",
+        "stat": {
+          "bytes": 61016369,
+          "device": 1791601135,
+          "inode": 662147833056,
+          "modified_ns": 1793741462000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008339\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "add5cd416520fbbcfc9172c3c9ceb8539247b51fe10559bbf411465354767b43",
+        "stat": {
+          "bytes": 202818,
+          "device": 1791601135,
+          "inode": 199129563232,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.78125,
+          -0.0,
+          -0.0,
+          353.609375
+        ],
+        [
+          -0.0,
+          0.78125,
+          0.0,
+          -178.609375
+        ],
+        [
+          0.0,
+          0.0,
+          -0.800000011920929,
+          -51.5
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        442,
+        512,
+        205
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008339\\segmentations\\pancreas.nii.gz",
+        "sha256": "c225be724cc4df0c438c0e8b9ab436574fbb99354a254b3ae4ebb151c0bb4321",
+        "stat": {
+          "bytes": 235067,
+          "device": 1791601135,
+          "inode": 199129563136,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008434": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008434.nii.gz",
+        "sha256": "e5053aa6bd68288db101f9b28fa4604b4534579ec246eec4df1537e1539ff15d",
+        "stat": {
+          "bytes": 25519516,
+          "device": 1791601135,
+          "inode": 662147833568,
+          "modified_ns": 1793741684000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008434\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "ee1c51d44d20e1759b9a1a88bcb08dd14c374577dc80e8c244d4f7df559a5ad0",
+        "stat": {
+          "bytes": 104724,
+          "device": 1791601135,
+          "inode": 199119863904,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.78515625,
+          0.0,
+          0.0,
+          202.607421875
+        ],
+        [
+          0.0,
+          -0.78515625,
+          0.0,
+          355.607421875
+        ],
+        [
+          0.0,
+          0.0,
+          5.0,
+          -975.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        509,
+        343,
+        136
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008434\\segmentations\\pancreas.nii.gz",
+        "sha256": "2d8ec1913d541174550c4cc2bfd853de00a78d5ab953bb9bb301ff871a6a9c1b",
+        "stat": {
+          "bytes": 107775,
+          "device": 1791601135,
+          "inode": 199119863808,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008711": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008711.nii.gz",
+        "sha256": "00396cb2f658d9c012d84148d1ee1d250d94f5f8527039c4fc6dacc4ef9dd477",
+        "stat": {
+          "bytes": 19779084,
+          "device": 1791601135,
+          "inode": 662147833312,
+          "modified_ns": 1793741622000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008711\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "554bf5214296bc56db9db843941e2f0e7eb25201860f421e53a31d061abbdfcd",
+        "stat": {
+          "bytes": 74974,
+          "device": 1791601135,
+          "inode": 199128907872,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.9609379768371582,
+          0.0,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.9609379768371582,
+          0.0,
+          -491.039306640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        481,
+        337,
+        104
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008711\\segmentations\\pancreas.nii.gz",
+        "sha256": "c98171a48a7236f83a25a39e804d6d987a0d1d460d5f9265a625630d9cdc9730",
+        "stat": {
+          "bytes": 85673,
+          "device": 1791601135,
+          "inode": 199128907776,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008743": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008743.nii.gz",
+        "sha256": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+        "stat": {
+          "bytes": 13212081,
+          "device": 1791601135,
+          "inode": 662147833824,
+          "modified_ns": 1793741780000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008743\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "563d80bcd57cceab1cccd4e629c1889cb29f52cf65e2932e9bd94fa6dffbfd82",
+        "stat": {
+          "bytes": 49729,
+          "device": 1791601135,
+          "inode": 199126679648,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          0.7734379768371582,
+          0.0,
+          0.0,
+          -395.226806640625
+        ],
+        [
+          0.0,
+          0.7734379768371582,
+          0.0,
+          -395.226806640625
+        ],
+        [
+          0.0,
+          0.0,
+          2.5,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        424,
+        294,
+        89
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008743\\segmentations\\pancreas.nii.gz",
+        "sha256": "38e6f82611cd2ec764385bd582d32f13cf15e75ec7d77ebb49561de0f56bbe35",
+        "stat": {
+          "bytes": 57140,
+          "device": 1791601135,
+          "inode": 199126679552,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    },
+    "PanTS_00008769": {
+      "ct": {
+        "path": "E:\\PROWL\\sources\\pants\\week05-autonomous70-20261103-a02\\PanTS_00008769.nii.gz",
+        "sha256": "d6b25292dc425c7e2e92b19f3c8820ee41b88fb3e05bfc1aa087309d519edc35",
+        "stat": {
+          "bytes": 56636218,
+          "device": 1791601135,
+          "inode": 662147833184,
+          "modified_ns": 1793741526000000000
+        }
+      },
+      "lesion": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008769\\segmentations\\pancreatic_lesion.nii.gz",
+        "sha256": "ed364a80b2ce668924a0b785ea7504ec24eaac3c4b40c1cfc1ce2f758bdea169",
+        "stat": {
+          "bytes": 193536,
+          "device": 1791601135,
+          "inode": 199125762144,
+          "modified_ns": 1791513586000000000
+        }
+      },
+      "native_affine": [
+        [
+          -0.9765625,
+          0.0,
+          0.0,
+          249.51171875
+        ],
+        [
+          0.0,
+          -0.9765625,
+          0.0,
+          414.51171875
+        ],
+        [
+          0.0,
+          0.0,
+          0.800000011920929,
+          -646.9000244140625
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_shape": [
+        473,
+        350,
+        266
+      ],
+      "pancreas": {
+        "path": "E:\\PROWL\\transfer\\PanTS-8h-20261008\\labels\\PanTS_00008769\\segmentations\\pancreas.nii.gz",
+        "sha256": "9b239d4f00acd2b58c42e9306f467dcd8c3320e2c1541f2bf5b4fb0f0dc6a699",
+        "stat": {
+          "bytes": 217646,
+          "device": 1791601135,
+          "inode": 199125762048,
+          "modified_ns": 1791513586000000000
+        }
+      }
+    }
+  },
+  "report": {
+    "cases": [
+      {
+        "case_id": "PanTS_00000029",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.7855377008652658,
+            "predicted_voxels": 1623,
+            "target_voxels": 1613,
+            "true_positive": 1271
+          },
+          "pancreas": {
+            "dice": 0.8769268469141277,
+            "predicted_voxels": 40601,
+            "target_voxels": 45096,
+            "true_positive": 37575
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 2928.8474698381565,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 2910.8015827781555,
+          "voxel_mm3": 1.8045887060000965
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 40
+      },
+      {
+        "case_id": "PanTS_00000084",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.6432038834951457,
+            "predicted_voxels": 5554,
+            "target_voxels": 2686,
+            "true_positive": 2650
+          },
+          "pancreas": {
+            "dice": 0.8173045971418519,
+            "predicted_voxels": 56032,
+            "target_voxels": 77551,
+            "true_positive": 54589
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 8474.7314453125,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 4098.5107421875,
+          "voxel_mm3": 1.52587890625
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00000139",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 1338,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9147793309250825,
+            "predicted_voxels": 108440,
+            "target_voxels": 114405,
+            "true_positive": 101927
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 1617.0095978604288,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.208527352661008
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00000514",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 855,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8068660809506881,
+            "predicted_voxels": 10548,
+            "target_voxels": 9143,
+            "true_positive": 7944
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 4076.9537212336836,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 4.768366925419513
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 24
+      },
+      {
+        "case_id": "PanTS_00000698",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 7652,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8027508215949454,
+            "predicted_voxels": 78824,
+            "target_voxels": 101922,
+            "true_positive": 72547
+          },
+          "predicted_components": 9,
+          "predicted_volume_mm3": 4728.790283203125,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.61798095703125
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00000909",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 721,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9270977328383787,
+            "predicted_voxels": 199920,
+            "target_voxels": 186378,
+            "true_positive": 179068
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 721.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.0
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 30
+      },
+      {
+        "case_id": "PanTS_00000927",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.5985342385684097,
+            "predicted_voxels": 10940,
+            "target_voxels": 11301,
+            "true_positive": 6656
+          },
+          "pancreas": {
+            "dice": 0.8387117198877188,
+            "predicted_voxels": 96095,
+            "target_voxels": 93429,
+            "true_positive": 79478
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 7361.663818359375,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 7604.585266113281,
+          "voxel_mm3": 0.67291259765625
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 30
+      },
+      {
+        "case_id": "PanTS_00001070",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.5167229926581983,
+            "predicted_voxels": 17228,
+            "target_voxels": 8515,
+            "true_positive": 6651
+          },
+          "pancreas": {
+            "dice": 0.8052373454130365,
+            "predicted_voxels": 114481,
+            "target_voxels": 107158,
+            "true_positive": 89236
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 9552.436921108008,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 4721.325771025929,
+          "voxel_mm3": 0.5544716113947068
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 96
+      },
+      {
+        "case_id": "PanTS_00001347",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.48098495212038306,
+            "predicted_voxels": 8232,
+            "target_voxels": 2733,
+            "true_positive": 2637
+          },
+          "pancreas": {
+            "dice": 0.8567905278470891,
+            "predicted_voxels": 48824,
+            "target_voxels": 54975,
+            "true_positive": 44467
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 13848.525159810692,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 4597.669978348229,
+          "voxel_mm3": 1.6822795383637867
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00001389",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 29652,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.0,
+            "predicted_voxels": 1317,
+            "target_voxels": 74,
+            "true_positive": 0
+          },
+          "predicted_components": 7,
+          "predicted_volume_mm3": 100075.49061814262,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 3.3749996836011946
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 9
+      },
+      {
+        "case_id": "PanTS_00001406",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": null,
+            "predicted_voxels": 0,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8456931647224505,
+            "predicted_voxels": 217813,
+            "target_voxels": 198293,
+            "true_positive": 175949
+          },
+          "predicted_components": 0,
+          "predicted_volume_mm3": 0.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.3125000046566128
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 63
+      },
+      {
+        "case_id": "PanTS_00001583",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 2,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.4466524722025077,
+            "predicted_voxels": 9711,
+            "target_voxels": 19878,
+            "true_positive": 6608
+          },
+          "pancreas": {
+            "dice": 0.8519952292391041,
+            "predicted_voxels": 100860,
+            "target_voxels": 97012,
+            "true_positive": 84293
+          },
+          "predicted_components": 5,
+          "predicted_volume_mm3": 7483.174757569322,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 15317.737393776435,
+          "voxel_mm3": 0.7705874531530554
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00001823",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.06295081967213115,
+            "predicted_voxels": 1371,
+            "target_voxels": 154,
+            "true_positive": 48
+          },
+          "pancreas": {
+            "dice": 0.7428318142781949,
+            "predicted_voxels": 19929,
+            "target_voxels": 16168,
+            "true_positive": 13407
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 4627.125,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "small",
+          "target_volume_mm3": 519.75,
+          "voxel_mm3": 3.375
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 90
+      },
+      {
+        "case_id": "PanTS_00002028",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.43682008368200836,
+            "predicted_voxels": 7348,
+            "target_voxels": 2212,
+            "true_positive": 2088
+          },
+          "pancreas": {
+            "dice": 0.7249466145095149,
+            "predicted_voxels": 26566,
+            "target_voxels": 26351,
+            "true_positive": 19181
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 17518.980083991293,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 5273.813819513982,
+          "voxel_mm3": 2.384183462709757
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 32
+      },
+      {
+        "case_id": "PanTS_00002235",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 2,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.1675860257420541,
+            "predicted_voxels": 2036,
+            "target_voxels": 1771,
+            "true_positive": 319
+          },
+          "pancreas": {
+            "dice": 0.8587207930139249,
+            "predicted_voxels": 20804,
+            "target_voxels": 21566,
+            "true_positive": 18192
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 5696.466430453726,
+          "reference_components": 3,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 4955.0304756058695,
+          "voxel_mm3": 2.7978715277277635
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00002269",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.6756043428708536,
+            "predicted_voxels": 13876,
+            "target_voxels": 19466,
+            "true_positive": 11263
+          },
+          "pancreas": {
+            "dice": 0.7544021482893631,
+            "predicted_voxels": 55627,
+            "target_voxels": 41939,
+            "true_positive": 36802
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 10480.953465952593,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 14703.245904311989,
+          "voxel_mm3": 0.75532959541313
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00002435",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.4294740511569132,
+            "predicted_voxels": 8778,
+            "target_voxels": 14171,
+            "true_positive": 4928
+          },
+          "pancreas": {
+            "dice": 0.8007014224350062,
+            "predicted_voxels": 118303,
+            "target_voxels": 90986,
+            "true_positive": 83789
+          },
+          "predicted_components": 8,
+          "predicted_volume_mm3": 6044.12474027153,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 9757.495066574145,
+          "voxel_mm3": 0.6885537412020426
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 90
+      },
+      {
+        "case_id": "PanTS_00002495",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.3825160378384256,
+            "predicted_voxels": 6509,
+            "target_voxels": 2688,
+            "true_positive": 1759
+          },
+          "pancreas": {
+            "dice": 0.8500701596462895,
+            "predicted_voxels": 18349,
+            "target_voxels": 19422,
+            "true_positive": 16054
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 19902.048846983114,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 8218.882670255127,
+          "voxel_mm3": 3.057620041017532
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00002514",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.07721475353326439,
+            "predicted_voxels": 1021,
+            "target_voxels": 1880,
+            "true_positive": 112
+          },
+          "pancreas": {
+            "dice": 0.7907111463724861,
+            "predicted_voxels": 35414,
+            "target_voxels": 43993,
+            "true_positive": 31394
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 2178.4520153829726,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 4011.2534661312325,
+          "voxel_mm3": 2.1336454607081023
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00002770",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 2127,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8673051477537648,
+            "predicted_voxels": 51013,
+            "target_voxels": 44213,
+            "true_positive": 41295
+          },
+          "predicted_components": 7,
+          "predicted_volume_mm3": 3578.2085780997745,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.6822795383637867
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00002889",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.06952427117235649,
+            "predicted_voxels": 10842,
+            "target_voxels": 3599,
+            "true_positive": 502
+          },
+          "pancreas": {
+            "dice": 0.7928497043122562,
+            "predicted_voxels": 153409,
+            "target_voxels": 166354,
+            "true_positive": 126762
+          },
+          "predicted_components": 12,
+          "predicted_volume_mm3": 4727.622529689305,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 1569.3334702408974,
+          "voxel_mm3": 0.43604708814695675
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00002893",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.810860561435803,
+            "predicted_voxels": 2834,
+            "target_voxels": 3685,
+            "true_positive": 2643
+          },
+          "pancreas": {
+            "dice": 0.9031522380234616,
+            "predicted_voxels": 38896,
+            "target_voxels": 37399,
+            "true_positive": 34453
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 4813.09944152832,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 6258.3879470825195,
+          "voxel_mm3": 1.6983413696289062
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00002935",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.367498776309349,
+            "predicted_voxels": 4927,
+            "target_voxels": 5288,
+            "true_positive": 1877
+          },
+          "pancreas": {
+            "dice": 0.623089355806973,
+            "predicted_voxels": 28251,
+            "target_voxels": 15059,
+            "true_positive": 13493
+          },
+          "predicted_components": 7,
+          "predicted_volume_mm3": 16628.625,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 17847.0,
+          "voxel_mm3": 3.375
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00002954",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 20,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.3343253968253968,
+            "predicted_voxels": 4724,
+            "target_voxels": 1324,
+            "true_positive": 1011
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 5.896306447685902,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.2948153223842951
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 15
+      },
+      {
+        "case_id": "PanTS_00003130",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 2,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.26917557008451604,
+            "predicted_voxels": 1839,
+            "target_voxels": 4432,
+            "true_positive": 844
+          },
+          "pancreas": {
+            "dice": 0.8386551782395675,
+            "predicted_voxels": 27926,
+            "target_voxels": 25345,
+            "true_positive": 22338
+          },
+          "predicted_components": 8,
+          "predicted_volume_mm3": 5612.1826171875,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 13525.390625,
+          "voxel_mm3": 3.0517578125
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00003457",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.22171052631578947,
+            "predicted_voxels": 2489,
+            "target_voxels": 551,
+            "true_positive": 337
+          },
+          "pancreas": {
+            "dice": 0.9182447779496398,
+            "predicted_voxels": 34673,
+            "target_voxels": 37090,
+            "true_positive": 32948
+          },
+          "predicted_components": 9,
+          "predicted_volume_mm3": 6084.450026406683,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 1346.9393188228535,
+          "voxel_mm3": 2.4445359688255053
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 48
+      },
+      {
+        "case_id": "PanTS_00003583",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 2263,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8559302851969217,
+            "predicted_voxels": 40398,
+            "target_voxels": 47962,
+            "true_positive": 37815
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 4027.65380859375,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.77978515625
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00003817",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 6679,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8520182970869111,
+            "predicted_voxels": 80455,
+            "target_voxels": 69077,
+            "true_positive": 63702
+          },
+          "predicted_components": 17,
+          "predicted_volume_mm3": 6936.479205103609,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.0385505622254243
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 112
+      },
+      {
+        "case_id": "PanTS_00004023",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 258,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8914572378430798,
+            "predicted_voxels": 166791,
+            "target_voxels": 184840,
+            "true_positive": 156732
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 125.97656437719706,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.4882812572759576
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00004267",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 2,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.16936104695919937,
+            "predicted_voxels": 11509,
+            "target_voxels": 1481,
+            "true_positive": 1100
+          },
+          "pancreas": {
+            "dice": 0.8951772499061412,
+            "predicted_voxels": 151686,
+            "target_voxels": 162616,
+            "true_positive": 140678
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 7431.959339260447,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "small",
+          "target_volume_mm3": 956.3586568289793,
+          "voxel_mm3": 0.645751962747454
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00004681",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 15174,
+            "target_voxels": 492,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.7898365399508147,
+            "predicted_voxels": 141457,
+            "target_voxels": 123256,
+            "true_positive": 104540
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 6339.47528154435,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "small",
+          "target_volume_mm3": 205.55040454196785,
+          "voxel_mm3": 0.4177853750853005
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00004719",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 3459,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.927115863018049,
+            "predicted_voxels": 74017,
+            "target_voxels": 77127,
+            "true_positive": 70064
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 4275.1922607421875,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.2359619140625
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 84
+      },
+      {
+        "case_id": "PanTS_00004724",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 4078,
+            "target_voxels": 1363,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.7947419357869714,
+            "predicted_voxels": 116910,
+            "target_voxels": 95944,
+            "true_positive": 84582
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 3111.2671362052424,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 1039.886490104891,
+          "voxel_mm3": 0.7629394644936838
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 24
+      },
+      {
+        "case_id": "PanTS_00004732",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 80,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9151503462415421,
+            "predicted_voxels": 186340,
+            "target_voxels": 192153,
+            "true_positive": 173189
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 30.517581035383046,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.38146976294228807
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00004814",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": null,
+            "predicted_voxels": 0,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8170773965341558,
+            "predicted_voxels": 163557,
+            "target_voxels": 127916,
+            "true_positive": 119078
+          },
+          "predicted_components": 0,
+          "predicted_volume_mm3": 0.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.645752648201061
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00005024",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": null,
+            "predicted_voxels": 0,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9109640845120202,
+            "predicted_voxels": 139442,
+            "target_voxels": 143500,
+            "true_positive": 128875
+          },
+          "predicted_components": 0,
+          "predicted_volume_mm3": 0.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.4882812572759576
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00005046",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 1186,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.5752123982212478,
+            "predicted_voxels": 67598,
+            "target_voxels": 158628,
+            "true_positive": 65064
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 415.80687437358193,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.350596015492059
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00005194",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 321,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.675096068282159,
+            "predicted_voxels": 218216,
+            "target_voxels": 131275,
+            "true_positive": 117970
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 126.95800970432174,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.39550781839352567
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00005363",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 17545,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.814800577232275,
+            "predicted_voxels": 168751,
+            "target_voxels": 159020,
+            "true_positive": 133534
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 7172.418380803142,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.4088012756228636
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 36
+      },
+      {
+        "case_id": "PanTS_00005437",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.129427055128344,
+            "predicted_voxels": 15932,
+            "target_voxels": 2534,
+            "true_positive": 1195
+          },
+          "pancreas": {
+            "dice": 0.5061053042883658,
+            "predicted_voxels": 8873,
+            "target_voxels": 11601,
+            "true_positive": 5181
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 48589.49551462866,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 7728.206228600868,
+          "voxel_mm3": 3.049805141515733
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00005592",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 1120,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8256054601497138,
+            "predicted_voxels": 46841,
+            "target_voxels": 43999,
+            "true_positive": 37499
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 2430.2719116210938,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 2.1698856353759766
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00005761",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 227,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9015453891647286,
+            "predicted_voxels": 197713,
+            "target_voxels": 206910,
+            "true_positive": 182393
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 102.15000152215362,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.45000000670552254
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00005780",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.1511382113821138,
+            "predicted_voxels": 22169,
+            "target_voxels": 2431,
+            "true_positive": 1859
+          },
+          "pancreas": {
+            "dice": 0.8400852013388782,
+            "predicted_voxels": 25522,
+            "target_voxels": 23773,
+            "true_positive": 20706
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 78183.13789367674,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 8573.377609252928,
+          "voxel_mm3": 3.5266876220703116
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00005848",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 1057,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.901242475661786,
+            "predicted_voxels": 139668,
+            "target_voxels": 127299,
+            "true_positive": 120301
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 1057.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.0
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 36
+      },
+      {
+        "case_id": "PanTS_00006011",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.5934195064629847,
+            "predicted_voxels": 861,
+            "target_voxels": 841,
+            "true_positive": 505
+          },
+          "pancreas": {
+            "dice": 0.9318492544755593,
+            "predicted_voxels": 30589,
+            "target_voxels": 31582,
+            "true_positive": 28967
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 2905.875,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 2838.375,
+          "voxel_mm3": 3.375
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 96
+      },
+      {
+        "case_id": "PanTS_00006112",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 5991,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.6461407399519415,
+            "predicted_voxels": 144616,
+            "target_voxels": 71371,
+            "true_positive": 69779
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 3300.0961303710938,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.55084228515625
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 30
+      },
+      {
+        "case_id": "PanTS_00006115",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 833,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.6495419601344198,
+            "predicted_voxels": 9361,
+            "target_voxels": 12362,
+            "true_positive": 7055
+          },
+          "predicted_components": 7,
+          "predicted_volume_mm3": 2811.375,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 3.375
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00006394",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.3758332151467877,
+            "predicted_voxels": 11452,
+            "target_voxels": 2650,
+            "true_positive": 2650
+          },
+          "pancreas": {
+            "dice": 0.8775116654880477,
+            "predicted_voxels": 176759,
+            "target_voxels": 175348,
+            "true_positive": 154489
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 5099.861500325616,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 1180.1111575150965,
+          "voxel_mm3": 0.4453249651000364
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00006454",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 30075,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8265578278312873,
+            "predicted_voxels": 288315,
+            "target_voxels": 244093,
+            "true_positive": 220033
+          },
+          "predicted_components": 14,
+          "predicted_volume_mm3": 11566.778355341825,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.384597784051266
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 48
+      },
+      {
+        "case_id": "PanTS_00006543",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 181,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.5071082700321902,
+            "predicted_voxels": 227596,
+            "target_voxels": 101387,
+            "true_positive": 83415
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 71.35817890361055,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.39424408234038977
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00006755",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 7649,
+            "target_voxels": 3515,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.3026630804244377,
+            "predicted_voxels": 142426,
+            "target_voxels": 26739,
+            "true_positive": 25600
+          },
+          "predicted_components": 8,
+          "predicted_volume_mm3": 3335.324177236072,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 1532.705514836553,
+          "voxel_mm3": 0.43604708814695675
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00006837",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.414391724758264,
+            "predicted_voxels": 40259,
+            "target_voxels": 26446,
+            "true_positive": 13821
+          },
+          "pancreas": {
+            "dice": 0.8181882235233606,
+            "predicted_voxels": 149387,
+            "target_voxels": 134467,
+            "true_positive": 116123
+          },
+          "predicted_components": 17,
+          "predicted_volume_mm3": 27720.485067053032,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 18209.49223982922,
+          "voxel_mm3": 0.6885537412020426
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 144
+      },
+      {
+        "case_id": "PanTS_00006880",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 3447,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8028475822694436,
+            "predicted_voxels": 232096,
+            "target_voxels": 206311,
+            "true_positive": 175987
+          },
+          "predicted_components": 5,
+          "predicted_volume_mm3": 1063.7647497380485,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.3086059616298371
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 84
+      },
+      {
+        "case_id": "PanTS_00006901",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 3377,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.7092861539864572,
+            "predicted_voxels": 24065,
+            "target_voxels": 19796,
+            "true_positive": 15555
+          },
+          "predicted_components": 3,
+          "predicted_volume_mm3": 9497.8125,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 2.8125
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 36
+      },
+      {
+        "case_id": "PanTS_00006903",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.5943990665110852,
+            "predicted_voxels": 10807,
+            "target_voxels": 6333,
+            "true_positive": 5094
+          },
+          "pancreas": {
+            "dice": 0.87476535814297,
+            "predicted_voxels": 147601,
+            "target_voxels": 144866,
+            "true_positive": 127920
+          },
+          "predicted_components": 4,
+          "predicted_volume_mm3": 10807.0,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 6333.0,
+          "voxel_mm3": 1.0
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 30
+      },
+      {
+        "case_id": "PanTS_00007023",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 1055,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9033801323783247,
+            "predicted_voxels": 37760,
+            "target_voxels": 35817,
+            "true_positive": 33234
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 1556.0469245910647,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.474925994873047
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 24
+      },
+      {
+        "case_id": "PanTS_00007226",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": null,
+            "predicted_voxels": 0,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9190703218116806,
+            "predicted_voxels": 113407,
+            "target_voxels": 104733,
+            "true_positive": 100243
+          },
+          "predicted_components": 0,
+          "predicted_volume_mm3": 0.0,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.0
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 20
+      },
+      {
+        "case_id": "PanTS_00007529",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 8,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8896676858777598,
+            "predicted_voxels": 175816,
+            "target_voxels": 162027,
+            "true_positive": 150284
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 4.104001217842379,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.5130001522302974
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00007636",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 2,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.7786242183058556,
+            "predicted_voxels": 4823,
+            "target_voxels": 3972,
+            "true_positive": 3424
+          },
+          "pancreas": {
+            "dice": 0.8411947418775638,
+            "predicted_voxels": 38186,
+            "target_voxels": 38115,
+            "true_positive": 32092
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 9522.262334823608,
+          "reference_components": 2,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 7842.095375061035,
+          "voxel_mm3": 1.974344253540039
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00007687",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 917,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9146676729017303,
+            "predicted_voxels": 38849,
+            "target_voxels": 35355,
+            "true_positive": 33936
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 1639.6275806427004,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.7880344390869143
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 72
+      },
+      {
+        "case_id": "PanTS_00007826",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 9978,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.5007308133390299,
+            "predicted_voxels": 197298,
+            "target_voxels": 69528,
+            "true_positive": 66804
+          },
+          "predicted_components": 5,
+          "predicted_volume_mm3": 4146.160976551749,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.4155302642364952
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00007868",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 132,
+            "target_voxels": 1218,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.8808285031453451,
+            "predicted_voxels": 92995,
+            "target_voxels": 89020,
+            "true_positive": 80162
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 85.23925908266392,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "small",
+          "target_volume_mm3": 786.5258906263989,
+          "voxel_mm3": 0.645751962747454
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00007905",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.5433899364517137,
+            "predicted_voxels": 5529,
+            "target_voxels": 4070,
+            "true_positive": 2608
+          },
+          "pancreas": {
+            "dice": 0.6459613125864022,
+            "predicted_voxels": 42459,
+            "target_voxels": 53748,
+            "true_positive": 31073
+          },
+          "predicted_components": 13,
+          "predicted_volume_mm3": 14437.095652661927,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 10627.415320371503,
+          "voxel_mm3": 2.6111585553738337
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 96
+      },
+      {
+        "case_id": "PanTS_00008158",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 813,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9220284163105001,
+            "predicted_voxels": 49699,
+            "target_voxels": 45528,
+            "true_positive": 43901
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 1598.0949221878536,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 1.9656764110551705
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00008203",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": false,
+          "case_detected": false,
+          "detected_components": 0,
+          "false_alarm_any": true,
+          "lesion": {
+            "dice": 0.0,
+            "predicted_voxels": 50,
+            "target_voxels": 0,
+            "true_positive": 0
+          },
+          "pancreas": {
+            "dice": 0.9006165035256702,
+            "predicted_voxels": 119626,
+            "target_voxels": 110543,
+            "true_positive": 103647
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 34.42768706010213,
+          "reference_components": 0,
+          "reference_positive": false,
+          "size_band": "empty",
+          "target_volume_mm3": 0.0,
+          "voxel_mm3": 0.6885537412020426
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 90
+      },
+      {
+        "case_id": "PanTS_00008339",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.04133333333333333,
+            "predicted_voxels": 8696,
+            "target_voxels": 304,
+            "true_positive": 186
+          },
+          "pancreas": {
+            "dice": 0.6811386604053142,
+            "predicted_voxels": 83106,
+            "target_voxels": 120045,
+            "true_positive": 69187
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 4246.093813271727,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "small",
+          "target_volume_mm3": 148.43750221189111,
+          "voxel_mm3": 0.4882812572759576
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 60
+      },
+      {
+        "case_id": "PanTS_00008434",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.4497117232543241,
+            "predicted_voxels": 4817,
+            "target_voxels": 2988,
+            "true_positive": 1755
+          },
+          "pancreas": {
+            "dice": 0.8341013824884793,
+            "predicted_voxels": 16994,
+            "target_voxels": 14688,
+            "true_positive": 13213
+          },
+          "predicted_components": 11,
+          "predicted_volume_mm3": 14847.688064575195,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 9210.066833496094,
+          "voxel_mm3": 3.0823516845703125
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 54
+      },
+      {
+        "case_id": "PanTS_00008711",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.1757839548916807,
+            "predicted_voxels": 15406,
+            "target_voxels": 4812,
+            "true_positive": 1777
+          },
+          "pancreas": {
+            "dice": 0.7619595494731742,
+            "predicted_voxels": 46628,
+            "target_voxels": 52456,
+            "true_positive": 37749
+          },
+          "predicted_components": 6,
+          "predicted_volume_mm3": 35564.82014705372,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "large",
+          "target_volume_mm3": 11108.523597794527,
+          "voxel_mm3": 2.308504488319727
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 48
+      },
+      {
+        "case_id": "PanTS_00008743",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.7376993552765524,
+            "predicted_voxels": 2310,
+            "target_voxels": 3584,
+            "true_positive": 2174
+          },
+          "pancreas": {
+            "dice": 0.8714019114403665,
+            "predicted_voxels": 35827,
+            "target_voxels": 34905,
+            "true_positive": 30818
+          },
+          "predicted_components": 1,
+          "predicted_volume_mm3": 3454.641405680599,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 5359.92848396505,
+          "voxel_mm3": 1.4955157600348912
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 45
+      },
+      {
+        "case_id": "PanTS_00008769",
+        "gaps": 0,
+        "metrics": {
+          "case_alert_50mm3": true,
+          "case_detected": true,
+          "detected_components": 1,
+          "false_alarm_any": false,
+          "lesion": {
+            "dice": 0.1284953395472703,
+            "predicted_voxels": 349,
+            "target_voxels": 2655,
+            "true_positive": 193
+          },
+          "pancreas": {
+            "dice": 0.7346704548255018,
+            "predicted_voxels": 173814,
+            "target_voxels": 110229,
+            "true_positive": 104339
+          },
+          "predicted_components": 2,
+          "predicted_volume_mm3": 266.26587310829564,
+          "reference_components": 1,
+          "reference_positive": true,
+          "size_band": "medium",
+          "target_volume_mm3": 2025.6042782307304,
+          "voxel_mm3": 0.7629394644936838
+        },
+        "scope": "provided_pancreas_region_exploratory",
+        "tiles": 30
+      }
+    ],
+    "step": 14000,
+    "summary": {
+      "alarms": 30,
+      "detected": 32,
+      "empty": 34,
+      "lesion_dice": 0.35348832630924676,
+      "positive": 36
+    }
+  },
+  "run_id": "pants_stunet_corrected_continuation_12k_20261108",
+  "schema": "prowl-corrected-stunet-full70-export-1",
+  "scope": "Complete raw provided-pancreas native development evaluation; exploratory. No5mm filtering applied; live selection unchanged.",
+  "source": {
+    "bytes": 65221,
+    "path": "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution\\native-14000.json",
+    "sha256": "044dcd30400f8896a144b18921b3d40d4df135986f6635c7ca2a4c98b76aa3ee"
+  },
+  "validation_seconds": 5588.125
+}
