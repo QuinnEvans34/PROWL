@@ -30,6 +30,7 @@ def verify(r,mode):
         if sha(path)!=expected:raise ValueError('Frozen pin mismatch: '+path)
     if r['seconds']!=(144000 if mode=='science' else 1800):raise ValueError('Wall cap changed')
     if r['rss_bytes']!=12*1024**3 or r['cuda_bytes']!=6*1024**3:raise ValueError('Memory cap changed')
+    if r.get('parent_checkpoint_sha256')!='ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55':raise ValueError('Unexpected parent')
     if mode=='science':
         if r['approval']!='Approve 88 GiB backup allowance':raise ValueError('Wall amendment missing')
         for label in ('producer_resources','cold_resources'):
@@ -87,6 +88,10 @@ def main():
     try:
         with training_guard(ROOT/'outputs/prowl/.cuda-training.lock'):
             verify(r,a.mode)
+            gpu=subprocess.check_output(['nvidia-smi','--query-compute-apps=pid','--format=csv,noheader,nounits'],text=True,timeout=15).strip()
+            if gpu:raise RuntimeError('Foreign GPU compute owner')
+            reserve=(24 if a.mode=='science' else 2 if a.mode=='producer' else 0)*698140651+64*1024**2
+            if size('C:/Users/quinn/PROWL-Backups')+reserve>88*1024**3 or shutil.disk_usage('C:/').free-reserve<100*1024**3:raise RuntimeError('Projected backup admission')
             if a.mode=='science':
                 # A new root is mandatory, including for failed starts; never resume.
                 artifact=Path(r['artifact']);artifact.mkdir(exist_ok=False);(artifact/'splits').mkdir()
