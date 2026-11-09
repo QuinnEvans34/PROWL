@@ -1,5 +1,19 @@
 # Mac work status
 
+## November 9 Trello rolled to Week 6
+
+- User explicitly requested Week5 Done only and current Week6 work. Board verified
+  12 To Do / 2 In Progress / 1 Done for Week6; Week5's seven completed cards unchanged.
+  Renamed/reused old To Do/In Progress list IDs; no archive/deletion or false closure.
+- Ten unfinished cards retain IDs/history under W06-03..12; existing W06-01/02
+  moved from Backlog. New W06-13 raw/5mm model qualification, W06-14 weekly closeout,
+  W06-15 completed reporting/demo preparation. Training card uQpn9fze is now
+  W06-11 and remains In Progress until complete validation/backups/tracking/cleanup.
+- [Rollover record](../weeks/WEEK-06-TRELLO-ROLLOVER-20261109.md) and adjacent JSON
+  retain original full descriptions/deadlines, mappings and readback verification.
+  REF-04 now points to Week6 priorities. Dependencies/G3–G7 gaps and personal-hour
+  confirmation remain open. No job, source pin, recipe, budget, monitor or schedule changed.
+
 ## November 9 degree-chair check-in and Training refresh
 
 - [Talking points](../weeks/DEGREE-CHAIR-CHECKIN-20261109.md) and

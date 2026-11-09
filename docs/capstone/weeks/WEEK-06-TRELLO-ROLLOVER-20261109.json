@@ -1,0 +1,478 @@
+{
+  "schema": "prowl-trello-week-rollover-v1",
+  "requested_date": "2026-11-09",
+  "timezone": "America/Denver",
+  "from_week": "2026-11-02/2026-11-08",
+  "to_week": "2026-11-09/2026-11-15",
+  "board": "ari:cloud:trello::board/workspace/659744245e561cf84747c752/6ac5026e10d898299a3c60a1",
+  "original_lists": [
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562da34fd373e2508de74",
+      "name": "Resources",
+      "position": 16384,
+      "objectId": "6ac562da34fd373e2508de74"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562db823e8beca74c5890",
+      "name": "Backlog",
+      "position": 24576,
+      "objectId": "6ac562db823e8beca74c5890"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+      "name": "Week 5 — To Do",
+      "position": 32768,
+      "objectId": "6ac5028d32d668762b483a44"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+      "name": "Week 5 — In Progress",
+      "position": 49152,
+      "objectId": "6ac5028ea2d524a8b5df9bc9"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ae8d9b9aa52e50863ca1667",
+      "name": "Week 5 Complete — Nov 2–8",
+      "position": 51200,
+      "objectId": "6ae8d9b9aa52e50863ca1667"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6adfd99bd7fc4ad8aa1ee911",
+      "name": "Week 4 Complete — Oct 26–Nov 1",
+      "position": 53248,
+      "objectId": "6adfd99bd7fc4ad8aa1ee911"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ad7a77c584ad42e5c4c8874",
+      "name": "Week 3 Complete — Oct 19–25",
+      "position": 57344,
+      "objectId": "6ad7a77c584ad42e5c4c8874"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028f590ebd8b7b384c2c",
+      "name": "Week 2 Complete — Oct 12–18",
+      "position": 65536,
+      "objectId": "6ac5028f590ebd8b7b384c2c"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562dde157155b140674d4",
+      "name": "Week 1 Complete — Oct 5–11",
+      "position": 73728,
+      "objectId": "6ac562dde157155b140674d4"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562dcd5bcd522852916d9",
+      "name": "Pre-course Complete",
+      "position": 81920,
+      "objectId": "6ac562dcd5bcd522852916d9"
+    }
+  ],
+  "original_cards": [
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac5639da775122ab25adb38",
+      "name": "[REF-04] Week 5 dashboard and weekly specification",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562da34fd373e2508de74",
+        "name": "Resources"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "Week 5: November 2–8, 2026\n\nApproved proposal v3.8 milestone: held-out autonomous imaging baseline, error analysis, and a versioned, queryable retrieval prototype.\n\nPrimary coding: W05-01 + W04-01, connect and qualify full CT → predicted localization → segmentation → native output. Supplied pancreas regions do not establish autonomous acceptance. Keep the frozen KD treatment running alongside CPU work; schedule a deliberate GPU window for baseline evaluation if needed.\n\nW05-02 retrieval prototype is delivered early (14 source bundles / 1,179 passages); closure does not establish independent answer accuracy. W04-03 executor qualification and matched launch delivered; KD outcome remains open. W04-04 retains bounded answer quality and reviewer workflow checks. W05-03 confirms the Week 7 participant/fallback; W05-04 records actual evidence and confirmed hours.\n\nWeekly specification: docs/capstone/weeks/WEEK-05-WORK-PLAN.md (commit cbeb81a, pushed to main). Midweek decision: if KD still occupies the GPU, explicitly agree a baseline-evaluation pause rather than silently miss the milestone.\n\n---\nPrior reference and history\n\nOctober26–November1. Priority: finish verified teacher targets; qualify full KD executor and matched launch; deliver original Week4 restartable DAG milestone; verify existing reviewer/assistant workflow. Only teacher generation is currently executing; other work is queued.\n\nPlan: https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/weeks/WEEK-04-WORK-PLAN.md\nWeek3 history: docs/capstone/weeks/WEEK-03-WORK-PLAN.md and Week3 Complete list. PANORAMA original exploratory milestone complete; newer port separate. AI-03 preparation complete, independent system acceptance still open; exposed test success is regression evidence. AI-06 reference comparison and AI-07 reviewed training feedback retained as final commitments.\n\nHuman hours require Quinton confirmation. Machine runtime is not human work. No new schedules or model changes from board rollover.",
+      "url": "https://trello.com/c/cWuIVLyG/36-ref-04-week-5-dashboard-and-weekly-specification"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac50301a0a2f9e2a49e50f2",
+      "name": "[W06-01] Complete one controlled model comparison",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562db823e8beca74c5890",
+        "name": "Backlog"
+      },
+      "due": "2026-11-16T06:59:00.000Z",
+      "complete": false,
+      "desc": "Owner: Quinton Evans\nArea: Imaging\n\nDone when\nFreeze recipe/selection rules and matched evaluation; report overlap, coverage, detection/false-alarm tradeoffs and every failed attempt; preserve protected evaluation roles.\n\nDependencies\nW05-01; frozen comparison and evaluation protocol.\n\nDate\n2026-11-15, 11:59 pm America/Denver. Internal planning target from the master plan; revise as scope and course deliverables are confirmed.\n\nRepository\nhttps://github.com/QuinnEvans34/PROWL\nWorking documentation: docs/capstone/MASTER-PLAN.md\nCurrent working documents may remain local pending reviewed publication.",
+      "url": "https://trello.com/c/p99kSjSv/14-w06-01-complete-one-controlled-model-comparison"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac50302334a62bbeda5b798",
+      "name": "[W06-02] Evaluate retrieval and grounded responses",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562db823e8beca74c5890",
+        "name": "Backlog"
+      },
+      "due": "2026-11-16T06:59:00.000Z",
+      "complete": false,
+      "desc": "Owner: Quinton Evans\nArea: Literature\n\nDone when\nFrozen development/held-out question sets, retrieval metrics, citation integrity, groundedness and refusal evidence; additional span/delivery metrics require their declared preconditions.\n\nDependencies\nW05-02; question-set and metric protocol.\n\nDate\n2026-11-15, 11:59 pm America/Denver. Internal planning target from the master plan; revise as scope and course deliverables are confirmed.\n\nRepository\nhttps://github.com/QuinnEvans34/PROWL\nWorking documentation: docs/capstone/MASTER-PLAN.md\nCurrent working documents may remain local pending reviewed publication.\n\nOctober17 development comparison (spec1.27): https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/retrieval/RETRIEVAL-DEVELOPMENT-RESULTS-2026-10-17.md\nUser-authorized bounded development sequencing before formal freeze; provisional exposed v6labels, not final selection.20answerable cases: dense/FTS-OR/RRF60. Source recall@5 .8775/.755/.880; sourceMRR .7363/.6450/.8321. Actual top5 has direct evidence on9/10/10of20 questions. Neither candidate qualifies: head-size still0directhits; hybrid inflammation/tumor hits are cancer-only signs, not sufficient comparative evidence. Keep live dense/v6.1. Next improve candidate coverage with general terminology/source context before reranking; do not add question-specific gold boosts.\nInitial PostgreSQL backend exit2 preserved; canaries/fullinventory pass and one documented recovery attempt completes. Cause unproven, no DB cleanup/restart.41focused checks pass; final actual HTTP search matches canonical dense results.23query embeddings/0answer-model calls. Formal label review/protected freeze/Step6acceptance remain open.",
+      "url": "https://trello.com/c/zDFlThwi/15-w06-02-evaluate-retrieval-and-grounded-responses"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac502d9967abf507ed5ff24",
+      "name": "[W05-01] Establish the autonomous imaging baseline",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+        "name": "Week 5 — To Do"
+      },
+      "due": "2026-11-09T06:59:00.000Z",
+      "complete": false,
+      "desc": "November 2 evidence correction: the CT-only path already exists. Reuse CAP-EXP-012 localizer and scripts/predict_autonomous_ct.py; retained inference weights hash matches original request. October9 completed68-case development comparison demonstrates execution, but broad predicted regions and false positives remain. Current-segmenter compatibility, present cohort exposure, runtime qualification and formal baseline acceptance remain open. Prepare Windows CUDA handoff under W05-09 while Mac KD continues; verify remote verifier completion/GPU availability before dispatch. Details: docs/capstone/weeks/WEEK-05-WORK-PLAN.md, commit94efc71.\n\nWeek 5 priority — November 2–8. Audit the existing predicted-ROI/full-volume adapter and select a frozen capstone checkpoint and approved evaluation cohort. Verify full CT → predicted localization → segmentation → native exports without reference-derived crops. While KD trains, prepare CPU/synthetic adapter, geometry, identity and failure/recovery checks; do not launch competing GPU work. Run the qualified evaluation in a free GPU window; record lesion/pancreas overlap, missed lesions, false alarms, coverage, failure denominators and error groups, with provided-region results separately labeled. Preserve held-out roles; this plan is not permission to reuse exposed development cases as independent acceptance. Current KD comparison is provided-pancreas-region exploratory work and does not close this milestone.\n\n--- Prior card scope and history ---\nOwner: Quinton Evans\nArea: Imaging\n\nDone when\nNew capstone localizer-to-segmenter execution on full volumes with native exports, paired metrics, failure denominators and recovery; no reference-derived ROI in the autonomous arm.\n\nDependencies\nW01-03, W02-01 and a separately qualified, approved execution packet.\n\nDate\n2026-11-08, 11:59 pm America/Denver. Internal planning target from the master plan; revise as scope and course deliverables are confirmed.\n\nRepository\nhttps://github.com/QuinnEvans34/PROWL\nWorking documentation: docs/capstone/MASTER-PLAN.md\nCurrent working documents may remain local pending reviewed publication.",
+      "url": "https://trello.com/c/AypxMvB4/12-w05-01-establish-the-autonomous-imaging-baseline"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6acd07c126d80ea452044039",
+      "name": "[W05-05] Verify existing localizer and model handoff",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+        "name": "Week 5 — To Do"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "November2 Mac dependency work: localizer verified, selected control20k checkpoint/report checked against frozen closeout and independent backups, inference-only export tensors exact.6CPU tests pass. Private35MB archive with17files prepared and verified; report/code pushed2c67a5d.70case identities include3localizer-development overlaps; not independent acceptance. Laptop has completed verifier and prepared bridge/access guard. Remaining: private delivery/hash readback, Windows supervision/physical path integration, cross-device reference and frozen evaluation packet. GPU dispatch remains pending; Mac KD untouched.\n\nWeek 5 continuation. Original tracking identity: [W02-02]. Earlier completed work remains historical; this card tracks the outstanding finish line.\n\nOctober26: Week4 carryover; original task ID and original reporting period preserved. Follow docs/capstone/weeks/WEEK-04-WORK-PLAN.md for current order. Reconcile actual source/provenance evidence before closing the recorded failures; no unchanged-baseline rerun is planned.\n\n--- Historical record ---\nWeek 3 carryover, October 20: awaiting source-unit/annotation evidence or an identified replacement candidate from the data/training work. Seven prior prediction failures remain explicit. Quinton's recent full-pancreas/lesion input checks may inform this handoff, but do not by themselves resolve the recorded failures. Start the evidence review when the handoff is available; no training or unchanged-baseline rerun here.\n\nWEEK 3 CONDITIONAL CARRYOVER: source-unit/annotation provenance remains unresolved; awaiting supplied evidence or candidate handoff. The older Week 2 execution order below is historical. AI development proceeds independently under the authorized completion spec; no unchanged baseline rerun or training in this chat.\n\nExecution order 2 in the Week 2 queue (October 12 decision). Work one card at a time. Finish Week 2 engineering before returning to AI expert tasks. Detailed inputs, work, acceptance and fallback: docs/capstone/weeks/WEEK-02-WORK-PLAN.md, section 3.\n\nOwner: Mac development + Quinton.\n\nSecondary imaging work; use supplied candidate models, no training here. Existing cascade yields 68/75 outputs; seven CT-unit cases need actual source evidence. Finish: each requested case has aligned native output or explicit unresolved failure, model/config identity preserved, no label access during prediction. Review anatomy/input support concerns. Reuse docs/capstone/imaging/AUTONOMOUS-CHECKPOINT-CONNECTION-2026-10-09.md.\n\nPlan: docs/capstone/weeks/WEEK-02-WORK-PLAN.md. Initial failure disposition/review delivered October12. Seven source-unit failures and upstream head-study PanTS_00001389 annotation/provenance remain unresolved; revisit with actual source evidence. Keep open. No replacement model supplied and no unchanged baseline rerun.",
+      "url": "https://trello.com/c/jXIcbELc/60-w05-05-verify-existing-localizer-and-model-handoff"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8da2f79d882a1deba5dfd",
+      "name": "[W05-03] Confirm the stakeholder participant or fallback",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+        "name": "Week 5 — To Do"
+      },
+      "due": "2026-11-15T06:59:00.000Z",
+      "complete": false,
+      "desc": "November7 user scheduling update: preliminary aunt/fallback walkthrough moved from SaturdayNov7 to SaturdayNov14,2026 (America/Denver). Exact meeting time and specific role remain unconfirmed; card due is an end-of-day planning marker, not an appointment time. No session/feedback recorded and no outreach sent. Keep existing30–45minute role-appropriate script, saved scan/conversation fixtures and save/reopen checks in Plan11; preparation remains separate from completed stakeholder or clinical validation. Main Week7 requirement remains on W07-02.\n\nOwner: Quinton. Confirm suitable participant/role/time or record fallback limitations. Weekly plan docs/capstone/weeks/WEEK-05-WORK-PLAN.md; living session plan docs/capstone/implementation/11-stakeholder-validation.md.",
+      "url": "https://trello.com/c/WD6xJcnB/86-w05-03-confirm-the-stakeholder-participant-or-fallback"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8da31ececf9827e6a1c4a",
+      "name": "[W05-04] Close Week 5 evidence, risks and confirmed hours",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+        "name": "Week 5 — To Do"
+      },
+      "due": "2026-11-09T06:59:00.000Z",
+      "complete": false,
+      "desc": "Owner: Quinton + development. Summarize actual autonomous-baseline status, retrieval-prototype closeout, KD outcome or remaining runtime, reviewer quality findings, unresolved gates and next-week work. Link evidence, preserve failures, and record only Quinton-confirmed human hours. Existing W01/02/03/04 closeout cards remain pending until their own requirements are met. No claim of course submission. Weekly plan: docs/capstone/weeks/WEEK-05-WORK-PLAN.md.",
+      "url": "https://trello.com/c/nl7XeVHH/87-w05-04-close-week-5-evidence-risks-and-confirmed-hours"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6adbf448645f70dc8047e5be",
+      "name": "[W05-08] Complete and assess the matched Mac KD treatment",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "CURRENT November5 evening — KD COMPUTE/CLOSEOUT COMPLETE; detailed assessment remains open.24kupdates/all12native70-case validations finished; selected20kDice.389084 vscontrol.383593,terminal24k.383439 vscontrol.381964. Finalbackup/checkpoint/native/component/journal/152pin/24storedmetric/processabsence/exclusiveGPUrelease checks PASS; treatment MLflowFINISHED. HourlyKDmonitorPAUSED. Retainedtreatmentattempts66.841657supervisedhours; originalbudget240633/345600s charged/104967unused. Originalcontrolcleanup-onlyFAILEDhistory preserved. Noindependent-patientCI/H0/practicalverdict. Tomorrow: completecase/error/transfer-learninganalysis. One separatelyauthorizedlargerUniversalSwininference-onlyscreenonLenovohasboundpermit; thisisnotmoreKDtraining. Evidence main93899ef, docs/capstone/operations/MAC-KD-COMPLETION-20261105.md.\n\n--- Earlier status/history retained ---\nCURRENT November5 — KD resumed from verified pause.pt at20989 after actual-MPS producer/cold qualification passed. New root mac-kd-treatment-resume-20261105-01; readySHA38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049. Scientific21002 observed; teacher accessed/KDweight0.1, MLflow1e356a71e4f74d5192a091fc40d3f6b8 RUNNING with stored step21000 loss. Initial/ready independent backups match,152pins unchanged. One launchd-owned worker; hourly monitoringACTIVE. Original cumulative345600s cap preserved:209780charged/135820remaining at dispatch. Last completed20k native lesionDice.389084 is interim; finish24k and selected+terminal/error/cleanup review before verdict. No automaticretry/successor or concurrent GPU job. Commit0da4a31; current handoff docs/capstone/operations/MAC-KD-LAUNCH-HANDOFF-20261027.md.\n\n--- Prior status/history preserved ---\nNovember2 evening KD RESUMED from verified step720 after Mac reference completion/cleanup. Fresh root mac-kd-treatment-resume-20261102-03; readySHA bbdec51e0865ebe86c82392613ba292b9e6dd2e89f7f93f0161f4ea6feb9d97f. Actual721+ updates, teacher accessed; MLflowRUNNING, initial checkpoint/ready backups verified. Producer+cold qualification passed.334345seconds remaining original budget. Launchd-owned/no automatic restart; no recipe changes. Commit471bf29.\n\nNovember2 CLASS PAUSE verified at720 updates. pause.pt and independent backup SHA339b08f118d78ba85e8515a7c0335fe73b32ecafb17e2b82704f7c9f7ff822be match; journal backup exact. Workers reaped/no survivors; launchd not running; GPU lock free.334345seconds cumulative budget remain. Explicit pause: no automatic restart. Reference check deferred until user returns. Evidence commitfa75844.\n\nNovember2 second AC interruption: clean stop at275 before500 checkpoint; only initial state durable. New continuation mac-kd-treatment-resume-20261102-02 passed checkpoint/backup and actual-MPS cold restore checks. Scientific1->2updates verified, teacher access and MLflow ee3b6badb72640c19a20a92217d11d94 RUNNING. All prior attempts retained;5755seconds cumulatively charged,339845remaining. No recipe/code change this restart. Current label com.prowl.mac-kd-treatment-resume-20261102-02; use v3 pause command and new receipt. Full evidence in MAC-KD-LAUNCH-HANDOFF-20261027.md.\n\nNovember2 accidental AC disconnect recovery: safeguard stopped cleanly at472; no500-step checkpoint yet, so verified initial checkpoint restored. Original attempt preserved and3556seconds charged (342044remaining). Additive v3 resume/pause/controller,16CPU tests and real2+1MPS restore checks passed. New launchd-owned treatment-resume-20261102-01 actually advancing1->2; teacher targets accessed; MLflow ffa0eafcfdc74f73a3b691fcd3db58d3 RUNNING with stored losses, initial independent backup matches. KD/control recipe unchanged. Details: docs/capstone/operations/MAC-KD-LAUNCH-HANDOFF-20261027.md.\n\nWeek 5 continuation. Original tracking identity: [KD-MAC]. Earlier completed work remains historical; this card tracks the outstanding finish line.\n\nCURRENT November 2 — teacher generation complete (1,333 admitted targets); no teacher inference job is needed. Matched control24k complete; KD treatment is running under com.prowl.mac-kd-treatment-20261102-01, ready879349950468b903aacb0296cfe48dbc8bdcf0d3475d68a8797c377a9661cf25. Preserve all producing pins and one GPU owner. Next: finish treatment and native evaluations; verify backups/cleanup/tracking; compare selected AND terminal checkpoints on the same development cohort, missed lesions, false positives, outlines, coverage and measurement limitations separately. Keep teacher-assisted exploratory scope and supplied-pancreas-region boundary. A Dice gain alone is insufficient; no autonomous or independent acceptance claim. No new experiment, recipe change, concurrent GPU load or automatic retry. Operator pause uses pause_mac_kd_treatment_v2.py. Handoff: docs/capstone/operations/MAC-KD-LAUNCH-HANDOFF-20261027.md.\n\n--- Prior card scope and history ---\nWeek4 CURRENT October26: R-SuperPanTSMerlin replaces the earlier teacher candidate; user has authorized the matched exploratory training launch once qualified. Generation continuation04 reused313 verified targets and began fresh inference; this is a startup observation, not a current completion count. Full1333 targets and actual full-provider MPS/native-evaluation/recovery qualification remain prerequisites. Two-case real KD engineering passed; zero full scientific updates at last verification. Preserve active source pins and previous failures; no competing GPU experiment. Evidence: docs/capstone/operations/MAC-KD-DURABILITY-20261025.md and MAC-RSUPER-TRAINING-PREPARATION-20261023.md. The older preparation-only restriction below is historical.\n\n--- Prior record (preserved) ---\nUser-approved Oct23 preparation through readiness, not scientific training launch. Preserve Windows varied-focus run. Reuse pinned MedFormer teacher + existing student/KD implementation. Complete: source handoff integrated; Mac AC/64GB/MPS available; pinned teacher acquired externally and safe tensor conversion verified. Next: bounded synthetic CPU/MPS teacher, actual student update/restore, fixed training-case pilot with contour/coverage/resource review, exact metadata/recipe, target-cache/storage fit, matched Mac no-KD control, independent backups. Teacher membership unknown: exploratory only. Do not claim ready until all prerequisites pass. See TWO-MACHINE-HANDOFF-20261023 and PANTS-TEACHER-DISTILLATION-20261023; Mac preparation report will record outcomes.",
+      "url": "https://trello.com/c/natlITz0/81-w05-08-complete-and-assess-the-matched-mac-kd-treatment"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac502d8420a3e0aedd887aa",
+      "name": "[W05-06] Finish baseline workflow lifecycle and provenance",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": "2026-11-02T06:59:00.000Z",
+      "complete": false,
+      "desc": "November5 CPU result-to-review integration DELIVERED (7bef5e5, 7a0dd61): registered autonomous-baseline admission→analysis→handoff uses the actual retained63-score/seven-failure export. Actual run3/3, explicit resume3/3 reuse, identical-source relocation3/3 reuse.80combinedCPU tests pass: stale/corrupt input/output rejection, preserved failure and selective explicit recovery, strict timestamp contracts (fc5ce5f). No inference/scoring rerun, GPU work or independent acceptance; expensive inference-stage recovery/full productionG3 remains OPEN. Operator evidence: docs/capstone/orchestration/BASELINE-REVIEW-WORKFLOW-20261105.md.\n\n--- Previous scope/history retained ---\nWeek 5 continuation. Original tracking identity: [W04-01]. Earlier completed work remains historical; this card tracks the outstanding finish line.\n\nWeek 5 carryover — reconcile the existing G3 table with Oct30–Nov2 full-provider MPS, real checkpoint recovery and v3 cleanup evidence. Close only supported rows. Primary implementation is the smallest missing production adapter needed for W05-01; prove stage identity, valid reuse, stale-input rejection and failure recovery using CPU/synthetic/saved evidence while KD runs. No further generic runner or scheduler expansion. Full G3 remains open until the intended production subgraphs are demonstrated. docs/capstone/orchestration/G3-EVIDENCE-REVIEW-20261027.md; docs/capstone/operations/MAC-KD-LAUNCH-HANDOFF-20261027.md.\n\n--- Prior card scope and history ---\nWeek4 primary proposal milestone, October26–November1: reuse existing stage/executor contracts to deliver reproducible inputs and cross-stage failure recovery. Inventory completed evidence first; implement only missing connections. Deliver one bounded executable dependency flow with versioned input/output identity, valid-output reuse, stale-output rejection and injected-failure recovery. Individual checkpoint resume alone is insufficient. No new orchestration framework without a demonstrated gap. See docs/capstone/weeks/WEEK-04-WORK-PLAN.md.\n\n--- Prior record (preserved) ---\nCompletion spec Step 3 — COMPLETE for bounded literature scope (2026-10-17). This wider milestone remains OPEN for general D-201/tool selection and broader imaging/G3 obligations. Original date unchanged.\n\nDelivered: exact corpus/catalog binding, read-only repeatable-read inventory/search, storage admission before attempts and executing stages, fail-closed invalidation, remaining publication-boundary tests, canonical source/frozen-embedding rebuild command and verification. Retain the existing sequential repository adapter for this literature slice; no Prefect trial or rejection claimed. Conservative binding changes require a new request; historical completed responses remain readable.\n\nEvidence: https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/retrieval/LITERATURE-WORKFLOW-CLOSURE-2026-10-17.md\nCheckpoint: https://github.com/QuinnEvans34/PROWL/commit/d3a3c999282c7a6ecd364428812f252d79872622\n\nOwner: Quinton Evans\nArea: Orchestration\n\nDone when\nVersioned stage inputs/outputs; repeatability/idempotency and injected-failure resume evidence; scoped tool selection and implementation approval.\n\nDependencies\nShared stage contracts and tool-selection decision.\n\nDate\n2026-11-01, 11:59 pm America/Denver. Internal planning target from the master plan; revise as scope and course deliverables are confirmed.\n\nRepository\nhttps://github.com/QuinnEvans34/PROWL\nWorking documentation: docs/capstone/MASTER-PLAN.md\nCurrent working documents may remain local pending reviewed publication.",
+      "url": "https://trello.com/c/Z9QSh78P/11-w05-06-finish-baseline-workflow-lifecycle-and-provenance"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6adfd9e8d7e0e56714be2029",
+      "name": "[W05-07] Verify assistant answers and the reviewer workflow",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "November5 Saturday preparation delivered (7a0dd61):124focusedUI tests pass (citations, editing/resend, cancellation/late responses, prediction/revision binding, save/reopen). Actual2028 saved package CPU loader passed, exact manifestb671bd4453db6c91d842d948c95eeac351df76902480d54b5389a2a174efd2f5; all five original files unchanged. Fresh isolated engineering-only ASGI persistence check: idempotent save, reopen without source registration, revision2, stale-write409 and retained file hashes PASS; no production decisions. Saturday script/frozen packet recorded in existing Plan11. Live GPU viewer/answer generation/latency, participant feedback and independent answer/measurement acceptance remain OPEN. Known saved-answer relevance/jargon defects are retained, not claimed fixed. docs/capstone/implementation/11-stakeholder-validation.md.\n\n--- Previous scope/history retained ---\nNovember2 CPU-only assistant review: three saved fast-preview answers manually checked against returned passages. Boundary answer has tangential diagnosis/PC jargon; function answer lacks plain-language roles; missing stiffness range correctly refused. Citation quotations bind, not semantic verification. Fixed pending-question loss on study/prediction switch (two red-to-green regressions; newer draft retained); earlier chat answers now retain preview labeling/citations.84 focused UI tests and build pass. Five-case saved-evidence packet prepared for next coordinated GPU window; model/prompt unchanged, no live quality promotion. Commits97e82ef,8eed581; docs/capstone/retrieval/ASSISTANT-OFFLINE-REVIEW-2026-11-02.md. KD untouched.\n\nWeek 5 continuation. Original tracking identity: [W04-04]. Earlier completed work remains historical; this card tracks the outstanding finish line.\n\nWeek 5 carryover — retain accepted fast AI preview and message-thread/edit/cancel UI. User reported roughly2–4second responses October31; this is responsiveness evidence, not independent accuracy. Next: one compact support/completeness/citations/refusal/latency table plus full case→contours→qualified measurement or limitation→cited answer→save/reopen/revise walkthrough. CPU/synthetic UI work may continue while KD runs; generated-answer performance checks require a deliberate free GPU slot. Fix demonstrated failures only; no redesign or custom evaluation application. Keep AI-04/AI-05 and fresh W06-02 acceptance distinct.\n\n--- Prior card scope and history ---\nBounded weekly slice of W03-02/W07-01/AI-04/AI-05. Open case, inspect contours, show qualified measurements or explicit limitation, ask representative natural-language questions, inspect citations, save/reopen/revise review. Check support/completeness/refusal/latency separately in Research and Workbench. Reuse exposed cases; no independent-accuracy claim. Fix demonstrated blockers only; coordinate model checks so they do not compete with teacher generation. Done: reproducible walkthrough and separate pass/failure table.\n\nOwner: Quinton + Mac development. Weekly specification: docs/capstone/weeks/WEEK-04-WORK-PLAN.md",
+      "url": "https://trello.com/c/KPvynqav/84-w05-07-verify-assistant-answers-and-the-reviewer-workflow"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8dd958eef4f9aad32d6f7",
+      "name": "[W05-09] Prepare a portable CUDA baseline evaluation handoff",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "November2 parity outcome: Mac reference complete/transferred, masks identical and native geometry matches, but169/51,444,975 probability values exceed frozen tolerance; max absolute difference4.851818e-5. Four-case batch correctly STOPPED; failed evidence retained, no tolerance change/retry. Runtime versions differ; cause unresolved. See Mac reference report, commit471bf29.\n\nNovember2 Mac reference COMPLETE:60windows/65.57s inference,76.56s supervised,26CPU tests pass/4Windows-only skipped. Native localizer/final mask hashes identical to laptop; same native grid/ROI.12independent backup pairs verified, workers reaped/GPU released.145,928,223-byte private reference archive transferred; laptop now compares probabilities under predeclared unchanged tolerances before four-case admission. Commits414d870,c35cd2b,d7fb2d5. No Dice acceptance claimed. KD resume qualification from720 is being prepared separately.\n\nNovember 2 execution follow-on dispatched: commit168185a, docs/capstone/handoffs/WEEK-05-CUDA-EXECUTION-20261102.md. Laptop chat confirmed active. Finish Windows physical executor/supervisor integration and targeted CPU tests now; one bounded diagnostic then fixed four-case development evaluation authorized only after applicable qualification/admission gates. Same-recipe cross-device reference remains unresolved; exact Mac dependency requested without interrupting KD. No new training or full-cohort expansion.\n\nNovember 2, 21:00 UTC: private model transfer COMPLETE. Laptop received the 34,975,283-byte archive, verified SHA256 before safe extraction, and verified all 16 payload hashes before/after extraction. Receipt retained outside Git; delivery evidence in commit cedc9dd. Laptop now continuing CPU strict loading, cohort reconciliation and Windows physical-executor preparation. Cross-device reference/admission remain open; no new GPU evaluation launched. Mac KD untouched.\n\nNovember2 Mac dependency work: localizer verified, selected control20k checkpoint/report checked against frozen closeout and independent backups, inference-only export tensors exact.6CPU tests pass. Private35MB archive with17files prepared and verified; report/code pushed2c67a5d.70case identities include3localizer-development overlaps; not independent acceptance. Laptop has completed verifier and prepared bridge/access guard. Remaining: private delivery/hash readback, Windows supervision/physical path integration, cross-device reference and frozen evaluation packet. GPU dispatch remains pending; Mac KD untouched.\n\nHandoff prepared, committed and pushed in d03e904; sent to Plan capstone experiment workflow on the Windows laptop November 2. Spec: https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/handoffs/WEEK-05-CUDA-BASELINE-HANDOFF-20261102.md\n\nRequested verifier completion/GPU checks, artifact inventory, geometry compatibility audit, additive CPU tests and bounded readiness packet. No GPU evaluation/training dispatch yet. Important: old single-tensor cascade is not automatically compatible with current physical-window segmenter. Await laptop findings and minimal missing-file list.\n\nKeep Mac KD running. Reuse CAP-EXP-012 and existing CT-only cascade; first check checkpoint hashes, preprocessing, current segmenter compatibility and cohort exposure. Prepare pinned code/checkpoints/config, case manifest and source hashes, native geometry/units, resource bounds, output schema and one-command qualification/evaluation handoff. References stay outside inference. The Windows laptop's latest chat records a verifier training launch with a later exit-0 command result; verify completion, backups and free GPU before any dispatch. No remote launch, checkpoint transfer or interruption is authorized merely by this planning card. Compare a small agreed cross-device case before bounded cohort inference. Return per-case native metrics/failures, timing and integrity receipts; do not copy the whole dataset if matching files already exist.",
+      "url": "https://trello.com/c/nI7oktAT/88-w05-09-prepare-a-portable-cuda-baseline-evaluation-handoff"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6aede8449ca19a9ae78e648e",
+      "name": "[W05] Resolve model pretraining overlap and freeze next transfer study",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "November6 planning/review, not a new GPU launch. Universal Swin .710754 was inference-only on four positive exposed-development cases; no negative evaluation or fine-tuning. Official Universal and PanTS papers confirm shared public source datasets (including MSD/Pancreas-CT); exact patient/checkpoint train AND selection membership remains UNKNOWN. Do not label leak-free. Lenovo requested bounded retained-metadata crosswalk review, no CT/voxel/test reads, bulk duplicate audit or GPU. Next: patient/source exposure mapping; preserve unknown/seen strata; unit/geometry admission for negative/training cases; fixed balanced untouched-checkpoint evaluation; short adaptation only after prospective design and measured training/recovery/safety qualification. New recipe/budget/receipt required; consumed overnight permit cannot be reused. All failures and original cohorts/results preserved. Existing KD teacher exposure and 6755/2889 grouping unresolved. See main209e0cb, docs/capstone/operations/UNIVERSAL-SWIN-PROVENANCE-AND-NEXT-STUDY-20261106.md and EXPERIMENT-REVIEW-INDEX-20261106.md. KD full-series analysis main6947827; no duplicate MLflow runs/hours or model promotion.",
+      "url": "https://trello.com/c/uPkdgBxK/92-w05-resolve-model-pretraining-overlap-and-freeze-next-transfer-study"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af0b96d26da186b06189043",
+      "name": "[W05→W06] Continue corrected STU-Net from 12k to 24k",
+      "list": {
+        "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+        "name": "Week 5 — In Progress"
+      },
+      "due": null,
+      "complete": false,
+      "desc": "Owner: Quinton Evans; execution: Lenovo. In progress, launched November 8.\n\nRun: pants_stunet_corrected_continuation_12k_20261108_launch02. MLflow: 13c709ae157949988de1d7f8821a03b7 (RUNNING; first global12001 loss stored). Parent preserved at12000, Dice0.371633; no new phase Dice yet.\n\nScope: exactly12000 additional updates to global24000, full learned body/heads/AdamW/RNG/exposure retained, seven confirmed normal-case targets corrected, same1333train/70dev (664positive/669empty), 500warmup to2e-5 then cosine. Architecture/loss/inference and3:1ratio unchanged. Six full70 validations at14/16/18/20/22/24k; checkpoint500. Composite label/LR/exposure study, exploratory unknown pretraining exposure; no isolated-duration or leakage-free claim.\n\nQualification: seven real targets and1326ordinary bindings checked; nine real loader inputs pass. Actual CUDA parent import exact; five diagnostic updates and native positive/empty gap-free; cold replay522state tensors, maxdiff0. Mac independently passes41CPU tests for correction, ancestry, launch/runtime and dashboard.\n\nOperational history: initial launch used isolated supervisor env missingMLflow; zero updates/no new tracking run, cleanly reaped, preserved. Additive supervisor-runtime correction uses existing MLflow env and unchanged qualified model env; one corrected launch,60s charged from40h cap (143940s remaining). User approved88GiB Cbackup allowance;100GiBfree floors/12GiBRSS/6GiBCUDA/32GiBcache unchanged. No automatic retries or successors.\n\nDone when: all12000new updates and six complete validations; selected+terminal results and paired error tradeoffs; independent checkpoint/report/journal backups; workers reaped, MLflowFINISHED/losses exact; monitor paused after verified completion. Parent fallback retained.\n\nEvidence: branch codex/week05-cuda-readiness commits8c9dfbc,5295867,1b301bf,ac8db59,48ea7c5; main b0ba6a3 independent review and7110dd1 backup approval. https://github.com/QuinnEvans34/PROWL/blob/main/docs/capstone/operations/STUNET-CONTINUATION-MAC-REVIEW-20261108.md\n\nSeparate cards keep provenance and formal comparison gaps open.",
+      "url": "https://trello.com/c/uQpn9fze/95-w05%E2%86%92w06-continue-corrected-stu-net-from-12k-to-24k"
+    }
+  ],
+  "completed_week5_cards": [
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6adfd9e711c839009aeb398d",
+      "name": "[W04-03] Qualify the full KD executor and launch the matched comparison",
+      "complete": true,
+      "url": "https://trello.com/c/pyQUMV4S/83-w04-03-qualify-the-full-kd-executor-and-launch-the-matched-comparison"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac502ff3fec7339b1ca9b5b",
+      "name": "[W05-02] Create the authorized literature corpus/index prototype",
+      "complete": true,
+      "url": "https://trello.com/c/OqxGSjju/13-w05-02-create-the-authorized-literature-corpus-index-prototype"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6aef949425136819bda30d84",
+      "name": "[CAP-EXP-020] Test Mac 12k lesion-confidence thresholds",
+      "complete": true,
+      "url": "https://trello.com/c/36PNBVVj/94-cap-exp-020-test-mac-12k-lesion-confidence-thresholds"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6aed401c77c01e9835abc8e1",
+      "name": "[EXP] Screen larger Universal Swin UNETR after KD",
+      "complete": true,
+      "url": "https://trello.com/c/Khp8LCoP/91-exp-screen-larger-universal-swin-unetr-after-kd"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6aef72fe70748ebc448827f7",
+      "name": "[W05-10] Show experiment DICE and saved-result freshness",
+      "complete": true,
+      "url": "https://trello.com/c/aMwkx9r5/93-w05-10-show-experiment-dice-and-saved-result-freshness"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af0e9536ef3baacb6e56819",
+      "name": "[W05→W06] Audit lesion supervision and spatial false positives",
+      "complete": true,
+      "url": "https://trello.com/c/3q16BJkt/96-w05%E2%86%92w06-audit-lesion-supervision-and-spatial-false-positives"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af0ecbb899cbc980b3dcdc5",
+      "name": "[W05→W06] Test spatial and boundary recovery policies",
+      "complete": true,
+      "url": "https://trello.com/c/kcRD0lx4/97-w05%E2%86%92w06-test-spatial-and-boundary-recovery-policies"
+    }
+  ],
+  "authority": "User explicitly requested rolling all unfinished Week5 work to Week6 and retaining only Week5 Done. This changes board planning only; no scientific launch or gate waiver.",
+  "verified_at_utc": "2026-11-09 22:11:04 UTC",
+  "final_lists": [
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562da34fd373e2508de74",
+      "name": "Resources",
+      "position": 16384,
+      "objectId": "6ac562da34fd373e2508de74"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562db823e8beca74c5890",
+      "name": "Backlog",
+      "position": 24576,
+      "objectId": "6ac562db823e8beca74c5890"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028d32d668762b483a44",
+      "name": "Week 6 — To Do",
+      "position": 32768,
+      "objectId": "6ac5028d32d668762b483a44"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028ea2d524a8b5df9bc9",
+      "name": "Week 6 — In Progress",
+      "position": 49152,
+      "objectId": "6ac5028ea2d524a8b5df9bc9"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6af243cbff32ffcf4d9f1e63",
+      "name": "Week 6 Done — Nov 9–15",
+      "position": 50176,
+      "objectId": "6af243cbff32ffcf4d9f1e63"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ae8d9b9aa52e50863ca1667",
+      "name": "Week 5 Done — Nov 2–8",
+      "position": 51200,
+      "objectId": "6ae8d9b9aa52e50863ca1667"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6adfd99bd7fc4ad8aa1ee911",
+      "name": "Week 4 Complete — Oct 26–Nov 1",
+      "position": 53248,
+      "objectId": "6adfd99bd7fc4ad8aa1ee911"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ad7a77c584ad42e5c4c8874",
+      "name": "Week 3 Complete — Oct 19–25",
+      "position": 57344,
+      "objectId": "6ad7a77c584ad42e5c4c8874"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac5028f590ebd8b7b384c2c",
+      "name": "Week 2 Complete — Oct 12–18",
+      "position": 65536,
+      "objectId": "6ac5028f590ebd8b7b384c2c"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562dde157155b140674d4",
+      "name": "Week 1 Complete — Oct 5–11",
+      "position": 73728,
+      "objectId": "6ac562dde157155b140674d4"
+    },
+    {
+      "id": "ari:cloud:trello::list/workspace/659744245e561cf84747c752/6ac562dcd5bcd522852916d9",
+      "name": "Pre-course Complete",
+      "position": 81920,
+      "objectId": "6ac562dcd5bcd522852916d9"
+    }
+  ],
+  "carryover_mapping": [
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac502d9967abf507ed5ff24",
+      "original_name": "[W05-01] Establish the autonomous imaging baseline",
+      "current_name": "[W06-03] Qualify the autonomous imaging baseline",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/AypxMvB4/12-w05-01-establish-the-autonomous-imaging-baseline"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac502d8420a3e0aedd887aa",
+      "original_name": "[W05-06] Finish baseline workflow lifecycle and provenance",
+      "current_name": "[W06-04] Integrate production imaging stages and recovery",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/Z9QSh78P/11-w05-06-finish-baseline-workflow-lifecycle-and-provenance"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6acd07c126d80ea452044039",
+      "original_name": "[W05-05] Verify existing localizer and model handoff",
+      "current_name": "[W06-05] Resolve source-unit admission and localizer/model bindings",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/jXIcbELc/60-w05-05-verify-existing-localizer-and-model-handoff"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8dd958eef4f9aad32d6f7",
+      "original_name": "[W05-09] Prepare a portable CUDA baseline evaluation handoff",
+      "current_name": "[W06-06] Resolve portable baseline numerical qualification",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/nI7oktAT/88-w05-09-prepare-a-portable-cuda-baseline-evaluation-handoff"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6adbf448645f70dc8047e5be",
+      "original_name": "[W05-08] Complete and assess the matched Mac KD treatment",
+      "current_name": "[W06-07] Finish the matched KD spatial error assessment",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/natlITz0/81-w05-08-complete-and-assess-the-matched-mac-kd-treatment"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6adfd9e8d7e0e56714be2029",
+      "original_name": "[W05-07] Verify assistant answers and the reviewer workflow",
+      "current_name": "[W06-08] Finish reviewer-flow and assistant regression checks",
+      "list": "Week 6 — In Progress",
+      "new_planning_due": "2026-11-14T06:59:00.000Z",
+      "url": "https://trello.com/c/KPvynqav/84-w05-07-verify-assistant-answers-and-the-reviewer-workflow"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8da2f79d882a1deba5dfd",
+      "original_name": "[W05-03] Confirm the stakeholder participant or fallback",
+      "current_name": "[W06-09] Confirm and conduct the preliminary stakeholder walkthrough",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-15T06:59:00.000Z",
+      "url": "https://trello.com/c/WD6xJcnB/86-w05-03-confirm-the-stakeholder-participant-or-fallback"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ae8da31ececf9827e6a1c4a",
+      "original_name": "[W05-04] Close Week 5 evidence, risks and confirmed hours",
+      "current_name": "[W06-12] Confirm Week 5 active hours and submission closeout",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-11T06:59:00.000Z",
+      "url": "https://trello.com/c/nl7XeVHH/87-w05-04-close-week-5-evidence-risks-and-confirmed-hours"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6aede8449ca19a9ae78e648e",
+      "original_name": "[W05] Resolve model pretraining overlap and freeze next transfer study",
+      "current_name": "[W06-10] Resolve pretrained-model provenance and evaluation eligibility",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/uPkdgBxK/92-w05-resolve-model-pretraining-overlap-and-freeze-next-transfer-study"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af0b96d26da186b06189043",
+      "original_name": "[W05→W06] Continue corrected STU-Net from 12k to 24k",
+      "current_name": "[W06-11] Finish corrected STU-Net continuation and verify final results",
+      "list": "Week 6 — In Progress",
+      "new_planning_due": "2026-11-11T06:59:00.000Z",
+      "url": "https://trello.com/c/uQpn9fze/95-w05%E2%86%92w06-continue-corrected-stu-net-from-12k-to-24k"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac50301a0a2f9e2a49e50f2",
+      "original_name": "[W06-01] Complete one controlled model comparison",
+      "current_name": "[W06-01] Complete one controlled model comparison",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/p99kSjSv/14-w06-01-complete-one-controlled-model-comparison"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6ac50302334a62bbeda5b798",
+      "original_name": "[W06-02] Evaluate retrieval and grounded responses",
+      "current_name": "[W06-02] Evaluate retrieval and grounded responses",
+      "list": "Week 6 — To Do",
+      "new_planning_due": "2026-11-16T06:59:00.000Z",
+      "url": "https://trello.com/c/zDFlThwi/15-w06-02-evaluate-retrieval-and-grounded-responses"
+    }
+  ],
+  "created_cards": [
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af2448ac8df4d557638d169",
+      "name": "[W06-13] Evaluate fixed 5 mm filtering on the completed model",
+      "url": "https://trello.com/c/OecOcqRQ/98-w06-13-evaluate-fixed-5-mm-filtering-on-the-completed-model",
+      "list": "Week 6 — To Do",
+      "complete": false,
+      "due": "2026-11-16T06:59:00.000Z"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af2448b789339588d81e34e",
+      "name": "[W06-14] Close Week 6 evidence, hours and Week 7 handoff",
+      "url": "https://trello.com/c/QxycSJlp/99-w06-14-close-week-6-evidence-hours-and-week-7-handoff",
+      "list": "Week 6 — To Do",
+      "complete": false,
+      "due": "2026-11-16T06:59:00.000Z"
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/659744245e561cf84747c752/6af2448c90740bac69c40425",
+      "name": "[W06-15] Refresh experiment reporting and prepare the chair check-in",
+      "url": "https://trello.com/c/N6RbR7lm/100-w06-15-refresh-experiment-reporting-and-prepare-the-chair-check-in",
+      "list": "Week 6 Done — Nov 9–15",
+      "complete": true,
+      "due": null
+    }
+  ],
+  "verification": {
+    "week5_only_done_list": true,
+    "week5_done_card_ids_and_statuses_unchanged": true,
+    "all_ten_unfinished_carryovers_open": true,
+    "existing_week6_proposal_cards_reused": true,
+    "no_week6_card_left_in_backlog": true,
+    "week6_todo": 12,
+    "week6_in_progress": 2,
+    "week6_done": 1,
+    "week5_done": 7,
+    "no_scientific_jobs_or_schedules_changed": true
+  }
+}

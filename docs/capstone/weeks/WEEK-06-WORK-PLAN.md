@@ -1,5 +1,17 @@
 # Week 6 work plan — November 9–15, 2026
 
+## Current Trello board
+
+At Quinton's explicit November9 request, the board is now rolled to Week6:
+**12 To Do, 2 In Progress, 1 Done**; Week5 retains only its **7-card Done list**.
+See the [rollover map and verification](WEEK-06-TRELLO-ROLLOVER-20261109.md).
+Ten incomplete cards retain their IDs/history as W06-03 through W06-12; this is
+carryover, not acceptance. Existing W06-01/02 proposal cards are in this week's
+To Do. W06-13 covers per-model raw/5mm qualification, W06-14 weekly evidence and
+W06-15 today's completed reporting/demo preparation. Revised planning dates do
+not alter any training budget, gate or launch authority. The older dated entries
+below retain the observation time and original card names used in those reports.
+
 ## November 9 check-in and current evidence
 
 - [Degree-chair talking points](DEGREE-CHAIR-CHECKIN-20261109.md) prepared for a
@@ -172,7 +184,8 @@ Week 9's buffer and Week 10 delivery remain protected.
 - [Reviewer checks](../testing/REVIEWER-FLOW-20261107.md) and
   [Plan 11](../implementation/11-stakeholder-validation.md) distinguish engineering
   evidence from actual participant acceptance.
-- Trello W06-01 and W06-02 retain their existing deadlines and dependencies;
-  preparation does not mark them completed or roll the board early. W05-04 still
-  needs Quinton's hours/submission confirmation. W05-08 retains KD spatial/patient
-  follow-up even though compute and quantitative review are complete.
+- Trello W06-01 and W06-02 retain their existing deadlines/dependencies and remain
+  incomplete. The November9 rollover above supersedes the November7 preparation
+  instruction to leave the board in Week5. Former W05-04 is now W06-12 and still
+  needs Quinton's hours/submission confirmation. Former W05-08 is W06-07 and retains
+  KD spatial follow-up, although compute and quantitative review are complete.
