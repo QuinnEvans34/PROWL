@@ -70,6 +70,15 @@ model experimentation match the capstone expectations? For the remaining weeks,
 is closing the autonomous workflow and documenting reliable evaluation the right
 priority over pursuing more model variations?
 
+**How I'm protecting the remaining time:** I want to finish one reliable imaging
+and saved-review path, measure the assistant's answer quality, and close the
+existing model comparison before adding more architectures or broad UI changes.
+The [remaining-scope plan](REMAINING-SCOPE-AND-DEMO-20261109.md) maps that work to
+the class demo and final presentations. If the autonomous qualification remains
+blocked, I want to agree an explicit scoped fallback rather than overstate it.
+For this battery-powered meeting, Research demonstrates source search and
+citations; live local AI summaries still require a charger.
+
 ## Optional things to open
 
 1. [Training page](http://127.0.0.1:5180/training): current saved Dice history,

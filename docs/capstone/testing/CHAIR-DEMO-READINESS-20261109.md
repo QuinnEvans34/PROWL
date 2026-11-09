@@ -1,5 +1,45 @@
 # Check-in demonstration readiness — November 9
 
+## Battery follow-up before the meeting
+
+The earlier AC-powered check below passed but missed the battery case. Quinton's
+later Prepare attempt ran on battery: the answer candidate exited at the existing
+`AC power required` gate, while the preparer had already loaded the model and
+then obscured that exit as a generic readiness timeout. The drive/database was
+not the blocker. The original traceback was preserved in
+`outputs/prowl/expert-startup-20261109/literature-before.log`.
+
+Preparation now admits power before starting/warming the model and uses the same
+checked search backend in explicit CPU sources-only mode on battery or while
+another job owns the GPU. Direct answer/help routes reject generation in that
+mode; the UI/proxy also name the charger requirement. Source search and citations
+remain available, including from the internal database without the external drive.
+Unknown services are not killed. On AC, only the exact verified helper-owned
+sources-only process may be replaced after successful model preparation.
+Ownership is recorded again after health admission because macOS can rewrite
+Python's executable name during startup. Unverified identities remain a blocker.
+
+Actual battery verification: Prepare succeeded; the exposed boundary question
+returned source passages; View source opened its retained citation and excerpt.
+Direct and UI-proxied answer/interpret requests returned409, and Ollama reported
+no loaded model. One verified owned CPU stop/replacement checked service recovery
+and stable ownership; a repeated preparation retained the same replacement PID.
+The saved native-CT review service was also restored locally for the meeting.
+No scientific inference/training or production review write was started here.
+
+19preparation Python tests and72UI tests passed, including actual bounded HTTP
+source-only routing and battery Enter/Ask/Help/source-search behavior. Production
+build passed with its existing viewer-chunk advisory. One initial UI test invocation
+used the older default Node runtime and failed before jsdom workers could start;
+the supported existing Node24 runtime passed. No dependency change was made.
+
+Private evidence and screenshot: `outputs/prowl/expert-startup-20261109/`.
+The CPU source and review services are now deliberately **left running for the
+meeting**; the cleanup statement at the end of this report describes the earlier
+12:37check only. The idle user-started Ollama daemon is retained with no model
+allocated. Full battery generation is unavailable, not qualified or simulated.
+Use the [battery runbook and scope plan](../weeks/REMAINING-SCOPE-AND-DEMO-20261109.md).
+
 This is a bounded engineering/demo check, not stakeholder acceptance, a clinical
 review, a new segmentation evaluation or a formal answer-quality benchmark.
 Lenovo's existing training, frozen producer and hourly monitor are unchanged.
