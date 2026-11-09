@@ -108,11 +108,39 @@ def test_existing_wrong_search_configuration_fails_without_stopping_process(monk
 def test_new_backend_selects_fast_preview_only_when_gpu_free(monkeypatch,tmp_path,training_busy):
     setup(monkeypatch,tmp_path)
     monkeypatch.setattr(expert,'listening',lambda port:False)
-    states=iter([training_busy,True])
+    states=iter([training_busy,training_busy,True])
     monkeypatch.setattr(expert,'gpu_busy',lambda:next(states))
+    monkeypatch.setattr(expert,'prepare_model',lambda: not training_busy)
     starts=[]
     monkeypatch.setattr(expert,'start_process',lambda argv,name:starts.append(argv))
     expert.prepare()
     assert len(starts)==1
     expected='serve_literature_search.py' if training_busy else 'serve_single_summary_candidate.py'
     assert Path(starts[0][1]).name==expected
+
+
+def test_cold_start_warms_model_before_candidate_lifetime_reservation(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path,busy=False)
+    state={'reserved':False,'warmed':False}; events=[]
+    monkeypatch.setattr(expert,'listening',lambda port:False)
+    monkeypatch.setattr(expert,'gpu_busy',lambda:state['reserved'])
+    def warm():
+        assert not state['reserved']
+        state['warmed']=True; events.append('warm'); return True
+    def start(argv,name):
+        assert state['warmed']
+        assert Path(argv[1]).name=='serve_single_summary_candidate.py'
+        state['reserved']=True; events.append('reserve')
+    monkeypatch.setattr(expert,'prepare_model',warm)
+    monkeypatch.setattr(expert,'start_process',start)
+    expert.prepare()
+    assert events==['warm','reserve']
+
+
+def test_warmup_returns_without_model_calls_when_another_owner_holds_lock(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path)
+    monkeypatch.setattr(expert,'LOCK',tmp_path/'gpu.lock')
+    import fcntl
+    with expert.LOCK.open('a+b') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        assert expert.prepare_model() is False

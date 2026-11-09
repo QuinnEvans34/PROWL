@@ -101,6 +101,21 @@ def wait_for(check, seconds):
     raise RuntimeError('A service did not become ready. Check the local service logs, then try again.')
 
 
+def prepare_model():
+    # Complete warmup before the candidate takes its lifetime reservation.
+    # A concurrent trainer winning the lock leaves source search available.
+    with LOCK.open('a+b') as lock:
+        try: fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError: return False
+        if not listening(11434): start_process(['ollama', 'serve'], 'ollama')
+        wait_for(lambda: http(11434, 'api/tags'), 10)
+        tags = http(11434, 'api/tags')['models']
+        if not any(m.get('name') == MODEL and m.get('digest') == MODEL_SHA for m in tags):
+            raise RuntimeError('The reviewed local model is missing or changed. No model was downloaded.')
+        http(11434, 'api/generate', {'model': MODEL, 'stream': False, 'keep_alive': '10m'}, timeout=60)
+        return True
+
+
 def prepare():
     raw = json.loads(CONFIG.read_text())
     if raw.get('storage','external')=='external' and not Path(raw['mount']).is_mount():
@@ -130,7 +145,9 @@ def prepare():
     def database_ready():
         with connect(c) as db: return db.execute('SELECT 1').fetchone()[0] == 1
     wait_for(database_ready, 20)
+    model_prepared = False
     if not listening(8016):
+        if not gpu_busy(): model_prepared = prepare_model()
         # Source search must remain available when training owns the accelerator.
         if gpu_busy():
             start_process([str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_literature_search.py'),
@@ -147,16 +164,7 @@ def prepare():
             raise RuntimeError('Port 8016 is serving a different or older search configuration. Stop the verified old literature service, then prepare again. No process was stopped automatically.')
     wait_for(lambda: backend_ready(digest(c)), 35)
     if gpu_busy(): return status()
-    # Hold the same exclusive lock as training during model preparation.
-    with LOCK.open('a+b') as lock:
-        try: fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError: return status()
-        if not listening(11434): start_process(['ollama', 'serve'], 'ollama')
-        wait_for(lambda: http(11434, 'api/tags'), 10)
-        tags = http(11434, 'api/tags')['models']
-        if not any(m.get('name') == MODEL and m.get('digest') == MODEL_SHA for m in tags):
-            raise RuntimeError('The reviewed local model is missing or changed. No model was downloaded.')
-        http(11434, 'api/generate', {'model': MODEL, 'stream': False, 'keep_alive': '10m'}, timeout=60)
+    if not model_prepared: prepare_model()
     return status()
 
 
