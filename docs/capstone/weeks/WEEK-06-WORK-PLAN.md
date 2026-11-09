@@ -1,5 +1,27 @@
 # Week 6 work plan — November 9–15, 2026
 
+## November 9 check-in and current evidence
+
+- [Degree-chair talking points](DEGREE-CHAIR-CHECKIN-20261109.md) prepared for a
+  conversational ten-minute check-in, with evidence and remaining gaps.
+  Meeting time/date, feedback, personal hours and course submission are not inferred.
+- [Training-page reconciliation](../operations/TRAINING-ACCOUNTING-REFRESH-20261109.md):
+  646.1 recorded training-session hours including 177.0 historical estimates;
+  91.0 teacher-target hours separately. Lenovo snapshot at 12:24 p.m. MST records
+  global 22,571; raw 14k/16k/18k/20k/22k Dice .3535/.3965/.4305/.4086/.4122. Best 18k,
+  final 24k pending. No filter applied; supplied-region development scope unchanged.
+- [Demo checks](../testing/CHAIR-DEMO-READINESS-20261109.md) verified a live cited
+  answer, actual retained CT rendering and predicted-mask volume. Fixed the
+  cold-start model/service reservation order and stale retained-export endpoint.
+  Test decisions were not written. Temporary services were cleaned up afterward.
+- [Autonomous-baseline next work](../operations/AUTONOMOUS-BASELINE-NEXT-WORK-20261109.md)
+  separates source-unit evidence, resource failure 5592, numerical qualification
+  and actual production-stage integration. G3/G4 remain open; no invented fix or
+  failure exclusion.
+- Continue the existing Lenovo run/monitor. Next Mac work remains the source-grounded
+  retrieval/answer evaluation contract and an admitted production adapter, while
+  preserving the November 14 participant plan. No successor GPU job is queued.
+
 ## November 8 evening handoff
 
 The November7 preparation below is retained as dated history. The next week's

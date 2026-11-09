@@ -386,7 +386,7 @@ export default function App() {
       navigate={navigate}
       activeStudy={caseId}
       endpointStatus={route.view === 'predict' ? predictionEndpointStatus : route.view === 'workbench' ? endpointStatus : null}
-      modelLabel={route.view === 'predict' ? 'On-demand prediction · see result provenance' : ['saved','studies'].includes(route.view) ? 'Model identity is shown with each prediction' : MODEL_LABEL}
+      modelLabel={route.view === 'training' ? 'Dated experiment exports · see source timestamps' : route.view === 'predict' ? 'On-demand prediction · see result provenance' : ['saved','studies'].includes(route.view) ? 'Model identity is shown with each prediction' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
       {content}

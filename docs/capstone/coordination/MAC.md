@@ -1,5 +1,30 @@
 # Mac work status
 
+## November 9 degree-chair check-in and Training refresh
+
+- [Talking points](../weeks/DEGREE-CHAIR-CHECKIN-20261109.md) and
+  [baseline next-work packet](../operations/AUTONOMOUS-BASELINE-NEXT-WORK-20261109.md)
+  prepared. G3/G4, retrieval/answer acceptance, stakeholder feedback and confirmed
+  personal hours remain open; the notes do not claim a meeting occurred.
+- UI continuation support `a6c9e85`, verified exports/accounting `6cdca20`, cold
+  model/service startup repair `7268063`. Peer `4025c4e` source blobs copied exactly;
+  no branch merge. See [accounting receipt](../operations/TRAINING-ACCOUNTING-REFRESH-20261109.md).
+  Combined 646.1 training-session hours including 177.0 historical estimates;
+  teacher targets add 91.0, for 737.1 recorded model-work hours. Neither is human time.
+- Current result snapshot at 12:24 p.m. MST: global 22,571, phase 10,571/12,000,
+  latest raw 22k Dice .412172, best 18k .430517. Five full 70-case validations;
+  final 24k pending. Source age/phase scope and parent deduplication are explicit.
+- [Actual demo check](../testing/CHAIR-DEMO-READINESS-20261109.md): live boundary
+  answer/citation, native archived CT, 76.36 mL predicted pancreas-mask measurement.
+  The source-bound answer still needs scope/clarity review, not an accuracy pass.
+  No production review was written; all five original package hashes match.
+- 75 UI / 8 accounting / 12 preparation tests pass; production/Sites build passes.
+  Demo model, exact owned services and dedicated internal DB stopped after the
+  check; GPU lock released. Training page remains open and works from retained
+  snapshots without the external drive. Re-prepare live services for the meeting.
+- Lenovo's frozen run and monitor unchanged. Peer should inspect these Git commits
+  without merging/pulling into its active checkout. Unrelated audit drafts untouched.
+
 ## November 8 standing future-model postprocessing rule and CPU findings
 
 - User directs the fixed5mm predicted-pancreas component filter to become the
