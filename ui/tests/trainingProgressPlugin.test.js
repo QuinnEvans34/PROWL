@@ -7,7 +7,7 @@ import retained from '../../configs/training-progress/current.json'
 import { trainingProgressPlugin } from '../trainingProgressPlugin.js'
 let dir
 afterEach(() => { vi.unstubAllEnvs(); if (dir) rmSync(dir, { recursive: true, force: true }); dir = null })
-function middleware() { let h; trainingProgressPlugin().configureServer({ middlewares: { use: (_, handler) => { h = handler } } }); return h }
+function middleware(options) { let h; trainingProgressPlugin(options).configureServer({ middlewares: { use: (_, handler) => { h = handler } } }); return h }
 function call(h, url = '/', method = 'GET') {
   let body; const res = { statusCode: 200, setHeader: vi.fn(), end: v => { body = v } }
   h({ url, method }, res); return { status: res.statusCode, body, headers: res.setHeader }
@@ -34,4 +34,19 @@ it('rejects source paths in requests, query overrides and writes; HEAD has no bo
   const h = middleware()
   for (const [url, method] of [['/../../etc/passwd', 'GET'], ['/?file=/etc/passwd', 'GET'], ['/', 'POST']]) expect(call(h, url, method).status).toBe(404)
   expect(call(h, '/', 'HEAD').body).toBe('')
+})
+
+it('admits a refreshed retained export without a server restart and refuses later score rewrites', () => {
+  vi.stubEnv('PROWL_TRAINING_PROGRESS_FILE', '')
+  dir = mkdtempSync(join(tmpdir(), 'prowl-retained-progress-')); const file = join(dir, 'current.json')
+  writeFileSync(file, JSON.stringify(retained)); const h = middleware({ retainedPath: file })
+  expect(JSON.parse(call(h).body).snapshot).toEqual(retained)
+  const next = structuredClone(retained); next.observed_at = new Date(Date.parse(retained.observed_at) + 60000).toISOString()
+  next.run.step++; next.run.elapsed_seconds++
+  writeFileSync(file, JSON.stringify(next))
+  expect(JSON.parse(call(h).body).snapshot).toEqual(next)
+  const corrupt = structuredClone(next); corrupt.validations[0].lesion_dice = 0.99
+  writeFileSync(file, JSON.stringify(corrupt))
+  expect(JSON.parse(call(h).body).snapshot).toEqual(next)
+  expect(JSON.parse(call(h).body).note).toContain('last verified')
 })

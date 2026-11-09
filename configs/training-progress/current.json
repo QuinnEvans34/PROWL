@@ -1,23 +1,24 @@
 {
   "schema": "prowl-training-progress-v1",
-  "observed_at": "2026-11-07T18:51:06.339094Z",
+  "observed_at": "2026-11-09T19:24:02.184170Z",
   "source": {
     "machine": "Lenovo",
     "kind": "saved_metadata_export",
-    "run_id": "pants_stunet_base_transfer_12k_20261106_launch02",
-    "receipt_sha256": "59e8188d60d70840eabb8752f0be5d5c1f818bc51e3cdcf81d16c74c79cf3e68",
-    "mlflow_run_id": "243ccf3f71c34417be60362af35187d1"
+    "run_id": "pants_stunet_corrected_continuation_12k_20261108_launch02",
+    "receipt_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+    "mlflow_run_id": "13c709ae157949988de1d7f8821a03b7"
   },
   "run": {
-    "title": "STU-Net-B transfer learning",
+    "title": "Correct seven normal-case targets, then continue STU-Net for 12k updates",
     "scope": "provided_pancreas_region_exploratory",
     "exposure": "pretraining_overlap_unresolved",
     "phase": "training",
-    "step": 6814,
+    "step": 10571,
     "target_steps": 12000,
     "validation_interval": 2000,
-    "elapsed_seconds": 57655.15700000001,
-    "validation": null
+    "elapsed_seconds": 91365.40600000008,
+    "validation": null,
+    "starting_step": 12000
   },
   "cohort": {
     "training_cases": 1333,
@@ -28,25 +29,41 @@
   "validations": [
     {
       "step": 2000,
-      "lesion_dice": 0.14417918715716796,
-      "pancreas_dice": 0.6511537113890942,
-      "detected_positive_cases": 28,
-      "false_alarm_cases": 33,
+      "lesion_dice": 0.35348832630924676,
+      "pancreas_dice": 0.7854457083427576,
+      "detected_positive_cases": 32,
+      "false_alarm_cases": 30,
       "completed_cases": 70
     },
     {
       "step": 4000,
-      "lesion_dice": 0.22208659334792857,
-      "pancreas_dice": 0.7215574922576614,
-      "detected_positive_cases": 26,
-      "false_alarm_cases": 29,
+      "lesion_dice": 0.3965334553205323,
+      "pancreas_dice": 0.791702307317802,
+      "detected_positive_cases": 35,
+      "false_alarm_cases": 31,
       "completed_cases": 70
     },
     {
       "step": 6000,
-      "lesion_dice": 0.3471818046280159,
-      "pancreas_dice": 0.7441344158660579,
-      "detected_positive_cases": 30,
+      "lesion_dice": 0.43051696723124094,
+      "pancreas_dice": 0.7985930023083472,
+      "detected_positive_cases": 35,
+      "false_alarm_cases": 29,
+      "completed_cases": 70
+    },
+    {
+      "step": 8000,
+      "lesion_dice": 0.4085809893760974,
+      "pancreas_dice": 0.7996568593317417,
+      "detected_positive_cases": 33,
+      "false_alarm_cases": 27,
+      "completed_cases": 70
+    },
+    {
+      "step": 10000,
+      "lesion_dice": 0.4121723662348846,
+      "pancreas_dice": 0.8043442499391997,
+      "detected_positive_cases": 35,
       "false_alarm_cases": 26,
       "completed_cases": 70
     }

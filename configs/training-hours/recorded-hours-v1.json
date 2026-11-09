@@ -1,6 +1,6 @@
 {
   "schema": "prowl-combined-training-hours-v1",
-  "generated_at": "2026-11-04T21:03:50.119707+00:00",
+  "generated_at": "2026-11-09T19:26:40.296241+00:00",
   "policy": "Recorded training-session time includes in-run validation, checkpoint and I/O work. It is not GPU-busy time or personal working hours.",
   "complete_project_history": false,
   "entries": [
@@ -1082,20 +1082,36 @@
     {
       "execution_id": "mlflow:a23104d649a24c7fb0b19e0e1b9ca09b",
       "machine": "Mac",
-      "title": "KD treatment \u00b7 current attempt",
-      "seconds": 94.36863804189488,
+      "title": "KD treatment \u00b7 mac-kd-treatment-resume-20261104-01",
+      "seconds": 68788.63663395797,
       "category": "training",
-      "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
+      "basis": "Last recorded monotonic journal counter for this attempt; pause gaps excluded",
       "aliases": [
         "mlflow:a23104d649a24c7fb0b19e0e1b9ca09b"
       ],
       "period": "KD comparison",
       "arm": "treatment",
-      "status": "last_recorded",
-      "last_step": 14037,
-      "as_of_utc": "2026-11-04T21:03:42.319000+00:00",
-      "evidence_sha256": "f5cd7c2cbe60595acafc516787008dd3c3eca2f67756a5bcf01196a55dcfee3c",
-      "evidence_prefix_bytes": 448809
+      "status": "closed",
+      "evidence_sha256": "616d0243af8d4c96d53ce46e28a018c536b3baf86a3d3edee6867901b8280f02",
+      "evidence_prefix_bytes": 12288075
+    },
+    {
+      "execution_id": "mlflow:1e356a71e4f74d5192a091fc40d3f6b8",
+      "machine": "Mac",
+      "title": "KD treatment \u00b7 current attempt",
+      "seconds": 30829.37209429103,
+      "category": "training",
+      "basis": "Last recorded monotonic journal counter; no wall-clock extrapolation",
+      "aliases": [
+        "mlflow:1e356a71e4f74d5192a091fc40d3f6b8"
+      ],
+      "period": "KD comparison",
+      "arm": "treatment",
+      "status": "closed",
+      "last_step": 24000,
+      "as_of_utc": "2026-11-06T03:03:36.151000+00:00",
+      "evidence_sha256": "69132bc9c66ac0678520fac347e7b73aa174e6669b2dc6dcbc04c8086762f266",
+      "evidence_prefix_bytes": 5653656
     },
     {
       "execution_id": "teacher:rsuper-full-targets-02",
@@ -1278,7 +1294,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "8ebf529d883d64c4cc4713ca78ff692cfe58085716568fce12bd32d9e55dcaa0",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_varied_focus_24k_20261022",
@@ -1293,7 +1309,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "8ee7a63fbc4cae9ba93a6cbb304a3240bfea36bad9f852078d69a1567405c8c6",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_pancreas_region_24k_20261019",
@@ -1308,7 +1324,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "5dc520f5b31fe8b21498db71f6aacc707d7c02075f7dee884f5c54d57b5c6f01",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_full_coverage_physical_24k_20261018",
@@ -1323,7 +1339,7 @@
       "period": "Lenovo scientific runs",
       "status": "stopped",
       "evidence_sha256": "47c36f8f1b901ba3a863f68d5c31e02c925406375afacc3b47498942229b0869",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_only_augmented_views_24k_win_20261017",
@@ -1338,7 +1354,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "95116a33472d27a0d41aef6294ccc7974b0bb587dd5543a406ed70317982a9f5",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_only_ema_72k_20261013",
@@ -1353,7 +1369,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "ac1bac3efc83665d355cb839ce2fc09f550dcf31e973e1a090f4895a3a4bac28",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_plus_expert_panorama_dicefocal_24k_20261012",
@@ -1368,7 +1384,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "4abe5ee0104ce9615d564c7913e330510fb016cf64d50c35745877918f9e601c",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_course_reference_dicefocal_24k_20261011",
@@ -1383,7 +1399,7 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "1781e033fda4c4cfcf59a5e5031e02967ca9b2266399c9123ab511840f64e953",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     },
     {
       "execution_id": "lenovo:pants_candidate_verifier_20261031",
@@ -1398,23 +1414,53 @@
       "period": "Lenovo scientific runs",
       "status": "FINISHED",
       "evidence_sha256": "d980bee239b80711570cc3753e8f7ed57d80faec4d01b9ce5aff6ae1bccd6bf5",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00"
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_stunet_base_transfer_12k_20261106",
+      "machine": "Lenovo",
+      "title": "Fine-tune pretrained STU-Net with complete lesion coverage",
+      "seconds": 105530.10999999999,
+      "category": "training",
+      "basis": "training_completed.elapsed_seconds",
+      "aliases": [
+        "mlflow:243ccf3f71c34417be60362af35187d1"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "FINISHED",
+      "evidence_sha256": "88618d845944b9de2804c9de5ed0fce55e5d82434d51d858e887280785f59906",
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
+    },
+    {
+      "execution_id": "lenovo:pants_stunet_corrected_continuation_12k_20261108",
+      "machine": "Lenovo",
+      "title": "Correct seven normal-case targets, then continue STU-Net for 12k updates",
+      "seconds": 91365.40600000008,
+      "category": "training",
+      "basis": "update.elapsed_seconds",
+      "aliases": [
+        "mlflow:13c709ae157949988de1d7f8821a03b7"
+      ],
+      "period": "Lenovo scientific runs",
+      "status": "RUNNING",
+      "evidence_sha256": "63e74a17cbf9b73929624edc5aea722244f67aad15edd969161e3e36eaca1178",
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00"
     }
   ],
   "totals": {
-    "training_seconds": 1392215.5092341695,
+    "training_seconds": 1688634.665324377,
     "legacy_estimated_seconds": 637363.1719999999,
-    "recorded_training_seconds": 2029578.6812341693,
+    "recorded_training_seconds": 2325997.8373243767,
     "teacher_seconds": 327465.76392404106,
-    "recorded_model_work_seconds": 2357044.4451582106,
+    "recorded_model_work_seconds": 2653463.601248418,
     "machines": {
       "Mac": {
-        "training_seconds": 427705.6812341697,
+        "training_seconds": 527229.3213243769,
         "legacy_estimated_seconds": 637363.1719999999,
         "teacher_seconds": 327465.76392404106
       },
       "Lenovo": {
-        "training_seconds": 964509.8279999999,
+        "training_seconds": 1161405.344,
         "legacy_estimated_seconds": 0,
         "teacher_seconds": 0
       }
@@ -1430,15 +1476,15 @@
     },
     {
       "name": "Mac KD lineage",
-      "as_of_utc": "2026-11-04T21:03:42.319000+00:00",
-      "fingerprint": "7cf54250da7f109723f48678fcbfc3763b953170618a9f0215c3862a417bc3f7",
-      "records": 8
+      "as_of_utc": "2026-11-06T03:03:36.151000+00:00",
+      "fingerprint": "38b8f8a83a4ca3d6ceab76cdb8d34fe2681d71e16c4e50a9460b9240da359049",
+      "records": 9
     },
     {
       "name": "Lenovo verified export",
-      "as_of_utc": "2026-11-03T21:44:33.729601+00:00",
-      "fingerprint": "c28c3b75cb3582ebd592b657169db5095cc045d37ac610a19a0efd38a30efae6",
-      "records": 9
+      "as_of_utc": "2026-11-09T19:24:02.184170+00:00",
+      "fingerprint": "6acb7d445e8a8c771f181295e2bc4c2a8a542d33f6f19ad1add469df3389730f",
+      "records": 11
     }
   ],
   "issues": [

@@ -10,14 +10,18 @@ function readSnapshot(path) {
   return JSON.parse(data)
 }
 
-export function trainingProgressPlugin() {
+export function trainingProgressPlugin({ retainedPath = retained } = {}) {
   let last = null
   return { name: 'readonly-training-progress', configureServer(server) {
     server.middlewares.use('/training-progress', (req, res) => {
       if (!['/', ''].includes(req.url) || !['GET', 'HEAD'].includes(req.method)) { res.statusCode = 404; res.end(); return }
       try {
-        last ||= acceptTrainingProgress(null, readSnapshot(retained))
         let readState = 'retained_snapshot', note = 'Saved metadata export; this page does not connect to Lenovo.'
+        try { last = acceptTrainingProgress(last, readSnapshot(retainedPath)) }
+        catch (error) {
+          if (!last) throw error
+          note = 'The retained export is unavailable or inconsistent. Keeping the last verified results.'
+        }
         const selected = process.env.PROWL_TRAINING_PROGRESS_FILE
         if (selected) {
           try {

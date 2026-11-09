@@ -1,0 +1,33 @@
+{
+  "peer_commit": "4025c4ec623f4e203a675f534af95dfa4eb8c80c",
+  "source_sha256": {
+    "docs/capstone/coordination/WINDOWS-TRAINING-HOURS-20261109.json": "6acb7d445e8a8c771f181295e2bc4c2a8a542d33f6f19ad1add469df3389730f",
+    "configs/training-progress/lenovo-stunet-corrected-20261109.json": "9959f678d93123a30f4b1cbe1acd5dfb9d8e30e75dc4cf58f2d43a688d64193a",
+    "docs/capstone/coordination/STUNET-PROGRESS-ANCESTRY-20261109.json": "5b7c9c6f567a1c34eb61cbcc6e80f2a6a9b478db8449439eb261456276dd90cb"
+  },
+  "old_nine_records_unchanged": true,
+  "unique_lenovo_executions": 11,
+  "parent_seconds_added_to_continuation": 0,
+  "consumer_sha256": "8bc24910b39fcfe76c453f4a6b8f6ebe77c2a99f6286809557d52a8bd524cdcd",
+  "normalization": "Explicit aggregate field projection; UTC timestamp serialization; starting_step bound to hash-checked ancestry sidecar. Raw exports remain byte-exact. No scores changed.",
+  "combined_hours_sha256": "9f6fb25e4450b791db931ee2bbe5ed6776664f2b8a6188d9949019a8d624c684",
+  "combined_totals": {
+    "training_seconds": 1688634.665324377,
+    "legacy_estimated_seconds": 637363.1719999999,
+    "recorded_training_seconds": 2325997.8373243767,
+    "teacher_seconds": 327465.76392404106,
+    "recorded_model_work_seconds": 2653463.601248418,
+    "machines": {
+      "Mac": {
+        "training_seconds": 527229.3213243769,
+        "legacy_estimated_seconds": 637363.1719999999,
+        "teacher_seconds": 327465.76392404106
+      },
+      "Lenovo": {
+        "training_seconds": 1161405.344,
+        "legacy_estimated_seconds": 0,
+        "teacher_seconds": 0
+      }
+    }
+  }
+}

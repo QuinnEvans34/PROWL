@@ -1,0 +1,97 @@
+{
+  "schema": "prowl-training-progress-v1",
+  "observed_at": "2026-11-09T19:24:02.184170+00:00",
+  "source": {
+    "machine": "Lenovo",
+    "kind": "saved_metadata_export",
+    "run_id": "pants_stunet_corrected_continuation_12k_20261108_launch02",
+    "receipt_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+    "mlflow_run_id": "13c709ae157949988de1d7f8821a03b7",
+    "snapshot_only": true,
+    "journal_prefix_sha256": "63e74a17cbf9b73929624edc5aea722244f67aad15edd969161e3e36eaca1178",
+    "source_event_at": "2026-11-09T19:23:59.522000+00:00"
+  },
+  "run": {
+    "title": "Correct seven normal-case targets, then continue STU-Net for 12k updates",
+    "scope": "provided_pancreas_region_exploratory",
+    "exposure": "pretraining_overlap_unresolved",
+    "phase": "training",
+    "step": 10571,
+    "target_steps": 12000,
+    "validation_interval": 2000,
+    "elapsed_seconds": 91365.40600000008,
+    "validation": null,
+    "global_step": 22571,
+    "ancestry_start_step": 12000,
+    "global_target_steps": 24000
+  },
+  "cohort": {
+    "training_cases": 1333,
+    "development_cases": 70,
+    "positive_cases": 36,
+    "reference_empty_cases": 34
+  },
+  "validations": [
+    {
+      "step": 2000,
+      "global_step": 14000,
+      "lesion_dice": 0.35348832630924676,
+      "pancreas_dice": 0.7854457083427576,
+      "detected_positive_cases": 32,
+      "false_alarm_cases": 30,
+      "completed_cases": 70,
+      "report_sha256": "044dcd30400f8896a144b18921b3d40d4df135986f6635c7ca2a4c98b76aa3ee",
+      "raw_predictions": true,
+      "fixed_5mm_filter_applied": false
+    },
+    {
+      "step": 4000,
+      "global_step": 16000,
+      "lesion_dice": 0.3965334553205323,
+      "pancreas_dice": 0.791702307317802,
+      "detected_positive_cases": 35,
+      "false_alarm_cases": 31,
+      "completed_cases": 70,
+      "report_sha256": "b179874f4ace7c140ed33437f564ef50cfa6b45470d8207a583e3e61cad5a0fa",
+      "raw_predictions": true,
+      "fixed_5mm_filter_applied": false
+    },
+    {
+      "step": 6000,
+      "global_step": 18000,
+      "lesion_dice": 0.43051696723124094,
+      "pancreas_dice": 0.7985930023083472,
+      "detected_positive_cases": 35,
+      "false_alarm_cases": 29,
+      "completed_cases": 70,
+      "report_sha256": "a25ccdff7f0971d9e9a85c32133977c427ce4e6041573fe6c9933433342148e4",
+      "raw_predictions": true,
+      "fixed_5mm_filter_applied": false
+    },
+    {
+      "step": 8000,
+      "global_step": 20000,
+      "lesion_dice": 0.4085809893760974,
+      "pancreas_dice": 0.7996568593317417,
+      "detected_positive_cases": 33,
+      "false_alarm_cases": 27,
+      "completed_cases": 70,
+      "report_sha256": "32bd0a71878948247fe2c1e439febd92711f657e6db077b00c96ba4982c6ead0",
+      "raw_predictions": true,
+      "fixed_5mm_filter_applied": false
+    },
+    {
+      "step": 10000,
+      "global_step": 22000,
+      "lesion_dice": 0.4121723662348846,
+      "pancreas_dice": 0.8043442499391997,
+      "detected_positive_cases": 35,
+      "false_alarm_cases": 26,
+      "completed_cases": 70,
+      "report_sha256": "dd740df17da8454322fdbdb6c16f721a57c30f8b8c7d3a70312fd782ef95e36e",
+      "raw_predictions": true,
+      "fixed_5mm_filter_applied": false
+    }
+  ],
+  "snapshot_notice": "Saved Lenovo observation, not a live connection. Steps and elapsed time are phase-local; global steps are separately provided. Parent hours are excluded from this phase."
+}
