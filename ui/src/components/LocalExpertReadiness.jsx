@@ -26,9 +26,10 @@ export default function LocalExpertReadiness({ onStatus }) {
     <div aria-live="polite">
       {busy && <p>{busy === 'prepare' ? 'Checking local storage and starting missing services. This can take a few minutes.' : 'Checking local service status.'}</p>}
       {state && !error && !busy && <>
-        <p>{state.search ? 'Source search is ready.' : 'Source search needs preparation.'} {state.gpu_busy ? 'The teacher is using the GPU. Pause it before testing AI answers; source search can run alongside it.' : state.model && state.search ? 'The local model is loaded and ready for questions.' : 'Prepare the AI expert to load the local model.'}</p>
+        <p>{state.search ? 'Source search is ready.' : 'Source search needs preparation.'} {state.answer_blocker === 'ac_power' ? 'Battery mode: use Find sources to read passages and citations. Connect the charger, then Prepare AI expert for live summaries.' : state.gpu_busy ? 'Another local job is using the GPU. Source search can run alongside it; coordinate its pause before testing AI answers.' : state.answer_blocker === 'sources_only' ? 'Sources-only mode. Prepare AI expert to enable live summaries.' : state.model && state.search ? 'The local model is loaded and ready for questions.' : 'Prepare the AI expert to load the local model.'}</p>
         <details><summary>Service status</summary><ul>
           {Object.entries({ drive: 'Literature storage', database: 'Literature database', search: 'Search service', ollama: 'Model service', model: 'Answer model loaded' }).map(([key, label]) => <li key={key}>{label}: {state[key] ? 'Ready' : 'Not ready'}</li>)}
+          {typeof state.ac_power === 'boolean' && <li>Power: {state.ac_power ? 'AC connected' : 'Battery · live AI summaries unavailable'}</li>}
         </ul></details>
       </>}
       {error && <p role="alert">{error}</p>}

@@ -261,7 +261,7 @@ export default function LiteratureSearchPanel({
     questionInput.current?.focus()
   }
   async function helpWithQuestion() {
-    if (!question.trim() || active.current) return
+    if (!question.trim() || active.current || readiness?.gpu_busy || readiness?.answer_blocker) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 25000)
@@ -278,6 +278,8 @@ export default function LiteratureSearchPanel({
   async function submit(event, sourcesOnly = phase === 'error' && sourceMode) {
     event.preventDefault()
     if (!question.trim() || active.current) return
+    if (!sourcesOnly && (readiness?.gpu_busy || readiness?.answer_blocker)
+      && !(measurementContext && scanQuestion(question))) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 150000)
@@ -425,19 +427,19 @@ export default function LiteratureSearchPanel({
         onChange={e => change(e.target.value)} />
       <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
       <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading' || (readiness?.gpu_busy && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+        <button type="submit" disabled={!question.trim() || phase === 'loading' || ((readiness?.gpu_busy || readiness?.answer_blocker) && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
         {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
         <span>{question.length}/500</span>
       </div>
       {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
-        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>
         {/* Service controls stay mounted (readiness feeds the send button) but out of the way. */}
         <LocalExpertReadiness onStatus={setReadiness} />
       </details> : <div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
-        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy} onClick={helpWithQuestion}>Help phrase my question</button>
+        <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>}
     </form>
     <small>Session history only · Each question is answered independently. Not saved to your review.</small>

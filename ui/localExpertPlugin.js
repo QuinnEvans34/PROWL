@@ -25,7 +25,9 @@ export function localExpertPlugin() {
       if (!localRequest(req)) return reply(403, { error: 'Local access required.' })
       try {
         if (answer) {
-          if ((await run('gpu')).gpu_busy) return reply(409, { error: 'Teacher is using the GPU. Find sources is available; pause the teacher before asking the model.' })
+          const gate = await run('gpu')
+          if (gate.answer_blocker === 'ac_power') return reply(409, { error: 'Connect the charger for live AI answers. Find sources works on battery.' })
+          if (gate.gpu_busy) return reply(409, { error: 'Another local job owns the GPU. Find sources is available; coordinate its pause before asking the model.' })
           return next()
         }
         if ((path.endsWith('/prepare') && req.method !== 'POST') || (path.endsWith('/status') && req.method !== 'GET')) return reply(405, { error: 'Method not allowed.' })

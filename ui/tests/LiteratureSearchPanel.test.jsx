@@ -229,6 +229,28 @@ it('finds sources without calling the answer path and keeps citations accessible
   await user.click(screen.getByRole('button', { name: 'View source 1' }))
   expect(screen.getAllByRole('link', { name: /Read full source/ }).length).toBe(4)
 })
+it('keeps battery source search available and blocks model actions including Enter', async () => {
+  const user = userEvent.setup(), search = vi.fn(), interpret = vi.fn()
+  const findSources = vi.fn(async r => sourceResponse(r))
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ok:true,json:async()=>({
+    drive:true,database:true,search:true,ollama:false,model:false,gpu_busy:false,
+    ac_power:false,answer_blocker:'ac_power',
+  })}))
+  try {
+    render(<LiteratureSearchPanel search={search} interpret={interpret} findSources={findSources} />)
+    await user.click(screen.getByRole('button', {name:'Check status'}))
+    expect(await screen.findByText(/Battery mode: use Find sources/)).toBeTruthy()
+    await user.type(screen.getByLabelText('Literature question'), 'Pancreatic head swelling')
+    expect(screen.getByRole('button', {name:'Ask question'}).disabled).toBe(true)
+    expect(screen.getByRole('button', {name:'Help phrase my question'}).disabled).toBe(true)
+    await user.keyboard('{Enter}')
+    expect(search).not.toHaveBeenCalled(); expect(interpret).not.toHaveBeenCalled()
+    expect(screen.getByRole('button', {name:'Find sources'}).disabled).toBe(false)
+    await user.click(screen.getByRole('button', {name:'Find sources'}))
+    expect(await screen.findByText(/Relevant comparison sources/)).toBeTruthy()
+    expect(findSources).toHaveBeenCalledOnce()
+  } finally { vi.unstubAllGlobals() }
+})
 it.each(['missing', 'unknown', 'extra', 'wrongPair', 'answerPath'])('rejects %s source-record mismatch', kind => {
   const request = { request_id: 'test', question: 'Pancreatic head swelling' }, result = sourceResponse(request)
   if (kind === 'missing') result.evidence.pop()

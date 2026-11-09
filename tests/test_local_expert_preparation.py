@@ -19,11 +19,14 @@ def setup(monkeypatch, tmp_path, *, busy=True, bad_mount=False, stale=False):
     c = {'mount': str(tmp_path), 'volume_uuid': 'fixed-uuid', 'data': '/expected'}
     p=tmp_path/'config.json';p.write_text(json.dumps(c))
     monkeypatch.setattr(expert, 'CONFIG', p)
+    monkeypatch.setattr(expert, 'OUT', tmp_path/'services')
+    monkeypatch.setattr(expert, 'ac_power', lambda: True)
+    monkeypatch.setattr(expert, 'require_ac', lambda: None)
     monkeypatch.setattr(Path, 'is_mount', lambda self: True)
     monkeypatch.setattr(expert, 'read_config', lambda p: c)
     monkeypatch.setattr(expert, 'limits', lambda c: None)
     monkeypatch.setattr(expert, 'gpu_busy', lambda: busy)
-    monkeypatch.setattr(expert, 'wait_for', lambda *a: None)
+    monkeypatch.setattr(expert, 'wait_for', lambda *a, **kw: None)
     monkeypatch.setattr(expert, 'listening', lambda port: True)
     monkeypatch.setattr(expert, 'status', lambda: {'gpu_busy': busy, 'search': True})
     calls=[]
@@ -115,8 +118,8 @@ def test_new_backend_selects_fast_preview_only_when_gpu_free(monkeypatch,tmp_pat
     monkeypatch.setattr(expert,'start_process',lambda argv,name:starts.append(argv))
     expert.prepare()
     assert len(starts)==1
-    expected='serve_literature_search.py' if training_busy else 'serve_single_summary_candidate.py'
-    assert Path(starts[0][1]).name==expected
+    assert Path(starts[0][1]).name=='serve_single_summary_candidate.py'
+    assert ('--sources-only' in starts[0]) is training_busy
 
 
 def test_cold_start_warms_model_before_candidate_lifetime_reservation(monkeypatch,tmp_path):
@@ -144,3 +147,95 @@ def test_warmup_returns_without_model_calls_when_another_owner_holds_lock(monkey
     with expert.LOCK.open('a+b') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         assert expert.prepare_model() is False
+
+
+def test_battery_preparation_starts_only_source_search_never_model(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path,busy=False)
+    monkeypatch.setattr(expert,'ac_power',lambda:False)
+    monkeypatch.setattr(expert,'listening',lambda _:False)
+    monkeypatch.setattr(expert,'prepare_model',lambda:pytest.fail('No battery model warmup'))
+    starts=[]
+    monkeypatch.setattr(expert,'start_process',lambda argv,name:starts.append(argv))
+    expert.prepare()
+    assert len(starts)==1 and '--sources-only' in starts[0]
+
+
+def test_power_gate_precedes_every_model_service_or_allocation_call(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path,busy=False)
+    def denied():raise RuntimeError('AC power required')
+    monkeypatch.setattr(expert,'require_ac',denied)
+    monkeypatch.setattr(expert,'http',lambda *a,**k:pytest.fail('No model request before power admission'))
+    with pytest.raises(RuntimeError,match='AC power required'):expert.prepare_model()
+
+
+def test_existing_owned_source_service_upgrades_only_after_power_and_warmup(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path,busy=False)
+    monkeypatch.setattr(expert,'http',lambda *a,**k:{'storage_identity':expert.digest(expert.read_config(expert.CONFIG)),'answer_policy':'sources-only'})
+    events=[]
+    monkeypatch.setattr(expert,'prepare_model',lambda:events.append('warm') or True)
+    monkeypatch.setattr(expert,'stop_owned_sources',lambda:events.append('stop-owned'))
+    monkeypatch.setattr(expert,'start_process',lambda argv,name:events.append(('start',argv)))
+    expert.prepare()
+    assert events[:2]==['warm','stop-owned']
+    assert len(events)==3 and '--sources-only' not in events[-1][1]
+
+
+def test_unverified_owner_is_never_signalled(monkeypatch,tmp_path):
+    setup(monkeypatch,tmp_path)
+    monkeypatch.setattr(expert.os,'kill',lambda *a:pytest.fail('Must not signal unknown owner'))
+    with pytest.raises(RuntimeError,match='ownership could not be verified'):expert.stop_owned_sources()
+
+
+def test_ready_owner_uses_post_startup_identity(monkeypatch,tmp_path):
+    from types import SimpleNamespace
+    setup(monkeypatch,tmp_path)
+    expert.OUT.mkdir()
+    record=expert.OUT/'literature-owner.json'
+    record.write_text(json.dumps({'pid':123,'argv':['fixed'],'identity':'transient interpreter'}))
+    monkeypatch.setattr(expert,'process_identity',lambda pid:'stable interpreter')
+    expert.record_ready_owner(SimpleNamespace(pid=123,poll=lambda:None))
+    assert json.loads(record.read_text())=={'pid':123,'argv':['fixed'],'identity':'stable interpreter'}
+
+
+def test_exited_child_is_reported_immediately_with_stage_instead_of_generic_timeout():
+    class Exited:
+        def poll(self):return 1
+    with pytest.raises(RuntimeError,match='Literature search service exited before'):
+        expert.wait_for(lambda:False,35,stage='Literature search service',process=Exited())
+
+
+def test_sources_only_http_refuses_model_routes_and_keeps_queries(monkeypatch):
+    import importlib.util,sys,threading
+    from types import SimpleNamespace
+    from urllib.request import Request,urlopen
+    from urllib.error import HTTPError
+    path=expert.ROOT/'scripts/serve_single_summary_candidate.py'
+    sys.path.insert(0,str(expert.ROOT/'scripts'))
+    try:
+        spec=importlib.util.spec_from_file_location('source_only_candidate_test',path)
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    finally:sys.path.pop(0)
+    source=SimpleNamespace(config={'collection':'fixture','retriever':'fixture'},storage_identity='fixture',check_backend=lambda:None,
+                           search=lambda request:{'state':'evidence_unassessed','generation':'not_called'})
+    monkeypatch.setattr(module,'create_service',lambda _:source)
+    monkeypatch.setattr(module,'create_study_answers',lambda _:(source,None))
+    monkeypatch.setattr(module,'training_guard',lambda _:pytest.fail('No GPU/training guard for CPU sources'))
+    monkeypatch.setattr(module,'SinglePassAnswers',lambda _:pytest.fail('No model answer object for CPU sources'))
+    original=module.LocalFixtureServer
+    seen=[]
+    class TestServer(original):
+        def serve_forever(self):
+            thread=threading.Thread(target=super().serve_forever,daemon=True);thread.start()
+            try:
+                for route in ['query','answer','interpret']:
+                    request=Request(f'http://127.0.0.1:{self.server_port}/literature-search/{route}',
+                                    data=b'{"schema_version":"prowl-expert-request-v1","request_id":"7597e91c-6023-4610-a7b5-f27c73c8a540","question":"Why are pancreas boundaries difficult to outline?"}',headers={'Content-Type':'application/json'})
+                    try:
+                        with urlopen(request,timeout=5) as r:seen.append((route,r.status,json.load(r)))
+                    except HTTPError as r:seen.append((route,r.code,json.load(r)))
+            finally:self.shutdown();thread.join(5)
+    monkeypatch.setattr(module,'LocalFixtureServer',TestServer)
+    module.run_candidate('fixture',0,sources_only=True)
+    assert [(r,s) for r,s,_ in seen]==[('query',200),('answer',409),('interpret',409)]
+    assert seen[0][2]['generation']=='not_called'
+    assert source.answer_gpu_reserved is False
