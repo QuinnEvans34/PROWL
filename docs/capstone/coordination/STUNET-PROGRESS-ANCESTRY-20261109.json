@@ -1,0 +1,14 @@
+{
+  "schema": "prowl-training-progress-ancestry-v1",
+  "progress_path": "configs/training-progress/lenovo-stunet-corrected-20261109.json",
+  "progress_sha256": "9959f678d93123a30f4b1cbe1acd5dfb9d8e30e75dc4cf58f2d43a688d64193a",
+  "starting_step": 12000,
+  "phase_local_step": 10571,
+  "global_step": 22571,
+  "parent_run_id": "pants_stunet_base_transfer_12k_20261106",
+  "parent_mlflow_run_id": "243ccf3f71c34417be60362af35187d1",
+  "parent_checkpoint_sha256": "ed000e1ce25829c29f1efea7bf7a5f3684cddf43b0dbcdc5d9f47e8afc8bfa55",
+  "continuation_ready_sha256": "d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8",
+  "parent_seconds_added_to_phase": 0,
+  "note": "Progress snapshot was already written before starting_step refinement arrived; preserved unchanged. Mac may map starting_step to run.starting_step. Parent is separate archived curve."
+}
