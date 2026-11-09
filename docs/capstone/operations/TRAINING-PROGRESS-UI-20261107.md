@@ -91,3 +91,15 @@ in the normal desktop viewport. Browser proof remains local at
 Mobile browser presentation and a participant walkthrough were not performed.
 The saved export is not an automatic live feed and needs a newly delivered
 metadata export to advance its step count.
+
+## November 9 continuation display
+
+The current admitted export now has a stable consumer path,
+`configs/training-progress/current.json`; the original November 7 export remains
+unchanged in its dated file. An optional integer `run.starting_step` defaults to
+zero and is immutable within an execution. Counts and elapsed time in the export
+remain phase-local. The UI derives global checkpoint/validation labels by adding
+the starting step, while the progress bar counts only new updates. It does not
+join parent and continuation curves or add parent runtime to the continuation.
+A fresh dated export and its source hash are required before refreshing the
+current file; this is still a saved observation, not a live Lenovo feed.

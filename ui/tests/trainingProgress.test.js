@@ -40,6 +40,18 @@ describe('completed validation admission', () => {
 })
 
 describe('export freshness and immutability', () => {
+  it('admits a continuation offset without allowing ancestry to change within one execution', () => {
+    const old = fixture(); old.run.starting_step = 12000
+    expect(validateTrainingProgress(old)).toBe(old)
+    const next = structuredClone(old); next.run.starting_step = 0
+    expect(() => acceptTrainingProgress(old, next)).toThrow()
+    for (const offset of [-1, 1.5, '12000', 999999]) {
+      const d = fixture(); d.run.starting_step = offset
+      expect(() => validateTrainingProgress(d)).toThrow()
+    }
+    const legacy = fixture(), explicitZero = fixture(); explicitZero.run.starting_step = 0
+    expect(acceptTrainingProgress(legacy, explicitZero)).toBe(explicitZero)
+  })
   it('uses observation time rather than the time a file is read', () => {
     const d = fixture(), t = Date.parse(d.observed_at)
     expect(trainingProgressSummary(d, t + 16 * 60000).freshness).toBe('older')

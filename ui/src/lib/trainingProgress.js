@@ -21,9 +21,10 @@ export function validateTrainingProgress(value) {
   text(source.run_id); text(source.mlflow_run_id)
   if (!/^[a-f0-9]{64}$/.test(source.receipt_sha256)) fail()
   if (!run || !phases.has(run.phase) || run.scope !== 'provided_pancreas_region_exploratory' || run.exposure !== 'pretraining_overlap_unresolved') fail()
-  keys(run, ['title', 'scope', 'exposure', 'phase', 'step', 'target_steps', 'validation_interval', 'elapsed_seconds', 'validation'])
+  keys(run, ['title', 'scope', 'exposure', 'phase', 'step', 'target_steps', 'starting_step', 'validation_interval', 'elapsed_seconds', 'validation'])
   text(run.title)
   integer(run.target_steps, 1, 1000000); integer(run.step, 0, run.target_steps)
+  integer(run.starting_step ?? 0, 0, 1000000 - run.target_steps)
   integer(run.validation_interval, 1, run.target_steps)
   if (run.target_steps % run.validation_interval !== 0 || typeof run.elapsed_seconds !== 'number' || !Number.isFinite(run.elapsed_seconds) || run.elapsed_seconds < 0) fail()
   if (!cohort) fail()
@@ -62,6 +63,7 @@ export function acceptTrainingProgress(previous, candidate) {
   if (next.source.run_id === previous.source.run_id) {
     const same = ['receipt_sha256', 'mlflow_run_id', 'machine'].every(k => next.source[k] === previous.source[k])
       && ['target_steps', 'validation_interval', 'scope', 'exposure'].every(k => next.run[k] === previous.run[k])
+      && (next.run.starting_step ?? 0) === (previous.run.starting_step ?? 0)
       && Object.keys(previous.cohort).every(k => next.cohort[k] === previous.cohort[k])
     if (!same || next.run.step < previous.run.step || next.run.elapsed_seconds < previous.run.elapsed_seconds) throw new Error('Training identity or progress changed')
     for (const [index, old] of previous.validations.entries()) {

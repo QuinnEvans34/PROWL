@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import retained from '../../../configs/training-progress/lenovo-stunet-20261106.json'
+import retained from '../../../configs/training-progress/current.json'
 import { acceptTrainingProgress, MAX_PROGRESS_BYTES, trainingProgressSummary, validateTrainingProgress } from '../lib/trainingProgress.js'
 import './TrainingProgressPanel.css'
 
@@ -9,7 +9,7 @@ const dice = n => n.toFixed(4)
 const duration = n => `${Math.floor(n / 3600)}h ${Math.floor(n % 3600 / 60)}m`
 const phaseLabels = { training: 'Training', validating: 'Validating', paused: 'Paused', failed: 'Failed', completed: 'Completed' }
 
-function DiceChart({ points, target }) {
+function DiceChart({ points, target, startingStep = 0 }) {
   const x = step => 40 + step / target * 520
   const y = score => 125 - score * 100
   return <figure className="pw-progress__chart">
@@ -19,13 +19,13 @@ function DiceChart({ points, target }) {
         <line x1="40" x2="560" y1={y(tick)} y2={y(tick)} className="pw-progress__grid" />
         <text x="30" y={y(tick) + 4} textAnchor="end">{tick}</text>
       </g>)}
-      {[0, target / 2, target].map(tick => <text key={tick} x={x(tick)} y="148" textAnchor="middle">{number(tick)}</text>)}
+      {[0, target / 2, target].map(tick => <text key={tick} x={x(tick)} y="148" textAnchor="middle">{number(tick + startingStep)}</text>)}
       {['lesion_dice', 'pancreas_dice'].map(metric => <g key={metric} className={`pw-progress__${metric}`}>
         <polyline points={points.map(p => `${x(p.step)},${y(p[metric])}`).join(' ')} fill="none" strokeWidth="2.5" />
-        {points.map(p => <circle key={p.step} cx={x(p.step)} cy={y(p[metric])} r="4"><title>{`${number(p.step)} updates: ${dice(p[metric])}`}</title></circle>)}
+        {points.map(p => <circle key={p.step} cx={x(p.step)} cy={y(p[metric])} r="4"><title>{`${number(p.step + startingStep)} updates: ${dice(p[metric])}`}</title></circle>)}
       </g>)}
     </svg>
-    <figcaption><span className="pw-progress__legend-lesion">Lesion</span><span className="pw-progress__legend-pancreas">Pancreas</span><span>Completed validations only · optimizer updates</span></figcaption>
+    <figcaption><span className="pw-progress__legend-lesion">Lesion</span><span className="pw-progress__legend-pancreas">Pancreas</span><span>Completed validations only · {startingStep ? 'global' : 'optimizer'} updates</span></figcaption>
   </figure>
 }
 
@@ -73,6 +73,7 @@ export default function TrainingProgressPanel({ initialSnapshot = retained, now 
 
   const { latest, best, ageMinutes, freshness } = trainingProgressSummary(snapshot, observedNow)
   const { run, cohort, source } = snapshot
+  const startingStep = run.starting_step ?? 0
   const freshnessLabel = freshness === 'clock_ahead' ? 'Source clock is ahead; freshness is uncertain'
     : freshness === 'older' ? 'Older saved observation' : 'Recent saved observation'
   return <section className="pw-progress" aria-labelledby="experiment-progress-heading">
@@ -84,21 +85,22 @@ export default function TrainingProgressPanel({ initialSnapshot = retained, now 
       <p>{notice}</p>{error && <p role="alert">{error}</p>}
     </div>
     <div className="pw-progress__updates"><strong>{number(run.step)} / {number(run.target_steps)} updates</strong><span>{duration(run.elapsed_seconds)} recorded session time</span></div>
+    {startingStep > 0 && <p>New updates in this continuation. Global step <strong>{number(startingStep + run.step)}/{number(startingStep + run.target_steps)}</strong>; parent checkpoint at {number(startingStep)}. Session time above covers this phase only; parent time is counted separately once.</p>}
     <progress value={run.step} max={run.target_steps} aria-label="Recorded optimizer updates" />
-    {run.validation && <p className="pw-progress__pending" role="status">Validation at {number(run.validation.step)} updates: {run.validation.completed_cases}/{run.validation.total_cases} cases checked. DICE will appear when the complete report is ready.</p>}
+    {run.validation && <p className="pw-progress__pending" role="status">Validation at {number(run.validation.step + startingStep)} updates: {run.validation.completed_cases}/{run.validation.total_cases} cases checked. DICE will appear when the complete report is ready.</p>}
     {latest ? <>
       <div className="pw-progress__metrics">
-        <div><span>Latest lesion DICE</span><strong>{dice(latest.lesion_dice)}</strong><small>{number(latest.step)} updates</small></div>
-        <div><span>Best lesion DICE so far</span><strong>{dice(best.lesion_dice)}</strong><small>{number(best.step)} updates</small></div>
-        <div><span>Latest pancreas DICE</span><strong>{dice(latest.pancreas_dice)}</strong><small>{number(latest.step)} updates</small></div>
+        <div><span>Latest lesion DICE</span><strong>{dice(latest.lesion_dice)}</strong><small>{number(latest.step + startingStep)} updates</small></div>
+        <div><span>Best lesion DICE so far</span><strong>{dice(best.lesion_dice)}</strong><small>{number(best.step + startingStep)} updates</small></div>
+        <div><span>Latest pancreas DICE</span><strong>{dice(latest.pancreas_dice)}</strong><small>{number(latest.step + startingStep)} updates</small></div>
       </div>
-      <DiceChart points={snapshot.validations} target={run.target_steps} />
+      <DiceChart points={snapshot.validations} target={run.target_steps} startingStep={startingStep} />
       <p>At the latest completed validation: lesion overlap in <strong>{latest.detected_positive_cases}/{cohort.positive_cases}</strong> positive cases; predicted lesions in <strong>{latest.false_alarm_cases}/{cohort.reference_empty_cases}</strong> reference-empty cases.</p>
       <div className="pw-progress__table"><table><caption>Complete {cohort.development_cases}-case validation history</caption>
-        <thead><tr><th>Updates</th><th>Lesion DICE</th><th>Pancreas DICE</th><th>Detected positive cases</th><th>Reference-empty false alarms</th></tr></thead>
-        <tbody>{snapshot.validations.map(point => <tr key={point.step}><th scope="row">{number(point.step)}{point.step === best.step && <small>Best lesion score</small>}</th><td>{dice(point.lesion_dice)}</td><td>{dice(point.pancreas_dice)}</td><td>{point.detected_positive_cases}/{cohort.positive_cases}</td><td>{point.false_alarm_cases}/{cohort.reference_empty_cases}</td></tr>)}</tbody>
+        <thead><tr><th>{startingStep ? 'Global updates' : 'Updates'}</th><th>Lesion DICE</th><th>Pancreas DICE</th><th>Detected positive cases</th><th>Reference-empty false alarms</th></tr></thead>
+        <tbody>{snapshot.validations.map(point => <tr key={point.step}><th scope="row">{number(point.step + startingStep)}{point.step === best.step && <small>Best lesion score</small>}</th><td>{dice(point.lesion_dice)}</td><td>{dice(point.pancreas_dice)}</td><td>{point.detected_positive_cases}/{cohort.positive_cases}</td><td>{point.false_alarm_cases}/{cohort.reference_empty_cases}</td></tr>)}</tbody>
       </table></div>
-    </> : <p className="pw-progress__pending">No complete validation yet. First DICE is scheduled at {number(run.validation_interval)} updates, after all {cohort.development_cases} cases have been checked.</p>}
+    </> : <p className="pw-progress__pending">No complete validation yet. First DICE is scheduled at {number(run.validation_interval + startingStep)} updates, after all {cohort.development_cases} cases have been checked.</p>}
     <p className="pw-progress__scope">Uses supplied pancreas regions. Development results; pretraining overlap remains unresolved. These scores do not establish autonomous or independent-test performance.</p>
     <details className="pw-progress__definitions"><summary>Metric definitions and result source</summary>
       <p>Lesion DICE averages the {cohort.positive_cases} positive cases. Pancreas DICE averages all {cohort.development_cases} cases. Detection means any lesion overlap; a false alarm means any predicted lesion on a reference-empty case. Best means the highest completed lesion DICE observed so far.</p>

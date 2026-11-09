@@ -2,7 +2,7 @@ import { readFileSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { acceptTrainingProgress, MAX_PROGRESS_BYTES } from './src/lib/trainingProgress.js'
 
-const retained = fileURLToPath(new URL('../configs/training-progress/lenovo-stunet-20261106.json', import.meta.url))
+const retained = fileURLToPath(new URL('../configs/training-progress/current.json', import.meta.url))
 function readSnapshot(path) {
   if (statSync(path).size > MAX_PROGRESS_BYTES) throw new Error('Export too large')
   const data = readFileSync(path, 'utf8')

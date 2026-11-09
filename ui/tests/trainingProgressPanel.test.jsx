@@ -1,9 +1,10 @@
 import React from 'react'
 import { it, expect, vi } from 'vitest'
 import { fireEvent, render, screen, within, waitFor } from '@testing-library/react'
-import TrainingProgressPanel from '../src/components/TrainingProgressPanel.jsx'
+import ProgressPanel from '../src/components/TrainingProgressPanel.jsx'
 import retained from '../../configs/training-progress/lenovo-stunet-20261106.json'
 const fixture = () => structuredClone(retained)
+const TrainingProgressPanel = props => <ProgressPanel initialSnapshot={retained} {...props} />
 const now = () => Date.parse(retained.observed_at) + 20 * 60000
 const response = snapshot => new Response(JSON.stringify({ snapshot, read_state: 'local_snapshot', note: 'Saved export read.' }))
 
@@ -85,4 +86,19 @@ it('isolates a late response from an unmounted request, even if transport ignore
   resolve(response(late))
   await waitFor(() => expect(screen.getByText('6,814 / 12,000 updates')).toBeTruthy())
   expect(screen.queryByText('7,000 / 12,000 updates')).toBeNull()
+})
+
+it('separates new continuation updates and time from global checkpoint and validation labels', async () => {
+  const d = fixture(); d.run.starting_step = 12000
+  d.source.run_id = 'corrected-continuation'; d.run.title = 'Corrected continuation'
+  vi.stubGlobal('fetch', vi.fn(async () => response(d)))
+  render(<TrainingProgressPanel initialSnapshot={d} now={now} />)
+  await screen.findByText('Saved export read.')
+  expect(screen.getByText('6,814 / 12,000 updates')).toBeTruthy()
+  expect(screen.getByText('18,814/24,000')).toBeTruthy()
+  expect(screen.getByText(/Session time above covers this phase only/)).toBeTruthy()
+  const table = screen.getByRole('table')
+  expect(within(table).getByText('Global updates')).toBeTruthy()
+  expect(within(table).getByText('14,000')).toBeTruthy()
+  expect(within(table).queryByText('2,000')).toBeNull()
 })

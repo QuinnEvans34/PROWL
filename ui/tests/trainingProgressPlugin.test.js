@@ -3,7 +3,7 @@ import { mkdtempSync, writeFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { it, expect, vi, afterEach } from 'vitest'
-import retained from '../../configs/training-progress/lenovo-stunet-20261106.json'
+import retained from '../../configs/training-progress/current.json'
 import { trainingProgressPlugin } from '../trainingProgressPlugin.js'
 let dir
 afterEach(() => { vi.unstubAllEnvs(); if (dir) rmSync(dir, { recursive: true, force: true }); dir = null })
@@ -23,7 +23,7 @@ it('keeps valid data after a malformed, oversized or regressed local export', ()
   dir = mkdtempSync(join(tmpdir(), 'prowl-progress-')); const file = join(dir, 'export.json')
   vi.stubEnv('PROWL_TRAINING_PROGRESS_FILE', file)
   const d = structuredClone(retained); d.run.step++; d.run.elapsed_seconds++
-  d.observed_at = '2026-11-07T19:00:00Z'; writeFileSync(file, JSON.stringify(d))
+  d.observed_at = new Date(Date.parse(retained.observed_at) + 60000).toISOString(); writeFileSync(file, JSON.stringify(d))
   const h = middleware(); expect(JSON.parse(call(h).body).snapshot.run.step).toBe(d.run.step)
   for (const invalid of ['{partial', ' '.repeat(128 * 1024 + 1), JSON.stringify(retained)]) {
     writeFileSync(file, invalid); const result = JSON.parse(call(h).body)
