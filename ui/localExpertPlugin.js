@@ -26,7 +26,6 @@ export function localExpertPlugin() {
       try {
         if (answer) {
           const gate = await run('gpu')
-          if (gate.answer_blocker === 'ac_power') return reply(409, { error: 'Connect the charger for live AI answers. Find sources works on battery.' })
           if (gate.gpu_busy) return reply(409, { error: 'Another local job owns the GPU. Find sources is available; coordinate its pause before asking the model.' })
           return next()
         }

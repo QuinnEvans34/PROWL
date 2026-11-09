@@ -149,27 +149,44 @@ def test_warmup_returns_without_model_calls_when_another_owner_holds_lock(monkey
         assert expert.prepare_model() is False
 
 
-def test_battery_preparation_starts_only_source_search_never_model(monkeypatch,tmp_path):
+def test_battery_preparation_warms_model_and_starts_answer_service(monkeypatch,tmp_path):
     setup(monkeypatch,tmp_path,busy=False)
     monkeypatch.setattr(expert,'ac_power',lambda:False)
     monkeypatch.setattr(expert,'listening',lambda _:False)
-    monkeypatch.setattr(expert,'prepare_model',lambda:pytest.fail('No battery model warmup'))
+    warmed=[]
+    monkeypatch.setattr(expert,'prepare_model',lambda:warmed.append(True) or True)
     starts=[]
     monkeypatch.setattr(expert,'start_process',lambda argv,name:starts.append(argv))
     expert.prepare()
-    assert len(starts)==1 and '--sources-only' in starts[0]
+    assert warmed==[True]
+    assert len(starts)==1 and '--sources-only' not in starts[0]
 
 
-def test_power_gate_precedes_every_model_service_or_allocation_call(monkeypatch,tmp_path):
-    setup(monkeypatch,tmp_path,busy=False)
+def test_expert_battery_guard_preserves_exclusivity_and_training_ac_rule(monkeypatch,tmp_path):
+    from src.retrieval.local_runtime import expert_gpu_guard
+    from src.operations import full_training_platform as training
     def denied():raise RuntimeError('AC power required')
-    monkeypatch.setattr(expert,'require_ac',denied)
-    monkeypatch.setattr(expert,'http',lambda *a,**k:pytest.fail('No model request before power admission'))
-    with pytest.raises(RuntimeError,match='AC power required'):expert.prepare_model()
+    monkeypatch.setattr(training,'require_ac',denied)
+    path=tmp_path/'gpu.lock'
+    with pytest.raises(RuntimeError,match='AC power required'):
+        with training.training_guard(path):pytest.fail('Training must still require AC')
+    with expert_gpu_guard(path):
+        with pytest.raises(BlockingIOError):
+            with expert_gpu_guard(path):pytest.fail('Never admit a duplicate GPU owner')
+    with expert_gpu_guard(path):pass
 
 
-def test_existing_owned_source_service_upgrades_only_after_power_and_warmup(monkeypatch,tmp_path):
+def test_expert_battery_guard_releases_lock_after_failure(tmp_path):
+    from src.retrieval.local_runtime import expert_gpu_guard
+    path=tmp_path/'gpu.lock'
+    with pytest.raises(ValueError):
+        with expert_gpu_guard(path):raise ValueError('test failure')
+    with expert_gpu_guard(path):pass
+
+
+def test_existing_owned_source_service_upgrades_on_battery_after_warmup(monkeypatch,tmp_path):
     setup(monkeypatch,tmp_path,busy=False)
+    monkeypatch.setattr(expert,'ac_power',lambda:False)
     monkeypatch.setattr(expert,'http',lambda *a,**k:{'storage_identity':expert.digest(expert.read_config(expert.CONFIG)),'answer_policy':'sources-only'})
     events=[]
     monkeypatch.setattr(expert,'prepare_model',lambda:events.append('warm') or True)
@@ -219,7 +236,7 @@ def test_sources_only_http_refuses_model_routes_and_keeps_queries(monkeypatch):
                            search=lambda request:{'state':'evidence_unassessed','generation':'not_called'})
     monkeypatch.setattr(module,'create_service',lambda _:source)
     monkeypatch.setattr(module,'create_study_answers',lambda _:(source,None))
-    monkeypatch.setattr(module,'training_guard',lambda _:pytest.fail('No GPU/training guard for CPU sources'))
+    monkeypatch.setattr(module,'expert_gpu_guard',lambda _:pytest.fail('No GPU guard for CPU sources'))
     monkeypatch.setattr(module,'SinglePassAnswers',lambda _:pytest.fail('No model answer object for CPU sources'))
     original=module.LocalFixtureServer
     seen=[]

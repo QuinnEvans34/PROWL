@@ -13,14 +13,13 @@ it('prepares explicitly and explains the local GPU reservation', async () => {
   expect(fetch.mock.calls[0][1].method).toBe('POST')
 })
 
-it('shows successful battery source-search readiness without claiming live AI answers', async () => {
-  const value={drive:true,database:true,search:true,ollama:true,model:false,gpu_busy:false,ac_power:false,answer_blocker:'ac_power'}
+it('shows live AI readiness on battery', async () => {
+  const value={drive:true,database:true,search:true,ollama:true,model:true,gpu_busy:false,ac_power:false,answer_blocker:null}
   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:true,json:async()=>value}))
   render(<LocalExpertReadiness />)
   fireEvent.click(screen.getByText('Prepare AI expert'))
-  expect(await screen.findByText(/Battery mode: use Find sources/)).toBeTruthy()
+  expect(await screen.findByText(/The local model is loaded and ready for questions.*Running on battery/)).toBeTruthy()
   expect(screen.queryByRole('alert')).toBeNull()
-  expect(screen.queryByText(/loaded and ready for questions/)).toBeNull()
 })
 it('shows the actionable mount failure',async()=>{
   vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:true,json:async()=>({error:'Restart Docker Desktop to refresh its mount.'})}))

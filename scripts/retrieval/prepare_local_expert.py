@@ -49,7 +49,7 @@ def status():
     result = dict(drive=False, database=False, search=False, ollama=False,
                   model=False, gpu_busy=answer_gpu_busy())
     result['ac_power'] = ac_power()
-    result['answer_blocker'] = 'ac_power' if not result['ac_power'] else 'gpu_busy' if result['gpu_busy'] else None
+    result['answer_blocker'] = 'gpu_busy' if result['gpu_busy'] else None
     expected = None
     try:
         c = read_config(CONFIG); limits(c); result['drive'] = True
@@ -150,7 +150,6 @@ def wait_for(check, seconds, *, stage='Local service', process=None):
 def prepare_model():
     # Complete warmup before the candidate takes its lifetime reservation.
     # A concurrent trainer winning the lock leaves source search available.
-    require_ac()
     with LOCK.open('a+b') as lock:
         try: fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError: return False
@@ -159,7 +158,6 @@ def prepare_model():
         tags = http(11434, 'api/tags')['models']
         if not any(m.get('name') == MODEL and m.get('digest') == MODEL_SHA for m in tags):
             raise RuntimeError('The reviewed local model is missing or changed. No model was downloaded.')
-        require_ac()
         http(11434, 'api/generate', {'model': MODEL, 'stream': False, 'keep_alive': '10m'}, timeout=60)
         return True
 
@@ -201,9 +199,9 @@ def prepare():
         if sources_only: argv.append('--sources-only')
         return start_process(argv,'literature')
     if not listening(8016):
-        if ac_power() and not gpu_busy(): model_prepared = prepare_model()
+        if not gpu_busy(): model_prepared = prepare_model()
         # Source search must remain available when training owns the accelerator.
-        process = start_search(not ac_power() or gpu_busy() or not model_prepared)
+        process = start_search(gpu_busy() or not model_prepared)
     else:
         try:
             health = http(8016, 'literature-search/health')
@@ -211,14 +209,14 @@ def prepare():
             health = None
         if isinstance(health, dict) and health.get('storage_identity') != digest(c):
             raise RuntimeError('Port 8016 is serving a different or older search configuration. Stop the verified old literature service, then prepare again. No process was stopped automatically.')
-        if isinstance(health,dict) and health.get('answer_policy')=='sources-only' and ac_power() and not gpu_busy():
+        if isinstance(health,dict) and health.get('answer_policy')=='sources-only' and not gpu_busy():
             model_prepared = prepare_model()
             if model_prepared:
                 stop_owned_sources()
-                process = start_search(not ac_power() or gpu_busy())
+                process = start_search(gpu_busy())
     wait_for(lambda: backend_ready(digest(c)), 35,stage='Literature search service',process=process)
     if process is not None: record_ready_owner(process)
-    if not ac_power() or gpu_busy(): return status()
+    if gpu_busy(): return status()
     if not model_prepared: prepare_model()
     return status()
 
@@ -229,7 +227,7 @@ if __name__ == '__main__':
         if action not in ('status', 'prepare', 'gpu'): raise ValueError('Unknown action')
         if action == 'gpu':
             power=ac_power();busy=answer_gpu_busy()
-            value={'gpu_busy':busy,'ac_power':power,'answer_blocker':'ac_power' if not power else 'gpu_busy' if busy else None}
+            value={'gpu_busy':busy,'ac_power':power,'answer_blocker':'gpu_busy' if busy else None}
         else: value = prepare() if action == 'prepare' else status()
         print(json.dumps(value))
     except Exception as e:

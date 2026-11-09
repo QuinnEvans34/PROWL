@@ -229,17 +229,17 @@ it('finds sources without calling the answer path and keeps citations accessible
   await user.click(screen.getByRole('button', { name: 'View source 1' }))
   expect(screen.getAllByRole('link', { name: /Read full source/ }).length).toBe(4)
 })
-it('keeps battery source search available and blocks model actions including Enter', async () => {
+it('keeps battery source search available when another job owns the GPU and blocks model actions including Enter', async () => {
   const user = userEvent.setup(), search = vi.fn(), interpret = vi.fn()
   const findSources = vi.fn(async r => sourceResponse(r))
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ok:true,json:async()=>({
-    drive:true,database:true,search:true,ollama:false,model:false,gpu_busy:false,
-    ac_power:false,answer_blocker:'ac_power',
+    drive:true,database:true,search:true,ollama:false,model:false,gpu_busy:true,
+    ac_power:false,answer_blocker:'gpu_busy',
   })}))
   try {
     render(<LiteratureSearchPanel search={search} interpret={interpret} findSources={findSources} />)
     await user.click(screen.getByRole('button', {name:'Check status'}))
-    expect(await screen.findByText(/Battery mode: use Find sources/)).toBeTruthy()
+    expect(await screen.findByText(/Another local job is using the GPU/)).toBeTruthy()
     await user.type(screen.getByLabelText('Literature question'), 'Pancreatic head swelling')
     expect(screen.getByRole('button', {name:'Ask question'}).disabled).toBe(true)
     expect(screen.getByRole('button', {name:'Help phrase my question'}).disabled).toBe(true)
@@ -249,6 +249,24 @@ it('keeps battery source search available and blocks model actions including Ent
     await user.click(screen.getByRole('button', {name:'Find sources'}))
     expect(await screen.findByText(/Relevant comparison sources/)).toBeTruthy()
     expect(findSources).toHaveBeenCalledOnce()
+  } finally { vi.unstubAllGlobals() }
+})
+it('allows live answers with Enter on battery when the expert is ready', async () => {
+  const user=userEvent.setup(), search=vi.fn(async r=>response(r))
+  vi.stubGlobal('fetch',vi.fn().mockResolvedValue({ok:true,json:async()=>({
+    drive:true,database:true,search:true,ollama:true,model:true,gpu_busy:false,
+    ac_power:false,answer_blocker:null,
+  })}))
+  try {
+    render(<LiteratureSearchPanel search={search} />)
+    await user.click(screen.getByRole('button',{name:'Check status'}))
+    expect(await screen.findByText(/Running on battery/)).toBeTruthy()
+    await user.type(screen.getByLabelText('Literature question'),'Pancreatic imaging')
+    expect(screen.getByRole('button',{name:'Ask question'}).disabled).toBe(false)
+    expect(screen.getByRole('button',{name:'Help phrase my question'}).disabled).toBe(false)
+    await user.keyboard('{Enter}')
+    expect(await screen.findByText('Retrieved passages')).toBeTruthy()
+    expect(search).toHaveBeenCalledOnce()
   } finally { vi.unstubAllGlobals() }
 })
 it.each(['missing', 'unknown', 'extra', 'wrongPair', 'answerPath'])('rejects %s source-record mismatch', kind => {

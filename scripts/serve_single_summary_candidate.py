@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Opt-in single-call candidate. Requires exclusive accelerator admission; no auto-promotion."""
+"""Single-call expert with exclusive accelerator admission, on AC or battery."""
 import argparse
 from contextlib import nullcontext
 from pathlib import Path
 from serve_literature_search import create_service, create_study_answers, handler_for, LocalFixtureServer
 from src.retrieval.single_pass_summary import SinglePassAnswers
-from src.operations.full_training_platform import training_guard
+from src.retrieval.local_runtime import expert_gpu_guard
 ROOT=Path(__file__).resolve().parents[1]
 def run_candidate(config, port, *, sources_only=False):
-    with (nullcontext() if sources_only else training_guard(ROOT/'outputs/prowl/.mps-profile.lock')):
+    with (nullcontext() if sources_only else expert_gpu_guard(ROOT/'outputs/prowl/.mps-profile.lock')):
         service=create_service(config); sources,_=create_study_answers(service)
         service.answer_gpu_reserved = not sources_only
         class SourceOnlyAnswers:
@@ -18,7 +18,7 @@ def run_candidate(config, port, *, sources_only=False):
             def do_POST(self):
                 if self.path in ('/literature-search/answer','/literature-search/interpret'):
                     if not self.local(): return self.reply(403, {'error':'Local access required.'})
-                    return self.reply(409, {'error':'Source search is ready. Live AI answers require AC power and a free local GPU; use Find sources.'})
+                    return self.reply(409, {'error':'Source search is ready. Prepare AI expert with a free local GPU to enable live answers, or use Find sources.'})
                 return super().do_POST()
         try:
             server=LocalFixtureServer(('127.0.0.1',port),SourceOnlyHandler if sources_only else handler)
