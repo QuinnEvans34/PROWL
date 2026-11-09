@@ -1,5 +1,46 @@
 # Week 6 work plan — November 9–15, 2026
 
+## November 8 evening handoff
+
+The November7 preparation below is retained as dated history. The next week's
+starting evidence has advanced:
+
+- Original STU-Net12k is complete. The corrected continuation from that parent
+  is running toward global24000, with its existing hourly monitor. First full
+  raw14k validation Dice.353488 versus parent.371633 is an interim decline;
+  review all remaining scheduled validations and selected/terminal checkpoints
+  before deciding on the longer-training outcome. Do not change a live recipe
+  in reaction to one point. The complete per-case14k export is published on
+  Lenovo branch commit`02ba420`; it is not a filtered score.
+- The [Mac confidence study](../operations/CAP-EXP-020-MAC-RESULTS-20261108.md)
+  and [nine-policy spatial/boundary screen](../operations/STUNET-POSTPROCESS-RESULTS-20261108.md)
+  are complete. Confidence cuts did not improve Dice; fixed5mm component
+  filtering gave original12k developmentDice.394938 with unchanged recall and
+  component hits. The entire policy grid and failures are retained; this is
+  postprocessing evidence, not model learning or independent confirmation.
+- The user made [fixed5mm postprocessing](../evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md)
+  a standing requirement for future segmentation integrations. Preserve raw
+  outputs and paired evaluation, qualify applicability/detection/recall per
+  model, and retain explicit raw fallback for missing predicted pancreas.
+  Do not retrofit this into the currently frozen evaluator or selection.
+- [Six exact training-input replays](../operations/STUNET-INPUT-AND-SPATIAL-FINDINGS-20261108.md)
+  found lesion labels disappearing at the8³ auxiliary target in3/4selected
+  positive patches, while full-resolution labels survive. The isolated
+  [16,8,4,2,0]/30 loss-weight candidate is CPU-tested, not CUDA/launch ready.
+  Keep it as the next single-factor training proposal; do not mix normalization,
+  sampling and spatial filtering into that comparison or queue another GPU job
+  merely because preparation is complete.
+
+Monday order: review new complete continuation results and backup/tracking
+evidence; reconcile the formal baseline/comparison requirements; then prepare
+the smallest matched loss ablation if still justified. While Lenovo trains,
+Mac can finish the source-grounded retrieval/answer evaluation protocol and
+reviewer checks for the proposed November14 participant walkthrough. Confirm
+the session details and personal active hours/submission separately; unattended
+compute is not human work time. Tonight's default is to leave the admitted run
+unchanged with AC/drives/app available and its existing monitor active. No new
+scientific launch or schedule is created by this handoff.
+
 Prepare a defensible model decision and measure retrieval/answer quality while
 finishing the open baseline and reviewer requirements. This is the November 7
 preparation requested by Quinton; Week 5 and its outstanding hours/submission
