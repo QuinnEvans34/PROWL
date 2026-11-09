@@ -1,5 +1,12 @@
 # AGENTS.md — Agent Context
 
+> **November9 local expert battery inference authorized and verified:** User
+> requires live AI answers for an unplugged presentation. Local expert uses
+> `src/retrieval/local_runtime.py` exclusive GPU guard without an AC requirement;
+> training/teacher/experiment AC rules remain unchanged. Do not reapply training's
+> power policy to interactive literature answers. Read
+> `docs/capstone/retrieval/BATTERY-EXPERT-20261109.md` for verification and demo steps.
+
 > **November8 standing rule for future segmentation models:** User requires
 > `predicted-pancreas-proximity-5mm-v1` for all future pancreas/lesion model
 > evaluation/inference integrations. Read

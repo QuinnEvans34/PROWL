@@ -16,7 +16,7 @@ demonstrate and explain from input to saved decision.
 | --- | --- |
 | Imaging and review | One admitted raw-CT → localization → segmentation → native-viewer → human-decision path, with valid reuse, stale-input rejection and recovery evidence. Keep a verified saved prediction available for demonstrations. |
 | Model evidence | Close the existing continuation with its complete validation series, selected/final checkpoints, false positives, missed lesions, tracking and backups. Compare matched scopes; preserve raw scores and qualify the fixed 5 mm policy separately. |
-| Cited assistant | Reliable startup, clear battery/source-only mode, correct citations, editing/cancellation and retained conversation behavior. Finish the source-grounded retrieval/answer evaluation rather than treating one successful answer as acceptance. |
+| Cited assistant | Reliable startup on battery or AC, clear source-only fallback when the GPU is occupied, correct citations, editing/cancellation and retained conversation behavior. Finish the source-grounded retrieval/answer evaluation rather than treating one successful answer as acceptance. |
 | Stakeholder and communication | Conduct the planned aunt walkthrough, record actual observations and prioritized changes, reconcile personal work hours separately from compute, and assemble the demo/report evidence. |
 
 The autonomous baseline still has 63 completed cases and seven declared failures.
@@ -61,21 +61,21 @@ Pretraining/patient overlap remains unresolved; do not claim leakage-free scores
 
 ## Battery meeting runbook
 
-**Prepare AI expert** now starts CPU source search on battery using the existing
-internal literature database. It does not load the local answer model. The UI
-states that limit and blocks Ask/Help, including Enter submission; **Find sources**
-and source passages/citations remain available. Returning to AC and preparing
-again can upgrade the verified helper-owned service, subject to the existing GPU
-and safety gates. Full generation was not requalified on battery.
+Quinton's later November9 authorization replaces the earlier source-only battery
+fallback. **Prepare AI expert** now loads the same pinned answer model on battery
+or AC using the existing internal literature database. Actual unplugged model
+loading and generated answers passed; see the [battery qualification](../retrieval/BATTERY-EXPERT-20261109.md).
+The GPU reservation and existing resource checks still apply. **Find sources**
+remains a fallback if another job owns the accelerator.
 
 For the short check-in:
 
 1. Open [Training](http://127.0.0.1:5180/training) to show dated results and the
    measured/estimated compute accounting. Explain that this is a retained snapshot.
-2. Open [Research](http://127.0.0.1:5180/research), prepare, then **Find sources**
+2. Open [Research](http://127.0.0.1:5180/research), prepare, then **Ask question**
    for “Why can pancreas boundaries be hard to outline on CT?” Open a citation
-   and its original passage. This demonstrates retrieval, not a newly generated
-   battery answer. Opening the publisher website itself requires internet.
+   and its original passage. Live generation works on battery; **Find sources**
+   also works independently. Opening the publisher website itself requires internet.
 3. Open the [saved prediction](http://127.0.0.1:5180/saved?review=b671bd4453db6c91d842d948c95eeac351df76902480d54b5389a2a174efd2f5)
    to show native CT and predicted overlays. “How big is this pancreas?” calculates
    the predicted-mask volume locally; it does not establish anatomical truth.
@@ -84,7 +84,7 @@ For the short check-in:
    The earlier AC-powered AI answer can be discussed as a recorded example,
    with its known answer-quality limitations.
 
-The CPU literature and saved-review services are deliberately left available for
-this meeting. No local model inference or training is running. Existing Lenovo
+The literature/model and saved-review services are deliberately left available for
+this meeting. No local training is running. Existing Lenovo
 training is unchanged. Read the [startup evidence](../testing/CHAIR-DEMO-READINESS-20261109.md)
 and [ten-minute talking points](DEGREE-CHAIR-CHECKIN-20261109.md).

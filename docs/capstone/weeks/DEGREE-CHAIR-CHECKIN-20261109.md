@@ -76,8 +76,9 @@ existing model comparison before adding more architectures or broad UI changes.
 The [remaining-scope plan](REMAINING-SCOPE-AND-DEMO-20261109.md) maps that work to
 the class demo and final presentations. If the autonomous qualification remains
 blocked, I want to agree an explicit scoped fallback rather than overstate it.
-For this battery-powered meeting, Research demonstrates source search and
-citations; live local AI summaries still require a charger.
+For this battery-powered meeting, Research now supports live AI summaries as
+well as source search and citations. Unplugged loading and generation were
+[verified after the explicit battery authorization](../retrieval/BATTERY-EXPERT-20261109.md).
 
 ## Optional things to open
 

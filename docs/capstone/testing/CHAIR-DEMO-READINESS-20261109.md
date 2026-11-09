@@ -1,5 +1,13 @@
 # Check-in demonstration readiness — November 9
 
+**Latest authorization supersedes the earlier battery restriction:** Quinton
+requires live AI generation while unplugged. The expert now uses a separate
+exclusive inference guard; training still requires AC. Battery model preparation,
+a real browser answer and a second proxy answer passed. Read the
+[current battery qualification and runbook](../retrieval/BATTERY-EXPERT-20261109.md).
+The source-only battery account below records the earlier diagnosis/repair and
+is historical. No scientific training power rule was changed.
+
 ## Battery follow-up before the meeting
 
 The earlier AC-powered check below passed but missed the battery case. Quinton's
