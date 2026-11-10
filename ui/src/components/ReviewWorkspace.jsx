@@ -732,7 +732,7 @@ export default function ReviewWorkspace({
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={focusMode}
             onClick={toggleFocus}>{focusMode ? 'Exit focus' : 'Focus workspace'}</button>
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" onClick={toggleFullscreen}
-            title={fullscreenAvailable ? 'Open this workspace in full screen' : 'Use workspace focus when browser full screen is unavailable'}><Expand size={13} aria-hidden="true" /> {isFullscreen ? 'Exit full screen' : 'Full screen'}</button>
+            title={isFullscreen ? 'Exit display full screen (Esc)' : fullscreenAvailable ? 'Fill the entire display and hide browser controls (Esc to exit)' : 'Display full screen needs a supported browser'}><Expand size={13} aria-hidden="true" /> {isFullscreen ? 'Exit full screen' : 'Full screen'}</button>
           <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" onClick={() => {
             resetLayout(); setFocusMode(false); setMobilePanelOpen(false); setMobileStudiesOpen(false)
             dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' })

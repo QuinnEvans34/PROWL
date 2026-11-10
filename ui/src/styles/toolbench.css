@@ -61,6 +61,8 @@
 .pw-toolbench--focus .pw-studybar { display: none; }
 .pw-toolbench--focus .pw-workspace-actions__label { color: var(--pw-text); }
 .pw-toolbench:fullscreen { width: 100%; height: 100%; background: var(--pw-bg); }
+.pw-toolbench:-webkit-full-screen { width: 100%; height: 100%; background: var(--pw-bg); }
+.pw-toolbench--fullscreen .pw-studybar { display: none; }
 .pw-toolbench::backdrop { background: var(--pw-bg); }
 
 @media (max-width: 1300px) {

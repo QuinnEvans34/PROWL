@@ -23,6 +23,9 @@ afterEach(() => {
   delete document.fullscreenElement
   delete document.exitFullscreen
   delete document.fullscreenEnabled
+  delete document.webkitFullscreenElement
+  delete document.webkitExitFullscreen
+  delete document.webkitFullscreenEnabled
 })
 
 describe('workspace focus and browser full screen', () => {
@@ -40,17 +43,17 @@ describe('workspace focus and browser full screen', () => {
     expect(mounted).toHaveBeenCalledTimes(1)
   })
 
-  it('uses workspace focus when browser full screen is unavailable or denied', async () => {
+  it('explains unavailable or denied full screen without substituting workspace focus', async () => {
     render(<Workspace />)
     await act(async () => { await display.toggleFullscreen() })
-    expect(display.focusMode).toBe(true)
+    expect(display.focusMode).toBe(false)
     expect(display.isFullscreen).toBe(false)
-    expect(screen.getByLabelText('Fullscreen error').textContent).toContain('unavailable')
+    expect(screen.getByLabelText('Fullscreen error').textContent).toContain('cannot use display full screen')
     const workspace = screen.getByTestId('workspace')
     workspace.requestFullscreen = vi.fn().mockRejectedValue(new Error('Permission denied'))
     document.exitFullscreen = vi.fn()
     await act(async () => { await display.toggleFullscreen() })
-    expect(display.focusMode).toBe(true)
+    expect(display.focusMode).toBe(false)
     expect(screen.getByLabelText('Fullscreen error').textContent).toContain('could not open')
   })
 
@@ -86,12 +89,34 @@ describe('workspace focus and browser full screen', () => {
     })
     await act(async () => { await display.toggleFullscreen() })
     expect(display.isFullscreen).toBe(true)
+    expect(workspace.requestFullscreen).toHaveBeenCalledWith({ navigationUI: 'hide' })
     fireEvent.click(screen.getByText('Focus'))
     await act(async () => { fireEvent.keyDown(document, { key: 'Escape' }) })
     expect(document.exitFullscreen).toHaveBeenCalledTimes(1)
     expect(display.isFullscreen).toBe(false)
     expect(display.focusMode).toBe(false)
     expect(mounted).toHaveBeenCalledTimes(1)
+  })
+
+  it('supports Safari prefixed full screen while preserving an existing focus layout', async () => {
+    render(<Workspace />)
+    const workspace = screen.getByTestId('workspace')
+    workspace.webkitRequestFullscreen = vi.fn(() => {
+      Object.defineProperty(document, 'webkitFullscreenElement', { value: workspace, configurable: true })
+      document.dispatchEvent(new Event('webkitfullscreenchange'))
+    })
+    document.webkitExitFullscreen = vi.fn(() => {
+      Object.defineProperty(document, 'webkitFullscreenElement', { value: null, configurable: true })
+      document.dispatchEvent(new Event('webkitfullscreenchange'))
+    })
+    fireEvent.click(screen.getByText('Focus'))
+    await act(async () => { await display.toggleFullscreen() })
+    expect(display.isFullscreen).toBe(true)
+    expect(display.focusMode).toBe(true)
+    await act(async () => { await display.toggleFullscreen() })
+    expect(display.isFullscreen).toBe(false)
+    expect(display.focusMode).toBe(true)
+    expect(document.webkitExitFullscreen).toHaveBeenCalledTimes(1)
   })
 
   it('does not exit another element full screen and removes listeners on unmount', () => {

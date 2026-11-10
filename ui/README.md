@@ -9,7 +9,10 @@ panel; keyboard arrows also operate focused dividers. Restore layout changes
 presentation preferences without clearing imaging settings or review drafts.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
-mode where supported and falls back to focus otherwise; Escape exits either.
+mode where supported, hiding browser controls and the study header. It requests
+the entire display; Focus workspace fills only the current window. If the host
+cannot enter native full screen, PROWL explains that without changing layouts.
+Escape exits either mode.
 Viewer instances remain mounted through these display changes. Layout choices
 are saved locally; CT positions, measurements and review text are not included in
 the layout preference record. Narrow screens open their drawers only on request.
