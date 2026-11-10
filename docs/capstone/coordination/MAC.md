@@ -1,5 +1,43 @@
 # Mac work status
 
+## November 10 terminal24k case-reuse continuation LIVE after approval
+
+- User approved the pause-aware deadline extension, preserving the same four-hour
+  cumulative active allowance and every scientific/resource gate. Original budget,
+  pause, interrupted output and parentMLflow remain intact. Charge2,264.624918s
+  before pause and all current preparation from11:37:34; effective stop is
+  **14:59:49Mountain**, earlier than the approved15:30 ceiling. No budget reset.
+  [Approval](../operations/STUNET-24K-MARGIN-RESUME-APPROVAL-20261110.json),
+  [protocol](../operations/STUNET-24K-MARGIN-RESUME-20261110.md), and
+  [execution snapshot](../operations/STUNET-24K-MARGIN-RESUME-EXECUTION-20261110.json).
+- Root `stunet-margin-mac-20261110/screen-02`, independent backup
+  `~/PROWL-Backups/stunet-margin-mac-20261110-02`. Exact14case/817tile proofs reused;
+  only56remaining cases/3146tiles are inferred. New scientific case body is byte
+  identical except progress counters; same model/weights/policies/geometry/runtime.
+  Independent model cold reopen exact. Original14 native codes are not duplicated.
+- RequestSHA `1e8f3ff8b98014af3d560638bd0567fb6bf29ac40fb214deaef7db27154dbbdc`.
+  One-shot owner `com.prowl.stunet-margin-mac-20261110-02`, supervisor68453 /
+  worker68520, worker startTueNov10 11:54:52Mountain. First two new cases completed
+  and independently replayed: total16/70,939/3963tiles. New-case qualificationPASS,
+  conservative remaining6,215.49s fits10,799.67s; peakMPS6,463,586,304B<8GiB.
+  All392producing pins match. Do not edit pinned code, duplicate or retry inference.
+- MLflow `5ece75b524484d8c94391228acfabebd` RUNNING, inference_policy, excluded
+  fromtraininghours. Parent `e9ae248ba9ff488e8c9a2c32040edbb5` remains
+  KILLED/PAUSED_BY_USER; newrun links to it. Full70-case tuning verdict pending.
+- CPU completion owner `com.prowl.stunet-margin-closeout-20261110-04` waits for
+  the exact resumed supervisor before verifying/reducing/publishing reports.
+  Its first wrapper matched the old producer filename and exited prematurely;
+  failure preserved, registration removed, additivev2corrected and regression
+  tested. No inference interruption, source-pin edit or repeated case resulted.
+- Same six-policy CPU clipping stage, `com.prowl.stunet-voxel-clip-20261110-02`,
+  waits for verified full primary closeout; still4GiBRSS/20min within the same
+  effective deadline. Combined60settings, no extra model/CTvoxel reads or training.
+  Both one-shot CPU stages publish exact verified result-document paths only;
+  no recurring monitor, automatic GPU successor or policy deployment is armed.
+- Continuation/control/closeout checks:24tests+54 native-scoring subtestsPASS.
+  TrelloW06-16 updated. Lenovo remains unchanged:26kfirst fullvalidation advancing,
+  latest peer14/70cases,741/3963tiles; no completed new nativeDice yet.
+
 ## November 10 terminal24k screen USER PAUSED for school
 
 - Explicit user pause supersedes the LIVE entry below. Stopped at14 fully

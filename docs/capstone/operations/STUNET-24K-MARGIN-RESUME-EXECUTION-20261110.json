@@ -1,0 +1,50 @@
+{
+  "status": "RUNNING_CONTINUATION_NOT_A_COMPLETE_RESULT",
+  "observed_utc": "2026-11-10T18:57:51.005315+00:00",
+  "request_sha256": "1e8f3ff8b98014af3d560638bd0567fb6bf29ac40fb214deaef7db27154dbbdc",
+  "parent_request_sha256": "8cff4e3bcb0142ea12bb9c5ee1c1efff4401dbca4755c3fccbe51677e26deb75",
+  "checkpoint_sha256": "2cb9ff72c66b67f8bcdcb081c5d3f84735a83830f693ad2990fb8139933da92c",
+  "reused_cases": 14,
+  "new_cases_completed": 2,
+  "completed_cases_total": 16,
+  "completed_tiles_total": 939,
+  "last_progress": {
+    "event": "case_complete",
+    "case_id": "PanTS_00002028",
+    "completed": 16,
+    "tiles_done": 939,
+    "seconds": 53.47675483394414
+  },
+  "source_pins_checked": 392,
+  "source_pin_mismatches": [],
+  "process": {
+    "supervisor": 68453,
+    "worker": 68520,
+    "worker_start": "Tue Nov 10 11:54:52 2026"
+  },
+  "mlflow": {
+    "tracking_uri": "sqlite:////Volumes/PROWL-Data/PROWL/artifacts/stunet-margin-mac-20261110/mlflow.db",
+    "run_id": "5ece75b524484d8c94391228acfabebd",
+    "status": "RUNNING",
+    "parent_run_id": "e9ae248ba9ff488e8c9a2c32040edbb5",
+    "parent_status": "KILLED",
+    "kind": "inference_policy",
+    "training_hours": "excluded"
+  },
+  "deadline_unix": 1794347989.3750815,
+  "effective_deadline_mountain": "2026-11-10T14:59:49.375082-07:00",
+  "approved_hard_ceiling_mountain": "2026-11-10T15:30:00-07:00",
+  "cumulative_active_seconds": 14400,
+  "prior_charged_seconds": 2264.624918460846,
+  "conservative_remaining_projection_at_prepare_seconds": 10088.202345348274,
+  "original_budget_reset": false,
+  "primary_label": "com.prowl.stunet-margin-mac-20261110-02",
+  "closeout_label": "com.prowl.stunet-margin-closeout-20261110-04",
+  "secondary_label": "com.prowl.stunet-voxel-clip-20261110-02",
+  "completion_helper_v1_failed_before_results": true,
+  "additive_v2_helper_recovered_without_interrupting_inference": true,
+  "scientific_recipe_unchanged": true,
+  "primary_policies": 54,
+  "secondary_cpu_policies": 6,
+  "no_automatic_policy_deployment": true
+}
