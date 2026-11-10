@@ -1,0 +1,127 @@
+{
+  "as_of_utc": "2026-11-10T18:39:08.945619+00:00",
+  "run_id": "pants_stunet_longer_continuation_12k_20261110",
+  "global_step": 26000,
+  "phase_updates": 2000,
+  "phase_target": 12000,
+  "latest_event": "native_progress",
+  "phase_elapsed_seconds": 12535.734000000171,
+  "validation_progress": {
+    "event": "native_progress",
+    "elapsed_seconds": 12535.734000000171,
+    "utc_ms": 1794335929625,
+    "step": 26000,
+    "completed_cases": 7,
+    "total_cases": 70,
+    "tiles_done": 332,
+    "total_tiles": 3963
+  },
+  "completed_native_reports": [],
+  "checkpoint_backups": [
+    {
+      "step": 26000,
+      "sha256": "25aea4b9d4fc0eeb89b27fe46f2443d4c8b9e157ef0e1380f4a37e13568830c3",
+      "independent_backup_matches": true,
+      "bytes": 698166891
+    }
+  ],
+  "processes": [
+    {
+      "pid": 52560,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "scripts/training/supervise_stunet_longer_20261110.py",
+        "--request",
+        "E:/PROWL/readiness/stunet-longer-scientific-launch-20261110-a01/ready.json",
+        "--sha256",
+        "889675ab2069318c2eca4208ac2bdcf5be6e457f6442089e8db2a90aae0bbca3",
+        "--mode",
+        "science"
+      ],
+      "created": 1794323320.7313695,
+      "rss": 224591872,
+      "cpu_seconds": 5354.984375,
+      "io": {
+        "read_count": 123143,
+        "write_count": 60961,
+        "read_bytes": 18179855445,
+        "write_bytes": 121230575,
+        "other_count": 26064099,
+        "other_bytes": 1250413032
+      }
+    },
+    {
+      "pid": 46764,
+      "command": [
+        "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-longer-scientific-launch-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_longer_continuation_12k_20261110_launch01\\execution"
+      ],
+      "created": 1794323382.818318,
+      "rss": 5079040,
+      "cpu_seconds": 0.046875,
+      "io": {
+        "read_count": 3,
+        "write_count": 0,
+        "read_bytes": 2710,
+        "write_bytes": 0,
+        "other_count": 164,
+        "other_bytes": 4992
+      }
+    },
+    {
+      "pid": 35244,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ],
+      "created": 1794323382.8614895,
+      "rss": 8105984,
+      "cpu_seconds": 0.03125,
+      "io": {
+        "read_count": 0,
+        "write_count": 0,
+        "read_bytes": 0,
+        "write_bytes": 0,
+        "other_count": 111,
+        "other_bytes": 4696
+      }
+    },
+    {
+      "pid": 53712,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\prowl-week05-matched-20261102-a01\\python\\cpython-3.12.13-windows-x86_64-none\\python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-longer-scientific-launch-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_longer_continuation_12k_20261110_launch01\\execution"
+      ],
+      "created": 1794323382.9178784,
+      "rss": 1703591936,
+      "cpu_seconds": 11882.265624999998,
+      "io": {
+        "read_count": 1054610,
+        "write_count": 2470,
+        "read_bytes": 70653779196,
+        "write_bytes": 1398275328,
+        "other_count": 236644,
+        "other_bytes": 11997686
+      }
+    }
+  ],
+  "mlflow": {
+    "id": "dc0b189042704f51af9dbb2deed5f5a6",
+    "status": "RUNNING",
+    "stored_losses": 2000,
+    "matched_losses": 2000
+  },
+  "gpu": "38 %, 6019 MiB"
+}
