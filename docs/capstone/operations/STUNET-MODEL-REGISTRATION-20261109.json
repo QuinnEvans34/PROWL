@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "registry_name": "prowl-stunet-pancreas-assisted-research",
+  "version": 1,
+  "source": "runs:/13c709ae157949988de1d7f8821a03b7/registered-selected-stunet-18000-20261109",
+  "run_id": "13c709ae157949988de1d7f8821a03b7",
+  "checkpoint_sha256": "3a5615f0c54f3af80202f81fa0234e51e3b38df768a47f00ec4be39c7f624f1a",
+  "step": 18000,
+  "dice": 0.43051696723124094,
+  "exact_CPU_reload": true,
+  "new_training_seconds": 0,
+  "model_files": {
+    "MLmodel": "c5429b02cb78471da630f8a73b47f683720b87575f7362ed01570b77c72167b4",
+    "conda.yaml": "1842febab7e7df1f48e3f49b4166b8e2f0a62c35cd68370920f2ad88d4b333e7",
+    "requirements.txt": "dd4bb66eef51c78317597b0209f7498a9038fd5d2630eee0a6546e113eed0610",
+    "python_env.yaml": "a38198655b794c0e6ed76d70642ef844ab396984d0e3d405b469d15c41373888",
+    "data\\pickle_module_info.txt": "e0a90fe617e727b1c0a2f152d235ca0f9df721b407cb26644ce5e7f7bec29518",
+    "data\\model.pth": "a2b14aaf841477b2eabddcbc1fb372237ebb6b78e85c7d03234ea47b7b8f3e6c"
+  }
+}
