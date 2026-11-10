@@ -1,0 +1,227 @@
+{
+  "schema": "prowl.stunet24k.extended-source-reconciliation.v1",
+  "sources_sha256": {
+    "docs/capstone/coordination/STUNET-CORRECTED-FULL-NATIVE-METADATA-20261110.json": "4e2bec89a08dae10856f6da618c9c5be149aa19614471a7573d884be08036787",
+    "docs/capstone/coordination/LENOVO-STUNET-CORRECTED-COMPLETE-NATIVE-METADATA-20261110.json": "6413c8cecc8a0e3c64cdb3f0c3ee9731113a33de7cb0442fc8b4d8614407423e",
+    "docs/capstone/coordination/LENOVO-STUNET-COMPLETE-NATIVE-METADATA-20261108.json": "c5dcdb2aa77dbe2df2d214932b2d7e27b9dd55351c2aea798f2d676fd047f3cf"
+  },
+  "input_identity_comparison": {
+    "cases": 70,
+    "source_hashes": 210,
+    "exact_native_shapes_affines": true
+  },
+  "derived_series_exact_between_publications": true,
+  "all_420_case_rows_exact_between_publications": false,
+  "selected_sha256": "3a5615f0c54f3af80202f81fa0234e51e3b38df768a47f00ec4be39c7f624f1a",
+  "terminal_sha256": "2cb9ff72c66b67f8bcdcb081c5d3f84735a83830f693ad2990fb8139933da92c",
+  "training": {
+    "phase_updates": 12000,
+    "global_updates": 24000,
+    "first500_mean_loss": 0.6108967637717724,
+    "last500_mean_loss": 0.5607283807098865,
+    "loss_change_fraction": -0.08212252222804128,
+    "finite_losses": true,
+    "exposure_count_scope": "cumulative parent+continuation, not phase-only",
+    "cases": 1333,
+    "global_exposures": 24000,
+    "min_visits": 14,
+    "max_visits": 32,
+    "periodic_diagnostics": 24,
+    "positive_periodic_diagnostics": 10,
+    "lost_at_coarsest": [
+      {
+        "step": 19501,
+        "lesion_voxels_by_scale": [
+          1596,
+          212,
+          25,
+          3,
+          0
+        ]
+      },
+      {
+        "step": 22501,
+        "lesion_voxels_by_scale": [
+          1749,
+          204,
+          20,
+          1,
+          0
+        ]
+      },
+      {
+        "step": 23501,
+        "lesion_voxels_by_scale": [
+          720,
+          90,
+          12,
+          2,
+          0
+        ]
+      }
+    ],
+    "nonzero_finite_body_and_head_gradient_in_each_diagnostic": true
+  },
+  "saved_output_arrays": {
+    "retained_masks": false,
+    "retained_probabilities": false,
+    "retained_logits": false,
+    "mask_probability_logit_files": [],
+    "basis": "Saved execution inventory and frozen predict implementation return metrics only; no native arrays persisted.",
+    "selected_and_terminal_checkpoints": [
+      {
+        "path": "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution\\checkpoint-18000.pt",
+        "backup": "C:\\Users\\quinn\\PROWL-Backups\\pants_stunet_corrected_continuation_12k_20261108_launch02\\checkpoint-18000.pt",
+        "file": "checkpoint-18000.pt",
+        "sha256": "3a5615f0c54f3af80202f81fa0234e51e3b38df768a47f00ec4be39c7f624f1a",
+        "bytes": 698166891
+      },
+      {
+        "path": "E:\\PROWL\\artifacts\\pants_stunet_corrected_continuation_12k_20261108_launch02\\execution\\checkpoint-24000.pt",
+        "backup": "C:\\Users\\quinn\\PROWL-Backups\\pants_stunet_corrected_continuation_12k_20261108_launch02\\checkpoint-24000.pt",
+        "file": "checkpoint-24000.pt",
+        "sha256": "2cb9ff72c66b67f8bcdcb081c5d3f84735a83830f693ad2990fb8139933da92c",
+        "bytes": 698166891
+      }
+    ],
+    "inventory_as_previously_recorded": [
+      {
+        "name": "history.jsonl",
+        "bytes": 12746644
+      },
+      {
+        "name": "checkpoint-12500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-13000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-13500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-14000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-14000.json",
+        "bytes": 65221
+      },
+      {
+        "name": "checkpoint-14500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-15000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-15500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-16000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-16000.json",
+        "bytes": 65268
+      },
+      {
+        "name": "checkpoint-16500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-17000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-17500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-18000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-18000.json",
+        "bytes": 65243
+      },
+      {
+        "name": "checkpoint-18500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-19000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-19500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-20000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-20000.json",
+        "bytes": 65181
+      },
+      {
+        "name": "checkpoint-20500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-21000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-21500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-22000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-22000.json",
+        "bytes": 65206
+      },
+      {
+        "name": "checkpoint-22500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-23000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-23500.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "checkpoint-24000.pt",
+        "bytes": 698166891
+      },
+      {
+        "name": "native-24000.json",
+        "bytes": 65188
+      },
+      {
+        "name": "selected.json",
+        "bytes": 647
+      },
+      {
+        "name": "result.json",
+        "bytes": 46343
+      }
+    ]
+  },
+  "new_model_calls": 0,
+  "new_array_reads": 0,
+  "new_training_updates": 0,
+  "core_420_case_rows_exact_after_removing_first_export_derived_counts": true,
+  "raw_row_difference": "First envelope adds derived_lesion_counts; all420derived TP/FP/FN records reproduce saved counts and remaining row fields equal the untouched extended export."
+}
