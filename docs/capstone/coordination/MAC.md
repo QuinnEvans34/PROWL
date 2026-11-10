@@ -1,5 +1,29 @@
 # Mac work status
 
+## November 10 terminal24k screen USER PAUSED for school
+
+- Explicit user pause supersedes the LIVE entry below. Stopped at14 fully
+  committed cases /817tiles;56cases /3146tiles remain. Every completed native
+  code and case record matches its independent backup; all54-policy replay
+  proofs retained. No incomplete case artifacts at stop.
+- [Pause receipt](../operations/STUNET-24K-MARGIN-PAUSE-20261110.json).
+  Supervisor/worker43979/43993 reaped, GPU lock reacquired after exit, all382
+  producing pins still match. Actual worker1,746.569s; peakcombinedRSS3,033,628,672B.
+  Supervisor signal15 is an intentional user interruption, not a model failure.
+  MLflowe9ae248ba9ff488e8c9a2c32040edbb5 markedKILLED with
+  `prowl.operator_status=PAUSED_BY_USER`, read back and database independently
+  snapshotted. Original interruption resources and FAILED snapshot preserved.
+- Primary launchd01c, CPU closeout02 and queued voxel-clip01 registrations all
+  removed; identified CPU waiters48570/48573 absent. No automatic resume, report
+  publication or secondary execution remains armed. Lenovo training unchanged.
+- User intends to continue at school. Before any restart require connected drive,
+  AC, all original resource/integrity gates, an additive case-reuse continuation
+  runner and a remaining-budget check. Reuse the14 verified cases; never rerun
+  them or edit the original frozen producer/request. Original cumulative budget
+  and12:36:15Mountain deadline were **not** reset or extended by this pause.
+  If that deadline no longer fits, resolve the concrete time allowance before
+  launch. This pause does not authorize bypassing AC or safety checks at school.
+
 ## November 10 terminal24k tuning LIVE
 
 - External drive is reconnected. User explicitly authorizes autonomous current-model
