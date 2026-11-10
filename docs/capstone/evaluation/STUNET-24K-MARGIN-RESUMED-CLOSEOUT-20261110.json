@@ -1,0 +1,38 @@
+{
+  "status": "VERIFIED_COMPLETE",
+  "cases": 70,
+  "policies": 54,
+  "source_checkpoint_sha256": "2cb9ff72c66b67f8bcdcb081c5d3f84735a83830f693ad2990fb8139933da92c",
+  "request_sha256": "1e8f3ff8b98014af3d560638bd0567fb6bf29ac40fb214deaef7db27154dbbdc",
+  "result_sha256": "fad51ea37a0ff32d2f2d3f79d91c840a4f5cd437273296fb2080fb3653f1da41",
+  "mlflow": {
+    "tracking_uri": "sqlite:////Volumes/PROWL-Data/PROWL/artifacts/stunet-margin-mac-20261110/mlflow.db",
+    "run_id": "5ece75b524484d8c94391228acfabebd"
+  },
+  "mlflow_status": "FINISHED",
+  "source_pins_match": true,
+  "all_case_backups_match": true,
+  "all_policy_replays_match": true,
+  "independent_final_backups_match": true,
+  "database_integrity": "ok",
+  "resources": {
+    "seconds": 6414.641093667131,
+    "peak_owned_rss_bytes": 3630923776,
+    "samples": 2589,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 3,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "gpu_lock_acquired_after_exit": true,
+  "owned_processes_absent": true,
+  "one_shot_launch_registration_removed": true,
+  "producing_attempts_preserved": true,
+  "policy_deployed": false,
+  "training_updates": 0
+}
