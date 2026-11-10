@@ -1,0 +1,133 @@
+{
+  "status": "PASS_RECOVERY_LAUNCH_VERIFIED",
+  "utc": "2026-11-10T21:02:09.190046+00:00",
+  "ready_sha256": "7501db5a6b2b1eac5a56a930812a5fbe02da3c72fa9c9e2e3e92499977930f89",
+  "pins": 546,
+  "owner_session": 73346,
+  "processes": [
+    {
+      "pid": 55708,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "scripts/training/supervise_stunet_recovery_20261110.py",
+        "--request",
+        "E:/PROWL/readiness/stunet-storage-recovery-20261110-a01/ready.json",
+        "--sha256",
+        "7501db5a6b2b1eac5a56a930812a5fbe02da3c72fa9c9e2e3e92499977930f89",
+        "--mode",
+        "science"
+      ],
+      "created": 1794344384.4273927
+    },
+    {
+      "pid": 61432,
+      "command": [
+        "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\recover_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-storage-recovery-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_storage_recovery_10k_20261110_launch01\\execution"
+      ],
+      "created": 1794344450.5224469
+    },
+    {
+      "pid": 55840,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ],
+      "created": 1794344450.5556068
+    },
+    {
+      "pid": 59028,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\prowl-week05-matched-20261102-a01\\python\\cpython-3.12.13-windows-x86_64-none\\python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\recover_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-storage-recovery-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_storage_recovery_10k_20261110_launch01\\execution"
+      ],
+      "created": 1794344450.5996997
+    }
+  ],
+  "restored": {
+    "event": "checkpoint_restored",
+    "elapsed_seconds": 18.484000000171363,
+    "utc_ms": 1794344481015,
+    "step": 26000,
+    "proof": {
+      "tensors": 522,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "sha256": "25aea4b9d4fc0eeb89b27fe46f2443d4c8b9e157ef0e1380f4a37e13568830c3"
+  },
+  "initial_validation": {
+    "event": "native_started",
+    "elapsed_seconds": 18.516000000061467,
+    "utc_ms": 1794344481034,
+    "step": 26000,
+    "completed_cases": 14,
+    "total_cases": 70,
+    "tiles_done": 711,
+    "total_tiles": 3963
+  },
+  "latest_validation": {
+    "event": "native_progress",
+    "elapsed_seconds": 65.39100000006147,
+    "utc_ms": 1794344527918,
+    "step": 26000,
+    "completed_cases": 14,
+    "total_cases": 70,
+    "tiles_done": 761,
+    "total_tiles": 3963
+  },
+  "completed_cases_reused": 14,
+  "new_optimizer_updates": 0,
+  "mlflow": {
+    "b9cce56d45964819a3bea45ff5120ca1": "RUNNING",
+    "dc0b189042704f51af9dbb2deed5f5a6": "FAILED"
+  },
+  "phone_card": {
+    "id": "pants_stunet_storage_recovery_10k_20261110",
+    "title": "Resume STU-Net from 26k after disk-space stop",
+    "status": "validating",
+    "steps": 0,
+    "target_steps": 10000,
+    "seconds": 65.39100000006147,
+    "loss": null,
+    "learning_rate": null,
+    "train_cases": 1333,
+    "development_cases": 70,
+    "latest": null,
+    "best": null,
+    "ema_latest": null,
+    "ema_best": null,
+    "native": [],
+    "history": [],
+    "metric_scope": "native_pancreas_assisted",
+    "progress": {
+      "completed_cases": 14,
+      "total_cases": 70,
+      "tiles_done": 761,
+      "total_tiles": 3963
+    },
+    "verifier_history": [],
+    "tuning_cases": 0,
+    "next_validation": 2000,
+    "updated_at": 1794344527.918,
+    "age_seconds": 1,
+    "ancestry_start": 26000,
+    "global_steps": 26000,
+    "global_target_steps": 36000
+  },
+  "total_seconds": 1188887.8599999999,
+  "history_cards": 13
+}

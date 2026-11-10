@@ -5769,3 +5769,7 @@ Same corrected1,333 PanTS patients with new sampling/augmentation addresses; fin
 
 ### November10: Longer STU-Net continuation launched
 Qualified28CPUtests, five nonpromotableGPUupdates and exact522-tensor cold replay. Scientific phase now running24001-36000 from final24k, same corrected1333patients/new addresses, six full70validations. MLflowdc0b189042704f51af9dbb2deed5f5a6; observed24013 and live private phone phase metrics. Hypothesis remains NOT TESTED until completed matched outcomes; no new Dice yet. Selected18k researchregistryversion1 and final24k preserved. Details: operations/STUNET-LONGER-HANDOFF-20261110.md. No new monitoring schedule.
+
+
+### November10: Continue after disk-space safety stop
+User approved50GiB C/E free-space floor. Original longer phase stopped at26k,14/70validation; no complete newDice. Saved26k model/optimizer/RNG/exposure restored exactly (522tensors),14completecasesreused; remaining56validationcases then10000updates to36k. No LR restart or recipechange.24CPUtests/actualGPUrestore PASS; newMLflowb9cce56d45964819a3bea45ff5120ca1 RUNNING, failedparent preserved. Phase-only hours/newupdates, original40h less priorfailure andqualification. Phoneupdated; validation761/3963advancing. See operations/STUNET-STORAGE-RECOVERY-HANDOFF-20261110.md. H0 remainsNOTTESTED.

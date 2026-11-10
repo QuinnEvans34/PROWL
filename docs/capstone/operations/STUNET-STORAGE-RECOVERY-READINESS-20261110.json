@@ -1,0 +1,34 @@
+{
+  "ready_sha256": "7501db5a6b2b1eac5a56a930812a5fbe02da3c72fa9c9e2e3e92499977930f89",
+  "pins": 546,
+  "review": {
+    "status": "PASS_READY_USER_AUTHORIZED",
+    "restore": {
+      "status": "PASS",
+      "scientific_updates": 0,
+      "restored_step": 26000,
+      "state_comparison": {
+        "tensors": 522,
+        "max_abs_difference": 0.0,
+        "atol": 0,
+        "rtol": 0
+      },
+      "reusable_cases": 14,
+      "reserved_peak": 738197504
+    },
+    "resources": {
+      "seconds": 49.70299999997951,
+      "peak_owned_rss_bytes": 2367782912,
+      "samples": 300,
+      "workers_reaped": true,
+      "success": true,
+      "exit_code": 0
+    },
+    "remaining_seconds": 130790.79700000002,
+    "projected_backups_bytes": 91579108748,
+    "free_floor_gib": 50,
+    "remaining_updates": 10000,
+    "reused_native_cases": 14,
+    "remaining_native_cases": 56
+  }
+}

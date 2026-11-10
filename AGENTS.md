@@ -1,5 +1,11 @@
 # AGENTS.md — Agent Context
 
+> **November10 storage recovery LAUNCH VERIFIED:** Userapproved50GiBC/Efloor. Owned73346/supervisor55708/wrapper61432/actual59028; MLflowb9cce56d45964819a3bea45ff5120ca1 RUNNING. Ready7501db5a6b2b1eac5a56a930812a5fbe02da3c72fa9c9e2e3e92499977930f89/546pins. Read STUNET-STORAGE-RECOVERY-HANDOFF-20261110.md.26krestored522tensorsexact;14casesreused,validation761/3963advancing;10000newupdates pendingvalidation. Originalbudget130790.797sleft; othercapsunchanged. Phone13cards/actualhours. Failedparent staysFAILED. Preservepins/no duplicate/retry/merge/GPUcompetition; no new monitor.
+
+
+> **November10 disk-stop recovery AUTHORIZED/PREPARING:** User approves50GiBC/E freefloor andresume. Prior36kphaseFAILED at26k during14/70native; saved26k E/C SHA25aea4b9... verified. Newrestore owned8681/requestbd97f83a.../541pins,zeroGPUupdates; do not duplicate. Read STUNET-STORAGE-RECOVERY-20261110.md.24CPUtests PASS. Preservefailed/oldpins; remaining10kupdates +56nativecases, no newLRrestart. Original40h minus failed13159.5s andrestoretime.12GiBRSS/6GiBCUDA/88GiBbackup unchanged.
+
+
 > **November10 longer STU-Net LAUNCH VERIFIED:** Owned94864/supervisor52560/workerwrapper46764, MLflowdc0b189042704f51af9dbb2deed5f5a6 RUNNING. Actualglobal24001->24013;11storedlosses/10capturedexact. Ready889675ab2069318c2eca4208ac2bdcf5be6e457f6442089e8db2a90aae0bbca3/531pins. Read STUNET-LONGER-HANDOFF-20261110.md. SAME1333correctedPanTS,12knew/global36ktarget;6full70validations/checkpoints every2k.40h/12GiBRSS/6GiBCUDA/88GiBCbackup/100GiBfree unchanged. Phone12cards/phasehours verified; parentE/Cexact; cold522tensorsexact. Preservepins/no duplicate/retry/merge/GPUcompetition. No new schedule/successor.
 
 
