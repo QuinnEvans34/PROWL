@@ -258,8 +258,43 @@
 .pw-app .literature-search__edit { justify-self: end; padding: 2px 4px; min-height: 24px; background: transparent; border: 0; color: var(--pw-text-muted); font-size: 11px; }
 .pw-app .literature-search__thread .literature-search__answer-card { margin: 0 14px 16px 0; border-radius: 4px 16px 16px 16px; }
 .pw-app .literature-search--panel > .literature-search__thread { order: 2; flex: 1 1 auto; max-height: 55vh; }
-.pw-app .literature-search > form.literature-search__composer { position: static; border-top: 1px solid var(--pw-border); padding: 14px 0 8px; background: var(--pw-bg); margin-top: 8px; }
-.pw-app .literature-search__composer textarea { min-height: 64px; border-radius: 16px; }
+.pw-app .literature-search > form.literature-search__composer { position: static; border-top: 1px solid var(--pw-border); padding: 14px 0 8px; background: transparent; margin-top: 8px; }
+.pw-app .literature-search__input-frame {
+  display: grid; min-width: 0; padding: 4px; overflow: hidden;
+  border: 1px solid var(--pw-border-control); border-radius: var(--pw-radius-lg); background: var(--pw-sunken);
+  transition: border-color var(--pw-fast), box-shadow var(--pw-fast);
+}
+.pw-app .literature-search__input-frame:focus-within { border-color: var(--pw-focus); box-shadow: 0 0 0 1px var(--pw-focus); }
+.pw-app .literature-search__composer .literature-search__input-frame textarea {
+  display: block; min-height: 64px; max-height: 160px; margin: 0; padding: 8px;
+  border: 0; border-radius: 0; background: transparent; resize: none; box-shadow: none;
+}
+.pw-app .literature-search__composer .literature-search__input-frame textarea:focus { outline: none; }
+.pw-app .literature-search__send-row { gap: 6px; padding: 2px 4px 4px; }
+.pw-app .literature-search__send-row span { margin: 0 auto 0 0; padding-left: 4px; font-size: 11px; }
+.pw-app .literature-search__send-row button { min-height: 30px; padding: 0 10px; font-size: 12px; }
+.pw-app .literature-search__composer > small { color: var(--pw-text-faint); font-size: 10.5px; }
+.pw-app .literature-search--panel .literature-search__send-row button[type='submit'] {
+  background: var(--pw-hover); border-color: var(--pw-border-control); color: var(--pw-text);
+}
+.pw-app .literature-search--panel .literature-search__send-row button[type='submit']:hover:not(:disabled) { background: var(--pw-border); }
+.pw-app .literature-search--panel .literature-search__error {
+  margin: 0; padding: 10px 12px; border: 1px solid var(--pw-border); border-radius: var(--pw-radius);
+  background: var(--pw-warning-soft); color: var(--pw-text-muted); font-size: 12px; overflow-wrap: anywhere;
+}
+.pw-app .literature-search--panel .literature-search__tools,
+.pw-app .literature-search--panel .literature-search__question-ideas {
+  padding-top: 8px; background: transparent; border-color: var(--pw-border-subtle);
+}
+.pw-app .literature-search--panel :is(.literature-search__tools, .literature-search__question-ideas) > summary {
+  display: flex; align-items: center; gap: 7px; padding: 3px 0; list-style: none; font-size: 11.5px; font-weight: 500;
+}
+.pw-app .literature-search--panel :is(.literature-search__tools, .literature-search__question-ideas) > summary::-webkit-details-marker { display: none; }
+.pw-app .literature-search--panel :is(.literature-search__tools, .literature-search__question-ideas) > summary::before {
+  content: ''; width: 5px; height: 5px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  transform: rotate(-45deg); margin-right: 2px; transition: transform var(--pw-fast);
+}
+.pw-app .literature-search--panel :is(.literature-search__tools, .literature-search__question-ideas)[open] > summary::before { transform: rotate(45deg); }
 .pw-app .literature-search__typing { display: inline-flex; gap: 4px; }
 .pw-app .literature-search__typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--pw-accent); animation: prowl-typing 1.2s ease-in-out infinite; }
 .pw-app .literature-search__typing i:nth-child(2) { animation-delay: .15s; }

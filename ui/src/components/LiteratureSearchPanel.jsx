@@ -387,7 +387,7 @@ export default function LiteratureSearchPanel({
         <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Writing a response from the research…'}</p>
         <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
-      {phase === 'error' && <p role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
+      {phase === 'error' && <p className="literature-search__error" role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
       {result && <article className="literature-search__answer-card" aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
@@ -416,21 +416,23 @@ export default function LiteratureSearchPanel({
     <form className="guided-evidence__body literature-search__composer" onSubmit={submit}>
       {editing && <p role="status">Editing a previous question. Send to get a new answer; the original stays in this thread.</p>}
       <label htmlFor="literature-question">Literature question</label>
-      <textarea ref={questionInput} id="literature-question" rows={2} maxLength={500} value={question}
-        placeholder={panel ? "Ask PROWL a question…" : "What imaging findings help distinguish pancreatitis from pancreatic cancer?"}
-        aria-describedby="literature-question-shortcut"
-        onKeyDown={e => {
-          if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
-          e.preventDefault()
-          if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
-        }}
-        onChange={e => change(e.target.value)} />
-      <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
-      <div className="literature-search__actions">
-        <button type="submit" disabled={!question.trim() || phase === 'loading' || ((readiness?.gpu_busy || readiness?.answer_blocker) && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
-        {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
-        <span>{question.length}/500</span>
+      <div className="literature-search__input-frame">
+        <textarea ref={questionInput} id="literature-question" rows={2} maxLength={500} value={question}
+          placeholder={panel ? "Ask PROWL a question…" : "What imaging findings help distinguish pancreatitis from pancreatic cancer?"}
+          aria-describedby="literature-question-shortcut"
+          onKeyDown={e => {
+            if (e.key !== 'Enter' || e.shiftKey || e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return
+            e.preventDefault()
+            if (!e.repeat && question.trim() && phase !== 'loading') e.currentTarget.form.requestSubmit()
+          }}
+          onChange={e => change(e.target.value)} />
+        <div className="literature-search__actions literature-search__send-row">
+          <span aria-label="Question length">{question.length}/500</span>
+          {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
+          <button type="submit" disabled={!question.trim() || phase === 'loading' || ((readiness?.gpu_busy || readiness?.answer_blocker) && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+        </div>
       </div>
+      <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
       {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
