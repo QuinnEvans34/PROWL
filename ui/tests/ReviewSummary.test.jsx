@@ -42,6 +42,18 @@ it('labels derived values and refuses healthy conclusions from an empty predicti
   expect(empty).not.toMatch(/normal|healthy|benign/i)
 })
 
+it('uses verified outline volumes and withholds legacy headlines when measurements fail', () => {
+  const measured = { ...facts, measurementStatus: 'ready', pancreasVolumeMm3: 60330, studyLabel: 'S', seriesLabel: 'CT', prediction: saved }
+  const ready = generateObservations(measured)
+  expect(ready).toContain('Predicted outline volume 60.33 mL; whole-organ coverage unverified')
+  expect(ready).toContain('Predicted mask volume 15.63 cm³')
+  expect(ready).not.toContain('spherical diameter')
+  const unavailable = generateObservations({ ...measured, measurementStatus: 'unavailable', pancreasVolumeMm3: undefined })
+  expect(unavailable).toContain('Verified outline volume unavailable')
+  expect(unavailable).toContain('Predicted mask volume unavailable')
+  expect(unavailable).not.toContain('15.63')
+})
+
 it('keeps edits across study switches and requires a choice before regenerating over them', async () => {
   const user = userEvent.setup()
   render(<Harness />)

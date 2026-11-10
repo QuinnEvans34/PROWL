@@ -31,7 +31,8 @@ for (const variant of ['page','panel']) test(`synthetic summary citations and ca
  })
  await page.goto('/?summary='+variant)
  if(variant==='panel'){
-   await expect(page.getByRole('status',{name:'Synthetic viewer stub'})).toBeVisible()
+   await expect(page.getByRole('status',{name:'Synthetic viewer stub'})).toHaveCount(3)
+   await expect(page.getByRole('status',{name:'Synthetic viewer stub'}).first()).toBeVisible()
    await page.getByRole('tab',{name:'Ask PROWL'}).click()
  }
  const input=page.getByLabel('Literature question')

@@ -1,34 +1,34 @@
 /*
- * PROWL design tokens — Concept 01 (graphite / silver / violet).
- * Source: docs/capstone/interface/ui-redesign/04-VISUAL-DIRECTION-AND-BRANDING.md
+ * PROWL design tokens — neutral carbon imaging toolbench.
+ * Approved charcoal direction, November 10, 2026.
  *
- * Contrast (measured, WCAG 2.x ratio against --pw-surface #15181D):
- *   text 15.9 · text-muted 8.2 · text-faint 5.8 · accent 8.3 · ink-on-accent 8.5
- *   control border 3.5 on surface, 3.2 on raised (non-text minimum 3:1)
+ * Contrast (WCAG 2.x relative luminance against --pw-surface #242527):
+ *   text 13.8 · text-muted 8.4 · text-faint 6.2 · accent 10.3
+ *   control border 3.4 on surface, 3.0 on raised (non-text minimum 3:1)
  *
  * Brand accent never stands in for scientific layer colors. Layer colors mirror
  * REVIEW_COLORS in src/lib/viewerLayers.js and must stay paired with text labels.
  */
 :root {
-  --pw-bg: #0d0f12;
-  --pw-sunken: #0a0c0f;
-  --pw-surface: #15181d;
-  --pw-raised: #1d2128;
-  --pw-hover: #242934;
-  --pw-border: #343a46;
-  --pw-border-subtle: #262b34;
-  --pw-border-control: #666e7f;
+  --pw-bg: #191a1c;
+  --pw-sunken: #1c1d1f;
+  --pw-surface: #242527;
+  --pw-raised: #2c2e31;
+  --pw-hover: #36383c;
+  --pw-border: #424448;
+  --pw-border-subtle: #343639;
+  --pw-border-control: #73777d;
 
-  --pw-text: #f0f2f6;
-  --pw-text-muted: #a8b0be;
-  --pw-text-faint: #8a93a3;
+  --pw-text: #f3f3f1;
+  --pw-text-muted: #bdc0c4;
+  --pw-text-faint: #a1a5ac;
 
-  --pw-accent: #b7a4ff;
-  --pw-accent-hover: #c9bbff;
-  --pw-accent-ink: #171223;
-  --pw-accent-soft: rgba(183, 164, 255, 0.12);
-  --pw-accent-line: rgba(183, 164, 255, 0.38);
-  --pw-focus: #b7a4ff;
+  --pw-accent: #d1d4d9;
+  --pw-accent-hover: #e4e6e9;
+  --pw-accent-ink: #242527;
+  --pw-accent-soft: rgba(209, 212, 217, 0.1);
+  --pw-accent-line: rgba(209, 212, 217, 0.32);
+  --pw-focus: #dde0e4;
 
   --pw-silver: #dcddd8;
 
@@ -54,7 +54,7 @@
   --pw-header-h: 56px;
   --pw-studybar-h: 52px;
   --pw-footer-h: 30px;
-  --pw-panel-w: 360px;
+  --pw-panel-w: 320px;
 
   --pw-ease: cubic-bezier(0.2, 0, 0, 1);
   --pw-fast: 120ms;

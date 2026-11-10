@@ -12,6 +12,7 @@ import {
   Database,
   Eye,
   EyeOff,
+  Expand,
   LoaderCircle,
   Maximize,
   Maximize2,
@@ -35,8 +36,13 @@ import StructurePopover from './StructurePopover.jsx'
 import ReviewSummary from './ReviewSummary.jsx'
 import { draftKey, hasHumanContent, predictionIdentity } from '../lib/summaryDraft.js'
 import { PantherBadge } from '../shell/Brand.jsx'
+import { useToolbenchLayout } from '../lib/toolbenchLayout.js'
+import { useWorkspaceDisplay } from './useWorkspaceDisplay.js'
+import WorkspaceResizeHandle from './WorkspaceResizeHandle.jsx'
+import { usePredictionMeasurements, MeasurementReadout } from './PredictionMeasurements.jsx'
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
+const ToolbenchViewer = lazy(() => import('./ToolbenchViewer.jsx'))
 
 // Display defaults; the 3D scene selector replaced the older emphasis presets.
 const DEFAULT_OVERLAY_OPACITY = 0.62
@@ -148,8 +154,8 @@ export default function ReviewWorkspace({
   endpointStatus,
   truthRevealed,
   reviewStatus,
-  finding,
-  overlap,
+  finding: suppliedFinding,
+  overlap: suppliedOverlap,
   referenceCompatibility = 'compatible',
   modelLabel = 'Segmenter v1 · step 18000',
   askPanel = null,
@@ -165,6 +171,18 @@ export default function ReviewWorkspace({
   onOpenComparison,
   onOpenLibrary,
 }) {
+  // Prepared contours remain the files supplied with this case. A legacy live
+  // score does not replace those files, their measurements or their identity.
+  const finding = {
+    ...suppliedFinding,
+    lesionFlagged: typeof caseData.pred_has_lesion === 'boolean' ? caseData.pred_has_lesion : suppliedFinding.lesionFlagged,
+    volumeMm3: Number.isFinite(caseData.lesion_volume_mm3) ? caseData.lesion_volume_mm3 : suppliedFinding.volumeMm3,
+    confidence: Number.isFinite(caseData.confidence) ? caseData.confidence : suppliedFinding.confidence,
+  }
+  const overlap = {
+    pancreas: Number.isFinite(caseData.dice_pancreas) ? caseData.dice_pancreas : suppliedOverlap.pancreas,
+    lesion: Number.isFinite(caseData.dice_lesion) ? caseData.dice_lesion : suppliedOverlap.lesion,
+  }
   const hasPrediction = isCurated || hasLiveResult
   const truthUnlocked = isCurated || truthRevealed
   const differenceAvailable = Boolean(caseData.files?.difference)
@@ -181,12 +199,34 @@ export default function ReviewWorkspace({
 
   const [state, dispatch] = useReducer(reviewReducer, { hasPrediction }, makeReviewState)
   // Layout chrome is reviewer preference, not study state: it survives study changes.
-  const [studyListOpen, setStudyListOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1360))
-  const [panelOpen, setPanelOpen] = useState(() => (typeof window === 'undefined' ? true : window.innerWidth >= 1024))
+  const [layout, setLayout, resetLayout] = useToolbenchLayout()
+  const workspaceRef = useRef(null)
+  const { focusMode, setFocusMode, toggleFocus, isFullscreen, toggleFullscreen, fullscreenAvailable, fullscreenError } = useWorkspaceDisplay(workspaceRef)
+  const [compactWorkspace, setCompactWorkspace] = useState(() => typeof window !== 'undefined' && window.innerWidth < 1024)
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(false)
+  const [mobileStudiesOpen, setMobileStudiesOpen] = useState(false)
+  useEffect(() => {
+    const resize = () => setCompactWorkspace(window.innerWidth < 1024)
+    window.addEventListener('resize', resize)
+    return () => window.removeEventListener('resize', resize)
+  }, [])
+  const studyListOpen = (compactWorkspace ? mobileStudiesOpen : layout.studyListOpen) && !focusMode
+  const panelOpen = (compactWorkspace ? mobilePanelOpen : layout.panelOpen) && !focusMode
+  const setStudyListOpen = value => {
+    if (compactWorkspace) setMobileStudiesOpen(value)
+    else setLayout(previous => ({ studyListOpen: typeof value === 'function' ? value(previous.studyListOpen) : value }))
+  }
+  const setPanelOpen = value => {
+    setFocusMode(false)
+    if (compactWorkspace) setMobilePanelOpen(value)
+    else setLayout(previous => ({ panelOpen: typeof value === 'function' ? value(previous.panelOpen) : value }))
+  }
   const [panelTab, setPanelTab] = useState('findings')
   const [snapOpen, setSnapOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
-  const [panelWide, setPanelWide] = useState(false)
+  const panelWide = layout.panelWidth >= 420
+  const [activeControlPlane, setActiveControlPlane] = useState('axial')
+  const [threeDVisited, setThreeDVisited] = useState(false)
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
   const [peelReveal3d, setPeelReveal3d] = useState(null)
@@ -205,7 +245,7 @@ export default function ReviewWorkspace({
   const clipFrameRef = useRef(null)
   const pendingClipProgressRef = useRef(null)
 
-  const navigatorPlane = state.activePlane === 'multiplanar' ? 'axial' : state.activePlane
+  const navigatorPlane = state.activePlane === 'multiplanar' ? (layout.maximizedPlane || activeControlPlane) : state.activePlane
   const navigatorIndex = navigation.indices[navigatorPlane] || 0
   const navigatorTotal = navigation.totals[navigatorPlane] || 1
 
@@ -243,6 +283,8 @@ export default function ReviewWorkspace({
     clipFrameRef.current = null
     pendingSliceRef.current = null
     pendingClipProgressRef.current = null
+    setNavigationCommand(null)
+    setActiveControlPlane('axial')
     dispatch({ type: 'CASE_CHANGED', hasPrediction: isCurated })
     setNavigation({
       indices: { axial: 0, coronal: 0, sagittal: 0 },
@@ -269,6 +311,7 @@ export default function ReviewWorkspace({
       if (tagName === 'input' || tagName === 'select' || tagName === 'textarea' || target?.isContentEditable) return
       if (event.metaKey || event.ctrlKey || event.altKey) return
       if (target?.closest?.('[role="dialog"], .pw-panel')) return
+      if (target?.closest?.('[role="separator"], .tb-pane')) return
       if (event.key === 'Escape') dispatch({ type: 'CLEAR_SELECTION' })
       if (state.viewMode !== '3d' && ['ArrowLeft', 'ArrowDown'].includes(event.key)) {
         event.preventDefault()
@@ -311,6 +354,15 @@ export default function ReviewWorkspace({
   const predictionShown = state.evidenceMode === 'prediction' || state.evidenceMode === 'overlap'
   const referenceShown = state.evidenceMode === 'truth' || state.evidenceMode === 'overlap'
   const comparing = referenceShown && referenceState === 'ready'
+  // The prepared viewer renders caseData.files.pred. Measure that same saved mask,
+  // never a numerical result returned by the separate legacy live scoring service.
+  const measurementContext = useMemo(() => ({
+    identity: `${caseId}:${caseData.files?.ct || ''}:${caseData.files?.pred || ''}:saved`,
+    key: `${caseId}:${caseData.files?.ct || ''}:${caseData.files?.pred || ''}:saved`,
+    caseId, files: caseData.files, spacingMm: caseData.spacing_mm, source: 'saved',
+    available: hasPrediction && predictionShown && !isAnalyzing && Boolean(caseData.files?.ct && caseData.files?.pred),
+  }), [caseId, caseData.files, caseData.spacing_mm, hasPrediction, predictionShown, isAnalyzing])
+  const measurementState = usePredictionMeasurements(measurementContext)
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
   const selectedLabel = objectLabel(state.selectedObject)
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
@@ -359,18 +411,6 @@ export default function ReviewWorkspace({
     issueViewerCommand({ type: 'focus', source, anatomy })
   }
 
-  function markerStyle(anatomy) {
-    const range = navigation.ranges[anatomy]?.[navigatorPlane]
-    if (!range || navigatorTotal <= 1) return null
-    const start = Math.max(0, Math.min(100, (range[0] / (navigatorTotal - 1)) * 100))
-    const end = Math.max(start, Math.min(100, (range[1] / (navigatorTotal - 1)) * 100))
-    return { left: `${start}%`, width: `${Math.max(1, end - start)}%` }
-  }
-
-  const pancreasMarker = markerStyle('pancreas')
-  const lesionMarker = markerStyle('lesion')
-  const planeName = navigatorPlane[0].toUpperCase() + navigatorPlane.slice(1)
-  const sliceProgress = navigatorTotal > 1 ? (navigatorIndex / (navigatorTotal - 1)) * 100 : 0
   const coronalPancreasRange = navigation.ranges.pancreas?.coronal
   const coronalTotal = navigation.totals.coronal || 1
   // Prefer the 3D scene's own geometry (correct for the full abdomen); fall back to the
@@ -405,6 +445,7 @@ export default function ReviewWorkspace({
 
   function setViewMode(viewMode) {
     if (viewMode === 'split' && !SPLIT_SUPPORTED) return
+    if (viewMode !== '2d') setThreeDVisited(true)
     dispatch({ type: 'SET_VIEW_MODE', value: viewMode })
   }
 
@@ -497,19 +538,21 @@ export default function ReviewWorkspace({
   )
 
   const prediction = useMemo(
-    () => predictionIdentity({ hasPrediction, liveResult, modelLabel }),
-    [hasPrediction, liveResult, modelLabel],
+    () => predictionIdentity({ hasPrediction, liveResult: null, modelLabel }),
+    [hasPrediction, modelLabel],
   )
   const seriesLabel = `Abdomen CT · prepared, ${Array.isArray(caseData.spacing_mm) ? `${caseData.spacing_mm[0]} mm voxels` : 'spacing not recorded'}`
   const summaryFacts = useMemo(() => ({
     hasPrediction,
     lesionFlagged: Boolean(finding.lesionFlagged),
-    volumeMm3: finding.volumeMm3,
-    diameterMm: finding.diameterMm,
+    volumeMm3: measurementState.status === 'ready' ? measurementState.measurement.lesionMl * 1000 : undefined,
+    pancreasVolumeMm3: measurementState.status === 'ready' ? measurementState.measurement.pancreasMl * 1000 : undefined,
+    measurementStatus: measurementState.status,
+    diameterMm: undefined,
     comparison: comparing
       ? { pancreas: overlap.pancreas, lesion: overlap.lesion, bothLesionAbsent: !caseData.gt_has_lesion && !finding.lesionFlagged }
       : null,
-  }), [hasPrediction, finding.lesionFlagged, finding.volumeMm3, finding.diameterMm, comparing, overlap.pancreas, overlap.lesion, caseData.gt_has_lesion])
+  }), [hasPrediction, finding.lesionFlagged, measurementState, comparing, overlap.pancreas, overlap.lesion, caseData.gt_has_lesion])
   const currentDraft = summaryStore?.drafts[draftKey(caseId, 'prepared-ct', prediction.key)]
   const summaryStatus = !summaryStore ? null : currentDraft ? (hasHumanContent(currentDraft) ? 'Unsaved draft · edited' : 'Unsaved draft') : 'Not started'
 
@@ -518,19 +561,22 @@ export default function ReviewWorkspace({
     : isAnalyzing
       ? 'Analysis running…'
       : hasPrediction
-        ? liveResult?.source === 'live' ? `Live prediction · ${liveResult.scoredAt}` : 'Saved prediction'
+        ? liveResult?.source === 'live' ? 'Live score · saved contours' : 'Saved prediction'
         : 'Prediction hidden'
 
   const wbClass = [
     'pw-wb',
+    'pw-toolbench',
+    focusMode ? 'pw-toolbench--focus' : '',
+    isFullscreen ? 'pw-toolbench--fullscreen' : '',
     studyListOpen ? '' : 'pw-wb--list-closed',
     panelOpen ? '' : 'pw-wb--panel-closed',
-    panelOpen && panelWide ? 'pw-wb--panel-wide' : '',
   ].filter(Boolean).join(' ')
 
   return (
-    <main className={wbClass} aria-label={`Workbench · ${studyLabel}`}>
-      <aside className="pw-wb__list" aria-label="Study list" inert={studyListOpen ? undefined : ''}>
+    <main ref={workspaceRef} className={wbClass} aria-label={`Workbench · ${studyLabel}`}
+      style={{ '--pw-list-w': `${layout.studyListWidth}px`, '--pw-panel-w': `${layout.panelWidth}px` }}>
+      <aside className="pw-wb__list" aria-label="Study list" hidden={!studyListOpen} inert={studyListOpen ? undefined : ''}>
         <div className="pw-wb__list-head">
           <strong>Studies</strong>
           <span className="pw-muted">{caseItems.length}</span>
@@ -552,12 +598,14 @@ export default function ReviewWorkspace({
         <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm pw-wb__list-all" onClick={onOpenLibrary}>
           <ChevronLeft size={14} aria-hidden="true" /> All studies
         </button>
+        <WorkspaceResizeHandle label="Study list width" value={layout.studyListWidth} min={160} max={320}
+          onChange={studyListWidth => setLayout({ studyListWidth })} className="pw-workspace-resize--right" />
       </aside>
 
       <section className="pw-wb__center">
         <header className="pw-studybar">
           {!studyListOpen && (
-            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => setStudyListOpen(true)} aria-label="Open study list" title="Open study list">
+            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => { setFocusMode(false); setStudyListOpen(true) }} aria-label="Open study list" title="Open study list">
               <PanelLeftOpen size={16} aria-hidden="true" /> Studies <span className="pw-library-count">{caseItems.length}</span>
             </button>
           )}
@@ -620,7 +668,12 @@ export default function ReviewWorkspace({
               ]}
             />
           )}
-          {is2dLike && <label className="pw-select pw-toolbar__plane"><span className="sr-only">Plane</span><select aria-label="Plane" value={state.activePlane} onChange={e => dispatch({ type: 'SET_ACTIVE_PLANE', value: e.target.value })}><option value="multiplanar">All 3 planes</option><option value="axial">Axial</option><option value="coronal">Coronal</option><option value="sagittal">Sagittal</option></select></label>}
+          {is2dLike && <Segmented label="Visible planes" value={state.activePlane === 'multiplanar' ? layout.maximizedPlane || 'multiplanar' : state.activePlane}
+            onChange={value => {
+              dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' })
+              setLayout({ maximizedPlane: value === 'multiplanar' ? null : value, hiddenPlanes: [] })
+            }}
+            options={[["multiplanar", "All planes"], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
           <Segmented
             label="Mouse tool"
             value={state.interactionMode}
@@ -638,6 +691,10 @@ export default function ReviewWorkspace({
             <select value={state.ctWindow} onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { ctWindow: event.target.value } })}>
               {CT_WINDOW_OPTIONS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
             </select>
+          </label>
+          <label className="pw-toolbench-opacity"><span>Overlay <output>{Math.round(state.overlayOpacity * 100)}%</output></span>
+            <input type="range" min="0" max="1" step="0.05" value={state.overlayOpacity} aria-label="Prediction overlay opacity"
+              onChange={event => dispatch({ type: 'PATCH_SETTINGS', value: { overlayOpacity: Number(event.target.value) } })} />
           </label>
           <span className="pw-toolbar__spacer" />
           {is3dLike && (
@@ -663,6 +720,25 @@ export default function ReviewWorkspace({
             <Settings2 size={16} aria-hidden="true" />
           </button>
         </div>
+
+        <div className="pw-workspace-actions" role="group" aria-label="Workspace layout">
+          <span className="pw-workspace-actions__label">IMAGING WORKSPACE</span>
+          {is2dLike && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.linked}
+            onClick={() => setLayout({ linked: !layout.linked })}>Linked crosshairs</button>}
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.measurementsVisible}
+            onClick={() => setLayout({ measurementsVisible: !layout.measurementsVisible })}>Measurements</button>
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={panelOpen}
+            onClick={() => setPanelOpen(!panelOpen)}>Expert panel</button>
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={focusMode}
+            onClick={toggleFocus}>{focusMode ? 'Exit focus' : 'Focus workspace'}</button>
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" onClick={toggleFullscreen}
+            title={fullscreenAvailable ? 'Open this workspace in full screen' : 'Use workspace focus when browser full screen is unavailable'}><Expand size={13} aria-hidden="true" /> {isFullscreen ? 'Exit full screen' : 'Full screen'}</button>
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" onClick={() => {
+            resetLayout(); setFocusMode(false); setMobilePanelOpen(false); setMobileStudiesOpen(false)
+            dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' })
+          }}>Restore layout</button>
+        </div>
+        {fullscreenError && <p className="pw-toolbench-notice" role="status">{fullscreenError}</p>}
 
           {state.evidenceMode === 'ct' && !hasPrediction && (
             <div className="pw-ct-only" role="region" aria-label="Prediction not shown">
@@ -699,36 +775,31 @@ export default function ReviewWorkspace({
           }}
         >
           <ViewerSuspense>
-            {state.viewMode === 'split' ? (
-              <div className="pw-split">
-                <section className="pw-split__pane" aria-label="2D planes">
-                  <NiivueViewer {...viewerProps} mode="2d" interactionMode={state.interactionMode} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
+              <div className={`pw-toolbench-scene pw-toolbench-scene--${state.viewMode}`}>
+                <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={state.viewMode === '3d'}>
+                  <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={state.interactionMode}
+                    layout={layout} onLayoutChange={setLayout} linked={layout.linked} onActivePlaneChange={setActiveControlPlane}
+                    onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
                 </section>
-                <section className="pw-split__pane" aria-label="3D surfaces">
+                <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={state.viewMode === '2d'}>
                   <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">3D surfaces</span>
-                  <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode="rotate" label={`${viewerLabel} · 3D surfaces`} />
+                  {threeDVisited && <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={state.viewMode === '3d' ? state.interactionMode : 'rotate'} label={`${viewerLabel} · 3D surfaces`} />}
                   {snapPad}
                 </section>
               </div>
-            ) : (
-              <NiivueViewer
-                {...viewerProps}
-                {...(state.viewMode === '3d' ? viewer3dProps : null)}
-                mode={state.viewMode}
-                interactionMode={state.interactionMode}
-                onNavigationChange={setNavigation}
-                label={viewerLabel}
-              />
-            )}
           </ViewerSuspense>
-
-          {state.viewMode === '3d' && snapPad}
+          {layout.measurementsVisible && predictionShown && (
+            <div className="pw-toolbench-measure-overlay" aria-label="Displayed prediction measurements">
+              <MeasurementReadout state={measurementState} compact showEvidence={false} />
+            </div>
+          )}
 
           {state.selectedObject && (
             <StructurePopover
               object={state.selectedObject}
               anchor={popAnchor}
               finding={finding}
+              measurementState={measurementState}
               overlap={overlap}
               comparing={comparing}
               gtHasLesion={Boolean(caseData.gt_has_lesion)}
@@ -802,7 +873,7 @@ export default function ReviewWorkspace({
               </div>
               <label className="review-range">
                 <span>Mask strength <strong>{Math.round(state.overlayOpacity * 100)}%</strong></span>
-                <input type="range" min="0.2" max="1" step="0.05" value={state.overlayOpacity}
+                <input type="range" min="0" max="1" step="0.05" value={state.overlayOpacity}
                   onChange={(event) => dispatch({ type: 'PATCH_SETTINGS', value: { displayPreset: 'custom', overlayOpacity: Number(event.target.value) } })} />
               </label>
               {is3dLike && scene3d !== 'surfaces' && (
@@ -901,37 +972,9 @@ export default function ReviewWorkspace({
           )}
         </div>
 
-        {is2dLike && (
-          <div className="pw-slicebar" aria-label="2D slice navigation">
-            <span className="pw-slicebar__readout"><strong>{planeName}</strong> <span className="pw-num">{navigatorIndex + 1}</span><span className="pw-muted"> / {navigatorTotal}</span></span>
-            <button type="button" className="pw-icon-btn" onClick={() => setSlice(navigatorIndex - 1)} disabled={navigatorIndex <= 0} aria-label={`Previous ${planeName.toLowerCase()} slice`} title="Previous slice (←)">
-              <ChevronLeft size={15} aria-hidden="true" />
-            </button>
-            <div className="pw-slicebar__track" style={{ '--slice-progress': `${sliceProgress}%` }}>
-              {pancreasMarker && <i className="pw-range pw-range--pancreas" style={pancreasMarker} title="Slices containing predicted pancreas" />}
-              {lesionMarker && <i className="pw-range pw-range--lesion" style={lesionMarker} title="Slices containing predicted lesion" />}
-              <input
-                type="range"
-                min="0"
-                max={Math.max(0, navigatorTotal - 1)}
-                step="1"
-                value={Math.min(navigatorIndex, navigatorTotal - 1)}
-                onChange={(event) => setSlice(Number(event.target.value), { live: true })}
-                aria-label={`${planeName} slice`}
-                aria-valuetext={`${planeName} slice ${navigatorIndex + 1} of ${navigatorTotal}`}
-              />
-            </div>
-            <button type="button" className="pw-icon-btn" onClick={() => setSlice(navigatorIndex + 1)} disabled={navigatorIndex >= navigatorTotal - 1} aria-label={`Next ${planeName.toLowerCase()} slice`} title="Next slice (→)">
-              <ChevronRight size={15} aria-hidden="true" />
-            </button>
-            {(pancreasMarker || lesionMarker) && (
-              <span className="pw-slicebar__legend" aria-label="Slice range markers">
-                {pancreasMarker && <span><i className="pw-range-key pw-range-key--pancreas" />Pancreas</span>}
-                {lesionMarker && <span><i className="pw-range-key pw-range-key--lesion" />Lesion</span>}
-              </span>
-            )}
-          </div>
-        )}
+        {layout.measurementsVisible && <div className="pw-toolbench-measure-strip">
+          <MeasurementReadout state={measurementState} />
+        </div>}
         {is3dLike && scene3d !== 'surfaces' && (
           <div className="pw-slicebar pw-slicebar--cut" aria-label="Front-to-back peel">
             <span className="pw-slicebar__readout" title="Removes the CT from the front of the body towards the back. [ and ] step the peel.">
@@ -963,6 +1006,7 @@ export default function ReviewWorkspace({
         className="pw-panel"
         id="pw-assistant"
         aria-label="PROWL Assistant"
+        hidden={!panelOpen}
         inert={panelOpen ? undefined : ''}
         onKeyDown={(event) => {
           if (event.key === 'Escape' && window.matchMedia?.('(max-width: 1023px)').matches) {
@@ -971,6 +1015,8 @@ export default function ReviewWorkspace({
           }
         }}
       >
+        <WorkspaceResizeHandle label="Expert panel width" value={layout.panelWidth} min={260} max={520} direction={-1}
+          onChange={panelWidth => setLayout({ panelWidth })} className="pw-workspace-resize--left" />
         <header className="pw-panel__head">
           <PantherBadge size="sm" pulse={assistantPending} />
           <div>
@@ -984,7 +1030,7 @@ export default function ReviewWorkspace({
               // A wide assistant needs the room: tuck the study list away and re-dock any open card.
               if (!panelWide) setStudyListOpen(false)
               setPopAnchor(null)
-              setPanelWide((wide) => !wide)
+              setLayout({ panelWidth: panelWide ? 320 : 480 })
             }}
             aria-pressed={panelWide}
             aria-label={panelWide ? 'Narrow assistant panel' : 'Widen assistant panel'}
@@ -996,6 +1042,11 @@ export default function ReviewWorkspace({
             <X size={16} aria-hidden="true" />
           </button>
         </header>
+        <div className="pw-toolbench-pinned-finding" aria-label="Current model finding">
+          <span className="pw-swatch" style={{ background: REVIEW_COLORS.pred.lesion }} aria-hidden="true" />
+          <div><strong>{hasPrediction ? finding.lesionFlagged ? 'Possible lesion · review required' : 'No lesion predicted' : 'Prediction not displayed'}</strong>
+            <small>{hasPrediction ? 'Prepared saved outline · model proposal' : 'Show the prediction to inspect model findings'}</small></div>
+        </div>
         <div className="pw-tabs" role="tablist" aria-label="Assistant sections">
           {[['findings', 'Findings'], ['ask', 'Ask PROWL'], ['summary', 'Summary']].map(([key, label]) => (
             <button
@@ -1033,6 +1084,7 @@ export default function ReviewWorkspace({
             liveResult={isCurated && !liveResult ? null : liveResult}
             isCurated={isCurated}
             finding={finding}
+            measurementState={measurementState}
             overlap={overlap}
             referenceState={referenceState}
             comparing={comparing}

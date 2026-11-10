@@ -30,10 +30,16 @@ export function generateObservations(facts) {
     lines.push('No model prediction has been displayed for this study, so no model-derived observations are included.')
   } else {
     lines.push('Model-derived observations (for reviewer verification):')
-    lines.push('- Pancreas: model outline present. Pancreas volume is not published in this prediction package.')
+    if (facts.measurementStatus !== undefined) {
+      const pancreasVolume = facts.measurementStatus === 'ready' ? fixed(facts.pancreasVolumeMm3 / 1000, 2) : null
+      lines.push(`- Pancreas: model outline present. ${pancreasVolume ? `Predicted outline volume ${pancreasVolume} mL; whole-organ coverage unverified.` : 'Verified outline volume unavailable.'}`)
+    } else {
+      lines.push('- Pancreas: model outline present. Pancreas volume is not published in this prediction package.')
+    }
     if (facts.lesionFlagged) {
-      const volume = fixed(facts.volumeMm3 / 1000, 2)
-      const diameter = facts.diameterMm ? `, equivalent spherical diameter ${facts.diameterMm} mm (derived; not a measured width or length)` : ''
+      const usableMeasurement = facts.measurementStatus === undefined || facts.measurementStatus === 'ready'
+      const volume = usableMeasurement ? fixed(facts.volumeMm3 / 1000, 2) : null
+      const diameter = facts.measurementStatus === undefined && facts.diameterMm ? `, equivalent spherical diameter ${facts.diameterMm} mm (derived; not a measured width or length)` : ''
       lines.push(`- Possible lesion proposed by the model. ${volume ? `Predicted mask volume ${volume} cm³${diameter}.` : 'Predicted mask volume unavailable.'}`)
     } else {
       lines.push('- No lesion was predicted by the model. This does not establish that no lesion is present.')

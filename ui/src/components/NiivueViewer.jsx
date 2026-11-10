@@ -4,6 +4,8 @@ import { DRAG_MODE, Niivue } from '@niivue/niivue'
 import { LoaderCircle, TriangleAlert } from 'lucide-react'
 
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
+import { viewerSceneKey } from '../lib/viewerSceneKey.js'
+export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
 const BASE = '/cases'
 
@@ -229,8 +231,10 @@ function labelBounds(volume, requestedLabel) {
   return bounds
 }
 
-function navigationSnapshot(nv, maskVolume) {
-  const dims = nv?.volumes?.[0]?.hdr?.dims
+export function navigationSnapshot(nv, maskVolume) {
+  // Crosshair fractions describe NiiVue's displayed RAS grid, which can have a
+  // different axis order from the file header (notably in native CT packages).
+  const dims = nv?.volumes?.[0]?.dimsRAS || nv?.volumes?.[0]?.hdr?.dims
   const crosshair = nv?.scene?.crosshairPos
   if (!dims || dims.length < 4 || !crosshair) return null
 
@@ -239,23 +243,38 @@ function navigationSnapshot(nv, maskVolume) {
     coronal: Math.max(1, Number(dims[2])),
     axial: Math.max(1, Number(dims[3])),
   }
-  const indices = {
-    sagittal: Math.round(Math.min(1, Math.max(0, Number(crosshair[0]))) * (totals.sagittal - 1)),
-    coronal: Math.round(Math.min(1, Math.max(0, Number(crosshair[1]))) * (totals.coronal - 1)),
-    axial: Math.round(Math.min(1, Math.max(0, Number(crosshair[2]))) * (totals.axial - 1)),
-  }
+  // NiiVue texture fractions span voxel edges; the center of voxel i is
+  // (i + 0.5) / dimension, including the first and last slice.
+  const indices = Object.fromEntries(Object.entries(PLANE_AXIS).map(([plane, axis]) => [plane,
+    Math.max(0, Math.min(totals[plane] - 1, Math.round(Number(crosshair[axis]) * totals[plane] - 0.5))),
+  ]))
   const ranges = {}
   for (const [anatomy, labelValue] of [['pancreas', 1], ['lesion', 2]]) {
     const bounds = labelBounds(maskVolume, labelValue)
-    ranges[anatomy] = bounds
-      ? {
-          sagittal: [bounds.min[0], bounds.max[0]],
-          coronal: [bounds.min[1], bounds.max[1]],
-          axial: [bounds.min[2], bounds.max[2]],
+    ranges[anatomy] = null
+    if (!bounds) continue
+    // Label bounds are file voxels. Transform their corners into the displayed
+    // grid before using them as anatomical slice ranges.
+    const displayBounds = { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity] }
+    for (const x of [bounds.min[0], bounds.max[0]]) {
+      for (const y of [bounds.min[1], bounds.max[1]]) {
+        for (const z of [bounds.min[2], bounds.max[2]]) {
+          const world = voxelToWorld(maskVolume, [x, y, z])
+          const fraction = world && typeof nv.mm2frac === 'function' ? nv.mm2frac(world, 0, true) : null
+          if (!fraction || !Array.from(fraction).slice(0, 3).every(Number.isFinite)) continue
+          for (const [plane, axis] of Object.entries(PLANE_AXIS)) {
+            const index = Math.max(0, Math.min(totals[plane] - 1, Math.round(fraction[axis] * totals[plane] - 0.5)))
+            displayBounds.min[axis] = Math.min(displayBounds.min[axis], index)
+            displayBounds.max[axis] = Math.max(displayBounds.max[axis], index)
+          }
         }
-      : null
+      }
+    }
+    if (displayBounds.min.every(Number.isFinite)) {
+      ranges[anatomy] = Object.fromEntries(Object.entries(PLANE_AXIS).map(([plane, axis]) => [plane, [displayBounds.min[axis], displayBounds.max[axis]]]))
+    }
   }
-  return { indices, totals, ranges }
+  return { indices, totals, ranges, fractions: Array.from(crosshair).slice(0, 3) }
 }
 
 function captureViewState(nv) {
@@ -375,6 +394,7 @@ const SLICE_TYPE_KEYS = { 0: 'axial', 1: 'coronal', 2: 'sagittal' }
 // (or below it in a tall viewer). A single row of three left most of a normal
 // workstation viewer empty. Very wide viewers keep the original row.
 function setPlaneLayout(nv, activePlane) {
+  const view = captureViewState(nv)
   const sliceType = {
     axial: nv.sliceTypeAxial,
     coronal: nv.sliceTypeCoronal,
@@ -387,6 +407,7 @@ function setPlaneLayout(nv, activePlane) {
   if (activePlane !== 'multiplanar' || !aspect || aspect > 2.4 || typeof nv.setCustomLayout !== 'function') {
     if (typeof nv.clearCustomLayout === 'function') nv.clearCustomLayout()
     nv.setSliceType(sliceType)
+    restoreViewState(nv, view, '2d')
     return
   }
   nv.setSliceType(sliceType)
@@ -401,6 +422,7 @@ function setPlaneLayout(nv, activePlane) {
         { sliceType: nv.sliceTypeCoronal, position: [0, 0.6, 0.5, 0.4] },
         { sliceType: nv.sliceTypeSagittal, position: [0.5, 0.6, 0.5, 0.4] },
       ])
+  restoreViewState(nv, view, '2d')
 }
 
 // Where NiiVue actually drew each 2D tile, in CSS pixels, so the plane labels
@@ -596,6 +618,10 @@ export default function NiivueViewer({
   interactionMode = 'navigate',
   navigationCommand = null,
   onNavigationChange = null,
+  syncCrosshair = null,
+  syncWindow = null,
+  onWindowChange = null,
+  showPlaneLabels = true,
   onPeelReveal = null,
   clip = null,
   resetToken = 0,
@@ -616,9 +642,11 @@ export default function NiivueViewer({
   const pointerStartRef = useRef(null)
   const loadedSceneKeyRef = useRef('')
   const currentSceneRef = useRef(null)
+  const sceneLoadChainRef = useRef(Promise.resolve())
   const savedViewsRef = useRef(new Map())
   const latestCrosshairRef = useRef(new Map())
   const handledResetTokenRef = useRef(resetToken)
+  const handledNavigationCommandRef = useRef(null)
   const previousClipEnabledRef = useRef(Boolean(clip?.enabled))
   const clipFrameRef = useRef(null)
   const navigationFrameRef = useRef(null)
@@ -628,6 +656,7 @@ export default function NiivueViewer({
     mode,
     onSelectObject,
     onNavigationChange,
+    onWindowChange,
     visibleSources: visibleSources || sources,
     differenceMode,
   })
@@ -638,20 +667,16 @@ export default function NiivueViewer({
   const orbitCentreRef = useRef(null)
 
   const renderedSources = visibleSources || sources
-  const sceneKey = [
-    caseData?.case_id || caseData?.files?.ct || 'no-case',
-    sources.join('|'),
-    mode,
-    showFull ? 'full' : 'crop',
-    enableDifferenceAssets ? 'difference-ready' : 'standard',
-  ].join('::')
+  const sceneKey = viewerSceneKey({ caseData, assetUrls, sources, mode, showFull, enableDifferenceAssets })
 
-  function publishNavigation(nv, { immediate = false } = {}) {
+  function publishNavigation(nv, { immediate = false, origin = 'interaction' } = {}) {
     const maskVolume = registryRef.current.volumes.get('pred')
       || registryRef.current.volumes.get('gt')
       || registryRef.current.volumes.values().next().value
     const snapshot = navigationSnapshot(nv, maskVolume)
     if (!snapshot) return
+    snapshot.sceneKey = loadedSceneKeyRef.current
+    snapshot.origin = origin
     const signature = [
       snapshot.indices.sagittal,
       snapshot.indices.coronal,
@@ -659,6 +684,7 @@ export default function NiivueViewer({
       snapshot.totals.sagittal,
       snapshot.totals.coronal,
       snapshot.totals.axial,
+      ...snapshot.fractions.map((value) => Number(value).toFixed(6)),
     ].join(':')
     if (signature === lastNavigationSignatureRef.current) return
 
@@ -693,17 +719,18 @@ export default function NiivueViewer({
       mode,
       onSelectObject,
       onNavigationChange,
+      onWindowChange,
       visibleSources: renderedSources,
       differenceMode,
     }
-  }, [mode, onSelectObject, onNavigationChange, renderedSources.join('|'), differenceMode])
+  }, [mode, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
 
   useEffect(() => {
     if (!canvasRef.current) return undefined
 
     const canvas = canvasRef.current
     const nv = new Niivue({
-      backColor: [0.018, 0.026, 0.042, 1],
+      backColor: [0.024, 0.026, 0.029, 1],
       show3Dcrosshair: false,
       isColorbar: false,
       multiplanarShowRender: 0,
@@ -722,6 +749,16 @@ export default function NiivueViewer({
     nv.onLocationChange = (location) => {
       locationRef.current = location
       if (interactiveRef.current.mode === '2d') publishNavigation(nv)
+    }
+    nv.onIntensityChange = (volume) => {
+      if (interactiveRef.current.mode !== '2d' || !loadedSceneKeyRef.current) return
+      const ct = nv.volumes?.[0]
+      if (volume && volume !== ct) return
+      if (!Number.isFinite(ct?.cal_min) || !Number.isFinite(ct?.cal_max)) return
+      interactiveRef.current.onWindowChange?.({
+        sceneKey: loadedSceneKeyRef.current,
+        range: [Number(ct.cal_min), Number(ct.cal_max)],
+      })
     }
     nvRef.current = nv
 
@@ -1053,7 +1090,7 @@ export default function NiivueViewer({
         nv.drawScene()
         currentSceneRef.current = { caseId: currentCaseId, mode }
         loadedSceneKeyRef.current = sceneKey
-        publishNavigation(nv, { immediate: true })
+        publishNavigation(nv, { immediate: true, origin: 'initial' })
         setSceneVersion((version) => version + 1)
         if (!cancelled) setState({ status: 'ready', message: 'Prepared result loaded' })
       } catch (error) {
@@ -1066,7 +1103,11 @@ export default function NiivueViewer({
       }
     }
 
-    loadScene()
+    // NiiVue mutates one volume registry while loading. Serialize transitions so
+    // a slow previous study cannot append volumes into a newer study's scene.
+    sceneLoadChainRef.current = sceneLoadChainRef.current
+      .catch(() => {})
+      .then(() => { if (!cancelled) return loadScene() })
     return () => {
       cancelled = true
     }
@@ -1092,11 +1133,6 @@ export default function NiivueViewer({
 
     try {
       batchViewerUpdate(nv, () => {
-        const ctVolume = nv.volumes[0]
-        const windowRange = ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
-        ctVolume.cal_min = windowRange.cal_min
-        ctVolume.cal_max = windowRange.cal_max
-
         if (mode === '2d') {
           setVolumeRendering(nv, true)
           registryRef.current.volumeIndexes.forEach((volumeIndex, source) => {
@@ -1199,7 +1235,6 @@ export default function NiivueViewer({
     mode,
     overlayOpacity,
     ctOpacity,
-    ctWindow,
     showPancreas,
     showLesion,
     anatomyFocus,
@@ -1215,6 +1250,17 @@ export default function NiivueViewer({
     sceneKey,
   ])
 
+  // Layer/selection changes must not discard a window adjusted on the image.
+  // Only an explicit preset/range change or a newly loaded scene resets it.
+  useEffect(() => {
+    const nv = nvRef.current
+    if (!nv || state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey || !nv.volumes?.[0]) return
+    const range = ctRange ? { cal_min: ctRange[0], cal_max: ctRange[1] } : CT_WINDOWS[ctWindow] || CT_WINDOWS.soft
+    nv.volumes[0].cal_min = range.cal_min
+    nv.volumes[0].cal_max = range.cal_max
+    nv.updateGLVolume()
+  }, [ctWindow, ctRange?.[0], ctRange?.[1], sceneVersion, state.status, sceneKey])
+
   useEffect(() => {
     const nv = nvRef.current
     if (
@@ -1228,6 +1274,33 @@ export default function NiivueViewer({
     setPlaneTiles(planeTilesFrom(nv))
     publishNavigation(nv)
   }, [activePlane, mode, sceneVersion, state.status, sceneKey])
+
+  // Linked panes exchange only the anatomical crosshair. Pan/zoom intentionally
+  // remain local, and applying a remote position is tagged to prevent echoes.
+  useEffect(() => {
+    const nv = nvRef.current
+    if (!nv || mode !== '2d' || state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey
+      || syncCrosshair?.sceneKey !== sceneKey || !Array.isArray(syncCrosshair?.fractions)
+      || syncCrosshair.fractions.length !== 3 || !syncCrosshair.fractions.every(Number.isFinite)) return
+    const next = syncCrosshair.fractions.map(value => Math.max(0, Math.min(1, value)))
+    if (next.every((value, index) => Math.abs(value - nv.scene.crosshairPos[index]) < 0.000001)) return
+    nv.scene.crosshairPos = new Float32Array(next)
+    nv.drawScene()
+    publishNavigation(nv, { immediate: true, origin: 'sync' })
+  }, [syncCrosshair?.id, sceneVersion, state.status, sceneKey, mode])
+
+  useEffect(() => {
+    const nv = nvRef.current
+    if (!nv || mode !== '2d' || state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey
+      || syncWindow?.sceneKey !== sceneKey || !Array.isArray(syncWindow?.range)) return
+    const [min, max] = syncWindow.range
+    const ct = nv.volumes?.[0]
+    if (!ct || !Number.isFinite(min) || !Number.isFinite(max) || max <= min
+      || (ct.cal_min === min && ct.cal_max === max)) return
+    ct.cal_min = min
+    ct.cal_max = max
+    nv.updateGLVolume()
+  }, [syncWindow?.id, sceneVersion, state.status, sceneKey, mode])
 
   // Re-run the layout when the viewer changes size (panels opening, window resize).
   useEffect(() => {
@@ -1296,6 +1369,7 @@ export default function NiivueViewer({
     const nv = nvRef.current
     if (
       !navigationCommand
+      || handledNavigationCommandRef.current === navigationCommand.id
       || !nv
       || state.status !== 'ready'
       || loadedSceneKeyRef.current !== sceneKey
@@ -1303,13 +1377,14 @@ export default function NiivueViewer({
     ) return
 
     const command = navigationCommand
+    handledNavigationCommandRef.current = command.id
     if (command.type === 'slice') {
       const axis = PLANE_AXIS[command.plane]
-      const total = Number(nv.volumes[0]?.hdr?.dims?.[axis + 1])
-      if (Number.isInteger(axis) && Number.isFinite(total) && total > 1) {
+      const total = Number((nv.volumes[0]?.dimsRAS || nv.volumes[0]?.hdr?.dims)?.[axis + 1])
+      if (Number.isInteger(axis) && Number.isFinite(total) && total > 1 && Number.isFinite(Number(command.index))) {
         const index = Math.max(0, Math.min(total - 1, Number(command.index)))
         const next = Array.from(nv.scene.crosshairPos)
-        next[axis] = index / (total - 1)
+        next[axis] = (index + 0.5) / total
         nv.scene.crosshairPos = new Float32Array(next)
       }
     } else if (command.type === 'focus') {
@@ -1332,13 +1407,32 @@ export default function NiivueViewer({
         Math.max(-90, Math.min(90, Number(nv.scene.renderElevation) + Number(command.deltaElevation || 0))),
       )
     } else if (command.type === 'zoom') {
-      const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
-      nv.setScale(scale)
+      if (mode === '2d') {
+        const pan = Array.from(nv.scene.pan2Dxyzmm || [0, 0, 0, 1])
+        const factor = Number(command.factor)
+        const previousZoom = Number(pan[3])
+        const world = Array.from(nv.frac2mm(nv.scene.crosshairPos)).slice(0, 3)
+        if (Number.isFinite(factor) && factor > 0 && Number.isFinite(previousZoom) && previousZoom > 0
+          && world.length === 3 && world.every(Number.isFinite)) {
+          const nextZoom = Math.max(0.25, Math.min(12, previousZoom * factor))
+          // Match NiiVue's wheel zoom: preserve the crosshair's screen position
+          // by compensating for the world origin as well as the new scale.
+          // Changing only scale sends scans with nonzero affines off screen.
+          const zoomChange = previousZoom - nextZoom
+          for (let axis = 0; axis < 3; axis += 1) pan[axis] += zoomChange * world[axis]
+          pan[3] = nextZoom
+          nv.setPan2Dxyzmm(pan)
+        }
+      } else {
+        const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
+        nv.setScale(scale)
+      }
     } else if (command.type === 'fit') {
       orbitCentreRef.current = null
-      focusOnWorldPoint(nv, volumeCenterMM(nv.volumes[0]), mode)
-      if (mode === '3d') nv.setScale(1)
-      else nv.setPan2Dxyzmm([0, 0, 0, 1])
+      if (mode === '3d') {
+        focusOnWorldPoint(nv, volumeCenterMM(nv.volumes[0]), mode)
+        nv.setScale(1)
+      } else nv.setPan2Dxyzmm([0, 0, 0, 1])
     }
 
     nv.drawScene()
@@ -1434,8 +1528,8 @@ export default function NiivueViewer({
 
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
-      <canvas ref={canvasRef} aria-label={label} style={nativeGeometry && state.status !== 'ready' ? { visibility: 'hidden' } : undefined} />
-      {mode === '2d' && (
+      <canvas ref={canvasRef} aria-label={label} style={state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? { visibility: 'hidden' } : undefined} />
+      {mode === '2d' && showPlaneLabels && (
         <div
           className={`viewer-plane-labels viewer-plane-labels--${activePlane}${planeTiles.length ? ' viewer-plane-labels--placed' : ''}`}
           aria-label="CT anatomical planes"

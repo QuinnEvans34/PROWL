@@ -6,7 +6,7 @@ function fmt(value, digits) {
   return Number.isFinite(value) ? value.toFixed(digits) : null
 }
 
-function structureFacts(object, { finding, overlap, comparing, gtHasLesion }) {
+function structureFacts(object, { finding, overlap, comparing, gtHasLesion, measurementState }) {
   if (object.source === 'difference') {
     const dice = fmt(overlap?.[object.anatomy], 3)
     return [
@@ -15,7 +15,13 @@ function structureFacts(object, { finding, overlap, comparing, gtHasLesion }) {
     ]
   }
   const facts = [['Source', object.source === 'gt' ? 'Reference annotation' : 'Model proposal']]
-  if (object.source === 'pred' && object.anatomy === 'lesion') {
+  if (object.source === 'pred' && measurementState !== undefined) {
+    const value = measurementState?.status === 'ready' ? measurementState.measurement?.[object.anatomy === 'pancreas' ? 'pancreasMl' : 'lesionMl'] : null
+    const volume = Number.isFinite(value)
+      ? `${value > 0 && value < 0.01 ? '<0.01' : value.toFixed(2)} mL`
+      : measurementState?.status === 'loading' ? 'Checking…' : 'Unavailable'
+    facts.push([object.anatomy === 'pancreas' ? 'Outline volume' : 'Total lesion volume', volume])
+  } else if (object.source === 'pred' && object.anatomy === 'lesion') {
     const volume = Number.isFinite(finding.volumeMm3) ? `${(finding.volumeMm3 / 1000).toFixed(2)} cm³` : 'Unavailable'
     facts.push(['Volume', volume])
     if (finding.diameterMm) facts.push(['Equiv. diameter', `${finding.diameterMm} mm`])
@@ -39,11 +45,12 @@ export default function StructurePopover({
   focusControl,
   onAsk,
   onClose,
+  measurementState,
 }) {
   const color = object.source === 'difference'
     ? REVIEW_COLORS.difference[object.region]
     : REVIEW_COLORS[object.source]?.[object.anatomy]
-  const facts = structureFacts(object, { finding, overlap, comparing, gtHasLesion })
+  const facts = structureFacts(object, { finding, overlap, comparing, gtHasLesion, measurementState })
   const questions = structureQuestions(object)
   const style = anchor ? { left: `${anchor.left}px`, top: `${anchor.top}px` } : undefined
   return (
@@ -61,7 +68,12 @@ export default function StructurePopover({
           <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
         ))}
       </dl>
-      {object.source === 'pred' && object.anatomy === 'lesion' && finding.diameterMm && <small>Equivalent diameter describes a sphere with this volume, not a measured lesion width or length.</small>}
+      {object.source === 'pred' && measurementState !== undefined && <small>
+        {measurementState?.status === 'ready'
+          ? 'Predicted outline volume. Whole-organ coverage and model accuracy remain unverified.'
+          : measurementState?.status === 'loading' ? 'Checking geometry before measuring this outline.' : measurementState?.reason || 'Verified outline volume is unavailable.'}
+      </small>}
+      {object.source === 'pred' && measurementState === undefined && object.anatomy === 'lesion' && finding.diameterMm && <small>Equivalent diameter describes a sphere with this volume, not a measured lesion width or length.</small>}
       {focusControl}
       {questions.length > 0 && (
         <div className="pw-structure-pop__ask">

@@ -1,5 +1,31 @@
 # PanTS CADe — 3D Viewer (React + NiiVue)
 
+## Charcoal toolbench
+
+The Workbench uses three persistent CT planes with individual slice, zoom, fit,
+hide and maximize controls. Crosshairs can be linked while pan and zoom remain
+independent. Drag the dividers to resize planes, the study list or the expert
+panel; keyboard arrows also operate focused dividers. Restore layout changes
+presentation preferences without clearing imaging settings or review drafts.
+
+Focus workspace hides surrounding panels. Full screen uses the browser display
+mode where supported and falls back to focus otherwise; Escape exits either.
+Viewer instances remain mounted through these display changes. Layout choices
+are saved locally; CT positions, measurements and review text are not included in
+the layout preference record. Narrow screens open their drawers only on request.
+
+Pancreas-outline and total-lesion volumes come from the displayed saved mask,
+with geometry, units and coverage checks. Unavailable values never fall back to
+legacy manifest volumes or a sphere-equivalent diameter. The saved/native result
+page reuses verified package measurements. These are model-outline volumes, not
+verified whole-organ measurements or a diagnosis. The legacy prepared-study live
+scoring endpoint does not replace the saved contours; fresh native inference
+remains available through Analyze when its model worker is connected.
+
+Regression checks: `npm run test:run`, `npm run build`, and
+`npm run test:e2e -- --config=playwright.toolbench.config.js`. Synthetic browser
+checks prove controls and draft lifetime; real CT rendering also needs browser inspection.
+
 ## Capstone test foundation
 
 Use Node 24.21.0 (`nvm use` in this directory), then `npm ci` and `npm run test:run`.

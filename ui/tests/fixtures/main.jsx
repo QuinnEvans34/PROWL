@@ -8,6 +8,7 @@ import '../../src/styles/shell.css'
 import '../../src/styles/workbench.css'
 import '../../src/styles/assistant.css'
 import '../../src/styles/pages.css'
+import '../../src/styles/toolbench.css'
 import GuidedEvidencePanel from '../../src/components/GuidedEvidencePanel.jsx'
 import { workspaceProps } from './workspace.js'
 

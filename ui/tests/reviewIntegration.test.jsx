@@ -1,6 +1,6 @@
 import React from 'react'
 import { it, expect, vi } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import SavedPredictionView from '../src/components/SavedPredictionView.jsx'
 import { loadSavedPrediction } from '../src/lib/savedPrediction.js'
 vi.mock('../src/lib/savedPrediction.js',()=>({loadSavedPrediction:vi.fn()}))
@@ -21,7 +21,10 @@ it('connects review and literature without bypassing unavailable measurements; g
   fireEvent.change(screen.getByLabelText('Measurement question'),{target:{value:'How big is this pancreas?'}})
   fireEvent.click(screen.getByText('Calculate volume'))
   expect(screen.getByText('Measurement unavailable')).toBeTruthy()
-  expect(screen.getByText('Outline touches its inference boundary.')).toBeTruthy()
+  expect(within(screen.getByRole('region', { name: 'Native scan measurements' })).getByText('Outline touches its inference boundary.')).toBeTruthy()
+  const readout = within(screen.getByRole('region', { name: 'Prediction measurements' }))
+  expect(readout.getByText('Outline touches its inference boundary.')).toBeTruthy()
+  expect(readout.getAllByText('Unavailable')).toHaveLength(2)
   fireEvent.change(screen.getByLabelText('Decision'),{target:{value:'reject'}})
   const selector=screen.getByLabelText('Prediction')
   fireEvent.change(selector,{target:{value:b}})

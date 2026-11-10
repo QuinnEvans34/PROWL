@@ -1,0 +1,41 @@
+.pw-measurements {
+  --measurement-line: var(--pw-border);
+  color: var(--pw-text);
+  background: var(--pw-surface);
+  border: 1px solid var(--measurement-line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 0;
+}
+.pw-measurements__values { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 26px; }
+.pw-measurements__value { display: grid; gap: 4px; min-width: 120px; }
+.pw-measurements__value > span { display: flex; align-items: center; gap: 6px; color: var(--pw-text-muted); font-size: 10px; font-weight: 600; letter-spacing: .035em; text-transform: uppercase; }
+.pw-measurements__value strong { color: var(--pw-text); font-size: 21px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.pw-measurements__value strong small { color: var(--pw-text-muted); font-size: 11px; font-weight: 400; }
+.pw-measurements__dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+.pw-measurements__dot--pancreas { background: var(--pw-layer-pred-pancreas); }
+.pw-measurements__dot--lesion { background: var(--pw-layer-pred-lesion); }
+.pw-measurements__status { display: flex; align-items: flex-start; gap: 6px; color: var(--pw-text-muted); margin-left: auto; font-size: 11px; }
+.pw-measurements__status.is-ready { color: var(--pw-text); }
+.pw-measurements__status small { display: block; max-width: 210px; margin-top: 4px; color: var(--pw-text-faint); font-size: 10px; line-height: 1.4; }
+.pw-measurements__note, .pw-measurements__reason { margin: 10px 0 0; color: var(--pw-text-muted); font-size: 10px; line-height: 1.5; }
+.pw-measurements__reason { color: var(--pw-warning); font-size: 11px; }
+.pw-measurements__evidence { margin-top: 8px; font-size: 11px; }
+.pw-measurements__evidence summary { display: flex; align-items: center; gap: 5px; cursor: pointer; width: fit-content; color: var(--pw-text-muted); }
+.pw-measurements__evidence summary:focus-visible { outline: 2px solid var(--pw-focus); outline-offset: 4px; }
+.pw-measurements__evidence > div { margin-top: 10px; padding-top: 3px; border-top: 1px solid var(--measurement-line); color: var(--pw-text-muted); }
+.pw-measurements__evidence p { margin: 7px 0; line-height: 1.55; }
+.pw-measurements__evidence dl { display: grid; gap: 7px; margin: 12px 0 0; }
+.pw-measurements__evidence dt { font-size: 10px; font-weight: 600; }
+.pw-measurements__evidence dd { margin: 3px 0 0; overflow-wrap: anywhere; font: 10px/1.4 ui-monospace, monospace; }
+.pw-measurements--compact { padding: 8px 10px; border-radius: 7px; background: rgb(16 17 19 / 90%); max-width: 380px; }
+.pw-measurements--compact .pw-measurements__values { gap: 8px 18px; }
+.pw-measurements--compact .pw-measurements__value { min-width: 95px; gap: 3px; }
+.pw-measurements--compact .pw-measurements__value > span { font-size: 10px; }
+.pw-measurements--compact .pw-measurements__value strong { font-size: 16px; }
+.pw-measurements--compact .pw-measurements__status { flex-basis: 100%; margin-left: 0; font-size: 10px; }
+.pw-measurements--compact .pw-measurements__status small { display: inline; margin: 0 0 0 5px; font-size: 10px; }
+.pw-measurements--compact .pw-measurements__reason { max-width: 280px; font-size: 10px; margin-top: 6px; }
+.pw-measurements__spinner { animation: pw-measurements-spin 1.5s linear infinite; }
+@keyframes pw-measurements-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .pw-measurements__spinner { animation: none; } }

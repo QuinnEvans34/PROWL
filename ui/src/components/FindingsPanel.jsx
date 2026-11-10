@@ -32,13 +32,20 @@ export default function FindingsPanel({
   onSetReviewStatus,
   onStartSummary,
   modelLabel,
+  measurementState,
 }) {
-  const source = liveResult?.source === 'live'
+  const verifiedMeasurements = measurementState !== undefined
+  const measurement = measurementState?.status === 'ready' ? measurementState.measurement : null
+  const source = !verifiedMeasurements && liveResult?.source === 'live'
     ? { icon: Radio, label: `Live analysis · ${liveResult.scoredAt}`, detail: `${fmt(liveResult.result.inference_seconds, 1)} s inference` }
     : { icon: Database, label: 'Saved prediction', detail: 'Produced earlier from the prepared CT' }
   const SourceIcon = source.icon
-  const volumeCm3 = Number.isFinite(finding.volumeMm3) ? finding.volumeMm3 / 1000 : null
+  const volumeCm3 = verifiedMeasurements ? measurement?.lesionMl : Number.isFinite(finding.volumeMm3) ? finding.volumeMm3 / 1000 : null
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
+  const pending = measurementState?.status === 'loading'
+  const volume = value => Number.isFinite(value)
+    ? <><span className="pw-num">{value > 0 && value < 0.01 ? '<0.01' : value.toFixed(2)}</span> {verifiedMeasurements ? 'mL' : 'cm³'}</>
+    : <Unavailable>{pending ? 'Checking…' : 'Unavailable'}</Unavailable>
 
   if (!predictionFile) {
     return (
@@ -79,6 +86,9 @@ export default function FindingsPanel({
             <h3 id="finding-pancreas">Pancreas</h3>
             <small>Model outline</small>
           </div>
+          {verifiedMeasurements && <dl className="pw-structure__metrics">
+            <div><dt title="Predicted pancreas outline including lesion labels; whole-organ coverage remains unverified.">Outline volume</dt><dd>{volume(measurement?.pancreasMl)}</dd></div>
+          </dl>}
           <div className="pw-structure__actions">
             <button type="button" className="pw-icon-btn" disabled={!ranges.pancreas} onClick={() => onShowInViewer('pancreas')} aria-label="Show pancreas in viewer" title="Show in viewer">
               <ArrowUpRight size={14} aria-hidden="true" />
@@ -96,16 +106,16 @@ export default function FindingsPanel({
             <h3 id="finding-lesion">{finding.lesionFlagged ? 'Possible lesion' : 'Lesion'}</h3>
             <small>{finding.lesionFlagged ? 'Model proposal' : 'None predicted'}</small>
           </div>
-          {finding.lesionFlagged && (
+          {(finding.lesionFlagged || verifiedMeasurements) && (
             <dl className="pw-structure__metrics">
               <div>
-                <dt>Volume</dt>
-                <dd>{volumeCm3 !== null ? <><span className="pw-num">{volumeCm3.toFixed(2)}</span> cm³</> : <Unavailable />}</dd>
+                <dt>{verifiedMeasurements ? 'Total volume' : 'Volume'}</dt>
+                <dd>{volume(volumeCm3)}</dd>
               </div>
-              <div>
+              {!verifiedMeasurements && <div>
                 <dt title="Diameter of a sphere with the same volume. Not a measured width or length.">≈ Diameter</dt>
                 <dd>{finding.diameterMm ? <><span className="pw-num">{finding.diameterMm}</span> mm</> : <Unavailable />}</dd>
-              </div>
+              </div>}
             </dl>
           )}
           <div className="pw-structure__actions">
@@ -139,12 +149,18 @@ export default function FindingsPanel({
         )}
       </ul>
       <p className="pw-fine">
-        {finding.lesionFlagged
+        {verifiedMeasurements
+          ? 'Volumes measure the displayed prediction’s outlines. Pancreas includes lesion labels; lesion total combines all lesion labels. Whole-organ coverage and model accuracy remain unverified. Human review is required.'
+          : finding.lesionFlagged
           ? 'Lesion volume comes from the predicted mask; ≈ diameter is a same-volume sphere, not a measured width or length. Proposals for review, not a diagnosis.'
           : 'The model did not predict a lesion. This does not establish that no lesion is present.'}
         {comparing ? ' Dice is computed against this study’s reference annotation and shown only while comparing.' : ''}
         {' '}Click a structure in the viewer for details and related literature questions.
       </p>
+      {verifiedMeasurements && measurementState?.status !== 'ready' && <p className="pw-fine" role="status">
+        {pending ? 'Checking CT and prediction geometry before showing outline volumes.' : measurementState?.reason || 'Verified outline volumes are unavailable.'}
+      </p>}
+      {verifiedMeasurements && measurement?.lesionVoxels === 0 && <p className="pw-fine">No lesion-labeled voxels were found. This does not establish that no lesion is present.</p>}
 
       {!comparing && referenceState !== 'absent' && (
         <p className="pw-reference-line">
@@ -168,13 +184,13 @@ export default function FindingsPanel({
         <dl className="pw-facts pw-facts--compact">
           <div><dt>Prediction</dt><dd><SourceIcon size={12} aria-hidden="true" /> {source.label}</dd></div>
           <div><dt>Model</dt><dd>{modelLabel}</dd></div>
-          {liveResult?.source === 'live' && <div><dt>Inference</dt><dd>{source.detail}</dd></div>}
-          <div>
+          {!verifiedMeasurements && liveResult?.source === 'live' && <div><dt>Inference</dt><dd>{source.detail}</dd></div>}
+          {!verifiedMeasurements && <div>
             <dt title="Peak model output. Not a probability of disease.">Peak model score</dt>
             <dd>{fmt(finding.confidence) ?? <Unavailable />} <small>not a probability</small></dd>
-          </div>
+          </div>}
           <div><dt>Voxel spacing</dt><dd>{Array.isArray(caseData.spacing_mm) ? `${caseData.spacing_mm.join(' × ')} mm` : <Unavailable />}</dd></div>
-          <div><dt>Pancreas volume</dt><dd><Unavailable>Not published in this package</Unavailable></dd></div>
+          <div><dt>Pancreas outline volume</dt><dd>{verifiedMeasurements ? volume(measurement?.pancreasMl) : <Unavailable>Not published in this package</Unavailable>}</dd></div>
           <div><dt>Display surfaces</dt><dd>{caseData.display_mesh_version === 'v3-difference-main-smoothing' ? 'v3, matched smoothing' : caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}</dd></div>
           <div><dt>Study type</dt><dd>{isCurated ? 'Validation example' : 'Prepared study'}</dd></div>
         </dl>
