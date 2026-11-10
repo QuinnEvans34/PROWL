@@ -1,5 +1,52 @@
 # Mac work status
 
+## November 10 terminal24k tuning LIVE
+
+- External drive is reconnected. User explicitly authorizes autonomous current-model
+  tuning. Privately received terminal24k and selected18k checkpoints; archive,
+  checkpoint and canonical metadata hashes verified. Terminal24k is the primary;
+  the18k checkpoint is preserved but is not being inferred in this study.
+- [Frozen54-policy protocol](../operations/STUNET-24K-MARGIN-SCREEN-20261110.md)
+  and [execution snapshot](../operations/STUNET-24K-MARGIN-EXECUTION-20261110.json).
+  One new MPS pass across the same70 exposed development cases, provided-pancreas
+  region. Five lesion-margin decisions, proximity/size gates and seed/grow tests;
+  preserve fresh raw and exact standing5mm. No training or policy deployment.
+- Actual owner: launchd `com.prowl.stunet-margin-mac-20261110-01c`,
+  supervisor43979/worker43993, worker startTueNov10 08:44:43Mountain. Both largest
+  native cases passed; full cohort is advancing. Pilot peak6,463,586,304driverbytes
+  under8GiB; conservative remaining projection10,714.55s fits13,329.81s available.
+  First positive raw counts exactly match savedCUDA. Do not generalize pilot Dice.
+- New cumulative four-hour deadline **November10 12:36:15Mountain** includes
+  transfer/preparation, inference/scoring and the secondary CPU test. Original
+  November8 run/budget remains historical. No retry/reset. AC, exclusiveMPS,
+  memory floor,8GiBMPS/12GiBRSS,50GBinternal/100GiBexternal reserves and existing
+  26GiBtotalbackup/4GiBnewroot caps intact. Independent model-only cold reopen
+  matched130tensors. Per-case native four-bit codes and54-policy score replays
+  are independently backed up. All producing files in request remain frozen.
+- [Separate six-policy CPU hypothesis](../operations/STUNET-24K-VOXEL-CLIP-ADDENDUM-20261110.md)
+  tests per-voxel clipping of attached overextension, after successful primary
+  completion/reaping only. No extra inference or CT voxel reads,4GiBRSS/20min
+  within the same deadline. Combined prospective search is60 settings. Whole
+  component versus voxel clipping remain separately reported; all eight utility
+  guards still apply. Neither a higher unguarded Dice nor0.50 is promised.
+- Deterministic one-shot CPU closeout `com.prowl.stunet-margin-closeout-20261110-02`
+  verifies complete case records, all hashes/backup/replay, MLflow FINISHED and
+  database backup, worker reaping and GPU-lock release before committing/pushing
+  exact result-document paths. `com.prowl.stunet-voxel-clip-20261110-01` waits for
+  that verified closeout, then runs only the bounded CPU secondary stage and
+  publishes its combined60-setting comparison. These are not recurring monitors
+  and cannot restart inference. v1 closeout was retired while idle; additivev2
+  preserves exact pilot-first floating-point summation order.
+- Pre-inference operational refusals preserved: external launchd stdout access,
+  then GPU lock held by identified idle AI expert8013. Used internal owned-job
+  logs and safely stopped that expert; no scans were retried. Local AI answers
+  are temporarily unavailable while this experiment owns the GPU. No Ollama
+  model was resident. Lenovo24k→36k training is unchanged; peer last reported24,332.
+- Code/protocol tests:36pass plus54 independent native-scoring subtests.
+  TrelloW06-16 is InProgress. Final cohort tuning conclusions remain pending;
+  do not edit pinned source, merge peer code, launch another MacGPU job or label
+  this an independent/leakage-free evaluation.
+
 ## November 10 terminal24k audit and tuning preparation
 
 - User requests deep hyperparameter analysis of final24k, not only selected18k.
