@@ -1,0 +1,9 @@
+# Corrected STU-Net continuation completed
+
+Verified November 9: 12,000 contiguous finite new updates, global12,001-24,000, and six complete same70-case native validations with zero reconstruction gaps. Raw Dice at14/16/18/20/22/24k: .353488/.396533/.430517/.408581/.412172/.411972. Selected18k by best Dice; terminal24k preserved. Selected detects35/36positive cases with29/34empty alarms; terminal34/36 with27/34. No5mm filter applied. Exploratory supplied-pancreas development results; no independent generalization or H0 verdict asserted by operational closeout.
+
+Phase session105641.953seconds (29.344987hours), including validation/checkpoint/I/O. Parent time is separate. MLflow13c709ae157949988de1d7f8821a03b7 FINISHED; all12000stored losses exactly match journal. Supervisor success/exit0/workers reaped; original48348/52992/32244 absent and noGPUcompute processes. PeakownedRSS3895738368B, CUDAreserved6203375616B, supervisor105649.890s within original limits. RetainedCbackups85924425675B and Ecache24713390976B within caps; both disks above100GiB free.
+
+All33execution files (24checkpoints,6reports,journal,result,selection) independently hashed againstCbackups and match. ReadySHA d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8 unchanged;219repository producing pins rehashed match. Other frozen sources preserved; no repeated data audit. Evidence E:/PROWL/readiness/stunet-corrected-closeout-20261109-a01/verification.json independently copied to C:/Users/quinn/PROWL-Backups/stunet-corrected-closeout-20261109-a01/verification.json.
+
+PhoneAPI completed,12000phase/global24000; phase seconds match result and total1175681.891seconds equals summed journal rows without duplicate parent time. Hourly monitor deleted after verified completion. No retry, successor, filtering, model promotion or new experiment launched. Faileda01 and parent evidence remain intact.

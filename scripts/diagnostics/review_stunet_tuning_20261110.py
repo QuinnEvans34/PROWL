@@ -18,6 +18,7 @@ MLFLOW = '13c709ae157949988de1d7f8821a03b7'
 METRIC_PRODUCER = '6e02fa0da2db3af02bb76b2caff2e498e5ec9b104bc057b7863907e9ed1eb85a'
 STEPS = [14000, 16000, 18000, 20000, 22000, 24000]
 MAX_BYTES = 4 * 1024 * 1024
+GEOMETRY_SHA = 'c5dcdb2aa77dbe2df2d214932b2d7e27b9dd55351c2aea798f2d676fd047f3cf'
 
 
 def counterfactual(rows, *, fp_removed=0., fn_recovered=0.):
@@ -63,9 +64,8 @@ def describe(rows):
         positive_macro_precision_zero_for_no_prediction=mean(r['precision'] or 0. for r in positive) if positive else None,
         small_case_definition='Total reference lesion volume below 1 mL; not individual component size',
     )
-    oracles = dict(perfect_fp_removal=counterfactual(rows), perfect_fn_recovery=counterfactual(rows))
-    oracles['perfect_fp_removal'] = counterfactual(rows, fp_removed=1.)
-    oracles['perfect_fn_recovery'] = counterfactual(rows, fn_recovered=1.)
+    oracles = dict(perfect_fp_removal=counterfactual(rows, fp_removed=1.),
+        perfect_fn_recovery=counterfactual(rows, fn_recovered=1.))
     oracles['uniform_fp_removal_fraction_needed_for_macro_dice_05_with_zero_tp_loss'] = required_fp_fraction(rows)
     oracles['error_budget_grid'] = [dict(fp_removed=fp_cut, fn_recovered=fn_fix,
         macro_dice=counterfactual(rows, fp_removed=fp_cut, fn_recovered=fn_fix))
@@ -175,12 +175,82 @@ def review(raw, expected_sha):
     return result
 
 
+def review_published(raw, expected_sha, geometry_raw, geometry_sha):
+    """Explicit adapter for the peer's original full-report publication envelope.
+
+    Geometry is joined through the unchanged original input-configuration pin,
+    not guessed from equal cohort counts. Both original source files stay intact.
+    """
+    for data,sha in ((raw,expected_sha),(geometry_raw,geometry_sha)):
+        require(len(data)<=MAX_BYTES and digest(sha) and hashlib.sha256(data).hexdigest()==sha,
+            'Published metadata SHA256/size mismatch')
+    require(geometry_sha==GEOMETRY_SHA,'Wrong original geometry export')
+    p,g=json.loads(raw),json.loads(geometry_raw)
+    require(set(p)=={'scope','reports','completion','bindings','selected','terminal_checkpoint_sha256','inventory','saved_native_arrays'},
+        'Unsupported published metadata envelope')
+    c=p['completion']; pins=p['bindings']['pins']
+    require(c['run_id']=='pants_stunet_corrected_continuation_12k_20261108'
+        and c['ready_sha256']==p['bindings']['ready_sha256']==READY and c['status']=='PASS'
+        and c['updates']==12000 and c['global_step']==24000 and c['mlflow_status']=='FINISHED'
+        and c['stored_losses_exact']==12000 and c['repository_pins_match'] is True,
+        'Incomplete corrected closeout')
+    require(c['resources']['workers_reaped'] is True and c['resources']['success'] is True
+        and c['resources']['exit_code']==0,'Failed worker closeout')
+    old_input='E:\\PROWL\\readiness\\stunet-full-input-binding-20261106-a01\\worker\\inputs.json'
+    require(pins[old_input]==g['source_json_sha256']['inputs.json'], 'Original development input binding changed')
+    require(pins['src\\training\\pants_native_evaluation.py']==METRIC_PRODUCER
+        and pins['src\\data\\stunet_inputs_20261106.py']==g['metric_producer_pins_as_recorded']['src\\data\\stunet_inputs_20261106.py'],
+        'Inherited native/input producer changed')
+    require(pins['C:\\Users\\quinn\\Desktop\\PROWL\\src\\data\\stunet_continuation_inputs_20261108.py']
+        =='d501270fc6b486b18effbf2fd0685c704e28c223a52e508c7ab6428faf4cf45f',
+        'Corrected inherited-development wrapper changed')
+    backups={r['file']:r for r in c['backup_pairs']}
+    expected={f'checkpoint-{s:05d}.pt' for s in range(12500,24001,500)}
+    expected|={f'native-{s:05d}.json' for s in STEPS}|{'history.jsonl','result.json','selected.json'}
+    require(len(c['backup_pairs'])==len(backups)==33 and set(backups)==expected
+        and all(digest(r['sha256']) and type(r['bytes'])is int and r['bytes']>0 for r in backups.values()),
+        'Incomplete independent backup ledger')
+    require(len(p['inventory'])==33 and {r['name']:r['bytes'] for r in p['inventory']}=={n:r['bytes'] for n,r in backups.items()}, 'Execution/backup inventory differs')
+    normalized=dict(schema='prowl-stunet-saved-native-metadata-v1',artifact_id=ARTIFACT,
+        ready_sha256=READY,mlflow_run_id=MLFLOW,scope=p['scope'],observed_at=c['as_of_utc'],
+        metric_producer_pins_as_recorded={'src\\training\\pants_native_evaluation.py':METRIC_PRODUCER},
+        case_identities_from_frozen_inputs=g['case_identities_from_frozen_inputs'],source_json_sha256={},reports=[])
+    require([r['report']['step'] for r in p['reports']]==STEPS,'Incomplete published curve')
+    require(c['reports']==[dict(r['report']['summary'],step=r['report']['step']) for r in p['reports']], 'Completion/report curve differs')
+    for wrapper in p['reports']:
+        report=wrapper['report'];step=report['step'];name=f'native-{step:05d}.json';cp=f'checkpoint-{step:05d}.pt'
+        require(wrapper['path'].replace('\\','/').endswith('/'+name) and wrapper['sha256']==backups[name]['sha256'], 'Published report backup differs')
+        normalized['source_json_sha256'][name]=wrapper['sha256']
+        normalized['reports'].append(dict(step=step,report_name=name,report_sha256=wrapper['sha256'],
+            independent_report_backup_matches=True,cases_as_saved=report['cases'],summary_as_saved=report['summary'],
+            checkpoint=dict(name=cp,sha256_from_saved_journal=backups[cp]['sha256'],bytes=backups[cp]['bytes'])))
+    normalized_raw=json.dumps(normalized,sort_keys=True,allow_nan=False).encode()
+    result=review(normalized_raw,hashlib.sha256(normalized_raw).hexdigest())
+    selected=next(r for r in result['series'] if r['step']==result['selected_step'])
+    require(c['selected_step']==p['selected']['step']==selected['step']
+        and close(p['selected']['lesion_dice'],selected['summary']['positive_macro_dice'])
+        and p['selected']['checkpoint']['sha256']==selected['checkpoint_sha256_from_peer_journal']
+        and p['terminal_checkpoint_sha256']==backups['checkpoint-24000.pt']['sha256'], 'Selected/terminal checkpoint binding differs')
+    result.update(source_sha256=expected_sha,geometry_source_sha256=geometry_sha,
+        normalized_adapter_sha256=hashlib.sha256(normalized_raw).hexdigest(),
+        geometry_binding='Original inputs.json identity and original input/metric producer pins match; explicit cross-export metadata join',
+        closure='Peer saved-JSON backup/process/MLflow attestation; Mac did not reread remote artifact bytes',
+        saved_native_arrays=p['saved_native_arrays'],phase_elapsed_seconds=c['seconds'])
+    return result
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--export',type=Path,required=True);p.add_argument('--sha256',required=True)
+    p.add_argument('--geometry-export',type=Path);p.add_argument('--geometry-sha256')
     p.add_argument('--output',type=Path,required=True);args=p.parse_args()
     with args.export.open('rb') as f:raw=f.read(MAX_BYTES+1)
-    result=review(raw,args.sha256)
+    if args.geometry_export or args.geometry_sha256:
+        require(bool(args.geometry_export and args.geometry_sha256),'Both geometry arguments required')
+        with args.geometry_export.open('rb') as f:geometry_raw=f.read(MAX_BYTES+1)
+        result=review_published(raw,args.sha256,geometry_raw,args.geometry_sha256)
+        require(args.geometry_export.read_bytes()==geometry_raw,'Geometry input changed during review')
+    else:result=review(raw,args.sha256)
     require(args.export.read_bytes()==raw,'Input changed during review')
     with args.output.open('x') as f:f.write(json.dumps(result,indent=2,allow_nan=False)+'\n')
 

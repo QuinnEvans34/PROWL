@@ -1,0 +1,157 @@
+{
+  "status": "PASS_LAUNCH_VERIFIED",
+  "ready_sha256": "889675ab2069318c2eca4208ac2bdcf5be6e457f6442089e8db2a90aae0bbca3",
+  "pins": 531,
+  "observed_updates": 10,
+  "first_step": 24001,
+  "last_step": 24010,
+  "mlflow_run_id": "dc0b189042704f51af9dbb2deed5f5a6",
+  "stored_loss_count": 11,
+  "matched_loss_count": 10,
+  "parent_import": {
+    "model": {
+      "tensors": 130,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "optimizer": {
+      "tensors": 390,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "rng": {
+      "tensors": 2,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    },
+    "exposure": {
+      "tensors": 0,
+      "max_abs_difference": 0.0,
+      "atol": 0,
+      "rtol": 0
+    }
+  },
+  "processes": [
+    {
+      "pid": 52560,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "scripts/training/supervise_stunet_longer_20261110.py",
+        "--request",
+        "E:/PROWL/readiness/stunet-longer-scientific-launch-20261110-a01/ready.json",
+        "--sha256",
+        "889675ab2069318c2eca4208ac2bdcf5be6e457f6442089e8db2a90aae0bbca3",
+        "--mode",
+        "science"
+      ],
+      "created": 1794323320.7313695
+    },
+    {
+      "pid": 46764,
+      "command": [
+        "C:/Users/quinn/.cache/prowl-week05-matched-20261102-a01/venv/Scripts/python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-longer-scientific-launch-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_longer_continuation_12k_20261110_launch01\\execution"
+      ],
+      "created": 1794323382.818318
+    },
+    {
+      "pid": 35244,
+      "command": [
+        "\\??\\C:\\WINDOWS\\system32\\conhost.exe",
+        "0x4"
+      ],
+      "created": 1794323382.8614895
+    },
+    {
+      "pid": 53712,
+      "command": [
+        "C:\\Users\\quinn\\.cache\\prowl-week05-matched-20261102-a01\\python\\cpython-3.12.13-windows-x86_64-none\\python.exe",
+        "C:\\Users\\quinn\\Desktop\\PROWL\\scripts\\training\\train_stunet_longer_20261110.py",
+        "--request",
+        "E:\\PROWL\\readiness\\stunet-longer-scientific-launch-20261110-a01\\ready.json",
+        "--mode",
+        "science",
+        "--output",
+        "E:\\PROWL\\artifacts\\pants_stunet_longer_continuation_12k_20261110_launch01\\execution"
+      ],
+      "created": 1794323382.9178784
+    }
+  ],
+  "apis": {
+    "local": {
+      "card": {
+        "id": "pants_stunet_longer_continuation_12k_20261110",
+        "title": "Continue STU-Net from 24k to 36k with fresh views",
+        "status": "running",
+        "steps": 11,
+        "target_steps": 12000,
+        "seconds": 68.06300000008196,
+        "loss": 0.7282276749610901,
+        "learning_rate": 4.4e-07,
+        "train_cases": 1333,
+        "development_cases": 70,
+        "latest": null,
+        "best": null,
+        "ema_latest": null,
+        "ema_best": null,
+        "native": [],
+        "history": [],
+        "metric_scope": "native_pancreas_assisted",
+        "progress": null,
+        "verifier_history": [],
+        "tuning_cases": 0,
+        "next_validation": 2000,
+        "updated_at": 1794323461.835,
+        "age_seconds": 1,
+        "ancestry_start": 24000,
+        "global_steps": 24011,
+        "global_target_steps": 36000
+      },
+      "total_seconds": 1175749.954,
+      "total_steps": 256841,
+      "history_count": 12
+    },
+    "phone": {
+      "card": {
+        "id": "pants_stunet_longer_continuation_12k_20261110",
+        "title": "Continue STU-Net from 24k to 36k with fresh views",
+        "status": "running",
+        "steps": 11,
+        "target_steps": 12000,
+        "seconds": 68.06300000008196,
+        "loss": 0.7282276749610901,
+        "learning_rate": 4.4e-07,
+        "train_cases": 1333,
+        "development_cases": 70,
+        "latest": null,
+        "best": null,
+        "ema_latest": null,
+        "ema_best": null,
+        "native": [],
+        "history": [],
+        "metric_scope": "native_pancreas_assisted",
+        "progress": null,
+        "verifier_history": [],
+        "tuning_cases": 0,
+        "next_validation": 2000,
+        "updated_at": 1794323461.835,
+        "age_seconds": 1,
+        "ancestry_start": 24000,
+        "global_steps": 24011,
+        "global_target_steps": 36000
+      },
+      "total_seconds": 1175749.954,
+      "total_steps": 256841,
+      "history_count": 12
+    }
+  }
+}
