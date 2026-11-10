@@ -1302,7 +1302,10 @@ export default function NiivueViewer({
     nv.updateGLVolume()
   }, [syncWindow?.id, sceneVersion, state.status, sceneKey, mode])
 
-  // Re-run the layout when the viewer changes size (panels opening, window resize).
+  // Resize the WebGL drawing buffer as well as the layout. Redrawing into the
+  // old buffer leaves anatomy at its old size when a pane/fullscreen grows.
+  // Keep the camera in anatomical units so NiiVue's fit scales with the new
+  // canvas while the user's additional zoom, pan and slice remain unchanged.
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas || mode !== '2d' || typeof ResizeObserver === 'undefined') return undefined
@@ -1312,7 +1315,11 @@ export default function NiivueViewer({
       frame = window.requestAnimationFrame(() => {
         frame = null
         const nv = nvRef.current
-        if (!nv || state.status !== 'ready' || !nv.volumes?.[0]) return
+        if (!nv || state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey
+          || !nv.volumes?.[0] || canvas.clientWidth <= 0 || canvas.clientHeight <= 0) return
+        const view = captureViewState(nv)
+        nv.resizeListener()
+        restoreViewState(nv, view, '2d')
         setPlaneLayout(nv, activePlane)
         nv.drawScene()
         setPlaneTiles(planeTilesFrom(nv))

@@ -16,11 +16,15 @@ vi.mock('@niivue/niivue', () => ({
       this.loadVolumes = vi.fn(async specs => {
         this.volumes = specs.map(spec => ({ ...spec, hdr: { dims: [3, 11, 21, 31], affine: [[harness.spacing[0], 0, 0, harness.origin[0]], [0, harness.spacing[1], 0, harness.origin[1]], [0, 0, harness.spacing[2], harness.origin[2]], [0, 0, 0, 1]] }, img: new Uint8Array(11 * 21 * 31) }))
       })
+      this.resizeListener = vi.fn(() => {
+        this.canvas.width = this.canvas.offsetWidth * window.devicePixelRatio
+        this.canvas.height = this.canvas.offsetHeight * window.devicePixelRatio
+      })
+      this.drawScene = vi.fn()
       this.cleanup = vi.fn()
       harness.instances.push(this)
     }
     attachToCanvas(canvas) { this.canvas = canvas }
-    drawScene() {}
     updateGLVolume() {}
     clearCustomLayout() {}
     setSliceType() {
@@ -119,6 +123,49 @@ it('anchors zoom at the crosshair for non-origin CT affines, without zooming ano
   expect(Array.from(peer.scene.pan2Dxyzmm)).toEqual(peerView)
   rerender(renderPair({ id: 3, type: 'zoom', factor: 1 / 1.44 }))
   Array.from(nv.scene.pan2Dxyzmm).forEach((value, axis) => expect(value).toBeCloseTo([8, -3, 7, 1][axis], 4))
+})
+
+it('grows the rendered scan with the pane and restores its original size without changing the anatomical camera', async () => {
+  harness.origin = [-342.55, -397.22, -16]
+  harness.spacing = [1.5, 1.5, 1.5]
+  render(<NiivueViewer {...base} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const canvas = nv.canvas
+  let size = { width: 512, height: 320 }
+  for (const [property, dimension] of [['clientWidth', 'width'], ['offsetWidth', 'width'], ['clientHeight', 'height'], ['offsetHeight', 'height']]) {
+    Object.defineProperty(canvas, property, { configurable: true, get: () => size[dimension] })
+  }
+  nv.scene.crosshairPos = new Float32Array([.2, .4, .8])
+  nv.scene.pan2Dxyzmm = new Float32Array([8, -3, 7, 1.44])
+  nv.volumes[0].cal_min = .2
+  nv.volumes[0].cal_max = .8
+  const position = Array.from(nv.scene.crosshairPos)
+  const camera = Array.from(nv.scene.pan2Dxyzmm)
+  const anchor = nv.frac2mm(position)
+  const projection = anchor.map((value, axis) => value * camera[3] + camera[axis])
+  const resize = async () => {
+    const calls = nv.resizeListener.mock.calls.length
+    act(() => harness.observers.at(-1).callback())
+    await waitFor(() => expect(nv.resizeListener).toHaveBeenCalledTimes(calls + 1))
+  }
+  await resize()
+  const initialBuffer = [canvas.width, canvas.height]
+  size = { width: 1024, height: 640 }
+  await resize()
+  // The renderer receives twice as many pixels per anatomical unit instead
+  // of stretching a stale buffer or retaining the smaller drawing viewport.
+  expect([canvas.width, canvas.height]).toEqual(initialBuffer.map(value => value * 2))
+  expect(nv.drawScene).toHaveBeenCalled()
+  expect(Array.from(nv.scene.crosshairPos)).toEqual(position)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(camera)
+  projection.forEach((value, axis) => expect(anchor[axis] * nv.scene.pan2Dxyzmm[3] + nv.scene.pan2Dxyzmm[axis]).toBeCloseTo(value, 4))
+  expect([nv.volumes[0].cal_min, nv.volumes[0].cal_max]).toEqual([.2, .8])
+  size = { width: 512, height: 320 }
+  await resize()
+  expect([canvas.width, canvas.height]).toEqual(initialBuffer)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(camera)
+  expect(nv.loadVolumes).toHaveBeenCalledTimes(1)
 })
 
 it('moves each slice slider to a voxel center, including the first and last slice', async () => {
