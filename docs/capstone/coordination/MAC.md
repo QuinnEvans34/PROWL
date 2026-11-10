@@ -1,5 +1,32 @@
 # Mac work status
 
+## November 10 terminal24k audit and tuning preparation
+
+- User requests deep hyperparameter analysis of final24k, not only selected18k.
+  [Full report](../evaluation/STUNET-24K-TUNING-ANALYSIS-20261110.md) and
+  [bounded strategy](../evaluation/STUNET-TUNING-STRATEGY-20261110.md) delivered.
+  All six validations/70cases retained: finalDice.411972 versus selected.430517;
+  precision.461849 versus.421671, recall.499250 versus.551734. Small5Dice.111298.
+  Per-case errors, specificity denominators and reference-only error budgets
+  show a precision/recall tradeoff; no tuned24k score is claimed.
+- New count-only checked reader, explicit original-publication adapter, source
+  reconciliation and PNG/PDF figures. Peer d5b127d/4d557f7 metadata imported
+  byte-for-byte, no merge. Extended native rows reproduce every derived value;
+  70identities/210source hashes/native geometry match the qualified parent.
+  The original envelope added derived counts; exact core420row equality checked.
+- Actual scientific diagnostics:3/10periodic positive patches lose lesions at
+  coarsest scale. Training loss declines but later native recall also declines;
+  head/body gradients are nonzero in the24sampled diagnostics. These cadence
+  samples are not a cohort prevalence estimate or proof of a single cause.
+- Neither24k nor18k native masks/probabilities/logits were retained. A measured
+  raw/5mm or decision-margin study requires new bounded inference. Mac external
+  drive is absent; no arrays, GPU work, MLflow writes or Optuna training here.
+  Existing Optuna is4.9.0; historical tuner targets SegResNet, not this STU-Net.
+- Lenovo9dd725b verified the separately authorized24k→36k phase running, live
+  losses inMLflowdc0b189042704f51af9dbb2deed5f5a6, original24k full-state import
+  and522tensor cold replay exact.531pins and current recipe remain untouched;
+  first new full validation26k. No competing job or automatic successor.
+
 ## November 9 Trello rolled to Week 6
 
 - User explicitly requested Week5 Done only and current Week6 work. Board verified
