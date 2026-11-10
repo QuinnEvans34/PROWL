@@ -1,4 +1,5 @@
 import unittest
+from copy import deepcopy
 
 import numpy as np
 
@@ -76,6 +77,33 @@ class MarginScreenTests(unittest.TestCase):
             screen.encode(p*np.nan)
         with self.assertRaises(ValueError):
             screen.components(code, 0., np.zeros((4, 4)))
+
+    def test_higher_dice_with_a_lost_component_remains_ineligible(self):
+        base = dict(lesion=dict(target_voxels=10, predicted_voxels=100, true_positive=5, dice=10/110),
+            pancreas=dict(dice=.8), reference_positive=True, target_volume_mm3=100.,
+            voxel_mm3=10., reference_components=2, detected_components=2,
+            hit_component_ids=[1, 2], case_detected=True, false_alarm_any=False)
+        metrics = {k:deepcopy(base) for k in screen.policies()}
+        name = 'bias0_near5_min0'
+        candidate = metrics[name]
+        candidate['lesion'].update(predicted_voxels=5, dice=10/15)
+        candidate.update(hit_component_ids=[1], detected_components=1)
+        rows = [dict(case_id='synthetic-positive', policies=metrics)]
+        result = screen.summarize(rows, require_full=False)
+        self.assertTrue(result['guards'][name]['checks']['dice_gain_at_least_02'])
+        self.assertFalse(result['guards'][name]['passes'])
+        self.assertEqual(result['selected_exploratory_policy'], 'raw')
+        self.assertEqual(result['guards'][name]['lost_components'], [dict(case_id='synthetic-positive', component_id=2)])
+        candidate['target_volume_mm3'] += 1
+        with self.assertRaisesRegex(ValueError, 'Matched reference'):
+            screen.summarize(rows, require_full=False)
+
+    def test_complete_cohort_is_required_for_final_selection(self):
+        p = np.zeros((3, 2, 2, 3), dtype=np.float32); p[0] = 1
+        code = screen.encode(p)
+        metrics = screen.score_case(code, np.zeros(code.shape, np.uint8), np.zeros(code.shape, np.uint8), np.eye(4))
+        with self.assertRaisesRegex(ValueError, 'denominators'):
+            screen.summarize([dict(case_id='synthetic', policies=metrics)])
 
 
 if __name__ == '__main__':

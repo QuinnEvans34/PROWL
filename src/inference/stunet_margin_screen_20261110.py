@@ -176,8 +176,15 @@ def summarize(rows, *, require_full=True):
             if n+p and not np.isclose(m['lesion']['dice'], 2*t/(n+p), rtol=0, atol=1e-12):
                 raise ValueError('Dice arithmetic mismatch')
             if (len(m['hit_component_ids']) != m['detected_components'] or
+                    len(set(m['hit_component_ids'])) != len(m['hit_component_ids']) or
+                    any(type(c) is not int or not 1 <= c <= m['reference_components'] for c in m['hit_component_ids']) or
                     bool(m['hit_component_ids']) != m['case_detected']):
                 raise ValueError('Component identity census mismatch')
+        for row in rows:
+            raw, candidate = row['policies']['raw'], row['policies'][name]
+            if (raw['lesion']['target_voxels'] != candidate['lesion']['target_voxels'] or
+                    any(raw[k] != candidate[k] for k in ('voxel_mm3', 'target_volume_mm3', 'reference_positive', 'reference_components'))):
+                raise ValueError('Matched reference changed between policies')
         def recall(group):
             return mean(m['lesion']['true_positive']/m['lesion']['target_voxels'] for m in group) if group else None
         result[name] = dict(positive_macro_dice=mean(m['lesion']['dice'] for m in pos) if pos else None,
