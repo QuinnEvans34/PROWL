@@ -1,0 +1,13 @@
+{
+  "approval": "Yes, raise it to whatever it needs. Lets get this finished so we can try to increase the DICE>",
+  "approved_action": "One CPU-only continuation of the same six settings; reuse the two completed pilot records and score the 68 remaining development cases",
+  "cpu_cap_seconds": 2700,
+  "wall_deadline_unix": 1794358800,
+  "wall_deadline_mountain": "2026-11-10T18:00:00-07:00",
+  "cumulative_active_seconds": 14400,
+  "hold_verified_unix": 1794343838,
+  "hold_evidence": "Conservatively charge through meeting hold commit eadacbd, 13:50:38 Mountain; worker was reaped before that commit",
+  "resume_origin_unix": 1794354167,
+  "resume_evidence": "Charge from the first return-time readiness check, 16:42:47 Mountain, including preparation and approval wait",
+  "unchanged_limits": "4 GiB combined CPU worker RSS, AC, memory pressure and storage caps/floors. No new inference, training, CT voxel reads, completed-case rerun, or deployment."
+}
