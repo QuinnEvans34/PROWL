@@ -5754,3 +5754,18 @@ H0: the composite corrected-label, LR-restart and additional-exposure phase does
 All1333train retained,664positive/669empty after seven exact errata corrections;70dev unchanged. Start parent12k full model/heads/AdamW/RNG/exposure;12000additionalglobal12001-24000,500warmup2e-5 then cosinezero;newdeterministic3:1coverage/jitter/context views. Sixnative70validations and500step independentbackups. Qualifiedreal7targets/9loaderchecks plusGPU5/cold1;522state tensors exact.
 
 First scientific a01 stopped before updates because supervisor interpreter lacked MLflow; no tracking run, workersreaped, evidence preserved. One authorized operational correction uses existingMLflow supervisor and unchangedCUDAworker, charges60s against40h. Corrected a02owned99079 verified advancing12001->12027; MLflow13c709ae157949988de1d7f8821a03b7RUNNING/25storedlossesexact. Parent independentE/C checkpoint reference reused. Phone11cards/all10history, newphasehours/steps counted once. HourlymonitorACTIVE for thisrunonly, no successor/retry. No new Dice available until firstfull70validation atglobal14000.
+
+
+## November9 — Proposed: twelve more thousand STU-Net updates
+
+User requested another12k training steps and registration of the current model. See [full proposed design](capstone/operations/STUNET-LONGER-36K-PROPOSAL-20261109.md). Data interpretation (same patients/new views versus new patients) pending user clarification; no launch. Preserve best18k Dice0.4305169672 and final24k0.4119720668. Proposed controlled continuation starts from24k and tracks12000new/global36000 separately; H0 no terminal native Dice improvement, paired uncertainty plus detection/FPguards. Longer training with LRrestart is not independent initialization or additional patients.
+
+Selected18k registered in MLflow as `prowl-stunet-pancreas-assisted-research`, version1, Dice0.4305169672, checkpoint SHA3a5615f0c54f3af80202f81fa0234e51e3b38df768a47f00ec4be39c7f624f1a. CPU model package save/reload tensors exact; published artifact hashes match. Research network component only; no deployment promotion or additional training hours. Final24k checkpoint remains preserved for proposed continuation. Two local packaging failures retained; neither changed the registry. Receipt: operations/STUNET-MODEL-REGISTRATION-20261109.json.
+
+
+### November10: Approved longer STU-Net phase, 24k to36k
+Same corrected1,333 PanTS patients with new sampling/augmentation addresses; final24k full-state ancestry, separate MLflow phase. Prior selected18k registered/preserved. H0, matched terminal comparison and promotion guards fixed in operations/STUNET-LONGER-LAUNCH-20261110.md.28CPUtests and metadata/coverage/storage review PASS; five nonpromotable GPU updates now qualifying, then independent cold replay. No new patients or test access. Scientific launch pending these gates; one launch authorized by user.
+
+
+### November10: Longer STU-Net continuation launched
+Qualified28CPUtests, five nonpromotableGPUupdates and exact522-tensor cold replay. Scientific phase now running24001-36000 from final24k, same corrected1333patients/new addresses, six full70validations. MLflowdc0b189042704f51af9dbb2deed5f5a6; observed24013 and live private phone phase metrics. Hypothesis remains NOT TESTED until completed matched outcomes; no new Dice yet. Selected18k researchregistryversion1 and final24k preserved. Details: operations/STUNET-LONGER-HANDOFF-20261110.md. No new monitoring schedule.

@@ -1,5 +1,15 @@
 # AGENTS.md — Agent Context
 
+> **November10 longer STU-Net LAUNCH VERIFIED:** Owned94864/supervisor52560/workerwrapper46764, MLflowdc0b189042704f51af9dbb2deed5f5a6 RUNNING. Actualglobal24001->24013;11storedlosses/10capturedexact. Ready889675ab2069318c2eca4208ac2bdcf5be6e457f6442089e8db2a90aae0bbca3/531pins. Read STUNET-LONGER-HANDOFF-20261110.md. SAME1333correctedPanTS,12knew/global36ktarget;6full70validations/checkpoints every2k.40h/12GiBRSS/6GiBCUDA/88GiBCbackup/100GiBfree unchanged. Phone12cards/phasehours verified; parentE/Cexact; cold522tensorsexact. Preservepins/no duplicate/retry/merge/GPUcompetition. No new schedule/successor.
+
+
+> **November10 longer STU-Net phase PREPARING, user approved:** Same1333 corrected PanTS/new addresses, final24k to36k. Read STUNET-LONGER-LAUNCH-20261110.md. Producer owned2647, request3fb055b4... at E:/PROWL/readiness/stunet-longer-qualification-20261110-a01. Preserve all historical/new pins; no duplicate.28CPUtests PASS; cold replay/freeze/scientific launch pending. Registered18k version1 preserved.40h/12GiBRSS/6GiBCUDA/88GiBbackups/100GiBfree; six checkpoints every2k. No new schedule or successor.
+
+
+> **November9 corrected STU-Net continuation COMPLETE/verified:** 12000new/global24000, sixfull70validations. Selected18k Dice.430517; terminal24k.411972. MLflowFINISHED/12000losses exact;33E/Cexecution backups match;219repositorypins match;workerexit0/reaped/absent. Phase29.345h, phonecompleted/phasehourscorrect. Monitor deleted; no successor. Read docs/capstone/operations/STUNET-CORRECTED-COMPLETION-20261109.md. Preserve all500pins and failed/parent evidence.
+
+
+
 > **November8 corrected continuation LAUNCH VERIFIED:** NEW12k/global12001-24000,owned99079/supervisor48348/worker52992(actual32244). Ready d0a291420d0e1ee07e56f1007540797ebb97c9a08ff25cc82111d53f77c4d9f8/500pins. MLflow13c709ae157949988de1d7f8821a03b7RUNNING,updates12001->12027/stored25exact;parentE/Cinitialreferenceverified. Phonephaseprogress/hourslive/allhistory. ONEhourly monitor-corrected-stu-net-continuation ACTIVE. Read docs/capstone/operations/STUNET-CORRECTED-LAUNCH-20261108.md.143940sremaining/88GiBCbackups/100GiBfree/12GiBRSS/6GiBCUDA. Preservefaileda01zero-updates/allpins; no retry/resume/successor.
 
 > **November8 continuation scientific a01 failed before updates; operational correction authorized:** Wrong supervisor interpreter lackedMLflow; noexecution/noMLflowrecord/zero updates.95228reaped, GPUidle. Preservea01. v2supervisor uses existingMLflowenv, unchangedqualifiedCUDAworker. ONE correctedlaunch authorized viaMac underhumanfix-and-launch; charge60s against40h,143940s remain. Bounded preflight40420active; no duplicate. Read STUNET-CONTINUATION-QUALIFICATION-20261108.md.
