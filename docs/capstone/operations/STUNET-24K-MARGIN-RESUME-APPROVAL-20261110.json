@@ -1,0 +1,16 @@
+{
+  "approved": true,
+  "approved_unix": 1794336828.0540311,
+  "user_answer": "Approve pause-aware deadline extension",
+  "scope": "Exclude documented user-requested pause; preserve original cumulative active-work allowance and all science/resource gates",
+  "deadline_unix": 1794349800.0,
+  "deadline_mountain": "2026-11-10 15:30 America/Denver",
+  "cumulative_active_seconds": 14400,
+  "mps_bytes": 8589934592,
+  "rss_bytes": 12884901888,
+  "backup_cap_bytes": 27917287424,
+  "new_root_cap_bytes": 4294967296,
+  "question_item_id": "call_c2638ae1d9e640ec98525cf6b406b6ed:0",
+  "case_reruns_authorized": false,
+  "scientific_changes_authorized": false
+}
