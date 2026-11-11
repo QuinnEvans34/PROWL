@@ -1,0 +1,88 @@
+{
+  "status": "VERIFIED_COMPLETE",
+  "request_sha256": "5ce4cbd8f880df9aabd900c65a94e7dddbe142b55e47dc3e1a819ade1a58e82a",
+  "mlflow_run_id": "9b3b885263e340db8431a5497d568ee5",
+  "updates": 2400,
+  "diagnostic_components": 24,
+  "patches": 216,
+  "device": "cpu",
+  "gate": false,
+  "small": {
+    "incumbent": {
+      "dice": 0.08393699371591441,
+      "hits": 7,
+      "fp_voxels": 65144
+    },
+    "refiner": {
+      "dice": 0.4422577599836041,
+      "hits": 12,
+      "fp_voxels": 6390
+    }
+  },
+  "larger": {
+    "incumbent": {
+      "dice": 0.3274923146160396,
+      "hits": 11,
+      "fp_voxels": 16222
+    },
+    "refiner": {
+      "dice": 0.23428366795962907,
+      "hits": 12,
+      "fp_voxels": 1993
+    }
+  },
+  "policy_deployed": false,
+  "result_sha256": "60e5d889b366540e4f509a808f68ad3b6ba422f4a836417bf764d29502881818",
+  "workers_reaped": true,
+  "independent_artifacts_match": true,
+  "verified_closeout_sha256": "951d20b42bba88e1551220735c3732a3899b487bcf214efc442be46a1a99d897",
+  "finished_mountain": "2026-11-10T19:47:57-07:00",
+  "scope": "Known-location diagnostic on 24 annotated lesion components across 19 exposed development scans, 12 per volume group. Numbers are crop/component Dice, not full-scan Dice.",
+  "stage_resources": {
+    "cache": {
+      "seconds": 437.30690566590056,
+      "peak_owned_rss_bytes": 3199926272,
+      "samples": 173,
+      "process_sample_timeouts": 0,
+      "workers_reaped": true,
+      "cleanup_error": null,
+      "surviving_workers": [],
+      "tracked_worker_identities": 5,
+      "success": true,
+      "error": null,
+      "supervisor_cleanup_error": null,
+      "exit_code": 0
+    },
+    "fit": {
+      "seconds": 3530.174608166795,
+      "peak_owned_rss_bytes": 1898676224,
+      "samples": 1345,
+      "process_sample_timeouts": 0,
+      "workers_reaped": true,
+      "cleanup_error": null,
+      "surviving_workers": [],
+      "tracked_worker_identities": 1,
+      "success": true,
+      "error": null,
+      "supervisor_cleanup_error": null,
+      "exit_code": 0
+    },
+    "score": {
+      "seconds": 120.1311707496643,
+      "peak_owned_rss_bytes": 3311173632,
+      "samples": 46,
+      "process_sample_timeouts": 0,
+      "workers_reaped": true,
+      "cleanup_error": null,
+      "surviving_workers": [],
+      "tracked_worker_identities": 1,
+      "success": true,
+      "error": null,
+      "supervisor_cleanup_error": null,
+      "exit_code": 0
+    }
+  },
+  "mlflow_status": "FINISHED",
+  "mlflow_snapshot_integrity": "ok",
+  "interpretation": "Small-component Dice gained 0.3583 with the reference location supplied. Larger-control Dice fell by 0.0932; the fixed advance gate failed. No autonomous proposal run or deployment."
+}
