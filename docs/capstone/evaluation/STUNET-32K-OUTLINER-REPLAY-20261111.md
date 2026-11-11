@@ -25,3 +25,18 @@ Quinton chose to keep Lenovo's 48k continuation first and use the Mac for the re
 The Mac can initialize MPS in the experiment runtime. Both architecture sources are present, the local Expert has no resident model, and the 70-case worst-case packed archive is 1.053 GiB including metadata reserve. Projected total retained backups were 25.908 GiB under the existing 26 GiB cap, with about 71.78 GB of internal free space after that reserve. Recheck at launch. Nine focused tests passed including geometry, class packing, and drift rejection. No masks were reconstructed.
 
 The private input is pending explicit transfer authorization. The proposed packet contains only `model-only.pt`, the byte-identical `native-32000.json`, and `manifest.json`. The manifest records `step`, `source_checkpoint_sha256`, `independent_checkpoint_sha256`, `tensor_equality`, `report_sha256`, and `model_sha256`. The model envelope contains `step`, `parent_sha256` and `model`. The full checkpoint and optimizer remain on the Lenovo. Verify the outer packet SHA and regular members before extraction, then the exact file and source identities. The automatic approval review blocked the proposed Lenovo-to-Mac transfer because the artifact and destination needed specific authorization. No alternate transfer was attempted.
+
+## Authorized private receive
+
+Quinton explicitly authorized the Magic Wormhole transfer of the model-only
+32k weights, original validation report and verification manifest between his
+Lenovo and Mac. No CT, reference mask, optimizer state or other payload is in
+scope. The [packet importer](../../../scripts/diagnostics/import_mac_stunet_32k_packet_20261111.py)
+accepts only the three authorized regular files, checks the outer archive and
+member hashes before extraction, and creates an import receipt in a fresh
+private directory. Eleven focused tests passed, including rejection of extra
+or unsafe archive members. No model bytes were read as part of these checks.
+
+The Lenovo confirmed the 48k continuation is advancing and that the registered
+36k checkpoint scored .4293 raw Dice. The new phase's first complete evaluation
+is at 38k. The separate Mac replay has no confirmed sender or received packet yet.
