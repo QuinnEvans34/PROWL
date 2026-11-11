@@ -1,0 +1,56 @@
+{
+  "schema": "prowl.local-refiner-mac-launch-verification.v1",
+  "status": "RUNNING_CACHE_PREPARATION",
+  "device": "cpu",
+  "label": "com.prowl.local-refiner-cpu-20261110-a02",
+  "ready_sha256": "5ce4cbd8f880df9aabd900c65a94e7dddbe142b55e47dc3e1a819ade1a58e82a",
+  "parent_request_sha256": "663b8123516f8c1a4eb11f150bfdc22d7c12c8c6b686281e038cf31645e57465",
+  "result_root": "/Volumes/PROWL-Data/PROWL/artifacts/local-refiner-mac-20261110-a02",
+  "independent_backup_root": "/Users/quintonevans/PROWL-Backups/local-refiner-mac-20261110-a02",
+  "stage_identity": {
+    "supervisor": 70915,
+    "worker": 70942,
+    "worker_start": "Tue Nov 10 18:39:42 2026"
+  },
+  "observed_cache_progress": {
+    "event": "train_case_cached",
+    "completed": 15,
+    "total": 108
+  },
+  "training_case_counts": {
+    "small": 48,
+    "medium": 24,
+    "empty": 36
+  },
+  "planned_updates": 2400,
+  "diagnostic_scans": 19,
+  "diagnostic_components": 24,
+  "small_components": 12,
+  "scope": "Exposed known-location diagnostic; no automatic detection or independent validation claim",
+  "original_qualification": {
+    "request_sha256": "663b8123516f8c1a4eb11f150bfdc22d7c12c8c6b686281e038cf31645e57465",
+    "train_probe_cases": 3,
+    "updates": 16,
+    "cold_prediction_exact": true,
+    "checkpoint_sha256": "96af3eb61d6f026a7e89313a4b11233599c567f124aa8ac81229a4c4e780bb34",
+    "max_prepare_seconds": 5.744833750184625,
+    "update_seconds": 0.36373773438390344,
+    "conservative_seconds": 5566.825215082616
+  },
+  "original_qualification_peak_rss": 3922329600,
+  "original_in_memory_dispatch": "not launched; measured peak plus patch residency exceeded 4 GiB",
+  "cache_method": "External lossless patch cache; supervised CPU cache, fit and score stages isolated",
+  "conservative_seconds": 6981,
+  "worker_cap_seconds": 28800,
+  "cutoff_mountain": "2026-11-11T08:45:00-07:00",
+  "worker_rss_cap_bytes": 4294967296,
+  "retry": false,
+  "gpu_calls": 0,
+  "unapproved_test_reads": 0,
+  "plan_commit": "eec9d55",
+  "code_commits": [
+    "3e52674",
+    "bd8ce24"
+  ],
+  "validation": "two focused tests and exact real-crop cache/logit roundtrip"
+}
