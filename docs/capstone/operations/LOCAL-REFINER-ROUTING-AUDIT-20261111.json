@@ -1,0 +1,70 @@
+{
+  "scope": "Exposed development; candidate availability and known-location counterfactual only. No refiner inference or automatic fusion was run.",
+  "comparator": "tier3_trim4mm_grow1.5mm",
+  "candidates": {
+    "incumbent_le1ml": {
+      "proposals": 56,
+      "zero_overlap_proposals": 48,
+      "empty_scans_with_proposals": 17,
+      "small_hits": 2,
+      "small_hits_with_90_percent_in_crop": 2,
+      "small_hits_incumbent_missed": 0,
+      "larger_hits": 4
+    },
+    "incumbent_le2ml": {
+      "proposals": 71,
+      "zero_overlap_proposals": 60,
+      "empty_scans_with_proposals": 20,
+      "small_hits": 4,
+      "small_hits_with_90_percent_in_crop": 4,
+      "small_hits_incumbent_missed": 0,
+      "larger_hits": 5
+    },
+    "additional_plus1_le1ml": {
+      "proposals": 65,
+      "zero_overlap_proposals": 63,
+      "empty_scans_with_proposals": 16,
+      "small_hits": 1,
+      "small_hits_with_90_percent_in_crop": 1,
+      "small_hits_incumbent_missed": 0,
+      "larger_hits": 1
+    }
+  },
+  "status": "VERIFIED_COMPLETE",
+  "resources": {
+    "seconds": 114.2702317503281,
+    "peak_owned_rss_bytes": 2487451648,
+    "samples": 56,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 1,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "full_routing_sha256": "bf978c928bd00d240a0804de80597bea9cf9790d55bcb06dda0eb54260bd5f70",
+  "producer_sha256": "3f70d894dc04ab2e29a0aa0c4935702b91c884af755ca4e254480baf5083bde1",
+  "refiner_result_sha256": "60e5d889b366540e4f509a808f68ad3b6ba422f4a836417bf764d29502881818",
+  "full_core_result_sha256": "68073a50eb107c0b1efd63ed3497033f250118f655693a35d6ac5c2ad7388549",
+  "routing_geometry": "Connected components in native RAS, full-affine 5 mm for extra proposals, 64 native voxels on each crop axis. Coverage counts require proposal overlap and at least 90% of target inside the crop. Zero overlap is a proposal diagnostic, not a deployed false alarm.",
+  "reference_components": 45,
+  "small_components": 12,
+  "incumbent_small_component_hits": 7,
+  "known_location_oracle": {
+    "crops": 4,
+    "positive_scan_denominator": 36,
+    "before_dice": 0.43670881754159574,
+    "after_dice": 0.4571745658797506,
+    "macro_dice_delta": 0.02046574833815483,
+    "fp_volume_delta_ml": -0.7141725271167114,
+    "true_positive_voxel_delta": 931,
+    "improved_scans": 3,
+    "worse_scans": 1,
+    "method": "Replace all incumbent lesion predictions only within one reference-centered crop on each selected scan; leave the rest of each scan and all other scans unchanged. Restrict to fully covered <1 mL single-reference-component scans so whole-scan counts reconcile exactly. Uses true locations and true size; not a prediction-only estimate or upper bound."
+  },
+  "small_crop_dice_wins": 11,
+  "larger_crop_dice_wins": 4
+}
