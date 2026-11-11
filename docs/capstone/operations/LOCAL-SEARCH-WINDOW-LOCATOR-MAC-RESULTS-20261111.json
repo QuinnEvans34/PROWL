@@ -1,0 +1,107 @@
+{
+  "status": "VERIFIED_COMPLETE",
+  "purpose": "Off-center search windows and mined negatives for a CT-only locator",
+  "scope": "Exposed development proposal benchmark. No fusion or whole-scan Dice was measured.",
+  "request_sha256": "f453c0c570ef0a89e8dafe016c0037d373fa1fd8ad436e2fbdd3e10a7a67a898",
+  "score_sha256": "e8ca7851fb1d9b6c0f3354d84c34a4849bc1e1bb0c53473774ca24fa78989da4",
+  "checkpoint_sha256": "0b939a7770a3d2aa20f151111a20b910c27fc87a4030ead205f30a5ed9aedb66",
+  "mlflow_run_id": "01c8c2dc4c3542e98db9242ad60290d1",
+  "mlflow_snapshot_sha256": "34f62a82cc6edbcf146c883eb1a5fa32a9072cf4ef11d2e512ce5067a32c4dd4",
+  "loss_journal_sha256": "8f2521407605f6de54f226c16f65c0c3504123e15dd1ad5f89bfb66ffb4f1c68",
+  "updates": 900,
+  "training_scans": 108,
+  "patches": 354,
+  "patch_counts": {
+    "offcenter_positive": 142,
+    "mined_negative": 106,
+    "grid_negative": 106
+  },
+  "patches_with_partial_component": 25,
+  "partially_masked_training_scans": 15,
+  "development_scans": 70,
+  "annotated_components": 45,
+  "small_components": 12,
+  "positive_scans": 36,
+  "comparison_definition": "One-to-one center distance <=5 mm and 64-cubed native crop coverage >=90%. Every unmatched proposal counts as false.",
+  "baseline": {
+    "matched": 9,
+    "small_hits": 4,
+    "newly_located_small": 0,
+    "false_proposals": 62,
+    "empty_scans_with_proposals": 20
+  },
+  "previous_locator_top3": {
+    "matched": 2,
+    "small_hits": 0,
+    "newly_located_small": 0,
+    "false_proposals": 208,
+    "empty_scans_with_proposals": 34
+  },
+  "previous_locator_at_baseline_false_proposals": {
+    "matched": 0,
+    "small_hits": 0,
+    "newly_located_small": 0,
+    "false_proposals": 1,
+    "empty_scans_with_proposals": 1,
+    "threshold": 0.11475896835327148
+  },
+  "fixed_top_k": {
+    "1": {
+      "matched": 1,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 69,
+      "empty_scans_with_proposals": 34
+    },
+    "2": {
+      "matched": 1,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 139,
+      "empty_scans_with_proposals": 34
+    },
+    "3": {
+      "matched": 1,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 209,
+      "empty_scans_with_proposals": 34
+    }
+  },
+  "exploratory_at_baseline_false_proposals": {
+    "matched": 0,
+    "small_hits": 0,
+    "newly_located_small": 0,
+    "false_proposals": 1,
+    "empty_scans_with_proposals": 0,
+    "threshold": 0.10071828216314316
+  },
+  "gate": false,
+  "no_fusion": true,
+  "cache_chunks": 23,
+  "identical_prefix_patches": 134,
+  "resources": {
+    "cache_seconds": 225.32829812401906,
+    "fit_seconds": 32.127056582830846,
+    "score_seconds": 137.95131687493995,
+    "peak_owned_rss_bytes": 3494281216,
+    "all_workers_reaped": true
+  },
+  "original_attempt_seconds_charged": 228,
+  "cumulative_seconds_cap": 4200,
+  "total_worker_seconds": 395.40667158178985,
+  "mask_policy": "ignore clipped lesion footprint and adjacent heatmap cells",
+  "prior_attempts": [
+    "First cache stopped at training scan 10 because no eligible window avoided clipping all annotated lesions.",
+    "Second cache stopped under the 4 GiB limit while processing scan 35. The final attempt rebuilt the exact 134-patch prefix and processed large scans in fresh workers."
+  ],
+  "at_exact_baseline_false_proposals": {
+    "matched": 0,
+    "small_hits": 0,
+    "newly_located_small": 0,
+    "false_proposals": 62,
+    "empty_scans_with_proposals": 23,
+    "threshold": 0.08201166242361069
+  },
+  "interpretation": "Off-center sampling with mined negatives did not improve small-lesion localization in this matched pilot. The two changes were tested together. Predicted pancreas constrained the evaluation search; annotations were used only for training sampling and development scoring."
+}
