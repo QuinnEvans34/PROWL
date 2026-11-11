@@ -1,0 +1,37 @@
+{
+  "status": "VERIFIED_COMPLETE_CPU_ONLY",
+  "resources": {
+    "seconds": 1173.6857181247324,
+    "peak_owned_rss_bytes": 3498442752,
+    "samples": 485,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 5,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "cases": 70,
+  "policies": 6,
+  "combined_settings": 60,
+  "independent_case_backups_match": true,
+  "summary_rebuilt_from_case_records": true,
+  "producing_pins_match": true,
+  "mlflow": {
+    "tracking_uri": "sqlite:////Volumes/PROWL-Data/PROWL/artifacts/stunet-margin-mac-20261110/mlflow.db",
+    "run_id": "3d1b6cf3b75946dea41f35b34775e850"
+  },
+  "mlflow_status": "FINISHED",
+  "result_sha256": "cda55c8faba730b2c4d8c101fc8ae56bf7c72265db97ca2f87e2576597f7a1c7",
+  "reused_cases": 2,
+  "new_cases": 68,
+  "request_sha256": "08a83d49a303e460bf7c4c680c751c94c2350fba1fafa6d18ea98534d00c5e3b",
+  "previous_run_id": "6da01ac4688546af9aaabfde52b5f79d",
+  "policy_deployed": false,
+  "model_calls": 0,
+  "optimizer_updates": 0,
+  "ct_voxel_reads": 0
+}
