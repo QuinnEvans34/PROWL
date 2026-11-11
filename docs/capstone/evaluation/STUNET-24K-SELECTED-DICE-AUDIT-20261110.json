@@ -1,0 +1,93 @@
+{
+  "schema": "prowl.stunet-terminal24k-selected-dice-audit.v1",
+  "scope": "Exposed development, provided pancreas region; headline is macro Dice over 36 positive scans; verified receipt census 70 total",
+  "evidence": "Exact selected-mask replay from saved four-bit codes and admitted native lesion reference masks, matched to saved per-case overlap counts and component identities",
+  "limitations": "Oracle repairs use the references and are hypothetical. Candidate availability refers only to the five saved bias decisions. No tuning, model calls, CT reads, deployment, or independent test claim.",
+  "aggregate_only": true,
+  "full_local_audit_sha256": "3be146a00a049a45a2d69eba4c310024fed29763c81edae998492eff2e01a03f",
+  "resources": {
+    "seconds": 34.719080165959895,
+    "peak_owned_rss_bytes": 1232961536,
+    "samples": 17,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 1,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "actual_dice": 0.43262638859140395,
+  "groups": {
+    "small": {
+      "cases": 5,
+      "dice": 0.12384487825018967,
+      "case_hits": 4,
+      "recall": 0.43212515624605363
+    },
+    "medium": {
+      "cases": 24,
+      "dice": 0.4671385163243205,
+      "case_hits": 24,
+      "recall": 0.5596307571149421
+    },
+    "large": {
+      "cases": 7,
+      "dice": 0.5348573151794146,
+      "case_hits": 7,
+      "recall": 0.5630420225530017
+    }
+  },
+  "oracles": {
+    "all_fp_removed": 0.6485539142780642,
+    "all_fn_recovered": 0.6879135615532811,
+    "all_five_small_cases_perfect": 0.5543145999455443,
+    "all_five_small_case_fn_recovered": 0.46220533035515843,
+    "all_small_component_fn_recovered": 0.4851528729941564,
+    "all_missed_components_recovered": 0.4561899112690614,
+    "all_missed_small_components_recovered": 0.44850650776619433,
+    "zero_overlap_case_fn_recovered": 0.43512600755192826,
+    "isolated_fp_removed": 0.4786579491094564,
+    "filtered_candidate_fn_recovered": 0.43281162468834666,
+    "within_grid_fn_recovered": 0.46124071479483075
+  },
+  "error_voxels": {
+    "fn": 78749,
+    "fp": 123037,
+    "unconnected_fp": 37294,
+    "attached_fp": 85743,
+    "candidate_filtered_fn": 48,
+    "candidate_only_at_plus_one_fn": 7639,
+    "outside_bias_grid_fn": 71062,
+    "missed_component_fn": 4734,
+    "small_component_fn": 8410
+  },
+  "error_volume_ml": {
+    "fn": 95.11218004106075,
+    "fp": 161.11761620525292,
+    "unconnected_fp": 54.05136677915119,
+    "attached_fp": 107.06624942610173,
+    "candidate_filtered_fn": 0.07061473651617295,
+    "candidate_only_at_plus_one_fn": 10.426541895317587,
+    "outside_bias_grid_fn": 84.61502340922699,
+    "missed_component_fn": 4.529668059155319,
+    "small_component_fn": 4.637821473325269
+  },
+  "small_components": 12,
+  "small_components_hit": 7,
+  "positive_cases": 36,
+  "reference_components": 45,
+  "found_components": 39,
+  "oracle_examples": {
+    "drop_50pct_fp": 0.4982658139687482,
+    "add_20pct_fn": 0.4978939448023925,
+    "drop_25pct_fp_add_20pct_fn": 0.5301742801279177
+  },
+  "connectivity": "26-connected",
+  "policy": "grow0.5_seed-0.5_near5",
+  "primary_result_sha256": "fad51ea37a0ff32d2f2d3f79d91c840a4f5cd437273296fb2080fb3653f1da41",
+  "primary_request_sha256": "1e8f3ff8b98014af3d560638bd0567fb6bf29ac40fb214deaef7db27154dbbdc",
+  "audit_script_sha256": "c5d066a3121bd75d5260118b6790ec848c37c7a195180a4005ba1c68ed1c7248"
+}
