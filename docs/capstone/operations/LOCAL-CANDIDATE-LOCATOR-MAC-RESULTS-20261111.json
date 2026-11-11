@@ -1,0 +1,140 @@
+{
+  "status": "VERIFIED_COMPLETE",
+  "request_sha256": "135c6e01692f14f3e59d44d88df626247f4975f88d506010e406bc1a52feebb8",
+  "result_sha256": "c96956db92153a561dd83244b14294cabcb79d19695075bc28bff9bca95e0660",
+  "score_mlflow_run_id": "cafb08a86e124e238b26e78f5a4d08b4",
+  "failed_fit_and_score_run_id": "049344ef0763495a8c32af5917284fc5",
+  "trained_checkpoint_sha256": "2c188a1f1b8422e9aead1ca81f01fe0563923929b822cdcd5162712964b557fc",
+  "device": "cpu",
+  "gate": false,
+  "workers_reaped": true,
+  "training_updates": 0,
+  "no_fusion": true,
+  "scope": "Exposed development proposal benchmark only. No refiner inference, segmentation fusion, Dice update, or deployment.",
+  "initial_fit_updates": 900,
+  "training_scans": 108,
+  "training_patches": 216,
+  "cases": 70,
+  "reference_components": 45,
+  "small_components": 12,
+  "baseline": {
+    "matched": 9,
+    "small_hits": 4,
+    "newly_located_small": 0,
+    "false_proposals": 62,
+    "empty_scans_with_proposals": 20
+  },
+  "fixed_top_k": {
+    "1": {
+      "matched": 0,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 70,
+      "empty_scans_with_proposals": 34
+    },
+    "2": {
+      "matched": 1,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 139,
+      "empty_scans_with_proposals": 34
+    },
+    "3": {
+      "matched": 2,
+      "small_hits": 0,
+      "newly_located_small": 0,
+      "false_proposals": 208,
+      "empty_scans_with_proposals": 34
+    }
+  },
+  "exploratory_at_baseline_false_proposals": {
+    "matched": 0,
+    "small_hits": 0,
+    "newly_located_small": 0,
+    "false_proposals": 1,
+    "empty_scans_with_proposals": 1,
+    "threshold": 0.11475896835327148
+  },
+  "matched_curve_threshold_count": 210,
+  "no_pancreas_context": 0,
+  "cases_with_partitioned_regions": 47,
+  "largest_number_of_regions": 7,
+  "definition": "One-to-one predicted centers within 5 mm of lesion and 64-voxel native crop covering >=90% of it. Every unmatched proposal counts as false.",
+  "protocol": {
+    "input": "one CT channel, no known-location hint",
+    "grid_stride": [
+      4,
+      4,
+      1
+    ],
+    "search_mm": 10.0,
+    "nms_mm": 8.0,
+    "max_proposals": 3,
+    "match_mm": 5.0,
+    "minimum_crop_fraction": 0.9
+  },
+  "qualification": {
+    "steps": 24,
+    "seconds_per_update": 0.021514409706772614,
+    "seconds_per_largest_proposal": 1.2583897500298917,
+    "projected_seconds": 514.9005024763756,
+    "request_sha256": "cbf0ea890008fec77bbeac7c1d03b4663078a7fdf76e1e9a947d5a355b74d5ea"
+  },
+  "fit_resources": {
+    "seconds": 40.36496708309278,
+    "peak_owned_rss_bytes": 572112896,
+    "samples": 19,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 1,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "score_resources": {
+    "seconds": 137.9327412089333,
+    "peak_owned_rss_bytes": 2032091136,
+    "samples": 65,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 1,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "preserved_failures": [
+    "Initial scoring stopped on an oversized ROI.",
+    "Second score-only attempt stopped on the original 4 GiB RSS limit."
+  ],
+  "score_only_reused_final_checkpoint": true,
+  "forward_window_max_voxels": 1048576,
+  "three_case_memory_probe": {
+    "seconds": 10.706647583283484,
+    "peak_owned_rss_bytes": 1751547904,
+    "samples": 5,
+    "process_sample_timeouts": 0,
+    "workers_reaped": true,
+    "cleanup_error": null,
+    "surviving_workers": [],
+    "tracked_worker_identities": 1,
+    "success": true,
+    "error": null,
+    "supervisor_cleanup_error": null,
+    "exit_code": 0
+  },
+  "partition_method": "Geometric midpoint partition of predicted pancreas support to bound forward working memory; full source support retained. Model normalization is per window. No source or label changes.",
+  "independent_backups_match": true,
+  "training_loss_readback": true,
+  "mlflow_score_status": "FINISHED",
+  "code_commits": [
+    "91a352d",
+    "ab3b3cc",
+    "da8924c"
+  ]
+}
