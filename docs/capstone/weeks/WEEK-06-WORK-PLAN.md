@@ -1,5 +1,150 @@
 # Week 6 work plan — November 9–15, 2026
 
+## November 10 priority: improve small-lesion contours
+
+Week 6's model focus is to find out whether better supervision, a local refiner,
+or training hyperparameters improve lesion overlap without increasing false
+positives. Target by **Friday, November 13**: a matched supervision result and a
+known-location refiner feasibility result, if hardware qualification passes.
+Target by **Sunday, November 15**: finish the first four Optuna trials and, if
+the refiner passes, measure its automatic proposal path. A verified negative
+result counts; do not guarantee 0.50 Dice or independent confirmation this week.
+This update changes priorities only. The existing reviewer/retrieval commitments
+and formal G4 dependency remain visible.
+
+Planned Week 6 cards: [W06-17: supervision](https://trello.com/c/JaQ2AMD8),
+[W06-18: refiner](https://trello.com/c/KGeyILOB), and
+[W06-19: Optuna](https://trello.com/c/cgdd1AqU). These are To Do, not active jobs.
+
+**Starting evidence.** The 24k saved-output core rule reached 0.436709 Dice on
+the 36 positive development scans, with the mean for the five under-1-mL
+total-burden scans at 0.144914. That rule preserved hits on 39/45 components;
+five of the six misses were under 1 mL, the other was 2.33 mL. Giving it the
+complete masks of the six missed components while leaving existing predictions
+would yield only 0.461436 Dice. The Lenovo's reported historical best on those
+same five small cases was **0.2384** (varied-view 18k). Keep that as a comparator
+if case/reference identities and geometry match; do not attribute the
+cross-model difference to sampling or assume that an ensemble will help.
+[Saved core experiment](../evaluation/STUNET-24K-CONFIDENT-CORE-RESULTS-20261110.json)
+and [error audit](../evaluation/STUNET-24K-SELECTED-DICE-AUDIT-20261110.json).
+
+### 1. Coarsest supervision: one changed loss term
+
+- Use the existing CPU-verified candidate
+  `src/training/stunet_supervision_candidate_v1.py`. Compare weights
+  `[16,8,4,2,1]/31` versus `[16,8,4,2,0]/30`; keep the five outputs,
+  nearest target reduction, CE + Dice formula, architecture and optimizer state.
+  Verify zero loss gradient for the omitted scale, without silently freezing
+  weights or discarding AdamW state. Keep the active 26k→36k recovery untouched.
+- Bind the original 12k checkpoint, optimizer/RNG, corrected 1,333-case train
+  set, exact sampling/augmentation addresses, and original corrected
+  continuation's LR schedule. First compare **2,000 updates → global 14k**,
+  using the identical schedule prefix and one full native 70-scan validation.
+  Reuse the completed corrected run's 14k report only if ancestry, addresses,
+  runtime and evaluator match and the baseline path passes parity
+  qualification. Otherwise run a fresh matched control or report the blocker;
+  never substitute the 24k or 36k result as control.
+- Qualify actual CUDA updates, per-scale/component target survival, fixed input
+  replay, checkpoint/independent backup and cold restore. Evaluate raw learning
+  effects first; record paired raw and standing fixed 5 mm results separately.
+  Keep the confident-core rule fixed as a labeled secondary comparison if
+  matching saved margins are available. No new postprocessing search.
+- **Estimate:** 2–3 hours setup and evidence review; **6–8 GPU slot hours**
+  for qualification, one new 2k arm and full validation, or **11–14 hours**
+  if the control needs replay. A complete 12k arm with six full validations
+  is a separate **30–36 hour** decision. A null 2k result does not rule out
+  a late effect. If coverage logs show too few usable small-lesion patches,
+  prepare a separate sampler experiment that replaces some existing positive
+  crops with small-component-centered crops while preserving negative/context
+  slots, case coverage, and total steps. Do not combine it with this ablation.
+
+### 2. Lesion refiner: test contours before building a detector
+
+- On the Mac, build a versioned native-coordinate crop/restore adapter, patch
+  manifest and component evaluator. Fit a small 3D segmentation refiner using
+  only admitted training cases: small-component-centered positives with
+  center jitter, some larger examples, and pancreas-region negative patches.
+  Retain as much native resolution as practical; record slice spacing,
+  physical field of view and coverage. Resampling does not add source detail.
+  Test full-affine crop restoration, padding, label identity, and empty cases.
+- Use the same trained refiner at known lesion locations on a fixed diagnostic
+  subset (all available <1 mL components plus larger controls). Report
+  component Dice versus the incumbent on matched locations, including zero
+  overlap, missed tissue and extra predicted tissue. Reference boxes are used
+  only in this labeled diagnostic evaluation. Predeclare a practical pilot
+  gate of **+0.03 mean Dice on the small components** without a decline on the
+  larger controls. A box-assisted result is neither automatic nor independent.
+- If that passes, search the qualified predicted pancreas region with its
+  fixed physical margin. Use a bounded dense-window score or candidate
+  heatmap so regions the current mask misses can still be proposed. Freeze
+  proposal count/threshold, duplicate merging and mask fusion before scoring.
+  Compare the predicted-proposal pipeline with the incumbent on the same 70
+  scans, report proposal coverage separately from refinement, and measure
+  one-to-one component detection at a matched false-positive-per-scan budget,
+  whole-scan Dice, small-lesion overlap, empty alarms and FP volume. If using
+  provided pancreas regions during feasibility, label that scope separately
+  from autonomous localization.
+- **Estimate:** **5–8 hours engineering/CPU preparation**, then **2–6 GPU
+  hours** for the qualified compact refiner and diagnostic result (unmeasured;
+  benchmark a pilot). Allow **3–6 more hours engineering and 2–5 GPU hours**
+  for the first automatic proposal pass. Mac GPU is optional only after a
+  measured resource/restore check, AC, exclusive access and enough space.
+  Otherwise run sequentially on Lenovo. If the diagnostic gate fails, keep
+  the result and stop before spending GPU time on a new detector.
+
+### 3. Optuna: four-trial pilot, six only if capacity allows
+
+- Add a separate STU-Net adapter; the historical `scripts/tune_optuna.py`
+  is for another model and is not used. Freeze one corrected parent, the
+  optimizer-start choice, input addresses, augmentation, supervision setting,
+  seed, and common schedule prefix. Tune only peak LR (start with
+  `5e-6…4e-5`, log scale) and CE-to-Dice weight (`0.5…2`, log scale).
+  Include the unchanged baseline as a trial and hold the rest fixed.
+- Run **one baseline plus three candidates**, serially, at **1,000 updates
+  and one full 70-scan evaluation per trial**. Keep pruning off for this
+  first pilot. Maximize positive macro Dice, rejecting candidates that worsen
+  overall or small-case recall, lose a baseline case/component hit, increase
+  false alarms or FP volume, or fail the pancreas/geometry checks. Record
+  all trials, including failed/infeasible ones, in Optuna SQLite and MLflow.
+  The five small-burden scans are a diagnostic group, not the sole objective.
+- **Estimate:** **3–5 hours adapter/CPU checks** during the occupied GPU
+  window, **13–16 GPU hours for four trials** or **20–24 for six**. Keep at
+  most two feasible finalists for a longer matched replay; allow **5–6 GPU
+  hours per fresh 2k replay**. Short trials can misrank longer runs, so no
+  trial win is called a generalization result. Confirmation needs a cleared,
+  patient-disjoint cohort unused for tuning and defensible pretraining
+  provenance. A new split of the already exposed 70 is not that cohort.
+
+### Calendar and capacity
+
+| When (Mountain) | Mac and analysis | Single Lenovo GPU |
+| --- | --- | --- |
+| Tue Nov 10 / Wed Nov 11 | Freeze controls, review the small-case training inputs, start refiner crop/restore and Optuna adapter tests | Finish and verify the existing 26k→36k recovery. The latest peer estimate around 5:42 p.m. Tue was 22–23 hours remaining, implying Wed afternoon only if progress and storage hold. |
+| Wed evening / Thu Nov 12 | Verify the 14k comparator; prepare the refiner diagnostic set; implement scoring and trial logging | Qualify and run the matched 2k supervision pilot, after recovery closeout and new launch approval. |
+| Fri Nov 13 | Report the matched learning result and, if qualified, the refiner's known-location result. Preserve reviewer/demo preparation. | Run the compact refiner diagnostic block if it cannot run on the Mac; then start Optuna baseline and first candidates. |
+| Sat Nov 14 / Sun Nov 15 | Preserve the tentative stakeholder walkthrough. Compare full results and write next-week decisions. | Finish the four-trial Optuna pilot; run predicted proposals only after the refiner gate passes. Use extra time for trials five/six or finalist replay only if the first evidence warrants it. |
+
+The Lenovo measured about **6.2 seconds/update** recently and **92.5 minutes**
+per full native 70-case pass on the earlier 12k run. Budget **21–30 GPU hours
+after recovery** for the 2k ablation, known-location refiner and four Optuna
+trials, if the historical control is reusable; add roughly **5–6 hours** for
+a fresh control and **2–5** for the automatic refiner pass. Recheck storage
+and retained independent backups before every new run; the recovery's limits
+do not authorize a new experiment. If capacity slips, protect the matched
+ablation and known-location diagnostic, then finish four Optuna trials before
+extra arms. No training, GPU scheduling, cohort access or policy deployment
+is authorized by this plan.
+
+Report both positive-case Dice and lesion-level overlap, small-bin counts,
+component hits, per-case recall changes, empty-scan alarms, physical FP
+volume, and failure denominators. These are exposed development comparisons
+unless an independent cohort is separately admitted. References:
+[supervision evidence](../operations/STUNET-INPUT-AND-SPATIAL-FINDINGS-20261108.md),
+[measured runtime breakdown](../coordination/LENOVO-STUNET-LONGER-SCHEDULE-REVIEW-20261108.md),
+[standing evaluation policy](../evaluation/SEGMENTATION-POSTPROCESSING-POLICY-V1.md),
+[pancreatic tumor cascade study](https://pmc.ncbi.nlm.nih.gov/articles/PMC11335681/),
+and [Optuna constrained optimization](https://optuna.readthedocs.io/en/stable/tutorial/20_recipes/002_multi_objective.html).
+
 ## Current Trello board
 
 At Quinton's explicit November9 request, the board is now rolled to Week6:
