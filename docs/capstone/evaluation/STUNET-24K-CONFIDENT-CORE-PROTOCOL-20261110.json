@@ -1,0 +1,17 @@
+{
+  "schema": "prowl.stunet.confident-core-screen.v1",
+  "scope": "Exploratory fixed grid on exposed terminal-24k development cases, provided-pancreas region. No deployment or independent test claim.",
+  "incumbent": "grow0.5_seed-0.5_near5",
+  "hypothesis": "Trim low-margin voxels far from their own confident lesion core. A small direct-neighbor shell can recover weak boundary tissue without admitting separate blobs.",
+  "core": "The original -0.5 lesion-winning voxels in each incumbent retained component. Distance uses the full native affine; trim references only the core in that same component.",
+  "trim_max_tier": [2, 3],
+  "trim_tiers": "Tier 2 is +0.5-only relative to zero bias; tier 3 wins at zero but not at -0.5. Never remove tier 4 or 5.",
+  "trim_radius_mm": [4, 8, 16],
+  "growth_radius_mm": [0, 1.5, 3],
+  "growth": "Only direct 26-neighbors of a retained core within the specified physical radius that win as lesion at +1 but not +0.5, and have background fallback. No pancreas label can change. Zero disables growth.",
+  "candidate_count": 18,
+  "cohort": {"total": 70, "positive": 36, "empty": 34, "reference_components": 45, "small_positive": 5},
+  "gate": "Beat the exact incumbent positive-case macro Dice; no decline in macro or small-case recall or pooled true positives; retain all incumbent case and component hits; do not increase empty-scan alarms, or false-positive physical volume on positive scans, empty scans, or overall. Report case-level recall regressions separately.",
+  "resource_limits": {"worker_seconds": 600, "worker_combined_rss_gib": 4, "platform_storage_memory_ac_gates": "unchanged"},
+  "read_scope": "Saved independently verified prediction codes and admitted development lesion labels only. No CT reads, GPU, training, or protected test data."
+}
