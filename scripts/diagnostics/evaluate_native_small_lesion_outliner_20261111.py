@@ -59,7 +59,9 @@ def unpack_native(member, shape):
 
 def verify_manifest(path, cases):
     data = read(path)
-    if data.get('step') != STEP or data.get('schema') != 'prowl.stunet.native-mask-export.v1':
+    schema = data.get('schema')
+    if data.get('step') != STEP or schema not in (
+            'prowl.stunet.native-mask-export.v1','prowl.stunet.mac-native-mask-replay.v1'):
         raise ValueError('Expected native 32k manifest')
     checkpoint = data.get('checkpoint_sha256','')
     if checkpoint != CHECKPOINT_SHA or checkpoint != data.get('independent_checkpoint_sha256'):
@@ -70,6 +72,19 @@ def verify_manifest(path, cases):
     report = read(report_path)
     if report.get('step') != STEP or report['summary']['positive'] != 36 or report['summary']['empty'] != 34:
         raise ValueError('Report step or cohort differs')
+    original_rows = {r['case_id']:r for r in report['cases']}
+    if schema == 'prowl.stunet.mac-native-mask-replay.v1':
+        backup = Path.home()/'PROWL-Backups'/path.parent.name
+        closeout = path.parent/'closeout.json'
+        status = read(closeout)
+        if (sha(closeout)!=sha(backup/closeout.name) or status['status']!='VERIFIED_COMPLETE'
+                or status['manifest_sha256']!=sha(path) or not status['mps_lock_released']
+                or data['maximum_positive_case_dice_drift']>.01):
+            raise ValueError('Mac replay closeout is not verified')
+        local_report = path.parent/'mac-native-32000.json'
+        if sha(local_report)!=data['mac_report_sha256'] or sha(local_report)!=sha(backup/local_report.name):
+            raise ValueError('Independent Mac baseline differs')
+        report = read(local_report)
     rows = {r['case_id']:r for r in report['cases']}
     members = {r['case_id']:r for r in data['cases']}
     if (len(rows) != 70 or len(data['cases']) != 70 or len(report['cases']) != 70
@@ -81,7 +96,8 @@ def verify_manifest(path, cases):
         source = {k:v['sha256'] for k,v in case['sources'].items()}
         if (member['source_sha256'] != source or member['native_shape'] != case['native_shape']
                 or member['native_affine'] != case['native_affine'] or member['mask_file'] != name+'.npz'
-                or rows[name]['gaps'] != 0 or member['tiles'] != rows[name]['tiles']):
+                or rows[name]['gaps'] != 0 or member['tiles'] != rows[name]['tiles']
+                or member['tiles'] != original_rows[name]['tiles']):
             raise ValueError('Native geometry, source, or coverage differs')
         if sha(path.parent/member['mask_file']) != member['mask_sha256']:
             raise ValueError('Mask archive digest differs')
@@ -265,7 +281,7 @@ def worker(manifest,directory,expected):
     if not math.isclose(result['baseline_raw']['dice'],report['summary']['lesion_dice'],rel_tol=0,abs_tol=1e-12):
         raise ValueError('Aggregate 32k baseline differs')
     write(directory/'result.json',dict(step=STEP,request_sha256=expected,checkpoint_sha256=package['checkpoint_sha256'],
-         refiner_sha256=refiner_sha,metrics=result,cases=len(rows),rows=rows))
+         refiner_sha256=refiner_sha,baseline_source=package['schema'],metrics=result,cases=len(rows),rows=rows))
 
 
 def main():

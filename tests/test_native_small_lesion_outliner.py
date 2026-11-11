@@ -33,3 +33,22 @@ def test_packed_native_mask_and_corrupt_padding(tmp_path):
     np.savez(source, packed=np.array([0x10, 0x12], dtype=np.uint8), shape=shape)
     with pytest.raises(ValueError, match='Malformed packed mask'):
         unpack_native(source, shape)
+
+
+def test_mac_replay_rejects_reference_drift_and_excess_dice_delta():
+    from copy import deepcopy
+
+    from scripts.diagnostics.reconstruct_mac_stunet_32k_masks_20261111 import parity
+
+    cuda = dict(reference_positive=True, reference_components=1, target_volume_mm3=35.0,
+                voxel_mm3=1.0, lesion=dict(target_voxels=35, dice=.40),
+                pancreas=dict(target_voxels=400))
+    mac = deepcopy(cuda)
+    mac['lesion']['dice'] = .405
+    assert parity(mac, cuda) == pytest.approx(.005)
+    mac['lesion']['dice'] = .42
+    with pytest.raises(ValueError, match='Dice drift'):
+        parity(mac, cuda)
+    mac['reference_components'] = 2
+    with pytest.raises(ValueError, match='Reference census'):
+        parity(mac, cuda)
