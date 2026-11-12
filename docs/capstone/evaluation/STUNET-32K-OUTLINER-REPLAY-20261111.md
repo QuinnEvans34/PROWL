@@ -37,6 +37,21 @@ member hashes before extraction, and creates an import receipt in a fresh
 private directory. Eleven focused tests passed, including rejection of extra
 or unsafe archive members. No model bytes were read as part of these checks.
 
-The Lenovo confirmed the 48k continuation is advancing and that the registered
-36k checkpoint scored .4293 raw Dice. The new phase's first complete evaluation
-is at 38k. The separate Mac replay has no confirmed sender or received packet yet.
+The Lenovo confirmed the 48k continuation was advancing and that the registered
+36k checkpoint scored .4293 raw Dice. The new phase's first scheduled evaluation
+is at 38k. The Mac received the 232,765,440-byte packet on November 11 and verified
+the three file identities against the sender's manifest and original report. The
+archive SHA-256 is `27fc428553fe360c0f914eea99829c5c250216b66af62a5d66369d7b24d88309`.
+
+The Mac started one replay in `stunet-32k-mac-replay-20261111-a01`. The idle AI
+Expert released its GPU lock and switched to source search during replay. The
+supervising wrapper restores live answers when replay exits. A single CPU
+comparison is queued for `stunet-32k-mac-outliner-20261111-a01` and requires a
+verified replay closeout with a matching independent copy. No paired scores are
+available yet.
+
+Both pilot scans passed and their independently reopened masks matched the
+written masks. The positive pilot had zero Dice drift against the Lenovo report.
+The pilot projected 74.5 minutes for the remaining 68 scans, including the
+runner's 1.5× margin. Peak MPS memory through the pilot was 6.02 GiB. The next
+scan started in the same owned worker.
