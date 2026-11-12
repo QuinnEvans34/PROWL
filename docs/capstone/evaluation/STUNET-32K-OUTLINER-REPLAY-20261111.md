@@ -47,11 +47,25 @@ The Mac started one replay in `stunet-32k-mac-replay-20261111-a01`. The idle AI
 Expert released its GPU lock and switched to source search during replay. The
 supervising wrapper restores live answers when replay exits. A single CPU
 comparison is queued for `stunet-32k-mac-outliner-20261111-a01` and requires a
-verified replay closeout with a matching independent copy. No paired scores are
-available yet.
+verified replay closeout with a matching independent copy.
 
 Both pilot scans passed and their independently reopened masks matched the
 written masks. The positive pilot had zero Dice drift against the Lenovo report.
 The pilot projected 74.5 minutes for the remaining 68 scans, including the
 runner's 1.5× margin. Peak MPS memory through the pilot was 6.02 GiB. The next
 scan started in the same owned worker.
+
+## Completed comparison
+
+The Mac reconstructed all 70 scans (36 lesion-positive, 34 reference-empty) in 56.7 minutes. Every positive case matched the Lenovo report's Dice exactly, and all 147 replay evidence files checked against their independent copies matched. The CPU comparison finished in 7.0 minutes with 3.62 GiB peak process-tree memory. Both worker trees exited cleanly, the MPS lock was released, and the AI Expert health endpoint showed its live-answer mode restored. The scoring journal matched all 70 result rows. Result SHA-256 `fdf5265e8f752a5cc191da450f4434bf4166b9c072992dae912af96480535e90`.
+
+| Arm | Positive Dice | Positive recall | Small hits /12 | False-positive mL | Empty alarms /34 | Scans with more FP |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Raw baseline | .410898 | .489534 | 5 | 189.965 | 25 | 0 |
+| Raw trim | .412666 | .489510 | 4 | 184.974 | 25 | 0 |
+| Raw replacement | .408314 | .490246 | 4 | 197.338 | 25 | 21 |
+| 5 mm baseline | .415860 | .489534 | 5 | 181.090 | 24 | 0 |
+| 5 mm trim | .417621 | .489510 | 4 | 176.117 | 24 | 0 |
+| 5 mm replacement | .413386 | .490246 | 4 | 185.554 | 24 | 18 |
+
+The refiner accepted 55 of 98 eligible predicted components across 29 scans. With the fixed 5 mm policy, trim improved eight positive scans and worsened one. It gained .001761 Dice and removed 4.973 mL of false-positive tissue, but lost the only overlapping prediction for one small reference component on case `6755`. Replacement lost the same component and increased false-positive volume. Neither edit gained a reference hit. Both fail the small-lesion retention guard, so keep the 32k 5 mm baseline. These are exploratory results on exposed development scans. The scorer stores per-scan volume and reference-hit metrics only. A new-false-component audit would need a separate replay.
