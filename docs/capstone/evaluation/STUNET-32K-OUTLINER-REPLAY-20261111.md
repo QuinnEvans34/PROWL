@@ -69,3 +69,17 @@ The Mac reconstructed all 70 scans (36 lesion-positive, 34 reference-empty) in 5
 | 5 mm replacement | .413386 | .490246 | 4 | 185.554 | 24 | 18 |
 
 The refiner accepted 55 of 98 eligible predicted components across 29 scans. With the fixed 5 mm policy, trim improved eight positive scans and worsened one. It gained .001761 Dice and removed 4.973 mL of false-positive tissue, but lost the only overlapping prediction for one small reference component on case `6755`. Replacement lost the same component and increased false-positive volume. Neither edit gained a reference hit. Both fail the small-lesion retention guard, so keep the 32k 5 mm baseline. These are exploratory results on exposed development scans. The scorer stores per-scan volume and reference-hit metrics only. A new-false-component audit would need a separate replay.
+
+## Dice headroom from saved counts
+
+Three of 36 positive scans had zero lesion overlap in both baselines. Two of those scans had total reference lesion volumes below 1 mL. The third had 1.040 mL. Across all five scans below 1 mL of total reference lesion volume, mean Dice was .086968 raw and .097503 with the 5 mm policy. These are scan-volume groups. The 5/12 baseline hit count above is at the individual-component level.
+
+| Reference-informed hypothetical correction | Raw | Fixed 5 mm |
+| --- | ---: | ---: |
+| Actual baseline | .410898 | .415860 |
+| Recover all missed tissue on the three zero-overlap scans, retaining their false positives | .450360 | .455322 |
+| Perfect masks on the three zero-overlap scans only | .494232 | .499193 |
+| Remove all false positives on the 36 positive scans, retaining existing true positives | .588357 | .588357 |
+| Recover all missed tissue on the 36 positive scans, retaining existing false positives | .721077 | .728698 |
+
+Each row averages per-scan Dice over the same 36 positive scans. The calculations use the verified result's saved voxel counts and leave the other scans unchanged when the correction is limited to three scans. Reference-informed corrections quantify headroom and are unavailable during inference. Fixing the three complete misses alone would leave the 5 mm mean below .50 even with perfect replacement masks. Reaching .50 also calls for better overlap on scans with partial detections. The trims tested here improved overlap slightly while losing a small hit, which supports keeping both recall and false-positive guards in the planned supervision comparison.
