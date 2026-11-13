@@ -41,3 +41,7 @@ Reran the engineering walkthrough checks together on current `main` after the ov
 | Ask a research question and inspect its citation | Fixture checks for source binding, opening citations and study-switch isolation passed. | Live pancreas-boundary answer clarity, factual support and current-corpus quality remain open. |
 | Save, reopen and revise | Saved-package and review proxy integration passed. The November 7 exercise records the earlier browser revision evidence. | Run the current production walkthrough and collect actual participant observations. |
 | Recover an interrupted research workflow | Isolated HTTP restart, linked recovery and retrieval reuse passed. | Confirm the fixture-proven recovery path against the deployed build when appropriate. |
+
+## November 13, 5:45 a.m. Mountain
+
+- Added `--unit-dispositions` to the saved autonomous baseline review command and ran it against the original hash-bound export. Five completed scans have both reference units declared millimetres, and all five are lesion-positive. The remaining 58 completed scans include 27 positive and all 31 reference-empty scans. At least one reference unit was assumed on each. The six CT unit failures and one resource failure stay in the 70-case denominator. The declared-unit subset alone cannot estimate false alarms. Pushed `167730c`, passed 27 focused tests, and updated [W06-03](https://trello.com/c/AypxMvB4). Authoritative source-unit evidence and G4 admission remain open.
