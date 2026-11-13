@@ -66,6 +66,7 @@ export function acceptTrainingProgress(previous, candidate) {
       && (next.run.starting_step ?? 0) === (previous.run.starting_step ?? 0)
       && Object.keys(previous.cohort).every(k => next.cohort[k] === previous.cohort[k])
     if (!same || next.run.step < previous.run.step || next.run.elapsed_seconds < previous.run.elapsed_seconds) throw new Error('Training identity or progress changed')
+    if (previous.run.phase === 'completed' && next.run.phase !== 'completed') throw new Error('Completed run phase changed')
     for (const [index, old] of previous.validations.entries()) {
       const current = next.validations[index]
       if (!current || Object.keys(old).some(k => current[k] !== old[k])) throw new Error('Completed validation changed')

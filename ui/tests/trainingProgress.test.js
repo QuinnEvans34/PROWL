@@ -68,4 +68,21 @@ describe('export freshness and immutability', () => {
     next.run.step++; next.run.elapsed_seconds++; next.observed_at = '2026-11-07T19:00:00Z'
     expect(acceptTrainingProgress(old, next)).toBe(next)
   })
+  it('preserves a completed run while allowing a different continuation', () => {
+    const old = fixture()
+    old.run.target_steps = old.run.step = old.validations.at(-1).step
+    old.run.phase = 'completed'
+    for (const phase of ['training', 'paused', 'failed']) {
+      const next = structuredClone(old)
+      next.run.phase = phase
+      next.observed_at = '2026-11-08T00:00:00Z'
+      expect(validateTrainingProgress(next)).toBe(next)
+      expect(() => acceptTrainingProgress(old, next)).toThrow('Completed run phase changed')
+    }
+    const continuation = fixture()
+    continuation.source.run_id = 'new-continuation'
+    continuation.run.starting_step = old.run.step
+    continuation.observed_at = '2026-11-08T00:00:00Z'
+    expect(acceptTrainingProgress(old, continuation)).toBe(continuation)
+  })
 })
