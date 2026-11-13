@@ -108,3 +108,24 @@ def test_receipts_are_immutable_and_hash_checked(tmp_path):
     path.write_text(path.read_text().replace('"value":1', '"value":2'))
     with pytest.raises(ValueError, match='hash'):
         checked_read(path)
+
+
+def test_saved_rankings_preserve_generation_failure_and_search_denominator():
+    from src.retrieval.evaluation import score_saved_rankings
+    suite = dict(split='development', cases=[
+        dict(id='ranked', question='First', expected_status='excerpts', reference_passage_ids=['a', 'b']),
+        dict(id='failed', question='Second', expected_status='excerpts', reference_passage_ids=['c']),
+        dict(id='boundary', question='Third', expected_status='insufficient_evidence', reference_passage_ids=[]),
+    ])
+    receipts = {case['id']: dict(case_id=case['id'], question=case['question'], suite_sha256=digest(suite))
+                for case in suite['cases']}
+    receipts['ranked'].update(error='TimeoutError', error_stage='generation', passages=[
+        dict(record=dict(passage=dict(passage_id=pid))) for pid in ('x', 'a', 'b')])
+    receipts['failed']['error'] = 'TimeoutError'
+    result = score_saved_rankings(suite, receipts)
+    assert result['answerable_cases'] == 2 and result['other_cases'] == result['search_errors'] == 1
+    assert result['recall_at'] == {1: 0, 3: .5, 5: .5}
+    assert result['mrr_at_5'] == .25
+    receipts['ranked']['question'] = 'Wrong'
+    with pytest.raises(ValueError, match='identity'):
+        score_saved_rankings(suite, receipts)

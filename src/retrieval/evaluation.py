@@ -1,6 +1,39 @@
 """Score hash-bound human/agent judgments without using a model as its own judge."""
 from .direct_ingestion import digest
 from .grounded_answer import validate_answer
+from .metrics import mean_or_none, recall_at_k, reciprocal_rank
+
+
+def score_saved_rankings(suite, receipts):
+    """Score the ordered top-five passage lists saved by the development runner."""
+    cases = suite['cases']
+    ids = {case['id'] for case in cases}
+    if suite.get('split') != 'development' or len(ids) != len(cases) or receipts.keys() != ids:
+        raise ValueError('A complete development suite with unique case IDs is required')
+    suite_sha = digest(suite)
+    cutoffs = (1, 3, 5)
+    rows = []
+    search_errors = 0
+    for case in cases:
+        receipt = receipts[case['id']]
+        if (receipt['suite_sha256'] != suite_sha or receipt['case_id'] != case['id']
+                or receipt['question'] != case['question']):
+            raise ValueError('Ranking receipt identity mismatch')
+        search_failed = 'error' in receipt and receipt.get('error_stage') != 'generation'
+        search_errors += int(search_failed)
+        if case['expected_status'] != 'excerpts':
+            continue
+        ranked = [] if search_failed else [p['record']['passage']['passage_id'] for p in receipt['passages']]
+        if len(ranked) > cutoffs[-1]:
+            raise ValueError('Saved ranking exceeds the development runner depth')
+        gold = case['reference_passage_ids']
+        rows.append(dict(id=case['id'], search_failed=search_failed,
+                         recall_at={k: recall_at_k(ranked, gold, k) for k in cutoffs},
+                         reciprocal_rank=reciprocal_rank(ranked, gold)))
+    return dict(scope='saved_development_passage_rankings', max_depth=cutoffs[-1],
+                answerable_cases=len(rows), other_cases=len(cases)-len(rows), search_errors=search_errors,
+                recall_at={k: mean_or_none(row['recall_at'][k] for row in rows) for k in cutoffs},
+                mrr_at_5=mean_or_none(row['reciprocal_rank'] for row in rows), cases=rows)
 
 
 def score(suite, receipts, reviews):
@@ -68,11 +101,19 @@ if __name__ == '__main__':
     from scripts.retrieval.evaluate_answers import checked_read
     parser = argparse.ArgumentParser(description='Recompute a development score from immutable receipts and recorded judgments')
     parser.add_argument('--run', type=Path, required=True)
-    parser.add_argument('--review', type=Path, required=True)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--review', type=Path)
+    mode.add_argument('--rankings-only', action='store_true', help='Score saved passage ranks on a development suite')
     args = parser.parse_args()
     manifest = checked_read(args.run/'manifest.json')
-    review = json.loads(args.review.read_text())
     suite = manifest['suite']
+    if args.rankings_only:
+        if suite.get('split') != 'development':
+            raise ValueError('Saved-ranking review requires a development suite')
+        receipts = {c['id']: checked_read(args.run/(c['id']+'.json')) for c in suite['cases']}
+        print(json.dumps(score_saved_rankings(suite, receipts), indent=2))
+        raise SystemExit(0)
+    review = json.loads(args.review.read_text())
     if review['manifest_sha256'] != digest(manifest) or review['suite_sha256'] != digest(suite):
         raise ValueError('Review belongs to another run/suite')
     receipts = {c['id']: checked_read(args.run/(c['id']+'.json')) for c in suite['cases']}
