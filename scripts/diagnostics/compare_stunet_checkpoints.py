@@ -41,6 +41,9 @@ def bundle_arm(path, step, policy):
             'Missing declared original report SHA-256')
     if 'independent_sha256' in entry:
         require(entry['independent_sha256'] == report_sha, 'Independent report SHA-256 differs')
+    if any(key in entry for key in ('primary_sha256', 'independent_backup_sha256', 'backup_match')):
+        require(entry.get('primary_sha256') == entry.get('independent_backup_sha256') == report_sha
+                and entry.get('backup_match') is True, 'Report and independent backup attestations differ')
     if policy == FIXED_5MM:
         require(entry.get('policy_sha256', bundle.get('policy_sha256')) == read(POLICY_FILE)[1],
                 'Fixed 5 mm config hash differs or is absent')
