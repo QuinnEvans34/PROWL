@@ -13,3 +13,7 @@
 ## November 12, 11:34 p.m. Mountain
 
 - Fixed the follow-on replay issue. The existing explicit `--reuse-retrieval` path now accepts hash-checked passages from a generation-only failure if the case, question and frozen suite match. Failed searches and mismatched receipts are rejected. Pushed `3d434f9`, passed 40 targeted CPU tests, and added the evidence to [W06-02](https://trello.com/c/zDFlThwi). The scorer and replay changes support a later answer-only comparison with frozen passages.
+
+## November 13, 12:36 a.m. Mountain
+
+- Added `python -m src.retrieval.evaluation --run SAVED_RUN --rankings-only` to score the saved top-five passage order without starting a search or answer model. It retains search failures in the answerable denominator and preserves ranks when only generation failed. The historical October 15 baseline reproduced its existing answer score. Its seven answerable questions gave passage recall@1/3/5 of .250/.655/.881 and MRR@5 of .690. These figures describe the older development corpus and passage rankings. Current-corpus source ranking and G6 remain open. Pushed `7c7dabf`, passed 41 focused tests, and updated [W06-02](https://trello.com/c/zDFlThwi).
