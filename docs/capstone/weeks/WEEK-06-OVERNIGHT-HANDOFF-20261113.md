@@ -9,3 +9,7 @@
 ## November 12, 10:30 p.m. Mountain
 
 - Rechecked the approved proposal and [W06-02](https://trello.com/c/zDFlThwi). The development evaluation harness used to discard successful search evidence when answer generation raised an error. It now retains the passages and timings, counts retrieval hits independently, and records an answer error without giving answer or refusal credit. Pushed `a22b387`, passed 35 targeted CPU tests, and added the evidence to Trello. No new answer-quality score was measured. The pancreas-boundary clarity issue still needs a qualified answer check.
+
+## November 12, 11:34 p.m. Mountain
+
+- Fixed the follow-on replay issue. The existing explicit `--reuse-retrieval` path now accepts hash-checked passages from a generation-only failure if the case, question and frozen suite match. Failed searches and mismatched receipts are rejected. Pushed `3d434f9`, passed 40 targeted CPU tests, and added the evidence to [W06-02](https://trello.com/c/zDFlThwi). The scorer and replay changes support a later answer-only comparison with frozen passages.
