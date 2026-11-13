@@ -25,3 +25,7 @@
 ## November 13, 2:37 a.m. Mountain
 
 - Fixed two Training export recovery cases. The read-only endpoint can start with a valid configured export when the bundled fallback is missing, and retains the correct source label when keeping a previously verified local snapshot after an error. Pushed `5eb19ed`, passed 33 focused tests, and updated [W06-11](https://trello.com/c/uQpn9fze).
+
+## November 13, 3:44 a.m. Mountain
+
+- Fixed a Research workflow race discovered while checking [W06-08](https://trello.com/c/KPvynqav). A delayed status response could display an older stage after the submit response arrived. The panel now ends provisional polling when the submit response returns and follows a single status sequence afterward. A delayed-response regression reproduces the case and confirms the saved answer still displays. Pushed `7daa3e0`, passed 15 focused UI tests, and posted the result on W06-08. Verification used fixtures.
