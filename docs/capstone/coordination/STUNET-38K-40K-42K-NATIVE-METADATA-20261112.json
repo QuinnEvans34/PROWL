@@ -6585,7 +6585,11 @@
   "case_identities_from_frozen_inputs": [
     {
       "case_id": "PanTS_00007636",
-      "source_sha256": "f959ab99927d403e2e32fc6e29fc042cc94f669b12af1339c194da74006caacf",
+      "source_sha256": {
+        "ct": "f959ab99927d403e2e32fc6e29fc042cc94f669b12af1339c194da74006caacf",
+        "pancreas": "7dfef4d7b2d4e7619c859c8eb865a4f7a89a7434f7517a96f0387c960cbbae10",
+        "lesion": "3500884264c85ac3fb24ee6d4eadda4b0e5d00d9741fd81dc352cf4eb77f00a6"
+      },
       "native_shape": [
         478,
         472,
@@ -6623,7 +6627,11 @@
     },
     {
       "case_id": "PanTS_00002028",
-      "source_sha256": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+      "source_sha256": {
+        "ct": "bc75f19627b1529629538aaa392075867ecaa282c9b9fa1dcef406a390d07160",
+        "pancreas": "3f15b75f467523d531e06fd6d22f3343e1079d4ce8f4c45086f0ef64089413d3",
+        "lesion": "523736974b7ebd80f666900da05db39c2d3189e99a3995a447b3a2d9baa34862"
+      },
       "native_shape": [
         407,
         311,
@@ -6661,7 +6669,11 @@
     },
     {
       "case_id": "PanTS_00001070",
-      "source_sha256": "90bf329d4a959144dfc453c5f1adce83ac18b1d5493984cb8aaa3911a1f1000f",
+      "source_sha256": {
+        "ct": "90bf329d4a959144dfc453c5f1adce83ac18b1d5493984cb8aaa3911a1f1000f",
+        "pancreas": "a69bd9f962a11d6626356eb350f35059128dd5e7bc42184eefe36efb22257530",
+        "lesion": "c338646e5921695d1935eeada8fecb3050245f1484c4a1b15011ba488219f086"
+      },
       "native_shape": [
         426,
         301,
@@ -6699,7 +6711,11 @@
     },
     {
       "case_id": "PanTS_00006011",
-      "source_sha256": "a8bf4f1deb3ea7c959674d10312e6873e9493d4630233d23e0f63b6ef454b28e",
+      "source_sha256": {
+        "ct": "a8bf4f1deb3ea7c959674d10312e6873e9493d4630233d23e0f63b6ef454b28e",
+        "pancreas": "62b20cd148d99f53f9e6b4c1b50cd03ef743657ab67562b00ec7b9c602c261b5",
+        "lesion": "7d4be842ec0742f54b8658f7ec5611a1ea427d5c59b0e0b7036d2e5aa758f2e0"
+      },
       "native_shape": [
         220,
         204,
@@ -6737,7 +6753,11 @@
     },
     {
       "case_id": "PanTS_00000927",
-      "source_sha256": "969ae02c1afee1ad0c50af09ef779e3a944fcd127d33b0fbd2cf36fed2f7234c",
+      "source_sha256": {
+        "ct": "969ae02c1afee1ad0c50af09ef779e3a944fcd127d33b0fbd2cf36fed2f7234c",
+        "pancreas": "a5a0a8b78a6f45b2eba4be3664839d9045daa666d56dd10717a2b42f007a58b3",
+        "lesion": "39e4832e472cb799a45ba671a59851247d4782f12e6b3f2d3cf2421355199edc"
+      },
       "native_shape": [
         512,
         338,
@@ -6775,7 +6795,11 @@
     },
     {
       "case_id": "PanTS_00007868",
-      "source_sha256": "ee2c7eb5fcd43868d294fd385024031e8231e778fc1aeab540d2643c6c38e4c5",
+      "source_sha256": {
+        "ct": "ee2c7eb5fcd43868d294fd385024031e8231e778fc1aeab540d2643c6c38e4c5",
+        "pancreas": "b0e7d41c602a601c6be945451b03ee9f7c1bb8a96d98e68dd4a0b1f0a6015e50",
+        "lesion": "886924d4687817c287d6a21f0631489ad80d7da8e05b395d3af0945c79658a5c"
+      },
       "native_shape": [
         485,
         299,
@@ -6813,7 +6837,11 @@
     },
     {
       "case_id": "PanTS_00006394",
-      "source_sha256": "898014bd90076fb4ffd45aaeda38ae09b7b662675cb1a3be5f43bb8b1ba14a94",
+      "source_sha256": {
+        "ct": "898014bd90076fb4ffd45aaeda38ae09b7b662675cb1a3be5f43bb8b1ba14a94",
+        "pancreas": "904a87e770d23e5f055f5c04a6d258f3ff96587d95ff133894f2a4a5386108dc",
+        "lesion": "c0971790774378563dc01cab725ce98ae66782d7879790a5bde2eb12bb8ded81"
+      },
       "native_shape": [
         512,
         377,
@@ -6851,7 +6879,11 @@
     },
     {
       "case_id": "PanTS_00005780",
-      "source_sha256": "6ae8eb5ebc8c1cb45b343cc78bec5fa1b58182635459eec3e87f83c740bcb0ce",
+      "source_sha256": {
+        "ct": "6ae8eb5ebc8c1cb45b343cc78bec5fa1b58182635459eec3e87f83c740bcb0ce",
+        "pancreas": "211fe4b521e23df626566e77ba579aab3da20f984ecf832e0626b57b64c259a1",
+        "lesion": "2ac6d86822d9ba4158b8c63e635bbde818df0bd1a66b691b9dba97bfad8644cb"
+      },
       "native_shape": [
         512,
         423,
@@ -6889,7 +6921,11 @@
     },
     {
       "case_id": "PanTS_00004724",
-      "source_sha256": "9d32f81f15289af0755d252f838bd34ee302899317c186477c3862a71ed8b292",
+      "source_sha256": {
+        "ct": "9d32f81f15289af0755d252f838bd34ee302899317c186477c3862a71ed8b292",
+        "pancreas": "618d60fd138b0a5aad056a1ac8fa4f86175e5d3d781ec311b801537e96d1f511",
+        "lesion": "b9ff5c2e4a20a93f5f28a8893e4c48e27acefe201d2c7605f74a20a9d2a05e5e"
+      },
       "native_shape": [
         493,
         334,
@@ -6927,7 +6963,11 @@
     },
     {
       "case_id": "PanTS_00001347",
-      "source_sha256": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+      "source_sha256": {
+        "ct": "ce2950a9206807473a7215fcec8654c8fa7d075c016ac17b95b5aebca03d1fe0",
+        "pancreas": "e2317f69aad902d4acf62e7612ea77e8ddcd7287a15a6e960c23267e90ca8c33",
+        "lesion": "b7a25e62854024305ad32429817b302db479f30d730c5c1f2afb5a292f48d492"
+      },
       "native_shape": [
         442,
         365,
@@ -6965,7 +7005,11 @@
     },
     {
       "case_id": "PanTS_00004681",
-      "source_sha256": "8249c821684154b49e5670b1bc76efd4a179ea79a79121fc5e44e07dbfb33090",
+      "source_sha256": {
+        "ct": "8249c821684154b49e5670b1bc76efd4a179ea79a79121fc5e44e07dbfb33090",
+        "pancreas": "34ecdc4184bd64c0d304d2df9e6776e4d58ed7d3f61cf2a9e4e7abd947f9b5b0",
+        "lesion": "307529b2ce78b32cc1cc6c88b4462520e4a55afb6167e2593c2c1861f5d973eb"
+      },
       "native_shape": [
         512,
         406,
@@ -7003,7 +7047,11 @@
     },
     {
       "case_id": "PanTS_00002235",
-      "source_sha256": "c8af89d3c810258fac1cd271c2c466c5f6aab793111f2b060ce538bbd80e622b",
+      "source_sha256": {
+        "ct": "c8af89d3c810258fac1cd271c2c466c5f6aab793111f2b060ce538bbd80e622b",
+        "pancreas": "7bbc21c91cd1dedc449260bc759335460d2126d1cba80fb8c7d6e84e11c175b6",
+        "lesion": "f90a093fb6ea54f6af6b2cb474f1f23842c9a7800381a3cff64dd233bd41de98"
+      },
       "native_shape": [
         445,
         332,
@@ -7041,7 +7089,11 @@
     },
     {
       "case_id": "PanTS_00001583",
-      "source_sha256": "0527d81494201090292e6d6fcc14e332d0d62d55e4807d11f97392f1406125d6",
+      "source_sha256": {
+        "ct": "0527d81494201090292e6d6fcc14e332d0d62d55e4807d11f97392f1406125d6",
+        "pancreas": "fc7956f06def88d43557cb225b43a1f57b38c8d8043dd333e6453fa5cc26c7e5",
+        "lesion": "0ba5d09082f2d3a8333c36aaae96c3188f6c5657d85ba59c8f656a66a111b7ac"
+      },
       "native_shape": [
         503,
         435,
@@ -7079,7 +7131,11 @@
     },
     {
       "case_id": "PanTS_00000084",
-      "source_sha256": "68a615c8c8dc5fdd324e209a39a2e496dca9bcf8ce3bcadfa707b942d1836ec3",
+      "source_sha256": {
+        "ct": "68a615c8c8dc5fdd324e209a39a2e496dca9bcf8ce3bcadfa707b942d1836ec3",
+        "pancreas": "c758d261c9bd9e9dafae68d6637cb066e222546333fa53b5e8b2167f6fc49803",
+        "lesion": "2dc75d0b50f8abf0c8a042f92cdc36c0dd3457f32d72663bb106ca7525cb50ff"
+      },
       "native_shape": [
         453,
         355,
@@ -7117,7 +7173,11 @@
     },
     {
       "case_id": "PanTS_00005437",
-      "source_sha256": "8afce9da8b9036e95146d49a64a39b009eb94abfb3acc0dff52ebb57231b24f9",
+      "source_sha256": {
+        "ct": "8afce9da8b9036e95146d49a64a39b009eb94abfb3acc0dff52ebb57231b24f9",
+        "pancreas": "187d21d868b488c313c8fb1aa25ea3a03b1420fa895588aea9f0f01b44a64d76",
+        "lesion": "6b99c0efc44f8675e4bffe96040a384e2b561b0753a250d663da8ace0aa60301"
+      },
       "native_shape": [
         434,
         261,
@@ -7155,7 +7215,11 @@
     },
     {
       "case_id": "PanTS_00006755",
-      "source_sha256": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+      "source_sha256": {
+        "ct": "71abce399a152e93c5bbcd9862ab10ab63b00ff9dffabade6ed7a62e56091e77",
+        "pancreas": "4c8ed3726772bdf48c135d3c4b41e86b19d7536d6c82d8612afdb0adadd30b19",
+        "lesion": "3e45b4461a3649b3f4be7935eb51bbaa1e73616f3f2783f38d7c759337873b02"
+      },
       "native_shape": [
         512,
         436,
@@ -7193,7 +7257,11 @@
     },
     {
       "case_id": "PanTS_00007905",
-      "source_sha256": "66d50a34caea204a1cc5181a8daee446df3111f2542393e2150e4eae6cfb147c",
+      "source_sha256": {
+        "ct": "66d50a34caea204a1cc5181a8daee446df3111f2542393e2150e4eae6cfb147c",
+        "pancreas": "695e831841d9a01823fb4f6b19ad665aa5a5da722e0011308f174b3ea0743d7e",
+        "lesion": "17818f4f9307f104425fccab65b5abd7578b27d6bd46cac6119cd19cff71fb00"
+      },
       "native_shape": [
         512,
         376,
@@ -7231,7 +7299,11 @@
     },
     {
       "case_id": "PanTS_00008434",
-      "source_sha256": "e5053aa6bd68288db101f9b28fa4604b4534579ec246eec4df1537e1539ff15d",
+      "source_sha256": {
+        "ct": "e5053aa6bd68288db101f9b28fa4604b4534579ec246eec4df1537e1539ff15d",
+        "pancreas": "2d8ec1913d541174550c4cc2bfd853de00a78d5ab953bb9bb301ff871a6a9c1b",
+        "lesion": "ee1c51d44d20e1759b9a1a88bcb08dd14c374577dc80e8c244d4f7df559a5ad0"
+      },
       "native_shape": [
         509,
         343,
@@ -7269,7 +7341,11 @@
     },
     {
       "case_id": "PanTS_00002514",
-      "source_sha256": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+      "source_sha256": {
+        "ct": "9acacfacaffc284e6ea43ffaf62baa2594dfcb773ffdfb470dee86657cc1d1b7",
+        "pancreas": "b996011ed113f1c47737b73ce91fd33636e27a326ea28e1af4670229ceacaebf",
+        "lesion": "983c3730cff63c5f8f2250e8cde3865abc7da8618bbfbe0d4f3d7b4a02d05d81"
+      },
       "native_shape": [
         394,
         268,
@@ -7307,7 +7383,11 @@
     },
     {
       "case_id": "PanTS_00006903",
-      "source_sha256": "373e18c00422db551a25c7c7e49a7f4b872ce9092dfebe978ded1a6fc6cfbb0b",
+      "source_sha256": {
+        "ct": "373e18c00422db551a25c7c7e49a7f4b872ce9092dfebe978ded1a6fc6cfbb0b",
+        "pancreas": "a5620b09129d2fea9630d9c775a0115e24cd479166c0760a885215e100cc4a6b",
+        "lesion": "522856461e3c7258381300a1da86f3011367177ac60c0b5f9154623164b7f050"
+      },
       "native_shape": [
         466,
         268,
@@ -7345,7 +7425,11 @@
     },
     {
       "case_id": "PanTS_00002269",
-      "source_sha256": "a92627dc28c4cf5ce0a303960c9c52c18ccc9c15e4298fa545bbdce00760d756",
+      "source_sha256": {
+        "ct": "a92627dc28c4cf5ce0a303960c9c52c18ccc9c15e4298fa545bbdce00760d756",
+        "pancreas": "ab79133907f4b14d8051833feb14eb79a47dcfddfab427788c4d318fb0ebdec9",
+        "lesion": "97a563bcf2a86dec0dd6d5bf2affba7ae3869931321ca0e130ab914b43fcbac1"
+      },
       "native_shape": [
         422,
         302,
@@ -7383,7 +7467,11 @@
     },
     {
       "case_id": "PanTS_00001823",
-      "source_sha256": "4d77813b70e49812231a9ddb2ee29980f250fad7b8acb877add80caba00797cc",
+      "source_sha256": {
+        "ct": "4d77813b70e49812231a9ddb2ee29980f250fad7b8acb877add80caba00797cc",
+        "pancreas": "d3f67063037d10b59c1f2c3a4d0c0e0f48fe87550c773616ebdfb7f0de0abefa",
+        "lesion": "67d85f105b6e1c0606f1857b125b7a8766c291741d03cf86d41756f727c1b183"
+      },
       "native_shape": [
         245,
         155,
@@ -7421,7 +7509,11 @@
     },
     {
       "case_id": "PanTS_00002495",
-      "source_sha256": "b635efce2c9caf31e1d329d8325974725a6ccbf20ff24e7dab9b9510817dfb8c",
+      "source_sha256": {
+        "ct": "b635efce2c9caf31e1d329d8325974725a6ccbf20ff24e7dab9b9510817dfb8c",
+        "pancreas": "4eb27b5c8fbcfb38094d6b488e5dc0052ce16edd6b492b87a754976264743d32",
+        "lesion": "cf34a218583a133c9a750bc75f4b40fb48ae07cbe968ea25b6ae84c7c4a11ed6"
+      },
       "native_shape": [
         499,
         345,
@@ -7459,7 +7551,11 @@
     },
     {
       "case_id": "PanTS_00002889",
-      "source_sha256": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+      "source_sha256": {
+        "ct": "c0ae6d21be7efd09f2cd6961d6d8d5ba253688c6428ef6931fe10a62889f3905",
+        "pancreas": "7d66348f621cc46d731e9dc21c95567985bdfdce901d2c6b5bf8d3b689a3f750",
+        "lesion": "d2edb1ec8969428176cbf65e87185bb35eb177dd5e9e67166d186b3ad740f180"
+      },
       "native_shape": [
         512,
         436,
@@ -7497,7 +7593,11 @@
     },
     {
       "case_id": "PanTS_00008769",
-      "source_sha256": "d6b25292dc425c7e2e92b19f3c8820ee41b88fb3e05bfc1aa087309d519edc35",
+      "source_sha256": {
+        "ct": "d6b25292dc425c7e2e92b19f3c8820ee41b88fb3e05bfc1aa087309d519edc35",
+        "pancreas": "9b239d4f00acd2b58c42e9306f467dcd8c3320e2c1541f2bf5b4fb0f0dc6a699",
+        "lesion": "ed364a80b2ce668924a0b785ea7504ec24eaac3c4b40c1cfc1ce2f758bdea169"
+      },
       "native_shape": [
         473,
         350,
@@ -7535,7 +7635,11 @@
     },
     {
       "case_id": "PanTS_00008743",
-      "source_sha256": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+      "source_sha256": {
+        "ct": "68da6ff63d98bbbd4e2778a4325c47515413d10c2e5a05825e2f003aa50572e7",
+        "pancreas": "38e6f82611cd2ec764385bd582d32f13cf15e75ec7d77ebb49561de0f56bbe35",
+        "lesion": "563d80bcd57cceab1cccd4e629c1889cb29f52cf65e2932e9bd94fa6dffbfd82"
+      },
       "native_shape": [
         424,
         294,
@@ -7573,7 +7677,11 @@
     },
     {
       "case_id": "PanTS_00002435",
-      "source_sha256": "2de3adf883b24e22c506d5d426c9cc41eef54e5f0c78d9818451b6d4d479592f",
+      "source_sha256": {
+        "ct": "2de3adf883b24e22c506d5d426c9cc41eef54e5f0c78d9818451b6d4d479592f",
+        "pancreas": "33be3cdf2631056962c9f3b1388018984edb739fa40fe0bd661300be71682c5e",
+        "lesion": "88525fd587d545655c43beb3f9d493da7355d82152085d18d26ecee86047837b"
+      },
       "native_shape": [
         415,
         296,
@@ -7611,7 +7719,11 @@
     },
     {
       "case_id": "PanTS_00002893",
-      "source_sha256": "524f6b0cff7c448ee173ff042981393e82dfbd347d5f9c3d45153ec31e94a2ca",
+      "source_sha256": {
+        "ct": "524f6b0cff7c448ee173ff042981393e82dfbd347d5f9c3d45153ec31e94a2ca",
+        "pancreas": "234eab6325c78890931af2648242341e054029ed0bc89b174d11d03d28a15318",
+        "lesion": "de682a62bc80897f23ff36e38d66d01807b889c9054ef03205012e394ff1cfe4"
+      },
       "native_shape": [
         503,
         429,
@@ -7649,7 +7761,11 @@
     },
     {
       "case_id": "PanTS_00008711",
-      "source_sha256": "00396cb2f658d9c012d84148d1ee1d250d94f5f8527039c4fc6dacc4ef9dd477",
+      "source_sha256": {
+        "ct": "00396cb2f658d9c012d84148d1ee1d250d94f5f8527039c4fc6dacc4ef9dd477",
+        "pancreas": "c98171a48a7236f83a25a39e804d6d987a0d1d460d5f9265a625630d9cdc9730",
+        "lesion": "554bf5214296bc56db9db843941e2f0e7eb25201860f421e53a31d061abbdfcd"
+      },
       "native_shape": [
         481,
         337,
@@ -7687,7 +7803,11 @@
     },
     {
       "case_id": "PanTS_00008339",
-      "source_sha256": "b48180688af1cdd290c8b9de36ae887b2c3946840beca8cb9d015b94207c3f24",
+      "source_sha256": {
+        "ct": "b48180688af1cdd290c8b9de36ae887b2c3946840beca8cb9d015b94207c3f24",
+        "pancreas": "c225be724cc4df0c438c0e8b9ab436574fbb99354a254b3ae4ebb151c0bb4321",
+        "lesion": "add5cd416520fbbcfc9172c3c9ceb8539247b51fe10559bbf411465354767b43"
+      },
       "native_shape": [
         442,
         512,
@@ -7725,7 +7845,11 @@
     },
     {
       "case_id": "PanTS_00003130",
-      "source_sha256": "ce6474fe61cf4050765bc1d4809cd1004de916f3b24d1ea827fab2f5520ecd2e",
+      "source_sha256": {
+        "ct": "ce6474fe61cf4050765bc1d4809cd1004de916f3b24d1ea827fab2f5520ecd2e",
+        "pancreas": "ac6489304b55c6cffe05dbe2e351ca4fc38496bf0287163a9c37480a8e56ba4e",
+        "lesion": "3aceee929538201f54b6fa73a32e68600605a162ccffce99d82675a84488895a"
+      },
       "native_shape": [
         505,
         320,
@@ -7763,7 +7887,11 @@
     },
     {
       "case_id": "PanTS_00004267",
-      "source_sha256": "c08a988214490bac07103e22598c0794fa8d1f82765b0527b9943c415451e7cd",
+      "source_sha256": {
+        "ct": "c08a988214490bac07103e22598c0794fa8d1f82765b0527b9943c415451e7cd",
+        "pancreas": "c791434d030c86646ea463aaea9d777e73d3d68bfba4b494060dc6a7456bea19",
+        "lesion": "be1034c77dce4c0312f3582ff9c05f0c85eba7105f0b0d881d79085c943f5a49"
+      },
       "native_shape": [
         474,
         377,
@@ -7801,7 +7929,11 @@
     },
     {
       "case_id": "PanTS_00006837",
-      "source_sha256": "d28a8407da32457bc1aad2946c4670e4676aaaf378683bb3f8df5c7cfb99975a",
+      "source_sha256": {
+        "ct": "d28a8407da32457bc1aad2946c4670e4676aaaf378683bb3f8df5c7cfb99975a",
+        "pancreas": "b2a6c50f3707bf61f36e9787bd64325edc554bd5422913a2130672c7ce1de0b8",
+        "lesion": "9ad02430090a2f563f17abdc3c2e644fc3ee90ff1d1108bbcf199a4c1710998a"
+      },
       "native_shape": [
         450,
         313,
@@ -7839,7 +7971,11 @@
     },
     {
       "case_id": "PanTS_00003457",
-      "source_sha256": "de6da3d1054c1f239b0b5192cbe20404dd972769eb49f941dec7855c2b270429",
+      "source_sha256": {
+        "ct": "de6da3d1054c1f239b0b5192cbe20404dd972769eb49f941dec7855c2b270429",
+        "pancreas": "d246cc8d7b80b5c72754ae48c3567e4f5c13180b8d24016f8c0122df805359a2",
+        "lesion": "dbd88b935cc5bfd9ecb1de4e59ec625d04f04eedb7cd13818264a07dd0900606"
+      },
       "native_shape": [
         476,
         383,
@@ -7877,7 +8013,11 @@
     },
     {
       "case_id": "PanTS_00002935",
-      "source_sha256": "e3b1eba68a07ace89e87b0ff31f730f42dfabbfab0e885dc6c7d1ea20803e497",
+      "source_sha256": {
+        "ct": "e3b1eba68a07ace89e87b0ff31f730f42dfabbfab0e885dc6c7d1ea20803e497",
+        "pancreas": "f1da33efcb4e5e64bdfb82d163095cc7b0b8ddfe3a803e34982d28ed99cbd653",
+        "lesion": "e8dea4114bf83ababa2fafa843485d34b8208a76692fc87f894095da0167dbdb"
+      },
       "native_shape": [
         193,
         150,
@@ -7915,7 +8055,11 @@
     },
     {
       "case_id": "PanTS_00000029",
-      "source_sha256": "dfafa585d7ad71f09303960d8aa7f325f5848d39db35ec76e6f8e1b860b95c12",
+      "source_sha256": {
+        "ct": "dfafa585d7ad71f09303960d8aa7f325f5848d39db35ec76e6f8e1b860b95c12",
+        "pancreas": "1a556c01eb7d3a0b5e8a451ff4c906dae28b98223941030cb719c7c004f6add0",
+        "lesion": "f7bd672ee6c0528bdfa8f7c9597c43c076f541d1725ed5d5a47c13e234f71ead"
+      },
       "native_shape": [
         419,
         340,
@@ -7953,7 +8097,11 @@
     },
     {
       "case_id": "PanTS_00005046",
-      "source_sha256": "39de221d019c5045baeb92d204c88f55fb5dc018f57b2238ba9445a79b981c28",
+      "source_sha256": {
+        "ct": "39de221d019c5045baeb92d204c88f55fb5dc018f57b2238ba9445a79b981c28",
+        "pancreas": "75ac83e4a18f7a9e57f84899255a21ea368d98a16a71748643522ae44b3825fc",
+        "lesion": "66130aabcdb2c73408659b5816cd34759a127ac6ed5ceda818c6aee95d8f7b78"
+      },
       "native_shape": [
         512,
         331,
@@ -7991,7 +8139,11 @@
     },
     {
       "case_id": "PanTS_00005761",
-      "source_sha256": "823fbbe42b01d0fcc09d681bd8390381846c0c30cb4223903ae922762fa66a48",
+      "source_sha256": {
+        "ct": "823fbbe42b01d0fcc09d681bd8390381846c0c30cb4223903ae922762fa66a48",
+        "pancreas": "8ba862200c314df805fc859685ff441ce782824cc07b91744a1232bfa1bf4690",
+        "lesion": "b28306f3fc601a5c07ac14482395f6b4b38dfa392ce67fff5938ba2a952a3084"
+      },
       "native_shape": [
         489,
         439,
@@ -8029,7 +8181,11 @@
     },
     {
       "case_id": "PanTS_00005363",
-      "source_sha256": "d7bb830a4a414c07146f0f8327a5770a6fa658e079060876daafa8d24f42982c",
+      "source_sha256": {
+        "ct": "d7bb830a4a414c07146f0f8327a5770a6fa658e079060876daafa8d24f42982c",
+        "pancreas": "b635acdfcab11a544f5a14419655e63d71dca57b8879ac4cbd901dc5bd8bf3fa",
+        "lesion": "a82c2c1bf6d7c7d71d0295cf65db5a88098fa1c4395ddc4aa11ee30af4d5f8f8"
+      },
       "native_shape": [
         503,
         348,
@@ -8067,7 +8223,11 @@
     },
     {
       "case_id": "PanTS_00004732",
-      "source_sha256": "9f28a890b12edc37e80f7492d15f5ac7fe434f2e8bc13803ee102f307d6d0c27",
+      "source_sha256": {
+        "ct": "9f28a890b12edc37e80f7492d15f5ac7fe434f2e8bc13803ee102f307d6d0c27",
+        "pancreas": "a878ac306ec6a2e83370da825b787f1fa7fc98e557bc6d134a907982fd952f85",
+        "lesion": "e90f9ff896e443269a2544909c5bbd4fa30d89b4d3b9aa23bba261680f7bfff7"
+      },
       "native_shape": [
         460,
         355,
@@ -8105,7 +8265,11 @@
     },
     {
       "case_id": "PanTS_00006901",
-      "source_sha256": "96b31d22d6ebf15e5dfd1c460f9dd271bb862e9380759669ea6d48531381b55d",
+      "source_sha256": {
+        "ct": "96b31d22d6ebf15e5dfd1c460f9dd271bb862e9380759669ea6d48531381b55d",
+        "pancreas": "68ea2e22c116e0f2cb171341bbf470e948d17f4e3fca17eb5d0d0eae9814d2a4",
+        "lesion": "a41d2e064613f76ecac70b2fd0972939a6568d5a960e6b338a2738f1a2303623"
+      },
       "native_shape": [
         54,
         361,
@@ -8143,7 +8307,11 @@
     },
     {
       "case_id": "PanTS_00003583",
-      "source_sha256": "64d80794c8099e18bd790eda3d679a6c0f3ac83601d0c220a38a237a2f0cee4b",
+      "source_sha256": {
+        "ct": "64d80794c8099e18bd790eda3d679a6c0f3ac83601d0c220a38a237a2f0cee4b",
+        "pancreas": "06f8ec22be4a46dc70e9961ee48801595052df620a203f5f4dffeebb6daf65a1",
+        "lesion": "2d2a58ea3de07adbba8ecb83c72be7a2081ebc4fbdfebded050cac721d5944fc"
+      },
       "native_shape": [
         512,
         500,
@@ -8181,7 +8349,11 @@
     },
     {
       "case_id": "PanTS_00000698",
-      "source_sha256": "3d4f40cbd0c0992ad8ee7115eb3a036f201e00c9aee43ef7e7f32d8d33193ee7",
+      "source_sha256": {
+        "ct": "3d4f40cbd0c0992ad8ee7115eb3a036f201e00c9aee43ef7e7f32d8d33193ee7",
+        "pancreas": "fe8483384cf63d9620806ee8bbcb43e151a878ae720c2d096363306bdc875fb5",
+        "lesion": "03a0e7c7c0e07deb6b94111ea6de215066190ac6e9625ef1e5fbb46c5eb88a6b"
+      },
       "native_shape": [
         479,
         344,
@@ -8219,7 +8391,11 @@
     },
     {
       "case_id": "PanTS_00002954",
-      "source_sha256": "700ab27c28b2d4d703850a259ca367630ba00e260177720329cd0b5685814d2a",
+      "source_sha256": {
+        "ct": "700ab27c28b2d4d703850a259ca367630ba00e260177720329cd0b5685814d2a",
+        "pancreas": "822da1ff089d50cab2b52adb2181878b5a46cca321c867d686501015b40623f4",
+        "lesion": "dc04dbb6267997f204b473d551007b071d1463d5e6d92cda926f4cb109d100ac"
+      },
       "native_shape": [
         655,
         503,
@@ -8257,7 +8433,11 @@
     },
     {
       "case_id": "PanTS_00001406",
-      "source_sha256": "204275adf01f9b8ece3efdbc5c3a576322441160d17a519633b7fedfe39bf63d",
+      "source_sha256": {
+        "ct": "204275adf01f9b8ece3efdbc5c3a576322441160d17a519633b7fedfe39bf63d",
+        "pancreas": "fa266491d4b1eebae76a1740f19a636bc005bb95d64ea5ad7d38875b1247ca7d",
+        "lesion": "33f7d5da65704d0b47afb03cbc8b6a3b087066c01c3c1b921569ef2f57141270"
+      },
       "native_shape": [
         512,
         449,
@@ -8295,7 +8475,11 @@
     },
     {
       "case_id": "PanTS_00007529",
-      "source_sha256": "a583d6fdc12ac7e4f84fc6a5a56e4181c889a21b458fa913db4c9c0a076ee62d",
+      "source_sha256": {
+        "ct": "a583d6fdc12ac7e4f84fc6a5a56e4181c889a21b458fa913db4c9c0a076ee62d",
+        "pancreas": "5f85df879a9e8347dcb66894c0c5297f834056a75cadd2b5adc4a3cad7581a55",
+        "lesion": "798a5b04374c7179c03bfde0b617d4c8e439d91aa266f435f986432391e4488e"
+      },
       "native_shape": [
         506,
         388,
@@ -8333,7 +8517,11 @@
     },
     {
       "case_id": "PanTS_00005024",
-      "source_sha256": "501d69b8741c89204b0e7c114f357aa20638a0e7cb7e57ab3675bda876b7e7a1",
+      "source_sha256": {
+        "ct": "501d69b8741c89204b0e7c114f357aa20638a0e7cb7e57ab3675bda876b7e7a1",
+        "pancreas": "4e616fff2b45cb8e5f9090f9069edb5d85c6e93763ecf2adbae9a6347c9c269d",
+        "lesion": "7dfccb540339f187c1369ec97e9023869b55714be2cdbbe46b283a184054f8b2"
+      },
       "native_shape": [
         510,
         345,
@@ -8371,7 +8559,11 @@
     },
     {
       "case_id": "PanTS_00006115",
-      "source_sha256": "ce83f10fe20c6dcad94da3a986d9dde52b5fe939c8d2a603a9ec1b953ab975f6",
+      "source_sha256": {
+        "ct": "ce83f10fe20c6dcad94da3a986d9dde52b5fe939c8d2a603a9ec1b953ab975f6",
+        "pancreas": "545e02c233aaad27ccd47c6514575c351161638c1675852e9470ff2479227a3e",
+        "lesion": "6e1c131d403f90f870f90d69c7af8c479dda7223192df19d2d72acf007f93811"
+      },
       "native_shape": [
         221,
         144,
@@ -8409,7 +8601,11 @@
     },
     {
       "case_id": "PanTS_00006454",
-      "source_sha256": "df353b7b0fe00d4b4a6c04fd363641e4b1f8cd43dee01ebfe44c51ce017ce2fc",
+      "source_sha256": {
+        "ct": "df353b7b0fe00d4b4a6c04fd363641e4b1f8cd43dee01ebfe44c51ce017ce2fc",
+        "pancreas": "a25718dd05cc2d9cae65a4c9d4a4b2ef9c111cf51ead5a753049201a9f5881c9",
+        "lesion": "7721708e9e08e9b4b4287da4c9f71b4abababf7a164cecadda3f353dfb9ee5f1"
+      },
       "native_shape": [
         512,
         388,
@@ -8447,7 +8643,11 @@
     },
     {
       "case_id": "PanTS_00007826",
-      "source_sha256": "93e3f6267d3e96a433dc758740be35f5d3deb98cf55ace142c34396c1c203cec",
+      "source_sha256": {
+        "ct": "93e3f6267d3e96a433dc758740be35f5d3deb98cf55ace142c34396c1c203cec",
+        "pancreas": "21a8b2eed837190b41f471b249b409aff57468052f46a7efe470965c02c875d8",
+        "lesion": "eb8b43cf894fbdcac0aa6f41732fbde854d5e0c4700b4540723fab34226acdce"
+      },
       "native_shape": [
         508,
         353,
@@ -8485,7 +8685,11 @@
     },
     {
       "case_id": "PanTS_00003817",
-      "source_sha256": "353f1b8cacf0444a88660ee0847e50681abe2c06362b9f3a2928540936294d61",
+      "source_sha256": {
+        "ct": "353f1b8cacf0444a88660ee0847e50681abe2c06362b9f3a2928540936294d61",
+        "pancreas": "8c23b6aeeb45afa6508a5229263635b4e0c7e390c2cdcab3dcc6ec6c5d046439",
+        "lesion": "c99fbe8c2b01fc6ea12e8f2e491b2abd00d030e4655cd931e5d5c3a09ae6df1c"
+      },
       "native_shape": [
         512,
         432,
@@ -8523,7 +8727,11 @@
     },
     {
       "case_id": "PanTS_00005848",
-      "source_sha256": "aa0f920f0d311ead92ab77f6cb574ee0d36cdcb5b845d68531b00ed05e11aafe",
+      "source_sha256": {
+        "ct": "aa0f920f0d311ead92ab77f6cb574ee0d36cdcb5b845d68531b00ed05e11aafe",
+        "pancreas": "18cf91a9dd2ab77df1f2c517288e0b04409b651dd3ea4ab5372ea376c7ae00d7",
+        "lesion": "de6115ad3bd62f6336da8b64752f5fdcf4e2861891231968f2849cdb23daf1ca"
+      },
       "native_shape": [
         512,
         306,
@@ -8561,7 +8769,11 @@
     },
     {
       "case_id": "PanTS_00008203",
-      "source_sha256": "ed46d45440e20b6b26b8b367304cd22e1f71abc164b1e99742e2d58c4400252c",
+      "source_sha256": {
+        "ct": "ed46d45440e20b6b26b8b367304cd22e1f71abc164b1e99742e2d58c4400252c",
+        "pancreas": "1c62f597e5ba36c068477466708de76e07d816d3013e458367d160e8f90ee699",
+        "lesion": "811d4d929634c5864378ab2abfdb453f9c29a9d6384f66e7414fcb7532ce6cd3"
+      },
       "native_shape": [
         454,
         352,
@@ -8599,7 +8811,11 @@
     },
     {
       "case_id": "PanTS_00002770",
-      "source_sha256": "54d8ad59a55834b63ecd8355e9ee919f8e4a352214f973dd62bba51332136f34",
+      "source_sha256": {
+        "ct": "54d8ad59a55834b63ecd8355e9ee919f8e4a352214f973dd62bba51332136f34",
+        "pancreas": "0cf41c1c69d554031c51b8413a6cca7711c0d7781d1cc8a32a13c793085ccb52",
+        "lesion": "0197b0b0b6ad62dd5ad5238690af5696b966129a79c455344af4bfe091cec737"
+      },
       "native_shape": [
         511,
         401,
@@ -8637,7 +8853,11 @@
     },
     {
       "case_id": "PanTS_00006112",
-      "source_sha256": "18e80f6549b9f0fdeec9b9b59b85abc4445b0b992a0f85b2ab3aa7646680595e",
+      "source_sha256": {
+        "ct": "18e80f6549b9f0fdeec9b9b59b85abc4445b0b992a0f85b2ab3aa7646680595e",
+        "pancreas": "3edf0895697bf7a8ab2581226c4f56352fd727a88bdb08e9575014a402968f1b",
+        "lesion": "af2964822362d403034a5719fbee6f8bad4ce4d97578b5f2768b8a4cae2695df"
+      },
       "native_shape": [
         512,
         427,
@@ -8675,7 +8895,11 @@
     },
     {
       "case_id": "PanTS_00007023",
-      "source_sha256": "6dca21dc2487cba3c3fb36ab9d5fd8ea634c15a0bafe8309d07bbc0de03d1d03",
+      "source_sha256": {
+        "ct": "6dca21dc2487cba3c3fb36ab9d5fd8ea634c15a0bafe8309d07bbc0de03d1d03",
+        "pancreas": "2db4cf602bf348195754f4d4c330d6b954a704ab909fc03bb867ee7fb660c85b",
+        "lesion": "03b66405b12af5d195ae6c583ee0c9ce565696d0b76f0b3db10f51a211d1e596"
+      },
       "native_shape": [
         512,
         101,
@@ -8713,7 +8937,11 @@
     },
     {
       "case_id": "PanTS_00000514",
-      "source_sha256": "2b85d2fd1ec35ff7b30d089245451c61988e52c267382d2a06e23ffc955f7b39",
+      "source_sha256": {
+        "ct": "2b85d2fd1ec35ff7b30d089245451c61988e52c267382d2a06e23ffc955f7b39",
+        "pancreas": "8909cb1d5b4d7208b2c09996943c5e63b78ffd4103766a435a7f6a9561801ce6",
+        "lesion": "62327a7523f27314a4b4f6a759a923cd82a475c36ed30d56d287c9ed8e8e4ab2"
+      },
       "native_shape": [
         431,
         348,
@@ -8751,7 +8979,11 @@
     },
     {
       "case_id": "PanTS_00007687",
-      "source_sha256": "62c2d9a84942eebd154def4d642415d62dfa7207c880577a4077d443ed1b0f5b",
+      "source_sha256": {
+        "ct": "62c2d9a84942eebd154def4d642415d62dfa7207c880577a4077d443ed1b0f5b",
+        "pancreas": "af31342c966e1bcaea2ce67282ebc5ecd7f3a8406ab6025c3113c507652691f6",
+        "lesion": "7518a455451e39988c8c564d037d40bd2893decb373088910ba1a3d74783bacd"
+      },
       "native_shape": [
         512,
         457,
@@ -8789,7 +9021,11 @@
     },
     {
       "case_id": "PanTS_00005592",
-      "source_sha256": "40c7f8166c736969cad5cb9ffaba357ad6cdbf541e97b3de9f8f62a5c771c5eb",
+      "source_sha256": {
+        "ct": "40c7f8166c736969cad5cb9ffaba357ad6cdbf541e97b3de9f8f62a5c771c5eb",
+        "pancreas": "efc08e45dfdb667073fc1f9749edbf33d07df4e4446d496fdd7dec86d65574c9",
+        "lesion": "0a80c873b523c73e6d90f4e65500251cd439e0b6d3a80d413389b0ef78f692ee"
+      },
       "native_shape": [
         500,
         456,
@@ -8827,7 +9063,11 @@
     },
     {
       "case_id": "PanTS_00004719",
-      "source_sha256": "bc1cf6068e3e191650c37d173e2ff491aa7b7116b21c3431d99562492503299d",
+      "source_sha256": {
+        "ct": "bc1cf6068e3e191650c37d173e2ff491aa7b7116b21c3431d99562492503299d",
+        "pancreas": "0865410f7ba83e0d9a25e3aa3993875a86e8935ba70f7b39220fcef25e48670e",
+        "lesion": "6d0a228a4bc76d0ef177f3c76e1191e6674178be33ae5fac02b60f719a730c14"
+      },
       "native_shape": [
         512,
         437,
@@ -8865,7 +9105,11 @@
     },
     {
       "case_id": "PanTS_00007226",
-      "source_sha256": "f1b275025293af403f240d0374dc574946478aa2235ca0c69b44e3289ff2a904",
+      "source_sha256": {
+        "ct": "f1b275025293af403f240d0374dc574946478aa2235ca0c69b44e3289ff2a904",
+        "pancreas": "ba4d07a4e07797ff9120aba48ee7e90a6355de1ad707500a697362948fcfbb8a",
+        "lesion": "3ea7e1f0cf78e81a4058d14e893e865c886067cb27e45c3808f1ec66818f5e5b"
+      },
       "native_shape": [
         490,
         318,
@@ -8903,7 +9147,11 @@
     },
     {
       "case_id": "PanTS_00001389",
-      "source_sha256": "9d0a2b40a53f09a671efbd2e972e95e12555202c0daf16ae430ab62fb1967d73",
+      "source_sha256": {
+        "ct": "9d0a2b40a53f09a671efbd2e972e95e12555202c0daf16ae430ab62fb1967d73",
+        "pancreas": "f0a937410c8885261127151d4eb5ca597d6ccc60a4b31477eb2c0630208d53e0",
+        "lesion": "1fedd2e03bb74da3bfb89343ad78c07c42e55e614c407bbda87bccf750e975d5"
+      },
       "native_shape": [
         110,
         125,
@@ -8941,7 +9189,11 @@
     },
     {
       "case_id": "PanTS_00004814",
-      "source_sha256": "98c02da21a9d6471ab7fb81929481f975a225c54b4ff6e1edfa88ba7b6e11d33",
+      "source_sha256": {
+        "ct": "98c02da21a9d6471ab7fb81929481f975a225c54b4ff6e1edfa88ba7b6e11d33",
+        "pancreas": "2340c5f97160a87a6d451aa01f803eb43c6daca3f36a31b0add07c023165024e",
+        "lesion": "8d5569a9da402af164280d495f71a9d1787d7660ec23bb30ee2783126e401898"
+      },
       "native_shape": [
         428,
         511,
@@ -8979,7 +9231,11 @@
     },
     {
       "case_id": "PanTS_00008158",
-      "source_sha256": "d00db05ab5fab507cadc42ecb35eda2d3acfb4f10f0214e8b86d79ea59e77052",
+      "source_sha256": {
+        "ct": "d00db05ab5fab507cadc42ecb35eda2d3acfb4f10f0214e8b86d79ea59e77052",
+        "pancreas": "27d8d0f35af33beb54f1136db2ba304213c924493896e126d9fa56add687ae0e",
+        "lesion": "cce93a3860a8bb1e1fa7ba6dbcc62c2d14cd390bf3e5e71337677d75a18ed39d"
+      },
       "native_shape": [
         454,
         384,
@@ -9017,7 +9273,11 @@
     },
     {
       "case_id": "PanTS_00005194",
-      "source_sha256": "db24835b8967cc35f9b5a03b8e5bafe89175544373cabce580224577bd28cb71",
+      "source_sha256": {
+        "ct": "db24835b8967cc35f9b5a03b8e5bafe89175544373cabce580224577bd28cb71",
+        "pancreas": "806280857e4ced04cedea10bae63d66e7f82619f520e1816bda155552c4323cc",
+        "lesion": "a16222a59cb0bf0663078375949aa72f795081b376587a848c0dba4176f20d77"
+      },
       "native_shape": [
         502,
         423,
@@ -9055,7 +9315,11 @@
     },
     {
       "case_id": "PanTS_00006543",
-      "source_sha256": "3c8fb6663a530222a383200f2bcd4386e7d96251c18e496033665067372d2e54",
+      "source_sha256": {
+        "ct": "3c8fb6663a530222a383200f2bcd4386e7d96251c18e496033665067372d2e54",
+        "pancreas": "c098cb6a5695be9bcd742966b0db5165019e38b49b04e04afb2d7ebd1f432fd3",
+        "lesion": "8282ba00ed416492b64c3c3c09df16882ea8410aa1a725fc18b0e137d8e3850f"
+      },
       "native_shape": [
         505,
         413,
@@ -9093,7 +9357,11 @@
     },
     {
       "case_id": "PanTS_00006880",
-      "source_sha256": "4b987c93b1fce54229c6858c0d07336f631e4f4c6810620ee83255297e85d20e",
+      "source_sha256": {
+        "ct": "4b987c93b1fce54229c6858c0d07336f631e4f4c6810620ee83255297e85d20e",
+        "pancreas": "a7c79f532f349d55323a4cff316eead7bafa0ebcb3a2584be04262eebc1c8b4c",
+        "lesion": "3f5586df4405e54ea16380c89afe332eac82d5bc630923b2bbd0e98d0685a220"
+      },
       "native_shape": [
         512,
         431,
@@ -9131,7 +9399,11 @@
     },
     {
       "case_id": "PanTS_00000139",
-      "source_sha256": "cb2f541103504271955083cddfbb754bdf304dddc8529aa5b4035aa8d8aaf110",
+      "source_sha256": {
+        "ct": "cb2f541103504271955083cddfbb754bdf304dddc8529aa5b4035aa8d8aaf110",
+        "pancreas": "2e14004bda04d161248acb7616a20b17cba635bcd8898860c7b15840ac6cee31",
+        "lesion": "8f1baf9d42f662ab0802e93160afd6e8705a2a10cdd297d80257a5075a0a1fb4"
+      },
       "native_shape": [
         487,
         378,
@@ -9169,7 +9441,11 @@
     },
     {
       "case_id": "PanTS_00004023",
-      "source_sha256": "e0d17ff7a0174c367e80a92e2cd56ebd8289fc69637a5086432c80458b0c24f5",
+      "source_sha256": {
+        "ct": "e0d17ff7a0174c367e80a92e2cd56ebd8289fc69637a5086432c80458b0c24f5",
+        "pancreas": "7d5698a29697c6333dcf8ca25885ef59ca7b24334019069b0414fea4de1ce2c1",
+        "lesion": "70510b1236f891c6afdbb4888c11636aea6a0af29a4adb2b1d7adbb52109805b"
+      },
       "native_shape": [
         500,
         422,
@@ -9207,7 +9483,11 @@
     },
     {
       "case_id": "PanTS_00000909",
-      "source_sha256": "1c3bb63e4a7eefb8cf14f19b66d9b2dce0600d3b4615b9a521f9835a6e656e20",
+      "source_sha256": {
+        "ct": "1c3bb63e4a7eefb8cf14f19b66d9b2dce0600d3b4615b9a521f9835a6e656e20",
+        "pancreas": "ffa4d3f58e87e8c0898a2f05a7da364848fdb2fa60e939cdc3ffb02c2ac2dc4b",
+        "lesion": "0fa8be3e0821a737ec9661fbccb606e21e94c0a417f9586fe76e4875decb1987"
+      },
       "native_shape": [
         512,
         316,
