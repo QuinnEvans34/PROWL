@@ -17,3 +17,18 @@ Add a read-only command for comparing two saved native reports. Reuse the existi
 - When comparable Lenovo reports are available, run the command for 38k versus 40k, then 40k versus the next complete validation. Report the exact denominators, available evidence, and false-positive trade-offs. Treat these as exploratory development results.
 
 Estimate 1–2 hours for the command and verification. Use saved reports and test fixtures on the Mac while Lenovo training runs. This work needs no new inference or checkpoint transfer. The [14k replay and matched supervision study](STUNET-OVERNIGHT-DICE-QUEUE-20261111.md) remain separate GPU work.
+
+## Running the review
+
+Use [compare_stunet_checkpoints.py](../../../scripts/diagnostics/compare_stunet_checkpoints.py) from the repository root. The command prints JSON and only opens saved metadata.
+
+```sh
+python scripts/diagnostics/compare_stunet_checkpoints.py bundle BUNDLE.json 38000 40000
+python scripts/diagnostics/compare_stunet_checkpoints.py --policy predicted-pancreas-proximity-5mm-v1 outliner REPLAY_DIR OUTLINER_DIR
+```
+
+Bundle mode uses saved reports and frozen per-case source hashes, shape, affine, and tile count. An optional `--candidate-bundle` supplies a separate report and set of identities. Use the same policy for both arms. A fixed 5 mm export must carry the policy config hash and per-case application status. Raw-only historical reports can still support voxel and case comparisons and aggregate component counts. Exact component gains and losses require hit IDs. The all-cohort sub-1 mL component counts also require small-component IDs.
+
+## Verification
+
+The command reproduced the verified 32k trim comparison in both raw and fixed 5 mm arms. Dice, recall, pancreas Dice, false-positive volume and empty alarms matched the saved summary. The fixed 5 mm comparison moved Dice from .415860 to .417621, with no increase in false-positive volume on any scan and one lost small reference component. That hit loss reduced small-component detection from 5/12 to 4/12. The historical 18k versus 24k raw reports reproduced .430517 and .411972 Dice and correctly reported component identity comparison as unavailable. The new and existing native review suites passed 39 tests and 6 subtests.
