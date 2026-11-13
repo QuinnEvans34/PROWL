@@ -9,14 +9,23 @@ async function ask(user, q = 'how big is this pancreas?') {
   await user.type(screen.getByLabelText('Literature question'), q)
   await user.click(screen.getByRole('button', { name: 'Ask question' }))
 }
-it('answers locally and shows provenance without sending scan data to literature', async () => {
+it.each(['How big is this pancreas?', 'What is the pancreas volume?'])('answers %s locally with provenance', async question => {
   const user = userEvent.setup(); const search = vi.fn(); const measure = vi.fn(async () => measurement)
   render(<LiteratureSearchPanel variant="panel" measurementContext={context} measure={measure} search={search} />)
-  await ask(user)
+  await ask(user, question)
   expect(await screen.findByText(/about 72.00 mL/)).toBeTruthy()
   expect(screen.getByText(/Calculated locally/)).toBeTruthy()
   expect(screen.getByText('Measurement source and limitations')).toBeTruthy()
+  expect(measure).toHaveBeenCalledWith(context, expect.any(AbortSignal))
   expect(search).not.toHaveBeenCalled()
+})
+it('keeps the same wording in literature mode when no scan is attached', async () => {
+  const user = userEvent.setup(); const search = vi.fn(async () => { throw new Error('No response in fixture') })
+  const measure = vi.fn()
+  render(<LiteratureSearchPanel variant="panel" search={search} measure={measure} />)
+  await ask(user, 'What is the pancreas volume?')
+  expect(search).toHaveBeenCalledWith(expect.objectContaining({question: 'What is the pancreas volume?'}), expect.any(AbortSignal))
+  expect(measure).not.toHaveBeenCalled()
 })
 it('clears completed results when prediction identity changes within one study', async () => {
   const user = userEvent.setup(); const props = { variant: 'panel', contextKey: 'one', measure: async () => measurement }

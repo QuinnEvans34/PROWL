@@ -10,6 +10,8 @@ const close = (a, b) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a -
 // Closed question grammar: qualifiers/clinical questions must never be silently dropped.
 export function scanQuestion(question) {
   const q = question.toLowerCase().trim().replace(/[?.!]+$/, '').replace(/\s+/g, ' ')
+  const directVolume = q.match(/^what is the (pancreas|lesion) volume(?: (?:in|on) (?:this|the|my) (?:scan|image))?$/)
+  if (directVolume) return directVolume[1]
   const match = q.match(/^(?:how (?:big|large) is|what is the (?:size|volume) of) (?:this|the|my) (pancreas|lesion)(?: (?:in|on) (?:this|the|my) (?:scan|image))?$/)
   if (match) return match[1]
   const subject = '(?:this|my|the current) pancreas'

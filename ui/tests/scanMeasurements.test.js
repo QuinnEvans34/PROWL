@@ -78,7 +78,9 @@ describe('deterministic mask arithmetic and validity', () => {
 
 it.each(['how big is this pancreas?', 'What is the volume of my pancreas?', 'What is the size of the pancreas in this scan?'])('routes %s', q => expect(scanQuestion(q)).toBe('pancreas'))
 it.each(['How large is this pancreas and is it cancer?', 'What is the size of this pancreas head?', 'Is this lesion malignant?'])('does not discard qualifiers in %s', q => expect(scanQuestion(q)).toBe('unsupported'))
-it('keeps general literature separate', () => expect(scanQuestion('What is the average pancreas volume?')).toBe(null))
+it.each(['What is the average pancreas volume?', 'What is the pancreas volume in adults?'])('keeps literature separate for %s', q => expect(scanQuestion(q)).toBe(null))
+it('accepts direct lesion volume wording in scan context', () => expect(scanQuestion('What is the lesion volume on this scan?')).toBe('lesion'))
+it('keeps compound volume requests outside the measurement grammar', () => expect(scanQuestion('What is the lesion volume on this scan and is it cancer?')).toBe('unsupported'))
 
 function nifti({ invalidLabel = false, slope = 0 } = {}) {
   const h = new NIFTI1(); Object.assign(h, header(), { littleEndian: true, datatypeCode: 4, numBitsPerVoxel: 16, vox_offset: 352, scl_slope: slope, scl_inter: 0, magic: 'n+1' })
