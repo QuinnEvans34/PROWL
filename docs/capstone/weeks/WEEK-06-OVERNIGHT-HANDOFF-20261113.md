@@ -45,3 +45,14 @@ Reran the engineering walkthrough checks together on current `main` after the ov
 ## November 13, 5:45 a.m. Mountain
 
 - Added `--unit-dispositions` to the saved autonomous baseline review command and ran it against the original hash-bound export. Five completed scans have both reference units declared millimetres, and all five are lesion-positive. The remaining 58 completed scans include 27 positive and all 31 reference-empty scans. At least one reference unit was assumed on each. The six CT unit failures and one resource failure stay in the 70-case denominator. The declared-unit subset alone cannot estimate false alarms. Pushed `167730c`, passed 27 focused tests, and updated [W06-03](https://trello.com/c/AypxMvB4). Authoritative source-unit evidence and G4 admission remain open.
+
+## Morning handoff
+
+| Commitment | Delivered evidence | Remaining work |
+| --- | --- | --- |
+| Model evidence and false alarms | Paired saved-checkpoint review through 42k, plus Training page closeout and fallback fixes. Reconciled [W06-11](https://trello.com/c/uQpn9fze) with the [verified historical 12k–24k closeout](../operations/STUNET-CORRECTED-COMPLETION-20261109.md). | Use the Lenovo's verified final 48k reports, tracking and backups for the longer-run decision. The archived 38k–42k data support raw scores and aggregate component counts. |
+| Autonomous baseline and formal comparison | Saved metadata now reports declared units, unit assumptions and all seven failures. | Resolve unit evidence and probability-equivalence scope before G4 admission or agree a scoped fallback with Quinton. |
+| Retrieval evaluation | Generation failures preserve ranked evidence and can be replayed with the same passages. Offline passage recall/MRR now reproduces from historical receipts. | Measure current-corpus source retrieval and grounded-answer quality with eligible questions. Recheck the exposed boundary answer for scope and clarity. |
+| Reviewer walkthrough | Fixed direct volume phrasing and stale Research workflow progress. Integrated fixture pass covered measurement, citations, saved review and recovery. | Recheck the retained scan and live citation in the production walkthrough. Confirm participant availability and collect observations during the session. |
+
+Keep the formal Week 6 comparison, G6 retrieval quality, participant observations, active hours and submission status open until their evidence is available. The existing Lenovo run and its monitor are separate from this handoff.
