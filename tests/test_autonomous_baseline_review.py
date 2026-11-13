@@ -6,7 +6,7 @@ import json
 import pytest
 
 from src.operations.autonomous_baseline_review_v1 import FAILURES, MAX_BYTES, read_bound, review
-from scripts.diagnostics.review_autonomous_baseline import run
+from scripts.diagnostics.review_autonomous_baseline import run, unit_dispositions
 
 REQUEST, READY = "a" * 64, "b" * 64
 
@@ -75,6 +75,14 @@ def test_mixed_saved_reference_units_are_flagged_without_repair():
     assert result["assumed_reference_unit_cases"] == 1
     assert result["cases"][0]["physical_units_assumed"] is True
     assert document["ordered_cases"][0]["reference_units"] == ["unknown", "mm"]
+    report = unit_dispositions(result)
+    assert report["requested"] == 70 and report["failures_by_case"] == FAILURES
+    assert report["completed_by_reference_units"] == {
+        "declared_mm": dict(completed=62, positive=0, reference_empty=62,
+                            positive_with_overlap=0, reference_empty_with_alarm=62),
+        "assumed_mm": dict(completed=1, positive=1, reference_empty=0,
+                           positive_with_overlap=0, reference_empty_with_alarm=0),
+    }
 
 
 @pytest.mark.parametrize("mutation", [
