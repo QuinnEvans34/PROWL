@@ -21,3 +21,7 @@
 ## November 13, 1:40 a.m. Mountain
 
 - Fixed a Training page admission gap before the longer STU-Net closeout. A later saved export for the same execution could change a completed phase back to training, paused or failed even if its updates and validation scores were identical. The shared client/server validator now rejects those reversals while admitting a separately identified continuation. Pushed `c0b6047`, passed 32 focused tests, and posted the result on [W06-11](https://trello.com/c/uQpn9fze). The training job and its monitor were untouched.
+
+## November 13, 2:37 a.m. Mountain
+
+- Fixed two Training export recovery cases. The read-only endpoint can start with a valid configured export when the bundled fallback is missing, and retains the correct source label when keeping a previously verified local snapshot after an error. Pushed `5eb19ed`, passed 33 focused tests, and updated [W06-11](https://trello.com/c/uQpn9fze).
