@@ -28,7 +28,19 @@ it('keeps valid data after a malformed, oversized or regressed local export', ()
   for (const invalid of ['{partial', ' '.repeat(128 * 1024 + 1), JSON.stringify(retained)]) {
     writeFileSync(file, invalid); const result = JSON.parse(call(h).body)
     expect(result.snapshot).toEqual(d); expect(result.note).toContain('last verified')
+    expect(result.read_state).toBe('local_snapshot')
   }
+})
+it('can read a valid configured export when the retained file is unavailable at startup', () => {
+  dir = mkdtempSync(join(tmpdir(), 'prowl-progress-'))
+  const file = join(dir, 'export.json')
+  vi.stubEnv('PROWL_TRAINING_PROGRESS_FILE', file)
+  const h = middleware({ retainedPath: join(dir, 'missing.json') })
+  expect(call(h).status).toBe(503)
+  writeFileSync(file, JSON.stringify(retained))
+  const recovered = call(h)
+  expect(recovered.status).toBe(200)
+  expect(JSON.parse(recovered.body)).toMatchObject({ snapshot: retained, read_state: 'local_snapshot' })
 })
 it('rejects source paths in requests, query overrides and writes; HEAD has no body', () => {
   const h = middleware()

@@ -12,14 +12,16 @@ function readSnapshot(path) {
 
 export function trainingProgressPlugin({ retainedPath = retained } = {}) {
   let last = null
+  let readState = 'retained_snapshot'
   return { name: 'readonly-training-progress', configureServer(server) {
     server.middlewares.use('/training-progress', (req, res) => {
       if (!['/', ''].includes(req.url) || !['GET', 'HEAD'].includes(req.method)) { res.statusCode = 404; res.end(); return }
       try {
-        let readState = 'retained_snapshot', note = 'Saved metadata export; this page does not connect to Lenovo.'
-        try { last = acceptTrainingProgress(last, readSnapshot(retainedPath)) }
-        catch (error) {
-          if (!last) throw error
+        let note = 'Saved metadata export; this page does not connect to Lenovo.'
+        try {
+          last = acceptTrainingProgress(last, readSnapshot(retainedPath))
+          readState = 'retained_snapshot'
+        } catch {
           note = 'The retained export is unavailable or inconsistent. Keeping the last verified results.'
         }
         const selected = process.env.PROWL_TRAINING_PROGRESS_FILE
@@ -29,6 +31,7 @@ export function trainingProgressPlugin({ retainedPath = retained } = {}) {
             readState = 'local_snapshot'; note = 'Local export read successfully; host status is recorded at the observation time.'
           } catch { note = 'The configured export is unavailable or inconsistent. Keeping the last verified results.' }
         }
+        if (!last) throw new Error('No verified training progress export')
         res.setHeader('Content-Type', 'application/json')
         res.setHeader('Cache-Control', 'no-store')
         res.setHeader('X-Content-Type-Options', 'nosniff')
