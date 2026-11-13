@@ -69,7 +69,7 @@ def test_runner_does_not_send_gold_labels_to_model():
 
 
 def test_generation_failure_preserves_retrieval_without_earning_answer_credit():
-    from scripts.retrieval.evaluate_answers import run_case
+    from scripts.retrieval.evaluate_answers import reuse_passages, run_case
     suite, receipts, reviews = fixture()
     passages = receipts['one']['passages']
 
@@ -86,6 +86,16 @@ def test_generation_failure_preserves_retrieval_without_earning_answer_credit():
     assert result['totals']['reference_hits'] == result['totals']['errors'] == 1
     assert result['totals']['supported_answers'] == result['totals']['correct_abstentions'] == 0
     assert result['cases'][0]['error_stage'] == 'generation'
+    assert reuse_passages(receipt, suite['cases'][0], digest(suite)) == passages
+
+
+@pytest.mark.parametrize('change', [dict(error='TimeoutError'), dict(passages=None), dict(case_id='other'),
+                                    dict(question='different'), dict(suite_sha256='wrong')])
+def test_retrieval_reuse_rejects_failed_search_or_mismatched_receipt(change):
+    from scripts.retrieval.evaluate_answers import reuse_passages
+    suite, receipts, _ = fixture()
+    with pytest.raises(ValueError, match='Invalid retrieval reuse'):
+        reuse_passages(dict(receipts['one'], **change), suite['cases'][0], digest(suite))
 
 
 def test_receipts_are_immutable_and_hash_checked(tmp_path):

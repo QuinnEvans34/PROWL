@@ -42,6 +42,14 @@ def save(path, value):
     write_once(path, dict(value, content_sha256=digest(value)))
 
 
+def reuse_passages(receipt, case, suite_sha256):
+    if (receipt.get('case_id') != case['id'] or receipt.get('question') != case['question']
+            or receipt.get('suite_sha256') != suite_sha256 or not isinstance(receipt.get('passages'), list)
+            or ('error' in receipt and receipt.get('error_stage') != 'generation')):
+        raise ValueError('Invalid retrieval reuse')
+    return receipt['passages']
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--suite', type=Path, default=ROOT/'configs/evidence/evaluation/development-v1.json')
@@ -119,9 +127,7 @@ def main():
         def retrieve(question):
             if previous:
                 old = checked_read(args.reuse_retrieval/(case['id']+'.json'))
-                if old['question'] != question or 'error' in old:
-                    raise ValueError('Invalid retrieval reuse')
-                return old['passages']
+                return reuse_passages(old, case, manifest['suite_sha256'])
             read_config(args.config)
             with connect(config) as db:
                 return guided_search(db, suite['collection'], model, question, 5)
