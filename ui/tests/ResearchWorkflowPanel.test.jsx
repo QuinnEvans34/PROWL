@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ResearchWorkflowPanel, { workflowRequest } from '../src/components/ResearchWorkflowPanel.jsx'
 import questions from '../../configs/evidence/research-questions-v1.json'
@@ -47,6 +47,41 @@ it('unknown transport outcome checks the same ID without starting another genera
   await user.click(screen.getByRole('button', { name: 'Check same request' }))
   expect(await screen.findByRole('button', { name: 'Retry failed stage' })).toBeTruthy()
   expect(load.mock.calls[1][0]).toEqual(load.mock.calls[0][0])
+})
+
+it('ignores an older inspection once the submission has returned newer progress', async () => {
+  vi.useFakeTimers()
+  let finishSubmission, finishInspection, request
+  const load = vi.fn((value, _signal, inspect) => {
+    request = value
+    return new Promise(resolve => {
+      if (inspect) finishInspection = resolve
+      else finishSubmission = resolve
+    })
+  })
+  const running = (completed) => {
+    const record = run(request, 'running')
+    record.stages = record.stages.map(({ stage }, i) => ({ stage,
+      state: i < completed ? 'completed' : i === completed ? 'running' : 'pending' }))
+    return record
+  }
+  const { unmount } = render(<ResearchWorkflowPanel loadWorkflow={load} />)
+  try {
+    fireEvent.click(screen.getByText('Research evidence workflow'))
+    fireEvent.click(screen.getByRole('button', { name: 'Run evidence workflow' }))
+    await act(async () => { await vi.advanceTimersByTimeAsync(750) })
+    await act(async () => { finishSubmission(running(2)) })
+    expect(screen.getByText('Verify quotations: In progress')).toBeTruthy()
+    await act(async () => { finishInspection(running(0)) })
+    expect(screen.getByText('Verify quotations: In progress')).toBeTruthy()
+    await act(async () => { await vi.advanceTimersByTimeAsync(750) })
+    expect(load).toHaveBeenCalledTimes(3)
+    await act(async () => { finishInspection(run(request, 'completed')) })
+    expect(screen.getByRole('article')).toBeTruthy()
+  } finally {
+    unmount()
+    vi.useRealTimers()
+  }
 })
 
 it.each(['wrong-id', 'premature-answer', 'rejected-complete', 'unfinished-complete'])('rejects unsafe workflow response: %s', async kind => {

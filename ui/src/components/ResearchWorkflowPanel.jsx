@@ -45,17 +45,20 @@ export default function ResearchWorkflowPanel({ loadWorkflow = workflowRequest }
     setPhase('loading'); setRun(null)
     const timeout = setTimeout(() => controller.abort(), 120000)
     let inspecting = false
+    let waitingForSubmission = true
     const progress = setInterval(async () => {
       if (inspecting || controller.signal.aborted) return
       inspecting = true
       try {
         const next = await loadWorkflow(request, controller.signal, true)
-        if (active.current === controller && !controller.signal.aborted) setRun(next)
+        if (waitingForSubmission && active.current === controller && !controller.signal.aborted) setRun(next)
       } catch { /* A new run may not have been published yet. POST remains authoritative. */ }
       finally { inspecting = false }
     }, 750)
     try {
       let next = await loadWorkflow(request, controller.signal)
+      waitingForSubmission = false
+      clearInterval(progress)
       while (next.state === 'running' && !controller.signal.aborted) {
         setRun(next)
         await new Promise(resolve => setTimeout(resolve, 750))
