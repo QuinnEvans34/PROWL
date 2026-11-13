@@ -32,3 +32,21 @@ Bundle mode uses saved reports and frozen per-case source hashes, shape, affine,
 ## Verification
 
 The command reproduced the verified 32k trim comparison in both raw and fixed 5 mm arms. Dice, recall, pancreas Dice, false-positive volume and empty alarms matched the saved summary. The fixed 5 mm comparison moved Dice from .415860 to .417621, with no increase in false-positive volume on any scan and one lost small reference component. That hit loss reduced small-component detection from 5/12 to 4/12. The historical 18k versus 24k raw reports reproduced .430517 and .411972 Dice and correctly reported component identity comparison as unavailable. The new and existing native review suites passed 39 tests and 6 subtests.
+
+## Lenovo results through 42k
+
+The [verified Lenovo bundle](../coordination/STUNET-38K-40K-42K-NATIVE-METADATA-20261112.json) contains complete raw reports for the same 70 scans. The initial export contained CT hashes only. The command rejected it, and the corrected export includes all three source hashes from the frozen inputs. The archived reports record counts without component IDs, so the tool identifies changed scan-level overlap and reports component totals. Exact component gains and losses and fixed 5 mm results are unavailable for these checkpoints.
+
+| Metric | 38k | 40k | 42k |
+| --- | ---: | ---: | ---: |
+| Dice, 36 positive scans | .377426 | .411317 | .422996 |
+| Macro voxel recall, 36 positive scans | 43.10% | 64.64% | 51.06% |
+| Positive scans with overlap /36 | 32 | 35 | 33 |
+| Reference components with overlap /45 | 35 | 40 | 38 |
+| Scans with overlap in the <1 mL group /5 | 3 | 4 | 4 |
+| Components with overlap within those five scans /6 | 3 | 5 | 4 |
+| Dice within those five scans | .055434 | .071344 | .070182 |
+| False-positive volume across all 70 scans | 185.071 mL | 454.391 mL | 213.284 mL |
+| Alarms on reference-empty scans /34 | 26 | 28 | 28 |
+
+At 40k, three scans gained overlap and none lost it. False-positive volume rose on 56 of 70 scans. At 42k, the newly detected <1 mL scan retained overlap and the two newly detected medium-volume scans lost it. The 33 positive scans with overlap at both 40k and 42k gained .015924 mean Dice while losing 26,786 true-positive voxels and shedding 175.194 mL of false-positive tissue. The longer run so far shows a trade-off between detection, recall, and excess tissue. Use the same measures at 48k before choosing a checkpoint for further work.
