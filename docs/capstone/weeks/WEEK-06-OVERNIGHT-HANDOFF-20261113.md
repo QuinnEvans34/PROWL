@@ -29,3 +29,15 @@
 ## November 13, 3:44 a.m. Mountain
 
 - Fixed a Research workflow race discovered while checking [W06-08](https://trello.com/c/KPvynqav). A delayed status response could display an older stage after the submit response arrived. The panel now ends provisional polling when the submit response returns and follows a single status sequence afterward. A delayed-response regression reproduces the case and confirms the saved answer still displays. Pushed `7daa3e0`, passed 15 focused UI tests, and posted the result on W06-08. Verification used fixtures.
+
+## November 13, 4:44 a.m. Mountain
+
+Reran the engineering walkthrough checks together on current `main` after the overnight changes. The 15 selected UI files yielded 215 passes and one opt-in physical-package check skipped. The 38 workflow, saved-package and proxy tests passed with isolated loopback fixtures. The initial HTTP attempt could not bind local ports. Rerunning with fixture access resolved it. Two existing test-client deprecation warnings remain.
+
+| Walkthrough step | Evidence tonight | Remaining check |
+| --- | --- | --- |
+| Open a saved scan and show contours | Saved-package identity, native grid and stale-response fixture checks passed. Workbench overlay visibility and absent-reference controls passed. | Reopen and render the retained demo scan before the walkthrough. |
+| Ask for pancreas volume | Direct wording, local calculation, provenance and geometry refusal passed with fixtures. | Verify the qualified measurement and limitation on the actual demo scan. |
+| Ask a research question and inspect its citation | Fixture checks for source binding, opening citations and study-switch isolation passed. | Live pancreas-boundary answer clarity, factual support and current-corpus quality remain open. |
+| Save, reopen and revise | Saved-package and review proxy integration passed. The November 7 exercise records the earlier browser revision evidence. | Run the current production walkthrough and collect actual participant observations. |
+| Recover an interrupted research workflow | Isolated HTTP restart, linked recovery and retrieval reuse passed. | Confirm the fixture-proven recovery path against the deployed build when appropriate. |
