@@ -17,3 +17,7 @@
 ## November 13, 12:36 a.m. Mountain
 
 - Added `python -m src.retrieval.evaluation --run SAVED_RUN --rankings-only` to score the saved top-five passage order without starting a search or answer model. It retains search failures in the answerable denominator and preserves ranks when only generation failed. The historical October 15 baseline reproduced its existing answer score. Its seven answerable questions gave passage recall@1/3/5 of .250/.655/.881 and MRR@5 of .690. These figures describe the older development corpus and passage rankings. Current-corpus source ranking and G6 remain open. Pushed `7c7dabf`, passed 41 focused tests, and updated [W06-02](https://trello.com/c/zDFlThwi).
+
+## November 13, 1:40 a.m. Mountain
+
+- Fixed a Training page admission gap before the longer STU-Net closeout. A later saved export for the same execution could change a completed phase back to training, paused or failed even if its updates and validation scores were identical. The shared client/server validator now rejects those reversals while admitting a separately identified continuation. Pushed `c0b6047`, passed 32 focused tests, and posted the result on [W06-11](https://trello.com/c/uQpn9fze). The training job and its monitor were untouched.
