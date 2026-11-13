@@ -19,9 +19,16 @@ def score(suite, receipts, reviews):
         supported = case['expected_status'] == 'excerpts'
         totals['supported_cases' if supported else 'missing_cases'] += 1
         totals['aspects'] += len(case['aspects'])
+        # A failed answer does not erase a successful retrieval.
+        retrieved = {p['record']['passage']['passage_id'] for p in receipt.get('passages', [])}
+        hit = supported and bool(retrieved & set(case['reference_passage_ids']))
+        totals['reference_hits'] += int(hit)
         if 'error' in receipt:
             totals['errors'] += 1
-            rows.append(dict(id=case['id'], error=receipt['error']))
+            row = dict(id=case['id'], error=receipt['error'])
+            if receipt.get('error_stage') == 'generation':
+                row.update(error_stage='generation', reference_hit=hit, total_seconds=receipt['total_seconds'])
+            rows.append(row)
             continue
         answer = receipt['generation']['answer']
         relevance, covered = review['extract_relevance'], review['aspects_covered']
@@ -36,13 +43,10 @@ def score(suite, receipts, reviews):
             validate_answer(answer, receipt['passages'])
         except ValueError:
             exact = False
-        retrieved = {p['record']['passage']['passage_id'] for p in receipt['passages']}
-        hit = supported and bool(retrieved & set(case['reference_passage_ids']))
         valid = exact and receipt['generation']['validation'] != 'generation_rejected'
         nonempty = valid and answer['status'] == 'excerpts'
         clean = supported and nonempty and all(covered) and all(r == 'relevant' for r in relevance)
         abstained = not supported and valid and answer['status'] == 'insufficient_evidence'
-        totals['reference_hits'] += int(hit)
         totals['supported_answers'] += int(supported and nonempty)
         totals['clean_supported_answers'] += int(clean)
         totals['correct_abstentions'] += int(abstained)

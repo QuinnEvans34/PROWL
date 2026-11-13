@@ -68,6 +68,26 @@ def test_runner_does_not_send_gold_labels_to_model():
     assert 'aspects' not in result
 
 
+def test_generation_failure_preserves_retrieval_without_earning_answer_credit():
+    from scripts.retrieval.evaluate_answers import run_case
+    suite, receipts, reviews = fixture()
+    passages = receipts['one']['passages']
+
+    def unavailable(question, received):
+        assert received == passages
+        raise TimeoutError('Test timeout')
+
+    receipt = run_case(suite['cases'][0], lambda _: passages, unavailable)
+    assert receipt['passages'] == passages
+    assert receipt['total_seconds'] >= receipt['retrieval_seconds']
+    receipt['suite_sha256'] = digest(suite)
+    reviews['one']['receipt_sha256'] = digest(receipt)
+    result = score(suite, {'one': receipt}, reviews)
+    assert result['totals']['reference_hits'] == result['totals']['errors'] == 1
+    assert result['totals']['supported_answers'] == result['totals']['correct_abstentions'] == 0
+    assert result['cases'][0]['error_stage'] == 'generation'
+
+
 def test_receipts_are_immutable_and_hash_checked(tmp_path):
     from scripts.retrieval.evaluate_answers import save, checked_read
     path = tmp_path/'receipt.json'

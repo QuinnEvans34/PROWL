@@ -20,11 +20,14 @@ def run_case(case, retrieve, generate):
     start = time.monotonic()
     passages = retrieve(case['question'])
     retrieved = time.monotonic()
-    generation = generate(case['question'], passages)
-    return dict(case_id=case['id'], question=case['question'], passages=passages,
-                generation=generation, retrieval_seconds=retrieved-start,
-                answer_seconds=time.monotonic()-retrieved,
-                total_seconds=time.monotonic()-start)
+    receipt = dict(case_id=case['id'], question=case['question'], passages=passages,
+                   retrieval_seconds=retrieved-start)
+    try:
+        receipt['generation'] = generate(case['question'], passages)
+    except Exception as error:
+        receipt.update(error=type(error).__name__, error_stage='generation')
+    finished = time.monotonic()
+    return dict(receipt, answer_seconds=finished-retrieved, total_seconds=finished-start)
 
 
 def checked_read(path):
