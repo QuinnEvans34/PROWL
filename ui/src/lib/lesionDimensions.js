@@ -2,6 +2,69 @@ const MAX_LABEL_VOXELS = 250_000
 const MAX_COMPONENTS = 512
 export const LESION_DIMENSIONS_POLICY = 'native-centered-slice-calipers-v1'
 
+// Keep the sparse picking index out of serializable measurement/review data.
+// It expires with the exact verified dimensions record and retains no mask.
+const componentIndexes = new WeakMap()
+const column = (affine, j) => affine.slice(0, 3).map(row => row[j])
+const dot = (a, b) => a.reduce((sum, value, i) => sum + value * b[i], 0)
+const cross = (a, b) => [
+  a[1] * b[2] - a[2] * b[1],
+  a[2] * b[0] - a[0] * b[2],
+  a[0] * b[1] - a[1] * b[0],
+]
+
+function parallelToAxis(vector, axis) {
+  const tolerance = 1e-6 * Math.hypot(...vector)
+  return vector.every((value, index) => index === axis || Math.abs(value) <= tolerance)
+}
+
+function anatomicalPlane(i, j, k) {
+  const normal = cross(i, j)
+  // In-plane rotation and signed permutations are fine. A tilted normal or
+  // a k axis with an in-plane component requires unsupported reslicing.
+  const axis = normal.findIndex((_, i) => parallelToAxis(normal, i) && parallelToAxis(k, i))
+  return ['sagittal', 'coronal', 'axial'][axis] ?? null
+}
+
+function slotAt(packed, voxelIndex) {
+  const target = voxelIndex * MAX_COMPONENTS
+  let lo = 0
+  let hi = packed.length
+  while (lo < hi) {
+    const middle = (lo + hi) >> 1
+    if (packed[middle] < target) lo = middle + 1
+    else hi = middle
+  }
+  return packed[lo] < target + MAX_COMPONENTS ? packed[lo] - target : -1
+}
+
+// A mesh hit may lie exactly on a voxel face, edge or corner. Accept it only
+// if it touches occupied voxels from one component; never snap to a nearby
+// component from background or choose between two ambiguous components.
+function touchingVoxels(coordinate, extent) {
+  const centered = coordinate + 0.5
+  const nearestFace = Math.round(centered)
+  const candidates = Math.abs(centered - nearestFace) <= 1e-6
+    ? [nearestFace - 1, nearestFace] : [Math.floor(centered)]
+  return candidates.filter(index => index >= 0 && index < extent)
+}
+
+export function lesionComponentAtWorld(measurement, worldMm) {
+  const index = componentIndexes.get(measurement?.lesionDimensions)
+  if (!index || worldMm?.length !== 3 || !Array.from(worldMm).every(Number.isFinite)) return null
+  const { packed, slots, inverse, origin, shape } = index
+  const relative = origin.map((offset, axis) => worldMm[axis] - offset)
+  const [xs, ys, zs] = inverse.map((row, axis) => touchingVoxels(dot(row, relative), shape[axis]))
+  let slot = -1
+  for (const z of zs) for (const y of ys) for (const x of xs) {
+    const hit = slotAt(packed, x + shape[0] * (y + shape[1] * z))
+    if (hit < 0) continue
+    if (slot >= 0 && slot !== hit) return null
+    slot = hit
+  }
+  return slots[slot] ?? null
+}
+
 // Called only after measureMask has validated the matched grids, units, labels
 // and coverage. Native voxel coordinates refer to voxel centers.
 export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVoxels, voxelMm3 }) {
@@ -12,6 +75,9 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
   const xy = nx * ny
   const queue = new Uint32Array(lesionVoxels)
   const visited = new Uint8Array(Math.ceil(labels.length / 8))
+  // Exact cell ownership uses <= 2 MB, bounded by occupied voxels. Pack the
+  // linear voxel index and component slot into an exactly representable integer.
+  const packed = new Float64Array(lesionVoxels)
   const visit = (index, tail) => {
     const bit = 1 << (index % 8)
     if (labels[index] !== 2 || (visited[index >> 3] & bit)) return tail
@@ -20,11 +86,11 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
     return tail + 1
   }
   const world = point => affine.slice(0, 3).map(row => row[3] + row[0] * point[0] + row[1] * point[1] + row[2] * point[2])
-  const iAxis = affine.slice(0, 3).map(row => row[0])
-  const jAxis = affine.slice(0, 3).map(row => row[1])
+  const [iAxis, jAxis, kAxis] = [0, 1, 2].map(axis => column(affine, axis))
   const iMm = Math.hypot(...iAxis)
   const jMm = Math.hypot(...jAxis)
-  const orthogonal = Math.abs(iAxis.reduce((dot, value, n) => dot + value * jAxis[n], 0)) <= 1e-5 * iMm * jMm
+  const orthogonal = Math.abs(dot(iAxis, jAxis)) <= 1e-5 * iMm * jMm
+  const plane = orthogonal ? anatomicalPlane(iAxis, jAxis, kAxis) : null
   const voxelHeight = affine[2].slice(0, 3).reduce((sum, v) => sum + Math.abs(v), 0)
   const components = []
   let measuredVoxels = 0
@@ -37,6 +103,7 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
     let top = -Infinity
     for (let head = 0; head < size; head++) {
       const index = queue[head]
+      packed[measuredVoxels + head] = index * MAX_COMPONENTS + components.length
       const x = index % nx
       const y = Math.floor(index / nx) % ny
       const z = Math.floor(index / xy)
@@ -85,13 +152,20 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
         const ends = [lo - 0.5, hi + 0.5].map(edge => center.map((v, i) => i === axis ? edge : v))
         return { lengthMm: (hi - lo + 1) * (axis === 0 ? iMm : jMm), voxelEndpoints: ends, worldEndpointsMm: ends.map(world) }
       })
-      calipers = { nativeSlice: k, anchorVoxel: center, anchorWorldMm: world(center), axes }
+      calipers = { nativeSlice: k, plane, anchorVoxel: center, anchorWorldMm: world(center), axes }
     }
     components.push({ id: seed, voxelCount: size, volumeMl: size * voxelMm3 / 1000,
       superiorInferiorMm: top - bottom + voxelHeight, calipers,
+      focusWorldMm: calipers?.anchorWorldMm ?? world([seed % nx, Math.floor(seed / nx) % ny, Math.floor(seed / xy)]),
       caliperUnavailableReason: orthogonal ? undefined : 'The native slice axes are not perpendicular.' })
   }
   function shapeSize(axis) { return axis === 0 ? nx : ny }
-  components.sort((a, b) => b.voxelCount - a.voxelCount || a.id - b.id)
-  return record('ready', components)
+  const dimensions = record('ready', [...components].sort((a, b) => b.voxelCount - a.voxelCount || a.id - b.id))
+  const cofactors = [cross(jAxis, kAxis), cross(kAxis, iAxis), cross(iAxis, jAxis)]
+  const determinant = dot(iAxis, cofactors[0])
+  componentIndexes.set(dimensions, {
+    packed: packed.sort(), slots: components, shape: [nx, ny, nz],
+    inverse: cofactors.map(row => row.map(n => n / determinant)), origin: column(affine, 3),
+  })
+  return dimensions
 }
