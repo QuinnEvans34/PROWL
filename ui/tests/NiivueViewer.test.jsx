@@ -12,14 +12,18 @@ vi.mock('@niivue/niivue', () => ({
       this.volumes = []
       this.meshes = []
       this.screenSlices = []
-      this.sliceTypeAxial = 0; this.sliceTypeCoronal = 1; this.sliceTypeSagittal = 2; this.sliceTypeMultiplanar = 3
+      this.sliceTypeAxial = 0; this.sliceTypeCoronal = 1; this.sliceTypeSagittal = 2; this.sliceTypeMultiplanar = 3; this.sliceTypeRender = 4
       this.loadVolumes = vi.fn(async specs => {
-        this.volumes = specs.map(spec => ({ ...spec, hdr: { dims: [3, 11, 21, 31], affine: [[harness.spacing[0], 0, 0, harness.origin[0]], [0, harness.spacing[1], 0, harness.origin[1]], [0, 0, harness.spacing[2], harness.origin[2]], [0, 0, 0, 1]] }, img: new Uint8Array(11 * 21 * 31) }))
+        this.volumes = specs.map(spec => ({ ...spec, setColormapLabel() {}, hdr: { dims: [3, 11, 21, 31], affine: [[harness.spacing[0], 0, 0, harness.origin[0]], [0, harness.spacing[1], 0, harness.origin[1]], [0, 0, harness.spacing[2], harness.origin[2]], [0, 0, 0, 1]] }, img: new Uint8Array(11 * 21 * 31) }))
       })
       this.resizeListener = vi.fn(() => {
         this.canvas.width = this.canvas.offsetWidth * window.devicePixelRatio
         this.canvas.height = this.canvas.offsetHeight * window.devicePixelRatio
       })
+      this.loadMeshes = vi.fn(async specs => {
+        this.meshes = specs.map((spec, id) => ({ ...spec, id, visible: true, pts: new Float32Array([.25, 0, .8]) }))
+      })
+      this.calculateMvpMatrix = vi.fn(() => [[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]])
       this.drawScene = vi.fn()
       this.cleanup = vi.fn()
       harness.instances.push(this)
@@ -33,6 +37,12 @@ vi.mock('@niivue/niivue', () => ({
     }
     setCrosshairColor() {}
     setAtlasOutline() {}
+    setMeshShader() {}
+    setMeshProperty(id, key, value) { this.meshes[id][key] = value }
+    setRenderAzimuthElevation(azimuth, elevation) { this.scene.renderAzimuth = azimuth; this.scene.renderElevation = elevation }
+    setClipPlaneColor() {}
+    setClipPlane() {}
+    resetBriCon() {}
     setMouseEventConfig() {}
     setTouchEventConfig() {}
     setOpacity() {}
@@ -50,6 +60,7 @@ vi.mock('@niivue/niivue', () => ({
 }))
 
 import NiivueViewer, { navigationSnapshot, viewerSceneKey } from '../src/components/NiivueViewer.jsx'
+import { projectCalipers } from '../src/lib/viewerCaliperProjection.js'
 
 const caseData = { case_id: 'SYNTHETIC_ONLY', files: { ct: 'synthetic-only.nii.gz' } }
 const base = { caseData, sources: [], activePlane: 'axial', label: 'Synthetic CT' }
@@ -271,4 +282,108 @@ it('reports displayed anatomical axes and mask ranges for a permuted native file
     totals: { sagittal: 4, coronal: 3, axial: 2 },
     ranges: { lesion: { sagittal: [2, 2], coronal: [1, 1], axial: [1, 1] }, pancreas: null },
   })
+})
+
+it('jumps to the measured physical slice and tracks its calipers through redraw and resize', async () => {
+  harness.origin = [-55, -70, -100]
+  harness.spacing = [2, 3, 4]
+  const props = { ...base, sources: ['pred'], caseData: { ...caseData, files: { ...caseData.files, pred: 'synthetic-pred.nii.gz' } } }
+  const { rerender } = render(<NiivueViewer {...props} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  let size = 240
+  for (const prop of ['clientWidth', 'clientHeight', 'offsetWidth', 'offsetHeight']) {
+    Object.defineProperty(nv.canvas, prop, { configurable: true, get: () => size })
+  }
+  nv.canvas.width = 240
+  nv.canvas.height = 240
+  nv.drawScene.mockImplementation(() => {
+    const [panX, panY, , zoom] = nv.scene.pan2Dxyzmm
+    nv.screenSlices = [{ axCorSag: 0, sliceFrac: nv.scene.crosshairPos[2], leftTopWidthHeight: [0, 0, nv.canvas.width, nv.canvas.height],
+      leftTopMM: [(-60 - panX) / zoom, (-80 - panY) / zoom], fovMM: [30 / zoom, 60 / zoom] }]
+  })
+  const anchorWorldMm = [-45, -40, -72]
+  const measurementCalipers = { plane: 'axial', anchorWorldMm, axes: [
+    { lengthMm: 8, worldEndpointsMm: [[-49, -40, -72], [-41, -40, -72]] },
+    { lengthMm: 12, worldEndpointsMm: [[-45, -46, -72], [-45, -34, -72]] },
+  ] }
+  const command = { type: 'measurement-point', id: 10, worldMm: anchorWorldMm }
+  const inspect = options => <NiivueViewer {...props} measurementCalipers={measurementCalipers} navigationCommand={command} {...options} />
+  rerender(inspect())
+  expect(nv.scene.crosshairPos[2]).toBeCloseTo(7.5 / 31)
+  const overlay = screen.getByRole('img', { name: /Lesion calipers/ })
+  expect(overlay.textContent).toContain('0.80 cm')
+  expect(overlay.textContent).toContain('1.20 cm')
+  const drawPath = () => screen.getByRole('img', { name: /Lesion calipers/ }).querySelector('[data-caliper-arm="0"]').getAttribute('d')
+  const before = drawPath()
+  act(() => { nv.scene.pan2Dxyzmm = new Float32Array([45, 40, 0, 2]); nv.drawScene() })
+  expect(drawPath()).not.toBe(before)
+  const afterZoom = drawPath()
+  size = 480
+  act(() => harness.observers.at(-1).callback())
+  await waitFor(() => expect(drawPath()).not.toBe(afterZoom))
+  rerender(inspect({ navigationCommand: { id: 11, type: 'slice', plane: 'axial', index: 8 } }))
+  expect(screen.queryByRole('img', { name: /Lesion calipers/ })).toBeNull()
+  rerender(inspect({ navigationCommand: { ...command, id: 12 } }))
+  expect(screen.getByRole('img', { name: /Lesion calipers/ })).toBeTruthy()
+  rerender(inspect({ caseData: { case_id: 'OTHER', files: { ct: 'other.nii.gz', pred: 'other-mask.nii.gz' } }, measurementCalipers: null }))
+  expect(screen.queryByRole('img', { name: /Lesion calipers/ })).toBeNull()
+  await screen.findByLabelText('Prepared result loaded')
+  expect(screen.queryByRole('img', { name: /Lesion calipers/ })).toBeNull()
+})
+
+it('projects only onto the matching anatomical plane and follows radiological mirroring at high DPI', () => {
+  const calipers = { plane: 'coronal', anchorWorldMm: [2, 3, 2], axes: [
+    { lengthMm: 4, worldEndpointsMm: [[0, 3, 2], [4, 3, 2]] },
+    { lengthMm: 2, worldEndpointsMm: [[2, 3, 1], [2, 3, 3]] },
+  ] }
+  const mirrored = { axCorSag: 1, sliceFrac: .35, leftTopWidthHeight: [0, 0, 400, 300],
+    leftTopMM: [10, 0], fovMM: [-10, 10] }
+  const nv = {
+    canvas: { width: 400, height: 300, clientWidth: 200, clientHeight: 150 },
+    volumes: [{ dimsRAS: [3, 10, 10, 10] }],
+    mm2frac: (point, _, forceWorld) => { expect(forceWorld).toBe(true); return point.map(v => (v + .5) / 10) },
+    frac2mm: point => point.map(v => v * 10 - .5),
+    screenSlices: [{ ...mirrored, axCorSag: 0 }, mirrored],
+  }
+  expect(projectCalipers(nv, calipers).lines[0].points).toEqual([[200, 120], [120, 120]])
+  expect(projectCalipers(nv, { ...calipers, plane: null })).toBeNull()
+  expect(projectCalipers(nv, { ...calipers, axes: [calipers.axes[0], { ...calipers.axes[1], worldEndpointsMm: [[2, 3, 1], [2, 3.1, 3]] }] })).toBeNull()
+  mirrored.sliceFrac = .45
+  expect(projectCalipers(nv, calipers)).toBeNull()
+})
+
+it('binds a 3D surface pick to a lesion voxel along the ray and projects its marker through orbit redraws', async () => {
+  harness.origin = [-5, -10, -15]
+  const onSelectObject = vi.fn()
+  const props = {
+    ...base, mode: '3d', sources: ['pred'], onSelectObject,
+    caseData: { ...caseData, files: { ...caseData.files, pred: 'synthetic-pred.nii.gz', mesh: { lesion_pred: 'synthetic-lesion.obj' } } },
+  }
+  const { rerender } = render(<NiivueViewer {...props} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  for (const name of ['clientWidth', 'clientHeight', 'width', 'height']) {
+    Object.defineProperty(nv.canvas, name, { configurable: true, value: 100 })
+  }
+  // A synthetic displaced vertex marks the click location, but it is not
+  // inside the mask itself. The validated click ray reaches this label voxel.
+  nv.volumes[1].img[5 + 11 * (10 + 21 * 15)] = 2
+  nv.screenSlices = [{ axCorSag: 4, leftTopWidthHeight: [0, 0, 100, 100] }]
+  function click() {
+    for (const type of ['pointerdown', 'pointerup']) nv.canvas.dispatchEvent(new MouseEvent(type, { bubbles: true, clientX: 62, clientY: 50 }))
+  }
+  act(click)
+  await waitFor(() => expect(onSelectObject).toHaveBeenLastCalledWith({ source: 'pred', anatomy: 'lesion', worldMm: [0, 0, 0] }))
+  const worldMm = onSelectObject.mock.lastCall[0].worldMm
+  rerender(<NiivueViewer {...props} selectedLesionWorldMm={worldMm} />)
+  const markerX = () => screen.getByRole('img', { name: 'Selected predicted lesion marker' }).querySelector('circle').getAttribute('cx')
+  expect(markerX()).toBe('50')
+  act(() => {
+    nv.calculateMvpMatrix.mockReturnValue([[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, .4, 0, 0, 1]])
+    nv.drawScene()
+  })
+  expect(markerX()).toBe('70')
+  rerender(<NiivueViewer {...props} selectedLesionWorldMm={worldMm} showLesion={false} />)
+  expect(screen.queryByRole('img', { name: 'Selected predicted lesion marker' })).toBeNull()
 })

@@ -4,6 +4,7 @@ import { DRAG_MODE, Niivue } from '@niivue/niivue'
 import { LoaderCircle, TriangleAlert } from 'lucide-react'
 
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
+import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -495,6 +496,7 @@ function pickSurfaceAtClick(nv, event, entries, toleranceMm = 3) {
     for (let i = 0; i < points.length; i += 3) {
       const vx = points[i] - near[0]; const vy = points[i + 1] - near[1]; const vz = points[i + 2] - near[2]
       const along = vx * u[0] + vy * u[1] + vz * u[2]
+      if (along < 0 || along > length) continue
       const perp = Math.hypot(vx - along * u[0], vy - along * u[1], vz - along * u[2])
       if (perp > toleranceMm) continue
       const lesion = entry.anatomy === 'lesion'
@@ -503,7 +505,39 @@ function pickSurfaceAtClick(nv, event, entries, toleranceMm = 3) {
       }
     }
   })
-  return best ? { ...best.entry, point: best.point } : null
+  return best ? { ...best.entry, point: best.point, ray: { near, direction: u, along: best.along, length } } : null
+}
+
+// Surface meshes can move slightly with smoothing. Keep the existing mesh hit
+// priority, but give component selection a native lesion voxel, not a guessed
+// closest component. Try the actual click ray locally around the surface hit;
+// a verified hit vertex also works when grazing the edge of the outline.
+function lesionVoxelAtSurface(volume, picked) {
+  const affine = volume?.hdr?.affine
+  const dims = volume?.hdr?.dims
+  const image = volume?.img
+  if (!affine || !dims || !image) return null
+  const inverse = invert4(Array.from({ length: 16 }, (_, n) => affine[n % 4]?.[Math.floor(n / 4)]))
+  if (!inverse) return null
+  const voxelCenter = (world) => {
+    const voxel = unproject(inverse, ...world)?.map(v => Math.floor(v + 0.5))
+    if (!voxel?.every((v, axis) => Number.isInteger(v) && v >= 0 && v < dims[axis + 1])) return null
+    const [x, y, z] = voxel
+    return image[x + dims[1] * (y + dims[2] * z)] === 2 ? voxelToWorld(volume, voxel) : null
+  }
+  const { near, direction, along, length } = picked.ray
+  const rate = Math.max(...[0, 1, 2].map(axis => Math.abs(direction[0] * inverse[axis]
+    + direction[1] * inverse[axis + 4] + direction[2] * inverse[axis + 8])))
+  const steps = Math.max(12, Math.min(128, Math.ceil(12 * rate)))
+  for (let n = 0; n <= steps; n += 1) {
+    for (const sign of n ? [-1, 1] : [1]) {
+      const depth = along + sign * n * 3 / steps
+      if (depth < 0 || depth > length) continue
+      const point = voxelCenter(near.map((v, i) => v + direction[i] * depth))
+      if (point) return point
+    }
+  }
+  return voxelCenter(picked.point)
 }
 
 // NiiVue ray-casts every loaded volume in 3D even at zero opacity. In "Masks only"
@@ -613,6 +647,8 @@ export default function NiivueViewer({
   enableDifferenceAssets = false,
   focusTreatment = 'context',
   selectedObject = null,
+  selectedLesionWorldMm = null,
+  measurementCalipers = null,
   onSelectObject = null,
   activePlane = 'multiplanar',
   interactionMode = 'navigate',
@@ -641,6 +677,7 @@ export default function NiivueViewer({
   const locationRef = useRef(null)
   const pointerStartRef = useRef(null)
   const loadedSceneKeyRef = useRef('')
+  const expectedSceneKeyRef = useRef('')
   const currentSceneRef = useRef(null)
   const sceneLoadChainRef = useRef(Promise.resolve())
   const savedViewsRef = useRef(new Map())
@@ -668,6 +705,7 @@ export default function NiivueViewer({
 
   const renderedSources = visibleSources || sources
   const sceneKey = viewerSceneKey({ caseData, assetUrls, sources, mode, showFull, enableDifferenceAssets })
+  expectedSceneKeyRef.current = sceneKey
 
   function publishNavigation(nv, { immediate = false, origin = 'interaction' } = {}) {
     const maskVolume = registryRef.current.volumes.get('pred')
@@ -793,7 +831,7 @@ export default function NiivueViewer({
     function handlePointerDown(event) {
       pointerHeld = true
       window.clearTimeout(restoreTimer)
-      pointerStartRef.current = { x: event.clientX, y: event.clientY }
+      pointerStartRef.current = { x: event.clientX, y: event.clientY, sceneKey: loadedSceneKeyRef.current }
       setLowResolution(true)
     }
 
@@ -805,9 +843,13 @@ export default function NiivueViewer({
 
       const interaction = interactiveRef.current
       if (typeof interaction.onSelectObject !== 'function') return
+      const current = () => Boolean(start.sceneKey) && nvRef.current === nv
+        && start.sceneKey === loadedSceneKeyRef.current && start.sceneKey === expectedSceneKeyRef.current
+      if (!current()) return
 
       if (interaction.mode === '2d') {
         window.setTimeout(() => {
+          if (!current()) return
           interaction.onSelectObject(
             semanticFromLocation(
               locationRef.current,
@@ -822,12 +864,17 @@ export default function NiivueViewer({
       nv.resetBriCon(event)
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (picked) {
-        window.setTimeout(() => interaction.onSelectObject(picked.region
-          ? { source: picked.source, anatomy: picked.anatomy, region: picked.region }
-          : { source: picked.source, anatomy: picked.anatomy }), 0)
+        const semantic = { source: picked.source, anatomy: picked.anatomy }
+        if (picked.region) semantic.region = picked.region
+        if (picked.source === 'pred' && picked.anatomy === 'lesion') {
+          const worldMm = lesionVoxelAtSurface(registryRef.current.volumes.get('pred'), picked)
+          if (worldMm) semantic.worldMm = worldMm
+        }
+        window.setTimeout(() => { if (current()) interaction.onSelectObject(semantic) }, 0)
         return
       }
       window.setTimeout(() => {
+        if (!current()) return
         const fraction = nv.scene?.crosshairPos
         if (!fraction) return
         const world = Array.from(nv.frac2mm(fraction, 0, true)).slice(0, 3)
@@ -1394,6 +1441,14 @@ export default function NiivueViewer({
         next[axis] = (index + 0.5) / total
         nv.scene.crosshairPos = new Float32Array(next)
       }
+    } else if (command.type === 'measurement-point') {
+      if (mode === '2d' && Array.isArray(command.worldMm) && command.worldMm.length === 3
+        && command.worldMm.every(Number.isFinite)) {
+        const fraction = nv.mm2frac(command.worldMm, 0, true)
+        if (fraction?.length === 3 && Array.from(fraction).every(v => Number.isFinite(v) && v >= 0 && v <= 1)) {
+          nv.scene.crosshairPos = new Float32Array(fraction)
+        }
+      }
     } else if (command.type === 'focus') {
       const volume = registryRef.current.volumes.get(command.source)
         || registryRef.current.volumes.get('pred')
@@ -1452,9 +1507,11 @@ export default function NiivueViewer({
       !nv
       || state.status !== 'ready'
       || loadedSceneKeyRef.current !== sceneKey
+      || (mode === '2d' && measurementCalipers)
       || !selectedObject
     ) return
-    const focusKey = `${selectedObject.source}:${selectedObject.anatomy}`
+    const worldMm = selectedObject.worldMm
+    const focusKey = `${selectedObject.source}:${selectedObject.anatomy}:${worldMm?.join(',') || ''}`
     if (lastFocusedObjectRef.current === focusKey) return
 
     const volume = selectedObject.source === 'difference'
@@ -1463,7 +1520,7 @@ export default function NiivueViewer({
     const labelValue = selectedObject.source === 'difference'
       ? { agreement: 1, predOnly: 2, gtOnly: 3 }[selectedObject.region]
       : selectedObject.anatomy === 'lesion' ? 2 : 1
-    if (focusOnWorldPoint(nv, labelCentroidMM(volume, labelValue), mode)) {
+    if (focusOnWorldPoint(nv, worldMm || labelCentroidMM(volume, labelValue), mode)) {
       lastFocusedObjectRef.current = focusKey
       nv.drawScene()
       publishNavigation(nv)
@@ -1475,6 +1532,8 @@ export default function NiivueViewer({
     selectedObject?.source,
     selectedObject?.anatomy,
     selectedObject?.region,
+    selectedObject?.worldMm,
+    measurementCalipers,
     sceneKey,
   ])
 
@@ -1536,6 +1595,9 @@ export default function NiivueViewer({
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
       <canvas ref={canvasRef} aria-label={label} style={state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? { visibility: 'hidden' } : undefined} />
+      <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
+        ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && showLesion && !differenceMode && renderedSources.includes('pred')}
+        mode={mode} calipers={measurementCalipers} marker={selectedLesionWorldMm} />
       {mode === '2d' && showPlaneLabels && (
         <div
           className={`viewer-plane-labels viewer-plane-labels--${activePlane}${planeTiles.length ? ' viewer-plane-labels--placed' : ''}`}
