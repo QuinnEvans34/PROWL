@@ -5,7 +5,7 @@ function displayCm(lengthMm) {
   return lengthMm < 0.1 ? '<0.01 cm' : `${(lengthMm / 10).toFixed(2)} cm`
 }
 
-function Arm({ line, index }) {
+function Arm({ line, index, bounds }) {
   const [[x1, y1], [x2, y2]] = line.points
   const dx = x2 - x1
   const dy = y2 - y1
@@ -15,12 +15,20 @@ function Arm({ line, index }) {
   const ty = dx / pixelLength * 4
   const path = `M ${x1} ${y1} L ${x2} ${y2} M ${x1 - tx} ${y1 - ty} L ${x1 + tx} ${y1 + ty} M ${x2 - tx} ${y2 - ty} L ${x2 + tx} ${y2 + ty}`
   const horizontal = Math.abs(dx) >= Math.abs(dy)
-  const x = horizontal ? (x1 + x2) / 2 : Math.max(x1, x2) + 8
-  const y = horizontal ? Math.min(y1, y2) - 7 : (y1 + y2) / 2 + 4
+  // Keep the value outside the caliper so the label leaves the CT texture and
+  // the crossing itself readable, including when the lesion is small.
+  const right = x1 > x2 ? [x1, y1] : [x2, y2]
+  const left = x1 > x2 ? [x2, y2] : [x1, y1]
+  const top = y1 < y2 ? [x1, y1] : [x2, y2]
+  const bottom = y1 < y2 ? [x2, y2] : [x1, y1]
+  const putRight = right[0] + 70 < bounds.x + bounds.width
+  const putAbove = top[1] - 22 >= bounds.y
+  const x = horizontal ? (putRight ? right[0] + 8 : left[0] - 8) : (putAbove ? top[0] : bottom[0])
+  const y = horizontal ? (putRight ? right[1] : left[1]) + 4 : (putAbove ? top[1] - 7 : bottom[1] + 16)
   return <g>
     <path d={path} fill="none" stroke="#191208" strokeWidth="4" />
     <path d={path} fill="none" stroke="#ffcf8e" strokeWidth="1.7" data-caliper-arm={index} />
-    <text x={x} y={y} textAnchor={horizontal ? 'middle' : 'start'} fill="#ffdfb5" stroke="#191208"
+    <text x={x} y={y} textAnchor={horizontal ? (putRight ? 'start' : 'end') : 'middle'} fill="#ffdfb5" stroke="#191208"
       paintOrder="stroke" strokeWidth="4" strokeLinejoin="round" fontSize="12" fontWeight="600">
       {displayCm(line.lengthMm)}
     </text>
@@ -72,7 +80,7 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
   return <svg style={style} role="img" aria-label={`Lesion calipers: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
     <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
     <g clipPath={`url(#${clip})`}>
-      {projection.lines.map((line, index) => <Arm key={index} line={line} index={index} />)}
+      {projection.lines.map((line, index) => <Arm key={index} line={line} index={index} bounds={projection.bounds} />)}
     </g>
   </svg>
 }

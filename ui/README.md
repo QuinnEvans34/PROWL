@@ -25,6 +25,15 @@ verified whole-organ measurements or a diagnosis. The legacy prepared-study live
 scoring endpoint does not replace the saved contours; fresh native inference
 remains available through Analyze when its model worker is connected.
 
+On a prepared study with prediction surfaces, enter **3D** (use **Surfaces**
+to remove the surrounding CT) and click a predicted lesion. Findings promotes
+the matched component, with its dimensions in cm and outline volume in mL.
+**Select in 3D** in Findings is the keyboard alternative. **Inspect measurement**
+opens the exact source CT slice and draws the two centered calipers. The cross
+follows the view and disappears when you leave that slice. If the viewer cannot
+reproduce the measurement plane, the dimensions remain visible without a jump
+action. Calipers measure the predicted outline, not a maximum diameter.
+
 Regression checks: `npm run test:run`, `npm run build`, and
 `npm run test:e2e -- --config=playwright.toolbench.config.js`. Synthetic browser
 checks prove controls and draft lifetime; real CT rendering also needs browser inspection.

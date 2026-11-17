@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ReviewWorkspace from '../src/components/ReviewWorkspace.jsx'
-import { loadScanMeasurements } from '../src/lib/scanMeasurements.js'
+import { loadScanMeasurements, measureMask } from '../src/lib/scanMeasurements.js'
 import { readToolbenchLayout } from '../src/lib/toolbenchLayout.js'
 import { workspaceProps } from './fixtures/workspace.js'
 
@@ -59,6 +59,45 @@ async function startDraft(user) {
 }
 
 describe('real workspace layout with synthetic imaging only', () => {
+  it('promotes the selected 3D lesion and sends its exact measurement to the matching 2D plane', async () => {
+    const user = userEvent.setup()
+    const affine = [[2, 0, 0, -4], [0, 0, -4, 10], [0, 3, 0, 1], [0, 0, 0, 1]]
+    const hdr = { dims: [3, 8, 8, 8, 1, 1, 1, 1], affine, xyzt_units: 2, sform_code: 1 }
+    const labels = new Uint8Array(8 ** 3)
+    const index = (x, y, z) => x + 8 * (y + 8 * z)
+    labels[index(1, 1, 1)] = 1
+    labels[index(2, 2, 2)] = labels[index(2, 3, 2)] = 2
+    labels[index(4, 4, 5)] = 2
+    const volumes = measureMask(hdr, hdr, labels)
+    const second = volumes.lesionDimensions.components[1]
+    loadScanMeasurements.mockImplementation(async context => measured(context, volumes))
+    const props = (caseId, syntheticLesionPick) => workspaceProps({ caseId, isCurated: true,
+      caseData: { ...cases[caseId], files: { ...cases[caseId].files, mesh: { lesion_pred: 'synthetic.obj' } },
+        syntheticLesionPick },
+    })
+    const { rerender } = render(<ReviewWorkspace {...props('SYNTHETIC_A', [4, -10, 13])} />)
+    const findings = await screen.findByRole('region', { name: 'Predicted lesion dimensions' })
+    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
+    await user.click(await screen.findByRole('button', { name: 'Pick synthetic lesion surface' }))
+    expect(findings.querySelector('[data-selected]')?.textContent).toContain('Predicted lesion 2')
+    expect(within(findings).getByText('Selected')).toBeTruthy()
+    const viewer3d = screen.getByTestId(/^synthetic-viewer-3d/)
+    expect(viewerData(viewer3d).selectedLesionWorldMm).toEqual(second.focusWorldMm)
+    await user.click(within(findings).getByRole('button', { name: 'Inspect measurement for lesion 2' }))
+    const coronal = within(screen.getByRole('region', { name: 'Coronal CT plane' })).getByRole('status', { name: 'Synthetic viewer stub' })
+    await waitFor(() => expect(viewerData(coronal).navigationCommand).toMatchObject({
+      type: 'measurement-point', plane: 'coronal', worldMm: [4, -10, 13],
+    }))
+    expect(viewerData(coronal).measurementCalipers).toEqual(second.calipers)
+    expect(screen.getByRole('button', { name: '2D', exact: true }).getAttribute('aria-pressed')).toBe('true')
+    expect(screen.queryByRole('region', { name: 'Axial CT plane' })).toBeNull()
+
+    rerender(<ReviewWorkspace {...props('SYNTHETIC_B', null)} />)
+    const next = await screen.findByRole('region', { name: 'Predicted lesion dimensions' })
+    expect(within(next).queryByText('Selected')).toBeNull()
+    expect(viewerData(screen.getByTestId('synthetic-viewer-2d-coronal')).measurementCalipers).toBeUndefined()
+  })
+
   it('preserves mounted planes, expert questions and summary drafts through focus, hiding and resizing', async () => {
     const user = userEvent.setup()
     render(<Harness />)

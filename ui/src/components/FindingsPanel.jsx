@@ -34,6 +34,10 @@ export default function FindingsPanel({
   onStartSummary,
   modelLabel,
   measurementState,
+  selectedLesionId,
+  onSelectLesion,
+  onInspectLesion,
+  lesionSelectionNotice,
 }) {
   const verifiedMeasurements = measurementState !== undefined
   const measurement = measurementState?.status === 'ready' ? measurementState.measurement : null
@@ -80,7 +84,8 @@ export default function FindingsPanel({
     <div className="pw-findings">
       <p className="pw-context-chip"><i aria-hidden="true" />{studyLabel} · {source.label}</p>
 
-      <LesionDimensions measurement={measurement} />
+      <LesionDimensions measurement={measurement} selectedId={selectedLesionId}
+        onSelect={onSelectLesion} onInspect={onInspectLesion} selectionNotice={lesionSelectionNotice} />
 
       <ul className="pw-structures" aria-label="Structures in this prediction">
         <li className="pw-structure">

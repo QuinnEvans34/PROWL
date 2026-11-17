@@ -26,6 +26,11 @@ export default function MockViewer(props) {
   }, [sceneKey, label, mode, activePlane])
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
-    <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand })}</pre>
+    <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
+      measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm })}</pre>
+    {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
+      onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'lesion', worldMm: props.caseData.syntheticLesionPick })}>
+      Pick synthetic lesion surface
+    </button>}
   </div>
 }

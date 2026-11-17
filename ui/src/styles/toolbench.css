@@ -8,6 +8,9 @@
 .pw-lesion-dimensions__item dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; }
 .pw-lesion-dimensions__item dt, .pw-lesion-dimensions__item small { color: var(--pw-text-muted); font-size: 12px; }
 .pw-lesion-dimensions__item dd { margin: 0; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pw-lesion-dimensions__item[data-selected] { border-inline-start: 2px solid var(--pw-lesion, #fca283); padding-inline-start: 9px; }
+.pw-lesion-dimensions__selected { color: var(--pw-text-muted); font-size: 11px; margin-inline-start: 6px; }
+.pw-lesion-dimensions__actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .pw-toolbench { position: relative; }
 .pw-toolbench .pw-wb__list { position: relative; background: var(--pw-surface); grid-column: 1; grid-row: 1; }
 .pw-toolbench .pw-wb__center { background: var(--pw-bg); grid-column: 2; grid-row: 1; }

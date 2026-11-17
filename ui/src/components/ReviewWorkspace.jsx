@@ -40,6 +40,7 @@ import { useToolbenchLayout } from '../lib/toolbenchLayout.js'
 import { useWorkspaceDisplay } from './useWorkspaceDisplay.js'
 import WorkspaceResizeHandle from './WorkspaceResizeHandle.jsx'
 import { usePredictionMeasurements, MeasurementReadout } from './PredictionMeasurements.jsx'
+import { lesionComponentAtWorld } from '../lib/lesionDimensions.js'
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
 const ToolbenchViewer = lazy(() => import('./ToolbenchViewer.jsx'))
@@ -230,6 +231,7 @@ export default function ReviewWorkspace({
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
   const [peelReveal3d, setPeelReveal3d] = useState(null)
+  const [lesionSelection, setLesionSelection] = useState(null)
   useEffect(() => { setPeelReveal3d(null) }, [caseId])
   const viewerRef = useRef(null)
   const lastPointerRef = useRef(null)
@@ -312,7 +314,10 @@ export default function ReviewWorkspace({
       if (event.metaKey || event.ctrlKey || event.altKey) return
       if (target?.closest?.('[role="dialog"], .pw-panel')) return
       if (target?.closest?.('[role="separator"], .tb-pane')) return
-      if (event.key === 'Escape') dispatch({ type: 'CLEAR_SELECTION' })
+      if (event.key === 'Escape') {
+        setLesionSelection(null)
+        dispatch({ type: 'CLEAR_SELECTION' })
+      }
       if (state.viewMode !== '3d' && ['ArrowLeft', 'ArrowDown'].includes(event.key)) {
         event.preventDefault()
         setSlice(navigatorIndex - 1)
@@ -363,6 +368,12 @@ export default function ReviewWorkspace({
     available: hasPrediction && predictionShown && !isAnalyzing && Boolean(caseData.files?.ct && caseData.files?.pred),
   }), [caseId, caseData.files, caseData.spacing_mm, hasPrediction, predictionShown, isAnalyzing])
   const measurementState = usePredictionMeasurements(measurementContext)
+  const verifiedMeasurement = measurementState.status === 'ready' ? measurementState.measurement : null
+  // The selection is scoped to the actual verified result, not just a lesion
+  // index or case name, which can repeat across prediction versions.
+  const currentLesionSelection = verifiedMeasurement && lesionSelection?.measurement === verifiedMeasurement
+    ? lesionSelection : null
+  const measurementInspection = currentLesionSelection?.inspect ? currentLesionSelection : null
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
   const selectedLabel = objectLabel(state.selectedObject)
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
@@ -398,10 +409,50 @@ export default function ReviewWorkspace({
   }
 
   function resetScan() {
+    setLesionSelection(null)
     onResetScan()
     dispatch({ type: 'CASE_CHANGED', hasPrediction: false })
   }
 
+  function markMeasuredLesion(component, inspect = false) {
+    setLesionSelection({ measurement: verifiedMeasurement, component, inspect })
+    setPopAnchor(null)
+    dispatch({ type: 'SELECT_OBJECT', value: { source: 'pred', anatomy: 'lesion', worldMm: component.focusWorldMm } })
+    openPanel('findings')
+  }
+
+  function selectLesionIn3d(component) {
+    if (!verifiedMeasurement) return
+    setViewMode('3d')
+    if (comparing) dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
+    markMeasuredLesion(component)
+  }
+
+  function inspectLesion(component) {
+    const calipers = component.calipers
+    if (!verifiedMeasurement || !calipers?.plane) return
+    if (sliceFrameRef.current !== null) window.cancelAnimationFrame(sliceFrameRef.current)
+    sliceFrameRef.current = null
+    pendingSliceRef.current = null
+    setViewMode('2d')
+    dispatch({ type: 'SET_ACTIVE_PLANE', value: calipers.plane })
+    dispatch({ type: 'PATCH_SETTINGS', value: { showFull: false } })
+    dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
+    markMeasuredLesion(component, true)
+    issueViewerCommand({ type: 'measurement-point', plane: calipers.plane, worldMm: calipers.anchorWorldMm })
+  }
+
+  function selectFrom3d(value) {
+    if (value?.source === 'pred' && value.anatomy === 'lesion') {
+      const component = lesionComponentAtWorld(verifiedMeasurement, value.worldMm)
+      if (component) return markMeasuredLesion(component)
+      openPanel('findings')
+      setLesionSelection({ measurement: verifiedMeasurement, unmatched: true })
+    } else {
+      setLesionSelection(null)
+    }
+    dispatch({ type: value ? 'SELECT_OBJECT' : 'CLEAR_SELECTION', value })
+  }
 
   function focusStructure(anatomy) {
     const source = visibleSources.includes('pred') ? 'pred' : visibleSources.includes('gt') ? 'gt' : availableSources[0]
@@ -471,7 +522,9 @@ export default function ReviewWorkspace({
     selectedObject: state.selectedObject,
     onSelectObject: (value) => dispatch({ type: value ? 'SELECT_OBJECT' : 'CLEAR_SELECTION', value }),
     activePlane: state.activePlane,
-    navigationCommand,
+    navigationCommand: navigationCommand?.type !== 'measurement-point' || measurementInspection ? navigationCommand : null,
+    measurementCalipers: !state.showFull && predictionShown && !comparing && state.layerVisibility.lesion
+      ? measurementInspection?.component.calipers : null,
     clip: {
       enabled: state.clipEnabled,
       progress: state.clipProgress,
@@ -488,6 +541,10 @@ export default function ReviewWorkspace({
     showFull: scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
+    onSelectObject: selectFrom3d,
+    selectedLesionWorldMm: predictionShown && !comparing && state.layerVisibility.lesion
+      ? currentLesionSelection?.component?.focusWorldMm : null,
+    navigationCommand: navigationCommand?.type === 'measurement-point' ? null : navigationCommand,
   }
 
   function openPanel(tab) {
@@ -794,7 +851,7 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-          {state.selectedObject && (
+          {state.selectedObject && !currentLesionSelection?.component && (
             <StructurePopover
               object={state.selectedObject}
               anchor={popAnchor}
@@ -1085,6 +1142,12 @@ export default function ReviewWorkspace({
             isCurated={isCurated}
             finding={finding}
             measurementState={measurementState}
+            selectedLesionId={currentLesionSelection?.component?.id}
+            onSelectLesion={caseData.files?.mesh?.lesion_pred ? selectLesionIn3d : null}
+            onInspectLesion={inspectLesion}
+            lesionSelectionNotice={currentLesionSelection?.unmatched
+              ? 'This click could not be matched to a measured lesion. Select a lesion in Findings to inspect it.'
+              : null}
             overlap={overlap}
             referenceState={referenceState}
             comparing={comparing}
