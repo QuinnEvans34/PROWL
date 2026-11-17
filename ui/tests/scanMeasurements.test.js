@@ -10,6 +10,53 @@ function header() {
 function labels() { const a = new Uint8Array(125); a[31] = 1; a[32] = 1; a[62] = 2; return a }
 const calculate = (h = header(), a = labels(), spacing) => measureMask(h, structuredClone(h), a, spacing)
 
+describe('slice calipers derived from the verified prediction', () => {
+  it('separates face-connected lesions, picks the largest slice and measures rotated anisotropic voxels', () => {
+    const h = { ...header(), dims: [3, 8, 8, 8, 1, 1, 1, 1],
+      affine: [[0, -3, 0, -9], [2, 0, 0, 4], [0, 0, 4, 2], [0, 0, 0, 1]] }
+    const a = new Uint8Array(8 ** 3)
+    const set = (x, y, z, label = 2) => { a[x + 8 * y + 64 * z] = label }
+    for (let y = 2; y <= 4; y++) for (let x = 2; x <= 5; x++) set(x, y, 3)
+    set(3, 3, 4)
+    set(6, 5, 3) // Diagonally adjacent only; do not merge it.
+    set(1, 1, 1, 1)
+    const m = calculate(h, a)
+    const [first, second] = m.lesionDimensions.components
+    expect([first.voxelCount, second.voxelCount]).toEqual([13, 1])
+    expect(first.volumeMl + second.volumeMl).toBeCloseTo(m.lesionMl, 12)
+    expect(first.superiorInferiorMm).toBe(8)
+    expect(first.calipers).toEqual({
+      nativeSlice: 3, anchorVoxel: [3, 3, 3], anchorWorldMm: [-18, 10, 14],
+      axes: [
+        { lengthMm: 8, voxelEndpoints: [[1.5, 3, 3], [5.5, 3, 3]], worldEndpointsMm: [[-18, 7, 14], [-18, 15, 14]] },
+        { lengthMm: 9, voxelEndpoints: [[3, 1.5, 3], [3, 4.5, 3]], worldEndpointsMm: [[-13.5, 10, 14], [-22.5, 10, 14]] },
+      ],
+    })
+  })
+
+  it('keeps both calipers inside a concave outline by stopping at the first gap', () => {
+    const a = new Uint8Array(125)
+    a[31] = 1
+    for (let y = 1; y <= 3; y++) for (let x = 1; x <= 3; x++) {
+      if (x !== 2 || y !== 2) a[x + 5 * y + 50] = 2
+    }
+    const [{ calipers }] = calculate(header(), a).lesionDimensions.components
+    expect(calipers.anchorVoxel).toEqual([1, 2, 2])
+    expect(calipers.axes.map(axis => axis.lengthMm)).toEqual([2, 9])
+    expect(calipers.axes[0].voxelEndpoints).toEqual([[0.5, 2, 2], [1.5, 2, 2]])
+  })
+
+  it('retains volume and head-to-foot extent but does not claim perpendicular calipers on a sheared slice', () => {
+    const h = header()
+    h.affine[0][1] = 1
+    h.affine[2][0] = 0.5
+    const m = calculate(h)
+    expect(m.lesionDimensions.components[0]).toMatchObject({
+      calipers: null, superiorInferiorMm: 4.5, volumeMl: m.lesionMl,
+    })
+  })
+})
+
 describe('deterministic mask arithmetic and validity', () => {
   it('counts pancreas union and all lesion components using physical voxel volume', () => {
     const m = calculate(); expect(m.pancreasVoxels).toBe(3); expect(m.lesionVoxels).toBe(1)

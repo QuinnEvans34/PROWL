@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import NativeMeasurementPanel from './NativeMeasurementPanel.jsx'
 import ReviewDecisionPanel, { reviewRequest } from './ReviewDecisionPanel.jsx'
 import LiteratureSearchPanel from './LiteratureSearchPanel.jsx'
+import LesionDimensions from './LesionDimensions.jsx'
 import NiivueViewer from './NiivueViewer.jsx'
 import { MeasurementReadout, measurementState } from './PredictionMeasurements.jsx'
 import { loadSavedPrediction } from '../lib/savedPrediction.js'
@@ -81,6 +82,7 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
       </div>}
       <p className="pw-fineprint">Native CT with predicted pancreas (green) and lesion (red). Reference annotations are not loaded.</p>
       <MeasurementReadout state={measurementState(state.measurement, `${base}:${revision}:${state.manifestHash}`)} />
+      {state.measurement?.status === 'ready' && <LesionDimensions measurement={state.measurement} />}
       <div className="pw-saved__viewer">
         <NiivueViewer key={`${base}:${revision}:${state.manifest.result_sha256}`} caseData={caseData}
           assetUrls={state.urls} nativeGeometry={state.manifest.geometry} ctRange={state.manifest.ct_window}

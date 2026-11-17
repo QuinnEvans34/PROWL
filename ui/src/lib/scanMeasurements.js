@@ -1,4 +1,5 @@
 import { readHeader } from 'nifti-reader-js'
+import { lesionDimensions } from './lesionDimensions.js'
 import volumeFacts from '../../../configs/evidence/source-facts-volume-v1.json' with { type: 'json' }
 
 export const MEASUREMENT_POLICY = 'prepared-mask-volume-v1'
@@ -89,7 +90,8 @@ export function measureMask(ct, pred, labels, spacingMm, { maxVoxels = 16000000,
     const error = new Error(`The predicted outline touches the ${cropBoundary ? 'inference crop' : 'image'} boundary and may be cut off. Its size cannot be reported reliably.`)
     error.code = 'mask_coverage'; error.coverageDiagnostics = coverageDiagnostics; throw error
   }
-  return { schema: MEASUREMENT_POLICY, shape: g.shape, affine: g.affine, voxelMm3: g.voxel,
+  const dimensions = lesionDimensions(labels, { shape: g.shape, affine: g.affine, lesionVoxels: lesion, voxelMm3: g.voxel })
+  return { schema: MEASUREMENT_POLICY, shape: g.shape, affine: g.affine, voxelMm3: g.voxel, lesionDimensions: dimensions,
     pancreasVoxels: pancreas, lesionVoxels: lesion, pancreasMl: pancreas * g.voxel / 1000,
     lesionMl: lesion * g.voxel / 1000, unitsBasis, coverage: 'Whole-organ coverage unverified',
     hashBasis: 'Decoded NIfTI bytes after gzip or HTTP decoding',

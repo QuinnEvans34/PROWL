@@ -1,6 +1,7 @@
 import { ArrowUpRight, Check, Database, Download, Info, MessageSquareText, MessageSquareWarning, Radio, TriangleAlert } from 'lucide-react'
 import { REVIEW_COLORS } from '../lib/viewerLayers.js'
 import { structureQuestions } from '../lib/structureQuestions.js'
+import LesionDimensions from './LesionDimensions.jsx'
 
 function fmt(value, digits = 2) {
   return Number.isFinite(value) ? value.toFixed(digits) : null
@@ -78,6 +79,8 @@ export default function FindingsPanel({
   return (
     <div className="pw-findings">
       <p className="pw-context-chip"><i aria-hidden="true" />{studyLabel} · {source.label}</p>
+
+      <LesionDimensions measurement={measurement} />
 
       <ul className="pw-structures" aria-label="Structures in this prediction">
         <li className="pw-structure">

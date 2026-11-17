@@ -3,6 +3,7 @@ import { it, expect, vi } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import FindingsPanel from '../src/components/FindingsPanel.jsx'
 import StructurePopover from '../src/components/StructurePopover.jsx'
+import { LESION_DIMENSIONS_POLICY } from '../src/lib/lesionDimensions.js'
 
 const legacy = { lesionFlagged: true, volumeMm3: 15630, diameterMm: 31, confidence: 0.95 }
 const ready = { status: 'ready', measurement: { pancreasMl: 72, lesionMl: 3, lesionVoxels: 125 } }
@@ -39,6 +40,25 @@ it('clears old volumes while the next displayed mask is being checked', () => {
   rerender(<FindingsPanel {...props} measurementState={{ status: 'loading' }} />)
   expect(screen.queryByText('72.00')).toBeNull()
   expect(screen.getAllByText('Checking…')).toHaveLength(3)
+})
+
+it('shows per-lesion lengths in centimeters and clears them when the prediction changes', () => {
+  const measurement = { ...ready.measurement, lesionDimensions: {
+    policy: LESION_DIMENSIONS_POLICY, status: 'ready',
+    components: [
+      { id: 1, volumeMl: 2, superiorInferiorMm: 24, calipers: { nativeSlice: 3, axes: [{ lengthMm: 28 }, { lengthMm: 19 }] } },
+      { id: 2, volumeMl: 1, superiorInferiorMm: 10, calipers: null,
+        caliperUnavailableReason: 'The native slice axes are not perpendicular.' },
+    ],
+  } }
+  const { rerender } = render(<FindingsPanel {...props} measurementState={{ status: 'ready', measurement }} />)
+  const dimensions = within(screen.getByRole('region', { name: 'Predicted lesion dimensions' }))
+  expect(dimensions.getByText('2.80 × 1.90 cm')).toBeTruthy()
+  expect(dimensions.getByText('2.40 cm')).toBeTruthy()
+  expect(dimensions.getByText('2.00 mL')).toBeTruthy()
+  expect(dimensions.getByText('1 more predicted lesion')).toBeTruthy()
+  rerender(<FindingsPanel {...props} measurementState={{ status: 'loading' }} />)
+  expect(screen.queryByRole('region', { name: 'Predicted lesion dimensions' })).toBeNull()
 })
 
 it('displays zero total lesion volume without equating it with absence of disease', () => {

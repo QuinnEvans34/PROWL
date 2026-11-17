@@ -1,5 +1,13 @@
 /* Neutral charcoal toolbench. Imaging canvases and scientific layer hues retain
    their independent rendering colors; resizing changes presentation only. */
+.pw-lesion-dimensions { border: 1px solid var(--pw-border); border-radius: 8px; padding: 12px; margin-block: 8px 14px; }
+.pw-lesion-dimensions h3 { margin: 0 0 10px; font-size: 14px; }
+.pw-lesion-dimensions ol { padding: 0; margin: 0; list-style: none; }
+.pw-lesion-dimensions__item + .pw-lesion-dimensions__item { border-top: 1px solid var(--pw-border); padding-top: 10px; margin-top: 10px; }
+.pw-lesion-dimensions__item dl { display: grid; gap: 5px; margin: 8px 0; }
+.pw-lesion-dimensions__item dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; }
+.pw-lesion-dimensions__item dt, .pw-lesion-dimensions__item small { color: var(--pw-text-muted); font-size: 12px; }
+.pw-lesion-dimensions__item dd { margin: 0; font-size: 13px; font-variant-numeric: tabular-nums; }
 .pw-toolbench { position: relative; }
 .pw-toolbench .pw-wb__list { position: relative; background: var(--pw-surface); grid-column: 1; grid-row: 1; }
 .pw-toolbench .pw-wb__center { background: var(--pw-bg); grid-column: 2; grid-row: 1; }
