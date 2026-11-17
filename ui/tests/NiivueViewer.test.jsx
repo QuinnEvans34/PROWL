@@ -15,7 +15,16 @@ vi.mock('@niivue/niivue', () => ({
       this.screenSlices = []
       this.sliceTypeAxial = 0; this.sliceTypeCoronal = 1; this.sliceTypeSagittal = 2; this.sliceTypeMultiplanar = 3; this.sliceTypeRender = 4
       this.loadVolumes = vi.fn(async specs => {
-        this.volumes = specs.map(spec => ({ ...spec, setColormapLabel() {}, hdr: { dims: [3, 11, 21, 31], affine: [[harness.spacing[0], 0, 0, harness.origin[0]], [0, harness.spacing[1], 0, harness.origin[1]], [0, 0, harness.spacing[2], harness.origin[2]], [0, 0, 0, 1]] }, img: new Uint8Array(11 * 21 * 31) }))
+        const dims = [3, 11, 21, 31]
+        const [sx, sy, sz] = harness.spacing
+        const [x, y, z] = harness.origin
+        const affine = [[sx, 0, 0, x], [0, sy, 0, y], [0, 0, sz, z], [0, 0, 0, 1]]
+        this.volumes = specs.map(spec => ({
+          ...spec,
+          setColormapLabel(value) { this.labelColormap = value },
+          hdr: { dims, affine },
+          img: new Uint8Array(11 * 21 * 31),
+        }))
       })
       this.resizeListener = vi.fn(() => {
         this.canvas.width = this.canvas.offsetWidth * window.devicePixelRatio
@@ -38,7 +47,7 @@ vi.mock('@niivue/niivue', () => ({
     }
     setCrosshairColor() {}
     setAtlasOutline() {}
-    setMeshShader() {}
+    setMeshShader(id, shader) { this.meshes[id].shader = shader }
     setMeshProperty(id, key, value) { this.meshes[id][key] = value }
     setRenderAzimuthElevation(azimuth, elevation) { this.scene.renderAzimuth = azimuth; this.scene.renderElevation = elevation }
     setClipPlaneColor() {}
@@ -47,7 +56,7 @@ vi.mock('@niivue/niivue', () => ({
     setDragMode(value) { this.opts.dragMode = value }
     setMouseEventConfig(config) { this.opts.mouseEventConfig = config }
     setTouchEventConfig(config) { this.opts.touchEventConfig = config }
-    setOpacity() {}
+    setOpacity(index, opacity) { this.volumes[index].opacity = opacity }
     setPan2Dxyzmm(value) { this.scene.pan2Dxyzmm = new Float32Array(value) }
     setScale(value) { this.scene.volScaleMultiplier = value }
     mm2frac(point) {
@@ -67,6 +76,18 @@ import { projectCalipers } from '../src/lib/viewerCaliperProjection.js'
 
 const caseData = { case_id: 'SYNTHETIC_ONLY', files: { ct: 'synthetic-only.nii.gz' } }
 const base = { caseData, sources: [], activePlane: 'axial', label: 'Synthetic CT' }
+const anatomyProps = {
+  ...base,
+  sources: ['pred'],
+  caseData: {
+    ...caseData,
+    files: {
+      ...caseData.files,
+      pred: 'synthetic-pred.nii.gz',
+      mesh: { pancreas_pred: 'synthetic-pancreas.obj', lesion_pred: 'synthetic-lesion.obj' },
+    },
+  },
+}
 
 beforeEach(() => {
   harness.instances.length = 0
@@ -78,6 +99,94 @@ beforeEach(() => {
     observe() {}
     disconnect() {}
   })
+})
+
+it('keeps CT and surrounding surfaces at their configured opacity during inspection', async () => {
+  const props = { ...anatomyProps, mode: '3d', ctOpacity: .44 }
+  const { rerender } = render(<NiivueViewer {...props} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const [pancreas, lesion] = nv.meshes
+  const baseline = { pancreas: pancreas.opacity, lesion: lesion.opacity }
+  const selectedLesion = { source: 'pred', anatomy: 'lesion', worldMm: [1, 2, 3] }
+  const selectedPancreas = { source: 'pred', anatomy: 'pancreas', worldMm: [4, 5, 6] }
+
+  rerender(<NiivueViewer {...props} selectedObject={selectedLesion} />)
+  expect(nv.volumes[0].opacity).toBe(.44)
+  expect(pancreas.opacity).toBe(baseline.pancreas)
+  expect(lesion.shader).toBe('Toon')
+  rerender(<NiivueViewer {...props} selectedObject={selectedPancreas} />)
+  expect(nv.volumes[0].opacity).toBe(.44)
+  expect(lesion.opacity).toBe(baseline.lesion)
+  expect(pancreas.shader).toBe('Toon')
+
+  rerender(<NiivueViewer {...props} selectedObject={selectedPancreas} focusTreatment="isolate" />)
+  expect(nv.volumes[0].opacity).toBe(.44)
+  expect(lesion.visible).toBe(false)
+  rerender(<NiivueViewer {...props} selectedObject={selectedPancreas} clip={{ enabled: true, progress: 100 }} />)
+  expect(nv.volumes[0].opacity).toBe(0)
+  rerender(<NiivueViewer {...props} selectedObject={selectedPancreas} ctOpacity={0} />)
+  expect(nv.volumes[0].opacity).toBe(0)
+
+  rerender(<NiivueViewer {...props} />)
+  expect(pancreas.opacity).toBe(baseline.pancreas)
+  expect(lesion.opacity).toBe(baseline.lesion)
+  expect(nv.pivot3D).toEqual(selectedPancreas.worldMm)
+  nv.pivot3D = [0, 0, 0]
+  rerender(<NiivueViewer {...props} selectedObject={selectedPancreas} />)
+  expect(nv.pivot3D).toEqual(selectedPancreas.worldMm)
+})
+
+it('preserves the 2D anatomy overlays on an inspected slice unless isolation is requested', async () => {
+  const { rerender } = render(<NiivueViewer {...anatomyProps} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const [ct, prediction] = harness.instances[0].volumes
+  const selected = { source: 'pred', anatomy: 'lesion', worldMm: [1, 2, 3] }
+  expect(prediction.labelColormap.A).toEqual([0, 188, 255])
+  rerender(<NiivueViewer {...anatomyProps} selectedObject={selected} />)
+  expect(ct.opacity).toBe(1)
+  expect(prediction.labelColormap.A).toEqual([0, 188, 255])
+  rerender(<NiivueViewer {...anatomyProps} selectedObject={selected} focusTreatment="isolate" />)
+  expect(ct.opacity).toBe(1)
+  expect(prediction.labelColormap.A).toEqual([0, 0, 255])
+})
+
+it('keeps other difference regions visible while inspecting one region', async () => {
+  const props = {
+    ...anatomyProps,
+    mode: '3d',
+    sources: ['pred', 'gt'],
+    differenceMode: true,
+    enableDifferenceAssets: true,
+    caseData: {
+      ...caseData,
+      files: {
+        ...anatomyProps.caseData.files,
+        gt: 'synthetic-gt.nii.gz',
+        difference: { pancreas: 'synthetic-diff-pancreas.nii.gz', lesion: 'synthetic-diff-lesion.nii.gz' },
+        mesh: {
+          pancreas_agreement: 'pancreas-agreement.obj',
+          pancreas_pred_only: 'pancreas-pred-only.obj',
+          lesion_gt_only: 'lesion-gt-only.obj',
+        },
+      },
+    },
+  }
+  const { rerender } = render(<NiivueViewer {...props} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const [agreement, predictionOnly, referenceLesion] = harness.instances[0].meshes
+  const lesionOpacity = referenceLesion.opacity
+  const selected = { source: 'difference', anatomy: 'pancreas', region: 'agreement', worldMm: [4, 5, 6] }
+
+  rerender(<NiivueViewer {...props} selectedObject={selected} />)
+  expect(agreement.shader).toBe('Toon')
+  expect(predictionOnly.opacity).toBe(1)
+  expect(referenceLesion.opacity).toBe(lesionOpacity)
+
+  rerender(<NiivueViewer {...props} selectedObject={selected} focusTreatment="isolate" />)
+  expect(agreement.visible).toBe(true)
+  expect(predictionOnly.visible).toBe(false)
+  expect(referenceLesion.visible).toBe(false)
 })
 
 it('links anatomical position without changing local pan or zoom, and tags remote updates', async () => {
@@ -480,4 +589,25 @@ it('binds a 3D surface pick to a lesion voxel along the ray and projects its mar
   rerender(caliperView({ measurementCalipers: null }))
   expect(screen.queryByRole('img', crossName)).toBeNull()
   expect(markerX()).toBe('50')
+})
+
+it('treats a 3D background click as a miss instead of selecting near a previous crosshair', async () => {
+  const onSelectObject = vi.fn()
+  render(<NiivueViewer {...anatomyProps} mode="3d" onSelectObject={onSelectObject} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  // There is no mesh ray hit. The nearest-vertex test should only run for
+  // coordinates produced by this click's depth picker.
+  nv.indexNearestXYZmm = vi.fn(id => [0, id + 1])
+  function click() {
+    for (const type of ['pointerdown', 'pointerup']) nv.canvas.dispatchEvent(new MouseEvent(type, { bubbles: true, clientX: 50, clientY: 50 }))
+  }
+  act(click)
+  await waitFor(() => expect(onSelectObject).toHaveBeenLastCalledWith(null))
+  expect(nv.indexNearestXYZmm).not.toHaveBeenCalled()
+
+  nv.resetBriCon = () => { nv.scene.crosshairPos = new Float32Array([.5, .5, .5]) }
+  act(click)
+  await waitFor(() => expect(onSelectObject).toHaveBeenLastCalledWith({ source: 'pred', anatomy: 'pancreas' }))
+  expect(nv.indexNearestXYZmm).toHaveBeenCalledWith(0, 5, 10, 15)
 })

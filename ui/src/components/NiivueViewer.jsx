@@ -67,8 +67,6 @@ function anatomyAlpha(anatomy, {
     const isSelected = selectedObject.source === source && selectedObject.anatomy === anatomy
     if (isSelected) return 255
     if (focusTreatment === 'isolate') return 0
-    if (selectedObject.anatomy === anatomy) return 48
-    return anatomy === 'pancreas' ? 34 : 76
   }
 
   if (anatomyFocus === 'all') return anatomy === 'pancreas' ? 188 : 255
@@ -99,14 +97,15 @@ function labelColormap(source, presentation) {
   }
 }
 
-function differenceColormap({ selectedObject, anatomy }) {
+function differenceColormap({ selectedObject, anatomy, focusTreatment }) {
   const selectedRegion = selectedObject?.source === 'difference'
     && selectedObject.anatomy === anatomy
     ? selectedObject.region
     : null
   const alpha = (region) => {
-    if (!selectedRegion) return region === 'agreement' ? 205 : 255
-    return selectedRegion === region ? 255 : 35
+    if (selectedRegion === region) return 255
+    if (selectedRegion && focusTreatment === 'isolate') return 0
+    return region === 'agreement' ? 205 : 255
   }
   return {
     R: [0, DIFFERENCE_COLORS.agreement[0], DIFFERENCE_COLORS.predOnly[0], DIFFERENCE_COLORS.gtOnly[0]],
@@ -604,18 +603,14 @@ function meshOpacity({
   visible,
   anatomyFocus,
   focusTreatment,
-  selectedObject,
+  hasSelection,
+  isSelected,
   overlayOpacity,
   sourceFocus,
 }) {
   if (!visible) return 0
-  if (selectedObject) {
-    const selected = selectedObject.source === source && selectedObject.anatomy === anatomy
-    if (selected) return 1
-    if (focusTreatment === 'isolate') return 0
-    if (selectedObject.anatomy === anatomy) return 0.16
-    return anatomy === 'pancreas' ? 0.11 : 0.3
-  }
+  if (isSelected) return 1
+  if (hasSelection && focusTreatment === 'isolate') return 0
   const sourceScale = (sourceFocus === 'pred' || sourceFocus === 'gt') && sourceFocus !== source
     ? 0.16
     : 1
@@ -862,7 +857,11 @@ export default function NiivueViewer({
         return
       }
 
+      const previousCrosshair = nv.scene?.crosshairPos
       nv.resetBriCon(event)
+      // NiiVue replaces the crosshair on a successful depth pick and leaves the
+      // previous position alone on a miss. A miss must not reselect that anatomy.
+      const depthCrosshair = nv.scene?.crosshairPos !== previousCrosshair ? nv.scene?.crosshairPos : null
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (picked) {
         const semantic = { source: picked.source, anatomy: picked.anatomy }
@@ -876,9 +875,11 @@ export default function NiivueViewer({
       }
       window.setTimeout(() => {
         if (!current()) return
-        const fraction = nv.scene?.crosshairPos
-        if (!fraction) return
-        const world = Array.from(nv.frac2mm(fraction, 0, true)).slice(0, 3)
+        if (!depthCrosshair) {
+          interaction.onSelectObject(null)
+          return
+        }
+        const world = Array.from(nv.frac2mm(depthCrosshair, 0, true)).slice(0, 3)
         if (!world.every(Number.isFinite)) return
 
         let nearest = null
@@ -1192,12 +1193,14 @@ export default function NiivueViewer({
           registryRef.current.differenceVolumeIndexes.forEach((volumeIndex, anatomy) => {
             const volume = nv.volumes[volumeIndex]
             if (!volume) return
-            volume.setColormapLabel(differenceColormap({ selectedObject, anatomy }))
+            volume.setColormapLabel(differenceColormap({ selectedObject, anatomy, focusTreatment }))
             const anatomyVisible = anatomyFocus === 'all' || anatomyFocus === anatomy
             const layerVisible = anatomy === 'pancreas' ? showPancreas : showLesion
+            const excludedBySelection = focusTreatment === 'isolate' && selectedObject?.source === 'difference'
+              && selectedObject.anatomy !== anatomy
             nv.setOpacity(
               volumeIndex,
-              differenceMode && anatomyVisible && layerVisible ? overlayOpacity : 0,
+              differenceMode && anatomyVisible && layerVisible && !excludedBySelection ? overlayOpacity : 0,
             )
           })
           nv.setOpacity(0, 1)
@@ -1207,44 +1210,32 @@ export default function NiivueViewer({
         }
 
         const renderedCtOpacity = effectiveCtOpacity(ctOpacity, clip)
-        const shownCtOpacity = selectedObject
-          ? Math.min(renderedCtOpacity, 0.045)
-          : renderedCtOpacity
-        nv.setOpacity(0, shownCtOpacity)
-        setVolumeRendering(nv, shownCtOpacity > 0.001)
+        nv.setOpacity(0, renderedCtOpacity)
+        setVolumeRendering(nv, renderedCtOpacity > 0.001)
         registryRef.current.meshes.forEach((entry) => {
           const structureVisible = entry.anatomy === 'pancreas' ? showPancreas : showLesion
           const sourceVisible = entry.source === 'difference'
-            ? differenceMode
-            : renderedSources.includes(entry.source)
+            ? differenceMode && (anatomyFocus === 'all' || anatomyFocus === entry.anatomy)
+            : !differenceMode && renderedSources.includes(entry.source)
+          const isSelected = selectedObject?.source === entry.source
+            && selectedObject.anatomy === entry.anatomy
+            && (entry.source !== 'difference' || selectedObject.region === entry.region)
           const opacity = meshOpacity({
             anatomy: entry.anatomy,
             source: entry.source,
             visible: structureVisible && sourceVisible,
             anatomyFocus,
             focusTreatment,
-            selectedObject,
+            hasSelection: Boolean(selectedObject),
+            isSelected,
             overlayOpacity,
             sourceFocus,
           })
-          const differenceSelected = selectedObject?.source === 'difference'
-            && selectedObject.anatomy === entry.anatomy
-            && selectedObject.region === entry.region
-          const differenceVisible = differenceMode
-            && entry.source === 'difference'
-            && (anatomyFocus === 'all' || anatomyFocus === entry.anatomy)
-          const regularVisible = !differenceMode && entry.source !== 'difference'
-          const regionContextOpacity = selectedObject?.source === 'difference' && !differenceSelected
-            ? (focusTreatment === 'isolate' ? 0 : 0.12)
-            : 1
           // Difference pieces tile one surface; drawing the pancreas pieces opaque
           // avoids stacked translucent shells. Lesion pieces show through via X-ray.
-          const differenceOpacity = entry.anatomy === 'pancreas' && !selectedObject && opacity > 0
+          const finalOpacity = entry.source === 'difference' && entry.anatomy === 'pancreas' && opacity > 0
             ? 1
             : opacity
-          const finalOpacity = entry.source === 'difference'
-            ? (differenceVisible ? differenceOpacity * regionContextOpacity : 0)
-            : (regularVisible ? opacity : 0)
           const color = entry.source === 'difference'
             ? DIFFERENCE_COLORS[entry.region]
             : SOURCE_COLORS[entry.source][entry.anatomy]
@@ -1256,10 +1247,6 @@ export default function NiivueViewer({
             clamp255(finalOpacity * 255),
           ]))
           setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', finalOpacity)
-          const isSelected = selectedObject
-            && selectedObject.source === entry.source
-            && selectedObject.anatomy === entry.anatomy
-            && (entry.source !== 'difference' || selectedObject.region === entry.region)
           const shader = meshShaderFor(entry, { isSelected, renderedSources, sourceFocus })
           if (entry.appliedShader !== shader) {
             nv.setMeshShader(entry.mesh.id, shader)
@@ -1525,16 +1512,19 @@ export default function NiivueViewer({
   }, [navigationCommand?.id, sceneVersion, state.status, sceneKey, mode, framingLocked])
 
   useEffect(() => {
+    if (!selectedObject) {
+      lastFocusedObjectRef.current = ''
+      return
+    }
     const nv = nvRef.current
     if (
       !nv
       || state.status !== 'ready'
       || loadedSceneKeyRef.current !== sceneKey
       || (mode === '2d' && measurementCalipers)
-      || !selectedObject
     ) return
     const worldMm = selectedObject.worldMm
-    const focusKey = `${selectedObject.source}:${selectedObject.anatomy}:${worldMm?.join(',') || ''}`
+    const focusKey = `${selectedObject.source}:${selectedObject.anatomy}:${selectedObject.region || ''}:${worldMm?.join(',') || ''}`
     if (lastFocusedObjectRef.current === focusKey) return
 
     const volume = selectedObject.source === 'difference'

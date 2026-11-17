@@ -80,8 +80,6 @@ export function reviewReducer(state, action) {
       return {
         ...state,
         selectedObject: action.value,
-        anatomyFocus: action.value?.anatomy || 'all',
-        sourceFocus: action.value?.source || state.sourceFocus,
         layerVisibility: action.value
           ? {
               ...state.layerVisibility,
@@ -93,7 +91,7 @@ export function reviewReducer(state, action) {
           : state.layerVisibility,
       }
     case 'CLEAR_SELECTION':
-      return { ...state, selectedObject: null, anatomyFocus: 'all' }
+      return { ...state, selectedObject: null, focusTreatment: 'context' }
     case 'TOGGLE_LAYER':
       return {
         ...state,

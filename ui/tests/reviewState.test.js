@@ -28,9 +28,21 @@ describe('historical presentation reducer (not durable review persistence)', () 
     expect(reviewReducer(old, { type: 'TOGGLE_LAYER', layer: 'pred' }).layerVisibility.pred).toBe(false)
     expect(old.layerVisibility.pred).toBe(true)
   })
-  it('selection makes its anatomy and source visible', () => {
-    const old = { ...makeReviewState(), layerVisibility: { lesion: false, gt: false } }
-    expect(reviewReducer(old, { type: 'SELECT_OBJECT', value: { anatomy: 'lesion', source: 'gt' } })).toMatchObject({ anatomyFocus: 'lesion', sourceFocus: 'gt', layerVisibility: { lesion: true, gt: true } })
+  it('makes the selected layer visible without changing the comparison filter', () => {
+    const old = { ...makeReviewState(), evidenceMode: 'overlap', layerVisibility: { lesion: false, gt: false } }
+    const object = { anatomy: 'lesion', source: 'gt' }
+    expect(reviewReducer(old, { type: 'SELECT_OBJECT', value: object })).toMatchObject({
+      selectedObject: object, anatomyFocus: 'all', sourceFocus: 'both', layerVisibility: { lesion: true, gt: true },
+    })
+  })
+  it('exits inspection and leaves the current plane and source filter in place', () => {
+    const old = {
+      ...makeReviewState(), activePlane: 'coronal', sourceFocus: 'gt', focusTreatment: 'isolate',
+      selectedObject: { anatomy: 'lesion', source: 'gt' },
+    }
+    expect(reviewReducer(old, { type: 'CLEAR_SELECTION' })).toEqual({
+      ...old, selectedObject: null, focusTreatment: 'context',
+    })
   })
   it('reset preserves evidence/view mode but resets focus and increments token', () => {
     const old = { ...makeReviewState(), viewMode: '3d', evidenceMode: 'overlap', anatomyFocus: 'lesion', resetToken: 2 }
