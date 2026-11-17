@@ -32,5 +32,9 @@ export default function MockViewer(props) {
       onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'lesion', worldMm: props.caseData.syntheticLesionPick })}>
       Pick synthetic lesion surface
     </button>}
+    {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
+      onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'pancreas' })}>
+      Pick surrounding synthetic tissue
+    </button>}
   </div>
 }

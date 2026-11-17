@@ -34,9 +34,13 @@ follows the view and disappears when you leave that slice. If the viewer cannot
 reproduce the measurement plane, the dimensions remain visible without a jump
 action. Calipers measure the predicted outline, not a maximum diameter.
 
-In **3D** or **Split**, **Show calipers** displays those same endpoints on the
-selected lesion's original measurement plane. It starts off for each new
-selection and does not change the 2D measurement view.
+In **3D** or **Split**, click a predicted lesion or select it from the **Lesion
+review** strip above the scan. The strip shows the dimensions beside **Show
+calipers** and **Inspect CT slice**. Once shown, the 3D cross stays on while you
+click surrounding tissue or move between views. **Hide calipers** turns it off,
+and switching studies clears it. In 2D, the cross appears only on the measured
+slice; **Go to measured slice** returns there after browsing nearby tissue.
+Saved reviews and Analyze results offer **Inspect measurement** for 2D.
 
 Regression checks: `npm run test:run`, `npm run build`, and
 `npm run test:e2e -- --config=playwright.toolbench.config.js`. Synthetic browser
