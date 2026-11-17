@@ -319,6 +319,23 @@ function restoreViewState(nv, view, mode, crosshairOnly = false) {
   return true
 }
 
+function zoomAroundCrosshair(nv, factor) {
+  const pan = Array.from(nv.scene.pan2Dxyzmm || [0, 0, 0, 1])
+  const previousZoom = Number(pan[3])
+  if (!Number.isFinite(factor) || factor <= 0 || !Number.isFinite(previousZoom) || previousZoom <= 0) return
+  const nextZoom = Math.max(0.25, Math.min(12, previousZoom * factor))
+  if (nextZoom === previousZoom) return
+  const world = Array.from(nv.frac2mm(nv.scene.crosshairPos)).slice(0, 3)
+  if (world.length !== 3 || !world.every(Number.isFinite)) return
+
+  // Translate as we scale so the crosshair stays in place on screen, including
+  // scans whose affine origin is far from zero.
+  const zoomChange = previousZoom - nextZoom
+  for (let axis = 0; axis < 3; axis += 1) pan[axis] += zoomChange * world[axis]
+  pan[3] = nextZoom
+  nv.setPan2Dxyzmm(pan)
+}
+
 function focusOnWorldPoint(nv, worldMM, mode) {
   if (!worldMM) return false
   const fraction = nv.mm2frac(worldMM, 0, true)
@@ -648,6 +665,7 @@ export default function NiivueViewer({
   activePlane = 'multiplanar',
   interactionMode = 'navigate',
   framingLocked = false,
+  wheelZoom = false,
   navigationCommand = null,
   onNavigationChange = null,
   syncCrosshair = null,
@@ -1430,6 +1448,74 @@ export default function NiivueViewer({
 
   useEffect(() => {
     const nv = nvRef.current
+    const canvas = canvasRef.current
+    if (mode !== '2d' || !wheelZoom || !nv || !canvas) return
+
+    let pinchDistance = null
+    let pinching = false
+    const canZoom = () => !framingLocked && nv.volumes?.[0]
+      && loadedSceneKeyRef.current && loadedSceneKeyRef.current === expectedSceneKeyRef.current
+
+    function handleWheelZoom(event) {
+      // NiiVue binds a bubble listener to the same canvas. Stop it before its
+      // default slice scroll, including when the scan is loading or locked.
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      const { deltaMode, deltaX, deltaY } = event
+      if (!canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
+      const unit = deltaMode === 1 ? 16 : deltaMode === 2 ? canvas.clientHeight : 1
+      const delta = Math.max(-120, Math.min(120, deltaY * unit))
+      zoomAroundCrosshair(nv, Math.exp(-delta * 0.003))
+    }
+
+    function handlePinch(event) {
+      if (event.touches.length < 2 && !pinching) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      pinching = true
+      const first = event.touches[0]
+      const second = event.touches[1]
+      if (!second) {
+        pinchDistance = null
+        return
+      }
+      const distance = Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY)
+      if (canZoom() && pinchDistance > 0 && distance > 0) zoomAroundCrosshair(nv, distance / pinchDistance)
+      pinchDistance = distance
+    }
+
+    function endPinch(event) {
+      pinchDistance = null
+      if (event.touches.length === 0) pinching = false
+    }
+
+    function suppressSliceShortcut(event) {
+      const crosshairKey = ['KeyH', 'KeyJ', 'KeyK', 'KeyL'].includes(event.code)
+        || (event.ctrlKey && ['KeyU', 'KeyD'].includes(event.code))
+      if (!crosshairKey && !['ArrowLeft', 'ArrowRight'].includes(event.code)) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+    }
+
+    const captureGesture = { capture: true, passive: false }
+    canvas.addEventListener('wheel', handleWheelZoom, captureGesture)
+    canvas.addEventListener('touchstart', handlePinch, captureGesture)
+    canvas.addEventListener('touchmove', handlePinch, captureGesture)
+    canvas.addEventListener('touchend', endPinch, true)
+    canvas.addEventListener('touchcancel', endPinch, true)
+    canvas.addEventListener('keydown', suppressSliceShortcut, true)
+    return () => {
+      canvas.removeEventListener('wheel', handleWheelZoom, true)
+      canvas.removeEventListener('touchstart', handlePinch, true)
+      canvas.removeEventListener('touchmove', handlePinch, true)
+      canvas.removeEventListener('touchend', endPinch, true)
+      canvas.removeEventListener('touchcancel', endPinch, true)
+      canvas.removeEventListener('keydown', suppressSliceShortcut, true)
+    }
+  }, [compact, framingLocked, mode, wheelZoom])
+
+  useEffect(() => {
+    const nv = nvRef.current
     if (
       !navigationCommand
       || handledNavigationCommandRef.current === navigationCommand.id
@@ -1480,21 +1566,7 @@ export default function NiivueViewer({
       )
     } else if (command.type === 'zoom') {
       if (mode === '2d') {
-        const pan = Array.from(nv.scene.pan2Dxyzmm || [0, 0, 0, 1])
-        const factor = Number(command.factor)
-        const previousZoom = Number(pan[3])
-        const world = Array.from(nv.frac2mm(nv.scene.crosshairPos)).slice(0, 3)
-        if (Number.isFinite(factor) && factor > 0 && Number.isFinite(previousZoom) && previousZoom > 0
-          && world.length === 3 && world.every(Number.isFinite)) {
-          const nextZoom = Math.max(0.25, Math.min(12, previousZoom * factor))
-          // Match NiiVue's wheel zoom: preserve the crosshair's screen position
-          // by compensating for the world origin as well as the new scale.
-          // Changing only scale sends scans with nonzero affines off screen.
-          const zoomChange = previousZoom - nextZoom
-          for (let axis = 0; axis < 3; axis += 1) pan[axis] += zoomChange * world[axis]
-          pan[3] = nextZoom
-          nv.setPan2Dxyzmm(pan)
-        }
+        zoomAroundCrosshair(nv, Number(command.factor))
       } else {
         const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
         nv.setScale(scale)

@@ -35,10 +35,17 @@ vi.mock('@niivue/niivue', () => ({
       })
       this.calculateMvpMatrix = vi.fn(() => [[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]])
       this.drawScene = vi.fn()
-      this.cleanup = vi.fn()
+      this.nativeGesture = vi.fn()
+      this.cleanup = vi.fn(() => this.nativeGestures?.abort())
       harness.instances.push(this)
     }
-    attachToCanvas(canvas) { this.canvas = canvas }
+    attachToCanvas(canvas) {
+      this.canvas = canvas
+      this.nativeGestures = new AbortController()
+      for (const event of ['wheel', 'touchstart', 'touchmove', 'keydown']) {
+        canvas.addEventListener(event, this.nativeGesture, { signal: this.nativeGestures.signal })
+      }
+    }
     updateGLVolume() {}
     clearCustomLayout() {}
     setSliceType() {
@@ -256,7 +263,7 @@ it('locks 2D framing while allowing slice steps and windowing, then unlocks with
   expect(nv.scene.crosshairPos[2]).toBeCloseTo(23.5 / 31)
 })
 
-it('keeps the zoomed CT steady while jumping to a numbered slice and stepping around it', async () => {
+it('keeps the zoomed CT steady while choosing another slice on the slider', async () => {
   const user = userEvent.setup()
   const { rerender } = render(<ToolbenchViewer {...base} />)
   const lock = screen.getByRole('button', { name: 'Lock framing' })
@@ -269,26 +276,95 @@ it('keeps the zoomed CT steady while jumping to a numbered slice and stepping ar
   await user.click(lock)
   expect(lock.getAttribute('aria-pressed')).toBe('true')
   expect(zoom.disabled).toBe(true)
-  const sliceNumber = screen.getByRole('spinbutton', { name: 'Jump to axial slice' })
-  await user.clear(sliceNumber)
-  await user.type(sliceNumber, '9{Enter}')
+  const slider = screen.getByRole('slider', { name: 'Axial slice' })
+  fireEvent.change(slider, { target: { value: '8' } })
   await waitFor(() => expect(nv.scene.crosshairPos[2]).toBeCloseTo(8.5 / 31))
-  await waitFor(() => expect(sliceNumber.value).toBe('9'))
-  await user.click(screen.getByRole('button', { name: 'Next axial slice' }))
-  await waitFor(() => expect(sliceNumber.value).toBe('10'))
-  expect(nv.scene.crosshairPos[2]).toBeCloseTo(9.5 / 31)
-  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
-  await user.clear(sliceNumber)
-  await user.type(sliceNumber, '14')
-  // Pointer activation need not transfer focus to the button (e.g. Safari).
-  fireEvent.blur(sliceNumber, { relatedTarget: null })
-  await user.click(screen.getByRole('button', { name: 'Go to axial slice' }))
+  await waitFor(() => expect(slider.getAttribute('aria-valuetext')).toBe('Slice 9 of 31'))
+  fireEvent.change(slider, { target: { value: '13' } })
   await waitFor(() => expect(nv.scene.crosshairPos[2]).toBeCloseTo(13.5 / 31))
-  await waitFor(() => expect(sliceNumber.value).toBe('14'))
+  await waitFor(() => expect(slider.getAttribute('aria-valuetext')).toBe('Slice 14 of 31'))
   expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
   rerender(<ToolbenchViewer {...base} caseData={{ case_id: 'OTHER', files: { ct: 'other.nii.gz' } }} />)
   expect(lock.getAttribute('aria-pressed')).toBe('false')
   await waitFor(() => expect(zoom.disabled).toBe(false))
+})
+
+it('turns canvas wheel gestures into anchored zoom in every 2D tool and blocks them when locked', async () => {
+  harness.origin = [-342.55, -397.22, -16]
+  const view = (interactionMode = 'navigate', framingLocked = false) =>
+    <NiivueViewer {...base} wheelZoom interactionMode={interactionMode} framingLocked={framingLocked} />
+  const { rerender } = render(view())
+  const nv = harness.instances[0]
+  expect(fireEvent.wheel(nv.canvas, { deltaY: -40 })).toBe(false)
+  await screen.findByLabelText('Prepared result loaded')
+  const crosshair = [...nv.scene.crosshairPos]
+  const world = nv.frac2mm(crosshair)
+  const projected = () => world.map((coordinate, axis) => coordinate * nv.scene.pan2Dxyzmm[3] + nv.scene.pan2Dxyzmm[axis])
+  const anchor = projected()
+
+  for (const mode of ['navigate', 'pan', 'window']) {
+    rerender(view(mode))
+    const zoom = nv.scene.pan2Dxyzmm[3]
+    expect(fireEvent.wheel(nv.canvas, { deltaY: -40, deltaMode: 0 })).toBe(false)
+    expect(nv.scene.pan2Dxyzmm[3]).toBeGreaterThan(zoom)
+    projected().forEach((coordinate, axis) => expect(coordinate).toBeCloseTo(anchor[axis]))
+    expect(fireEvent.wheel(nv.canvas, { deltaY: 40, ctrlKey: true })).toBe(false)
+    expect(nv.scene.pan2Dxyzmm[3]).toBeCloseTo(zoom)
+    expect([...nv.scene.crosshairPos]).toEqual(crosshair)
+    projected().forEach((coordinate, axis) => expect(coordinate).toBeCloseTo(anchor[axis]))
+  }
+
+  const framing = [...nv.scene.pan2Dxyzmm]
+  rerender(view('navigate', true))
+  expect(fireEvent.wheel(nv.canvas, { deltaY: -100 })).toBe(false)
+  expect([...nv.scene.pan2Dxyzmm]).toEqual(framing)
+  expect([...nv.scene.crosshairPos]).toEqual(crosshair)
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+})
+
+it('zooms touchscreen pinches without invoking native slice gestures and starts fresh after cancellation', async () => {
+  const { rerender } = render(<NiivueViewer {...base} wheelZoom />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const crosshair = [...nv.scene.crosshairPos]
+  const touches = distance => [{ clientX: 0, clientY: 0 }, { clientX: distance, clientY: 0 }]
+
+  fireEvent.touchStart(nv.canvas, { touches: touches(100) })
+  fireEvent.touchMove(nv.canvas, { touches: touches(150) })
+  expect(nv.scene.pan2Dxyzmm[3]).toBeCloseTo(1.5)
+  fireEvent.touchCancel(nv.canvas, { touches: [] })
+  fireEvent.touchStart(nv.canvas, { touches: touches(60) })
+  expect(nv.scene.pan2Dxyzmm[3]).toBeCloseTo(1.5)
+  fireEvent.touchMove(nv.canvas, { touches: touches(40) })
+  expect(nv.scene.pan2Dxyzmm[3]).toBeCloseTo(1)
+  fireEvent.touchEnd(nv.canvas, { touches: touches(40).slice(0, 1) })
+  fireEvent.touchMove(nv.canvas, { touches: touches(40).slice(0, 1) })
+  fireEvent.touchEnd(nv.canvas, { touches: [] })
+
+  expect(fireEvent.keyDown(nv.canvas, { code: 'KeyJ', key: 'j' })).toBe(false)
+  expect(fireEvent.keyDown(nv.canvas, { code: 'KeyU', key: 'u', ctrlKey: true })).toBe(false)
+  expect(fireEvent.keyDown(nv.canvas, { code: 'ArrowRight', key: 'ArrowRight' })).toBe(false)
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+  expect([...nv.scene.crosshairPos]).toEqual(crosshair)
+
+  rerender(<NiivueViewer {...base} wheelZoom framingLocked />)
+  fireEvent.touchStart(nv.canvas, { touches: touches(75) })
+  fireEvent.touchMove(nv.canvas, { touches: touches(125) })
+  expect(nv.scene.pan2Dxyzmm[3]).toBeCloseTo(1)
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+  expect([...nv.scene.crosshairPos]).toEqual(crosshair)
+  fireEvent.touchEnd(nv.canvas, { touches: [] })
+  fireEvent.touchStart(nv.canvas, { touches: touches(75).slice(0, 1) })
+  expect(nv.nativeGesture).toHaveBeenCalledOnce()
+})
+
+it.each([{}, { mode: '3d', wheelZoom: true }])('preserves native wheel input outside opted-in 2D %#', async (options) => {
+  render(<NiivueViewer {...base} {...options} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  expect(fireEvent.wheel(nv.canvas, { deltaY: -40 })).toBe(true)
+  expect(nv.nativeGesture).toHaveBeenCalledOnce()
+  expect(nv.scene.pan2Dxyzmm[3]).toBe(1)
 })
 
 it('anchors zoom at the crosshair for non-origin CT affines, without zooming another plane', async () => {

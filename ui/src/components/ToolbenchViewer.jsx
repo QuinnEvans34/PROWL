@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Eye, EyeOff, Link2, LockKeyhole, LockKeyholeOpen, Maximize2, Minimize2, Scan, ZoomIn, ZoomOut } from 'lucide-react'
+import { Eye, EyeOff, Link2, LockKeyhole, LockKeyholeOpen, Maximize2, Minimize2, Scan, ZoomIn, ZoomOut } from 'lucide-react'
 import NiivueViewer from './NiivueViewer.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import '../styles/toolbench-viewer.css'
@@ -49,34 +49,6 @@ function PaneDivider({ orientation, value, onChange, label, containerRef, min = 
   ><span /></div>
 }
 
-function SliceNumber({ plane, index, total, ready, onJump }) {
-  const [draft, setDraft] = useState(null)
-  useEffect(() => { setDraft(null) }, [index, total])
-  function commitJump() {
-    if (!ready || draft === null || !/^\d+$/.test(draft)) {
-      setDraft(null)
-      return
-    }
-    const next = Math.min(total, Math.max(1, Number(draft))) - 1
-    if (Number.isInteger(next) && next !== index) onJump(next)
-    setDraft(null)
-  }
-  return <div className="tb-pane__slice-number">
-    <input type="number" inputMode="numeric" enterKeyHint="go" aria-label={`Jump to ${plane} slice`}
-      title="Enter a slice number, then press Enter or Go" min={1} max={total} step={1} disabled={!ready}
-      placeholder="—" value={ready ? draft ?? String(index + 1) : ''}
-      onChange={event => setDraft(event.target.value)} onKeyDown={event => {
-        if (event.key === 'Enter') {
-          event.preventDefault()
-          commitJump()
-        }
-        if (event.key === 'Escape') setDraft(null)
-      }} />
-    <span aria-hidden="true">/ {ready ? total : '—'}</span>
-    <button type="button" onClick={commitJump} aria-label={`Go to ${plane} slice`} disabled={!ready || draft === null || !/^\d+$/.test(draft)}>Go</button>
-  </div>
-}
-
 /** Three persistent imaging canvases: layout changes never destroy a pane's view. */
 export default function ToolbenchViewer({
   viewerProps = null,
@@ -86,7 +58,6 @@ export default function ToolbenchViewer({
   onLinkedChange = null,
   framingLocked: controlledFraming = null,
   onFramingLockedChange = null,
-  onActivePlaneChange = null,
   overlay = null,
   ...directViewerProps
 }) {
@@ -117,8 +88,8 @@ export default function ToolbenchViewer({
   const serial = useRef(0)
   const anchorRef = useRef(null)
   const snapshotsRef = useRef({})
-  const callbacks = useRef({ onNavigationChange, onActivePlaneChange })
-  callbacks.current = { onNavigationChange, onActivePlaneChange }
+  const onNavigationRef = useRef(onNavigationChange)
+  onNavigationRef.current = onNavigationChange
   const [snapshots, setSnapshots] = useState({})
   const [syncCrosshair, setSyncCrosshair] = useState(null)
   const [syncWindow, setSyncWindow] = useState(null)
@@ -164,15 +135,6 @@ export default function ToolbenchViewer({
     command(target, navigationCommand)
   }, [navigationCommand?.id])
 
-  function activate(plane) {
-    setActive(plane)
-    callbacks.current.onActivePlaneChange?.(plane)
-  }
-
-  useEffect(() => {
-    callbacks.current.onActivePlaneChange?.(effectiveActive)
-  }, [effectiveActive, sceneKey])
-
   function receiveNavigation(plane, snapshot) {
     if (!snapshot || snapshot.sceneKey !== sceneKey) return
     snapshotsRef.current = { ...snapshotsRef.current, [plane]: snapshot }
@@ -201,7 +163,7 @@ export default function ToolbenchViewer({
         if (peer?.totals) aggregate.totals[key] = peer.totals[key]
       }
     }
-    callbacks.current.onNavigationChange?.(aggregate)
+    onNavigationRef.current?.(aggregate)
   }
 
   const areas = visible.length === 3
@@ -244,15 +206,8 @@ export default function ToolbenchViewer({
           aria-label={`${TITLES[plane]} CT plane`}
           aria-hidden={!shown}
           tabIndex={shown ? 0 : -1}
-          onPointerDownCapture={() => activate(plane)}
-          onFocusCapture={() => activate(plane)}
-          onKeyDown={event => {
-            if (event.target.closest('button, input, select, textarea') || !ready || !['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
-            event.preventDefault()
-            event.stopPropagation()
-            const delta = ['ArrowLeft', 'ArrowDown'].includes(event.key) ? -1 : 1
-            command(plane, { type: 'slice', plane, index: Math.max(0, Math.min(total - 1, index + delta * (event.shiftKey ? 10 : 1))) })
-          }}
+          onPointerDownCapture={() => setActive(plane)}
+          onFocusCapture={() => setActive(plane)}
         >
           <header className="tb-pane__header">
             <span className="tb-pane__title"><strong>{TITLES[plane]}</strong><small>{EXPLANATIONS[plane]}</small></span>
@@ -268,6 +223,7 @@ export default function ToolbenchViewer({
             <NiivueViewer
               {...props}
               mode="2d"
+              wheelZoom
               framingLocked={framingLocked}
               activePlane={plane}
               navigationCommand={paneCommand?.type === 'measurement-point' && !props.measurementCalipers ? null : paneCommand || null}
@@ -282,11 +238,11 @@ export default function ToolbenchViewer({
             />
           </div>
           <footer className="tb-pane__navigator">
-            <button type="button" disabled={!ready || index === 0} aria-label={`Previous ${TITLES[plane].toLowerCase()} slice`} onClick={() => command(plane, { type: 'slice', plane, index: index - 1 })}><ChevronLeft size={14} /></button>
-            <input type="range" aria-label={`${TITLES[plane]} slice`} min="0" max={Math.max(0, total - 1)} value={index} disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}` : 'Loading scan'} onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
-            <button type="button" disabled={!ready || index >= total - 1} aria-label={`Next ${TITLES[plane].toLowerCase()} slice`} onClick={() => command(plane, { type: 'slice', plane, index: index + 1 })}><ChevronRight size={14} /></button>
-            <SliceNumber key={sceneKey} plane={plane} index={index} total={total} ready={ready}
-              onJump={next => command(plane, { type: 'slice', plane, index: next })} />
+            <span aria-hidden="true">Slice</span>
+            <input type="range" aria-label={`${TITLES[plane]} slice`} min="0" max={total - 1} step="1" value={index}
+              disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}` : 'Loading scan'}
+              onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
+            <span className="tb-pane__slice-count" aria-hidden="true">{ready ? `${index + 1} / ${total}` : '—'}</span>
           </footer>
         </section>
       })}

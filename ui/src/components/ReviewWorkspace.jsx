@@ -77,9 +77,9 @@ const CONTROL_HELP = {
   ],
   '2d': [
     ['Crosshair', 'Click or drag with the Navigate tool'],
-    ['Slices', 'Scroll, or ← and →'],
+    ['Slices', 'Use the slider below each plane'],
     ['Pan', 'Shift-drag, or the Pan tool'],
-    ['Zoom', 'Scroll with the Pan tool'],
+    ['Zoom', 'Scroll with two fingers over the image'],
     ['Brightness', 'Right-drag, or the Window tool'],
     ['View', 'F fit · R reset'],
   ],
@@ -228,7 +228,6 @@ export default function ReviewWorkspace({
   const [snapOpen, setSnapOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
   const panelWide = layout.panelWidth >= 420
-  const [activeControlPlane, setActiveControlPlane] = useState('axial')
   const [threeDVisited, setThreeDVisited] = useState(false)
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
@@ -247,8 +246,6 @@ export default function ReviewWorkspace({
   })
   const [navigationCommand, setNavigationCommand] = useState(null)
   const navigationCommandId = useRef(0)
-  const sliceFrameRef = useRef(null)
-  const pendingSliceRef = useRef(null)
   const clipFrameRef = useRef(null)
   const pendingClipProgressRef = useRef(null)
 
@@ -266,49 +263,19 @@ export default function ReviewWorkspace({
     dispatch({ type: 'RESET_VIEW' })
   }, [exitInspection])
 
-  const navigatorPlane = state.activePlane === 'multiplanar' ? (layout.maximizedPlane || activeControlPlane) : state.activePlane
-  const navigatorIndex = navigation.indices[navigatorPlane] || 0
-  const navigatorTotal = navigation.totals[navigatorPlane] || 1
-
   function issueViewerCommand(command) {
     navigationCommandId.current += 1
     setNavigationCommand({ ...command, id: navigationCommandId.current })
   }
 
-  function setSlice(index, { live = false } = {}) {
-    const command = { type: 'slice', plane: navigatorPlane, index: Math.max(0, Math.min(navigatorTotal - 1, index)) }
-    if (!live) {
-      if (sliceFrameRef.current !== null) {
-        window.cancelAnimationFrame(sliceFrameRef.current)
-        sliceFrameRef.current = null
-      }
-      pendingSliceRef.current = null
-      issueViewerCommand(command)
-      return
-    }
-    pendingSliceRef.current = command
-    if (sliceFrameRef.current === null) {
-      sliceFrameRef.current = window.requestAnimationFrame(() => {
-        sliceFrameRef.current = null
-        const pending = pendingSliceRef.current
-        pendingSliceRef.current = null
-        if (pending) issueViewerCommand(pending)
-      })
-    }
-  }
-
   useEffect(() => {
-    if (sliceFrameRef.current !== null) window.cancelAnimationFrame(sliceFrameRef.current)
     if (clipFrameRef.current !== null) window.cancelAnimationFrame(clipFrameRef.current)
-    sliceFrameRef.current = null
     clipFrameRef.current = null
-    pendingSliceRef.current = null
     pendingClipProgressRef.current = null
     setPendingLesionPick(null)
     setLesionSelection(null)
     setFramingStudy(null)
     setNavigationCommand(null)
-    setActiveControlPlane('axial')
     dispatch({ type: 'CASE_CHANGED', hasPrediction: isCurated })
     setNavigation({
       indices: { axial: 0, coronal: 0, sagittal: 0 },
@@ -318,7 +285,6 @@ export default function ReviewWorkspace({
   }, [caseId, isCurated])
 
   useEffect(() => () => {
-    if (sliceFrameRef.current !== null) window.cancelAnimationFrame(sliceFrameRef.current)
     if (clipFrameRef.current !== null) window.cancelAnimationFrame(clipFrameRef.current)
   }, [])
 
@@ -340,14 +306,6 @@ export default function ReviewWorkspace({
       }
       if (target?.closest?.('[role="dialog"], .pw-panel')) return
       if (target?.closest?.('[role="separator"], .tb-pane')) return
-      if (state.viewMode !== '3d' && ['ArrowLeft', 'ArrowDown'].includes(event.key)) {
-        event.preventDefault()
-        setSlice(navigatorIndex - 1)
-      }
-      if (state.viewMode !== '3d' && ['ArrowRight', 'ArrowUp'].includes(event.key)) {
-        event.preventDefault()
-        setSlice(navigatorIndex + 1)
-      }
       if (event.key.toLowerCase() === 'r' && !(framingLocked && state.viewMode !== '3d')) resetView()
       if (event.key.toLowerCase() === 'f' && !(framingLocked && state.viewMode === '2d')) issueViewerCommand({ type: 'fit' })
       if (state.viewMode !== '2d') {
@@ -364,7 +322,7 @@ export default function ReviewWorkspace({
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal, framingLocked, exitInspection, resetView, isFullscreen])
+  }, [state.viewMode, state.clipProgress, framingLocked, exitInspection, resetView, isFullscreen])
 
   const availableSources = useMemo(() => {
     const next = []
@@ -464,9 +422,6 @@ export default function ReviewWorkspace({
   function inspectLesion(component) {
     const calipers = component.calipers
     if (!verifiedMeasurement || !calipers?.plane) return
-    if (sliceFrameRef.current !== null) window.cancelAnimationFrame(sliceFrameRef.current)
-    sliceFrameRef.current = null
-    pendingSliceRef.current = null
     setViewMode('2d')
     dispatch({ type: 'SET_ACTIVE_PLANE', value: calipers.plane })
     dispatch({ type: 'PATCH_SETTINGS', value: { showFull: false } })
@@ -825,9 +780,9 @@ export default function ReviewWorkspace({
             options={state.viewMode === '3d'
               ? [['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Rotate: drag to orbit the camera' }], ['move', 'Move', { icon: <Move size={14} aria-hidden="true" />, title: 'Move: drag to reframe the anatomy' }]]
               : [
-                  ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Navigate: click or drag the crosshair; scroll through slices' }],
-                  ['pan', 'Pan + zoom', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked,
-                    title: framingLocked ? 'Unlock framing to pan or zoom' : 'Pan + zoom: drag to reposition; scroll to zoom' }],
+                  ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
+                  ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked,
+                    title: framingLocked ? 'Unlock framing to pan' : 'Drag to reposition the image' }],
                   ['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Window: drag to adjust CT brightness and contrast' }],
                 ]}
           />
@@ -950,7 +905,7 @@ export default function ReviewWorkspace({
                 <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={state.viewMode === '3d'}>
                   <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={state.interactionMode}
                     framingLocked={framingLocked} onFramingLockedChange={changeFramingLock}
-                    layout={layout} onLayoutChange={setLayout} linked={layout.linked} onActivePlaneChange={setActiveControlPlane}
+                    layout={layout} onLayoutChange={setLayout} linked={layout.linked}
                     onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
                 </section>
                 <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={state.viewMode === '2d'}>
@@ -1029,12 +984,13 @@ export default function ReviewWorkspace({
 
           <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={(state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split'}>
             {state.viewMode === 'split'
-              ? '2D: scroll slices, drag the crosshair · 3D: drag to orbit'
+              ? '2D: scroll to zoom, use the slice sliders · 3D: drag to orbit'
               : state.viewMode === '3d'
               ? state.interactionMode === 'move' ? 'Drag to reframe · scroll to zoom' : 'Drag to orbit · scroll to zoom · click a surface to focus'
-              : state.interactionMode === 'pan' ? 'Drag to reposition · scroll to zoom'
-                : state.interactionMode === 'window' ? 'Drag to tune brightness and contrast'
-                  : 'Scroll slices · drag the crosshair · ← → step slices'}
+              : framingLocked ? 'Framing locked · use the slice sliders'
+                : state.interactionMode === 'pan' ? 'Drag to reposition · scroll to zoom'
+                  : state.interactionMode === 'window' ? 'Drag to adjust brightness and contrast · scroll to zoom'
+                    : 'Scroll to zoom · use the slice sliders'}
           </p>
 
           {state.settingsOpen && (

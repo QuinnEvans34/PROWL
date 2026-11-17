@@ -222,7 +222,7 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(screen.getAllByRole('status', { name: 'Synthetic viewer stub' })).toEqual(viewers)
   })
 
-  it('directs each slice and zoom control to its own plane', async () => {
+  it('uses the focused plane slider for slice changes and keeps zoom local', async () => {
     const user = userEvent.setup()
     render(<Harness />)
     await screen.findAllByRole('status', { name: 'Synthetic viewer stub' })
@@ -230,6 +230,11 @@ describe('real workspace layout with synthetic imaging only', () => {
     const coronalViewer = within(coronal).getByRole('status', { name: 'Synthetic viewer stub' })
     const coronalSlice = within(coronal).getByRole('slider', { name: 'Coronal slice' })
     await waitFor(() => expect(coronalSlice.disabled).toBe(false))
+    fireEvent.keyDown(coronal, { key: 'ArrowRight' })
+    fireEvent.keyDown(document.body, { key: 'ArrowDown' })
+    expect(viewerData(coronalViewer).navigationCommand).toBeNull()
+    expect(within(coronal).queryByRole('spinbutton')).toBeNull()
+    expect(within(coronal).queryByRole('button', { name: /Next|Previous.*slice/ })).toBeNull()
     fireEvent.change(coronalSlice, { target: { value: '51' } })
     await waitFor(() => expect(viewerData(coronalViewer).navigationCommand).toMatchObject({ type: 'slice', plane: 'coronal', index: 51 }))
     const axial = screen.getByRole('region', { name: 'Axial CT plane' })
