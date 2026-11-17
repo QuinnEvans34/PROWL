@@ -1,13 +1,14 @@
 import React from 'react'
-import { act, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { beforeEach, expect, it, vi } from 'vitest'
+import userEvent from '@testing-library/user-event'
 
 const harness = vi.hoisted(() => ({ instances: [], observers: [], origin: [0, 0, 0], spacing: [1, 1, 1] }))
 vi.mock('@niivue/niivue', () => ({
-  DRAG_MODE: { crosshair: 0, pan: 1, windowing: 2 },
+  DRAG_MODE: { none: 0, crosshair: 8, pan: 3, windowing: 9 },
   Niivue: class SyntheticNiivue {
     constructor(options) {
-      this.opts = options
+      this.opts = { dragMode: 0, ...options }
       this.scene = { crosshairPos: new Float32Array([.5, .5, .5]), pan2Dxyzmm: new Float32Array([0, 0, 0, 1]), volScaleMultiplier: 1 }
       this.volumes = []
       this.meshes = []
@@ -43,8 +44,9 @@ vi.mock('@niivue/niivue', () => ({
     setClipPlaneColor() {}
     setClipPlane() {}
     resetBriCon() {}
-    setMouseEventConfig() {}
-    setTouchEventConfig() {}
+    setDragMode(value) { this.opts.dragMode = value }
+    setMouseEventConfig(config) { this.opts.mouseEventConfig = config }
+    setTouchEventConfig(config) { this.opts.touchEventConfig = config }
     setOpacity() {}
     setPan2Dxyzmm(value) { this.scene.pan2Dxyzmm = new Float32Array(value) }
     setScale(value) { this.scene.volScaleMultiplier = value }
@@ -60,6 +62,7 @@ vi.mock('@niivue/niivue', () => ({
 }))
 
 import NiivueViewer, { navigationSnapshot, viewerSceneKey } from '../src/components/NiivueViewer.jsx'
+import ToolbenchViewer from '../src/components/ToolbenchViewer.jsx'
 import { projectCalipers } from '../src/lib/viewerCaliperProjection.js'
 
 const caseData = { case_id: 'SYNTHETIC_ONLY', files: { ct: 'synthetic-only.nii.gz' } }
@@ -107,6 +110,76 @@ it('preserves pan and zoom when changing plane or resizing, and zooms the 2D ima
   expect(nv.scene.volScaleMultiplier).toBe(1)
   expect(harness.instances).toHaveLength(1)
   expect(nv.loadVolumes).toHaveBeenCalledTimes(1)
+})
+
+it('locks 2D framing while allowing slice steps and windowing, then unlocks without applying skipped commands', async () => {
+  const { rerender } = render(<NiivueViewer {...base} interactionMode="pan" />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  nv.opts.dragMode = 3
+  const framing = [3, -5, 7, 2]
+  nv.scene.pan2Dxyzmm = new Float32Array(framing)
+  const beforeSlice = nv.scene.crosshairPos[2]
+  const view = options => <NiivueViewer {...base} interactionMode="pan" framingLocked {...options} />
+  rerender(view({ navigationCommand: { id: 1, type: 'slice', plane: 'axial', index: 23 } }))
+  expect(nv.scene.crosshairPos[2]).not.toBe(beforeSlice)
+  expect(nv.scene.crosshairPos[2]).toBeCloseTo(23.5 / 31)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  expect(nv.opts.mouseEventConfig).toEqual({ leftButton: { primary: 8, withShift: 0, withCtrl: 8 }, rightButton: 9, centerButton: 0 })
+  expect(nv.opts.touchEventConfig).toEqual({ singleTouch: 8, doubleTouch: 0 })
+  expect(nv.opts.dragMode).toBe(0)
+  const modeCycle = new KeyboardEvent('keydown', { code: 'KeyM', bubbles: true, cancelable: true })
+  act(() => nv.canvas.dispatchEvent(modeCycle))
+  expect(modeCycle.defaultPrevented).toBe(true)
+  const fit = { id: 2, type: 'fit' }
+  rerender(view({ navigationCommand: fit, resetToken: 1 }))
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  expect(nv.scene.crosshairPos[2]).toBeCloseTo(23.5 / 31)
+  rerender(view({ navigationCommand: { id: 3, type: 'zoom', factor: 2 }, interactionMode: 'window', resetToken: 1 }))
+  expect(nv.opts.mouseEventConfig.leftButton.primary).toBe(9)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  rerender(view({ navigationCommand: fit, resetToken: 1 }))
+  rerender(view({ framingLocked: false, navigationCommand: fit, resetToken: 1 }))
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  expect(nv.opts.dragMode).toBe(3)
+  rerender(view({ framingLocked: false, navigationCommand: { id: 4, type: 'fit' }, resetToken: 1 }))
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual([0, 0, 0, 1])
+  expect(nv.scene.crosshairPos[2]).toBeCloseTo(23.5 / 31)
+})
+
+it('keeps the zoomed CT steady while jumping to a numbered slice and stepping around it', async () => {
+  const user = userEvent.setup()
+  const { rerender } = render(<ToolbenchViewer {...base} />)
+  const lock = screen.getByRole('button', { name: 'Lock framing' })
+  await waitFor(() => expect(lock.disabled).toBe(false))
+  const nv = harness.instances[0]
+  const zoom = screen.getByRole('button', { name: 'Zoom in axial' })
+  await user.click(zoom)
+  const framing = Array.from(nv.scene.pan2Dxyzmm)
+  expect(framing[3]).toBeCloseTo(1.2)
+  await user.click(lock)
+  expect(lock.getAttribute('aria-pressed')).toBe('true')
+  expect(zoom.disabled).toBe(true)
+  const sliceNumber = screen.getByRole('spinbutton', { name: 'Jump to axial slice' })
+  await user.clear(sliceNumber)
+  await user.type(sliceNumber, '9{Enter}')
+  await waitFor(() => expect(nv.scene.crosshairPos[2]).toBeCloseTo(8.5 / 31))
+  await waitFor(() => expect(sliceNumber.value).toBe('9'))
+  await user.click(screen.getByRole('button', { name: 'Next axial slice' }))
+  await waitFor(() => expect(sliceNumber.value).toBe('10'))
+  expect(nv.scene.crosshairPos[2]).toBeCloseTo(9.5 / 31)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  await user.clear(sliceNumber)
+  await user.type(sliceNumber, '14')
+  // Pointer activation need not transfer focus to the button (e.g. Safari).
+  fireEvent.blur(sliceNumber, { relatedTarget: null })
+  await user.click(screen.getByRole('button', { name: 'Go to axial slice' }))
+  await waitFor(() => expect(nv.scene.crosshairPos[2]).toBeCloseTo(13.5 / 31))
+  await waitFor(() => expect(sliceNumber.value).toBe('14'))
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(framing)
+  rerender(<ToolbenchViewer {...base} caseData={{ case_id: 'OTHER', files: { ct: 'other.nii.gz' } }} />)
+  expect(lock.getAttribute('aria-pressed')).toBe('false')
+  await waitFor(() => expect(zoom.disabled).toBe(false))
 })
 
 it('anchors zoom at the crosshair for non-origin CT affines, without zooming another plane', async () => {

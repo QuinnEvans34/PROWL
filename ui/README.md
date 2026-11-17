@@ -7,6 +7,9 @@ hide and maximize controls. Crosshairs can be linked while pan and zoom remain
 independent. Drag the dividers to resize planes, the study list or the expert
 panel; keyboard arrows also operate focused dividers. Restore layout changes
 presentation preferences without clearing imaging settings or review drafts.
+Use **Lock framing** to preserve pan and zoom while browsing slices or changing
+the window. Each plane has a slice number field: enter a number and press
+**Enter** to jump, or use the adjacent arrows and slider to browse.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests
@@ -38,7 +41,8 @@ In **3D** or **Split**, click a predicted lesion or select it from the **Lesion
 review** strip above the scan. The strip shows the dimensions beside **Show
 calipers** and **Inspect CT slice**. Once shown, the 3D cross stays on while you
 click surrounding tissue or move between views. **Hide calipers** turns it off,
-and switching studies clears it. In 2D, the cross appears only on the measured
+and switching studies clears it. **Face calipers** rotates the 3D view so both
+arms are visible. In 2D, the cross appears only on the measured
 slice; **Go to measured slice** returns there after browsing nearby tissue.
 Saved reviews and Analyze results offer **Inspect measurement** for 2D.
 

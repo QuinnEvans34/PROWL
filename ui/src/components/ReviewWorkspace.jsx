@@ -62,6 +62,7 @@ const CAMERA_SHORTCUTS = {
   ...Object.fromEntries(CAMERA_VIEWS.map(([, azimuth, elevation], index) => [String(index + 1), [azimuth, elevation]])),
   0: [120, 15],
 }
+const CALIPER_CAMERAS = { axial: [0, 90], coronal: [0, 0], sagittal: [90, 0] }
 
 // Viewer controls, written for both mouse and trackpad users.
 const CONTROL_HELP = {
@@ -234,6 +235,8 @@ export default function ReviewWorkspace({
   const [peelReveal3d, setPeelReveal3d] = useState(null)
   const [lesionSelection, setLesionSelection] = useState(null)
   const [pendingLesionPick, setPendingLesionPick] = useState(null)
+  const [framingStudy, setFramingStudy] = useState(null)
+  const framingLocked = framingStudy === caseId
   useEffect(() => { setPeelReveal3d(null) }, [caseId])
   const viewerRef = useRef(null)
   const lastPointerRef = useRef(null)
@@ -289,6 +292,7 @@ export default function ReviewWorkspace({
     pendingClipProgressRef.current = null
     setPendingLesionPick(null)
     setLesionSelection(null)
+    setFramingStudy(null)
     setNavigationCommand(null)
     setActiveControlPlane('axial')
     dispatch({ type: 'CASE_CHANGED', hasPrediction: isCurated })
@@ -331,8 +335,8 @@ export default function ReviewWorkspace({
         event.preventDefault()
         setSlice(navigatorIndex + 1)
       }
-      if (event.key.toLowerCase() === 'r') dispatch({ type: 'RESET_VIEW' })
-      if (event.key.toLowerCase() === 'f') issueViewerCommand({ type: 'fit' })
+      if (event.key.toLowerCase() === 'r' && !(framingLocked && state.viewMode !== '3d')) dispatch({ type: 'RESET_VIEW' })
+      if (event.key.toLowerCase() === 'f' && !(framingLocked && state.viewMode === '2d')) issueViewerCommand({ type: 'fit' })
       if (state.viewMode !== '2d') {
         // Camera shortcuts for 3D (and the 3D pane in Split): 1–6 anatomical views, 0 home.
         const view = CAMERA_SHORTCUTS[event.key]
@@ -347,7 +351,7 @@ export default function ReviewWorkspace({
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal])
+  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal, framingLocked])
 
   const availableSources = useMemo(() => {
     const next = []
@@ -545,13 +549,18 @@ export default function ReviewWorkspace({
     dispatch({ type: 'SET_VIEW_MODE', value: viewMode })
   }
 
+  function changeFramingLock(locked) {
+    setFramingStudy(locked ? caseId : null)
+    if (locked && state.interactionMode === 'pan') dispatch({ type: 'SET_INTERACTION_MODE', value: 'navigate' })
+  }
+
   const is2dLike = state.viewMode !== '3d'
   const is3dLike = state.viewMode !== '2d'
   let lesionReviewMessage
   if (selectedComponent) {
     if (!selectedCalipers?.plane) lesionReviewMessage = 'The exact measurement slice cannot be displayed.'
     else if (is3dLike && show3dCalipers) lesionReviewMessage = 'Calipers stay on until hidden.'
-    else if (measurementInspection && !is3dLike) lesionReviewMessage = 'The cross appears on the measured slice. Browse nearby tissue, then jump back here.'
+    else if (measurementInspection && !is3dLike) lesionReviewMessage = 'Cross shown on the measured slice only.'
   } else if (!measuredLesionVisible) lesionReviewMessage = 'Show the model lesion to review its measurements.'
   else if (awaitingPick) lesionReviewMessage = 'Lesion clicked. Checking its outline…'
   else if (measurementState.status === 'loading') lesionReviewMessage = 'Checking the predicted outline…'
@@ -798,7 +807,8 @@ export default function ReviewWorkspace({
               ? [['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Rotate: drag to orbit the camera' }], ['move', 'Move', { icon: <Move size={14} aria-hidden="true" />, title: 'Move: drag to reframe the anatomy' }]]
               : [
                   ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Navigate: click or drag the crosshair; scroll through slices' }],
-                  ['pan', 'Pan + zoom', { icon: <Move size={14} aria-hidden="true" />, title: 'Pan + zoom: drag to reposition; scroll to zoom' }],
+                  ['pan', 'Pan + zoom', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked,
+                    title: framingLocked ? 'Unlock framing to pan or zoom' : 'Pan + zoom: drag to reposition; scroll to zoom' }],
                   ['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Window: drag to adjust CT brightness and contrast' }],
                 ]}
           />
@@ -819,10 +829,12 @@ export default function ReviewWorkspace({
               <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', factor: 1.16 })} aria-label="Zoom in" title="Zoom in (+)">+</button>
             </div>
           )}
-          <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'fit' })} aria-label="Fit" title="Fit the complete CT in the viewer (F)">
+          <button type="button" className="pw-icon-btn" disabled={framingLocked && !is3dLike}
+            onClick={() => issueViewerCommand({ type: 'fit' })} aria-label="Fit" title="Fit the complete CT in the viewer (F)">
             <Maximize size={15} aria-hidden="true" />
           </button>
-          <button type="button" className="pw-icon-btn" onClick={() => dispatch({ type: 'RESET_VIEW' })} aria-label="Reset viewer" title="Reset viewer (R)">
+          <button type="button" className="pw-icon-btn" disabled={framingLocked && is2dLike}
+            onClick={() => dispatch({ type: 'RESET_VIEW' })} aria-label="Reset viewer" title="Reset viewer (R)">
             <RotateCcw size={15} aria-hidden="true" />
           </button>
           <button
@@ -889,6 +901,11 @@ export default function ReviewWorkspace({
             {is3dLike && selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
               aria-pressed={show3dCalipers} onClick={() => setLesionSelection(previous => previous === currentLesionSelection
                 ? { ...previous, showCalipers3d: !show3dCalipers } : previous)}>{show3dCalipers ? 'Hide calipers' : 'Show calipers'}</button>}
+            {is3dLike && show3dCalipers && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost"
+              title="Rotate the 3D view to see both arms of the cross" onClick={() => {
+                const [azimuth, elevation] = CALIPER_CAMERAS[selectedCalipers.plane]
+                issueViewerCommand({ type: 'camera', azimuth, elevation })
+              }}>Face calipers</button>}
             {selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--primary"
               onClick={() => inspectLesion(selectedComponent)}>{is3dLike ? 'Inspect CT slice' : 'Go to measured slice'}</button>}
             {!show3dCalipers && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" onClick={() => {
@@ -904,7 +921,7 @@ export default function ReviewWorkspace({
               onClick={() => openPanel('findings')}>Choose lesion in Findings</button> : null} />}
 
         <div
-          className="pw-viewer"
+          className={`pw-viewer${is2dLike ? ' pw-viewer--slice-tools' : ''}`}
           ref={viewerRef}
           onPointerDownCapture={(event) => {
             const rect = viewerRef.current?.getBoundingClientRect()
@@ -915,6 +932,7 @@ export default function ReviewWorkspace({
               <div className={`pw-toolbench-scene pw-toolbench-scene--${state.viewMode}`}>
                 <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={state.viewMode === '3d'}>
                   <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={state.interactionMode}
+                    framingLocked={framingLocked} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked} onActivePlaneChange={setActiveControlPlane}
                     onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
                 </section>

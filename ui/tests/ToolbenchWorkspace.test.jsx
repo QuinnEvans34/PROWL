@@ -100,6 +100,8 @@ describe('real workspace layout with synthetic imaging only', () => {
     await user.click(screen.getByRole('button', { name: 'Pick surrounding synthetic tissue' }))
     expect(rail.getByText('Predicted lesion 2')).toBeTruthy()
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
+    await user.click(rail.getByRole('button', { name: 'Face calipers' }))
+    expect(viewer3d().navigationCommand).toMatchObject({ type: 'camera', azimuth: 0, elevation: 0 })
     await user.click(hide())
     expect(viewer3d().measurementCalipers).toBeNull()
     await user.click(toggle())

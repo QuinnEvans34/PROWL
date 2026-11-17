@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChevronLeft, ChevronRight, Eye, EyeOff, Link2, Maximize2, Minimize2, Scan, ZoomIn, ZoomOut } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Eye, EyeOff, Link2, LockKeyhole, LockKeyholeOpen, Maximize2, Minimize2, Scan, ZoomIn, ZoomOut } from 'lucide-react'
 import NiivueViewer from './NiivueViewer.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import '../styles/toolbench-viewer.css'
@@ -49,6 +49,34 @@ function PaneDivider({ orientation, value, onChange, label, containerRef, min = 
   ><span /></div>
 }
 
+function SliceNumber({ plane, index, total, ready, onJump }) {
+  const [draft, setDraft] = useState(null)
+  useEffect(() => { setDraft(null) }, [index, total])
+  function commitJump() {
+    if (!ready || draft === null || !/^\d+$/.test(draft)) {
+      setDraft(null)
+      return
+    }
+    const next = Math.min(total, Math.max(1, Number(draft))) - 1
+    if (Number.isInteger(next) && next !== index) onJump(next)
+    setDraft(null)
+  }
+  return <div className="tb-pane__slice-number">
+    <input type="number" inputMode="numeric" enterKeyHint="go" aria-label={`Jump to ${plane} slice`}
+      title="Enter a slice number, then press Enter or Go" min={1} max={total} step={1} disabled={!ready}
+      placeholder="—" value={ready ? draft ?? String(index + 1) : ''}
+      onChange={event => setDraft(event.target.value)} onKeyDown={event => {
+        if (event.key === 'Enter') {
+          event.preventDefault()
+          commitJump()
+        }
+        if (event.key === 'Escape') setDraft(null)
+      }} />
+    <span aria-hidden="true">/ {ready ? total : '—'}</span>
+    <button type="button" onClick={commitJump} aria-label={`Go to ${plane} slice`} disabled={!ready || draft === null || !/^\d+$/.test(draft)}>Go</button>
+  </div>
+}
+
 /** Three persistent imaging canvases: layout changes never destroy a pane's view. */
 export default function ToolbenchViewer({
   viewerProps = null,
@@ -56,6 +84,8 @@ export default function ToolbenchViewer({
   onLayoutChange = null,
   linked = true,
   onLinkedChange = null,
+  framingLocked: controlledFraming = null,
+  onFramingLockedChange = null,
   onActivePlaneChange = null,
   overlay = null,
   ...directViewerProps
@@ -63,6 +93,15 @@ export default function ToolbenchViewer({
   const props = { ...viewerProps, ...directViewerProps, mode: '2d' }
   const { activePlane = 'multiplanar', navigationCommand, onNavigationChange, ctWindow, ctRange, label = 'CT viewer' } = props
   const sceneKey = viewerSceneKey(props)
+  const framingStudy = props.caseData?.case_id || props.caseData?.files?.ct
+  const [lockedStudy, setLockedStudy] = useState(null)
+  // Returning to a study starts unlocked, even when its presentation was saved.
+  useEffect(() => { setLockedStudy(null) }, [framingStudy])
+  const framingLocked = controlledFraming ?? (framingStudy != null && lockedStudy === framingStudy)
+  function toggleFraming() {
+    setLockedStudy(framingLocked ? null : framingStudy)
+    onFramingLockedChange?.(!framingLocked)
+  }
   const [localLayout, setLocalLayout] = useState(DEFAULT_LAYOUT)
   const settings = { ...DEFAULT_LAYOUT, ...localLayout, ...layout }
   const primaryShare = clampShare(settings.primaryShare, 64)
@@ -178,6 +217,12 @@ export default function ToolbenchViewer({
     <div className="tb-viewer__rail">
       <span className="tb-viewer__context"><span className="tb-live-dot" />2D imaging <small>{visible.length === 1 ? TITLES[visible[0]] : `${visible.length} planes`}</small></span>
       <div className="tb-viewer__rail-actions">
+        <button type="button" className="tb-viewer__framing" aria-pressed={framingLocked}
+          disabled={!framingLocked && !visible.some(plane => snapshots[plane]?.sceneKey === sceneKey)}
+          onClick={toggleFraming} title={framingLocked ? 'Pan and zoom are locked; slicing and window controls still work' : 'Keep pan and zoom steady while browsing slices'}>
+          {framingLocked ? <LockKeyhole size={13} aria-hidden="true" /> : <LockKeyholeOpen size={13} aria-hidden="true" />}
+          Lock framing
+        </button>
         {onLinkedChange ? <button className="tb-link" type="button" aria-pressed={linked} onClick={() => onLinkedChange(!linked)} title="Link anatomical crosshairs across planes"><Link2 size={13} />{linked ? 'Linked' : 'Independent'}</button> : <span className="tb-link"><Link2 size={13} />{linked ? 'Linked crosshairs' : 'Independent planes'}</span>}
         {hiddenPlanes.length > 0 && activePlane === 'multiplanar' && !maximized && <button type="button" onClick={() => changeLayout({ hiddenPlanes: [] })}><Eye size={13} />Restore planes</button>}
         {maximized && activePlane === 'multiplanar' && <button type="button" onClick={() => changeLayout({ maximizedPlane: null })}><Minimize2 size={13} />Restore layout</button>}
@@ -211,9 +256,9 @@ export default function ToolbenchViewer({
           <header className="tb-pane__header">
             <span className="tb-pane__title"><strong>{TITLES[plane]}</strong><small>{EXPLANATIONS[plane]}</small></span>
             <div className="tb-pane__actions">
-              <button type="button" disabled={!ready} aria-label={`Zoom out ${TITLES[plane].toLowerCase()}`} title="Zoom out" onClick={() => command(plane, { type: 'zoom', factor: 1 / 1.2 })}><ZoomOut size={13} /></button>
-              <button type="button" disabled={!ready} aria-label={`Zoom in ${TITLES[plane].toLowerCase()}`} title="Zoom in" onClick={() => command(plane, { type: 'zoom', factor: 1.2 })}><ZoomIn size={13} /></button>
-              <button type="button" disabled={!ready} aria-label={`Fit ${TITLES[plane].toLowerCase()} image`} title="Fit image" onClick={() => command(plane, { type: 'fit' })}><Scan size={13} /></button>
+              <button type="button" disabled={!ready || framingLocked} aria-label={`Zoom out ${TITLES[plane].toLowerCase()}`} title="Zoom out" onClick={() => command(plane, { type: 'zoom', factor: 1 / 1.2 })}><ZoomOut size={13} /></button>
+              <button type="button" disabled={!ready || framingLocked} aria-label={`Zoom in ${TITLES[plane].toLowerCase()}`} title="Zoom in" onClick={() => command(plane, { type: 'zoom', factor: 1.2 })}><ZoomIn size={13} /></button>
+              <button type="button" disabled={!ready || framingLocked} aria-label={`Fit ${TITLES[plane].toLowerCase()} image`} title="Fit image" onClick={() => command(plane, { type: 'fit' })}><Scan size={13} /></button>
               {activePlane === 'multiplanar' && <button type="button" aria-label={`${maximized === plane ? 'Restore' : 'Maximize'} ${TITLES[plane].toLowerCase()} plane`} title={maximized === plane ? 'Restore layout' : 'Maximize plane'} onClick={() => changeLayout({ maximizedPlane: maximized === plane ? null : plane })}>{maximized === plane ? <Minimize2 size={13} /> : <Maximize2 size={13} />}</button>}
               {activePlane === 'multiplanar' && !only && <button type="button" aria-label={`Hide ${TITLES[plane].toLowerCase()} plane`} title="Hide plane" onClick={() => changeLayout({ hiddenPlanes: [...hiddenPlanes, plane] })}><EyeOff size={13} /></button>}
             </div>
@@ -222,6 +267,7 @@ export default function ToolbenchViewer({
             <NiivueViewer
               {...props}
               mode="2d"
+              framingLocked={framingLocked}
               activePlane={plane}
               navigationCommand={commands[plane] || null}
               syncCrosshair={linked ? syncCrosshair : null}
@@ -238,7 +284,8 @@ export default function ToolbenchViewer({
             <button type="button" disabled={!ready || index === 0} aria-label={`Previous ${TITLES[plane].toLowerCase()} slice`} onClick={() => command(plane, { type: 'slice', plane, index: index - 1 })}><ChevronLeft size={14} /></button>
             <input type="range" aria-label={`${TITLES[plane]} slice`} min="0" max={Math.max(0, total - 1)} value={index} disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}` : 'Loading scan'} onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
             <button type="button" disabled={!ready || index >= total - 1} aria-label={`Next ${TITLES[plane].toLowerCase()} slice`} onClick={() => command(plane, { type: 'slice', plane, index: index + 1 })}><ChevronRight size={14} /></button>
-            <output>{ready ? `${index + 1} / ${total}` : '— / —'}</output>
+            <SliceNumber key={sceneKey} plane={plane} index={index} total={total} ready={ready}
+              onJump={next => command(plane, { type: 'slice', plane, index: next })} />
           </footer>
         </section>
       })}

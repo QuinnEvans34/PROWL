@@ -652,6 +652,7 @@ export default function NiivueViewer({
   onSelectObject = null,
   activePlane = 'multiplanar',
   interactionMode = 'navigate',
+  framingLocked = false,
   navigationCommand = null,
   onNavigationChange = null,
   syncCrosshair = null,
@@ -1385,20 +1386,20 @@ export default function NiivueViewer({
 
     let primary = DRAG_MODE.crosshair
     if (mode === '2d') {
-      if (interactionMode === 'pan') primary = DRAG_MODE.pan
+      if (interactionMode === 'pan' && !framingLocked) primary = DRAG_MODE.pan
       if (interactionMode === 'window') primary = DRAG_MODE.windowing
       nv.setMouseEventConfig({
         leftButton: {
           primary,
-          withShift: DRAG_MODE.pan,
+          withShift: framingLocked ? DRAG_MODE.none : DRAG_MODE.pan,
           withCtrl: DRAG_MODE.crosshair,
         },
         rightButton: DRAG_MODE.windowing,
-        centerButton: DRAG_MODE.pan,
+        centerButton: framingLocked ? DRAG_MODE.none : DRAG_MODE.pan,
       })
       nv.setTouchEventConfig({
         singleTouch: primary,
-        doubleTouch: DRAG_MODE.pan,
+        doubleTouch: framingLocked ? DRAG_MODE.none : DRAG_MODE.pan,
       })
       return
     }
@@ -1417,7 +1418,28 @@ export default function NiivueViewer({
       singleTouch: primary,
       doubleTouch: DRAG_MODE.slicer3D,
     })
-  }, [interactionMode, mode, sceneVersion, state.status, sceneKey])
+  }, [interactionMode, framingLocked, mode, sceneVersion, state.status, sceneKey])
+
+  useEffect(() => {
+    const nv = nvRef.current
+    const canvas = canvasRef.current
+    if (mode !== '2d' || !framingLocked || !nv || !canvas) return
+    // NiiVue's wheel and pinch behavior considers its fallback drag mode,
+    // independently of the configured mouse buttons.
+    const previous = nv.opts.dragMode
+    nv.setDragMode(DRAG_MODE.none)
+    const preventModeCycle = event => {
+      if (event.code === 'KeyM') {
+        event.preventDefault()
+        event.stopImmediatePropagation()
+      }
+    }
+    canvas.addEventListener('keydown', preventModeCycle, true)
+    return () => {
+      canvas.removeEventListener('keydown', preventModeCycle, true)
+      if (nvRef.current === nv && previous !== undefined) nv.setDragMode(previous)
+    }
+  }, [framingLocked, compact, mode])
 
   useEffect(() => {
     const nv = nvRef.current
@@ -1432,6 +1454,7 @@ export default function NiivueViewer({
 
     const command = navigationCommand
     handledNavigationCommandRef.current = command.id
+    if (mode === '2d' && framingLocked && (command.type === 'fit' || command.type === 'zoom')) return
     if (command.type === 'slice') {
       const axis = PLANE_AXIS[command.plane]
       const total = Number((nv.volumes[0]?.dimsRAS || nv.volumes[0]?.hdr?.dims)?.[axis + 1])
@@ -1499,7 +1522,7 @@ export default function NiivueViewer({
 
     nv.drawScene()
     publishNavigation(nv)
-  }, [navigationCommand?.id, sceneVersion, state.status, sceneKey, mode])
+  }, [navigationCommand?.id, sceneVersion, state.status, sceneKey, mode, framingLocked])
 
   useEffect(() => {
     const nv = nvRef.current
@@ -1571,6 +1594,7 @@ export default function NiivueViewer({
       || !nv.volumes?.[0]
     ) return
     handledResetTokenRef.current = resetToken
+    if (mode === '2d' && framingLocked) return
     orbitCentreRef.current = null
     lastFocusedObjectRef.current = ''
     if (mode === '3d') {
@@ -1590,7 +1614,7 @@ export default function NiivueViewer({
     focusOnWorldPoint(nv, target, mode)
     nv.drawScene()
     publishNavigation(nv)
-  }, [resetToken, sceneVersion, state.status, mode, sceneKey, clip?.enabled])
+  }, [resetToken, sceneVersion, state.status, mode, sceneKey, clip?.enabled, framingLocked])
 
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>

@@ -129,6 +129,7 @@
 .pw-viewer-legend i { width: 10px; height: 10px; border-radius: 3px; background: var(--key); }
 .pw-viewer-legend i.pw-viewer-legend__ref { background: transparent; box-shadow: inset 0 0 0 2px var(--key); }
 .pw-viewer-help { position: absolute; right: 12px; bottom: 10px; max-height: calc(100% - 20px); max-width: calc(100% - 24px); z-index: 5; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.pw-viewer--slice-tools > .pw-viewer-help { bottom: 46px; max-height: calc(100% - 58px); }
 .pw-viewer-help__toggle {
   display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; padding: 0; order: 2;
   border: 1px solid var(--pw-border); border-radius: 50%; background: rgba(13, 15, 18, 0.88);
@@ -151,6 +152,7 @@
   animation: pw-hint-fade 600ms var(--pw-ease) 8s forwards;
 }
 /* The interaction hint fades after a few seconds so it stops covering the image. */
+.pw-viewer--slice-tools > .pw-viewer__hint { bottom: 50px; }
 @keyframes pw-hint-fade { to { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .pw-viewer__hint { animation: none; } }
 
