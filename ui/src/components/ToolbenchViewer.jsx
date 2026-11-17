@@ -231,6 +231,7 @@ export default function ToolbenchViewer({
     <div className="tb-viewer__grid" ref={containerRef} style={gridStyle} data-visible-planes={visible.length}>
       {PLANES.map(plane => {
         const snapshot = snapshots[plane]?.sceneKey === sceneKey ? snapshots[plane] : null
+        const paneCommand = commands[plane]
         const total = snapshot?.totals?.[plane] || 1
         const index = snapshot?.indices?.[plane] || 0
         const ready = Boolean(snapshot)
@@ -269,7 +270,7 @@ export default function ToolbenchViewer({
               mode="2d"
               framingLocked={framingLocked}
               activePlane={plane}
-              navigationCommand={commands[plane] || null}
+              navigationCommand={paneCommand?.type === 'measurement-point' && !props.measurementCalipers ? null : paneCommand || null}
               syncCrosshair={linked ? syncCrosshair : null}
               syncWindow={syncWindow}
               showPlaneLabels={false}

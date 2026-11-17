@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement, lazy, Suspense, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { cloneElement, isValidElement, lazy, Suspense, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
 import {
   Activity,
   Box,
@@ -30,7 +30,7 @@ import {
   X,
 } from 'lucide-react'
 import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
-import { REVIEW_COLORS, objectLabel, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
+import { REVIEW_COLORS, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
 import FindingsPanel from './FindingsPanel.jsx'
 import LesionReviewBar from './LesionReviewBar.jsx'
 import StructurePopover from './StructurePopover.jsx'
@@ -252,6 +252,20 @@ export default function ReviewWorkspace({
   const clipFrameRef = useRef(null)
   const pendingClipProgressRef = useRef(null)
 
+  const exitInspection = useCallback(() => {
+    setPendingLesionPick(null)
+    setLesionSelection(null)
+    setPopAnchor(null)
+    setNavigationCommand(previous => previous?.type === 'measurement-point' ? null : previous)
+    lastPointerRef.current = null
+    dispatch({ type: 'CLEAR_SELECTION' })
+  }, [])
+
+  const resetView = useCallback(() => {
+    exitInspection()
+    dispatch({ type: 'RESET_VIEW' })
+  }, [exitInspection])
+
   const navigatorPlane = state.activePlane === 'multiplanar' ? (layout.maximizedPlane || activeControlPlane) : state.activePlane
   const navigatorIndex = navigation.indices[navigatorPlane] || 0
   const navigatorTotal = navigation.totals[navigatorPlane] || 1
@@ -319,14 +333,13 @@ export default function ReviewWorkspace({
       const target = event.target
       const tagName = target?.tagName?.toLowerCase()
       if (tagName === 'input' || tagName === 'select' || tagName === 'textarea' || target?.isContentEditable) return
-      if (event.metaKey || event.ctrlKey || event.altKey) return
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return
+      if (event.key === 'Escape') {
+        if (!target?.closest?.('[aria-modal="true"]') && !isFullscreen) exitInspection()
+        return
+      }
       if (target?.closest?.('[role="dialog"], .pw-panel')) return
       if (target?.closest?.('[role="separator"], .tb-pane')) return
-      if (event.key === 'Escape') {
-        setPendingLesionPick(null)
-        setLesionSelection(previous => previous?.showCalipers3d ? previous : null)
-        dispatch({ type: 'CLEAR_SELECTION' })
-      }
       if (state.viewMode !== '3d' && ['ArrowLeft', 'ArrowDown'].includes(event.key)) {
         event.preventDefault()
         setSlice(navigatorIndex - 1)
@@ -335,7 +348,7 @@ export default function ReviewWorkspace({
         event.preventDefault()
         setSlice(navigatorIndex + 1)
       }
-      if (event.key.toLowerCase() === 'r' && !(framingLocked && state.viewMode !== '3d')) dispatch({ type: 'RESET_VIEW' })
+      if (event.key.toLowerCase() === 'r' && !(framingLocked && state.viewMode !== '3d')) resetView()
       if (event.key.toLowerCase() === 'f' && !(framingLocked && state.viewMode === '2d')) issueViewerCommand({ type: 'fit' })
       if (state.viewMode !== '2d') {
         // Camera shortcuts for 3D (and the 3D pane in Split): 1–6 anatomical views, 0 home.
@@ -351,7 +364,7 @@ export default function ReviewWorkspace({
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal, framingLocked])
+  }, [state.viewMode, state.clipProgress, navigatorIndex, navigatorPlane, navigatorTotal, framingLocked, exitInspection, resetView, isFullscreen])
 
   const availableSources = useMemo(() => {
     const next = []
@@ -392,14 +405,13 @@ export default function ReviewWorkspace({
   const selectedLesionNumber = selectedComponent ? components.indexOf(selectedComponent) + 1 : 0
   const awaitingPick = pendingLesionPick?.identity === measurementState.identity && measurementState.status === 'loading'
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
-  const selectedLabel = objectLabel(state.selectedObject)
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
 
   async function analyze() {
     const outcome = await onAnalyze(caseId)
     if (outcome) {
       dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
-      dispatch({ type: 'RESET_VIEW' })
+      resetView()
     }
   }
 
@@ -426,8 +438,7 @@ export default function ReviewWorkspace({
   }
 
   function resetScan() {
-    setPendingLesionPick(null)
-    setLesionSelection(null)
+    exitInspection()
     onResetScan()
     dispatch({ type: 'CASE_CHANGED', hasPrediction: false })
   }
@@ -465,11 +476,10 @@ export default function ReviewWorkspace({
   }
 
   function selectFrom3d(value) {
-    // Background clicks are easy to make while orbiting. Keep the measured
-    // lesion until the user selects something else or clears it explicitly.
+    // A pinned cross stays in view while the reviewer explores nearby tissue.
     const pickedModelLesion = value?.source === 'pred' && value.anatomy === 'lesion'
     if (!pickedModelLesion && show3dCalipers) return
-    if (!value && (currentLesionSelection?.component || awaitingPick)) return
+    if (!value) return exitInspection()
     setPendingLesionPick(null)
     if (pickedModelLesion) {
       const component = measuredLesionVisible ? lesionComponentAtWorld(verifiedMeasurement, value.worldMm) : null
@@ -484,7 +494,15 @@ export default function ReviewWorkspace({
     } else {
       setLesionSelection(null)
     }
-    dispatch({ type: value ? 'SELECT_OBJECT' : 'CLEAR_SELECTION', value })
+    dispatch({ type: 'SELECT_OBJECT', value })
+  }
+
+  function selectFrom2d(value) {
+    if (measurementInspection || show3dCalipers) return
+    if (!value) return exitInspection()
+    setPendingLesionPick(null)
+    setLesionSelection(null)
+    dispatch({ type: 'SELECT_OBJECT', value })
   }
 
   useEffect(() => {
@@ -507,7 +525,7 @@ export default function ReviewWorkspace({
       setLesionSelection(null)
     }
     if (!predictionShown && source === 'pred') setLayers(true, referenceShown)
-    dispatch({ type: 'SELECT_OBJECT', value: { source, anatomy } })
+    if (!show3dCalipers) dispatch({ type: 'SELECT_OBJECT', value: { source, anatomy } })
     issueViewerCommand({ type: 'focus', source, anatomy })
   }
 
@@ -556,10 +574,11 @@ export default function ReviewWorkspace({
 
   const is2dLike = state.viewMode !== '3d'
   const is3dLike = state.viewMode !== '2d'
+  const modelLesionPicked = state.selectedObject?.source === 'pred' && state.selectedObject.anatomy === 'lesion'
+  const lesionInReview = Boolean(currentLesionSelection?.component || (is3dLike && measuredLesionVisible && modelLesionPicked))
   let lesionReviewMessage
   if (selectedComponent) {
     if (!selectedCalipers?.plane) lesionReviewMessage = 'The exact measurement slice cannot be displayed.'
-    else if (is3dLike && show3dCalipers) lesionReviewMessage = 'Calipers stay on until hidden.'
     else if (measurementInspection && !is3dLike) lesionReviewMessage = 'Cross shown on the measured slice only.'
   } else if (!measuredLesionVisible) lesionReviewMessage = 'Show the model lesion to review its measurements.'
   else if (awaitingPick) lesionReviewMessage = 'Lesion clicked. Checking its outline…'
@@ -587,7 +606,7 @@ export default function ReviewWorkspace({
     enableDifferenceAssets: truthUnlocked && referenceState === 'ready',
     focusTreatment: state.focusTreatment,
     selectedObject: state.selectedObject,
-    onSelectObject: (value) => dispatch({ type: value ? 'SELECT_OBJECT' : 'CLEAR_SELECTION', value }),
+    onSelectObject: selectFrom2d,
     activePlane: state.activePlane,
     navigationCommand: navigationCommand?.type !== 'measurement-point' || measurementInspection ? navigationCommand : null,
     measurementCalipers: !state.showFull && predictionShown && !comparing && state.layerVisibility.lesion
@@ -610,7 +629,7 @@ export default function ReviewWorkspace({
     onPeelReveal: setPeelReveal3d,
     onSelectObject: selectFrom3d,
     selectedLesionWorldMm: measuredLesionVisible
-      ? currentLesionSelection?.component?.focusWorldMm : null,
+      ? (currentLesionSelection?.component?.focusWorldMm ?? null) : null,
     measurementCalipers: show3dCalipers ? selectedCalipers : null,
     navigationCommand: navigationCommand?.type === 'measurement-point' ? null : navigationCommand,
   }
@@ -834,7 +853,7 @@ export default function ReviewWorkspace({
             <Maximize size={15} aria-hidden="true" />
           </button>
           <button type="button" className="pw-icon-btn" disabled={framingLocked && is2dLike}
-            onClick={() => dispatch({ type: 'RESET_VIEW' })} aria-label="Reset viewer" title="Reset viewer (R)">
+            onClick={resetView} aria-label="Reset viewer" title="Reset viewer (R)">
             <RotateCcw size={15} aria-hidden="true" />
           </button>
           <button
@@ -894,11 +913,12 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-        {hasPrediction && (is3dLike || measurementInspection) && <LesionReviewBar
+        {hasPrediction && (is3dLike || lesionInReview) && <LesionReviewBar
           component={selectedComponent} number={selectedLesionNumber}
           status={lesionReviewMessage}
           actions={selectedComponent ? <>
             {is3dLike && selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
+              title={show3dCalipers ? 'Hide the pinned cross' : 'Keep the cross visible while browsing'}
               aria-pressed={show3dCalipers} onClick={() => setLesionSelection(previous => previous === currentLesionSelection
                 ? { ...previous, showCalipers3d: !show3dCalipers } : previous)}>{show3dCalipers ? 'Hide calipers' : 'Show calipers'}</button>}
             {is3dLike && show3dCalipers && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost"
@@ -907,18 +927,15 @@ export default function ReviewWorkspace({
                 issueViewerCommand({ type: 'camera', azimuth, elevation })
               }}>Face calipers</button>}
             {selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--primary"
-              onClick={() => inspectLesion(selectedComponent)}>{is3dLike ? 'Inspect CT slice' : 'Go to measured slice'}</button>}
-            {!show3dCalipers && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" onClick={() => {
-              setLesionSelection(null)
-              dispatch({ type: 'CLEAR_SELECTION' })
-            }}>Clear lesion selection</button>}
+              onClick={() => inspectLesion(selectedComponent)}>{!is3dLike && measurementInspection ? 'Go to measured slice' : 'Inspect CT slice'}</button>}
           </> : !measuredLesionVisible ? <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" onClick={() => {
             dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
             dispatch({ type: 'PATCH_SETTINGS', value: { layerVisibility: { ...state.layerVisibility, pred: true, lesion: true } } })
           }}>Show model lesion</button> : components.length === 1 ? <button type="button"
             className="pw-btn pw-btn--sm pw-btn--primary" onClick={() => markMeasuredLesion(components[0])}>Select predicted lesion</button>
             : components.length > 1 ? <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
-              onClick={() => openPanel('findings')}>Choose lesion in Findings</button> : null} />}
+              onClick={() => openPanel('findings')}>Choose lesion in Findings</button> : null}
+          onExit={lesionInReview ? exitInspection : null} />}
 
         <div
           className={`pw-viewer${is2dLike ? ' pw-viewer--slice-tools' : ''}`}
@@ -949,8 +966,7 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-          {state.selectedObject && !currentLesionSelection?.component
-            && !(is3dLike && state.selectedObject.source === 'pred' && state.selectedObject.anatomy === 'lesion') && (
+          {state.selectedObject && !lesionInReview && (
             <StructurePopover
               object={state.selectedObject}
               anchor={popAnchor}
@@ -960,7 +976,7 @@ export default function ReviewWorkspace({
               comparing={comparing}
               gtHasLesion={Boolean(caseData.gt_has_lesion)}
               onAsk={askAbout}
-              onClose={() => dispatch({ type: 'CLEAR_SELECTION' })}
+              onClose={exitInspection}
               focusControl={(
                 <Segmented
                   label="Focus treatment"

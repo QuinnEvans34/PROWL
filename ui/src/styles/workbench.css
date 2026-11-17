@@ -333,7 +333,7 @@
 .pw-structure-pop__head > div { display: grid; min-width: 0; }
 .pw-structure-pop__head small { color: var(--pw-text-faint); font-size: 11px; }
 .pw-structure-pop__head strong { font-size: 13.5px; }
-.pw-structure-pop__head .pw-icon-btn { margin-left: auto; }
+.pw-structure-pop__head .pw-btn { margin-inline-start: auto; flex: none; }
 .pw-structure-pop__facts { display: grid; gap: 4px; margin: 0; }
 .pw-structure-pop__facts div { display: flex; justify-content: space-between; gap: 12px; font-size: 12.5px; }
 .pw-structure-pop__facts dt { color: var(--pw-text-faint); }

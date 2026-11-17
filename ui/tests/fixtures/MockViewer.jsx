@@ -27,7 +27,8 @@ export default function MockViewer(props) {
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
-      measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm })}</pre>
+      measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm,
+      selectedObject: props.selectedObject })}</pre>
     {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
       onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'lesion', worldMm: props.caseData.syntheticLesionPick })}>
       Pick synthetic lesion surface
@@ -35,6 +36,10 @@ export default function MockViewer(props) {
     {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
       onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'pancreas' })}>
       Pick surrounding synthetic tissue
+    </button>}
+    {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
+      onClick={() => props.onSelectObject?.(null)}>
+      Pick empty space
     </button>}
   </div>
 }

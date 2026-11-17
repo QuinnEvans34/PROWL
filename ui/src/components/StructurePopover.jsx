@@ -1,4 +1,4 @@
-import { MessageSquareText, X } from 'lucide-react'
+import { MessageSquareText } from 'lucide-react'
 import { REVIEW_COLORS, objectLabel } from '../lib/viewerLayers.js'
 import { structureQuestions } from '../lib/structureQuestions.js'
 
@@ -61,7 +61,8 @@ export default function StructurePopover({
           <small>Focused structure</small>
           <strong>{objectLabel(object)}</strong>
         </div>
-        <button type="button" className="pw-icon-btn" onClick={onClose} aria-label="Clear structure focus"><X size={14} /></button>
+        <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" title="Exit inspection (Esc)"
+          aria-keyshortcuts="Escape" onClick={onClose}>Exit inspection</button>
       </header>
       <dl className="pw-structure-pop__facts">
         {facts.map(([label, value]) => (

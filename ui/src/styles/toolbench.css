@@ -12,7 +12,10 @@
 .pw-lesion-dimensions__selected { color: var(--pw-text-muted); font-size: 11px; margin-inline-start: 6px; }
 .pw-lesion-dimensions__actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .pw-lesion-review { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px 14px; padding: 8px 12px; background: var(--pw-surface); border-bottom: 1px solid var(--pw-border); }
-.pw-lesion-review__readout, .pw-lesion-review__readout dl, .pw-lesion-review__actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0; }
+.pw-lesion-review[data-selected] { box-shadow: inset 2px 0 var(--pw-lesion, #fca283); }
+.pw-lesion-review__readout, .pw-lesion-review__readout dl { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 0; }
+.pw-lesion-review__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pw-lesion-review__actions .pw-btn { padding-inline: 9px; }
 .pw-lesion-review__readout strong { font-size: 12px; }
 .pw-lesion-review__readout dl > div { display: inline-flex; gap: 5px; align-items: baseline; }
 .pw-lesion-review__readout dd { margin: 0; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
