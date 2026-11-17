@@ -34,6 +34,10 @@ follows the view and disappears when you leave that slice. If the viewer cannot
 reproduce the measurement plane, the dimensions remain visible without a jump
 action. Calipers measure the predicted outline, not a maximum diameter.
 
+In **3D** or **Split**, **Show calipers** displays those same endpoints on the
+selected lesion's original measurement plane. It starts off for each new
+selection and does not change the 2D measurement view.
+
 Regression checks: `npm run test:run`, `npm run build`, and
 `npm run test:e2e -- --config=playwright.toolbench.config.js`. Synthetic browser
 checks prove controls and draft lifetime; real CT rendering also needs browser inspection.

@@ -374,6 +374,10 @@ export default function ReviewWorkspace({
   const currentLesionSelection = verifiedMeasurement && lesionSelection?.measurement === verifiedMeasurement
     ? lesionSelection : null
   const measurementInspection = currentLesionSelection?.inspect ? currentLesionSelection : null
+  const measuredLesionVisible = predictionShown && !comparing && state.layerVisibility.lesion && visibleSources.includes('pred')
+  const selectedCalipers = currentLesionSelection?.component?.calipers
+  const canShow3dCalipers = measuredLesionVisible && Boolean(selectedCalipers?.plane)
+  const show3dCalipers = canShow3dCalipers && currentLesionSelection.showCalipers3d === true
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
   const selectedLabel = objectLabel(state.selectedObject)
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
@@ -415,7 +419,10 @@ export default function ReviewWorkspace({
   }
 
   function markMeasuredLesion(component, inspect = false) {
-    setLesionSelection({ measurement: verifiedMeasurement, component, inspect })
+    setLesionSelection(previous => ({ measurement: verifiedMeasurement, component, inspect,
+      showCalipers3d: previous?.measurement === verifiedMeasurement && previous.component === component
+        && previous.showCalipers3d === true,
+    }))
     setPopAnchor(null)
     dispatch({ type: 'SELECT_OBJECT', value: { source: 'pred', anatomy: 'lesion', worldMm: component.focusWorldMm } })
     openPanel('findings')
@@ -542,8 +549,9 @@ export default function ReviewWorkspace({
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
     onSelectObject: selectFrom3d,
-    selectedLesionWorldMm: predictionShown && !comparing && state.layerVisibility.lesion
+    selectedLesionWorldMm: measuredLesionVisible
       ? currentLesionSelection?.component?.focusWorldMm : null,
+    measurementCalipers: show3dCalipers ? selectedCalipers : null,
     navigationCommand: navigationCommand?.type === 'measurement-point' ? null : navigationCommand,
   }
 
@@ -784,6 +792,11 @@ export default function ReviewWorkspace({
             onClick={() => setLayout({ linked: !layout.linked })}>Linked crosshairs</button>}
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.measurementsVisible}
             onClick={() => setLayout({ measurementsVisible: !layout.measurementsVisible })}>Measurements</button>
+          {is3dLike && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
+            aria-pressed={show3dCalipers} disabled={!canShow3dCalipers}
+            title={canShow3dCalipers ? 'Show the measured CT slice calipers in 3D' : 'Select a visible lesion with a supported measurement plane'}
+            onClick={() => setLesionSelection(previous => previous === currentLesionSelection
+              ? { ...previous, showCalipers3d: !show3dCalipers } : previous)}>Show calipers</button>}
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={panelOpen}
             onClick={() => setPanelOpen(!panelOpen)}>Expert panel</button>
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={focusMode}

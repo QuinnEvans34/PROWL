@@ -1,5 +1,5 @@
 import { useId, useLayoutEffect, useState } from 'react'
-import { projectCalipers, projectLesionMarker } from '../lib/viewerCaliperProjection.js'
+import { project3dCalipers, projectCalipers, projectLesionMarker } from '../lib/viewerCaliperProjection.js'
 
 function displayCm(lengthMm) {
   return lengthMm < 0.1 ? '<0.01 cm' : `${(lengthMm / 10).toFixed(2)} cm`
@@ -43,7 +43,8 @@ function Arm({ line, index, bounds }) {
 export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sceneKey, ready, mode,
   calipers, marker }) {
   const clip = useId()
-  const input = mode === '2d' ? calipers : marker
+  const draw3dCross = mode === '3d' && Boolean(calipers)
+  const input = mode === '2d' || draw3dCross ? calipers : marker
   const [frame, setFrame] = useState(null)
   useLayoutEffect(() => {
     const nv = nvRef.current
@@ -51,7 +52,8 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
     let last = null
     function refresh() {
       if (nvRef.current !== nv || loadedSceneKeyRef.current !== sceneKey) return
-      const projection = mode === '2d' ? projectCalipers(nv, input) : projectLesionMarker(nv, input)
+      const projection = mode === '2d' ? projectCalipers(nv, input)
+        : draw3dCross ? project3dCalipers(nv, input) : projectLesionMarker(nv, input)
       const signature = JSON.stringify(projection)
       if (signature === last) return
       last = signature
@@ -66,21 +68,26 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
     nv.drawScene = drawWithMeasurement
     refresh()
     return () => { if (nv.drawScene === drawWithMeasurement) nv.drawScene = original }
-  }, [input, loadedSceneKeyRef, mode, nvRef, ready, sceneKey])
+  }, [input, draw3dCross, loadedSceneKeyRef, mode, nvRef, ready, sceneKey])
 
   const projection = ready && frame?.input === input && frame.sceneKey === sceneKey ? frame.projection : null
   if (!projection) return null
   const style = { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }
-  if (mode === '3d') return <svg style={style} role="img" aria-label="Selected predicted lesion marker">
+  if (mode === '3d' && !draw3dCross) return <svg style={style} role="img" aria-label="Selected predicted lesion marker">
     <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#191208" strokeWidth="4" />
     <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#ffcf8e" strokeWidth="2" />
     <circle cx={projection.x} cy={projection.y} r="2" fill="#ffdfb5" />
   </svg>
 
-  return <svg style={style} role="img" aria-label={`Lesion calipers: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
+  const label = draw3dCross ? '3D lesion calipers on the measured CT slice' : 'Lesion calipers'
+  const edgeOn = draw3dCross && projection.lines.some(({ points: [[x1, y1], [x2, y2]] }) =>
+    Math.hypot(x2 - x1, y2 - y1) < 2)
+  return <svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
     <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
     <g clipPath={`url(#${clip})`}>
       {projection.lines.map((line, index) => <Arm key={index} line={line} index={index} bounds={projection.bounds} />)}
     </g>
+    {edgeOn && <text x={projection.bounds.x + 14} y={projection.bounds.y + 46} fontSize="12"
+      fill="#ffdfb5" stroke="#191208" strokeWidth="4" paintOrder="stroke">Rotate to see both calipers</text>}
   </svg>
 }

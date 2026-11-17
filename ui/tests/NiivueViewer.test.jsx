@@ -384,6 +384,27 @@ it('binds a 3D surface pick to a lesion voxel along the ray and projects its mar
     nv.drawScene()
   })
   expect(markerX()).toBe('70')
-  rerender(<NiivueViewer {...props} selectedLesionWorldMm={worldMm} showLesion={false} />)
+  const measurementCalipers = { plane: 'axial', anchorWorldMm: worldMm, axes: [
+    { lengthMm: 1, worldEndpointsMm: [[-.5, 0, 0], [.5, 0, 0]] },
+    { lengthMm: 1, worldEndpointsMm: [[0, -.5, 0], [0, .5, 0]] },
+  ] }
+  const caliperView = changes => <NiivueViewer {...props} selectedLesionWorldMm={worldMm}
+    measurementCalipers={measurementCalipers} {...changes} />
+  rerender(caliperView())
   expect(screen.queryByRole('img', { name: 'Selected predicted lesion marker' })).toBeNull()
+  const crossName = { name: '3D lesion calipers on the measured CT slice: 0.10 cm by 0.10 cm' }
+  const arms = () => Array.from(screen.getByRole('img', crossName).querySelectorAll('[data-caliper-arm]'),
+    arm => arm.getAttribute('d'))
+  const beforeOrbit = arms()
+  expect(beforeOrbit).toHaveLength(2)
+  act(() => {
+    nv.calculateMvpMatrix.mockReturnValue([[0, .7, .7, 0, -1, 0, 0, 0, 0, -.7, .7, 0, 0, 0, 0, 1]])
+    nv.drawScene()
+  })
+  expect(arms()).not.toEqual(beforeOrbit)
+  rerender(caliperView({ showLesion: false }))
+  expect(screen.queryByRole('img', crossName)).toBeNull()
+  rerender(caliperView({ measurementCalipers: null }))
+  expect(screen.queryByRole('img', crossName)).toBeNull()
+  expect(markerX()).toBe('50')
 })
