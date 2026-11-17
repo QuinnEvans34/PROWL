@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import NativeMeasurementPanel from './NativeMeasurementPanel.jsx'
 import ReviewDecisionPanel, { reviewRequest } from './ReviewDecisionPanel.jsx'
 import LiteratureSearchPanel from './LiteratureSearchPanel.jsx'
@@ -28,19 +28,41 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
   const [showPancreas, setShowPancreas] = useState(true)
   const [showLesion, setShowLesion] = useState(true)
   const [revision, setRevision] = useState(0)
+  const [inspection, setInspection] = useState(null)
+  const inspectionId = useRef(0)
+  const viewerRef = useRef(null)
   useEffect(() => {
     const controller = new AbortController()
     let active = true, loaded
     setState({ status: 'loading' })
+    setInspection(null)
     loadSavedPrediction(base, controller.signal, expected).then(result => {
       if (!active) { result.release(); return }
       loaded = result
-      setState({ status: 'ready', base, revision, ...result })
+      setState({ status: 'ready', base, revision, expected, ...result })
     }).catch(error => { if (active) setState({ status: 'error', message: error.message }) })
     return () => { active = false; controller.abort(); loaded?.release() }
   }, [base, revision, expected])
   const caseData = useMemo(() => state.manifest ? { case_id: state.manifest.case_id, files: { ct: 'ct.nii.gz', pred: 'prediction.nii.gz' } } : null, [state.manifest])
-  const ready = state.status === 'ready' && state.base === base && state.revision === revision
+  const ready = state.status === 'ready' && state.base === base && state.revision === revision && state.expected === expected
+  const measurements = measurementState(state.measurement, `${base}:${revision}:${state.manifestHash}`)
+  // Bind to this loaded result object, so a new package never inherits the
+  // previous anatomy's slice or cross even before the load effect runs.
+  const activeInspection = ready && showLesion && inspection?.result === state ? inspection : null
+  const calipers = activeInspection?.component.calipers
+  useEffect(() => {
+    if (activeInspection) viewerRef.current?.scrollIntoView?.({ block: 'nearest' })
+  }, [activeInspection])
+
+  function inspectLesion(component) {
+    const slice = component.calipers
+    if (!ready || measurements.status !== 'ready' || !slice?.plane) return
+    setShowLesion(true)
+    setInspection({ result: state, component, command: {
+      type: 'measurement-point', id: ++inspectionId.current, plane: slice.plane, worldMm: slice.anchorWorldMm,
+    } })
+  }
+
   const Root = live ? 'section' : 'main'
   return <Root className={`pw-saved${live ? ' pw-saved--live' : ''}`}>
     <header className="pw-saved__head">
@@ -71,7 +93,10 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
         <h2 className="pw-mono-id">{state.manifest.case_id}</h2>
         <div className="pw-saved__layers" role="group" aria-label="Prediction layers">
           <label className="pw-check"><input type="checkbox" checked={showPancreas} onChange={e => setShowPancreas(e.target.checked)} /><i className="pw-swatch pw-swatch--pred-pancreas" aria-hidden="true" /> Predicted pancreas</label>
-          <label className="pw-check"><input type="checkbox" checked={showLesion} onChange={e => setShowLesion(e.target.checked)} /><i className="pw-swatch pw-swatch--pred-lesion" aria-hidden="true" /> Predicted lesion</label>
+          <label className="pw-check"><input type="checkbox" checked={showLesion} onChange={e => {
+            setShowLesion(e.target.checked)
+            if (!e.target.checked) setInspection(null)
+          }} /><i className="pw-swatch pw-swatch--pred-lesion" aria-hidden="true" /> Predicted lesion</label>
         </div>
       </div>
       {(state.manifest.warnings.length > 0 || state.manifest.prediction_mode === 'pancreas_assisted') && <div className="pw-notice pw-saved__notes">
@@ -81,11 +106,19 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
         </div>
       </div>}
       <p className="pw-fineprint">Native CT with predicted pancreas (green) and lesion (red). Reference annotations are not loaded.</p>
-      <MeasurementReadout state={measurementState(state.measurement, `${base}:${revision}:${state.manifestHash}`)} />
-      {state.measurement?.status === 'ready' && <LesionDimensions measurement={state.measurement} />}
-      <div className="pw-saved__viewer">
+      <MeasurementReadout state={measurements} />
+      {measurements.status === 'ready' && <LesionDimensions measurement={measurements.measurement}
+        selectedId={activeInspection?.component.id} onInspect={inspectLesion} />}
+      {calipers && <div className="pw-saved__controls">
+        <p className="pw-muted" role="status">Inspecting the lesion measurement on the {calipers.plane} CT plane.</p>
+        <button type="button" className="pw-btn pw-btn--secondary pw-btn--sm"
+          onClick={() => setInspection(null)}>Return to all planes</button>
+      </div>}
+      <div className="pw-saved__viewer" ref={viewerRef}>
         <NiivueViewer key={`${base}:${revision}:${state.manifest.result_sha256}`} caseData={caseData}
           assetUrls={state.urls} nativeGeometry={state.manifest.geometry} ctRange={state.manifest.ct_window}
+          mode="2d" activePlane={calipers?.plane || 'multiplanar'} measurementCalipers={calipers}
+          navigationCommand={activeInspection?.command}
           showPancreas={showPancreas} showLesion={showLesion} label={`Saved CT and prediction for ${state.manifest.case_id}`} />
       </div>
       <div className="pw-saved__panels">
