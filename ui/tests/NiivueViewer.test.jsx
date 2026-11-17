@@ -58,7 +58,7 @@ vi.mock('@niivue/niivue', () => ({
     setMeshProperty(id, key, value) { this.meshes[id][key] = value }
     setRenderAzimuthElevation(azimuth, elevation) { this.scene.renderAzimuth = azimuth; this.scene.renderElevation = elevation }
     setClipPlaneColor() {}
-    setClipPlane() {}
+    setClipPlane(value) { this.scene.clipPlane = value }
     resetBriCon() {}
     setDragMode(value) { this.opts.dragMode = value }
     setMouseEventConfig(config) { this.opts.mouseEventConfig = config }
@@ -358,7 +358,38 @@ it('zooms touchscreen pinches without invoking native slice gestures and starts 
   expect(nv.nativeGesture).toHaveBeenCalledOnce()
 })
 
-it.each([{}, { mode: '3d', wheelZoom: true }])('preserves native wheel input outside opted-in 2D %#', async (options) => {
+it('uses the same 3D zoom limits for wheel, pinch and buttons after the CT is peeled', async () => {
+  const view = (depth, navigationCommand = null) => <NiivueViewer {...base} mode="3d" wheelZoom
+    clip={{ enabled: true, depth }} navigationCommand={navigationCommand} />
+  const { rerender } = render(view(2))
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const setClipPlane = vi.spyOn(nv, 'setClipPlane')
+  const initialScale = nv.scene.volScaleMultiplier
+
+  rerender(view(-0.15))
+  await waitFor(() => expect(setClipPlane).toHaveBeenLastCalledWith([-0.15, 0, 0]))
+  setClipPlane.mockClear()
+  nv.nativeGesture.mockImplementation(() => nv.setClipPlane([0, 0, 0]))
+  expect(fireEvent.wheel(nv.canvas, { deltaY: -60 })).toBe(false)
+  expect(nv.scene.volScaleMultiplier).toBeGreaterThan(initialScale)
+  expect(fireEvent.wheel(nv.canvas, { deltaY: 60, ctrlKey: true })).toBe(false)
+  expect(nv.scene.volScaleMultiplier).toBeCloseTo(initialScale)
+  expect(nv.scene.pan2Dxyzmm[3]).toBe(1)
+
+  const touches = distance => [{ clientX: 0, clientY: 0 }, { clientX: distance, clientY: 0 }]
+  fireEvent.touchStart(nv.canvas, { touches: touches(10) })
+  fireEvent.touchMove(nv.canvas, { touches: touches(100) })
+  expect(nv.scene.volScaleMultiplier).toBe(4)
+  fireEvent.touchEnd(nv.canvas, { touches: [] })
+  rerender(view(-0.15, { id: 1, type: 'zoom', factor: 0.01 }))
+  expect(nv.scene.volScaleMultiplier).toBe(0.45)
+  expect(nv.scene.clipPlane).toEqual([-0.15, 0, 0])
+  expect(setClipPlane).not.toHaveBeenCalled()
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+})
+
+it.each([{}, { mode: '3d' }])('preserves native wheel input outside opted-in viewers %#', async (options) => {
   render(<NiivueViewer {...base} {...options} />)
   await screen.findByLabelText('Prepared result loaded')
   const nv = harness.instances[0]

@@ -336,6 +336,13 @@ function zoomAroundCrosshair(nv, factor) {
   nv.setPan2Dxyzmm(pan)
 }
 
+function zoom3d(nv, factor) {
+  const scale = Number(nv.scene.volScaleMultiplier)
+  if (!Number.isFinite(factor) || factor <= 0 || !Number.isFinite(scale) || scale <= 0) return
+  const nextScale = Math.max(0.45, Math.min(4, scale * factor))
+  if (nextScale !== scale) nv.setScale(nextScale)
+}
+
 function focusOnWorldPoint(nv, worldMM, mode) {
   if (!worldMM) return false
   const fraction = nv.mm2frac(worldMM, 0, true)
@@ -705,6 +712,8 @@ export default function NiivueViewer({
   const lastNavigationSignatureRef = useRef('')
   const interactiveRef = useRef({
     mode,
+    framingLocked,
+    wheelZoom,
     onSelectObject,
     onNavigationChange,
     onWindowChange,
@@ -769,13 +778,15 @@ export default function NiivueViewer({
   useEffect(() => {
     interactiveRef.current = {
       mode,
+      framingLocked,
+      wheelZoom,
       onSelectObject,
       onNavigationChange,
       onWindowChange,
       visibleSources: renderedSources,
       differenceMode,
     }
-  }, [mode, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
+  }, [mode, framingLocked, wheelZoom, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
 
   useEffect(() => {
     if (!canvasRef.current) return undefined
@@ -822,6 +833,8 @@ export default function NiivueViewer({
     let wheelTimer = null
     let restoreTimer = null
     let pointerHeld = false
+    let pinchDistance = null
+    let pinching = false
     function setLowResolution(active) {
       const native = window.devicePixelRatio || 1
       if (active === lowResActive) return
@@ -830,10 +843,65 @@ export default function NiivueViewer({
       nv.opts.forceDevicePixelRatio = active ? Math.max(1, native / 2) : 0
       nv.resizeListener()
     }
-    function handleWheel() {
+    function pulseLowResolution() {
       setLowResolution(true)
       window.clearTimeout(wheelTimer)
       wheelTimer = window.setTimeout(() => { if (!pointerHeld) setLowResolution(false) }, 220)
+    }
+    function canZoom() {
+      const { mode, framingLocked } = interactiveRef.current
+      return !(mode === '2d' && framingLocked) && nv.volumes?.[0]
+        && loadedSceneKeyRef.current && loadedSceneKeyRef.current === expectedSceneKeyRef.current
+    }
+    function zoomBy(factor) {
+      if (interactiveRef.current.mode === '3d') {
+        pulseLowResolution()
+        zoom3d(nv, factor)
+      } else zoomAroundCrosshair(nv, factor)
+    }
+    function handleWheel(event) {
+      const { mode, wheelZoom } = interactiveRef.current
+      if (!wheelZoom) {
+        if (mode === '3d') pulseLowResolution()
+        return
+      }
+      // NiiVue's listener can advance the 2D slice or the active 3D clip plane.
+      // Capture the gesture before either behavior runs.
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      const { deltaMode, deltaX, deltaY } = event
+      if (!canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
+      const unit = deltaMode === 1 ? 16 : deltaMode === 2 ? canvas.clientHeight : 1
+      const delta = Math.max(-120, Math.min(120, deltaY * unit))
+      zoomBy(Math.exp(-delta * 0.003))
+    }
+    function handlePinch(event) {
+      if (!interactiveRef.current.wheelZoom || (event.touches.length < 2 && !pinching)) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      pinching = true
+      const first = event.touches[0]
+      const second = event.touches[1]
+      if (!second) {
+        pinchDistance = null
+        return
+      }
+      const distance = Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY)
+      if (canZoom() && pinchDistance > 0 && distance > 0) zoomBy(distance / pinchDistance)
+      pinchDistance = distance
+    }
+    function endPinch(event) {
+      pinchDistance = null
+      if (event.touches.length === 0) pinching = false
+    }
+    function suppressSliceShortcut(event) {
+      const { mode, wheelZoom } = interactiveRef.current
+      if (mode !== '2d' || !wheelZoom) return
+      const crosshairKey = ['KeyH', 'KeyJ', 'KeyK', 'KeyL'].includes(event.code)
+        || (event.ctrlKey && ['KeyU', 'KeyD'].includes(event.code))
+      if (!crosshairKey && !['ArrowLeft', 'ArrowRight'].includes(event.code)) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
     }
     function endGesture() {
       // After NiiVue has processed its own mouseup at the gesture's resolution.
@@ -922,14 +990,20 @@ export default function NiivueViewer({
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (!picked?.point) return
       orbitCentreRef.current = picked.point
-      nv.setScale(Math.min(4, Number(nv.scene.volScaleMultiplier) * 1.15))
+      zoom3d(nv, 1.15)
       nv.drawScene()
     }
 
+    const captureGesture = { capture: true, passive: false }
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
     canvas.addEventListener('dblclick', handleDoubleClick)
-    canvas.addEventListener('wheel', handleWheel, { passive: true })
+    canvas.addEventListener('wheel', handleWheel, captureGesture)
+    canvas.addEventListener('touchstart', handlePinch, captureGesture)
+    canvas.addEventListener('touchmove', handlePinch, captureGesture)
+    canvas.addEventListener('touchend', endPinch, true)
+    canvas.addEventListener('touchcancel', endPinch, true)
+    canvas.addEventListener('keydown', suppressSliceShortcut, true)
     window.addEventListener('pointerup', endGesture)
     window.addEventListener('pointercancel', endGesture)
     window.addEventListener('blur', endGesture)
@@ -947,7 +1021,12 @@ export default function NiivueViewer({
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
       canvas.removeEventListener('dblclick', handleDoubleClick)
-      canvas.removeEventListener('wheel', handleWheel)
+      canvas.removeEventListener('wheel', handleWheel, true)
+      canvas.removeEventListener('touchstart', handlePinch, true)
+      canvas.removeEventListener('touchmove', handlePinch, true)
+      canvas.removeEventListener('touchend', endPinch, true)
+      canvas.removeEventListener('touchcancel', endPinch, true)
+      canvas.removeEventListener('keydown', suppressSliceShortcut, true)
       window.removeEventListener('pointerup', endGesture)
       window.removeEventListener('pointercancel', endGesture)
       window.removeEventListener('blur', endGesture)
@@ -1448,74 +1527,6 @@ export default function NiivueViewer({
 
   useEffect(() => {
     const nv = nvRef.current
-    const canvas = canvasRef.current
-    if (mode !== '2d' || !wheelZoom || !nv || !canvas) return
-
-    let pinchDistance = null
-    let pinching = false
-    const canZoom = () => !framingLocked && nv.volumes?.[0]
-      && loadedSceneKeyRef.current && loadedSceneKeyRef.current === expectedSceneKeyRef.current
-
-    function handleWheelZoom(event) {
-      // NiiVue binds a bubble listener to the same canvas. Stop it before its
-      // default slice scroll, including when the scan is loading or locked.
-      event.preventDefault()
-      event.stopImmediatePropagation()
-      const { deltaMode, deltaX, deltaY } = event
-      if (!canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
-      const unit = deltaMode === 1 ? 16 : deltaMode === 2 ? canvas.clientHeight : 1
-      const delta = Math.max(-120, Math.min(120, deltaY * unit))
-      zoomAroundCrosshair(nv, Math.exp(-delta * 0.003))
-    }
-
-    function handlePinch(event) {
-      if (event.touches.length < 2 && !pinching) return
-      event.preventDefault()
-      event.stopImmediatePropagation()
-      pinching = true
-      const first = event.touches[0]
-      const second = event.touches[1]
-      if (!second) {
-        pinchDistance = null
-        return
-      }
-      const distance = Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY)
-      if (canZoom() && pinchDistance > 0 && distance > 0) zoomAroundCrosshair(nv, distance / pinchDistance)
-      pinchDistance = distance
-    }
-
-    function endPinch(event) {
-      pinchDistance = null
-      if (event.touches.length === 0) pinching = false
-    }
-
-    function suppressSliceShortcut(event) {
-      const crosshairKey = ['KeyH', 'KeyJ', 'KeyK', 'KeyL'].includes(event.code)
-        || (event.ctrlKey && ['KeyU', 'KeyD'].includes(event.code))
-      if (!crosshairKey && !['ArrowLeft', 'ArrowRight'].includes(event.code)) return
-      event.preventDefault()
-      event.stopImmediatePropagation()
-    }
-
-    const captureGesture = { capture: true, passive: false }
-    canvas.addEventListener('wheel', handleWheelZoom, captureGesture)
-    canvas.addEventListener('touchstart', handlePinch, captureGesture)
-    canvas.addEventListener('touchmove', handlePinch, captureGesture)
-    canvas.addEventListener('touchend', endPinch, true)
-    canvas.addEventListener('touchcancel', endPinch, true)
-    canvas.addEventListener('keydown', suppressSliceShortcut, true)
-    return () => {
-      canvas.removeEventListener('wheel', handleWheelZoom, true)
-      canvas.removeEventListener('touchstart', handlePinch, true)
-      canvas.removeEventListener('touchmove', handlePinch, true)
-      canvas.removeEventListener('touchend', endPinch, true)
-      canvas.removeEventListener('touchcancel', endPinch, true)
-      canvas.removeEventListener('keydown', suppressSliceShortcut, true)
-    }
-  }, [compact, framingLocked, mode, wheelZoom])
-
-  useEffect(() => {
-    const nv = nvRef.current
     if (
       !navigationCommand
       || handledNavigationCommandRef.current === navigationCommand.id
@@ -1565,12 +1576,8 @@ export default function NiivueViewer({
         Math.max(-90, Math.min(90, Number(nv.scene.renderElevation) + Number(command.deltaElevation || 0))),
       )
     } else if (command.type === 'zoom') {
-      if (mode === '2d') {
-        zoomAroundCrosshair(nv, Number(command.factor))
-      } else {
-        const scale = Math.max(0.45, Math.min(4, Number(nv.scene.volScaleMultiplier) * command.factor))
-        nv.setScale(scale)
-      }
+      if (mode === '2d') zoomAroundCrosshair(nv, Number(command.factor))
+      else zoom3d(nv, Number(command.factor))
     } else if (command.type === 'fit') {
       orbitCentreRef.current = null
       if (mode === '3d') {

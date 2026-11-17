@@ -33,6 +33,7 @@ import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
 import { REVIEW_COLORS, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
 import FindingsPanel from './FindingsPanel.jsx'
 import LesionReviewBar from './LesionReviewBar.jsx'
+import SliceSlider from './SliceSlider.jsx'
 import StructurePopover from './StructurePopover.jsx'
 import ReviewSummary from './ReviewSummary.jsx'
 import { draftKey, hasHumanContent, predictionIdentity } from '../lib/summaryDraft.js'
@@ -69,11 +70,11 @@ const CONTROL_HELP = {
   '3d': [
     ['Rotate', 'Drag with the Rotate tool (one finger on a trackpad)'],
     ['Pan', 'Shift-drag, right-drag, or drag with the Move tool'],
-    ['Zoom', 'Scroll, pinch, or + / −'],
+    ['Zoom', 'Scroll, pinch, or + / − at any peel depth'],
     ['Select', 'Click a surface for its details'],
     ['Orbit a structure', 'Double-click a surface'],
     ['Views', '1–6 anatomical views · 0 home · F fit · R reset'],
-    ['Peel', '[ and ] step the front-to-back peel'],
+    ['Peel', 'Use the front-to-back slider below the image'],
   ],
   '2d': [
     ['Crosshair', 'Click or drag with the Navigate tool'],
@@ -315,14 +316,10 @@ export default function ReviewWorkspace({
         if (event.key === '+' || event.key === '=') issueViewerCommand({ type: 'zoom', factor: 1.16 })
         if (event.key === '-' || event.key === '_') issueViewerCommand({ type: 'zoom', factor: 0.86 })
       }
-      if (state.viewMode !== '2d' && (event.key === '[' || event.key === ']')) {
-        event.preventDefault()
-        setClipProgress(state.clipProgress + (event.key === ']' ? 5 : -5))
-      }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [state.viewMode, state.clipProgress, framingLocked, exitInspection, resetView, isFullscreen])
+  }, [state.viewMode, framingLocked, exitInspection, resetView, isFullscreen])
 
   const availableSources = useMemo(() => {
     const next = []
@@ -579,6 +576,7 @@ export default function ReviewWorkspace({
 
   // 3D scene choice: which CT (if any) surrounds the surfaces.
   const viewer3dProps = {
+    wheelZoom: true,
     showFull: scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
@@ -1105,7 +1103,7 @@ export default function ReviewWorkspace({
         </div>}
         {is3dLike && scene3d !== 'surfaces' && (
           <div className="pw-slicebar pw-slicebar--cut" aria-label="Front-to-back peel">
-            <span className="pw-slicebar__readout" title="Removes the CT from the front of the body towards the back. [ and ] step the peel.">
+            <span className="pw-slicebar__readout" title="Use the slider to remove CT from front to back">
               <strong>Peel</strong> <span className="pw-muted">front → back</span>
             </span>
             <div className="pw-slicebar__track" style={{ '--slice-progress': `${state.clipProgress}%` }}>
@@ -1119,7 +1117,7 @@ export default function ReviewWorkspace({
                   title="Peel to the front of the pancreas"
                 />
               )}
-              <input type="range" min="0" max="100" step="1" value={state.clipProgress}
+              <SliceSlider min="0" max="100" step="1" value={state.clipProgress}
                 onChange={(event) => setClipProgress(Number(event.target.value), { live: true })} aria-label="Front-to-back CT removal" />
             </div>
             <span className="pw-slicebar__value pw-num">{Math.round(state.clipProgress)}%</span>

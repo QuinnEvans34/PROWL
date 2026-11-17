@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Eye, EyeOff, Link2, LockKeyhole, LockKeyholeOpen, Maximize2, Minimize2, Scan, ZoomIn, ZoomOut } from 'lucide-react'
 import NiivueViewer from './NiivueViewer.jsx'
+import SliceSlider from './SliceSlider.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import '../styles/toolbench-viewer.css'
 
@@ -239,7 +240,7 @@ export default function ToolbenchViewer({
           </div>
           <footer className="tb-pane__navigator">
             <span aria-hidden="true">Slice</span>
-            <input type="range" aria-label={`${TITLES[plane]} slice`} min="0" max={total - 1} step="1" value={index}
+            <SliceSlider aria-label={`${TITLES[plane]} slice`} min="0" max={total - 1} step="1" value={index}
               disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}` : 'Loading scan'}
               onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
             <span className="tb-pane__slice-count" aria-hidden="true">{ready ? `${index + 1} / ${total}` : '—'}</span>

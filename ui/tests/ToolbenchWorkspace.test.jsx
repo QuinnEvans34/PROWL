@@ -235,14 +235,32 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(coronalViewer).navigationCommand).toBeNull()
     expect(within(coronal).queryByRole('spinbutton')).toBeNull()
     expect(within(coronal).queryByRole('button', { name: /Next|Previous.*slice/ })).toBeNull()
+    act(() => coronalSlice.focus())
     fireEvent.change(coronalSlice, { target: { value: '51' } })
     await waitFor(() => expect(viewerData(coronalViewer).navigationCommand).toMatchObject({ type: 'slice', plane: 'coronal', index: 51 }))
+    const sliceCommand = viewerData(coronalViewer).navigationCommand
+    expect(fireEvent.wheel(coronalSlice, { deltaY: 40 })).toBe(false)
+    expect(document.activeElement).toBe(coronalSlice)
+    expect(viewerData(coronalViewer).navigationCommand).toEqual(sliceCommand)
     const axial = screen.getByRole('region', { name: 'Axial CT plane' })
     const axialViewer = within(axial).getByRole('status', { name: 'Synthetic viewer stub' })
     expect(viewerData(axialViewer).navigationCommand).toBeNull()
     await user.click(within(axial).getByRole('button', { name: 'Zoom in axial' }))
     expect(viewerData(axialViewer).navigationCommand).toMatchObject({ type: 'zoom', factor: 1.2 })
     expect(viewerData(coronalViewer).navigationCommand).toMatchObject({ type: 'slice', plane: 'coronal', index: 51 })
+  })
+
+  it('blocks wheel adjustment after using the 3D CT removal slider', async () => {
+    const user = userEvent.setup()
+    render(<Harness />)
+    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
+    const peel = screen.getByRole('slider', { name: 'Front-to-back CT removal' })
+    act(() => peel.focus())
+    fireEvent.change(peel, { target: { value: '37' } })
+    await waitFor(() => expect(peel.value).toBe('37'))
+    expect(fireEvent.wheel(peel, { deltaY: -40 })).toBe(false)
+    expect(peel.value).toBe('37')
+    expect(document.activeElement).toBe(peel)
   })
 
   it('keeps study measurements visible with the expert and rejects a late result from the previous study', async () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect, it, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ReviewWorkspace from '../src/components/ReviewWorkspace.jsx'
 import LiteratureSearchPanel from '../src/components/LiteratureSearchPanel.jsx'
@@ -80,8 +80,11 @@ it('offers independent 3D scenes and does not guess a pancreas peel before geome
   await user.click(screen.getByRole('button', { name: 'Viewer controls', exact: true }))
   expect(screen.getByRole('region', { name: 'Viewer controls' })).toBeTruthy()
   await user.click(screen.getByRole('button', { name: 'Close viewer controls', exact: true }))
+  const peel = screen.getByLabelText('Front-to-back CT removal')
   await user.keyboard(']')
-  expect(screen.getByLabelText('Front-to-back CT removal').value).toBe('5')
+  expect(peel.value).toBe('0')
+  fireEvent.change(peel, { target: { value: '5' } })
+  await waitFor(() => expect(peel.value).toBe('5'))
   await user.click(screen.getByRole('button', { name: 'Restore CT', exact: true }))
-  expect(screen.getByLabelText('Front-to-back CT removal').value).toBe('0')
+  expect(peel.value).toBe('0')
 })

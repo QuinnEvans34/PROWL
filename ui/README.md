@@ -8,9 +8,10 @@ independent. Drag the dividers to resize planes, the study list or the expert
 panel; keyboard arrows also operate focused dividers. Restore layout changes
 presentation preferences without clearing imaging settings or review drafts.
 Use **Lock framing** to preserve pan and zoom while browsing slices or changing
-the window. Two-finger scrolling over a Workbench CT image zooms the active
-plane. Drag the slider below an image to browse slices, or focus it and use the
-arrow keys for single-slice steps.
+the window. Two-finger scrolling over a Workbench image zooms the active 2D
+plane or the 3D camera, including while the 3D CT is peeled. Drag the slider
+below an image to browse slices or change peel depth. The arrow keys also work
+when the slider has focus.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests
