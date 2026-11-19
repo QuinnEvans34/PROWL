@@ -1,3 +1,5 @@
+import { centeredSliceCalipers, column, cross, dot, nativeSliceGeometry, voxelToWorld } from './sliceCalipers.js'
+
 const MAX_LABEL_VOXELS = 250_000
 const MAX_COMPONENTS = 512
 export const LESION_DIMENSIONS_POLICY = 'native-centered-slice-calipers-v1'
@@ -5,26 +7,7 @@ export const LESION_DIMENSIONS_POLICY = 'native-centered-slice-calipers-v1'
 // Keep the sparse picking index out of serializable measurement/review data.
 // It expires with the exact verified dimensions record and retains no mask.
 const componentIndexes = new WeakMap()
-const column = (affine, j) => affine.slice(0, 3).map(row => row[j])
-const dot = (a, b) => a.reduce((sum, value, i) => sum + value * b[i], 0)
-const cross = (a, b) => [
-  a[1] * b[2] - a[2] * b[1],
-  a[2] * b[0] - a[0] * b[2],
-  a[0] * b[1] - a[1] * b[0],
-]
-
-function parallelToAxis(vector, axis) {
-  const tolerance = 1e-6 * Math.hypot(...vector)
-  return vector.every((value, index) => index === axis || Math.abs(value) <= tolerance)
-}
-
-function anatomicalPlane(i, j, k) {
-  const normal = cross(i, j)
-  // In-plane rotation and signed permutations are fine. A tilted normal or
-  // a k axis with an in-plane component requires unsupported reslicing.
-  const axis = normal.findIndex((_, i) => parallelToAxis(normal, i) && parallelToAxis(k, i))
-  return ['sagittal', 'coronal', 'axial'][axis] ?? null
-}
+const isLesion = value => value === 2
 
 function slotAt(packed, voxelIndex) {
   const target = voxelIndex * MAX_COMPONENTS
@@ -80,17 +63,14 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
   const packed = new Float64Array(lesionVoxels)
   const visit = (index, tail) => {
     const bit = 1 << (index % 8)
-    if (labels[index] !== 2 || (visited[index >> 3] & bit)) return tail
+    if (!isLesion(labels[index]) || (visited[index >> 3] & bit)) return tail
     visited[index >> 3] |= bit
     queue[tail] = index
     return tail + 1
   }
-  const world = point => affine.slice(0, 3).map(row => row[3] + row[0] * point[0] + row[1] * point[1] + row[2] * point[2])
-  const [iAxis, jAxis, kAxis] = [0, 1, 2].map(axis => column(affine, axis))
-  const iMm = Math.hypot(...iAxis)
-  const jMm = Math.hypot(...jAxis)
-  const orthogonal = Math.abs(dot(iAxis, jAxis)) <= 1e-5 * iMm * jMm
-  const plane = orthogonal ? anatomicalPlane(iAxis, jAxis, kAxis) : null
+  const world = point => voxelToWorld(affine, point)
+  const geometry = nativeSliceGeometry(affine)
+  const { iAxis, jAxis, kAxis, iMm, jMm, orthogonal } = geometry
   const voxelHeight = affine[2].slice(0, 3).reduce((sum, v) => sum + Math.abs(v), 0)
   const components = []
   let measuredVoxels = 0
@@ -150,17 +130,7 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
           closest = distance; anchor = index
         }
       }
-      const center = [anchor % nx, Math.floor(anchor / nx) % ny, k]
-      const axes = [1, nx].map((step, axis) => {
-        let lo = center[axis]
-        let hi = lo
-        const start = anchor - lo * step
-        while (lo > 0 && labels[start + (lo - 1) * step] === 2) lo--
-        while (hi + 1 < shapeSize(axis) && labels[start + (hi + 1) * step] === 2) hi++
-        const ends = [lo - 0.5, hi + 0.5].map(edge => center.map((v, i) => i === axis ? edge : v))
-        return { lengthMm: (hi - lo + 1) * (axis === 0 ? iMm : jMm), voxelEndpoints: ends, worldEndpointsMm: ends.map(world) }
-      })
-      calipers = { nativeSlice: k, plane, anchorVoxel: center, anchorWorldMm: world(center), axes }
+      calipers = centeredSliceCalipers(labels, [nx, ny, nz], affine, geometry, anchor, isLesion)
     }
     // Camera framing uses the outer voxel edges in the original affine.
     const boundsWorldMm = []
@@ -176,7 +146,6 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
       focusWorldMm: calipers?.anchorWorldMm ?? world([seed % nx, Math.floor(seed / nx) % ny, Math.floor(seed / xy)]),
       caliperUnavailableReason: orthogonal ? undefined : 'The native slice axes are not perpendicular.' })
   }
-  function shapeSize(axis) { return axis === 0 ? nx : ny }
   const dimensions = record('ready', [...components].sort((a, b) => b.voxelCount - a.voxelCount || a.id - b.id))
   const cofactors = [cross(jAxis, kAxis), cross(kAxis, iAxis), cross(iAxis, jAxis)]
   const determinant = dot(iAxis, cofactors[0])
