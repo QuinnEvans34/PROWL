@@ -16,19 +16,27 @@ export function parseLocation(location = window.location) {
         : 'studies'
   const study = params.get('study')
   const review = params.get('review')
+  const run = params.get('run')
+  const validStudy = Boolean(study && /^[A-Za-z0-9_-]{1,80}$/.test(study))
+  const validRun = view === 'workbench' && validStudy && /^[a-f0-9]{32}$/.test(run || '')
+    && params.get('layout') !== 'compare'
   return {
     view,
     review: view === 'saved' && /^[a-f0-9]{64}$/.test(review || '') ? review : null,
-    study: study && /^[A-Za-z0-9_-]{1,80}$/.test(study) ? study : null,
+    study: validStudy ? study : null,
+    run: validRun ? run : null,
+    invalidRun: view === 'workbench' && params.has('run') && !validRun,
     layout: params.get('layout') === 'compare' ? 'compare' : null,
   }
 }
 
-export function hrefFor({ view = 'studies', study = null, layout = null, review = null } = {}) {
+export function hrefFor({ view = 'studies', study = null, layout = null, review = null, run = null } = {}) {
   const path = view === 'studies' ? '/' : `/${view}`
   const params = new URLSearchParams()
   if (study && view === 'workbench') params.set('study', study)
   if (layout && view === 'workbench') params.set('layout', layout)
+  if (view === 'workbench' && /^[A-Za-z0-9_-]{1,80}$/.test(study || '') && /^[a-f0-9]{32}$/.test(run || '')
+    && layout !== 'compare') params.set('run', run)
   if (view === 'saved' && /^[a-f0-9]{64}$/.test(review || '')) params.set('review', review)
   const query = params.toString()
   return query ? `${path}?${query}` : path
@@ -58,7 +66,7 @@ export function useRoute({ guard } = {}) {
   }, [])
 
   const navigate = useCallback((to, { replace = false } = {}) => {
-    const next = { ...routeRef.current, layout: null, review: null, ...to }
+    const next = { ...routeRef.current, layout: null, review: null, run: null, ...to }
     if (guardRef.current && guardRef.current(next, { popstate: false }) === false) return false
     const href = hrefFor(next)
     if (href !== window.location.pathname + window.location.search) {

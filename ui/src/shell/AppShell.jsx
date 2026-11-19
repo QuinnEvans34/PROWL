@@ -16,6 +16,7 @@ const NAV = [
 const STATUS_LABELS = {
   predict: { online: 'Model worker connected', offline: 'Model worker not connected', checking: 'Checking model worker…' },
   workbench: { online: 'Live analysis connected', offline: 'Live analysis offline · saved results available', checking: 'Checking live analysis…' },
+  run: { online: 'Prediction artifact verified', offline: 'Prediction artifact unavailable', checking: 'Verifying prediction artifact…' },
 }
 
 function ServiceStatus({ status, view }) {
@@ -31,11 +32,16 @@ function ServiceStatus({ status, view }) {
   )
 }
 
-export default function AppShell({ route, navigate, activeStudy, endpointStatus, modelLabel, onAbout, children }) {
+export default function AppShell({ route, navigate, activeStudy, activePrediction, endpointStatus, modelLabel, onAbout, children }) {
+  function target(view) {
+    return view === 'workbench'
+      ? { view, study: activePrediction?.study || activeStudy, run: activePrediction?.run }
+      : { view }
+  }
   function go(event, view) {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) return
     event.preventDefault()
-    navigate(view === 'workbench' ? { view, study: activeStudy } : { view })
+    navigate(target(view))
   }
   const current = route.view
   return (
@@ -47,7 +53,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
           {NAV.map(([view, label, short]) => (
             <a
               key={view}
-              href={hrefFor(view === 'workbench' ? { view, study: activeStudy } : { view })}
+              href={hrefFor(target(view))}
               className={current === view ? 'active' : ''}
               aria-current={current === view ? 'page' : undefined}
               onClick={(event) => go(event, view)}
@@ -57,7 +63,7 @@ export default function AppShell({ route, navigate, activeStudy, endpointStatus,
           ))}
         </nav>
         <div className="pw-header__end">
-          <ServiceStatus status={endpointStatus} view={route.view} />
+          <ServiceStatus status={endpointStatus} view={route.run || route.invalidRun ? 'run' : route.view} />
           <button type="button" className="pw-icon-btn" onClick={onAbout} aria-label="About PROWL" title="About PROWL">
             <Info size={17} aria-hidden="true" />
           </button>

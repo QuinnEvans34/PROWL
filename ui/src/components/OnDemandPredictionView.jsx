@@ -1,15 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { predictionCatalog, predictStudy, disposePrediction } from '../lib/onDemandPrediction.js'
-import SavedPredictionView from './SavedPredictionView.jsx'
 
-export default function OnDemandPredictionView({ onServiceStatus, onReviewDirty } = {}) {
+export default function OnDemandPredictionView({ onServiceStatus, onOpenWorkbench } = {}) {
   const [catalog, setCatalog] = useState(null)
   const [caseId, setCaseId] = useState('')
   const [error, setError] = useState('')
   const [status, setStatus] = useState('idle')
-  const [reviewDirty, setReviewDirty] = useState(false)
-  const changedReview = useCallback(value => { setReviewDirty(value); onReviewDirty?.(value) }, [onReviewDirty])
-  const canLeaveReview = () => !reviewDirty || window.confirm('Discard this unsaved review draft? Recorded decisions will remain saved.')
   const [result, setResult] = useState(null)
   const active = useRef(null)
   useEffect(() => {
@@ -27,11 +23,9 @@ export default function OnDemandPredictionView({ onServiceStatus, onReviewDirty 
     if (previous?.id) void disposePrediction(previous.id)
   }
   function select(value) {
-    if (!canLeaveReview()) return
     stop(); setCaseId(value); setResult(null); setStatus('idle'); setError('')
   }
   async function predict() {
-    if (!canLeaveReview()) return
     stop(); setResult(null); setError(''); setStatus('queued')
     const task = { controller: new AbortController(), id: null }
     active.current = task
@@ -43,6 +37,10 @@ export default function OnDemandPredictionView({ onServiceStatus, onReviewDirty 
     } catch (e) {
       if (active.current === task) { setError(e.message); setStatus('failed') }
     }
+  }
+  function openWorkbench() {
+    if (!result || active.current?.id !== result.job_id) return
+    if (onOpenWorkbench?.(result)) active.current = null
   }
   const busy = ['queued', 'running'].includes(status)
   return <section className="pw-page pw-analyze" aria-label="On-demand prediction">
@@ -69,6 +67,9 @@ export default function OnDemandPredictionView({ onServiceStatus, onReviewDirty 
         <li><strong>Inspect and record</strong><span>Measure the outline, then record your review decision locally.</span></li>
       </ol>
     </div>}
-    {result && <SavedPredictionView key={result.job_id} base={`/scan-inference/jobs/${result.job_id}/files`} expected={result} live onReviewDirty={changedReview} />}
+    {result && <div className="pw-notice">
+      <p role="status"><strong>Prediction ready for review.</strong> Open this run’s CT, outline, and measurements in the Workbench.</p>
+      <button type="button" className="pw-btn pw-btn--primary" onClick={openWorkbench}>Open prediction in Workbench</button>
+    </div>}
   </section>
 }

@@ -7,6 +7,18 @@ export async function request(path, options = {}) {
   return value
 }
 export const predictionCatalog = signal => request('/cases', { signal })
+
+export async function predictionJobForReview(jobId, caseId, signal, expected = null) {
+  if (!/^[a-f0-9]{32}$/.test(jobId || '') || !/^[A-Za-z0-9_-]{1,80}$/.test(caseId || ''))
+    throw new Error('Invalid prediction review link.')
+  const job = await request(`/jobs/${jobId}`, { signal })
+  if (job.job_id !== jobId || job.case_id !== caseId || !/^[a-f0-9]{64}$/.test(job.request_identity || '')
+    || (expected && expected.request_identity !== job.request_identity))
+    throw new Error('Prediction belongs to a different study or request.')
+  if (job.status !== 'ready') throw new Error('This prediction is not available for review yet.')
+  return { ...job, base: `/scan-inference/jobs/${jobId}/files` }
+}
+
 const delay = (ms, signal) => new Promise((resolve, reject) => {
   if (signal?.aborted) return reject(signal.reason)
   const cancel = () => { clearTimeout(timer); reject(signal.reason) }
