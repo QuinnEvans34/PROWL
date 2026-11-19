@@ -1,5 +1,5 @@
 import { useId, useLayoutEffect, useState } from 'react'
-import { project3dCalipers, projectCalipers, projectLesionMarker } from '../lib/viewerCaliperProjection.js'
+import { project3dCalipers, projectCalipers, projectLesionMarker, projectSliceLocator } from '../lib/viewerCaliperProjection.js'
 
 function displayCm(lengthMm) {
   return lengthMm < 0.1 ? '<0.01 cm' : `${(lengthMm / 10).toFixed(2)} cm`
@@ -51,23 +51,24 @@ function Arm({ line, index, bounds, cameraFacing }) {
  * camera from controls, which would lag behind interaction.
  */
 export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sceneKey, ready, mode,
-  anatomy = 'lesion', calipers, marker }) {
+  anatomy = 'lesion', calipers, marker, sliceLocatorCorners }) {
   const clip = useId()
   const draw3dCross = mode === '3d' && anatomy === 'lesion' && Boolean(calipers)
   const input = mode === '2d' || draw3dCross ? calipers : marker
   const [frame, setFrame] = useState(null)
   useLayoutEffect(() => {
     const nv = nvRef.current
-    if (!ready || !input || !nv) return undefined
+    if (!ready || (!input && !sliceLocatorCorners) || !nv) return undefined
     let last = null
     function refresh() {
       if (nvRef.current !== nv || loadedSceneKeyRef.current !== sceneKey) return
-      const projection = mode === '2d' ? projectCalipers(nv, input)
-        : draw3dCross ? project3dCalipers(nv, input) : projectLesionMarker(nv, input)
-      const signature = JSON.stringify(projection)
+      const projection = input ? (mode === '2d' ? projectCalipers(nv, input)
+        : draw3dCross ? project3dCalipers(nv, input) : projectLesionMarker(nv, input)) : null
+      const locator = projectSliceLocator(nv, sliceLocatorCorners)
+      const signature = JSON.stringify([projection, locator])
       if (signature === last) return
       last = signature
-      setFrame({ input, sceneKey, projection })
+      setFrame({ input, sceneKey, projection, sliceLocatorCorners, locator })
     }
     const original = nv.drawScene
     function drawWithMeasurement(...args) {
@@ -78,24 +79,28 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
     nv.drawScene = drawWithMeasurement
     refresh()
     return () => { if (nv.drawScene === drawWithMeasurement) nv.drawScene = original }
-  }, [input, draw3dCross, loadedSceneKeyRef, mode, nvRef, ready, sceneKey])
+  }, [input, draw3dCross, loadedSceneKeyRef, mode, nvRef, ready, sceneKey, sliceLocatorCorners])
 
   const projection = ready && frame?.input === input && frame.sceneKey === sceneKey ? frame.projection : null
-  if (!projection) return null
   const style = { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }
-  if (mode === '3d' && !draw3dCross) return <svg style={style} role="img" aria-label="Selected predicted lesion marker">
+  const points = ready && frame?.locator && frame.sceneKey === sceneKey && frame.sliceLocatorCorners === sliceLocatorCorners ? frame.locator : null
+  const locator = points && <svg style={style} role="img" aria-label="Current CT slice plane in 3D">
+    <polygon points={points.map(point => point.join(',')).join(' ')} fill="#b4ccff16" stroke="#b4ccff" strokeWidth="1.4" strokeDasharray="6 4" />
+  </svg>
+  if (!projection) return locator || null
+  if (mode === '3d' && !draw3dCross) return <>{locator}<svg style={style} role="img" aria-label="Selected predicted lesion marker">
     <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#191208" strokeWidth="4" />
     <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#ffcf8e" strokeWidth="2" />
     <circle cx={projection.x} cy={projection.y} r="2" fill="#ffdfb5" />
-  </svg>
+  </svg></>
 
   const label = draw3dCross ? '3D lesion calipers from the measured CT slice'
     : anatomy === 'pancreas' ? 'Pancreas calipers' : 'Lesion calipers'
-  return <svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
+  return <>{locator}<svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
     <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
     <g clipPath={`url(#${clip})`}>
       {projection.lines.map((line, index) =>
         <Arm key={index} line={line} index={index} bounds={projection.bounds} cameraFacing={draw3dCross} />)}
     </g>
-  </svg>
+  </svg></>
 }

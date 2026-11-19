@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+// Load the real toolbench after its canvas mock is installed. The 2D and 3D
+// lazy imports then share the same mock rather than racing WebGL initialization.
+import '../src/components/ToolbenchViewer.jsx'
 import ReviewWorkspace from '../src/components/ReviewWorkspace.jsx'
 import { loadScanMeasurements, measureMask } from '../src/lib/scanMeasurements.js'
 import { readToolbenchLayout } from '../src/lib/toolbenchLayout.js'
@@ -59,125 +62,199 @@ async function startDraft(user) {
   fireEvent.change(screen.getByLabelText(/Your notes/), { target: { value: 'Synthetic reviewer notes.' } })
 }
 
+function measuredFindings() {
+  const affine = [[2, 0, 0, -4], [0, 0, -4, 10], [0, 3, 0, 1], [0, 0, 0, 1]]
+  const hdr = { dims: [3, 8, 8, 8, 1, 1, 1, 1], affine, xyzt_units: 2, sform_code: 1 }
+  const labels = new Uint8Array(8 ** 3)
+  const index = (x, y, z) => x + 8 * (y + 8 * z)
+  labels[index(1, 1, 1)] = 1
+  labels[index(2, 2, 2)] = labels[index(2, 3, 2)] = 2
+  labels[index(4, 4, 5)] = 2
+  return measureMask(hdr, hdr, labels)
+}
+
+const lesionLocation = [4, -10, 13]
+const planeCorners = [[-8, -10, 3], [16, -10, 3], [16, -10, 24], [-8, -10, 24]]
+const camera = { azimuth: 71, elevation: 26, scale: 1.5, pivot3D: lesionLocation, orbitCentre: lesionLocation }
+const meshStudy = ({ caseId = 'SYNTHETIC_A', syntheticLesionPick = lesionLocation, syntheticRestore = vi.fn() } = {}) =>
+  workspaceProps({ caseId, isCurated: true,
+    caseData: { ...cases[caseId], files: { ...cases[caseId].files, mesh: { lesion_pred: 'synthetic.obj', pancreas_pred: 'synthetic.obj' } },
+      syntheticLesionPick, syntheticPlaneCorners: planeCorners, syntheticView: { '3d': camera }, syntheticRestore },
+  })
+
+const lesionRail = () => within(screen.getByRole('region', { name: 'Lesion review' }))
+const showCalipers = () => screen.getByRole('button', { name: 'Show calipers', exact: true })
+const hideCalipers = () => screen.getByRole('button', { name: 'Hide calipers', exact: true })
+const viewer3d = () => viewerData(screen.getByTestId(/^synthetic-viewer-3d/))
+const measuredViewer = async () => within(await screen.findByRole('region', { name: 'Measured CT' }))
+  .findByRole('status', { name: 'Synthetic viewer stub' })
+
 describe('real workspace layout with synthetic imaging only', () => {
-  it('sends the selected lesion or pancreas measurement to the exact 2D plane', async () => {
+  it('keeps lesion calipers pinned and takes the selected pancreas to its prepared measurement', async () => {
     const user = userEvent.setup()
-    const affine = [[2, 0, 0, -4], [0, 0, -4, 10], [0, 3, 0, 1], [0, 0, 0, 1]]
-    const hdr = { dims: [3, 8, 8, 8, 1, 1, 1, 1], affine, xyzt_units: 2, sform_code: 1 }
-    const labels = new Uint8Array(8 ** 3)
-    const index = (x, y, z) => x + 8 * (y + 8 * z)
-    labels[index(1, 1, 1)] = 1
-    labels[index(2, 2, 2)] = labels[index(2, 3, 2)] = 2
-    labels[index(4, 4, 5)] = 2
-    const volumes = measureMask(hdr, hdr, labels)
+    const volumes = measuredFindings()
     const second = volumes.lesionDimensions.components[1]
     let finish
     loadScanMeasurements.mockImplementationOnce(context => new Promise(resolve => { finish = () => resolve(measured(context, volumes)) }))
       .mockImplementation(async context => measured(context, volumes))
-    const props = (caseId, syntheticLesionPick) => workspaceProps({ caseId, isCurated: true,
-      caseData: { ...cases[caseId], files: { ...cases[caseId].files, mesh: { lesion_pred: 'synthetic.obj', pancreas_pred: 'synthetic.obj' } },
-        syntheticLesionPick },
-    })
-    const { rerender } = render(<ReviewWorkspace {...props('SYNTHETIC_A', [4, -10, 13])} />)
-    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
-    const rail = () => within(screen.getByRole('region', { name: 'Lesion review' }))
-    const toggle = () => screen.getByRole('button', { name: 'Show calipers', exact: true })
-    const hide = () => screen.getByRole('button', { name: 'Hide calipers', exact: true })
-    const exit = () => rail().getByRole('button', { name: 'Exit inspection' })
+    render(<ReviewWorkspace {...meshStudy()} />)
+    expect(screen.getByRole('button', { name: '3D', exact: true, pressed: true })).toBeTruthy()
     const pickLesion = () => user.click(screen.getByRole('button', { name: 'Pick synthetic lesion surface' }))
     const pickEmpty = () => user.click(screen.getByRole('button', { name: 'Pick empty space' }))
-    expect(rail().getByText('Checking the predicted outline…')).toBeTruthy()
+    expect(lesionRail().getByText('Checking the predicted outline…')).toBeTruthy()
     await user.click(await screen.findByRole('button', { name: 'Pick synthetic lesion surface' }))
-    expect(rail().getByText('Lesion clicked. Checking its outline…')).toBeTruthy()
+    expect(lesionRail().getByText('Lesion clicked. Checking its outline…')).toBeTruthy()
     await act(async () => finish())
     const findings = await screen.findByRole('region', { name: 'Predicted lesion dimensions' })
     expect(findings.querySelector('[data-selected]')?.textContent).toContain('Predicted lesion 2')
     expect(within(findings).getByText('Selected')).toBeTruthy()
-    const viewer3d = () => viewerData(screen.getByTestId(/^synthetic-viewer-3d/))
     expect(viewer3d().selectedLesionWorldMm).toEqual(second.focusWorldMm)
-    expect(toggle().disabled).toBe(false)
-    expect(toggle().getAttribute('aria-pressed')).toBe('false')
+    expect(showCalipers().disabled).toBe(false)
+    expect(showCalipers().getAttribute('aria-pressed')).toBe('false')
     expect(viewer3d().measurementCalipers).toBeNull()
-    await user.click(toggle())
-    expect(hide().getAttribute('aria-pressed')).toBe('true')
+    await user.click(showCalipers())
+    expect(hideCalipers().getAttribute('aria-pressed')).toBe('true')
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
     await user.click(screen.getByRole('button', { name: 'Pick surrounding synthetic tissue' }))
     await pickEmpty()
-    expect(rail().getByText('Predicted lesion 2')).toBeTruthy()
+    expect(lesionRail().getByText('Predicted lesion 2')).toBeTruthy()
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
-    await user.click(rail().getByRole('button', { name: 'Zoom to lesion' }))
+    await user.click(lesionRail().getByRole('button', { name: 'Zoom to lesion' }))
     expect(viewer3d().navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '3d', boundsWorldMm: second.boundsWorldMm })
-    await user.click(hide())
+    await user.click(hideCalipers())
     expect(viewer3d().measurementCalipers).toBeNull()
     await pickEmpty()
     expect(viewer3d()).toMatchObject({ selectedObject: null, selectedLesionWorldMm: null })
-    expect(rail().queryByText('Predicted lesion 2')).toBeNull()
+    expect(lesionRail().queryByText('Predicted lesion 2')).toBeNull()
     await user.click(screen.getByRole('button', { name: 'Pick surrounding synthetic tissue' }))
     const pancreas = within(screen.getByRole('region', { name: 'Predicted pancreas dimensions' }))
     expect(pancreas.getByText('Selected')).toBeTruthy()
     expect(pancreas.getAllByText(/cm$/)).toHaveLength(2)
+    expect(pancreas.getByText(/Prepared slice/)).toBeTruthy()
     await user.click(pancreas.getByRole('button', { name: 'Inspect pancreas measurement' }))
-    const pancreasViewer = within(screen.getByRole('region', { name: 'Coronal CT plane' }))
-      .getByRole('status', { name: 'Synthetic viewer stub' })
+    const pancreasViewer = await measuredViewer()
     const pancreasCalipers = volumes.pancreasDimensions.calipers
     expect(viewerData(pancreasViewer)).toMatchObject({
       measurementAnatomy: 'pancreas', measurementCalipers: pancreasCalipers,
-      navigationCommand: { type: 'measurement-point', plane: 'coronal', worldMm: pancreasCalipers.anchorWorldMm },
+      navigationCommand: { type: 'measurement-point', target: 'inspection', plane: 'coronal', worldMm: pancreasCalipers.anchorWorldMm },
     })
     await user.click(screen.getByRole('button', { name: 'Lesion', exact: true, pressed: true }))
     expect(viewerData(pancreasViewer).measurementCalipers).toEqual(pancreasCalipers)
     await user.click(screen.getByRole('button', { name: 'Lesion', exact: true, pressed: false }))
     await user.click(within(screen.getByRole('region', { name: 'Pancreas review' })).getByRole('button', { name: 'Exit inspection' }))
-    expect(viewerData(pancreasViewer).measurementCalipers).toBeUndefined()
+    expect(screen.queryByRole('region', { name: 'Measured CT' })).toBeNull()
     await user.click(pancreas.getByRole('button', { name: 'Select pancreas in 3D' }))
     expect(viewer3d().selectedObject).toMatchObject({ source: 'pred', anatomy: 'pancreas' })
     await pickLesion()
-    await user.click(toggle())
-    await user.click(rail().getByRole('button', { name: 'Inspect CT slice' }))
-    const coronal = within(screen.getByRole('region', { name: 'Coronal CT plane' })).getByRole('status', { name: 'Synthetic viewer stub' })
-    await waitFor(() => expect(viewerData(coronal).navigationCommand).toMatchObject({
-      type: 'measurement-point', plane: 'coronal', worldMm: [4, -10, 13],
-    }))
-    expect(viewerData(coronal).measurementCalipers).toEqual(second.calipers)
-    expect(screen.getByRole('button', { name: '2D', exact: true }).getAttribute('aria-pressed')).toBe('true')
-    expect(screen.queryByRole('region', { name: 'Axial CT plane' })).toBeNull()
-    expect(screen.queryByRole('button', { name: 'Show calipers', exact: true })).toBeNull()
-    await user.click(rail().getByRole('button', { name: 'Zoom to lesion' }))
-    expect(viewerData(coronal).navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '2d', worldMm: second.focusWorldMm })
-    expect(viewer3d().navigationCommand).toBeNull()
-
-    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
-    expect(viewer3d().measurementCalipers).toEqual(second.calipers)
+    await user.click(showCalipers())
     await user.click(within(findings).getByText('1 more predicted lesion'))
     await user.click(within(findings).getByRole('button', { name: 'Select lesion 1 in 3D' }))
-    expect(hide().getAttribute('aria-pressed')).toBe('true')
+    expect(hideCalipers().getAttribute('aria-pressed')).toBe('true')
     expect(viewer3d().measurementCalipers).toEqual(volumes.lesionDimensions.components[0].calipers)
-
-    await user.click(exit())
+    await user.click(lesionRail().getByRole('button', { name: 'Exit inspection' }))
     expect(viewer3d()).toMatchObject({ selectedObject: null, selectedLesionWorldMm: null, measurementCalipers: null })
     expect(within(findings).queryByText('Selected')).toBeNull()
+  })
 
-    await pickLesion()
-    await user.click(toggle())
-    await user.click(rail().getByRole('button', { name: 'Inspect CT slice' }))
-    const coronalPane = screen.getByRole('region', { name: 'Coronal CT plane' })
-    fireEvent.keyDown(coronalPane, { key: 'Escape' })
-    const coronalAfterExit = within(coronalPane).getByRole('status', { name: 'Synthetic viewer stub' })
-    expect(viewerData(coronalAfterExit)).toMatchObject({ activePlane: 'coronal', selectedObject: null, navigationCommand: null })
-    expect(viewerData(coronalAfterExit).measurementCalipers).toBeUndefined()
+  it('links the measured CT and mounted 3D view while preserving the earlier camera and peel', async () => {
+    const user = userEvent.setup()
+    const volumes = measuredFindings()
+    const second = volumes.lesionDimensions.components[1]
+    const restoreCamera = vi.fn()
+    loadScanMeasurements.mockImplementation(async context => measured(context, volumes))
+    render(<ReviewWorkspace {...meshStudy({ syntheticRestore: restoreCamera })} />)
+    const original3d = await screen.findByTestId(/^synthetic-viewer-3d/)
+    const inspectionTools = () => within(screen.getByRole('toolbar', { name: 'Finding inspection tools' }))
+    await user.click(screen.getByRole('button', { name: 'Back to front', exact: true }))
+    const peel = screen.getByRole('slider', { name: 'Back-to-front CT removal' })
+    fireEvent.change(peel, { target: { value: '27' } })
+    await waitFor(() => expect(viewer3d().clip).toMatchObject({ progress: 27, azimuth: 180 }))
+    await screen.findByRole('region', { name: 'Predicted lesion dimensions' })
+    await user.click(screen.getByRole('button', { name: 'Pick synthetic lesion surface' }))
+    await user.click(showCalipers())
+    await user.click(lesionRail().getByRole('button', { name: 'Inspect CT slice' }))
+    const coronal = await measuredViewer()
+    await waitFor(() => expect(viewerData(coronal).navigationCommand).toMatchObject({
+      type: 'measurement-point', target: 'inspection', plane: 'coronal', worldMm: [4, -10, 13],
+    }))
+    expect(viewerData(coronal).measurementCalipers).toEqual(second.calipers)
+    expect(screen.getByRole('button', { name: 'Split', exact: true, pressed: true })).toBeTruthy()
+    expect(screen.getByTestId(/^synthetic-viewer-3d/)).toBe(original3d)
+    expect(screen.queryByRole('region', { name: '2D planes' })).toBeNull()
+    expect(screen.queryByRole('region', { name: 'Axial CT plane' })).toBeNull()
+    expect(hideCalipers().getAttribute('aria-pressed')).toBe('true')
+    expect(viewer3d().measurementCalipers).toEqual(second.calipers)
+    const measurementCommand = viewerData(coronal).navigationCommand
+    expect(viewerData(coronal).overlayMode).toBe('outline')
+    await user.click(inspectionTools().getByRole('button', { name: 'Fill' }))
+    expect(viewerData(coronal).overlayMode).toBe('fill')
+    await user.click(inspectionTools().getByRole('button', { name: 'CT only' }))
+    expect(viewerData(coronal).overlayMode).toBe('off')
+    await user.click(inspectionTools().getByRole('button', { name: 'Outline' }))
+    expect(viewerData(coronal).navigationCommand).toEqual(measurementCommand)
+    expect(viewer3d().navigationCommand).toBeNull()
+    await user.click(inspectionTools().getByRole('button', { name: 'Show slice in 3D' }))
+    expect(viewer3d().sliceLocatorCorners).toEqual(planeCorners)
+    expect(viewer3d().clip).toMatchObject({ progress: 27, azimuth: 180 })
+    await user.click(inspectionTools().getByRole('button', { name: 'Show slice in 3D' }))
+    expect(viewer3d().sliceLocatorCorners).toBeNull()
+    await user.click(lesionRail().getByRole('button', { name: 'Zoom to lesion' }))
+    expect(viewerData(coronal).navigationCommand).toMatchObject({ type: 'zoom-lesion', target: 'inspection', worldMm: second.focusWorldMm })
+    expect(viewer3d().navigationCommand).toBeNull()
+    await user.click(lesionRail().getByRole('button', { name: 'Go to measured slice' }))
+    expect(viewerData(coronal).navigationCommand).toMatchObject({ type: 'measurement-point', worldMm: [4, -10, 13] })
+    await user.click(screen.getByRole('button', { name: 'Front to back', exact: true }))
+    expect(viewer3d().clip.azimuth).toBe(0)
+
+    fireEvent.keyDown(coronal, { key: 'Escape' })
+    expect(screen.queryByRole('region', { name: 'Measured CT' })).toBeNull()
+    expect(screen.getByRole('button', { name: '3D', exact: true, pressed: true })).toBeTruthy()
+    expect(restoreCamera).toHaveBeenLastCalledWith(expect.objectContaining(camera))
+    expect(viewer3d().clip).toMatchObject({ progress: 27, azimuth: 180 })
     expect(viewer3d().measurementCalipers).toBeNull()
-    expect(screen.getByRole('button', { name: '2D', exact: true }).getAttribute('aria-pressed')).toBe('true')
+  })
 
-    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
-    await pickLesion()
-    await user.click(toggle())
-    rerender(<ReviewWorkspace {...props('SYNTHETIC_B', null)} />)
+  it('clears linked inspection and pinned calipers when the study changes', async () => {
+    const user = userEvent.setup()
+    const volumes = measuredFindings()
+    loadScanMeasurements.mockImplementation(async context => measured(context, volumes))
+    const { rerender } = render(<ReviewWorkspace {...meshStudy()} />)
+    const button = await screen.findByRole('button', { name: 'Inspect measurement for lesion 1' })
+    await user.click(button)
+    await measuredViewer()
+    await user.click(showCalipers())
+    expect(viewer3d().measurementCalipers).toEqual(volumes.lesionDimensions.components[0].calipers)
+    rerender(<ReviewWorkspace {...meshStudy({ caseId: 'SYNTHETIC_B', syntheticLesionPick: null })} />)
     const next = await screen.findByRole('region', { name: 'Predicted lesion dimensions' })
     expect(within(next).queryByText('Selected')).toBeNull()
-    expect(viewerData(screen.getByTestId('synthetic-viewer-2d-coronal')).measurementCalipers).toBeUndefined()
+    expect(screen.queryByRole('region', { name: 'Measured CT' })).toBeNull()
+    await user.click(screen.getByRole('button', { name: '2D', exact: true }))
+    expect(viewerData(await screen.findByTestId('synthetic-viewer-2d-coronal')).measurementCalipers).toBeUndefined()
     await user.click(screen.getByRole('button', { name: '3D', exact: true }))
     expect(screen.queryByRole('button', { name: 'Show calipers', exact: true })).toBeNull()
     expect(viewer3d().measurementCalipers).toBeNull()
+  })
+
+  it('opens one measured CT pane when the prediction has no 3D meshes', async () => {
+    const user = userEvent.setup()
+    const volumes = measuredFindings()
+    loadScanMeasurements.mockImplementation(async context => measured(context, volumes))
+    render(<Harness />)
+    const originalPanes = within(screen.getByRole('region', { name: '2D planes' }))
+    const oldViewers = await originalPanes.findAllByRole('status', { name: 'Synthetic viewer stub' })
+    const lesion = await screen.findByRole('button', { name: 'Inspect measurement for lesion 1' })
+    await user.click(lesion)
+    const inspected = within(await screen.findByRole('region', { name: 'Measured CT' }))
+    const measuredNode = await inspected.findByRole('status', { name: 'Synthetic viewer stub' })
+    expect(viewerData(measuredNode)).toMatchObject({
+      measurementCalipers: volumes.lesionDimensions.components[0].calipers, overlayMode: 'outline',
+    })
+    expect(screen.getByRole('button', { name: '2D', exact: true, pressed: true })).toBeTruthy()
+    expect(screen.queryByRole('region', { name: '3D surfaces' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Show slice in 3D' })).toBeNull()
+    await user.click(within(screen.getByRole('region', { name: 'Lesion review' })).getByRole('button', { name: 'Exit inspection' }))
+    expect(screen.queryByRole('region', { name: 'Measured CT' })).toBeNull()
+    expect(originalPanes.getAllByRole('status', { name: 'Synthetic viewer stub' })).toEqual(oldViewers)
   })
 
   it('preserves mounted planes, expert questions and summary drafts through focus, hiding and resizing', async () => {

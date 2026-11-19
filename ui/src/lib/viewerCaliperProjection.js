@@ -82,6 +82,14 @@ function ndcToPixels({ x, y, width, height }, ndc) {
   return [x + width * (1 + ndc[0]) / 2, y + height * (1 - ndc[1]) / 2]
 }
 
+export function projectSliceLocator(nv, corners) {
+  if (corners?.length !== 4) return null
+  const camera = renderCamera(nv)
+  if (!camera) return null
+  const points = corners.map(point => worldToNdc(camera.matrix, point))
+  return points.every(Boolean) ? points.map(point => ndcToPixels(camera.bounds, point)) : null
+}
+
 function intersectsTile([a, b]) {
   let entry = 0
   let exit = 1

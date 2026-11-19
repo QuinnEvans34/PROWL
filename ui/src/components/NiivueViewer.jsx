@@ -5,6 +5,8 @@ import { LoaderCircle, TriangleAlert } from 'lucide-react'
 
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
+import ImagingViewportDetails from './ImagingViewportDetails.jsx'
+import ViewerContourOverlay from './ViewerContourOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, pan3dPivot, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
@@ -289,7 +291,35 @@ function captureViewState(nv) {
     elevation: Number(nv.scene.renderElevation),
     scale: Number(nv.scene.volScaleMultiplier),
     pivot3D: Array.isArray(nv.pivot3D) ? [...nv.pivot3D] : null,
+    ctRange: [nv.volumes?.[0]?.cal_min, nv.volumes?.[0]?.cal_max],
   }
+}
+
+function inspectedPlane(nv, plane, snapshot, calipers, bounds) {
+  const axis = PLANE_AXIS[plane]
+  const total = snapshot.totals[plane]
+  if (!Number.isInteger(axis) || !total || !calipers) return
+  const fractionsAt = xyz => Array.from(nv.mm2frac(xyz, 0, true) || [])
+  const indexAt = fraction => Math.max(0, Math.min(total - 1, Math.round(fraction * total - 0.5)))
+  const measured = fractionsAt(calipers.anchorWorldMm)[axis]
+  if (measured >= 0 && measured <= 1) snapshot.measuredIndex = indexAt(measured)
+  if (bounds?.length) {
+    const values = bounds.map(point => fractionsAt(point)[axis])
+    if (values.every(Number.isFinite)) {
+      const first = Math.max(0, Math.ceil(Math.min(...values) * total - 0.5001))
+      const last = Math.min(total - 1, Math.floor(Math.max(...values) * total - 0.4999))
+      if (first <= last) snapshot.inspectionRange = [first, last]
+    }
+  }
+  const [x, y] = [0, 1, 2].filter(index => index !== axis)
+  const worldAt = frac => Array.from(nv.frac2mm(frac, 0, true) || []).slice(0, 3)
+  snapshot.worldMm = worldAt(snapshot.fractions)
+  snapshot.planeWorldCorners = [[0, 0], [1, 0], [1, 1], [0, 1]].map(([i, j]) => {
+    const fraction = [...snapshot.fractions]
+    fraction[x] = i
+    fraction[y] = j
+    return worldAt(fraction)
+  })
 }
 
 function restoreViewState(nv, view, mode, crosshairOnly = false) {
@@ -626,8 +656,8 @@ function installOrbitCentre(nv, centreRef) {
   }
 }
 
-function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus }) {
-  if (isSelected) return 'Toon'
+function meshShaderFor(entry, { isSelected, renderedSources, sourceFocus, anatomyLighting }) {
+  if (isSelected) return anatomyLighting ? 'Diffuse' : 'Toon'
   if (entry.source === 'gt' && renderedSources.includes('pred') && sourceFocus !== 'gt') return 'Outline'
   return 'Hemispheric'
 }
@@ -698,6 +728,13 @@ export default function NiivueViewer({
   selectedLesionWorldMm = null,
   measurementCalipers = null,
   measurementAnatomy = 'lesion',
+  overlayMode = 'fill',
+  imageDetails = null,
+  sliceLocatorCorners = null,
+  capturePlaneLocation = false,
+  inspectionBounds = null,
+  onViewHandle = null,
+  anatomyLighting = false,
   onSelectObject = null,
   activePlane = 'multiplanar',
   interactionMode = 'navigate',
@@ -752,6 +789,9 @@ export default function NiivueViewer({
     onWindowChange,
     visibleSources: visibleSources || sources,
     differenceMode,
+    inspectionPlane: capturePlaneLocation ? activePlane : null,
+    measurementCalipers,
+    inspectionBounds,
   })
   const lastFocusedObjectRef = useRef('')
   const [state, setState] = useState({ status: 'loading', message: 'Preparing viewer' })
@@ -779,6 +819,8 @@ export default function NiivueViewer({
     if (!snapshot) return
     snapshot.sceneKey = loadedSceneKeyRef.current
     snapshot.origin = origin
+    const { inspectionPlane, measurementCalipers: calipers, inspectionBounds: bounds } = interactiveRef.current
+    if (inspectionPlane) inspectedPlane(nv, inspectionPlane, snapshot, calipers, bounds)
     const signature = [
       snapshot.indices.sagittal,
       snapshot.indices.coronal,
@@ -787,6 +829,8 @@ export default function NiivueViewer({
       snapshot.totals.coronal,
       snapshot.totals.axial,
       ...snapshot.fractions.map((value) => Number(value).toFixed(6)),
+      snapshot.measuredIndex,
+      snapshot.inspectionRange?.join(','),
     ].join(':')
     if (signature === lastNavigationSignatureRef.current) return
 
@@ -828,8 +872,11 @@ export default function NiivueViewer({
       onWindowChange,
       visibleSources: renderedSources,
       differenceMode,
+      inspectionPlane: capturePlaneLocation ? activePlane : null,
+      measurementCalipers,
+      inspectionBounds,
     }
-  }, [mode, framingLocked, wheelZoom, interactionMode, onZoomChange, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
+  }, [mode, framingLocked, wheelZoom, interactionMode, onZoomChange, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode, capturePlaneLocation, activePlane, measurementCalipers, inspectionBounds])
 
   useEffect(() => { setZoomBox(null) }, [interactionMode, framingLocked, sceneKey])
 
@@ -1360,12 +1407,14 @@ export default function NiivueViewer({
 
           availableSources.forEach((source) => {
             for (const anatomy of ['pancreas', 'lesion']) {
-              const meshPath = meshFiles[`${anatomy}_${source}`]
-              if (!meshPath) continue
+              const key = `${anatomy}_${source}`
+              const meshPath = meshFiles[key]
+              const verifiedMesh = assetUrls?.mesh?.[key]
+              if (!meshPath && !verifiedMesh) continue
               const colors = SOURCE_COLORS[source][anatomy]
               layers.push({
-                url: `${BASE}/${meshPath}`,
-                name: `${source}-${anatomy}.obj`,
+                url: verifiedMesh || `${BASE}/${meshPath}`,
+                name: `${source}-${anatomy}.${verifiedMesh ? 'stl' : 'obj'}`,
                 rgba255: [...colors, anatomy === 'pancreas' ? 190 : 255],
                 opacity: anatomy === 'pancreas' ? 0.68 : 1,
               })
@@ -1434,6 +1483,7 @@ export default function NiivueViewer({
             ? labelCentroidMM(primaryVolume, 1)
             : volumeCenterMM(nv.volumes[0])
           focusOnWorldPoint(nv, target, mode)
+          if (mode === '3d' && anatomyLighting && !showFull && primaryVolume && target) orbitCentreRef.current = target
         }
         // First visit to 3D for this case (no saved camera): frame the surfaces.
         if (mode === '3d' && !savedView) {
@@ -1495,7 +1545,7 @@ export default function NiivueViewer({
             const volume = nv.volumes[volumeIndex]
             if (!volume) return
             volume.setColormapLabel(labelColormap(source, presentation))
-            nv.setOpacity(volumeIndex, !differenceMode && renderedSources.includes(source) ? overlayOpacity : 0)
+            nv.setOpacity(volumeIndex, overlayMode === 'fill' && !differenceMode && renderedSources.includes(source) ? overlayOpacity : 0)
           })
           registryRef.current.differenceVolumeIndexes.forEach((volumeIndex, anatomy) => {
             const volume = nv.volumes[volumeIndex]
@@ -1554,7 +1604,7 @@ export default function NiivueViewer({
             clamp255(finalOpacity * 255),
           ]))
           setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', finalOpacity)
-          const shader = meshShaderFor(entry, { isSelected, renderedSources, sourceFocus })
+          const shader = meshShaderFor(entry, { isSelected, renderedSources, sourceFocus, anatomyLighting })
           if (entry.appliedShader !== shader) {
             nv.setMeshShader(entry.mesh.id, shader)
             entry.appliedShader = shader
@@ -1575,6 +1625,8 @@ export default function NiivueViewer({
     sceneVersion,
     state.status,
     mode,
+    overlayMode,
+    anatomyLighting,
     overlayOpacity,
     ctOpacity,
     showPancreas,
@@ -1746,6 +1798,7 @@ export default function NiivueViewer({
     ) return
 
     const command = navigationCommand
+    if (command.type === 'restore-camera' && command.view.sceneKey !== sceneKey) return
     handledNavigationCommandRef.current = command.id
     if (mode === '2d' && framingLocked && ['fit', 'zoom', 'zoom-lesion'].includes(command.type)) return
     if (command.type === 'slice') {
@@ -1764,6 +1817,27 @@ export default function NiivueViewer({
         if (fraction?.length === 3 && Array.from(fraction).every(v => Number.isFinite(v) && v >= 0 && v <= 1)) {
           nv.scene.crosshairPos = new Float32Array(fraction)
         }
+        if (!framingLocked && command.fitBounds?.length) zoomToBounds2d(nv, command.fitBounds, 0.48)
+      }
+    } else if (command.type === 'restore-camera') {
+      orbitCentreRef.current = command.view.orbitCentre ?? null
+      restoreViewState(nv, command.view, mode)
+    } else if (command.type === 'restore-finding-view') {
+      const { worldMm, camera, pan2Dxyzmm, ctRange: window } = command.view
+      if (mode === '3d' && camera) {
+        orbitCentreRef.current = camera.pivot ?? null
+        nv.setRenderAzimuthElevation(camera.azimuth, camera.elevation)
+        nv.setScale(camera.scale)
+      } else if (mode === '2d') {
+        const fraction = nv.mm2frac(worldMm, 0, true)
+        if (fraction?.length !== 3 || !Array.from(fraction).every(v => Number.isFinite(v) && v >= 0 && v <= 1)) return
+        nv.scene.crosshairPos = new Float32Array(fraction)
+        if (pan2Dxyzmm) nv.setPan2Dxyzmm(pan2Dxyzmm)
+        if (window) {
+          nv.volumes[0].cal_min = window[0]
+          nv.volumes[0].cal_max = window[1]
+        }
+        nv.updateGLVolume()
       }
     } else if (command.type === 'focus') {
       const volume = registryRef.current.volumes.get(command.source)
@@ -1902,8 +1976,35 @@ export default function NiivueViewer({
     publishNavigation(nv)
   }, [resetToken, sceneVersion, state.status, mode, sceneKey, clip?.enabled, framingLocked])
 
+  useEffect(() => {
+    const nv = nvRef.current
+    if (!onViewHandle || !nv || state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey) return
+    const isCurrent = () => nvRef.current === nv && loadedSceneKeyRef.current === sceneKey && expectedSceneKeyRef.current === sceneKey
+    onViewHandle({
+      capture: () => isCurrent() ? {
+        ...captureViewState(nv), sceneKey, orbitCentre: orbitCentreRef.current,
+        worldMm: mode === '2d' ? Array.from(nv.frac2mm(nv.scene.crosshairPos, 0, true)).slice(0, 3) : null,
+      } : null,
+      restore: (view) => {
+        if (!view || view.sceneKey !== sceneKey || !isCurrent()) return false
+        orbitCentreRef.current = view.orbitCentre ?? null
+        restoreViewState(nv, view, mode)
+        if (view.ctRange?.every(Number.isFinite)) {
+          ;[nv.volumes[0].cal_min, nv.volumes[0].cal_max] = view.ctRange
+          nv.updateGLVolume()
+        }
+        nv.drawScene()
+        publishZoom(nv)
+        publishNavigation(nv)
+        return true
+      },
+    })
+    return () => onViewHandle(null)
+  }, [onViewHandle, mode, sceneKey, sceneVersion, state.status])
+
   const isPancreasMeasurement = mode === '2d' && measurementAnatomy === 'pancreas'
   const measurementLayerVisible = isPancreasMeasurement ? showPancreas : showLesion
+  const ready = state.status === 'ready' && loadedSceneKeyRef.current === sceneKey
 
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
@@ -1913,8 +2014,13 @@ export default function NiivueViewer({
         touchAction: mode === '3d' && interactionMode === 'pan' ? 'none' : undefined,
       }} />
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
-        ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')}
-        mode={mode} anatomy={measurementAnatomy} calipers={measurementCalipers} marker={selectedLesionWorldMm} />
+        ready={ready && Boolean(sliceLocatorCorners || (overlayMode !== 'off' && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')))}
+        mode={mode} anatomy={measurementAnatomy} calipers={measurementCalipers} marker={selectedLesionWorldMm} sliceLocatorCorners={sliceLocatorCorners} />
+      {mode === '2d' && overlayMode === 'outline' && <ViewerContourOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
+        ready={ready && renderedSources.includes('pred') && !differenceMode} mask={registryRef.current.volumes.get('pred')}
+        plane={activePlane} showLesion={showLesion} showPancreas={showPancreas} />}
+      {imageDetails && <ImagingViewportDetails nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
+        ready={ready} plane={activePlane} source={imageDetails} />}
       {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (
         <div aria-hidden="true" className="niivue-zoom-box" style={{ ...zoomBox, position: 'absolute',
           border: '1px solid #f5ca82', background: '#f5ca8224', pointerEvents: 'none' }} />

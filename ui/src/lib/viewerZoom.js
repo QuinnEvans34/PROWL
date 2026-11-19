@@ -92,7 +92,7 @@ export function zoomBox2d(nv, start, end) {
   return apply2dZoom(nv, box.factor, worldAt(nv, box.center, tileIndex), worldAt(nv, box.viewCenter, tileIndex))
 }
 
-export function zoomToBounds2d(nv, boundsWorldMm) {
+export function zoomToBounds2d(nv, boundsWorldMm, fill = 0.65) {
   const tileIndex = nv.screenSlices?.findIndex(tile => tile.axCorSag >= 0 && tile.axCorSag <= 2 && tile.sliceFrac !== Infinity)
   const tile = nv.screenSlices?.[tileIndex]
   const viewport = normalizedViewport(tile?.leftTopWidthHeight)
@@ -109,7 +109,7 @@ export function zoomToBounds2d(nv, boundsWorldMm) {
     const min = Math.min(...coordinates)
     const max = Math.max(...coordinates)
     source[axis] = (min + max) / 2
-    return 0.65 * Math.abs(tile.fovMM[index]) / (max - min)
+    return fill * Math.abs(tile.fovMM[index]) / (max - min)
   }))
   return apply2dZoom(nv, factor, source, target)
 }

@@ -57,6 +57,11 @@
 
 .pw-toolbench-scene { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; }
 .pw-toolbench-scene--split { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 6px; padding-right: 6px; }
+.pw-toolbench-scene--split.pw-toolbench-scene--inspection { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+.pw-toolbench-scene__inspection { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+.pw-toolbench .pw-viewer--inspection { flex: 1 0 clamp(350px, 56dvh, 760px); }
+.pw-inspection-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 5px 12px; background: var(--pw-bg); border-bottom: 1px solid var(--pw-border); }
+.pw-inspection-source { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; margin-left: auto; font-size: 11px; color: var(--pw-text-muted); }
 .pw-toolbench-scene__planes, .pw-toolbench-scene__3d { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
 .pw-toolbench-scene__3d { background: #050608; border: 1px solid var(--pw-border); border-radius: 6px; margin: 8px 0; }
 .pw-toolbench-scene--3d .pw-toolbench-scene__3d { margin: 8px; }
@@ -104,6 +109,8 @@
 @media (max-width: 700px) {
   .pw-toolbench-opacity { display: none; }
   .pw-toolbench-scene--split { grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr 1fr; padding-right: 0; }
+  .pw-toolbench-scene--split.pw-toolbench-scene--inspection { grid-template-columns: minmax(0, 1fr); grid-template-rows: 1.65fr 1fr; }
+  .pw-toolbench .pw-viewer--inspection { flex-basis: 530px; }
   .pw-toolbench .pw-toolbar [aria-label='Visible planes'] { flex-wrap: wrap; }
   .pw-toolbench .pw-toolbar [aria-label='Visible planes'] button { padding-inline: 7px; }
   .pw-workspace-actions { padding: 6px 8px; gap: 5px; }

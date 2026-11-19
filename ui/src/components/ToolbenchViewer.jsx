@@ -60,6 +60,7 @@ export default function ToolbenchViewer({
   framingLocked: controlledFraming = null,
   onFramingLockedChange = null,
   overlay = null,
+  singlePane = false,
   ...directViewerProps
 }) {
   const props = { ...viewerProps, ...directViewerProps, mode: '2d' }
@@ -82,7 +83,7 @@ export default function ToolbenchViewer({
   const maximized = PLANES.includes(settings.maximizedPlane) ? settings.maximizedPlane : null
   const visible = activePlane !== 'multiplanar' && PLANES.includes(activePlane)
     ? [activePlane]
-    : maximized ? [maximized] : PLANES.filter(plane => !hiddenPlanes.includes(plane))
+    : maximized ? [maximized] : singlePane ? ['axial'] : PLANES.filter(plane => !hiddenPlanes.includes(plane))
   if (!visible.length) visible.push('axial')
 
   const containerRef = useRef(null)
@@ -107,6 +108,7 @@ export default function ToolbenchViewer({
 
   useEffect(() => {
     anchorRef.current = null
+    lastCommand.current = null
     snapshotsRef.current = {}
     setSnapshots({})
     setSyncCrosshair(null)
@@ -135,7 +137,7 @@ export default function ToolbenchViewer({
     lastCommand.current = navigationCommand.id
     const target = PLANES.includes(navigationCommand.plane) ? navigationCommand.plane : effectiveActive
     command(target, navigationCommand)
-  }, [navigationCommand?.id])
+  }, [navigationCommand?.id, sceneKey])
 
   function receiveNavigation(plane, snapshot) {
     if (!snapshot || snapshot.sceneKey !== sceneKey) return
@@ -199,7 +201,7 @@ export default function ToolbenchViewer({
       </div>
     </div>
     <div className="tb-viewer__grid" ref={containerRef} style={gridStyle} data-visible-planes={visible.length}>
-      {PLANES.map(plane => {
+      {(singlePane ? visible.slice(0, 1) : PLANES).map(plane => {
         const snapshot = snapshots[plane]?.sceneKey === sceneKey ? snapshots[plane] : null
         const paneCommand = commands[plane]
         const total = snapshot?.totals?.[plane] || 1
@@ -208,6 +210,8 @@ export default function ToolbenchViewer({
         const zoom = ready && zoomLevels[plane]?.sceneKey === sceneKey ? zoomLevels[plane].percent : null
         const shown = visible.includes(plane)
         const only = visible.length === 1
+        const lesionSpan = snapshot?.inspectionRange
+        const measured = snapshot?.measuredIndex
         return <section
           key={plane}
           className={`tb-pane${effectiveActive === plane ? ' tb-pane--active' : ''}`}
@@ -225,7 +229,7 @@ export default function ToolbenchViewer({
               <output className="tb-pane__zoom" aria-label={`${TITLES[plane]} zoom level`} aria-live="off" title="Zoom relative to Fit">{zoom == null ? '—' : `${zoom}%`}</output>
               <button type="button" disabled={!ready || framingLocked} aria-label={`Zoom in ${TITLES[plane].toLowerCase()}`} title="Zoom in" onClick={() => command(plane, { type: 'zoom', factor: 1.2 })}><ZoomIn size={13} /></button>
               <button type="button" disabled={!ready || framingLocked} aria-label={`Fit ${TITLES[plane].toLowerCase()} image`} title="Fit image" onClick={() => command(plane, { type: 'fit' })}><Scan size={13} /></button>
-              {activePlane === 'multiplanar' && <button type="button" aria-label={`${maximized === plane ? 'Restore' : 'Maximize'} ${TITLES[plane].toLowerCase()} plane`} title={maximized === plane ? 'Restore layout' : 'Maximize plane'} onClick={() => changeLayout({ maximizedPlane: maximized === plane ? null : plane })}>{maximized === plane ? <Minimize2 size={13} /> : <Maximize2 size={13} />}</button>}
+              {!singlePane && activePlane === 'multiplanar' && <button type="button" aria-label={`${maximized === plane ? 'Restore' : 'Maximize'} ${TITLES[plane].toLowerCase()} plane`} title={maximized === plane ? 'Restore layout' : 'Maximize plane'} onClick={() => changeLayout({ maximizedPlane: maximized === plane ? null : plane })}>{maximized === plane ? <Minimize2 size={13} /> : <Maximize2 size={13} />}</button>}
               {activePlane === 'multiplanar' && !only && <button type="button" aria-label={`Hide ${TITLES[plane].toLowerCase()} plane`} title="Hide plane" onClick={() => changeLayout({ hiddenPlanes: [...hiddenPlanes, plane] })}><EyeOff size={13} /></button>}
             </div>
           </header>
@@ -250,9 +254,16 @@ export default function ToolbenchViewer({
           </div>
           <footer className="tb-pane__navigator">
             <span aria-hidden="true">Slice</span>
-            <SliceSlider aria-label={`${TITLES[plane]} slice`} min="0" max={total - 1} step="1" value={index}
-              disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}` : 'Loading scan'}
-              onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
+            <div className="tb-pane__slice-track">
+              {lesionSpan && total > 1 && <span className="tb-pane__slice-span" role="img"
+                aria-label={`Finding spans slices ${lesionSpan[0] + 1} to ${lesionSpan[1] + 1}`}
+                style={{ left: `${100 * lesionSpan[0] / (total - 1)}%`, width: `${100 * (lesionSpan[1] - lesionSpan[0]) / (total - 1)}%` }} />}
+              {Number.isInteger(measured) && total > 1 && <span className="tb-pane__slice-mark" role="img"
+                aria-label={`Measured slice ${measured + 1}`} style={{ left: `${100 * measured / (total - 1)}%` }} />}
+              <SliceSlider aria-label={`${TITLES[plane]} slice`} min="0" max={total - 1} step="1" value={index}
+                disabled={!ready} aria-valuetext={ready ? `Slice ${index + 1} of ${total}${index === measured ? ', measured slice' : ''}` : 'Loading scan'}
+                onChange={event => command(plane, { type: 'slice', plane, index: Number(event.target.value) })} />
+            </div>
             <span className="tb-pane__slice-count" aria-hidden="true">{ready ? `${index + 1} / ${total}` : '—'}</span>
           </footer>
         </section>
