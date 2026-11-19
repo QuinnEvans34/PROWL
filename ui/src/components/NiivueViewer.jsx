@@ -9,7 +9,7 @@ import ImagingViewportDetails from './ImagingViewportDetails.jsx'
 import ViewerContourOverlay from './ViewerContourOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
-import { clientToBackingPx, pan3dPivot, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
+import { clientToBackingPx, pan2d, pan3dPivot, panPlaneAt, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -322,19 +322,10 @@ function inspectedPlane(nv, plane, snapshot, calipers, bounds) {
   })
 }
 
-function restoreViewState(nv, view, mode, crosshairOnly = false) {
+function restoreViewState(nv, view, mode) {
   if (!view) return false
   if (Array.isArray(view.crosshair) && view.crosshair.length >= 3) {
     nv.scene.crosshairPos = new Float32Array(view.crosshair.slice(0, 3))
-  }
-  if (crosshairOnly) {
-    if (mode === '3d') {
-      const world = nv.frac2mm(nv.scene.crosshairPos, 0, true)
-      if (world && Array.from(world).slice(0, 3).every(Number.isFinite)) {
-        nv.pivot3D = Array.from(world).slice(0, 3)
-      }
-    }
-    return true
   }
   if (Array.isArray(view.pan2Dxyzmm) && view.pan2Dxyzmm.length >= 4) {
     nv.scene.pan2Dxyzmm = new Float32Array(view.pan2Dxyzmm.slice(0, 4))
@@ -771,7 +762,7 @@ export default function NiivueViewer({
   const currentSceneRef = useRef(null)
   const sceneLoadChainRef = useRef(Promise.resolve())
   const savedViewsRef = useRef(new Map())
-  const latestCrosshairRef = useRef(new Map())
+  const latestCrosshairWorldRef = useRef(new Map())
   const handledResetTokenRef = useRef(resetToken)
   const handledNavigationCommandRef = useRef(null)
   const previousClipEnabledRef = useRef(Boolean(clip?.enabled))
@@ -841,10 +832,6 @@ export default function NiivueViewer({
       pendingNavigationRef.current = null
       if (!pending || pending.signature === lastNavigationSignatureRef.current) return
       lastNavigationSignatureRef.current = pending.signature
-      const currentCase = currentSceneRef.current?.caseId
-      if (currentCase) {
-        latestCrosshairRef.current.set(currentCase, Array.from(nv.scene.crosshairPos))
-      }
       interactiveRef.current.onNavigationChange?.(pending.snapshot)
     }
 
@@ -1013,6 +1000,11 @@ export default function NiivueViewer({
       handlePinch(event)
     }
     function handleTouchMove(event) {
+      if (panToolActive() && event.touches.length === 1 && !pinching) {
+        event.preventDefault()
+        event.stopImmediatePropagation()
+        return
+      }
       if (interactiveRef.current.mode !== '3d' || event.touches.length !== 1 || pinching) {
         handlePinch(event)
         return
@@ -1056,13 +1048,18 @@ export default function NiivueViewer({
       return interactiveRef.current.interactionMode === 'box-zoom'
     }
     function panToolActive() {
-      return interactiveRef.current.mode === '3d' && interactiveRef.current.interactionMode === 'pan'
+      const { mode, interactionMode, framingLocked } = interactiveRef.current
+      return interactionMode === 'pan' && (mode === '3d' || !framingLocked)
     }
     function usesCustomDrag() {
       return boxToolActive() || panToolActive()
     }
+    function startsCustomDrag(event) {
+      return event.button === 0 && (boxToolActive()
+        || (panToolActive() && (interactiveRef.current.mode === '3d' || !event.ctrlKey)))
+    }
     function preventNativeDrag(event) {
-      if (!usesCustomDrag() || event.button !== 0) return
+      if (!startsCustomDrag(event)) return
       event.preventDefault()
       event.stopImmediatePropagation()
     }
@@ -1095,16 +1092,17 @@ export default function NiivueViewer({
       if (!panGesture.moved && Math.hypot(event.clientX - panGesture.clientX, event.clientY - panGesture.clientY) <= 5) return
       // Use the current viewport for both locations, including any DPI or size
       // change during capture. This translation leaves the peel in scan space.
-      const view = renderView(nv)
-      if (!view) return
       const previous = clientToBackingPx(canvas, panGesture.clientX, panGesture.clientY)
       const next = clientToBackingPx(canvas, event.clientX, event.clientY)
-      const pivot = pan3dPivot(nv.pivot3D, view.viewPoint, previous, next)
-      if (!pivot) return
-      orbitCentreRef.current = pivot
-      nv.pivot3D = pivot
+      if (interactiveRef.current.mode === '3d') {
+        const view = renderView(nv)
+        const pivot = view && pan3dPivot(nv.pivot3D, view.viewPoint, previous, next)
+        if (!pivot) return
+        orbitCentreRef.current = pivot
+        nv.pivot3D = pivot
+        nv.drawScene()
+      } else if (!pan2d(nv, panGesture.plane, previous, next)) return
       panGesture = { ...panGesture, clientX: event.clientX, clientY: event.clientY, moved: true }
-      nv.drawScene()
     }
     function handlePointerMove(event) {
       if (panGesture) panMove(event)
@@ -1118,8 +1116,9 @@ export default function NiivueViewer({
     }
 
     function handlePointerDown(event) {
-      if (interactiveRef.current.mode === '3d' && event.button !== 0) return
-      if (usesCustomDrag() && event.button === 0) {
+      const is3d = interactiveRef.current.mode === '3d'
+      if (is3d && event.button !== 0) return
+      if (startsCustomDrag(event)) {
         event.preventDefault()
         if (!canZoom() || boxGesture || panGesture || pinching || event.isPrimary === false) return
         const gesture = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, sceneKey: loadedSceneKeyRef.current }
@@ -1129,11 +1128,15 @@ export default function NiivueViewer({
           boxGesture = gesture
           return
         }
-        panGesture = gesture
+        const plane = is3d ? null : panPlaneAt(nv, clientToBackingPx(canvas, event.clientX, event.clientY))
+        if (!is3d && plane === null) return
+        panGesture = { ...gesture, plane }
       }
       pointerHeld = true
       window.clearTimeout(restoreTimer)
-      pointerStartRef.current = { x: event.clientX, y: event.clientY, sceneKey: loadedSceneKeyRef.current }
+      // A plain click in 2D Pan leaves the slice and its crosshair where they were.
+      pointerStartRef.current = !is3d && panGesture ? null
+        : { x: event.clientX, y: event.clientY, sceneKey: loadedSceneKeyRef.current }
       setLowResolution(true)
     }
 
@@ -1310,10 +1313,13 @@ export default function NiivueViewer({
         const previousView = captureViewState(nv)
         if (previousScene && previousView && loadedSceneKeyRef.current) {
           savedViewsRef.current.set(
-            `${previousScene.caseId}::${previousScene.mode}`,
-            { ...previousView, orbitCentre: orbitCentreRef.current },
+            previousScene.viewKey,
+            { ...previousView, ctUrl: previousScene.ctUrl, orbitCentre: orbitCentreRef.current },
           )
-          latestCrosshairRef.current.set(previousScene.caseId, previousView.crosshair)
+          const worldMm = Array.from(nv.frac2mm(previousView.crosshair, 0, true) || []).slice(0, 3)
+          if (worldMm.length === 3 && worldMm.every(Number.isFinite)) {
+            latestCrosshairWorldRef.current.set(previousScene.caseId, worldMm)
+          }
         }
 
         loadedSceneKeyRef.current = ''
@@ -1332,13 +1338,18 @@ export default function NiivueViewer({
         const ctPath = showFull && caseData.files.ct_full
           ? caseData.files.ct_full
           : caseData.files.ct
+        const ctUrl = assetUrls?.ct || `${BASE}/${ctPath}`
+        const currentCaseId = caseData.case_id || caseData.files.ct
+        // A crop and the full study need independent framing. Reloads for an
+        // arriving mask or mesh on the same CT should preserve the camera.
+        const viewKey = JSON.stringify([currentCaseId, mode, mode === '3d' ? ctUrl : null])
         const availableSources = sources.filter((source) => caseData.files[source])
         const renderedCtOpacity = effectiveCtOpacity(ctOpacity, clip)
 
         clearMeshes(nv)
         orbitCentreRef.current = null
         const volumes = [{
-          url: assetUrls?.ct || `${BASE}/${ctPath}`,
+          url: ctUrl,
           name: 'ct.nii.gz',
           colormap: 'gray',
           opacity: mode === '2d'
@@ -1468,17 +1479,13 @@ export default function NiivueViewer({
           onPeelReveal?.(peelRevealPercentages(nv, Array.from(registryRef.current.meshes.values())))
         }
 
-        const currentCaseId = caseData.case_id || caseData.files.ct
-        const savedView = savedViewsRef.current.get(`${currentCaseId}::${mode}`)
+        const savedView = savedViewsRef.current.get(viewKey)
+        const sameGrid = savedView?.ctUrl === ctUrl
         if (mode === '3d') orbitCentreRef.current = savedView?.orbitCentre ?? null
-        const latestCrosshair = latestCrosshairRef.current.get(currentCaseId)
-        let restored = restoreViewState(nv, savedView, mode)
-        if (latestCrosshair?.length >= 3) {
-          restoreViewState(nv, { crosshair: latestCrosshair }, mode, true)
-          restored = true
-        }
-
-        if (!restored) {
+        // Keep the established 2D framing on an image source change, while
+        // treating its fractional slice position as specific to the old grid.
+        const restore = sameGrid || !savedView ? savedView : { ...savedView, crosshair: null }
+        if (!restoreViewState(nv, restore, mode) || !sameGrid) {
           const primaryVolume = registryRef.current.volumes.get(availableSources[0])
           const target = primaryVolume
             ? labelCentroidMM(primaryVolume, 1)
@@ -1486,15 +1493,22 @@ export default function NiivueViewer({
           focusOnWorldPoint(nv, target, mode)
           if (mode === '3d' && anatomyLighting && !showFull && primaryVolume && target) orbitCentreRef.current = target
         }
+        // NiiVue fractions belong to the CT grid. Bridge scene changes through
+        // world millimeters and leave a crop's own position if the point lies outside it.
+        const worldMm = latestCrosshairWorldRef.current.get(currentCaseId)
+        const fraction = worldMm && Array.from(nv.mm2frac(worldMm, 0, true) || []).slice(0, 3)
+        if (fraction?.length === 3 && fraction.every(value => Number.isFinite(value) && value >= 0 && value <= 1)) {
+          nv.scene.crosshairPos = new Float32Array(fraction)
+        }
         // First visit to 3D for this case (no saved camera): frame the surfaces.
         if (mode === '3d' && !savedView) {
           const fit = compact ? 1.1 : showFull ? FULL_SCAN_SCALE : surfaceFitScale(nv)
-          if (fit) nv.setScale(fit)
+          nv.setScale(fit || FULL_SCAN_SCALE)
         }
 
         nv.updateGLVolume()
         nv.drawScene()
-        currentSceneRef.current = { caseId: currentCaseId, mode }
+        currentSceneRef.current = { caseId: currentCaseId, ctUrl, viewKey }
         loadedSceneKeyRef.current = sceneKey
         publishZoom(nv)
         publishNavigation(nv, { immediate: true, origin: 'initial' })
@@ -1799,7 +1813,7 @@ export default function NiivueViewer({
     ) return
 
     const command = navigationCommand
-    if (command.type === 'restore-camera' && command.view.sceneKey !== sceneKey) return
+    if (command.type === 'restore-camera' && command.view.viewKey !== currentSceneRef.current?.viewKey) return
     handledNavigationCommandRef.current = command.id
     if (mode === '2d' && framingLocked && ['fit', 'zoom', 'zoom-lesion'].includes(command.type)) return
     if (command.type === 'slice') {
@@ -1983,7 +1997,7 @@ export default function NiivueViewer({
     const isCurrent = () => nvRef.current === nv && loadedSceneKeyRef.current === sceneKey && expectedSceneKeyRef.current === sceneKey
     onViewHandle({
       capture: () => isCurrent() ? {
-        ...captureViewState(nv), sceneKey, orbitCentre: orbitCentreRef.current,
+        ...captureViewState(nv), sceneKey, viewKey: currentSceneRef.current?.viewKey, orbitCentre: orbitCentreRef.current,
         worldMm: mode === '2d' ? Array.from(nv.frac2mm(nv.scene.crosshairPos, 0, true)).slice(0, 3) : null,
       } : null,
       thumbnail: () => {
@@ -2002,7 +2016,9 @@ export default function NiivueViewer({
         }
       },
       restore: (view) => {
-        if (!view || view.sceneKey !== sceneKey || !isCurrent()) return false
+        if (!view || !isCurrent()) return false
+        const sameView = mode === '3d' ? view.viewKey === currentSceneRef.current?.viewKey : view.sceneKey === sceneKey
+        if (!sameView) return false
         orbitCentreRef.current = view.orbitCentre ?? null
         restoreViewState(nv, view, mode)
         if (view.ctRange?.every(Number.isFinite)) {
@@ -2021,13 +2037,14 @@ export default function NiivueViewer({
   const isPancreasMeasurement = mode === '2d' && measurementAnatomy === 'pancreas'
   const measurementLayerVisible = isPancreasMeasurement ? showPancreas : showLesion
   const ready = state.status === 'ready' && loadedSceneKeyRef.current === sceneKey
+  const panning = interactionMode === 'pan' && (mode === '3d' || !framingLocked)
 
   return (
-    <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
+    <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}${panning ? ' niivue-frame--pan' : ''}`}>
       <canvas ref={canvasRef} aria-label={label} style={{
         visibility: state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? 'hidden' : undefined,
         cursor: interactionMode === 'box-zoom' && !(mode === '2d' && framingLocked) ? 'crosshair' : undefined,
-        touchAction: mode === '3d' && interactionMode === 'pan' ? 'none' : undefined,
+        touchAction: panning ? 'none' : undefined,
       }} />
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={ready && Boolean(sliceLocatorCorners || (overlayMode !== 'off' && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')))}

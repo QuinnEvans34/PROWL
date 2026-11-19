@@ -1102,11 +1102,13 @@ code {
   cursor: crosshair;
 }
 
-.niivue-frame--3d canvas {
+.niivue-frame--3d canvas,
+.niivue-frame--pan canvas {
   cursor: grab;
 }
 
-.niivue-frame--3d canvas:active {
+.niivue-frame--3d canvas:active,
+.niivue-frame--pan canvas:active {
   cursor: grabbing;
 }
 

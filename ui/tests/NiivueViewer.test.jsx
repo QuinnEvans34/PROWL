@@ -425,6 +425,42 @@ it('reverses the peel at its existing depth and calculates the pancreas shortcut
   expect(nv.loadVolumes).toHaveBeenCalledOnce()
 })
 
+it.each([
+  ['axial', 0, 45, [112, -97, 14, 2]],
+  ['coronal', 1, -45, [-88, 13, -96, 2]],
+  ['sagittal', 2, 45, [12, 113, -96, 2]],
+])('pans the %s image from its margin, without changing slice or zoom', async (activePlane, axCorSag, horizontalFov, expected) => {
+  const onSelectObject = vi.fn()
+  render(<NiivueViewer {...base} activePlane={activePlane} wheelZoom interactionMode="pan" onSelectObject={onSelectObject} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  nv.canvas.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100 })
+  nv.canvas.width = 200
+  nv.canvas.height = 200
+  nv.screenSlices = [{ axCorSag, leftTopWidthHeight: [60, 45, 90, 120], fovMM: [horizontalFov, 60] }]
+  nv.setPan2Dxyzmm([12, 13, 14, 2])
+  const beforeSlice = Array.from(nv.scene.crosshairPos)
+  const pointer = (type, clientX, clientY) => fireEvent(nv.canvas, new MouseEvent(type, {
+    bubbles: true, cancelable: true, button: 0, clientX, clientY,
+  }))
+  pointer('pointerdown', 15, 20)
+  pointer('pointermove', 35, 30)
+  pointer('pointermove', 65, 75)
+  pointer('pointerup', 65, 75)
+  expect(Array.from(nv.scene.pan2Dxyzmm)).toEqual(expected)
+  expect(Array.from(nv.scene.crosshairPos)).toEqual(beforeSlice)
+  expect(onSelectObject).not.toHaveBeenCalled()
+  expect(pointer('mousedown', 20, 20)).toBe(false)
+
+  const touch = [{ clientX: 60, clientY: 55 }]
+  expect(fireEvent.touchStart(nv.canvas, { touches: touch })).toBe(false)
+  expect(fireEvent.touchMove(nv.canvas, { touches: touch })).toBe(false)
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+  expect(fireEvent.wheel(nv.canvas, { deltaY: -60, clientX: 65, clientY: 75 })).toBe(false)
+  expect(nv.scene.pan2Dxyzmm[3]).toBeGreaterThan(2)
+  expect(Array.from(nv.scene.crosshairPos)).toEqual(beforeSlice)
+})
+
 it('pans the 3D camera while preserving angles, zoom, peel and click selection', async () => {
   const onSelectObject = vi.fn()
   render(<NiivueViewer {...base} mode="3d" wheelZoom interactionMode="pan"
@@ -809,4 +845,78 @@ it('treats a 3D background click as a miss instead of selecting near a previous 
   act(click)
   await waitFor(() => expect(onSelectObject).toHaveBeenLastCalledWith({ source: 'pred', anatomy: 'pancreas' }))
   expect(nv.indexNearestXYZmm).toHaveBeenCalledWith(0, 5, 10, 15)
+})
+
+it('keeps Abdomen and Region camera framing independent while carrying the crosshair in world millimeters', async () => {
+  const study = { ...caseData, files: { ...caseData.files, ct_full: 'synthetic-abdomen.nii.gz' } }
+  const view = showFull => <NiivueViewer {...base} caseData={study} mode="3d" showFull={showFull} />
+  const { rerender } = render(view(false))
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const point = [3, 7, 12]
+  function moveCrosshair(world) {
+    nv.scene.crosshairPos = new Float32Array(nv.mm2frac(world))
+  }
+  function expectCrosshair(world) {
+    nv.frac2mm(nv.scene.crosshairPos).forEach((position, axis) => expect(position).toBeCloseTo(world[axis]))
+  }
+  nv.setRenderAzimuthElevation(64, 16)
+  nv.setScale(2.6)
+  moveCrosshair(point)
+
+  harness.origin = [-6, -8, -11]
+  harness.spacing = [2, 2, 2]
+  rerender(view(true))
+  await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(2))
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.volumes[0].url).toBe('/cases/synthetic-abdomen.nii.gz')
+  expect(nv.scene.volScaleMultiplier).toBe(1)
+  expect(nv.scene.renderAzimuth).not.toBe(64)
+  expectCrosshair(point)
+
+  nv.setRenderAzimuthElevation(108, 25)
+  nv.setScale(1.6)
+  moveCrosshair([4, 8, 13])
+  harness.origin = [0, 0, 0]
+  harness.spacing = [1, 1, 1]
+  rerender(view(false))
+  await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(3))
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.volumes[0].url).toBe('/cases/synthetic-only.nii.gz')
+  expect(nv.scene.volScaleMultiplier).toBe(2.6)
+  expect(nv.scene.renderAzimuth).toBe(64)
+  expectCrosshair([4, 8, 13])
+
+  harness.origin = [-6, -8, -11]
+  harness.spacing = [2, 2, 2]
+  rerender(view(true))
+  await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(4))
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.scene.volScaleMultiplier).toBe(1.6)
+  expect(nv.scene.renderAzimuth).toBe(108)
+})
+
+it('retains the 3D source CT camera when its prediction mesh arrives', async () => {
+  const study = { ...caseData, files: { ...caseData.files, pred: 'synthetic-source-pred.nii.gz' } }
+  const assetUrls = { ct: 'blob:synthetic-source', pred: 'blob:synthetic-source-pred' }
+  let handle
+  const onViewHandle = next => { handle = next }
+  const view = urls => <NiivueViewer {...base} caseData={study} assetUrls={urls} sources={['pred']} mode="3d" showFull onViewHandle={onViewHandle} />
+  const { rerender } = render(view(assetUrls))
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  nv.setRenderAzimuthElevation(73, -17)
+  nv.setScale(1.9)
+  const camera = handle.capture()
+
+  rerender(view({ ...assetUrls, mesh: { pancreas_pred: 'blob:synthetic-pancreas' } }))
+  await waitFor(() => expect(nv.loadMeshes).toHaveBeenCalledOnce())
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.volumes[0].url).toBe(assetUrls.ct)
+  expect(nv.scene.volScaleMultiplier).toBe(1.9)
+  expect(nv.scene.renderAzimuth).toBe(73)
+  expect(nv.scene.renderElevation).toBe(-17)
+  nv.setScale(1.2)
+  expect(handle.restore(camera)).toBe(true)
+  expect(nv.scene.volScaleMultiplier).toBe(1.9)
 })

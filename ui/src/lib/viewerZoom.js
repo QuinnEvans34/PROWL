@@ -1,6 +1,7 @@
 const clamp = (value, min, max) => Math.max(min, Math.min(max, value))
 const validPoint = (point, dimensions) => point?.length >= dimensions
   && Array.from(point).slice(0, dimensions).every(Number.isFinite)
+const SLICE_AXES_2D = [[0, 1], [0, 2], [1, 2]]
 
 export function clientToBackingPx(canvas, clientX, clientY) {
   const rect = canvas?.getBoundingClientRect()
@@ -60,6 +61,40 @@ function worldAt(nv, point, tileIndex) {
   return nv.frac2mm(fraction)
 }
 
+export function panPlaneAt(nv, point) {
+  if (!validPoint(point, 2)) return null
+  let closestPlane = null
+  let closestDistance = Infinity
+  for (const tile of nv.screenSlices || []) {
+    const bounds = normalizedViewport(tile.leftTopWidthHeight)
+    if (!SLICE_AXES_2D[tile.axCorSag] || tile.sliceFrac === Infinity || !bounds) continue
+    const [left, top, width, height] = bounds
+    const dx = point[0] - clamp(point[0], left, left + width)
+    const dy = point[1] - clamp(point[1], top, top + height)
+    const distance = dx * dx + dy * dy
+    if (distance < closestDistance) {
+      closestDistance = distance
+      closestPlane = tile.axCorSag
+    }
+  }
+  return closestPlane
+}
+
+export function pan2d(nv, plane, previous, next) {
+  const axes = SLICE_AXES_2D[plane]
+  const tile = nv.screenSlices?.find(candidate => candidate.axCorSag === plane && candidate.sliceFrac !== Infinity)
+  const pan = Array.from(nv.scene.pan2Dxyzmm || [])
+  if (!axes || !normalizedViewport(tile?.leftTopWidthHeight) || !validPoint(tile.fovMM, 2)
+    || !validPoint(pan, 4) || pan[3] <= 0 || !validPoint(previous, 2) || !validPoint(next, 2)
+    || (previous[0] === next[0] && previous[1] === next[1])) return false
+  const [, , width, height] = tile.leftTopWidthHeight
+  // Pan is in scaled millimeters. The signed FOV also accounts for a mirror.
+  pan[axes[0]] += (next[0] - previous[0]) * (tile.fovMM[0] / width) * pan[3]
+  pan[axes[1]] += (previous[1] - next[1]) * (tile.fovMM[1] / height) * pan[3]
+  nv.setPan2Dxyzmm(pan)
+  return true
+}
+
 function apply2dZoom(nv, factor, sourceWorld, targetWorld) {
   const pan = Array.from(nv.scene.pan2Dxyzmm || [0, 0, 0, 1])
   const previousZoom = pan[3]
@@ -103,7 +138,7 @@ export function zoomToBounds2d(nv, boundsWorldMm, fill = 0.65) {
   if (points.some(point => !validPoint(point, 3))) return false
 
   const source = Array.from(target).slice(0, 3)
-  const axes = [[0, 1], [0, 2], [1, 2]][tile.axCorSag]
+  const axes = SLICE_AXES_2D[tile.axCorSag]
   const factor = Math.min(...axes.map((axis, index) => {
     const coordinates = points.map(point => point[axis])
     const min = Math.min(...coordinates)
