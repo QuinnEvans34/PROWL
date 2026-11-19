@@ -92,7 +92,7 @@
 .pw-segmented button[aria-pressed='true'] { background: var(--pw-hover); color: var(--pw-text); box-shadow: inset 0 -2px 0 var(--pw-accent); }
 .pw-segmented button:disabled { opacity: 0.45; cursor: not-allowed; }
 @media (max-width: 1599px) {
-  .pw-toolbar .pw-segmented[aria-label='Mouse tool'] .pw-seg-text { display: none; }
+  .pw-toolbar .pw-segmented[aria-label='Mouse tool'] button:not([aria-label='Pan']) .pw-seg-text { display: none; }
   .pw-toolbar .pw-segmented[aria-label='Mouse tool'] button { padding: 0 8px; }
 }
 @media (max-width: 1180px) {

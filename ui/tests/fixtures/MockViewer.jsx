@@ -39,11 +39,17 @@ export default function MockViewer(props) {
   }, [mode, sceneKey, syntheticView, syntheticRestore])
   const peelReveal = props.caseData.syntheticPeelReveal
   useEffect(() => {
-    if (mode === '3d' && peelReveal) revealCallback.current?.(peelReveal)
+    if (mode !== '3d' || !peelReveal) return
+    let active = true
+    Promise.resolve().then(() => {
+      if (active) revealCallback.current?.(peelReveal)
+    })
+    return () => { active = false }
   }, [sceneKey, mode, peelReveal])
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
+      showFull: props.showFull, ctOpacity: props.ctOpacity, assetUrls: props.assetUrls, nativeCtOnly: props.nativeCtOnly,
       clip: props.clip, interactionMode: props.interactionMode,
       overlayMode: props.overlayMode, sliceLocatorCorners: props.sliceLocatorCorners,
       measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm,

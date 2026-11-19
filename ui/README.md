@@ -2,6 +2,10 @@
 
 ## Charcoal toolbench
 
+Studies open in **3D** with **Abdomen** selected when the full CT is available.
+Prepared studies with only a pancreas crop open in **Region**. Select a 3D
+scene directly from 2D to open it, or change the scene beside a CT plane in Split.
+
 The Workbench uses three persistent CT planes with individual slice, zoom, fit,
 hide and maximize controls. Crosshairs can be linked while pan and zoom remain
 independent. Drag the dividers to resize planes, the study list or the expert
@@ -12,8 +16,11 @@ the window. Two-finger scrolling over a Workbench image zooms the active 2D
 plane or the 3D camera, including while the 3D CT is peeled. Drag the slider
 below an image to browse slices or change peel depth. Choose **Front → back**
 or **Back → front** beside Peel to change which side the cut starts from.
-The arrow keys also work when the slider has focus. In 3D, select **Pan**
-and drag to reposition the view while keeping the same angle and peel depth.
+The arrow keys also work when the slider has focus. Select **Pan** and drag
+in 2D, 3D, Split, or a measured inspection. In 3D this keeps the angle and
+peel depth. Pan stays selected across layouts. Selecting Pan releases the
+visible 2D frame lock. Lock it again to hold the 2D plane steady while you pan
+the adjacent 3D view.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests
@@ -32,7 +39,7 @@ verified whole-organ measurements or a diagnosis. The legacy prepared-study live
 scoring endpoint does not replace the saved contours; fresh native inference
 remains available through Analyze when its model worker is connected.
 
-On a prepared study with prediction surfaces, enter **3D** (use **Surfaces**
+On a prepared study with prediction surfaces, use **3D** (choose **Surfaces**
 to remove the surrounding CT) and click a predicted lesion. Findings promotes
 the matched component, with its dimensions in cm and outline volume in mL.
 **Select in 3D** in Findings is the keyboard alternative. **Inspect measurement**

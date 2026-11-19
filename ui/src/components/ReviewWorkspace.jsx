@@ -151,11 +151,6 @@ function LayerToggle({ checked, label, sublabel, color, onClick, disabled = fals
   )
 }
 
-// Split = two NiiVue instances (2D planes + 3D surfaces) sharing one review state:
-// layers, selection, focus/Go-to, reset, window and slice commands go to both.
-// The 3D camera stays independent; 3D crosshair display is not enabled.
-const SPLIT_SUPPORTED = true
-
 export default function ReviewWorkspace({
   caseId,
   caseData,
@@ -204,7 +199,9 @@ export default function ReviewWorkspace({
   }
   const hasPrediction = isCurated || hasLiveResult
   const meshFiles = verifiedPrediction?.urls?.mesh || caseData.files?.mesh
-  const has3dOutline = hasPrediction && Boolean(meshFiles?.pancreas_pred || meshFiles?.lesion_pred)
+  const hasSourceCt = Boolean(verifiedPrediction?.urls?.ct || localCt?.assetUrls?.ct)
+  const hasFullCt = hasSourceCt || Boolean(caseData.files?.ct_full)
+  const hasRegionCt = !hasSourceCt && Boolean(caseData.files?.ct)
   const studyKey = verifiedPrediction?.manifestHash || caseId
   const truthUnlocked = isCurated || truthRevealed
   const differenceAvailable = Boolean(caseData.files?.difference)
@@ -219,13 +216,14 @@ export default function ReviewWorkspace({
           ? 'permitted'
           : 'locked'
 
-  const [state, dispatch] = useReducer(reviewReducer, { hasPrediction, start3d: has3dOutline }, makeReviewState)
+  const [state, dispatch] = useReducer(reviewReducer, { hasPrediction, hasFullCt }, makeReviewState)
   const [inspection, setInspection] = useState(null)
   const inspecting = inspection?.studyKey === studyKey ? inspection : null
-  const viewMode = inspecting ? (has3dOutline ? 'split' : '2d') : state.viewMode
+  const viewMode = inspecting ? 'split' : state.viewMode
   const [inspectionOverlay, setInspectionOverlay] = useState('outline')
   const [sliceLocator, setSliceLocator] = useState(false)
   const [inspectionNavigation, setInspectionNavigation] = useState(null)
+  const [inspectionFramingLocked, setInspectionFramingLocked] = useState(false)
   const view3dRef = useRef(null)
   const inspectionViewRef = useRef(null)
   const capture3d = useCallback(handle => { view3dRef.current = handle }, [])
@@ -257,8 +255,7 @@ export default function ReviewWorkspace({
   const [snapOpen, setSnapOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
   const panelWide = layout.panelWidth >= 420
-  const [threeDVisited, setThreeDVisited] = useState(has3dOutline)
-  const [twoDVisited, setTwoDVisited] = useState(!has3dOutline)
+  const [twoDVisited, setTwoDVisited] = useState(false)
   const [threeDZoom, setThreeDZoom] = useState(null)
   const [askDraft, setAskDraft] = useState(null)
   const [popAnchor, setPopAnchor] = useState(null)
@@ -267,15 +264,17 @@ export default function ReviewWorkspace({
   const [pendingLesionPick, setPendingLesionPick] = useState(null)
   const [inspectedPancreasMeasurement, setInspectedPancreasMeasurement] = useState(null)
   const [framingStudy, setFramingStudy] = useState(null)
-  const framingLocked = framingStudy === caseId && !inspecting
+  const framingLocked = inspecting ? inspectionFramingLocked : framingStudy === caseId
   useEffect(() => { setPeelReveal3d(null) }, [caseId])
   const viewerRef = useRef(null)
   const lastPointerRef = useRef(null)
-  const [navigation, setNavigation] = useState({
+  const [twoDNavigation, setNavigation] = useState({
     indices: { axial: 0, coronal: 0, sagittal: 0 },
     totals: { axial: 1, coronal: 1, sagittal: 1 },
     ranges: { pancreas: null, lesion: null },
   })
+  const [threeDNavigation, setThreeDNavigation] = useState(null)
+  const navigation = (inspecting ? inspectionNavigation ?? threeDNavigation : viewMode === '3d' ? threeDNavigation : null) ?? twoDNavigation
   const [pendingNavigationCommand, setNavigationCommand] = useState(null)
   const navigationCommand = pendingNavigationCommand?.studyKey === studyKey ? pendingNavigationCommand : null
   const navigationCommandId = useRef(0)
@@ -298,13 +297,18 @@ export default function ReviewWorkspace({
       if (camera && !view3dRef.current?.restore(camera)) {
         issueViewerCommand({ type: 'restore-camera', target: '3d', view: camera })
       }
-      dispatch({ type: 'PATCH_SETTINGS', value: inspecting.settings })
+      const activeTool = state.interactionMode
+      dispatch({ type: 'PATCH_SETTINGS', value: {
+        ...inspecting.settings,
+        interactionMode: activeTool === 'pan' || activeTool === 'box-zoom' ? activeTool : inspecting.settings.interactionMode,
+      } })
     }
     setInspection(null)
     setInspectionNavigation(null)
+    setInspectionFramingLocked(false)
     setSliceLocator(false)
     clearFinding()
-  }, [clearFinding, inspecting])
+  }, [clearFinding, inspecting, state.interactionMode])
 
   const resetView = useCallback(() => {
     exitInspection()
@@ -325,13 +329,14 @@ export default function ReviewWorkspace({
     setInspectedPancreasMeasurement(null)
     setInspection(null)
     setInspectionNavigation(null)
+    setInspectionFramingLocked(false)
     setSliceLocator(false)
     setFramingStudy(null)
     setThreeDZoom(null)
+    setThreeDNavigation(null)
     setNavigationCommand(null)
-    setThreeDVisited(has3dOutline)
-    setTwoDVisited(!has3dOutline)
-    dispatch({ type: 'CASE_CHANGED', hasPrediction, start3d: has3dOutline })
+    setTwoDVisited(false)
+    dispatch({ type: 'CASE_CHANGED', hasPrediction, hasFullCt })
     setNavigation({
       indices: { axial: 0, coronal: 0, sagittal: 0 },
       totals: { axial: 1, coronal: 1, sagittal: 1 },
@@ -386,6 +391,9 @@ export default function ReviewWorkspace({
     () => visibleSourcesForEvidence(state.evidenceMode, state.sourceFocus, state.layerVisibility),
     [state.evidenceMode, state.sourceFocus, state.layerVisibility],
   )
+  const hasSurfaceScene = visibleSources.some(source => availableSources.includes(source) && (
+    meshFiles?.[`pancreas_${source}`] || meshFiles?.[`lesion_${source}`]
+  )) || (state.evidenceMode === 'overlap' && state.sourceFocus === 'difference' && differenceAvailable)
 
   const predictionShown = state.evidenceMode === 'prediction' || state.evidenceMode === 'overlap'
   const referenceShown = state.evidenceMode === 'truth' || state.evidenceMode === 'overlap'
@@ -517,7 +525,6 @@ export default function ReviewWorkspace({
         interactionMode: state.interactionMode,
       },
     })
-    if (has3dOutline) setThreeDVisited(true)
     if (state.evidenceMode !== 'prediction') dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
     select()
     issueViewerCommand({ type: 'measurement-point', target: 'inspection', plane: calipers.plane,
@@ -620,18 +627,27 @@ export default function ReviewWorkspace({
 
 
   function setViewMode(viewMode) {
-    if (viewMode === 'split' && !SPLIT_SUPPORTED) return
     if (inspecting) exitInspection()
-    if (viewMode !== '2d') setThreeDVisited(true)
     if (viewMode !== '3d') setTwoDVisited(true)
-    dispatch({ type: 'SET_VIEW_MODE', value: viewMode })
+    dispatch({ type: 'SET_VIEW_MODE', value: viewMode, interactionMode: state.interactionMode })
   }
 
   function changeFramingLock(locked) {
-    setFramingStudy(locked ? caseId : null)
-    if (locked && state.viewMode === '2d' && ['pan', 'box-zoom'].includes(state.interactionMode)) {
+    if (inspecting) setInspectionFramingLocked(locked)
+    else setFramingStudy(locked ? caseId : null)
+    if (locked && viewMode === '2d' && ['pan', 'box-zoom'].includes(state.interactionMode)) {
       dispatch({ type: 'SET_INTERACTION_MODE', value: 'navigate' })
     }
+  }
+
+  function selectMouseTool(value) {
+    if (value === 'pan' && viewMode !== '3d' && framingLocked) changeFramingLock(false)
+    dispatch({ type: 'SET_INTERACTION_MODE', value })
+  }
+
+  function selectScene(value) {
+    if (viewMode === '2d') setViewMode('3d')
+    dispatch({ type: 'PATCH_SETTINGS', value: { scene3d: value } })
   }
 
   const is2dLike = viewMode !== '3d'
@@ -654,8 +670,11 @@ export default function ReviewWorkspace({
   else if (!components.length) lesionReviewMessage = 'No measurable lesion outline in this prediction.'
   else if (currentLesionSelection?.unmatched) lesionReviewMessage = 'That click did not match an outline. Select a lesion to continue.'
   else lesionReviewMessage = 'Click a predicted lesion in 3D or select it here.'
-  // Full abdomen needs the exported whole-abdomen CT; fall back to the region if absent.
-  const scene3d = state.scene3d === 'full' && !caseData.files?.ct_full ? 'region' : state.scene3d
+  const requestedSceneAvailable = state.scene3d === 'full' ? hasFullCt
+    : state.scene3d === 'region' ? hasRegionCt : hasSurfaceScene
+  const scene3d = requestedSceneAvailable ? state.scene3d : hasFullCt ? 'full' : 'region'
+  const scene3dLabel = scene3d === 'full' ? (hasSourceCt ? 'Full source CT · 3D' : 'Abdomen · 3D')
+    : scene3d === 'region' ? 'Pancreas region · 3D' : 'Model surfaces · 3D'
   const viewerProps = {
     caseData,
     assetUrls: verifiedPrediction?.urls ?? localCt?.assetUrls,
@@ -699,7 +718,7 @@ export default function ReviewWorkspace({
   const viewer3dProps = {
     wheelZoom: true,
     anatomyLighting: true,
-    showFull: scene3d === 'full',
+    showFull: hasSourceCt || scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
     onSelectObject: selectFrom3d,
@@ -710,6 +729,7 @@ export default function ReviewWorkspace({
     navigationCommand: navigationCommand?.type === 'restore-finding-view' && navigationCommand.view.camera
       ? navigationCommand : ['2d', 'inspection'].includes(navigationCommand?.target) || navigationCommand?.type === 'measurement-point' ? null : navigationCommand,
     onZoomChange: scale => setThreeDZoom(Number.isFinite(scale) ? Math.round(scale * 100) : null),
+    onNavigationChange: setThreeDNavigation,
     onViewHandle: capture3d,
     sliceLocatorCorners: sliceLocator && inspecting ? inspectionNavigation?.planeWorldCorners : null,
   }
@@ -734,7 +754,7 @@ export default function ReviewWorkspace({
   function captureKeyView() {
     const view = inspectionViewRef.current?.capture()
     if (!inspecting || !view?.worldMm?.every(Number.isFinite)) return null
-    const camera = has3dOutline ? view3dRef.current?.capture() : null
+    const camera = view3dRef.current?.capture()
     return {
       plane: inspecting.calipers.plane, worldMm: view.worldMm,
       sliceIndex: inspectionNavigation?.indices?.[inspecting.calipers.plane],
@@ -750,7 +770,6 @@ export default function ReviewWorkspace({
   function reopenKeyView(record) {
     const view = record.view
     if (view.seriesKey !== (sourceDetails ? 'source' : 'prepared')) return 'The CT series for this key view is unavailable.'
-    if (view.camera && !has3dOutline) return 'Wait for the 3D outline before reopening this view.'
     const component = record.finding.anatomy === 'pancreas'
       ? pancreasDimensions : components.find(item => item.id === record.finding.id)
     if (component?.calipers?.plane !== view.plane) return 'The measured plane for this finding is unavailable.'
@@ -930,28 +949,23 @@ export default function ReviewWorkspace({
             onChange={setViewMode}
             options={[
               ['2d', '2D', { icon: <Crosshair size={14} aria-hidden="true" /> }],
-              ['3d', '3D', { icon: <Box size={14} aria-hidden="true" />, disabled: Boolean(verifiedPrediction && !has3dOutline),
-                title: verifiedPrediction?.surfaceStatus === 'loading' ? 'Preparing 3D from the verified mask' : undefined }],
+              ['3d', '3D', { icon: <Box size={14} aria-hidden="true" /> }],
               ['split', 'Split', {
-                disabled: Boolean(verifiedPrediction && !has3dOutline),
                 icon: <Columns2 size={14} aria-hidden="true" />,
-                disabled: !SPLIT_SUPPORTED,
-                title: 'Split: 2D planes and 3D surfaces side by side, sharing layers, selection and Go-to',
+                title: 'Show 2D planes and the 3D scene side by side',
               }],
             ]}
           />
-          {is3dLike && (
-            <Segmented
-              label="3D scene"
-              value={scene3d}
-              onChange={(value) => dispatch({ type: 'PATCH_SETTINGS', value: { scene3d: value } })}
-              options={[
-                ['full', 'Abdomen', { disabled: !caseData.files?.ct_full, title: 'Full abdomen: the whole abdominal CT around the surfaces' }],
-                ['region', 'Region', { title: 'Pancreas region: only the cropped CT around the pancreas' }],
-                ['surfaces', 'Surfaces', { title: 'Surfaces only: just the pancreas and lesion' }],
-              ]}
-            />
-          )}
+          <Segmented
+            label="3D scene"
+            value={scene3d}
+            onChange={selectScene}
+            options={[
+              ['full', 'Abdomen', { disabled: !hasFullCt, title: hasFullCt ? 'Show the full supplied CT in 3D' : 'This study has only a region scan' }],
+              ['region', 'Region', { disabled: !hasRegionCt, title: hasRegionCt ? 'Show the prepared pancreas-region CT' : 'A separate region scan is unavailable' }],
+              ['surfaces', 'Surfaces', { disabled: !hasSurfaceScene, title: hasSurfaceScene ? 'Show model surfaces without CT' : '3D segmentation surfaces are unavailable' }],
+            ]}
+          />
           {verifiedPrediction?.surfaceStatus === 'loading' && <span className="pw-muted" role="status">Preparing 3D outline…</span>}
           {verifiedPrediction?.surfaceStatus === 'unavailable' && <span className="pw-muted" title={verifiedPrediction.surfaceError}>3D outline unavailable</span>}
           {is2dLike && !inspecting && <Segmented label="Visible planes" value={state.activePlane === 'multiplanar' ? layout.maximizedPlane || 'multiplanar' : state.activePlane}
@@ -962,14 +976,14 @@ export default function ReviewWorkspace({
             options={[["multiplanar", "All planes", { disabled: Boolean(verifiedPrediction || localCt) }], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
           <Segmented
             label="Mouse tool"
-            value={is2dLike ? twoDInteractionMode : state.interactionMode}
-            onChange={(value) => dispatch({ type: 'SET_INTERACTION_MODE', value })}
+            value={viewMode === 'split' && (pan || boxZoom) ? state.interactionMode : is2dLike ? twoDInteractionMode : state.interactionMode}
+            onChange={selectMouseTool}
             options={[
               viewMode === '3d'
                 ? ['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Drag to orbit the camera' }]
                 : ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
-              ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked && !is3dLike,
-                title: framingLocked ? (is3dLike ? 'Drag to reposition the 3D view' : 'Unlock framing to pan') : 'Drag to reposition the view' }],
+              ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />,
+                title: is2dLike && framingLocked ? 'Unlock 2D framing and pan' : 'Drag to reposition the view' }],
               ...(is2dLike ? [['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Drag to adjust CT brightness and contrast' }]] : []),
               ['box-zoom', 'Box zoom', { disabled: framingLocked && !is3dLike,
                 title: framingLocked && !is3dLike ? 'Unlock framing to zoom' : 'Left-drag a box around a region to zoom in' }],
@@ -1093,8 +1107,8 @@ export default function ReviewWorkspace({
         {inspecting && <div className="pw-inspection-tools" role="toolbar" aria-label="Finding inspection tools">
           <Segmented label="CT overlay" value={inspectionOverlay} onChange={setInspectionOverlay}
             options={[[ 'outline', 'Outline' ], [ 'fill', 'Fill' ], [ 'off', 'CT only' ]]} />
-          {has3dOutline && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" aria-pressed={sliceLocator}
-            onClick={() => setSliceLocator(value => !value)}>Show slice in 3D</button>}
+          <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" aria-pressed={sliceLocator}
+            onClick={() => setSliceLocator(value => !value)}>Show slice in 3D</button>
           <InspectionSourceControls sourceAvailable={Boolean(sourceDetails)} preparedAvailable={!verifiedPrediction}
             activeSource={sourceDetails ? 'source' : 'prepared'} />
         </div>}
@@ -1111,17 +1125,18 @@ export default function ReviewWorkspace({
               <div className={`pw-toolbench-scene pw-toolbench-scene--${viewMode}${inspecting ? ' pw-toolbench-scene--inspection' : ''}`}>
                 <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={Boolean(inspecting) || viewMode === '3d'}>
                   {twoDVisited && <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={twoDInteractionMode}
-                    framingLocked={framingLocked} onFramingLockedChange={changeFramingLock}
+                    framingLocked={framingStudy === caseId} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked}
                     singlePane={Boolean(verifiedPrediction || localCt)} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />}
                 </section>
                 {inspectionProps && <section className="pw-toolbench-scene__inspection" aria-label="Measured CT">
                   <ToolbenchViewer {...inspectionProps} singlePane interactionMode={twoDInteractionMode}
-                    linked={false} onNavigationChange={setInspectionNavigation} label={`${viewerLabel} · Measured CT`} />
+                    linked={false} framingLocked={inspectionFramingLocked} onFramingLockedChange={changeFramingLock}
+                    onNavigationChange={setInspectionNavigation} label={`${viewerLabel} · Measured CT`} />
                 </section>}
                 <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={viewMode === '2d'}>
-                  <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">{scene3d === 'full' ? 'Abdomen · 3D' : scene3d === 'region' ? 'Pancreas region · 3D' : 'Model surfaces · 3D'}</span>
-                  {threeDVisited && <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={threeDInteractionMode} label={`${viewerLabel} · 3D surfaces`} />}
+                  <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">{scene3dLabel}</span>
+                  <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={threeDInteractionMode} label={`${viewerLabel} · 3D surfaces`} />
                   {snapPad}
                 </section>
               </div>

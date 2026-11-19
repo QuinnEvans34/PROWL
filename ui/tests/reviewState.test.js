@@ -3,12 +3,13 @@ import { makeReviewState, reviewReducer } from '../src/lib/reviewState.js'
 import { objectLabel, sourcesForEvidence, visibleSourcesForEvidence } from '../src/lib/viewerLayers.js'
 
 describe('historical presentation reducer (not durable review persistence)', () => {
-  it('starts unmarked cases in 2D CT', () => {
-    expect(makeReviewState()).toMatchObject({ viewMode: '2d', evidenceMode: 'ct', selectedObject: null })
+  it('starts unmarked cases in 3D Abdomen or uses Region for a crop-only study', () => {
+    expect(makeReviewState()).toMatchObject({ viewMode: '3d', scene3d: 'full', interactionMode: 'rotate', evidenceMode: 'ct', selectedObject: null })
+    expect(makeReviewState({ hasFullCt: false })).toMatchObject({ viewMode: '3d', scene3d: 'region' })
     expect(makeReviewState({ hasPrediction: true }).evidenceMode).toBe('prediction')
   })
   it('case change clears the previous case display state', () => {
-    const old = { ...makeReviewState(), viewMode: '3d', selectedObject: { anatomy: 'lesion' }, overlayOpacity: 0.1 }
+    const old = { ...makeReviewState(), viewMode: '2d', scene3d: 'region', selectedObject: { anatomy: 'lesion' }, overlayOpacity: 0.1 }
     expect(reviewReducer(old, { type: 'CASE_CHANGED', hasPrediction: false })).toEqual(makeReviewState())
   })
   it('live prediction advances CT without wiping selected plane or opacity', () => {
@@ -22,6 +23,12 @@ describe('historical presentation reducer (not durable review persistence)', () 
   })
   it.each([['3d', 'rotate'], ['2d', 'navigate']])('mode %s uses %s interaction', (value, interactionMode) => {
     expect(reviewReducer(makeReviewState(), { type: 'SET_VIEW_MODE', value })).toMatchObject({ viewMode: value, interactionMode, settingsOpen: false })
+  })
+  it('keeps Pan selected when switching review layouts', () => {
+    const pan = { ...makeReviewState(), interactionMode: 'pan' }
+    for (const value of ['2d', 'split', '3d']) {
+      expect(reviewReducer(pan, { type: 'SET_VIEW_MODE', value })).toMatchObject({ viewMode: value, interactionMode: 'pan' })
+    }
   })
   it('toggles a layer without mutating its input', () => {
     const old = makeReviewState()

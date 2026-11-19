@@ -16,7 +16,7 @@ vi.mock('../src/lib/scanMeasurements.js', async importOriginal => ({
 }))
 
 const cases = {
-  SYNTHETIC_A: { files: { ct: 'SYNTHETIC_A/ct.nii.gz', pred: 'SYNTHETIC_A/pred.nii.gz' }, spacing_mm: [2, 3, 4],
+  SYNTHETIC_A: { files: { ct: 'SYNTHETIC_A/ct.nii.gz', ct_full: 'SYNTHETIC_A/ct_full.nii.gz', pred: 'SYNTHETIC_A/pred.nii.gz' }, spacing_mm: [2, 3, 4],
     syntheticPeelReveal: { frontToBack: 30, backToFront: 52 } },
   SYNTHETIC_B: { files: { ct: 'SYNTHETIC_B/ct.nii.gz', pred: 'SYNTHETIC_B/pred.nii.gz' }, spacing_mm: [2, 3, 4] },
 }
@@ -88,6 +88,14 @@ const hideCalipers = () => screen.getByRole('button', { name: 'Hide calipers', e
 const viewer3d = () => viewerData(screen.getByTestId(/^synthetic-viewer-3d/))
 const measuredViewer = async () => within(await screen.findByRole('region', { name: 'Measured CT' }))
   .findByRole('status', { name: 'Synthetic viewer stub' })
+const modeButton = name => screen.getByRole('button', { name, exact: true })
+const paneViewers = () => within(screen.getByRole('region', { name: '2D planes' }))
+const viewerRole = { name: 'Synthetic viewer stub' }
+
+async function openPlanes(user) {
+  await user.click(modeButton('2D'))
+  return paneViewers().findAllByRole('status', viewerRole)
+}
 
 describe('real workspace layout with synthetic imaging only', () => {
   it('keeps lesion calipers pinned and takes the selected pancreas to its prepared measurement', async () => {
@@ -198,6 +206,12 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewer3d().clip).toMatchObject({ progress: 27, azimuth: 180 })
     await user.click(inspectionTools().getByRole('button', { name: 'Show slice in 3D' }))
     expect(viewer3d().sliceLocatorCorners).toBeNull()
+    await user.click(modeButton('Region'))
+    expect(viewer3d().showFull).toBe(false)
+    await user.click(modeButton('Abdomen'))
+    expect(viewer3d().showFull).toBe(true)
+    expect(await measuredViewer()).toBe(coronal)
+    expect(viewerData(coronal).navigationCommand).toEqual(measurementCommand)
     await user.click(lesionRail().getByRole('button', { name: 'Zoom to lesion' }))
     expect(viewerData(coronal).navigationCommand).toMatchObject({ type: 'zoom-lesion', target: 'inspection', worldMm: second.focusWorldMm })
     expect(viewer3d().navigationCommand).toBeNull()
@@ -235,13 +249,15 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewer3d().measurementCalipers).toBeNull()
   })
 
-  it('opens one measured CT pane when the prediction has no 3D meshes', async () => {
+  it('keeps the measured plane beside the 3D CT when the prediction has no meshes', async () => {
     const user = userEvent.setup()
     const volumes = measuredFindings()
     loadScanMeasurements.mockImplementation(async context => measured(context, volumes))
     render(<Harness />)
-    const originalPanes = within(screen.getByRole('region', { name: '2D planes' }))
-    const oldViewers = await originalPanes.findAllByRole('status', { name: 'Synthetic viewer stub' })
+    const oldViewers = await openPlanes(user)
+    const normalLock = paneViewers().getByRole('button', { name: 'Lock framing' })
+    await waitFor(() => expect(normalLock.disabled).toBe(false))
+    await user.click(normalLock)
     const lesion = await screen.findByRole('button', { name: 'Inspect measurement for lesion 1' })
     await user.click(lesion)
     const inspected = within(await screen.findByRole('region', { name: 'Measured CT' }))
@@ -249,18 +265,31 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(measuredNode)).toMatchObject({
       measurementCalipers: volumes.lesionDimensions.components[0].calipers, overlayMode: 'outline',
     })
-    expect(screen.getByRole('button', { name: '2D', exact: true, pressed: true })).toBeTruthy()
-    expect(screen.queryByRole('region', { name: '3D surfaces' })).toBeNull()
-    expect(screen.queryByRole('button', { name: 'Show slice in 3D' })).toBeNull()
+    expect(modeButton('Split').getAttribute('aria-pressed')).toBe('true')
+    expect(screen.getByRole('region', { name: '3D surfaces' })).toBeTruthy()
+    expect(viewer3d()).toMatchObject({ mode: '3d', showFull: true })
+    await user.click(modeButton('Pan'))
+    expect(viewerData(measuredNode).interactionMode).toBe('pan')
+    expect(viewer3d().interactionMode).toBe('pan')
+    const lock = within(screen.getByRole('region', { name: 'Measured CT' })).getByRole('button', { name: 'Lock framing' })
+    await waitFor(() => expect(lock.disabled).toBe(false))
+    expect(lock.getAttribute('aria-pressed')).toBe('false')
+    await user.click(lock)
+    expect(viewerData(measuredNode).interactionMode).toBe('navigate')
+    expect(viewer3d().interactionMode).toBe('pan')
+    await user.click(modeButton('Pan'))
+    expect(lock.getAttribute('aria-pressed')).toBe('false')
+    expect(viewerData(measuredNode).interactionMode).toBe('pan')
     await user.click(within(screen.getByRole('region', { name: 'Lesion review' })).getByRole('button', { name: 'Exit inspection' }))
     expect(screen.queryByRole('region', { name: 'Measured CT' })).toBeNull()
-    expect(originalPanes.getAllByRole('status', { name: 'Synthetic viewer stub' })).toEqual(oldViewers)
+    expect(paneViewers().getAllByRole('status', viewerRole)).toEqual(oldViewers)
+    expect(normalLock.getAttribute('aria-pressed')).toBe('true')
   })
 
   it('preserves mounted planes, expert questions and summary drafts through focus, hiding and resizing', async () => {
     const user = userEvent.setup()
     render(<Harness />)
-    const viewers = await screen.findAllByRole('status', { name: 'Synthetic viewer stub' })
+    const viewers = await openPlanes(user)
     expect(viewers).toHaveLength(3)
     await startDraft(user)
     await user.click(screen.getByRole('tab', { name: 'Ask PROWL' }))
@@ -282,7 +311,7 @@ describe('real workspace layout with synthetic imaging only', () => {
 
     await user.click(screen.getByRole('button', { name: 'Hide sagittal plane' }))
     expect(screen.getAllByRole('status', { name: 'Synthetic viewer stub' })).toHaveLength(2)
-    expect(screen.getAllByRole('status', { name: 'Synthetic viewer stub', hidden: true })).toEqual(viewers)
+    expect(paneViewers().getAllByRole('status', { ...viewerRole, hidden: true })).toEqual(viewers)
     await user.click(screen.getByRole('button', { name: 'Maximize axial plane' }))
     expect(screen.getAllByRole('status', { name: 'Synthetic viewer stub' })).toEqual([viewers[0]])
     await user.click(screen.getByRole('button', { name: 'Restore axial plane' }))
@@ -300,7 +329,7 @@ describe('real workspace layout with synthetic imaging only', () => {
   it('restores layout without resetting evidence, window, opacity or review draft', async () => {
     const user = userEvent.setup()
     render(<Harness />)
-    const viewers = await screen.findAllByRole('status', { name: 'Synthetic viewer stub' })
+    const viewers = await openPlanes(user)
     await startDraft(user)
     fireEvent.change(screen.getByLabelText('CT window preset'), { target: { value: 'wide' } })
     fireEvent.change(screen.getByLabelText('Prediction overlay opacity'), { target: { value: '0.35' } })
@@ -321,7 +350,7 @@ describe('real workspace layout with synthetic imaging only', () => {
   it('uses the focused plane slider for slice changes and keeps zoom local', async () => {
     const user = userEvent.setup()
     render(<Harness />)
-    await screen.findAllByRole('status', { name: 'Synthetic viewer stub' })
+    await openPlanes(user)
     const coronal = screen.getByRole('region', { name: 'Coronal CT plane' })
     const coronalViewer = within(coronal).getByRole('status', { name: 'Synthetic viewer stub' })
     const coronalSlice = within(coronal).getByRole('slider', { name: 'Coronal slice' })
@@ -381,30 +410,29 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(viewer).clip).toMatchObject({ azimuth: 0, progress: 0, depth: 2 })
   })
 
-  it('allows 3D pan while 2D framing is locked', async () => {
+  it('keeps Pan marked active in Split while a 2D lock pauses only the planes', async () => {
     const user = userEvent.setup()
     render(<Harness />)
+    const viewer = await screen.findByTestId(/^synthetic-viewer-3d/)
+    expect(viewerData(viewer).interactionMode).toBe('rotate')
+    await user.click(modeButton('Pan'))
+    expect(viewerData(viewer).interactionMode).toBe('pan')
+    await user.click(modeButton('Split'))
+    const axial = await screen.findByTestId('synthetic-viewer-2d-axial')
+    expect(viewerData(axial).interactionMode).toBe('pan')
     const lock = await screen.findByRole('button', { name: 'Lock framing' })
     await waitFor(() => expect(lock.disabled).toBe(false))
     await user.click(lock)
-    const pan = () => screen.getByRole('button', { name: 'Pan', exact: true })
-    expect(pan().disabled).toBe(true)
-
-    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
-    const viewer = await screen.findByTestId(/^synthetic-viewer-3d/)
-    const rotate = screen.getByRole('button', { name: 'Rotate', pressed: true })
-    expect(viewerData(viewer).interactionMode).toBe('rotate')
-    await user.click(pan())
+    expect(modeButton('Pan').getAttribute('aria-pressed')).toBe('true')
     expect(viewerData(viewer).interactionMode).toBe('pan')
-    await user.click(rotate)
-    expect(viewerData(viewer).interactionMode).toBe('rotate')
-
-    await user.click(screen.getByRole('button', { name: 'Split', exact: true }))
-    await user.click(pan())
+    expect(viewerData(axial).interactionMode).toBe('navigate')
+    await user.click(modeButton('2D'))
+    expect(modeButton('Pan').disabled).toBe(false)
+    await user.click(modeButton('Pan'))
+    expect(lock.getAttribute('aria-pressed')).toBe('false')
+    expect(viewerData(axial).interactionMode).toBe('pan')
+    await user.click(modeButton('3D'))
     expect(viewerData(viewer).interactionMode).toBe('pan')
-    expect(viewerData(screen.getByTestId('synthetic-viewer-2d-axial')).interactionMode).toBe('navigate')
-    await user.click(screen.getByRole('button', { name: '2D', exact: true }))
-    expect(pan().disabled).toBe(true)
   })
 
   it('keeps study measurements visible with the expert and rejects a late result from the previous study', async () => {

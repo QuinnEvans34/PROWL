@@ -4,7 +4,7 @@ PROWL opens a study, shows the model’s pancreas and lesion outlines, and lets 
 
 ## 1. An inspection layout for one finding
 
-- With a visible prediction, **3D overview** opens on the whole pancreas outline and its lesions with local anatomical context. Plain CT studies open in 2D. **Abdomen**, **Region**, and **Surfaces** remain reachable in one step.
+- Studies open in **3D Abdomen** when the full CT is available, including source CT and studies still awaiting prediction surfaces. Prepared crops open in **3D Region**. Choosing a scene in 2D opens 3D. Changing scenes from Split or inspection keeps the adjacent CT pane.
 - **Inspect CT slice** from either the viewer or Findings opens a linked layout. A smaller 3D pane remains visible beside one large CT plane. The selected finding, dimensions in cm, and displayed-outline volume stay in reach. A narrow window can show the two panes in a stack or allow switching between them.
 - Open at the exact evidence slice with the recorded caliper endpoints. Give the CT pane a useful initial fit around the finding and surrounding tissue. Mark the lesion’s slice span and the measured slice on the slider when the corresponding grid is known. Provide one action to return to the measured slice.
 - **Show slice in 3D** adds an optional plane positioned using the CT’s world coordinates. The plane follows the active CT slice and is independent of the front/back peel. Camera-facing 3D calipers retain their existing behavior and identify the plane on which they were measured.
