@@ -1,0 +1,61 @@
+{
+  "version": "prowl-expert-demo-development-v1",
+  "exposed_development": true,
+  "independent_evaluation": false,
+  "purpose": "Rehearse the user's general pancreas questions and follow-ups. Routing checks are automatic; answer accuracy, completeness and citation support require manual review.",
+  "corpus": "configs/evidence/corpus-disease-v1.json",
+  "source_scopes": {
+    "function": {
+      "available_scope": "Digestive enzyme and hormone secretion; endocrine cells and glucose regulation.",
+      "limits": "Do not turn a broad function answer into unrelated aging mechanisms, cell percentages or disease statistics.",
+      "source_candidates": [
+        {"pmid": "36834922", "ordinal": 4, "passage_id": "psg:ce52e9271baed789f32bb515e0a33f6b7d8be742e3e2a69521814f7553851b9f"},
+        {"pmid": "36834922", "ordinal": 7, "passage_id": "psg:b8168c59d182d83f80f0cba47665761d85162ac15bed195ae314e21120f01122"}
+      ]
+    },
+    "insulin": {
+      "available_scope": "Pancreatic beta cells secrete insulin to maintain glucose homeostasis.",
+      "limits": "Answer the insulin follow-up directly. The source's debate about senescent cells is not a general claim that the pancreas does not produce insulin.",
+      "source_candidates": [
+        {"pmid": "36834922", "ordinal": 114, "passage_id": "psg:0aea82a849af4522692781e88bff0e5a6d685776b8678b6065ff95c82ae29ad5"}
+      ]
+    },
+    "loss_of_function": {
+      "available_scope": "Limited endocrine coverage: beta-cell dysfunction, diabetes and glucose regulation in aging or type 2 diabetes contexts.",
+      "limits": "Partial coverage of a broad loss-of-function question. The audited corpus has no direct exocrine insufficiency, steatorrhea, malabsorption or maldigestion passages. Do not invent a complete clinical consequence list or treatment advice.",
+      "source_candidates": [
+        {"pmid": "36834922", "ordinal": 140, "passage_id": "psg:f3c8f390cba90645e9d92be80f8d34b14e27d330e77e72a715ea3b06faa4d6d8"},
+        {"pmid": "25950180", "ordinal": 5, "passage_id": "psg:a66f9aacb162ff7a1dd99664c392f39dad15e4fa0c83fc32232ef3cf01bae884"}
+      ]
+    },
+    "location": {
+      "available_scope": "Posterior abdominal wall behind the stomach in the epigastric region; head within the duodenal curve.",
+      "limits": "General anatomy, not localization in an attached scan. Keep the answer focused on where the organ is.",
+      "source_candidates": [
+        {"pmid": "35877639", "ordinal": 26, "passage_id": "psg:baa64c457cae269ce83843795c2afd18149fc4455e0e99b6d91b1cee21f53d50"}
+      ]
+    },
+    "disease_signs": {
+      "available_scope": "Disease-specific examples of abdominal pain and jaundice, plus the limitation that early pancreatic cancer may have no symptoms.",
+      "limits": "The corpus does not provide a universal or exhaustive list of clear signs of all pancreatic diseases. Preserve disease and anatomical restrictions; do not diagnose the user or imply that symptoms prove disease.",
+      "source_candidates": [
+        {"pmid": "32335790", "ordinal": 23, "passage_id": "psg:8714daa3a7de00ce33ed4d2c11b0709a3d6f07b268ad1f276783d261aea821b8"},
+        {"pmid": "37173876", "ordinal": 6, "passage_id": "psg:41a52591b689f279e9ad31599bd8fc3019ea7575c1ba148d47929f7b48335130"}
+      ]
+    }
+  },
+  "cases": [
+    {"id": "function", "question": "What does the pancreas do?", "conversation": [], "expected_reason": null, "source_scope": "function"},
+    {"id": "function_default_topic", "question": "What does it do?", "conversation": [], "expected_reason": null, "source_scope": "function"},
+    {"id": "insulin_followup", "question": "Does it produce insulin?", "conversation": [{"question": "What does the pancreas do?"}], "expected_reason": null, "source_scope": "insulin"},
+    {"id": "loss_of_function", "question": "What happens if the pancreas loses function?", "conversation": [{"question": "What does the pancreas do?"}, {"question": "Does it produce insulin?"}], "expected_reason": null, "source_scope": "loss_of_function"},
+    {"id": "loss_of_function_followup", "question": "What happens if it loses function?", "conversation": [{"question": "What does the pancreas do?"}, {"question": "Does it produce insulin?"}], "expected_reason": null, "source_scope": "loss_of_function"},
+    {"id": "location_followup", "question": "Where is it located?", "conversation": [{"question": "What does the pancreas do?"}, {"question": "Does it produce insulin?"}, {"question": "What happens if the pancreas loses function?"}], "expected_reason": null, "source_scope": "location"},
+    {"id": "disease_signs_followup", "question": "What are clear signs of disease?", "conversation": [{"question": "Does it produce insulin?"}, {"question": "What happens if the pancreas loses function?"}, {"question": "Where is it located?"}], "expected_reason": null, "source_scope": "disease_signs"},
+    {"id": "disease_signs_explicit", "question": "What are clear signs of pancreatic disease?", "conversation": [], "expected_reason": null, "source_scope": "disease_signs"},
+    {"id": "explicit_new_topic", "question": "Explain pancreatic function.", "conversation": [{"question": "What imaging findings distinguish pancreatitis from pancreatic cancer?"}], "expected_reason": null, "source_scope": "function", "expect_unchanged_question": true},
+    {"id": "ambiguous_measurement", "question": "How big is it?", "conversation": [], "expected_reason": "clarification_subject", "source_scope": null},
+    {"id": "different_organ", "question": "Where are the kidneys located?", "conversation": [{"question": "What does the pancreas do?"}], "expected_reason": "pancreas_topic_required", "source_scope": null},
+    {"id": "individual_diagnosis", "question": "Does this patient have pancreatic cancer?", "conversation": [{"question": "What does the pancreas do?"}], "expected_reason": "out_of_scope", "source_scope": null}
+  ]
+}
