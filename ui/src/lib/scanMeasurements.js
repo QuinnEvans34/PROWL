@@ -8,17 +8,20 @@ const fail = (message) => { throw new Error(message) }
 const close = (a, b) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= EPS
 
 // Closed question grammar: qualifiers/clinical questions must never be silently dropped.
-export function scanQuestion(question) {
+export function scanQuestion(question, { subject = 'pancreas' } = {}) {
   const q = question.toLowerCase().trim().replace(/[?.!]+$/, '').replace(/\s+/g, ' ')
+  // The caller invokes measurements only with an attached saved prediction. A bare
+  // size follow-up defaults to the workbench's pancreas, retaining a measured lesion.
+  if (/^how (?:big|large) is it$/.test(q)) return ['pancreas', 'lesion'].includes(subject) ? subject : 'unsupported'
   const directVolume = q.match(/^what is the (pancreas|lesion) volume(?: (?:in|on) (?:this|the|my) (?:scan|image))?$/)
   if (directVolume) return directVolume[1]
   const match = q.match(/^(?:how (?:big|large) is|what is the (?:size|volume) of) (?:this|the|my) (pancreas|lesion)(?: (?:in|on) (?:this|the|my) (?:scan|image))?$/)
   if (match) return match[1]
-  const subject = '(?:this|my|the current) pancreas'
+  const pancreasSubject = '(?:this|my|the current) pancreas'
   const comparisons = [
-    `^is ${subject} (?:big or small|large or small|big|small|large|enlarged|normal(?: in size)?|(?:bigger|smaller|larger) than (?:the )?average)$`,
-    `^how does (?:the size of )?${subject} compare (?:to|with) (?:the )?average$`,
-    `^compare ${subject} (?:to|with) (?:the )?average$`,
+    `^is ${pancreasSubject} (?:big or small|large or small|big|small|large|enlarged|normal(?: in size)?|(?:bigger|smaller|larger) than (?:the )?average)$`,
+    `^how does (?:the size of )?${pancreasSubject} compare (?:to|with) (?:the )?average$`,
+    `^compare ${pancreasSubject} (?:to|with) (?:the )?average$`,
   ]
   if (comparisons.some(pattern => new RegExp(pattern).test(q))) return 'pancreas_comparison'
   if (/\b(?:this|my|current)\b/.test(q) && /\b(?:scan|pancreas|lesion|tumou?r|image)\b/.test(q)) return 'unsupported'

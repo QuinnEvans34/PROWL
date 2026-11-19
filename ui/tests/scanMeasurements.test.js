@@ -77,6 +77,12 @@ describe('deterministic mask arithmetic and validity', () => {
 })
 
 it.each(['how big is this pancreas?', 'What is the volume of my pancreas?', 'What is the size of the pancreas in this scan?'])('routes %s', q => expect(scanQuestion(q)).toBe('pancreas'))
+it.each(['How big is it?', 'How large is it?'])('resolves the saved-scan follow-up %s with a bounded referent', q => {
+  expect(scanQuestion(q)).toBe('pancreas')
+  expect(scanQuestion(q, { subject: 'lesion' })).toBe('lesion')
+  expect(scanQuestion(q, { subject: 'unknown' })).toBe('unsupported')
+})
+it.each(['How big is it and is it cancer?', 'How big is it without the lesion?'])('does not discard qualifiers in a bare follow-up: %s', q => expect(scanQuestion(q)).toBeNull())
 it.each(['How large is this pancreas and is it cancer?', 'What is the size of this pancreas head?', 'Is this lesion malignant?'])('does not discard qualifiers in %s', q => expect(scanQuestion(q)).toBe('unsupported'))
 it.each(['What is the average pancreas volume?', 'What is the pancreas volume in adults?'])('keeps literature separate for %s', q => expect(scanQuestion(q)).toBe(null))
 it('accepts direct lesion volume wording in scan context', () => expect(scanQuestion('What is the lesion volume on this scan?')).toBe('lesion'))
