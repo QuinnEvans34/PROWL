@@ -56,12 +56,20 @@ class DevelopmentSearch:
         self.scope_policy = scope_policy
         self.lock = Lock()
 
-    def search(self, request):
-        reason = self.scope_policy(request)
-        base = dict(schema_version='prowl-development-search-response-v1',
+    def _base(self, request):
+        return dict(schema_version='prowl-development-search-response-v1',
             request_id=request['request_id'], question=request['question'],
             collection=self.config['collection'], target=self.corpus.target,
             configuration_sha256=digest(self.config), generation='not_called', answer=None)
+
+    def not_searched(self, request, reason):
+        """Bind a clarification without calling a retrieval provider."""
+        plan_request(request)
+        return dict(self._base(request), state='not_searched', reason=reason, evidence=[])
+
+    def search(self, request):
+        reason = self.scope_policy(request)
+        base = self._base(request)
         if reason:
             return dict(base, state='not_searched', reason=reason, evidence=[])
         if not self.lock.acquire(blocking=False):

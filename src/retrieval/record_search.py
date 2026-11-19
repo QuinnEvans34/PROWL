@@ -132,6 +132,11 @@ class RecordAwareSearch:
             raise ValueError('Record search configuration mismatch')
         self.baseline=baseline;self.index=index;self.config=deepcopy(config)
 
+    def not_searched(self, request, reason):
+        return dict(self.baseline.not_searched(request, reason),
+            configuration_sha256=digest(self.config), retrieval_policy=self.policy,
+            record_selection=dict(policy=self.policy, status='not_searched', reason=reason, matches=[]))
+
     def search(self, request):
         # Retains input/privacy/scope gates, DB identity and storage checks on every request.
         base=self.baseline.search(request)

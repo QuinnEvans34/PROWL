@@ -55,7 +55,7 @@ def preview_question(request, call=None):
         result['message'] = 'Are you asking for a saved-outline measurement or a general literature explanation? Use Ask question for the current saved case; search wording cannot supply scan findings.'
         return result
     if re.search(r'\b(it|that|those|they)\b', original.casefold()) and intent['subject'] == 'unspecified':
-        result['message'] = 'Which organ, finding or test do you mean? Include it in your question; earlier questions are not remembered.'
+        result['message'] = 'For wording help, include the organ, finding or test in this question. You can also ask a follow-up directly with Ask question.'
         return result
     from .volume_record_search import route_volume_question
     if route_volume_question(original)['reason'] == 'general_size_defaults_to_study_volume':

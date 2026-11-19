@@ -62,6 +62,9 @@ class LiteratureSearch:
         self.study = study
         self.config = dict(disease.config, retriever='source-linked-literature-search-v4' if study else 'source-linked-literature-search-v3' if measurement else 'source-linked-literature-search-v2')
 
+    def not_searched(self, request, reason):
+        return self.disease.not_searched(request, reason)
+
     def search(self, request):
         question = request['question']
         if self.study and self.study.index.search(question)['route']['status'] == 'candidate':
