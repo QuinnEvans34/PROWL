@@ -709,6 +709,7 @@ export default function NiivueViewer({
   caseData,
   assetUrls = null,
   nativeGeometry = null,
+  nativeCtOnly = false,
   ctRange = null,
   sources = ['pred'],
   visibleSources = null,
@@ -1378,7 +1379,7 @@ export default function NiivueViewer({
 
         await nv.loadVolumes(volumes)
         if (cancelled) return
-        if (nativeGeometry) verifyNativeVolumes(nv.volumes, nativeGeometry)
+        if (nativeGeometry) verifyNativeVolumes(nv.volumes, nativeGeometry, { ctOnly: nativeCtOnly })
 
         availableSources.forEach((source, index) => {
           const volumeIndex = index + 1

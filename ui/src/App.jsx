@@ -113,11 +113,12 @@ function ViewerSuspense({ children, label = 'Preparing medical viewer…' }) {
 }
 
 function WorkbenchEmpty({ onStudies, onImport, missingStudy }) {
+  const expiredLocalStudy = /^Local_CT_[a-f0-9]{32}$/.test(missingStudy || '')
   return (
     <main className="pw-empty" aria-labelledby="wb-empty-title">
       <PantherBadge size="empty" />
-      <h1 id="wb-empty-title">{missingStudy ? 'Study not found' : 'No study open'}</h1>
-      <p>{missingStudy
+      <h1 id="wb-empty-title">{expiredLocalStudy ? 'Local CT session ended' : missingStudy ? 'Study not found' : 'No study open'}</h1>
+      <p>{expiredLocalStudy ? 'Reopen the NIfTI file to view it again.' : missingStudy
         ? `“${missingStudy}” is not in this workstation’s prepared studies.`
         : 'Open a prepared study to inspect the CT and its predicted outlines. Reviews without a reference annotation are complete reviews.'}</p>
       <div className="pw-empty__actions">
@@ -186,6 +187,7 @@ export default function App() {
   const [truthRevealedCaseId, setTruthRevealedCaseId] = useState(null)
   const [askPending, setAskPending] = useState(false)
   const [importOpen, setImportOpen] = useState(false)
+  const [localCt, setLocalCt] = useState(null)
   // Review drafts: in memory only (session). Never written to localStorage.
   const [drafts, setDrafts] = useState({})
   const updateDraft = useCallback((key, draft) => {
@@ -203,6 +205,9 @@ export default function App() {
     ? route.run ? { run: route.run, study: route.study } : null
     : lastPrediction
   const showPrediction = showWorkbench && Boolean(route.run || route.invalidRun)
+  const localId = localCt?.caseData.case_id
+  const localActive = Boolean(localId && !showPrediction && (showWorkbench ? route.study === localId : caseId === localId))
+  useEffect(() => () => localCt?.release(), [localCt])
   useEffect(() => {
     if (showWorkbench) setLastPrediction(route.run ? { run: route.run, study: route.study } : null)
   }, [showWorkbench, route.run, route.study])
@@ -222,6 +227,15 @@ export default function App() {
     if (ownedRunRef.current && ownedRunRef.current !== job.job_id) replacedRuns.current.add(ownedRunRef.current)
     ownedRunRef.current = job.job_id
     setOwnedPrediction(job)
+    return true
+  }
+
+  function openLocalCt(study) {
+    const id = study.caseData.case_id
+    if (!navigate({ view: 'workbench', study: id })) return false
+    setLocalCt(study)
+    setCaseId(id)
+    setImportOpen(false)
     return true
   }
 
@@ -275,9 +289,9 @@ export default function App() {
 
   // URL is the source of truth for the active study once cases are known.
   useEffect(() => {
-    if (!cases || route.view !== 'workbench' || !route.study || showPrediction) return
-    if (route.study !== caseId && cases[route.study]) selectScan(route.study)
-  }, [cases, route.view, route.study, showPrediction, caseId, selectScan])
+    if (route.view !== 'workbench' || !route.study || showPrediction || route.study === caseId) return
+    if (route.study === localId || cases?.[route.study]) selectScan(route.study)
+  }, [cases, route.view, route.study, showPrediction, caseId, localId, selectScan])
 
   const currentCase = caseId && cases ? cases[caseId] : null
   const currentLive = caseId ? liveResults[caseId] : null
@@ -293,11 +307,12 @@ export default function App() {
       saved: 'Saved prediction',
       training: 'Training',
       predict: 'Analyze scan',
-      workbench: showPrediction && route.study ? `${formatStudyId(route.study)} · Workbench`
+      workbench: localActive ? 'Local CT · Workbench'
+        : showPrediction && route.study ? `${formatStudyId(route.study)} · Workbench`
         : currentCase ? `${formatStudyId(caseId)} · Workbench` : 'Workbench',
     }
     document.title = `${titles[route.view]} · PROWL`
-  }, [route.view, route.study, showPrediction, caseId, currentCase])
+  }, [route.view, route.study, showPrediction, localActive, caseId, currentCase])
 
   const studies = useMemo(() => Object.keys(cases || {}).sort().map((id) => {
     const item = cases[id]
@@ -410,12 +425,13 @@ export default function App() {
       ? predictionVerification.status : 'checking'
 
   let content
-  if (loadError && !showPrediction && ['studies', 'workbench'].includes(route.view)) {
+  if (loadError && !showPrediction && !localActive && ['studies', 'workbench'].includes(route.view)) {
     content = (
       <main className="pw-empty">
         <Database size={28} aria-hidden="true" />
         <h1>No prepared studies found</h1>
         <p>PROWL could not read the study manifest at <code>/cases/results.json</code> ({loadError}).</p>
+        <button type="button" className="pw-btn pw-btn--primary" onClick={() => setImportOpen(true)}>Import CT</button>
       </main>
     )
   }
@@ -424,16 +440,16 @@ export default function App() {
     <AppShell
       route={route}
       navigate={navigate}
-      activeStudy={caseId}
+      activeStudy={localActive ? localId : caseId}
       activePrediction={activePrediction}
-      endpointStatus={showPrediction ? artifactStatus : route.view === 'predict' ? predictionEndpointStatus : showWorkbench ? endpointStatus : null}
+      endpointStatus={localActive ? null : showPrediction ? artifactStatus : route.view === 'predict' ? predictionEndpointStatus : showWorkbench ? endpointStatus : null}
       modelLabel={route.view === 'training' ? 'Dated experiment exports · see source timestamps' : showPrediction || route.view === 'predict' ? 'On-demand prediction · see result provenance' : ['saved','studies'].includes(route.view) ? 'Model identity is shown with each prediction' : MODEL_LABEL}
       onAbout={() => setShowAbout(true)}
     >
       {content}
       {!loadError && route.view === 'studies' && (
         cases
-          ? <StudiesPage studies={studies} activeStudy={caseId} onOpen={openStudy} onImport={() => setImportOpen(true)} importAvailable={false} />
+          ? <StudiesPage studies={studies} activeStudy={caseId} onOpen={openStudy} onImport={() => setImportOpen(true)} importAvailable />
           : <main className="pw-empty" role="status"><p>Loading studies…</p></main>
       )}
 
@@ -441,7 +457,7 @@ export default function App() {
 
       {/* The workbench stays mounted once a study is open so Research and back keep
           the viewer, layers, and drafts exactly where the reviewer left them. */}
-      {!loadError && currentCase && !activePrediction && (
+      {!loadError && currentCase && !activePrediction && !localActive && (
         <div className="pw-route" hidden={!showWorkbench || showCompare || showPrediction}>
           <ReviewWorkspace
             caseId={caseId}
@@ -491,6 +507,13 @@ export default function App() {
           />
         </div>
       )}
+      {localActive && <div className="pw-route" hidden={!showWorkbench}>
+        <ReviewWorkspace key={localId} localCt={localCt} caseId={localId} caseData={localCt.caseData}
+          profile={{ label: 'Local source CT', tone: 'neutral' }}
+          caseItems={reviewCaseItems} onSelectScan={openStudy} endpointStatus="offline"
+          onOpenLibrary={() => navigate({ view: 'studies' })} modelLabel="Local CT · no prediction"
+          askPanel={<LiteratureSearchPanel variant="panel" contextKey={localId} contextLabel="Local CT" />} />
+      </div>}
       {showCompare && (
         <ViewerSuspense>
           <ValidationComparison
@@ -503,7 +526,7 @@ export default function App() {
           />
         </ViewerSuspense>
       )}
-      {!loadError && showWorkbench && !showPrediction && cases && !currentCase && (
+      {!loadError && showWorkbench && !showPrediction && !localActive && cases && !currentCase && (
         <WorkbenchEmpty
           onStudies={() => navigate({ view: 'studies' })}
           onImport={() => setImportOpen(true)}
@@ -530,8 +553,8 @@ export default function App() {
       {route.view === 'research' && (
         <ViewerSuspense label="Loading research…">
           <ResearchPage
-            activeStudyLabel={activePrediction ? formatStudyId(activePrediction.study) : currentCase ? formatStudyId(caseId) : null}
-            onReturnToStudy={() => navigate(activePrediction ? { view: 'workbench', ...activePrediction } : { view: 'workbench', study: caseId })}
+            activeStudyLabel={localActive ? 'Local CT' : activePrediction ? formatStudyId(activePrediction.study) : currentCase ? formatStudyId(caseId) : null}
+            onReturnToStudy={() => navigate(activePrediction ? { view: 'workbench', ...activePrediction } : { view: 'workbench', study: localActive ? localId : caseId })}
           />
         </ViewerSuspense>
       )}
@@ -544,7 +567,7 @@ export default function App() {
       )}
 
       {showAbout && <AboutDialog onClose={() => setShowAbout(false)} />}
-      {importOpen && <ImportStudyDialog onClose={() => setImportOpen(false)} onOpenStudies={() => navigate({ view: 'studies' })} />}
+      {importOpen && <ImportStudyDialog onOpenLocalCt={openLocalCt} onClose={() => setImportOpen(false)} onOpenStudies={() => navigate({ view: 'studies' })} />}
     </AppShell>
   )
 }

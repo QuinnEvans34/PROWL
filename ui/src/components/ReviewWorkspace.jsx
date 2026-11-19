@@ -178,6 +178,7 @@ export default function ReviewWorkspace({
   summaryPanel = null,
   summaryStore = null,
   verifiedPrediction = null,
+  localCt = null,
   predictionJob = null,
   onReviewDirty = null,
   onSelectScan,
@@ -420,7 +421,7 @@ export default function ReviewWorkspace({
   const selectedLesionNumber = selectedComponent ? components.indexOf(selectedComponent) + 1 : 0
   const awaitingPick = pendingLesionPick?.identity === measurementState.identity && measurementState.status === 'loading'
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
-  const studyLabel = caseId.replace('PanTS_', 'PanTS ')
+  const studyLabel = localCt ? 'Local CT' : caseId.replace('PanTS_', 'PanTS ')
 
   async function analyze() {
     const outcome = await onAnalyze(caseId)
@@ -657,9 +658,11 @@ export default function ReviewWorkspace({
   const scene3d = state.scene3d === 'full' && !caseData.files?.ct_full ? 'region' : state.scene3d
   const viewerProps = {
     caseData,
-    assetUrls: verifiedPrediction?.urls,
-    nativeGeometry: verifiedPrediction?.manifest?.geometry,
-    ctRange: verifiedPrediction?.manifest?.ct_window,
+    assetUrls: verifiedPrediction?.urls ?? localCt?.assetUrls,
+    nativeGeometry: verifiedPrediction?.manifest?.geometry ?? localCt?.geometry,
+    nativeCtOnly: Boolean(localCt),
+    ctRange: verifiedPrediction?.manifest?.ct_window ?? localCt?.ctRange,
+    imageDetails: localCt?.imageSource,
     sources: availableSources,
     visibleSources,
     showFull: state.showFull,
@@ -890,10 +893,10 @@ export default function ReviewWorkspace({
           )}
           <div className="pw-studybar__id">
             <h1>{studyLabel}</h1>
-            <span className="pw-tag">{verifiedPrediction ? 'Verified source CT' : isCurated ? 'Validation example' : 'Prepared study'}</span>
+            <span className="pw-tag">{localCt ? 'This tab only' : verifiedPrediction ? 'Verified source CT' : isCurated ? 'Validation example' : 'Prepared study'}</span>
           </div>
           <dl className="pw-studybar__meta">
-            <div><dt>Series</dt><dd>Abdomen CT · {verifiedPrediction ? 'Source' : 'Prepared'}</dd></div>
+            <div><dt>Series</dt><dd>{localCt ? 'Local source CT' : `Abdomen CT · ${verifiedPrediction ? 'Source' : 'Prepared'}`}</dd></div>
             <div><dt>Prediction</dt><dd title={predictionStatus}>{predictionStatus}</dd></div>
             {summaryStatus && <div><dt>Summary</dt><dd title={summaryStatus}>{summaryStatus}</dd></div>}
           </dl>
@@ -956,7 +959,7 @@ export default function ReviewWorkspace({
               dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' })
               setLayout({ maximizedPlane: value === 'multiplanar' ? null : value, hiddenPlanes: [] })
             }}
-            options={[["multiplanar", "All planes", { disabled: Boolean(verifiedPrediction) }], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
+            options={[["multiplanar", "All planes", { disabled: Boolean(verifiedPrediction || localCt) }], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
           <Segmented
             label="Mouse tool"
             value={is2dLike ? twoDInteractionMode : state.interactionMode}
@@ -1032,7 +1035,7 @@ export default function ReviewWorkspace({
           {state.evidenceMode === 'ct' && !hasPrediction && (
             <div className="pw-ct-only" role="region" aria-label="Prediction not shown">
               <strong>CT only</strong>
-              <span>Model outlines are hidden.</span>
+              <span>{localCt ? 'Analysis for this file requires a configured CT-only model worker.' : 'Model outlines are hidden.'}</span>
               <div>
                 {endpointStatus === 'online' && (
                   <button type="button" className="pw-btn pw-btn--primary pw-btn--sm" onClick={analyze} disabled={isAnalyzing}>
@@ -1110,7 +1113,7 @@ export default function ReviewWorkspace({
                   {twoDVisited && <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={twoDInteractionMode}
                     framingLocked={framingLocked} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked}
-                    singlePane={Boolean(verifiedPrediction)} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />}
+                    singlePane={Boolean(verifiedPrediction || localCt)} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />}
                 </section>
                 {inspectionProps && <section className="pw-toolbench-scene__inspection" aria-label="Measured CT">
                   <ToolbenchViewer {...inspectionProps} singlePane interactionMode={twoDInteractionMode}
