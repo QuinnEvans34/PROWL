@@ -56,9 +56,37 @@ it('shows per-lesion lengths in centimeters and clears them when the prediction 
   expect(dimensions.getByText('2.80 × 1.90 cm')).toBeTruthy()
   expect(dimensions.getByText('2.40 cm')).toBeTruthy()
   expect(dimensions.getByText('2.00 mL')).toBeTruthy()
+  expect(dimensions.getByText(/Prepared slice 4/)).toBeTruthy()
   expect(dimensions.getByText('1 more predicted lesion')).toBeTruthy()
   rerender(<FindingsPanel {...props} measurementState={{ status: 'loading' }} />)
   expect(screen.queryByRole('region', { name: 'Predicted lesion dimensions' })).toBeNull()
+})
+
+it('identifies source-grid calipers and exports the verified run mask from its checked URL', () => {
+  const calipers = { nativeSlice: 3, plane: 'axial', axes: [{ lengthMm: 28 }, { lengthMm: 19 }] }
+  const measurement = { ...ready.measurement,
+    lesionDimensions: {
+      policy: LESION_DIMENSIONS_POLICY, status: 'ready',
+      components: [{ id: 1, volumeMl: 3, superiorInferiorMm: 24, calipers }],
+    },
+    pancreasDimensions: { status: 'ready', superiorInferiorMm: 85, calipers },
+  }
+  render(<FindingsPanel {...props} verifiedRun sourceSlice predictionUrl="blob:verified-mask"
+    caseData={{ ...props.caseData, files: { pred: 'prediction.nii.gz' } }}
+    measurementState={{ status: 'ready', measurement }} onInspectPancreas={vi.fn()} />)
+  expect(screen.getAllByText(/Source slice 4/)).toHaveLength(2)
+  expect(screen.getByText(/PanTS 00000001 · Verified prediction/)).toBeTruthy()
+  const download = screen.getByRole('link', { name: 'Export prediction (NIfTI)', hidden: true })
+  expect(download.getAttribute('href')).toBe('blob:verified-mask')
+})
+
+it('exposes unavailable lesion status on a verified run with no flag or verified measurements', () => {
+  render(<FindingsPanel {...props} verifiedRun finding={{}}
+    measurementState={{ status: 'unavailable', reason: 'The outline geometry could not be measured.' }} />)
+  expect(screen.getByText('Lesion status unavailable')).toBeTruthy()
+  expect(screen.getByText('The outline geometry could not be measured.')).toBeTruthy()
+  expect(screen.queryByText('None predicted')).toBeNull()
+  expect(screen.queryByRole('link', { name: 'Export prediction (NIfTI)', hidden: true })).toBeNull()
 })
 
 it('displays zero total lesion volume without equating it with absence of disease', () => {

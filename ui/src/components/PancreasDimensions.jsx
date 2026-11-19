@@ -4,7 +4,7 @@ function centimetres(mm) {
   return mm < 0.1 ? '<0.01' : (mm / 10).toFixed(2)
 }
 
-export default function PancreasDimensions({ measurementState, selected, onSelect, onInspect }) {
+export default function PancreasDimensions({ measurementState, selected, onSelect, onInspect, sourceSlice = false }) {
   const region = useRef(null)
   useEffect(() => {
     if (selected) region.current?.scrollIntoView?.({ block: 'nearest' })
@@ -28,7 +28,7 @@ export default function PancreasDimensions({ measurementState, selected, onSelec
           <div><dt>Centered slice calipers</dt><dd>{hasCalipers ? `${axes.map(axis => centimetres(axis.lengthMm)).join(' × ')} cm` : 'Unavailable'}</dd></div>
           <div><dt>Head-to-foot extent</dt><dd>{hasExtent ? `${centimetres(extent)} cm` : 'Unavailable'}</dd></div>
         </dl>
-        {hasCalipers && <small>Native slice {calipers.nativeSlice + 1} · Largest outlined area</small>}
+        {hasCalipers && <small>{sourceSlice ? 'Source slice' : 'Prepared slice'} {calipers.nativeSlice + 1} · Largest outlined area</small>}
         {reason && (!hasCalipers || !calipers.plane) && <p className="pw-muted">{reason}</p>}
       </> : <p className="pw-muted">{reason || measurementState?.reason || 'Pancreas dimensions unavailable.'}</p>}
     <div className="pw-lesion-dimensions__actions">

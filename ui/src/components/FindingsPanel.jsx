@@ -42,13 +42,22 @@ export default function FindingsPanel({
   onSelectLesion,
   onInspectLesion,
   lesionSelectionNotice,
+  sourceSlice = false,
+  verifiedRun = false,
+  predictionUrl = null,
 }) {
-  const verifiedMeasurements = measurementState !== undefined
+  const verifiedMeasurements = verifiedRun || measurementState !== undefined
   const measurement = measurementState?.status === 'ready' ? measurementState.measurement : null
-  const source = !verifiedMeasurements && liveResult?.source === 'live'
-    ? { icon: Radio, label: `Live analysis · ${liveResult.scoredAt}`, detail: `${fmt(liveResult.result.inference_seconds, 1)} s inference` }
-    : { icon: Database, label: 'Saved prediction', detail: 'Produced earlier from the prepared CT' }
+  const source = verifiedRun ? { icon: Database, label: 'Verified prediction' }
+    : !verifiedMeasurements && liveResult?.source === 'live'
+      ? { icon: Radio, label: `Live analysis · ${liveResult.scoredAt}`, detail: `${fmt(liveResult.result.inference_seconds, 1)} s inference` }
+      : { icon: Database, label: 'Saved prediction' }
+  const predictionDownload = verifiedRun ? predictionUrl
+    : caseData.files?.pred ? `/cases/${caseData.files.pred}` : null
   const SourceIcon = source.icon
+  const lesionFlagged = Number.isSafeInteger(measurement?.lesionVoxels) && measurement.lesionVoxels >= 0
+    ? measurement.lesionVoxels > 0
+    : typeof finding.lesionFlagged === 'boolean' ? finding.lesionFlagged : null
   const volumeCm3 = verifiedMeasurements ? measurement?.lesionMl : Number.isFinite(finding.volumeMm3) ? finding.volumeMm3 / 1000 : null
   const studyLabel = caseId.replace('PanTS_', 'PanTS ')
   const pending = measurementState?.status === 'loading'
@@ -89,9 +98,9 @@ export default function FindingsPanel({
       <p className="pw-context-chip"><i aria-hidden="true" />{studyLabel} · {source.label}</p>
 
       <LesionDimensions measurement={measurement} selectedId={selectedLesionId}
-        onSelect={onSelectLesion} onInspect={onInspectLesion} selectionNotice={lesionSelectionNotice} />
+        onSelect={onSelectLesion} onInspect={onInspectLesion} selectionNotice={lesionSelectionNotice} sourceSlice={sourceSlice} />
       {(onSelectPancreas || onInspectPancreas) && <PancreasDimensions measurementState={measurementState}
-        selected={selectedPancreas} onSelect={onSelectPancreas} onInspect={onInspectPancreas} />}
+        selected={selectedPancreas} onSelect={onSelectPancreas} onInspect={onInspectPancreas} sourceSlice={sourceSlice} />}
 
       <ul className="pw-structures" aria-label="Structures in this prediction">
         <li className="pw-structure">
@@ -117,10 +126,11 @@ export default function FindingsPanel({
         <li className="pw-structure">
           <span className="pw-swatch" style={{ background: REVIEW_COLORS.pred.lesion }} aria-hidden="true" />
           <div className="pw-structure__main">
-            <h3 id="finding-lesion">{finding.lesionFlagged ? 'Possible lesion' : 'Lesion'}</h3>
-            <small>{finding.lesionFlagged ? 'Model proposal' : 'None predicted'}</small>
+            <h3 id="finding-lesion">{lesionFlagged ? 'Possible lesion' : 'Lesion'}</h3>
+            <small>{lesionFlagged ? 'Model proposal' : lesionFlagged === false ? 'None predicted'
+              : pending ? 'Checking prediction' : 'Lesion status unavailable'}</small>
           </div>
-          {(finding.lesionFlagged || verifiedMeasurements) && (
+          {(lesionFlagged || verifiedMeasurements) && (
             <dl className="pw-structure__metrics">
               <div>
                 <dt>{verifiedMeasurements ? 'Total volume' : 'Volume'}</dt>
@@ -133,7 +143,7 @@ export default function FindingsPanel({
             </dl>
           )}
           <div className="pw-structure__actions">
-            {finding.lesionFlagged && (
+            {lesionFlagged && (
               <button type="button" className="pw-icon-btn" disabled={!ranges.lesion} onClick={() => onShowInViewer('lesion')} aria-label="Show lesion in viewer" title="Show in viewer">
                 <ArrowUpRight size={14} aria-hidden="true" />
               </button>
@@ -156,7 +166,7 @@ export default function FindingsPanel({
               <div><dt>Pancreas</dt><dd>{fmt(overlap.pancreas, 3) ? <span className="pw-num">{fmt(overlap.pancreas, 3)}</span> : <Unavailable />}</dd></div>
               <div>
                 <dt>Lesion</dt>
-                <dd>{!caseData.gt_has_lesion && !finding.lesionFlagged ? 'Absent in both' : fmt(overlap.lesion, 3) ? <span className="pw-num">{fmt(overlap.lesion, 3)}</span> : <Unavailable />}</dd>
+                <dd>{caseData.gt_has_lesion === false && lesionFlagged === false ? 'Absent in both' : fmt(overlap.lesion, 3) ? <span className="pw-num">{fmt(overlap.lesion, 3)}</span> : <Unavailable />}</dd>
               </div>
             </dl>
           </li>
@@ -165,9 +175,10 @@ export default function FindingsPanel({
       <p className="pw-fine">
         {verifiedMeasurements
           ? 'Volumes measure the displayed prediction’s outlines. Pancreas includes lesion labels; lesion total combines all lesion labels. Whole-organ coverage and model accuracy remain unverified. Human review is required.'
-          : finding.lesionFlagged
+          : lesionFlagged
           ? 'Lesion volume comes from the predicted mask; ≈ diameter is a same-volume sphere, not a measured width or length. Proposals for review, not a diagnosis.'
-          : 'The model did not predict a lesion. This does not establish that no lesion is present.'}
+          : lesionFlagged === false ? 'The model did not predict a lesion. This does not establish that no lesion is present.'
+            : 'The available prediction does not report lesion status.'}
         {comparing ? ' Dice is computed against this study’s reference annotation and shown only while comparing.' : ''}
         {' '}Click a structure in the viewer for details and related literature questions.
       </p>
@@ -205,12 +216,12 @@ export default function FindingsPanel({
           </div>}
           <div><dt>Voxel spacing</dt><dd>{Array.isArray(caseData.spacing_mm) ? `${caseData.spacing_mm.join(' × ')} mm` : <Unavailable />}</dd></div>
           <div><dt>Pancreas outline volume</dt><dd>{verifiedMeasurements ? volume(measurement?.pancreasMl) : <Unavailable>Not published in this package</Unavailable>}</dd></div>
-          <div><dt>Display surfaces</dt><dd>{caseData.display_mesh_version === 'v3-difference-main-smoothing' ? 'v3, matched smoothing' : caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}</dd></div>
-          <div><dt>Study type</dt><dd>{isCurated ? 'Validation example' : 'Prepared study'}</dd></div>
+          <div><dt>Display surfaces</dt><dd>{verifiedRun && !caseData.files?.mesh ? 'No surfaces packaged' : caseData.display_mesh_version === 'v3-difference-main-smoothing' ? 'v3, matched smoothing' : caseData.display_mesh_version ? 'v2, explicit normals' : 'v1, source-grid reconstruction'}</dd></div>
+          <div><dt>Study type</dt><dd>{verifiedRun ? 'Verified prediction package' : isCurated ? 'Validation example' : 'Prepared study'}</dd></div>
         </dl>
         <p className="pw-fine">Measurements derive from the original NIfTI masks, not the display surfaces.</p>
-        {caseData.files?.pred && (
-          <a className="pw-btn pw-btn--ghost pw-btn--sm" href={`/cases/${caseData.files.pred}`} download>
+        {predictionDownload && (
+          <a className="pw-btn pw-btn--ghost pw-btn--sm" href={predictionDownload} download={verifiedRun ? caseData.files?.pred || '' : true}>
             <Download size={13} aria-hidden="true" /> Export prediction (NIfTI)
           </a>
         )}

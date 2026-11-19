@@ -108,7 +108,7 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
       <p className="pw-fineprint">Native CT with predicted pancreas (green) and lesion (red). Reference annotations are not loaded.</p>
       <MeasurementReadout state={measurements} />
       {measurements.status === 'ready' && <LesionDimensions measurement={measurements.measurement}
-        selectedId={activeInspection?.component.id} onInspect={inspectLesion} />}
+        selectedId={activeInspection?.component.id} onInspect={inspectLesion} sourceSlice />}
       {calipers && <div className="pw-saved__controls">
         <p className="pw-muted" role="status">Inspecting the lesion measurement on the {calipers.plane} CT plane.</p>
         <button type="button" className="pw-btn pw-btn--secondary pw-btn--sm"

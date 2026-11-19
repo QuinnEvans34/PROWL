@@ -1,0 +1,57 @@
+.pw-finding-ask {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.pw-finding-ask__scopes {
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.pw-finding-ask__scopes button {
+  font-size: .77rem;
+  padding-inline: .5rem;
+}
+
+.pw-finding-ask__literature {
+  min-height: 0;
+  flex: 1;
+}
+
+.pw-finding-ask__outline {
+  background: var(--pw-surface);
+  border: 1px solid var(--pw-border);
+  border-radius: 6px;
+  padding: .7rem;
+}
+
+.pw-finding-ask__outline h3 {
+  font-size: .9rem;
+  margin: 0 0 .5rem;
+}
+
+.pw-finding-ask__measurements {
+  display: grid;
+  gap: .35rem;
+  margin: 0;
+  font-size: .8rem;
+}
+
+.pw-finding-ask__measurements div {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+}
+
+.pw-finding-ask__measurements dt {
+  color: var(--pw-text-muted);
+}
+
+.pw-finding-ask__measurements dd {
+  margin: 0;
+  text-align: right;
+  white-space: nowrap;
+}
