@@ -1,0 +1,9 @@
+{
+  "version": "canonical-lexical-dense-recall-v1",
+  "dense_candidates": 20,
+  "lexical_candidates": 50,
+  "max_corpus_passages": 1179,
+  "top_k": 5,
+  "lexical_slots": 3,
+  "dense_slots": 2
+}
