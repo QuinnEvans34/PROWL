@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT), str(ROOT/'scripts')]
 from retrieval.direct_corpus import read_config, limits, connect
 from src.retrieval.search_reformulation import MODEL, MODEL_SHA
+from src.retrieval.expert_conversation import POLICY as CONTEXT_POLICY
+from src.retrieval.single_pass_summary import FINGERPRINT as ANSWER_PROMPT_SHA
 from src.retrieval.direct_ingestion import digest
 from src.operations.full_training_platform import require_ac
 CONFIG = ROOT/'infra/retrieval/.env.local-expert.json'
@@ -87,7 +89,16 @@ def answer_gpu_busy():
 def backend_ready(identity):
     if identity is None:return False
     health=http(8016, 'literature-search/health')
-    return health.get('backend')=='checked' and health.get('storage_identity')==identity
+    return (health.get('backend')=='checked' and health.get('storage_identity')==identity
+            and capabilities_current(health))
+
+
+def capabilities_current(health):
+    return (health.get('context_policy') == CONTEXT_POLICY
+            and ((health.get('answer_policy') == 'single-pass-summary-v1'
+                  and health.get('answer_prompt_sha256') == ANSWER_PROMPT_SHA)
+                 or (health.get('answer_policy') == 'sources-only'
+                     and health.get('answer_prompt_sha256') is None)))
 
 
 def listening(port):
@@ -122,17 +133,27 @@ def record_ready_owner(child):
     owner_path.write_text(json.dumps(owner))
 
 
-def stop_owned_sources():
+def stop_owned_search(*, sources_only):
     try:
         owner = json.loads((OUT/'literature-owner.json').read_text())
         expected = [str(ROOT/'.venv-retrieval/bin/python'), str(ROOT/'scripts/serve_single_summary_candidate.py'),
-                    '--config',str(CONFIG),'--port','8016','--sources-only']
+                    '--config',str(CONFIG),'--port','8016']
+        if sources_only:
+            expected.append('--sources-only')
         if type(owner['pid']) is not int or owner['pid'] <= 0 or owner['argv'] != expected or not owner['identity'] or process_identity(owner['pid']) != owner['identity']:
             raise ValueError('Owner identity differs')
     except (OSError,KeyError,TypeError,ValueError):
-        raise RuntimeError('Source search is available, but its ownership could not be verified. No service was stopped; use Find sources and inspect the service before enabling AI answers.') from None
+        raise RuntimeError('The local expert needs an update, but its ownership could not be verified. No service was stopped; inspect the service before preparing again.') from None
     os.kill(owner['pid'],signal.SIGTERM)
-    wait_for(lambda: not listening(8016) and process_identity(owner['pid']) != owner['identity'],5,stage='Stopping the owned source-only service')
+    wait_for(lambda: not listening(8016) and process_identity(owner['pid']) != owner['identity'],5,stage='Stopping the owned literature service')
+
+
+def stop_owned_sources():
+    return stop_owned_search(sources_only=True)
+
+
+def stop_owned_answers():
+    return stop_owned_search(sources_only=False)
 
 
 def wait_for(check, seconds, *, stage='Local service', process=None):
@@ -209,7 +230,16 @@ def prepare():
             health = None
         if isinstance(health, dict) and health.get('storage_identity') != digest(c):
             raise RuntimeError('Port 8016 is serving a different or older search configuration. Stop the verified old literature service, then prepare again. No process was stopped automatically.')
-        if isinstance(health,dict) and health.get('answer_policy')=='sources-only' and not gpu_busy():
+        if isinstance(health, dict) and not capabilities_current(health):
+            if health.get('answer_policy') == 'single-pass-summary-v1':
+                stop_owned_answers()
+            elif health.get('answer_policy') == 'sources-only':
+                stop_owned_sources()
+            else:
+                raise RuntimeError('The service on port 8016 does not provide the current AI expert capabilities. No service was stopped; inspect the existing service before preparing again.')
+            if not gpu_busy(): model_prepared = prepare_model()
+            process = start_search(gpu_busy() or not model_prepared)
+        elif isinstance(health,dict) and health.get('answer_policy')=='sources-only' and not gpu_busy():
             model_prepared = prepare_model()
             if model_prepared:
                 stop_owned_sources()

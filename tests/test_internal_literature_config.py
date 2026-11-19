@@ -34,7 +34,9 @@ def test_internal_reserve_retained(tmp_path,monkeypatch):
     with pytest.raises(OSError,match='50 GB'):dc.limits(c)
 
 def test_old_backend_cannot_be_mistaken_for_new(monkeypatch):
-    monkeypatch.setattr(prep,'http',lambda *a:{'backend':'checked','storage_identity':'old'})
+    monkeypatch.setattr(prep,'http',lambda *a:{'backend':'checked','storage_identity':'old',
+        'answer_policy':'single-pass-summary-v1','context_policy':prep.CONTEXT_POLICY,
+        'answer_prompt_sha256':prep.ANSWER_PROMPT_SHA})
     assert not prep.backend_ready('new')
     assert prep.backend_ready('old')
     assert not prep.backend_ready(None)
