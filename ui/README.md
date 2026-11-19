@@ -10,8 +10,9 @@ presentation preferences without clearing imaging settings or review drafts.
 Use **Lock framing** to preserve pan and zoom while browsing slices or changing
 the window. Two-finger scrolling over a Workbench image zooms the active 2D
 plane or the 3D camera, including while the 3D CT is peeled. Drag the slider
-below an image to browse slices or change peel depth. The arrow keys also work
-when the slider has focus.
+below an image to browse slices or change peel depth. Choose **Front → back**
+or **Back → front** beside Peel to change which side the cut starts from.
+The arrow keys also work when the slider has focus.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests

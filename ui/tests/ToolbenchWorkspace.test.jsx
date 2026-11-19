@@ -13,7 +13,8 @@ vi.mock('../src/lib/scanMeasurements.js', async importOriginal => ({
 }))
 
 const cases = {
-  SYNTHETIC_A: { files: { ct: 'SYNTHETIC_A/ct.nii.gz', pred: 'SYNTHETIC_A/pred.nii.gz' }, spacing_mm: [2, 3, 4] },
+  SYNTHETIC_A: { files: { ct: 'SYNTHETIC_A/ct.nii.gz', pred: 'SYNTHETIC_A/pred.nii.gz' }, spacing_mm: [2, 3, 4],
+    syntheticPeelReveal: { frontToBack: 30, backToFront: 52 } },
   SYNTHETIC_B: { files: { ct: 'SYNTHETIC_B/ct.nii.gz', pred: 'SYNTHETIC_B/pred.nii.gz' }, spacing_mm: [2, 3, 4] },
 }
 function measured(context, changes = {}) {
@@ -268,7 +269,7 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(coronalViewer).navigationCommand).toMatchObject({ type: 'slice', plane: 'coronal', index: 51 })
   })
 
-  it('uses anatomical camera presets independently of the 3D peel slider', async () => {
+  it('reverses the peel at the current depth independently of anatomical camera presets', async () => {
     const user = userEvent.setup()
     render(<Harness />)
     await user.click(screen.getByRole('button', { name: '3D', exact: true }))
@@ -284,9 +285,23 @@ describe('real workspace layout with synthetic imaging only', () => {
     await user.click(screen.getByRole('button', { name: 'Front', exact: true }))
     const viewer = screen.getByTestId(/^synthetic-viewer-3d/)
     expect(viewerData(viewer).navigationCommand).toMatchObject({ type: 'camera', azimuth: 180, elevation: 0 })
+    expect(viewerData(viewer).clip).toMatchObject({ azimuth: 0, progress: 37 })
+    expect(screen.getByRole('button', { name: 'Peel to the pancreas (30%)' })).toBeTruthy()
+    const cameraCommand = viewerData(viewer).navigationCommand
+    await user.click(screen.getByRole('button', { name: 'Back to front', exact: true }))
+    expect(screen.getByRole('button', { name: 'Back to front', pressed: true })).toBeTruthy()
+    expect(screen.getByRole('slider', { name: 'Back-to-front CT removal' }).value).toBe('37')
+    expect(viewerData(viewer).navigationCommand).toEqual(cameraCommand)
+    expect(viewerData(viewer).clip).toMatchObject({ azimuth: 180, progress: 37 })
     await user.keyboard('2')
     expect(viewerData(viewer).navigationCommand).toMatchObject({ type: 'camera', azimuth: 0, elevation: 0 })
     expect(peel.value).toBe('37')
+    await user.click(screen.getByRole('button', { name: 'Peel to the pancreas (52%)' }))
+    expect(viewerData(viewer).clip).toMatchObject({ azimuth: 180, progress: 52 })
+    await user.click(screen.getByRole('button', { name: 'Restore CT', exact: true }))
+    expect(viewerData(viewer).clip).toMatchObject({ azimuth: 180, progress: 0, depth: 2 })
+    await user.click(screen.getByRole('button', { name: 'Front to back', exact: true }))
+    expect(viewerData(viewer).clip).toMatchObject({ azimuth: 0, progress: 0, depth: 2 })
     await user.click(screen.getByRole('button', { name: '2D', exact: true }))
     expect(screen.getByRole('button', { name: 'Pan', exact: true })).toBeTruthy()
   })

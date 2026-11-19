@@ -591,17 +591,27 @@ function setVolumeRendering(nv, enabled) {
   else nv.drawImage3D = skipImage3D
 }
 
-// Where the fixed front-to-back peel (0-100%) has cut past the front of the pancreas,
-// from the pancreas surface and the scene bounds along the view axis. NiiVue's clip
-// depth spans the scene from the front face (-0.5) to the back face (+0.5).
-function peelRevealPercent(nv, meshes) {
-  const pancreas = meshes.find((entry) => entry.anatomy === 'pancreas' && entry.source !== 'difference' && entry.mesh.extentsMax)
-  if (!pancreas || typeof nv.sceneExtentsMinMax !== 'function') return null
-  const [, hi, range] = nv.sceneExtentsMinMax()
+// The peel runs along the anatomical anterior/posterior axis. Each shortcut
+// reveals the near side of the pancreas with a small margin past its surface.
+function peelRevealPercentages(nv, meshes) {
+  const unavailable = { frontToBack: null, backToFront: null }
+  const pancreas = meshes.find((entry) => entry.anatomy === 'pancreas'
+    && entry.source !== 'difference' && entry.mesh.extentsMin && entry.mesh.extentsMax)
+  if (!pancreas || typeof nv.sceneExtentsMinMax !== 'function') return unavailable
+  const [lo, hi, range] = nv.sceneExtentsMinMax()
   const span = Number(range?.[1])
-  if (!Number.isFinite(span) || span <= 0) return null
-  const fraction = (hi[1] - pancreas.mesh.extentsMax[1]) / span + 0.03
-  return Math.max(1, Math.min(99, Math.round(fraction * 100)))
+  if (!Number.isFinite(span) || span <= 0) return unavailable
+  const percent = (distance) => Number.isFinite(distance)
+    ? Math.max(1, Math.min(99, Math.round((distance / span + 0.03) * 100)))
+    : null
+  return {
+    frontToBack: percent(hi?.[1] - pancreas.mesh.extentsMax[1]),
+    backToFront: percent(pancreas.mesh.extentsMin[1] - lo?.[1]),
+  }
+}
+
+function applyPeel(nv, clip) {
+  nv.setClipPlane([clip?.enabled ? clip.depth : 2, clip?.azimuth ?? 0, clip?.elevation ?? 0])
 }
 
 // NiiVue recomputes its 3D pivot from the scene bounds on every frame, so rotation is
@@ -1344,10 +1354,8 @@ export default function NiivueViewer({
           nv.opts.isOrientCube = !compact
           nv.setRenderAzimuthElevation(...(clip?.enabled ? ANTERIOR_CAMERA : [120, 15]))
           nv.setClipPlaneColor([0, 0, 0, 0])
-          nv.setClipPlane(clip?.enabled
-            ? [clip.depth, 0, 0]
-            : [2, 0, 0])
-          onPeelReveal?.(peelRevealPercent(nv, Array.from(registryRef.current.meshes.values())))
+          applyPeel(nv, clip)
+          onPeelReveal?.(peelRevealPercentages(nv, Array.from(registryRef.current.meshes.values())))
         }
 
         const currentCaseId = caseData.case_id || caseData.files.ct
@@ -1794,14 +1802,13 @@ export default function NiivueViewer({
     }
     clipFrameRef.current = window.requestAnimationFrame(() => {
       clipFrameRef.current = null
-      nv.setClipPlane(clip?.enabled
-        ? [clip.depth, 0, 0]
-        : [2, 0, 0])
+      if (loadedSceneKeyRef.current !== sceneKey || expectedSceneKeyRef.current !== sceneKey) return
+      applyPeel(nv, clip)
       if (justActivated) {
         nv.setRenderAzimuthElevation(...ANTERIOR_CAMERA)
       }
     })
-  }, [clip?.enabled, clip?.depth, mode, sceneKey])
+  }, [clip?.enabled, clip?.depth, clip?.azimuth, clip?.elevation, mode, sceneKey, sceneVersion])
 
   useEffect(() => {
     const nv = nvRef.current

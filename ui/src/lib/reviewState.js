@@ -28,6 +28,7 @@ export function makeReviewState({ hasPrediction = false } = {}) {
   ctOpacity: 0.44,
     clipEnabled: true,
     clipProgress: 0,
+    clipDirection: 'frontToBack',
     resetToken: 0,
     drawerOpen: true,
     settingsOpen: false,
@@ -126,6 +127,7 @@ export function reviewReducer(state, action) {
         ctOpacity: 0.44,
         clipEnabled: true,
         clipProgress: 0,
+        clipDirection: 'frontToBack',
         resetToken: state.resetToken + 1,
         settingsOpen: false,
       }

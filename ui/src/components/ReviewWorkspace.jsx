@@ -74,7 +74,7 @@ const CONTROL_HELP = {
     ['Select', 'Click a surface for its details'],
     ['Orbit a structure', 'Double-click a surface'],
     ['Views', '1–6 anatomical views · 0 home · F fit · R reset'],
-    ['Peel', 'Use the front-to-back slider below the image'],
+    ['Peel', 'Choose a direction and drag the slider below the image'],
   ],
   '2d': [
     ['Crosshair', 'Click or drag with the Navigate tool'],
@@ -87,13 +87,17 @@ const CONTROL_HELP = {
   ],
 }
 
-const FRONT_CUT_DEPTH_MIN = -0.5
-const FRONT_CUT_DEPTH_MAX = 0.5
+const PEEL_DIRECTIONS = [
+  ['frontToBack', 'Front → back', { ariaLabel: 'Front to back' }],
+  ['backToFront', 'Back → front', { ariaLabel: 'Back to front' }],
+]
+const CUT_DEPTH_MIN = -0.5
+const CUT_DEPTH_MAX = 0.5
 
 function clipDepthFromProgress(progress) {
   if (progress <= 0) return 2
   const fraction = Math.max(0, Math.min(1, progress / 100))
-  return FRONT_CUT_DEPTH_MIN + fraction * (FRONT_CUT_DEPTH_MAX - FRONT_CUT_DEPTH_MIN)
+  return CUT_DEPTH_MIN + fraction * (CUT_DEPTH_MAX - CUT_DEPTH_MIN)
 }
 
 function evidenceModeFor(prediction, reference) {
@@ -519,13 +523,16 @@ export default function ReviewWorkspace({
 
   const coronalPancreasRange = navigation.ranges.pancreas?.coronal
   const coronalTotal = navigation.totals.coronal || 1
+  const peelFromBack = state.clipDirection === 'backToFront'
+  const peelDirectionLabel = peelFromBack ? 'Back-to-front' : 'Front-to-back'
   // Prefer the 3D scene's own geometry (correct for the full abdomen); fall back to the
   // 2D coronal estimate before the 3D view has loaded.
-  const pancreasRevealProgress = peelReveal3d ?? (coronalPancreasRange && coronalTotal > 1
-    ? Math.max(1, Math.min(99, Math.round(
-      ((coronalTotal - 1 - coronalPancreasRange[1] + Math.max(8, Math.round(coronalTotal * 0.08))) / (coronalTotal - 1)) * 100,
-    )))
-    : null)
+  let pancreasRevealProgress = peelReveal3d?.[state.clipDirection] ?? null
+  if (pancreasRevealProgress === null && coronalPancreasRange && coronalTotal > 1) {
+    const entryDistance = peelFromBack ? coronalPancreasRange[0] : coronalTotal - 1 - coronalPancreasRange[1]
+    const margin = Math.max(8, Math.round(coronalTotal * 0.08))
+    pancreasRevealProgress = Math.max(1, Math.min(99, Math.round((entryDistance + margin) / (coronalTotal - 1) * 100)))
+  }
   function setClipProgress(value, { live = false } = {}) {
     const nextProgress = Math.max(0, Math.min(100, Number(value)))
     const commit = (progress) => dispatch({ type: 'PATCH_SETTINGS', value: { clipEnabled: true, clipProgress: progress } })
@@ -609,7 +616,7 @@ export default function ReviewWorkspace({
       enabled: state.clipEnabled,
       progress: state.clipProgress,
       depth: clipDepthFromProgress(state.clipProgress),
-      azimuth: 0,
+      azimuth: peelFromBack ? 180 : 0,
       elevation: 0,
     },
     resetToken: state.resetToken,
@@ -1160,25 +1167,29 @@ export default function ReviewWorkspace({
           <MeasurementReadout state={measurementState} />
         </div>}
         {is3dLike && scene3d !== 'surfaces' && (
-          <div className="pw-slicebar pw-slicebar--cut" aria-label="Front-to-back peel">
-            <span className="pw-slicebar__readout" title="Use the slider to remove CT from front to back">
-              <strong>Peel</strong> <span className="pw-muted">front → back</span>
-            </span>
-            <div className="pw-slicebar__track" style={{ '--slice-progress': `${state.clipProgress}%` }}>
-              {pancreasRevealProgress !== null && (
-                <button
-                  type="button"
-                  className="pw-cut-marker"
-                  style={{ left: `${pancreasRevealProgress}%` }}
-                  onClick={() => setClipProgress(pancreasRevealProgress)}
-                  aria-label={`Peel to the pancreas (${pancreasRevealProgress}%)`}
-                  title="Peel to the front of the pancreas"
-                />
-              )}
-              <SliceSlider min="0" max="100" step="1" value={state.clipProgress}
-                onChange={(event) => setClipProgress(Number(event.target.value), { live: true })} aria-label="Front-to-back CT removal" />
+          <div className="pw-slicebar pw-slicebar--cut" role="group" aria-label="CT peel">
+            <div className="pw-slicebar__direction">
+              <strong className="pw-slicebar__label">Peel</strong>
+              <Segmented label="Peel direction" value={state.clipDirection} options={PEEL_DIRECTIONS}
+                onChange={clipDirection => dispatch({ type: 'PATCH_SETTINGS', value: { clipDirection } })} />
             </div>
-            <span className="pw-slicebar__value pw-num">{Math.round(state.clipProgress)}%</span>
+            <div className="pw-slicebar__slider">
+              <div className="pw-slicebar__track" style={{ '--slice-progress': `${state.clipProgress}%` }}>
+                {pancreasRevealProgress !== null && (
+                  <button
+                    type="button"
+                    className="pw-cut-marker"
+                    style={{ left: `${pancreasRevealProgress}%` }}
+                    onClick={() => setClipProgress(pancreasRevealProgress)}
+                    aria-label={`Peel to the pancreas (${pancreasRevealProgress}%)`}
+                    title={`Peel to the pancreas from the ${peelFromBack ? 'back' : 'front'}`}
+                  />
+                )}
+                <SliceSlider min="0" max="100" step="1" value={state.clipProgress}
+                  onChange={(event) => setClipProgress(Number(event.target.value), { live: true })} aria-label={`${peelDirectionLabel} CT removal`} />
+              </div>
+              <span className="pw-slicebar__value pw-num">{Math.round(state.clipProgress)}%</span>
+            </div>
             <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" disabled={state.clipProgress === 0 && pancreasRevealProgress === null} onClick={() => setClipProgress(state.clipProgress > 0 ? 0 : pancreasRevealProgress)}>
               {state.clipProgress > 0 ? 'Restore CT' : 'Peel to pancreas'}
             </button>

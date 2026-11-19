@@ -233,8 +233,10 @@
 .pw-layerbar__goto > span { margin-right: 4px; color: var(--pw-text-faint); font-size: 12px; }
 
 /* ---------- Slice bar ---------- */
-.pw-slicebar__readout { flex: none; min-width: 112px; font-size: 13px; white-space: nowrap; }
-.pw-slicebar__readout strong { font-weight: 600; margin-right: 6px; }
+.pw-slicebar--cut { flex-wrap: wrap; }
+.pw-slicebar__direction, .pw-slicebar__slider { display: flex; align-items: center; gap: 8px; }
+.pw-slicebar__label { flex: none; font-size: 13px; font-weight: 600; }
+.pw-slicebar__slider { flex: 1 1 160px; min-width: 0; }
 .pw-slicebar__status { flex: none; min-width: 112px; color: var(--pw-text-muted); font-family: var(--pw-mono); font-size: 12px; text-align: right; }
 .pw-slicebar__track { position: relative; flex: 1 1 auto; height: 28px; display: flex; align-items: center; }
 .pw-slicebar__track::before {
@@ -438,7 +440,6 @@
   .pw-studybar__actions .pw-btn--ghost, .pw-studybar__id .pw-tag { display: none; }
   .pw-studybar__id h1 { font-size: 14px; }
   .pw-slicebar__legend, .pw-viewer__hint, .pw-layerbar__goto > span { display: none; }
-  .pw-slicebar__readout { min-width: 0; }
   .pw-compare__grid, .pw-metric-strip { grid-template-columns: 1fr; }
 }
 @media (max-height: 560px) and (min-width: 1024px) {

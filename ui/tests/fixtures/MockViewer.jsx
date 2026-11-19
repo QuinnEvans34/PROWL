@@ -14,7 +14,9 @@ export default function MockViewer(props) {
   const { mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, label, onNavigationChange, navigationCommand } = props
   const sceneKey = viewerSceneKey(props)
   const callback = useRef(onNavigationChange)
+  const revealCallback = useRef(props.onPeelReveal)
   callback.current = onNavigationChange
+  revealCallback.current = props.onPeelReveal
   useEffect(() => {
     let active = true
     // Match a real viewer's asynchronous load: the workspace establishes its
@@ -24,9 +26,14 @@ export default function MockViewer(props) {
     })
     return () => { active = false }
   }, [sceneKey, label, mode, activePlane])
+  const peelReveal = props.caseData.syntheticPeelReveal
+  useEffect(() => {
+    if (mode === '3d' && peelReveal) revealCallback.current?.(peelReveal)
+  }, [sceneKey, mode, peelReveal])
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
+      clip: props.clip,
       measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm,
       measurementAnatomy: props.measurementAnatomy,
       selectedObject: props.selectedObject })}</pre>

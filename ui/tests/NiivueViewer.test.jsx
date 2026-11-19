@@ -399,6 +399,32 @@ it('keeps the 3D cut fixed during rotation and zoom', async () => {
   expect(nv.nativeGesture).not.toHaveBeenCalled()
 })
 
+it('reverses the peel at its existing depth and calculates the pancreas shortcut for each entry side', async () => {
+  const onPeelReveal = vi.fn()
+  const view = azimuth => <NiivueViewer {...anatomyProps} mode="3d" onPeelReveal={onPeelReveal}
+    clip={{ enabled: true, depth: -0.2, azimuth }} />
+  const { rerender } = render(view(0))
+  const nv = harness.instances[0]
+  nv.sceneExtentsMinMax = () => [[0, -50, 0], [100, 50, 100], [100, 100, 100]]
+  const loadMeshes = nv.loadMeshes.getMockImplementation()
+  nv.loadMeshes.mockImplementation(async specs => {
+    await loadMeshes(specs)
+    Object.assign(nv.meshes[0], { extentsMin: [0, -8, 0], extentsMax: [10, 19, 10] })
+  })
+  await screen.findByLabelText('Prepared result loaded')
+  expect(onPeelReveal).toHaveBeenCalledExactlyOnceWith({ frontToBack: 34, backToFront: 45 })
+  expect(nv.scene.clipPlane).toEqual([-0.2, 0, 0])
+  nv.setRenderAzimuthElevation(35, 22)
+  nv.setScale(2)
+
+  rerender(view(180))
+  await waitFor(() => expect(nv.scene.clipPlane).toEqual([-0.2, 180, 0]))
+  expect(nv.scene.renderAzimuth).toBe(35)
+  expect(nv.scene.renderElevation).toBe(22)
+  expect(nv.scene.volScaleMultiplier).toBe(2)
+  expect(nv.loadVolumes).toHaveBeenCalledOnce()
+})
+
 it.each([{}, { mode: '3d' }])('preserves native wheel input outside opted-in viewers %#', async (options) => {
   render(<NiivueViewer {...base} {...options} />)
   await screen.findByLabelText('Prepared result loaded')
