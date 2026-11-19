@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { clientToBackingPx, zoom2d, zoomBox2d, zoom3dFraming, zoomBox3dFraming } from '../src/lib/viewerZoom.js'
+import { clientToBackingPx, zoom2d, zoomBox2d, zoom3dFraming, zoomBox3dFraming, zoomToBounds2d } from '../src/lib/viewerZoom.js'
 
 function mirroredCoronalView() {
   const scene = { pan2Dxyzmm: [276, -63, 155, 1.5], crosshairPos: [108, 12, -82] }
@@ -74,5 +74,16 @@ describe('viewer zoom framing', () => {
     const viewPoint = ([x, y]) => [pivot[0] - (y - 140) / 2, pivot[1] + (x - 160) / 2, pivot[2]]
     const next = zoomBox3dFraming(1, pivot, viewport, viewPoint, [95, 80], [155, 120])
     expect(next).toEqual({ scale: 4, pivot: viewPoint([125, 100]) })
+  })
+
+  it('centers lesion bounds beyond the current image edges with surrounding space', () => {
+    const nv = mirroredCoronalView()
+    nv.mm2frac = point => point
+    nv.screenSlices[0].fovMM = [160, 160 / 1.5]
+    const corners = [[90, 12, -110], [130, 18, -90]]
+    expect(zoomToBounds2d(nv, corners)).toBe(true)
+    expect(nv.project([110, 15, -100])).toEqual([expect.closeTo(180), expect.closeTo(110)])
+    const [a, b] = corners.map(point => nv.project(point))
+    expect(Math.abs(a[0] - b[0])).toBeCloseTo(0.65 * 240)
   })
 })

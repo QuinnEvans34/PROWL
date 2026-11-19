@@ -106,6 +106,8 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
     await user.click(rail.getByRole('button', { name: 'Face calipers' }))
     expect(viewer3d().navigationCommand).toMatchObject({ type: 'camera', azimuth: 0, elevation: 0 })
+    await user.click(rail.getByRole('button', { name: 'Zoom to lesion' }))
+    expect(viewer3d().navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '3d', boundsWorldMm: second.boundsWorldMm })
     await user.click(hide())
     expect(viewer3d().measurementCalipers).toBeNull()
     await pickEmpty()
@@ -126,6 +128,9 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(screen.getByRole('button', { name: '2D', exact: true }).getAttribute('aria-pressed')).toBe('true')
     expect(screen.queryByRole('region', { name: 'Axial CT plane' })).toBeNull()
     expect(screen.queryByRole('button', { name: 'Show calipers', exact: true })).toBeNull()
+    await user.click(rail.getByRole('button', { name: 'Zoom to lesion' }))
+    expect(viewerData(coronal).navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '2d', worldMm: second.focusWorldMm })
+    expect(viewer3d().navigationCommand).toBeNull()
 
     await user.click(screen.getByRole('button', { name: '3D', exact: true }))
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)

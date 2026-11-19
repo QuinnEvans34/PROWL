@@ -70,7 +70,7 @@ function renderCamera(nv) {
   return { matrix, bounds: { x: left * scale[0], y: top * scale[1], width: width * scale[0], height: height * scale[1] } }
 }
 
-function worldToNdc(matrix, world) {
+export function worldToNdc(matrix, world) {
   if (!validPoint(world)) return null
   const clip = Array.from({ length: 4 }, (_, n) => world[0] * matrix[n] + world[1] * matrix[n + 4] + world[2] * matrix[n + 8] + matrix[n + 12])
   if (!clip.every(Number.isFinite) || clip[3] <= 0) return null

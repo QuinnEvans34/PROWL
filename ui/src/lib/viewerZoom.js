@@ -92,6 +92,28 @@ export function zoomBox2d(nv, start, end) {
   return apply2dZoom(nv, box.factor, worldAt(nv, box.center, tileIndex), worldAt(nv, box.viewCenter, tileIndex))
 }
 
+export function zoomToBounds2d(nv, boundsWorldMm) {
+  const tileIndex = nv.screenSlices?.findIndex(tile => tile.axCorSag >= 0 && tile.axCorSag <= 2 && tile.sliceFrac !== Infinity)
+  const tile = nv.screenSlices?.[tileIndex]
+  const viewport = normalizedViewport(tile?.leftTopWidthHeight)
+  if (!viewport || !validPoint(tile.fovMM, 2) || !boundsWorldMm?.length) return false
+  const target = worldAt(nv, viewportCenter(viewport), tileIndex)
+  if (!validPoint(target, 3)) return false
+  const points = boundsWorldMm.map(point => nv.frac2mm(nv.mm2frac(point, 0, true)))
+  if (points.some(point => !validPoint(point, 3))) return false
+
+  const source = Array.from(target).slice(0, 3)
+  const axes = [[0, 1], [0, 2], [1, 2]][tile.axCorSag]
+  const factor = Math.min(...axes.map((axis, index) => {
+    const coordinates = points.map(point => point[axis])
+    const min = Math.min(...coordinates)
+    const max = Math.max(...coordinates)
+    source[axis] = (min + max) / 2
+    return 0.65 * Math.abs(tile.fovMM[index]) / (max - min)
+  }))
+  return apply2dZoom(nv, factor, source, target)
+}
+
 export function zoom3dFraming(previousScale, pivot, factor, viewport, viewPoint, anchor = null) {
   if (!Number.isFinite(previousScale) || previousScale <= 0 || !Number.isFinite(factor) || factor <= 0) return null
   const scale = clamp(previousScale * factor, 0.45, 4)

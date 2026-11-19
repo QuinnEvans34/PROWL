@@ -6,7 +6,8 @@ import { LoaderCircle, TriangleAlert } from 'lucide-react'
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
-import { clientToBackingPx, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming } from '../lib/viewerZoom.js'
+import { clientToBackingPx, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
+import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
 const BASE = '/cases'
@@ -345,6 +346,19 @@ function apply3dFraming(nv, orbitCentreRef, framing) {
   if (!framing) return
   orbitCentreRef.current = framing.pivot
   nv.setScale(framing.scale)
+}
+
+function lesionFraming3d(nv, bounds) {
+  const view = renderView(nv)
+  if (!view || bounds?.length !== 8) return null
+  const projected = bounds.map(point => worldToNdc(view.matrix, point))
+  if (projected.some(point => !point)) return null
+  const factor = Math.min(...[0, 1].map(axis => {
+    const coordinates = projected.map(point => point[axis])
+    return 1.3 / (Math.max(...coordinates) - Math.min(...coordinates))
+  }))
+  const centre = [0, 1, 2].map(axis => bounds.reduce((sum, point) => sum + point[axis], 0) / bounds.length)
+  return zoom3dFraming(nv.scene.volScaleMultiplier, centre, factor)
 }
 
 function focusOnWorldPoint(nv, worldMM, mode) {
@@ -1644,7 +1658,7 @@ export default function NiivueViewer({
 
     const command = navigationCommand
     handledNavigationCommandRef.current = command.id
-    if (mode === '2d' && framingLocked && (command.type === 'fit' || command.type === 'zoom')) return
+    if (mode === '2d' && framingLocked && ['fit', 'zoom', 'zoom-lesion'].includes(command.type)) return
     if (command.type === 'slice') {
       const axis = PLANE_AXIS[command.plane]
       const total = Number((nv.volumes[0]?.dimsRAS || nv.volumes[0]?.hdr?.dims)?.[axis + 1])
@@ -1684,6 +1698,15 @@ export default function NiivueViewer({
     } else if (command.type === 'zoom') {
       if (mode === '2d') zoom2d(nv, Number(command.factor))
       else zoom3d(nv, Number(command.factor))
+    } else if (command.type === 'zoom-lesion') {
+      if (mode === '3d') {
+        apply3dFraming(nv, orbitCentreRef, lesionFraming3d(nv, command.boundsWorldMm))
+      } else {
+        zoomToBounds2d(nv, command.boundsWorldMm)
+        // This explicit action takes the reviewer through the selected lesion
+        // when the current CT slice no longer intersects it.
+        focusOnWorldPoint(nv, command.worldMm, mode)
+      }
     } else if (command.type === 'fit') {
       orbitCentreRef.current = null
       if (mode === '3d') {

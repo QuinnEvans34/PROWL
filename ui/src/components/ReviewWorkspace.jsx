@@ -896,6 +896,13 @@ export default function ReviewWorkspace({
                 const [azimuth, elevation] = CALIPER_CAMERAS[selectedCalipers.plane]
                 issueViewerCommand({ type: 'camera', azimuth, elevation })
               }}>Face calipers</button>}
+            {selectedComponent.boundsWorldMm && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
+              disabled={!is3dLike && framingLocked}
+              title={is3dLike ? 'Frame the selected lesion in 3D' : 'Frame a CT slice through the selected lesion'}
+              onClick={() => issueViewerCommand({
+                type: 'zoom-lesion', target: is3dLike ? '3d' : '2d',
+                boundsWorldMm: selectedComponent.boundsWorldMm, worldMm: selectedComponent.focusWorldMm,
+              })}>Zoom to lesion</button>}
             {selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--primary"
               onClick={() => inspectLesion(selectedComponent)}>{!is3dLike && measurementInspection ? 'Go to measured slice' : 'Inspect CT slice'}</button>}
           </> : !measuredLesionVisible ? <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" onClick={() => {

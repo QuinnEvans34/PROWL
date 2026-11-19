@@ -99,6 +99,8 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
     if (!size) continue
     if (components.length >= MAX_COMPONENTS) return record('unavailable', [], 'Too many separate lesion regions to measure in this viewer.')
     const slices = new Map()
+    const lo = [nx, ny, nz]
+    const hi = [-1, -1, -1]
     let bottom = Infinity
     let top = -Infinity
     for (let head = 0; head < size; head++) {
@@ -107,6 +109,12 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
       const x = index % nx
       const y = Math.floor(index / nx) % ny
       const z = Math.floor(index / xy)
+      lo[0] = Math.min(lo[0], x)
+      lo[1] = Math.min(lo[1], y)
+      lo[2] = Math.min(lo[2], z)
+      hi[0] = Math.max(hi[0], x)
+      hi[1] = Math.max(hi[1], y)
+      hi[2] = Math.max(hi[2], z)
       if (x > 0) size = visit(index - 1, size)
       if (x + 1 < nx) size = visit(index + 1, size)
       if (y > 0) size = visit(index - nx, size)
@@ -154,8 +162,17 @@ export function lesionDimensions(labels, { shape: [nx, ny, nz], affine, lesionVo
       })
       calipers = { nativeSlice: k, plane, anchorVoxel: center, anchorWorldMm: world(center), axes }
     }
+    // Camera framing uses the outer voxel edges in the original affine.
+    const boundsWorldMm = []
+    for (const z of [lo[2] - 0.5, hi[2] + 0.5]) {
+      for (const y of [lo[1] - 0.5, hi[1] + 0.5]) {
+        for (const x of [lo[0] - 0.5, hi[0] + 0.5]) {
+          boundsWorldMm.push(world([x, y, z]))
+        }
+      }
+    }
     components.push({ id: seed, voxelCount: size, volumeMl: size * voxelMm3 / 1000,
-      superiorInferiorMm: top - bottom + voxelHeight, calipers,
+      superiorInferiorMm: top - bottom + voxelHeight, calipers, boundsWorldMm,
       focusWorldMm: calipers?.anchorWorldMm ?? world([seed % nx, Math.floor(seed / nx) % ny, Math.floor(seed / xy)]),
       caliperUnavailableReason: orthogonal ? undefined : 'The native slice axes are not perpendicular.' })
   }
