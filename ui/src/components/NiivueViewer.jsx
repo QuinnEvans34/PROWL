@@ -1986,6 +1986,21 @@ export default function NiivueViewer({
         ...captureViewState(nv), sceneKey, orbitCentre: orbitCentreRef.current,
         worldMm: mode === '2d' ? Array.from(nv.frac2mm(nv.scene.crosshairPos, 0, true)).slice(0, 3) : null,
       } : null,
+      thumbnail: () => {
+        if (!isCurrent() || mode !== '2d' || !nv.canvas?.width || !nv.canvas?.height) return null
+        try {
+          const image = document.createElement('canvas')
+          image.width = 112
+          image.height = Math.max(1, Math.min(112, Math.round(112 * nv.canvas.height / nv.canvas.width)))
+          const context = image.getContext('2d')
+          if (!context) return null
+          nv.drawScene()
+          context.drawImage(nv.canvas, 0, 0, image.width, image.height)
+          return image.toDataURL('image/jpeg', 0.8)
+        } catch {
+          return null
+        }
+      },
       restore: (view) => {
         if (!view || view.sceneKey !== sceneKey || !isCurrent()) return false
         orbitCentreRef.current = view.orbitCentre ?? null

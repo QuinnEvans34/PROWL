@@ -25,11 +25,12 @@ function findingName(finding) {
 }
 
 export default function FindingKeyViews({
-  scope, finding, capture, onReopen, storage, download = downloadKeyView,
+  scope, finding, capture, captureThumbnail, onReopen, storage, download = downloadKeyView,
 }) {
   const [saved, setSaved] = useState(() => readFindingKeyViews(storage))
   const [notice, setNotice] = useState(null)
   const [portable, setPortable] = useState(null)
+  const [thumbnails, setThumbnails] = useState({})
   const ready = keyViewScope(scope)
   const noticeKey = JSON.stringify([scope?.studyId, ready?.ctSha256, ready?.predictionSha256, ready?.manifestHash])
   const current = useRef(null)
@@ -51,7 +52,12 @@ export default function FindingKeyViews({
         announce('Wait for the selected finding and its image to finish loading.')
         return
       }
-      setSaved(saveFindingKeyView(record, storage))
+      const updated = saveFindingKeyView(record, storage)
+      setSaved(updated)
+      const image = captureThumbnail?.()
+      if (image) setThumbnails(previous => Object.fromEntries(updated
+        .map(item => [item.id, item.id === record.id ? image : previous[item.id]])
+        .filter(([, preview]) => preview)))
       setPortable({ keyView: record, reviewerNote: '' })
       announce('Key view saved on this browser.')
     } catch (error) {
@@ -112,6 +118,8 @@ export default function FindingKeyViews({
     <p className="pw-fine pw-finding-key-views__notice" role="status">{message}</p>
     {items.length > 0 && <ul className="pw-finding-key-views__list">
       {items.map(item => <li key={item.id}>
+        {matchesKeyViewScope(ready, item) && thumbnails[item.id] && <img className="pw-finding-key-views__thumbnail"
+          src={thumbnails[item.id]} alt="Captured CT slice" />}
         <div>
           <strong>{findingName(item.finding)}</strong>
           <small>{item.view.plane}{Number.isSafeInteger(item.view.sliceIndex) ? ` · slice ${item.view.sliceIndex + 1}` : ''}

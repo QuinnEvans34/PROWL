@@ -60,10 +60,14 @@ describe('finding key view controls', () => {
     const user = userEvent.setup()
     const capture = vi.fn(() => view)
     const onReopen = vi.fn(() => null)
-    const app = render(<FindingKeyViews scope={scope} finding={finding} capture={capture} onReopen={onReopen} />)
+    const thumbnail = 'data:image/jpeg;base64,AAAA'
+    const app = render(<FindingKeyViews scope={scope} finding={finding} capture={capture}
+      captureThumbnail={() => thumbnail} onReopen={onReopen} />)
     await user.click(screen.getByRole('button', { name: 'Save key view' }))
     expect(screen.getByRole('status').textContent).toContain('saved on this browser')
     expect(capture).toHaveBeenCalledOnce()
+    expect(screen.getByRole('img', { name: 'Captured CT slice' }).getAttribute('src')).toBe(thumbnail)
+    expect(window.localStorage.getItem(KEY_VIEWS_STORAGE_KEY)).not.toContain(thumbnail)
     app.unmount()
     const revised = render(<FindingKeyViews scope={scope} onReopen={onReopen} />)
     await user.click(screen.getByRole('button', { name: 'Reopen Predicted lesion 2 key view' }))

@@ -42,6 +42,15 @@
   display: block;
 }
 
+.pw-finding-key-views__thumbnail {
+  flex: none;
+  width: 56px;
+  height: 42px;
+  object-fit: contain;
+  background: var(--pw-sunken);
+  border-radius: 3px;
+}
+
 .pw-finding-key-views__portable {
   display: grid;
   gap: .65rem;

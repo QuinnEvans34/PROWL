@@ -1015,10 +1015,10 @@ export default function ReviewWorkspace({
 
         <div className="pw-workspace-actions" role="group" aria-label="Workspace layout">
           <span className="pw-workspace-actions__label">IMAGING WORKSPACE</span>
-          {is2dLike && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.linked}
+          {is2dLike && !inspecting && !verifiedPrediction && !localCt && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.linked}
             onClick={() => setLayout({ linked: !layout.linked })}>Linked crosshairs</button>}
-          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.measurementsVisible}
-            onClick={() => setLayout({ measurementsVisible: !layout.measurementsVisible })}>Volume overlay</button>
+          {hasPrediction && !inspecting && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.measurementsVisible}
+            onClick={() => setLayout({ measurementsVisible: !layout.measurementsVisible })}>Volume overlay</button>}
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={panelOpen}
             onClick={() => setPanelOpen(!panelOpen)}>Expert panel</button>
           <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={focusMode}
@@ -1459,7 +1459,8 @@ export default function ReviewWorkspace({
           />
           <FindingKeyViews scope={{ studyId: caseId, ctSha256: verifiedMeasurement?.ctSha256,
             predictionSha256: verifiedMeasurement?.predictionSha256, manifestHash: verifiedPrediction?.manifestHash }}
-            finding={inspecting ? selectedFinding : null} capture={captureKeyView} onReopen={reopenKeyView} />
+            finding={inspecting ? selectedFinding : null} capture={captureKeyView}
+            captureThumbnail={() => inspectionViewRef.current?.thumbnail?.()} onReopen={reopenKeyView} />
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-ask" aria-labelledby="pw-tab-ask" hidden={panelTab !== 'ask'}>
           <FindingAskPanel key={studyKey} measurementState={measurementState} finding={selectedFinding}
