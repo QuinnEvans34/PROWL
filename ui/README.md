@@ -12,7 +12,8 @@ the window. Two-finger scrolling over a Workbench image zooms the active 2D
 plane or the 3D camera, including while the 3D CT is peeled. Drag the slider
 below an image to browse slices or change peel depth. Choose **Front → back**
 or **Back → front** beside Peel to change which side the cut starts from.
-The arrow keys also work when the slider has focus.
+The arrow keys also work when the slider has focus. In 3D, select **Pan**
+and drag to reposition the view while keeping the same angle and peel depth.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests

@@ -425,6 +425,46 @@ it('reverses the peel at its existing depth and calculates the pancreas shortcut
   expect(nv.loadVolumes).toHaveBeenCalledOnce()
 })
 
+it('pans the 3D camera while preserving angles, zoom, peel and click selection', async () => {
+  const onSelectObject = vi.fn()
+  render(<NiivueViewer {...base} mode="3d" wheelZoom interactionMode="pan"
+    onSelectObject={onSelectObject} clip={{ enabled: true, depth: -0.2, azimuth: 180 }} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  nv.canvas.getBoundingClientRect = () => ({ left: 0, top: 0, width: 100, height: 100 })
+  nv.canvas.width = 200
+  nv.canvas.height = 200
+  nv.screenSlices = [{ axCorSag: nv.sliceTypeRender, leftTopWidthHeight: [0, 0, 200, 200] }]
+  nv.pivot3D = [0, 0, 0]
+  nv.setRenderAzimuthElevation(35, 22)
+  nv.setScale(2)
+
+  const pointer = (type, clientX, clientY) => fireEvent(nv.canvas, new MouseEvent(type, {
+    bubbles: true, cancelable: true, button: 0, clientX, clientY,
+  }))
+  pointer('pointerdown', 40, 40)
+  pointer('pointermove', 60, 55)
+  pointer('pointerup', 60, 55)
+  expect(nv.pivot3D[0]).toBeCloseTo(-0.4)
+  expect(nv.pivot3D[1]).toBeCloseTo(0.3)
+  expect(nv.pivot3D[2]).toBe(0)
+  expect(nv.scene.renderAzimuth).toBe(35)
+  expect(nv.scene.renderElevation).toBe(22)
+  expect(nv.scene.volScaleMultiplier).toBe(2)
+  expect(nv.scene.clipPlane).toEqual([-0.2, 180, 0])
+  expect(onSelectObject).not.toHaveBeenCalled()
+
+  const touch = [{ clientX: 60, clientY: 55 }]
+  expect(fireEvent.touchStart(nv.canvas, { touches: touch })).toBe(false)
+  expect(fireEvent.touchMove(nv.canvas, { touches: touch })).toBe(false)
+  expect(nv.nativeGesture).not.toHaveBeenCalled()
+  expect(nv.mouseMove).not.toHaveBeenCalled()
+
+  pointer('pointerdown', 40, 40)
+  pointer('pointerup', 40, 40)
+  await waitFor(() => expect(onSelectObject).toHaveBeenCalledExactlyOnceWith(null))
+})
+
 it.each([{}, { mode: '3d' }])('preserves native wheel input outside opted-in viewers %#', async (options) => {
   render(<NiivueViewer {...base} {...options} />)
   await screen.findByLabelText('Prepared result loaded')

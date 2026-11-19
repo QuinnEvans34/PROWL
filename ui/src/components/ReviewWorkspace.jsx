@@ -69,6 +69,7 @@ const CAMERA_SHORTCUTS = {
 const CONTROL_HELP = {
   '3d': [
     ['Rotate', 'Drag with the Rotate tool (one finger on a trackpad)'],
+    ['Pan', 'Drag to reposition the 3D view'],
     ['Zoom', 'Scroll, pinch, or + / − at any peel depth'],
     ['Box zoom', 'Left-drag to frame a region'],
     ['Select', 'Click a surface for its details'],
@@ -565,7 +566,7 @@ export default function ReviewWorkspace({
 
   function changeFramingLock(locked) {
     setFramingStudy(locked ? caseId : null)
-    if (locked && (state.interactionMode === 'pan' || (state.interactionMode === 'box-zoom' && state.viewMode === '2d'))) {
+    if (locked && state.viewMode === '2d' && ['pan', 'box-zoom'].includes(state.interactionMode)) {
       dispatch({ type: 'SET_INTERACTION_MODE', value: 'navigate' })
     }
   }
@@ -573,6 +574,9 @@ export default function ReviewWorkspace({
   const is2dLike = state.viewMode !== '3d'
   const is3dLike = state.viewMode !== '2d'
   const boxZoom = state.interactionMode === 'box-zoom'
+  const pan = state.interactionMode === 'pan'
+  const twoDInteractionMode = framingLocked && (boxZoom || pan) ? 'navigate' : state.interactionMode
+  const threeDInteractionMode = boxZoom || pan ? state.interactionMode : 'rotate'
   const modelLesionPicked = state.selectedObject?.source === 'pred' && state.selectedObject.anatomy === 'lesion'
   const lesionInReview = Boolean(currentLesionSelection?.component || (is3dLike && measuredLesionVisible && modelLesionPicked))
   let lesionReviewMessage
@@ -827,16 +831,12 @@ export default function ReviewWorkspace({
             value={state.interactionMode}
             onChange={(value) => dispatch({ type: 'SET_INTERACTION_MODE', value })}
             options={[
-              ...(state.viewMode === '3d'
-                ? [
-                    ['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Drag to orbit the camera' }],
-                  ]
-                : [
-                    ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
-                    ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked,
-                      title: framingLocked ? 'Unlock framing to pan' : 'Drag to reposition the image' }],
-                    ['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Drag to adjust CT brightness and contrast' }],
-                  ]),
+              state.viewMode === '3d'
+                ? ['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Drag to orbit the camera' }]
+                : ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
+              ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />, disabled: framingLocked && !is3dLike,
+                title: framingLocked ? (is3dLike ? 'Drag to reposition the 3D view' : 'Unlock framing to pan') : 'Drag to reposition the view' }],
+              ...(is2dLike ? [['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Drag to adjust CT brightness and contrast' }]] : []),
               ['box-zoom', 'Box zoom', { disabled: framingLocked && !is3dLike,
                 title: framingLocked && !is3dLike ? 'Unlock framing to zoom' : 'Left-drag a box around a region to zoom in' }],
             ]}
@@ -967,14 +967,14 @@ export default function ReviewWorkspace({
           <ViewerSuspense>
               <div className={`pw-toolbench-scene pw-toolbench-scene--${state.viewMode}`}>
                 <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={state.viewMode === '3d'}>
-                  <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={framingLocked && boxZoom ? 'navigate' : state.interactionMode}
+                  <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={twoDInteractionMode}
                     framingLocked={framingLocked} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked}
                     onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />
                 </section>
                 <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={state.viewMode === '2d'}>
                   <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">3D surfaces</span>
-                  {threeDVisited && <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={state.viewMode === '3d' || boxZoom ? state.interactionMode : 'rotate'} label={`${viewerLabel} · 3D surfaces`} />}
+                  {threeDVisited && <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={threeDInteractionMode} label={`${viewerLabel} · 3D surfaces`} />}
                   {snapPad}
                 </section>
               </div>
@@ -1046,14 +1046,14 @@ export default function ReviewWorkspace({
             )}
           </div>
 
-          <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={!boxZoom && ((state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split')}>
+          <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={!boxZoom && !pan && ((state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split')}>
             {boxZoom ? (framingLocked && is2dLike ? 'Left-drag a box on the 3D image · 2D framing locked' : 'Left-drag a box around the region to zoom')
+              : pan ? (framingLocked && state.viewMode === 'split' ? 'Drag to reposition the 3D view · 2D framing locked' : 'Drag to reposition · scroll to zoom')
               : state.viewMode === '3d'
               ? 'Drag to orbit · scroll to zoom · click a surface to focus'
               : framingLocked ? 'Framing locked · use the slice sliders'
-                : state.interactionMode === 'pan' ? 'Drag to reposition · scroll to zoom'
-                  : state.interactionMode === 'window' ? 'Drag to adjust brightness and contrast · scroll to zoom'
-                    : 'Scroll to zoom · use the slice sliders'}
+                : state.interactionMode === 'window' ? 'Drag to adjust brightness and contrast · scroll to zoom'
+                  : 'Scroll to zoom · use the slice sliders'}
           </p>
 
           {state.settingsOpen && (

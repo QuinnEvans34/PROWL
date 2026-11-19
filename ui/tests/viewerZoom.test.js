@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { clientToBackingPx, zoom2d, zoomBox2d, zoom3dFraming, zoomBox3dFraming, zoomToBounds2d } from '../src/lib/viewerZoom.js'
+import { clientToBackingPx, pan3dPivot, zoom2d, zoomBox2d, zoom3dFraming, zoomBox3dFraming, zoomToBounds2d } from '../src/lib/viewerZoom.js'
 
 function mirroredCoronalView() {
   const scene = { pan2Dxyzmm: [276, -63, 155, 1.5], crosshairPos: [108, 12, -82] }
@@ -74,6 +74,40 @@ describe('viewer zoom framing', () => {
     const viewPoint = ([x, y]) => [pivot[0] - (y - 140) / 2, pivot[1] + (x - 160) / 2, pivot[2]]
     const next = zoomBox3dFraming(1, pivot, viewport, viewPoint, [95, 80], [155, 120])
     expect(next).toEqual({ scale: 4, pivot: viewPoint([125, 100]) })
+  })
+
+  it('moves a zoomed, angled 3D view with the drag without shifting camera depth', () => {
+    const pivot = [100, -70, 124]
+    const scale = 2.5
+    const canvas = {
+      width: 600,
+      height: 400,
+      getBoundingClientRect: () => ({ left: 20, top: 40, width: 300, height: 200 }),
+    }
+    const start = clientToBackingPx(canvas, 150, 130)
+    const end = clientToBackingPx(canvas, 180, 145)
+    const viewPoint = ([x, y]) => [
+      pivot[0] - (y - 200) / scale,
+      pivot[1] + 0.8 * (x - 300) / scale,
+      pivot[2] + 0.6 * (x - 300) / scale,
+    ]
+
+    const next = pan3dPivot(pivot, viewPoint, start, end)
+    const shift = next.map((value, axis) => value - pivot[axis])
+    const projected = [
+      start[0] - (0.8 * shift[1] + 0.6 * shift[2]) * scale,
+      start[1] + shift[0] * scale,
+    ]
+    expect(projected).toEqual(end.map(value => expect.closeTo(value)))
+    expect(0.6 * shift[1] - 0.8 * shift[2]).toBeCloseTo(0)
+    expect(pivot).toEqual([100, -70, 124])
+  })
+
+  it('skips stationary 3D drags and projections without usable geometry', () => {
+    const pivot = [100, -70, 124]
+    const point = [160, 140]
+    expect(pan3dPivot(pivot, ([x, y]) => [x, y, 0], point, point)).toBeNull()
+    expect(pan3dPivot(pivot, () => null, point, [120, 130])).toBeNull()
   })
 
   it('centers lesion bounds beyond the current image edges with surrounding space', () => {

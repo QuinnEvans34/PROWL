@@ -33,7 +33,7 @@ export default function MockViewer(props) {
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
-      clip: props.clip,
+      clip: props.clip, interactionMode: props.interactionMode,
       measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm,
       measurementAnatomy: props.measurementAnatomy,
       selectedObject: props.selectedObject })}</pre>

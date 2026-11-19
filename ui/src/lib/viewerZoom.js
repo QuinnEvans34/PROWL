@@ -142,3 +142,15 @@ export function zoomBox3dFraming(previousScale, pivot, viewport, viewPoint, star
     box.factor,
   )
 }
+
+export function pan3dPivot(pivot, viewPoint, previousPx, nextPx) {
+  if (!validPoint(pivot, 3) || !validPoint(previousPx, 2) || !validPoint(nextPx, 2)
+    || (previousPx[0] === nextPx[0] && previousPx[1] === nextPx[1])) return null
+
+  const previousWorld = viewPoint(previousPx)
+  const nextWorld = viewPoint(nextPx)
+  if (!validPoint(previousWorld, 3) || !validPoint(nextWorld, 3)) return null
+  // Unprojecting both positions at the same depth yields a translation in the
+  // camera plane. Move its center opposite the drag so the scan follows it.
+  return [0, 1, 2].map(axis => pivot[axis] + (previousWorld[axis] - nextWorld[axis]))
+}

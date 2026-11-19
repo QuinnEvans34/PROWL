@@ -7,7 +7,7 @@ import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
-import { clientToBackingPx, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
+import { clientToBackingPx, pan3dPivot, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -881,6 +881,7 @@ export default function NiivueViewer({
     let pinchDistance = null
     let pinching = false
     let boxGesture = null
+    let panGesture = null
     function setLowResolution(active) {
       const native = window.devicePixelRatio || 1
       if (active === lowResActive) return
@@ -925,7 +926,7 @@ export default function NiivueViewer({
       event.preventDefault()
       event.stopImmediatePropagation()
       const { deltaMode, deltaX, deltaY } = event
-      if (boxGesture || !canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
+      if (boxGesture || panGesture || !canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
       const unit = deltaMode === 1 ? 16 : deltaMode === 2 ? canvas.clientHeight : 1
       const delta = Math.max(-120, Math.min(120, deltaY * unit))
       zoomBy(Math.exp(-delta * 0.003), event.clientX, event.clientY)
@@ -934,6 +935,10 @@ export default function NiivueViewer({
       if (!interactiveRef.current.wheelZoom || (event.touches.length < 2 && !pinching)) return
       event.preventDefault()
       event.stopImmediatePropagation()
+      if (panGesture) {
+        panGesture = null
+        pointerStartRef.current = null
+      }
       pinching = true
       const first = event.touches[0]
       const second = event.touches[1]
@@ -951,6 +956,14 @@ export default function NiivueViewer({
       pinchDistance = null
       if (event.touches.length === 0) pinching = false
     }
+    function handleTouchStart(event) {
+      if (panToolActive() && event.touches.length === 1 && !pinching) {
+        event.preventDefault()
+        event.stopImmediatePropagation()
+        return
+      }
+      handlePinch(event)
+    }
     function handleTouchMove(event) {
       if (interactiveRef.current.mode !== '3d' || event.touches.length !== 1 || pinching) {
         handlePinch(event)
@@ -959,7 +972,7 @@ export default function NiivueViewer({
       // NiiVue's single-touch move starts a clip-plane drag even in rotate mode.
       event.preventDefault()
       event.stopImmediatePropagation()
-      if (boxToolActive() || !canZoom()) return
+      if (usesCustomDrag() || !canZoom()) return
       const rect = canvas.getBoundingClientRect()
       const touch = event.touches[0]
       nv.mouseMove(touch.clientX - rect.left, touch.clientY - rect.top)
@@ -994,10 +1007,23 @@ export default function NiivueViewer({
     function boxToolActive() {
       return interactiveRef.current.interactionMode === 'box-zoom'
     }
-    function stopBoxMouse(event) {
-      if (!boxToolActive() || event.button !== 0) return
+    function panToolActive() {
+      return interactiveRef.current.mode === '3d' && interactiveRef.current.interactionMode === 'pan'
+    }
+    function usesCustomDrag() {
+      return boxToolActive() || panToolActive()
+    }
+    function preventNativeDrag(event) {
+      if (!usesCustomDrag() || event.button !== 0) return
       event.preventDefault()
       event.stopImmediatePropagation()
+    }
+    function cancelCustomDrag(event) {
+      if (boxGesture && (event.pointerId === undefined || boxGesture.pointerId === event.pointerId)) cancelBox()
+      if (panGesture && (event.pointerId === undefined || panGesture.pointerId === event.pointerId)) {
+        panGesture = null
+        pointerStartRef.current = null
+      }
     }
     function boxMove(event) {
       if (!boxGesture || boxGesture.pointerId !== event.pointerId) return
@@ -1012,6 +1038,30 @@ export default function NiivueViewer({
       const startY = boxGesture.clientY - rect.top
       setZoomBox({ left: Math.min(startX, x), top: Math.min(startY, y), width: Math.abs(x - startX), height: Math.abs(y - startY) })
     }
+    function panMove(event) {
+      if (!panGesture || panGesture.pointerId !== event.pointerId) return
+      if (!panToolActive() || !canZoom() || panGesture.sceneKey !== loadedSceneKeyRef.current) {
+        cancelCustomDrag(event)
+        return
+      }
+      if (!panGesture.moved && Math.hypot(event.clientX - panGesture.clientX, event.clientY - panGesture.clientY) <= 5) return
+      // Use the current viewport for both locations, including any DPI or size
+      // change during capture. This translation leaves the peel in scan space.
+      const view = renderView(nv)
+      if (!view) return
+      const previous = clientToBackingPx(canvas, panGesture.clientX, panGesture.clientY)
+      const next = clientToBackingPx(canvas, event.clientX, event.clientY)
+      const pivot = pan3dPivot(nv.pivot3D, view.viewPoint, previous, next)
+      if (!pivot) return
+      orbitCentreRef.current = pivot
+      nv.pivot3D = pivot
+      panGesture = { ...panGesture, clientX: event.clientX, clientY: event.clientY, moved: true }
+      nv.drawScene()
+    }
+    function handlePointerMove(event) {
+      if (panGesture) panMove(event)
+      else boxMove(event)
+    }
     function cancelBoxOnEscape(event) {
       if (event.key !== 'Escape' || !boxGesture) return
       event.preventDefault()
@@ -1021,13 +1071,17 @@ export default function NiivueViewer({
 
     function handlePointerDown(event) {
       if (interactiveRef.current.mode === '3d' && event.button !== 0) return
-      if (boxToolActive() && event.button === 0) {
+      if (usesCustomDrag() && event.button === 0) {
         event.preventDefault()
-        if (!canZoom() || boxGesture) return
-        boxGesture = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, sceneKey: loadedSceneKeyRef.current }
+        if (!canZoom() || boxGesture || panGesture || pinching || event.isPrimary === false) return
+        const gesture = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, sceneKey: loadedSceneKeyRef.current }
         canvas.focus({ preventScroll: true })
         canvas.setPointerCapture?.(event.pointerId)
-        return
+        if (boxToolActive()) {
+          boxGesture = gesture
+          return
+        }
+        panGesture = gesture
       }
       pointerHeld = true
       window.clearTimeout(restoreTimer)
@@ -1036,6 +1090,12 @@ export default function NiivueViewer({
     }
 
     function handlePointerUp(event) {
+      if (panGesture) {
+        if (panGesture.pointerId !== event.pointerId || event.button !== 0) return
+        panMove(event)
+        if (panGesture?.moved) pointerStartRef.current = null
+        panGesture = null
+      }
       if (boxToolActive() && event.button === 0) {
         const box = boxGesture
         if (!box || box.pointerId !== event.pointerId) return
@@ -1122,7 +1182,7 @@ export default function NiivueViewer({
 
     // Double-click a surface in 3D: orbit around that point and zoom in a step.
     function handleDoubleClick(event) {
-      if (interactiveRef.current.mode !== '3d' || boxToolActive()) return
+      if (interactiveRef.current.mode !== '3d' || usesCustomDrag()) return
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (!picked?.point) return
       orbitCentreRef.current = picked.point
@@ -1134,15 +1194,15 @@ export default function NiivueViewer({
     const captureGesture = { capture: true, passive: false }
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
-    canvas.addEventListener('pointermove', boxMove)
-    canvas.addEventListener('pointercancel', cancelBox)
-    canvas.addEventListener('lostpointercapture', cancelBox)
-    canvas.addEventListener('mousedown', stopBoxMouse, true)
-    canvas.addEventListener('mouseup', stopBoxMouse, true)
+    canvas.addEventListener('pointermove', handlePointerMove)
+    canvas.addEventListener('pointercancel', cancelCustomDrag)
+    canvas.addEventListener('lostpointercapture', cancelCustomDrag)
+    canvas.addEventListener('mousedown', preventNativeDrag, true)
+    canvas.addEventListener('mouseup', preventNativeDrag, true)
     canvas.addEventListener('keydown', cancelBoxOnEscape, true)
     canvas.addEventListener('dblclick', handleDoubleClick)
     canvas.addEventListener('wheel', handleWheel, captureGesture)
-    canvas.addEventListener('touchstart', handlePinch, captureGesture)
+    canvas.addEventListener('touchstart', handleTouchStart, captureGesture)
     canvas.addEventListener('touchmove', handleTouchMove, captureGesture)
     canvas.addEventListener('touchend', endPinch, true)
     canvas.addEventListener('touchcancel', endPinch, true)
@@ -1151,7 +1211,7 @@ export default function NiivueViewer({
     window.addEventListener('pointerup', endGesture)
     window.addEventListener('pointercancel', endGesture)
     window.addEventListener('blur', endGesture)
-    window.addEventListener('blur', cancelBox)
+    window.addEventListener('blur', cancelCustomDrag)
 
     return () => {
       if (clipFrameRef.current !== null) {
@@ -1165,15 +1225,15 @@ export default function NiivueViewer({
       pendingNavigationRef.current = null
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
-      canvas.removeEventListener('pointermove', boxMove)
-      canvas.removeEventListener('pointercancel', cancelBox)
-      canvas.removeEventListener('lostpointercapture', cancelBox)
-      canvas.removeEventListener('mousedown', stopBoxMouse, true)
-      canvas.removeEventListener('mouseup', stopBoxMouse, true)
+      canvas.removeEventListener('pointermove', handlePointerMove)
+      canvas.removeEventListener('pointercancel', cancelCustomDrag)
+      canvas.removeEventListener('lostpointercapture', cancelCustomDrag)
+      canvas.removeEventListener('mousedown', preventNativeDrag, true)
+      canvas.removeEventListener('mouseup', preventNativeDrag, true)
       canvas.removeEventListener('keydown', cancelBoxOnEscape, true)
       canvas.removeEventListener('dblclick', handleDoubleClick)
       canvas.removeEventListener('wheel', handleWheel, true)
-      canvas.removeEventListener('touchstart', handlePinch, true)
+      canvas.removeEventListener('touchstart', handleTouchStart, true)
       canvas.removeEventListener('touchmove', handleTouchMove, true)
       canvas.removeEventListener('touchend', endPinch, true)
       canvas.removeEventListener('touchcancel', endPinch, true)
@@ -1182,7 +1242,7 @@ export default function NiivueViewer({
       window.removeEventListener('pointerup', endGesture)
       window.removeEventListener('pointercancel', endGesture)
       window.removeEventListener('blur', endGesture)
-      window.removeEventListener('blur', cancelBox)
+      window.removeEventListener('blur', cancelCustomDrag)
       window.clearTimeout(restoreTimer)
       window.clearTimeout(wheelTimer)
       nv.cleanup()
@@ -1203,7 +1263,7 @@ export default function NiivueViewer({
         if (previousScene && previousView && loadedSceneKeyRef.current) {
           savedViewsRef.current.set(
             `${previousScene.caseId}::${previousScene.mode}`,
-            previousView,
+            { ...previousView, orbitCentre: orbitCentreRef.current },
           )
           latestCrosshairRef.current.set(previousScene.caseId, previousView.crosshair)
         }
@@ -1360,6 +1420,7 @@ export default function NiivueViewer({
 
         const currentCaseId = caseData.case_id || caseData.files.ct
         const savedView = savedViewsRef.current.get(`${currentCaseId}::${mode}`)
+        if (mode === '3d') orbitCentreRef.current = savedView?.orbitCentre ?? null
         const latestCrosshair = latestCrosshairRef.current.get(currentCaseId)
         let restored = restoreViewState(nv, savedView, mode)
         if (latestCrosshair?.length >= 3) {
@@ -1709,8 +1770,9 @@ export default function NiivueViewer({
         || registryRef.current.volumes.get('pred')
         || registryRef.current.volumes.get('gt')
       const labelValue = command.anatomy === 'lesion' ? 2 : 1
-      focusOnWorldPoint(nv, labelCentroidMM(volume, labelValue), mode)
+      const focused = focusOnWorldPoint(nv, labelCentroidMM(volume, labelValue), mode)
       if (mode === '3d') {
+        if (focused) orbitCentreRef.current = nv.pivot3D
         if (Number.isFinite(command.azimuth) && Number.isFinite(command.elevation)) {
           nv.setRenderAzimuthElevation(command.azimuth, command.elevation)
         }
@@ -1848,6 +1910,7 @@ export default function NiivueViewer({
       <canvas ref={canvasRef} aria-label={label} style={{
         visibility: state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? 'hidden' : undefined,
         cursor: interactionMode === 'box-zoom' && !(mode === '2d' && framingLocked) ? 'crosshair' : undefined,
+        touchAction: mode === '3d' && interactionMode === 'pan' ? 'none' : undefined,
       }} />
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')}

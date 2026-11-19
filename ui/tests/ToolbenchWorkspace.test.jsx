@@ -302,8 +302,32 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(viewer).clip).toMatchObject({ azimuth: 180, progress: 0, depth: 2 })
     await user.click(screen.getByRole('button', { name: 'Front to back', exact: true }))
     expect(viewerData(viewer).clip).toMatchObject({ azimuth: 0, progress: 0, depth: 2 })
+  })
+
+  it('allows 3D pan while 2D framing is locked', async () => {
+    const user = userEvent.setup()
+    render(<Harness />)
+    const lock = await screen.findByRole('button', { name: 'Lock framing' })
+    await waitFor(() => expect(lock.disabled).toBe(false))
+    await user.click(lock)
+    const pan = () => screen.getByRole('button', { name: 'Pan', exact: true })
+    expect(pan().disabled).toBe(true)
+
+    await user.click(screen.getByRole('button', { name: '3D', exact: true }))
+    const viewer = await screen.findByTestId(/^synthetic-viewer-3d/)
+    const rotate = screen.getByRole('button', { name: 'Rotate', pressed: true })
+    expect(viewerData(viewer).interactionMode).toBe('rotate')
+    await user.click(pan())
+    expect(viewerData(viewer).interactionMode).toBe('pan')
+    await user.click(rotate)
+    expect(viewerData(viewer).interactionMode).toBe('rotate')
+
+    await user.click(screen.getByRole('button', { name: 'Split', exact: true }))
+    await user.click(pan())
+    expect(viewerData(viewer).interactionMode).toBe('pan')
+    expect(viewerData(screen.getByTestId('synthetic-viewer-2d-axial')).interactionMode).toBe('navigate')
     await user.click(screen.getByRole('button', { name: '2D', exact: true }))
-    expect(screen.getByRole('button', { name: 'Pan', exact: true })).toBeTruthy()
+    expect(pan().disabled).toBe(true)
   })
 
   it('keeps study measurements visible with the expert and rejects a late result from the previous study', async () => {
