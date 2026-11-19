@@ -9,8 +9,10 @@ export function validateSingleSummary(result, request, validateSources) {
     return result
   }
   const a=result.answer
+  const fallback = a?.provenance === 'model_selected_source_fallback'
   if (!a || Object.entries(config).some(([k,v]) => a[k] !== v)
-    || a.provenance !== 'model_synthesized_passages' || a.validation !== 'citation_binding_only'
+    || (fallback ? (a.validation !== 'exact_citations_and_source_title' || a.review !== 'source_fallback' || a.coverage !== 'partial')
+      : (a.provenance !== 'model_synthesized_passages' || a.validation !== 'citation_binding_and_model_review'))
     || !['supported','partial','none'].includes(a.coverage) || !['summarized','insufficient'].includes(a.status)
     || !Array.isArray(a.claims) || a.claims.length > 3 || (a.coverage==='none') !== (a.claims.length===0)
     || (a.status==='insufficient') !== (a.claims.length===0)
@@ -21,5 +23,7 @@ export function validateSingleSummary(result, request, validateSources) {
       && new Set(c.citations.map(x=>x.rank)).size===c.citations.length
       && c.citations.every(x=>Number.isInteger(x.rank) && typeof x.quote==='string' && x.quote.length>=20
         && x.quote.length<=4000 && result.evidence.find(e=>e.rank===x.rank)?.record.text.includes(x.quote)))) fail()
+  if (fallback && !a.claims.every(c => c.text === c.citations.map(x =>
+    `Source wording from “${result.evidence.find(e => e.rank === x.rank).record.citation.title}”: ${x.quote}`).join('\n\n'))) fail()
   return result
 }
