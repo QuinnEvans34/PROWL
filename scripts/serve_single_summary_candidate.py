@@ -5,15 +5,15 @@ from contextlib import nullcontext
 from pathlib import Path
 from serve_literature_search import create_service, create_study_answers, handler_for, LocalFixtureServer
 from src.retrieval.single_pass_summary import SinglePassAnswers
+from src.retrieval.expert_conversation import ExpertConversation
 from src.retrieval.local_runtime import expert_gpu_guard
 ROOT=Path(__file__).resolve().parents[1]
 def run_candidate(config, port, *, sources_only=False):
     with (nullcontext() if sources_only else expert_gpu_guard(ROOT/'outputs/prowl/.mps-profile.lock')):
-        service=create_service(config); sources,_=create_study_answers(service)
+        service=create_service(config, ranking_config=ROOT/'configs/evidence/development-hybrid-search-v1.json'); sources,_=create_study_answers(service)
         service.answer_gpu_reserved = not sources_only
-        class SourceOnlyAnswers:
-            policy = 'sources-only'
-        handler = handler_for(service,sources,SourceOnlyAnswers() if sources_only else SinglePassAnswers(sources))
+        expert = ExpertConversation(sources, None if sources_only else SinglePassAnswers(sources))
+        handler = handler_for(service, expert, expert)
         class SourceOnlyHandler(handler):
             def do_POST(self):
                 if self.path in ('/literature-search/answer','/literature-search/interpret'):

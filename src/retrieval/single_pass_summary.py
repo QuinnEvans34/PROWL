@@ -67,7 +67,7 @@ def source_sentences(evidence):
     return sources, lookup
 
 
-def generate(question, evidence, call=None):
+def generate(question, evidence, call=None, *, question_context=None):
     if not 1 <= len(evidence) <= 5 or sum(len(e['record']['text']) for e in evidence) > 16000:
         raise ValueError('Evidence budget')
     texts = {e['rank']: e['record']['text'] for e in evidence}
@@ -100,7 +100,10 @@ def generate(question, evidence, call=None):
         return response
     if not any(m['name']==MODEL and m['digest']==MODEL_SHA for m in bounded('tags')['models']):
         raise OSError('Pinned model unavailable')
-    answer = chat(bounded, PROMPT, dict(question=question, passages=sources),
+    body = dict(question=question, passages=sources)
+    if question_context is not None:
+        body['question_context'] = question_context
+    answer = chat(bounded, PROMPT, body,
         schema, think=False, context_tokens=8192, model=MODEL)
     validate(answer,schema)
     if (answer['coverage']=='none') != (not answer['claims']): raise ValueError('Coverage mismatch')
@@ -131,10 +134,15 @@ class SinglePassAnswers:
     policy=POLICY
     def __init__(self, search, generate_fn=generate):
         self.search,self.generate_fn,self.lock=search,generate_fn,Lock()
-    def answer(self, request):
+    def answer(self, request, *, question_context=None):
         if not self.lock.acquire(blocking=False): raise OSError('Answer service busy')
         try:
-            started=monotonic(); result=deepcopy(self.search.search(request))
+            started=monotonic()
+            search_request = request if question_context is None else {
+                **request, 'question': question_context['resolved_question']}
+            result=deepcopy(self.search.search(search_request))
+            if question_context is not None:
+                result.update(question=request['question'], context=deepcopy(question_context))
             if result['state'] != 'evidence_unassessed': return result
             # Preserve clarification and scoped coverage boundaries in existing retrieval.
             selection=result.get('record_selection',{})
@@ -145,7 +153,8 @@ class SinglePassAnswers:
             result.update(schema_version='prowl-single-summary-response-v1',answer_policy=POLICY)
             retrieved=monotonic()
             try:
-                result.update(answer=self.generate_fn(request['question'],result['evidence']),generation='completed')
+                kwargs = {} if question_context is None else dict(question_context=question_context)
+                result.update(answer=self.generate_fn(request['question'],result['evidence'], **kwargs),generation='completed')
             except (OSError, ValueError, KeyError, TypeError, TimeoutError, ValidationError) as error:
                 result.update(answer=None,generation='unavailable',message='The summary could not be completed. You can still inspect the retrieved passages.')
             result['timing']=dict(retrieval_seconds=round(retrieved-started,3),total_seconds=round(monotonic()-started,3))

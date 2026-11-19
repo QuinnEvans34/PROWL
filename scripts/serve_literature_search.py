@@ -58,13 +58,20 @@ def check_database(db, spec, inventory, *, vector_probe=False):
                 raise ValueError('Stored vector probe failed')
 
 
-def create_service(config_path):
+def create_service(config_path, *, ranking_config=None):
     config = read_config(config_path); limits(config)
     spec = json.loads((ROOT/'configs/evidence/development-search-v1.json').read_text())
     manifest = checked_json(spec['manifest'], ROOT)
-    corpus = FrozenLiterature(batches=[checked_json(p, ROOT) for p in manifest['batches']],
+    batches = [checked_json(p, ROOT) for p in manifest['batches']]
+    corpus = FrozenLiterature(batches=batches,
         bundles=[checked_json(s['bundle'], ROOT) for s in manifest['sources']],
         inventory=manifest['inventory'], manifest_sha256=spec['manifest']['sha256'])
+    hybrid = None
+    if ranking_config is not None:
+        from src.retrieval.hybrid_retrieval import HybridPassageIndex, POLICY as HYBRID_POLICY
+        ranking = json.loads(Path(ranking_config).read_text())
+        hybrid = HybridPassageIndex([item['record'] for batch in batches for item in batch['items']], ranking)
+        spec = dict(spec, retriever=HYBRID_POLICY, ranking=ranking)
     model = encoder(config)
     if model.id != spec['encoder_id']:
         raise ValueError('Configured encoder differs from corpus')
@@ -94,7 +101,9 @@ def create_service(config_path):
         with checked_connection() as db:
             check_database(db, spec, manifest['inventory'])
             with backend_stage('retrieval', db):
-                return search(db, spec['collection'], model, question, spec['top_k'])
+                dense = search(db, spec['collection'], model, question,
+                    hybrid.config['dense_candidates'] if hybrid is not None else spec['top_k'])
+                return hybrid.rank(question, dense) if hybrid is not None else dense
 
     service = DevelopmentSearch(corpus, spec, retrieve)
     from src.retrieval.direct_ingestion import digest
@@ -180,13 +189,22 @@ def handler_for(service, source_search=None, record_answers=None):
             except Exception as error:
                 report_failure('readiness', error)
                 return self.reply(503, {'backend':'unavailable', 'error':'Literature backend unavailable.'})
-            self.reply(200, {'mode':'local_development_excerpts','backend':'checked',
+            health = {'mode':'local_development_excerpts','backend':'checked',
                 'generation_checked':False,'collection':service.config['collection'],
                 'storage_identity':getattr(service,'storage_identity',None),
                 'answer_gpu_reserved':getattr(service,'answer_gpu_reserved',False) is True,
                 'answer_policy':getattr(record_answers, 'policy', 'source-record-answer-v1') if record_answers else POLICY,
                 'retrieval_policy':source_search.config.get('retriever', 'dense-exact-cosine-v1'),
-                'answer_retrieval_policy':(source_search if record_answers else service).config.get('retriever', 'dense-exact-cosine-v1')})
+                'answer_retrieval_policy':(source_search if record_answers else service).config.get('retriever', 'dense-exact-cosine-v1')}
+            if getattr(source_search, 'supports_conversation', False):
+                from src.retrieval.expert_conversation import POLICY as CONTEXT_POLICY
+                health['context_policy'] = CONTEXT_POLICY
+                if health['answer_policy'] == 'single-pass-summary-v1':
+                    from src.retrieval.single_pass_summary import FINGERPRINT
+                    health['answer_prompt_sha256'] = FINGERPRINT
+                else:
+                    health['answer_prompt_sha256'] = None
+            self.reply(200, health)
 
         def do_POST(self):
             if not self.local(): return self.reply(403, {'error':'Local access required.'})
@@ -198,6 +216,10 @@ def handler_for(service, source_search=None, record_answers=None):
                         or self.headers.get('Transfer-Encoding')):
                     raise ValueError('Invalid body')
                 request = json.loads(self.rfile.read(size))
+                conversation = []
+                if getattr(source_search, 'supports_conversation', False):
+                    from src.retrieval.expert_conversation import unpack_request
+                    request, conversation = unpack_request(request)
                 # Validate user input before provider work, without echoing invalid content.
                 from src.retrieval.development_search import search_scope
                 search_scope(request)
@@ -212,7 +234,10 @@ def handler_for(service, source_search=None, record_answers=None):
                     report_failure('interpretation', error)
                     return self.reply(503, {'error':'Question help is unavailable. You can still ask your original question.'})
             try:
-                result = answers.answer(request) if self.path.endswith('/answer') else source_search.search(request)
+                operation = answers.answer if self.path.endswith('/answer') else source_search.search
+                result = (operation(request, conversation=conversation)
+                          if getattr(source_search, 'supports_conversation', False)
+                          else operation(request))
             except Exception as error:
                 report_failure('answer' if self.path.endswith('/answer') else 'source_request', error)
                 return self.reply(503, {'error':'Literature search unavailable. Check the service and drive, then retry.'})

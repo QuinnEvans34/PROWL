@@ -44,9 +44,9 @@ def test_candidate_reservation_lifetime_and_cleanup(tmp_path,monkeypatch):
     monkeypatch.setattr(candidate,'ROOT',tmp_path)
     monkeypatch.setattr(platform,'require_ac',lambda:None)
     service=SimpleNamespace()
-    monkeypatch.setattr(candidate,'create_service',lambda _:service)
-    monkeypatch.setattr(candidate,'create_study_answers',lambda _:(object(),None))
-    monkeypatch.setattr(candidate,'handler_for',lambda *a:None)
+    monkeypatch.setattr(candidate,'create_service',lambda _,**kwargs:service)
+    monkeypatch.setattr(candidate,'create_study_answers',lambda _:(SimpleNamespace(config={}),None))
+    monkeypatch.setattr(candidate,'handler_for',lambda *a:type('Handler',(),{}))
     closed=[]
     class Server:
         def __init__(self,*args): pass
@@ -69,7 +69,7 @@ def test_candidate_reservation_lifetime_and_cleanup(tmp_path,monkeypatch):
 
 def test_busy_teacher_prevents_candidate_creation(tmp_path,monkeypatch):
     monkeypatch.setattr(candidate,'ROOT',tmp_path)
-    monkeypatch.setattr(candidate,'create_service',lambda _:pytest.fail('must not create candidate'))
+    monkeypatch.setattr(candidate,'create_service',lambda _,**kwargs:pytest.fail('must not create candidate'))
     lock=tmp_path/'outputs/prowl/.mps-profile.lock';lock.parent.mkdir(parents=True)
     with lock.open('a+b') as handle:
         fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
