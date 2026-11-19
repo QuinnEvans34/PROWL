@@ -28,6 +28,7 @@ export default function MockViewer(props) {
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
       measurementCalipers: props.measurementCalipers, selectedLesionWorldMm: props.selectedLesionWorldMm,
+      measurementAnatomy: props.measurementAnatomy,
       selectedObject: props.selectedObject })}</pre>
     {mode === '3d' && props.caseData.syntheticLesionPick && <button type="button"
       onClick={() => props.onSelectObject?.({ source: 'pred', anatomy: 'lesion', worldMm: props.caseData.syntheticLesionPick })}>

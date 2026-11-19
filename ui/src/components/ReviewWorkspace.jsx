@@ -238,6 +238,7 @@ export default function ReviewWorkspace({
   const [peelReveal3d, setPeelReveal3d] = useState(null)
   const [lesionSelection, setLesionSelection] = useState(null)
   const [pendingLesionPick, setPendingLesionPick] = useState(null)
+  const [inspectedPancreasMeasurement, setInspectedPancreasMeasurement] = useState(null)
   const [framingStudy, setFramingStudy] = useState(null)
   const framingLocked = framingStudy === caseId
   useEffect(() => { setPeelReveal3d(null) }, [caseId])
@@ -256,6 +257,7 @@ export default function ReviewWorkspace({
   const exitInspection = useCallback(() => {
     setPendingLesionPick(null)
     setLesionSelection(null)
+    setInspectedPancreasMeasurement(null)
     setPopAnchor(null)
     setNavigationCommand(previous => previous?.type === 'measurement-point' ? null : previous)
     lastPointerRef.current = null
@@ -278,6 +280,7 @@ export default function ReviewWorkspace({
     pendingClipProgressRef.current = null
     setPendingLesionPick(null)
     setLesionSelection(null)
+    setInspectedPancreasMeasurement(null)
     setFramingStudy(null)
     setThreeDZoom(null)
     setNavigationCommand(null)
@@ -350,6 +353,11 @@ export default function ReviewWorkspace({
   }), [caseId, caseData.files, caseData.spacing_mm, hasPrediction, predictionShown, isAnalyzing])
   const measurementState = usePredictionMeasurements(measurementContext)
   const verifiedMeasurement = measurementState.status === 'ready' ? measurementState.measurement : null
+  const pancreasDimensions = verifiedMeasurement?.pancreasDimensions
+  const selectedPancreas = state.selectedObject?.source === 'pred' && state.selectedObject.anatomy === 'pancreas'
+  const measuredPancreasVisible = predictionShown && !comparing && state.layerVisibility.pancreas && visibleSources.includes('pred')
+  const pancreasInReview = selectedPancreas && measuredPancreasVisible && pancreasDimensions?.status === 'ready'
+  const pancreasInspection = pancreasInReview && inspectedPancreasMeasurement === verifiedMeasurement
   // The selection is scoped to the actual verified result, not just a lesion
   // index or case name, which can repeat across prediction versions.
   const currentLesionSelection = verifiedMeasurement && lesionSelection?.measurement === verifiedMeasurement
@@ -404,6 +412,7 @@ export default function ReviewWorkspace({
 
   function markMeasuredLesion(component, inspect = false) {
     setPendingLesionPick(null)
+    setInspectedPancreasMeasurement(null)
     setLesionSelection(previous => ({ measurement: verifiedMeasurement, component, inspect,
       showCalipers3d: previous?.measurement === verifiedMeasurement && previous.showCalipers3d === true,
     }))
@@ -421,13 +430,34 @@ export default function ReviewWorkspace({
   }
 
   function inspectLesion(component) {
-    const calipers = component.calipers
+    inspectMeasurement(component.calipers, () => markMeasuredLesion(component, true))
+  }
+
+  function markPancreas(worldMm, inspect = false) {
+    exitInspection()
+    if (inspect) setInspectedPancreasMeasurement(verifiedMeasurement)
+    dispatch({ type: 'SELECT_OBJECT', value: { source: 'pred', anatomy: 'pancreas', worldMm } })
+    setPanelTab('findings')
+    if (!compactWorkspace && !focusMode) setPanelOpen(true)
+  }
+
+  function selectPancreasIn3d() {
+    setViewMode('3d')
+    if (comparing) dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
+    markPancreas(pancreasDimensions?.focusWorldMm)
+  }
+
+  function inspectPancreas() {
+    inspectMeasurement(pancreasDimensions?.calipers, () => markPancreas(pancreasDimensions.focusWorldMm, true))
+  }
+
+  function inspectMeasurement(calipers, select) {
     if (!verifiedMeasurement || !calipers?.plane) return
     setViewMode('2d')
     dispatch({ type: 'SET_ACTIVE_PLANE', value: calipers.plane })
     dispatch({ type: 'PATCH_SETTINGS', value: { showFull: false } })
     dispatch({ type: 'SET_EVIDENCE_MODE', value: 'prediction' })
-    markMeasuredLesion(component, true)
+    select()
     issueViewerCommand({ type: 'measurement-point', plane: calipers.plane, worldMm: calipers.anchorWorldMm })
   }
 
@@ -436,7 +466,9 @@ export default function ReviewWorkspace({
     const pickedModelLesion = value?.source === 'pred' && value.anatomy === 'lesion'
     if (!pickedModelLesion && show3dCalipers) return
     if (!value) return exitInspection()
+    if (value.source === 'pred' && value.anatomy === 'pancreas') return markPancreas(pancreasDimensions?.focusWorldMm)
     setPendingLesionPick(null)
+    setInspectedPancreasMeasurement(null)
     if (pickedModelLesion) {
       const component = measuredLesionVisible ? lesionComponentAtWorld(verifiedMeasurement, value.worldMm) : null
       if (component) return markMeasuredLesion(component)
@@ -454,7 +486,7 @@ export default function ReviewWorkspace({
   }
 
   function selectFrom2d(value) {
-    if (measurementInspection || show3dCalipers) return
+    if (pancreasInspection || measurementInspection || show3dCalipers) return
     if (!value) return exitInspection()
     setPendingLesionPick(null)
     setLesionSelection(null)
@@ -476,6 +508,7 @@ export default function ReviewWorkspace({
   function focusStructure(anatomy) {
     const source = visibleSources.includes('pred') ? 'pred' : visibleSources.includes('gt') ? 'gt' : availableSources[0]
     if (!source) return
+    setInspectedPancreasMeasurement(null)
     if (!show3dCalipers && anatomy !== 'lesion') {
       setPendingLesionPick(null)
       setLesionSelection(null)
@@ -569,9 +602,10 @@ export default function ReviewWorkspace({
     onSelectObject: selectFrom2d,
     activePlane: state.activePlane,
     navigationCommand: navigationCommand?.target !== '3d'
-      && (navigationCommand?.type !== 'measurement-point' || measurementInspection) ? navigationCommand : null,
-    measurementCalipers: !state.showFull && predictionShown && !comparing && state.layerVisibility.lesion
-      ? measurementInspection?.component.calipers : null,
+      && (navigationCommand?.type !== 'measurement-point' || pancreasInspection || measurementInspection) ? navigationCommand : null,
+    measurementAnatomy: pancreasInspection ? 'pancreas' : 'lesion',
+    measurementCalipers: state.showFull ? null : pancreasInspection ? pancreasDimensions.calipers
+      : measuredLesionVisible ? measurementInspection?.component.calipers : null,
     clip: {
       enabled: state.clipEnabled,
       progress: state.clipProgress,
@@ -592,6 +626,7 @@ export default function ReviewWorkspace({
     onSelectObject: selectFrom3d,
     selectedLesionWorldMm: measuredLesionVisible
       ? (currentLesionSelection?.component?.focusWorldMm ?? null) : null,
+    measurementAnatomy: 'lesion',
     measurementCalipers: show3dCalipers ? selectedCalipers : null,
     navigationCommand: navigationCommand?.target === '2d' || navigationCommand?.type === 'measurement-point' ? null : navigationCommand,
     onZoomChange: scale => setThreeDZoom(Number.isFinite(scale) ? Math.round(scale * 100) : null),
@@ -883,7 +918,13 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-        {hasPrediction && (is3dLike || lesionInReview) && <LesionReviewBar
+        {pancreasInReview && <LesionReviewBar anatomy="pancreas"
+          component={pancreasDimensions} volumeMl={verifiedMeasurement.pancreasMl}
+          status={pancreasInspection && !is3dLike ? 'Cross shown on the measured slice only.' : null}
+          actions={pancreasDimensions.calipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--primary"
+            onClick={inspectPancreas}>{!is3dLike && pancreasInspection ? 'Go to measured slice' : 'Inspect CT slice'}</button>}
+          onExit={exitInspection} />}
+        {!pancreasInReview && hasPrediction && (is3dLike || lesionInReview) && <LesionReviewBar
           component={selectedComponent} number={selectedLesionNumber}
           status={lesionReviewMessage}
           actions={selectedComponent ? <>
@@ -943,7 +984,7 @@ export default function ReviewWorkspace({
             </div>
           )}
 
-          {state.selectedObject && !lesionInReview && (
+          {state.selectedObject && !lesionInReview && !pancreasInReview && (
             <StructurePopover
               object={state.selectedObject}
               anchor={popAnchor}
@@ -1234,6 +1275,9 @@ export default function ReviewWorkspace({
             isCurated={isCurated}
             finding={finding}
             measurementState={measurementState}
+            selectedPancreas={selectedPancreas}
+            onSelectPancreas={caseData.files?.mesh?.pancreas_pred ? selectPancreasIn3d : null}
+            onInspectPancreas={inspectPancreas}
             selectedLesionId={currentLesionSelection?.component?.id}
             onSelectLesion={caseData.files?.mesh?.lesion_pred ? selectLesionIn3d : null}
             onInspectLesion={inspectLesion}

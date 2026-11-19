@@ -687,6 +687,7 @@ export default function NiivueViewer({
   selectedObject = null,
   selectedLesionWorldMm = null,
   measurementCalipers = null,
+  measurementAnatomy = 'lesion',
   onSelectObject = null,
   activePlane = 'multiplanar',
   interactionMode = 'navigate',
@@ -1832,6 +1833,9 @@ export default function NiivueViewer({
     publishNavigation(nv)
   }, [resetToken, sceneVersion, state.status, mode, sceneKey, clip?.enabled, framingLocked])
 
+  const isPancreasMeasurement = mode === '2d' && measurementAnatomy === 'pancreas'
+  const measurementLayerVisible = isPancreasMeasurement ? showPancreas : showLesion
+
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
       <canvas ref={canvasRef} aria-label={label} style={{
@@ -1839,8 +1843,8 @@ export default function NiivueViewer({
         cursor: interactionMode === 'box-zoom' && !(mode === '2d' && framingLocked) ? 'crosshair' : undefined,
       }} />
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
-        ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && showLesion && !differenceMode && renderedSources.includes('pred')}
-        mode={mode} calipers={measurementCalipers} marker={selectedLesionWorldMm} />
+        ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')}
+        mode={mode} anatomy={measurementAnatomy} calipers={measurementCalipers} marker={selectedLesionWorldMm} />
       {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (
         <div aria-hidden="true" className="niivue-zoom-box" style={{ ...zoomBox, position: 'absolute',
           border: '1px solid #f5ca82', background: '#f5ca8224', pointerEvents: 'none' }} />

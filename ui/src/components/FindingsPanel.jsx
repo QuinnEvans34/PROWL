@@ -2,6 +2,7 @@ import { ArrowUpRight, Check, Database, Download, Info, MessageSquareText, Messa
 import { REVIEW_COLORS } from '../lib/viewerLayers.js'
 import { structureQuestions } from '../lib/structureQuestions.js'
 import LesionDimensions from './LesionDimensions.jsx'
+import PancreasDimensions from './PancreasDimensions.jsx'
 
 function fmt(value, digits = 2) {
   return Number.isFinite(value) ? value.toFixed(digits) : null
@@ -34,6 +35,9 @@ export default function FindingsPanel({
   onStartSummary,
   modelLabel,
   measurementState,
+  selectedPancreas,
+  onSelectPancreas,
+  onInspectPancreas,
   selectedLesionId,
   onSelectLesion,
   onInspectLesion,
@@ -86,6 +90,8 @@ export default function FindingsPanel({
 
       <LesionDimensions measurement={measurement} selectedId={selectedLesionId}
         onSelect={onSelectLesion} onInspect={onInspectLesion} selectionNotice={lesionSelectionNotice} />
+      {(onSelectPancreas || onInspectPancreas) && <PancreasDimensions measurementState={measurementState}
+        selected={selectedPancreas} onSelect={onSelectPancreas} onInspect={onInspectPancreas} />}
 
       <ul className="pw-structures" aria-label="Structures in this prediction">
         <li className="pw-structure">

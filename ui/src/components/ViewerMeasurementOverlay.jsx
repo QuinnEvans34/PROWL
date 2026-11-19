@@ -41,9 +41,9 @@ function Arm({ line, index, bounds }) {
  * camera from controls, which would lag behind interaction.
  */
 export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sceneKey, ready, mode,
-  calipers, marker }) {
+  anatomy = 'lesion', calipers, marker }) {
   const clip = useId()
-  const draw3dCross = mode === '3d' && Boolean(calipers)
+  const draw3dCross = mode === '3d' && anatomy === 'lesion' && Boolean(calipers)
   const input = mode === '2d' || draw3dCross ? calipers : marker
   const [frame, setFrame] = useState(null)
   useLayoutEffect(() => {
@@ -79,7 +79,8 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
     <circle cx={projection.x} cy={projection.y} r="2" fill="#ffdfb5" />
   </svg>
 
-  const label = draw3dCross ? '3D lesion calipers on the measured CT slice' : 'Lesion calipers'
+  const label = draw3dCross ? '3D lesion calipers on the measured CT slice'
+    : anatomy === 'pancreas' ? 'Pancreas calipers' : 'Lesion calipers'
   const edgeOn = draw3dCross && projection.lines.some(({ points: [[x1, y1], [x2, y2]] }) =>
     Math.hypot(x2 - x1, y2 - y1) < 2)
   return <svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>

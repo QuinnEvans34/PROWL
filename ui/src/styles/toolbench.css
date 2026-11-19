@@ -1,13 +1,14 @@
 /* Neutral charcoal toolbench. Imaging canvases and scientific layer hues retain
    their independent rendering colors; resizing changes presentation only. */
-.pw-lesion-dimensions { border: 1px solid var(--pw-border); border-radius: 8px; padding: 12px; margin-block: 8px 14px; }
-.pw-lesion-dimensions h3 { margin: 0 0 10px; font-size: 14px; }
+.pw-lesion-dimensions, .pw-pancreas-dimensions { border: 1px solid var(--pw-border); border-radius: 8px; padding: 12px; margin-block: 8px 14px; }
+.pw-lesion-dimensions h3, .pw-pancreas-dimensions h3 { margin: 0 0 10px; font-size: 14px; }
+.pw-pancreas-dimensions[data-selected] { border-inline-start: 2px solid var(--pw-pancreas, #26c5a6); }
 .pw-lesion-dimensions ol { padding: 0; margin: 0; list-style: none; }
 .pw-lesion-dimensions__item + .pw-lesion-dimensions__item { border-top: 1px solid var(--pw-border); padding-top: 10px; margin-top: 10px; }
-.pw-lesion-dimensions__item dl { display: grid; gap: 5px; margin: 8px 0; }
-.pw-lesion-dimensions__item dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; }
-.pw-lesion-dimensions__item dt, .pw-lesion-dimensions__item small { color: var(--pw-text-muted); font-size: 12px; }
-.pw-lesion-dimensions__item dd { margin: 0; font-size: 13px; font-variant-numeric: tabular-nums; }
+.pw-lesion-dimensions__item dl, .pw-pancreas-dimensions dl { display: grid; gap: 5px; margin: 8px 0; }
+.pw-lesion-dimensions__item dl > div, .pw-pancreas-dimensions dl > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; }
+.pw-lesion-dimensions__item dt, .pw-lesion-dimensions__item small, .pw-pancreas-dimensions dt, .pw-pancreas-dimensions small { color: var(--pw-text-muted); font-size: 12px; }
+.pw-lesion-dimensions__item dd, .pw-pancreas-dimensions dd { margin: 0; font-size: 13px; font-variant-numeric: tabular-nums; }
 .pw-lesion-dimensions__item[data-selected] { border-inline-start: 2px solid var(--pw-lesion, #fca283); padding-inline-start: 9px; }
 .pw-lesion-dimensions__selected { color: var(--pw-text-muted); font-size: 11px; margin-inline-start: 6px; }
 .pw-lesion-dimensions__actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
