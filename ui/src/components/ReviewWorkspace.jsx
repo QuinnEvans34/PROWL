@@ -64,7 +64,6 @@ const CAMERA_SHORTCUTS = {
   ...Object.fromEntries(CAMERA_VIEWS.map(([, azimuth, elevation], index) => [String(index + 1), [azimuth, elevation]])),
   0: [120, 15],
 }
-const CALIPER_CAMERAS = { axial: [0, 90], coronal: ANTERIOR_CAMERA, sagittal: [90, 0] }
 
 // Viewer controls, written for both mouse and trackpad users.
 const CONTROL_HELP = {
@@ -929,14 +928,9 @@ export default function ReviewWorkspace({
           status={lesionReviewMessage}
           actions={selectedComponent ? <>
             {is3dLike && selectedCalipers?.plane && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
-              title={show3dCalipers ? 'Hide the pinned cross' : 'Keep the cross visible while browsing'}
+              title={show3dCalipers ? 'Hide the pinned cross' : 'Show the measured dimensions as a camera-facing cross'}
               aria-pressed={show3dCalipers} onClick={() => setLesionSelection(previous => previous === currentLesionSelection
                 ? { ...previous, showCalipers3d: !show3dCalipers } : previous)}>{show3dCalipers ? 'Hide calipers' : 'Show calipers'}</button>}
-            {is3dLike && show3dCalipers && <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost"
-              title="Rotate the 3D view to see both arms of the cross" onClick={() => {
-                const [azimuth, elevation] = CALIPER_CAMERAS[selectedCalipers.plane]
-                issueViewerCommand({ type: 'camera', azimuth, elevation })
-              }}>Face calipers</button>}
             {selectedComponent.boundsWorldMm && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary"
               disabled={!is3dLike && framingLocked}
               title={is3dLike ? 'Frame the selected lesion in 3D' : 'Frame a CT slice through the selected lesion'}

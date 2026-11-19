@@ -38,7 +38,7 @@ function viewer() {
 const round = lines => lines.map(line => line.points.map(point => point.map(Math.round)))
 
 describe('3D calipers', () => {
-  it('projects the exact world endpoints into the 3D render tile at high DPI', () => {
+  it('projects the measured anchor and magnification into the 3D render tile at high DPI', () => {
     const nv = viewer()
     const result = project3dCalipers(nv, calipers)
     expect(nv.calculateMvpMatrix).toHaveBeenCalledExactlyOnceWith(null, deviceTile, 0, 0)
@@ -47,31 +47,44 @@ describe('3D calipers', () => {
     expect(projectLesionMarker(nv, anchorWorldMm)).toEqual({ x: 120, y: 85 })
   })
 
-  it('foreshortens with orbit and follows pan and zoom without changing physical lengths', () => {
+  it('keeps both arms facing the camera at an edge-on angle and follows pan and zoom', () => {
     const nv = viewer()
     const camera = nv.scene
-    camera.renderAzimuth = 60
+    camera.renderAzimuth = 90
     camera.zoom = 1.2
     camera.panX = 0.1
     const result = project3dCalipers(nv, calipers)
-    expect(round(result.lines)).toEqual([[[94, 85], [166, 85]], [[130, 121], [130, 49]]])
+    expect(round(result.lines)).toEqual([[[58, 85], [202, 85]], [[130, 121], [130, 49]]])
     expect(result.lines.map(line => line.lengthMm)).toEqual([6, 4])
   })
 
-  it('retains real endpoints for viewport clipping and hides a completely offscreen cross', () => {
+  it('preserves the unequal distances from the measured crossing', () => {
+    const nv = viewer()
+    const axes = [
+      { lengthMm: 6, worldEndpointsMm: [[9, 20, 30], [15, 20, 30]] },
+      { lengthMm: 4, worldEndpointsMm: [[10, 17, 30], [10, 21, 30]] },
+    ]
+    const result = project3dCalipers(nv, { ...calipers, axes })
+    expect(round(result.lines)).toEqual([[[100, 85], [220, 85]], [[120, 130], [120, 70]]])
+  })
+
+  it('retains scaled endpoints for viewport clipping and hides a completely offscreen cross', () => {
     const nv = viewer()
     nv.scene.zoom = 2
     const result = project3dCalipers(nv, calipers)
-    expect(round(result.lines)[0]).toEqual([[0, 85], [240, 85]])
+    expect(result.lines[0].points).toEqual([
+      [expect.closeTo(0), expect.closeTo(85)], [expect.closeTo(240), expect.closeTo(85)],
+    ])
     nv.scene.panX = 3
     expect(project3dCalipers(nv, calipers)).toBeNull()
   })
 
-  it('rejects unsupported planes, noncoplanar endpoints and inconsistent physical lengths', () => {
+  it('rejects unsupported planes, inconsistent lengths, and endpoints that do not cross at the anchor', () => {
     const nv = viewer()
     expect(project3dCalipers(nv, { ...calipers, plane: null })).toBeNull()
     expect(project3dCalipers(nv, { ...calipers, plane: 'coronal' })).toBeNull()
     expect(project3dCalipers(nv, { ...calipers, axes: [{ ...calipers.axes[0], lengthMm: 5 }, calipers.axes[1]] })).toBeNull()
+    expect(project3dCalipers(nv, { ...calipers, anchorWorldMm: [11, 20, 30] })).toBeNull()
     expect(project3dCalipers(nv, { ...calipers, axes: [{ lengthMm: 6, worldEndpointsMm: [[7, 20, NaN], [13, 20, 30]] }, calipers.axes[1]] })).toBeNull()
   })
 

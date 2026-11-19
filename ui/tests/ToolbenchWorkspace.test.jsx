@@ -104,8 +104,6 @@ describe('real workspace layout with synthetic imaging only', () => {
     await pickEmpty()
     expect(rail().getByText('Predicted lesion 2')).toBeTruthy()
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
-    await user.click(rail().getByRole('button', { name: 'Face calipers' }))
-    expect(viewer3d().navigationCommand).toMatchObject({ type: 'camera', azimuth: 180, elevation: 0 })
     await user.click(rail().getByRole('button', { name: 'Zoom to lesion' }))
     expect(viewer3d().navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '3d', boundsWorldMm: second.boundsWorldMm })
     await user.click(hide())

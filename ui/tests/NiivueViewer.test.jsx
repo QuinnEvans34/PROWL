@@ -701,16 +701,22 @@ it('binds a 3D surface pick to a lesion voxel along the ray and projects its mar
     measurementCalipers={measurementCalipers} {...changes} />
   rerender(caliperView())
   expect(screen.queryByRole('img', { name: 'Selected predicted lesion marker' })).toBeNull()
-  const crossName = { name: '3D lesion calipers on the measured CT slice: 0.10 cm by 0.10 cm' }
+  const crossName = { name: '3D lesion calipers from the measured CT slice: 0.10 cm by 0.10 cm' }
   const arms = () => Array.from(screen.getByRole('img', crossName).querySelectorAll('[data-caliper-arm]'),
     arm => arm.getAttribute('d'))
   const beforeOrbit = arms()
   expect(beforeOrbit).toHaveLength(2)
   act(() => {
-    nv.calculateMvpMatrix.mockReturnValue([[0, .7, .7, 0, -1, 0, 0, 0, 0, -.7, .7, 0, 0, 0, 0, 1]])
+    // The native axial cross would be edge-on from the front.
+    nv.calculateMvpMatrix.mockReturnValue([[1, 0, 0, 0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, 0, 1]])
     nv.drawScene()
   })
-  expect(arms()).not.toEqual(beforeOrbit)
+  const [[x1, y1, x2, y2], [x3, y3, x4, y4]] = arms().map(path => path.split(' ').slice(0, 6)
+    .filter(value => value !== 'M' && value !== 'L').map(Number))
+  expect(y1).toBe(y2)
+  expect(x3).toBe(x4)
+  expect(Math.abs(x2 - x1)).toBe(50)
+  expect(Math.abs(y4 - y3)).toBe(50)
   rerender(caliperView({ showLesion: false }))
   expect(screen.queryByRole('img', crossName)).toBeNull()
   rerender(caliperView({ measurementCalipers: null }))

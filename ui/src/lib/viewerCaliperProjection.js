@@ -97,33 +97,48 @@ function intersectsTile([a, b]) {
   return entry <= exit
 }
 
-// The render camera uses the same RAS millimeters as the recorded mask
-// endpoints. Project those endpoints, not a ruler placed at a screen angle.
+// The verified endpoints describe distances along the measured CT slice.
+// In 3D, show those distances in the orthographic camera plane at the
+// measured anchor so neither arm foreshortens as the camera orbits.
 export function project3dCalipers(nv, calipers) {
   const { plane, anchorWorldMm, axes } = calipers || {}
   if (!Object.hasOwn(PLANES, plane) || !validPoint(anchorWorldMm) || !Array.isArray(axes) || axes.length !== 2) return null
   const depth = PLANES[plane].axes[2]
   const camera = renderCamera(nv)
   if (!camera) return null
+  const { matrix, bounds } = camera
+  const anchor = worldToNdc(matrix, anchorWorldMm)
+  if (!anchor || Math.abs(anchor[2]) > 1) return null
+  // The 3D render uses an orthographic MVP. The row norms give the camera's
+  // screen-axis magnification in normalized device coordinates per mm.
+  if (matrix[3] !== 0 || matrix[7] !== 0 || matrix[11] !== 0) return null
+  const ndcPerMm = [0, 1].map(index => Math.hypot(matrix[index], matrix[index + 4], matrix[index + 8]) / matrix[15])
+  if (ndcPerMm.some(value => !Number.isFinite(value) || value <= 0)) return null
+
   let visible = false
   const lines = []
-  for (const axis of axes) {
+  for (const [index, axis] of axes.entries()) {
     const { lengthMm, worldEndpointsMm: ends } = axis || {}
     if (!Number.isFinite(lengthMm) || lengthMm <= 0 || !Array.isArray(ends) || ends.length !== 2 || !ends.every(validPoint)) return null
     const tolerance = Math.max(1e-6, lengthMm * 1e-5)
     if (ends.some(point => Math.abs(point[depth] - anchorWorldMm[depth]) > tolerance)) return null
     const distanceMm = Math.hypot(...[0, 1, 2].map(i => ends[1][i] - ends[0][i]))
     if (Math.abs(distanceMm - lengthMm) > tolerance) return null
-    const clip = ends.map(point => worldToNdc(camera.matrix, point))
-    if (clip.some(point => !point || Math.abs(point[2]) > 1)) return null
-    visible ||= intersectsTile(clip)
-    // Preserve the real endpoints outside the tile; SVG clips the lines and
-    // caps at the viewport edge rather than showing a fake shorter caliper.
-    const points = clip.map(point => ndcToPixels(camera.bounds, point))
+    // Preserve the crossing even when the selected voxel is off-center.
+    const [before, after] = ends.map(point => Math.hypot(...[0, 1, 2].map(i => point[i] - anchorWorldMm[i])))
+    if (Math.abs(before + after - lengthMm) > tolerance) return null
+    const endpoints = [-before, after].map(offset => {
+      const endpoint = anchor.slice()
+      endpoint[index] += offset * ndcPerMm[index]
+      return endpoint
+    })
+    const points = endpoints.map(point => ndcToPixels(bounds, point))
     if (points.some(point => !point.every(Number.isFinite))) return null
+    // Keep endpoints outside the viewport so the SVG clips the arms naturally.
+    visible ||= intersectsTile(endpoints)
     lines.push({ points, lengthMm })
   }
-  return visible ? { lines, bounds: camera.bounds } : null
+  return visible ? { lines, bounds } : null
 }
 
 export function projectLesionMarker(nv, world) {

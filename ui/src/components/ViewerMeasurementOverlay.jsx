@@ -5,7 +5,7 @@ function displayCm(lengthMm) {
   return lengthMm < 0.1 ? '<0.01 cm' : `${(lengthMm / 10).toFixed(2)} cm`
 }
 
-function Arm({ line, index, bounds }) {
+function Arm({ line, index, bounds, cameraFacing }) {
   const [[x1, y1], [x2, y2]] = line.points
   const dx = x2 - x1
   const dy = y2 - y1
@@ -23,12 +23,22 @@ function Arm({ line, index, bounds }) {
   const bottom = y1 < y2 ? [x2, y2] : [x1, y1]
   const putRight = right[0] + 70 < bounds.x + bounds.width
   const putAbove = top[1] - 22 >= bounds.y
-  const x = horizontal ? (putRight ? right[0] + 8 : left[0] - 8) : (putAbove ? top[0] : bottom[0])
-  const y = horizontal ? (putRight ? right[1] : left[1]) + 4 : (putAbove ? top[1] - 7 : bottom[1] + 16)
+  let x = horizontal ? (putRight ? right[0] + 8 : left[0] - 8) : (putAbove ? top[0] : bottom[0])
+  let y = horizontal ? (putRight ? right[1] : left[1]) + 4 : (putAbove ? top[1] - 7 : bottom[1] + 16)
+  let textAnchor = horizontal ? (putRight ? 'start' : 'end') : 'middle'
+  if (cameraFacing) {
+    // Keep the values readable when the measured arms extend past the viewport.
+    const insetX = Math.min(36, bounds.width / 2)
+    const insetY = Math.min(14, bounds.height / 2)
+    if (horizontal) x += putRight ? 26 : -26
+    x = Math.max(bounds.x + insetX, Math.min(bounds.x + bounds.width - insetX, x))
+    y = Math.max(bounds.y + insetY, Math.min(bounds.y + bounds.height - insetY, y))
+    textAnchor = 'middle'
+  }
   return <g>
     <path d={path} fill="none" stroke="#191208" strokeWidth="4" />
     <path d={path} fill="none" stroke="#ffcf8e" strokeWidth="1.7" data-caliper-arm={index} />
-    <text x={x} y={y} textAnchor={horizontal ? (putRight ? 'start' : 'end') : 'middle'} fill="#ffdfb5" stroke="#191208"
+    <text x={x} y={y} textAnchor={textAnchor} fill="#ffdfb5" stroke="#191208"
       paintOrder="stroke" strokeWidth="4" strokeLinejoin="round" fontSize="12" fontWeight="600">
       {displayCm(line.lengthMm)}
     </text>
@@ -79,16 +89,13 @@ export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sce
     <circle cx={projection.x} cy={projection.y} r="2" fill="#ffdfb5" />
   </svg>
 
-  const label = draw3dCross ? '3D lesion calipers on the measured CT slice'
+  const label = draw3dCross ? '3D lesion calipers from the measured CT slice'
     : anatomy === 'pancreas' ? 'Pancreas calipers' : 'Lesion calipers'
-  const edgeOn = draw3dCross && projection.lines.some(({ points: [[x1, y1], [x2, y2]] }) =>
-    Math.hypot(x2 - x1, y2 - y1) < 2)
   return <svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
     <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
     <g clipPath={`url(#${clip})`}>
-      {projection.lines.map((line, index) => <Arm key={index} line={line} index={index} bounds={projection.bounds} />)}
+      {projection.lines.map((line, index) =>
+        <Arm key={index} line={line} index={index} bounds={projection.bounds} cameraFacing={draw3dCross} />)}
     </g>
-    {edgeOn && <text x={projection.bounds.x + 14} y={projection.bounds.y + 46} fontSize="12"
-      fill="#ffdfb5" stroke="#191208" strokeWidth="4" paintOrder="stroke">Rotate to see both calipers</text>}
   </svg>
 }
