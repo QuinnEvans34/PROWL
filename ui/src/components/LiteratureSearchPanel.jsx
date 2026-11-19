@@ -33,7 +33,38 @@ const generationFailures = {
   validation_failed: 'The draft did not pass citation or answer-format checks. The retrieved passages are available below.',
 }
 
+export function validateConversationContext(result, conversation) {
+  if (result?.context === undefined) return result
+  const context = result.context
+  const question = value => typeof value === 'string' && value.trim().length > 0 && value.length <= 500
+  if (!context || typeof context !== 'object' || Array.isArray(context)
+    || Object.keys(context).sort().join(',') !== 'policy,previous_questions,resolved_question,topic'
+    || context.policy !== 'pancreatic-conversation-v1' || context.topic !== 'pancreatic research'
+    || !question(context.resolved_question) || !Array.isArray(context.previous_questions)
+    || context.previous_questions.length > 3 || !context.previous_questions.every(question)
+    || (conversation !== undefined && JSON.stringify(context.previous_questions) !== JSON.stringify(conversation.map(turn => turn.question)))) {
+    throw new Error('Invalid question context')
+  }
+  return result
+}
+
+// Questions provide conversational meaning; earlier answers never become evidence.
+export function literatureConversation(history) {
+  const eligible = entry => entry.response?.state === 'evidence_unassessed'
+    && entry.response.generation === 'completed' && entry.response.answer?.status === 'summarized'
+    && entry.response.evidence?.length > 0 && !entry.sourceMode
+    && entry.response.context?.policy === 'pancreatic-conversation-v1'
+  let start = history.length
+  while (start > 0 && eligible(history[start - 1])) start--
+  return history.slice(Math.max(start, history.length - 3)).map(entry => ({ question: entry.question }))
+}
+
+function literatureBody(request, conversation) {
+  return JSON.stringify(conversation?.length ? { request, conversation } : request)
+}
+
 export function validateSearch(result, request, limit = 5) {
+  validateConversationContext(result)
   if (result?.schema_version !== 'prowl-development-search-response-v1'
     || result.request_id !== request.request_id || result.question !== request.question
     || result.collection !== config.collection || result.generation !== 'not_called' || result.answer !== null
@@ -86,11 +117,11 @@ export function validateSourceSearch(result, request) {
   return result
 }
 
-export async function findLiteratureSources(request, signal) {
+export async function findLiteratureSources(request, signal, conversation) {
   const response = await fetch('/literature-search/query', { method: 'POST',
-    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request), signal })
+    headers: { 'Content-Type': 'application/json' }, body: literatureBody(request, conversation), signal })
   if (!response.ok) throw new Error('Search unavailable')
-  return validateSourceSearch(await response.json(), request)
+  return validateConversationContext(validateSourceSearch(await response.json(), request), conversation || [])
 }
 
 export async function previewQuestion(request, signal) {
@@ -106,6 +137,7 @@ export async function previewQuestion(request, signal) {
 }
 
 export function validateAnswer(result, request) {
+  validateConversationContext(result)
   if (result?.schema_version === 'prowl-single-summary-response-v1') return validateSingleSummary(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-general-extract-response-v1') return validateGeneralExtract(result, request, validateSourceSearch)
   if (result?.schema_version === 'prowl-evidence-answer-response-v1') return validateEvidenceAnswer(result, request, validateSearch)
@@ -139,11 +171,11 @@ export function validateAnswer(result, request) {
   return result
 }
 
-export async function searchLiterature(request, signal) {
+export async function searchLiterature(request, signal, conversation) {
   const response = await fetch('/literature-search/answer', { method: 'POST',
-    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(request), signal })
+    headers: { 'Content-Type': 'application/json' }, body: literatureBody(request, conversation), signal })
   if (!response.ok) throw new Error('Search unavailable')
-  return validateAnswer(await response.json(), request)
+  return validateConversationContext(validateAnswer(await response.json(), request), conversation || [])
 }
 
 export const SUGGESTED_QUESTIONS = [
@@ -175,13 +207,20 @@ export default function LiteratureSearchPanel({
 }) {
   const panel = variant === 'panel'
   const measurementKey = measurementContext?.key ?? null
+  const [measurementSubject, setMeasurementSubject] = useState('pancreas')
+  const scanTarget = text => scanQuestion(text, { subject: measurementSubject })
   const [history, setHistory] = useState([])
-  const remember = entry => setHistory(items => [...items, entry])
+  const [conversationTurns, setConversationTurns] = useState([])
+  const remember = entry => {
+    setHistory(items => [...items, entry])
+    setConversationTurns(items => literatureConversation([entry]).length ? [...items, entry].slice(-3) : [])
+  }
+  const clearHistory = () => { setHistory([]); setConversationTurns([]); setMeasurementSubject('pancreas') }
   const [scanResult, setScanResult] = useState(null)
   const measurementRef = useRef(measurementKey)
   useEffect(() => {
     if (measurementRef.current === measurementKey) return
-    setHistory([])
+    clearHistory()
     measurementRef.current = measurementKey
     if (active.current) cancelForContextChange('the saved prediction changed')
     setScanResult(null)
@@ -218,7 +257,7 @@ export default function LiteratureSearchPanel({
   useEffect(() => { onPendingChange?.(phase === 'loading') }, [phase, onPendingChange])
   useEffect(() => {
     if (contextRef.current === contextKey) return
-    setHistory([])
+    clearHistory()
     contextRef.current = contextKey
     setPreview(null); setHelpError(false)
     if (active.current) {
@@ -252,6 +291,7 @@ export default function LiteratureSearchPanel({
     active.current = null // Invalidate before abort: old callbacks cannot own the UI.
     previous?.abort()
     change(question || submittedQuestion)
+    setConversationTurns([])
     setResult(null); setScanResult(null)
     setContextNotice('Cancelled. Your draft is kept; you can ask a new question. The local service may still be finishing the previous request, but its response will not appear here.')
   }
@@ -279,7 +319,7 @@ export default function LiteratureSearchPanel({
     event.preventDefault()
     if (!question.trim() || active.current) return
     if (!sourcesOnly && (readiness?.gpu_busy || readiness?.answer_blocker)
-      && !(measurementContext && scanQuestion(question))) return
+      && !(measurementContext && scanTarget(question))) return
     const control = new AbortController(); active.current = control
     const request = { schema_version: 'prowl-expert-request-v1', request_id: crypto.randomUUID(), question: question.trim() }
     const timeout = setTimeout(() => control.abort(), 150000)
@@ -289,10 +329,11 @@ export default function LiteratureSearchPanel({
     setScanResult(null); setSourceMode(sourcesOnly); setElapsed(0); setPhase('loading'); setResult(null); setCapture(null); setCaptureNotice(''); setContextNotice('')
     setAskedFor({ key: contextKey, label: contextLabel })
     try {
-      const target = measurementContext ? scanQuestion(question) : null
+      const target = measurementContext ? scanTarget(question) : null
       if (target) {
         let value
         if (sourcesOnly) value = { message: 'Use Ask question to calculate the saved outline volume. Find sources searches general literature.' }
+        else if (target === 'unsupported' && /^how (?:big|large) is it[?.!]*$/i.test(request.question)) value = { message: 'Do you mean the loaded pancreas outline or the total lesion outline? Please name the structure.' }
         else if (target === 'unsupported') value = { message: 'I can calculate the loaded pancreas or total suspected-lesion mask volume. I can also compare the pancreas outline volume with a published study mean. Head measurements, individual lesion dimensions, clinical normal-range classification and disease interpretations of this scan are not connected yet.' }
         else {
           try {
@@ -303,25 +344,34 @@ export default function LiteratureSearchPanel({
         }
         if (active.current === control && !control.signal.aborted) {
           setScanResult({ ...value, key: measurementKey, requestId: request.request_id }); setPhase('done')
+          if (value.measurement) setMeasurementSubject(target === 'lesion' ? 'lesion' : 'pancreas')
           remember({ id: request.request_id, question: request.question, label: contextLabel || 'Current study',
             text: value.measurement ? measurementText(value.measurement, value.target) : value.message,
             comparison: value.target === 'pancreas_comparison', measured: Boolean(value.measurement) })
-        } else if (active.current === control) setPhase('error')
+        } else if (active.current === control) { setConversationTurns([]); setPhase('error') }
         return
       }
-      const response = sourcesOnly
-        ? validateSourceSearch(await findSources(request, control.signal), request)
-        : validateAnswer(await search(request, control.signal), request)
+      const conversation = literatureConversation(conversationTurns)
+      const send = sourcesOnly ? findSources : search
+      const returned = conversation.length
+        ? await send(request, control.signal, conversation)
+        : await send(request, control.signal)
+      const response = sourcesOnly ? validateSourceSearch(returned, request) : validateAnswer(returned, request)
+      validateConversationContext(response, conversation)
       if (active.current === control && !control.signal.aborted) {
         setResult(response); setPhase('done')
+        const interpreted = response.context?.resolved_question || request.question
+        const pancreasSubject = /\bpancrea\w*\b/i.test(interpreted)
+        const lesionSubject = /\b(lesions?|tumou?rs?|masses?)\b/i.test(interpreted)
+        setMeasurementSubject(pancreasSubject && !lesionSubject ? 'pancreas' : lesionSubject && !pancreasSubject ? 'lesion' : null)
         remember({ id: request.request_id, question: request.question, label: 'General literature', response, sourceMode: sourcesOnly })
         if (!sourcesOnly) {
           try { setCapture(serializeLiteratureCapture(request, response)) }
           catch (error) { setCaptureNotice(error.message) }
         }
       }
-      else if (active.current === control) setPhase('error')
-    } catch { if (active.current === control) { setPhase('error'); setQuestion(draft => draft || request.question) } }
+      else if (active.current === control) { setConversationTurns([]); setPhase('error') }
+    } catch { if (active.current === control) { setConversationTurns([]); setPhase('error'); setQuestion(draft => draft || request.question) } }
     finally { clearTimeout(timeout); if (active.current === control) active.current = null }
   }
   useEffect(() => {
@@ -362,8 +412,8 @@ export default function LiteratureSearchPanel({
     <div className="literature-search__thread" ref={thread} role="region" aria-label="Conversation">
       {history.some(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId) && <section className="literature-search__history" aria-label="Recent responses">
         {history.filter(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId).map(entry => <RecentResponse key={entry.id} entry={entry} onEdit={editQuestion} />)}
-        <button type="button" onClick={() => setHistory([])}>Clear recent responses</button>
       </section>}
+      {history.length > 0 && <button type="button" disabled={phase === 'loading'} onClick={clearHistory}>Clear recent responses</button>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
       {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}<button type="button" className="literature-search__edit" onClick={() => editQuestion(submittedQuestion)}>Edit question</button></p>}
       {scanResult?.key === measurementKey && scanResult && <article className="literature-search__answer-card" aria-label="Current scan measurement">
@@ -383,15 +433,17 @@ export default function LiteratureSearchPanel({
       </article>}
       {contextNotice && <p className="literature-search__context-notice">{contextNotice}</p>}
       {phase === 'loading' && <div className="literature-search__activity" role="status">
-        <div className="literature-search__activity-head"><span className="literature-search__typing" aria-hidden="true"><i /><i /><i /></span><strong>{helpMode ? 'Working on your wording' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
-        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanQuestion(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Writing a response from the research…'}</p>
-        <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanQuestion(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
+        <div className="literature-search__activity-head"><span className="literature-search__typing" aria-hidden="true"><i /><i /><i /></span><strong>{helpMode ? 'Working on your wording' : measurementContext && scanTarget(submittedQuestion) ? 'Checking the saved outline' : sourceMode ? 'Looking for sources' : 'Working on your question'}</strong><small>{elapsed}s elapsed</small></div>
+        <p>{helpMode ? 'Preparing a search suggestion for you to review…' : measurementContext && scanTarget(submittedQuestion) ? 'Checking the saved image geometry and calculating outline volume…' : sourceMode ? 'Finding source passages and their supporting context…' : 'Writing a response from the research…'}</p>
+        <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanTarget(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
       {phase === 'error' && <p className="literature-search__error" role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
       {result && <article className="literature-search__answer-card" aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
         <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
-        {result.answer_policy === 'single-pass-summary-v1' && result.answer && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
+        <QuestionContext result={result} />
+        {result.answer_policy === 'single-pass-summary-v1' && result.answer?.provenance === 'model_selected_source_fallback' && <p className="literature-search__scope">Source wording · Limited to the cited source context.</p>}
+        {result.answer_policy === 'single-pass-summary-v1' && result.answer && result.answer.provenance !== 'model_selected_source_fallback' && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
         {result.answer ? <details className="literature-search__provenance"><summary>About this response</summary>
         <ResponseExplanation result={result} sourceMode={sourceMode} />
         </details> : <ResponseExplanation result={result} sourceMode={sourceMode} />}
@@ -407,7 +459,7 @@ export default function LiteratureSearchPanel({
           {captureNotice && <p role="status">{captureNotice}</p>}
         </details>}
         {result.state !== 'not_searched' && <details><summary>Search details</summary>
-          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer_policy === 'single-pass-summary-v1' ? 'Single-call summary · Citation links checked; factual support requires review' : result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
+          <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer?.provenance === 'model_selected_source_fallback' ? 'Exact source wording · Read the source context and limitations' : result.answer_policy === 'single-pass-summary-v1' ? 'AI summary with a source-support check · Review important details against the sources' : result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
         </details>}
       </article>}
@@ -429,7 +481,7 @@ export default function LiteratureSearchPanel({
         <div className="literature-search__actions literature-search__send-row">
           <span aria-label="Question length">{question.length}/500</span>
           {phase === 'loading' && <button type="button" onClick={cancelQuestion}>Cancel</button>}
-          <button type="submit" disabled={!question.trim() || phase === 'loading' || ((readiness?.gpu_busy || readiness?.answer_blocker) && !(measurementContext && scanQuestion(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanQuestion(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
+          <button type="submit" disabled={!question.trim() || phase === 'loading' || ((readiness?.gpu_busy || readiness?.answer_blocker) && !(measurementContext && scanTarget(question)))}>{phase === 'loading' ? (helpMode ? 'Understanding question…' : sourceMode ? 'Finding sources…' : measurementContext && scanTarget(submittedQuestion) ? 'Measuring saved outline…' : 'Working…') : phase === 'error' ? 'Try again' : 'Ask question'}</button>
         </div>
       </div>
       <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
@@ -444,8 +496,17 @@ export default function LiteratureSearchPanel({
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>}
     </form>
-    <small>Session history only · Each question is answered independently. Not saved to your review.</small>
+    <small>Follow-up answers use recent literature questions when available · Clear recent responses to start fresh · Session only, not saved to your review.</small>
   </section>
+}
+
+function QuestionContext({ result }) {
+  if (!result.context || result.context.resolved_question === result.question) return null
+  return <details className="literature-search__interpretation">
+    <summary>How I understood your question</summary>
+    <p>{result.context.resolved_question}</p>
+    <small>{result.context.previous_questions.length > 0 ? 'Uses your recent literature questions.' : 'Uses pancreatic research as the topic.'}</small>
+  </details>
 }
 
 export function LiteratureReadingView({ evidence, answer }) {
@@ -498,6 +559,7 @@ function ResponseExplanation({ result, sourceMode }) {
   return <p>{result.message || (result.state !== 'not_searched' && result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] ? volumeReasons[result.record_selection.reason] : result.state === 'not_searched' ? reasons[result.reason] : result.state === 'no_results'
           ? 'No matching passages were returned. Try a broader pancreatic topic.'
           : result.answer?.provenance === 'model_synthesized_passages' ? 'AI summary · Preview · Check the linked sources for details.'
+          : result.answer?.provenance === 'model_selected_source_fallback' ? 'Source-based answer · Wording is copied from the research, with the source title to preserve its context.'
           : result.answer?.provenance === 'model_selected_source_sentences' ? 'Source-based answer · The local AI selected these quotations; wording is copied from the research.'
           : result.answer?.provenance === 'local_model_composition' ? 'Local AI summary · Select a citation to inspect its evidence.'
           : result.answer?.provenance === 'reviewed_source_fallback' ? 'The local AI could not finish a valid composition. This is a reviewed source summary assembled by the application, not model-written text.'
@@ -510,7 +572,9 @@ function RecentResponse({ entry, onEdit }) {
     <div className="literature-search__answer-card literature-search__history-body">
       <small>{entry.label}</small>
       {entry.response ? <>
-        {entry.response.answer_policy === 'single-pass-summary-v1' && entry.response.answer && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
+        <QuestionContext result={entry.response} />
+        {entry.response.answer_policy === 'single-pass-summary-v1' && entry.response.answer?.provenance === 'model_selected_source_fallback' && <p className="literature-search__scope">Source wording · Limited to the cited source context.</p>}
+        {entry.response.answer_policy === 'single-pass-summary-v1' && entry.response.answer && entry.response.answer.provenance !== 'model_selected_source_fallback' && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
         {entry.response.answer ? <LiteratureReadingView evidence={entry.response.evidence} answer={entry.response.answer} /> : <>
           <ResponseExplanation result={entry.response} sourceMode={entry.sourceMode} />
           {entry.response.evidence.length > 0 && <LiteratureReadingView evidence={entry.response.evidence} />}

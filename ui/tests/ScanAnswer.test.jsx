@@ -9,7 +9,7 @@ async function ask(user, q = 'how big is this pancreas?') {
   await user.type(screen.getByLabelText('Literature question'), q)
   await user.click(screen.getByRole('button', { name: 'Ask question' }))
 }
-it.each(['How big is this pancreas?', 'What is the pancreas volume?'])('answers %s locally with provenance', async question => {
+it.each(['How big is this pancreas?', 'What is the pancreas volume?', 'How big is it?', 'How large is it?'])('answers %s locally with provenance', async question => {
   const user = userEvent.setup(); const search = vi.fn(); const measure = vi.fn(async () => measurement)
   render(<LiteratureSearchPanel variant="panel" measurementContext={context} measure={measure} search={search} />)
   await ask(user, question)
@@ -17,6 +17,48 @@ it.each(['How big is this pancreas?', 'What is the pancreas volume?'])('answers 
   expect(screen.getByText(/Calculated locally/)).toBeTruthy()
   expect(screen.getByText('Measurement source and limitations')).toBeTruthy()
   expect(measure).toHaveBeenCalledWith(context, expect.any(AbortSignal))
+  expect(search).not.toHaveBeenCalled()
+})
+it('keeps a bare size follow-up on the previously measured lesion', async () => {
+  const user = userEvent.setup(), search = vi.fn(), measure = vi.fn(async () => measurement)
+  render(<LiteratureSearchPanel variant="panel" measurementContext={context} measure={measure} search={search} />)
+  await ask(user, 'How big is this lesion?')
+  expect(await screen.findByText(/about 3.00 mL/)).toBeTruthy()
+  await ask(user, 'How big is it?')
+  expect(screen.getAllByText(/about 3.00 mL/)).toHaveLength(2)
+  expect(screen.queryByText(/about 72.00 mL/)).toBeNull()
+  expect(search).not.toHaveBeenCalled()
+})
+it.each(['study', 'prediction', 'clear'])('resets the measured referent after a %s change', async kind => {
+  const user = userEvent.setup(), search = vi.fn(), measure = vi.fn(async current => ({ ...measurement, contextKey: current.key }))
+  const props = { variant: 'panel', contextKey: 'one', measurementContext: context, measure, search }
+  const { rerender } = render(<LiteratureSearchPanel {...props} />)
+  await ask(user, 'How big is this lesion?')
+  expect(await screen.findByText(/about 3.00 mL/)).toBeTruthy()
+  if (kind === 'study') rerender(<LiteratureSearchPanel {...props} contextKey="two" />)
+  if (kind === 'prediction') rerender(<LiteratureSearchPanel {...props} measurementContext={{ ...context, key: 'two:saved' }} />)
+  if (kind === 'clear') await user.click(screen.getByRole('button', { name: 'Clear recent responses' }))
+  await ask(user, 'How big is it?')
+  expect(await screen.findByText(/about 72.00 mL/)).toBeTruthy()
+  expect(search).not.toHaveBeenCalled()
+})
+it('keeps saved-mask size questions available while another job owns the GPU', async () => {
+  const user = userEvent.setup(), search = vi.fn(), measure = vi.fn(async () => measurement)
+  vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ drive: true, database: true, search: true,
+    ollama: false, model: false, gpu_busy: true, answer_blocker: 'gpu_busy' }))))
+  render(<LiteratureSearchPanel measurementContext={context} measure={measure} search={search} />)
+  await user.click(screen.getByRole('button', { name: 'Check status' }))
+  await screen.findByText(/Another local job is using the GPU/)
+  await ask(user, 'How big is it?')
+  expect(await screen.findByText(/about 72.00 mL/)).toBeTruthy()
+  expect(search).not.toHaveBeenCalled()
+})
+it('requires a usable saved prediction for a bare size question', async () => {
+  const user = userEvent.setup(), search = vi.fn()
+  render(<LiteratureSearchPanel measurementContext={{ ...context, available: false }} search={search} />)
+  await ask(user, 'How big is it?')
+  expect(await screen.findByText(/Show a saved prediction for this study/)).toBeTruthy()
+  expect(screen.queryByText(/about 72.00 mL/)).toBeNull()
   expect(search).not.toHaveBeenCalled()
 })
 it('keeps the same wording in literature mode when no scan is attached', async () => {

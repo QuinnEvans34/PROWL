@@ -16,14 +16,14 @@ function fixture(r){return {schema_version:'prowl-general-extract-response-v1',r
 function summary(r) {
  const result=fixture(r)
  result.schema_version='prowl-single-summary-response-v1';result.answer_policy=candidate.policy
- result.answer={...candidate,provenance:'model_synthesized_passages',validation:'citation_binding_only',coverage:'supported',status:'summarized',limitation:'',claims:[{text:'It releases enzymes to help digest food.',citations:[{rank:1,quote}]}]}
+ result.answer={...candidate,provenance:'model_synthesized_passages',validation:'citation_binding_and_model_review',coverage:'supported',status:'summarized',limitation:'',claims:[{text:'It releases enzymes to help digest food.',citations:[{rank:1,quote}]}]}
  return result
 }
 it('shows clean summary first and opens cited source separately',async()=>{
  const user=userEvent.setup();render(<LiteratureSearchPanel search={async r=>summary(r)}/> )
  await user.type(screen.getByLabelText('Literature question'),'What does the pancreas do?')
  await user.click(screen.getByRole('button',{name:'Ask question'}))
- expect(await screen.findByText(/AI summary/)).toBeTruthy()
+ expect(await screen.findByText(/AI summary · Preview/)).toBeTruthy()
  expect(screen.getByText('It releases enzymes to help digest food.')).toBeTruthy()
  expect(screen.queryByText(quote)).toBeNull()
  await user.click(screen.getByRole('button',{name:'View source 1'}))
@@ -31,12 +31,13 @@ it('shows clean summary first and opens cited source separately',async()=>{
  await user.click(screen.getByRole('button',{name:'Answer',exact:true}))
  expect(screen.getByText('It releases enzymes to help digest food.')).toBeTruthy()
 })
-it.each(['quote','rank','provenance','coverage'])('rejects invalid summary %s',kind=>{
+it.each(['quote','rank','provenance','coverage','unreviewed'])('rejects invalid summary %s',kind=>{
  const request={request_id:'test',question:'Question'},r=summary(request)
  if(kind==='quote')r.answer.claims[0].citations[0].quote='An entirely invented supporting excerpt.'
  if(kind==='rank')r.answer.claims[0].citations[0].rank=99
  if(kind==='provenance')r.answer.validation='factually_verified'
  if(kind==='coverage')r.answer.coverage='none'
+ if(kind==='unreviewed')r.answer.validation='citation_binding_only'
  expect(()=>validateAnswer(r,request)).toThrow()
 })
 
@@ -87,4 +88,33 @@ it.each(['page','panel'])('keeps preview labeling and citations on earlier answe
  await user.click(within(history).getByRole('button',{name:'View source 1'}))
  expect(within(history).getByRole('link',{name:/Read full source/}).href).toBe('https://pmc.ncbi.nlm.nih.gov/articles/PMC123/')
  expect(screen.getAllByRole('button',{name:'Edit question'})).toHaveLength(2)
+})
+
+function sourceFallback(request) {
+ const result = summary(request)
+ const citation = result.answer.claims[0].citations[0]
+ result.answer = { ...result.answer, provenance: 'model_selected_source_fallback',
+   validation: 'exact_citations_and_source_title', review: 'source_fallback', coverage: 'partial',
+   limitation: 'The source gives a limited example; a broader checked answer is unavailable.',
+   claims: [{ text: `Source wording from “Invented source”: ${citation.quote}`, citations: [citation] }] }
+ return result
+}
+
+it.each(['page','panel'])('labels exact source wording honestly in %s', async variant => {
+ const user = userEvent.setup()
+ render(<LiteratureSearchPanel variant={variant} search={async r => sourceFallback(r)}/>)
+ await user.type(screen.getByLabelText('Literature question'), 'Explain pancreatic function.')
+ await user.click(screen.getByRole('button', {name: 'Ask question', exact: true}))
+ expect(await screen.findByText('Source wording · Limited to the cited source context.')).toBeTruthy()
+ expect(screen.getByText(`Source wording from “Invented source”: ${quote}`)).toBeTruthy()
+ expect(screen.queryByText('Fast AI preview · Check important details against the sources.')).toBeNull()
+})
+
+it.each(['text','title','coverage'])('rejects altered source fallback %s', kind => {
+ const request = {request_id: 'test', question: 'Question'}
+ const result = sourceFallback(request)
+ if (kind === 'text') result.answer.claims[0].text += ' It produces insulin.'
+ if (kind === 'title') result.answer.claims[0].text = result.answer.claims[0].text.replace('Invented source', 'Different source')
+ if (kind === 'coverage') result.answer.coverage = 'supported'
+ expect(() => validateAnswer(result, request)).toThrow()
 })
