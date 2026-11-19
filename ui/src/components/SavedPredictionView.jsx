@@ -6,6 +6,7 @@ import LesionDimensions from './LesionDimensions.jsx'
 import NiivueViewer from './NiivueViewer.jsx'
 import { MeasurementReadout, measurementState } from './PredictionMeasurements.jsx'
 import { loadSavedPrediction } from '../lib/savedPrediction.js'
+import { usePredictionSurfaces } from '../lib/usePredictionSurfaces.js'
 
 export default function SavedPredictionView({ base: initialBase = '/saved-prediction', expected = null, live = false, onDemandHref = null, onReviewDirty, reviewHash = null, onSelectReview }) {
   const [dirty, setDirty] = useState(false)
@@ -27,6 +28,8 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
   const [state, setState] = useState({ status: 'loading' })
   const [showPancreas, setShowPancreas] = useState(true)
   const [showLesion, setShowLesion] = useState(true)
+  const [mode, setMode] = useState('3d')
+  const [pan, setPan] = useState(false)
   const [revision, setRevision] = useState(0)
   const [inspection, setInspection] = useState(null)
   const inspectionId = useRef(0)
@@ -36,6 +39,8 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
     let active = true, loaded
     setState({ status: 'loading' })
     setInspection(null)
+    setMode('3d')
+    setPan(false)
     loadSavedPrediction(base, controller.signal, expected).then(result => {
       if (!active) { result.release(); return }
       loaded = result
@@ -45,6 +50,8 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
   }, [base, revision, expected])
   const caseData = useMemo(() => state.manifest ? { case_id: state.manifest.case_id, files: { ct: 'ct.nii.gz', pred: 'prediction.nii.gz' } } : null, [state.manifest])
   const ready = state.status === 'ready' && state.base === base && state.revision === revision && state.expected === expected
+  const surface = usePredictionSurfaces(ready ? state.urls?.pred : null, state.manifest?.files.pred.bytes, state.manifest?.geometry)
+  const assetUrls = useMemo(() => ({ ...state.urls, mesh: surface.mesh }), [state.urls, surface.mesh])
   const measurements = measurementState(state.measurement, `${base}:${revision}:${state.manifestHash}`)
   // Bind to this loaded result object, so a new package never inherits the
   // previous anatomy's slice or cross even before the load effect runs.
@@ -58,6 +65,7 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
     const slice = component.calipers
     if (!ready || measurements.status !== 'ready' || !slice?.plane) return
     setShowLesion(true)
+    setMode('2d')
     setInspection({ result: state, component, command: {
       type: 'measurement-point', id: ++inspectionId.current, plane: slice.plane, worldMm: slice.anchorWorldMm,
     } })
@@ -99,13 +107,26 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
           }} /><i className="pw-swatch pw-swatch--pred-lesion" aria-hidden="true" /> Predicted lesion</label>
         </div>
       </div>
+      <div className="pw-saved__controls">
+        <div className="pw-segmented" role="group" aria-label="Saved CT view">
+          <button type="button" aria-pressed={mode === '3d'} title="Show the full available source CT in 3D"
+            onClick={() => { setInspection(null); setMode('3d') }}>3D Abdomen</button>
+          <button type="button" aria-pressed={mode === '2d'} onClick={() => setMode('2d')}>2D planes</button>
+        </div>
+        <div className="pw-segmented" role="group" aria-label="Saved CT mouse tool">
+          <button type="button" aria-pressed={!pan} onClick={() => setPan(false)}>{mode === '3d' ? 'Rotate' : 'Navigate'}</button>
+          <button type="button" aria-pressed={pan} onClick={() => setPan(true)}>Pan</button>
+        </div>
+        {mode === '3d' && surface.status === 'loading' && <span className="pw-muted" role="status">Preparing 3D outlines…</span>}
+        {mode === '3d' && surface.status === 'unavailable' && <span className="pw-muted" role="status">{surface.reason}</span>}
+      </div>
       {(state.manifest.warnings.length > 0 || state.manifest.prediction_mode === 'pancreas_assisted') && <div className="pw-notice pw-saved__notes">
         <div>
           {state.manifest.warnings.map(w => <p key={w}>{w}</p>)}
           {state.manifest.prediction_mode === 'pancreas_assisted' && <p>Pancreas-assisted prediction: a provided pancreas outline defined the search region. Volumes measure the model’s output.</p>}
         </div>
       </div>}
-      <p className="pw-fineprint">Native CT with predicted pancreas (green) and lesion (red). Reference annotations are not loaded.</p>
+      <p className="pw-fineprint">Source CT · predicted pancreas in green and lesion in red when displayed.</p>
       <MeasurementReadout state={measurements} />
       {measurements.status === 'ready' && <LesionDimensions measurement={measurements.measurement}
         selectedId={activeInspection?.component.id} onInspect={inspectLesion} sourceSlice />}
@@ -116,8 +137,10 @@ export default function SavedPredictionView({ base: initialBase = '/saved-predic
       </div>}
       <div className="pw-saved__viewer" ref={viewerRef}>
         <NiivueViewer key={`${base}:${revision}:${state.manifest.result_sha256}`} caseData={caseData}
-          assetUrls={state.urls} nativeGeometry={state.manifest.geometry} ctRange={state.manifest.ct_window}
-          mode="2d" activePlane={calipers?.plane || 'multiplanar'} measurementCalipers={calipers}
+          assetUrls={assetUrls} nativeGeometry={state.manifest.geometry} ctRange={state.manifest.ct_window}
+          mode={mode} showFull={mode === '3d'} ctOpacity={0.44}
+          interactionMode={pan ? 'pan' : mode === '3d' ? 'rotate' : 'navigate'} wheelZoom
+          activePlane={calipers?.plane || 'multiplanar'} measurementCalipers={calipers}
           navigationCommand={activeInspection?.command}
           showPancreas={showPancreas} showLesion={showLesion} label={`Saved CT and prediction for ${state.manifest.case_id}`} />
       </div>

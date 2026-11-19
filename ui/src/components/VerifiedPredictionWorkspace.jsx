@@ -3,12 +3,13 @@ import LiteratureSearchPanel from './LiteratureSearchPanel.jsx'
 import ReviewWorkspace from './ReviewWorkspace.jsx'
 import { predictionJobForReview } from '../lib/onDemandPrediction.js'
 import { loadSavedPrediction } from '../lib/savedPrediction.js'
+import { usePredictionSurfaces } from '../lib/usePredictionSurfaces.js'
 
 function NativeWorkspace({ job, loaded, caseItems, onSelectScan, onOpenLibrary, onReviewDirty }) {
   const { manifest, manifestHash, measurement } = loaded
   const [assistantPending, setAssistantPending] = useState(false)
   const [reviewStatus, setReviewStatus] = useState('unreviewed')
-  const [surface, setSurface] = useState({ status: 'loading' })
+  const surface = usePredictionSurfaces(loaded.urls.pred, manifest.files.pred.bytes, manifest.geometry)
   const caseId = manifest.case_id
   const caseData = useMemo(() => ({
     case_id: caseId,
@@ -19,33 +20,6 @@ function NativeWorkspace({ job, loaded, caseItems, onSelectScan, onOpenLibrary, 
   const modelLabel = `Segmenter · ${manifest.model_sha256.segmenter.slice(0, 12)}`
   const typeLabel = manifest.prediction_mode === 'pancreas_assisted' ? 'Pancreas-assisted prediction' : 'CT-only prediction'
   const measurementContext = { key: manifestHash, available: measured }
-  useEffect(() => {
-    let worker
-    const mesh = {}
-    const unavailable = reason => setSurface({ status: 'unavailable', reason })
-    try {
-      worker = new Worker(new URL('../lib/predictionSurfaceWorker.js', import.meta.url), { type: 'module' })
-      worker.onmessage = ({ data }) => {
-        worker.terminate()
-        if (data.error) { unavailable(data.error); return }
-        for (const [anatomy, buffer] of Object.entries(data.surfaces || {}))
-          mesh[anatomy] = URL.createObjectURL(new Blob([buffer], { type: 'application/octet-stream' }))
-        if (!Object.keys(mesh).length) { unavailable('The prediction has no 3D outline.'); return }
-        setSurface({ status: 'ready', mesh })
-      }
-      worker.onerror = () => {
-        worker.terminate()
-        unavailable('The verified 3D outline could not be prepared.')
-      }
-      worker.postMessage({ url: loaded.urls.pred, bytes: manifest.files.pred.bytes, geometry: manifest.geometry })
-    } catch {
-      unavailable('This browser could not prepare the verified 3D outline.')
-    }
-    return () => {
-      worker?.terminate()
-      Object.values(mesh).forEach(url => URL.revokeObjectURL(url))
-    }
-  }, [loaded, manifest])
   const verifiedPrediction = useMemo(() => ({
     ...loaded, urls: { ...loaded.urls, mesh: surface.mesh }, surfaceStatus: surface.status, surfaceError: surface.reason,
   }), [loaded, surface])
