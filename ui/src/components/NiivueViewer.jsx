@@ -6,6 +6,7 @@ import { LoaderCircle, TriangleAlert } from 'lucide-react'
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
+import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
@@ -594,12 +595,12 @@ function setVolumeRendering(nv, enabled) {
 // from the pancreas surface and the scene bounds along the view axis. NiiVue's clip
 // depth spans the scene from the front face (-0.5) to the back face (+0.5).
 function peelRevealPercent(nv, meshes) {
-  const pancreas = meshes.find((entry) => entry.anatomy === 'pancreas' && entry.source !== 'difference' && entry.mesh.extentsMin)
+  const pancreas = meshes.find((entry) => entry.anatomy === 'pancreas' && entry.source !== 'difference' && entry.mesh.extentsMax)
   if (!pancreas || typeof nv.sceneExtentsMinMax !== 'function') return null
-  const [lo, , range] = nv.sceneExtentsMinMax()
+  const [, hi, range] = nv.sceneExtentsMinMax()
   const span = Number(range?.[1])
   if (!Number.isFinite(span) || span <= 0) return null
-  const fraction = (pancreas.mesh.extentsMin[1] - lo[1]) / span + 0.03
+  const fraction = (hi[1] - pancreas.mesh.extentsMax[1]) / span + 0.03
   return Math.max(1, Math.min(99, Math.round(fraction * 100)))
 }
 
@@ -939,6 +940,25 @@ export default function NiivueViewer({
       pinchDistance = null
       if (event.touches.length === 0) pinching = false
     }
+    function handleTouchMove(event) {
+      if (interactiveRef.current.mode !== '3d' || event.touches.length !== 1 || pinching) {
+        handlePinch(event)
+        return
+      }
+      // NiiVue's single-touch move starts a clip-plane drag even in rotate mode.
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      if (boxToolActive() || !canZoom()) return
+      const rect = canvas.getBoundingClientRect()
+      const touch = event.touches[0]
+      nv.mouseMove(touch.clientX - rect.left, touch.clientY - rect.top)
+    }
+    function suppressClipShortcut(event) {
+      if (interactiveRef.current.mode !== '3d'
+        || ![nv.opts.clipPlaneHotKey, nv.opts.cycleClipPlaneHotKey].includes(event.code)) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+    }
     function suppressSliceShortcut(event) {
       const { mode, wheelZoom } = interactiveRef.current
       if (mode !== '2d' || !wheelZoom) return
@@ -989,6 +1009,7 @@ export default function NiivueViewer({
     }
 
     function handlePointerDown(event) {
+      if (interactiveRef.current.mode === '3d' && event.button !== 0) return
       if (boxToolActive() && event.button === 0) {
         event.preventDefault()
         if (!canZoom() || boxGesture) return
@@ -1111,10 +1132,11 @@ export default function NiivueViewer({
     canvas.addEventListener('dblclick', handleDoubleClick)
     canvas.addEventListener('wheel', handleWheel, captureGesture)
     canvas.addEventListener('touchstart', handlePinch, captureGesture)
-    canvas.addEventListener('touchmove', handlePinch, captureGesture)
+    canvas.addEventListener('touchmove', handleTouchMove, captureGesture)
     canvas.addEventListener('touchend', endPinch, true)
     canvas.addEventListener('touchcancel', endPinch, true)
     canvas.addEventListener('keydown', suppressSliceShortcut, true)
+    canvas.addEventListener('keyup', suppressClipShortcut, true)
     window.addEventListener('pointerup', endGesture)
     window.addEventListener('pointercancel', endGesture)
     window.addEventListener('blur', endGesture)
@@ -1141,10 +1163,11 @@ export default function NiivueViewer({
       canvas.removeEventListener('dblclick', handleDoubleClick)
       canvas.removeEventListener('wheel', handleWheel, true)
       canvas.removeEventListener('touchstart', handlePinch, true)
-      canvas.removeEventListener('touchmove', handlePinch, true)
+      canvas.removeEventListener('touchmove', handleTouchMove, true)
       canvas.removeEventListener('touchend', endPinch, true)
       canvas.removeEventListener('touchcancel', endPinch, true)
       canvas.removeEventListener('keydown', suppressSliceShortcut, true)
+      canvas.removeEventListener('keyup', suppressClipShortcut, true)
       window.removeEventListener('pointerup', endGesture)
       window.removeEventListener('pointercancel', endGesture)
       window.removeEventListener('blur', endGesture)
@@ -1318,10 +1341,7 @@ export default function NiivueViewer({
           nv.setSliceType(nv.sliceTypeRender)
           // Small labelled orientation cube in the corner so L/R, A/P and S/I stay readable while orbiting.
           nv.opts.isOrientCube = !compact
-          nv.setRenderAzimuthElevation(
-            clip?.enabled ? 0 : 120,
-            clip?.enabled ? 0 : 15,
-          )
+          nv.setRenderAzimuthElevation(...(clip?.enabled ? ANTERIOR_CAMERA : [120, 15]))
           nv.setClipPlaneColor([0, 0, 0, 0])
           nv.setClipPlane(clip?.enabled
             ? [clip.depth, 0, 0]
@@ -1608,19 +1628,18 @@ export default function NiivueViewer({
       return
     }
 
-    primary = interactionMode === 'move' ? DRAG_MODE.slicer3D : DRAG_MODE.crosshair
     nv.setMouseEventConfig({
       leftButton: {
-        primary,
-        withShift: DRAG_MODE.slicer3D,
+        primary: DRAG_MODE.crosshair,
+        withShift: DRAG_MODE.none,
         withCtrl: DRAG_MODE.crosshair,
       },
-      rightButton: DRAG_MODE.slicer3D,
-      centerButton: DRAG_MODE.slicer3D,
+      rightButton: DRAG_MODE.none,
+      centerButton: DRAG_MODE.none,
     })
     nv.setTouchEventConfig({
-      singleTouch: primary,
-      doubleTouch: DRAG_MODE.slicer3D,
+      singleTouch: DRAG_MODE.crosshair,
+      doubleTouch: DRAG_MODE.none,
     })
   }, [interactionMode, framingLocked, mode, sceneVersion, state.status, sceneKey])
 
@@ -1778,7 +1797,7 @@ export default function NiivueViewer({
         ? [clip.depth, 0, 0]
         : [2, 0, 0])
       if (justActivated) {
-        nv.setRenderAzimuthElevation(0, 0)
+        nv.setRenderAzimuthElevation(...ANTERIOR_CAMERA)
       }
     })
   }, [clip?.enabled, clip?.depth, mode, sceneKey])
@@ -1797,10 +1816,7 @@ export default function NiivueViewer({
     orbitCentreRef.current = null
     lastFocusedObjectRef.current = ''
     if (mode === '3d') {
-      nv.setRenderAzimuthElevation(
-        clip?.enabled ? 0 : 120,
-        clip?.enabled ? 0 : 15,
-      )
+      nv.setRenderAzimuthElevation(...(clip?.enabled ? ANTERIOR_CAMERA : [120, 15]))
       nv.setScale(compact ? 1 : showFull ? FULL_SCAN_SCALE : (surfaceFitScale(nv) || 1))
     } else {
       setPlaneLayout(nv, activePlane)

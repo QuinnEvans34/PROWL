@@ -8,7 +8,7 @@ vi.mock('@niivue/niivue', () => ({
   DRAG_MODE: { none: 0, crosshair: 8, pan: 3, windowing: 9 },
   Niivue: class SyntheticNiivue {
     constructor(options) {
-      this.opts = { dragMode: 0, ...options }
+      this.opts = { dragMode: 0, clipPlaneHotKey: 'KeyC', cycleClipPlaneHotKey: 'KeyP', ...options }
       this.scene = { crosshairPos: new Float32Array([.5, .5, .5]), pan2Dxyzmm: new Float32Array([0, 0, 0, 1]), volScaleMultiplier: 1 }
       this.volumes = []
       this.meshes = []
@@ -35,6 +35,7 @@ vi.mock('@niivue/niivue', () => ({
       })
       this.calculateMvpMatrix = vi.fn(() => [[1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]])
       this.drawScene = vi.fn()
+      this.mouseMove = vi.fn()
       this.nativeGesture = vi.fn()
       this.cleanup = vi.fn(() => this.nativeGestures?.abort())
       harness.instances.push(this)
@@ -42,7 +43,7 @@ vi.mock('@niivue/niivue', () => ({
     attachToCanvas(canvas) {
       this.canvas = canvas
       this.nativeGestures = new AbortController()
-      for (const event of ['wheel', 'touchstart', 'touchmove', 'keydown']) {
+      for (const event of ['wheel', 'touchstart', 'touchmove', 'keydown', 'keyup']) {
         canvas.addEventListener(event, this.nativeGesture, { signal: this.nativeGestures.signal })
       }
     }
@@ -358,12 +359,17 @@ it('zooms touchscreen pinches without invoking native slice gestures and starts 
   expect(nv.nativeGesture).toHaveBeenCalledOnce()
 })
 
-it('uses the same 3D zoom limits for wheel, pinch and buttons after the CT is peeled', async () => {
+it('keeps the 3D cut fixed during rotation and zoom', async () => {
   const view = (depth, navigationCommand = null) => <NiivueViewer {...base} mode="3d" wheelZoom
     clip={{ enabled: true, depth }} navigationCommand={navigationCommand} />
   const { rerender } = render(view(2))
   await screen.findByLabelText('Prepared result loaded')
   const nv = harness.instances[0]
+  expect(nv.scene.renderAzimuth).toBe(180)
+  expect(nv.opts.mouseEventConfig).toEqual({
+    leftButton: { primary: 8, withShift: 0, withCtrl: 8 }, rightButton: 0, centerButton: 0,
+  })
+  expect(nv.opts.touchEventConfig).toEqual({ singleTouch: 8, doubleTouch: 0 })
   const setClipPlane = vi.spyOn(nv, 'setClipPlane')
   const initialScale = nv.scene.volScaleMultiplier
 
@@ -371,6 +377,10 @@ it('uses the same 3D zoom limits for wheel, pinch and buttons after the CT is pe
   await waitFor(() => expect(setClipPlane).toHaveBeenLastCalledWith([-0.15, 0, 0]))
   setClipPlane.mockClear()
   nv.nativeGesture.mockImplementation(() => nv.setClipPlane([0, 0, 0]))
+  expect(fireEvent.keyUp(nv.canvas, { code: 'KeyC' })).toBe(false)
+  expect(fireEvent.keyUp(nv.canvas, { code: 'KeyP' })).toBe(false)
+  expect(fireEvent.touchMove(nv.canvas, { touches: [{ clientX: 12, clientY: 24 }] })).toBe(false)
+  expect(nv.mouseMove).toHaveBeenCalledWith(12, 24)
   expect(fireEvent.wheel(nv.canvas, { deltaY: -60 })).toBe(false)
   expect(nv.scene.volScaleMultiplier).toBeGreaterThan(initialScale)
   expect(fireEvent.wheel(nv.canvas, { deltaY: 60, ctrlKey: true })).toBe(false)

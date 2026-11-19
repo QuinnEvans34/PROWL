@@ -105,7 +105,7 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(rail.getByText('Predicted lesion 2')).toBeTruthy()
     expect(viewer3d().measurementCalipers).toEqual(second.calipers)
     await user.click(rail.getByRole('button', { name: 'Face calipers' }))
-    expect(viewer3d().navigationCommand).toMatchObject({ type: 'camera', azimuth: 0, elevation: 0 })
+    expect(viewer3d().navigationCommand).toMatchObject({ type: 'camera', azimuth: 180, elevation: 0 })
     await user.click(rail.getByRole('button', { name: 'Zoom to lesion' }))
     expect(viewer3d().navigationCommand).toMatchObject({ type: 'zoom-lesion', target: '3d', boundsWorldMm: second.boundsWorldMm })
     await user.click(hide())
@@ -255,10 +255,11 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(viewerData(coronalViewer).navigationCommand).toMatchObject({ type: 'slice', plane: 'coronal', index: 51 })
   })
 
-  it('blocks wheel adjustment after using the 3D CT removal slider', async () => {
+  it('uses anatomical camera presets independently of the 3D peel slider', async () => {
     const user = userEvent.setup()
     render(<Harness />)
     await user.click(screen.getByRole('button', { name: '3D', exact: true }))
+    expect(screen.queryByRole('button', { name: 'Move', exact: true })).toBeNull()
     const peel = screen.getByRole('slider', { name: 'Front-to-back CT removal' })
     act(() => peel.focus())
     fireEvent.change(peel, { target: { value: '37' } })
@@ -266,6 +267,15 @@ describe('real workspace layout with synthetic imaging only', () => {
     expect(fireEvent.wheel(peel, { deltaY: -40 })).toBe(false)
     expect(peel.value).toBe('37')
     expect(document.activeElement).toBe(peel)
+    await user.click(screen.getByRole('button', { name: 'Views', exact: true }))
+    await user.click(screen.getByRole('button', { name: 'Front', exact: true }))
+    const viewer = screen.getByTestId(/^synthetic-viewer-3d/)
+    expect(viewerData(viewer).navigationCommand).toMatchObject({ type: 'camera', azimuth: 180, elevation: 0 })
+    await user.keyboard('2')
+    expect(viewerData(viewer).navigationCommand).toMatchObject({ type: 'camera', azimuth: 0, elevation: 0 })
+    expect(peel.value).toBe('37')
+    await user.click(screen.getByRole('button', { name: '2D', exact: true }))
+    expect(screen.getByRole('button', { name: 'Pan', exact: true })).toBeTruthy()
   })
 
   it('keeps study measurements visible with the expert and rejects a late result from the previous study', async () => {

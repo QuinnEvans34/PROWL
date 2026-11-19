@@ -31,6 +31,7 @@ import {
 } from 'lucide-react'
 import { makeReviewState, reviewReducer } from '../lib/reviewState.js'
 import { REVIEW_COLORS, visibleSourcesForEvidence, EVIDENCE_META } from '../lib/viewerLayers.js'
+import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import FindingsPanel from './FindingsPanel.jsx'
 import LesionReviewBar from './LesionReviewBar.jsx'
 import SliceSlider from './SliceSlider.jsx'
@@ -58,18 +59,17 @@ const CT_WINDOW_OPTIONS = [
 ]
 
 // Keyboard camera views (azimuth, elevation), matching the Views menu order.
-const CAMERA_VIEWS = [['Front', 0, 0], ['Back', 180, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]]
+const CAMERA_VIEWS = [['Front', ...ANTERIOR_CAMERA], ['Back', 0, 0], ['Left', 90, 0], ['Right', 270, 0], ['Top', 0, 90], ['Bottom', 0, -90]]
 const CAMERA_SHORTCUTS = {
   ...Object.fromEntries(CAMERA_VIEWS.map(([, azimuth, elevation], index) => [String(index + 1), [azimuth, elevation]])),
   0: [120, 15],
 }
-const CALIPER_CAMERAS = { axial: [0, 90], coronal: [0, 0], sagittal: [90, 0] }
+const CALIPER_CAMERAS = { axial: [0, 90], coronal: ANTERIOR_CAMERA, sagittal: [90, 0] }
 
 // Viewer controls, written for both mouse and trackpad users.
 const CONTROL_HELP = {
   '3d': [
     ['Rotate', 'Drag with the Rotate tool (one finger on a trackpad)'],
-    ['Pan', 'Shift-drag, right-drag, or drag with the Move tool'],
     ['Zoom', 'Scroll, pinch, or + / − at any peel depth'],
     ['Box zoom', 'Left-drag to frame a region'],
     ['Select', 'Click a surface for its details'],
@@ -490,9 +490,11 @@ export default function ReviewWorkspace({
   // Prefer the 3D scene's own geometry (correct for the full abdomen); fall back to the
   // 2D coronal estimate before the 3D view has loaded.
   const pancreasRevealProgress = peelReveal3d ?? (coronalPancreasRange && coronalTotal > 1
-    ? Math.max(1, Math.min(99, Math.round(Math.min(1, (coronalPancreasRange[1] + Math.max(8, Math.round(coronalTotal * 0.08))) / (coronalTotal - 1)) * 100)))
+    ? Math.max(1, Math.min(99, Math.round(
+      ((coronalTotal - 1 - coronalPancreasRange[1] + Math.max(8, Math.round(coronalTotal * 0.08))) / (coronalTotal - 1)) * 100,
+    )))
     : null)
-  function setClipProgress(value, { snapFront = false, live = false } = {}) {
+  function setClipProgress(value, { live = false } = {}) {
     const nextProgress = Math.max(0, Math.min(100, Number(value)))
     const commit = (progress) => dispatch({ type: 'PATCH_SETTINGS', value: { clipEnabled: true, clipProgress: progress } })
     if (!live) {
@@ -513,7 +515,6 @@ export default function ReviewWorkspace({
         })
       }
     }
-    if (snapFront) issueViewerCommand({ type: 'camera', azimuth: 0, elevation: 0 })
   }
 
 
@@ -788,7 +789,6 @@ export default function ReviewWorkspace({
               ...(state.viewMode === '3d'
                 ? [
                     ['rotate', 'Rotate', { icon: <Rotate3d size={14} aria-hidden="true" />, title: 'Drag to orbit the camera' }],
-                    ['move', 'Move', { icon: <Move size={14} aria-hidden="true" />, title: 'Drag to reframe the anatomy' }],
                   ]
                 : [
                     ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
@@ -1007,7 +1007,7 @@ export default function ReviewWorkspace({
           <p key={`${state.viewMode}-${state.interactionMode}`} className="pw-viewer__hint" aria-hidden="true" hidden={!boxZoom && ((state.evidenceMode === 'ct' && !hasPrediction) || state.viewMode === 'split')}>
             {boxZoom ? (framingLocked && is2dLike ? 'Left-drag a box on the 3D image · 2D framing locked' : 'Left-drag a box around the region to zoom')
               : state.viewMode === '3d'
-              ? state.interactionMode === 'move' ? 'Drag to reframe · scroll to zoom' : 'Drag to orbit · scroll to zoom · click a surface to focus'
+              ? 'Drag to orbit · scroll to zoom · click a surface to focus'
               : framingLocked ? 'Framing locked · use the slice sliders'
                 : state.interactionMode === 'pan' ? 'Drag to reposition · scroll to zoom'
                   : state.interactionMode === 'window' ? 'Drag to adjust brightness and contrast · scroll to zoom'
