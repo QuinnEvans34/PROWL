@@ -26,6 +26,7 @@
 .pw-toolbench .pw-studybar { background: var(--pw-surface); min-height: 54px; }
 .pw-toolbench .pw-studybar__id h1 { font-size: 15px; letter-spacing: .015em; }
 .pw-toolbench .pw-toolbar { padding: 9px 12px; gap: 8px; background: var(--pw-bg); }
+.pw-toolbar__zoom { align-self: center; min-width: 5ch; text-align: center; white-space: nowrap; font-size: 12px; font-variant-numeric: tabular-nums; color: var(--pw-text-muted); }
 .pw-toolbench .pw-toolbar [aria-label='Visible planes'] { background: var(--pw-surface); }
 .pw-toolbench .pw-segmented button[aria-pressed='true'] { background: var(--pw-accent); color: var(--pw-accent-ink); box-shadow: none; }
 .pw-toolbench .pw-toolbar [aria-label='Visible planes'] button { padding-inline: 9px; }

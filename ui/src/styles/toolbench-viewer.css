@@ -20,6 +20,7 @@
 .tb-pane__title strong { color: var(--pw-text); font-size: 11px; font-weight: 600; }
 .tb-pane__title small { color: var(--pw-text-faint); font-size: 10px; overflow: hidden; text-overflow: ellipsis; }
 .tb-pane__actions { display: flex; align-items: center; gap: 1px; }
+.tb-pane__zoom { min-width: 5ch; text-align: center; white-space: nowrap; font-size: 10px; font-variant-numeric: tabular-nums; color: var(--pw-text-muted); }
 .tb-pane__actions button { display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 25px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: var(--pw-text-muted); }
 .tb-pane button:hover:enabled { color: var(--pw-text); background: #ffffff0d; }
 .tb-pane button:disabled { opacity: .32; cursor: default; }

@@ -6,6 +6,7 @@ import { LoaderCircle, TriangleAlert } from 'lucide-react'
 import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
+import { clientToBackingPx, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming } from '../lib/viewerZoom.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
 const BASE = '/cases'
@@ -319,28 +320,31 @@ function restoreViewState(nv, view, mode, crosshairOnly = false) {
   return true
 }
 
-function zoomAroundCrosshair(nv, factor) {
-  const pan = Array.from(nv.scene.pan2Dxyzmm || [0, 0, 0, 1])
-  const previousZoom = Number(pan[3])
-  if (!Number.isFinite(factor) || factor <= 0 || !Number.isFinite(previousZoom) || previousZoom <= 0) return
-  const nextZoom = Math.max(0.25, Math.min(12, previousZoom * factor))
-  if (nextZoom === previousZoom) return
-  const world = Array.from(nv.frac2mm(nv.scene.crosshairPos)).slice(0, 3)
-  if (world.length !== 3 || !world.every(Number.isFinite)) return
-
-  // Translate as we scale so the crosshair stays in place on screen, including
-  // scans whose affine origin is far from zero.
-  const zoomChange = previousZoom - nextZoom
-  for (let axis = 0; axis < 3; axis += 1) pan[axis] += zoomChange * world[axis]
-  pan[3] = nextZoom
-  nv.setPan2Dxyzmm(pan)
-}
-
 function zoom3d(nv, factor) {
   const scale = Number(nv.scene.volScaleMultiplier)
   if (!Number.isFinite(factor) || factor <= 0 || !Number.isFinite(scale) || scale <= 0) return
   const nextScale = Math.max(0.45, Math.min(4, scale * factor))
   if (nextScale !== scale) nv.setScale(nextScale)
+}
+
+function renderView(nv) {
+  const viewport = nv.screenSlices?.find(tile => tile.axCorSag === nv.sliceTypeRender)?.leftTopWidthHeight
+  if (!viewport) return null
+  const [left, top, width, height] = viewport
+  if (!(width > 0 && height > 0)) return null
+  const [matrix] = nv.calculateMvpMatrix(null, viewport, nv.scene.renderAzimuth, nv.scene.renderElevation)
+  const inverse = matrix && invert4(matrix)
+  if (!inverse) return null
+  return {
+    viewport, matrix,
+    viewPoint: ([x, y]) => unproject(inverse, 2 * (x - left) / width - 1, 1 - 2 * (y - top) / height, 0),
+  }
+}
+
+function apply3dFraming(nv, orbitCentreRef, framing) {
+  if (!framing) return
+  orbitCentreRef.current = framing.pivot
+  nv.setScale(framing.scale)
 }
 
 function focusOnWorldPoint(nv, worldMM, mode) {
@@ -675,6 +679,7 @@ export default function NiivueViewer({
   wheelZoom = false,
   navigationCommand = null,
   onNavigationChange = null,
+  onZoomChange = null,
   syncCrosshair = null,
   syncWindow = null,
   onWindowChange = null,
@@ -714,6 +719,8 @@ export default function NiivueViewer({
     mode,
     framingLocked,
     wheelZoom,
+    interactionMode,
+    onZoomChange,
     onSelectObject,
     onNavigationChange,
     onWindowChange,
@@ -724,11 +731,19 @@ export default function NiivueViewer({
   const [state, setState] = useState({ status: 'loading', message: 'Preparing viewer' })
   const [sceneVersion, setSceneVersion] = useState(0)
   const [planeTiles, setPlaneTiles] = useState([])
+  const [zoomBox, setZoomBox] = useState(null)
   const orbitCentreRef = useRef(null)
 
   const renderedSources = visibleSources || sources
   const sceneKey = viewerSceneKey({ caseData, assetUrls, sources, mode, showFull, enableDifferenceAssets })
   expectedSceneKeyRef.current = sceneKey
+
+  function publishZoom(nv) {
+    const { onZoomChange: notifyZoom, mode: currentMode } = interactiveRef.current
+    if (!notifyZoom || !loadedSceneKeyRef.current || loadedSceneKeyRef.current !== expectedSceneKeyRef.current) return
+    const scale = currentMode === '3d' ? nv.scene.volScaleMultiplier : nv.scene.pan2Dxyzmm?.[3]
+    if (Number.isFinite(scale) && scale > 0) notifyZoom(scale)
+  }
 
   function publishNavigation(nv, { immediate = false, origin = 'interaction' } = {}) {
     const maskVolume = registryRef.current.volumes.get('pred')
@@ -780,13 +795,17 @@ export default function NiivueViewer({
       mode,
       framingLocked,
       wheelZoom,
+      interactionMode,
+      onZoomChange,
       onSelectObject,
       onNavigationChange,
       onWindowChange,
       visibleSources: renderedSources,
       differenceMode,
     }
-  }, [mode, framingLocked, wheelZoom, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
+  }, [mode, framingLocked, wheelZoom, interactionMode, onZoomChange, onSelectObject, onNavigationChange, onWindowChange, renderedSources.join('|'), differenceMode])
+
+  useEffect(() => { setZoomBox(null) }, [interactionMode, framingLocked, sceneKey])
 
   useEffect(() => {
     if (!canvasRef.current) return undefined
@@ -835,6 +854,7 @@ export default function NiivueViewer({
     let pointerHeld = false
     let pinchDistance = null
     let pinching = false
+    let boxGesture = null
     function setLowResolution(active) {
       const native = window.devicePixelRatio || 1
       if (active === lowResActive) return
@@ -853,11 +873,20 @@ export default function NiivueViewer({
       return !(mode === '2d' && framingLocked) && nv.volumes?.[0]
         && loadedSceneKeyRef.current && loadedSceneKeyRef.current === expectedSceneKeyRef.current
     }
-    function zoomBy(factor) {
+    function zoomBy(factor, clientX, clientY) {
+      const point = clientToBackingPx(canvas, clientX, clientY)
       if (interactiveRef.current.mode === '3d') {
-        pulseLowResolution()
-        zoom3d(nv, factor)
-      } else zoomAroundCrosshair(nv, factor)
+        const view = point && renderView(nv)
+        if (view) {
+          const framing = zoom3dFraming(nv.scene.volScaleMultiplier, nv.pivot3D, factor, view.viewport, view.viewPoint, point)
+          pulseLowResolution()
+          apply3dFraming(nv, orbitCentreRef, framing)
+        } else {
+          pulseLowResolution()
+          zoom3d(nv, factor)
+        }
+      } else zoom2d(nv, factor, point)
+      publishZoom(nv)
     }
     function handleWheel(event) {
       const { mode, wheelZoom } = interactiveRef.current
@@ -870,10 +899,10 @@ export default function NiivueViewer({
       event.preventDefault()
       event.stopImmediatePropagation()
       const { deltaMode, deltaX, deltaY } = event
-      if (!canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
+      if (boxGesture || !canZoom() || !deltaY || Math.abs(deltaX) > Math.abs(deltaY)) return
       const unit = deltaMode === 1 ? 16 : deltaMode === 2 ? canvas.clientHeight : 1
       const delta = Math.max(-120, Math.min(120, deltaY * unit))
-      zoomBy(Math.exp(-delta * 0.003))
+      zoomBy(Math.exp(-delta * 0.003), event.clientX, event.clientY)
     }
     function handlePinch(event) {
       if (!interactiveRef.current.wheelZoom || (event.touches.length < 2 && !pinching)) return
@@ -887,7 +916,9 @@ export default function NiivueViewer({
         return
       }
       const distance = Math.hypot(second.clientX - first.clientX, second.clientY - first.clientY)
-      if (canZoom() && pinchDistance > 0 && distance > 0) zoomBy(distance / pinchDistance)
+      if (!boxGesture && canZoom() && pinchDistance > 0 && distance > 0) {
+        zoomBy(distance / pinchDistance, (first.clientX + second.clientX) / 2, (first.clientY + second.clientY) / 2)
+      }
       pinchDistance = distance
     }
     function endPinch(event) {
@@ -910,7 +941,48 @@ export default function NiivueViewer({
       restoreTimer = window.setTimeout(() => setLowResolution(false), 0)
     }
 
+    function cancelBox() {
+      if (!boxGesture) return
+      boxGesture = null
+      setZoomBox(null)
+    }
+    function boxToolActive() {
+      return interactiveRef.current.interactionMode === 'box-zoom'
+    }
+    function stopBoxMouse(event) {
+      if (!boxToolActive() || event.button !== 0) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+    }
+    function boxMove(event) {
+      if (!boxGesture || boxGesture.pointerId !== event.pointerId) return
+      if (!boxToolActive() || !canZoom() || boxGesture.sceneKey !== loadedSceneKeyRef.current) {
+        cancelBox()
+        return
+      }
+      const rect = canvas.getBoundingClientRect()
+      const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left))
+      const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top))
+      const startX = boxGesture.clientX - rect.left
+      const startY = boxGesture.clientY - rect.top
+      setZoomBox({ left: Math.min(startX, x), top: Math.min(startY, y), width: Math.abs(x - startX), height: Math.abs(y - startY) })
+    }
+    function cancelBoxOnEscape(event) {
+      if (event.key !== 'Escape' || !boxGesture) return
+      event.preventDefault()
+      event.stopImmediatePropagation()
+      cancelBox()
+    }
+
     function handlePointerDown(event) {
+      if (boxToolActive() && event.button === 0) {
+        event.preventDefault()
+        if (!canZoom() || boxGesture) return
+        boxGesture = { pointerId: event.pointerId, clientX: event.clientX, clientY: event.clientY, sceneKey: loadedSceneKeyRef.current }
+        canvas.focus({ preventScroll: true })
+        canvas.setPointerCapture?.(event.pointerId)
+        return
+      }
       pointerHeld = true
       window.clearTimeout(restoreTimer)
       pointerStartRef.current = { x: event.clientX, y: event.clientY, sceneKey: loadedSceneKeyRef.current }
@@ -918,6 +990,24 @@ export default function NiivueViewer({
     }
 
     function handlePointerUp(event) {
+      if (boxToolActive() && event.button === 0) {
+        const box = boxGesture
+        if (!box || box.pointerId !== event.pointerId) return
+        cancelBox()
+        if (!canZoom() || box.sceneKey !== loadedSceneKeyRef.current
+          || Math.min(Math.abs(box.clientX - event.clientX), Math.abs(box.clientY - event.clientY)) < 6) return
+        const start = clientToBackingPx(canvas, box.clientX, box.clientY)
+        const end = clientToBackingPx(canvas, event.clientX, event.clientY)
+        if (!start || !end) return
+        if (interactiveRef.current.mode === '3d') {
+          const view = renderView(nv)
+          if (view) apply3dFraming(nv, orbitCentreRef, zoomBox3dFraming(
+            nv.scene.volScaleMultiplier, nv.pivot3D, view.viewport, view.viewPoint, start, end,
+          ))
+        } else zoomBox2d(nv, start, end)
+        publishZoom(nv)
+        return
+      }
       const start = pointerStartRef.current
       pointerStartRef.current = null
       if (!start) return
@@ -986,17 +1076,24 @@ export default function NiivueViewer({
 
     // Double-click a surface in 3D: orbit around that point and zoom in a step.
     function handleDoubleClick(event) {
-      if (interactiveRef.current.mode !== '3d') return
+      if (interactiveRef.current.mode !== '3d' || boxToolActive()) return
       const picked = pickSurfaceAtClick(nv, event, Array.from(registryRef.current.meshes.values()))
       if (!picked?.point) return
       orbitCentreRef.current = picked.point
       zoom3d(nv, 1.15)
       nv.drawScene()
+      publishZoom(nv)
     }
 
     const captureGesture = { capture: true, passive: false }
     canvas.addEventListener('pointerdown', handlePointerDown)
     canvas.addEventListener('pointerup', handlePointerUp)
+    canvas.addEventListener('pointermove', boxMove)
+    canvas.addEventListener('pointercancel', cancelBox)
+    canvas.addEventListener('lostpointercapture', cancelBox)
+    canvas.addEventListener('mousedown', stopBoxMouse, true)
+    canvas.addEventListener('mouseup', stopBoxMouse, true)
+    canvas.addEventListener('keydown', cancelBoxOnEscape, true)
     canvas.addEventListener('dblclick', handleDoubleClick)
     canvas.addEventListener('wheel', handleWheel, captureGesture)
     canvas.addEventListener('touchstart', handlePinch, captureGesture)
@@ -1007,6 +1104,7 @@ export default function NiivueViewer({
     window.addEventListener('pointerup', endGesture)
     window.addEventListener('pointercancel', endGesture)
     window.addEventListener('blur', endGesture)
+    window.addEventListener('blur', cancelBox)
 
     return () => {
       if (clipFrameRef.current !== null) {
@@ -1020,6 +1118,12 @@ export default function NiivueViewer({
       pendingNavigationRef.current = null
       canvas.removeEventListener('pointerdown', handlePointerDown)
       canvas.removeEventListener('pointerup', handlePointerUp)
+      canvas.removeEventListener('pointermove', boxMove)
+      canvas.removeEventListener('pointercancel', cancelBox)
+      canvas.removeEventListener('lostpointercapture', cancelBox)
+      canvas.removeEventListener('mousedown', stopBoxMouse, true)
+      canvas.removeEventListener('mouseup', stopBoxMouse, true)
+      canvas.removeEventListener('keydown', cancelBoxOnEscape, true)
       canvas.removeEventListener('dblclick', handleDoubleClick)
       canvas.removeEventListener('wheel', handleWheel, true)
       canvas.removeEventListener('touchstart', handlePinch, true)
@@ -1030,6 +1134,7 @@ export default function NiivueViewer({
       window.removeEventListener('pointerup', endGesture)
       window.removeEventListener('pointercancel', endGesture)
       window.removeEventListener('blur', endGesture)
+      window.removeEventListener('blur', cancelBox)
       window.clearTimeout(restoreTimer)
       window.clearTimeout(wheelTimer)
       nv.cleanup()
@@ -1236,6 +1341,7 @@ export default function NiivueViewer({
         nv.drawScene()
         currentSceneRef.current = { caseId: currentCaseId, mode }
         loadedSceneKeyRef.current = sceneKey
+        publishZoom(nv)
         publishNavigation(nv, { immediate: true, origin: 'initial' })
         setSceneVersion((version) => version + 1)
         if (!cancelled) setState({ status: 'ready', message: 'Prepared result loaded' })
@@ -1576,7 +1682,7 @@ export default function NiivueViewer({
         Math.max(-90, Math.min(90, Number(nv.scene.renderElevation) + Number(command.deltaElevation || 0))),
       )
     } else if (command.type === 'zoom') {
-      if (mode === '2d') zoomAroundCrosshair(nv, Number(command.factor))
+      if (mode === '2d') zoom2d(nv, Number(command.factor))
       else zoom3d(nv, Number(command.factor))
     } else if (command.type === 'fit') {
       orbitCentreRef.current = null
@@ -1587,6 +1693,7 @@ export default function NiivueViewer({
     }
 
     nv.drawScene()
+    publishZoom(nv)
     publishNavigation(nv)
   }, [navigationCommand?.id, sceneVersion, state.status, sceneKey, mode, framingLocked])
 
@@ -1682,15 +1789,23 @@ export default function NiivueViewer({
       : volumeCenterMM(nv.volumes[0])
     focusOnWorldPoint(nv, target, mode)
     nv.drawScene()
+    publishZoom(nv)
     publishNavigation(nv)
   }, [resetToken, sceneVersion, state.status, mode, sceneKey, clip?.enabled, framingLocked])
 
   return (
     <div className={`niivue-frame niivue-frame--${mode}${compact ? ' niivue-frame--compact' : ''}${guided ? ' niivue-frame--guided' : ''}`}>
-      <canvas ref={canvasRef} aria-label={label} style={state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? { visibility: 'hidden' } : undefined} />
+      <canvas ref={canvasRef} aria-label={label} style={{
+        visibility: state.status !== 'ready' || loadedSceneKeyRef.current !== sceneKey ? 'hidden' : undefined,
+        cursor: interactionMode === 'box-zoom' && !(mode === '2d' && framingLocked) ? 'crosshair' : undefined,
+      }} />
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && showLesion && !differenceMode && renderedSources.includes('pred')}
         mode={mode} calipers={measurementCalipers} marker={selectedLesionWorldMm} />
+      {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (
+        <div aria-hidden="true" className="niivue-zoom-box" style={{ ...zoomBox, position: 'absolute',
+          border: '1px solid #f5ca82', background: '#f5ca8224', pointerEvents: 'none' }} />
+      )}
       {mode === '2d' && showPlaneLabels && (
         <div
           className={`viewer-plane-labels viewer-plane-labels--${activePlane}${planeTiles.length ? ' viewer-plane-labels--placed' : ''}`}

@@ -92,6 +92,7 @@ export default function ToolbenchViewer({
   const onNavigationRef = useRef(onNavigationChange)
   onNavigationRef.current = onNavigationChange
   const [snapshots, setSnapshots] = useState({})
+  const [zoomLevels, setZoomLevels] = useState({})
   const [syncCrosshair, setSyncCrosshair] = useState(null)
   const [syncWindow, setSyncWindow] = useState(null)
   const [commands, setCommands] = useState({})
@@ -167,6 +168,12 @@ export default function ToolbenchViewer({
     onNavigationRef.current?.(aggregate)
   }
 
+  function receiveZoom(plane, scale) {
+    const percent = Number.isFinite(scale) ? Math.round(scale * 100) : null
+    setZoomLevels(current => current[plane]?.sceneKey === sceneKey && current[plane]?.percent === percent
+      ? current : { ...current, [plane]: { sceneKey, percent } })
+  }
+
   const areas = visible.length === 3
     ? '"axial primary coronal" "axial primary secondary" "axial primary sagittal"'
     : visible.length === 2 ? `"${visible[0]} primary ${visible[1]}"` : `"${visible[0]}"`
@@ -198,6 +205,7 @@ export default function ToolbenchViewer({
         const total = snapshot?.totals?.[plane] || 1
         const index = snapshot?.indices?.[plane] || 0
         const ready = Boolean(snapshot)
+        const zoom = ready && zoomLevels[plane]?.sceneKey === sceneKey ? zoomLevels[plane].percent : null
         const shown = visible.includes(plane)
         const only = visible.length === 1
         return <section
@@ -214,6 +222,7 @@ export default function ToolbenchViewer({
             <span className="tb-pane__title"><strong>{TITLES[plane]}</strong><small>{EXPLANATIONS[plane]}</small></span>
             <div className="tb-pane__actions">
               <button type="button" disabled={!ready || framingLocked} aria-label={`Zoom out ${TITLES[plane].toLowerCase()}`} title="Zoom out" onClick={() => command(plane, { type: 'zoom', factor: 1 / 1.2 })}><ZoomOut size={13} /></button>
+              <output className="tb-pane__zoom" aria-label={`${TITLES[plane]} zoom level`} aria-live="off" title="Zoom relative to Fit">{zoom == null ? '—' : `${zoom}%`}</output>
               <button type="button" disabled={!ready || framingLocked} aria-label={`Zoom in ${TITLES[plane].toLowerCase()}`} title="Zoom in" onClick={() => command(plane, { type: 'zoom', factor: 1.2 })}><ZoomIn size={13} /></button>
               <button type="button" disabled={!ready || framingLocked} aria-label={`Fit ${TITLES[plane].toLowerCase()} image`} title="Fit image" onClick={() => command(plane, { type: 'fit' })}><Scan size={13} /></button>
               {activePlane === 'multiplanar' && <button type="button" aria-label={`${maximized === plane ? 'Restore' : 'Maximize'} ${TITLES[plane].toLowerCase()} plane`} title={maximized === plane ? 'Restore layout' : 'Maximize plane'} onClick={() => changeLayout({ maximizedPlane: maximized === plane ? null : plane })}>{maximized === plane ? <Minimize2 size={13} /> : <Maximize2 size={13} />}</button>}
@@ -232,6 +241,7 @@ export default function ToolbenchViewer({
               syncWindow={syncWindow}
               showPlaneLabels={false}
               onNavigationChange={snapshot => receiveNavigation(plane, snapshot)}
+              onZoomChange={scale => receiveZoom(plane, scale)}
               onWindowChange={window => {
                 if (window.sceneKey === sceneKey) setSyncWindow({ ...window, id: ++serial.current })
               }}
