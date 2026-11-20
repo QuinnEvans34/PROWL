@@ -9,6 +9,7 @@ import './styles/assistant.css'
 import './styles/pages.css'
 import './styles/toolbench.css'
 import './styles/workbench-refresh.css'
+import './styles/radiologist-tools.css'
 
 // All routes (/, /workbench, /research, /saved) render inside the shared PROWL shell.
 createRoot(document.getElementById('root')).render(
