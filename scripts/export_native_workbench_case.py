@@ -10,6 +10,9 @@ Inputs
   --case-dir   existing ui/public/cases/<case> directory (1.5 mm prepared files)
   --results    ui/public/cases/results.json (updated in place for this case)
 
+Use --full-only with an existing native crop to add the full native 3D CT
+without modifying the crop, labels, measurements, or 2 mm full export.
+
 The crop never uses reference labels: slice range comes from the saved
 prediction's pancreas extent (+/- margin), in-plane extent from the body outline.
 """
@@ -18,8 +21,10 @@ from __future__ import annotations
 import argparse
 import gzip
 import json
-import struct
+import os
 import shutil
+import struct
+import tempfile
 from pathlib import Path
 
 import nibabel as nib
@@ -114,26 +119,90 @@ def check_difference_codes(case_dir: Path) -> None:
             raise SystemExit(f'Legacy {name} difference codes differ from 1/2/3 convention ({agreement:.4f})')
 
 
+def read_results(path: Path, case_id: str) -> dict:
+    try:
+        results = json.loads(path.read_text())
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise SystemExit(f'Cannot read results manifest {path}: {exc}') from exc
+    if not isinstance(results, dict) or not isinstance(results.get(case_id), dict):
+        raise SystemExit(f'Results manifest {path} has no valid entry for {case_id}')
+    return results
+
+
+def export_full_ct(native: nib.Nifti1Image, case_dir: Path, results_path: Path, dry_run: bool) -> None:
+    case_id = case_dir.name
+    entry = read_results(results_path, case_id)[case_id]
+    files = entry.get('files')
+    if not isinstance(files, dict) or entry.get('display_resolution') != 'native' or files.get('ct') != f'{case_id}/ct.nii.gz':
+        raise SystemExit('Export the native CT crop for this study before adding its full 3D volume')
+    crop = nib.load(case_dir / 'ct.nii.gz')
+    if len(native.shape) != 3 or len(crop.shape) != 3:
+        raise SystemExit('The source CT and its native crop must be 3D')
+    crop_in_full = np.linalg.solve(native.affine, crop.affine)
+    start = np.rint(crop_in_full[:3, 3]).astype(int)
+    end = start + np.asarray(crop.shape)
+    if (not np.allclose(crop_in_full[:3, :3], np.eye(3), rtol=0, atol=1e-5)
+            or not np.allclose(crop_in_full[:3, 3], start, rtol=0, atol=1e-3)
+            or np.any(start < 0) or np.any(end > native.shape)):
+        raise SystemExit('The source CT grid does not contain the existing native crop')
+
+    values = np.asarray(native.dataobj, dtype=np.float32)
+    limits = np.iinfo(np.int16)
+    if not limits.min <= values.min() <= values.max() <= limits.max:
+        raise SystemExit('The source CT has non-finite or out-of-range intensities')
+    full_hu = np.rint(values).astype(np.int16)
+    region = tuple(slice(a, b) for a, b in zip(start, end))
+    expected_crop_hu = np.clip(full_hu[region], -1024, 3071)
+    if (not np.isclose(crop.dataobj.slope, CT_SLOPE, rtol=1e-6, atol=0)
+            or crop.dataobj.inter != CT_INTER
+            or not np.array_equal(expected_crop_hu, crop.dataobj.get_unscaled())):
+        raise SystemExit('The source CT intensities do not match the existing native crop')
+
+    print(f'{case_id}: full native CT {native.shape} @ {native.header.get_zooms()} mm')
+    if dry_run:
+        return
+
+    filename = 'ct_full_native.nii.gz'
+    image = nib.Nifti1Image(full_hu, native.affine)
+    image.header.set_xyzt_units('mm')
+    image.header.set_slope_inter(CT_SLOPE, CT_INTER)
+    with tempfile.TemporaryDirectory(dir=case_dir) as staging:
+        image_path = Path(staging) / filename
+        nib.save(image, image_path)
+        os.replace(image_path, case_dir / filename)
+
+    # Publish the manifest after the volume is fully available.
+    results = read_results(results_path, case_id)
+    results[case_id]['files']['ct_full_native'] = f'{case_id}/{filename}'
+    with tempfile.TemporaryDirectory(dir=results_path.parent) as staging:
+        manifest = Path(staging) / results_path.name
+        manifest.write_text(json.dumps(results, indent=1) + '\n')
+        os.replace(manifest, results_path)
+    print(f'  wrote {filename} and updated {results_path.name}')
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--ct', type=Path, required=True)
-    parser.add_argument('--labels', type=Path, required=True)
+    parser.add_argument('--labels', type=Path)
     parser.add_argument('--case-dir', type=Path, required=True)
     parser.add_argument('--results', type=Path, required=True)
+    parser.add_argument('--full-only', action='store_true', help='add the full native CT without rebuilding the crop')
     parser.add_argument('--dry-run', action='store_true')
     args = parser.parse_args()
 
+    if not args.full_only and args.labels is None:
+        parser.error('--labels is required unless --full-only is used')
+
     case_dir: Path = args.case_dir
     case_id = case_dir.name
-    try:
-        results = json.loads(args.results.read_text())
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise SystemExit(f'Cannot read results manifest {args.results}: {exc}') from exc
-    if not isinstance(results, dict) or not isinstance(results.get(case_id), dict):
-        raise SystemExit(f'Results manifest {args.results} has no valid entry for {case_id}')
-    entry = results[case_id]
-
     native = nib.load(args.ct)
+    if args.full_only:
+        export_full_ct(native, case_dir, args.results, args.dry_run)
+        return
+
+    results = read_results(args.results, case_id)
+    entry = results[case_id]
     prepared_pred = nib.load(prepared(case_dir, 'pred.nii.gz'))
     prepared_gt = nib.load(prepared(case_dir, 'gt.nii.gz'))
     zooms = [round(float(z), 4) for z in native.header.get_zooms()[:3]]
