@@ -4,6 +4,9 @@ export function preparedViewerCtPath({ caseData, mode = '2d', showFull = false, 
     if (mode === '3d' && preferNativeFull && files?.ct_full_native) return files.ct_full_native
     if (files?.ct_full) return files.ct_full
   }
+  // Native studies keep a whole-body-width `ct` for 2D; the 3D region scene uses a
+  // pancreas-box crop so "Region" is a real close-up and loads a fraction of the voxels.
+  if (mode === '3d' && files?.ct_region) return files.ct_region
   return files?.ct || ''
 }
 
