@@ -3,6 +3,7 @@ import { REVIEW_COLORS } from '../lib/viewerLayers.js'
 import { structureQuestions } from '../lib/structureQuestions.js'
 import LesionDimensions from './LesionDimensions.jsx'
 import PancreasDimensions from './PancreasDimensions.jsx'
+import { LesionCharacteristics, StructuredSummary, VesselRelationship } from './FindingsInsights.jsx'
 
 function fmt(value, digits = 2) {
   return Number.isFinite(value) ? value.toFixed(digits) : null
@@ -16,6 +17,7 @@ function Unavailable({ children = 'Unavailable' }) {
 // unavailable — never zero, never recomputed from a visual bounding box.
 export default function FindingsPanel({
   caseId,
+  insights = null,
   caseData,
   hasPrediction,
   predictionFile,
@@ -118,6 +120,12 @@ export default function FindingsPanel({
         {(onSelectPancreas || onInspectPancreas) && <PancreasDimensions measurementState={measurementState}
           selected={selectedPancreas} onSelect={onSelectPancreas} onInspect={onInspectPancreas} sourceSlice={sourceSlice} />}
       </details>
+
+      {insights && hasPrediction && <>
+        <LesionCharacteristics insights={insights} />
+        <VesselRelationship insights={insights} />
+        <StructuredSummary insights={insights} studyLabel={studyLabel} />
+      </>}
 
       <ul className="pw-structures" aria-label="Structures in this prediction">
         <li className="pw-structure">
