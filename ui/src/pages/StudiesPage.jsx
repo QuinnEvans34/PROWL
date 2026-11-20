@@ -91,7 +91,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
               <select value={kind} onChange={(event) => setKind(event.target.value)}>
                 <option value="all">All studies</option>
                 <option value="prepared">Prepared</option>
-                <option value="validation">Validation examples</option>
+                <option value="validation">Test-set examples</option>
               </select>
             </label>
           </div>
@@ -120,7 +120,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
                         <span>
                           <strong className="pw-mono-id">{study.displayId}</strong>
                           <small>
-                            {study.kind === 'validation' ? 'Validation example' : 'Prepared study'}
+                            {study.kind === 'validation' ? 'Test-set example' : 'Prepared study'}
                             {!sharedSpacing && ` · ${study.spacingLabel}`}
                             {active && ' · Open in workbench'}
                           </small>
@@ -160,11 +160,11 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
           </table>
         </div>
         <p className="pw-fineprint">
-          Validation examples open with their saved prediction; prepared studies open on the CT alone until you show the saved prediction.
+          Test-set examples open with their saved prediction; prepared studies open on the CT alone until you show the saved prediction.
           Reference annotations, when available, stay hidden until you choose to compare.
         </p>
         <p className="pw-fineprint">
-          Study IDs come from the prepared PanTS research set. No patient names or demographics are shown or stored.
+          Study IDs come from the official PanTS test set (PanTS-te), which was used for the held-out evaluation. No patient names or demographics are shown or stored.
           “Marked reviewed” labels are local browser notes, not durable review records.
         </p>
       </section>

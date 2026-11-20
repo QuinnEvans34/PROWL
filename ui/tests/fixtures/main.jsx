@@ -9,18 +9,25 @@ import '../../src/styles/workbench.css'
 import '../../src/styles/assistant.css'
 import '../../src/styles/pages.css'
 import '../../src/styles/toolbench.css'
+import '../../src/styles/workbench-refresh.css'
 import GuidedEvidencePanel from '../../src/components/GuidedEvidencePanel.jsx'
 import { workspaceProps } from './workspace.js'
 
 function Fixture() {
   const [caseId, setCaseId] = useState('SYNTHETIC_A')
-  const summaryVariant = new URLSearchParams(location.search).get('summary')
+  const search = new URLSearchParams(location.search)
+  const summaryVariant = search.get('summary')
+  const props = workspaceProps({ caseId })
+  if (search.get('study') === 'test-set') {
+    props.isCurated = true
+    props.caseData = { ...props.caseData, files: { ...props.caseData.files, pred: 'synthetic-prediction.nii.gz' } }
+  }
   if (summaryVariant === 'page') return <main><p>Synthetic summary fixture — no model or patient data</p><LiteratureSearchPanel variant="page" /></main>
   return <>
     <header>SYNTHETIC UI BASELINE — viewer stub, no patient data
       <button onClick={() => setCaseId(caseId === 'SYNTHETIC_A' ? 'SYNTHETIC_B' : 'SYNTHETIC_A')}>Switch synthetic case</button>
     </header>
-    <div style={{ height: 'calc(100vh - 40px)' }}><ReviewWorkspace {...workspaceProps({ caseId })} askPanel={summaryVariant === 'panel' ? <LiteratureSearchPanel variant="panel" /> : null} /></div>
+    <div style={{ height: 'calc(100vh - 40px)' }}><ReviewWorkspace {...props} askPanel={summaryVariant === 'panel' ? <LiteratureSearchPanel variant="panel" /> : null} /></div>
     {/* Earlier guided demonstrations, as on the Research page's explicit demo entry. */}
     <section aria-label="Earlier guided demonstrations"><GuidedEvidencePanel key={caseId} /></section>
   </>

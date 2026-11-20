@@ -39,7 +39,8 @@ it('clears old volumes while the next displayed mask is being checked', () => {
   expect(screen.getAllByText('72.00').length).toBeGreaterThan(0)
   rerender(<FindingsPanel {...props} measurementState={{ status: 'loading' }} />)
   expect(screen.queryByText('72.00')).toBeNull()
-  expect(screen.getAllByText('Checking…')).toHaveLength(3)
+  // Summary card (lesion + pancreas) plus the structures list and provenance facts.
+  expect(screen.getAllByText('Checking…')).toHaveLength(5)
 })
 
 it('shows per-lesion lengths in centimeters and clears them when the prediction changes', () => {
@@ -83,7 +84,8 @@ it('identifies source-grid calipers and exports the verified run mask from its c
 it('exposes unavailable lesion status on a verified run with no flag or verified measurements', () => {
   render(<FindingsPanel {...props} verifiedRun finding={{}}
     measurementState={{ status: 'unavailable', reason: 'The outline geometry could not be measured.' }} />)
-  expect(screen.getByText('Lesion status unavailable')).toBeTruthy()
+  expect(within(screen.getByRole('list', { name: 'Structures in this prediction' })).getByText('Lesion status unavailable')).toBeTruthy()
+  expect(within(screen.getByRole('region', { name: 'Finding summary' })).getByText('Lesion status unavailable')).toBeTruthy()
   expect(screen.getByText('The outline geometry could not be measured.')).toBeTruthy()
   expect(screen.queryByText('None predicted')).toBeNull()
   expect(screen.queryByRole('link', { name: 'Export prediction (NIfTI)', hidden: true })).toBeNull()
@@ -92,13 +94,13 @@ it('exposes unavailable lesion status on a verified run with no flag or verified
 it('displays zero total lesion volume without equating it with absence of disease', () => {
   render(<FindingsPanel {...props} finding={{ ...legacy, lesionFlagged: false }}
     measurementState={{ status: 'ready', measurement: { ...ready.measurement, lesionMl: 0, lesionVoxels: 0 } }} />)
-  expect(screen.getByText('0.00')).toBeTruthy()
+  expect(within(screen.getByRole('list', { name: 'Structures in this prediction' })).getByText('0.00')).toBeTruthy()
   expect(screen.getByText(/does not establish that no lesion is present/)).toBeTruthy()
 })
 
 it('retains legacy callers while measurements are absent', () => {
   render(<FindingsPanel {...props} />)
-  expect(screen.getByText('15.63')).toBeTruthy()
+  expect(within(screen.getByRole('list', { name: 'Structures in this prediction' })).getByText('15.63')).toBeTruthy()
   expect(screen.getByText('31')).toBeTruthy()
   expect(screen.getByText('0.95')).toBeTruthy()
 })

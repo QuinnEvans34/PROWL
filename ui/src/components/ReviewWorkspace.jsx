@@ -17,6 +17,7 @@ import {
   Maximize,
   Maximize2,
   Minimize2,
+  MoreHorizontal,
   Move,
   PanelLeftClose,
   PanelLeftOpen,
@@ -54,7 +55,7 @@ const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
 const ToolbenchViewer = lazy(() => import('./ToolbenchViewer.jsx'))
 
 // Display defaults; the 3D scene selector replaced the older emphasis presets.
-const DEFAULT_OVERLAY_OPACITY = 0.62
+const DEFAULT_OVERLAY_OPACITY = 0.3
 const DEFAULT_CT_OPACITY = 0.44
 
 const CT_WINDOW_OPTIONS = [
@@ -254,6 +255,14 @@ export default function ReviewWorkspace({
   const [panelTab, setPanelTab] = useState('findings')
   const [snapOpen, setSnapOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
+  const moreRef = useRef(null)
+  useEffect(() => {
+    if (!moreOpen) return undefined
+    const close = event => { if (!moreRef.current?.contains(event.target)) setMoreOpen(false) }
+    document.addEventListener('pointerdown', close)
+    return () => document.removeEventListener('pointerdown', close)
+  }, [moreOpen])
   const panelWide = layout.panelWidth >= 420
   const [twoDVisited, setTwoDVisited] = useState(false)
   const [threeDZoom, setThreeDZoom] = useState(null)
@@ -912,7 +921,7 @@ export default function ReviewWorkspace({
           )}
           <div className="pw-studybar__id">
             <h1>{studyLabel}</h1>
-            <span className="pw-tag">{localCt ? 'This tab only' : verifiedPrediction ? 'Verified source CT' : isCurated ? 'Validation example' : 'Prepared study'}</span>
+            <span className="pw-tag">{localCt ? 'This tab only' : verifiedPrediction ? 'Verified source CT' : isCurated ? 'Test-set example' : 'Prepared study'}</span>
           </div>
           <dl className="pw-studybar__meta">
             <div><dt>Series</dt><dd>{localCt ? 'Local source CT' : `Abdomen CT · ${verifiedPrediction ? 'Source' : 'Prepared'}`}</dd></div>
@@ -921,8 +930,8 @@ export default function ReviewWorkspace({
           </dl>
           <div className="pw-studybar__actions">
             {isCurated && (
-              <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={onOpenComparison} title="Open the three-view validation comparison">
-                <Columns2 size={14} aria-hidden="true" /> Validation view
+              <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={onOpenComparison} title="Open the three-view comparison with the reference">
+                <Columns2 size={14} aria-hidden="true" /> Three-view compare
               </button>
             )}
             <button type="button" className="pw-btn pw-btn--primary pw-btn--sm" onClick={() => openPanel('summary')}>
@@ -974,8 +983,10 @@ export default function ReviewWorkspace({
               setLayout({ maximizedPlane: value === 'multiplanar' ? null : value, hiddenPlanes: [] })
             }}
             options={[["multiplanar", "All planes", { disabled: Boolean(verifiedPrediction || localCt) }], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
+          <span className="pw-toolbar__break" aria-hidden="true" />
           <Segmented
             label="Mouse tool"
+            className="pw-segmented--icons"
             value={viewMode === 'split' && (pan || boxZoom) ? state.interactionMode : is2dLike ? twoDInteractionMode : state.interactionMode}
             onChange={selectMouseTool}
             options={[
@@ -1025,25 +1036,29 @@ export default function ReviewWorkspace({
           >
             <Settings2 size={16} aria-hidden="true" />
           </button>
+          <div className="pw-more" ref={moreRef}>
+            <button type="button" className={`pw-icon-btn${moreOpen ? ' active' : ''}`} aria-label="Workspace options"
+              title="Workspace options" aria-haspopup="true" aria-expanded={moreOpen} onClick={() => setMoreOpen(open => !open)}>
+              <MoreHorizontal size={16} aria-hidden="true" />
+            </button>
+            {moreOpen && <div className="pw-more__menu" role="group" aria-label="Workspace layout"
+              onKeyDown={event => { if (event.key === 'Escape') { event.stopPropagation(); setMoreOpen(false) } }}>
+              <button type="button" className="pw-more__item" aria-pressed={panelOpen}
+                onClick={() => setPanelOpen(!panelOpen)}>Expert panel</button>
+              <button type="button" className="pw-more__item" aria-pressed={focusMode}
+                onClick={() => { toggleFocus(); setMoreOpen(false) }}>{focusMode ? 'Exit focus' : 'Focus workspace'}</button>
+              <button type="button" className="pw-more__item" onClick={() => { toggleFullscreen(); setMoreOpen(false) }}
+                title={isFullscreen ? 'Exit display full screen (Esc)' : fullscreenAvailable ? 'Fill the entire display and hide browser controls (Esc to exit)' : 'Display full screen needs a supported browser'}>
+                <Expand size={13} aria-hidden="true" /> {isFullscreen ? 'Exit full screen' : 'Full screen'}</button>
+              <span className="pw-more__divider" aria-hidden="true" />
+              <button type="button" className="pw-more__item" onClick={() => {
+                resetLayout(); setFocusMode(false); setMobilePanelOpen(false); setMobileStudiesOpen(false)
+                dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' }); setMoreOpen(false)
+              }}>Restore layout</button>
+            </div>}
+          </div>
         </div>
 
-        <div className="pw-workspace-actions" role="group" aria-label="Workspace layout">
-          <span className="pw-workspace-actions__label">IMAGING WORKSPACE</span>
-          {is2dLike && !inspecting && !verifiedPrediction && !localCt && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.linked}
-            onClick={() => setLayout({ linked: !layout.linked })}>Linked crosshairs</button>}
-          {hasPrediction && !inspecting && <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={layout.measurementsVisible}
-            onClick={() => setLayout({ measurementsVisible: !layout.measurementsVisible })}>Volume overlay</button>}
-          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={panelOpen}
-            onClick={() => setPanelOpen(!panelOpen)}>Expert panel</button>
-          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" aria-pressed={focusMode}
-            onClick={toggleFocus}>{focusMode ? 'Exit focus' : 'Focus workspace'}</button>
-          <button type="button" className="pw-btn pw-btn--sm pw-btn--secondary" onClick={toggleFullscreen}
-            title={isFullscreen ? 'Exit display full screen (Esc)' : fullscreenAvailable ? 'Fill the entire display and hide browser controls (Esc to exit)' : 'Display full screen needs a supported browser'}><Expand size={13} aria-hidden="true" /> {isFullscreen ? 'Exit full screen' : 'Full screen'}</button>
-          <button type="button" className="pw-btn pw-btn--sm pw-btn--ghost" onClick={() => {
-            resetLayout(); setFocusMode(false); setMobilePanelOpen(false); setMobileStudiesOpen(false)
-            dispatch({ type: 'SET_ACTIVE_PLANE', value: 'multiplanar' })
-          }}>Restore layout</button>
-        </div>
         {fullscreenError && <p className="pw-toolbench-notice" role="status">{fullscreenError}</p>}
 
           {state.evidenceMode === 'ct' && !hasPrediction && (
@@ -1127,6 +1142,7 @@ export default function ReviewWorkspace({
                   {twoDVisited && <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={twoDInteractionMode}
                     framingLocked={framingStudy === caseId} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked}
+                    onLinkedChange={verifiedPrediction || localCt ? null : linked => setLayout({ linked })}
                     singlePane={Boolean(verifiedPrediction || localCt)} onNavigationChange={setNavigation} label={`${viewerLabel} · 2D planes`} />}
                 </section>
                 {inspectionProps && <section className="pw-toolbench-scene__inspection" aria-label="Measured CT">
@@ -1141,11 +1157,6 @@ export default function ReviewWorkspace({
                 </section>
               </div>
           </ViewerSuspense>
-          {layout.measurementsVisible && predictionShown && !inspecting && (
-            <div className="pw-toolbench-measure-overlay" aria-label="Displayed prediction measurements">
-              <MeasurementReadout state={measurementState} compact showEvidence={false} />
-            </div>
-          )}
 
           {state.selectedObject && !lesionInReview && !pancreasInReview && (
             <StructurePopover
@@ -1170,24 +1181,6 @@ export default function ReviewWorkspace({
           )}
 
 
-          {comparing && (state.sourceFocus === 'difference' || state.sourceFocus === 'both') && (
-            <div className="pw-viewer-legend" aria-label="Colour key">
-              {state.sourceFocus === 'difference' ? (
-                <>
-                  <span><i style={{ '--key': REVIEW_COLORS.difference.agreement }} />Agreement</span>
-                  <span><i style={{ '--key': REVIEW_COLORS.difference.predOnly }} />Prediction only</span>
-                  <span><i style={{ '--key': REVIEW_COLORS.difference.gtOnly }} />Reference only</span>
-                </>
-              ) : (
-                <>
-                  <span><i style={{ '--key': REVIEW_COLORS.pred.pancreas }} />Prediction pancreas</span>
-                  <span><i style={{ '--key': REVIEW_COLORS.pred.lesion }} />Prediction lesion</span>
-                  <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.pancreas }} />Reference pancreas</span>
-                  <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.lesion }} />Reference lesion</span>
-                </>
-              )}
-            </div>
-          )}
 
           {comparing && state.sourceFocus === 'difference' && viewMode !== '2d' && <p className="pw-difference-note" role="note">Smoothed 3D surfaces may hide thin differences. Check the exact overlays in 2D.</p>}
           <div className="pw-viewer-help">
@@ -1325,8 +1318,32 @@ export default function ReviewWorkspace({
           )}
         </div>
 
-        {layout.measurementsVisible && !inspecting && <div className="pw-toolbench-measure-strip">
-          <MeasurementReadout state={measurementState} />
+        {!inspecting && hasPrediction && <div className="pw-toolbench-measure-strip">
+          <MeasurementReadout state={measurementState} compact showEvidence={false} label="Prediction measurements" />
+            {comparing && (state.sourceFocus === 'difference' || state.sourceFocus === 'both') && (
+              <div className="pw-viewer-legend pw-viewer-legend--inline" aria-label="Colour key">
+                {state.sourceFocus === 'difference' ? (
+                  <>
+                    <span><i style={{ '--key': REVIEW_COLORS.difference.agreement }} />Agreement</span>
+                    <span><i style={{ '--key': REVIEW_COLORS.difference.predOnly }} />Prediction only</span>
+                    <span><i style={{ '--key': REVIEW_COLORS.difference.gtOnly }} />Reference only</span>
+                  </>
+                ) : (
+                  <>
+                    <span><i style={{ '--key': REVIEW_COLORS.pred.pancreas }} />Prediction pancreas</span>
+                    <span><i style={{ '--key': REVIEW_COLORS.pred.lesion }} />Prediction lesion</span>
+                    <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.pancreas }} />Reference pancreas</span>
+                    <span><i className="pw-viewer-legend__ref" style={{ '--key': REVIEW_COLORS.gt.lesion }} />Reference lesion</span>
+                  </>
+                )}
+              </div>
+            )}
+          {comparing && (Number.isFinite(overlap.pancreas) || Number.isFinite(overlap.lesion)) && (
+            <dl className="pw-agreement" aria-label="Agreement with reference">
+              <div><dt>Pancreas Dice</dt><dd className="pw-num">{Number.isFinite(overlap.pancreas) ? overlap.pancreas.toFixed(3) : '—'}</dd></div>
+              <div><dt>Lesion Dice</dt><dd className="pw-num">{Number.isFinite(overlap.lesion) ? overlap.lesion.toFixed(3) : caseData.gt_has_lesion || caseData.pred_has_lesion ? '—' : 'No lesion in either'}</dd></div>
+            </dl>
+          )}
         </div>}
         {is3dLike && scene3d !== 'surfaces' && (
           <div className="pw-slicebar pw-slicebar--cut" role="group" aria-label="CT peel">
@@ -1400,7 +1417,8 @@ export default function ReviewWorkspace({
           </button>
         </header>
         <div className="pw-toolbench-pinned-finding" aria-label="Current model finding">
-          <span className="pw-swatch" style={{ background: REVIEW_COLORS.pred.lesion }} aria-hidden="true" />
+          <span className="pw-swatch" style={{ background: selectedPancreas ? REVIEW_COLORS.pred.pancreas
+            : selectedFinding || finding.lesionFlagged === true ? REVIEW_COLORS.pred.lesion : 'var(--pw-text-faint)' }} aria-hidden="true" />
           <div><strong>{selectedFinding ? selectedPancreas ? 'Predicted pancreas' : `Predicted lesion ${selectedLesionNumber}`
             : hasPrediction ? finding.lesionFlagged === true ? 'Possible lesion · review required'
               : finding.lesionFlagged === false ? 'No lesion predicted' : 'Lesion status unavailable'

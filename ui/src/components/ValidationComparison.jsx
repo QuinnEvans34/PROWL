@@ -56,7 +56,7 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
         </div>
         <div className="pw-compare__controls">
           <label className="pw-select">
-            <span>Validation example</span>
+            <span>Test-set example</span>
             <select value={caseId} onChange={(event) => onSelectCase(event.target.value)}>
               {caseOptions.map(([id, label]) => <option value={id} key={id}>{id.replace('PanTS_', 'PanTS ')} · {label}</option>)}
             </select>
@@ -132,7 +132,7 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
             {caseData.gt_has_lesion ? <BadgeCheck size={18} /> : <CircleAlert size={18} />}
           </span>
           <div>
-            <p className="pw-eyebrow">What this validation example shows · {profile.eyebrow}</p>
+            <p className="pw-eyebrow">What this test-set example shows · {profile.eyebrow}</p>
             <h2>{profile.interpretation}</h2>
             <dl>
               <div><dt>Pancreas</dt><dd>{profile.strength}</dd></div>

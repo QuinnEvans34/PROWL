@@ -1,0 +1,94 @@
+/* Workbench visual refresh (November 19, 2026).
+   Spec: docs/capstone/interface/WORKBENCH-VISUAL-REFRESH-SPEC-20261119.md
+   Loaded last so it can tighten the toolbench without editing every older rule. */
+
+/* ---- Toolbar: one quiet row ------------------------------------------------ */
+.pw-toolbench .pw-toolbar { flex-wrap: nowrap; gap: 8px; min-height: 46px; padding: 6px 12px; overflow: visible; }
+.pw-toolbench .pw-toolbar > .pw-toolbar__spacer { flex: 1 1 0; min-width: 4px; }
+.pw-toolbar .pw-segmented button[aria-pressed='true'] { background: var(--pw-accent-soft); color: var(--pw-text); box-shadow: inset 0 0 0 1px var(--pw-accent); }
+.pw-segmented--icons button { padding: 0 9px; min-width: 32px; justify-content: center; }
+.pw-segmented--icons button:not([aria-label='Pan']) .pw-seg-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.pw-toolbench .pw-toolbench-opacity { grid-template-columns: auto 84px; align-items: center; column-gap: 8px; font-size: 11px; }
+.pw-toolbench .pw-toolbench-opacity > span { gap: 6px; }
+/* Wide screens: one row. Laptop widths: two deliberate rows (view, then tools). */
+.pw-toolbar__break { display: none; }
+@media (max-width: 1679px) {
+  .pw-toolbench .pw-toolbar { flex-wrap: wrap; row-gap: 6px; }
+  .pw-toolbar__break { display: block; flex-basis: 100%; height: 0; }
+}
+
+/* Overflow menu for workspace layout actions. */
+.pw-more { position: relative; display: inline-flex; }
+.pw-more__menu {
+  position: absolute; top: calc(100% + 6px); right: 0; z-index: 40; min-width: 196px;
+  display: grid; gap: 2px; padding: 6px; border: 1px solid var(--pw-border); border-radius: 8px;
+  background: rgba(21, 24, 29, 0.98); box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5);
+}
+.pw-more__item {
+  display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 10px; border: 0; border-radius: 5px;
+  background: transparent; color: var(--pw-text-muted); font: inherit; font-size: 12.5px; text-align: left; cursor: pointer;
+}
+.pw-more__item:hover, .pw-more__item:focus-visible { background: var(--pw-hover); color: var(--pw-text); outline: none; }
+.pw-more__item[aria-pressed='true'] { color: var(--pw-text); }
+.pw-more__item[aria-pressed='true']::after { content: ''; width: 6px; height: 6px; margin-left: auto; border-radius: 50%; background: var(--pw-accent); }
+.pw-more__divider { height: 1px; margin: 4px 2px; background: var(--pw-border); }
+
+/* ---- Image panes ------------------------------------------------------------ */
+/* Pane controls appear on hover or keyboard focus; the plane title stays. */
+.tb-pane__actions { opacity: 0; transition: opacity 140ms var(--pw-ease); }
+.tb-pane:hover .tb-pane__actions, .tb-pane:focus-within .tb-pane__actions, .tb-pane--active .tb-pane__actions { opacity: 1; }
+@media (hover: none) { .tb-pane__actions { opacity: 1; } }
+.tb-pane__header { flex-basis: 30px; }
+.tb-pane__title strong { font-size: 12px; }
+.tb-pane__title small, .tb-viewer__context small { font-size: 11px; }
+.tb-viewer__rail { font-size: 11.5px; }
+.tb-viewer__rail button { font-size: 11px; }
+
+/* Interaction hint: top centre of the viewer, never over a pane's image. */
+.pw-viewer__hint { top: 7px; bottom: auto; right: auto; left: 50%; transform: translateX(-50%); z-index: 6; animation-delay: 4s; white-space: nowrap; }
+.pw-viewer--slice-tools > .pw-viewer__hint { bottom: auto; }
+
+/* ---- Bottom bar: layers, compare, volumes and agreement ------------------------ */
+.pw-toolbench .pw-layerbar { padding: 6px 12px; min-height: 42px; }
+.pw-toolbench-measure-strip {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding: 6px 14px;
+}
+.pw-toolbench-measure-strip .pw-measurements--compact { max-width: none; padding: 0; background: transparent; border: 0; }
+.pw-toolbench-measure-strip .pw-measurements--compact .pw-measurements__values { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; }
+.pw-toolbench-measure-strip .pw-measurements__value { display: flex; align-items: baseline; gap: 8px; }
+.pw-toolbench-measure-strip .pw-measurements__value strong { font-size: 16px; }
+.pw-toolbench-measure-strip .pw-measurements__status { font-size: 11px; }
+.pw-agreement { display: flex; gap: 22px; margin: 0 0 0 auto; padding-left: 18px; border-left: 1px solid var(--pw-border); }
+.pw-agreement div { display: flex; align-items: baseline; gap: 8px; }
+.pw-agreement dt { color: var(--pw-text-faint); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; }
+.pw-agreement dd { margin: 0; color: var(--pw-text); font-size: 16px; font-weight: 600; }
+
+/* ---- Side panel: lead with the answer ------------------------------------------ */
+.pw-finding-summary { display: grid; gap: 10px; margin: 0; padding: 12px 14px; border: 1px solid var(--pw-border); border-radius: 10px; background: var(--pw-surface); }
+.pw-finding-summary header { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 8px; }
+.pw-finding-summary header small { grid-column: 2; color: var(--pw-text-faint); font-size: 11px; }
+.pw-finding-summary header strong { font-size: 14px; color: var(--pw-text); }
+.pw-finding-summary__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pw-text-faint); }
+.pw-finding-summary.is-flagged .pw-finding-summary__dot { background: #f96363; box-shadow: 0 0 0 3px rgb(249 99 99 / 18%); }
+.pw-finding-summary dl { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; margin: 0; }
+.pw-finding-summary dl div { display: grid; gap: 2px; }
+.pw-finding-summary dt { color: var(--pw-text-faint); font-size: 11px; }
+.pw-finding-summary dd { margin: 0; color: var(--pw-text); font-size: 16px; font-weight: 600; }
+.pw-section { margin: 0 0 10px; }
+.pw-section > summary { cursor: pointer; padding: 4px 0 8px; color: var(--pw-text-muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; list-style-position: inside; }
+.pw-disclosure--quiet > summary { color: var(--pw-text-faint); font-size: 12px; }
+
+/* Bottom-bar status stays on one line. */
+.pw-toolbench-measure-strip .pw-measurements__status { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.pw-toolbench-measure-strip .pw-measurements__status > span { display: inline-flex; gap: 6px; align-items: baseline; }
+
+/* Study bar: keep metadata readable instead of truncating mid-word. */
+.pw-studybar__meta dd { max-width: none; white-space: nowrap; }
+@media (max-width: 1500px) { .pw-studybar__meta > div:nth-child(3) { display: none; } }
+.pw-toolbench-measure-strip .pw-measurements--compact .pw-measurements__status { flex-basis: auto; margin-left: 4px; font-size: 11px; }
+.pw-toolbench-measure-strip .pw-measurements--compact .pw-measurements__status small { font-size: 11px; }
+.pw-toolbench-measure-strip .pw-measurements--compact .pw-measurements__value > span { font-size: 11px; }
+.pw-findings .pw-finding-summary + .pw-section { margin-top: 4px; }
+.pw-toolbench-measure-strip .pw-measurements--compact { flex: 0 1 auto; width: auto; }
+.pw-viewer-legend.pw-viewer-legend--inline { position: static; inset: auto; margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: var(--pw-text-muted); }
+.pw-viewer-legend--inline .pw-viewer-legend__ref { background: transparent; border: 1.5px dashed var(--key); }

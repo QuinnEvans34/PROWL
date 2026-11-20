@@ -195,7 +195,7 @@ export default function ToolbenchViewer({
           {framingLocked ? <LockKeyhole size={13} aria-hidden="true" /> : <LockKeyholeOpen size={13} aria-hidden="true" />}
           Lock framing
         </button>
-        {onLinkedChange ? <button className="tb-link" type="button" aria-pressed={linked} onClick={() => onLinkedChange(!linked)} title="Link anatomical crosshairs across planes"><Link2 size={13} />{linked ? 'Linked' : 'Independent'}</button> : <span className="tb-link"><Link2 size={13} />{linked ? 'Linked crosshairs' : 'Independent planes'}</span>}
+        {onLinkedChange ? <button className="tb-link" type="button" aria-label="Linked crosshairs" aria-pressed={linked} onClick={() => onLinkedChange(!linked)} title="Link anatomical crosshairs across planes"><Link2 size={13} />{linked ? 'Linked' : 'Independent'}</button> : <span className="tb-link"><Link2 size={13} />{linked ? 'Linked crosshairs' : 'Independent planes'}</span>}
         {hiddenPlanes.length > 0 && activePlane === 'multiplanar' && !maximized && <button type="button" onClick={() => changeLayout({ hiddenPlanes: [] })}><Eye size={13} />Restore planes</button>}
         {maximized && activePlane === 'multiplanar' && <button type="button" onClick={() => changeLayout({ maximizedPlane: null })}><Minimize2 size={13} />Restore layout</button>}
       </div>

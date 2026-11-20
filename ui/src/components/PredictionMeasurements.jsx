@@ -105,13 +105,13 @@ function Evidence({ measurement }) {
   </details>
 }
 
-export function MeasurementReadout({ state: input, compact = false, showEvidence = !compact, className = '' }) {
+export function MeasurementReadout({ state: input, compact = false, showEvidence = !compact, className = '', label = null }) {
   const state = input?.status === 'ready' ? measurementState(input.measurement, input.identity) : input
   const ready = state?.status === 'ready'
   const loading = state?.status === 'loading'
   const measurement = ready ? state.measurement : null
   return <section className={`pw-measurements${compact ? ' pw-measurements--compact' : ''} ${className}`}
-    aria-label={compact ? 'Image measurement overlay' : 'Prediction measurements'} aria-live={compact ? undefined : 'polite'} aria-busy={loading}>
+    aria-label={label || (compact ? 'Image measurement overlay' : 'Prediction measurements')} aria-live={compact ? undefined : 'polite'} aria-busy={loading}>
     <div className="pw-measurements__values">
       <div className="pw-measurements__value" title="Volume of the predicted pancreas outline, including lesion labels; whole-organ coverage remains unverified.">
         <span><i className="pw-measurements__dot pw-measurements__dot--pancreas" aria-hidden="true" />Pancreas outline</span>
