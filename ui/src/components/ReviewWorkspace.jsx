@@ -2,6 +2,9 @@ import { cloneElement, isValidElement, lazy, Suspense, useCallback, useEffect, u
 import {
   Activity,
   Box,
+  PencilLine,
+  Spline,
+  Video,
   ChevronDown,
   CircleHelp,
   ChevronLeft,
@@ -50,6 +53,10 @@ import InspectionSourceControls from './InspectionSourceControls.jsx'
 import { verifiedInspectionSource } from '../lib/viewerImageDetails.js'
 import FindingKeyViews from './FindingKeyViews.jsx'
 import FindingAskPanel from './FindingAskPanel.jsx'
+import { DISTANCE_BANDS, rgb, useStudyInsights } from '../lib/studyInsights.js'
+
+const CurvedView = lazy(() => import('./CurvedView.jsx'))
+const OutlineEditor = lazy(() => import('./OutlineEditor.jsx'))
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
 const ToolbenchViewer = lazy(() => import('./ToolbenchViewer.jsx'))
@@ -257,6 +264,11 @@ export default function ReviewWorkspace({
   const [panelTab, setPanelTab] = useState('findings')
   const [snapOpen, setSnapOpen] = useState(false)
   const [helpOpen, setHelpOpen] = useState(false)
+  // Review aids precomputed for native studies (reference anatomy, contact, curved view, confidence).
+  const insights = useStudyInsights(caseData).insights
+  const [showAnatomy, setShowAnatomy] = useState(true)
+  const [showConfidence, setShowConfidence] = useState(false)
+  const [recording, setRecording] = useState(null)
   const [moreOpen, setMoreOpen] = useState(false)
   const moreRef = useRef(null)
   useEffect(() => {
@@ -377,6 +389,8 @@ export default function ReviewWorkspace({
       }
       if (target?.closest?.('[role="dialog"], .pw-panel')) return
       if (target?.closest?.('[role="separator"], .tb-pane')) return
+      // Curved and Edit surfaces own their own controls; viewer shortcuts would act on hidden scenes.
+      if (viewMode === 'curved' || viewMode === 'edit') return
       if (event.key.toLowerCase() === 'r' && !(framingLocked && viewMode !== '3d')) resetView()
       if (event.key.toLowerCase() === 'f' && !(framingLocked && viewMode === '2d')) issueViewerCommand({ type: 'fit', target: inspecting ? 'inspection' : undefined })
       if (viewMode !== '2d') {
@@ -657,12 +671,18 @@ export default function ReviewWorkspace({
   }
 
   function selectScene(value) {
-    if (viewMode === '2d') setViewMode('3d')
+    if (viewMode !== '3d' && viewMode !== 'split') setViewMode('3d')
     dispatch({ type: 'PATCH_SETTINGS', value: { scene3d: value } })
   }
 
-  const is2dLike = viewMode !== '3d'
-  const is3dLike = viewMode !== '2d'
+  // Curved and Edit replace the imaging scene with a dedicated review surface.
+  const auxView = viewMode === 'curved' || viewMode === 'edit'
+  const is2dLike = !auxView && viewMode !== '3d'
+  const is3dLike = !auxView && viewMode !== '2d'
+  const hasAnatomy = Boolean(caseData.files?.anatomy)
+  const hasConfidence = Boolean(caseData.files?.confidence)
+  const anatomyBanded = Boolean(meshFiles && Object.keys(meshFiles).some(key => key.includes('__contact') || key.includes('__near') || key.includes('__close')))
+  const canEditOutline = hasPrediction && Boolean(caseData.files?.pred) && !verifiedPrediction && !localCt
   const boxZoom = state.interactionMode === 'box-zoom'
   const pan = state.interactionMode === 'pan'
   const twoDInteractionMode = (framingLocked && (boxZoom || pan)) || state.interactionMode === 'rotate' ? 'navigate' : state.interactionMode
@@ -696,6 +716,8 @@ export default function ReviewWorkspace({
     sources: availableSources,
     visibleSources,
     showFull: state.showFull,
+    showAnatomy: hasAnatomy && showAnatomy,
+    showConfidence: hasConfidence && showConfidence,
     overlayOpacity: state.overlayOpacity,
     ctOpacity: state.ctOpacity,
     ctWindow: state.ctWindow,
@@ -734,6 +756,7 @@ export default function ReviewWorkspace({
     showFull: hasSourceCt || scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
+    onRecordingChange: setRecording,
     onSelectObject: selectFrom3d,
     selectedLesionWorldMm: measuredLesionVisible
       ? (currentLesionSelection?.component?.focusWorldMm ?? null) : null,
@@ -967,18 +990,24 @@ export default function ReviewWorkspace({
                 icon: <Columns2 size={14} aria-hidden="true" />,
                 title: 'Show 2D planes and the 3D scene side by side',
               }],
+              ...(caseData.files?.cpr && !inspecting ? [['curved', 'Curved', {
+                icon: <Spline size={14} aria-hidden="true" />,
+                title: 'Curved view straightened along the predicted pancreas',
+              }]] : []),
             ]}
           />
-          <Segmented
-            label="3D scene"
-            value={scene3d}
-            onChange={selectScene}
-            options={[
-              ['full', 'Abdomen', { disabled: !hasFullCt, title: hasFullCt ? 'Show the full supplied CT in 3D' : 'This study has only a region scan' }],
-              ['region', 'Region', { disabled: !hasRegionCt, title: hasRegionCt ? 'Show the prepared pancreas-region CT' : 'A separate region scan is unavailable' }],
-              ['surfaces', 'Surfaces', { disabled: !hasSurfaceScene, title: hasSurfaceScene ? 'Show model surfaces without CT' : '3D segmentation surfaces are unavailable' }],
-            ]}
-          />
+          {!auxView && (
+            <Segmented
+              label="3D scene"
+              value={scene3d}
+              onChange={selectScene}
+              options={[
+                ['full', 'Abdomen', { disabled: !hasFullCt, title: hasFullCt ? 'Show the full supplied CT in 3D' : 'This study has only a region scan' }],
+                ['region', 'Region', { disabled: !hasRegionCt, title: hasRegionCt ? 'Show the CT around the predicted pancreas' : 'A separate region scan is unavailable' }],
+                ['surfaces', 'Surfaces', { disabled: !hasSurfaceScene, title: hasSurfaceScene ? 'Show model surfaces without CT' : '3D segmentation surfaces are unavailable' }],
+              ]}
+            />
+          )}
           {verifiedPrediction?.surfaceStatus === 'loading' && <span className="pw-muted" role="status">Preparing 3D outline…</span>}
           {verifiedPrediction?.surfaceStatus === 'unavailable' && <span className="pw-muted" title={verifiedPrediction.surfaceError}>3D outline unavailable</span>}
           {is2dLike && !inspecting && <Segmented label="Visible planes" value={state.activePlane === 'multiplanar' ? layout.maximizedPlane || 'multiplanar' : state.activePlane}
@@ -987,7 +1016,8 @@ export default function ReviewWorkspace({
               setLayout({ maximizedPlane: value === 'multiplanar' ? null : value, hiddenPlanes: [] })
             }}
             options={[["multiplanar", "All planes", { disabled: Boolean(verifiedPrediction || localCt) }], ["axial", "Axial"], ["coronal", "Coronal"], ["sagittal", "Sagittal"]]} />}
-          <span className="pw-toolbar__break" aria-hidden="true" />
+          {!auxView && <span className="pw-toolbar__break" aria-hidden="true" />}
+          {!auxView && <>
           <Segmented
             label="Mouse tool"
             className="pw-segmented--icons"
@@ -1014,6 +1044,7 @@ export default function ReviewWorkspace({
             <input type="range" min="0" max="1" step="0.05" value={state.overlayOpacity} aria-label="Prediction overlay opacity"
               onChange={event => dispatch({ type: 'PATCH_SETTINGS', value: { overlayOpacity: Number(event.target.value) } })} />
           </label>}
+          </>}
           <span className="pw-toolbar__spacer" />
           {is3dLike && (
             <div className="pw-toolbar__group" role="group" aria-label="3D zoom">
@@ -1022,6 +1053,7 @@ export default function ReviewWorkspace({
               <button type="button" className="pw-icon-btn" onClick={() => issueViewerCommand({ type: 'zoom', target: '3d', factor: 1.16 })} aria-label="Zoom in" title="Zoom in (+)">+</button>
             </div>
           )}
+          {!auxView && <>
           <button type="button" className="pw-icon-btn" disabled={framingLocked && !is3dLike}
             onClick={() => issueViewerCommand({ type: 'fit', target: inspecting ? 'inspection' : undefined })} aria-label="Fit" title="Fit the complete CT in the viewer (F)">
             <Maximize size={15} aria-hidden="true" />
@@ -1030,6 +1062,24 @@ export default function ReviewWorkspace({
             onClick={resetView} aria-label="Reset viewer" title="Reset viewer (R)">
             <RotateCcw size={15} aria-hidden="true" />
           </button>
+          </>}
+          {is3dLike && meshFiles && (
+            <button type="button" className={`pw-icon-btn${recording ? ' active pw-recording' : ''}`}
+              disabled={Boolean(recording)}
+              onClick={() => issueViewerCommand({ type: 'record-turntable', target: '3d' })}
+              aria-label={recording ? `Recording turntable ${Math.round((recording.progress || 0) * 100)}%` : 'Record turntable'}
+              title="Record an 8-second 360° turntable of the 3D scene (WebM)">
+              <Video size={15} aria-hidden="true" />
+            </button>
+          )}
+          {canEditOutline && !inspecting && (
+            <button type="button" className={`pw-btn pw-btn--sm ${viewMode === 'edit' ? 'pw-btn--primary' : 'pw-btn--secondary'}`}
+              aria-pressed={viewMode === 'edit'}
+              onClick={() => setViewMode(viewMode === 'edit' ? '2d' : 'edit')}
+              title="Correct the model outline with a brush and export the edited mask">
+              <PencilLine size={14} aria-hidden="true" /> {viewMode === 'edit' ? 'Close editor' : 'Edit outline'}
+            </button>
+          )}
           <button
             type="button"
             className={`pw-icon-btn${state.settingsOpen ? ' active' : ''}`}
@@ -1142,7 +1192,7 @@ export default function ReviewWorkspace({
         >
           <ViewerSuspense>
               <div className={`pw-toolbench-scene pw-toolbench-scene--${viewMode}${inspecting ? ' pw-toolbench-scene--inspection' : ''}`}>
-                <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={Boolean(inspecting) || viewMode === '3d'}>
+                <section className="pw-toolbench-scene__planes" aria-label="2D planes" hidden={Boolean(inspecting) || viewMode === '3d' || auxView}>
                   {twoDVisited && <ToolbenchViewer {...viewerProps} mode="2d" interactionMode={twoDInteractionMode}
                     framingLocked={framingStudy === caseId} onFramingLockedChange={changeFramingLock}
                     layout={layout} onLayoutChange={setLayout} linked={layout.linked}
@@ -1154,10 +1204,19 @@ export default function ReviewWorkspace({
                     linked={false} framingLocked={inspectionFramingLocked} onFramingLockedChange={changeFramingLock}
                     onNavigationChange={setInspectionNavigation} label={`${viewerLabel} · Measured CT`} />
                 </section>}
-                <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={viewMode === '2d'}>
+                <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={viewMode === '2d' || auxView}>
                   <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={threeDInteractionMode} label={`${viewerLabel} · 3D surfaces`} />
                   {snapPad}
                 </section>
+                {viewMode === 'curved' && <section className="pw-toolbench-scene__aux" aria-label="Curved pancreas view">
+                  <CurvedView caseData={caseData} insights={insights}
+                    showPrediction={predictionShown} showReference={referenceShown}
+                    showAnatomy={hasAnatomy && showAnatomy} />
+                </section>}
+                {viewMode === 'edit' && canEditOutline && <section className="pw-toolbench-scene__aux" aria-label="Outline editor">
+                  <OutlineEditor caseData={caseData} caseId={caseId} startSlice={insights?.lesion?.slice ?? null}
+                    onClose={() => setViewMode('2d')} />
+                </section>}
               </div>
           </ViewerSuspense>
 
@@ -1284,6 +1343,27 @@ export default function ReviewWorkspace({
               disabled={state.evidenceMode === 'ct'}
               onClick={() => dispatch({ type: 'TOGGLE_LAYER', layer: 'lesion' })}
             />
+            {(hasAnatomy || hasConfidence) && <span className="pw-layerbar__divider" aria-hidden="true" />}
+            {hasAnatomy && (
+              <LayerToggle
+                checked={showAnatomy}
+                label="Anatomy"
+                sublabel="ref"
+                color="#60a5fa"
+                onClick={() => setShowAnatomy(value => !value)}
+                title="Vessels and ducts from the dataset reference annotation (not model output)"
+              />
+            )}
+            {hasConfidence && (
+              <LayerToggle
+                checked={showConfidence}
+                label="Confidence"
+                color="#f59e0b"
+                disabled={!hasPrediction || !is2dLike}
+                onClick={() => setShowConfidence(value => !value)}
+                title={is2dLike ? 'Show where the model is uncertain about the boundary (8-flip test-time agreement)' : 'Confidence map is shown on 2D planes'}
+              />
+            )}
           </div>
 
           {comparing && state.evidenceMode === 'overlap' && (
@@ -1323,6 +1403,22 @@ export default function ReviewWorkspace({
 
         {!inspecting && hasPrediction && <div className="pw-toolbench-measure-strip">
           <MeasurementReadout state={measurementState} compact showEvidence={false} label="Prediction measurements" />
+          {hasAnatomy && showAnatomy && is3dLike && anatomyBanded && (
+            <div className="pw-viewer-legend pw-viewer-legend--inline pw-band-legend" aria-label="Vessel distance to lesion">
+              <span className="pw-band-legend__title">Vessel to lesion</span>
+              {DISTANCE_BANDS.map(band => (
+                <span key={band.key}><i style={{ '--key': rgb(band.color) }} />{band.label}</span>
+              ))}
+            </div>
+          )}
+          {hasConfidence && showConfidence && is2dLike && (
+            <div className="pw-viewer-legend pw-viewer-legend--inline pw-confidence-legend" aria-label="Boundary uncertainty">
+              <span className="pw-band-legend__title">Boundary uncertainty</span>
+              <small className="pw-confidence-legend__end">confident</small>
+              <span className="pw-confidence-legend__ramp" aria-hidden="true" />
+              <small className="pw-confidence-legend__end">uncertain</small>
+            </div>
+          )}
             {comparing && (state.sourceFocus === 'difference' || state.sourceFocus === 'both') && (
               <div className="pw-viewer-legend pw-viewer-legend--inline" aria-label="Colour key">
                 {state.sourceFocus === 'difference' ? (
@@ -1462,6 +1558,7 @@ export default function ReviewWorkspace({
           <FindingsPanel
             caseId={caseId}
             caseData={caseData}
+            insights={verifiedPrediction || localCt ? null : insights}
             hasPrediction={hasPrediction}
             predictionFile={Boolean(caseData.files?.pred)}
             liveResult={isCurated && !liveResult ? null : liveResult}
