@@ -11,6 +11,7 @@ import { preparedViewerCtPath, viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, pan2d, pan3dPivot, panPlaneAt, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { hasContourTile } from '../lib/viewerContour.js'
+import { anatomyColormap, anatomyMeshLayers, CONFIDENCE_COLORMAP, CONFIDENCE_COLORMAP_LUT, CONFIDENCE_RANGE } from '../lib/studyInsights.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -695,9 +696,52 @@ function meshOpacity({
     if (focusTreatment === 'isolate') return 0
     return (anatomy === 'pancreas' ? 0.12 : 0.3) * sourceScale
   }
-  const base = anatomy === 'pancreas' ? 0.68 : 1
+  // A translucent pancreas lets the lesion read as a solid object inside it.
+  const base = anatomy === 'pancreas' ? 0.5 : 1
   return Math.max(0, Math.min(1, base * (0.65 + overlayOpacity * 0.5) * sourceScale))
 }
+
+// 360-degree orbit captured from the WebGL canvas and saved as WebM. Uses the current
+// elevation and zoom so the recording matches what the reviewer framed.
+async function recordTurntable(nv, canvas, { caseId, seconds = 8, onChange } = {}) {
+  if (!canvas?.captureStream || typeof MediaRecorder === 'undefined') {
+    onChange?.({ status: 'unsupported' })
+    return
+  }
+  const type = ['video/webm;codecs=vp9', 'video/webm'].find(candidate => MediaRecorder.isTypeSupported?.(candidate)) || ''
+  const recorder = new MediaRecorder(canvas.captureStream(30), type ? { mimeType: type } : undefined)
+  const chunks = []
+  recorder.ondataavailable = event => { if (event.data?.size) chunks.push(event.data) }
+  const done = new Promise(resolve => { recorder.onstop = resolve })
+  const startAzimuth = Number(nv.scene.renderAzimuth) || 0
+  const elevation = Number(nv.scene.renderElevation) || 0
+  onChange?.({ status: 'recording' })
+  recorder.start(250)
+  const started = performance.now()
+  await new Promise(resolve => {
+    const step = now => {
+      const t = Math.min(1, (now - started) / (seconds * 1000))
+      nv.setRenderAzimuthElevation(startAzimuth + 360 * t, elevation)
+      nv.drawScene()
+      if (t < 1) requestAnimationFrame(step)
+      else resolve()
+    }
+    requestAnimationFrame(step)
+  })
+  recorder.stop()
+  await done
+  nv.setRenderAzimuthElevation(startAzimuth, elevation)
+  nv.drawScene()
+  const url = URL.createObjectURL(new Blob(chunks, { type: type || 'video/webm' }))
+  const link = Object.assign(document.createElement('a'), { href: url, download: `${caseId || 'prowl'}-turntable.webm` })
+  document.body.append(link)
+  link.click()
+  link.remove()
+  setTimeout(() => URL.revokeObjectURL(url), 10000)
+  onChange?.({ status: 'saved' })
+}
+
+const meshExtension = path => (/\.(mz3|obj|stl|gii)(\.gz)?$/i.exec(path || '')?.[1] || 'obj').toLowerCase()
 
 export default function NiivueViewer({
   caseData,
@@ -710,6 +754,9 @@ export default function NiivueViewer({
   mode = '2d',
   showFull = false,
   preferNativeFull = true,
+  showAnatomy = false,
+  showConfidence = false,
+  onRecordingChange = null,
   overlayOpacity = 0.3,
   ctOpacity = 0.18,
   ctWindow = 'soft',
@@ -793,6 +840,48 @@ export default function NiivueViewer({
   const lastFocusedObjectRef = useRef('')
   const [state, setState] = useState({ status: 'loading', message: 'Preparing viewer' })
   const [sceneVersion, setSceneVersion] = useState(0)
+  // Review aids (reference anatomy, confidence) arrive after first paint; this
+  // version re-applies presentation once they land without re-running scene effects.
+  const [reviewLayerVersion, setReviewLayerVersion] = useState(0)
+  const reviewTogglesRef = useRef({ showAnatomy, showConfidence })
+  reviewTogglesRef.current = { showAnatomy, showConfidence }
+
+  // Queued on the scene chain so a later scene never interleaves with these appends.
+  function queueReviewJob(job) {
+    sceneLoadChainRef.current = sceneLoadChainRef.current.catch(() => {}).then(job).catch(() => {})
+  }
+
+  function loadReviewLayers({ nv, mode: layerMode, caseData: data, sceneKey: key, isCancelled }) {
+    queueReviewJob(async () => {
+      const stale = () => isCancelled() || nvRef.current !== nv || loadedSceneKeyRef.current !== key
+      if (stale()) return
+      if (layerMode === '2d') {
+        const file = data.files?.anatomy
+        if (!file || registryRef.current.extraVolumeIndexes.has('anatomy')) return
+        const volume = await nv.addVolumeFromUrl({ url: `${BASE}/${file}`, name: 'anatomy.nii.gz', colormap: 'gray', opacity: 0, cal_min: 0, cal_max: 7 })
+        if (stale()) { try { nv.removeVolume(volume) } catch { /* scene already replaced */ } return }
+        if (volume.hdr) volume.hdr.intent_code = 1002
+        volume.setColormapLabel(anatomyColormap(255))
+        registryRef.current.extraVolumeIndexes.set('anatomy', nv.volumes.indexOf(volume))
+      } else {
+        const layers = anatomyMeshLayers(data.files?.mesh || {}).layers
+        if (!layers.length || registryRef.current.anatomyMeshes.length) return
+        const loaded = await Promise.all(layers.map(layer => nv.addMeshFromUrl({
+          url: `${BASE}/${layer.path}`, name: `${layer.key}.${meshExtension(layer.path)}`,
+          rgba255: [...layer.color, 255], opacity: layer.opacity,
+        }).then(mesh => ({ ...layer, mesh })).catch(() => null)))
+        const entries = loaded.filter(Boolean)
+        if (stale()) { entries.forEach(entry => { try { nv.removeMesh(entry.mesh) } catch { /* gone */ } }); return }
+        const visible = reviewTogglesRef.current.showAnatomy
+        entries.forEach(entry => {
+          entry.mesh.visible = visible
+          nv.setMeshShader(entry.mesh.id, 'Hemispheric')
+        })
+        registryRef.current.anatomyMeshes = entries
+      }
+      setReviewLayerVersion(version => version + 1)
+    })
+  }
   const [planeTiles, setPlaneTiles] = useState([])
   const [zoomBox, setZoomBox] = useState(null)
   const orbitCentreRef = useRef(null)
@@ -1338,7 +1427,9 @@ export default function NiivueViewer({
           volumes: new Map(),
           differenceVolumeIndexes: new Map(),
           differenceVolumes: new Map(),
+          extraVolumeIndexes: new Map(),
           meshes: new Map(),
+          anatomyMeshes: [],
         }
 
         const ctUrl = assetUrls?.ct || `${BASE}/${preparedViewerCtPath(ctSource)}`
@@ -1409,18 +1500,21 @@ export default function NiivueViewer({
             differenceIndex += 1
           }
         }
+        // Only reference anatomy draws NiiVue's label outline (intent 1002). Prediction
+        // and reference masks keep fill-only rendering; their crisp edges are SVG contours.
+        nv.volumes.slice(1, differenceIndex).forEach(volume => { if (volume?.hdr) volume.hdr.intent_code = 0 })
 
         if (mode === '2d') {
           nv.opts.isOrientCube = false
           setPlaneLayout(nv, activePlane)
           // A thin, quiet crosshair with an open centre keeps the target visible.
-          nv.setCrosshairColor([0.66, 0.74, 0.84, 0.42])
-          nv.opts.crosshairWidth = 1
+          nv.setCrosshairColor([0.66, 0.74, 0.84, window.__PROWL_CAPTURE ? 0 : 0.42])
+          nv.opts.crosshairWidth = window.__PROWL_CAPTURE ? 0 : 1
           nv.opts.crosshairGap = 14
           // Orientation letters: larger and brighter so they read at a glance.
           nv.opts.fontMinPx = 15
           nv.opts.fontColor = [0.8, 0.84, 0.9, 1]
-          nv.setAtlasOutline(0)
+          nv.setAtlasOutline(0.9)
         } else {
           const meshFiles = caseData.files.mesh || {}
           const layers = []
@@ -1435,9 +1529,9 @@ export default function NiivueViewer({
               const colors = SOURCE_COLORS[source][anatomy]
               layers.push({
                 url: verifiedMesh || `${BASE}/${meshPath}`,
-                name: `${source}-${anatomy}.${verifiedMesh ? 'stl' : 'obj'}`,
-                rgba255: [...colors, anatomy === 'pancreas' ? 190 : 255],
-                opacity: anatomy === 'pancreas' ? 0.68 : 1,
+                name: `${source}-${anatomy}.${verifiedMesh ? 'stl' : meshExtension(meshPath)}`,
+                rgba255: [...colors, anatomy === 'pancreas' ? 150 : 255],
+                opacity: anatomy === 'pancreas' ? 0.5 : 1,
               })
               layerSemantics.push({ source, anatomy })
             }
@@ -1454,7 +1548,7 @@ export default function NiivueViewer({
                 const colors = DIFFERENCE_COLORS[region]
                 layers.push({
                   url: `${BASE}/${meshPath}`,
-                  name: `difference-${anatomy}-${region}.obj`,
+                  name: `difference-${anatomy}-${region}.${meshExtension(meshPath)}`,
                   rgba255: [...colors, 255],
                   opacity: 1,
                 })
@@ -1481,7 +1575,7 @@ export default function NiivueViewer({
 
           nv.setSliceType(nv.sliceTypeRender)
           // Small labelled orientation cube in the corner so L/R, A/P and S/I stay readable while orbiting.
-          nv.opts.isOrientCube = !compact
+          nv.opts.isOrientCube = !compact && !window.__PROWL_CAPTURE
           nv.setRenderAzimuthElevation(...(clip?.enabled ? ANTERIOR_CAMERA : [120, 15]))
           nv.setClipPlaneColor([0, 0, 0, 0])
           applyPeel(nv, clip)
@@ -1523,6 +1617,8 @@ export default function NiivueViewer({
         publishNavigation(nv, { immediate: true, origin: 'initial' })
         setSceneVersion((version) => version + 1)
         if (!cancelled) setState({ status: 'ready', message: 'Prepared result loaded' })
+        // Review aids load after the scan is on screen so they never delay first paint.
+        if (!assetUrls) loadReviewLayers({ nv, mode, caseData, sceneKey, isCancelled: () => cancelled })
       } catch (error) {
         if (!cancelled) {
           setState({
@@ -1602,6 +1698,10 @@ export default function NiivueViewer({
               differenceMode && anatomyVisible && layerVisible && !excludedBySelection ? overlayOpacity : 0,
             )
           })
+          registryRef.current.extraVolumeIndexes.forEach((volumeIndex, kind) => {
+            if (!nv.volumes[volumeIndex]) return
+            nv.setOpacity(volumeIndex, kind === 'anatomy' ? (showAnatomy ? 0.22 : 0) : (showConfidence ? 0.8 : 0))
+          })
           nv.setOpacity(0, 1)
           nv.updateGLVolume()
           nv.drawScene()
@@ -1652,6 +1752,10 @@ export default function NiivueViewer({
             entry.appliedShader = shader
           }
         })
+        registryRef.current.anatomyMeshes.forEach(entry => {
+          entry.mesh.visible = showAnatomy
+          setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', showAnatomy ? entry.opacity : 0)
+        })
         nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
 
         nv.updateGLVolume()
@@ -1685,7 +1789,30 @@ export default function NiivueViewer({
     clip?.enabled,
     Number(clip?.progress || 0) >= 99.5,
     sceneKey,
+    showAnatomy,
+    showConfidence,
+    reviewLayerVersion,
   ])
+
+  // The confidence map is only fetched the first time someone turns it on.
+  useEffect(() => {
+    const nv = nvRef.current
+    const file = caseData?.files?.confidence
+    if (!nv || mode !== '2d' || assetUrls || !showConfidence || !file || state.status !== 'ready') return
+    if (registryRef.current.extraVolumeIndexes.has('confidence')) return
+    const key = sceneKey
+    queueReviewJob(async () => {
+      if (nvRef.current !== nv || loadedSceneKeyRef.current !== key || registryRef.current.extraVolumeIndexes.has('confidence')) return
+      try { nv.addColormap(CONFIDENCE_COLORMAP, CONFIDENCE_COLORMAP_LUT) } catch { /* default ramp */ }
+      const volume = await nv.addVolumeFromUrl({
+        url: `${BASE}/${file}`, name: 'confidence.nii.gz', colormap: CONFIDENCE_COLORMAP, opacity: 0,
+        cal_min: CONFIDENCE_RANGE[0], cal_max: CONFIDENCE_RANGE[1], trustCalMinMax: true,
+      })
+      if (nvRef.current !== nv || loadedSceneKeyRef.current !== key) { try { nv.removeVolume(volume) } catch { /* replaced */ } return }
+      registryRef.current.extraVolumeIndexes.set('confidence', nv.volumes.indexOf(volume))
+      setReviewLayerVersion(version => version + 1)
+    })
+  }, [showConfidence, mode, state.status, sceneKey, caseData?.files?.confidence, assetUrls])
 
   // Layer/selection changes must not discard a window adjusted on the image.
   // Only an explicit preset/range change or a newly loaded scene resets it.
@@ -1900,6 +2027,9 @@ export default function NiivueViewer({
         // when the current CT slice no longer intersects it.
         focusOnWorldPoint(nv, command.worldMm, mode)
       }
+    } else if (command.type === 'record-turntable') {
+      if (mode === '3d') recordTurntable(nv, canvasRef.current, { caseId: caseData?.case_id, onChange: onRecordingChange })
+      return
     } else if (command.type === 'fit') {
       orbitCentreRef.current = null
       if (mode === '3d') {
