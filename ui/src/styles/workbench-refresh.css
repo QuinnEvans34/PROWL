@@ -12,7 +12,10 @@
 .pw-toolbench .pw-toolbench-opacity > span { gap: 6px; }
 /* Wide screens: one row. Laptop widths: two deliberate rows (view, then tools). */
 .pw-toolbar__break { display: none; }
-@media (max-width: 1679px) {
+/* Two tidy rows whenever the centre column (not the viewport) is too narrow for one:
+   the assistant panel and studies rail change the available width independently. */
+.pw-toolbench .pw-wb__center { container: pw-center / inline-size; }
+@container pw-center (max-width: 1619px) {
   .pw-toolbench .pw-toolbar { flex-wrap: wrap; row-gap: 6px; }
   .pw-toolbar__break { display: block; flex-basis: 100%; height: 0; }
 }
