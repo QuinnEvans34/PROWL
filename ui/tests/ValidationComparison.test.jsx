@@ -4,12 +4,12 @@ import { expect, it, vi } from 'vitest'
 import ValidationComparison from '../src/components/ValidationComparison.jsx'
 
 vi.mock('../src/components/NiivueViewer.jsx', () => ({
-  default: ({ sources, mode, activePlane, showFull, ctOpacity, interactionMode, label }) =>
-    <output aria-label={label}>{JSON.stringify({ sources, mode, activePlane, showFull, ctOpacity, interactionMode })}</output>,
+  default: ({ sources, mode, activePlane, showFull, preferNativeFull, ctOpacity, interactionMode, label }) =>
+    <output aria-label={label}>{JSON.stringify({ sources, mode, activePlane, showFull, preferNativeFull, ctOpacity, interactionMode })}</output>,
 }))
 
 const study = {
-  files: { ct: 'synthetic-region.nii.gz', ct_full: 'synthetic-abdomen.nii.gz' },
+  files: { ct: 'synthetic-region.nii.gz', ct_full: 'synthetic-abdomen.nii.gz', ct_full_native: 'synthetic-native-abdomen.nii.gz' },
   gt_has_lesion: true,
   pred_has_lesion: true,
   dice_pancreas: 0.855,
@@ -27,7 +27,7 @@ it('opens the full abdomen, keeps Pan available in both modes, and retains the c
   await screen.findByLabelText('synthetic-study model prediction')
   const titles = ['model prediction', 'reference annotation', 'combined overlay']
   titles.forEach(title => expect(viewer('synthetic-study', title)).toMatchObject({
-    mode: '3d', showFull: true, ctOpacity: 0.44, interactionMode: 'rotate',
+    mode: '3d', showFull: true, preferNativeFull: false, ctOpacity: 0.44, interactionMode: 'rotate',
   }))
   expect(screen.getByText('0.919')).toBeTruthy()
   expect(screen.getByText('15.63 cm³')).toBeTruthy()

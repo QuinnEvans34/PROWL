@@ -110,6 +110,7 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
                 sources={sources}
                 mode={mode}
                 showFull={mode === '3d' && shownScene === 'full'}
+                preferNativeFull={false}
                 activePlane={plane}
                 interactionMode={interactionMode}
                 wheelZoom

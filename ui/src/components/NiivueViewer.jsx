@@ -7,7 +7,7 @@ import { verifyNativeVolumes } from '../lib/nativeGeometry.js'
 import ViewerMeasurementOverlay from './ViewerMeasurementOverlay.jsx'
 import ImagingViewportDetails from './ImagingViewportDetails.jsx'
 import ViewerContourOverlay from './ViewerContourOverlay.jsx'
-import { viewerSceneKey } from '../lib/viewerSceneKey.js'
+import { preparedViewerCtPath, viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, pan2d, pan3dPivot, panPlaneAt, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { hasContourTile } from '../lib/viewerContour.js'
@@ -709,6 +709,7 @@ export default function NiivueViewer({
   visibleSources = null,
   mode = '2d',
   showFull = false,
+  preferNativeFull = true,
   overlayOpacity = 0.3,
   ctOpacity = 0.18,
   ctWindow = 'soft',
@@ -725,6 +726,7 @@ export default function NiivueViewer({
   measurementAnatomy = 'lesion',
   overlayMode = 'fill',
   imageDetails = null,
+  sceneLabel = null,
   sliceLocatorCorners = null,
   capturePlaneLocation = false,
   inspectionBounds = null,
@@ -796,7 +798,8 @@ export default function NiivueViewer({
   const orbitCentreRef = useRef(null)
 
   const renderedSources = visibleSources || sources
-  const sceneKey = viewerSceneKey({ caseData, assetUrls, sources, mode, showFull, enableDifferenceAssets })
+  const ctSource = { caseData, mode, showFull, preferNativeFull }
+  const sceneKey = viewerSceneKey({ ...ctSource, assetUrls, sources, enableDifferenceAssets })
   expectedSceneKeyRef.current = sceneKey
 
   function publishZoom(nv) {
@@ -1338,10 +1341,7 @@ export default function NiivueViewer({
           meshes: new Map(),
         }
 
-        const ctPath = showFull && caseData.files.ct_full
-          ? caseData.files.ct_full
-          : caseData.files.ct
-        const ctUrl = assetUrls?.ct || `${BASE}/${ctPath}`
+        const ctUrl = assetUrls?.ct || `${BASE}/${preparedViewerCtPath(ctSource)}`
         const currentCaseId = caseData.case_id || caseData.files.ct
         // A crop and the full study need independent framing. Reloads for an
         // arriving mask or mesh on the same CT should preserve the camera.
@@ -2072,8 +2072,8 @@ export default function NiivueViewer({
         plane={activePlane} showLesion={showLesion} showPancreas={showPancreas} colors={REFERENCE_STROKES}
         dashed={renderedSources.includes('pred')} label="Reference contours"
         opacity={sourceFocus === 'pred' && renderedSources.includes('pred') ? 0.3 : 1} />}
-      {imageDetails && <ImagingViewportDetails nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
-        ready={ready} plane={activePlane} source={imageDetails} />}
+      {(imageDetails || sceneLabel) && <ImagingViewportDetails nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef}
+        sceneKey={sceneKey} ready={ready} plane={activePlane} source={imageDetails} sceneLabel={sceneLabel} />}
       {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (
         <div aria-hidden="true" className="niivue-zoom-box" style={{ ...zoomBox, position: 'absolute',
           border: '1px solid #f5ca82', background: '#f5ca8224', pointerEvents: 'none' }} />

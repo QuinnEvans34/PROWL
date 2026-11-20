@@ -22,7 +22,7 @@ vi.mock('@niivue/niivue', () => ({
         this.volumes = specs.map(spec => ({
           ...spec,
           setColormapLabel(value) { this.labelColormap = value },
-          hdr: { dims, affine },
+          hdr: { dims, affine, xyzt_units: 2 },
           img: new Uint8Array(11 * 21 * 31),
         }))
       })
@@ -884,9 +884,27 @@ it('treats a 3D background click as a miss instead of selecting near a previous 
   expect(nv.indexNearestXYZmm).toHaveBeenCalledWith(0, 5, 10, 15)
 })
 
-it('keeps Abdomen and Region camera framing independent while carrying the crosshair in world millimeters', async () => {
+it('keys full-volume scenes by the CT they load and preserves existing 2D and source keys', () => {
   const study = { ...caseData, files: { ...caseData.files, ct_full: 'synthetic-abdomen.nii.gz' } }
-  const view = showFull => <NiivueViewer {...base} caseData={study} mode="3d" showFull={showFull} />
+  const nativeStudy = { ...study, files: { ...study.files, ct_full_native: 'synthetic-native-abdomen.nii.gz' } }
+  const key = (caseData, options) => viewerSceneKey({ caseData, showFull: true, ...options })
+  expect(key(nativeStudy, { mode: '3d' })).not.toBe(key(study, { mode: '3d' }))
+  for (const options of [
+    { mode: '2d' },
+    { mode: '3d', showFull: false },
+    { mode: '3d', preferNativeFull: false },
+    { mode: '3d', assetUrls: { ct: 'blob:synthetic-source' } },
+  ]) {
+    expect(key(nativeStudy, options)).toBe(key(study, options))
+  }
+})
+
+it('uses the native full CT in 3D while preserving separate framing and world crosshair positions', async () => {
+  const study = { ...caseData, files: { ...caseData.files,
+    ct_full: 'synthetic-abdomen.nii.gz', ct_full_native: 'synthetic-native-abdomen.nii.gz' } }
+  const imageDetails = { kind: 'prepared', legacyMillimeters: true }
+  const view = (showFull, options = {}) => <NiivueViewer {...base} caseData={study} mode="3d" showFull={showFull}
+    sceneLabel={showFull ? 'Abdomen · 3D' : 'Pancreas region · 3D'} imageDetails={imageDetails} {...options} />
   const { rerender } = render(view(false))
   await screen.findByLabelText('Prepared result loaded')
   const nv = harness.instances[0]
@@ -901,12 +919,15 @@ it('keeps Abdomen and Region camera framing independent while carrying the cross
   nv.setScale(2.6)
   moveCrosshair(point)
 
-  harness.origin = [-6, -8, -11]
-  harness.spacing = [2, 2, 2]
+  expect(screen.getByText('1 × 1 × 1 mm voxels')).toBeTruthy()
+  harness.origin = [-2, -3, -5]
+  harness.spacing = [.86, .86, 2.5]
   rerender(view(true))
+  expect(screen.queryByText('1 × 1 × 1 mm voxels')).toBeNull()
   await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(2))
   await screen.findByLabelText('Prepared result loaded')
-  expect(nv.volumes[0].url).toBe('/cases/synthetic-abdomen.nii.gz')
+  expect(nv.volumes[0].url).toBe('/cases/synthetic-native-abdomen.nii.gz')
+  expect(screen.getByText('0.86 × 0.86 × 2.5 mm voxels')).toBeTruthy()
   expect(nv.scene.volScaleMultiplier).toBe(1)
   expect(nv.scene.renderAzimuth).not.toBe(64)
   expectCrosshair(point)
@@ -924,17 +945,28 @@ it('keeps Abdomen and Region camera framing independent while carrying the cross
   expect(nv.scene.renderAzimuth).toBe(64)
   expectCrosshair([4, 8, 13])
 
-  harness.origin = [-6, -8, -11]
-  harness.spacing = [2, 2, 2]
+  harness.origin = [-2, -3, -5]
+  harness.spacing = [.86, .86, 2.5]
   rerender(view(true))
   await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(4))
   await screen.findByLabelText('Prepared result loaded')
   expect(nv.scene.volScaleMultiplier).toBe(1.6)
   expect(nv.scene.renderAzimuth).toBe(108)
+
+  rerender(view(true, { mode: '2d', sceneLabel: null, imageDetails: null }))
+  await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(5))
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.volumes[0].url).toBe('/cases/synthetic-abdomen.nii.gz')
+
+  rerender(view(true, { preferNativeFull: false, sceneLabel: null, imageDetails: null }))
+  await waitFor(() => expect(nv.loadVolumes).toHaveBeenCalledTimes(6))
+  await screen.findByLabelText('Prepared result loaded')
+  expect(nv.volumes[0].url).toBe('/cases/synthetic-abdomen.nii.gz')
 })
 
 it('retains the 3D source CT camera when its prediction mesh arrives', async () => {
-  const study = { ...caseData, files: { ...caseData.files, pred: 'synthetic-source-pred.nii.gz' } }
+  const study = { ...caseData, files: { ...caseData.files,
+    pred: 'synthetic-source-pred.nii.gz', ct_full_native: 'synthetic-native-abdomen.nii.gz' } }
   const assetUrls = { ct: 'blob:synthetic-source', pred: 'blob:synthetic-source-pred' }
   let handle
   const onViewHandle = next => { handle = next }

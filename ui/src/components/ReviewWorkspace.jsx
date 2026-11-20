@@ -57,6 +57,8 @@ const ToolbenchViewer = lazy(() => import('./ToolbenchViewer.jsx'))
 // Display defaults; the 3D scene selector replaced the older emphasis presets.
 const DEFAULT_OVERLAY_OPACITY = 0.3
 const DEFAULT_CT_OPACITY = 0.44
+const PREPARED_CT_DETAILS = { kind: 'prepared', legacyMillimeters: true }
+const SOURCE_CT_DETAILS = { kind: 'source' }
 
 const CT_WINDOW_OPTIONS = [
   ['soft', 'Soft tissue', 'Best general view of the pancreas and nearby organs'],
@@ -201,7 +203,7 @@ export default function ReviewWorkspace({
   const hasPrediction = isCurated || hasLiveResult
   const meshFiles = verifiedPrediction?.urls?.mesh || caseData.files?.mesh
   const hasSourceCt = Boolean(verifiedPrediction?.urls?.ct || localCt?.assetUrls?.ct)
-  const hasFullCt = hasSourceCt || Boolean(caseData.files?.ct_full)
+  const hasFullCt = hasSourceCt || Boolean(caseData.files?.ct_full_native || caseData.files?.ct_full)
   const hasRegionCt = !hasSourceCt && Boolean(caseData.files?.ct)
   const studyKey = verifiedPrediction?.manifestHash || caseId
   const truthUnlocked = isCurated || truthRevealed
@@ -727,6 +729,8 @@ export default function ReviewWorkspace({
   const viewer3dProps = {
     wheelZoom: true,
     anatomyLighting: true,
+    sceneLabel: scene3dLabel,
+    imageDetails: scene3d === 'surfaces' ? null : hasSourceCt ? localCt?.imageSource || SOURCE_CT_DETAILS : PREPARED_CT_DETAILS,
     showFull: hasSourceCt || scene3d === 'full',
     ctOpacity: scene3d === 'surfaces' ? 0 : state.ctOpacity,
     onPeelReveal: setPeelReveal3d,
@@ -1151,7 +1155,6 @@ export default function ReviewWorkspace({
                     onNavigationChange={setInspectionNavigation} label={`${viewerLabel} · Measured CT`} />
                 </section>}
                 <section className="pw-toolbench-scene__3d" aria-label="3D surfaces" hidden={viewMode === '2d'}>
-                  <span className="pw-split__label" title="The 3D camera moves independently of the 2D crosshair">{scene3dLabel}</span>
                   <NiivueViewer {...viewerProps} {...viewer3dProps} mode="3d" interactionMode={threeDInteractionMode} label={`${viewerLabel} · 3D surfaces`} />
                   {snapPad}
                 </section>

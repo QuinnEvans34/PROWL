@@ -110,6 +110,19 @@ it('starts a study with only a prepared crop in 3D Region', async () => {
   expect(modeButton('Abdomen').disabled).toBe(true)
 })
 
+it('offers a native-only full abdomen in 3D and keeps the full 2D option unavailable', async () => {
+  const user = userEvent.setup()
+  const caseData = { files: { ct: preparedFiles.ct, ct_full_native: 'synthetic-native-abdomen.nii.gz' } }
+  render(<ReviewWorkspace {...workspaceProps({ caseData })} />)
+  const viewport = await screen.findByRole('status', { name: 'Synthetic viewer stub' })
+  expect(viewerData(viewport)).toMatchObject({ mode: '3d', showFull: true })
+  expect(modeButton('Abdomen').disabled).toBe(false)
+  expect(modeButton('Abdomen').getAttribute('aria-pressed')).toBe('true')
+  await user.click(modeButton('2D'))
+  await user.click(modeButton('View settings'))
+  expect(screen.getByRole('checkbox', { name: 'Full abdominal CT in 2D' }).disabled).toBe(true)
+})
+
 it.each(['local', 'verified'])('opens %s source CT in 3D before any surfaces are available', async kind => {
   const user = userEvent.setup()
   const assetUrls = { ct: 'blob:synthetic-source' }

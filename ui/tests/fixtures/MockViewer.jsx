@@ -47,6 +47,7 @@ export default function MockViewer(props) {
     return () => { active = false }
   }, [sceneKey, mode, peelReveal])
   return <div role="status" aria-label="Synthetic viewer stub" data-testid={`synthetic-viewer-${mode}-${activePlane}`}>
+    {props.sceneLabel && <span>{props.sceneLabel}</span>}
     SYNTHETIC UI FIXTURE — NO CT / NO WEBGL
     <pre>{JSON.stringify({ mode, activePlane, visibleSources, resetToken, ctWindow, overlayOpacity, navigationCommand,
       showFull: props.showFull, ctOpacity: props.ctOpacity, assetUrls: props.assetUrls, nativeCtOnly: props.nativeCtOnly,

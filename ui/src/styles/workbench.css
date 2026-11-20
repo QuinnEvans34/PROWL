@@ -210,7 +210,8 @@
   position: absolute; left: 10px; top: 10px; z-index: 3; padding: 3px 8px; border-radius: 5px;
   background: rgba(8, 9, 12, 0.72); color: var(--pw-text); font-size: 12px; pointer-events: none;
 }
-.pw-split__label small { margin-left: 6px; color: var(--pw-text-faint); }
+.pw-split__label { max-width: calc(100% - 94px); }
+.pw-split__label small { margin-left: 6px; color: var(--pw-text-muted); font-size: 11px; white-space: nowrap; }
 @media (max-width: 900px) { .pw-split { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; } }
 
 /* ---------- Layer bar ---------- */

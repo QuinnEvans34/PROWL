@@ -164,3 +164,16 @@ The 3D Abdomen view uses the existing full-volume CT. The UI suite passed 591
 tests with 7 skipped, the Chromium suite passed 9 tests, and the production build
 succeeded. Synthetic exports verified repeatability, preserved the prepared
 backups, and left files intact when the preflight rejected invalid inputs.
+
+## 11. Native full-volume 3D Workbench
+
+The Workbench's 3D Abdomen view uses `files.ct_full_native` when available. The
+scene label reads voxel spacing from the volume it actually loaded. Region
+continues to use the native crop. Full 2D and Three-view compare continue to use
+the smaller `files.ct_full` volume.
+
+To install the local full-volume asset, run the existing exporter with
+`--full-only --ct <original-ct> --case-dir <study-directory> --results <results-json>`.
+The exporter checks that the original CT matches the installed native crop in
+geometry and intensity before publishing the new volume. It preserves the full
+acquired grid and the display window calibration. Scan assets stay local.
