@@ -10,6 +10,7 @@ import ViewerContourOverlay from './ViewerContourOverlay.jsx'
 import { viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, pan2d, pan3dPivot, panPlaneAt, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
+import { hasContourTile } from '../lib/viewerContour.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -25,6 +26,8 @@ const SOURCE_COLORS = {
     lesion: [251, 191, 36],
   },
 }
+
+const REFERENCE_STROKES = { pancreas: '#38bdf8', lesion: '#fbbf24' }
 
 const DIFFERENCE_COLORS = {
   agreement: [196, 181, 253],
@@ -706,7 +709,7 @@ export default function NiivueViewer({
   visibleSources = null,
   mode = '2d',
   showFull = false,
-  overlayOpacity = 0.62,
+  overlayOpacity = 0.3,
   ctOpacity = 0.18,
   ctWindow = 'soft',
   showPancreas = true,
@@ -1410,8 +1413,14 @@ export default function NiivueViewer({
         if (mode === '2d') {
           nv.opts.isOrientCube = false
           setPlaneLayout(nv, activePlane)
-          nv.setCrosshairColor([0.46, 0.57, 0.69, 0.78])
-          nv.setAtlasOutline(0.32)
+          // A thin, quiet crosshair with an open centre keeps the target visible.
+          nv.setCrosshairColor([0.66, 0.74, 0.84, 0.42])
+          nv.opts.crosshairWidth = 1
+          nv.opts.crosshairGap = 14
+          // Orientation letters: larger and brighter so they read at a glance.
+          nv.opts.fontMinPx = 15
+          nv.opts.fontColor = [0.8, 0.84, 0.9, 1]
+          nv.setAtlasOutline(0)
         } else {
           const meshFiles = caseData.files.mesh || {}
           const layers = []
@@ -1538,6 +1547,20 @@ export default function NiivueViewer({
     const nv = nvRef.current
     if (
       !nv
+      || mode !== '2d'
+      || state.status !== 'ready'
+      || loadedSceneKeyRef.current !== sceneKey
+    ) return
+    setPlaneLayout(nv, activePlane)
+    nv.drawScene()
+    setPlaneTiles(planeTilesFrom(nv))
+    publishNavigation(nv)
+  }, [activePlane, mode, sceneVersion, state.status, sceneKey])
+
+  useEffect(() => {
+    const nv = nvRef.current
+    if (
+      !nv
       || state.status !== 'ready'
       || loadedSceneKeyRef.current !== sceneKey
       || !nv.volumes?.[0]
@@ -1560,7 +1583,11 @@ export default function NiivueViewer({
             const volume = nv.volumes[volumeIndex]
             if (!volume) return
             volume.setColormapLabel(labelColormap(source, presentation))
-            nv.setOpacity(volumeIndex, overlayMode === 'fill' && !differenceMode && renderedSources.includes(source) ? overlayOpacity : 0)
+            // Keep a reference fill when the displayed CT grid or plane cannot
+            // support the dashed reference contour over the prediction.
+            const outlineOnly = source === 'gt' && renderedSources.includes('pred')
+              && hasContourTile(nv, volume, activePlane)
+            nv.setOpacity(volumeIndex, overlayMode === 'fill' && !differenceMode && renderedSources.includes(source) && !outlineOnly ? overlayOpacity : 0)
           })
           registryRef.current.differenceVolumeIndexes.forEach((volumeIndex, anatomy) => {
             const volume = nv.volumes[volumeIndex]
@@ -1640,6 +1667,7 @@ export default function NiivueViewer({
     sceneVersion,
     state.status,
     mode,
+    activePlane,
     overlayMode,
     anatomyLighting,
     overlayOpacity,
@@ -1669,20 +1697,6 @@ export default function NiivueViewer({
     nv.volumes[0].cal_max = range.cal_max
     nv.updateGLVolume()
   }, [ctWindow, ctRange?.[0], ctRange?.[1], sceneVersion, state.status, sceneKey])
-
-  useEffect(() => {
-    const nv = nvRef.current
-    if (
-      !nv
-      || mode !== '2d'
-      || state.status !== 'ready'
-      || loadedSceneKeyRef.current !== sceneKey
-    ) return
-    setPlaneLayout(nv, activePlane)
-    nv.drawScene()
-    setPlaneTiles(planeTilesFrom(nv))
-    publishNavigation(nv)
-  }, [activePlane, mode, sceneVersion, state.status, sceneKey])
 
   // Linked panes exchange only the anatomical crosshair. Pan/zoom intentionally
   // remain local, and applying a remote position is tagged to prevent echoes.
@@ -2049,9 +2063,15 @@ export default function NiivueViewer({
       <ViewerMeasurementOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={ready && Boolean(sliceLocatorCorners || (overlayMode !== 'off' && measurementLayerVisible && !differenceMode && renderedSources.includes('pred')))}
         mode={mode} anatomy={measurementAnatomy} calipers={measurementCalipers} marker={selectedLesionWorldMm} sliceLocatorCorners={sliceLocatorCorners} />
-      {mode === '2d' && overlayMode === 'outline' && <ViewerContourOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
+      {mode === '2d' && (overlayMode === 'outline' || overlayMode === 'fill') && activePlane !== 'multiplanar' && <ViewerContourOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={ready && renderedSources.includes('pred') && !differenceMode} mask={registryRef.current.volumes.get('pred')}
-        plane={activePlane} showLesion={showLesion} showPancreas={showPancreas} />}
+        plane={activePlane} showLesion={showLesion} showPancreas={showPancreas}
+        opacity={sourceFocus === 'gt' && renderedSources.includes('gt') ? 0.3 : 1} />}
+      {mode === '2d' && overlayMode === 'fill' && activePlane !== 'multiplanar' && <ViewerContourOverlay nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
+        ready={ready && renderedSources.includes('gt') && !differenceMode} mask={registryRef.current.volumes.get('gt')}
+        plane={activePlane} showLesion={showLesion} showPancreas={showPancreas} colors={REFERENCE_STROKES}
+        dashed={renderedSources.includes('pred')} label="Reference contours"
+        opacity={sourceFocus === 'pred' && renderedSources.includes('pred') ? 0.3 : 1} />}
       {imageDetails && <ImagingViewportDetails nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef} sceneKey={sceneKey}
         ready={ready} plane={activePlane} source={imageDetails} />}
       {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (

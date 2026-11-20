@@ -2,8 +2,10 @@ import { useId, useLayoutEffect, useState } from 'react'
 import { projectPredictedContours } from '../lib/viewerContour.js'
 import { observeViewerDraw } from '../lib/viewerDraw.js'
 
+const PREDICTION_STROKES = { pancreas: '#26c5a6', lesion: '#f96363' }
+
 export default function ViewerContourOverlay({ nvRef, loadedSceneKeyRef, sceneKey, ready, mask, plane,
-  showLesion, showPancreas, opacity = 1 }) {
+  showLesion, showPancreas, opacity = 1, colors = PREDICTION_STROKES, dashed = false, label = 'Predicted contours' }) {
   const clip = useId()
   const [frame, setFrame] = useState(null)
   useLayoutEffect(() => {
@@ -25,13 +27,14 @@ export default function ViewerContourOverlay({ nvRef, loadedSceneKeyRef, sceneKe
 
   const projection = ready && frame?.sceneKey === sceneKey && frame.mask === mask && frame.plane === plane ? frame.projection : null
   if (!projection || !(showLesion && projection.paths.lesion || showPancreas && projection.paths.pancreas)) return null
-  return <svg role="img" aria-label="Predicted contours"
+  return <svg role="img" aria-label={label} className="viewer-contours"
     style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
     <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
     <g clipPath={`url(#${clip})`}>
-      <g transform={projection.transform} fill="none" strokeWidth="1.5" opacity={opacity}>
-        {showPancreas && projection.paths.pancreas && <path d={projection.paths.pancreas} stroke="#26c5a6" vectorEffect="non-scaling-stroke" />}
-        {showLesion && projection.paths.lesion && <path d={projection.paths.lesion} stroke="#f96363" vectorEffect="non-scaling-stroke" />}
+      <g transform={projection.transform} fill="none" strokeWidth="1.5" opacity={opacity}
+        strokeDasharray={dashed ? '4 3' : undefined} strokeLinejoin="round">
+        {showPancreas && projection.paths.pancreas && <path d={projection.paths.pancreas} stroke={colors.pancreas} vectorEffect="non-scaling-stroke" />}
+        {showLesion && projection.paths.lesion && <path d={projection.paths.lesion} stroke={colors.lesion} vectorEffect="non-scaling-stroke" />}
       </g>
     </g>
   </svg>

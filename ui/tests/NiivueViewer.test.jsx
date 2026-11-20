@@ -159,6 +159,43 @@ it('preserves the 2D anatomy overlays on an inspected slice unless isolation is 
   expect(prediction.labelColormap.A).toEqual([0, 0, 255])
 })
 
+it('keeps the reference fill unless a matching CT grid has the requested single plane', async () => {
+  const props = {
+    ...anatomyProps,
+    sources: ['pred', 'gt'],
+    overlayOpacity: .6,
+    caseData: {
+      ...anatomyProps.caseData,
+      files: { ...anatomyProps.caseData.files, gt: 'synthetic-reference.nii.gz' },
+    },
+  }
+  const { rerender } = render(<NiivueViewer {...props} />)
+  await screen.findByLabelText('Prepared result loaded')
+  const nv = harness.instances[0]
+  const [ct, prediction, reference] = nv.volumes
+  const grid = { dimsRAS: [3, 11, 21, 31], matRAS: Float32Array.from([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]) }
+  Object.assign(ct, grid)
+  Object.assign(reference, grid, { matRAS: grid.matRAS.slice() })
+  expect(reference.opacity).toBe(.6)
+
+  nv.screenSlices = [{ axCorSag: nv.sliceTypeAxial, sliceFrac: .5 }]
+  rerender(<NiivueViewer {...props} overlayOpacity={.5} />)
+  expect(prediction.opacity).toBe(.5)
+  expect(reference.opacity).toBe(0)
+
+  rerender(<NiivueViewer {...props} activePlane="coronal" />)
+  expect(reference.opacity).toBe(.6)
+  rerender(<NiivueViewer {...props} activePlane="multiplanar" />)
+  expect(reference.opacity).toBe(.6)
+
+  ct.matRAS[12] = 10
+  rerender(<NiivueViewer {...props} />)
+  expect(reference.opacity).toBe(.6)
+  rerender(<NiivueViewer {...props} overlayMode="off" />)
+  expect(prediction.opacity).toBe(0)
+  expect(reference.opacity).toBe(0)
+})
+
 it('keeps other difference regions visible while inspecting one region', async () => {
   const props = {
     ...anatomyProps,

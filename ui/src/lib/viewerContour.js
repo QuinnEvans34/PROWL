@@ -106,11 +106,20 @@ function screenProjection(nv, tile, [horizontal, vertical, depth], width, height
   }
 }
 
-export function projectPredictedContours(nv, mask, plane) {
+function contourTile(nv, mask, plane) {
   const info = PLANES[plane]
   if (!info || !sameGrid(nv?.volumes?.[0], mask)) return null
-  const tile = nv.screenSlices?.find(slice => slice.axCorSag === info.type
-    && Number.isFinite(slice.sliceFrac) && slice.sliceFrac >= 0 && slice.sliceFrac <= 1)
+  return nv.screenSlices?.find(slice => slice.axCorSag === info.type
+    && Number.isFinite(slice.sliceFrac) && slice.sliceFrac >= 0 && slice.sliceFrac <= 1) ?? null
+}
+
+export function hasContourTile(nv, mask, plane) {
+  return Boolean(contourTile(nv, mask, plane))
+}
+
+export function projectPredictedContours(nv, mask, plane) {
+  const tile = contourTile(nv, mask, plane)
+  const info = PLANES[plane]
   if (!tile) return null
   const [width, height, slices] = info.axes.map(axis => mask.dimsRAS[axis + 1])
   const index = Math.min(slices - 1, Math.floor(tile.sliceFrac * slices))
