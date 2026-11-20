@@ -3,12 +3,84 @@ import { describe, it, expect, vi } from 'vitest'
 import { NIFTI1 } from 'nifti-reader-js'
 import { gzipSync, gunzipSync } from 'node:zlib'
 import { measureMask, scanQuestion, loadScanMeasurements, measurementText } from '../src/lib/scanMeasurements.js'
+import { lesionComponentAtWorld } from '../src/lib/lesionDimensions.js'
 
 function header() {
   return { dims: [3, 5, 5, 5, 1, 1, 1, 1], affine: [[2, 0, 0, -9], [0, 3, 0, 4], [0, 0, 4, 2], [0, 0, 0, 1]], xyzt_units: 2, sform_code: 1 }
 }
 function labels() { const a = new Uint8Array(125); a[31] = 1; a[32] = 1; a[62] = 2; return a }
 const calculate = (h = header(), a = labels(), spacing) => measureMask(h, structuredClone(h), a, spacing)
+
+describe('slice calipers derived from the verified prediction', () => {
+  it('separates face-connected lesions, picks the largest slice and measures rotated anisotropic voxels', () => {
+    const h = { ...header(), dims: [3, 8, 8, 8, 1, 1, 1, 1],
+      affine: [[0, -3, 0, -9], [2, 0, 0, 4], [0, 0, 4, 2], [0, 0, 0, 1]] }
+    const a = new Uint8Array(8 ** 3)
+    const set = (x, y, z, label = 2) => { a[x + 8 * y + 64 * z] = label }
+    for (let y = 2; y <= 4; y++) for (let x = 2; x <= 5; x++) set(x, y, 3)
+    set(3, 3, 4)
+    set(6, 5, 3) // Diagonally adjacent only; do not merge it.
+    set(1, 1, 1, 1)
+    const m = calculate(h, a)
+    const [first, second] = m.lesionDimensions.components
+    expect([first.voxelCount, second.voxelCount]).toEqual([13, 1])
+    expect(first.volumeMl + second.volumeMl).toBeCloseTo(m.lesionMl, 12)
+    expect(first.superiorInferiorMm).toBe(8)
+    expect(first.calipers).toEqual({
+      nativeSlice: 3, plane: 'axial', anchorVoxel: [3, 3, 3], anchorWorldMm: [-18, 10, 14],
+      axes: [
+        { lengthMm: 8, voxelEndpoints: [[1.5, 3, 3], [5.5, 3, 3]], worldEndpointsMm: [[-18, 7, 14], [-18, 15, 14]] },
+        { lengthMm: 9, voxelEndpoints: [[3, 1.5, 3], [3, 4.5, 3]], worldEndpointsMm: [[-13.5, 10, 14], [-22.5, 10, 14]] },
+      ],
+    })
+    expect(lesionComponentAtWorld(m, [-18, 10, 14])).toBe(first)
+    expect(lesionComponentAtWorld(m, [-24, 16, 14])).toBe(second)
+    expect(lesionComponentAtWorld(m, [-13.5, 10, 14])).toBe(first) // On the outline's exact face.
+    expect(lesionComponentAtWorld(m, [-22.5, 15, 14])).toBeNull() // Edge shared by separate components.
+    expect(lesionComponentAtWorld(m, [-13.49, 10, 14])).toBeNull() // Background, no snapping.
+    expect(lesionComponentAtWorld(m, [-99, 10, 14])).toBeNull()
+    expect(lesionComponentAtWorld(m, [NaN, 10, 14])).toBeNull()
+    expect(lesionComponentAtWorld(structuredClone(m), first.focusWorldMm)).toBeNull()
+  })
+
+  it('keeps both calipers inside a concave outline by stopping at the first gap', () => {
+    const a = new Uint8Array(125)
+    a[31] = 1
+    for (let y = 1; y <= 3; y++) for (let x = 1; x <= 3; x++) {
+      if (x !== 2 || y !== 2) a[x + 5 * y + 50] = 2
+    }
+    const m = calculate(header(), a)
+    const [{ calipers }] = m.lesionDimensions.components
+    expect(calipers.anchorVoxel).toEqual([1, 2, 2])
+    expect(calipers.axes.map(axis => axis.lengthMm)).toEqual([2, 9])
+    expect(calipers.axes[0].voxelEndpoints).toEqual([[0.5, 2, 2], [1.5, 2, 2]])
+    expect(lesionComponentAtWorld(m, [-5, 10, 10])).toBeNull() // Hole inside the component's bounds.
+  })
+
+  it('retains volume and head-to-foot extent but does not claim perpendicular calipers on a sheared slice', () => {
+    const h = header()
+    h.affine[0][1] = 1
+    h.affine[2][0] = 0.5
+    const m = calculate(h)
+    expect(m.lesionDimensions.components[0]).toMatchObject({
+      calipers: null, focusWorldMm: [-3, 10, 11], superiorInferiorMm: 4.5, volumeMl: m.lesionMl,
+    })
+    expect(lesionComponentAtWorld(m, m.lesionDimensions.components[0].focusWorldMm)).toBe(m.lesionDimensions.components[0])
+  })
+
+  it.each([
+    ['sagittal', [[0, 0, -4, 10], [2, 0, 0, 1], [0, 3, 0, -2], [0, 0, 0, 1]]],
+    ['coronal', [[2, 0, 0, 1], [0, 0, -4, 10], [0, 3, 0, -2], [0, 0, 0, 1]]],
+    ['axial', [[Math.SQRT2, -Math.SQRT2, 0, 1], [Math.SQRT2, Math.SQRT2, 0, 10], [0, 0, 4, -2], [0, 0, 0, 1]]],
+    [null, [[2, 0, 1, 1], [0, 3, 0, 10], [0, 0, 4, -2], [0, 0, 0, 1]]], // Skewed k axis.
+    [null, [[2, 0, 0, 1], [0, Math.SQRT2, -Math.SQRT2, 10], [0, Math.SQRT2, Math.SQRT2, -2], [0, 0, 0, 1]]], // Oblique plane.
+  ])('binds the native measurement to viewer plane %s only when exact', (plane, affine) => {
+    const m = calculate({ ...header(), affine })
+    const [component] = m.lesionDimensions.components
+    expect(component.calipers.plane).toBe(plane)
+    expect(lesionComponentAtWorld(m, component.focusWorldMm)).toBe(component)
+  })
+})
 
 describe('deterministic mask arithmetic and validity', () => {
   it('counts pancreas union and all lesion components using physical voxel volume', () => {

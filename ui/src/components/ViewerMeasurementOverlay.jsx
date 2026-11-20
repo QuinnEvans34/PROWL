@@ -1,0 +1,106 @@
+import { useId, useLayoutEffect, useState } from 'react'
+import { project3dCalipers, projectCalipers, projectLesionMarker, projectSliceLocator } from '../lib/viewerCaliperProjection.js'
+
+function displayCm(lengthMm) {
+  return lengthMm < 0.1 ? '<0.01 cm' : `${(lengthMm / 10).toFixed(2)} cm`
+}
+
+function Arm({ line, index, bounds, cameraFacing }) {
+  const [[x1, y1], [x2, y2]] = line.points
+  const dx = x2 - x1
+  const dy = y2 - y1
+  const pixelLength = Math.hypot(dx, dy)
+  if (pixelLength < 0.1) return null
+  const tx = -dy / pixelLength * 4
+  const ty = dx / pixelLength * 4
+  const path = `M ${x1} ${y1} L ${x2} ${y2} M ${x1 - tx} ${y1 - ty} L ${x1 + tx} ${y1 + ty} M ${x2 - tx} ${y2 - ty} L ${x2 + tx} ${y2 + ty}`
+  const horizontal = Math.abs(dx) >= Math.abs(dy)
+  // Keep the value outside the caliper so the label leaves the CT texture and
+  // the crossing itself readable, including when the lesion is small.
+  const right = x1 > x2 ? [x1, y1] : [x2, y2]
+  const left = x1 > x2 ? [x2, y2] : [x1, y1]
+  const top = y1 < y2 ? [x1, y1] : [x2, y2]
+  const bottom = y1 < y2 ? [x2, y2] : [x1, y1]
+  const putRight = right[0] + 70 < bounds.x + bounds.width
+  const putAbove = top[1] - 22 >= bounds.y
+  let x = horizontal ? (putRight ? right[0] + 8 : left[0] - 8) : (putAbove ? top[0] : bottom[0])
+  let y = horizontal ? (putRight ? right[1] : left[1]) + 4 : (putAbove ? top[1] - 7 : bottom[1] + 16)
+  let textAnchor = horizontal ? (putRight ? 'start' : 'end') : 'middle'
+  if (cameraFacing) {
+    // Keep the values readable when the measured arms extend past the viewport.
+    const insetX = Math.min(36, bounds.width / 2)
+    const insetY = Math.min(14, bounds.height / 2)
+    if (horizontal) x += putRight ? 26 : -26
+    x = Math.max(bounds.x + insetX, Math.min(bounds.x + bounds.width - insetX, x))
+    y = Math.max(bounds.y + insetY, Math.min(bounds.y + bounds.height - insetY, y))
+    textAnchor = 'middle'
+  }
+  return <g>
+    <path d={path} fill="none" stroke="#191208" strokeWidth="4" />
+    <path d={path} fill="none" stroke="#ffcf8e" strokeWidth="1.7" data-caliper-arm={index} />
+    <text x={x} y={y} textAnchor={textAnchor} fill="#ffdfb5" stroke="#191208"
+      paintOrder="stroke" strokeWidth="4" strokeLinejoin="round" fontSize="12" fontWeight="600">
+      {displayCm(line.lengthMm)}
+    </text>
+  </g>
+}
+
+/**
+ * NiiVue updates tile transforms during its draw (including mouse pan/zoom and
+ * resize). Read those transforms after the draw instead of reconstructing the
+ * camera from controls, which would lag behind interaction.
+ */
+export default function ViewerMeasurementOverlay({ nvRef, loadedSceneKeyRef, sceneKey, ready, mode,
+  anatomy = 'lesion', calipers, marker, sliceLocatorCorners }) {
+  const clip = useId()
+  const draw3dCross = mode === '3d' && anatomy === 'lesion' && Boolean(calipers)
+  const input = mode === '2d' || draw3dCross ? calipers : marker
+  const [frame, setFrame] = useState(null)
+  useLayoutEffect(() => {
+    const nv = nvRef.current
+    if (!ready || (!input && !sliceLocatorCorners) || !nv) return undefined
+    let last = null
+    function refresh() {
+      if (nvRef.current !== nv || loadedSceneKeyRef.current !== sceneKey) return
+      const projection = input ? (mode === '2d' ? projectCalipers(nv, input)
+        : draw3dCross ? project3dCalipers(nv, input) : projectLesionMarker(nv, input)) : null
+      const locator = projectSliceLocator(nv, sliceLocatorCorners)
+      const signature = JSON.stringify([projection, locator])
+      if (signature === last) return
+      last = signature
+      setFrame({ input, sceneKey, projection, sliceLocatorCorners, locator })
+    }
+    const original = nv.drawScene
+    function drawWithMeasurement(...args) {
+      const result = original.apply(this, args)
+      refresh()
+      return result
+    }
+    nv.drawScene = drawWithMeasurement
+    refresh()
+    return () => { if (nv.drawScene === drawWithMeasurement) nv.drawScene = original }
+  }, [input, draw3dCross, loadedSceneKeyRef, mode, nvRef, ready, sceneKey, sliceLocatorCorners])
+
+  const projection = ready && frame?.input === input && frame.sceneKey === sceneKey ? frame.projection : null
+  const style = { position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }
+  const points = ready && frame?.locator && frame.sceneKey === sceneKey && frame.sliceLocatorCorners === sliceLocatorCorners ? frame.locator : null
+  const locator = points && <svg style={style} role="img" aria-label="Current CT slice plane in 3D">
+    <polygon points={points.map(point => point.join(',')).join(' ')} fill="#b4ccff16" stroke="#b4ccff" strokeWidth="1.4" strokeDasharray="6 4" />
+  </svg>
+  if (!projection) return locator || null
+  if (mode === '3d' && !draw3dCross) return <>{locator}<svg style={style} role="img" aria-label="Selected predicted lesion marker">
+    <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#191208" strokeWidth="4" />
+    <circle cx={projection.x} cy={projection.y} r="8" fill="none" stroke="#ffcf8e" strokeWidth="2" />
+    <circle cx={projection.x} cy={projection.y} r="2" fill="#ffdfb5" />
+  </svg></>
+
+  const label = draw3dCross ? '3D lesion calipers from the measured CT slice'
+    : anatomy === 'pancreas' ? 'Pancreas calipers' : 'Lesion calipers'
+  return <>{locator}<svg style={style} role="img" aria-label={`${label}: ${projection.lines.map(line => displayCm(line.lengthMm)).join(' by ')}`}>
+    <defs><clipPath id={clip}><rect {...projection.bounds} /></clipPath></defs>
+    <g clipPath={`url(#${clip})`}>
+      {projection.lines.map((line, index) =>
+        <Arm key={index} line={line} index={index} bounds={projection.bounds} cameraFacing={draw3dCross} />)}
+    </g>
+  </svg></>
+}

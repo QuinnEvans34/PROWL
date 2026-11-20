@@ -2,11 +2,25 @@
 
 ## Charcoal toolbench
 
+Studies open in **3D** with **Abdomen** selected when the full CT is available.
+Prepared studies with only a pancreas crop open in **Region**. Select a 3D
+scene directly from 2D to open it, or change the scene beside a CT plane in Split.
+
 The Workbench uses three persistent CT planes with individual slice, zoom, fit,
 hide and maximize controls. Crosshairs can be linked while pan and zoom remain
 independent. Drag the dividers to resize planes, the study list or the expert
 panel; keyboard arrows also operate focused dividers. Restore layout changes
 presentation preferences without clearing imaging settings or review drafts.
+Use **Lock framing** to preserve pan and zoom while browsing slices or changing
+the window. Two-finger scrolling over a Workbench image zooms the active 2D
+plane or the 3D camera, including while the 3D CT is peeled. Drag the slider
+below an image to browse slices or change peel depth. Choose **Front → back**
+or **Back → front** beside Peel to change which side the cut starts from.
+The arrow keys also work when the slider has focus. Select **Pan** and drag
+in 2D, 3D, Split, or a measured inspection. In 3D this keeps the angle and
+peel depth. Pan stays selected across layouts. Selecting Pan releases the
+visible 2D frame lock. Lock it again to hold the 2D plane steady while you pan
+the adjacent 3D view.
 
 Focus workspace hides surrounding panels. Full screen uses the browser display
 mode where supported, hiding browser controls and the study header. It requests
@@ -24,6 +38,24 @@ page reuses verified package measurements. These are model-outline volumes, not
 verified whole-organ measurements or a diagnosis. The legacy prepared-study live
 scoring endpoint does not replace the saved contours; fresh native inference
 remains available through Analyze when its model worker is connected.
+
+On a prepared study with prediction surfaces, use **3D** (choose **Surfaces**
+to remove the surrounding CT) and click a predicted lesion. Findings promotes
+the matched component, with its dimensions in cm and outline volume in mL.
+**Select in 3D** in Findings is the keyboard alternative. **Inspect measurement**
+opens the exact source CT slice and draws the two centered calipers. The cross
+follows the view and disappears when you leave that slice. If the viewer cannot
+reproduce the measurement plane, the dimensions remain visible without a jump
+action. Calipers measure the predicted outline, not a maximum diameter.
+
+In **3D** or **Split**, click a predicted lesion or select it from the **Lesion
+review** strip above the scan. The strip shows the dimensions beside **Show
+calipers** and **Inspect CT slice**. Once shown, the 3D cross stays on while you
+click surrounding tissue or move between views. **Hide calipers** turns it off,
+and switching studies clears it. The 3D cross faces the camera as you orbit and
+shows the dimensions from the measured CT slice. In 2D, the cross appears only on that
+slice; **Go to measured slice** returns there after browsing nearby tissue.
+Saved reviews and Analyze results offer **Inspect measurement** for 2D.
 
 Regression checks: `npm run test:run`, `npm run build`, and
 `npm run test:e2e -- --config=playwright.toolbench.config.js`. Synthetic browser

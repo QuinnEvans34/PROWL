@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { ArrowLeft, BadgeCheck, BookOpen, CircleAlert } from 'lucide-react'
 
 const NiivueViewer = lazy(() => import('./NiivueViewer.jsx'))
@@ -23,9 +23,20 @@ function ViewerSuspense({ children }) {
 // Validation layer: three synchronized-by-convention views of a validation example
 // whose package permits reference comparison. Only rendered for those studies.
 export default function ValidationComparison({ caseId, caseData, caseOptions, profile, onSelectCase, onBack }) {
-  const [mode, setMode] = useState('2d')
+  const [mode, setMode] = useState('3d')
+  const [scene, setScene] = useState('full')
+  const [pan, setPan] = useState(false)
   // Each view is a third of the width, so show one plane at a time for legibility.
   const [plane, setPlane] = useState('axial')
+  useEffect(() => {
+    setMode('3d')
+    setScene('full')
+    setPlane('axial')
+    setPan(false)
+  }, [caseId])
+  const hasFullCt = Boolean(caseData.files?.ct_full)
+  const shownScene = scene === 'full' && !hasFullCt ? 'region' : scene
+  const interactionMode = pan ? 'pan' : mode === '3d' ? 'rotate' : 'navigate'
   const bothAbsent = !caseData.gt_has_lesion && !caseData.pred_has_lesion
   const views = [
     ['pred', ['pred'], 'Model prediction', 'Prediction', [['pred-pancreas', 'Predicted pancreas'], ['pred-lesion', 'Predicted lesion']]],
@@ -52,7 +63,18 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
           </label>
           <div className="pw-segmented" role="group" aria-label="Comparison view">
             <button type="button" aria-pressed={mode === '2d'} onClick={() => setMode('2d')}>2D planes</button>
-            <button type="button" aria-pressed={mode === '3d'} onClick={() => setMode('3d')}>3D surfaces</button>
+            <button type="button" aria-pressed={mode === '3d'} onClick={() => setMode('3d')}>3D view</button>
+          </div>
+          <div className="pw-segmented" role="group" aria-label="Comparison 3D scene">
+            {[['full', 'Abdomen'], ['region', 'Region'], ['surfaces', 'Surfaces']].map(([value, label]) => (
+              <button type="button" key={value} disabled={value === 'full' && !hasFullCt}
+                title={value === 'full' && !hasFullCt ? 'Full abdomen is unavailable for this prepared crop' : undefined}
+                aria-pressed={mode === '3d' && shownScene === value} onClick={() => { setScene(value); setMode('3d') }}>{label}</button>
+            ))}
+          </div>
+          <div className="pw-segmented" role="group" aria-label="Comparison mouse tool">
+            <button type="button" aria-pressed={!pan} onClick={() => setPan(false)}>{mode === '3d' ? 'Rotate' : 'Navigate'}</button>
+            <button type="button" aria-pressed={pan} onClick={() => setPan(true)}>Pan</button>
           </div>
           {mode === '2d' && (
             <div className="pw-segmented" role="group" aria-label="Comparison plane">
@@ -87,9 +109,12 @@ export default function ValidationComparison({ caseId, caseData, caseOptions, pr
                 caseData={caseData}
                 sources={sources}
                 mode={mode}
+                showFull={mode === '3d' && shownScene === 'full'}
                 activePlane={plane}
+                interactionMode={interactionMode}
+                wheelZoom
                 overlayOpacity={key === 'both' ? 0.6 : 0.72}
-                ctOpacity={mode === '3d' ? 0 : 0.1}
+                ctOpacity={mode === '3d' && shownScene !== 'surfaces' ? 0.44 : 0}
                 compact
                 label={`${caseId} ${title.toLowerCase()}`}
               />

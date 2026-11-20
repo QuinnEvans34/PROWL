@@ -6,6 +6,8 @@ export function viewerSceneKey({ caseData, sources = ['pred'], mode = '2d', show
     assetUrls?.ct || (showFull && caseData?.files?.ct_full ? caseData.files.ct_full : caseData?.files?.ct) || '',
     sources.join('|'),
     sources.map(source => `${source}:${assetUrls?.[source] || caseData?.files?.[source] || ''}`).join('|'),
+    mode === '3d' ? ['pancreas', 'lesion'].flatMap(anatomies =>
+      sources.map(source => assetUrls?.mesh?.[`${anatomies}_${source}`] || caseData?.files?.mesh?.[`${anatomies}_${source}`] || '')).join('|') : '',
     mode,
     showFull ? 'full' : 'crop',
     enableDifferenceAssets ? 'difference-ready' : 'standard',

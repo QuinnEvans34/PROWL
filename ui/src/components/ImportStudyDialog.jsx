@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react'
 import { AlertTriangle, ArrowLeft, Check, CircleSlash, FolderOpen, Info, X } from 'lucide-react'
 import { EXAMPLE_SERIES, IMPORT_ERRORS, importReducer, initialImportState, unavailableAdapter } from '../lib/importAdapter.js'
+import LocalCtImport from './LocalCtImport.jsx'
 
 function useFocusTrap(ref, onClose) {
   const closeRef = useRef(onClose)
@@ -45,7 +46,7 @@ function spacing(series) {
   return series.spacingMm ? `${series.spacingMm.join(' × ')} mm` : '—'
 }
 
-export default function ImportStudyDialog({ adapter = unavailableAdapter, onClose, onOpenStudies }) {
+export default function ImportStudyDialog({ adapter = unavailableAdapter, onClose, onOpenStudies, onOpenLocalCt }) {
   const [state, dispatch] = useReducer(importReducer, initialImportState)
   const ref = useRef(null)
   useFocusTrap(ref, onClose)
@@ -67,6 +68,7 @@ export default function ImportStudyDialog({ adapter = unavailableAdapter, onClos
         {!example && (
           <>
             <p id="import-desc" className="pw-muted">Bring a CT study into PROWL, choose the series to review, then open it in the Workbench.</p>
+            {onOpenLocalCt && <LocalCtImport onOpenStudy={onOpenLocalCt} />}
             {!adapter.capabilities.available && (
               <div className="pw-notice pw-notice--warning" role="status">
                 <CircleSlash size={16} aria-hidden="true" />

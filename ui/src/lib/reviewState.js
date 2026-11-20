@@ -2,11 +2,11 @@ export const EVIDENCE_MODES = ['ct', 'prediction', 'truth', 'overlap']
 export const ANATOMY_FOCUS = ['all', 'pancreas', 'lesion']
 export const SOURCE_FOCUS = ['both', 'pred', 'gt', 'difference']
 
-export function makeReviewState({ hasPrediction = false } = {}) {
+export function makeReviewState({ hasPrediction = false, hasFullCt = true } = {}) {
   return {
-    viewMode: '2d',
+    viewMode: '3d',
     activePlane: 'multiplanar',
-    interactionMode: 'navigate',
+    interactionMode: 'rotate',
     evidenceMode: hasPrediction ? 'prediction' : 'ct',
     anatomyFocus: 'all',
     sourceFocus: 'both',
@@ -21,13 +21,14 @@ export function makeReviewState({ hasPrediction = false } = {}) {
     showFull: false,
     // What the 3D view shows: the full abdominal CT, the cropped pancreas region,
     // or the surfaces alone. 2D keeps its own Full abdominal CT setting.
-    scene3d: 'full',
+    scene3d: hasFullCt ? 'full' : 'region',
     displayPreset: 'anatomy',
     ctWindow: 'soft',
     overlayOpacity: 0.62,
-  ctOpacity: 0.44,
+    ctOpacity: 0.44,
     clipEnabled: true,
     clipProgress: 0,
+    clipDirection: 'frontToBack',
     resetToken: 0,
     drawerOpen: true,
     settingsOpen: false,
@@ -37,7 +38,7 @@ export function makeReviewState({ hasPrediction = false } = {}) {
 export function reviewReducer(state, action) {
   switch (action.type) {
     case 'CASE_CHANGED':
-      return makeReviewState({ hasPrediction: action.hasPrediction })
+      return makeReviewState(action)
     // A live prediction arrived for a scan that loaded unmarked. Advance the view from
     // the bare CT to the model proposal WITHOUT resetting the rest of the review state
     // (CASE_CHANGED would wipe layer toggles, opacity, and the current plane).
@@ -45,13 +46,16 @@ export function reviewReducer(state, action) {
       return state.evidenceMode === 'ct'
         ? { ...state, evidenceMode: 'prediction', selectedObject: null }
         : state
-    case 'SET_VIEW_MODE':
+    case 'SET_VIEW_MODE': {
+      const tool = action.interactionMode ?? state.interactionMode
+      const sharedTool = tool === 'pan' || tool === 'box-zoom'
       return {
         ...state,
         viewMode: action.value,
-        interactionMode: action.value === '3d' ? 'rotate' : 'navigate',
+        interactionMode: sharedTool ? tool : action.value === '3d' ? 'rotate' : 'navigate',
         settingsOpen: false,
       }
+    }
     case 'SET_ACTIVE_PLANE':
       return { ...state, activePlane: action.value }
     case 'SET_INTERACTION_MODE':
@@ -80,8 +84,6 @@ export function reviewReducer(state, action) {
       return {
         ...state,
         selectedObject: action.value,
-        anatomyFocus: action.value?.anatomy || 'all',
-        sourceFocus: action.value?.source || state.sourceFocus,
         layerVisibility: action.value
           ? {
               ...state.layerVisibility,
@@ -93,7 +95,7 @@ export function reviewReducer(state, action) {
           : state.layerVisibility,
       }
     case 'CLEAR_SELECTION':
-      return { ...state, selectedObject: null, anatomyFocus: 'all' }
+      return { ...state, selectedObject: null, focusTreatment: 'context' }
     case 'TOGGLE_LAYER':
       return {
         ...state,
@@ -128,6 +130,7 @@ export function reviewReducer(state, action) {
         ctOpacity: 0.44,
         clipEnabled: true,
         clipProgress: 0,
+        clipDirection: 'frontToBack',
         resetToken: state.resetToken + 1,
         settingsOpen: false,
       }
