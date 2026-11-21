@@ -1,0 +1,24 @@
+{
+  "path": "/Volumes/PROWL-Data/PROWL/sources/pants/acquisition-3b1cd6110811/metadata.xlsx",
+  "sha256": "4bcbf14a31b1ca9441af051a104702e7a832391f47d3af5f493048ec813283e3",
+  "headers": [
+    "PanTS ID",
+    "shape",
+    "spacing",
+    "ct phase",
+    "sex",
+    "age",
+    "manufacturer",
+    "manufacturer model",
+    "study type",
+    "site",
+    "site detail",
+    "site nationality",
+    "study year",
+    "tumor?",
+    "structured report"
+  ],
+  "decoded_header_rows": 1,
+  "decoded_study_rows": 0,
+  "source_patient_crosswalk_columns": []
+}

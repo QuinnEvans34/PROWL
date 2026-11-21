@@ -1,0 +1,77 @@
+{
+  "schema": "prowl.stunet.overlap-result.v2",
+  "status": "COMPLETE_WITH_DECLARED_LIMITATIONS",
+  "development_cases": 75,
+  "classifications": {
+    "UNRESOLVED": 70,
+    "SUSPECTED_OVERLAP": 5
+  },
+  "confirmed_image_cases": [],
+  "source_institution_flagged_development": 5,
+  "source_institution_flagged_train": 91,
+  "training_images_compared": 0,
+  "reference_summary": {
+    "reference_count": 1204,
+    "verified_reference_file_hashes": 1203,
+    "blocked_references": [
+      {
+        "case_id": "TotalSegV1:s0864",
+        "archive_member": "Totalsegmentator_dataset/s0864/ct.nii.gz",
+        "reason": "ARCHIVE_MEMBER_CRC_FAILURE_UNUSABLE",
+        "expected_crc32_hex": "08acde52",
+        "observed_crc32_hex": "cca32844",
+        "independently_confirmed": true,
+        "publisher_archive_md5_matches": true,
+        "used_for_comparison": false,
+        "partial_preserved": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-extraction-01/ct/s0864/ct.nii.gz"
+      }
+    ],
+    "references_fingerprinted": 1203,
+    "reference_failures": [],
+    "full_native_voxel_hashes": 1203,
+    "proxy_only_references": 0,
+    "query_count": 75,
+    "seconds": 570.5534581248648,
+    "clearance_issued": false
+  },
+  "reference_summary_sha256": "5f17438d379e0fe74dc98ca82502eef9d6b0e9ceabc61c39dadcbefd481faa73",
+  "candidates_sha256": "94334cff4178cb113247f9c3e6b049a55c5c41a83b5583940becded81ffc5338",
+  "reference_request_sha256": "fbff2632d4c2a48853a0dc8bcb3f4ff07cfe4117d60964cc2056b5943b4e8af8",
+  "cohort_sha256": "0e63126be7df03072b0064e9740c9fe6ca7efec766f2324e79a49ddde278d8e2",
+  "source_metadata_sha256": "772640cccd64894e3341c43f1a22cf2ca3dfc8bb2ac1cbd2f5f4f3be305b4207",
+  "csv_sha256": "e7764c601a43ee5c6585919a9806f38c9f921084a36d45c81e00898986dbd04b",
+  "patient_independence_verified": false,
+  "protected_prowl_test_images_compared": 0,
+  "clinical_model_forwards": 0,
+  "optimizer_updates": 0,
+  "caveat": "No match does not establish patient independence; reference-pool overlap is distinct from exact binary gradient/selection membership",
+  "exact_crop_checks": {
+    "pairs": 6,
+    "development_cases": 5,
+    "confirmed_image_pairs": 0,
+    "scope": "Geometry-screened candidates only; not exhaustive crop search"
+  },
+  "optional_translation_diagnostic": {
+    "status": "FAILED_ALLOCATION_GUARD_WITH_PARTIAL_EVIDENCE",
+    "completed_pairs": 1,
+    "attempted_pair_limit": 6,
+    "identity_confirmation": false,
+    "workers_reaped": true,
+    "previous_results_preserved": true
+  },
+  "classification_rationale": "Five shared-institution development cases remain suspected; all other cases unresolved; no exact source-image identity confirmed, no patient independence clearance",
+  "synthetic_tests": {
+    "passed": 28,
+    "seconds": 1.276,
+    "log": "outputs/prowl/stunet-audit-20261106/overlap-tests-08.log"
+  },
+  "additional_evidence_sha256": {
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/cropped-image-request-01.json": "38f9a2c768c5ca314a41c131b1120d7a0b4bd61004e9d9bea038ab79825c5829",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-confirmation-01/results.json": "7d79617367e765e476f4d14879209c3c74040acb335ae47a87b131829c9ff2b8",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-confirmation-01/summary.json": "87dcad7416d92c735d5667dbf95bdb2ba80c025a98f70d25104663f1e0fa88e9",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-supervision-01/resources.json": "97ebf7b504aae4f7a15d44d1ff2edadbcb34742b10981dd19f11624fa7ae03d3",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-request-01.json": "cea6a0cc8a73a70e9b180cb2b7ba40771047d1ecbd806a26df75a5931a470779",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-01/progress.json": "cde05b1d35ed399018d92ba17609549c2010603fa8dd569da083a5f2249fb19d",
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-supervision-01/resources.json": "2721bb5097057a6850f7af4e626828b9df31d87b3e709831374ea365c20f0e8c"
+  }
+}

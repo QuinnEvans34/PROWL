@@ -1,0 +1,33 @@
+{
+  "schema": "prowl.stunet.original-reference-acquisition.v1",
+  "status": "ORIGINAL_FILE_CHECKSUM_VERIFIED_WITH_MEMBER_INTEGRITY_FAILURE",
+  "source_record": "https://zenodo.org/records/6802614",
+  "doi": "10.5281/zenodo.6802614",
+  "version": "1.0",
+  "license": "CC-BY-4.0 (original record API)",
+  "source_url": "https://zenodo.org/records/6802614/files/Totalsegmentator_dataset.zip?download=1",
+  "archive": "/Volumes/PROWL-Data/PROWL/sources/totalsegmentator-v1-audit-20261106-ranges-04/Totalsegmentator_dataset.zip",
+  "bytes": 28404091806,
+  "publisher_md5": "f0fbb3f91d9d99f2169863545f577b30",
+  "sha256": "efbc7119d7da5ca3b0ef56687d19136b03842c3f027a104258f0eac77d902409",
+  "download_receipt": "/Volumes/PROWL-Data/PROWL/sources/totalsegmentator-v1-audit-20261106-ranges-04/download.json",
+  "download_receipt_sha256": "69731e5e1a63807bfea04c1a96682c1d60e2f6c89b2af3e71a6992475dca1bef",
+  "final_attempt_total_seconds": 4385.024894291069,
+  "range_request_elapsed_checks_seconds": 3600,
+  "timing_caveat": "Network range checks only; total includes additional merge/hash time. See retained assembly-timing-note.json. Not an end-to-end download watchdog qualification.",
+  "ct_members_selected": 1204,
+  "selection_policy": "CT members only; no annotation extraction",
+  "earlier_attempts_preserved": true,
+  "protected_prowl_test_images_used": false,
+  "all_members_integrity_verified": false,
+  "known_blocked_references": [
+    {
+      "case_id": "TotalSegV1:s0864",
+      "archive_member": "Totalsegmentator_dataset/s0864/ct.nii.gz",
+      "expected_crc32_hex": "08acde52",
+      "observed_crc32_hex": "cca32844",
+      "independent_tool_exit_code": 2,
+      "used_for_comparison": false
+    }
+  ]
+}

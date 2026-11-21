@@ -1,0 +1,702 @@
+{
+  "schema": "prowl.stunet.audit-execution.v2",
+  "verified_at": "2026-11-06T20:36:08.146600+00:00",
+  "git_head": "e6f6400a61266ac8733ce3c3094ac9e247405486",
+  "decision": "NO_GO_CURRENT_UNSEEN_PATIENT_CLAIM; CONDITIONAL_FUTURE_EXPLORATORY_MODEL_USE",
+  "patient_independence_verified": false,
+  "previous_release_manifest": {
+    "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/audit-release-01/execution_manifest.json",
+    "sha256": "6b149fa981d470368219f62df1268def942102cdac53bc4b7c4ad06d4a69acdd",
+    "preserved_review_files": 47
+  },
+  "frozen_request_checks": [
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/source-evidence-snapshot.json",
+      "sha256": "b2e1215360dca678906ddd638bb2de0ecdb4e2d367f01a1efc66cf5cc97236eb",
+      "source_pin_count": 5,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-01/request.json",
+      "sha256": "3cd67d6fc0bcc608dac3b91234cd022f80b387feac2e205ee043fcbdd09caacb",
+      "source_pin_count": 375,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/request.json",
+      "sha256": "e0a2e439c27c39862c7041d214152266a29b105731771624f027d5ca6708ab84",
+      "source_pin_count": 380,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/reference-request.json",
+      "sha256": "fbff2632d4c2a48853a0dc8bcb3f4ff07cfe4117d60964cc2056b5943b4e8af8",
+      "source_pin_count": 380,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/cropped-image-request-01.json",
+      "sha256": "38f9a2c768c5ca314a41c131b1120d7a0b4bd61004e9d9bea038ab79825c5829",
+      "source_pin_count": 5,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-request-01.json",
+      "sha256": "cea6a0cc8a73a70e9b180cb2b7ba40771047d1ecbd806a26df75a5931a470779",
+      "source_pin_count": 6,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-request-01.json",
+      "sha256": "5209295f2e2780497ba087fe81278a933ed1ab2bca5e431b6b827a470320d58e",
+      "source_pin_count": 6,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-request-01.json",
+      "sha256": "312285d0413f9f79938120acea0d613ad302ce1353d47b279f03d74cb459bc26",
+      "source_pin_count": 6,
+      "mismatches": []
+    },
+    {
+      "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-request-01.json",
+      "sha256": "36c2a9eb53d87c383f51cdf006805d095caed348b2c1e23b1e73476bdea6e1f3",
+      "source_pin_count": 7,
+      "mismatches": []
+    }
+  ],
+  "review_files": {
+    "docs/stunet_audit/01_project_inventory.md": {
+      "bytes": 7206,
+      "sha256": "b0cb2c2126ad62af5821bc49c64cff809a01e4f9214eef936e7acf747c70eb58"
+    },
+    "docs/stunet_audit/02_checkpoint_provenance.md": {
+      "bytes": 6157,
+      "sha256": "4cfad3be0f73afed34b7ffbba27cb9c4a8902f1a852deeef04fafe1cf0f152fb"
+    },
+    "docs/stunet_audit/03_checkpoint_verification.md": {
+      "bytes": 3027,
+      "sha256": "2fe2e804d5e2178de840216ab09c1f1d94a55fabad8edffb2fb99cfcba2ac8c7"
+    },
+    "docs/stunet_audit/04_dataset_overlap_report.md": {
+      "bytes": 14581,
+      "sha256": "f68260878e3c0fdac6528512c44df3ecaebccc88292c8152e2f2e2faf13db275"
+    },
+    "docs/stunet_audit/05_transfer_feasibility.md": {
+      "bytes": 5348,
+      "sha256": "1846853448234d45124dcc0ea78d574d3fa6a36e4d44a18b45d4a89b984c8544"
+    },
+    "docs/stunet_audit/06_experiment_protocol.md": {
+      "bytes": 11318,
+      "sha256": "e36fe5ed4b0a59cda7f8d7e4d1ab1e73c69e9ab03d5817930f9e1fec782ec395"
+    },
+    "docs/stunet_audit/07_final_decision.md": {
+      "bytes": 8218,
+      "sha256": "da2f6fe6b3a3852a9bdfd594ca5a6614cefc2a18b5db872cf041c4a170a197b1"
+    },
+    "docs/stunet_audit/08_author_questions.md": {
+      "bytes": 3181,
+      "sha256": "8cb037dc40adeaaa64370728daaf89e3f490764485b7ecb2a62c87405ace7aa8"
+    },
+    "docs/stunet_audit/09_clearance_followup.md": {
+      "bytes": 11531,
+      "sha256": "489d73b589a3093689e4758f176ff6a52a5ccfe3d67217071ad990d35b772d4f"
+    },
+    "docs/stunet_audit/10_author_outreach.txt": {
+      "bytes": 3921,
+      "sha256": "55190e9a9b2a9645aa7a73ce22d07b996b40fa98daf8807528bdc9a2a9c6fd97"
+    },
+    "docs/stunet_audit/README.md": {
+      "bytes": 3924,
+      "sha256": "db6ed66ed9839af5fbe742e15a3af5f869d2e87bbe00babb22c914bafec1033c"
+    },
+    "docs/stunet_audit/archive_manifest.json": {
+      "bytes": 1714,
+      "sha256": "b8881fee50a0b8423843a22f07821892856d9df83d4e430ccaaad8f32568d823"
+    },
+    "docs/stunet_audit/checkpoint_manifest.json": {
+      "bytes": 32800,
+      "sha256": "08b3bfe60d8db29f8eb372f7e0257b8bea7dd1007860e21a56172fc051d254d9"
+    },
+    "docs/stunet_audit/leakage_clearance.json": {
+      "bytes": 3710,
+      "sha256": "ceb7615b5a3a616568826ef6847c429e408d7fbfa34b14ca62dd5f3c3c7a3943"
+    },
+    "docs/stunet_audit/overlap_results.csv": {
+      "bytes": 144900,
+      "sha256": "e7764c601a43ee5c6585919a9806f38c9f921084a36d45c81e00898986dbd04b"
+    },
+    "docs/stunet_audit/overlap_summary.json": {
+      "bytes": 4090,
+      "sha256": "81e57bd96c135a0e15a8f8072088be3e014f570be4ca1328ffef7d2cd4544cae"
+    },
+    "docs/stunet_audit/pants_metadata_schema.json": {
+      "bytes": 549,
+      "sha256": "87d9a6fbe5ca9f57c1dc11bfd1be504ad25a7eb830fb45c7ba9f07a1433cf90a"
+    },
+    "docs/stunet_audit/selected_source_metadata.json": {
+      "bytes": 4996,
+      "sha256": "27da67342a40c60f89a440b2f249462949fb669467df466ec91ab1b3edcb3bc9"
+    },
+    "docs/stunet_audit/source_manifest.json": {
+      "bytes": 1712,
+      "sha256": "5bfa71b5c847595fe25869cfea932d46d3134810b57aca3de844222a2c710c09"
+    },
+    "docs/stunet_audit/source_provenance.csv": {
+      "bytes": 358188,
+      "sha256": "772640cccd64894e3341c43f1a22cf2ca3dfc8bb2ac1cbd2f5f4f3be305b4207"
+    },
+    "docs/stunet_audit/test_use_ledger.json": {
+      "bytes": 5847,
+      "sha256": "4c835582d0cdc975acbed5433a386acffabf46edc82781837ba593216b26a5c0"
+    },
+    "docs/stunet_audit/upstream_plan_summary.json": {
+      "bytes": 793,
+      "sha256": "3504bf10781a58c6498502b711fb719d696cce7334232cae5a4fc7027aba7a1e"
+    },
+    "scripts/audit_stunet_overlap.py": {
+      "bytes": 3659,
+      "sha256": "a6cf17573385efc72e137817a818bdef06b608ebde7465dc18d7287c9a497b24"
+    },
+    "scripts/stunet_audit/align_candidate_samples_v2.py": {
+      "bytes": 4817,
+      "sha256": "d72474efee9eb3e4875a8f3f24bb870b3c3502777c714e5572c34643b0fad769"
+    },
+    "scripts/stunet_audit/checkpoint_probe.py": {
+      "bytes": 6666,
+      "sha256": "0f12204868f0e8456ce46d539fdfe1acd371b991a9781651cfc6322bae5fa661"
+    },
+    "scripts/stunet_audit/confirm_cropped_images.py": {
+      "bytes": 5609,
+      "sha256": "6a2d6fd26518165d02a8d6e0b5a1367f961d7772a32bb5b1542b139354e118e6"
+    },
+    "scripts/stunet_audit/download_checkpoint.py": {
+      "bytes": 2632,
+      "sha256": "2e25f10ed0eaafcb953ec37819f262e42c1947aa78df7cc3d16d0a41040c55a8"
+    },
+    "scripts/stunet_audit/download_totalseg_ranges.py": {
+      "bytes": 3787,
+      "sha256": "beaca819672555f1819e7e9a1d5875d6a3a35007570d8e6718c2bde46a00877d"
+    },
+    "scripts/stunet_audit/download_totalseg_resumed.py": {
+      "bytes": 4441,
+      "sha256": "cc09d1ebc8dd38ab4d793350b69c14deebcdf14414d5ae54a131cc990de5fca3"
+    },
+    "scripts/stunet_audit/download_totalseg_retry_bounded.py": {
+      "bytes": 5125,
+      "sha256": "3c5165dc2ca79c29847fe1e58ba7b53101d829269bc8bab54c9da64557f320af"
+    },
+    "scripts/stunet_audit/download_totalseg_v1.py": {
+      "bytes": 2831,
+      "sha256": "380e400901bd8aed8e29c54da51ff099198fb4fd7a98c07bb3750f31afa6c253"
+    },
+    "scripts/stunet_audit/extract_accessible_reference_ct.py": {
+      "bytes": 5450,
+      "sha256": "85eacf39597c7314fb573e971b107929b001ffb7e12ecf33f457f44b7a31c491"
+    },
+    "scripts/stunet_audit/extract_reference_ct.py": {
+      "bytes": 3845,
+      "sha256": "6fc99efad3a3e4e48be6c7ad50de2569a2ecec56d01d8c0d2c40bf91ad3925c7"
+    },
+    "scripts/stunet_audit/inspect_publisher_sidecar_v2.py": {
+      "bytes": 3386,
+      "sha256": "76751dd8fbb820211e43a3566e41c89502f9075ae2b660abf980c8810c5c2913"
+    },
+    "scripts/stunet_audit/inspect_small_plan.py": {
+      "bytes": 1416,
+      "sha256": "79a8d3db91bc79458aef2925a8bdd2e16111f506a8fa43180a3f800d5ca93488"
+    },
+    "scripts/stunet_audit/metadata_header.py": {
+      "bytes": 2103,
+      "sha256": "fdfdf40b450e64d6958032d4896a93fc27ce53d0500380e68b688df5c6321dc4"
+    },
+    "scripts/stunet_audit/overlap.py": {
+      "bytes": 7815,
+      "sha256": "84e83d11495dde99b23041109f3d31c5d82967dd10e4ecdaba3660c4903fa250"
+    },
+    "scripts/stunet_audit/publish_overlap_results.py": {
+      "bytes": 5507,
+      "sha256": "486e995eea211effdb917f76f84d30c32c1a041bb9f2711de23e75f55977c8a9"
+    },
+    "scripts/stunet_audit/reference_accessible_worker.py": {
+      "bytes": 6124,
+      "sha256": "d5fe6081c5eb1bda74a21f146b6623a06acd11e0f79f2b6ae0e93e8dd6599eac"
+    },
+    "scripts/stunet_audit/reference_worker.py": {
+      "bytes": 5946,
+      "sha256": "5c920ee76f7b9c6e9f172af7bc02eb8be2fd98bb5c239525e252f52e102118b0"
+    },
+    "scripts/stunet_audit/render_candidate_pair_review.py": {
+      "bytes": 3200,
+      "sha256": "a292660d49fa79a0f03d8f82980fb12d1f2ccb63c6b3c59456fb16308dbfd237"
+    },
+    "scripts/stunet_audit/review_candidate_translations.py": {
+      "bytes": 4151,
+      "sha256": "b5e00b7874b3e537da260f3552e05a4395f3215582bb3cccab4150d8af4f1248"
+    },
+    "scripts/stunet_audit/review_development_fingerprints.py": {
+      "bytes": 2799,
+      "sha256": "e2014bcdf297463fe080d30120983e6652aa38945dc1dde1813ed839b7bc1328"
+    },
+    "scripts/stunet_audit/run_accessible_reference_pipeline.py": {
+      "bytes": 7121,
+      "sha256": "dc8193ec3cc085c46cd74840db772c6182f7d414334d1271cd32596492a28740"
+    },
+    "scripts/stunet_audit/run_bounded_cpu.py": {
+      "bytes": 752,
+      "sha256": "9adc5d4fedabfe7d620134b659924dff88852a14e77e4fb5713b7d0c0ba15bf3"
+    },
+    "scripts/stunet_audit/run_image_cpu.py": {
+      "bytes": 1220,
+      "sha256": "feb790f950f18ca4af703020c9be0a3e9e98feb7aedfb12644f0168f8ed31c34"
+    },
+    "scripts/stunet_audit/run_reference_pipeline.py": {
+      "bytes": 5958,
+      "sha256": "1a04f31044bc90f085a5e1d83c227afc51740a3a16f7851e0de6b3463a033358"
+    },
+    "scripts/stunet_audit/selected_source_metadata.py": {
+      "bytes": 4793,
+      "sha256": "b42c6a5fa7322af90fd3ce942173dd1a05a18a8374abc2cc2a741985aab9e5e9"
+    },
+    "scripts/stunet_audit/verify_intensity_reexport.py": {
+      "bytes": 3290,
+      "sha256": "c1d255f4fb0c7d3124f4f86f88eaeb6397960eb95ba275f3d5fca9e958980fca"
+    },
+    "tests/stunet_audit/test_archive_guards.py": {
+      "bytes": 1414,
+      "sha256": "6378aabe190907cedec2c3419dd2b2b72ce28ae48d098f462cde7ec6ac1b0a8e"
+    },
+    "tests/stunet_audit/test_exact_crop.py": {
+      "bytes": 1174,
+      "sha256": "3b6229a4201f8334cdb85213398a17d26165b57c3fd35f78cab59ba18f7b4f3b"
+    },
+    "tests/stunet_audit/test_intensity_reexport.py": {
+      "bytes": 898,
+      "sha256": "96c7da1e3f53c0ee418852be67583c5e6190ef004745edfc81d8817c5a1fbd61"
+    },
+    "tests/stunet_audit/test_member_integrity.py": {
+      "bytes": 1489,
+      "sha256": "2d403c4d69d32649990123a94e97dae367d873ddf7196db6a5a5dfa73fa1a176"
+    },
+    "tests/stunet_audit/test_overlap.py": {
+      "bytes": 6931,
+      "sha256": "57bf9b960575f1da65f8327704bbfa6d8ca298d9877915e333ad6542e10981d6"
+    },
+    "tests/stunet_audit/test_publisher_sidecar.py": {
+      "bytes": 928,
+      "sha256": "13e10374e66c8d5fe0854974e0c34ff248214f2496ee8d5fd3c86960e5f77395"
+    },
+    "tests/stunet_audit/test_reference_proxy.py": {
+      "bytes": 1178,
+      "sha256": "78ed21d2984ee61bcde98d8ddbfaab113df016df6287ce3b7a5bd0cecc1c1488"
+    },
+    "tests/stunet_audit/test_sparse_alignment.py": {
+      "bytes": 1404,
+      "sha256": "a857e923516ff472f4596b13ac77e0fd1fbd77296fb5eb7d05ceb68b29405e7a"
+    },
+    "tests/stunet_audit/test_translation_review.py": {
+      "bytes": 1114,
+      "sha256": "0b7944ec23ecb9bb61ba652265c068fe34891efa8944bca5681934bae27923be"
+    }
+  },
+  "evidence": {
+    "/Users/quintonevans/Desktop/Quinn/Desktop-Quinn/GitHub/PROWL/outputs/prowl/stunet-audit-20261106/finish_followup_manifest.py": {
+      "bytes": 5776,
+      "sha256": "ca77df826bf6210b9f08028fa71a7fcc31b6eff55625ced01f133f61b70aa7c7"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-01/candidate-review.png": {
+      "bytes": 185190,
+      "sha256": "19a735499ac41eb0468843b80c34cf9d6c7384d8dfbe0890a6ebaf5aab086ffc"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-01/summary.json": {
+      "bytes": 869,
+      "sha256": "788b2426c058560761c0f3c1562d1f22bfcb3e4b4763bfd89ecd62ae645cadf4"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-request-01.json": {
+      "bytes": 2127,
+      "sha256": "312285d0413f9f79938120acea0d613ad302ce1353d47b279f03d74cb459bc26"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-confirmation-01/results.json": {
+      "bytes": 2206,
+      "sha256": "7d79617367e765e476f4d14879209c3c74040acb335ae47a87b131829c9ff2b8"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-confirmation-01/summary.json": {
+      "bytes": 149,
+      "sha256": "87dcad7416d92c735d5667dbf95bdb2ba80c025a98f70d25104663f1e0fa88e9"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-supervision-01/resources.json": {
+      "bytes": 152,
+      "sha256": "97ebf7b504aae4f7a15d44d1ff2edadbcb34742b10981dd19f11624fa7ae03d3"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/cropped-image-request-01.json": {
+      "bytes": 16797,
+      "sha256": "38f9a2c768c5ca314a41c131b1120d7a0b4bd61004e9d9bea038ab79825c5829"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/extraction-supervision-01/resources.json": {
+      "bytes": 189,
+      "sha256": "caca39f6e0469d4cc3df40ed9091689d1fc3f18099ffc548bd4af7fbc63d7927"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/extraction-supervision-02/resources.json": {
+      "bytes": 155,
+      "sha256": "54fd5cd1394ae6e6d909c142363590330f3af1b1079cb22ba60c0ae49a69930e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/final-integrity-01.json": {
+      "bytes": 4656,
+      "sha256": "8762b934215ffabf8c98e43efccddae3bcdb7358961a37e1052ff15eff161543"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/followup-identity-01/summary.json": {
+      "bytes": 1283,
+      "sha256": "e7f08a848f244fc368a72c49cbb9a73602629477a1912fbe920e17e2471dbc68"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/initial-published-overlap-01/overlap_results.csv": {
+      "bytes": 137023,
+      "sha256": "19ee9f62d5ed21a05d514d22879b8dbbb31a3cc04ece1be4714fb077d402f034"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/initial-published-overlap-01/overlap_summary.json": {
+      "bytes": 2089,
+      "sha256": "61ba42534b1fb5e32a9320af5342c2e1ee3ecc00cde841273417eaa3f08078e9"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-01/results.json": {
+      "bytes": 9736,
+      "sha256": "32d80d0058adfa683d81979a0f06343449f77d94e5f2fb52e728a5fad1e980b4"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-01/summary.json": {
+      "bytes": 266,
+      "sha256": "7e16db7c8062735b0dd5e229bbab85f63bcb623366c92896d631272e0578a3c5"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-request-01.json": {
+      "bytes": 2298,
+      "sha256": "36c2a9eb53d87c383f51cdf006805d095caed348b2c1e23b1e73476bdea6e1f3"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/query-manifest.json": {
+      "bytes": 23412,
+      "sha256": "95a2a0137f5427b7f437ddd413d3d67f5b086f1cbed088a3ba2c2fa1d64bc710"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/query-request.json": {
+      "bytes": 2005,
+      "sha256": "4217c96b72f55f89a2bd5d7f61b2b3e73354d494bb280c81b5a65fe6643fb8d0"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/query-supervision-01/resources.json": {
+      "bytes": 154,
+      "sha256": "9ea4667abb53be9daab6249215a282f64791f12776e571b156baf05088b51c95"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-comparison-02/candidates.json": {
+      "bytes": 126851,
+      "sha256": "94334cff4178cb113247f9c3e6b049a55c5c41a83b5583940becded81ffc5338"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-comparison-02/summary.json": {
+      "bytes": 816,
+      "sha256": "5f17438d379e0fe74dc98ca82502eef9d6b0e9ceabc61c39dadcbefd481faa73"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-01/request.json": {
+      "bytes": 42861,
+      "sha256": "3cd67d6fc0bcc608dac3b91234cd022f80b387feac2e205ee043fcbdd09caacb"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-01/result.json": {
+      "bytes": 164,
+      "sha256": "9aa6b7547d15eac2027306bfed8e4d8b5391f90ea3de59dd8ebc9556d459b288"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/reference-request.json": {
+      "bytes": 518479,
+      "sha256": "fbff2632d4c2a48853a0dc8bcb3f4ff07cfe4117d60964cc2056b5943b4e8af8"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/request.json": {
+      "bytes": 43418,
+      "sha256": "e0a2e439c27c39862c7041d214152266a29b105731771624f027d5ca6708ab84"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/result.json": {
+      "bytes": 175,
+      "sha256": "99f82d31a74946d4c445157cf3bc5591da6b28de2b94d2067d7aa175c2584a72"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/verified-reference-splits.json": {
+      "bytes": 140884,
+      "sha256": "2e86555e035b907a53636b6017c1f654a7c062a6b406fc2867244d2f16940dfd"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-supervision-02/resources.json": {
+      "bytes": 155,
+      "sha256": "7af73062dbbab91eeed364e22da0dbbe10c82fd7ce64d39a2da6a363efbd6809"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/source-evidence-snapshot.json": {
+      "bytes": 798,
+      "sha256": "b2e1215360dca678906ddd638bb2de0ecdb4e2d367f01a1efc66cf5cc97236eb"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-01/results.json": {
+      "bytes": 4211,
+      "sha256": "0cf37cfe05f60a442a1172773e55b5b12d1af9d8e1552900e0d1bc9abe1ccf5c"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-01/summary.json": {
+      "bytes": 137,
+      "sha256": "6d2618f5c426f8ae7daed33ccc40ddb4da16cac315f488286b1b59c2085d946b"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-request-01.json": {
+      "bytes": 15985,
+      "sha256": "5209295f2e2780497ba087fe81278a933ed1ab2bca5e431b6b827a470320d58e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-01/progress.json": {
+      "bytes": 644,
+      "sha256": "cde05b1d35ed399018d92ba17609549c2010603fa8dd569da083a5f2249fb19d"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-request-01.json": {
+      "bytes": 16975,
+      "sha256": "cea6a0cc8a73a70e9b180cb2b7ba40771047d1ecbd806a26df75a5931a470779"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-supervision-01/resources.json": {
+      "bytes": 189,
+      "sha256": "2721bb5097057a6850f7af4e626828b9df31d87b3e709831374ea365c20f0e8c"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/within-development-01/summary.json": {
+      "bytes": 405,
+      "sha256": "8fed874a3ca802f9ce3d8c68e90c7b5cf6a54a0b829e7a421b3839b74dfbce2b"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/within-development-supervision-01/resources.json": {
+      "bytes": 152,
+      "sha256": "39fed8095a003d0cc3ec0c8dcae4f644e933053d38d45cb07f9f024b5a2d3d89"
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-01/resources.json": {
+      "bytes": 154,
+      "sha256": "c5c28c3381c70e691197e02249dc15bba8ca8ac9375df76b1ba819ac41bf094c"
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-02/resources.json": {
+      "bytes": 154,
+      "sha256": "456cdd2e8381623a64392636207ab5f44d2ba40048c1b0812a64083d308a303c"
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-03/resources.json": {
+      "bytes": 154,
+      "sha256": "4defc9d8bd82410d892de78b9bc7459f899aa0e1257cf6d074b16b680b841f44"
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-probe-03.json": {
+      "bytes": 29033,
+      "sha256": "72856d7011179eac1221207486db45fc5132a8252071ddc8e2c0bead60c0e2c8"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/additional-sources.json": {
+      "bytes": 1050,
+      "sha256": "60f2364f0af526cfe2d278325d2360fbab8e57b99afb1cdf9cddc035bf4c066f"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/author-hf-model.txt": {
+      "bytes": 1545,
+      "sha256": "ef4cab49f0c68952fe3185d3addda85104a9006e2208a2514885d36b34654e87"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/checkpoint-sidecar-disassembly.txt": {
+      "bytes": 22983,
+      "sha256": "cb1a6ec067ad04874492db735ad6b9146c0acaf5a12faa070a4627a29aa03080"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/checkpoint-sidecar-review.json": {
+      "bytes": 374,
+      "sha256": "91a1cae1ed000c1cc702889ae524b10b00cc457a57964a79d6eecd238f67af3e"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/checkpoint-sidecar-v2.json": {
+      "bytes": 4174,
+      "sha256": "50073ac3fa5338d477dd89a5a052e2cdc1a59dc6c7952cce1884e65baab25f4b"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/hf-pointer-pinned.txt": {
+      "bytes": 134,
+      "sha256": "e9b7b2fcb9ed630249b86b1b734f68517db9bc2ff03a15d555a0a9cbf402f20a"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/hf-readme-pinned.txt": {
+      "bytes": 28,
+      "sha256": "98b45ea81164d1e1a1dd82255207053b15cd6c69d922a1c5cf3387ce604d4b74"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/manifest.json": {
+      "bytes": 2163,
+      "sha256": "98664ba4155bfda06cf59fbce95dd40139f89a2f895ba11eaf8328d69286370b"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/medim-pretrain-pinned.txt": {
+      "bytes": 3695,
+      "sha256": "1022bd4b4c1894d9c57a8d9255067718836143d54693b458bb959743ee4dcf5b"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/medim-readme-pinned.txt": {
+      "bytes": 2583,
+      "sha256": "a14c70039aea3cec30f129c0581edf4a071906eeb5161c415792eaf258e8fa3f"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/medim-tree.txt": {
+      "bytes": 7324,
+      "sha256": "822d2ede32decfa3f45e2dcae4a49c1b87cc060d8ebf9d490ae86567c434e204"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/pants-issue-1-comments.json": {
+      "bytes": 4090,
+      "sha256": "7db6d3af38a42cc98fcfa42b7a7bef6de13699efd800c2dc1ce1331d6c85b04c"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/pants-issues.txt": {
+      "bytes": 79936,
+      "sha256": "db59d0dac2d9b6db847a52c8e0ff423250cf1b915880dcd09b1fc1ef57cbd303"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/pants-readme.txt": {
+      "bytes": 9096,
+      "sha256": "2938bd327158294ada1d3f3cf667116c389c45d17cf5df5e0599e7e381880cdd"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/report-verification-correction.json": {
+      "bytes": 442,
+      "sha256": "cc3797cbd046b128068432af91935a80c36defe5330892333480ae9ff6885d23"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/stunet-issue-11-comments.json": {
+      "bytes": 7859,
+      "sha256": "48a2040ce600a1b649a217d448252f32508bec1bce137938a21e9e33b4b829d2"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/stunet-issue-18-comments.json": {
+      "bytes": 7700,
+      "sha256": "2a14cf40eda42ebb4dec55a27f2491dafe366b3a458613183e3159d062ce7e6a"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/stunet-issue-6-comments.json": {
+      "bytes": 17979,
+      "sha256": "90d9a5af5abc3d8d60484e2d775b8662a6aa97c5f3317a218fb23bab23a71308"
+    },
+    "outputs/prowl/stunet-audit-20261106/followup-public-01/stunet-issues.txt": {
+      "bytes": 131117,
+      "sha256": "7d0f1c1022eeb3a24cc5d1decbbc9d3fb10c4637cad4dbe6779b328785a2c3d3"
+    },
+    "outputs/prowl/stunet-audit-20261106/overlap-tests-08.log": {
+      "bytes": 3262,
+      "sha256": "81936ce14c70ab22b8e5a920efca35f837c7021f336ffcae31a5c491b061134e"
+    },
+    "outputs/prowl/stunet-audit-20261106/overlap-tests-09.log": {
+      "bytes": 4340,
+      "sha256": "3939f6dc21bbc2bfc784e49717d7be1cc4075d0d58e262174fd1f821366bdc85"
+    },
+    "outputs/prowl/stunet-audit-20261106/s0864-independent-zip-test.log": {
+      "bytes": 357,
+      "sha256": "3c43bb13df3e77dfda7bd2b03e0e7aa477e6d07d1aa67ef7af7dba5b8a350503"
+    },
+    "outputs/prowl/stunet-audit-20261106/finish_followup_manifest.py": {
+      "bytes": 5827,
+      "sha256": "67f3dbaa3aad6970c2a514791bbd201802882b48adca4841ec6b54d4951f0526"
+    }
+  },
+  "resources": {
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-supervision-01/resources.json": {
+      "seconds": 0.23727520881220698,
+      "peak_owned_rss_bytes": 147619840,
+      "samples": 3,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/crop-supervision-01/resources.json": {
+      "seconds": 3.827834499999881,
+      "peak_owned_rss_bytes": 925990912,
+      "samples": 47,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/extraction-supervision-01/resources.json": {
+      "seconds": 853.1234016669914,
+      "peak_owned_rss_bytes": 208011264,
+      "samples": 9127,
+      "workers_reaped": true,
+      "success": false,
+      "error": "ValueError('Duration worker failed')",
+      "exit_code": 1
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/extraction-supervision-02/resources.json": {
+      "seconds": 492.72534641670063,
+      "peak_owned_rss_bytes": 383631360,
+      "samples": 6141,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-supervision-01/resources.json": {
+      "seconds": 0.1704073748551309,
+      "peak_owned_rss_bytes": 105676800,
+      "samples": 2,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/query-supervision-01/resources.json": {
+      "seconds": 53.90128441574052,
+      "peak_owned_rss_bytes": 5983633408,
+      "samples": 691,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-supervision-02/resources.json": {
+      "seconds": 570.8971261666156,
+      "peak_owned_rss_bytes": 6663438336,
+      "samples": 7118,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-supervision-01/resources.json": {
+      "seconds": 3.5767272915691137,
+      "peak_owned_rss_bytes": 969490432,
+      "samples": 45,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-supervision-01/resources.json": {
+      "seconds": 1.4006853750906885,
+      "peak_owned_rss_bytes": 1555578880,
+      "samples": 17,
+      "workers_reaped": true,
+      "success": false,
+      "error": "ValueError('Duration worker failed')",
+      "exit_code": 1
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/within-development-supervision-01/resources.json": {
+      "seconds": 5.711131833028048,
+      "peak_owned_rss_bytes": 207798272,
+      "samples": 70,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-01/resources.json": {
+      "seconds": 1.0522262500599027,
+      "peak_owned_rss_bytes": 1133608960,
+      "samples": 12,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-02/resources.json": {
+      "seconds": 0.8337018340826035,
+      "peak_owned_rss_bytes": 1133592576,
+      "samples": 10,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    },
+    "outputs/prowl/stunet-audit-20261106/checkpoint-cpu-03/resources.json": {
+      "seconds": 3.2491565831005573,
+      "peak_owned_rss_bytes": 5132632064,
+      "samples": 36,
+      "workers_reaped": true,
+      "success": true,
+      "error": null,
+      "exit_code": 0
+    }
+  },
+  "all_recorded_workers_reaped": true,
+  "matching_python_workers": [],
+  "synthetic_tests": {
+    "count": 36,
+    "seconds": 1.813,
+    "log": "outputs/prowl/stunet-audit-20261106/overlap-tests-09.log"
+  },
+  "published_checkpoint_digest_verified": true,
+  "archive_rehashed_this_followup": false,
+  "clinical_model_forwards": 0,
+  "optimizer_updates": 0,
+  "new_training_ct_reads": 0,
+  "protected_prowl_test_image_reads": 0,
+  "protected_prowl_test_label_reads": 0,
+  "images_uploaded": 0,
+  "author_messages_sent": 0,
+  "author_outreach_state": "LOCAL_ONLY_USER_DIRECTED_DO_NOT_SEND",
+  "committed": false,
+  "local_only_decision_snapshot": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/local-only-decision-01"
+}
