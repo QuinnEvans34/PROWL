@@ -11,7 +11,7 @@ import { preparedViewerCtPath, viewerSceneKey } from '../lib/viewerSceneKey.js'
 import { ANTERIOR_CAMERA } from '../lib/viewerOrientation.js'
 import { clientToBackingPx, pan2d, pan3dPivot, panPlaneAt, zoom2d, zoom3dFraming, zoomBox2d, zoomBox3dFraming, zoomToBounds2d } from '../lib/viewerZoom.js'
 import { hasContourTile } from '../lib/viewerContour.js'
-import { anatomyColormap, anatomyMeshLayers, CONFIDENCE_COLORMAP, CONFIDENCE_COLORMAP_LUT, CONFIDENCE_RANGE } from '../lib/studyInsights.js'
+import { ANATOMY_STRUCTURES, anatomyColormap, anatomyMeshLayers, CONFIDENCE_COLORMAP, CONFIDENCE_COLORMAP_LUT, CONFIDENCE_RANGE, hoverStructureNames, rgb } from '../lib/studyInsights.js'
 import { worldToNdc } from '../lib/viewerCaliperProjection.js'
 export { viewerSceneKey } from '../lib/viewerSceneKey.js'
 
@@ -741,6 +741,39 @@ async function recordTurntable(nv, canvas, { caseId, seconds = 8, onChange } = {
   onChange?.({ status: 'saved' })
 }
 
+// Reference anatomy in 2D: hidden structures are removed from the label data (NiiVue
+// still draws outlines for zero-alpha labels), and a highlighted one stays full while
+// the rest dim. The original labels are kept so every change is reversible.
+function applyAnatomyView(volume, hidden, highlight) {
+  if (!volume?.img) return
+  if (!volume.prowlOriginalLabels) volume.prowlOriginalLabels = volume.img.slice()
+  const hiddenValues = new Set(ANATOMY_STRUCTURES.filter(item => hidden.includes(item.name)).map(item => item.value))
+  const key = `${[...hiddenValues].sort().join(',')}|${highlight || ''}`
+  if (volume.prowlAnatomyKey === key) return
+  const original = volume.prowlOriginalLabels
+  if (hiddenValues.size) {
+    for (let i = 0; i < original.length; i += 1) volume.img[i] = hiddenValues.has(original[i]) ? 0 : original[i]
+  } else volume.img.set(original)
+  const highlightValue = ANATOMY_STRUCTURES.find(item => item.name === highlight)?.value
+  const colormap = anatomyColormap(255)
+  if (highlightValue) colormap.A = colormap.A.map((alpha, index) => index === 0 ? 0 : colormap.I[index] === highlightValue ? 255 : 40)
+  volume.setColormapLabel(colormap)
+  volume.prowlAnatomyKey = key
+}
+
+// Label value of a loaded label volume at a world-space point (0 outside the volume).
+function sampleLabel(volume, mm) {
+  if (!volume?.img || !volume.dimsRAS || !volume.matRAS) return 0
+  try {
+    const vox = volume.mm2vox(mm)
+    const dims = volume.dimsRAS
+    if (vox[0] < 0 || vox[1] < 0 || vox[2] < 0 || vox[0] >= dims[1] || vox[1] >= dims[2] || vox[2] >= dims[3]) return 0
+    return Math.round(volume.getValue(vox[0], vox[1], vox[2])) || 0
+  } catch {
+    return 0
+  }
+}
+
 const meshExtension = path => (/\.(mz3|obj|stl|gii)(\.gz)?$/i.exec(path || '')?.[1] || 'obj').toLowerCase()
 
 export default function NiivueViewer({
@@ -755,6 +788,9 @@ export default function NiivueViewer({
   showFull = false,
   preferNativeFull = true,
   showAnatomy = false,
+  anatomyHidden = [],
+  structureHighlight = null,
+  hideCrosshair = false,
   showConfidence = false,
   onRecordingChange = null,
   overlayOpacity = 0.3,
@@ -806,6 +842,8 @@ export default function NiivueViewer({
     differenceVolumeIndexes: new Map(),
     differenceVolumes: new Map(),
     meshes: new Map(),
+    extraVolumeIndexes: new Map(),
+    anatomyMeshes: [],
   })
   const locationRef = useRef(null)
   const pointerStartRef = useRef(null)
@@ -845,6 +883,12 @@ export default function NiivueViewer({
   const [reviewLayerVersion, setReviewLayerVersion] = useState(0)
   const reviewTogglesRef = useRef({ showAnatomy, showConfidence })
   reviewTogglesRef.current = { showAnatomy, showConfidence }
+  // 2D hover tag: names the structure(s) under the cursor.
+  const [hoverTag, setHoverTag] = useState(null)
+  // Highlighted reference structure (from the layer bar's Anatomy menu): others fade.
+  const legendHighlight = structureHighlight
+  const anatomyHiddenKey = [...anatomyHidden].sort().join('|')
+  const hoverInputsRef = useRef(null)
 
   // Queued on the scene chain so a later scene never interleaves with these appends.
   function queueReviewJob(job) {
@@ -1509,7 +1553,7 @@ export default function NiivueViewer({
           setPlaneLayout(nv, activePlane)
           // A thin, quiet crosshair with an open centre keeps the target visible.
           nv.setCrosshairColor([0.66, 0.74, 0.84, window.__PROWL_CAPTURE ? 0 : 0.42])
-          nv.opts.crosshairWidth = window.__PROWL_CAPTURE ? 0 : 1
+          nv.opts.crosshairWidth = window.__PROWL_CAPTURE || hideCrosshair ? 0 : 1
           nv.opts.crosshairGap = 14
           // Orientation letters: larger and brighter so they read at a glance.
           nv.opts.fontMinPx = 15
@@ -1699,8 +1743,10 @@ export default function NiivueViewer({
             )
           })
           registryRef.current.extraVolumeIndexes.forEach((volumeIndex, kind) => {
-            if (!nv.volumes[volumeIndex]) return
-            nv.setOpacity(volumeIndex, kind === 'anatomy' ? (showAnatomy ? 0.22 : 0) : (showConfidence ? 0.8 : 0))
+            const volume = nv.volumes[volumeIndex]
+            if (!volume) return
+            if (kind === 'anatomy') applyAnatomyView(volume, anatomyHidden, legendHighlight)
+            nv.setOpacity(volumeIndex, kind === 'anatomy' ? (showAnatomy ? (legendHighlight ? 0.4 : 0.22) : 0) : (showConfidence ? 0.8 : 0))
           })
           nv.setOpacity(0, 1)
           nv.updateGLVolume()
@@ -1732,9 +1778,11 @@ export default function NiivueViewer({
           })
           // Difference pieces tile one surface; drawing the pancreas pieces opaque
           // avoids stacked translucent shells. Lesion pieces show through via X-ray.
-          const finalOpacity = entry.source === 'difference' && entry.anatomy === 'pancreas' && opacity > 0
+          const baseOpacity = entry.source === 'difference' && entry.anatomy === 'pancreas' && opacity > 0
             ? 1
             : opacity
+          const legendKey = entry.source === 'difference' ? null : `${entry.source === 'gt' ? 'reference' : 'model'}-${entry.anatomy}`
+          const finalOpacity = legendHighlight && legendKey !== legendHighlight ? baseOpacity * 0.12 : baseOpacity
           const color = entry.source === 'difference'
             ? DIFFERENCE_COLORS[entry.region]
             : SOURCE_COLORS[entry.source][entry.anatomy]
@@ -1753,8 +1801,10 @@ export default function NiivueViewer({
           }
         })
         registryRef.current.anatomyMeshes.forEach(entry => {
-          entry.mesh.visible = showAnatomy
-          setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', showAnatomy ? entry.opacity : 0)
+          const faded = legendHighlight && legendHighlight !== entry.structure
+          const shown = showAnatomy && !anatomyHidden.includes(entry.structure)
+          entry.mesh.visible = shown
+          setMeshPropertyIfChanged(nv, entry.mesh, 'opacity', shown ? (faded ? entry.opacity * 0.12 : entry.opacity) : 0)
         })
         nv.opts.meshXRay = differenceMode ? 0.32 : 0.22
 
@@ -1792,7 +1842,50 @@ export default function NiivueViewer({
     showAnatomy,
     showConfidence,
     reviewLayerVersion,
+    legendHighlight,
+    anatomyHiddenKey,
   ])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas || mode !== '2d') return undefined
+    let frame = 0
+    let last = null
+    const update = () => {
+      frame = 0
+      const nv = nvRef.current
+      const inputs = hoverInputsRef.current
+      if (!last || !nv || !inputs?.ready) { setHoverTag(null); return }
+      const point = clientToBackingPx(canvas, last.clientX, last.clientY)
+      const mm = point && nv.screenXY2mm(point[0], point[1])
+      if (!mm || !Number.isFinite(mm[0])) { setHoverTag(null); return }
+      const registry = registryRef.current
+      const anatomyIndex = registry.extraVolumeIndexes?.get('anatomy')
+      const names = hoverStructureNames({
+        pred: sampleLabel(registry.volumes.get('pred'), mm),
+        gt: sampleLabel(registry.volumes.get('gt'), mm),
+        anatomy: anatomyIndex === undefined ? 0 : sampleLabel(nv.volumes[anatomyIndex], mm),
+      }, inputs)
+      if (!names.length) { setHoverTag(null); return }
+      const rect = canvas.getBoundingClientRect()
+      setHoverTag({ x: last.clientX - rect.left, y: last.clientY - rect.top, width: rect.width, names })
+    }
+    const move = event => {
+      if (event.buttons) { last = null; setHoverTag(null); return }
+      last = event
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    const leave = () => { last = null; setHoverTag(null) }
+    canvas.addEventListener('pointermove', move)
+    canvas.addEventListener('pointerleave', leave)
+    canvas.addEventListener('pointerdown', leave)
+    return () => {
+      cancelAnimationFrame(frame)
+      canvas.removeEventListener('pointermove', move)
+      canvas.removeEventListener('pointerleave', leave)
+      canvas.removeEventListener('pointerdown', leave)
+    }
+  }, [mode])
 
   // The confidence map is only fetched the first time someone turns it on.
   useEffect(() => {
@@ -2178,6 +2271,13 @@ export default function NiivueViewer({
     return () => onViewHandle(null)
   }, [onViewHandle, mode, sceneKey, sceneVersion, state.status])
 
+  hoverInputsRef.current = {
+    ready: state.status === 'ready' && loadedSceneKeyRef.current === sceneKey && !differenceMode,
+    showPrediction: renderedSources.includes('pred'),
+    showReference: renderedSources.includes('gt'),
+    showPancreas, showLesion, showAnatomy,
+  }
+
   const isPancreasMeasurement = mode === '2d' && measurementAnatomy === 'pancreas'
   const measurementLayerVisible = isPancreasMeasurement ? showPancreas : showLesion
   const ready = state.status === 'ready' && loadedSceneKeyRef.current === sceneKey
@@ -2204,6 +2304,14 @@ export default function NiivueViewer({
         opacity={sourceFocus === 'pred' && renderedSources.includes('pred') ? 0.3 : 1} />}
       {(imageDetails || sceneLabel) && <ImagingViewportDetails nvRef={nvRef} loadedSceneKeyRef={loadedSceneKeyRef}
         sceneKey={sceneKey} ready={ready} plane={activePlane} source={imageDetails} sceneLabel={sceneLabel} />}
+      {hoverTag && (
+        <div className={`pw-hover-tag${hoverTag.x > hoverTag.width - 220 ? ' pw-hover-tag--left' : ''}`} aria-hidden="true"
+          style={{ left: hoverTag.x, top: hoverTag.y }}>
+          {hoverTag.names.map(item => (
+            <span key={item.key}><i style={{ background: rgb(item.color) }} />{item.name}<small>{item.source}</small></span>
+          ))}
+        </div>
+      )}
       {zoomBox && interactionMode === 'box-zoom' && !framingLocked && (
         <div aria-hidden="true" className="niivue-zoom-box" style={{ ...zoomBox, position: 'absolute',
           border: '1px solid #f5ca82', background: '#f5ca8224', pointerEvents: 'none' }} />

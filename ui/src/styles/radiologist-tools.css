@@ -172,3 +172,90 @@
   .pw-curved__frame { padding: 20px 34px 6px; }
   .pw-insight-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---------- Structure names: 2D hover tag and 3D legend ---------- */
+.pw-hover-tag {
+  position: absolute; z-index: 6; pointer-events: none; transform: translate(16px, 14px);
+  display: grid; gap: 3px; padding: 6px 9px; min-width: 120px;
+  background: rgba(17, 18, 20, 0.92); border: 1px solid var(--pw-border); border-radius: 7px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  font-size: 12px; color: var(--pw-text); white-space: nowrap;
+}
+.pw-hover-tag--left { transform: translate(calc(-100% - 16px), 14px); }
+.pw-hover-tag span { display: flex; align-items: center; gap: 7px; }
+.pw-hover-tag i { width: 8px; height: 8px; border-radius: 2px; flex: none; }
+.pw-hover-tag small { margin-left: auto; padding-left: 12px; font-size: 10.5px; color: var(--pw-text-faint); }
+
+.pw-structure-legend {
+  position: absolute; z-index: 5; right: 12px; bottom: 52px; max-height: calc(100% - 110px); overflow: auto;
+  display: grid; gap: 1px; padding: 6px; min-width: 168px;
+  background: rgba(17, 18, 20, 0.78); border: 1px solid var(--pw-border-subtle); border-radius: 8px;
+  backdrop-filter: blur(6px);
+}
+.pw-structure-legend button {
+  display: flex; align-items: center; gap: 8px; min-height: 24px; padding: 2px 8px;
+  font: inherit; font-size: 12px; color: var(--pw-text); text-align: left;
+  background: transparent; border: 1px solid transparent; border-radius: 5px; cursor: pointer;
+  transition: opacity var(--pw-fast) var(--pw-ease), background var(--pw-fast) var(--pw-ease);
+}
+.pw-structure-legend button:hover { background: var(--pw-hover); }
+.pw-structure-legend button[aria-pressed='true'] { background: var(--pw-accent-soft); border-color: var(--pw-accent-line); }
+.pw-structure-legend button.is-faded { opacity: 0.45; }
+.pw-structure-legend i { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.pw-structure-legend small { margin-left: auto; padding-left: 10px; font-size: 10px; color: var(--pw-text-faint); }
+.niivue-frame--compact .pw-structure-legend { display: none; }
+
+/* ---------- Anatomy menu in the layer bar ---------- */
+.pw-layer-split { display: inline-flex; align-items: center; gap: 0; }
+.pw-anatomy-menu { position: relative; display: inline-flex; }
+.pw-anatomy-menu__toggle {
+  display: inline-grid; place-items: center; width: 22px; height: 26px; margin-left: -4px; padding: 0;
+  color: var(--pw-text-faint); background: transparent; border: 1px solid transparent; border-radius: var(--pw-radius-sm); cursor: pointer;
+}
+.pw-anatomy-menu__toggle:hover:not(:disabled), .pw-anatomy-menu__toggle.is-open { color: var(--pw-text); background: var(--pw-hover); }
+.pw-anatomy-menu__toggle.is-pinned { color: var(--pw-accent); }
+.pw-anatomy-menu__toggle:disabled { opacity: 0.4; cursor: default; }
+.pw-anatomy-menu__panel {
+  position: absolute; bottom: calc(100% + 10px); left: -120px; z-index: 40; width: 330px;
+  padding: 10px 6px 8px; background: var(--pw-surface); border: 1px solid var(--pw-border); border-radius: 10px;
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+}
+.pw-anatomy-menu__panel header { display: grid; gap: 2px; padding: 0 8px 8px; border-bottom: 1px solid var(--pw-border-subtle); }
+.pw-anatomy-menu__panel header strong { font-size: 12.5px; }
+.pw-anatomy-menu__panel header small { font-size: 10.5px; color: var(--pw-text-faint); }
+.pw-anatomy-menu__panel ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 1px; }
+.pw-anatomy-menu__panel li { display: flex; align-items: center; gap: 2px; border-radius: 6px; }
+.pw-anatomy-menu__panel li:hover, .pw-anatomy-menu__panel li.is-highlighted { background: var(--pw-hover); }
+.pw-anatomy-menu__eye {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; flex: none; padding: 0;
+  color: var(--pw-text-muted); background: transparent; border: 0; border-radius: 6px; cursor: pointer;
+}
+.pw-anatomy-menu__eye[aria-pressed='false'] { color: var(--pw-text-faint); }
+.pw-anatomy-menu__name {
+  display: flex; align-items: center; gap: 8px; flex: 1 1 auto; min-width: 0; min-height: 28px; padding: 0 8px 0 2px;
+  font: inherit; font-size: 12.5px; color: var(--pw-text); text-align: left; background: transparent; border: 0; border-radius: 6px; cursor: pointer;
+}
+.pw-anatomy-menu__name i { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+.pw-anatomy-menu__name span { flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pw-anatomy-menu__name small { flex: none; font-size: 11px; color: var(--pw-text-faint); }
+.pw-anatomy-menu__name small::first-letter { text-transform: uppercase; }
+.pw-anatomy-menu__name small.is-contact { color: #fca5a5; }
+.pw-anatomy-menu__name[aria-pressed='true'] { box-shadow: inset 0 0 0 1px var(--pw-accent-line); background: var(--pw-accent-soft); }
+.pw-anatomy-menu__panel li.is-hidden .pw-anatomy-menu__name { opacity: 0.45; }
+.pw-anatomy-menu__reset { display: block; margin: 6px 8px 0 auto; font-size: 11.5px; }
+
+/* ---------- Study bar: name, rename, descriptor ---------- */
+.pw-studybar__id { display: grid; gap: 1px; min-width: 0; }
+.pw-studybar__name { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.pw-studybar__name h1 { margin: 0; font-family: inherit; font-size: 16px; font-weight: 600; letter-spacing: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pw-studybar__rename-btn { width: 24px; height: 24px; opacity: 0; transition: opacity var(--pw-fast) var(--pw-ease); }
+.pw-studybar__id:hover .pw-studybar__rename-btn, .pw-studybar__rename-btn:focus-visible { opacity: 1; }
+.pw-studybar__rename input {
+  width: 220px; height: 28px; padding: 0 8px; font: inherit; font-size: 15px; font-weight: 600; color: var(--pw-text);
+  background: var(--pw-sunken); border: 1px solid var(--pw-focus); border-radius: var(--pw-radius-sm);
+}
+.pw-studybar__descriptor { font-size: 11.5px; color: var(--pw-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pw-studybar__dataset { font-family: var(--pw-mono); font-size: 10.5px; color: var(--pw-text-faint); }
+.pw-wb__list-items code { font-family: inherit; font-size: 13px; font-weight: 550; }
+.pw-study-cell strong { font-size: 14px; font-weight: 600; }
+.pw-study-cell__id { font-family: var(--pw-mono); font-size: 11px; color: var(--pw-text-faint); }

@@ -473,7 +473,7 @@ def main():
         Image.fromarray(contour_rgba(gt_s, {
             (lambda a: a >= 1): (56, 189, 248, 255), 2: (251, 191, 36, 255)}), 'RGBA').save(case_dir / 'cpr_reference.png')
         ana_rgba = contour_rgba(ana_s, {1: (244, 114, 182, 255), 2: (232, 121, 249, 255), 3: (96, 165, 250, 255),
-                                        4: (248, 113, 113, 255), 5: (129, 140, 248, 255), 6: (52, 211, 153, 255), 7: (163, 230, 53, 255)})
+                                        4: (214, 222, 233, 255), 5: (129, 140, 248, 255), 6: (52, 211, 153, 255), 7: (163, 230, 53, 255)})
         Image.fromarray(ana_rgba, 'RGBA').save(case_dir / 'cpr_anatomy.png')
         cols = np.where((lab_s == 2).any(0))[0]
         cpr = {
