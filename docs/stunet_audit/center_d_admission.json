@@ -1,0 +1,188 @@
+{
+  "schema": "prowl.center-d.admission.v1",
+  "verified_at": "2026-11-06T21:12:02.051623+00:00",
+  "authorization": "Approve Center D download and provenance inspection",
+  "supersedes_prior_pending_download_status_for": "Center D two parts only; previous screen retained unchanged",
+  "decision": "ARCHIVE_INTEGRITY_AND_FILENAME_PAIRING_PASS; INDEPENDENCE_UNRESOLVED",
+  "patient_independence_verified": false,
+  "source_crosswalk_recovered": false,
+  "clinical_admission": "NOT_PERFORMED",
+  "final_test_admission": "NOT_CLEARED",
+  "allowed_future_claim": "Potential exploratory external PDAC benchmark only after separately authorized technical qualification and frozen evaluation",
+  "acquisition": {
+    "status": "VERIFIED",
+    "seconds": 828.9810486249626,
+    "parts": [
+      {
+        "filename": "Center_D.zip.001",
+        "path": "/Volumes/PROWL-Data/PROWL/sources/pdac-tags-center-d-audit-20261106-a01/Center_D.zip.001",
+        "bytes": 4697620480,
+        "sha256": "2cfdba0f95189bedd972c4d6137dc2a32c7d00209b12846b0ea21a28872cc55c",
+        "md5": "27b569b4116c6cfe698164213f256ce6",
+        "publisher_hashes_match": true
+      },
+      {
+        "filename": "Center_D.zip.002",
+        "path": "/Volumes/PROWL-Data/PROWL/sources/pdac-tags-center-d-audit-20261106-a01/Center_D.zip.002",
+        "bytes": 1549510523,
+        "sha256": "0b3a0ef1801a13be4af7f85f7a3c660860ff8441818130176e5cf2735aa408bf",
+        "md5": "ea90a6ff85dfea71dd4e37ab0f323374",
+        "publisher_hashes_match": true
+      }
+    ],
+    "total_bytes": 6247131003,
+    "archive_contents_opened": false,
+    "clinical_payloads_opened": 0,
+    "attempts_preserved": true
+  },
+  "preserved_transfer_failures": [
+    {
+      "seconds": 760.39,
+      "part": "Center_D.zip.001",
+      "attempt": 1,
+      "status": "FAILED_ATTEMPT_PRESERVED",
+      "error_type": "TimeoutError",
+      "error_code": null,
+      "partial_bytes": 4290772992
+    }
+  ],
+  "inventory": {
+    "members": 584,
+    "central_directory_bytes": 75977,
+    "declared_expanded_bytes": 6311831967,
+    "counts": {
+      "directories": 4,
+      "macos_housekeeping": 292,
+      "images": 96,
+      "lesion_mask": 96,
+      "organ_mask": 96
+    },
+    "complete_filename_triplets": 96,
+    "actual_suffixes": {
+      "images": "image",
+      "lesion_mask": "lesionmask",
+      "organ_mask": "organmask"
+    },
+    "numeric_alias_range": [
+      1,
+      99
+    ],
+    "numeric_alias_gaps": [
+      25,
+      68,
+      74
+    ],
+    "alias_gap_interpretation": "No publisher expected-case ledger; gaps are not proof of missing patients/exclusions"
+  },
+  "provenance": {
+    "standalone_ledger_members": [],
+    "macos_metadata_payloads_opened": 292,
+    "macos_metadata_payload_bytes": 1198084,
+    "observed_attribute_names": [
+      "com.apple.macl",
+      "com.apple.quarantine"
+    ],
+    "original_institution": "UNRESOLVED",
+    "cross_dataset_patient_identity": "UNRESOLVED"
+  },
+  "boundaries": {
+    "clinical_image_payloads_opened": 0,
+    "clinical_mask_payloads_opened": 0,
+    "clinical_headers_or_voxels_decoded": 0,
+    "medical_files_extracted_to_disk": 0,
+    "clinical_geometry_verified": false,
+    "per_clinical_member_crc_verified": false,
+    "clinical_model_forwards": 0,
+    "optimizer_updates": 0,
+    "protected_test_image_or_label_reads": 0,
+    "medical_uploads": 0,
+    "author_messages_sent": 0,
+    "committed": false
+  },
+  "checks": {
+    "new_synthetic_tests": 12,
+    "log": "outputs/prowl/stunet-audit-20261106/external-inventory-tests-03.log",
+    "previous_failed_test_fixture_log": "outputs/prowl/stunet-audit-20261106/external-inventory-tests-02.log",
+    "supervisor_import_failure": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/center-d-admission-01/inventory-01/failure.json",
+    "resources": {
+      "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/center-d-admission-01/inventory-02/resources.json": {
+        "seconds": 0.07571758423000574,
+        "peak_owned_rss_bytes": 18825216,
+        "samples": 1,
+        "workers_reaped": true,
+        "success": true,
+        "error": null,
+        "exit_code": 0
+      },
+      "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/center-d-admission-01/provenance-worker-01/resources.json": {
+        "seconds": 0.07664129184558988,
+        "peak_owned_rss_bytes": 21938176,
+        "samples": 1,
+        "workers_reaped": true,
+        "success": true,
+        "error": null,
+        "exit_code": 0
+      }
+    },
+    "workers_reaped": true,
+    "matching_workers": [],
+    "preceding_review_files_verified": 58,
+    "prior_request_pin_sets_unchanged": [
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/source-evidence-snapshot.json",
+        "source_pin_count": 5,
+        "sha256": "b2e1215360dca678906ddd638bb2de0ecdb4e2d367f01a1efc66cf5cc97236eb",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-01/request.json",
+        "source_pin_count": 375,
+        "sha256": "3cd67d6fc0bcc608dac3b91234cd022f80b387feac2e205ee043fcbdd09caacb",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/request.json",
+        "source_pin_count": 380,
+        "sha256": "e0a2e439c27c39862c7041d214152266a29b105731771624f027d5ca6708ab84",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/reference-request.json",
+        "source_pin_count": 380,
+        "sha256": "fbff2632d4c2a48853a0dc8bcb3f4ff07cfe4117d60964cc2056b5943b4e8af8",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/cropped-image-request-01.json",
+        "source_pin_count": 5,
+        "sha256": "38f9a2c768c5ca314a41c131b1120d7a0b4bd61004e9d9bea038ab79825c5829",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-request-01.json",
+        "source_pin_count": 6,
+        "sha256": "cea6a0cc8a73a70e9b180cb2b7ba40771047d1ecbd806a26df75a5931a470779",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-request-01.json",
+        "source_pin_count": 6,
+        "sha256": "5209295f2e2780497ba087fe81278a933ed1ab2bca5e431b6b827a470320d58e",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-request-01.json",
+        "source_pin_count": 6,
+        "sha256": "312285d0413f9f79938120acea0d613ad302ce1353d47b279f03d74cb459bc26",
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-request-01.json",
+        "source_pin_count": 7,
+        "sha256": "36c2a9eb53d87c383f51cdf006805d095caed348b2c1e23b1e73476bdea6e1f3",
+        "mismatches": []
+      }
+    ],
+    "unique_producing_files_verified": 391
+  }
+}
