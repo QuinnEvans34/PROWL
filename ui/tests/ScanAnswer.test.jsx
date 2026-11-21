@@ -37,7 +37,7 @@ it.each(['study', 'prediction', 'clear'])('resets the measured referent after a 
   expect(await screen.findByText(/about 3.00 mL/)).toBeTruthy()
   if (kind === 'study') rerender(<LiteratureSearchPanel {...props} contextKey="two" />)
   if (kind === 'prediction') rerender(<LiteratureSearchPanel {...props} measurementContext={{ ...context, key: 'two:saved' }} />)
-  if (kind === 'clear') await user.click(screen.getByRole('button', { name: 'Clear recent responses' }))
+  if (kind === 'clear') await user.click(screen.getByRole('button', { name: 'Clear conversation' }))
   await ask(user, 'How big is it?')
   expect(await screen.findByText(/about 72.00 mL/)).toBeTruthy()
   expect(search).not.toHaveBeenCalled()

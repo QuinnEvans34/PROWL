@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect, it, vi } from 'vitest'
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import LiteratureSearchPanel, { validateAnswer } from '../src/components/LiteratureSearchPanel.jsx'
 import config from '../../configs/evidence/development-search-v1.json'
@@ -397,11 +397,9 @@ it('keeps the panel composer after the conversation and optional suggestions and
   const user = userEvent.setup()
   render(<LiteratureSearchPanel variant="panel" measurementContext={{key: 'ct-only', available: false}} />)
   expect(screen.getByText(/Show a saved prediction to enable measurements/)).toBeTruthy()
-  expect(screen.getByText('Explore suggested questions').closest('details').open).toBe(false)
   const input = screen.getByLabelText('Literature question')
-  const disclosure = screen.getByText('Explore suggested questions')
-  expect(input.compareDocumentPosition(disclosure) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
-  await user.click(disclosure)
+  const starters = screen.getByRole('group', {name: 'Suggested general questions'})
+  expect(input.compareDocumentPosition(starters) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy()
   await user.click(screen.getByRole('button', {name: 'How big is this pancreas?'}))
   expect(input.value).toBe('How big is this pancreas?')
 })
@@ -563,4 +561,14 @@ it('preserves a newer draft when the active study changes', () => {
   fireEvent.change(input, {target: {value: 'My next question'}})
   rerender(<LiteratureSearchPanel search={search} contextKey="two" />)
   expect(input.value).toBe('My next question')
+})
+
+
+it('offers study-specific starter questions first and only fills the composer', async () => {
+  const user = userEvent.setup(), search = vi.fn()
+  render(<LiteratureSearchPanel variant="panel" search={search} studySuggestions={['What can a hypoattenuating pancreatic lesion on CT represent?']} />)
+  const group = screen.getByRole('group', {name: "Questions about this study's findings"})
+  await user.click(within(group).getByRole('button', {name: /hypoattenuating/}))
+  expect(screen.getByLabelText('Literature question').value).toBe('What can a hypoattenuating pancreatic lesion on CT represent?')
+  expect(search).not.toHaveBeenCalled()
 })

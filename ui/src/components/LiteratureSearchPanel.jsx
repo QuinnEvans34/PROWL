@@ -202,6 +202,8 @@ export default function LiteratureSearchPanel({
   measure = loadScanMeasurements,
   downloadCapture = downloadLiteratureCapture,
   suggestions = variant === 'panel' ? SUGGESTED_QUESTIONS : [],
+  // Questions prompted by the open study's findings (general wording, no patient data).
+  studySuggestions = [],
   // { text, token } from the workbench: fills the question box (never sends it).
   draftRequest = null,
 }) {
@@ -383,18 +385,31 @@ export default function LiteratureSearchPanel({
   const staleContext = result && askedFor && askedFor.key !== contextKey
   return <section className={`guided-evidence literature-search${panel ? ' literature-search--panel' : ''}`} aria-labelledby="literature-search-title">
     {panel ? <>
-      <p className="literature-search__scope"><span aria-hidden="true" />{measurementContext ? `Saved case: ${contextLabel || 'current study'} · ${measurementContext.available ? 'Outline measurements available for checking' : 'Show a saved prediction to enable measurements'}` : 'General literature · No scan attached'}</p>
-      <h2 id="literature-search-title">{phase === 'loading' ? 'On it.' : result || scanResult ? 'Here’s what I found' : 'How can I help?'}</h2>
-      {phase !== 'loading' && !result && !scanResult && <p>{measurementContext ? 'Ask me about the saved outline or explore the research behind your question.' : 'Use your own words. For help turning a question into search terms, choose Help phrase my question.'}</p>}
+      {/* Once a conversation exists the thread speaks for itself; the title stays for assistive tech. */}
+      <div className={`literature-search__intro${phase === 'loading' || result || scanResult || history.length ? ' pw-sr-only' : ''}`}>
+        <h2 id="literature-search-title">{phase === 'loading' ? 'On it.' : result || scanResult ? 'Here’s what I found' : 'Ask about the research'}</h2>
+        {phase !== 'loading' && !result && !scanResult && <p>{measurementContext ? 'Ask about the saved outline, or about published pancreatic research. Answers cite their sources.' : 'Answers come from published pancreatic research and cite their sources.'}</p>}
+      </div>
     </> : <>
       <h2 id="literature-search-title">Ask about pancreatic research</h2>
       <p>Use your own words. Get a cited explanation when the evidence supports one, or inspect the research passages.</p>
     </>}
-    {(!panel || (phase !== 'loading' && !result && !scanResult)) && <p className="literature-search__notice">{panel ? 'Development preview · Do not enter patient information.' : measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>}
+    {!panel && <p className="literature-search__notice">{panel ? 'Development preview · Do not enter patient information.' : measurementContext ? 'Development preview · Saved-mask calculations and cited literature answers. Do not enter patient information.' : 'Local AI answers from research sources · Development preview. Use general questions; do not enter patient information.'}</p>}
     {!panel && <p className="literature-search__scope">General literature · No scan attached</p>}
     {!panel && <LocalExpertReadiness onStatus={setReadiness} />}
-    {suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <details className="literature-search__question-ideas"><summary>Explore suggested questions</summary><div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
-      {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions).map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
+    {panel && !result && !scanResult && phase !== 'loading' && (studySuggestions.length > 0 || suggestions.length > 0) && <div className="literature-search__starters">
+      {studySuggestions.length > 0 && <div className="literature-search__starter-group" role="group" aria-label="Questions about this study's findings">
+        <h3>From this study’s findings</h3>
+        {studySuggestions.slice(0, 3).map(text => <button type="button" key={text} onClick={() => change(text)}><span>{text}</span></button>)}
+      </div>}
+      <div className="literature-search__starter-group" role="group" aria-label="Suggested general questions">
+        <h3>{studySuggestions.length > 0 ? 'More to explore' : 'Try asking'}</h3>
+        {(measurementContext ? ['How big is this pancreas?', 'What is the size of the lesion in this scan?', ...suggestions] : suggestions)
+          .slice(0, studySuggestions.length > 0 ? 2 : 5).map(text => <button type="button" key={text} onClick={() => change(text)}><span>{text}</span></button>)}
+      </div>
+    </div>}
+    {!panel && suggestions.length > 0 && !result && !scanResult && phase !== 'loading' && <details className="literature-search__question-ideas"><summary>Explore suggested questions</summary><div className="literature-search__suggestions" role="group" aria-label="Suggested general questions">
+      {suggestions.map(text => <button type="button" key={text} onClick={() => change(text)}>{text}</button>)}
     </div></details>}
 
     {originalQuestion && <details className="literature-search__interpretation"><summary>Original question</summary><p>{originalQuestion}</p></details>}
@@ -410,10 +425,10 @@ export default function LiteratureSearchPanel({
       <button type="button" onClick={() => setPreview(null)}>Keep my question</button>
     </section>}
     <div className="literature-search__thread" ref={thread} role="region" aria-label="Conversation">
+      {history.length > 0 && <button type="button" className="literature-search__clear" disabled={phase === 'loading'} onClick={clearHistory}>{panel ? 'Clear conversation' : 'Clear recent responses'}</button>}
       {history.some(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId) && <section className="literature-search__history" aria-label="Recent responses">
         {history.filter(entry => entry.id !== result?.request_id && entry.id !== scanResult?.requestId).map(entry => <RecentResponse key={entry.id} entry={entry} onEdit={editQuestion} />)}
       </section>}
-      {history.length > 0 && <button type="button" disabled={phase === 'loading'} onClick={clearHistory}>Clear recent responses</button>}
     <div aria-live="polite" aria-busy={phase === 'loading'}>
       {(phase === 'loading' || result || scanResult) && <p className="literature-search__question"><small>{phase === 'loading' ? 'Processing question' : 'You asked'}</small>{submittedQuestion}<button type="button" className="literature-search__edit" onClick={() => editQuestion(submittedQuestion)}>Edit question</button></p>}
       {scanResult?.key === measurementKey && scanResult && <article className="literature-search__answer-card" aria-label="Current scan measurement">
@@ -438,19 +453,28 @@ export default function LiteratureSearchPanel({
         <details><summary>What’s happening?</summary><p>{helpMode ? 'Your question is being rephrased. You choose whether to use the suggestion.' : measurementContext && scanTarget(submittedQuestion) ? 'Measurements are calculated locally from the saved mask after geometry and coverage checks.' : 'The service processes your question as one request. Individual retrieval and answer-writing stages are not reported live. Returned evidence and citations will be available to inspect.'}</p></details>
       </div>}
       {phase === 'error' && <p className="literature-search__error" role="alert">Search is unavailable or timed out. Use “Check status” or “Prepare AI expert” {panel ? 'under Search tools' : 'above'}. If the teacher is running, use “Find sources” until it is paused.</p>}
-      {result && <article className="literature-search__answer-card" aria-label="Literature search results">
+      {result && <article className={`literature-search__answer-card${panel ? ' literature-search__answer-card--chat' : ''}`} aria-label="Literature search results">
         {staleContext && <p className="literature-search__stale">General literature · asked while reviewing {askedFor.label || 'another study'}. Not about the current study.</p>}
-        <h3>{result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'}</h3>
-        <QuestionContext result={result} />
+        {(() => {
+          const heading = result.state === 'retrieval_failed' ? 'Search unavailable' : result.reason?.startsWith('clarification_') ? 'Clarify your question' : result.record_selection?.policy === 'source-linked-volume-search-v1' && volumeReasons[result.record_selection.reason] && result.state !== 'not_searched' ? 'Clarify your question' : result.state === 'not_searched' ? 'Search needs a different question' : result.state === 'no_results' ? 'No passages found' : result.answer ? 'Answer' : 'Retrieved passages'
+          return panel && ['Answer', 'Retrieved passages'].includes(heading) ? <h3 className="pw-sr-only">{heading}</h3> : <h3>{heading}</h3>
+        })()}
+        {!panel && <QuestionContext result={result} />}
         {result.answer_policy === 'single-pass-summary-v1' && result.answer?.provenance === 'model_selected_source_fallback' && <p className="literature-search__scope">Source wording · Limited to the cited source context.</p>}
         {result.answer_policy === 'single-pass-summary-v1' && result.answer && result.answer.provenance !== 'model_selected_source_fallback' && <p className="literature-search__scope">Fast AI preview · Check important details against the sources.</p>}
-        {result.answer ? <details className="literature-search__provenance"><summary>About this response</summary>
+        {!panel && (result.answer ? <details className="literature-search__provenance"><summary>About this response</summary>
         <ResponseExplanation result={result} sourceMode={sourceMode} />
-        </details> : <ResponseExplanation result={result} sourceMode={sourceMode} />}
+        </details> : <ResponseExplanation result={result} sourceMode={sourceMode} />)}
+        {panel && !result.answer && <ResponseExplanation result={result} sourceMode={sourceMode} />}
 
         {sourceMode && result.record_selection?.matches.some(m => m.comparison) && <p>Comparisons: {result.record_selection.matches.map(m => m.comparison.join(' versus ').replace('focal_AIP', 'focal AIP')).join('; ')}. MFCP: mass-forming chronic pancreatitis. Focal AIP: focal autoimmune pancreatitis. PDAC: pancreatic ductal adenocarcinoma.</p>}
         {result.evidence.length > 0 && <LiteratureReadingView key={result.request_id} evidence={result.evidence} answer={result.answer} />}
-        {!sourceMode && <details><summary>Keep this response</summary>
+        <div className={panel ? 'literature-search__meta' : undefined}>
+        {panel && <QuestionContext result={result} />}
+        {panel && result.answer && <details className="literature-search__provenance"><summary>About this response</summary>
+          <ResponseExplanation result={result} sourceMode={sourceMode} />
+        </details>}
+        {!sourceMode && <details><summary>{panel ? 'Save' : 'Keep this response'}</summary>
           <p>Download the submitted question, response, and citations for later inspection. This is general literature; no scan context is added automatically, and the file is not attached to your saved review.</p>
           {capture && <button type="button" onClick={() => {
             try { downloadCapture(capture); setCaptureNotice('Download requested. Check your downloads; your saved review has not changed.') }
@@ -458,10 +482,11 @@ export default function LiteratureSearchPanel({
           }}>Download response and citations</button>}
           {captureNotice && <p role="status">{captureNotice}</p>}
         </details>}
-        {result.state !== 'not_searched' && <details><summary>Search details</summary>
+        {result.state !== 'not_searched' && <details><summary>{panel ? 'Details' : 'Search details'}</summary>
           <p>{config.source_count} papers · {config.passage_count.toLocaleString()} indexed passages · {result.answer?.provenance === 'model_selected_source_fallback' ? 'Exact source wording · Read the source context and limitations' : result.answer_policy === 'single-pass-summary-v1' ? 'AI summary with a source-support check · Review important details against the sources' : result.answer_policy === 'general-source-extract-v1' ? 'General source-sentence selection · Local Qwen3 8B · Development preview' : result.retrieval_policy === 'evidence-led-answer-v1' ? 'Evidence-led section selection · Local Qwen · Development regression' : sourceMode ? 'Reviewed source records with dense-search fallback · No answer model called' : result.answer_policy ? 'Reviewed source records · Qwen3 8B constrained composition · Independent review pending' : 'Exact dense search · Local Qwen3 answer model'}</p>
           <small>Collection: {result.collection}<br />Corpus: {result.target.inventory.content_sha256}<br />Request: {result.request_id}</small>
         </details>}
+        </div>
       </article>}
     </div>
     </div>
@@ -485,10 +510,12 @@ export default function LiteratureSearchPanel({
         </div>
       </div>
       <small id="literature-question-shortcut">{phase === 'loading' ? 'You can draft your next question. Cancel this request before sending another.' : 'Enter to send · Shift+Enter for a new line'}</small>
+      {panel && <p className="literature-search__scope literature-search__scope--footer"><span aria-hidden="true" />{measurementContext ? `Saved case: ${contextLabel || 'current study'} · ${measurementContext.available ? 'Outline measurements available for checking' : 'Show a saved prediction to enable measurements'}` : 'General literature · No scan attached'} · Development preview · No patient information</p>}
       {panel ? <details className="literature-search__tools" hidden={phase === 'loading'}><summary>Search tools</summary><div className="literature-search__actions">
         <button type="button" disabled={!question.trim() || phase === 'loading'} onClick={e => submit(e, true)}>Find sources</button>
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>
+        <p className="literature-search__tools-note">Follow-up answers use your recent questions in this conversation · Session only, not saved to your review.</p>
         {/* Service controls stay mounted (readiness feeds the send button) but out of the way. */}
         <LocalExpertReadiness onStatus={setReadiness} />
       </details> : <div className="literature-search__actions">
@@ -496,7 +523,7 @@ export default function LiteratureSearchPanel({
         <button type="button" className="literature-search__help-button" disabled={!question.trim() || phase === 'loading' || readiness?.gpu_busy || Boolean(readiness?.answer_blocker)} onClick={helpWithQuestion}>Help phrase my question</button>
       </div>}
     </form>
-    <small>Follow-up answers use recent literature questions when available · Clear recent responses to start fresh · Session only, not saved to your review.</small>
+    {!panel && <small>Follow-up answers use recent literature questions when available · Clear recent responses to start fresh · Session only, not saved to your review.</small>}
   </section>
 }
 

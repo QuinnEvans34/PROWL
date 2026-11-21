@@ -25,7 +25,7 @@ it('states literature-only scope and never auto-submits a suggested question', a
   const search = vi.fn()
   render(<LiteratureSearchPanel variant="panel" search={search} contextKey="S1" contextLabel="Study 1" />)
   expect(screen.getByText(/General literature · No scan attached/)).toBeTruthy()
-  expect(screen.getByText(/Follow-up answers use recent literature questions/)).toBeTruthy()
+  expect(screen.getByText(/Follow-up answers use your recent questions/)).toBeTruthy()
   const suggestion = screen.getAllByRole('button').find((b) => b.closest('[aria-label="Suggested general questions"]'))
   await user.click(suggestion)
   expect(screen.getByLabelText('Literature question').value).toBe(suggestion.textContent)
