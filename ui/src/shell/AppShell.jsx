@@ -1,15 +1,65 @@
-import { Info } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Info, Settings } from 'lucide-react'
 import { hrefFor } from '../lib/router.js'
 import { Wordmark } from './Brand.jsx'
+import LocalExpertReadiness from '../components/LocalExpertReadiness.jsx'
 
+// The review flow lives in two places: Studies (choose a scan) and the Workbench.
+// Earlier development pages stay reachable from the settings menu, so nothing is lost.
 const NAV = [
   ['studies', 'Studies'],
   ['workbench', 'Workbench'],
-  ['predict', 'Analyze'],
-  ['saved', 'Saved reviews', 'Saved'],
-  ['research', 'Research'],
-  ['training', 'Training'],
 ]
+const MORE = [
+  ['predict', 'Analyze a scan', 'Run the model on a prepared CT (needs the model worker)'],
+  ['saved', 'Saved reviews', 'Reopen recorded review decisions'],
+  ['research', 'Research', 'Literature search workspace'],
+  ['training', 'Training', 'Recorded training runs'],
+]
+
+function SettingsMenu({ current, onNavigate }) {
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+  useEffect(() => {
+    if (!open) return undefined
+    const close = event => { if (!rootRef.current?.contains(event.target)) setOpen(false) }
+    const escape = event => { if (event.key === 'Escape') setOpen(false) }
+    document.addEventListener('pointerdown', close)
+    document.addEventListener('keydown', escape)
+    return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', escape) }
+  }, [open])
+  const onMorePage = MORE.some(([view]) => view === current)
+  return (
+    <div className="pw-settings" ref={rootRef}>
+      <button type="button" className={`pw-icon-btn${open || onMorePage ? ' active' : ''}`} aria-haspopup="dialog" aria-expanded={open}
+        onClick={() => setOpen(value => !value)} aria-label="Settings and tools" title="Settings and tools">
+        <Settings size={17} aria-hidden="true" />
+      </button>
+      {open && (
+        <div className="pw-settings__menu" role="dialog" aria-label="Settings and tools">
+          <section>
+            <h2>AI expert</h2>
+            <p>Start the local literature search and answer model before asking questions.</p>
+            <LocalExpertReadiness />
+          </section>
+          <section>
+            <h2>More tools</h2>
+            <ul>
+              {MORE.map(([view, label, detail]) => (
+                <li key={view}>
+                  <a href={hrefFor({ view })} aria-current={current === view ? 'page' : undefined}
+                    onClick={event => { setOpen(false); onNavigate(event, view) }}>
+                    <strong>{label}</strong><small>{detail}</small>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      )}
+    </div>
+  )
+}
 
 // Analyze talks to the on-demand model worker; the Workbench talks to live analysis of
 // prepared studies. They are separate services, so name the one being reported.
@@ -64,6 +114,7 @@ export default function AppShell({ route, navigate, activeStudy, activePredictio
         </nav>
         <div className="pw-header__end">
           <ServiceStatus status={endpointStatus} view={route.run || route.invalidRun ? 'run' : route.view} />
+          <SettingsMenu current={current} onNavigate={go} />
           <button type="button" className="pw-icon-btn" onClick={onAbout} aria-label="About PROWL" title="About PROWL">
             <Info size={17} aria-hidden="true" />
           </button>

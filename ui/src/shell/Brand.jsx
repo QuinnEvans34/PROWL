@@ -15,9 +15,8 @@ export function PantherBadge({ size = 'sm', pulse = false, className = '' }) {
 export function Wordmark({ onClick }) {
   return (
     <a className="pw-wordmark" href="/" onClick={onClick} aria-label="PROWL — Studies">
+      <PantherBadge size="nav" />
       <span className="pw-wordmark__name">PROWL</span>
-      <span className="pw-wordmark__divider" aria-hidden="true" />
-      <span className="pw-wordmark__descriptor">Pancreatic review</span>
     </a>
   )
 }

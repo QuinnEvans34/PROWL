@@ -20,16 +20,20 @@ function Shell() {
     <button onClick={()=>setDirty(false)}>Simulate durable save</button>
   </AppShell>
 }
+const openTools=()=>fireEvent.click(screen.getByRole('button',{name:'Settings and tools'}))
 it('exposes Analyze and Saved reviews, keeps the current review when navigation is declined',()=>{
   window.history.replaceState(null,'',`/saved?review=${hash}`)
   vi.stubGlobal('confirm',vi.fn().mockReturnValue(false))
   render(<Shell />)
-  expect(screen.getByRole('link',{name:'Saved reviews'}).getAttribute('aria-current')).toBe('page')
-  fireEvent.click(screen.getByRole('link',{name:'Analyze'}))
+  expect(screen.queryByRole('link',{name:/^Analyze/})).toBeNull()
+  openTools()
+  expect(screen.getByRole('link',{name:/^Saved reviews/}).getAttribute('aria-current')).toBe('page')
+  fireEvent.click(screen.getByRole('link',{name:/^Analyze a scan/}))
   expect(window.location.pathname).toBe('/saved')
   expect(screen.getByTestId('route').textContent).toBe(`saved:${hash}`)
   fireEvent.click(screen.getByText('Simulate durable save'))
-  fireEvent.click(screen.getByRole('link',{name:'Analyze'}))
+  openTools()
+  fireEvent.click(screen.getByRole('link',{name:/^Analyze a scan/}))
   expect(window.location.pathname).toBe('/predict')
   expect(screen.getByTestId('route').textContent).toBe('predict:')
   expect(confirm).toHaveBeenCalledTimes(1)
