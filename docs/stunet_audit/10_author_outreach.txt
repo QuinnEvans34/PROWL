@@ -1,0 +1,48 @@
+UNSENT DRAFTS — no medical images, labels or clinical records attached
+Prepared 6 November 2026 for Quinton Evans's review.
+
+EMAIL 1
+To: Ziyan Huang <ziyanhuang@sjtu.edu.cn>
+Recipient source: official STU-Net README, revision 0652eaf5cafda6bc269942238c3695994f2dc4f0.
+Subject: Original STU-Net-B checkpoint: case membership for a leakage audit
+
+Hi Ziyan,
+
+I'm a student working on PROWL, a pancreatic-lesion segmentation capstone. We are considering transfer learning from your original TotalSegmentator-pretrained STU-Net-B, with new lesion heads, and want to describe evaluation exposure accurately before training.
+
+Our author-linked base_ep4k.model is 466,715,133 bytes, SHA256 7232a6296d320da1d60debe873a1d3fcad74e9404272db8f7440e30d62c5997a. It also matches the LFS checksum in ziyanhuang/STU-Net at revision a50a9375d52e06c8498387bb222c7ca374125139.
+
+Could you clarify:
+1. The exact TotalSegmentator release and case IDs used for gradient training and validation/checkpoint selection for this binary, including whether it inherited any other pretrained weights or downstream fine-tuning.
+2. Whether this specific binary or its release/checkpoint selection used downstream datasets such as MSD Pancreas, separately from the paper's family-level direct-inference experiments.
+3. The one-case count difference: the v1 archive metadata lists 1,082 training cases, while the paper reports 1,081. Our publisher-MD5-matching original ZIP has a CRC failure in s0864/ct.nii.gz. Was s0864 excluded, repaired or used in your run?
+
+A pseudonymous case ledger or an existing public reference would be ideal; we do not need personal identifiers. We have not run STU-Net on clinical images or claimed independent performance.
+
+Thanks for sharing your work and for any clarification you can provide.
+Quinton Evans
+PROWL capstone project
+
+
+EMAIL 2
+To: Zongwei Zhou <zzhou82@jh.edu>
+Recipient source: PanTS paper correspondence and official repository contact.
+Subject: PanTS source crosswalk and independent evaluation for STU-Net transfer study
+
+Hi Zongwei,
+
+I'm a student working on PROWL, a pancreatic-lesion segmentation capstone using PanTS. Before trying the original TotalSegmentator-pretrained STU-Net-B, we want to establish patient-level evaluation separation rather than rely on filenames or a higher development Dice.
+
+We use 1,333 training and 75 development aliases from the public training partition. Five development aliases list University Hospital Basel in metadata.xlsx (SHA256 4bcbf14a31b1ca9441af051a104702e7a832391f47d3af5f493048ec813283e3): PanTS_00001389, PanTS_00001823, PanTS_00002935, PanTS_00006011 and PanTS_00006115. Shared source institution alone does not establish identity.
+
+Could you help with either:
+1. A privacy-preserving crosswalk or source-owner adjudication linking PanTS aliases to original source studies/patients, including TotalSegmentator reuse and repeat acquisitions/phases. We do not need names, birth dates or other direct identifiers. Please also confirm whether the site/source fields in this metadata snapshot are reliable independently of the reported structured-report alignment issue.
+2. An author-administered final evaluation on patients confirmed separate from the original TotalSegmentator v1 training/selection pool and our PROWL development, with the submission requirements, access conditions and evaluation-feedback policy.
+
+We can provide a checkpoint-specific provenance record and permitted aliases for private adjudication after agreeing the process. We would not call the evaluation independent without that confirmation. Our historical project already used the public 901-case benchmark, so we cannot describe that cohort as an untouched new final test.
+
+No local scans or labels are attached. We have not claimed STU-Net patient performance or started its training.
+
+Thanks for your help and for making PanTS available.
+Quinton Evans
+PROWL capstone project

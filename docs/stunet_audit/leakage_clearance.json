@@ -1,0 +1,89 @@
+{
+  "schema": "prowl.stunet.clearance-decision.v1",
+  "decision": "NO_GO_CURRENT_UNSEEN_PATIENT_OR_UNTOUCHED_TEST_CLAIM",
+  "model_use": "CONDITIONAL_EXPLORATORY_STUDY_NOT_LAUNCHED",
+  "patient_independence_verified": false,
+  "existing_public_benchmark_untouched": false,
+  "requirements": [
+    {
+      "requirement": "Publisher artifact digest and size",
+      "status": "VERIFIED",
+      "evidence": "Author-linked original download matches published author LFS pointer"
+    },
+    {
+      "requirement": "Checkpoint-specific gradient/selection/inherited case ledger",
+      "status": "UNRESOLVED",
+      "evidence": "No case list in released checkpoint or inspected sidecar; public descriptions are not an exact ledger"
+    },
+    {
+      "requirement": "Biological patient/source crosswalk",
+      "status": "UNRESOLVED",
+      "evidence": "1408 unverified study-as-subject records; no source-owner crosswalk retrieved"
+    },
+    {
+      "requirement": "Untouched final evaluation",
+      "status": "FAILED_FOR_EXISTING_901_COHORT",
+      "evidence": "Documented historical model decisions and threshold exploration"
+    },
+    {
+      "requirement": "No transformed development image overlap",
+      "status": "NOT_ESTABLISHED",
+      "evidence": "Five suspected cases, one strong head-CT near-duplicate candidate; no exact transformed-query SHA proof"
+    },
+    {
+      "requirement": "Independent external evaluation agreement",
+      "status": "UNRESOLVED",
+      "evidence": "Public submission route located; separation/permission/feedback agreement absent"
+    }
+  ],
+  "retained_file_hash_review": {
+    "scope": "Retained cohort/source hashes and split ID text only; zero new CT/mask reads",
+    "cohort_sha256": "0e63126be7df03072b0064e9740c9fe6ca7efec766f2324e79a49ddde278d8e2",
+    "training_cases": 1333,
+    "development_cases": 75,
+    "reference_cases": 1203,
+    "train_dev_original_file_hash_collisions": [],
+    "train_reference_original_file_hash_collisions": [],
+    "training_internal_original_file_hash_groups": [],
+    "retained_test_id_files": {
+      "outputs/splits/test.txt": {
+        "sha256": "7a323774be8c4459024f6e26113b84a4f892f52c954f42c3d033234e1e7b338e",
+        "count": 901,
+        "all_ids_in_official_range": true,
+        "overlap_current_registry_ids": []
+      },
+      "outputs/splits/test_pos.txt": {
+        "sha256": "a248722abf00a5ae3a869832ba86b28500e2e2f924c6aa64a211f8da01213979",
+        "count": 151,
+        "all_ids_in_official_range": true,
+        "overlap_current_registry_ids": []
+      },
+      "outputs/splits/test_neg.txt": {
+        "sha256": "a68673168aef8cf016f5f53104cd59be22b30d8c4291add92755cfa8c72f5281",
+        "count": 750,
+        "all_ids_in_official_range": true,
+        "overlap_current_registry_ids": []
+      }
+    },
+    "identity_assurance": {
+      "unverified_unique": 1408
+    },
+    "training_ct_sources_rehashed_now": false,
+    "patient_separation_verified": false
+  },
+  "author_repository_revision": "a50a9375d52e06c8498387bb222c7ca374125139",
+  "publisher_weight_sha256": "7232a6296d320da1d60debe873a1d3fcad74e9404272db8f7440e30d62c5997a",
+  "publisher_license_declaration": "apache-2.0",
+  "requested_outreach": {
+    "status": "LOCAL_ONLY_USER_DIRECTED_DO_NOT_SEND",
+    "draft": "docs/stunet_audit/10_author_outreach.txt",
+    "draft_sha256": "55190e9a9b2a9645aa7a73ce22d07b996b40fa98daf8807528bdc9a2a9c6fd97",
+    "existing_relevant_gmail_search_results": 0,
+    "user_decision": "Keep the drafts local",
+    "decision_recorded_at": "2026-11-06T20:36:08.145685+00:00"
+  },
+  "protected_prowl_test_image_reads": 0,
+  "protected_prowl_test_label_reads": 0,
+  "gpu_jobs_started": 0,
+  "optimizer_updates": 0
+}

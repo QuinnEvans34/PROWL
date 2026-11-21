@@ -1,0 +1,60 @@
+{
+  "schema": "prowl.stunet.test-use-ledger.v1",
+  "reviewed_at": "2026-11-06T19:02:46.905171+00:00",
+  "source_sha256": "62517a068eb33db28293ddd0b1c72e993d62881e61baf96b2dc60f7dec1a577b",
+  "records": [
+    {
+      "source": "docs/experiments.md",
+      "line": 1404,
+      "exact_source_line": "| EXP-24 official-test lesion.474, sensitivity96%, specificity17% | Recorded in EXP-25's July23\u201325 baseline comparison,151positive/750negative | Historical final-cohort account, not new capstone evidence or a tuning cohort. |",
+      "interpretation": "Documented historical project test evaluation/selection or threshold exploration; not a new re-score"
+    },
+    {
+      "source": "docs/experiments.md",
+      "line": 2556,
+      "exact_source_line": "LAUNCH (2026-07-23, LOCKED before any results). Run the extreme first: full realistic prevalence, 706 tumor + all 6,494 healthy (~1:9), split `fullhealthy`, fresh from the SuPreM init, the SAME whole-box recipe as the EXP-24 baseline (crop-native 16, 128\u00b3 @1.5mm, DiceFocal bg0, union ROI, 24k steps) \u2014 ONLY the healthy count changes, so it is a clean single variable vs the 0.415 model. ~14-18h (7,200-case first-epoch cache fill on the drive). Eval on the SAME frozen official test cohorts (`test_pos.txt` 151 / `test_neg.txt` 750) used for the 0.474 baseline. **PRE-REGISTERED ACCEPT BAR: specificity rises materially (test 17% -> ~30%+) AND detection sensitivity stays >= 90%.** If detection drops below 90%, the 1:9 ratio is too aggressive -> fall back to a 1:3 run (706 + 2,118). Compare against the EXP-24 test baseline: lesion Dice 0.474 [0.42-0.52], pancreas 0.827, detection 96%, specificity 17%. Expectation: specificity up, lesion Dice ~flat (tumor data capped), maybe a small detection cost.",
+      "interpretation": "Documented historical project test evaluation/selection or threshold exploration; not a new re-score"
+    },
+    {
+      "source": "docs/experiments.md",
+      "line": 2558,
+      "exact_source_line": "Result (2026-07-24 launch \u2192 2026-07-25 eval, run finished ~14h, checkpoint `transfer_wholebox_fullhealthy__20260724_133810/best.pt`, val lesion ~0.29 in-loop; scored on the FROZEN official test cohorts `test_pos.txt` 151 / `test_neg.txt` 750, same as the 0.474 baseline): **REJECTED on the detection floor.** The specificity half of the bar cleared decisively, but detection missed the \u226590% floor, so by the pre-registered rule this is a reject \u2014 no goalpost-moving (mirror of the EXP-26 lesson: a result that just misses the bar is a miss).",
+      "interpretation": "Documented historical project test evaluation/selection or threshold exploration; not a new re-score"
+    },
+    {
+      "source": "docs/experiments.md",
+      "line": 2568,
+      "exact_source_line": "Mechanism (analyze_cases, n=151, --whole-box --crop-native 16 --roi 128): the +29pp specificity was bought by making the model conservative, and the price landed almost entirely on **small tumors** \u2014 small (<1cm\u00b3) detection fell to **56%** and their Dice collapsed to **0.013** (the model essentially stopped drawing them); medium 0.368 Dice / 93% det, large 0.531 / 97%. By phase: arterial 0.445/93%, non-contrast 0.412/100%, venous 0.354/86%, delay 0.269/67% (n=3). Threshold sweep confirms the model itself is structurally more specific, not a threshold artifact: even at the most permissive thr 0.30, specificity is 40% (vs baseline 17%); thr 0.90 \u2192 67% spec / 0.355 Dice.",
+      "interpretation": "Documented historical project test evaluation/selection or threshold exploration; not a new re-score"
+    },
+    {
+      "source": "docs/experiments.md",
+      "line": 2570,
+      "exact_source_line": "Decision: **REJECT as a headline replacement.** For a CADe tool whose job is to not-miss tumors, trading 8pp of detection \u2014 concentrated in the hardest, most important-to-catch small-tumor class \u2014 for specificity is the wrong trade. **The EXP-24 0.474 / 96%-detection model stays the primary.** BUT this is a valuable rejection: it proves the low specificity is a real, movable *data* property (not a fixed flaw) and it precisely locates the cost (small tumors), exactly as EXP-05/07 predicted the lever would be data-scale. The pre-registered fallback (1:3 run, 706 + 2,118) is the direct next step, plus a lower detection-threshold sweep to test whether a few small tumors can be recovered while keeping most of the specificity gain (the 40% spec at thr 0.30 suggests an operating point that may beat baseline on BOTH axes) \u2014 a new, clearly-labeled exploration for Week 5, not a retroactive bar change. Checkpoint archived at `outputs/checkpoints/pants-level45/runs/transfer_wholebox_fullhealthy__20260724_133810/`; per-case CSV `outputs/test_fullhealthy_percase.csv`.",
+      "interpretation": "Documented historical project test evaluation/selection or threshold exploration; not a new re-score"
+    }
+  ],
+  "retained_test_id_files": {
+    "outputs/splits/test.txt": {
+      "sha256": "7a323774be8c4459024f6e26113b84a4f892f52c954f42c3d033234e1e7b338e",
+      "count": 901,
+      "all_ids_in_official_range": true,
+      "overlap_current_registry_ids": []
+    },
+    "outputs/splits/test_pos.txt": {
+      "sha256": "a248722abf00a5ae3a869832ba86b28500e2e2f924c6aa64a211f8da01213979",
+      "count": 151,
+      "all_ids_in_official_range": true,
+      "overlap_current_registry_ids": []
+    },
+    "outputs/splits/test_neg.txt": {
+      "sha256": "a68673168aef8cf016f5f53104cd59be22b30d8c4291add92755cfa8c72f5281",
+      "count": 750,
+      "all_ids_in_official_range": true,
+      "overlap_current_registry_ids": []
+    }
+  },
+  "conclusion": "DOCUMENTED_PRIOR_EVALUATION_AND_MODEL_DECISION_USE_NOT_UNTOUCHED",
+  "protected_test_images_or_labels_opened_now": 0,
+  "historical_raw_runs_independently_reexecuted": false
+}
