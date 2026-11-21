@@ -1,0 +1,299 @@
+{
+  "schema": "prowl.external-cohort-screen-manifest.v1",
+  "created_at_utc": "2026-11-06T20:49:44.066041+00:00",
+  "git_head": "e6f6400a61266ac8733ce3c3094ac9e247405486",
+  "review_files": {
+    "docs/stunet_audit/11_external_cohort_screen.md": {
+      "bytes": 13811,
+      "sha256": "a5ec82208621449e477bc2170962ef20540972cca48a5efdd18003ab88730fe5"
+    },
+    "docs/stunet_audit/external_cohort_screen.json": {
+      "bytes": 15592,
+      "sha256": "89d07870058c3a6b630046d76029c98769823e183a3cf925d3d94d9205e4c13b"
+    },
+    "docs/stunet_audit/execution_manifest.json": {
+      "bytes": 30700,
+      "sha256": "3dbc713d7808e051efb7122a0fd65ae0c0dd0e62bd225883cec4914f372b99b2"
+    },
+    "docs/stunet_audit/selected_source_metadata.json": {
+      "bytes": 4996,
+      "sha256": "27da67342a40c60f89a440b2f249462949fb669467df466ec91ab1b3edcb3bc9"
+    },
+    "docs/stunet_audit/test_use_ledger.json": {
+      "bytes": 5847,
+      "sha256": "4c835582d0cdc975acbed5433a386acffabf46edc82781837ba593216b26a5c0"
+    },
+    "docs/stunet_audit/leakage_clearance.json": {
+      "bytes": 3710,
+      "sha256": "ceb7615b5a3a616568826ef6847c429e408d7fbfa34b14ca62dd5f3c3c7a3943"
+    },
+    "docs/stunet_audit/10_author_outreach.txt": {
+      "bytes": 3921,
+      "sha256": "55190e9a9b2a9645aa7a73ce22d07b996b40fa98daf8807528bdc9a2a9c6fd97"
+    },
+    "docs/capstone/operations/PANORAMA-EXPLORATORY-ADMISSION-20261012.md": {
+      "bytes": 4590,
+      "sha256": "e06135004848aae2f79fe3ce9a90766c61afb02f484077a6e68aa130683a26dd"
+    },
+    "docs/capstone/operations/PANORAMA-POSITIVE-RESULTS-20261013.md": {
+      "bytes": 13642,
+      "sha256": "0fedb3a44cbbd2c27c5e50e1c13f18575b9765eebd19464511a6ac0be2ac531e"
+    }
+  },
+  "public_metadata": {
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/Center_A-listing.json": {
+      "bytes": 8220,
+      "sha256": "42cebf4ceaeaa3894ad34d37df522d7383849eebbd7aeecf6864d23001475e06"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/Center_B-listing.json": {
+      "bytes": 4174,
+      "sha256": "938915b1f807a16b7d78f700c1915a1efbdd964a9711abac69646a168b415cf9"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/Center_C-listing.json": {
+      "bytes": 4174,
+      "sha256": "c44d7f2a36c0a1d6561c4d167dd4c618e6c194acfbb51cef7ec97585327e8e58"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/Center_D-listing.json": {
+      "bytes": 4174,
+      "sha256": "05dccbcfb8b4c3e1154a6b94308d7ad38f34c44d94fbb6f759e7632dea5a37f7"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/basel-cysts-record.txt": {
+      "bytes": 5094,
+      "sha256": "307f627fd0dfaf431fda6de33251879d42678c43d88351ee04012ba87801d123"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/curvas-organ-record.txt": {
+      "bytes": 19333,
+      "sha256": "86c4996828b0b26bc1478143faa3f88f92e9b6fd1fcc7783b8bd94f68c173374"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/curvas-pdac-record.txt": {
+      "bytes": 15947,
+      "sha256": "dd652a17df311578f8b88d56933d8171cafd061f8644c1b0d4ac24e696b4c82f"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/fetch_followup-02.json": {
+      "bytes": 1143,
+      "sha256": "f1e6cd7a6d451d0ea74f36e7489a71aad61e9c9553aa9c67248bb3f28d2948cd"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/fetch_followup-03.json": {
+      "bytes": 670,
+      "sha256": "969cd1a4ca2dcd2e5fc3ea475a7f877993704fc9145c3b5a8838d0919ec86443"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/fetch_followup-04.json": {
+      "bytes": 975,
+      "sha256": "9755dc7a4a530ef13c6f5801d9f8821e2e2a7e0ffb7792f0c2e975430a79ea7e"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/fetch_followup-05.json": {
+      "bytes": 914,
+      "sha256": "0c387d626613787f56e6c92932c9a8f728a0e3e69b2162eae38a35a1116b3cfe"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/fetch_manifest.json": {
+      "bytes": 3326,
+      "sha256": "08861a2835bb16f3adddf8849bfd2feb317a1e636eda6025f49e920d5f522a17"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-children.txt": {
+      "bytes": 128,
+      "sha256": "337a5845bf62ccbe2bee6d47834c9d6317bc033ab935af60bc66d75c688ef71a"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-dataset-files.txt": {
+      "bytes": 6952,
+      "sha256": "f688c3f43678480e7944f3a92614d50bb046d10daf44a4e2444716fc130e0d1e"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-files.txt": {
+      "bytes": 947,
+      "sha256": "5e63c1cc37a5c14cb0c47f56c79af8a27ab692c6e9a01b15401b201085cee019"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-home-content.txt": {
+      "bytes": 4219,
+      "sha256": "aa015aa955be7bc19587090d6e6249d9d46829c3a07bab01a960bf2d2b9b6d1c"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-license.txt": {
+      "bytes": 13909,
+      "sha256": "d609ed93aab1fab0f4913bebd1ea4bf57c07fb1ef8dd524e0e7f1417adbd3f67"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-node.txt": {
+      "bytes": 6068,
+      "sha256": "394c9d34579bbb3803fa4ec46e51fc4a8d693747308b1f5a5d5ecccb0e55642c"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-root-files.txt": {
+      "bytes": 1834,
+      "sha256": "46a25f47aa30aef7aca2797fedb58daea280d730f3ac6811854dbfa350102d9c"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/osf-wikis.txt": {
+      "bytes": 1054,
+      "sha256": "8f28eced924053fe57d602caf83355472c6a4d46250c876b2b3b48018e78cc27"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/pnet-paper.txt": {
+      "bytes": 77958,
+      "sha256": "0020569b515953d734330145aa860c7157a98fd225d9fec82053615d1087ffb1"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/tags-paper.txt": {
+      "bytes": 240797,
+      "sha256": "5b6812eb5f9317d277afeaac137625ab7ae089b206b2a6c875dc30b19dd36519"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/tags-pinned-readme.txt": {
+      "bytes": 3012,
+      "sha256": "5f8cf643fd61335bd39f823ae1f1987bac70ab2bb77f31cf7316a94dae9ef3ae"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/tags-repo.txt": {
+      "bytes": 16995,
+      "sha256": "85deacb8630e815f649dbec8a1c4ea4bd3169181acbfbf275847c736bf5a9470"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/tags-site.txt": {
+      "bytes": 34837,
+      "sha256": "b94689aaf0dcbe37916c7d79a37a44feac8b519ac498799aed2d3b2e0e3139ba"
+    },
+    "outputs/prowl/stunet-audit-20261106/external-screen-01/tags-tree.txt": {
+      "bytes": 8150,
+      "sha256": "75db25cbf7bac7444c7219b42f2e1f40c4a6b86cbd66b698f1dc2833d8bffbf2"
+    }
+  },
+  "external_snapshot": {
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/10_author_outreach.txt": {
+      "bytes": 3921,
+      "sha256": "55190e9a9b2a9645aa7a73ce22d07b996b40fa98daf8807528bdc9a2a9c6fd97"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/11_external_cohort_screen.md": {
+      "bytes": 13811,
+      "sha256": "a5ec82208621449e477bc2170962ef20540972cca48a5efdd18003ab88730fe5"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/PANORAMA-EXPLORATORY-ADMISSION-20261012.md": {
+      "bytes": 4590,
+      "sha256": "e06135004848aae2f79fe3ce9a90766c61afb02f484077a6e68aa130683a26dd"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/PANORAMA-POSITIVE-RESULTS-20261013.md": {
+      "bytes": 13642,
+      "sha256": "0fedb3a44cbbd2c27c5e50e1c13f18575b9765eebd19464511a6ac0be2ac531e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/build_external_screen_manifest.py": {
+      "bytes": 9851,
+      "sha256": "707a37fdfa9f51dbaf2889f7e05aa7e2ede16f559098abe331cd79b92a5e227e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/execution_manifest.json": {
+      "bytes": 30700,
+      "sha256": "3dbc713d7808e051efb7122a0fd65ae0c0dd0e62bd225883cec4914f372b99b2"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/external_cohort_screen.json": {
+      "bytes": 15592,
+      "sha256": "89d07870058c3a6b630046d76029c98769823e183a3cf925d3d94d9205e4c13b"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/leakage_clearance.json": {
+      "bytes": 3710,
+      "sha256": "ceb7615b5a3a616568826ef6847c429e408d7fbfa34b14ca62dd5f3c3c7a3943"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/Center_A-listing.json": {
+      "bytes": 8220,
+      "sha256": "42cebf4ceaeaa3894ad34d37df522d7383849eebbd7aeecf6864d23001475e06"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/Center_B-listing.json": {
+      "bytes": 4174,
+      "sha256": "938915b1f807a16b7d78f700c1915a1efbdd964a9711abac69646a168b415cf9"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/Center_C-listing.json": {
+      "bytes": 4174,
+      "sha256": "c44d7f2a36c0a1d6561c4d167dd4c618e6c194acfbb51cef7ec97585327e8e58"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/Center_D-listing.json": {
+      "bytes": 4174,
+      "sha256": "05dccbcfb8b4c3e1154a6b94308d7ad38f34c44d94fbb6f759e7632dea5a37f7"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/basel-cysts-record.txt": {
+      "bytes": 5094,
+      "sha256": "307f627fd0dfaf431fda6de33251879d42678c43d88351ee04012ba87801d123"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/curvas-organ-record.txt": {
+      "bytes": 19333,
+      "sha256": "86c4996828b0b26bc1478143faa3f88f92e9b6fd1fcc7783b8bd94f68c173374"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/curvas-pdac-record.txt": {
+      "bytes": 15947,
+      "sha256": "dd652a17df311578f8b88d56933d8171cafd061f8644c1b0d4ac24e696b4c82f"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/fetch_followup-02.json": {
+      "bytes": 1143,
+      "sha256": "f1e6cd7a6d451d0ea74f36e7489a71aad61e9c9553aa9c67248bb3f28d2948cd"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/fetch_followup-03.json": {
+      "bytes": 670,
+      "sha256": "969cd1a4ca2dcd2e5fc3ea475a7f877993704fc9145c3b5a8838d0919ec86443"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/fetch_followup-04.json": {
+      "bytes": 975,
+      "sha256": "9755dc7a4a530ef13c6f5801d9f8821e2e2a7e0ffb7792f0c2e975430a79ea7e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/fetch_followup-05.json": {
+      "bytes": 914,
+      "sha256": "0c387d626613787f56e6c92932c9a8f728a0e3e69b2162eae38a35a1116b3cfe"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/fetch_manifest.json": {
+      "bytes": 3326,
+      "sha256": "08861a2835bb16f3adddf8849bfd2feb317a1e636eda6025f49e920d5f522a17"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-children.txt": {
+      "bytes": 128,
+      "sha256": "337a5845bf62ccbe2bee6d47834c9d6317bc033ab935af60bc66d75c688ef71a"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-dataset-files.txt": {
+      "bytes": 6952,
+      "sha256": "f688c3f43678480e7944f3a92614d50bb046d10daf44a4e2444716fc130e0d1e"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-files.txt": {
+      "bytes": 947,
+      "sha256": "5e63c1cc37a5c14cb0c47f56c79af8a27ab692c6e9a01b15401b201085cee019"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-home-content.txt": {
+      "bytes": 4219,
+      "sha256": "aa015aa955be7bc19587090d6e6249d9d46829c3a07bab01a960bf2d2b9b6d1c"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-license.txt": {
+      "bytes": 13909,
+      "sha256": "d609ed93aab1fab0f4913bebd1ea4bf57c07fb1ef8dd524e0e7f1417adbd3f67"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-node.txt": {
+      "bytes": 6068,
+      "sha256": "394c9d34579bbb3803fa4ec46e51fc4a8d693747308b1f5a5d5ecccb0e55642c"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-root-files.txt": {
+      "bytes": 1834,
+      "sha256": "46a25f47aa30aef7aca2797fedb58daea280d730f3ac6811854dbfa350102d9c"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/osf-wikis.txt": {
+      "bytes": 1054,
+      "sha256": "8f28eced924053fe57d602caf83355472c6a4d46250c876b2b3b48018e78cc27"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/pnet-paper.txt": {
+      "bytes": 77958,
+      "sha256": "0020569b515953d734330145aa860c7157a98fd225d9fec82053615d1087ffb1"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/tags-paper.txt": {
+      "bytes": 240797,
+      "sha256": "5b6812eb5f9317d277afeaac137625ab7ae089b206b2a6c875dc30b19dd36519"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/tags-pinned-readme.txt": {
+      "bytes": 3012,
+      "sha256": "5f8cf643fd61335bd39f823ae1f1987bac70ab2bb77f31cf7316a94dae9ef3ae"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/tags-repo.txt": {
+      "bytes": 16995,
+      "sha256": "85deacb8630e815f649dbec8a1c4ea4bd3169181acbfbf275847c736bf5a9470"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/tags-site.txt": {
+      "bytes": 34837,
+      "sha256": "b94689aaf0dcbe37916c7d79a37a44feac8b519ac498799aed2d3b2e0e3139ba"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/public-metadata/tags-tree.txt": {
+      "bytes": 8150,
+      "sha256": "75db25cbf7bac7444c7219b42f2e1f40c4a6b86cbd66b698f1dc2833d8bffbf2"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/selected_source_metadata.json": {
+      "bytes": 4996,
+      "sha256": "27da67342a40c60f89a440b2f249462949fb669467df466ec91ab1b3edcb3bc9"
+    },
+    "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/external-cohort-screen-01/test_use_ledger.json": {
+      "bytes": 5847,
+      "sha256": "4c835582d0cdc975acbed5433a386acffabf46edc82781837ba593216b26a5c0"
+    }
+  },
+  "prior_producing_pins_unchanged": true,
+  "prior_audit_review_files_unchanged": true,
+  "clinical_data_acquired": false,
+  "committed": false
+}

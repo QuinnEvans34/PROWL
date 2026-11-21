@@ -1,0 +1,389 @@
+{
+  "schema": "prowl.external-cohort-screen.v1",
+  "created_at_utc": "2026-11-06T20:49:44.066041+00:00",
+  "scope": "METADATA_ONLY",
+  "decision": "PREFERRED_CANDIDATE_FOUND_NO_INDEPENDENCE_CLEARANCE",
+  "patient_independence_verified": false,
+  "candidates": [
+    {
+      "id": "pdac-tags-500",
+      "name": "PDAC-TAGS",
+      "url": "https://osf.io/g6rv5/",
+      "declared_cases": 500,
+      "modality": "CT",
+      "license": "CC-BY-NC-4.0",
+      "license_evidence": "OSF project license relationship and Home wiki",
+      "access": "public direct split archives",
+      "endpoint": "PDAC and pancreas segmentation",
+      "negative_patients_declared": 0,
+      "compressed_bytes": 39681100216,
+      "patient_independence_verified": false,
+      "status": "PREFERRED_FOR_BOUNDED_ADMISSION_NOT_CLEARED",
+      "blockers": [
+        "Anonymous center-to-institution mapping",
+        "No exposed source/acquisition/patient crosswalk outside archives",
+        "No cross-project/checkpoint exposure reconciliation",
+        "All-positive cohort cannot measure negative-patient false alarms"
+      ]
+    },
+    {
+      "id": "pnet-469",
+      "name": "Rare pNET cohort",
+      "url": "https://arxiv.org/html/2501.17555v1",
+      "declared_cases": 469,
+      "modality": "CT",
+      "license": null,
+      "access": "No public artifact route verified in inspected sources",
+      "endpoint": "pNET segmentation",
+      "source": "Fudan University Shanghai Cancer Center",
+      "patient_independence_verified": false,
+      "status": "ACCESS_UNRESOLVED"
+    },
+    {
+      "id": "curvas-pdacvi",
+      "name": "CURVAS-PDACVI",
+      "url": "https://zenodo.org/records/15720085",
+      "modality": "CT",
+      "license": "CC-BY-4.0",
+      "access": "public training archive",
+      "endpoint": "PDAC segmentation",
+      "compressed_bytes": 5451385494,
+      "source": "PANORAMA derivative",
+      "patient_independence_verified": false,
+      "status": "REQUIRES_ORIGINAL_PATIENT_EXPOSURE_JOIN"
+    },
+    {
+      "id": "panorama",
+      "name": "PANORAMA public cohort",
+      "url": "https://github.com/DIAGNijmegen/panorama_labels",
+      "modality": "CT",
+      "license": null,
+      "access": "public source already acquired in PROWL",
+      "endpoint": "Annotation-dependent; expert-positive subset exists",
+      "prior_prowl_training_studies": 345,
+      "prior_prowl_training_source_subjects": 344,
+      "patient_independence_verified": false,
+      "status": "PRIOR_PROJECT_TRAINING_EXPOSURE_NOT_FRESH_BY_DEFAULT"
+    },
+    {
+      "id": "basel-cysts",
+      "name": "Basel pancreatic cyst cohort",
+      "url": "https://zenodo.org/records/4621057",
+      "declared_cases": 221,
+      "modality": "CT",
+      "license": "CC-BY-4.0",
+      "access": "public archive",
+      "endpoint": "Cyst-specific segmentation",
+      "compressed_bytes": 3217052760,
+      "patient_independence_verified": false,
+      "status": "SAME_SOURCE_INSTITUTION_CONCERN"
+    },
+    {
+      "id": "curvas-organ",
+      "name": "CURVAS organ cohort",
+      "url": "https://zenodo.org/records/13767408",
+      "declared_cases": 90,
+      "modality": "CT",
+      "license": "CC-BY-4.0",
+      "access": "public archives",
+      "endpoint": "Pancreas/kidney/liver only",
+      "patient_independence_verified": false,
+      "status": "NO_TUMOR_REFERENCE_ENDPOINT"
+    },
+    {
+      "id": "pancreatic-ct-cbct-seg",
+      "name": "PANCREATIC-CT-CBCT-SEG",
+      "url": "https://www.cancerimagingarchive.net/collection/pancreatic-ct-cbct-seg/",
+      "modality": "CT/CBCT",
+      "license": null,
+      "access": "public collection listed",
+      "endpoint": "Radiotherapy structures require separate suitability audit",
+      "patient_independence_verified": false,
+      "status": "PANTS_SOURCE_FAMILY_NOT_FRESH_BY_DEFAULT"
+    },
+    {
+      "id": "nih-pancreas-ct",
+      "name": "NIH Pancreas-CT",
+      "url": "https://www.cancerimagingarchive.net/collection/pancreas-ct/",
+      "modality": "CT",
+      "license": null,
+      "access": "public collection",
+      "endpoint": "Pancreas labels",
+      "patient_independence_verified": false,
+      "status": "REUSED_SOURCE_FAMILY_NO_COMPREHENSIVE_TUMOR_REFERENCE"
+    },
+    {
+      "id": "cptac-msd-resegmentation",
+      "name": "CPTAC/MSD resegmentation",
+      "url": "https://zenodo.org/records/5510650",
+      "modality": "CT",
+      "license": null,
+      "access": "public release listed",
+      "endpoint": "Pancreas/tumor",
+      "patient_independence_verified": false,
+      "status": "REANNOTATED_EXISTING_SOURCE_IMAGES"
+    },
+    {
+      "id": "panther",
+      "name": "PANTHER",
+      "url": "https://zenodo.org/records/15192302",
+      "modality": "MRI",
+      "license": null,
+      "access": "restricted request",
+      "endpoint": "Wrong modality for frozen CT task",
+      "patient_independence_verified": false,
+      "status": "OUT_OF_SCOPE"
+    }
+  ],
+  "pdac_tags": {
+    "centers": [
+      {
+        "center": "Center_A",
+        "publisher_declared_cases": 101,
+        "parts": 4,
+        "compressed_bytes": 15906769079
+      },
+      {
+        "center": "Center_B",
+        "publisher_declared_cases": 93,
+        "parts": 2,
+        "compressed_bytes": 8292036315
+      },
+      {
+        "center": "Center_C",
+        "publisher_declared_cases": 210,
+        "parts": 2,
+        "compressed_bytes": 9235163819
+      },
+      {
+        "center": "Center_D",
+        "publisher_declared_cases": 96,
+        "parts": 2,
+        "compressed_bytes": 6247131003
+      }
+    ],
+    "archive_parts": [
+      {
+        "center": "Center_A",
+        "filename": "Center_A.zip.001",
+        "osf_file_id": "6a84033876c111ed66eddaac",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "81c361ac782509a7d5c60815185539a1a11f09c5daa09ca16e70948d7f2be323",
+        "publisher_md5": "6b998e56b59ad78cbe1576d5c337fbd7",
+        "metadata_url": "https://api.osf.io/v2/files/6a84033876c111ed66eddaac/",
+        "download_url": "https://osf.io/download/6a84033876c111ed66eddaac/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_A",
+        "filename": "Center_A.zip.002",
+        "osf_file_id": "6a846efc3d13a9b880effe95",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "f5503bbf72358c39cf6d0e87cbe33c04fa0e6502abac23ff406810a07f8390f6",
+        "publisher_md5": "29e0ce66a77eeb4f13d7f9d5c346d7fe",
+        "metadata_url": "https://api.osf.io/v2/files/6a846efc3d13a9b880effe95/",
+        "download_url": "https://osf.io/download/6a846efc3d13a9b880effe95/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_A",
+        "filename": "Center_A.zip.003",
+        "osf_file_id": "6a848e2b1491c2f25beffe15",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "99867c2bde7b6dddcee61b4c5b66bfa675a265792a2442a839ad52adf1bc4173",
+        "publisher_md5": "302b9f433c55c5951ae3421f76b2fdca",
+        "metadata_url": "https://api.osf.io/v2/files/6a848e2b1491c2f25beffe15/",
+        "download_url": "https://osf.io/download/6a848e2b1491c2f25beffe15/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_A",
+        "filename": "Center_A.zip.004",
+        "osf_file_id": "6a84907e36cb654d64edd83c",
+        "compressed_bytes": 1813907639,
+        "publisher_sha256": "db34cde677905b53632c8c9f99094a0a4ec4c7f2ff8e9f29ef921a2e8309aefe",
+        "publisher_md5": "70e4447eac8445eba17d95f0656472e1",
+        "metadata_url": "https://api.osf.io/v2/files/6a84907e36cb654d64edd83c/",
+        "download_url": "https://osf.io/download/6a84907e36cb654d64edd83c/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_B",
+        "filename": "Center_B.zip.001",
+        "osf_file_id": "6a83de1480912b83f2bb65ab",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "6af831721cea31f38e420011600555dc0ee2163b26f4ec38ac6b798be19a5b6c",
+        "publisher_md5": "13805d5689fbaef8f7335515474ef1b4",
+        "metadata_url": "https://api.osf.io/v2/files/6a83de1480912b83f2bb65ab/",
+        "download_url": "https://osf.io/download/6a83de1480912b83f2bb65ab/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_B",
+        "filename": "Center_B.zip.002",
+        "osf_file_id": "6a83d824d86ade83c9759db2",
+        "compressed_bytes": 3594415835,
+        "publisher_sha256": "cd133bda7b9885af5e3cdd5a7676fc3162e2bb2ac131a66fcadb2937caf8bdba",
+        "publisher_md5": "2e6064f261414eb25616901c3c30c2ca",
+        "metadata_url": "https://api.osf.io/v2/files/6a83d824d86ade83c9759db2/",
+        "download_url": "https://osf.io/download/6a83d824d86ade83c9759db2/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_C",
+        "filename": "Center_C.zip.001",
+        "osf_file_id": "6a8408b50acdc3aaabbb6575",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "9441de3cd05f6652b569735fb7f4f406dfe21d4e64f8c09f34af9694a8ee39af",
+        "publisher_md5": "ba615815b840c2df8e9c02735cd59c1c",
+        "metadata_url": "https://api.osf.io/v2/files/6a8408b50acdc3aaabbb6575/",
+        "download_url": "https://osf.io/download/6a8408b50acdc3aaabbb6575/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_C",
+        "filename": "Center_C.zip.002",
+        "osf_file_id": "6a83ff109eb88aa1efd41f74",
+        "compressed_bytes": 4537543339,
+        "publisher_sha256": "858aef663a17e7e5ae0cc9a72d07226cc8d1aa4ed6cbfc3fdbb8963167fbb718",
+        "publisher_md5": "15db647b4f781c86de562e757cca2d27",
+        "metadata_url": "https://api.osf.io/v2/files/6a83ff109eb88aa1efd41f74/",
+        "download_url": "https://osf.io/download/6a83ff109eb88aa1efd41f74/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_D",
+        "filename": "Center_D.zip.001",
+        "osf_file_id": "6a8494a0967f858ae1edd872",
+        "compressed_bytes": 4697620480,
+        "publisher_sha256": "2cfdba0f95189bedd972c4d6137dc2a32c7d00209b12846b0ea21a28872cc55c",
+        "publisher_md5": "27b569b4116c6cfe698164213f256ce6",
+        "metadata_url": "https://api.osf.io/v2/files/6a8494a0967f858ae1edd872/",
+        "download_url": "https://osf.io/download/6a8494a0967f858ae1edd872/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      },
+      {
+        "center": "Center_D",
+        "filename": "Center_D.zip.002",
+        "osf_file_id": "6a8494a69aaa04280aefff22",
+        "compressed_bytes": 1549510523,
+        "publisher_sha256": "0b3a0ef1801a13be4af7f85f7a3c660860ff8441818130176e5cf2735aa408bf",
+        "publisher_md5": "ea90a6ff85dfea71dd4e37ab0f323374",
+        "metadata_url": "https://api.osf.io/v2/files/6a8494a69aaa04280aefff22/",
+        "download_url": "https://osf.io/download/6a8494a69aaa04280aefff22/",
+        "locally_downloaded": false,
+        "local_digest_verified": false
+      }
+    ],
+    "all_archive_bytes": 39681100216,
+    "public_node": "https://api.osf.io/v2/nodes/g6rv5/",
+    "wiki": "https://api.osf.io/v2/wikis/t3dpr/content/",
+    "license": "https://api.osf.io/v2/licenses/60bf992258510b0009a5a9a6/",
+    "site_repository_revision": "6870c103fbafb78c069665746a3c94973c105c70",
+    "source_crosswalk_visible_outside_archives": false,
+    "archive_contents_inspected": false
+  },
+  "next_admission": {
+    "status": "PREPARED_NOT_EXECUTING",
+    "smallest_complete_candidate_center": "Center_D",
+    "publisher_declared_cases": 96,
+    "archive_bytes": 6247131003,
+    "archive_parts": [
+      "Center_D.zip.001",
+      "Center_D.zip.002"
+    ],
+    "selection_reason": "Smallest compressed center; technical/provenance admission only, not model performance or final test selection",
+    "requires_download_size_authorization": true,
+    "download_authorized": false,
+    "clinical_file_reads_authorized": false,
+    "model_evaluation_authorized": false,
+    "training_authorized": false,
+    "stop_if_no_adequate_provenance": true,
+    "possible_outcomes": [
+      "Provenance supports independent cohort admission before predictions",
+      "Unresolved provenance: exploratory designation only; no unseen-patient claim",
+      "Confirmed relevant overlap: reject affected final-evaluation membership"
+    ]
+  },
+  "boundaries": {
+    "clinical_archive_download_bytes": 0,
+    "clinical_image_reads": 0,
+    "clinical_mask_reads": 0,
+    "clinical_model_forwards": 0,
+    "optimizer_updates": 0,
+    "protected_test_pixels_or_labels_read": 0,
+    "medical_uploads": 0,
+    "author_messages_sent": 0,
+    "committed": false
+  },
+  "prior_audit_unchanged": {
+    "path": "docs/stunet_audit/execution_manifest.json",
+    "sha256": "3dbc713d7808e051efb7122a0fd65ae0c0dd0e62bd225883cec4914f372b99b2",
+    "review_files_verified": 58,
+    "request_checks": [
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/source-evidence-snapshot.json",
+        "sha256": "b2e1215360dca678906ddd638bb2de0ecdb4e2d367f01a1efc66cf5cc97236eb",
+        "source_pin_count": 5,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-01/request.json",
+        "sha256": "3cd67d6fc0bcc608dac3b91234cd022f80b387feac2e205ee043fcbdd09caacb",
+        "source_pin_count": 375,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/request.json",
+        "sha256": "e0a2e439c27c39862c7041d214152266a29b105731771624f027d5ca6708ab84",
+        "source_pin_count": 380,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/reference-pipeline-02/reference-request.json",
+        "sha256": "fbff2632d4c2a48853a0dc8bcb3f4ff07cfe4117d60964cc2056b5943b4e8af8",
+        "source_pin_count": 380,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/cropped-image-request-01.json",
+        "sha256": "38f9a2c768c5ca314a41c131b1120d7a0b4bd61004e9d9bea038ab79825c5829",
+        "source_pin_count": 5,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/translation-review-request-01.json",
+        "sha256": "cea6a0cc8a73a70e9b180cb2b7ba40771047d1ecbd806a26df75a5931a470779",
+        "source_pin_count": 6,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/sparse-alignment-request-01.json",
+        "sha256": "5209295f2e2780497ba087fe81278a933ed1ab2bca5e431b6b827a470320d58e",
+        "source_pin_count": 6,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/candidate-view-request-01.json",
+        "sha256": "312285d0413f9f79938120acea0d613ad302ce1353d47b279f03d74cb459bc26",
+        "source_pin_count": 6,
+        "mismatches": []
+      },
+      {
+        "path": "/Volumes/PROWL-Data/PROWL/artifacts/stunet-audit-20261106/intensity-reexport-request-01.json",
+        "sha256": "36c2a9eb53d87c383f51cdf006805d095caed348b2c1e23b1e73476bdea6e1f3",
+        "source_pin_count": 7,
+        "mismatches": []
+      }
+    ]
+  }
+}
