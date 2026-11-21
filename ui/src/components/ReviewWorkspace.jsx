@@ -10,7 +10,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Columns2,
-  Contrast,
   Crosshair,
   Database,
   Eye,
@@ -52,8 +51,9 @@ import ReviewDecisionPanel from './ReviewDecisionPanel.jsx'
 import InspectionSourceControls from './InspectionSourceControls.jsx'
 import { verifiedInspectionSource } from '../lib/viewerImageDetails.js'
 import FindingKeyViews from './FindingKeyViews.jsx'
-import FindingAskPanel from './FindingAskPanel.jsx'
-import { DISTANCE_BANDS, rgb, useStudyInsights } from '../lib/studyInsights.js'
+import { DISTANCE_BANDS, rgb, structuredSummaryText, studyQuestionSuggestions, useStudyInsights } from '../lib/studyInsights.js'
+import { defaultStudyName, studyDescriptor, studyDisplayName, useStudyNames } from '../lib/studyNames.js'
+import AnatomyStructuresMenu from './AnatomyStructuresMenu.jsx'
 
 const CurvedView = lazy(() => import('./CurvedView.jsx'))
 const OutlineEditor = lazy(() => import('./OutlineEditor.jsx'))
@@ -267,6 +267,9 @@ export default function ReviewWorkspace({
   // Review aids precomputed for native studies (reference anatomy, contact, curved view, confidence).
   const insights = useStudyInsights(caseData).insights
   const [showAnatomy, setShowAnatomy] = useState(true)
+  // Per-structure control of the reference anatomy, from the layer bar's Anatomy menu.
+  const [hiddenStructures, setHiddenStructures] = useState([])
+  const [structureHighlight, setStructureHighlight] = useState(null)
   const [showConfidence, setShowConfidence] = useState(false)
   const [recording, setRecording] = useState(null)
   const [moreOpen, setMoreOpen] = useState(false)
@@ -278,6 +281,19 @@ export default function ReviewWorkspace({
     return () => document.removeEventListener('pointerdown', close)
   }, [moreOpen])
   const panelWide = layout.panelWidth >= 420
+  // Reading answers needs room: the Ask tab widens the panel and gives the width back after.
+  const askWidthRestoreRef = useRef(null)
+  useEffect(() => {
+    if (panelTab === 'ask') {
+      if (layout.panelWidth < 440) {
+        askWidthRestoreRef.current = layout.panelWidth
+        setLayout({ panelWidth: 460 })
+      }
+    } else if (askWidthRestoreRef.current != null) {
+      setLayout({ panelWidth: askWidthRestoreRef.current })
+      askWidthRestoreRef.current = null
+    }
+  }, [panelTab]) // eslint-disable-line react-hooks/exhaustive-deps
   const [twoDVisited, setTwoDVisited] = useState(false)
   const [threeDZoom, setThreeDZoom] = useState(null)
   const [askDraft, setAskDraft] = useState(null)
@@ -454,7 +470,9 @@ export default function ReviewWorkspace({
   const selectedLesionNumber = selectedComponent ? components.indexOf(selectedComponent) + 1 : 0
   const awaitingPick = pendingLesionPick?.identity === measurementState.identity && measurementState.status === 'loading'
   const viewerLabel = `${caseId} · ${EVIDENCE_META[state.evidenceMode].label}`
-  const studyLabel = localCt ? 'Local CT' : caseId.replace('PanTS_', 'PanTS ')
+  const [studyNames, renameStudy] = useStudyNames()
+  const studyLabel = localCt ? 'Local CT' : studyDisplayName(caseId, studyNames)
+  const [renaming, setRenaming] = useState(false)
 
   async function analyze() {
     const outcome = await onAnalyze(caseId)
@@ -651,6 +669,14 @@ export default function ReviewWorkspace({
   }
 
 
+  // Studies open in 3D. Once the 3D scene has loaded, mount the 2D planes in the
+  // background so the first switch to 2D is immediate instead of a fresh load.
+  useEffect(() => {
+    if (twoDVisited || viewMode !== '3d' || !threeDNavigation) return undefined
+    const timer = window.setTimeout(() => setTwoDVisited(true), 1500)
+    return () => window.clearTimeout(timer)
+  }, [twoDVisited, viewMode, threeDNavigation])
+
   function setViewMode(viewMode) {
     if (inspecting) exitInspection()
     if (viewMode !== '3d') setTwoDVisited(true)
@@ -681,11 +707,17 @@ export default function ReviewWorkspace({
   const is3dLike = !auxView && viewMode !== '2d'
   const hasAnatomy = Boolean(caseData.files?.anatomy)
   const hasConfidence = Boolean(caseData.files?.confidence)
+  // One-line lesion summary for the assistant header, from the precomputed findings.
+  const panelLesion = !verifiedPrediction && !localCt && insights?.lesion?.present ? insights.lesion : null
+  const panelLesionLine = panelLesion && Number.isFinite(panelLesion.long_axis_mm)
+    ? `${(panelLesion.long_axis_mm / 10).toFixed(1)} × ${(panelLesion.short_axis_mm / 10).toFixed(1)} cm${panelLesion.location ? ` · pancreatic ${panelLesion.location}` : ''} · model proposal`
+    : null
   const anatomyBanded = Boolean(meshFiles && Object.keys(meshFiles).some(key => key.includes('__contact') || key.includes('__near') || key.includes('__close')))
   const canEditOutline = hasPrediction && Boolean(caseData.files?.pred) && !verifiedPrediction && !localCt
   const boxZoom = state.interactionMode === 'box-zoom'
   const pan = state.interactionMode === 'pan'
-  const twoDInteractionMode = (framingLocked && (boxZoom || pan)) || state.interactionMode === 'rotate' ? 'navigate' : state.interactionMode
+  // The drag-to-window tool was retired (presets cover windowing); treat it as navigate.
+  const twoDInteractionMode = (framingLocked && (boxZoom || pan)) || ['rotate', 'window'].includes(state.interactionMode) ? 'navigate' : state.interactionMode
   const threeDInteractionMode = boxZoom || pan ? state.interactionMode : 'rotate'
   const modelLesionPicked = state.selectedObject?.source === 'pred' && state.selectedObject.anatomy === 'lesion'
   const lesionInReview = Boolean(currentLesionSelection?.component || (is3dLike && measuredLesionVisible && modelLesionPicked))
@@ -717,6 +749,8 @@ export default function ReviewWorkspace({
     visibleSources,
     showFull: state.showFull,
     showAnatomy: hasAnatomy && showAnatomy,
+    anatomyHidden: hiddenStructures,
+    structureHighlight: hasAnatomy && showAnatomy ? structureHighlight : null,
     showConfidence: hasConfidence && showConfidence,
     overlayOpacity: state.overlayOpacity,
     ctOpacity: state.ctOpacity,
@@ -779,6 +813,7 @@ export default function ReviewWorkspace({
     overlayMode: inspectionOverlay, onViewHandle: captureInspection,
     imageDetails: sourceDetails || { kind: 'prepared', legacyMillimeters: true },
     capturePlaneLocation: true, inspectionBounds: inspecting.anatomy === 'lesion' ? selectedComponent?.boundsWorldMm : null,
+    hideCrosshair: true,
   } : null
   const selectedFinding = selectedComponent ? {
     anatomy: 'lesion', id: selectedComponent.id, ordinal: selectedLesionNumber, dimensions: selectedComponent,
@@ -946,12 +981,26 @@ export default function ReviewWorkspace({
               <PanelLeftOpen size={16} aria-hidden="true" /> Studies <span className="pw-library-count">{caseItems.length}</span>
             </button>
           )}
-          <div className="pw-studybar__id">
-            <h1>{studyLabel}</h1>
-            <span className="pw-tag">{localCt ? 'This tab only' : verifiedPrediction ? 'Verified source CT' : isCurated ? 'Test-set example' : 'Prepared study'}</span>
+          <div className="pw-studybar__id" title={localCt ? undefined : `Dataset ID ${caseId}${isCurated ? ' · PanTS held-out test set' : ''}`}>
+            {renaming && !localCt ? (
+              <form className="pw-studybar__rename" onSubmit={event => { event.preventDefault(); renameStudy(caseId, new FormData(event.currentTarget).get('name')); setRenaming(false) }}>
+                <input name="name" aria-label="Study name" defaultValue={studyLabel} maxLength={60} autoFocus
+                  placeholder={defaultStudyName(caseId)} onKeyDown={event => { if (event.key === 'Escape') setRenaming(false) }}
+                  onBlur={event => { renameStudy(caseId, event.currentTarget.value); setRenaming(false) }} />
+              </form>
+            ) : (
+              <div className="pw-studybar__name">
+                <h1>{studyLabel}</h1>
+                {!localCt && <button type="button" className="pw-icon-btn pw-studybar__rename-btn" onClick={() => setRenaming(true)}
+                  aria-label="Rename study" title="Rename this study (saved in this browser)"><PencilLine size={13} aria-hidden="true" /></button>}
+              </div>
+            )}
+            <small className="pw-studybar__descriptor">
+              {localCt ? 'Local source CT · this tab only' : verifiedPrediction ? `${studyDescriptor(caseData)} · verified source CT` : studyDescriptor(caseData)}
+              {!localCt && <span className="pw-studybar__dataset"> · {caseId.replace('PanTS_', 'PanTS ')}</span>}
+            </small>
           </div>
           <dl className="pw-studybar__meta">
-            <div><dt>Series</dt><dd>{localCt ? 'Local source CT' : `Abdomen CT · ${verifiedPrediction ? 'Source' : 'Prepared'}`}</dd></div>
             <div><dt>Prediction</dt><dd title={predictionStatus}>{predictionStatus}</dd></div>
             {summaryStatus && <div><dt>Summary</dt><dd title={summaryStatus}>{summaryStatus}</dd></div>}
           </dl>
@@ -1029,7 +1078,6 @@ export default function ReviewWorkspace({
                 : ['navigate', 'Navigate', { icon: <Crosshair size={14} aria-hidden="true" />, title: 'Click or drag the crosshair' }],
               ['pan', 'Pan', { icon: <Move size={14} aria-hidden="true" />,
                 title: is2dLike && framingLocked ? 'Unlock 2D framing and pan' : 'Drag to reposition the view' }],
-              ...(is2dLike ? [['window', 'Window', { icon: <Contrast size={14} aria-hidden="true" />, title: 'Drag to adjust CT brightness and contrast' }]] : []),
               ['box-zoom', 'Box zoom', { disabled: framingLocked && !is3dLike,
                 title: framingLocked && !is3dLike ? 'Unlock framing to zoom' : 'Left-drag a box around a region to zoom in' }],
             ]}
@@ -1269,7 +1317,6 @@ export default function ReviewWorkspace({
               : viewMode === '3d'
               ? 'Drag to orbit · scroll to zoom · click a surface to focus'
               : framingLocked ? 'Framing locked · use the slice sliders'
-                : state.interactionMode === 'window' ? 'Drag to adjust brightness and contrast · scroll to zoom'
                   : 'Scroll to zoom · use the slice sliders'}
           </p>
 
@@ -1345,14 +1392,18 @@ export default function ReviewWorkspace({
             />
             {(hasAnatomy || hasConfidence) && <span className="pw-layerbar__divider" aria-hidden="true" />}
             {hasAnatomy && (
-              <LayerToggle
-                checked={showAnatomy}
-                label="Anatomy"
-                sublabel="ref"
-                color="#60a5fa"
-                onClick={() => setShowAnatomy(value => !value)}
-                title="Vessels and ducts from the dataset reference annotation (not model output)"
-              />
+              <span className="pw-layer-split">
+                <LayerToggle
+                  checked={showAnatomy}
+                  label="Anatomy"
+                  sublabel="ref"
+                  color="#60a5fa"
+                  onClick={() => setShowAnatomy(value => !value)}
+                  title="Vessels and ducts from the dataset reference annotation (not model output)"
+                />
+                <AnatomyStructuresMenu insights={insights} hidden={hiddenStructures} highlight={structureHighlight}
+                  disabled={!showAnatomy} onHiddenChange={setHiddenStructures} onHighlightChange={setStructureHighlight} />
+              </span>
             )}
             {hasConfidence && (
               <LayerToggle
@@ -1381,11 +1432,6 @@ export default function ReviewWorkspace({
           )}
 
           <span className="pw-toolbar__spacer" />
-          <div className="pw-layerbar__goto" role="group" aria-label="Go to structure">
-            <span>Go to</span>
-            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => focusStructure('pancreas')} disabled={!availableSources.length || !navigation.ranges.pancreas}>Pancreas</button>
-            <button type="button" className="pw-btn pw-btn--ghost pw-btn--sm" onClick={() => focusStructure('lesion')} disabled={!availableSources.length || !navigation.ranges.lesion}>Lesion</button>
-          </div>
           {(referenceState === 'permitted' || (referenceState === 'ready' && !comparing)) && (
             <button type="button" className="pw-btn pw-btn--link" onClick={compareWithReference}>Compare with reference</button>
           )}
@@ -1494,7 +1540,7 @@ export default function ReviewWorkspace({
           <PantherBadge size="sm" pulse={assistantPending} />
           <div>
             <h2>PROWL Assistant</h2>
-            <p>Evidence alongside your expertise.</p>
+            <p>{studyLabel}</p>
           </div>
           <button
             type="button"
@@ -1524,7 +1570,8 @@ export default function ReviewWorkspace({
               : 'Prediction not displayed'}</strong>
             <small>{selectedFinding?.dimensions?.calipers
               ? `${selectedFinding.dimensions.calipers.axes.map(axis => (axis.lengthMm / 10).toFixed(2)).join(' × ')} cm · measured slice`
-              : verifiedPrediction ? modelLabel : hasPrediction ? 'Prepared saved outline · model proposal' : 'Show the prediction to inspect model findings'}</small></div>
+              : verifiedPrediction ? modelLabel : hasPrediction && panelLesionLine ? panelLesionLine
+                : hasPrediction ? 'Prepared saved outline · model proposal' : 'Show the prediction to inspect model findings'}</small></div>
         </div>
         <div className="pw-tabs" role="tablist" aria-label="Assistant sections">
           {[['findings', 'Findings'], ['ask', 'Ask PROWL'], ['summary', 'Summary']].map(([key, label]) => (
@@ -1596,10 +1643,11 @@ export default function ReviewWorkspace({
             captureThumbnail={() => inspectionViewRef.current?.thumbnail?.()} onReopen={reopenKeyView} />
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-ask" aria-labelledby="pw-tab-ask" hidden={panelTab !== 'ask'}>
-          <FindingAskPanel key={studyKey} measurementState={measurementState} finding={selectedFinding}
-            onInspect={inspectSelected} literatureRequest={askDraft}>
-            {isValidElement(askPanel) ? cloneElement(askPanel, { draftRequest: askDraft, measurementContext: null }) : askPanel}
-          </FindingAskPanel>
+          {/* Ask is literature only; this study's measurements live in Findings. */}
+          <div key={studyKey} className="pw-finding-ask">
+            {isValidElement(askPanel) ? cloneElement(askPanel, { draftRequest: askDraft, measurementContext: null,
+              studySuggestions: verifiedPrediction || localCt ? [] : studyQuestionSuggestions(insights) }) : askPanel}
+          </div>
         </div>
         <div className="pw-panel__body" role="tabpanel" id="pw-tabpanel-summary" aria-labelledby="pw-tab-summary" hidden={panelTab !== 'summary'}>
           {verifiedPrediction && predictionJob ? <ReviewDecisionPanel base={predictionJob.base}
@@ -1613,6 +1661,7 @@ export default function ReviewWorkspace({
               facts={summaryFacts}
               drafts={summaryStore.drafts}
               onChange={summaryStore.onChange}
+              preview={!verifiedPrediction && !localCt && insights ? structuredSummaryText(insights, { studyLabel }) : null}
             />
           ) : summaryPanel}
         </div>

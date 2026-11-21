@@ -8,7 +8,7 @@ export const NO_PERSISTENCE = {
   reason: 'Durable saving isn’t connected yet. This draft lives only in this browser tab and is lost on reload.',
 }
 
-export default function ReviewSummary({ studyId, studyLabel, seriesKey = 'prepared-ct', seriesLabel, prediction, facts, drafts, onChange, persistence = NO_PERSISTENCE }) {
+export default function ReviewSummary({ studyId, studyLabel, seriesKey = 'prepared-ct', seriesLabel, prediction, facts, drafts, onChange, persistence = NO_PERSISTENCE, preview = null }) {
   const key = draftKey(studyId, seriesKey, prediction.key)
   const draft = drafts[key]
   const generated = useMemo(() => generateObservations({ ...facts, studyLabel, seriesLabel, prediction }), [facts, studyLabel, seriesLabel, prediction])
@@ -83,6 +83,11 @@ export default function ReviewSummary({ studyId, studyLabel, seriesKey = 'prepar
               ? 'Start from the validated findings shown for this prediction. Nothing is inferred beyond them.'
               : 'No prediction is displayed, so the draft will contain no model-derived observations. You can still write notes.'}
           </p>
+          {preview && <figure className="pw-summary__preview">
+            <figcaption>Findings the draft starts from</figcaption>
+            <pre>{preview}</pre>
+            <p className="pw-summary__source">Assembled by PROWL from the model’s outline and the dataset’s reference anatomy. No AI writing is involved. Drafts stay in this browser session.</p>
+          </figure>}
           <button type="button" className="pw-btn pw-btn--primary" onClick={start}>
             <FilePlus2 size={15} aria-hidden="true" /> Start draft from findings
           </button>

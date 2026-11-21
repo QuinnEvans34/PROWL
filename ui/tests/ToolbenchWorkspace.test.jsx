@@ -296,8 +296,10 @@ describe('real workspace layout with synthetic imaging only', () => {
     await user.type(screen.getByLabelText('Expert question draft'), 'Synthetic question in progress')
 
     const width = screen.getByRole('separator', { name: 'Expert panel width' })
+    // The Ask tab widens the panel for reading answers.
+    expect(width.getAttribute('aria-valuenow')).toBe('460')
     fireEvent.keyDown(width, { key: 'ArrowLeft' })
-    expect(width.getAttribute('aria-valuenow')).toBe('330')
+    expect(width.getAttribute('aria-valuenow')).toBe('470')
     await user.click(screen.getByRole('button', { name: 'Workspace options' }))
     await user.click(screen.getByRole('button', { name: 'Expert panel', exact: true }))
     expect(screen.queryByRole('tab', { name: 'Ask PROWL' })).toBeNull()
