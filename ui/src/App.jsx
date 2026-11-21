@@ -10,6 +10,7 @@ import { useRoute } from './lib/router.js'
 import { hasHumanContent } from './lib/summaryDraft.js'
 import { disposePrediction } from './lib/onDemandPrediction.js'
 import ImportStudyDialog from './components/ImportStudyDialog.jsx'
+import { studyDescriptor, studyDisplayName, useStudyNames } from './lib/studyNames.js'
 
 const ValidationComparison = lazy(() => import('./components/ValidationComparison.jsx'))
 const TrainingPage = lazy(() => import('./pages/TrainingPage.jsx'))
@@ -314,6 +315,7 @@ export default function App() {
     document.title = `${titles[route.view]} · PROWL`
   }, [route.view, route.study, showPrediction, localActive, caseId, currentCase])
 
+  const [studyNames] = useStudyNames()
   const studies = useMemo(() => Object.keys(cases || {}).sort().map((id) => {
     const item = cases[id]
     const validation = VALIDATION_SET.has(id)
@@ -323,6 +325,8 @@ export default function App() {
     return {
       id,
       displayId: formatStudyId(id),
+      name: studyDisplayName(id, studyNames),
+      descriptor: studyDescriptor(item),
       kind: validation ? 'validation' : 'prepared',
       thumbnail: `${BASE}/${id}/thumbnail.webp`,
       spacingLabel: spacing,
@@ -333,12 +337,12 @@ export default function App() {
       mark: reviewStatuses[id] === 'reviewed' || reviewStatuses[id] === 'discussion' ? reviewStatuses[id] : null,
       draft: Object.values(drafts).some((draft) => draft.studyId === id && hasHumanContent(draft)),
     }
-  }), [cases, inferenceState, liveResults, reviewStatuses, drafts])
+  }), [cases, inferenceState, liveResults, reviewStatuses, drafts, studyNames])
 
   const reviewCaseItems = useMemo(() => studies.map((study) => ({
     id: study.id,
-    shortId: study.id.replace('PanTS_', ''),
-    label: VALIDATION_PROFILES[study.id]?.label || 'Prepared study',
+    shortId: study.name,
+    label: study.descriptor.replace(/^CT abdomen · /, '') || VALIDATION_PROFILES[study.id]?.label || 'Prepared study',
     tone: VALIDATION_PROFILES[study.id]?.tone || 'neutral',
     status: reviewStatuses[study.id] || 'unreviewed',
   })), [studies, reviewStatuses])

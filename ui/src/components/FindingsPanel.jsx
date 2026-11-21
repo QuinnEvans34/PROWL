@@ -1,4 +1,5 @@
 import { ArrowUpRight, Check, Database, Download, Info, MessageSquareText, MessageSquareWarning, Radio, TriangleAlert } from 'lucide-react'
+import { studyDisplayName, useStudyNames } from '../lib/studyNames.js'
 import { REVIEW_COLORS } from '../lib/viewerLayers.js'
 import { structureQuestions } from '../lib/structureQuestions.js'
 import LesionDimensions from './LesionDimensions.jsx'
@@ -61,7 +62,8 @@ export default function FindingsPanel({
     ? measurement.lesionVoxels > 0
     : typeof finding.lesionFlagged === 'boolean' ? finding.lesionFlagged : null
   const volumeCm3 = verifiedMeasurements ? measurement?.lesionMl : Number.isFinite(finding.volumeMm3) ? finding.volumeMm3 / 1000 : null
-  const studyLabel = caseId.replace('PanTS_', 'PanTS ')
+  const [studyNames] = useStudyNames()
+  const studyLabel = studyDisplayName(caseId, studyNames)
   const pending = measurementState?.status === 'loading'
   const volume = value => Number.isFinite(value)
     ? <><span className="pw-num">{value > 0 && value < 0.01 ? '<0.01' : value.toFixed(2)}</span> {verifiedMeasurements ? 'mL' : 'cm³'}</>

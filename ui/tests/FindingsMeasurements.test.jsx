@@ -76,7 +76,7 @@ it('identifies source-grid calipers and exports the verified run mask from its c
     caseData={{ ...props.caseData, files: { pred: 'prediction.nii.gz' } }}
     measurementState={{ status: 'ready', measurement }} onInspectPancreas={vi.fn()} />)
   expect(screen.getAllByText(/Source slice 4/)).toHaveLength(2)
-  expect(screen.getByText(/PanTS 00000001 · Verified prediction/)).toBeTruthy()
+  expect(screen.getByText(/Case 1 · Verified prediction/)).toBeTruthy()
   const download = screen.getByRole('link', { name: 'Export prediction (NIfTI)', hidden: true })
   expect(download.getAttribute('href')).toBe('blob:verified-mask')
 })

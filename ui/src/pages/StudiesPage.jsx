@@ -34,7 +34,8 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase().replace(/\s+/g, '')
     return studies.filter((study) => (
-      (!q || study.id.toLowerCase().replace(/_/g, '').includes(q.replace(/_/g, '')))
+      (!q || [study.id, study.name, study.descriptor].filter(Boolean)
+        .some(text => text.toLowerCase().replace(/[\s_]+/g, '').includes(q.replace(/_/g, ''))))
       && (reference === 'all' || (reference === 'available') === study.referenceAvailable)
       && (kind === 'all' || study.kind === kind)
     ))
@@ -76,7 +77,7 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
             <label className="pw-search">
               <Search size={15} aria-hidden="true" />
               <span className="pw-sr-only">Search studies by ID</span>
-              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search study ID" />
+              <input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search name or ID" />
             </label>
             <label className="pw-select">
               <span>Reference</span>
@@ -118,9 +119,10 @@ export default function StudiesPage({ studies, activeStudy, onOpen, onImport, im
                       <div className="pw-study-cell">
                         <Thumb src={study.thumbnail} />
                         <span>
-                          <strong className="pw-mono-id">{study.displayId}</strong>
+                          <strong>{study.name || study.displayId}</strong>
                           <small>
-                            {study.kind === 'validation' ? 'Test-set example' : 'Prepared study'}
+                            {study.descriptor || 'CT abdomen'}
+                            <span className="pw-study-cell__id"> · {study.displayId}</span>
                             {!sharedSpacing && ` · ${study.spacingLabel}`}
                             {active && ' · Open in workbench'}
                           </small>
