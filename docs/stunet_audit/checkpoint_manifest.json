@@ -1,0 +1,1407 @@
+{
+  "schema": "prowl.stunet.checkpoint-audit.v1",
+  "status": "AUTHOR_LINKED_LOCAL_INTEGRITY_AND_SYNTHETIC_CPU_VERIFIED",
+  "repository": "https://github.com/uni-medical/STU-Net",
+  "revision": "0652eaf5cafda6bc269942238c3695994f2dc4f0",
+  "source_url": "https://drive.usercontent.google.com/download?id=1BHCp1Ort-OaVFwaZmvsG4qHiKiPeNb4h&export=download&confirm=t",
+  "original_filename": "base_ep4k.model",
+  "local_path": "/Volumes/PROWL-Data/PROWL/teachers/stunet-b-base-20261106/base_ep4k.model",
+  "bytes": 466715133,
+  "sha256": "7232a6296d320da1d60debe873a1d3fcad74e9404272db8f7440e30d62c5997a",
+  "publisher_checksum": null,
+  "cryptographic_authenticity_verified": false,
+  "source_license": "Apache-2.0 repository LICENSE; separate checkpoint-specific grant not independently located",
+  "evidence_path": "outputs/prowl/stunet-audit-20261106/checkpoint-probe-03.json",
+  "evidence_sha256": "72856d7011179eac1221207486db45fc5132a8252071ddc8e2c0bead60c0e2c8",
+  "verification": {
+    "weight_sha256": "7232a6296d320da1d60debe873a1d3fcad74e9404272db8f7440e30d62c5997a",
+    "source_sha256": "53da5fa6ea87c0b63177af6a93b5b148bda96b6e4be22290a8e5d49a4ef261bc",
+    "torch_version": "2.13.0",
+    "device": "cpu",
+    "unsafe_globals": [
+      "numpy.core.multiarray.scalar",
+      "numpy.dtype"
+    ],
+    "model_calls": 1,
+    "optimizer_updates": 0,
+    "clinical_data_reads": 0,
+    "restricted_numpy_metadata": [
+      "numpy.core.multiarray.scalar",
+      "numpy.dtype",
+      "numpy.dtypes.Float64DType",
+      "numpy.dtypes.Float32DType"
+    ],
+    "status": "CPU_SYNTHETIC_FORWARD_BACKWARD_PASS",
+    "checkpoint_keys": [
+      "epoch",
+      "state_dict",
+      "optimizer_state_dict",
+      "lr_scheduler_state_dict",
+      "plot_stuff",
+      "best_stuff",
+      "amp_grad_scaler"
+    ],
+    "epoch": 4000,
+    "state_entries": 130,
+    "state_elements": 58262669,
+    "tensors": {
+      "conv_blocks_context.0.0.conv1.weight": {
+        "shape": [
+          32,
+          1,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 864
+      },
+      "conv_blocks_context.0.0.conv1.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.norm1.weight": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.norm1.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.conv2.weight": {
+        "shape": [
+          32,
+          32,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 27648
+      },
+      "conv_blocks_context.0.0.conv2.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.norm2.weight": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.norm2.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.conv3.weight": {
+        "shape": [
+          32,
+          1,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.0.0.conv3.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_context.1.0.conv1.weight": {
+        "shape": [
+          64,
+          32,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 55296
+      },
+      "conv_blocks_context.1.0.conv1.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.norm1.weight": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.norm1.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.conv2.weight": {
+        "shape": [
+          64,
+          64,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 110592
+      },
+      "conv_blocks_context.1.0.conv2.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.norm2.weight": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.norm2.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.1.0.conv3.weight": {
+        "shape": [
+          64,
+          32,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 2048
+      },
+      "conv_blocks_context.1.0.conv3.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_context.2.0.conv1.weight": {
+        "shape": [
+          128,
+          64,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 221184
+      },
+      "conv_blocks_context.2.0.conv1.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.norm1.weight": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.norm1.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.conv2.weight": {
+        "shape": [
+          128,
+          128,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 442368
+      },
+      "conv_blocks_context.2.0.conv2.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.norm2.weight": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.norm2.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.2.0.conv3.weight": {
+        "shape": [
+          128,
+          64,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 8192
+      },
+      "conv_blocks_context.2.0.conv3.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_context.3.0.conv1.weight": {
+        "shape": [
+          256,
+          128,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 884736
+      },
+      "conv_blocks_context.3.0.conv1.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.norm1.weight": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.norm1.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.conv2.weight": {
+        "shape": [
+          256,
+          256,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 1769472
+      },
+      "conv_blocks_context.3.0.conv2.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.norm2.weight": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.norm2.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.3.0.conv3.weight": {
+        "shape": [
+          256,
+          128,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 32768
+      },
+      "conv_blocks_context.3.0.conv3.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_context.4.0.conv1.weight": {
+        "shape": [
+          512,
+          256,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 3538944
+      },
+      "conv_blocks_context.4.0.conv1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.norm1.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.norm1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.conv2.weight": {
+        "shape": [
+          512,
+          512,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 7077888
+      },
+      "conv_blocks_context.4.0.conv2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.norm2.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.norm2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.4.0.conv3.weight": {
+        "shape": [
+          512,
+          256,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 131072
+      },
+      "conv_blocks_context.4.0.conv3.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.conv1.weight": {
+        "shape": [
+          512,
+          512,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 7077888
+      },
+      "conv_blocks_context.5.0.conv1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.norm1.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.norm1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.conv2.weight": {
+        "shape": [
+          512,
+          512,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 7077888
+      },
+      "conv_blocks_context.5.0.conv2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.norm2.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.norm2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_context.5.0.conv3.weight": {
+        "shape": [
+          512,
+          512,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 262144
+      },
+      "conv_blocks_context.5.0.conv3.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "upsample_layers.0.conv.weight": {
+        "shape": [
+          512,
+          512,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 262144
+      },
+      "upsample_layers.0.conv.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "upsample_layers.1.conv.weight": {
+        "shape": [
+          256,
+          512,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 131072
+      },
+      "upsample_layers.1.conv.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "upsample_layers.2.conv.weight": {
+        "shape": [
+          128,
+          256,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 32768
+      },
+      "upsample_layers.2.conv.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "upsample_layers.3.conv.weight": {
+        "shape": [
+          64,
+          128,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 8192
+      },
+      "upsample_layers.3.conv.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "upsample_layers.4.conv.weight": {
+        "shape": [
+          32,
+          64,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 2048
+      },
+      "upsample_layers.4.conv.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.0.0.conv1.weight": {
+        "shape": [
+          512,
+          1024,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 14155776
+      },
+      "conv_blocks_localization.0.0.conv1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.norm1.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.norm1.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.conv2.weight": {
+        "shape": [
+          512,
+          512,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 7077888
+      },
+      "conv_blocks_localization.0.0.conv2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.norm2.weight": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.norm2.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.0.0.conv3.weight": {
+        "shape": [
+          512,
+          1024,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 524288
+      },
+      "conv_blocks_localization.0.0.conv3.bias": {
+        "shape": [
+          512
+        ],
+        "dtype": "torch.float32",
+        "elements": 512
+      },
+      "conv_blocks_localization.1.0.conv1.weight": {
+        "shape": [
+          256,
+          512,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 3538944
+      },
+      "conv_blocks_localization.1.0.conv1.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.norm1.weight": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.norm1.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.conv2.weight": {
+        "shape": [
+          256,
+          256,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 1769472
+      },
+      "conv_blocks_localization.1.0.conv2.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.norm2.weight": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.norm2.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.1.0.conv3.weight": {
+        "shape": [
+          256,
+          512,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 131072
+      },
+      "conv_blocks_localization.1.0.conv3.bias": {
+        "shape": [
+          256
+        ],
+        "dtype": "torch.float32",
+        "elements": 256
+      },
+      "conv_blocks_localization.2.0.conv1.weight": {
+        "shape": [
+          128,
+          256,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 884736
+      },
+      "conv_blocks_localization.2.0.conv1.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.norm1.weight": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.norm1.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.conv2.weight": {
+        "shape": [
+          128,
+          128,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 442368
+      },
+      "conv_blocks_localization.2.0.conv2.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.norm2.weight": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.norm2.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.2.0.conv3.weight": {
+        "shape": [
+          128,
+          256,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 32768
+      },
+      "conv_blocks_localization.2.0.conv3.bias": {
+        "shape": [
+          128
+        ],
+        "dtype": "torch.float32",
+        "elements": 128
+      },
+      "conv_blocks_localization.3.0.conv1.weight": {
+        "shape": [
+          64,
+          128,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 221184
+      },
+      "conv_blocks_localization.3.0.conv1.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.norm1.weight": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.norm1.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.conv2.weight": {
+        "shape": [
+          64,
+          64,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 110592
+      },
+      "conv_blocks_localization.3.0.conv2.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.norm2.weight": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.norm2.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.3.0.conv3.weight": {
+        "shape": [
+          64,
+          128,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 8192
+      },
+      "conv_blocks_localization.3.0.conv3.bias": {
+        "shape": [
+          64
+        ],
+        "dtype": "torch.float32",
+        "elements": 64
+      },
+      "conv_blocks_localization.4.0.conv1.weight": {
+        "shape": [
+          32,
+          64,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 55296
+      },
+      "conv_blocks_localization.4.0.conv1.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.norm1.weight": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.norm1.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.conv2.weight": {
+        "shape": [
+          32,
+          32,
+          3,
+          3,
+          3
+        ],
+        "dtype": "torch.float32",
+        "elements": 27648
+      },
+      "conv_blocks_localization.4.0.conv2.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.norm2.weight": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.norm2.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "conv_blocks_localization.4.0.conv3.weight": {
+        "shape": [
+          32,
+          64,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 2048
+      },
+      "conv_blocks_localization.4.0.conv3.bias": {
+        "shape": [
+          32
+        ],
+        "dtype": "torch.float32",
+        "elements": 32
+      },
+      "seg_outputs.0.weight": {
+        "shape": [
+          105,
+          512,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 53760
+      },
+      "seg_outputs.0.bias": {
+        "shape": [
+          105
+        ],
+        "dtype": "torch.float32",
+        "elements": 105
+      },
+      "seg_outputs.1.weight": {
+        "shape": [
+          105,
+          256,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 26880
+      },
+      "seg_outputs.1.bias": {
+        "shape": [
+          105
+        ],
+        "dtype": "torch.float32",
+        "elements": 105
+      },
+      "seg_outputs.2.weight": {
+        "shape": [
+          105,
+          128,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 13440
+      },
+      "seg_outputs.2.bias": {
+        "shape": [
+          105
+        ],
+        "dtype": "torch.float32",
+        "elements": 105
+      },
+      "seg_outputs.3.weight": {
+        "shape": [
+          105,
+          64,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 6720
+      },
+      "seg_outputs.3.bias": {
+        "shape": [
+          105
+        ],
+        "dtype": "torch.float32",
+        "elements": 105
+      },
+      "seg_outputs.4.weight": {
+        "shape": [
+          105,
+          32,
+          1,
+          1,
+          1
+        ],
+        "dtype": "torch.float32",
+        "elements": 3360
+      },
+      "seg_outputs.4.bias": {
+        "shape": [
+          105
+        ],
+        "dtype": "torch.float32",
+        "elements": 105
+      }
+    },
+    "original_parameter_elements": 58262669,
+    "transferred_parameter_elements": 58157984,
+    "new_parameter_elements": 2991,
+    "model_parameter_elements": 58160975,
+    "changed_from_random_tensors": 120,
+    "loaded_keys": [
+      "conv_blocks_context.0.0.conv1.weight",
+      "conv_blocks_context.0.0.conv1.bias",
+      "conv_blocks_context.0.0.norm1.weight",
+      "conv_blocks_context.0.0.norm1.bias",
+      "conv_blocks_context.0.0.conv2.weight",
+      "conv_blocks_context.0.0.conv2.bias",
+      "conv_blocks_context.0.0.norm2.weight",
+      "conv_blocks_context.0.0.norm2.bias",
+      "conv_blocks_context.0.0.conv3.weight",
+      "conv_blocks_context.0.0.conv3.bias",
+      "conv_blocks_context.1.0.conv1.weight",
+      "conv_blocks_context.1.0.conv1.bias",
+      "conv_blocks_context.1.0.norm1.weight",
+      "conv_blocks_context.1.0.norm1.bias",
+      "conv_blocks_context.1.0.conv2.weight",
+      "conv_blocks_context.1.0.conv2.bias",
+      "conv_blocks_context.1.0.norm2.weight",
+      "conv_blocks_context.1.0.norm2.bias",
+      "conv_blocks_context.1.0.conv3.weight",
+      "conv_blocks_context.1.0.conv3.bias",
+      "conv_blocks_context.2.0.conv1.weight",
+      "conv_blocks_context.2.0.conv1.bias",
+      "conv_blocks_context.2.0.norm1.weight",
+      "conv_blocks_context.2.0.norm1.bias",
+      "conv_blocks_context.2.0.conv2.weight",
+      "conv_blocks_context.2.0.conv2.bias",
+      "conv_blocks_context.2.0.norm2.weight",
+      "conv_blocks_context.2.0.norm2.bias",
+      "conv_blocks_context.2.0.conv3.weight",
+      "conv_blocks_context.2.0.conv3.bias",
+      "conv_blocks_context.3.0.conv1.weight",
+      "conv_blocks_context.3.0.conv1.bias",
+      "conv_blocks_context.3.0.norm1.weight",
+      "conv_blocks_context.3.0.norm1.bias",
+      "conv_blocks_context.3.0.conv2.weight",
+      "conv_blocks_context.3.0.conv2.bias",
+      "conv_blocks_context.3.0.norm2.weight",
+      "conv_blocks_context.3.0.norm2.bias",
+      "conv_blocks_context.3.0.conv3.weight",
+      "conv_blocks_context.3.0.conv3.bias",
+      "conv_blocks_context.4.0.conv1.weight",
+      "conv_blocks_context.4.0.conv1.bias",
+      "conv_blocks_context.4.0.norm1.weight",
+      "conv_blocks_context.4.0.norm1.bias",
+      "conv_blocks_context.4.0.conv2.weight",
+      "conv_blocks_context.4.0.conv2.bias",
+      "conv_blocks_context.4.0.norm2.weight",
+      "conv_blocks_context.4.0.norm2.bias",
+      "conv_blocks_context.4.0.conv3.weight",
+      "conv_blocks_context.4.0.conv3.bias",
+      "conv_blocks_context.5.0.conv1.weight",
+      "conv_blocks_context.5.0.conv1.bias",
+      "conv_blocks_context.5.0.norm1.weight",
+      "conv_blocks_context.5.0.norm1.bias",
+      "conv_blocks_context.5.0.conv2.weight",
+      "conv_blocks_context.5.0.conv2.bias",
+      "conv_blocks_context.5.0.norm2.weight",
+      "conv_blocks_context.5.0.norm2.bias",
+      "conv_blocks_context.5.0.conv3.weight",
+      "conv_blocks_context.5.0.conv3.bias",
+      "upsample_layers.0.conv.weight",
+      "upsample_layers.0.conv.bias",
+      "upsample_layers.1.conv.weight",
+      "upsample_layers.1.conv.bias",
+      "upsample_layers.2.conv.weight",
+      "upsample_layers.2.conv.bias",
+      "upsample_layers.3.conv.weight",
+      "upsample_layers.3.conv.bias",
+      "upsample_layers.4.conv.weight",
+      "upsample_layers.4.conv.bias",
+      "conv_blocks_localization.0.0.conv1.weight",
+      "conv_blocks_localization.0.0.conv1.bias",
+      "conv_blocks_localization.0.0.norm1.weight",
+      "conv_blocks_localization.0.0.norm1.bias",
+      "conv_blocks_localization.0.0.conv2.weight",
+      "conv_blocks_localization.0.0.conv2.bias",
+      "conv_blocks_localization.0.0.norm2.weight",
+      "conv_blocks_localization.0.0.norm2.bias",
+      "conv_blocks_localization.0.0.conv3.weight",
+      "conv_blocks_localization.0.0.conv3.bias",
+      "conv_blocks_localization.1.0.conv1.weight",
+      "conv_blocks_localization.1.0.conv1.bias",
+      "conv_blocks_localization.1.0.norm1.weight",
+      "conv_blocks_localization.1.0.norm1.bias",
+      "conv_blocks_localization.1.0.conv2.weight",
+      "conv_blocks_localization.1.0.conv2.bias",
+      "conv_blocks_localization.1.0.norm2.weight",
+      "conv_blocks_localization.1.0.norm2.bias",
+      "conv_blocks_localization.1.0.conv3.weight",
+      "conv_blocks_localization.1.0.conv3.bias",
+      "conv_blocks_localization.2.0.conv1.weight",
+      "conv_blocks_localization.2.0.conv1.bias",
+      "conv_blocks_localization.2.0.norm1.weight",
+      "conv_blocks_localization.2.0.norm1.bias",
+      "conv_blocks_localization.2.0.conv2.weight",
+      "conv_blocks_localization.2.0.conv2.bias",
+      "conv_blocks_localization.2.0.norm2.weight",
+      "conv_blocks_localization.2.0.norm2.bias",
+      "conv_blocks_localization.2.0.conv3.weight",
+      "conv_blocks_localization.2.0.conv3.bias",
+      "conv_blocks_localization.3.0.conv1.weight",
+      "conv_blocks_localization.3.0.conv1.bias",
+      "conv_blocks_localization.3.0.norm1.weight",
+      "conv_blocks_localization.3.0.norm1.bias",
+      "conv_blocks_localization.3.0.conv2.weight",
+      "conv_blocks_localization.3.0.conv2.bias",
+      "conv_blocks_localization.3.0.norm2.weight",
+      "conv_blocks_localization.3.0.norm2.bias",
+      "conv_blocks_localization.3.0.conv3.weight",
+      "conv_blocks_localization.3.0.conv3.bias",
+      "conv_blocks_localization.4.0.conv1.weight",
+      "conv_blocks_localization.4.0.conv1.bias",
+      "conv_blocks_localization.4.0.norm1.weight",
+      "conv_blocks_localization.4.0.norm1.bias",
+      "conv_blocks_localization.4.0.conv2.weight",
+      "conv_blocks_localization.4.0.conv2.bias",
+      "conv_blocks_localization.4.0.norm2.weight",
+      "conv_blocks_localization.4.0.norm2.bias",
+      "conv_blocks_localization.4.0.conv3.weight",
+      "conv_blocks_localization.4.0.conv3.bias"
+    ],
+    "skipped_head_shapes": {
+      "seg_outputs.0.weight": [
+        105,
+        512,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.0.bias": [
+        105
+      ],
+      "seg_outputs.1.weight": [
+        105,
+        256,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.1.bias": [
+        105
+      ],
+      "seg_outputs.2.weight": [
+        105,
+        128,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.2.bias": [
+        105
+      ],
+      "seg_outputs.3.weight": [
+        105,
+        64,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.3.bias": [
+        105
+      ],
+      "seg_outputs.4.weight": [
+        105,
+        32,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.4.bias": [
+        105
+      ]
+    },
+    "new_head_shapes": {
+      "seg_outputs.0.weight": [
+        3,
+        512,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.0.bias": [
+        3
+      ],
+      "seg_outputs.1.weight": [
+        3,
+        256,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.1.bias": [
+        3
+      ],
+      "seg_outputs.2.weight": [
+        3,
+        128,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.2.bias": [
+        3
+      ],
+      "seg_outputs.3.weight": [
+        3,
+        64,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.3.bias": [
+        3
+      ],
+      "seg_outputs.4.weight": [
+        3,
+        32,
+        1,
+        1,
+        1
+      ],
+      "seg_outputs.4.bias": [
+        3
+      ]
+    },
+    "transferred_exact": true,
+    "new_heads_preserved": true,
+    "output_shapes": [
+      [
+        1,
+        3,
+        64,
+        64,
+        64
+      ],
+      [
+        1,
+        3,
+        32,
+        32,
+        32
+      ],
+      [
+        1,
+        3,
+        16,
+        16,
+        16
+      ],
+      [
+        1,
+        3,
+        8,
+        8,
+        8
+      ],
+      [
+        1,
+        3,
+        4,
+        4,
+        4
+      ]
+    ],
+    "loss": 2.8847744464874268,
+    "finite_all_gradients": true,
+    "nonzero_gradients": true,
+    "production_training_qualified": false,
+    "seconds": 3.0045188749209046
+  }
+}

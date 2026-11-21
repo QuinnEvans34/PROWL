@@ -1,0 +1,46 @@
+{
+  "revision": "0652eaf5cafda6bc269942238c3695994f2dc4f0",
+  "repository": "https://github.com/uni-medical/STU-Net",
+  "files": {
+    "README.md": {
+      "sha256": "5f25cbd928b244a3ff6994f5aa391531cc7420cc94b1813100924ef4066442ed",
+      "bytes": 10869
+    },
+    "LICENSE": {
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    "label_orders.json": {
+      "sha256": "fb12f8615645f2c90232aa21b498593128cdab9a62b9ab998f1d5ca0b17f9ff1",
+      "bytes": 2820
+    },
+    "plan_files/plans.pkl": {
+      "sha256": "5436717587df44a6b18fd911f8ad1e93d99f46c09a39338e4a54a827c9455851",
+      "bytes": 583
+    },
+    "nnUNet-1.7.1/nnunet/network_architecture/STUNet.py": {
+      "sha256": "a44afe4c21848c0e78694a1859f35f08cb932e0cd7aed84c69f2ca6e212baa3f",
+      "bytes": 5561
+    },
+    "nnUNet-1.7.1/nnunet/run/run_finetuning.py": {
+      "sha256": "247562a727d05293fa11ec4943ce0e98d7fda48e7fb3dd833ac3c8fc316d546b",
+      "bytes": 14065
+    },
+    "nnUNet-1.7.1/nnunet/run/load_pretrained_weights.py": {
+      "sha256": "67b986a1bf1e14a19992c9419d6777cb1825ebe1116f697fa7b731750dfad6d0",
+      "bytes": 2504
+    },
+    "nnUNet-1.7.1/nnunet/training/network_training/STUNetTrainer.py": {
+      "sha256": "5bb916ba0950ba656dca928fc927a5d3b8f1340f4cb7d7ca30c8bc01abc01101",
+      "bytes": 9219
+    },
+    "nnUNet-2.2/nnunetv2/training/nnUNetTrainer/STUNetTrainer.py": {
+      "sha256": "53da5fa6ea87c0b63177af6a93b5b148bda96b6e4be22290a8e5d49a4ef261bc",
+      "bytes": 12069
+    },
+    "nnUNet-2.2/nnunetv2/run/run_finetuning_stunet.py": {
+      "sha256": "520e6fa8a638e769452c3dfc851eb48a6803186cdd0fee3130bebdded8c94528",
+      "bytes": 2800
+    }
+  }
+}

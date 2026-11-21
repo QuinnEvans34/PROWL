@@ -1,0 +1,37 @@
+{
+  "source_sha256": "5436717587df44a6b18fd911f8ad1e93d99f46c09a39338e4a54a827c9455851",
+  "bytes": 583,
+  "allowed_globals": [
+    "collections.OrderedDict",
+    "numpy.core.multiarray.scalar",
+    "numpy.dtype"
+  ],
+  "plan": {
+    "num_stages": 1,
+    "num_modalities": 1,
+    "normalization_schemes": {
+      "0": "nonCT"
+    },
+    "num_classes": 104,
+    "base_num_features": 32,
+    "use_mask_for_norm": {
+      "0": false
+    },
+    "keep_only_largest_region": null,
+    "min_region_size_per_class": null,
+    "min_size_per_class": null,
+    "transpose_forward": [
+      0,
+      1,
+      2
+    ],
+    "transpose_backward": [
+      0,
+      1,
+      2
+    ],
+    "data_identifier": "nnUNetData_plans_v2.1",
+    "preprocessor_name": "GenericPreprocessor",
+    "conv_per_stage": 2
+  }
+}
