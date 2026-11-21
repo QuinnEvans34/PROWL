@@ -16,7 +16,7 @@ const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../pr
 const ALL = ['D1', 'C2', 'D4', 'D5', 'B1', 'D10', 'F4', 'B2', 'F1', 'D7', 'D3', 'A1', 'A2', 'C1', 'D8', 'D9', 'E2', 'F2', 'F3']
 const WANT = new Set(process.argv.slice(2).length ? process.argv.slice(2) : ALL)
 const want = (...ids) => ids.some(id => WANT.has(id))
-const HIDE_OVERLAYS = `.pw-viewer-help, .pw-snap-wrap, .pw-split__label, .pw-viewport-detail, .pw-viewport-scale, .tb-pane__header, .tb-pane__navigator { visibility: hidden !important; }`
+const HIDE_OVERLAYS = `.pw-viewer-help, .pw-structure-legend, .pw-hover-tag, .pw-snap-wrap, .pw-split__label, .pw-viewport-detail, .pw-viewport-scale, .tb-pane__header, .tb-pane__navigator { visibility: hidden !important; }`
 mkdirSync(OUT, { recursive: true })
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -99,10 +99,18 @@ async function openStudy(study, mode = '2D') {
   await settle(2500)
 }
 
+// The layer-bar "Go to" buttons were retired (Nov 20). Studies open near the lesion;
+// for an exact lesion slice, use inspectLesion(), which opens the measured slice.
 async function goLesion() {
-  await clickText('Lesion', '.pw-layerbar__goto')
-  await settle(1000)
-  if (await clickText('Exit inspection', 'body', { optional: true })) await settle(800)
+  if (await clickText('Lesion', '.pw-layerbar__goto', { optional: true })) {
+    await settle(1000)
+    if (await clickText('Exit inspection', 'body', { optional: true })) await settle(800)
+  }
+}
+
+async function inspectLesion() {
+  await clickText('Inspect measurement', 'body')
+  await settle(2500)
 }
 
 async function toggleLayer(label, on) {
@@ -270,9 +278,7 @@ try {
     await settle(2000)
     await goLesion()
     await shot('F2_false_positive_9220_workbench')
-    await clickText('Axial', '[aria-label="Visible planes"]')
-    await settle(1500)
-    await goLesion()
+    await inspectLesion()
     await page.addStyleTag({ content: HIDE_OVERLAYS })
     await shot('F2_false_positive_9220_axial', await rect('.pw-toolbench-scene__planes'))
   })
@@ -284,9 +290,7 @@ try {
     await settle(3000)
     await goLesion()
     await shot('F3_failure_small_lesion_9687_workbench')
-    await clickText('Axial', '[aria-label="Visible planes"]')
-    await settle(1500)
-    await goLesion()
+    await inspectLesion()
     await page.addStyleTag({ content: HIDE_OVERLAYS })
     await shot('F3_failure_small_lesion_9687_axial', await rect('.pw-toolbench-scene__planes'))
   })
